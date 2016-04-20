@@ -1,28 +1,28 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <rss version='2.0' xmlns:atom='http://www.w3.org/2005/Atom'>
 <channel>
-<atom:link href='http://localhost:3000' rel='self' type='application/rss+xml'/>
+<atom:link href='http://ryan.himmelwright.net' rel='self' type='application/rss+xml'/>
 <title>
 λ ryan . himmelwright . net
 </title>
 <link>
-http://localhost:3000
+http://ryan.himmelwright.net
 </link>
 <description>
 Software Developer, Computer Science Masters Student, and Linux Enthusiast
 </description>
 <lastBuildDate>
-Tue, 19 Apr 2016 21:16:47 -0400
+Tue, 19 Apr 2016 21:26:47 -0400
 </lastBuildDate>
 <generator>
 clj-rss
 </generator>
 <item>
 <guid>
-http://localhost:3000/posts/website-switched-to-cryogen/
+http://ryan.himmelwright.net/posts/website-switched-to-cryogen/
 </guid>
 <link>
-http://localhost:3000/posts/website-switched-to-cryogen/
+http://ryan.himmelwright.net/posts/website-switched-to-cryogen/
 </link>
 <title>
 Using Cryogen for Website
@@ -42,10 +42,10 @@ Wed, 13 Apr 2016 00:00:00 -0400
 </item>
 <item>
 <guid>
-http://localhost:3000/posts/back-on-arch/
+http://ryan.himmelwright.net/posts/back-on-arch/
 </guid>
 <link>
-http://localhost:3000/posts/back-on-arch/
+http://ryan.himmelwright.net/posts/back-on-arch/
 </link>
 <title>
 Back On Arch, After Frantic Distro-hopping
@@ -65,10 +65,10 @@ Sun, 13 Mar 2016 00:00:00 -0500
 </item>
 <item>
 <guid>
-http://localhost:3000/posts/how-i-asked-my-groomsmen/
+http://ryan.himmelwright.net/posts/how-i-asked-my-groomsmen/
 </guid>
 <link>
-http://localhost:3000/posts/how-i-asked-my-groomsmen/
+http://ryan.himmelwright.net/posts/how-i-asked-my-groomsmen/
 </link>
 <title>
 How I asked my Groomsmen
@@ -236,10 +236,10 @@ Wed, 06 Jan 2016 00:00:00 -0500
 </item>
 <item>
 <guid>
-http://localhost:3000/posts/25-days-of-c/
+http://ryan.himmelwright.net/posts/25-days-of-c/
 </guid>
 <link>
-http://localhost:3000/posts/25-days-of-c/
+http://ryan.himmelwright.net/posts/25-days-of-c/
 </link>
 <title>
 25 Days of C
