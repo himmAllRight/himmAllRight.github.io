@@ -1,28 +1,51 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <rss version='2.0' xmlns:atom='http://www.w3.org/2005/Atom'>
 <channel>
-<atom:link href='http://ryan.himmelwright.net' rel='self' type='application/rss+xml'/>
+<atom:link href='http://http://meowth-cryogen.himmelwright.net/' rel='self' type='application/rss+xml'/>
 <title>
 λ ryan . himmelwright . net
 </title>
 <link>
-http://ryan.himmelwright.net
+http://http://meowth-cryogen.himmelwright.net/
 </link>
 <description>
 Software Developer, Computer Science Masters Student, and Linux Enthusiast
 </description>
 <lastBuildDate>
-Fri, 17 Jun 2016 14:59:27 +0000
+Mon, 11 Jul 2016 18:18:36 +0000
 </lastBuildDate>
 <generator>
 clj-rss
 </generator>
 <item>
 <guid>
-http://ryan.himmelwright.net/posts/website-switched-to-cryogen/
+http://http://meowth-cryogen.himmelwright.net/posts/Trying-out-plasma5/
 </guid>
 <link>
-http://ryan.himmelwright.net/posts/website-switched-to-cryogen/
+http://http://meowth-cryogen.himmelwright.net/posts/Trying-out-plasma5/
+</link>
+<title>
+Trying Out the Plasma 5 Desktop Environment
+</title>
+<description>
+&lt;p&gt;So after watching the Plasma 5 desktop environment progress from a distance, I decided I had to give it another try.It was just before 5.6 was released, and the project seemed to really be finding it's stride.  Now, right up front I want to come clean and admit that I have never liked the KDE/Plasma desktop environment. But, with that said... I am still using the plasma desktop on my main computer (months later, and haven't aborted yet...). Here are my thoughts.&lt;/p&gt;&lt;p&gt;&lt;!&amp;ndash; more &amp;ndash;&gt;&lt;/p&gt;&lt;h3&gt;&lt;a name=&quot;my&amp;#95;history&amp;#95;with&amp;#95;kde/plasma&amp;#95;now,&amp;#95;as&amp;#95;i&amp;#95;have&amp;#95;said&amp;#95;above,&amp;#95;&lt;i&gt;i&amp;#95;have&quot;&gt;&lt;/a&gt;My History with KDE/Plasma Now, as I have said above, &lt;/i&gt;I have&lt;/h3&gt;never really liked KDE (now Plasma)_. In fact, I would say I've hatedit every time I used it in the past. It is a great project, and I&lt;i&gt;desperatly want&lt;/i&gt; to like it. It has so many features and is amazingfor power users. I have tried again and again to have the projectsweep me off my feet, but it's design has always made me feel like Iam using a Fisher-Price operating system (which is ironic, becauselike I said... the plasma desktop is probably one of the best poweruser environments out there). The bulky themes always made it feellike toy. So, with that said... I have been using using the Plasmadesktop on all of my personal computers for over a few months. (andhaven't aborted yet...). Here are my thoughts.&lt;h3&gt;&lt;a name=&quot;pros&quot;&gt;&lt;/a&gt;Pros&lt;/h3&gt;&lt;ul&gt;&lt;li&gt;&lt;strong&gt;The theming has come a long way&lt;/strong&gt;. It no longer looks like a child's toy. Even the default theme is &lt;i&gt;very&lt;/i&gt; appealing.&lt;/li&gt;&lt;/ul&gt;&lt;p&gt;&amp;ndash;add image of KDE desktop&amp;ndash;&lt;/p&gt;&lt;ul&gt;&lt;li&gt;&lt;strong&gt;I Love the customizability.&lt;/strong&gt; I love the level of customization  the plasma desktop allows. I can set transparency, add/remove  palnnels or widgets, set custom keybindings (very imprtant to me),  and a bunch of other operations very easily.&lt;/li&gt;&lt;/ul&gt;&lt;p&gt;&amp;ndash; add image of plasma options? &amp;ndash;&lt;/p&gt;&lt;ul&gt;&lt;li&gt;&lt;strong&gt;Lets me hide window bars&lt;/strong&gt; One of these customizations that I love  is the ability to hide the window bars. I am not a fan of window  bars because I think they look clunky and just take up space. One  aspect that I often like about tiling window managers is it is  usually very easy to hide these window bars. This isn't always the  case in Desktop Environments, but I was pleased to easily figure out  how to do it in Plasma.&lt;/li&gt;&lt;/ul&gt;&lt;p&gt;&amp;ndash;add image of windows without windowbars &amp;ndash;&lt;/p&gt;&lt;ul&gt;&lt;li&gt;&lt;strong&gt;Lets me create an awesome-wm environment, but as a full DE&lt;/strong&gt;  Similar to above, I am able to do some of the features I like about  tiling window managers like awesome and i3, but with the full  desktop environment. In addition to removing window bars, I like to  eaisly move and resize windows by hitting the meta or alt key and  left/right clicking the windows. Again, in Plasma this was simple.&lt;/li&gt;&lt;li&gt;&lt;strong&gt;I love krunner. Like... a lot.&lt;/strong&gt; I using like application  launchers, and krunner looks nice, is fast, and gets the job done. I  didn't realy know much about krunner during previous attempts at  using KDE. This deffenitaly helped contribute to why I liked it much  more this time around.  &lt;/li&gt;&lt;/ul&gt;&lt;p&gt;  &amp;ndash; Image of K runner -   &lt;/p&gt;&lt;ul&gt;&lt;li&gt;&lt;strong&gt;Being able to do old-school animations is fun&lt;/strong&gt; Not much to say  here. While not very practicle, sometimes spinning a desktop cube is  just plain &lt;i&gt;fun&lt;/i&gt;.  &lt;/li&gt;&lt;/ul&gt;&lt;p&gt;  &amp;ndash; Image of Desktop Cube &amp;ndash;   &lt;/p&gt;&lt;ul&gt;&lt;li&gt;&lt;strong&gt;Fast. Even for a full DE&lt;/strong&gt;&lt;/li&gt;&lt;/ul&gt;&lt;h3&gt;&lt;a name=&quot;cons&quot;&gt;&lt;/a&gt;Cons&lt;/h3&gt;&lt;ul&gt;&lt;li&gt;&lt;strong&gt;Mult-monitor support. WTF.&lt;/strong&gt; This was by far the biggest issue I  had. My main computer is a 17&quot; laptop that I connect to two 24&quot;  displays. However, because it is a latop, I like that I can move it  around and be semi-mobil with it. This requires disconnecting the  monitors and going from 1 screen to 3 or vice-versa. Well it turns  out that this is a pain in the ass in Plasma. First, I have to  congigure the monitors 1 by on hitting &quot;apply&quot; between each  configuration (it doesn't really like when I try to move and place  all 3 displays in one swoop). Second, once I get how things should  be, the pannels often go crazy and can't be found, or I have to play  with them to set them up correctly. Lastly, sometimes the displays  overlap each other oddly, even though they apprear normal in the  display settings. The wallpapers almost never set correctly and my  right-click menu is disabled on some screens but not  others. Basically, it's just a hot mess and the most infuriating  problem I faced when using Plasma. If I used a laptop without  monitors, I would be fine.  &lt;/li&gt;&lt;/ul&gt;&lt;p&gt;  &amp;ndash; insert my wtf image &amp;ndash;   &lt;/p&gt;&lt;ul&gt;&lt;li&gt;&lt;strong&gt;Randomly just stops working with things&lt;/strong&gt; Sometimes, KDE  applications just crash and I can't seem to get them back. Widgets  seemed to beak things more frequently, so I just stopped using them.&lt;/li&gt;&lt;li&gt;&lt;strong&gt;A full DE&lt;/strong&gt; While I said above that it was nice having an  environment that resembled a window manager, but had the benefit of  having the full suite of applications that come with a desktop  environment, sometimes it was also a pain. There's just a lot of  crap that I don't use. The obvious remindiner of this was when I  would run &lt;code&gt;pacman -Syu&lt;/code&gt;, and see that the massive KDE stack would  need updates.&lt;/li&gt;&lt;li&gt;&lt;strong&gt;Sometimes all the settings can be very confusing&lt;/strong&gt; Having all  these options is great, but sometimes it was  overwhelming. Additionally, the settings felt disjointed and I  didn't know where the settings for some things where.&lt;/li&gt;&lt;/ul&gt;&lt;h3&gt;&lt;a name=&quot;final&amp;#95;thoughts&quot;&gt;&lt;/a&gt;Final Thoughts&lt;/h3&gt;&lt;ul&gt;&lt;li&gt;I can finally use Plasma&lt;/li&gt;&lt;li&gt;Still has a bit of stability/polish work to go&lt;/li&gt;&lt;li&gt;I'm still using it....so that's good. **&lt;/li&gt;&lt;/ul&gt;&lt;p&gt;** &lt;i&gt;Update: I took forever to get this post out and I have actually moved off of Plasma. I just couldn't handle the multi-monitor issues I had. However, I will deffinetly be trying out the Desktop Environment again in the future (I moved to i3-gaps for now. I love my tiling window managers :) )&lt;/i&gt;&lt;/p&gt;
+</description>
+<author>
+Ryan Himmelwright
+</author>
+<enclosure>
+
+</enclosure>
+<pubDate>
+Sun, 26 Jun 2016 00:00:00 +0000
+</pubDate>
+</item>
+<item>
+<guid>
+http://http://meowth-cryogen.himmelwright.net/posts/website-switched-to-cryogen/
+</guid>
+<link>
+http://http://meowth-cryogen.himmelwright.net/posts/website-switched-to-cryogen/
 </link>
 <title>
 Using Cryogen for Website
@@ -42,10 +65,10 @@ Wed, 13 Apr 2016 00:00:00 +0000
 </item>
 <item>
 <guid>
-http://ryan.himmelwright.net/posts/back-on-arch/
+http://http://meowth-cryogen.himmelwright.net/posts/back-on-arch/
 </guid>
 <link>
-http://ryan.himmelwright.net/posts/back-on-arch/
+http://http://meowth-cryogen.himmelwright.net/posts/back-on-arch/
 </link>
 <title>
 Back On Arch, After Frantic Distro-hopping
@@ -65,10 +88,10 @@ Sun, 13 Mar 2016 00:00:00 +0000
 </item>
 <item>
 <guid>
-http://ryan.himmelwright.net/posts/how-i-asked-my-groomsmen/
+http://http://meowth-cryogen.himmelwright.net/posts/how-i-asked-my-groomsmen/
 </guid>
 <link>
-http://ryan.himmelwright.net/posts/how-i-asked-my-groomsmen/
+http://http://meowth-cryogen.himmelwright.net/posts/how-i-asked-my-groomsmen/
 </link>
 <title>
 How I asked my Groomsmen
@@ -236,10 +259,10 @@ Wed, 06 Jan 2016 00:00:00 +0000
 </item>
 <item>
 <guid>
-http://ryan.himmelwright.net/posts/25-days-of-c/
+http://http://meowth-cryogen.himmelwright.net/posts/25-days-of-c/
 </guid>
 <link>
-http://ryan.himmelwright.net/posts/25-days-of-c/
+http://http://meowth-cryogen.himmelwright.net/posts/25-days-of-c/
 </link>
 <title>
 25 Days of C
