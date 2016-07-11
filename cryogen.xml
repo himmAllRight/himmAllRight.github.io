@@ -1,18 +1,18 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <rss version='2.0' xmlns:atom='http://www.w3.org/2005/Atom'>
 <channel>
-<atom:link href='http://http://meowth-cryogen.himmelwright.net/' rel='self' type='application/rss+xml'/>
+<atom:link href='http://ryan.himmelwright.net' rel='self' type='application/rss+xml'/>
 <title>
 λ ryan . himmelwright . net
 </title>
 <link>
-http://http://meowth-cryogen.himmelwright.net/
+http://ryan.himmelwright.net
 </link>
 <description>
 Software Developer, Computer Science Masters Student, and Linux Enthusiast
 </description>
 <lastBuildDate>
-Mon, 11 Jul 2016 18:18:36 +0000
+Mon, 11 Jul 2016 18:23:21 +0000
 </lastBuildDate>
 <generator>
 clj-rss
