@@ -1,0 +1,68 @@
+==================================================================
+https://keybase.io/himmallright
+--------------------------------------------------------------------
+
+I hereby claim:
+
+  * I am an admin of http://ryan.himmelwright.net
+  * I am himmallright (https://keybase.io/himmallright) on keybase.
+  * I have a public key with fingerprint BE33 C6BC 3481 BB18 9F42  599B 0254 C562 9660 8588
+
+To do so, I am signing this object:
+
+{
+    "body": {
+        "key": {
+            "eldest_kid": "010167aadf468fba286864e097629c7061b6805117b5315e114826b4e794216f53390a",
+            "fingerprint": "be33c6bc3481bb189f42599b0254c56296608588",
+            "host": "keybase.io",
+            "key_id": "0254c56296608588",
+            "kid": "010167aadf468fba286864e097629c7061b6805117b5315e114826b4e794216f53390a",
+            "uid": "f06805487ac6c9f11190addaf9b2bf19",
+            "username": "himmallright"
+        },
+        "service": {
+            "hostname": "ryan.himmelwright.net",
+            "protocol": "http:"
+        },
+        "type": "web_service_binding",
+        "version": 1
+    },
+    "ctime": 1471043816,
+    "expire_in": 157680000,
+    "prev": "a4ddd4d5c3a63162f7b0bc622434849a0c00ecd8c49ee0e8c24415b3b536d0c1",
+    "seqno": 4,
+    "tag": "signature"
+}
+
+which yields the signature:
+
+-----BEGIN PGP MESSAGE-----
+Version: Keybase OpenPGP v2.0.55
+Comment: https://keybase.io/crypto
+
+yMIvAnicrZJbSBVBGICPdvWUWr2ERBc2kEI5Z2d3dnb3gFEgBPZQWpGGcprZnT2u
+Hvcc96y3xCK6GJaJaFI9lBRhIGhCF4LuqEgK3TS0sgtE+pCGkUm92KzZU6/NyzAz
+3//N//8z3YkLPN64+D09pOXA8ZNx/Y+ulHn2deSOV3MkoldxgWqumM5NNKzTmBMs
+NnUuwPGAB0jGWDcgUgyCBQUpCFJelZGgajKPAEEKLwEgE0kEEgUAKgIikMoqFAAy
+JFFUecylc4ZphagdtU3LYVpCRVFDRBOhAggBimpAQVJVwgsS1CSmRohXJEVhgYWR
+mBvBkiM4Rn1mhO2xRfBPev/y/znvsjmdwbs0VGSsIU01AADsVNexoRKBGEB1wRi1
+LVxCGV1olpTgcNg2Q4UOV5POsZNyU6Nuc91q5im7Cls+F6XhijnUZ1GHiaJ2xIlo
+kbArcpxowDU4VVE3pIKS4LwsSExLZz1lAeXUjpkRiwsARmqO6doBlAEPRQWgdI5W
+Rk2bBk2XkGRWCBvuNbScKTHUdR3qkiZiJAIkGDLhiYYEAbK3gSrmNZ6nmq5oUKWU
+p4omQAgkIrK2IZ3XAOeWV2pFuABkaeIQU8bMkIWdMptyNY8f5i/0xHk9ixfFu3/N
+401Y8fcH+ncv9Yxw+dvaMt9lvv2a3DWR1+pp9D3z5e80qw92TZ5aefvEzyNLBqdS
+E8qvTN950XGxob4xtbdmLLuWSxvdcLPd3yn1tqDz+NrImh32aP3wbMXQePv29Zte
+Zg23TZzrvj9dkZ8w0Ncu3UzcGtrc2jgwa+9dfhrl9BzrbOrLeTpzVqr0DtY9umon
+te4TbtxKSznaXLvfbxT5pxaFVm/3bPlYOvL8wobKM/XfsfIrKSunqbk5r6kgY29C
+SpF4qO7BmU9fXs1cHjv94+q314dbCgbuUgU1dDfpk6uy6L3+sutd9cvWPdmVPZS8
+5+L7N0tS1+b23fM6/o1WV27G9w9J4Utj4uea3uHfVChEmQ==
+=qaZe
+-----END PGP MESSAGE-----
+
+And finally, I am proving ownership of this host by posting or
+appending to this document.
+
+View my publicly-auditable identity here: https://keybase.io/himmallright
+
+==================================================================
