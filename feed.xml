@@ -12,11 +12,34 @@ http://ryan.himmelwright.net
 Software Developer, Computer Science Masters Student, and Linux Enthusiast
 </description>
 <lastBuildDate>
-Thu, 14 Jul 2016 12:48:35 -0400
+Mon, 15 Aug 2016 21:07:17 +0000
 </lastBuildDate>
 <generator>
 clj-rss
 </generator>
+<item>
+<guid>
+http://ryan.himmelwright.net/posts/trying-snapd-on-arch/
+</guid>
+<link>
+http://ryan.himmelwright.net/posts/trying-snapd-on-arch/
+</link>
+<title>
+Trying out snapd on Arch Linux
+</title>
+<description>
+&lt;p&gt;I've been listening to all the noise about Ubuntu &quot;snaps&quot;, but I recently realized that I haven't tried this new technology yet...&lt;/p&gt;&lt;p&gt;&lt;!&amp;ndash; more &amp;ndash;&gt;&lt;/p&gt;&lt;h3&gt;&lt;a name=&quot;snapd&amp;#95;install&amp;#95;and&amp;#95;setup&quot;&gt;&lt;/a&gt;Snapd Install and Setup&lt;/h3&gt;&lt;p&gt;I installed snapd on my small netbook (Abra), which is running Arch Linux. So, installing snapd was as easy as running:&lt;/p&gt;&lt;p&gt;&lt;code&gt;pacaur -S snapd&lt;/code&gt;&lt;/p&gt;&lt;p&gt;Now, I use pacaur so that I can install packages from Arch Linux's main repos, as well as the AUR. However, because snapd has actually been moved to the community repos, you can install it in normal pacman, without having to go to the aur.&lt;/p&gt;&lt;p&gt;&lt;code&gt;sudo pacman -S snapd&lt;/code&gt;&lt;/p&gt;&lt;p&gt;After snapd is installed, it needs to be started. To start the snapd service, just use systemd:&lt;/p&gt;&lt;p&gt;&lt;code&gt;sudo systemctl start snapd&lt;/code&gt;&lt;/p&gt;&lt;p&gt;Additionally, If you want to start the snapd service automatically after a reboot run the command:&lt;/p&gt;&lt;p&gt;&lt;code&gt;sudo systemctl enable snapd&lt;/code&gt;&lt;/p&gt;&lt;h3&gt;&lt;a name=&quot;using&amp;#95;snap&amp;#95;once&amp;#95;i&amp;#95;had&amp;#95;snapd&amp;#95;installed&amp;#95;and&amp;#95;running,&amp;#95;i&amp;#95;started&quot;&gt;&lt;/a&gt;Using snap Once I had snapd installed and running, I started&lt;/h3&gt;playing with the snap application. The first thing I should note isthat to the extent of my knowledge, you have to run snap as root (atleast for now). So this means you need to prepend commands with&lt;code&gt;sudo&lt;/code&gt;.&lt;p&gt;First, I wanted to find a snap package. This can be done using the &lt;code&gt;snap find&lt;/code&gt; command as follows:&lt;/p&gt;&lt;p&gt;&lt;code&gt;sudo snap find package-name&lt;/code&gt;  &lt;i&gt;(where &lt;strong&gt;package-name&lt;/strong&gt; is the name of the package to search)&lt;/i&gt;&lt;/p&gt;&lt;p&gt;Just like in any standard package manager search, the potential matches were returned, along with a version number, the developer, and a summary.&lt;/p&gt;&lt;p&gt;Snap has serveral other commands. To see a full list of available snap commands and a description for each one, just type:&lt;/p&gt;&lt;p&gt;&lt;code&gt;sudo snap help&lt;/code&gt;&lt;/p&gt;&lt;h3&gt;&lt;a name=&quot;testing&amp;#95;a&amp;#95;snap&quot;&gt;&lt;/a&gt;Testing a snap&lt;/h3&gt;After learning about the basic snap commands, I wanted&lt;h3&gt;&lt;a name=&quot;my&amp;#95;only&amp;#95;issue&quot;&gt;&lt;/a&gt;My Only Issue&lt;/h3&gt;&lt;h3&gt;&lt;a name=&quot;thoughts&quot;&gt;&lt;/a&gt;Thoughts&lt;/h3&gt;
+</description>
+<author>
+Ryan Himmelwright
+</author>
+<enclosure>
+
+</enclosure>
+<pubDate>
+Tue, 12 Jul 2016 00:00:00 +0000
+</pubDate>
+</item>
 <item>
 <guid>
 http://ryan.himmelwright.net/posts/Trying-out-plasma5/
@@ -37,7 +60,7 @@ Ryan Himmelwright
 
 </enclosure>
 <pubDate>
-Sun, 26 Jun 2016 00:00:00 -0400
+Sun, 26 Jun 2016 00:00:00 +0000
 </pubDate>
 </item>
 <item>
@@ -60,7 +83,7 @@ Ryan Himmelwright
 
 </enclosure>
 <pubDate>
-Wed, 13 Apr 2016 00:00:00 -0400
+Wed, 13 Apr 2016 00:00:00 +0000
 </pubDate>
 </item>
 <item>
@@ -83,7 +106,7 @@ Ryan Himmelwright
 
 </enclosure>
 <pubDate>
-Sun, 13 Mar 2016 00:00:00 -0500
+Sun, 13 Mar 2016 00:00:00 +0000
 </pubDate>
 </item>
 <item>
@@ -254,7 +277,7 @@ Ryan Himmelwright
 
 </enclosure>
 <pubDate>
-Wed, 06 Jan 2016 00:00:00 -0500
+Wed, 06 Jan 2016 00:00:00 +0000
 </pubDate>
 </item>
 <item>
@@ -277,7 +300,7 @@ Ryan Himmelwright
 
 </enclosure>
 <pubDate>
-Thu, 24 Dec 2015 00:00:00 -0500
+Thu, 24 Dec 2015 00:00:00 +0000
 </pubDate>
 </item>
 </channel>
