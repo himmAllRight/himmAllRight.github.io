@@ -1,0 +1,26 @@
+==================================================================
+https://keybase.io/himmallright
+--------------------------------------------------------------------
+
+I hereby claim:
+
+  * I am an admin of http://ryan.himmelwright.net
+    * I am himmallright (https://keybase.io/himmallright) on keybase.
+      * I have a public key with fingerprint BE33 C6BC 3481 BB18 9F42  599B 0254 C562 9660 8588
+
+To do so, I am signing this object:
+
+{
+    "body": {
+            "key": {
+	                "eldest_kid": "010167aadf468fba286864e097629c7061b6805117b5315e114826b4e794216f53390a",
+			            "fingerprint": "be33c6bc3481bb189f42599b0254c56296608588",
+				                "host": "keybase.io",
+						            "key_id": "0254c56296608588",
+							                "kid": "010167aadf468fba286864e097629c7061b6805117b5315e114826b4e794216f53390a",
+									            "uid": "f06805487ac6c9f11190addaf9b2bf19",
+										                "username": "himmallright"
+												        },
+													        "revoke": {
+														            "sig_ids": [
+															                    "1066a638699ff65e4f9dcace4df1d03359a635e1003e2417d68"]}}}
