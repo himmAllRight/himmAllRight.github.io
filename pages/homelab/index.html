@@ -132,15 +132,15 @@
 	    <h3>Recent Posts</h3>
 	    <ul>
               
+              <li><a href="/posts/LFS-Getting-Started/">Linux from Scratch - Getting Started</a></li>
+              
+              <li><a href="/posts/installing-nextcloud-snap/">Installing Nextcloud 11 in a Snap</a></li>
+              
+              <li><a href="/posts/setting-up-nixos/">NixOS Part 2: Setting up NixOS</a></li>
+              
+              <li><a href="/posts/introduction-to-nixos/">NixOS Part 1: Introduction to NixOS</a></li>
+              
               <li><a href="/posts/introducing-kadabra/">Introducing Kadabra - My New, Used x230</a></li>
-              
-              <li><a href="/posts/snapd-on-arch/">Trying out snapd on Arch Linux</a></li>
-              
-              <li><a href="/posts/Trying-out-plasma5/">Trying Out the Plasma 5 Desktop Environment</a></li>
-              
-              <li><a href="/posts/website-switched-to-cryogen/">Using Cryogen for Website</a></li>
-              
-              <li><a href="/posts/back-on-arch/">Back On Arch, After Frantic Distro-hopping</a></li>
               
 	    </ul>
           </div>
@@ -152,7 +152,11 @@
               
               <a href="/tags-output/Cryogen/">[Cryogen]</a> 
               
+              <a href="/tags-output/NixOS/">[NixOS]</a> 
+              
               <a href="/tags-output/snapd/">[snapd]</a> 
+              
+              <a href="/tags-output/Nextcloud/">[Nextcloud]</a> 
               
               <a href="/tags-output/Wedding/">[Wedding]</a> 
               
@@ -164,6 +168,8 @@
               
               <a href="/tags-output/C/">[C]</a> 
               
+              <a href="/tags-output/LFS/">[LFS]</a> 
+              
               <a href="/tags-output/Linux/">[Linux]</a> 
               
               <a href="/tags-output/Clojure/">[Clojure]</a> 
@@ -172,7 +178,11 @@
               
               <a href="/tags-output/Programming/">[Programming]</a> 
               
+              <a href="/tags-output/Snap/">[Snap]</a> 
+              
               <a href="/tags-output/Korora/">[Korora]</a> 
+              
+              <a href="/tags-output/Functional/">[Functional]</a> 
               
 	    </ul>
           </div>
@@ -198,29 +208,19 @@ Nvidia GTX 970M
 120 GB Samsung EVO SSD
 1 TB 7200 RPM HDD
 17.3” 1920x1080 Display &#40;Also usually connected to 2x 23.6” 1920x1080 Monitors&#41;
-Arch Linux &amp; Korora 24 OS</code></pre>	<h4><a name="kadabra&#95;(portable&#95;laptop)"></a>Kadabra (Portable Laptop)</h4><pre><code>Lenovo x230
+Solus OS</code></pre>	<h4><a name="kadabra&#95;(portable&#95;laptop)"></a>Kadabra (Portable Laptop)</h4><pre><code>Lenovo x230
 Intel i5-3320M &#91;2.6 GHz &#40;3.3 GHz Turbo&#41;, 3M Cache, 2 Cores, 4 Threads&#93;
 8 GB RAM
-120 GB SSD
+240 GB Samsung EVO SSDSSD
 12.5&quot; HD LED 1366x768 Display
 9-Cell Battery
-Korora 24 OS</code></pre><h4><a name="abra&#95;(portable&#95;laptop)&#95;&ndash;&#95;broken"></a>Abra (Portable Laptop) &ndash; BROKEN</h4><pre><code>Asus X201E-DH01 &#40;Ubuntu Version&#41;
-Intel Celeron 847 &#91;1.1 Ghz, 2M Cache, 2 Cores, 2 Threads&#93;
-4 GB RAM
-320 GB 5400 RPM HDD
-11.6” 1366x768 LED Display
-2.9 Lbs and .9” Thick
-Arch Linux OS</code></pre><h3><a name="rebecca&#95;(fiancee)"></a>Rebecca (fiancee)</h3><h4><a name="bellsprout&#95;(2014)"></a>Bellsprout (2014)</h4><pre><code>Macbook Air
+Solus OS</code></pre><h3><a name="rebecca&#95;(fiancee)"></a>Rebecca (fiancee)</h3><h4><a name="bellsprout&#95;(2014)"></a>Bellsprout (2014)</h4><pre><code>Macbook Air
 Intel i5 &#40;1.4 GHz &#40;2.7 GHz Turbo&#41;, 3M Cache, 2 Cores, 2 Threads&#41; ?
 4 GB RAM
 128 GB PCIe Flash HD
 13.3” 1440x900 LED Display
 2.96 Lbs and &#126;0.7” thick
-Mac OS</code></pre><h3><a name="servers/other"></a>Servers/Other</h3><h4><a name="pallet&#95;town&#95;(webhost)"></a>Pallet Town (Webhost)</h4><pre><code>Raspberry Pi 2
-ARM Coretx-A7 &#40;900 MHz, 4 Cores, 4 Threads&#41;
-1 GB RAM
-16 GB MicroSD card for HD
-Rasbian OS</code></pre><h4><a name="ninetales&#95;(vm&#95;host&#95;/&#95;home&#95;server)"></a>Ninetales (VM Host / Home Server)</h4><pre><code>Lenovo ThinkServer 440
+Mac OS</code></pre><h3><a name="servers/other"></a>Servers/Other</h3><h4><a name="ninetales&#95;(vm&#95;host&#95;/&#95;home&#95;server)"></a>Ninetales (VM Host / Home Server)</h4><pre><code>Lenovo ThinkServer 440
 Intel Xeon E3-1225 v3 &#91;3.2 GHz &#40;3.6 GHz Turbo&#41;, 8M Cache, 4 Cores, 4 Threads&#93;
 20 GB ECC RAM
 250 GB Samsung EVO SSD &#40;OS Partition + LVM partion for VM Volumes&#41;
@@ -233,16 +233,24 @@ Diglet  &#40;50&#41;  - Arch Linux   - Minecraft Server
 Staryu  &#40;120&#41; - Arch Linux   - Plex Server
 Meowth  &#40;52&#41;  - Arch Linux   - IRC Chat / Remote Website Writting
 Tangela &#40;114&#41; - Centos 7     - Nginx for Port and Subdomain Proxy
-Geodude &#40;74&#41;  - Ubuntu 16.04 - Gitlab Server</code></pre><h4><a name="charmander&#95;(test&#95;server&#95;/&#95;rebecca’s&#95;gaming&#95;computer)"></a>Charmander (Test Server / Rebecca’s Gaming Computer)</h4><pre><code>My old desktop &#40;first computer build&#41;
+Geodude &#40;74&#41;  - Ubuntu 16.04 - Gitlab Server</code></pre>	<h4><a name="pi&#95;cluster"></a>Pi Cluster</h4><h5><a name="node&#95;1"></a>Node 1</h5><pre><code>Raspberry Pi 3
+ARM v8 CPU &#40;1.2 GHz, 4 Cores, 4 Threads&#41;
+1 GB RAM
+16 GB MicroSD card for HD
+-- OS</code></pre><h5><a name="pallet&#95;town&#95;(webhost&#95;&&#95;quassel&#95;core&#95;server)"></a>Pallet Town (Webhost & Quassel Core Server)</h5><pre><code>Raspberry Pi 2
+ARM Coretx-A7 &#40;900 MHz, 4 Cores, 4 Threads&#41;
+1 GB RAM
+16 GB MicroSD card for HD
+Rasbian OS</code></pre><h5><a name="node&#95;3"></a>Node 3</h5><pre><code>Bananna Pi 2?</code></pre>	ARM A7 Dual Core CPU (1 GHz, 2 Cores, 2 Threads)	1 GB RAM	16 GB MicroSD Card for HD	320GB 5400RPM SATA Drive?	&ndash; OS <h4><a name="charmander&#95;(test&#95;server&#95;/&#95;rebecca’s&#95;gaming&#95;computer)"></a>Charmander (Test Server / Rebecca’s Gaming Computer)</h4><pre><code>My old desktop &#40;first computer build&#41;
 Intel i7-930 &#91;2.8 GHz &#40;3.06 GHz Turbo&#41;, 8M Cache, 4 Cores, 8 Threads&#93;
 6 GB RAM
 Nvidia GTX 260
 120 GB Kingston SSD
-Ubuntu MATE 15.10 OS</code></pre><h3><a name="digital&#95;ocean&#95;droplets"></a>Digital Ocean Droplets</h3><h4><a name="pidgey&#95;(owncloud/test&#95;cloud&#95;server)"></a>Pidgey (Owncloud/Test Cloud Server)</h4><pre><code>Digital Ocean KVM Droplet
+Ubuntu MATE 15.10 OS</code></pre><h3><a name="digital&#95;ocean&#95;droplets"></a>Digital Ocean Droplets</h3><h4><a name="pidgey&#95;(next/test&#95;cloud&#95;server)"></a>Pidgey (Next/Test Cloud Server)</h4><pre><code>Digital Ocean KVM Droplet
 1 Core
 512 MB RAM
 20 GB SSD
-Ubuntu 14.10 OS</code></pre><h4><a name="wedding-server&#95;(himmelwright&#95;wedding&#95;website&#95;host)"></a>Wedding-Server (Himmelwright Wedding Website Host)</h4><pre><code>Digital Ocean KVM Droplet
+Ubuntu 16.04 OS</code></pre><h4><a name="wedding-server&#95;(himmelwright&#95;wedding&#95;website&#95;host)"></a>Wedding-Server (Himmelwright Wedding Website Host)</h4><pre><code>Digital Ocean KVM Droplet
 1 Core
 512 MB RAM
 20 GB SSD

@@ -1,0 +1,7 @@
+{:layout :post
+:title  "Packaging for Solus"
+:date "2016-12-16"
+:author "Ryan Himmelwright"
+:tags ["Linux" "NixOS" "Functional"]
+;:draft? true
+}
