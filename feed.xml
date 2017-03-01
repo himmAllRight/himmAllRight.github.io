@@ -12,7 +12,7 @@ http://ryan.himmelwright.net
 Software Developer, Functional Programming and Linux Enthusiast
 </description>
 <lastBuildDate>
-Wed, 01 Mar 2017 05:55:45 -0500
+Wed, 01 Mar 2017 06:00:08 -0500
 </lastBuildDate>
 <generator>
 clj-rss
@@ -38,75 +38,6 @@ Ryan Himmelwright
 </enclosure>
 <pubDate>
 Wed, 01 Mar 2017 00:00:00 -0500
-</pubDate>
-</item>
-<item>
-<guid>
-http://ryan.himmelwright.net/posts/installing-nextcloud-snap/
-</guid>
-<link>
-http://ryan.himmelwright.net/posts/installing-nextcloud-snap/
-</link>
-<title>
-Installing Nextcloud 11 in a Snap
-</title>
-<description>
-&lt;p&gt;As an Owncloud user for several years, it was a big deal when the project split to Nextcloud. Based on philosophies and just the general direction of the two projects, I decided I wanted to switch over to Nextcloud as soon as possible... but I kinda dragged me feet on that. However, once I realized Nextcloud could now be installed via a snap package... I had to try it out.&lt;/p&gt;&lt;p&gt;&lt;!&amp;ndash; more &amp;ndash;&gt;&lt;/p&gt;&lt;h3&gt;&lt;a name=&quot;setup&amp;#95;a&amp;#95;host&quot;&gt;&lt;/a&gt;Setup a host&lt;/h3&gt;The first step is to setup a host instance. For my real server, I am using a Ubuntu 16.04 &lt;a href='http://www.digitalocean.com'&gt;Digital Ocean&lt;/a&gt; droplet. However, for this tutorial I have spun up a fresh 16.04 Ubuntu VM on my home server. This way I can ensure I get every step, and can take a few screenshotes ;) .&lt;p&gt;Feel free to use what ever hosting setup you want. Since we are using snaps, I would reccomend using at Ubuntu 16.04 or newer. As stated, I will be basing this guide off my experience using Ubuntu 16.04 (which is the current LTS).&lt;/p&gt;&lt;p&gt;After your host is setup, it is good practice to update the system before proceding.&lt;/p&gt;&lt;p&gt;&lt;code&gt;sudo apt-get update&lt;/code&gt;&lt;/p&gt;&lt;p&gt;&lt;code&gt;sudo apt-get upgrade&lt;/code&gt;&lt;/p&gt;&lt;h3&gt;&lt;a name=&quot;installing&amp;#95;the&amp;#95;snap&amp;#95;&amp;&amp;#95;setting&amp;#95;up&amp;#95;nextcloud&quot;&gt;&lt;/a&gt;Installing the Snap &amp; Setting up Nextcloud&lt;/h3&gt;Ubuntu 16.04 and later should have snapd installed and running by default. If you are using an older version, or &lt;a href='../snapd-on-arch/'&gt;another distro&lt;/a&gt;, you might have to first setup and start snapd.&lt;p&gt;With snapd running, we can search for the nextcloud snap with the command&lt;/p&gt;&lt;p&gt;&lt;code&gt;snap find nextcloud&lt;/code&gt;&lt;/p&gt;&lt;p&gt;&lt;img src=&quot;../../img/posts/installing-nextcloud-snap/find-snap.png&quot; alt=&quot;Find snap&quot; /&gt;&lt;/p&gt;&lt;p&gt;After you confirm the snapname (nextcloud), you can easily download and install it with the sudo command:&lt;/p&gt;&lt;p&gt;&lt;code&gt;sudo snap install nextcloud&lt;/code&gt;&lt;/p&gt;&lt;p&gt;This might take a minute or so to down load if you have a slow connection. Otherwise, it should install easily.&lt;/p&gt;&lt;p&gt;&lt;img src=&quot;../../img/posts/installing-nextcloud-snap/install-snap.png&quot; alt=&quot;Install snap&quot; /&gt;&lt;/p&gt;&lt;p&gt;If you want to verify that the snap installed, you can use the &lt;code&gt;snap list&lt;/code&gt; command to check if nextcloud is listed.&lt;/p&gt;&lt;p&gt;&lt;img src=&quot;../../img/posts/installing-nextcloud-snap/list-snap.png&quot; alt=&quot;List snap&quot; /&gt;&lt;/p&gt;&lt;p&gt;After the nextcloud snap is installed, it should automaticall start. To check this, go to the ip of your server in a web browser to make sure the nextcloud service is running. You should be prompted with a screen to create an admin account.&lt;/p&gt;&lt;p&gt;&lt;img src=&quot;../../img/posts/installing-nextcloud-snap/create-admin.png&quot; alt=&quot;Crate Admin Account&quot; /&gt;&lt;/p&gt;&lt;h3&gt;&lt;a name=&quot;&quot;&gt;&lt;/a&gt;&lt;/h3&gt;&lt;h3&gt;&lt;a name=&quot;setting&amp;#95;up&amp;#95;ssl&quot;&gt;&lt;/a&gt;Setting Up SSL&lt;/h3&gt;&lt;h3&gt;&lt;a name=&quot;installing&amp;#95;desktop&amp;#95;clients&quot;&gt;&lt;/a&gt;Installing Desktop Clients&lt;/h3&gt;
-</description>
-<author>
-Ryan Himmelwright
-</author>
-<enclosure>
-
-</enclosure>
-<pubDate>
-Mon, 16 Jan 2017 00:00:00 -0500
-</pubDate>
-</item>
-<item>
-<guid>
-http://ryan.himmelwright.net/posts/setting-up-nixos/
-</guid>
-<link>
-http://ryan.himmelwright.net/posts/setting-up-nixos/
-</link>
-<title>
-NixOS Part 2: Setting up NixOS
-</title>
-<description>
-&lt;h3&gt;&lt;a name=&quot;installing&amp;#95;nixos&quot;&gt;&lt;/a&gt;Installing NixOS&lt;/h3&gt;&lt;h3&gt;&lt;a name=&quot;setting&amp;#95;up&amp;#95;my&amp;#95;configuration.nix&amp;#95;file&quot;&gt;&lt;/a&gt;Setting up my configuration.nix file&lt;/h3&gt;&lt;ul&gt;&lt;li&gt;Configure basics, like hostname, time, etc.&lt;/li&gt;&lt;li&gt;Graphics Card&lt;/li&gt;&lt;li&gt;Mount File Systems&lt;/li&gt;&lt;li&gt;Editing Grub Menu (Hardest part for me)&lt;/li&gt;&lt;li&gt;Clean up using abstraction :)&lt;/li&gt;&lt;/ul&gt;&lt;h3&gt;&lt;a name=&quot;installing&amp;#95;packages&quot;&gt;&lt;/a&gt;Installing Packages&lt;/h3&gt;&lt;ul&gt;&lt;li&gt;Setting up GPG... wtf&lt;/li&gt;&lt;/ul&gt;&lt;h3&gt;&lt;a name=&quot;rebuilding&amp;#95;the&amp;#95;configuration&quot;&gt;&lt;/a&gt;Rebuilding the configuration&lt;/h3&gt;
-</description>
-<author>
-Ryan Himmelwright
-</author>
-<enclosure>
-
-</enclosure>
-<pubDate>
-Sun, 18 Dec 2016 00:00:00 -0500
-</pubDate>
-</item>
-<item>
-<guid>
-http://ryan.himmelwright.net/posts/introduction-to-nixos/
-</guid>
-<link>
-http://ryan.himmelwright.net/posts/introduction-to-nixos/
-</link>
-<title>
-NixOS Part 1: Introduction to NixOS
-</title>
-<description>
-&lt;p&gt;If someone were to ask my what my top three interests in computing right now I think I would say (in no particular order): 1) Functional Programming and Languages 2) Linux Operating Systems and related technology, and lastly, 3) Large distributed computing systems (with an specific interest in build systems)&lt;/p&gt;&lt;p&gt;So, is there a project out there that contains bits of all three of my computing interests? Yes there is. And it is called &lt;a href='https://nixos.org'&gt;NixOS&lt;/a&gt;.&lt;/p&gt;&lt;p&gt;&lt;!&amp;ndash; more &amp;ndash;&gt;&lt;/p&gt;&lt;p&gt;I have followed NixOS for a few years now, playing with it off and on. I even had it installed as the main OS on my netbook for awhile. Recently, I have gotten the urge to once again scratch that itch... This time by seeing if I can install it on my main laptop, Alakazam.&lt;/p&gt;&lt;h3&gt;&lt;a name=&quot;the&amp;#95;nix&amp;#95;package&amp;#95;manager&quot;&gt;&lt;/a&gt;The Nix package manager&lt;/h3&gt;Before diving into NixOS, it is probably a good idea to first take some time and explain the &lt;a href='https://nixos.org/nix'&gt;nix package manager&lt;/a&gt;. Nix is a purely functional package manager for Linux and Unix operating systems that aims to provide reliable and reproducable builds for users. It is considered a &quot;purely functional&quot; package manager because it treaks packages like values in a purely functional programming language (think &lt;a href='https://www.haskell.org'&gt;Haskell&lt;/a&gt;). That is to say, packages are built by functions that don't have side-effects, and are immutable, meaning they don't ever change after being built. &lt;h4&gt;&lt;a name=&quot;functional&amp;#95;package&amp;#95;building&quot;&gt;&lt;/a&gt;Functional Package Building&lt;/h4&gt;&lt;p&gt;&lt;img src=&quot;../../img/posts/introduction-to-nixos/firefox-hash.png&quot; alt=&quot;Nix packages are hashed and stored in the Nix Store&quot; /&gt;&lt;/p&gt;&lt;p&gt;Nix packages are built using the Nix expressions, which is a simple pure, lazy, functional language (You can evel install a repl of it. Just use the nix command &lt;code&gt;nix-env -i nix-repl&lt;/code&gt; to install it). A Nix expression describe everything that goes into building a package, and is a key part of allowing Nix packages to be deterministic. Nix stores built packages in something called the &lt;code&gt;nix-store&lt;/code&gt;, which is maintained seperately from the system's package manager (unless the os is NixOS of course). This directory is commonly found at &lt;code&gt;/nix/store/&lt;/code&gt;, but it can be installed elsewhere if desired. Each package in the nix store has it's own sub-directory with an obnoxiously long name. For example, you might see something similar to &lt;code&gt;/nix/store/9qhnlzh6q4s9bsq75vqi93misaym2nys-firefox-41.0/&lt;/code&gt;. The random string of giberish in front of the package's name is actually a unique cryptographic hash of the build. Remember how I said nix is a functional package manager? When a package is built, all of its dependencies and versions are pumped through a hashing algorithm to create this unique identifier. In purley functional programming languages, a function takes and input and returns an output. Functions are not allowed to have side effects, so if the function is given the same input, it should always return the same output. Nix works the same why. If two packages are built with the exact same settings and dependencies, the resulting builds should be identical and have the same hash. However, if even a single dependency is a different version for one of the builds, the outputs are not considered identical (even if the functionality is the exact same), and the two builds will have different hashes as a result. The executable commands are then symlinked to the builds in the nix store so that the full hashed name isn't required. For example, instead of needing to launch the long name listed above,&lt;code&gt;firefox&lt;/code&gt; is be linked to the package to make it easier.&lt;/p&gt;&lt;h3&gt;&lt;a name=&quot;benefits&amp;#95;of&amp;#95;a&amp;#95;functional&amp;#95;package&amp;#95;manager&quot;&gt;&lt;/a&gt;Benefits of a Functional Package Manager&lt;/h3&gt;&lt;h4&gt;&lt;a name=&quot;complete&amp;#95;dependencies&amp;#95;and&amp;#95;multiple&amp;#95;user&amp;#95;support&quot;&gt;&lt;/a&gt;Complete Dependencies and Multiple User Support&lt;/h4&gt;&lt;h4&gt;&lt;a name=&quot;multiple&amp;#95;versions&quot;&gt;&lt;/a&gt;Multiple Versions&lt;/h4&gt;Because &lt;h4&gt;&lt;a name=&quot;atomic&amp;#95;upgrades&amp;#95;and&amp;#95;rollbacks&quot;&gt;&lt;/a&gt;Atomic Upgrades and Rollbacks&lt;/h4&gt;&lt;h3&gt;&lt;a name=&quot;what&amp;#95;is&amp;#95;nixos?&quot;&gt;&lt;/a&gt;What is NixOS?&lt;/h3&gt;&lt;h3&gt;&lt;a name=&quot;why&amp;#95;use&amp;#95;a&amp;#95;declarative&amp;#95;functional&amp;#95;operating&amp;#95;system?&quot;&gt;&lt;/a&gt;Why use a Declarative Functional Operating System?&lt;/h3&gt;&lt;p&gt;&lt;img src=&quot;../../img/posts/introduction-to-nixos/list-generations.png&quot; alt=&quot;Changes are automatically saved and can be rolled back to&quot; /&gt;&lt;/p&gt;
-</description>
-<author>
-Ryan Himmelwright
-</author>
-<enclosure>
-
-</enclosure>
-<pubDate>
-Fri, 16 Dec 2016 00:00:00 -0500
 </pubDate>
 </item>
 <item>
