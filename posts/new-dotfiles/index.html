@@ -2,8 +2,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
   <head>
     <meta charset="utf-8"/>
-    <title>λ ryan . himmelwright . net: Tags</title>
-    <link rel="canonical" href="http://ryan.himmelwright.net/tags/">
+    <title>λ ryan . himmelwright . net: My New Dotfiles Management - Using GNU Stow</title>
+    <link rel="canonical" href="http://ryan.himmelwright.net/posts/new-dotfiles/">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href='http://fonts.googleapis.com/css?family=Alegreya:400italic,700italic,400,700' rel='stylesheet'
           type='text/css'>
@@ -188,40 +188,52 @@
 
       <div id="content">
         
-<div id="tags-page">
-    <div id="page-header">
-        <h2>Tags</h2>
+<div id="post">
+    <div class="post-header">
+    <div id="post-meta" class="row">
+        <div class="col-lg-6">March 7, 2017</div>
+        
+        <span class="col-lg-6 right">By: Ryan Himmelwright</span>
+        
+    </div>
+    <h2>My New Dotfiles Management - Using GNU Stow</h2>
+</div>
+<div id="post-body">
+    
+    <p>I have maintained a "dotfiles" repository since I made my github account in 2013. However, overtime it became more of a post-apocalyptic wasteland, cluttered with remnants of obsolete configurations and scraps of scripts. It was no longer the pristine, culled, collection that I desired. I also did not have an efficient method of easily linking the files on a new system. I had to manually make symlinks for each dotfile. I knew there were <em>much</em> better dotfiles setups out there, but I never got around to it. Until now.</p><p><!&ndash; more&ndash;></p><p>One day, after reading <a href='http://brandon.invergo.net/news/2012-05-26-using-gnu-stow-to-manage-your-dotfiles.html'>this post</a>, I finally decided to sit down and clean up my dotfiles directory. I wanted to re-organize it so that I could use <a href='http://freecode.com/projects/gnustow'>GNU Stow</a> to initialize my dotfiles. </p><p>After setting it all up, I decided to just start from scratch with a <a href='https://github.com/himmAllRight/dotfiles'>new repository</a>.</p><h2><a name="using&#95;stow&#95;and&#95;dotfiles"></a>Using Stow and dotfiles</h2>If you haven't seen it before, I highly suggest reading the post I have linked above. But in the meantime, I can provide a quick summary of how my dotfiles are setup. <p><center><img src="../../img/posts/new-dotfiles/dotfiles.png" alt="My Dotfiles Dir" /></center></p><p>Each application has an associated sub-directory (ex: <code>dotfiles/emacs</code>), which contains all of the dotfiles/folders associated with that application. Structurally, I treat the items in each application directory as if they were in my <code>&#126;</code>. For example, the <code>vim</code> sub-directory has my <code>.vimrc</code>, as well as the <code>.vim/colors/</code> directory. This is so that when I use stow, it will properly link them in <code>&#126;</code>.</p><p><center><img src="../../img/posts/new-dotfiles/vim-dots.png" alt="Vim dotfiles directory" /></center></p><p>When I setup my dotfiles on a new system, or install an application for which I already have dotfiles saved for, setting them up is as easy as typing:</p><p> <code>stow application-dir</code> (ex: <code>stow vim</code>).   </p><p>GNU Stow then links the files under my home directory. In my vim example, this means symlinks are created for <code>&#126;/.vimrc</code> and <code>&#126;/.vim/colors/&#42;</code>, pointing to their respective locations in <code>&#126;/dotfiles/vim/</code>.</p><p><center><img src="../../img/posts/new-dotfiles/vim-home.png" alt="Vim dotfiles in Home" /></center></p><p>I think this setup is brilliant. Initializing an application's directory is so simple, and I can choose to only initialize specific sub-directories.</p><p>In the future, I might make multiple branches of the repository, one for each of my computers, so I can maintain specific configurations. In theory, I could also just make different folders (ex <code>vim-laptop</code> and <code>vim-server</code>), but I like the branch idea better because it's a little easier for me to merge changes. We shall see. </p><p>Anyway, that's the new setup. Enjoy :-D</p>
+</div>
+
+<div id="post-tags">
+    <b>Tags: </b>
+    
+    <a href="/tags-output/Linux/">[Linux]</a>
+    
+    <a href="/tags-output/Thinkpad/">[Thinkpad]</a>
+    
+    <a href="/tags-output/Korora/">[Korora]</a>
+    
+</div>
+
+
+    <div id="prev-next">
+        
+        
+        <a class="right" href="/posts/LFS-Getting-Started/">Linux from Scratch - Getting Started &raquo;</a>
+        
     </div>
 
-    <ul>
-        
-        <li><a href="/tags-output/Cryogen/">Cryogen</a></li>
-        
-        <li><a href="/tags-output/snapd/">snapd</a></li>
-        
-        <li><a href="/tags-output/Wedding/">Wedding</a></li>
-        
-        <li><a href="/tags-output/KDE/">KDE</a></li>
-        
-        <li><a href="/tags-output/Arch Linux/">Arch Linux</a></li>
-        
-        <li><a href="/tags-output/Website/">Website</a></li>
-        
-        <li><a href="/tags-output/C/">C</a></li>
-        
-        <li><a href="/tags-output/LFS/">LFS</a></li>
-        
-        <li><a href="/tags-output/Linux/">Linux</a></li>
-        
-        <li><a href="/tags-output/Clojure/">Clojure</a></li>
-        
-        <li><a href="/tags-output/Thinkpad/">Thinkpad</a></li>
-        
-        <li><a href="/tags-output/Programming/">Programming</a></li>
-        
-        <li><a href="/tags-output/Korora/">Korora</a></li>
-        
-    </ul>
+    
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = '//himmAllRight.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    
+
+
 </div>
 
       </div>

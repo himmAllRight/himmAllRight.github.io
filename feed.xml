@@ -12,11 +12,34 @@ http://ryan.himmelwright.net
 Software Developer, Functional Programming and Linux Enthusiast
 </description>
 <lastBuildDate>
-Fri, 03 Mar 2017 07:24:57 -0500
+Tue, 07 Mar 2017 07:18:57 -0500
 </lastBuildDate>
 <generator>
 clj-rss
 </generator>
+<item>
+<guid>
+http://ryan.himmelwright.net/posts/new-dotfiles/
+</guid>
+<link>
+http://ryan.himmelwright.net/posts/new-dotfiles/
+</link>
+<title>
+My New Dotfiles Management - Using GNU Stow
+</title>
+<description>
+&lt;p&gt;I have maintained a &quot;dotfiles&quot; repository since I made my github account in 2013. However, overtime it became more of a post-apocalyptic wasteland, cluttered with remnants of obsolete configurations and scraps of scripts. It was no longer the pristine, culled, collection that I desired. I also did not have an efficient method of easily linking the files on a new system. I had to manually make symlinks for each dotfile. I knew there were &lt;em&gt;much&lt;/em&gt; better dotfiles setups out there, but I never got around to it. Until now.&lt;/p&gt;&lt;p&gt;&lt;!&amp;ndash; more&amp;ndash;&gt;&lt;/p&gt;&lt;p&gt;One day, after reading &lt;a href='http://brandon.invergo.net/news/2012-05-26-using-gnu-stow-to-manage-your-dotfiles.html'&gt;this post&lt;/a&gt;, I finally decided to sit down and clean up my dotfiles directory. I wanted to re-organize it so that I could use &lt;a href='http://freecode.com/projects/gnustow'&gt;GNU Stow&lt;/a&gt; to initialize my dotfiles. &lt;/p&gt;&lt;p&gt;After setting it all up, I decided to just start from scratch with a &lt;a href='https://github.com/himmAllRight/dotfiles'&gt;new repository&lt;/a&gt;.&lt;/p&gt;&lt;h2&gt;&lt;a name=&quot;using&amp;#95;stow&amp;#95;and&amp;#95;dotfiles&quot;&gt;&lt;/a&gt;Using Stow and dotfiles&lt;/h2&gt;If you haven't seen it before, I highly suggest reading the post I have linked above. But in the meantime, I can provide a quick summary of how my dotfiles are setup. &lt;p&gt;&lt;center&gt;&lt;img src=&quot;../../img/posts/new-dotfiles/dotfiles.png&quot; alt=&quot;My Dotfiles Dir&quot; /&gt;&lt;/center&gt;&lt;/p&gt;&lt;p&gt;Each application has an associated sub-directory (ex: &lt;code&gt;dotfiles/emacs&lt;/code&gt;), which contains all of the dotfiles/folders associated with that application. Structurally, I treat the items in each application directory as if they were in my &lt;code&gt;&amp;#126;&lt;/code&gt;. For example, the &lt;code&gt;vim&lt;/code&gt; sub-directory has my &lt;code&gt;.vimrc&lt;/code&gt;, as well as the &lt;code&gt;.vim/colors/&lt;/code&gt; directory. This is so that when I use stow, it will properly link them in &lt;code&gt;&amp;#126;&lt;/code&gt;.&lt;/p&gt;&lt;p&gt;&lt;center&gt;&lt;img src=&quot;../../img/posts/new-dotfiles/vim-dots.png&quot; alt=&quot;Vim dotfiles directory&quot; /&gt;&lt;/center&gt;&lt;/p&gt;&lt;p&gt;When I setup my dotfiles on a new system, or install an application for which I already have dotfiles saved for, setting them up is as easy as typing:&lt;/p&gt;&lt;p&gt; &lt;code&gt;stow application-dir&lt;/code&gt; (ex: &lt;code&gt;stow vim&lt;/code&gt;).   &lt;/p&gt;&lt;p&gt;GNU Stow then links the files under my home directory. In my vim example, this means symlinks are created for &lt;code&gt;&amp;#126;/.vimrc&lt;/code&gt; and &lt;code&gt;&amp;#126;/.vim/colors/&amp;#42;&lt;/code&gt;, pointing to their respective locations in &lt;code&gt;&amp;#126;/dotfiles/vim/&lt;/code&gt;.&lt;/p&gt;&lt;p&gt;&lt;center&gt;&lt;img src=&quot;../../img/posts/new-dotfiles/vim-home.png&quot; alt=&quot;Vim dotfiles in Home&quot; /&gt;&lt;/center&gt;&lt;/p&gt;&lt;p&gt;I think this setup is brilliant. Initializing an application's directory is so simple, and I can choose to only initialize specific sub-directories.&lt;/p&gt;&lt;p&gt;In the future, I might make multiple branches of the repository, one for each of my computers, so I can maintain specific configurations. In theory, I could also just make different folders (ex &lt;code&gt;vim-laptop&lt;/code&gt; and &lt;code&gt;vim-server&lt;/code&gt;), but I like the branch idea better because it's a little easier for me to merge changes. We shall see. &lt;/p&gt;&lt;p&gt;Anyway, that's the new setup. Enjoy :-D&lt;/p&gt;
+</description>
+<author>
+Ryan Himmelwright
+</author>
+<enclosure>
+
+</enclosure>
+<pubDate>
+Tue, 07 Mar 2017 00:00:00 -0500
+</pubDate>
+</item>
 <item>
 <guid>
 http://ryan.himmelwright.net/posts/LFS-Getting-Started/
