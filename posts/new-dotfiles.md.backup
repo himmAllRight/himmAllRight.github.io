@@ -34,6 +34,6 @@ GNU Stow then links the files under my home directory. In my vim example, this m
 
 I think this setup is brilliant. Initializing an application's directory is so simple, and I can choose to only initialize specific sub-directories.
 
-In the future, I might make different branches of the repository, one for each of my computers, so I can maintain specific configurations. In theory, I could also just make different folders (ex `vim-laptop` and `vim-server`), but I like the branch idea better because it's a little easier for me to merge changes. We shall see. 
+In the future, I might make multiple branches of the repository, one for each of my computers, so I can maintain specific configurations. In theory, I could also just make different folders (ex `vim-laptop` and `vim-server`), but I like the branch idea better because it's a little easier for me to merge changes. We shall see. 
 
 Anyway, that's the new setup. Enjoy :-D
