@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
   <head>
     <meta charset="utf-8"/>
-    <title>λ ryan . himmelwright . net: Introducing Kadabra - My New, Used x230</title>
+    <title>λ ryan himmelwright . net: Introducing Kadabra - My New, Used x230</title>
     <link rel="canonical" href="http://ryan.himmelwright.net/posts/introducing-kadabra/">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href='http://fonts.googleapis.com/css?family=Alegreya:400italic,700italic,400,700' rel='stylesheet'
@@ -12,22 +12,33 @@
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.1/styles/default.min.css">
     <link href="/css/screen.css" rel="stylesheet" type="text/css" />
 
+    <script>
+      function swap(loc) {
+      window.document.pic.src=loc;
+      }
+    </script>
+
+
+
     <!-- Piwik -->
     <script type="text/javascript">
       var _paq = _paq || [];
-      _paq.push(["setDomains", ["*.ryan.himmelwright.net"]]);
+      /* tracker methods like "setCustomDimension" should be called before "trackPageView" */
+      _paq.push(["setDocumentTitle", document.domain + "/" + document.title]);
+      _paq.push(["setCookieDomain", "*.ryan.himmelwright.net"]);
       _paq.push(['trackPageView']);
       _paq.push(['enableLinkTracking']);
       (function() {
-      var u="//himmelwright.net/piwik/";
+      var u="//piwik.himmelwright.net/";
       _paq.push(['setTrackerUrl', u+'piwik.php']);
-      _paq.push(['setSiteId', 2]);
+      _paq.push(['setSiteId', '1']);
       var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
       g.type='text/javascript'; g.async=true; g.defer=true; g.src=u+'piwik.js'; s.parentNode.insertBefore(g,s);
       })();
     </script>
-    <noscript><p><img src="//himmelwright.net/piwik/piwik.php?idsite=2" style="border:0;" alt="" /></p></noscript>
+    <noscript><p><img src="//piwik.himmelwright.net/piwik.php?idsite=1&rec=1" style="border:0;" alt="" /></p></noscript>
     <!-- End Piwik Code -->
+
 
   </head>
   <body>
@@ -43,7 +54,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="/">λ ryan . himmelwright . net</a>
+          <a class="navbar-brand" href="/">λ ryan himmelwright . net</a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav navbar-right">

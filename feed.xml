@@ -3,7 +3,7 @@
 <channel>
 <atom:link href='http://ryan.himmelwright.net' rel='self' type='application/rss+xml'/>
 <title>
-λ ryan . himmelwright . net
+λ ryan himmelwright . net
 </title>
 <link>
 http://ryan.himmelwright.net
@@ -12,7 +12,7 @@ http://ryan.himmelwright.net
 Software Developer, Functional Programming and Linux Enthusiast
 </description>
 <lastBuildDate>
-Wed, 08 Mar 2017 19:16:09 -0500
+Sun, 12 Mar 2017 08:12:07 -0400
 </lastBuildDate>
 <generator>
 clj-rss
