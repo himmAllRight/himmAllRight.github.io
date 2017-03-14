@@ -12,11 +12,34 @@ http://ryan.himmelwright.net
 Software Developer, Functional Programming and Linux Enthusiast
 </description>
 <lastBuildDate>
-Sun, 12 Mar 2017 08:45:01 -0400
+Mon, 13 Mar 2017 20:41:54 -0400
 </lastBuildDate>
 <generator>
 clj-rss
 </generator>
+<item>
+<guid>
+http://ryan.himmelwright.net/posts/LFS-Repeated-Setup-Steps/
+</guid>
+<link>
+http://ryan.himmelwright.net/posts/LFS-Repeated-Setup-Steps/
+</link>
+<title>
+Linux from Scratch - Repeated Setup Steps
+</title>
+<description>
+&lt;p&gt;During the Linux From Scratch process, there may be times when the build environment (computer, VM, chroot, whatever) must be restarted. If so, there are a few steps from the setup phase that have to be re-initialized. This post maps out those steps.&lt;/p&gt;&lt;p&gt;&lt;!&amp;ndash; more &amp;ndash;&gt;&lt;/p&gt;&lt;h3&gt;&lt;a name=&quot;setting&amp;#95;the&amp;#95;$lfs&amp;#95;variable&quot;&gt;&lt;/a&gt;Setting The $LFS Variable&lt;/h3&gt;After setting up the virtual disk for my LFS build, I needed to define where I wanted to eventually mount it. This location is important, because it is the path that the $LFS variable is set to. The $LFS variable is used throughout the book, to easily point to where the LFS system is being built.&lt;p&gt;&lt;center&gt;&lt;a href='../../img/posts/LFS-Repeated-Setup-Steps/Setting-LFS-var.png'&gt;&lt;img src=&quot;../../img/posts/LFS-Repeated-Setup-Steps/Setting-LFS-var.png&quot; alt=&quot;Setting the LFS variable&quot; /&gt;&lt;/a&gt;&lt;/center&gt;&lt;/p&gt;&lt;p&gt;To set the #LFS variable, I ran the following command: *&lt;/p&gt;&lt;p&gt;&lt;code&gt;export LFS=/mnt/lfs&lt;/code&gt;&lt;/p&gt;&lt;p&gt;To check that the variable set correctly, just print it out using echo (if successful, the path that was specified should print out).&lt;/p&gt;&lt;p&gt;&lt;code&gt;echo $LFS&lt;/code&gt;&lt;/p&gt;&lt;p&gt;&amp;#42; &lt;em&gt;Note: All of these commands should be run from the &lt;b&gt;lfs&lt;/b&gt; user created in &lt;a href='../LFS-Getting-Started/'&gt;the previous LFS post&lt;/a&gt;, as that is the user account LFS will be built from.&lt;/em&gt;&lt;/p&gt;&lt;h3&gt;&lt;a name=&quot;ensuring&amp;#95;the&amp;#95;$lfs&amp;#95;variable&amp;#95;is&amp;#95;&lt;em&gt;always&lt;/em&gt;&amp;#95;set&quot;&gt;&lt;/a&gt;Ensuring the $LFS Variable is &lt;em&gt;Always&lt;/em&gt; Set&lt;/h3&gt;There are several ways to ensure that the &lt;em&gt;$LFS&lt;/em&gt; variable is always loaded during login. One method the book recommends is to edit the &lt;em&gt;.bash-profile&lt;/em&gt; found in both &lt;em&gt;~&lt;/em&gt; and &lt;em&gt;/root, by appending the export command defined above to them. This way every time the build machine resets, simply logging into the system (which loads &lt;/em&gt;bash&lt;em&gt;, assuming it is the default), will export the &lt;/em&gt;$LFS* variable.&lt;h3&gt;&lt;a name=&quot;mounting&amp;#95;the&amp;#95;lfs&amp;#95;partition(s)&quot;&gt;&lt;/a&gt;Mounting the LFS Partition(s)&lt;/h3&gt;&lt;p&gt;After setting the &lt;em&gt;$LFS&lt;/em&gt; variable, I could finally mount my LFS drive/partition to that location. First, I ensured that the directory existed by running:&lt;/p&gt;&lt;p&gt;&lt;code&gt;mkdir -pv $LFS&lt;/code&gt;&lt;/p&gt;&lt;p&gt;&lt;em&gt;Note: In this command, the -v again means verbose, so a message will be printed for each directory created. The -p flag is for &amp;ndash;parents, and will instruct &quot;mkdir&quot; to also make parent directories, as needed. So, if &lt;code&gt;/mnt/&lt;/code&gt; does not already exist, will be created along with &lt;code&gt;/mnt/lfs&lt;/code&gt;.&lt;/em&gt;&lt;/p&gt;&lt;p&gt;After creating the directories, I mounted them with the command:&lt;/p&gt;&lt;p&gt;&lt;code&gt;sudo mount ext4 /dev/sdb&lt;/code&gt;&lt;/p&gt;&lt;p&gt;(&lt;em&gt;In Ubuntu I could only mount the drive as root, so I did it from my &lt;b&gt;ryan&lt;/b&gt; account, which has sudo privileges.&lt;/em&gt;)&lt;/p&gt;&lt;p&gt;If multiple partitions are being used for the LFS build (&lt;em&gt;such as a separate &lt;code&gt;/home&lt;/code&gt; partition&lt;/em&gt;), they should also be mounted at this time.&lt;/p&gt;&lt;p&gt;&lt;center&gt; &lt;img src=&quot;../../img/posts/LFS-Repeated-Setup-Steps/mounting-play.png&quot; name=&quot;pic&quot; onclick=swap(&quot;../../img/posts/LFS-Repeated-Setup-Steps/mount-check.gif&quot;)&gt;  &lt;/center&gt;&lt;/p&gt;&lt;p&gt;After mounting my partition, the LFS book recommended that I check that the partition was not mounted with restrictive permissions. To do this, I ran the &lt;code&gt;mount&lt;/code&gt; command again, but this time without any parameters. From the output, I was able to see and confirm that the partition was not mounted with restrictive permissions, such as &lt;code&gt;nosuid&lt;/code&gt; or &lt;code&gt;nodev&lt;/code&gt;. If either of these options are set, the partition should be remounted.&lt;/p&gt;&lt;p&gt;Lastly, if a &lt;em&gt;swap&lt;/em&gt; partition is being used, do not forget to enable it using &lt;code&gt;swapon&lt;/code&gt;:&lt;/p&gt;&lt;p&gt;&lt;code&gt;swapon -v /dev/xxx&lt;/code&gt;  (with &lt;em&gt;xxx&lt;/em&gt; the name of the swap partition)&lt;/p&gt;&lt;h3&gt;&lt;a name=&quot;conclusion&quot;&gt;&lt;/a&gt;Conclusion&lt;/h3&gt;Remember, if the LFS host system is restarted for any reason, these steps must be completed upon logging into the rebooted system. Even if measures were taking to &lt;em&gt;always&lt;/em&gt; complete these steps (such as adding the &lt;em&gt;$LFS&lt;/em&gt; variable to the bash profile, or mounting the partitions via the &lt;em&gt;fstab&lt;/em&gt; file), it is still a good idea to check and make sure that they &lt;em&gt;actually&lt;/em&gt; initialized as  intended. This can prevent several headaches down the road.
+</description>
+<author>
+Ryan Himmelwright
+</author>
+<enclosure>
+
+</enclosure>
+<pubDate>
+Mon, 13 Mar 2017 00:00:00 -0400
+</pubDate>
+</item>
 <item>
 <guid>
 http://ryan.himmelwright.net/posts/new-dotfiles/

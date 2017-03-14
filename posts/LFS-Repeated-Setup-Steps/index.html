@@ -2,8 +2,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
   <head>
     <meta charset="utf-8"/>
-    <title>λ ryan himmelwright . net: Posts Tagged &quot;Korora&quot;</title>
-    <link rel="canonical" href="http://ryan.himmelwright.net/tags-output/Korora/">
+    <title>λ ryan himmelwright . net: Linux from Scratch - Repeated Setup Steps</title>
+    <link rel="canonical" href="http://ryan.himmelwright.net/posts/LFS-Repeated-Setup-Steps/">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href='http://fonts.googleapis.com/css?family=Alegreya:400italic,700italic,400,700' rel='stylesheet'
           type='text/css'>
@@ -199,17 +199,50 @@
 
       <div id="content">
         
-<div id="posts-by-tag">
-    <div id="page-header">
-        <h2>Posts Tagged &quot;Korora&quot;</h2>
+<div id="post">
+    <div class="post-header">
+    <div id="post-meta" class="row">
+        <div class="col-lg-6">March 13, 2017</div>
+        
+        <span class="col-lg-6 right">By: Ryan Himmelwright</span>
+        
     </div>
-    <ul>
+    <h2>Linux from Scratch - Repeated Setup Steps</h2>
+</div>
+<div id="post-body">
     
-        <li>
-            <a href="/posts/introducing-kadabra/">Introducing Kadabra - My New, Used x230</a>
-        </li>
+    <p>During the Linux From Scratch process, there may be times when the build environment (computer, VM, chroot, whatever) must be restarted. If so, there are a few steps from the setup phase that have to be re-initialized. This post maps out those steps.</p><p><!&ndash; more &ndash;></p><h3><a name="setting&#95;the&#95;$lfs&#95;variable"></a>Setting The $LFS Variable</h3>After setting up the virtual disk for my LFS build, I needed to define where I wanted to eventually mount it. This location is important, because it is the path that the $LFS variable is set to. The $LFS variable is used throughout the book, to easily point to where the LFS system is being built.<p><center><a href='../../img/posts/LFS-Repeated-Setup-Steps/Setting-LFS-var.png'><img src="../../img/posts/LFS-Repeated-Setup-Steps/Setting-LFS-var.png" alt="Setting the LFS variable" /></a></center></p><p>To set the #LFS variable, I ran the following command: *</p><p><code>export LFS=/mnt/lfs</code></p><p>To check that the variable set correctly, just print it out using echo (if successful, the path that was specified should print out).</p><p><code>echo $LFS</code></p><p>&#42; <em>Note: All of these commands should be run from the <b>lfs</b> user created in <a href='../LFS-Getting-Started/'>the previous LFS post</a>, as that is the user account LFS will be built from.</em></p><h3><a name="ensuring&#95;the&#95;$lfs&#95;variable&#95;is&#95;<em>always</em>&#95;set"></a>Ensuring the $LFS Variable is <em>Always</em> Set</h3>There are several ways to ensure that the <em>$LFS</em> variable is always loaded during login. One method the book recommends is to edit the <em>.bash-profile</em> found in both <em>~</em> and <em>/root, by appending the export command defined above to them. This way every time the build machine resets, simply logging into the system (which loads </em>bash<em>, assuming it is the default), will export the </em>$LFS* variable.<h3><a name="mounting&#95;the&#95;lfs&#95;partition(s)"></a>Mounting the LFS Partition(s)</h3><p>After setting the <em>$LFS</em> variable, I could finally mount my LFS drive/partition to that location. First, I ensured that the directory existed by running:</p><p><code>mkdir -pv $LFS</code></p><p><em>Note: In this command, the -v again means verbose, so a message will be printed for each directory created. The -p flag is for &ndash;parents, and will instruct "mkdir" to also make parent directories, as needed. So, if <code>/mnt/</code> does not already exist, will be created along with <code>/mnt/lfs</code>.</em></p><p>After creating the directories, I mounted them with the command:</p><p><code>sudo mount ext4 /dev/sdb</code></p><p>(<em>In Ubuntu I could only mount the drive as root, so I did it from my <b>ryan</b> account, which has sudo privileges.</em>)</p><p>If multiple partitions are being used for the LFS build (<em>such as a separate <code>/home</code> partition</em>), they should also be mounted at this time.</p><p><center> <img src="../../img/posts/LFS-Repeated-Setup-Steps/mounting-play.png" name="pic" onclick=swap("../../img/posts/LFS-Repeated-Setup-Steps/mount-check.gif")>  </center></p><p>After mounting my partition, the LFS book recommended that I check that the partition was not mounted with restrictive permissions. To do this, I ran the <code>mount</code> command again, but this time without any parameters. From the output, I was able to see and confirm that the partition was not mounted with restrictive permissions, such as <code>nosuid</code> or <code>nodev</code>. If either of these options are set, the partition should be remounted.</p><p>Lastly, if a <em>swap</em> partition is being used, do not forget to enable it using <code>swapon</code>:</p><p><code>swapon -v /dev/xxx</code>  (with <em>xxx</em> the name of the swap partition)</p><h3><a name="conclusion"></a>Conclusion</h3>Remember, if the LFS host system is restarted for any reason, these steps must be completed upon logging into the rebooted system. Even if measures were taking to <em>always</em> complete these steps (such as adding the <em>$LFS</em> variable to the bash profile, or mounting the partitions via the <em>fstab</em> file), it is still a good idea to check and make sure that they <em>actually</em> initialized as  intended. This can prevent several headaches down the road.
+</div>
+
+<div id="post-tags">
+    <b>Tags: </b>
     
-    </ul>
+    <a href="/tags-output/LFS/">[LFS]</a>
+    
+    <a href="/tags-output/Linux/">[Linux]</a>
+    
+</div>
+
+
+    <div id="prev-next">
+        
+        
+        <a class="right" href="/posts/new-dotfiles/">My New Dotfiles Management - Using GNU Stow &raquo;</a>
+        
+    </div>
+
+    
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = '//himmAllRight.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    
+
+
 </div>
 
       </div>
