@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <title>λ ryan himmelwright . net: Linux from Scratch - Final Preparation Steps</title>
+    <link rel="canonical" href="http://ryan.himmelwright.net/posts/LFS-Final-Preparation-Steps/">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href='http://fonts.googleapis.com/css?family=Alegreya:400italic,700italic,400,700' rel='stylesheet'
+          type='text/css'>
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css">
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.1/styles/default.min.css">
+    <link href="/css/screen.css" rel="stylesheet" type="text/css" />
+
+    <!-- Piwik -->
+    <script type="text/javascript">
+      var _paq = _paq || [];
+      /* tracker methods like "setCustomDimension" should be called before "trackPageView" */
+      _paq.push(["setDocumentTitle", document.domain + "/" + document.title]);
+      _paq.push(["setCookieDomain", "*.ryan.himmelwright.net"]);
+      _paq.push(['trackPageView']);
+      _paq.push(['enableLinkTracking']);
+      (function() {
+      var u="//cloud.himmelwright.net/piwik/";
+      _paq.push(['setTrackerUrl', u+'piwik.php']);
+      _paq.push(['setSiteId', '1']);
+      var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+      g.type='text/javascript'; g.async=true; g.defer=true; g.src=u+'piwik.js'; s.parentNode.insertBefore(g,s);
+      })();
+    </script>
+    <noscript><p><img src="//cloud.himmelwright.net/piwik/piwik.php?idsite=1&rec=1" style="border:0;" alt="" /></p></noscript>
+    <!-- End Piwik Code -->
+  </head>
+  <body>
+
+
+    <nav class="navbar navbar-default">
+      <div class="container">
+	<div class="navbar-header">
+	  
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/">λ ryan himmelwright . net</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav navbar-right">
+            <li ><a href="/">Home</a></li>
+            
+            <li
+              >
+              <a href="/pages/about/">About</a>
+            </li>
+            
+            <li
+              >
+              <a href="/pages/homelab/">Homelab</a>
+            </li>
+            
+	    <li
+              ><a href="/archives/">Archives</a></li>
+            <li><a href="/feed.xml">RSS</a></li>
+          </ul>
+        </div><!--/.nav-collapse -->
+      </div><!--/.container-fluid -->
+    </nav>
+
+
+    <div class="container">
+
+      <div id="sidebar">
+	<div id="sidebar-info">
+	  <h3>Ryan Himmelwright</h3>
+	  <img src=http://ryan.himmelwright.net/img/avatar.jpg width= 100%>
+
+
+	  Software Developer, Functional Programming and Linux Enthusiast
+
+	  <div id="sidebar-icons">
+	    <!-- Github -->
+	    <a href="https://www.github.com/himmAllRight"
+	       title="himmAllRight on GitHub"
+	       target="_blank"><img src=http://ryan.himmelwright.net/img/icons/Github.png width=30px></a>
+
+	    <!-- HackerRank -->
+	    <a href="https://www.hackerrank.com/himmAllRight"
+	       title="himmAllRight on HackerRank "
+	       target="_blank"><img src=http://ryan.himmelwright.net/img/icons/hackerrank.png width=30px></a>
+
+	    <!-- Linkedin -->
+	    <a href="https://www.linkedin.com/in/ryan-himmelwright-b3891774"
+	       title="Ryan Himmelwright on Linkedin"
+	       target="_blank"><img src=http://ryan.himmelwright.net/img/icons/Linkedin.png
+				    width=30px></a>
+
+	    <!-- Twitter -->
+	    <a href="https://www.twitter.com/himmAllRight17"
+	       title="himmAllRight17 on Twitter "
+	       target="_blank"><img src=http://ryan.himmelwright.net/img/icons/Twitter.png
+				    width=30px></a>
+
+	    <!-- Email
+		 <a href="mailto:ryan.himmelwright@gmail.com"
+		    title="Email me at ryan.himmelwright@gmail.com"
+		    target="_blank"><img src=http://ryan.himmelwright.net/img/icons/email.png width=30px></a>
+		 -->
+
+	    <a href="mailto:ryan.himmelwright@gmail.com"
+	       title="Email me at ryan.himmelwright@gmail.com"
+	       target="_blank">
+	      
+	      <img src=http://ryan.himmelwright.net/img/icons/email.png id="email1" width="30" height="30" alt="email" usemap="#socialiconmap">
+	      <map name="socialiconmap">
+		<area shape="poly" coords="..." alt="mail"
+		      onmouseover="document.getElementById('image1').src=http://ryan.himmelwright.net/img/icons/email_orange.png" 
+		      onmouseout="document.getElementById('image1').src='image1.png'"/>
+	      </map>
+
+	      
+	    </a>
+
+	  </div>
+	</div>
+
+	<div id="sidebar-links">
+	  
+	  
+          
+          <div id="recent">
+	    <h3>Recent Posts</h3>
+	    <ul>
+              
+              <li><a href="/posts/LFS-SBUs-and-Binutils/">Linux from Scratch - SBUs and Binutils</a></li>
+              
+              <li><a href="/posts/LFS-Final-Preparation-Steps/">Linux from Scratch - Final Preparation Steps</a></li>
+              
+              <li><a href="/posts/LFS-Repeated-Setup-Steps/">Linux from Scratch - Repeated Setup Steps</a></li>
+              
+              <li><a href="/posts/new-dotfiles/">My New Dotfiles Management - Using GNU Stow</a></li>
+              
+              <li><a href="/posts/LFS-Getting-Started/">Linux from Scratch - Getting Started</a></li>
+              
+	    </ul>
+          </div>
+          
+          
+          <div id="tags">
+	    <h3>Tags</h3>
+	    <ul>
+              
+              <a href="/tags-output/Cryogen/">[Cryogen]</a> 
+              
+              <a href="/tags-output/snapd/">[snapd]</a> 
+              
+              <a href="/tags-output/Wedding/">[Wedding]</a> 
+              
+              <a href="/tags-output/KDE/">[KDE]</a> 
+              
+              <a href="/tags-output/Arch Linux/">[Arch Linux]</a> 
+              
+              <a href="/tags-output/Website/">[Website]</a> 
+              
+              <a href="/tags-output/C/">[C]</a> 
+              
+              <a href="/tags-output/LFS/">[LFS]</a> 
+              
+              <a href="/tags-output/Linux/">[Linux]</a> 
+              
+              <a href="/tags-output/Clojure/">[Clojure]</a> 
+              
+              <a href="/tags-output/Thinkpad/">[Thinkpad]</a> 
+              
+              <a href="/tags-output/dotfiles/">[dotfiles]</a> 
+              
+              <a href="/tags-output/Programming/">[Programming]</a> 
+              
+              <a href="/tags-output/Korora/">[Korora]</a> 
+              
+	    </ul>
+          </div>
+          
+	</div>
+      </div>
+      
+
+
+
+
+      <div id="content">
+        
+<div id="post">
+    <div class="post-header">
+    <div id="post-meta" class="row">
+        <div class="col-lg-6">March 21, 2017</div>
+        
+        <span class="col-lg-6 right">By: Ryan Himmelwright</span>
+        
+    </div>
+    <h2>Linux from Scratch - Final Preparation Steps</h2>
+</div>
+<div id="post-body">
+    
+    <p>Now that the <em>repeated</em> setup steps have been defined in <a href='../LFS-Repeated=Setup-Steps/'>my previous LFS post</a>, there are a <em>few</em> more preparation steps to complete in order to start building the LFS system. I promise... we will start compiling soon. If all goes well, this should be the last preparation post.</p><p><!&ndash; more &ndash;></p><h3><a name="downloading&#95;sources"></a>Downloading Sources</h3>When it comes down to it, Linux from scratch is just a bunch of packages, and the Linux kernel, all compiled from source and linked together. To build all of this, we need to download the source code... for <em>all</em> of those packages. Luckily, LFS keeps a list of what is needed, and downloading it is trivial. <em>(Note: These commands should be run as <b>root</b>)</em><p><center> <img src="../../img/posts/LFS-Final-Preparation-Steps/make-sources-dir.png" alt="Making the sources directory" /> </center></p><p>First, lets make a new directory to put all of the source code. To make the directory:</p><pre><code>mkdir -v $LFS/sources
+</code></pre><p>The LFS book suggests for this directory to be writable and sticky. A "Sticky" directory allows only the file owner to delete a file in it. To make the directory both writable and sticky, use the command:</p><pre><code>chmod -v a+wt $LFS/sources
+</code></pre><p><center> <img src="../../img/posts/LFS-Final-Preparation-Steps/wget-sources-play.png" name="pic" onmouseover="this.src='../../img/posts/LFS-Final-Preparation-Steps/wget-sources.gif'" onmouseout="this.src='../../img/posts/LFS-Final-Preparation-Steps/wget-sources-play.png'">  </center></p><p>To download all of the source packages at once, download <a href='http://www.linuxfromscratch.org/lfs/view/stable-systemd/wget-list'>the LFS wget list</a>:</p><pre><code>wget http://www.linuxfromscratch.org/lfs/view/stable-systemd/wget-list
+</code></pre><p>After downloading the wget list, it can be used as the input-file for wget. This will download all the sources with one command:</p><pre><code>wget --input-file=wget-list --continue --directory-prefix=$LFS/sources
+</code></pre><p>It should take a few minutes to download everything (or longer if on a poor connection).</p><p><center> <img src="../../img/posts/LFS-Final-Preparation-Steps/sources-md5-play.png" name="pic" onmouseover="this.src='../../img/posts/LFS-Final-Preparation-Steps/sources-md5.gif'" onmouseout="this.src='../../img/posts/LFS-Final-Preparation-Steps/sources-md5-play.png'">  </center></p><p>Ever since LFS-7.0, a <a href='http://www.linuxfromscratch.org/lfs/view/stable-systemd/md5sums'>md5sums file</a> is provided, which can be downloaded and used to verify the integrity of downloaded packages. Download this file, again with <em>wget</em>:</p><pre><code>wget http://www.linuxfromscratch.org/lfs/view/stable-systemd/md5sums
+</code></pre><p>Then, compare the hashes in the list to the <a href='https://en.wikipedia.org/wiki/Md5sum'>md5sum</a> for each of the source packages. This is done with the commands:</p><pre><code class="bash">pushd $LFS/sources
+md5sum -c md5sums
+popd
+</code></pre><p>The results should all say <em>OK</em>. If not, try re-downloading the sources and verifying again.</p><h3><a name="creating&#95;the&#95;$lfs/tools&#95;directory"></a>Creating the $LFS/tools Directory</h3>LFS is built in two main steps. The first step builds a set of temporary tools to build the system, but not be included as part of the Final LFS system itself. To help prevent these tools from accidentally being included in the final system, they are kept in a separate directory that can be deleted after they have served their purpose. Make this directory as root:<pre><code>mkdir -v $LFS/tools
+</code></pre><p>Next, we will create a <code>/tools</code> symlink to the host system. </p><pre><code>ln -sv $LFS/tools /
+</code></pre><p>This enables the tool-chain to be compiled so that it always refers to <code>/tools</code>, which ensures that the compiler, assembler, and linker will work in both the first, and second steps of the LFS build.</p><p><strong>Update:</strong> <em>I did this step wrong the first time (I think it failed), and encountered errors later when trying to run tar. If you encounter issues as well, jump to <a href='../LFS-SBUs-and-Binutils/'>my next post</a> to see how I resolved these issues</em></p><h3><a name="adding&#95;the&#95;lfs&#95;user"></a>Adding the LFS User</h3>Running a system as root is a dangerous. Running the wrong command can completely obliterate a system, and having a typo bork the LFS build, or even the host system, would be horrific. To prevent this, the book recommends creating an unprivileged user to build the packages from. To do so, first create an <em>lfs</em> group and then create + add a <em>lfs</em> user to it using the commands (as root, ironic for this section...):<pre><code>groupadd lfs
+useradd -s /bin/bash -g lfs -m -k /dev/null lfs
+</code></pre>If you are not familiar with the <em>useradd</em> command, then <a href='https://en.wikipedia.org/wiki/RTFM'><em>RTFM</em></a> by typing <code>man useradd</code>. I'm just kidding (although reading the man pages is never a bad idea). Here is a quick summary of what all of the flags mean. <ul><li><code>-s /bin/bash</code> sets our <em>lfs</em> user's default shell to <em>bash</em></li><li><code>-g lfs</code> adds the user to the <em>lfs</em> group that was created in the previous command</li><li><code>-m</code> creates the user's home directory (<em>/home/lfs</em>)</li><li><code>-k /dev/null</code> changes the input direction to the special null device to prevent the copying of files from a skeleton directory</li><li>lastly, <code>lfs</code> is the new user's name.</li></ul><p>Before logging into the user, the password must be set. </p><pre><code>passwd lfs
+</code></pre><p>We also want to grant the <em>lfs</em> user full access to the tools directory we made (<em>$LFS/tools</em>), so lets make <em>lfs</em> the owner of that directory:</p><pre><code>chown -v lfs $LFS/tools
+</code></pre><p>Do the same for the sources directory we made:</p><pre><code>chown -v lfs $LFS/sources
+</code></pre><p>Lastly, login as <em>lfs</em>!</p><pre><code>su - lfs
+</code></pre><p><em>Note: the "-" tells su to start a login shell, rather than a non-login shell. This mostly ensures that various files are read at login to setup environment variable and other profiles.</em></p><h3><a name="setting&#95;up&#95;the&#95;build&#95;environment"></a>Setting up the Build Environment</h3>Now with the <em>lfs</em> user created, we need to setup a proper working environment for that user. To do this, we will create the <code>.bash&#95;profile</code> and <code>.bashrc</code> files. <h5><a name="creating&#95;.bash<i>profile"></a>Creating .bash</i>profile</h5><p><center> <img src="../../img/posts/LFS-Final-Preparation-Steps/set-bash-profile.png" name="pic" onmouseover="this.src='../../img/posts/LFS-Final-Preparation-Steps/set-bash-profile.gif'" onmouseout="this.src='../../img/posts/LFS-Final-Preparation-Steps/set-bash-profile.png'">  </center></p><p>When logging in as the <em>lfs</em> user, the shell first reads the <code>/etc/profile</code> of the host, followed by the <code>.bash&#95;profile</code>. So, lets start with the <code>.bash&#95;profile</code>. Create/open <code>.bash&#95;profile</code> and add the following line to it:</p><pre><code>exec env -i HOME=$HOME TERM=$TERM PS1='\u:\w\$ ' /bin/bash
+</code></pre><p>This line replaces the running shell with a new one that contains a completely empty environment, except the <em>HOME</em>, <em>TERM</em>, <em>PS1</em> variables. This ensures that there are no stray environment variables, that may interfere with the build environment.</p><h5><a name="creating&#95;.bashrc"></a>Creating .bashrc</h5><p><center> <img src="../../img/posts/LFS-Final-Preparation-Steps/set-bashrc.png" name="pic" onmouseover="this.src='../../img/posts/LFS-Final-Preparation-Steps/set-bashrc.gif'" onmouseout="this.src='../../img/posts/LFS-Final-Preparation-Steps/set-bashrc.png'">  </center></p><p>The new instance of this the shell is a non-login shell, so it does not read the <code>/etc/profile</code> or <code>.bash&#95;profile</code> files. However, it does read the <code>.bashrc, so lets go ahead and create that. Open </code>~/.bashrc` and add the following lines:</p><pre><code>set +h
+umask 022
+LFS=/mnt/lfs
+LC&#95;ALL=POSIX
+LFS&#95;TGT=$&#40;uname -m&#41;-lfs-linux-gnu
+PATH=/tools/bin:/bin:/usr/bin
+export LFS LC&#95;ALL LFS&#95;TGT PATH
+
+</code></pre><p>The <code>set +h</code> line turns off bash's hash function. This is normally a usefully feature, as it essentially caches the path-names of executables. Removing this will ensure that the newly compiled tools will always be found by the shell once they are available, because the shell will have to re-search the <em>PATH</em> each time. Similarly, placing <code>/tools/bin</code> ahead of the standard <code>/bin:/usr/bin</code> <em>PATH</em> <em>(line 6)</em>, also helps force the shell to immediately locate up all the programs in chapter 5 after installation. These two techniques will hopefully prevent the risk of using old programs from the host instead of the newly compiled ones.</p><p>The <code>umask 022</code> line defines the <a href='https://en.wikipedia.org/wiki/Umask'>umask</a> to 022, which sets up the system so that created files and directories are only writable by their owner, but are readable and executable by anyone.</p><p>The <code>LFS=/mnt/lfs</code> line should look familiar, as it sets the <code>LFS</code> variable to our LFS mount point.</p><p>Lastly, setting the <code>LC&#95;ALL</code> variable to <code>POSIX</code> or <code>C</code> ensures that everything will work as expected in the <em>chroot</em> environments (regarding localization settings).</p><p>To enable this new environment we've setup, source the user-profile:</p><pre><code>source &#126;/.bash&#95;profile
+</code></pre><p>Congratulations! We are now ready to start compiling some code in the next post!</p>
+</div>
+
+<div id="post-tags">
+    <b>Tags: </b>
+    
+    <a href="/tags-output/LFS/">[LFS]</a>
+    
+    <a href="/tags-output/Linux/">[Linux]</a>
+    
+</div>
+
+
+    <div id="prev-next">
+        
+        <a href="/posts/LFS-SBUs-and-Binutils/">&laquo; Linux from Scratch - SBUs and Binutils</a>
+        
+        
+        <a class="right" href="/posts/LFS-Repeated-Setup-Steps/">Linux from Scratch - Repeated Setup Steps &raquo;</a>
+        
+    </div>
+
+    
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = '//himmAllRight.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    
+
+
+</div>
+
+      </div>
+
+
+    </div>
+    <footer>Copyright &copy;  <a href="mailto: ryan.himmelwright@gmail.com">Ryan Himmelwright</a>
+      <p style="text-align: center;">Powered by <a href="http://cryogenweb.org">Cryogen</a></p></footer>
+
+    <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+    <script src="/js/highlight.pack.js" type="text/javascript"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+  </body>
+</html>
