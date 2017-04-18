@@ -2,8 +2,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
     <meta charset="utf-8"/>
-    <title>λ ryan himmelwright . net: Homelab</title>
-    <link rel="canonical" href="http://ryan.himmelwright.net/pages/homelab/">
+    <title>λ ryan himmelwright . net: LIA 1.0 Beta Released</title>
+    <link rel="canonical" href="http://ryan.himmelwright.net/posts/LIA-1-0-Beta-Released/">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href='http://fonts.googleapis.com/css?family=Alegreya:400italic,700italic,400,700' rel='stylesheet'
           type='text/css'>
@@ -56,7 +56,7 @@
                 </li>
                 
                 <li
-                 class="active" >
+                >
                 <a href="/pages/homelab/">Homelab</a>
                 </li>
                 
@@ -146,92 +146,54 @@
         <div class="col-lg-12">
             <div id="content">
                 
-<div id="custom-page">
-    <div id="page-header">
-        <h2>Homelab</h2>
+<div id="post">
+    <div class="post-header">
+    <h2>LIA 1.0 Beta Released</h2>
+    <div id="post-meta" class="row">
+        
+        <span class="col-lg-6 left">By: Ryan Himmelwright</span>
+        
+        <div class="col-lg-6 right">April 17, 2017</div>
     </div>
+</div>
+<div>
     
-    <p>This is a page where I maintain the status of the computers in my “Homelab”. I will list my current systems here (potentially with screenshots of my current desktop setup for my workstations), as well as network diagrams of our current setup.</p><h2><a name="network"></a>Network</h2><h3><a name="network&#95;diagram"></a>Network Diagram</h3><a href='../../img/homelab/NetworkDiagram.png'><img src="../../img/homelab/NetworkDiagram.png" alt="Himmelwright Network" /></a><em>&#42; A Little Out of Date</em><h2><a name="computers"></a>Computers</h2><h3><a name="ryan&#95;(me)"></a>Ryan (Me)</h3><p><a href='../../img/homelab/alakazam.jpg'><img src="../../img/homelab/alakazam.jpg" alt="Ryan's Workstation" /></a> <em>My Main Computer Setup (Alakazam)</em></p><p><a href='../../img/homelab/alakazam_chair.jpg'><img src="../../img/homelab/alakazam_chair.jpg" alt="Ryan's Desk - Chair" /></a> <em>My Workstation Area</em></p><p><a href='../../img/homelab/alakazam_desk.jpg'><img src="../../img/homelab/alakazam_desk.jpg" alt="Ryan's Desk" /></a> <em>My Workstation Standing Desk</em></p><h4><a name="alakazam&#95;(main&#95;workstation&#95;laptop)"></a>Alakazam (Main Workstation Laptop)</h4><pre><code>System76 Bonobo Extreme
-Intel i7 4810-MQ &#91;2.8 Ghz &#40;3.8 Ghz Turbo&#41;, 6M Cache, 4 Cores, 8 Threads&#93;
-16 GB RAM
-Nvidia GTX 970M
-120 GB Samsung EVO SSD
-1 TB 7200 RPM HDD
-17.3” 1920x1080 Display 
-Monitors&#41;
-Solus
-</code></pre><h5><a name="periphery"></a>Periphery</h5><pre><code>2 x 23.6&quot; ASUS 1920x1080 Monitors
-Happy Hacking Keyboard Lite 2
-Audioengine A2+ Speakers &amp; Stands
-Bose AE2 Headphones
-Logitech HD Pro Webcam c920 Widescreen
-Blue Yeti Microphone - Backout Edition
-Inateck USB 3.0 to SATA Dual-Bay Hard Drive Docking Station
-</code></pre><h4><a name="kadabra&#95;(portable&#95;laptop)"></a>Kadabra (Portable Laptop)</h4><pre><code>Lenovo x230
-Intel i5-3320M &#91;2.6 GHz &#40;3.3 GHz Turbo&#41;, 3M Cache, 2 Cores, 4 Threads&#93;
-8 GB RAM
-250 GB Samsung 850 EVO SSD
-12.5&quot; HD LED 1366x768 Display
-9-Cell Battery
-Solus
-</code></pre><h3><a name="rebecca&#95;(wife)"></a>Rebecca (Wife)</h3><h4><a name="bellsprout&#95;(2014)"></a>Bellsprout (2014)</h4><pre><code>Macbook Air
-Intel i5 &#40;1.4 GHz &#40;2.7 GHz Turbo&#41;, 3M Cache, 2 Cores, 2 Threads&#41; ?
-4 GB RAM
-128 GB PCIe Flash HD
-13.3” 1440x900 LED Display
-2.96 Lbs and &#126;0.7” thick
-Mac OS
-</code></pre><h3><a name="servers"></a>Servers</h3><a href='../../img/homelab/rack.jpg'><img src="../../img/homelab/rack.jpg" alt="Lack Rack" /></a><h4><a name="ninetales&#95;(vm&#95;host&#95;/&#95;home&#95;server)"></a>Ninetales (VM Host / Home Server)</h4><pre><code>Lenovo ThinkServer 440
-Intel Xeon E3-1225 v3 &#91;3.2 GHz &#40;3.6 GHz Turbo&#41;, 8M Cache, 4 Cores, 4 Threads&#93;
-20 GB ECC RAM
-250 GB Samsung EVO SSD &#40;OS Partition + LVM partion for VM Volumes&#41;
-2 x 1TB WD 7200 RPM HDD &#40;ZFS Mirror, for Backups&#41; &#40;Hotswap&#41;
-2 x 3TB TOSHIBA 7200 RPM HDD &#40;ZFS Mirror, for Storage&#41; &#40;Hotswap&#41;
-Proxmox VE 4.4
-</code></pre><h5><a name="ninetales&#95;kvm&#95;vms:"></a>Ninetales KVM VMs:</h5><pre><code>Gentoo  - Gentoo     - Vm to play with Gentoo Linux
-Vomonat - Kali Linux - Used for learning PenTesting techniques
-test-vm - Various    - VM used to test out differnt distros
-</code></pre><h5><a name="ninetales&#95;lxc&#95;containers:"></a>Ninetales LXC Containers:</h5><pre><code>Diglet  &#40;50&#41;  - Arch Linux   - Minecraft Server
-Staryu  &#40;120&#41; - Arch Linux   - Plex Server
-Meowth  &#40;52&#41;  - Arch Linux   - Remote Website Writting/ Other
-Kakuna  &#40;14&#41;  - Ubuntu 16.04 - Experimenting with Ledger syncing methods
-Tangela &#40;114&#41; - Centos 7     - Nginx for Port and Subdomain Proxy
-Geodude &#40;74&#41;  - Ubuntu 16.04 - Gitlab Server
-</code></pre><h4><a name="charmander&#95;(test&#95;server&#95;/&#95;rebecca’s&#95;gaming&#95;computer)"></a>Charmander (Test Server / Rebecca’s Gaming Computer)</h4><pre><code>My old desktop &#40;first computer build&#41;
-Intel i7-930 &#91;2.8 GHz &#40;3.06 GHz Turbo&#41;, 8M Cache, 4 Cores, 8 Threads&#93;
-6 GB RAM
-Nvidia GTX 260
-120 GB Kingston SSD
-Ubuntu MATE 15.10 OS</code></pre><h4><a name="cyberpower&#95;1500va/900w&#95;ups"></a>CyberPower 1500VA/900W UPS</h4><h4><a name="xbox&#95;one"></a>Xbox One</h4><h3><a name="pi&#95;cluster"></a>PI Cluster</h3><a href='../../img/homelab/pi-cluster.png'><img src="../../img/homelab/pi-cluster.png" alt="PI Cluster" /></a><h4><a name="node&#95;1"></a>Node 1</h4><pre><code>Raspberry Pi 3
-ARM v8 CPU &#40;1.2 GHz, 4 Cores, 4 Threads&#41;
-1 GB RAM
-MicroSD card for HD
-</code></pre><h4><a name="node&#95;2"></a>Node 2</h4><pre><code>Raspberry Pi 2
-ARM Coretx-A7 &#40;900 MHz, 4 Cores, 4 Threads&#41;
-1 GB RAM
-MicroSD card for HD
-</code></pre><h4><a name="node&#95;3"></a>Node 3</h4><pre><code>Banana Pi M1
-A20 ARM Cortex-A7 Dual Core &#40;2 Cores, 2 Threads&#41;
-1 GB RAM
-10/100/1000 Ethernet
-MicroSD card for HD
-</code></pre><h3><a name="digital&#95;ocean&#95;droplets"></a>Digital Ocean Droplets</h3><h4><a name="pidgey&#95;(nextcloud/test&#95;cloud&#95;server)"></a>Pidgey (Nextcloud/Test Cloud Server)</h4><pre><code>Digital Ocean KVM Droplet
-1 Core
-512 MB RAM
-20 GB SSD
-Ubuntu 16.04 OS</code></pre><h4><a name="wedding-server&#95;(himmelwright&#95;wedding&#95;website&#95;host)"></a>Wedding-Server (Himmelwright Wedding Website Host)</h4><pre><code>Digital Ocean KVM Droplet
-1 Core
-512 MB RAM
-20 GB SSD
-Ubuntu 14.04 LTS OS</code></pre>
+    <p>I have released the 1.0 Beta version for a personal project of mine: the <strong>L</strong>edger <strong>I</strong>mport <strong>A</strong>ssistant, or <a href='https://github.com/himmALlRight/LIA/'>LIA</a>. This post will talk briefly about the background of LIA, what it does, and explain the beta release. </p><p><!&ndash; more &ndash;></p><h2><a name="what&#95;is&#95;lia?"></a>What is LIA?</h2><p><img src="../../img/posts/LIA-1-0-Beta-Released/creditCardDownload.png" alt="Credit Card Statement CSV" /></p><p><em>Example Cred Card Statement CSV File</em></p><p>A while ago, I discovered <a href='http://www.ledger-cli.org'>Ledger</a>, the command line double-entry accounting application. Its powerful, yet simple design attracted me, and I wanted to try it out. To use it effectively however, I needed a method to import our bank and credit card statements into ledger journals. Then, I could use ledger to analyze the finances. However, there was an issue. While there are several great ledger convert/import options out there, many were more complicated than what I was looking for. So...I wrote my own. </p><p><img src="../../img/posts/LIA-1-0-Beta-Released/ledger-journal.png" alt="Example Ledger Journal File" /></p><p><em>Example Ledger Journal File</em></p><p>When I started writing LIA, I just wanted a python script that could help me convert the contents of a .csv file into a ledger-journal formatted file (without any of the fancy features. Just the basics). I thought it was a simple task and should only take me a few hours. It was, and it did. I wrote the the first basic implementation of LIA on a Sunday afternoon. While coding that bare-bones version, I realized that even though it <em>technically worked</em>, it would not be enjoyable to use, and therefore I would never use it. So I decided to expand it into a full project, something more than a simple script.</p><h2><a name="what&#95;does&#95;lia&#95;do?"></a>What does LIA do?</h2><p><img src="../../img/posts/LIA-1-0-Beta-Released/LIA-demo.gif" alt="LIA Running" /></p><p>LIA executes the core functionality that originally prompted me to write it: converting bank/credit card statement csv files into ledger journal files. Beyond that basic functionality,  LIA has a few nice features that help the user manually convert these files in an enjoyable way. By going through each transaction manually, the user has full control to make sure data is being input correctly. However, LIA helps make this otherwise dull process fast and efficient. Some of LIA's features that help accomplish this are:</p><ul><li>Data order is recognized by a header mechanism</li><li>Prompts the user to potentially edit the transaction information</li><li>Sets default transaction information from the values of the csv file</li><li>Manual transaction entries when needed (No input file)</li><li>Supports multiple destination accounts</li><li>Automatic placement system. The user can specify a file containing rules to automatically place transactions. (ex: anything with "Dunkin" in the description will default to Expenses:Food:Coffee)</li><li>Colored prompts</li></ul><h2><a name="what&#95;does&#95;lia&#95;1.0&#95;beta&#95;mean?"></a>What does LIA 1.0 Beta mean?</h2><h3><a name="lia&#95;1.0"></a>LIA 1.0</h3><p><img src="../../img/posts/LIA-1-0-Beta-Released/release-todo.png" alt="My 1.0 Todo List" /></p><p><em>My Todo list to release the 1.0 Version</em></p><p>When I expanded LIA to a personal project, I recorded several features that would make converting CSV statements easier, and got started. I worked on the project here and there, adding each feature over time. These features are what I determined were required in order for the application to be acceptably <em>usable</em>. When all of those requirements were met, I would release an official 1.0 Branch.</p><p>The main functionality of LIA has been implemented for a while now. Being a python application, it has been possible to run LIA by calling the files with python. However, I didn't want to release the 1.0 version without first making an installer. I wanted LIA to be run like a normal linux application. I have now finished configuring the project and a <code>setup.py</code> file, so users can use python's setuptools to install LIA as an application on their computer. Additionally, I have even packaged LIA as a Solus eopkg. It looks like I am ready for release.</p><h3><a name="beta"></a>Beta</h3>Sort of. Until now, I have been developing, but not using LIA day to day. I want to spend some time actually <em>using</em> the application to see if there are any remaining issues. Also, I have not confirmed that it fully does what is needed for ledger. I want to get a few ledger users to quickly look at it and let me know if they see any issues. After testing it for a bit, I will release it as the official 1.0 release. This will mean it should be stable enough for people to use, if they so choose to.<h2><a name="more&#95;information"></a>More Information</h2>To test out LIA, read some documentation, or find out more  <a href='https://github.com/himmAllRight/lia/'>check it out</a> on <a href='https://github.com/himmAllRight'>my github page</a>. I plan to continue to develop it further in the future. If you have a suggestion, or even some code you'd like to contribute, feel free to let me know, either on github or my <a href='../../pages//about/'>other contact methods</a>. Enjoy!
+</div>
 
-    <!-- <div id="prev-next"> -->
-    <!--  -->
-    <!-- <a href="/pages/about/">&laquo; About</a> -->
-    <!--  -->
-    <!--  -->
-    <!--  -->
-    <!-- </div> -->
+<div id="post-tags">
+    <b>Tags: </b>
+    
+    <a href="/tags-output/Python/">[Python]</a>
+    
+    <a href="/tags-output/Ledger/">[Ledger]</a>
+    
+    <a href="/tags-output/Solus/">[Solus]</a>
+    
+    <a href="/tags-output/Dev/">[Dev]</a>
+    
+</div>
+
+
+    <div id="prev-next">
+        
+        
+        <a class="right" href="/posts/New-Theme-Immutable/">New Website Theme: Immutable &raquo;</a>
+        
+    </div>
+
+    
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = '//himmAllRight.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    
+
+
 </div>
 
             </div>

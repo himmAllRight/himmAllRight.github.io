@@ -12,11 +12,34 @@ http://ryan.himmelwright.net
 Software Developer, Functional Programming and Linux Enthusiast
 </description>
 <lastBuildDate>
-Tue, 11 Apr 2017 21:22:38 -0400
+Mon, 17 Apr 2017 21:10:53 -0400
 </lastBuildDate>
 <generator>
 clj-rss
 </generator>
+<item>
+<guid>
+http://ryan.himmelwright.net/posts/LIA-1-0-Beta-Released/
+</guid>
+<link>
+http://ryan.himmelwright.net/posts/LIA-1-0-Beta-Released/
+</link>
+<title>
+LIA 1.0 Beta Released
+</title>
+<description>
+&lt;p&gt;I have released the 1.0 Beta version for a personal project of mine: the &lt;strong&gt;L&lt;/strong&gt;edger &lt;strong&gt;I&lt;/strong&gt;mport &lt;strong&gt;A&lt;/strong&gt;ssistant, or &lt;a href='https://github.com/himmALlRight/LIA/'&gt;LIA&lt;/a&gt;. This post will talk briefly about the background of LIA, what it does, and explain the beta release. &lt;/p&gt;&lt;p&gt;&lt;!&amp;ndash; more &amp;ndash;&gt;&lt;/p&gt;&lt;h2&gt;&lt;a name=&quot;what&amp;#95;is&amp;#95;lia?&quot;&gt;&lt;/a&gt;What is LIA?&lt;/h2&gt;&lt;p&gt;&lt;img src=&quot;../../img/posts/LIA-1-0-Beta-Released/creditCardDownload.png&quot; alt=&quot;Credit Card Statement CSV&quot; /&gt;&lt;/p&gt;&lt;p&gt;&lt;em&gt;Example Cred Card Statement CSV File&lt;/em&gt;&lt;/p&gt;&lt;p&gt;A while ago, I discovered &lt;a href='http://www.ledger-cli.org'&gt;Ledger&lt;/a&gt;, the command line double-entry accounting application. Its powerful, yet simple design attracted me, and I wanted to try it out. To use it effectively however, I needed a method to import our bank and credit card statements into ledger journals. Then, I could use ledger to analyze the finances. However, there was an issue. While there are several great ledger convert/import options out there, many were more complicated than what I was looking for. So...I wrote my own. &lt;/p&gt;&lt;p&gt;&lt;img src=&quot;../../img/posts/LIA-1-0-Beta-Released/ledger-journal.png&quot; alt=&quot;Example Ledger Journal File&quot; /&gt;&lt;/p&gt;&lt;p&gt;&lt;em&gt;Example Ledger Journal File&lt;/em&gt;&lt;/p&gt;&lt;p&gt;When I started writing LIA, I just wanted a python script that could help me convert the contents of a .csv file into a ledger-journal formatted file (without any of the fancy features. Just the basics). I thought it was a simple task and should only take me a few hours. It was, and it did. I wrote the the first basic implementation of LIA on a Sunday afternoon. While coding that bare-bones version, I realized that even though it &lt;em&gt;technically worked&lt;/em&gt;, it would not be enjoyable to use, and therefore I would never use it. So I decided to expand it into a full project, something more than a simple script.&lt;/p&gt;&lt;h2&gt;&lt;a name=&quot;what&amp;#95;does&amp;#95;lia&amp;#95;do?&quot;&gt;&lt;/a&gt;What does LIA do?&lt;/h2&gt;&lt;p&gt;&lt;img src=&quot;../../img/posts/LIA-1-0-Beta-Released/LIA-demo.gif&quot; alt=&quot;LIA Running&quot; /&gt;&lt;/p&gt;&lt;p&gt;LIA executes the core functionality that originally prompted me to write it: converting bank/credit card statement csv files into ledger journal files. Beyond that basic functionality,  LIA has a few nice features that help the user manually convert these files in an enjoyable way. By going through each transaction manually, the user has full control to make sure data is being input correctly. However, LIA helps make this otherwise dull process fast and efficient. Some of LIA's features that help accomplish this are:&lt;/p&gt;&lt;ul&gt;&lt;li&gt;Data order is recognized by a header mechanism&lt;/li&gt;&lt;li&gt;Prompts the user to potentially edit the transaction information&lt;/li&gt;&lt;li&gt;Sets default transaction information from the values of the csv file&lt;/li&gt;&lt;li&gt;Manual transaction entries when needed (No input file)&lt;/li&gt;&lt;li&gt;Supports multiple destination accounts&lt;/li&gt;&lt;li&gt;Automatic placement system. The user can specify a file containing rules to automatically place transactions. (ex: anything with &quot;Dunkin&quot; in the description will default to Expenses:Food:Coffee)&lt;/li&gt;&lt;li&gt;Colored prompts&lt;/li&gt;&lt;/ul&gt;&lt;h2&gt;&lt;a name=&quot;what&amp;#95;does&amp;#95;lia&amp;#95;1.0&amp;#95;beta&amp;#95;mean?&quot;&gt;&lt;/a&gt;What does LIA 1.0 Beta mean?&lt;/h2&gt;&lt;h3&gt;&lt;a name=&quot;lia&amp;#95;1.0&quot;&gt;&lt;/a&gt;LIA 1.0&lt;/h3&gt;&lt;p&gt;&lt;img src=&quot;../../img/posts/LIA-1-0-Beta-Released/release-todo.png&quot; alt=&quot;My 1.0 Todo List&quot; /&gt;&lt;/p&gt;&lt;p&gt;&lt;em&gt;My Todo list to release the 1.0 Version&lt;/em&gt;&lt;/p&gt;&lt;p&gt;When I expanded LIA to a personal project, I recorded several features that would make converting CSV statements easier, and got started. I worked on the project here and there, adding each feature over time. These features are what I determined were required in order for the application to be acceptably &lt;em&gt;usable&lt;/em&gt;. When all of those requirements were met, I would release an official 1.0 Branch.&lt;/p&gt;&lt;p&gt;The main functionality of LIA has been implemented for a while now. Being a python application, it has been possible to run LIA by calling the files with python. However, I didn't want to release the 1.0 version without first making an installer. I wanted LIA to be run like a normal linux application. I have now finished configuring the project and a &lt;code&gt;setup.py&lt;/code&gt; file, so users can use python's setuptools to install LIA as an application on their computer. Additionally, I have even packaged LIA as a Solus eopkg. It looks like I am ready for release.&lt;/p&gt;&lt;h3&gt;&lt;a name=&quot;beta&quot;&gt;&lt;/a&gt;Beta&lt;/h3&gt;Sort of. Until now, I have been developing, but not using LIA day to day. I want to spend some time actually &lt;em&gt;using&lt;/em&gt; the application to see if there are any remaining issues. Also, I have not confirmed that it fully does what is needed for ledger. I want to get a few ledger users to quickly look at it and let me know if they see any issues. After testing it for a bit, I will release it as the official 1.0 release. This will mean it should be stable enough for people to use, if they so choose to.&lt;h2&gt;&lt;a name=&quot;more&amp;#95;information&quot;&gt;&lt;/a&gt;More Information&lt;/h2&gt;To test out LIA, read some documentation, or find out more  &lt;a href='https://github.com/himmAllRight/lia/'&gt;check it out&lt;/a&gt; on &lt;a href='https://github.com/himmAllRight'&gt;my github page&lt;/a&gt;. I plan to continue to develop it further in the future. If you have a suggestion, or even some code you'd like to contribute, feel free to let me know, either on github or my &lt;a href='../../pages//about/'&gt;other contact methods&lt;/a&gt;. Enjoy!
+</description>
+<author>
+Ryan Himmelwright
+</author>
+<enclosure>
+
+</enclosure>
+<pubDate>
+Mon, 17 Apr 2017 00:00:00 -0400
+</pubDate>
+</item>
 <item>
 <guid>
 http://ryan.himmelwright.net/posts/New-Theme-Immutable/
