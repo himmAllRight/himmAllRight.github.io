@@ -78,6 +78,8 @@
                         <li class="divider"></li>
                         <li class="dropdown-header">Recent Posts</li>
                         
+                        <li><a href="/posts/ZFS-Backups-To-LUKS-External/">ZFS Snapshot Backups to an External Drive with LUKS</a></li>
+                        
                         <li><a href="/posts/LIA-1-0-Beta-Released/">LIA 1.0 Beta Released</a></li>
                         
                         <li><a href="/posts/New-Theme-Immutable/">New Website Theme: Immutable</a></li>
@@ -85,8 +87,6 @@
                         <li><a href="/posts/LFS-SBUs-and-Binutils/">Linux from Scratch - SBUs and Binutils</a></li>
                         
                         <li><a href="/posts/LFS-Final-Preparation-Steps/">Linux from Scratch - Final Preparation Steps</a></li>
-                        
-                        <li><a href="/posts/LFS-Repeated-Setup-Steps/">Linux from Scratch - Repeated Setup Steps</a></li>
                         
                         
 
@@ -97,6 +97,8 @@
                         <li><a href="/tags-output/Python/"><b>[Python]</b></a></li>
                         
                         <li><a href="/tags-output/Cryogen/"><b>[Cryogen]</b></a></li>
+                        
+                        <li><a href="/tags-output/Homelab/"><b>[Homelab]</b></a></li>
                         
                         <li><a href="/tags-output/snapd/"><b>[snapd]</b></a></li>
                         
@@ -115,6 +117,8 @@
                         <li><a href="/tags-output/Linux/"><b>[Linux]</b></a></li>
                         
                         <li><a href="/tags-output/Clojure/"><b>[Clojure]</b></a></li>
+                        
+                        <li><a href="/tags-output/ZFS/"><b>[ZFS]</b></a></li>
                         
                         <li><a href="/tags-output/Thinkpad/"><b>[Thinkpad]</b></a></li>
                         
@@ -147,6 +151,16 @@
             <div id="content">
                 
 <div id="post">
+    
+    <div class="post-header">
+        <h2>ZFS Snapshot Backups to an External Drive with LUKS</h2>
+        <div id="preview-meta">
+            April 20, 2017
+        </div>
+    </div>
+    <p>I have been using <a href="https://en.wikipedia.org/wiki/ZFS" shape="rect">ZFS</a> data pools to store data on <a href="../../pages/homelab/" shape="rect">my server</a> for some time now. As great as that is, I am ashamed to admit that I have not had a <em>true</em> backup system in place (raid/mirrors are not backup). I have a backup solution that I have attempted in the past, but ran into an issue and let it drift to the side. That changes now. It's time to revisit my solution, and complete it to the end.</p><p></p>
+    <a href="/posts/ZFS-Backups-To-LUKS-External/">Continue reading &#8594;</a>
+    <hr>
     
     <div class="post-header">
         <h2>LIA 1.0 Beta Released</h2>
@@ -186,16 +200,6 @@
     </div>
     <p>Now that the <em>repeated</em> setup steps have been defined in <a href="../LFS-Repeated=Setup-Steps/" shape="rect">my previous LFS post</a>, there are a <em>few</em> more preparation steps to complete in order to start building the LFS system. I promise... we will start compiling soon. If all goes well, this should be the last preparation post.</p><p></p>
     <a href="/posts/LFS-Final-Preparation-Steps/">Continue reading &#8594;</a>
-    <hr>
-    
-    <div class="post-header">
-        <h2>Linux from Scratch - Repeated Setup Steps</h2>
-        <div id="preview-meta">
-            March 13, 2017
-        </div>
-    </div>
-    <p>During the Linux From Scratch process, there may be times when the build environment (computer, VM, chroot, whatever) must be restarted. If so, there are a few steps from the setup phase that have to be re-initialized. This post maps out those steps.</p><p></p>
-    <a href="/posts/LFS-Repeated-Setup-Steps/">Continue reading &#8594;</a>
     <hr>
     
 
