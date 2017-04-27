@@ -89,7 +89,7 @@ sudo zfs send -R Data@DataBackupBase | sudo zfs recv externalBackup/DataBackup
 
 Taking a snapshot of my data and sending it to an external drive is nice, but I don't want to send all of the data each time I backup. Transferring can take a very long time, especially as my data pools continue to grow. I don't want to sit around all day, listening to hard drives hum as my data transfers.
 
-<center>![no time](../../posts/ZFS-Backups-To-LUKS-External/aint-nobody-got-time-for-that.gif)</center>
+<center>![no time](../../img/posts/ZFS-Backups-To-LUKS-External/aint-nobody-got-time-for-that.gif)</center>
 
 A useful feature of the zfs `send` and `recv` commands is the ability to send *incremental* snapshots. This means when I want to update my backups, I can just send the *changes* between the two snapshots. This is similar to [source code diffs](https://en.wikipedia.org/wiki/Diff_utility), but for file systems.
 
