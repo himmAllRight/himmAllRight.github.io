@@ -5,6 +5,7 @@
     <title>λ ryan himmelwright . net: Homelab</title>
     <link rel="canonical" href="http://ryan.himmelwright.net/pages/homelab/">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/font-hack/2.020/css/hack-extended.min.css">
     <link href='http://fonts.googleapis.com/css?family=Alegreya:400italic,700italic,400,700' rel='stylesheet'
           type='text/css'>
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css">
@@ -78,6 +79,8 @@
                         <li class="divider"></li>
                         <li class="dropdown-header">Recent Posts</li>
                         
+                        <li><a href="/posts/Setting-up-the-pi-cluster/">Setting Up the Pi Cluster</a></li>
+                        
                         <li><a href="/posts/ZFS-Backups-To-LUKS-External/">ZFS Snapshot Backups to an External Drive with LUKS</a></li>
                         
                         <li><a href="/posts/LIA-1-0-Beta-Released/">LIA 1.0 Beta Released</a></li>
@@ -85,8 +88,6 @@
                         <li><a href="/posts/New-Theme-Immutable/">New Website Theme: Immutable</a></li>
                         
                         <li><a href="/posts/LFS-SBUs-and-Binutils/">Linux from Scratch - SBUs and Binutils</a></li>
-                        
-                        <li><a href="/posts/LFS-Final-Preparation-Steps/">Linux from Scratch - Final Preparation Steps</a></li>
                         
                         
 
@@ -102,6 +103,8 @@
                         
                         <li><a href="/tags-output/snapd/"><b>[snapd]</b></a></li>
                         
+                        <li><a href="/tags-output/Pi/"><b>[Pi]</b></a></li>
+                        
                         <li><a href="/tags-output/Wedding/"><b>[Wedding]</b></a></li>
                         
                         <li><a href="/tags-output/KDE/"><b>[KDE]</b></a></li>
@@ -111,6 +114,8 @@
                         <li><a href="/tags-output/Website/"><b>[Website]</b></a></li>
                         
                         <li><a href="/tags-output/C/"><b>[C]</b></a></li>
+                        
+                        <li><a href="/tags-output/Cluster/"><b>[Cluster]</b></a></li>
                         
                         <li><a href="/tags-output/LFS/"><b>[LFS]</b></a></li>
                         
@@ -125,6 +130,8 @@
                         <li><a href="/tags-output/Ledger/"><b>[Ledger]</b></a></li>
                         
                         <li><a href="/tags-output/dotfiles/"><b>[dotfiles]</b></a></li>
+                        
+                        <li><a href="/tags-output/Devops/"><b>[Devops]</b></a></li>
                         
                         <li><a href="/tags-output/Programming/"><b>[Programming]</b></a></li>
                         
@@ -155,7 +162,7 @@
         <h2>Homelab</h2>
     </div>
     
-    <p>This is a page where I maintain the status of the computers in my “Homelab”. I will list my current systems here (potentially with screenshots of my current desktop setup for my workstations), as well as network diagrams of our current setup.</p><h2><a name="network"></a>Network</h2><h3><a name="network&#95;diagram"></a>Network Diagram</h3><a href='../../img/homelab/NetworkDiagram.png'><img src="../../img/homelab/NetworkDiagram.png" alt="Himmelwright Network" /></a><em>&#42; A Little Out of Date</em><h2><a name="computers"></a>Computers</h2><h3><a name="ryan&#95;(me)"></a>Ryan (Me)</h3><p><a href='../../img/homelab/alakazam.jpg'><img src="../../img/homelab/alakazam.jpg" alt="Ryan's Workstation" /></a> <em>My Main Computer Setup (Alakazam)</em></p><p><a href='../../img/homelab/alakazam_chair.jpg'><img src="../../img/homelab/alakazam_chair.jpg" alt="Ryan's Desk - Chair" /></a> <em>My Workstation Area</em></p><p><a href='../../img/homelab/alakazam_desk.jpg'><img src="../../img/homelab/alakazam_desk.jpg" alt="Ryan's Desk" /></a> <em>My Workstation Standing Desk</em></p><h4><a name="alakazam&#95;(main&#95;workstation&#95;laptop)"></a>Alakazam (Main Workstation Laptop)</h4><pre><code>System76 Bonobo Extreme
+    <p>This is a page where I maintain the status of the computers in my “Homelab”. I will list my current systems here (potentially with screenshots of my current desktop setup for my workstations), as well as network diagrams of our current setup.</p><h2><a name="network"></a>Network</h2><h3><a name="network&#95;diagram"></a>Network Diagram</h3><a href='../../img/homelab/NetworkDiagram.png'><img src="../../img/homelab/NetworkDiagram.png" alt="Himmelwright Network" /></a><em>&#42; A Little Out of Date</em><h2><a name="computers"></a>Computers</h2><h3><a name="ryan&#95;(me)"></a>Ryan (Me)</h3><p><a href='../../img/homelab/alakazam.jpg'><img src="../../img/homelab/alakazam.jpg" alt="Ryan's Workstation" /></a> <em>My Main Computer Setup (Alakazam)</em></p><p><a href='../../img/homelab/alakazam_chair.jpg'><img src="../../img/homelab/alakazam_chair.jpg" alt="Ryan's Desk - Chair" /></a> <em>My Workstation Area</em></p><p><a href='../../img/homelab/alakazam_desk.jpg'><img src="../../img/homelab/alakazam_desk.jpg" alt="Ryan's Desk" /></a> <em>My Workstation Standing Desk</em></p><p><a name="alakazam"></a><h4><a name="alakazam&#95;(main&#95;workstation&#95;laptop)"></a>Alakazam (Main Workstation Laptop)</h4><pre><code>System76 Bonobo Extreme
 Intel i7 4810-MQ &#91;2.8 Ghz &#40;3.8 Ghz Turbo&#41;, 6M Cache, 4 Cores, 8 Threads&#93;
 16 GB RAM
 Nvidia GTX 970M
@@ -171,28 +178,28 @@ Bose AE2 Headphones
 Logitech HD Pro Webcam c920 Widescreen
 Blue Yeti Microphone - Backout Edition
 Inateck USB 3.0 to SATA Dual-Bay Hard Drive Docking Station
-</code></pre><h4><a name="kadabra&#95;(portable&#95;laptop)"></a>Kadabra (Portable Laptop)</h4><pre><code>Lenovo x230
+</code></pre></p><p><a name="kadabra"></a><h4><a name="kadabra&#95;(portable&#95;laptop)"></a>Kadabra (Portable Laptop)</h4><pre><code>Lenovo x230
 Intel i5-3320M &#91;2.6 GHz &#40;3.3 GHz Turbo&#41;, 3M Cache, 2 Cores, 4 Threads&#93;
 8 GB RAM
 250 GB Samsung 850 EVO SSD
 12.5&quot; HD LED 1366x768 Display
 9-Cell Battery
 Solus
-</code></pre><h3><a name="rebecca&#95;(wife)"></a>Rebecca (Wife)</h3><h4><a name="bellsprout&#95;(2014)"></a>Bellsprout (2014)</h4><pre><code>Macbook Air
+</code></pre></p><h3><a name="rebecca&#95;(wife)"></a>Rebecca (Wife)</h3><h4><a name="bellsprout&#95;(2014)"></a>Bellsprout (2014)</h4><pre><code>Macbook Air
 Intel i5 &#40;1.4 GHz &#40;2.7 GHz Turbo&#41;, 3M Cache, 2 Cores, 2 Threads&#41; ?
 4 GB RAM
 128 GB PCIe Flash HD
 13.3” 1440x900 LED Display
 2.96 Lbs and &#126;0.7” thick
 Mac OS
-</code></pre><h3><a name="servers"></a>Servers</h3><a href='../../img/homelab/rack.jpg'><img src="../../img/homelab/rack.jpg" alt="Lack Rack" /></a><h4><a name="ninetales&#95;(vm&#95;host&#95;/&#95;home&#95;server)"></a>Ninetales (VM Host / Home Server)</h4><pre><code>Lenovo ThinkServer 440
+</code></pre><p><a name="servers"></a><h3><a name="servers"></a>Servers</h3><a href='../../img/homelab/rack.jpg'><img src="../../img/homelab/rack.jpg" alt="Lack Rack" /></a></p><p><a name="ninetales"></a><h4><a name="ninetales&#95;(vm&#95;host&#95;/&#95;home&#95;server)"></a>Ninetales (VM Host / Home Server)</h4><pre><code>Lenovo ThinkServer 440
 Intel Xeon E3-1225 v3 &#91;3.2 GHz &#40;3.6 GHz Turbo&#41;, 8M Cache, 4 Cores, 4 Threads&#93;
 20 GB ECC RAM
 250 GB Samsung EVO SSD &#40;OS Partition + LVM partion for VM Volumes&#41;
 2 x 1TB WD 7200 RPM HDD &#40;ZFS Mirror, for Backups&#41; &#40;Hotswap&#41;
 2 x 3TB TOSHIBA 7200 RPM HDD &#40;ZFS Mirror, for Storage&#41; &#40;Hotswap&#41;
 Proxmox VE 4.4
-</code></pre><h5><a name="ninetales&#95;kvm&#95;vms:"></a>Ninetales KVM VMs:</h5><pre><code>Gentoo  - Gentoo     - Vm to play with Gentoo Linux
+</code></pre></p><h5><a name="ninetales&#95;kvm&#95;vms:"></a>Ninetales KVM VMs:</h5><pre><code>Gentoo  - Gentoo     - Vm to play with Gentoo Linux
 Vomonat - Kali Linux - Used for learning PenTesting techniques
 test-vm - Various    - VM used to test out differnt distros
 </code></pre><h5><a name="ninetales&#95;lxc&#95;containers:"></a>Ninetales LXC Containers:</h5><pre><code>Diglet  &#40;50&#41;  - Arch Linux   - Minecraft Server
@@ -206,19 +213,22 @@ Intel i7-930 &#91;2.8 GHz &#40;3.06 GHz Turbo&#41;, 8M Cache, 4 Cores, 8 Threads
 6 GB RAM
 Nvidia GTX 260
 120 GB Kingston SSD
-Ubuntu MATE 15.10 OS</code></pre><h4><a name="cyberpower&#95;1500va/900w&#95;ups"></a>CyberPower 1500VA/900W UPS</h4><h4><a name="xbox&#95;one"></a>Xbox One</h4><h3><a name="pi&#95;cluster"></a>PI Cluster</h3><a href='../../img/homelab/pi-cluster.png'><img src="../../img/homelab/pi-cluster.png" alt="PI Cluster" /></a><h4><a name="node&#95;1"></a>Node 1</h4><pre><code>Raspberry Pi 3
+Ubuntu MATE 15.10 OS</code></pre><h4><a name="cyberpower&#95;1500va/900w&#95;ups"></a>CyberPower 1500VA/900W UPS</h4><h4><a name="xbox&#95;one"></a>Xbox One</h4><p><a name="cluster"></a><h3><a name="pi&#95;cluster"></a>PI Cluster</h3><a href='../../img/homelab/pi-cluster.png'><img src="../../img/homelab/pi-cluster.png" alt="PI Cluster" /></a></p><h4><a name="node&#95;1"></a>Node 1</h4><pre><code>Raspberry Pi 3
 ARM v8 CPU &#40;1.2 GHz, 4 Cores, 4 Threads&#41;
 1 GB RAM
 MicroSD card for HD
+Ubuntu 16.04 ARM
 </code></pre><h4><a name="node&#95;2"></a>Node 2</h4><pre><code>Raspberry Pi 2
 ARM Coretx-A7 &#40;900 MHz, 4 Cores, 4 Threads&#41;
 1 GB RAM
 MicroSD card for HD
+Ubuntu 16.04 ARM
 </code></pre><h4><a name="node&#95;3"></a>Node 3</h4><pre><code>Banana Pi M1
 A20 ARM Cortex-A7 Dual Core &#40;2 Cores, 2 Threads&#41;
 1 GB RAM
 10/100/1000 Ethernet
 MicroSD card for HD
+Armbian &#40;Ubuntu 16.04 version&#41;
 </code></pre><h3><a name="digital&#95;ocean&#95;droplets"></a>Digital Ocean Droplets</h3><h4><a name="pidgey&#95;(nextcloud/test&#95;cloud&#95;server)"></a>Pidgey (Nextcloud/Test Cloud Server)</h4><pre><code>Digital Ocean KVM Droplet
 1 Core
 512 MB RAM

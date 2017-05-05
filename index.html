@@ -5,6 +5,7 @@
     <title>λ ryan himmelwright . net</title>
     <link rel="canonical" href="http://ryan.himmelwright.net">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/font-hack/2.020/css/hack-extended.min.css">
     <link href='http://fonts.googleapis.com/css?family=Alegreya:400italic,700italic,400,700' rel='stylesheet'
           type='text/css'>
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css">
@@ -78,6 +79,8 @@
                         <li class="divider"></li>
                         <li class="dropdown-header">Recent Posts</li>
                         
+                        <li><a href="/posts/Setting-up-the-pi-cluster/">Setting Up the Pi Cluster</a></li>
+                        
                         <li><a href="/posts/ZFS-Backups-To-LUKS-External/">ZFS Snapshot Backups to an External Drive with LUKS</a></li>
                         
                         <li><a href="/posts/LIA-1-0-Beta-Released/">LIA 1.0 Beta Released</a></li>
@@ -85,8 +88,6 @@
                         <li><a href="/posts/New-Theme-Immutable/">New Website Theme: Immutable</a></li>
                         
                         <li><a href="/posts/LFS-SBUs-and-Binutils/">Linux from Scratch - SBUs and Binutils</a></li>
-                        
-                        <li><a href="/posts/LFS-Final-Preparation-Steps/">Linux from Scratch - Final Preparation Steps</a></li>
                         
                         
 
@@ -102,6 +103,8 @@
                         
                         <li><a href="/tags-output/snapd/"><b>[snapd]</b></a></li>
                         
+                        <li><a href="/tags-output/Pi/"><b>[Pi]</b></a></li>
+                        
                         <li><a href="/tags-output/Wedding/"><b>[Wedding]</b></a></li>
                         
                         <li><a href="/tags-output/KDE/"><b>[KDE]</b></a></li>
@@ -111,6 +114,8 @@
                         <li><a href="/tags-output/Website/"><b>[Website]</b></a></li>
                         
                         <li><a href="/tags-output/C/"><b>[C]</b></a></li>
+                        
+                        <li><a href="/tags-output/Cluster/"><b>[Cluster]</b></a></li>
                         
                         <li><a href="/tags-output/LFS/"><b>[LFS]</b></a></li>
                         
@@ -125,6 +130,8 @@
                         <li><a href="/tags-output/Ledger/"><b>[Ledger]</b></a></li>
                         
                         <li><a href="/tags-output/dotfiles/"><b>[dotfiles]</b></a></li>
+                        
+                        <li><a href="/tags-output/Devops/"><b>[Devops]</b></a></li>
                         
                         <li><a href="/tags-output/Programming/"><b>[Programming]</b></a></li>
                         
@@ -153,12 +160,22 @@
 <div id="post">
     
     <div class="post-header">
+            <h2><a href="/posts/Setting-up-the-pi-cluster/">Setting Up the Pi Cluster</a></h2>
+        <div id="preview-meta">
+            May 5, 2017
+        </div>
+    </div>
+    <p>I have a Raspberry Pi 2, a Raspberry Pi 3, and a Banana Pi. A while ago, I constructed a small tower to house my pi devices. Since then, I have additionally acquired a power source, and some CAT6 cable to connect them all up to a switch. I hope to use the Pis as a mini clustered environment, where I can learn (and play) with some of the "Devops" technologies/techniques out there. This post will briefly explain the initial setup of <a href="../../pages/homelab/#cluster" shape="rect">my cluster</a>.</p><p></p>
+    <a href="/posts/Setting-up-the-pi-cluster/">Continue reading &#8594;</a>
+    <hr>
+    
+    <div class="post-header">
             <h2><a href="/posts/ZFS-Backups-To-LUKS-External/">ZFS Snapshot Backups to an External Drive with LUKS</a></h2>
         <div id="preview-meta">
             April 20, 2017
         </div>
     </div>
-    <p>I have been using <a href="https://en.wikipedia.org/wiki/ZFS" shape="rect">ZFS</a> data pools to store data on <a href="../../pages/homelab/" shape="rect">my server</a> for some time now. As great as that is, I am ashamed to admit that I have not had a <em>true</em> backup system in place (raid/mirrors are not backup). I have a backup solution that I have attempted in the past, but ran into an issue and let it drift to the side. That changes now. It's time to revisit my solution, and complete it to the end.</p><p></p>
+    <p>I have been using <a href="https://en.wikipedia.org/wiki/ZFS" shape="rect">ZFS</a> data pools to store data on <a href="../../pages/homelab/#ninetales" shape="rect">my server</a> for some time now. As great as that is, I am ashamed to admit that I have not had a <em>true</em> backup system in place (raid/mirrors are not backup). I have a backup solution that I have attempted in the past, but ran into an issue and let it drift to the side. That changes now. It's time to revisit my solution, and complete it to the end.</p><p></p>
     <a href="/posts/ZFS-Backups-To-LUKS-External/">Continue reading &#8594;</a>
     <hr>
     
@@ -190,16 +207,6 @@
     </div>
     <p>Well, after all of the preparation, we are ready to start compiling packages. This post cover compiling all the packages, but it will detail the first build of <a href="https://www.gnu.org/software/binutils/" shape="rect">Binutils</a>, which is arguably the most important package to compile. Why is Binutils so crucial? It determines the SBU time for your build system. What's an SBU? Read on to find out!</p><p></p>
     <a href="/posts/LFS-SBUs-and-Binutils/">Continue reading &#8594;</a>
-    <hr>
-    
-    <div class="post-header">
-            <h2><a href="/posts/LFS-Final-Preparation-Steps/">Linux from Scratch - Final Preparation Steps</a></h2>
-        <div id="preview-meta">
-            March 21, 2017
-        </div>
-    </div>
-    <p>Now that the <em>repeated</em> setup steps have been defined in <a href="../LFS-Repeated=Setup-Steps/" shape="rect">my previous LFS post</a>, there are a <em>few</em> more preparation steps to complete in order to start building the LFS system. I promise... we will start compiling soon. If all goes well, this should be the last preparation post.</p><p></p>
-    <a href="/posts/LFS-Final-Preparation-Steps/">Continue reading &#8594;</a>
     <hr>
     
 
