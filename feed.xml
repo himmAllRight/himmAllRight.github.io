@@ -12,7 +12,7 @@ http://ryan.himmelwright.net
 Software Developer, Functional Programming and Linux Enthusiast
 </description>
 <lastBuildDate>
-Fri, 05 May 2017 06:13:23 -0400
+Fri, 05 May 2017 06:17:58 -0400
 </lastBuildDate>
 <generator>
 clj-rss
@@ -25,7 +25,7 @@ http://ryan.himmelwright.net/posts/Setting-up-the-pi-cluster/
 http://ryan.himmelwright.net/posts/Setting-up-the-pi-cluster/
 </link>
 <title>
-Setting Up the Pi Cluster
+Setting Up My Pi Cluster
 </title>
 <description>
 &lt;p&gt;I have a Raspberry Pi 2, a Raspberry Pi 3, and a Banana Pi. A while ago, I constructed a small tower to house my pi devices. Since then, I have additionally acquired a power source, and some CAT6 cable to connect them all up to a switch. I hope to use the Pis as a mini clustered environment, where I can learn (and play) with some of the &quot;Devops&quot; technologies/techniques out there. This post will briefly explain the initial setup of &lt;a href='../../pages/homelab/#cluster'&gt;my cluster&lt;/a&gt;.&lt;/p&gt;&lt;p&gt;&lt;!&amp;ndash; more &amp;ndash;&gt;&lt;/p&gt;&lt;h1&gt;&lt;a name=&quot;setting&amp;#95;up&amp;#95;the&amp;#95;os&amp;#95;images&quot;&gt;&lt;/a&gt;Setting up the OS Images&lt;/h1&gt;Before doing anything with the hardware, I had to setup the pi &quot;hard drives&quot; (micro SD cards), so they could boot. &lt;h3&gt;&lt;a name=&quot;ubuntu&amp;#95;for&amp;#95;raspberry&amp;#95;pi&quot;&gt;&lt;/a&gt;Ubuntu for Raspberry PI&lt;/h3&gt;&lt;p&gt;&lt;img src=&quot;../../img/posts/Setting-Up-Pi-Cluster/ubuntu-logo.jpg&quot; style=&quot;width: 200px%; float: right; margin: 0px 10px 0px 10px;&quot;/&gt;&lt;/p&gt;&lt;p&gt;After mucking around with Rapsbian and Hypriot one Sunday, I decided to just go with a plain Ubuntu image for the Raspberry Pis. I don't have anything against these specific OSes, but I am mostly setting up this cluster to simulate what I would do on a &quot;real&quot; system. For me, that often means using a straight OS like Ubuntu.&lt;/p&gt;&lt;p&gt;Luckily, Canonical makes special &lt;a href='https://wiki.ubuntu.com/ARM/RaspberryPi'&gt;Ubuntu ARM images&lt;/a&gt;, specifically for the Raspberry Pi. I download the 16.04 server version for both the &lt;a href='http://cdimage.ubuntu.com/ubuntu/releases/16.04/release/ubuntu-16.04.2-preinstalled-server-armhf+raspi2.img.xz'&gt;raspberry pi 2&lt;/a&gt; and &lt;a href='http://www.finnie.org/software/raspberrypi/ubuntu-rpi3/ubuntu-16.04-preinstalled-server-armhf+raspi3.img.xz'&gt;raspberry pi 3&lt;/a&gt;. The process to write these images to the microSD card differs slightly from ones I've used in the past. It still uses &lt;code&gt;dd&lt;/code&gt;, but the image is first piped through &lt;code&gt;xzcat&lt;/code&gt;, as such:&lt;/p&gt;&lt;pre&gt;&lt;code&gt;xzcat ubuntu-16.04.2-preinstalled-server-armhf+raspi2.img.xz | sudo dd bs=4M of=/dev/mmcblk0

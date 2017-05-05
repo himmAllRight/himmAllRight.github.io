@@ -2,7 +2,7 @@
 :title  "Setting Up the Pi Cluster"
 :date "2017-05-05"
 :author "Ryan Himmelwright"
-:tags ["Homelab" "Linux" "Cluster" "Pi""Devops"]
+:tags ["Homelab" "Linux" "Cluster" "Pi" "Devops"]
 :draft? false
 }
 
