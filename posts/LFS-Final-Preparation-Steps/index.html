@@ -79,6 +79,8 @@
                         <li class="divider"></li>
                         <li class="dropdown-header">Recent Posts</li>
                         
+                        <li><a href="/posts/Ansible-On-Pi-Cluster/">Configuring Ansible on the Pi Cluster</a></li>
+                        
                         <li><a href="/posts/Setting-up-the-pi-cluster/">Setting Up My Pi Cluster</a></li>
                         
                         <li><a href="/posts/ZFS-Backups-To-LUKS-External/">ZFS Snapshot Backups to an External Drive with LUKS</a></li>
@@ -86,8 +88,6 @@
                         <li><a href="/posts/LIA-1-0-Beta-Released/">LIA 1.0 Beta Released</a></li>
                         
                         <li><a href="/posts/New-Theme-Immutable/">New Website Theme: Immutable</a></li>
-                        
-                        <li><a href="/posts/LFS-SBUs-and-Binutils/">Linux from Scratch - SBUs and Binutils</a></li>
                         
                         
 
@@ -125,6 +125,8 @@
                         
                         <li><a href="/tags-output/ZFS/"><b>[ZFS]</b></a></li>
                         
+                        <li><a href="/tags-output/DevOps/"><b>[DevOps]</b></a></li>
+                        
                         <li><a href="/tags-output/Thinkpad/"><b>[Thinkpad]</b></a></li>
                         
                         <li><a href="/tags-output/Ledger/"><b>[Ledger]</b></a></li>
@@ -136,6 +138,8 @@
                         <li><a href="/tags-output/Programming/"><b>[Programming]</b></a></li>
                         
                         <li><a href="/tags-output/Solus/"><b>[Solus]</b></a></li>
+                        
+                        <li><a href="/tags-output/Ansible/"><b>[Ansible]</b></a></li>
                         
                         <li><a href="/tags-output/Dev/"><b>[Dev]</b></a></li>
                         
@@ -169,7 +173,7 @@
 </div>
 <div>
     
-    <p>Now that the <em>repeated</em> setup steps have been defined in <a href='../LFS-Repeated=Setup-Steps/'>my previous LFS post</a>, there are a <em>few</em> more preparation steps to complete in order to start building the LFS system. I promise... we will start compiling soon. If all goes well, this should be the last preparation post.</p><p><!&ndash; more &ndash;></p><h3><a name="downloading&#95;sources"></a>Downloading Sources</h3>When it comes down to it, Linux from scratch is just a bunch of packages, and the Linux kernel, all compiled from source and linked together. To build all of this, we need to download the source code... for <em>all</em> of those packages. Luckily, LFS keeps a list of what is needed, and downloading it is trivial. <em>(Note: These commands should be run as <b>root</b>)</em><p><center> <img src="../../img/posts/LFS-Final-Preparation-Steps/make-sources-dir.png" alt="Making the sources directory" /> </center></p><p>First, lets make a new directory to put all of the source code. To make the directory:</p><pre><code>mkdir -v $LFS/sources
+    <p>Now that the <em>repeated</em> setup steps have been defined in <a href='http://ryan.himmelwright.net/posts/LFS-Repeated-Setup-Steps/'>my previous LFS post</a>, there are a <em>few</em> more preparation steps to complete in order to start building the LFS system. I promise... we will start compiling soon. If all goes well, this should be the last preparation post.</p><p><!&ndash; more &ndash;></p><h3><a name="downloading&#95;sources"></a>Downloading Sources</h3>When it comes down to it, Linux from scratch is just a bunch of packages, and the Linux kernel, all compiled from source and linked together. To build all of this, we need to download the source code... for <em>all</em> of those packages. Luckily, LFS keeps a list of what is needed, and downloading it is trivial. <em>(Note: These commands should be run as <b>root</b>)</em><p><center> <img src="../../img/posts/LFS-Final-Preparation-Steps/make-sources-dir.png" alt="Making the sources directory" /> </center></p><p>First, lets make a new directory to put all of the source code. To make the directory:</p><pre><code>mkdir -v $LFS/sources
 </code></pre><p>The LFS book suggests for this directory to be writable and sticky. A "Sticky" directory allows only the file owner to delete a file in it. To make the directory both writable and sticky, use the command:</p><pre><code>chmod -v a+wt $LFS/sources
 </code></pre><p><center> <img src="../../img/posts/LFS-Final-Preparation-Steps/wget-sources-play.png" name="pic" onmouseover="this.src='../../img/posts/LFS-Final-Preparation-Steps/wget-sources.gif'" onmouseout="this.src='../../img/posts/LFS-Final-Preparation-Steps/wget-sources-play.png'">  </center></p><p>To download all of the source packages at once, download <a href='http://www.linuxfromscratch.org/lfs/view/stable-systemd/wget-list'>the LFS wget list</a>:</p><pre><code>wget http://www.linuxfromscratch.org/lfs/view/stable-systemd/wget-list
 </code></pre><p>After downloading the wget list, it can be used as the input-file for wget. This will download all the sources with one command:</p><pre><code>wget --input-file=wget-list --continue --directory-prefix=$LFS/sources
