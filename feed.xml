@@ -12,34 +12,11 @@ http://ryan.himmelwright.net
 Software Developer, Functional Programming and Linux Enthusiast
 </description>
 <lastBuildDate>
-Fri, 12 May 2017 07:18:11 -0400
+Fri, 12 May 2017 07:19:58 -0400
 </lastBuildDate>
 <generator>
 clj-rss
 </generator>
-<item>
-<guid>
-http://ryan.himmelwright.net/posts/Ansible-On-Pi-Cluster/
-</guid>
-<link>
-http://ryan.himmelwright.net/posts/Ansible-On-Pi-Cluster/
-</link>
-<title>
-Configuring Ansible on the Pi Cluster
-</title>
-<description>
-&lt;p&gt;In my &lt;a href='http://ryan.himmelwright.net/posts/Setting-up-the-pi-cluster/'&gt;previous post&lt;/a&gt;, I setup my &lt;a href='http://ryan.himmelwright.net/pages/homelab/#cluster'&gt;pi cluster&lt;/a&gt; and installed the variations of Ubuntu 16.04 Server on each of them. With the cluster setup, I needed an easy way to interact and maintain the systems. This is where &lt;a href='https://www.ansible.com/'&gt;Ansible&lt;/a&gt; comes in.&lt;/p&gt;&lt;p&gt;&lt;!&amp;ndash; more &amp;ndash;&gt;&lt;/p&gt;&lt;h2&gt;&lt;a name=&quot;ansible&quot;&gt;&lt;/a&gt;Ansible&lt;/h2&gt;Ansible is an open source configuration management and automation system, written in Python, and backed by &lt;a href='http://www.redhat.com'&gt;Red Hat&lt;/a&gt;. It allows management of groups of computers through the use of modules, standalone units of work (ex: apt, ping, rpm, etc). Ansible is scriptable, via playbooks, a YAML file that can define a set of tasks to orchestrate on a single or group of computers. &lt;h2&gt;&lt;a name=&quot;notes&amp;#95;for&amp;#95;post:&quot;&gt;&lt;/a&gt;Notes for post:&lt;/h2&gt;&amp;ndash; added &lt;code&gt;ryan&lt;/code&gt; user on rpis, gave sudo permissions   &lt;br /&gt;&lt;ul&gt;&lt;li&gt;Made ryan able to use sudo without password by adding &lt;code&gt;ryan ALL=&amp;#40;ALL&amp;#41; NOPASSWD: ALL&lt;/code&gt; to the bottom of my &lt;code&gt;visudo&lt;/code&gt; file.&lt;/li&gt;&lt;/ul&gt;&lt;p&gt;&amp;ndash; setup ssh keys&lt;/p&gt;&lt;p&gt;&amp;ndash; install python on rpis (bpi was okay)&lt;/p&gt;&lt;p&gt;&amp;ndash; install on host (was already on solus)&lt;/p&gt;
-</description>
-<author>
-Ryan Himmelwright
-</author>
-<enclosure>
-
-</enclosure>
-<pubDate>
-Wed, 10 May 2017 00:00:00 -0400
-</pubDate>
-</item>
 <item>
 <guid>
 http://ryan.himmelwright.net/posts/Setting-up-the-pi-cluster/
