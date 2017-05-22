@@ -12,11 +12,43 @@ http://ryan.himmelwright.net
 Software Developer, Functional Programming and Linux Enthusiast
 </description>
 <lastBuildDate>
-Fri, 12 May 2017 07:19:58 -0400
+Sun, 21 May 2017 20:38:02 -0400
 </lastBuildDate>
 <generator>
 clj-rss
 </generator>
+<item>
+<guid>
+http://ryan.himmelwright.net/posts/Ansible-On-Pi-Cluster/
+</guid>
+<link>
+http://ryan.himmelwright.net/posts/Ansible-On-Pi-Cluster/
+</link>
+<title>
+Configuring Ansible on the Pi Cluster
+</title>
+<description>
+&lt;p&gt;In my &lt;a href='http://ryan.himmelwright.net/posts/Setting-up-the-pi-cluster/'&gt;previous post&lt;/a&gt;, I pieced together my &lt;a href='http://ryan.himmelwright.net/pages/homelab/#cluster'&gt;pi cluster&lt;/a&gt;, and installed variations of Ubuntu 16.04 Server on each of its nodes. With the cluster built, I quickly needed an easy way to maintain and interact with the system as a whole. This, is where &lt;a href='https://www.ansible.com/'&gt;Ansible&lt;/a&gt; comes in. In this post, I will walk through the steps I took to setup Ansible on my Cluster.&lt;/p&gt;&lt;p&gt;&lt;!&amp;ndash; more &amp;ndash;&gt;&lt;/p&gt;&lt;h2&gt;&lt;a name=&quot;ansible&quot;&gt;&lt;/a&gt;Ansible&lt;/h2&gt;&lt;p&gt;&lt;img src=&quot;../../img/posts/setting-up-ansible-pi-cluster/ansible-logo.png&quot; style=&quot;width: 150px; float: left; margin: 0px 15px 5px 5px;&quot;/)&lt;/p&gt;&lt;p&gt;Ansible is an open source, configuration management and automation system. It is written in Python, and financially backed by &lt;a href='http://www.redhat.com'&gt;Red Hat&lt;/a&gt;. It simplifies the management of groups of computers, through the use of modules (standalone units of work. for example, apt, ping, rpm, etc). Ansible is script-able using simple YAML files, known as playbooks, that define a set of orchestration tasks for one or many computers. These scripts can be edited and version controlled, creating a simple &lt;a href='https://en.wikipedia.org/wiki/Infrastructure_as_Code'&gt;infrastructure as code&lt;/a&gt; setup.&lt;/p&gt;&lt;h2&gt;&lt;a name=&quot;setting&amp;#95;up&amp;#95;the&amp;#95;user&amp;#95;account&quot;&gt;&lt;/a&gt;Setting up the User Account&lt;/h2&gt;When Ansible executes commands on the PIs, it will do so from the user-account (ryan) that I setup in the last post. However, many of these commands will require Root privledges. While I previously setup sudo and added the &lt;code&gt;ryan&lt;/code&gt; account to the &lt;code&gt;sudo&lt;/code&gt; group ... it required that I manually enter my password. Ansible did not like this, so I had to update the sudo configuration to allow the &lt;code&gt;ryan&lt;/code&gt; account to run &lt;code&gt;sudo&lt;/code&gt; commands with out a password. To do this, I opened the &lt;code&gt;sudoers&lt;/code&gt; file:&lt;pre&gt;&lt;code&gt;sudo visudo
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;and added the following line to the end of the file:&lt;/p&gt;&lt;pre&gt;&lt;code&gt;ryan  ALL=&amp;#40;ALL:ALL&amp;#41; NOPASSWD: ALL
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;I repeated this on each of the nodes, and afterwards was no longer promted for a password when running &lt;code&gt;sudo&lt;/code&gt; commands. This made Ansible happy.&lt;/p&gt;&lt;h2&gt;&lt;a name=&quot;setup&amp;#95;ssh&amp;#95;keys&quot;&gt;&lt;/a&gt;Setup SSH Keys&lt;/h2&gt;Well... &lt;em&gt;almost&lt;/em&gt; happy. &lt;p&gt;Ansible's main method of communication is via ssh, which by default, prompts me for a password when connecting. Ansible &lt;em&gt;really&lt;/em&gt; hates passwords. So, I had to configure ssh to use keys instead. Honestly, this is proabaly a good step to do regardless, now that the &lt;code&gt;ryan&lt;/code&gt; account no longer uses a password when running &lt;code&gt;sudo&lt;/code&gt;. To setup key-based logins, I appended the contents of my &lt;a href='../../pages/homelab/#alakazam'&gt;main computer&lt;/a&gt;'s ssh public key*, to each pi's &lt;code&gt;authorized&amp;#95;keys&lt;/code&gt; file. This can all be done using a magic one-line pipe command (x3, one for each pi):&lt;/p&gt;&lt;pre&gt;&lt;code&gt;cat &amp;#126;/.ssh/id&amp;#95;rsa.pub | ssh pi0 &amp;quot;cat &amp;gt;&amp;gt; &amp;#126;/.ssh/authorized&amp;#95;keys&amp;quot;
+cat &amp;#126;/.ssh/id&amp;#95;rsa.pub | ssh pi1 &amp;quot;cat &amp;gt;&amp;gt; &amp;#126;/.ssh/authorized&amp;#95;keys&amp;quot;
+cat &amp;#126;/.ssh/id&amp;#95;rsa.pub | ssh bpi &amp;quot;cat &amp;gt;&amp;gt; &amp;#126;/.ssh/authorized&amp;#95;keys&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;em&gt;&amp;#42;Note: If keys are not already generated, they can be created using the command:&lt;/em&gt;&lt;/p&gt;&lt;pre&gt;&lt;code&gt;ssh-keygen
+&lt;/code&gt;&lt;/pre&gt;&lt;h4&gt;&lt;a name=&quot;key&amp;#95;only&amp;#95;login&quot;&gt;&lt;/a&gt;Key Only Login&lt;/h4&gt;To help secure access to the PIs (and to get on Ansible's good side), I configured sshd to disable password logins, and only allow connections from clients with approved keys. To disable password authentication, I opened the &lt;code&gt;/etc/ssh/sshd&amp;#95;config&lt;/code&gt; file, found the line containing &lt;code&gt;# PasswordAuthentication yes&lt;/code&gt;, changed the &lt;code&gt;yes&lt;/code&gt; to a &lt;code&gt;no&lt;/code&gt;, and unncommented it by removing the &lt;code&gt;#&lt;/code&gt;.&lt;p&gt;While I was in the &lt;code&gt;sshd&amp;#95;config&lt;/code&gt; file, I also set &lt;code&gt;PermitRootLogin&lt;/code&gt; to &lt;code&gt;no&lt;/code&gt;, for good measure.&lt;/p&gt;&lt;p&gt;Lastly, I reset the &lt;code&gt;sshd&lt;/code&gt; service and repeated the steps for each pi:&lt;/p&gt;&lt;pre&gt;&lt;code&gt;sudo systemctl restart sshd
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Afterwards, I was unable to login to the PIs from a computer with unauthorized ssh keys.&lt;/p&gt;&lt;p&gt;&lt;img src=&quot;../../img/posts/setting-up-ansible-pi-cluster/terminal-play.png&quot; name=&quot;pic&quot; onmouseover=&quot;this.src='../../img/posts/setting-up-ansible-pi-cluster/blocked-ssh-attempt.gif'&quot; onmouseout=&quot;this.src='../../img/posts/setting-up-ansible-pi-cluster/terminal-play.png'&quot;&gt; &lt;/p&gt;&lt;p&gt;But, I was still able to loging from the authorized computer.&lt;/p&gt;&lt;p&gt;&lt;img src=&quot;../../img/posts/setting-up-ansible-pi-cluster/terminal-play.png&quot; name=&quot;pic&quot; onmouseover=&quot;this.src='../../img/posts/setting-up-ansible-pi-cluster/accepted-ssh-attempt.gif'&quot; onmouseout=&quot;this.src='../../img/posts/setting-up-ansible-pi-cluster/terminal-play.png'&quot;&gt; &lt;/p&gt;&lt;h2&gt;&lt;a name=&quot;install&amp;#95;python&quot;&gt;&lt;/a&gt;Install Python&lt;/h2&gt;The last issue Ansible complained about was that it needed python installed on the Pis. Like everything else, the Bananna Pi already had this setup, but I had to install it on the two Raspberry Pis. It was simple enough:&lt;pre&gt;&lt;code&gt;sudo apt-get install python
+&lt;/code&gt;&lt;/pre&gt;&lt;h2&gt;&lt;a name=&quot;install&amp;#95;ansible&quot;&gt;&lt;/a&gt;Install Ansible&lt;/h2&gt;&lt;p&gt;I have a confession. So, you know how I have been fun and cheery by anthropomorphisizing Ansible, saying that it was &lt;em&gt;&quot;happy&quot;&lt;/em&gt; or &lt;em&gt;&quot;frusterated&quot;&lt;/em&gt; during the previous steps? That wasn't true. I made it up. Ansible wasn't &lt;em&gt;actually&lt;/em&gt; installed yet. &lt;em&gt;So... to install Ansible...&lt;/em&gt;&lt;/p&gt;&lt;pre&gt;&lt;code&gt;sudo eopkg it ansible
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;I used &lt;code&gt;eopkg&lt;/code&gt; because I am currently running &lt;a href='https://solus-project.com'&gt;Solus&lt;/a&gt;. You might use &lt;code&gt;sudo apt-get install ansible&lt;/code&gt;, &lt;code&gt;sudo dnf install ansible&lt;/code&gt;, or &lt;code&gt;pacaur -S ansible&lt;/code&gt; depending on whatever distro you are using.&lt;/p&gt;&lt;p&gt;That's all for &lt;em&gt;setting up&lt;/em&gt; Ansible. I'll cut this post off here, but in the next post, I'll walk through the steps on how to get Ansible to be useful.&lt;/p&gt;
+</description>
+<author>
+Ryan Himmelwright
+</author>
+<enclosure>
+
+</enclosure>
+<pubDate>
+Sun, 21 May 2017 00:00:00 -0400
+</pubDate>
+</item>
 <item>
 <guid>
 http://ryan.himmelwright.net/posts/Setting-up-the-pi-cluster/
