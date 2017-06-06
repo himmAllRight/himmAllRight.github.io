@@ -12,11 +12,108 @@ http://ryan.himmelwright.net
 Software Developer, Functional Programming and Linux Enthusiast
 </description>
 <lastBuildDate>
-Sun, 21 May 2017 20:38:02 -0400
+Tue, 06 Jun 2017 07:44:51 -0400
 </lastBuildDate>
 <generator>
 clj-rss
 </generator>
+<item>
+<guid>
+http://ryan.himmelwright.net/posts/Updating-Pi-Cluster-With-Ansible/
+</guid>
+<link>
+http://ryan.himmelwright.net/posts/Updating-Pi-Cluster-With-Ansible/
+</link>
+<title>
+Updating the Pi Cluster with Ansible
+</title>
+<description>
+&lt;p&gt;With Ansible configured on the Pi cluster, it is time to have it do something useful. When working with a clustered system, even the simplest tasks become tedious and time consuming. For example, updating the system. While I could manually update each of the 3 pi nodes, it is not scalable to 10 or 30 nodes, let alone hundreds or thousands. Tools like Ansible, make doing tasks such a supdating clustered systems, trivial again. In this post, I will walk through setting up an Ansible playbook to update my Pi cluster.&lt;/p&gt;&lt;p&gt;&lt;!&amp;ndash; more &amp;ndash;&gt;&lt;/p&gt;&lt;h3&gt;&lt;a name=&quot;hosts&amp;#95;file&quot;&gt;&lt;/a&gt;Hosts File&lt;/h3&gt;The first task when using Ansible is to setup the &lt;code&gt;hosts&lt;/code&gt; file. No, not the normal &lt;code&gt;/etc/hosts&lt;/code&gt; file, but the &lt;em&gt;other&lt;/em&gt; one &lt;em&gt;just&lt;/em&gt; for Ansible, which can be found at &lt;code&gt;/etc/ansible/hosts&lt;/code&gt;. Configuring the Ansible hosts file is fairly straightforward. Groups of computers are defined using &lt;code&gt;&amp;#91;brackets&amp;#93;&lt;/code&gt;, with computer ip/hostnames of the group are listed below. For example:&lt;p&gt;A nice feature of group definitions is that hierical structures can be constructed using the &lt;code&gt;:child&lt;/code&gt; suffix in order to create groups of groups. For example, for my &lt;a href='../../pages/homelab'&gt;homelab&lt;/a&gt;, I like to make an ansible hosts file that splits out my servers based on their distribution, and then group those by their packaging type. This makes it easier for me to do generic updates, which is what I mostly use ansible for (at this point). So, for example:&lt;/p&gt;&lt;pre&gt;&lt;code&gt;&amp;#91;ubuntu&amp;#93;
+mrmime
+geodude
+
+&amp;#91;debian&amp;#93;
+ninetales
+
+&amp;#91;fedora&amp;#93;
+fedora-test
+
+&amp;#91;centos&amp;#93;
+tangels
+
+&amp;#91;arch&amp;#93;
+meowth
+staryu
+diglet
+
+&amp;#91;deb:children&amp;#93;
+ubuntu
+debian
+
+&amp;#91;rpm:children&amp;#93;
+fedora
+centos
+
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;For use with the cluster, I kept it simple, although I did opt to create rpi/bpi subgroups:&lt;/p&gt;&lt;pre&gt;&lt;code&gt;&amp;#91;cluster:children&amp;#93;
+rpis
+bpis
+
+&amp;#91;rpis&amp;#93;
+pi0
+pi1
+
+&amp;#91;bpis&amp;#93;
+bpi
+&lt;/code&gt;&lt;/pre&gt;&lt;h3&gt;&lt;a name=&quot;ping&amp;#95;hosts&quot;&gt;&lt;/a&gt;Ping Hosts&lt;/h3&gt;Once the hosts file is setup, it can be tested using the &lt;code&gt;ping&lt;/code&gt; module. I tested my &lt;code&gt;cluser&lt;/code&gt; group, as well as the &lt;code&gt;rpis&lt;/code&gt; and &lt;code&gt;bpis&lt;/code&gt; subgroups.&lt;pre&gt;&lt;code&gt;ansible rpis -m ping
+ansible bpis -m ping
+ansible cluster -m ping
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Assuming the steps of &lt;a href='../Ansible-On-Pi-Cluster'&gt;the last post&lt;/a&gt; were done correctly, this should work. If not, double check that post and make sure everything looks correct.&lt;/p&gt;&lt;h3&gt;&lt;a name=&quot;playbooks&quot;&gt;&lt;/a&gt;Playbooks&lt;/h3&gt;After confirming that the hosts file is properly configured, I started to dig into playbooks. Playbooks are Ansible's scripting system used to configure, deploy, and orcistrate systems. They can describe ways in which systems should be configured (ex: enable ssh), or outline a set of steps for an IT task (ex: running updates, restarting a server). As stated in the &lt;a href='https://docs.ansible.com/ansible/playbooks.html'&gt;playbook documentation&lt;/a&gt;:&lt;p&gt;&lt;div id=&quot;post-quote&quot;&gt; &lt;em&gt;&quot;If Ansible modules are the tools in your workshop, playbooks are your instruction manuals, and your inventory of hosts are your raw material.&quot;&lt;/em&gt; &lt;/div&gt;&lt;/p&gt;&lt;p&gt;Playbook files are expressed using &lt;a href='https://docs.ansible.com/ansible/YAMLSyntax.html'&gt;YAML syntax&lt;/a&gt;, which is easy to read, but still powerful. The first step when creating a new playbook, being a YAML file, is to set the header and footer. The header consists of three &lt;code&gt;-&lt;/code&gt;'s at the top of the file, and the footer ends the file with three periods (&lt;code&gt;.&lt;/code&gt;). This indicates the start and end of the document.&lt;/p&gt;&lt;p&gt;When writing a playbook to update the pi cluster, I first needed to declare what systems the playbook is used with. To do that, I used the &lt;code&gt;hosts&lt;/code&gt; key, and provided it with the &lt;code&gt;cluster&lt;/code&gt; group name, which is defined in my &lt;code&gt;/etc/ansible/hosts&lt;/code&gt; file, as the value.&lt;/p&gt;&lt;pre&gt;&lt;code&gt;---
+- hosts: cluster
+
+...
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;After the hosts are defined, modules can be added to update the nodes. To list the tasks, I used the &lt;code&gt;taks:&lt;/code&gt; key, with the same indentation as the &lt;code&gt;hosts:&lt;/code&gt; keyword. Instead of using a single value, I provided the &lt;code&gt;tasks:&lt;/code&gt; keyword with a list of things to do. The first task I want to do when updating the nodes is to check that they running and connected. This can be accomplised with the &lt;a href='https://docs.ansible.com/ansible/ping_module.html'&gt;ping module&lt;/a&gt; that I used earlier in the post. The ping module will try to connect to each node, verify that a usable python is installed, and return &lt;code&gt;pong&lt;/code&gt; upon success. To add the module, I added &lt;code&gt;- ping: &amp;#126;&lt;/code&gt;, indented, to the line below &lt;code&gt;tasks:&lt;/code&gt;:&lt;/p&gt;&lt;pre&gt;&lt;code&gt;---
+- hosts: cluster
+
+  tasks:
+    - ping: &amp;#126;
+&lt;/code&gt;&lt;/pre&gt;&lt;h3&gt;&lt;a name=&quot;apt&amp;#95;module&quot;&gt;&lt;/a&gt;Apt Module&lt;/h3&gt;After defining the ping module, I started to get a bit fancier. Well... a little bit fancier. Each node in my pi cluster is running some verison of Ubuntu, which uses apt as it's package manager. If I wanted to ssh into each node and update them manually, the steps I would follow would be to 1) run the command &lt;code&gt;sudo apt-get update&lt;/code&gt; to update the repository cache, and 2) run &lt;code&gt;sudo apt-get upgrade&lt;/code&gt; to actually install the updates. To recreate these commands in the playbook, I used the &lt;a href='https://docs.ansible.com/ansible/apt_module.html'&gt;apt module&lt;/a&gt;. To start with updating the repository cache, I added the following lines to my playbook:&lt;pre&gt;&lt;code&gt;- name: Update APT package manager repositories cache
+  become: true
+  apt:
+    update&amp;#95;cache: yes
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;The &lt;code&gt;name:&lt;/code&gt; defines the name of the task, and is the text printed out to the console when executing this step of the playbook. Setting the &lt;a href='https://docs.ansible.com/ansible/become.html'&gt;&lt;code&gt;become&lt;/code&gt;&lt;/a&gt; key to &lt;code&gt;true&lt;/code&gt; tells Ansible to run the command with privilege escalation (sudo). Lastly, the remaining two lines run the &lt;code&gt;update&amp;#95;cache:&lt;/code&gt; functionality of the apt module. &lt;/p&gt;&lt;p&gt;With the repositories updated on each node, I can have ansible run the updates by adding the following lines to the playbook (after the cache update ones):&lt;/p&gt;&lt;pre&gt;&lt;code&gt;- name: Upgrade installed packages
+  become: true
+  apt:
+    upgrade: dist
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;This set of commands is very similar to the last group. The &lt;code&gt;name:&lt;/code&gt; again provides a description of what the task is doing, and privilege escalation is used again via &lt;code&gt;become: true&lt;/code&gt;. The only difference is that the apt module is using the &lt;code&gt;upgrade: dist&lt;/code&gt; command instead. This will run the updates for any installed packages on the system.&lt;/p&gt;&lt;h3&gt;&lt;a name=&quot;update&amp;#95;cluster&amp;#95;playbook&quot;&gt;&lt;/a&gt;Update Cluster Playbook&lt;/h3&gt;&lt;p&gt;I then had a completed playbook to update the pi cluster:&lt;/p&gt;&lt;pre&gt;&lt;code&gt;---
+- hosts: cluster
+
+  tasks:
+    - ping: &amp;#126;
+
+    - name: Update APT package manager repositories cache
+      become: true
+      apt:
+        update&amp;#95;cache: yes
+
+    - name: Upgrade installed packages
+      become: true
+      apt:
+        upgrade: dist
+...
+
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;The last step is to test it out! Playbooks can be executed using the &lt;code&gt;ansible-playbook&lt;/code&gt; command:&lt;/p&gt;&lt;pre&gt;&lt;code&gt;ansible-playbook update-cluster.yml
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;When running the playbook, ansible will first attempt to gather facts about each node, and then begin to run each of the tasks defined in the playbook. At each step, it will print out the &lt;code&gt;name&lt;/code&gt; of each task, followed by the status/result for each node. When it completes, all the nodes in the cluster should be updated. Now you can update three+ computers with a single command! Enjoy!&lt;/p&gt;
+</description>
+<author>
+Ryan Himmelwright
+</author>
+<enclosure>
+
+</enclosure>
+<pubDate>
+Thu, 25 May 2017 00:00:00 -0400
+</pubDate>
+</item>
 <item>
 <guid>
 http://ryan.himmelwright.net/posts/Ansible-On-Pi-Cluster/

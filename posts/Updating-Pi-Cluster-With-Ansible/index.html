@@ -2,8 +2,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
     <meta charset="utf-8"/>
-    <title>λ ryan himmelwright . net: LIA 1.0 Beta Released</title>
-    <link rel="canonical" href="http://ryan.himmelwright.net/posts/LIA-1-0-Beta-Released/">
+    <title>λ ryan himmelwright . net: Updating the Pi Cluster with Ansible</title>
+    <link rel="canonical" href="http://ryan.himmelwright.net/posts/Updating-Pi-Cluster-With-Ansible/">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="//cdn.jsdelivr.net/font-hack/2.020/css/hack-extended.min.css">
     <link href='http://fonts.googleapis.com/css?family=Alegreya:400italic,700italic,400,700' rel='stylesheet'
@@ -165,39 +165,113 @@
                 
 <div id="post">
     <div class="post-header">
-    <h2>LIA 1.0 Beta Released</h2>
+    <h2>Updating the Pi Cluster with Ansible</h2>
     <div id="post-meta" class="row">
         
         <span class="col-lg-6 left">By: Ryan Himmelwright</span>
         
-        <div class="col-lg-6 right">April 17, 2017</div>
+        <div class="col-lg-6 right">May 25, 2017</div>
     </div>
 </div>
 <div>
     
-    <p>I have released the 1.0 Beta version for a personal project of mine: the <strong>L</strong>edger <strong>I</strong>mport <strong>A</strong>ssistant, or <a href='https://github.com/himmALlRight/LIA/'>LIA</a>. This post will talk briefly about the background of LIA, what it does, and explain the beta release. </p><p><!&ndash; more &ndash;></p><h2><a name="what&#95;is&#95;lia?"></a>What is LIA?</h2><p><img src="../../img/posts/LIA-1-0-Beta-Released/creditCardDownload.png" alt="Credit Card Statement CSV" /></p><p><em>Example Cred Card Statement CSV File</em></p><p>A while ago, I discovered <a href='http://www.ledger-cli.org'>Ledger</a>, the command line double-entry accounting application. Its powerful, yet simple design attracted me, and I wanted to try it out. To use it effectively however, I needed a method to import our bank and credit card statements into ledger journals. Then, I could use ledger to analyze the finances. However, there was an issue. While there are several great ledger convert/import options out there, many were more complicated than what I was looking for. So...I wrote my own. </p><p><img src="../../img/posts/LIA-1-0-Beta-Released/ledger-journal.png" alt="Example Ledger Journal File" /></p><p><em>Example Ledger Journal File</em></p><p>When I started writing LIA, I just wanted a python script that could help me convert the contents of a .csv file into a ledger-journal formatted file (without any of the fancy features. Just the basics). I thought it was a simple task and should only take me a few hours. It was, and it did. I wrote the the first basic implementation of LIA on a Sunday afternoon. While coding that bare-bones version, I realized that even though it <em>technically worked</em>, it would not be enjoyable to use, and therefore I would never use it. So I decided to expand it into a full project, something more than a simple script.</p><h2><a name="what&#95;does&#95;lia&#95;do?"></a>What does LIA do?</h2><p><img src="../../img/posts/LIA-1-0-Beta-Released/LIA-demo.gif" alt="LIA Running" /></p><p>LIA executes the core functionality that originally prompted me to write it: converting bank/credit card statement csv files into ledger journal files. Beyond that basic functionality,  LIA has a few nice features that help the user manually convert these files in an enjoyable way. By going through each transaction manually, the user has full control to make sure data is being input correctly. However, LIA helps make this otherwise dull process fast and efficient. Some of LIA's features that help accomplish this are:</p><ul><li>Data order is recognized by a header mechanism</li><li>Prompts the user to potentially edit the transaction information</li><li>Sets default transaction information from the values of the csv file</li><li>Manual transaction entries when needed (No input file)</li><li>Supports multiple destination accounts</li><li>Automatic placement system. The user can specify a file containing rules to automatically place transactions. (ex: anything with "Dunkin" in the description will default to Expenses:Food:Coffee)</li><li>Colored prompts</li></ul><h2><a name="what&#95;does&#95;lia&#95;1.0&#95;beta&#95;mean?"></a>What does LIA 1.0 Beta mean?</h2><h3><a name="lia&#95;1.0"></a>LIA 1.0</h3><p><img src="../../img/posts/LIA-1-0-Beta-Released/release-todo.png" alt="My 1.0 Todo List" /></p><p><em>My Todo list to release the 1.0 Version</em></p><p>When I expanded LIA to a personal project, I recorded several features that would make converting CSV statements easier, and got started. I worked on the project here and there, adding each feature over time. These features are what I determined were required in order for the application to be acceptably <em>usable</em>. When all of those requirements were met, I would release an official 1.0 Branch.</p><p>The main functionality of LIA has been implemented for a while now. Being a python application, it has been possible to run LIA by calling the files with python. However, I didn't want to release the 1.0 version without first making an installer. I wanted LIA to be run like a normal linux application. I have now finished configuring the project and a <code>setup.py</code> file, so users can use python's setuptools to install LIA as an application on their computer. Additionally, I have even packaged LIA as a Solus eopkg. It looks like I am ready for release.</p><h3><a name="beta"></a>Beta</h3>Sort of. Until now, I have been developing, but not using LIA day to day. I want to spend some time actually <em>using</em> the application to see if there are any remaining issues. Also, I have not confirmed that it fully does what is needed for ledger. I want to get a few ledger users to quickly look at it and let me know if they see any issues. After testing it for a bit, I will release it as the official 1.0 release. This will mean it should be stable enough for people to use, if they so choose to.<h2><a name="more&#95;information"></a>More Information</h2>To test out LIA, read some documentation, or find out more  <a href='https://github.com/himmAllRight/lia/'>check it out</a> on <a href='https://github.com/himmAllRight'>my github page</a>. I plan to continue to develop it further in the future. If you have a suggestion, or even some code you'd like to contribute, feel free to let me know, either on github or my <a href='../../pages//about/'>other contact methods</a>. Enjoy!
+    <p>With Ansible configured on the Pi cluster, it is time to have it do something useful. When working with a clustered system, even the simplest tasks become tedious and time consuming. For example, updating the system. While I could manually update each of the 3 pi nodes, it is not scalable to 10 or 30 nodes, let alone hundreds or thousands. Tools like Ansible, make doing tasks such a supdating clustered systems, trivial again. In this post, I will walk through setting up an Ansible playbook to update my Pi cluster.</p><p><!&ndash; more &ndash;></p><h3><a name="hosts&#95;file"></a>Hosts File</h3>The first task when using Ansible is to setup the <code>hosts</code> file. No, not the normal <code>/etc/hosts</code> file, but the <em>other</em> one <em>just</em> for Ansible, which can be found at <code>/etc/ansible/hosts</code>. Configuring the Ansible hosts file is fairly straightforward. Groups of computers are defined using <code>&#91;brackets&#93;</code>, with computer ip/hostnames of the group are listed below. For example:<p>A nice feature of group definitions is that hierical structures can be constructed using the <code>:child</code> suffix in order to create groups of groups. For example, for my <a href='../../pages/homelab'>homelab</a>, I like to make an ansible hosts file that splits out my servers based on their distribution, and then group those by their packaging type. This makes it easier for me to do generic updates, which is what I mostly use ansible for (at this point). So, for example:</p><pre><code>&#91;ubuntu&#93;
+mrmime
+geodude
+
+&#91;debian&#93;
+ninetales
+
+&#91;fedora&#93;
+fedora-test
+
+&#91;centos&#93;
+tangels
+
+&#91;arch&#93;
+meowth
+staryu
+diglet
+
+&#91;deb:children&#93;
+ubuntu
+debian
+
+&#91;rpm:children&#93;
+fedora
+centos
+
+</code></pre><p>For use with the cluster, I kept it simple, although I did opt to create rpi/bpi subgroups:</p><pre><code>&#91;cluster:children&#93;
+rpis
+bpis
+
+&#91;rpis&#93;
+pi0
+pi1
+
+&#91;bpis&#93;
+bpi
+</code></pre><h3><a name="ping&#95;hosts"></a>Ping Hosts</h3>Once the hosts file is setup, it can be tested using the <code>ping</code> module. I tested my <code>cluser</code> group, as well as the <code>rpis</code> and <code>bpis</code> subgroups.<pre><code>ansible rpis -m ping
+ansible bpis -m ping
+ansible cluster -m ping
+</code></pre><p>Assuming the steps of <a href='../Ansible-On-Pi-Cluster'>the last post</a> were done correctly, this should work. If not, double check that post and make sure everything looks correct.</p><h3><a name="playbooks"></a>Playbooks</h3>After confirming that the hosts file is properly configured, I started to dig into playbooks. Playbooks are Ansible's scripting system used to configure, deploy, and orcistrate systems. They can describe ways in which systems should be configured (ex: enable ssh), or outline a set of steps for an IT task (ex: running updates, restarting a server). As stated in the <a href='https://docs.ansible.com/ansible/playbooks.html'>playbook documentation</a>:<p><div id="post-quote"> <em>"If Ansible modules are the tools in your workshop, playbooks are your instruction manuals, and your inventory of hosts are your raw material."</em> </div></p><p>Playbook files are expressed using <a href='https://docs.ansible.com/ansible/YAMLSyntax.html'>YAML syntax</a>, which is easy to read, but still powerful. The first step when creating a new playbook, being a YAML file, is to set the header and footer. The header consists of three <code>-</code>'s at the top of the file, and the footer ends the file with three periods (<code>.</code>). This indicates the start and end of the document.</p><p>When writing a playbook to update the pi cluster, I first needed to declare what systems the playbook is used with. To do that, I used the <code>hosts</code> key, and provided it with the <code>cluster</code> group name, which is defined in my <code>/etc/ansible/hosts</code> file, as the value.</p><pre><code>---
+- hosts: cluster
+
+...
+</code></pre><p>After the hosts are defined, modules can be added to update the nodes. To list the tasks, I used the <code>taks:</code> key, with the same indentation as the <code>hosts:</code> keyword. Instead of using a single value, I provided the <code>tasks:</code> keyword with a list of things to do. The first task I want to do when updating the nodes is to check that they running and connected. This can be accomplised with the <a href='https://docs.ansible.com/ansible/ping_module.html'>ping module</a> that I used earlier in the post. The ping module will try to connect to each node, verify that a usable python is installed, and return <code>pong</code> upon success. To add the module, I added <code>- ping: &#126;</code>, indented, to the line below <code>tasks:</code>:</p><pre><code>---
+- hosts: cluster
+
+  tasks:
+    - ping: &#126;
+</code></pre><h3><a name="apt&#95;module"></a>Apt Module</h3>After defining the ping module, I started to get a bit fancier. Well... a little bit fancier. Each node in my pi cluster is running some verison of Ubuntu, which uses apt as it's package manager. If I wanted to ssh into each node and update them manually, the steps I would follow would be to 1) run the command <code>sudo apt-get update</code> to update the repository cache, and 2) run <code>sudo apt-get upgrade</code> to actually install the updates. To recreate these commands in the playbook, I used the <a href='https://docs.ansible.com/ansible/apt_module.html'>apt module</a>. To start with updating the repository cache, I added the following lines to my playbook:<pre><code>- name: Update APT package manager repositories cache
+  become: true
+  apt:
+    update&#95;cache: yes
+</code></pre><p>The <code>name:</code> defines the name of the task, and is the text printed out to the console when executing this step of the playbook. Setting the <a href='https://docs.ansible.com/ansible/become.html'><code>become</code></a> key to <code>true</code> tells Ansible to run the command with privilege escalation (sudo). Lastly, the remaining two lines run the <code>update&#95;cache:</code> functionality of the apt module. </p><p>With the repositories updated on each node, I can have ansible run the updates by adding the following lines to the playbook (after the cache update ones):</p><pre><code>- name: Upgrade installed packages
+  become: true
+  apt:
+    upgrade: dist
+</code></pre><p>This set of commands is very similar to the last group. The <code>name:</code> again provides a description of what the task is doing, and privilege escalation is used again via <code>become: true</code>. The only difference is that the apt module is using the <code>upgrade: dist</code> command instead. This will run the updates for any installed packages on the system.</p><h3><a name="update&#95;cluster&#95;playbook"></a>Update Cluster Playbook</h3><p>I then had a completed playbook to update the pi cluster:</p><pre><code>---
+- hosts: cluster
+
+  tasks:
+    - ping: &#126;
+
+    - name: Update APT package manager repositories cache
+      become: true
+      apt:
+        update&#95;cache: yes
+
+    - name: Upgrade installed packages
+      become: true
+      apt:
+        upgrade: dist
+...
+
+</code></pre><p>The last step is to test it out! Playbooks can be executed using the <code>ansible-playbook</code> command:</p><pre><code>ansible-playbook update-cluster.yml
+</code></pre><p>When running the playbook, ansible will first attempt to gather facts about each node, and then begin to run each of the tasks defined in the playbook. At each step, it will print out the <code>name</code> of each task, followed by the status/result for each node. When it completes, all the nodes in the cluster should be updated. Now you can update three+ computers with a single command! Enjoy!</p>
 </div>
 
 <div id="post-tags">
     <b>Tags: </b>
     
-    <a href="/tags-output/Python/">[Python]</a>
+    <a href="/tags-output/Homelab/">[Homelab]</a>
     
-    <a href="/tags-output/Ledger/">[Ledger]</a>
+    <a href="/tags-output/Pi/">[Pi]</a>
     
-    <a href="/tags-output/Solus/">[Solus]</a>
+    <a href="/tags-output/Cluster/">[Cluster]</a>
     
-    <a href="/tags-output/Dev/">[Dev]</a>
+    <a href="/tags-output/DevOps/">[DevOps]</a>
+    
+    <a href="/tags-output/Ansible/">[Ansible]</a>
     
 </div>
 
 
     <div id="prev-next">
         
-        <a href="/posts/ZFS-Backups-To-LUKS-External/">&laquo; ZFS Snapshot Backups to an External Drive with LUKS</a>
         
-        
-        <a class="right" href="/posts/New-Theme-Immutable/">New Website Theme: Immutable &raquo;</a>
+        <a class="right" href="/posts/Ansible-On-Pi-Cluster/">Configuring Ansible on the Pi Cluster &raquo;</a>
         
     </div>
 
