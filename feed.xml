@@ -12,11 +12,35 @@ http://ryan.himmelwright.net
 Software Developer, Functional Programming and Linux Enthusiast
 </description>
 <lastBuildDate>
-Tue, 06 Jun 2017 07:44:51 -0400
+Fri, 16 Jun 2017 22:25:16 -0400
 </lastBuildDate>
 <generator>
 clj-rss
 </generator>
+<item>
+<guid>
+http://ryan.himmelwright.net/posts/exporting-proxmox-vms/
+</guid>
+<link>
+http://ryan.himmelwright.net/posts/exporting-proxmox-vms/
+</link>
+<title>
+Exporting Proxmox VMs
+</title>
+<description>
+&lt;p&gt;For a long time I have been thinking about replacing my server's proxmox install with vanilla Debian or CentOS, mostly for learning purposes. I would first setup zfs on the new system and import my existing data pools. Then, I would use either a system like ovrit or just plain kvm/lxc to run my VMs and containers. In order to do this though... I have to first figure out how export my containers and VMs running in Proxmox. As it turns out... exporting the VMs wasn't very hard...&lt;/p&gt;&lt;p&gt;&lt;!&amp;ndash; more &amp;ndash;&gt;&lt;/p&gt;&lt;h2&gt;&lt;a name=&quot;exporting&amp;#95;proxmox&amp;#95;vm&amp;#95;disk&quot;&gt;&lt;/a&gt;Exporting Proxmox VM Disk&lt;/h2&gt;&lt;p&gt;&lt;center&gt; &lt;img src=&quot;../../img/posts/exporting-proxmox-vms/proxmox-logo.png&quot; alt=&quot;Proxmox logo&quot; /&gt; &lt;/center&gt;&lt;/p&gt;&lt;p&gt;My Proxmox VMs are setup on an LVM virtual group, with each virtual drive being a lvm volume passed to the VM. So, I wanted to be able to extract these disks to something I could more easily transfer. I ended up converting the lvm volumes to qcow2 images because it was easy and I've actually experienced okay performance with qcow2 on my workstations. Additionally, qcow2 being a single file, is easy to move around and I can always convert them to something else on the final system. To export one of the VMs, I ran the command:&lt;/p&gt;&lt;pre&gt;&lt;code&gt;qemu-img convert -O qcow2 /dev/pve/vm-108-disk-1 /Data/freebsd-vm.qcow2
+&lt;/code&gt;&lt;/pre&gt;That was it. It took a few minutes to finish, but honestly that is all I had to do (I'm sure I should of taken a snapshot or something then copy that, but this seemed to work fine). When it completed, I copied the image down to my desktop and decided to test it out with virt-manager.&lt;h2&gt;&lt;a name=&quot;importing&amp;#95;the&amp;#95;image&amp;#95;to&amp;#95;virt-manager&quot;&gt;&lt;/a&gt;Importing the image to Virt-Manager&lt;/h2&gt;&lt;p&gt;I opened up virt-manager and selected the button to create a new VM. At the first prompt, instead of selecting my usual &quot;Local install media (ISO image or CDROM)&quot; option, I choose to &quot;Import an existing disk image&quot;.&lt;/p&gt;&lt;p&gt;&lt;center&gt; &lt;img src=&quot;../../img/posts/exporting-proxmox-vms/import-image.png&quot; alt=&quot;Proxmox logo&quot; /&gt; &lt;/center&gt;&lt;/p&gt;&lt;p&gt;At the second menu, I opened up the browse menu to see my already configured locations. From there, I found where I had saved the converted qcow2 image, and selected it.&lt;/p&gt;&lt;p&gt;&lt;center&gt; &lt;img src=&quot;../../img/posts/exporting-proxmox-vms/select-qcow2-image.png&quot; alt=&quot;Proxmox logo&quot; /&gt; &lt;/center&gt;&lt;/p&gt;&lt;p&gt;Next, I continued setting up the virtual specs (CPU, RAM, etc.) for the machine just as I would with any other VM setup. When I was done, I started the VM and FreeBSD booted right up. I logged in and compared the installed applications and files with the still running proxmox VM. They were identical.&lt;/p&gt;&lt;p&gt;That's all I really have for this post. It was extremely simple to export the VMs. I know I'm not fully done yet and still have to import the VMs to the final system, but I'll save that for a later post. Right now... I have quite a few VM images to convert, so I might as well get started.&lt;/p&gt;
+</description>
+<author>
+Ryan Himmelwright
+</author>
+<enclosure>
+
+</enclosure>
+<pubDate>
+Fri, 16 Jun 2017 00:00:00 -0400
+</pubDate>
+</item>
 <item>
 <guid>
 http://ryan.himmelwright.net/posts/Updating-Pi-Cluster-With-Ansible/

@@ -79,6 +79,8 @@
                         <li class="divider"></li>
                         <li class="dropdown-header">Recent Posts</li>
                         
+                        <li><a href="/posts/exporting-proxmox-vms/">Exporting Proxmox VMs</a></li>
+                        
                         <li><a href="/posts/Updating-Pi-Cluster-With-Ansible/">Updating the Pi Cluster with Ansible</a></li>
                         
                         <li><a href="/posts/Ansible-On-Pi-Cluster/">Configuring Ansible on the Pi Cluster</a></li>
@@ -86,8 +88,6 @@
                         <li><a href="/posts/Setting-up-the-pi-cluster/">Setting Up My Pi Cluster</a></li>
                         
                         <li><a href="/posts/ZFS-Backups-To-LUKS-External/">ZFS Snapshot Backups to an External Drive with LUKS</a></li>
-                        
-                        <li><a href="/posts/LIA-1-0-Beta-Released/">LIA 1.0 Beta Released</a></li>
                         
                         
 
@@ -98,6 +98,8 @@
                         <li><a href="/tags-output/Python/"><b>[Python]</b></a></li>
                         
                         <li><a href="/tags-output/Cryogen/"><b>[Cryogen]</b></a></li>
+                        
+                        <li><a href="/tags-output/KVM/"><b>[KVM]</b></a></li>
                         
                         <li><a href="/tags-output/Homelab/"><b>[Homelab]</b></a></li>
                         
@@ -124,6 +126,8 @@
                         <li><a href="/tags-output/Clojure/"><b>[Clojure]</b></a></li>
                         
                         <li><a href="/tags-output/ZFS/"><b>[ZFS]</b></a></li>
+                        
+                        <li><a href="/tags-output/Proxmox/"><b>[Proxmox]</b></a></li>
                         
                         <li><a href="/tags-output/DevOps/"><b>[DevOps]</b></a></li>
                         
@@ -166,6 +170,16 @@
 <div id="post">
     
     <div class="post-header">
+            <h2><a href="/posts/exporting-proxmox-vms/">Exporting Proxmox VMs</a></h2>
+        <div id="preview-meta">
+            June 16, 2017
+        </div>
+    </div>
+    <p>For a long time I have been thinking about replacing my server's proxmox install with vanilla Debian or CentOS, mostly for learning purposes. I would first setup zfs on the new system and import my existing data pools. Then, I would use either a system like ovrit or just plain kvm/lxc to run my VMs and containers. In order to do this though... I have to first figure out how export my containers and VMs running in Proxmox. As it turns out... exporting the VMs wasn't very hard...</p><p></p>
+    <a href="/posts/exporting-proxmox-vms/">Continue reading &#8594;</a>
+    <hr>
+    
+    <div class="post-header">
             <h2><a href="/posts/Updating-Pi-Cluster-With-Ansible/">Updating the Pi Cluster with Ansible</a></h2>
         <div id="preview-meta">
             May 25, 2017
@@ -203,16 +217,6 @@
     </div>
     <p>I have been using <a href="https://en.wikipedia.org/wiki/ZFS" shape="rect">ZFS</a> data pools to store data on <a href="../../pages/homelab/#ninetales" shape="rect">my server</a> for some time now. As great as that is, I am ashamed to admit that I have not had a <em>true</em> backup system in place (raid/mirrors are not backup). I have a backup solution that I have attempted in the past, but ran into an issue and let it drift to the side. That changes now. It's time to revisit my solution, and complete it to the end.</p><p></p>
     <a href="/posts/ZFS-Backups-To-LUKS-External/">Continue reading &#8594;</a>
-    <hr>
-    
-    <div class="post-header">
-            <h2><a href="/posts/LIA-1-0-Beta-Released/">LIA 1.0 Beta Released</a></h2>
-        <div id="preview-meta">
-            April 17, 2017
-        </div>
-    </div>
-    <p>I have released the 1.0 Beta version for a personal project of mine: the <strong>L</strong>edger <strong>I</strong>mport <strong>A</strong>ssistant, or <a href="https://github.com/himmALlRight/LIA/" shape="rect">LIA</a>. This post will talk briefly about the background of LIA, what it does, and explain the beta release. </p><p></p>
-    <a href="/posts/LIA-1-0-Beta-Released/">Continue reading &#8594;</a>
     <hr>
     
 

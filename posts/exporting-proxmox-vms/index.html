@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <title>λ ryan himmelwright . net: Exporting Proxmox VMs</title>
+    <link rel="canonical" href="http://ryan.himmelwright.net/posts/exporting-proxmox-vms/">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/font-hack/2.020/css/hack-extended.min.css">
+    <link href='http://fonts.googleapis.com/css?family=Alegreya:400italic,700italic,400,700' rel='stylesheet'
+          type='text/css'>
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css">
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.1/styles/default.min.css">
+    <link href="/css/screen.css" rel="stylesheet" type="text/css" />
+
+
+    <!-- Piwik -->
+    <script type="text/javascript">
+      var _paq = _paq || [];
+      /* tracker methods like "setCustomDimension" should be called before "trackPageView" */
+      _paq.push(["setDocumentTitle", document.domain + "/" + document.title]);
+      _paq.push(["setCookieDomain", "*.ryan.himmelwright.net"]);
+      _paq.push(['trackPageView']);
+      _paq.push(['enableLinkTracking']);
+      (function() {
+      var u="//cloud.himmelwright.net/piwik/";
+      _paq.push(['setTrackerUrl', u+'piwik.php']);
+      _paq.push(['setSiteId', '1']);
+      var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+      g.type='text/javascript'; g.async=true; g.defer=true; g.src=u+'piwik.js'; s.parentNode.insertBefore(g,s);
+      })();
+    </script>
+    <noscript><p><img src="//cloud.himmelwright.net/piwik/piwik.php?idsite=1&rec=1" style="border:0;" alt="" /></p></noscript>
+    <!-- End Piwik Code -->
+</head>
+<body>
+
+
+<nav class="navbar navbar-default">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">λ ryan himmelwright . net</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav navbar-right">
+                <li ><a href="/">Home</a></li>
+                
+                <li
+                >
+                <a href="/pages/about/">About</a>
+                </li>
+                
+                <li
+                >
+                <a href="/pages/homelab/">Homelab</a>
+                </li>
+                
+                <li
+                ><a href="/archives">Archives</a></li>
+                <li><a href="/feed.xml">RSS</a></li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                        More <span class="caret"></span></a>
+                    <ul class="dropdown-menu" role="menu">
+                        <!-- 
+                           -->
+                        <li class="dropdown-header">Links</li>
+                        <li><a href="https://github.com/himmAllRight"><img src=http://ryan.himmelwright.net/img/icons/Github.png width="30px">Github</a></li>
+                        <li><a href="https://www.linkedin.com/in/ryan-himmelwright-b3891774/"><img src=http://ryan.himmelwright.net/img/icons/Linkedin.png width="30px">LinkedIn</a></li>
+                        <li><a href="https://www.instagram.com/himmelwr/"><img src=http://ryan.himmelwright.net/img/icons/Instagram.png width="30px">Instagram</a></li>
+                        <li><a href="https://twitter.com/himmAllRight17"><img src=http://ryan.himmelwright.net/img/icons/Twitter.png width="30px">Twitter</a></li>
+                               
+                        <li class="divider"></li>
+                        <li class="dropdown-header">Recent Posts</li>
+                        
+                        <li><a href="/posts/exporting-proxmox-vms/">Exporting Proxmox VMs</a></li>
+                        
+                        <li><a href="/posts/Updating-Pi-Cluster-With-Ansible/">Updating the Pi Cluster with Ansible</a></li>
+                        
+                        <li><a href="/posts/Ansible-On-Pi-Cluster/">Configuring Ansible on the Pi Cluster</a></li>
+                        
+                        <li><a href="/posts/Setting-up-the-pi-cluster/">Setting Up My Pi Cluster</a></li>
+                        
+                        <li><a href="/posts/ZFS-Backups-To-LUKS-External/">ZFS Snapshot Backups to an External Drive with LUKS</a></li>
+                        
+                        
+
+                        
+                        <li class="divider"></li>
+                        <li class="dropdown-header">Tags</li>
+                        
+                        <li><a href="/tags-output/Python/"><b>[Python]</b></a></li>
+                        
+                        <li><a href="/tags-output/Cryogen/"><b>[Cryogen]</b></a></li>
+                        
+                        <li><a href="/tags-output/KVM/"><b>[KVM]</b></a></li>
+                        
+                        <li><a href="/tags-output/Homelab/"><b>[Homelab]</b></a></li>
+                        
+                        <li><a href="/tags-output/snapd/"><b>[snapd]</b></a></li>
+                        
+                        <li><a href="/tags-output/Pi/"><b>[Pi]</b></a></li>
+                        
+                        <li><a href="/tags-output/Wedding/"><b>[Wedding]</b></a></li>
+                        
+                        <li><a href="/tags-output/KDE/"><b>[KDE]</b></a></li>
+                        
+                        <li><a href="/tags-output/Arch Linux/"><b>[Arch Linux]</b></a></li>
+                        
+                        <li><a href="/tags-output/Website/"><b>[Website]</b></a></li>
+                        
+                        <li><a href="/tags-output/C/"><b>[C]</b></a></li>
+                        
+                        <li><a href="/tags-output/Cluster/"><b>[Cluster]</b></a></li>
+                        
+                        <li><a href="/tags-output/LFS/"><b>[LFS]</b></a></li>
+                        
+                        <li><a href="/tags-output/Linux/"><b>[Linux]</b></a></li>
+                        
+                        <li><a href="/tags-output/Clojure/"><b>[Clojure]</b></a></li>
+                        
+                        <li><a href="/tags-output/ZFS/"><b>[ZFS]</b></a></li>
+                        
+                        <li><a href="/tags-output/Proxmox/"><b>[Proxmox]</b></a></li>
+                        
+                        <li><a href="/tags-output/DevOps/"><b>[DevOps]</b></a></li>
+                        
+                        <li><a href="/tags-output/Thinkpad/"><b>[Thinkpad]</b></a></li>
+                        
+                        <li><a href="/tags-output/Ledger/"><b>[Ledger]</b></a></li>
+                        
+                        <li><a href="/tags-output/dotfiles/"><b>[dotfiles]</b></a></li>
+                        
+                        <li><a href="/tags-output/Devops/"><b>[Devops]</b></a></li>
+                        
+                        <li><a href="/tags-output/Programming/"><b>[Programming]</b></a></li>
+                        
+                        <li><a href="/tags-output/Solus/"><b>[Solus]</b></a></li>
+                        
+                        <li><a href="/tags-output/Ansible/"><b>[Ansible]</b></a></li>
+                        
+                        <li><a href="/tags-output/SSH/"><b>[SSH]</b></a></li>
+                        
+                        <li><a href="/tags-output/Dev/"><b>[Dev]</b></a></li>
+                        
+                        <li><a href="/tags-output/Korora/"><b>[Korora]</b></a></li>
+                        
+                        
+                    </ul>
+                </li>
+            </ul>
+        </div><!--/.nav-collapse -->
+    </div><!--/.container-fluid -->
+</nav>
+
+
+<div class="container">
+
+
+    <div class="row">
+        <div class="col-lg-12">
+            <div id="content">
+                
+<div id="post">
+    <div class="post-header">
+    <h2>Exporting Proxmox VMs</h2>
+    <div id="post-meta" class="row">
+        
+        <span class="col-lg-6 left">By: Ryan Himmelwright</span>
+        
+        <div class="col-lg-6 right">June 16, 2017</div>
+    </div>
+</div>
+<div>
+    
+    <p>For a long time I have been thinking about replacing my server's proxmox install with vanilla Debian or CentOS, mostly for learning purposes. I would first setup zfs on the new system and import my existing data pools. Then, I would use either a system like ovrit or just plain kvm/lxc to run my VMs and containers. In order to do this though... I have to first figure out how export my containers and VMs running in Proxmox. As it turns out... exporting the VMs wasn't very hard...</p><p><!&ndash; more &ndash;></p><h2><a name="exporting&#95;proxmox&#95;vm&#95;disk"></a>Exporting Proxmox VM Disk</h2><p><center> <img src="../../img/posts/exporting-proxmox-vms/proxmox-logo.png" alt="Proxmox logo" /> </center></p><p>My Proxmox VMs are setup on an LVM virtual group, with each virtual drive being a lvm volume passed to the VM. So, I wanted to be able to extract these disks to something I could more easily transfer. I ended up converting the lvm volumes to qcow2 images because it was easy and I've actually experienced okay performance with qcow2 on my workstations. Additionally, qcow2 being a single file, is easy to move around and I can always convert them to something else on the final system. To export one of the VMs, I ran the command:</p><pre><code>qemu-img convert -O qcow2 /dev/pve/vm-108-disk-1 /Data/freebsd-vm.qcow2
+</code></pre>That was it. It took a few minutes to finish, but honestly that is all I had to do (I'm sure I should of taken a snapshot or something then copy that, but this seemed to work fine). When it completed, I copied the image down to my desktop and decided to test it out with virt-manager.<h2><a name="importing&#95;the&#95;image&#95;to&#95;virt-manager"></a>Importing the image to Virt-Manager</h2><p>I opened up virt-manager and selected the button to create a new VM. At the first prompt, instead of selecting my usual "Local install media (ISO image or CDROM)" option, I choose to "Import an existing disk image".</p><p><center> <img src="../../img/posts/exporting-proxmox-vms/import-image.png" alt="Proxmox logo" /> </center></p><p>At the second menu, I opened up the browse menu to see my already configured locations. From there, I found where I had saved the converted qcow2 image, and selected it.</p><p><center> <img src="../../img/posts/exporting-proxmox-vms/select-qcow2-image.png" alt="Proxmox logo" /> </center></p><p>Next, I continued setting up the virtual specs (CPU, RAM, etc.) for the machine just as I would with any other VM setup. When I was done, I started the VM and FreeBSD booted right up. I logged in and compared the installed applications and files with the still running proxmox VM. They were identical.</p><p>That's all I really have for this post. It was extremely simple to export the VMs. I know I'm not fully done yet and still have to import the VMs to the final system, but I'll save that for a later post. Right now... I have quite a few VM images to convert, so I might as well get started.</p>
+</div>
+
+<div id="post-tags">
+    <b>Tags: </b>
+    
+    <a href="/tags-output/KVM/">[KVM]</a>
+    
+    <a href="/tags-output/Linux/">[Linux]</a>
+    
+    <a href="/tags-output/Proxmox/">[Proxmox]</a>
+    
+</div>
+
+
+    <div id="prev-next">
+        
+        
+        <a class="right" href="/posts/Updating-Pi-Cluster-With-Ansible/">Updating the Pi Cluster with Ansible &raquo;</a>
+        
+    </div>
+
+    
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = '//himmAllRight.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    
+
+
+</div>
+
+            </div>
+        </div>
+    </div>
+    <footer>Copyright &copy;  Ryan Himmelwright
+        <p style="text-align: center;">Generated using <a href="http://cryogenweb.org">Cryogen</a></p></footer>
+</div>
+<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+<script src="/js/highlight.pack.js" type="text/javascript"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+</body>
+</html>
+
