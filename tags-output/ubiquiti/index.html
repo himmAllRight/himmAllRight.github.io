@@ -2,8 +2,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
     <meta charset="utf-8"/>
-    <title>λ ryan himmelwright . net: Trying out snapd on Arch Linux</title>
-    <link rel="canonical" href="http://ryan.himmelwright.net/posts/snapd-on-arch/">
+    <title>λ ryan himmelwright . net: Posts Tagged &quot;ubiquiti&quot;</title>
+    <link rel="canonical" href="http://ryan.himmelwright.net/tags-output/ubiquiti/">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="//cdn.jsdelivr.net/font-hack/2.020/css/hack-extended.min.css">
     <link href='http://fonts.googleapis.com/css?family=Alegreya:400italic,700italic,400,700' rel='stylesheet'
@@ -177,54 +177,17 @@
         <div class="col-lg-12">
             <div id="content">
                 
-<div id="post">
-    <div class="post-header">
-    <h2>Trying out snapd on Arch Linux</h2>
-    <div id="post-meta" class="row">
-        
-        <span class="col-lg-6 left">By: Ryan Himmelwright</span>
-        
-        <div class="col-lg-6 right">July 17, 2016</div>
+<div id="posts-by-tag">
+    <div id="page-header">
+        <h2>Posts Tagged &quot;ubiquiti&quot;</h2>
     </div>
-</div>
-<div>
+    <ul>
     
-    <p>The past few weeks I have been listening to all of the buzz about Ubuntu "snaps", but I just recently decided to try this new technology out.</p><p><!&ndash; more &ndash;></p><h3><a name="snapd&#95;install&#95;and&#95;setup"></a>Snapd Install and Setup</h3><p>I decided to install snapd on my small netbook (Abra), which is running Arch Linux. So, installing snapd was as easy as running:</p><p><code>pacaur -S snapd</code></p><p>Now, I use pacaur so that I can install packages from Arch Linux's main repos, as well as the AUR. However, because snapd has actually been moved to the community repos, you can install it with vanilla pacman, without aur support.</p><p><code>sudo pacman -S snapd</code></p><p>After snapd is installed, it needs to be started. To start the snapd service, just use systemd:</p><p><code>sudo systemctl start snapd</code></p><p>Additionally, If you want to start the snapd service automatically after a reboot run the command:</p><p><code>sudo systemctl enable snapd</code></p><h3><a name="using&#95;snap"></a>Using snap</h3><p>After snapd was installed and running, I started playing with the snap application. The first thing I should note is that to the extent of my knowledge, snap has to be run as root (at least for now). So my commands all start with <code>sudo</code>.</p><p>First, I wanted to find a snap package. This can be done using the <code>snap find</code> command as follows:</p><p><code>sudo snap find package-name</code><br /></p><p><i>(where <strong>package-name</strong> is the name of the package to search)</i></p><p><img src="../../img/posts/arch-snaps/snap-find.png" alt="Finding Snaps" /></p><p>Just like in any standard package manager search, the potential matches were returned, along with a version number, the developer name, and a summary.</p><p>Snap has several other commands. To see a full list of available snap commands and a description for each one, just type:</p><p><code>sudo snap help</code></p><p><img src="../../img/posts/arch-snaps/snap-help.png" alt="Snap Help" /></p><h3><a name="testing&#95;a&#95;snap"></a>Testing a snap</h3><p>After learning about the basic snap commands, I wanted to install a snap to see how well it works. I decided to see if there was a Telegram snap (I heard there was, so it was a good bet). I ran <code>sudo snap find telegram</code>, and a list of my options appeared.</p><p><img src="../../img/posts/arch-snaps/snap-telegram-install.png" alt="Snap telegram" /></p><p>I choose the last one, and installed it using the command  <code>sudo snap install telegram-serguisens</code>. A progress bar tracked the download of the snap, and then the installation. That was it. To my delight, within a few seconds the Ubuntu <code>snap</code> application had downloaded the telegram snap, and installed it on my <i>arch linux</i> box, without any issue.</p><h3><a name="my&#95;only&#95;issue"></a>My Only Issue</h3><p><img src="../../img/posts/arch-snaps/snap-telegram-menu.png" alt="Snap Help" /></p><p>Well... <i>almost</i> without any issues. The one problem I did have was after installing the telegram snap, the executable wasn't in my path so I couldn't start it from my launcher or even a terminal. I think this was actually because snapd wasn't setup fully. I rebooted my computer and telegram now launches just fine. The snap is even identified with its full name (<i>telegram-serguisens</i>), so I can be sure it is the actual snap, and not another Telegram install.</p><h3><a name="thoughts"></a>Thoughts</h3><p><img src="../../img/posts/arch-snaps/snap-telegram.png" alt="Snap Help" /></p><p>While the fact that snaps are easy to package and install for developers and users alike, I think my favorite feature was something that I didn't even think about prior to trying it out, and I might not of realized had I installed snapd on another computer...</p><p>This little computer is low power, and tends to heat up and go crazy when I install certain packages (particularly ones from the AUR). Sometimes it is so bad that I have to kill the installation and forego that application for awhile. Telegram is one of them. I think this is because the aur build pulls down the telegram .deb package and then has to extract and compile it in order to install it on Arch. This little computer doesn't like that. The snap however, seems to of just download and installed itself. It hardly pegged my CPU at all. If this is true, snaps might have an additional use-case on weaker hardware, like my netbook. (yes, I know snaps might have a bigger disk footprint, but honestly that trade-off is fine with me)</p><p>I think the universal application frameworks are a great idea that is very much needed on Linux. Snapd is very promising and I look forward to seeing what it and other solutions have in store for the future of Linux.</p>
-</div>
-
-<div id="post-tags">
-    <b>Tags: </b>
+        <li>
+            <a href="/posts/upgrading-network-to-ubiquiti/">Home Network Ubiquiti Upgrade</a> <span id="tag-date">[6/23/17]</span>
+        </li>
     
-    <a href="/tags-output/snapd/">[snapd]</a>
-    
-    <a href="/tags-output/Arch Linux/">[Arch Linux]</a>
-    
-    <a href="/tags-output/Linux/">[Linux]</a>
-    
-</div>
-
-
-    <div id="prev-next">
-        
-        <a href="/posts/introducing-kadabra/">&laquo; Introducing Kadabra - My New, Used x230</a>
-        
-        
-        <a class="right" href="/posts/Trying-out-plasma5/">Trying Out the Plasma 5 Desktop Environment &raquo;</a>
-        
-    </div>
-
-    
-    <div id="disqus_thread"></div>
-    <script type="text/javascript">
-        (function() {
-            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-            dsq.src = '//himmAllRight.disqus.com/embed.js';
-            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-        })();
-    </script>
-    
-
-
+    </ul>
 </div>
 
             </div>
