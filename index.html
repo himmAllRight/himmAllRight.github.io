@@ -79,6 +79,8 @@
                         <li class="divider"></li>
                         <li class="dropdown-header">Recent Posts</li>
                         
+                        <li><a href="/posts/issues-setting-up-ubiquiti-network/">Encountered Issues Setting Up Ubiquiti Network</a></li>
+                        
                         <li><a href="/posts/upgrading-network-to-ubiquiti/">Home Network Ubiquiti Upgrade</a></li>
                         
                         <li><a href="/posts/Started-Using-i3blocks/">Refreshing my i3 setup with i3blocks</a></li>
@@ -86,8 +88,6 @@
                         <li><a href="/posts/exporting-proxmox-vms/">Exporting Proxmox VMs</a></li>
                         
                         <li><a href="/posts/Updating-Pi-Cluster-With-Ansible/">Updating the Pi Cluster with Ansible</a></li>
-                        
-                        <li><a href="/posts/Ansible-On-Pi-Cluster/">Configuring Ansible on the Pi Cluster</a></li>
                         
                         
 
@@ -180,6 +180,16 @@
 <div id="post">
     
     <div class="post-header">
+            <h2><a href="/posts/issues-setting-up-ubiquiti-network/">Encountered Issues Setting Up Ubiquiti Network</a></h2>
+        <div id="preview-meta">
+            June 29, 2017
+        </div>
+    </div>
+    <p>This past weekend, I setup my new ubiquiti network. It actually took up a good portion of Sunday, because I ran into a few minor issues. Fortunately/Unfortunately, these issues were mostly because it my first time configuring this type of setup, and there was a lot of trial and error. The basic network is now all configured and has been running great. It was a good day and I learned a lot :). In fact, I am confident that if I had to start over from scratch, the process would take me about 10-15 minutes. Just to be sure, I'm  going to quickly jot down the major pain points I experienced my first time around. </p><p></p>
+    <a href="/posts/issues-setting-up-ubiquiti-network/">Continue reading &#8594;</a>
+    <hr>
+    
+    <div class="post-header">
             <h2><a href="/posts/upgrading-network-to-ubiquiti/">Home Network Ubiquiti Upgrade</a></h2>
         <div id="preview-meta">
             June 26, 2017
@@ -217,16 +227,6 @@
     </div>
     <p>With Ansible configured on the Pi cluster, it is time to have it do something useful. When working with a clustered system, even the simplest tasks become tedious and time consuming. For example, updating the system. While I could manually update each of the 3 pi nodes, it is not scalable to 10 or 30 nodes, let alone hundreds or thousands. Tools like Ansible, make doing tasks such a supdating clustered systems, trivial again. In this post, I will walk through setting up an Ansible playbook to update my Pi cluster.</p><p></p>
     <a href="/posts/Updating-Pi-Cluster-With-Ansible/">Continue reading &#8594;</a>
-    <hr>
-    
-    <div class="post-header">
-            <h2><a href="/posts/Ansible-On-Pi-Cluster/">Configuring Ansible on the Pi Cluster</a></h2>
-        <div id="preview-meta">
-            May 21, 2017
-        </div>
-    </div>
-    <p>In my <a href="http://ryan.himmelwright.net/posts/Setting-up-the-pi-cluster/" shape="rect">previous post</a>, I pieced together my <a href="http://ryan.himmelwright.net/pages/homelab/#cluster" shape="rect">pi cluster</a>, and installed variations of Ubuntu 16.04 Server on each of its nodes. With the cluster built, I quickly needed an easy way to maintain and interact with the system as a whole. This, is where <a href="https://www.ansible.com/" shape="rect">Ansible</a> comes in. In this post, I will walk through the steps I took to setup Ansible on my Cluster.</p><p></p>
-    <a href="/posts/Ansible-On-Pi-Cluster/">Continue reading &#8594;</a>
     <hr>
     
 

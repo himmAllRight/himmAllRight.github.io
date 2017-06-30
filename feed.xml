@@ -12,11 +12,39 @@ http://ryan.himmelwright.net
 Software Developer, Functional Programming and Linux Enthusiast
 </description>
 <lastBuildDate>
-Mon, 26 Jun 2017 06:17:55 -0400
+Thu, 29 Jun 2017 20:45:55 -0400
 </lastBuildDate>
 <generator>
 clj-rss
 </generator>
+<item>
+<guid>
+http://ryan.himmelwright.net/posts/issues-setting-up-ubiquiti-network/
+</guid>
+<link>
+http://ryan.himmelwright.net/posts/issues-setting-up-ubiquiti-network/
+</link>
+<title>
+Encountered Issues Setting Up Ubiquiti Network
+</title>
+<description>
+&lt;p&gt;This past weekend, I setup my new ubiquiti network. It actually took up a good portion of Sunday, because I ran into a few minor issues. Fortunately/Unfortunately, these issues were mostly because it my first time configuring this type of setup, and there was a lot of trial and error. The basic network is now all configured and has been running great. It was a good day and I learned a lot :). In fact, I am confident that if I had to start over from scratch, the process would take me about 10-15 minutes. Just to be sure, I'm  going to quickly jot down the major pain points I experienced my first time around. &lt;/p&gt;&lt;p&gt;&lt;!&amp;ndash; more &amp;ndash;&gt;&lt;/p&gt;&lt;h2&gt;&lt;a name=&quot;trouble&amp;#95;connecting&amp;#95;to&amp;#95;the&amp;#95;edgerouter-x&amp;#95;for&amp;#95;initial&amp;#95;setup&quot;&gt;&lt;/a&gt;Trouble Connecting to the EdgeRouter-x for Initial Setup&lt;/h2&gt;&lt;center&gt;&lt;img alt=&quot;During initial setup, I was connecting the router wrong&quot; src=&quot;../../img/posts/ubiquiti-setup-issues/wrong-router-connection.png&quot; width=&quot;90%&quot;&gt;&lt;/center&gt;&lt;div id=&quot;caption&quot;&gt;During initial setup, I was connecting the router wrong&lt;/div&gt;&lt;p&gt;The edgerouter needed to be directly connected to a computer during its initial setup, to make the EdgeOS configuration wizard accessible. The instructions clearly stated to connect an ethernet cable from my laptop to the &lt;code&gt;eth0/POE&lt;/code&gt; port on the edgerouter, but I guess I didn't believe them.&lt;/p&gt;&lt;p&gt;Instead, I plugged the ethernet cable from my modem into &lt;code&gt;eth0&lt;/code&gt;, and my computer to &lt;code&gt;eth1&lt;/code&gt;. That didn't work. However, once I &lt;em&gt;properly&lt;/em&gt; connected the devices (and manually set a static IP on my laptop, &lt;code&gt;192.168.1.2&lt;/code&gt; for example), I was able to access the configuration page in my browser via &lt;code&gt;https://192.168.1.1&lt;/code&gt; (don't forget the &lt;em&gt;s&lt;/em&gt; in &lt;em&gt;https&lt;/em&gt;). Lesson Learned: manuals are (&lt;em&gt;usually&lt;/em&gt;) not out to get you.&lt;/p&gt;&lt;h2&gt;&lt;a name=&quot;setting&amp;#95;up&amp;#95;poe&amp;#95;and&amp;#95;connecting&amp;#95;the&amp;#95;ap&quot;&gt;&lt;/a&gt;Setting up POE and Connecting the AP&lt;/h2&gt;This was not actually an issue I encountered, but rather a confusion. I was unsure what the best setup for the &lt;a href='https://en.wikipedia.org/wiki/Power_over_Ethernet'&gt;POE&lt;/a&gt; hardware was. At first, I had the POE adaptor connected between the edgerouter and the AP, because I wasn't sure if it could optimally power both devices. I found an &lt;a href='https://www.youtube.com/watch?v=f7FeYsJqotc&amp;list=PLDBkup9c8YMgZaE50hAjP7rbbVriTlyQf&amp;index=1'&gt;informative guide&lt;/a&gt; that indicated that the POE adaptor could indeed power both.&lt;p&gt;&lt;p&gt;&lt;pre&gt;&lt;code&gt;Modem  --
+        |
+         --&amp;gt; POE Adaptor --&amp;gt; &amp;#40;&amp;#42;eth0&amp;#42;&amp;#41;  edgerouter-x  &amp;#40;&amp;#42;eth4&amp;#42;&amp;#41; --&amp;gt; AP Lite
+        |
+Power  --
+ &lt;/code&gt;&lt;/pre&gt; &lt;div id=&quot;caption&quot;&gt;Digram describing the correct link up&lt;/div&gt; &lt;/p&gt;&lt;/p&gt;&lt;p&gt;Once I swapped the cables all around, I had to go into the router configuration and enable the POE for &lt;code&gt;eth4&lt;/code&gt;. Afterwards, the AP lit up, indicating that it was connected and powered.&lt;/p&gt;&lt;h2&gt;&lt;a name=&quot;issues&amp;#95;linking/configuring&amp;#95;the&amp;#95;ap&quot;&gt;&lt;/a&gt;Issues linking/configuring the AP&lt;/h2&gt;This was the problem I spent the most time on. I had to install the configuration software for the Ubiquiti access point, but the &quot;Linux binary&quot; was a .deb, and I didn't feel like extracting the contents of the package so that I could install it on Solus (yet). So instead, I spun up a few Ubuntu VMs to try it out, but I over-looked the fact that VMs on my laptop use a different subnet (192.168.&lt;strong&gt;122&lt;/strong&gt;. &amp;#42;) for the virtual network. I had hoped that because the VM's network was routed through my laptop, which was connected directly to the edgerouter, it would still be able to see the access point. Regardless... the AP couldn't see the VM and vice versa. Finally, I admitted that the issues were most likely caused by the 192.168.122.* IP address that the VM was assigned.&lt;p&gt;&lt;center&gt; &lt;img alt=&quot;During initial setup, I was connecting the router wrong&quot; src=&quot;../../img/posts/ubiquiti-setup-issues/ubuntu.png&quot; width=&quot;45%&quot;&gt; &lt;img alt=&quot;During initial setup, I was connecting the router wrong&quot; src=&quot;../../img/posts/ubiquiti-setup-issues/venomoth.png&quot; width=&quot;35%&quot;&gt; &lt;/center&gt; &lt;div id=&quot;caption&quot;&gt;I spun up a new Ubuntu VM (Venomoth) to host the Ubifi controller&lt;/div&gt;&lt;/p&gt;&lt;p&gt;By this point, I had also learned that the Linux software is more of a server service, and not a GUI desktop application. So, I concluded that spinning up a dedicated VM on my server to host the wifi controller was worth it. Virtual machines hosted on my server automatically get configured on the main subnet, so it also resolved my issue. I was able to detect and configure the access point immediately. This setup made more sense anyway, as I can always connect to the AP controller by going to the VM's IP on my browser,  just like I can with my router.&lt;/p&gt;&lt;p&gt;Well, that was all of my setup &quot;&lt;em&gt;issues&lt;/em&gt;&quot;. There was nothing I would consider to be an actual &lt;em&gt;issue&lt;/em&gt;, just some confusions of an Ubiquiti/POE first-timer. Like I stated earlier, I am sure I could redo the setup in about 15 minutes without any issues... 10 now that I recorded everything in the post!&lt;/p&gt;
+</description>
+<author>
+Ryan Himmelwright
+</author>
+<enclosure>
+
+</enclosure>
+<pubDate>
+Thu, 29 Jun 2017 00:00:00 -0400
+</pubDate>
+</item>
 <item>
 <guid>
 http://ryan.himmelwright.net/posts/upgrading-network-to-ubiquiti/
