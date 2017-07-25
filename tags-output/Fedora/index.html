@@ -2,8 +2,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
     <meta charset="utf-8"/>
-    <title>λ ryan himmelwright . net: Linux from Scratch - Getting Started</title>
-    <link rel="canonical" href="http://ryan.himmelwright.net/posts/LFS-Getting-Started/">
+    <title>λ ryan himmelwright . net: Posts Tagged &quot;Fedora&quot;</title>
+    <link rel="canonical" href="http://ryan.himmelwright.net/tags-output/Fedora/">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="//cdn.jsdelivr.net/font-hack/2.020/css/hack-extended.min.css">
     <link href='http://fonts.googleapis.com/css?family=Alegreya:400italic,700italic,400,700' rel='stylesheet'
@@ -183,52 +183,17 @@
         <div class="col-lg-12">
             <div id="content">
                 
-<div id="post">
-    <div class="post-header">
-    <h2>Linux from Scratch - Getting Started</h2>
-    <div id="post-meta" class="row">
-        
-        <span class="col-lg-6 left">By: Ryan Himmelwright</span>
-        
-        <div class="col-lg-6 right">March 1, 2017</div>
+<div id="posts-by-tag">
+    <div id="page-header">
+        <h2>Posts Tagged &quot;Fedora&quot;</h2>
     </div>
-</div>
-<div>
+    <ul>
     
-    <p>When I started using <a href='https://www.archlinux.org'>Arch Linux</a> a while back, I learn about some of the internals of Linux quickly. Ever since then, I have considered building a Linux From Scratch by following the guidelines outlined in <a href='http://www.linuxfromscratch.org'>the book</a>. Based on my experience with Arch Linux, I'm sure that compiling a system from scratch will continue to teach me about Linux at a much deeper level.</p><p><!&ndash; more &ndash;></p><h3><a name="getting&#95;started"></a>Getting Started</h3><img src="../../img/posts/LFS-intro/book-cover.jpg" alt="Linux from Scratch Logo" /><p>First, it should be known that this process follows a book that is freely available at <a href='http://www.linuxfromscratch.org'>www.linuxfromscratch.org</a>. The book is updated from time to time, and there are several versions of it (ex: systemd or not). I am attempting to complete the systemd adaptation. There are also many videos online of people walking through the steps. I find watching such videos can be very helpful to watch.</p><h2><a name="setting&#95;up&#95;the&#95;host&#95;system"></a>Setting Up the Host System</h2><img src="../../img/posts/LFS-intro/VM-install.png" alt="VM installation Complete" /><p>LFS is constructed from a host environment that has the software required to build and compile all the components of the system. This host system can be a current Linux install, a seperate computer that is dedicated to LFS, or a Linux virtual machine. The LFS system is then assembled in a another partition, or even on a separate hard drive.</p><p>I setup a KVM virtual machine using Virt Manager for my host system, and then attached a virtual hard drive to build LFS on. I decided to use a <a href='https://www.ubuntu.com/download/desktop'>Ubuntu 16.04 Desktop</a> install because it should have most of the build tools, and it is easy to install any missing ones. For now, I configured the VM to use 4 cores and 4GB of RAM, but I might decide to increase that when I start compiling packages. I also decided to not worry about any of the fancy partitioning options like setting up LVM or disk encryption, and just let the installer automatically do it for me. Those features are not really needed here and I figured it would just potentially confuse me.</p><p><center><img src="../../img/posts/LFS-intro/HD-add.png" alt="Adding LFS hd" /></center></p><p>After the VM finished installing, I shutdown the system and added a virtual drive. This will be the virtual drive that I build the entire LFS system in. Then I started up the VM again, confirmed that everything installed correctly, and installed openssh so that I could just ssh into the system from my desktop if I didn't feel like working inside the VM's GUI.</p><h3><a name="setting&#95;up&#95;the&#95;host&#95;environment"></a>Setting up the Host Environment</h3><h4><a name="checking&#95;required&#95;packages"></a>Checking Required Packages</h4><img src="../../img/posts/LFS-intro/environment-check-pre.png" alt="Adding LFS hd" /><p>Now that the host system was setup, the host <em>environment</em> had to be configured. Luckily, LFS provides a nice script that can be copy and pasted into a terminal. This script prints out what required packages and programs are not yet installed on the system (make sure to run it as either root, or using sudo). When I ran the script, there were a few missing packages that had to be installed:</p><ul><li>bison</li><li>gawk</li><li>texinfo (makeinfo)</li></ul><p>So, I just ran a simple <code>apt-get install bison gawk texinfo</code> command and was good to go. I also had a symlink issue because <code>/bin/sh</code> was pointing to <code>/bin/dash</code>, and LFS wants it to point to <code>/bin/bash/</code>. This was easily resolved using the command <code>ln -sf bash /bin/sh</code>.</p><p><img src="../../img/posts/LFS-intro/environment-check-post.png" alt="Adding LFS hd" /></p><p>After installing those few packages and fixing the symlink, the check script was happy, and I could move on.</p><h4><a name="checking&#95;libraries"></a>Checking Libraries</h4><img src="../../img/posts/LFS-intro/library-check.png" alt="Adding LFS hd" /><p>After verifying that my host system had all the required packages, I had to confirm that a few libraries were "consistent". Again, LFS provides a simple script for this. When I ran it, the three libraries were not found. Tthe books states that all the files should either be <em>absent</em> or <em>present</em>. If one or two are there and the others missing, that is a problem. So my system was okay.</p><h3><a name="formatting&#95;the&#95;lfs&#95;disk"></a>Formatting the LFS Disk</h3>I added my LFS disk through the Virt Manager settings, which doesn't format it, so that had to be done next. <p><img src="../../img/posts/LFS-intro/disks.png" alt="Adding LFS hd" /></p><p>I first used <code>lsblk</code> to confirm the disk name. In my case it was the <code>/dev/sdb</code> disk.</p><p><img src="../../img/posts/LFS-intro/mkfs.png" alt="Adding LFS hd" /></p><p>After getting the disk's path, it was time to format. I decided to format the disk with t the basic, but very solid ext4 file system using the following command (again, as root or using <em>sudo</em>):</p><p><code>mkfs.ext4 -v /dev/sdb</code></p><p>Note that the <code>-v</code> was not required, but I personally prefer to see the output. Also, if I wanted to specify the drive using the UUID, that could be accomlished using the <code>-U</code> flag to specify a UUID instead of the file path.</p><p>The next few preparatory steps before starting to build LFS must be done each time the host system boots, so I think I am going to break that into a separate post. That way, it can be more easily referenced. Enjoy!</p>
-</div>
-
-<div id="post-tags">
-    <b>Tags: </b>
+        <li>
+            <a href="/posts/solus-to-fedora/">Migrating from Solus to Fedora for now</a> <span id="tag-date">[7/25/17]</span>
+        </li>
     
-    <a href="/tags-output/LFS/">[LFS]</a>
-    
-    <a href="/tags-output/Linux/">[Linux]</a>
-    
-</div>
-
-
-    <div id="prev-next">
-        
-        <a href="/posts/new-dotfiles/">&laquo; My New Dotfiles Management - Using GNU Stow</a>
-        
-        
-        <a class="right" href="/posts/introducing-kadabra/">Introducing Kadabra - My New, Used x230 &raquo;</a>
-        
-    </div>
-
-    
-    <div id="disqus_thread"></div>
-    <script type="text/javascript">
-        (function() {
-            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-            dsq.src = '//himmAllRight.disqus.com/embed.js';
-            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-        })();
-    </script>
-    
-
-
+    </ul>
 </div>
 
             </div>
