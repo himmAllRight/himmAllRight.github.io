@@ -2,8 +2,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
     <meta charset="utf-8"/>
-    <title>λ ryan himmelwright . net</title>
-    <link rel="canonical" href="http://ryan.himmelwright.net">
+    <title>λ ryan himmelwright . net: Dabbling with GO</title>
+    <link rel="canonical" href="http://ryan.himmelwright.net/posts/dabbling-with-go/">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="//cdn.jsdelivr.net/font-hack/2.020/css/hack-extended.min.css">
     <link href='http://fonts.googleapis.com/css?family=Alegreya:400italic,700italic,400,700' rel='stylesheet'
@@ -186,66 +186,91 @@
             <div id="content">
                 
 <div id="post">
-    
     <div class="post-header">
-            <h2><a href="/posts/LFS-Repeated-Setup-Steps/">Linux from Scratch - Repeated Setup Steps</a></h2>
-        <div id="preview-meta">
-            March 13, 2017
-        </div>
+    <h2>Dabbling with GO</h2>
+    <div id="post-meta" class="row">
+        
+        <span class="col-lg-6 left">By: Ryan Himmelwright</span>
+        
+        <div class="col-lg-6 right">July 30, 2017</div>
     </div>
-    <p>During the Linux From Scratch process, there may be times when the build environment (computer, VM, chroot, whatever) must be restarted. If so, there are a few steps from the setup phase that have to be re-initialized. This post maps out those steps.</p><p></p>
-    <a href="/posts/LFS-Repeated-Setup-Steps/">Continue reading &#8594;</a>
-    <hr>
+</div>
+<div>
     
-    <div class="post-header">
-            <h2><a href="/posts/new-dotfiles/">My New Dotfiles Management - Using GNU Stow</a></h2>
-        <div id="preview-meta">
-            March 7, 2017
-        </div>
-    </div>
-    <p>I have maintained a "dotfiles" repository since I made my github account in 2013. However, overtime it became more of a post-apocalyptic wasteland, cluttered with remnants of obsolete configurations and scraps of scripts. It was no longer the pristine, culled, collection that I desired. I also did not have an efficient method of easily linking the files on a new system. I had to manually make symlinks for each dotfile. I knew there were <em>much</em> better dotfiles setups out there, but I never got around to it. Until now.</p><p></p>
-    <a href="/posts/new-dotfiles/">Continue reading &#8594;</a>
-    <hr>
+    <p>After spending most of this month's dedicated learning time working on <a href='../solus-to-fedora/'>system</a>, <a href='../creating-a-git-remote/'>server</a>, and <a href='../issues-setting-up-ubiquiti-network/'>network</a> activities,  I have been itching to start some home programming again. To motivate myself, I even considered dabbling with a new programming language... and with very little internal debate, I decided to just <a href='https://golang.org'>Gopher</a> it (I'm so sorry).</p><p><!&ndash; more &ndash;></p><h2><a name="what&#95;is&#95;go?"></a>What is GO?</h2><img src="../../img/posts/dabbling-with-go/gopher.png" style="width: 30%; float: right; margin: 0px 10px 0px 10px;"/)<p>Go (sometimes referred to as "golang") is an open source programming language, developed in 2007 by a team at Google (Robert Griesemer, Rob Pike, and Ken Thompson). Distributed under a <a href='https://golang.org/LICENSE'>BSD-like license</a>, Go is also maintained and developed by open source volunteers all over the world. </p><p>Like C, it is a compiled and statically typed language. Unlike C, Go includes garbage collection and memory safety features, as well as other design aspects that are reminiscent of modern dynamic languages like python (ex: type inference and package <code>import</code> statements). Lastly, Go has a concurrent programming implementation that utilizes what are known as '<a href='https://tour.golang.org/concurrency/1'>goroutines</a>'. Goroutines are special light-weight "threads" that can process many concurrent tasks. All of these features work together to form an extremely relevant language for modern computing.</p><p>Like the programming language itself, the Go project summarizes all of this in a nice and concise statement on their <a href='https://golang.org/doc/'>documentation page</a>:</p><blockquote><p> The Go programming language is an open source project to make programmers more productive. Go is expressive, concise, clean, and efficient. Its concurrency mechanisms make it easy to write programs that get the most out of multicore and networked machines, while its novel type system enables flexible and modular program construction. Go compiles quickly to machine code yet has the convenience of garbage collection and the power of run-time reflection. It's a fast, statically typed, compiled language that feels like a dynamically typed, interpreted language.<br /></p></blockquote><h2><a name="motivation"></a>Motivation</h2><p>I've wanted to try <a href='https://golang.org/'>Go</a> for a long time now. A couple of months ago, I was trying to decide if I should pursue learning Rust or Go. At the time, I ultimately ended up experimenting with <a href='https://www.rust-lang.org/en-US/'>Rust</a>. I was toying with the idea of creating an experimental lisp, and Rust's feature set makes it great language for writing compilers and interpreters. However, while Rust is a great language, it can be quite complicated to learn. Go on the other hand, is apparently simpler and quick to grasp, which is <a href='https://golang.org/doc/faq#creating_a_new_language'>why it was created</a> in the first place.</p><p>When the Solus team <a href='https://solus-project.com/forums/viewtopic.php?f=13&t=2634'>announced</a> that they were declaring Go a first class citizen language of the project, my interest peaked. <a href='https://github.com/solus-project/solbuild'>Solbuild</a>, the Solus package build system was written in Go. In the announcement, the project stated that they intended to use Go for building tools. True to that statement, this past week, Ikey (the creator of Solus) published a patreon post detailing the new repo manager (<a href='https://github.com/solus-project/ferryd'>ferryd</a>) he's been working on... again in Go. After reading that post, I decided it was time for me to give it a Go (again, very sorry).</p><h2><a name="installation"></a>Installation</h2><p>I first went to the Go <a href='https://golang.org/doc/install'>install page</a> to figure out if there were any odd components to install. It didn't appear so. </p><p><em>Note:</em> Before progressing any further, I should point out that if you just want to <em>try</em> go, the project has a little embedded editor/compiler on the <a href='https://golang.org'>home page</a> of the website. Beyond that, they have an amazing <a href='https://tour.golang.org/welcome/1'>Go tour</a> that also has an embedded programming environment, and can be completed entirely in a web browser.</p><p>After playing with the online editor online for a bit, I decided that I wanted to install Go on my system. I was on my NixOS laptop at the time, so I installed go with the command: </p><pre><code>nix-env -i go
+</code></pre><p>On Alakazam, it was</p><pre><code>sudo dnf install golang
+</code></pre><p><em>(... and then when I jumped back to Solus on Alakazam, it was <code>sudo eopkg it golang</code>... but more on that later...)</em></p><p>Next, I walked through the <a href='https://golang.org/doc/install#testing'>test your install</a> steps, building a simple "hello world" app to make sure everything was working properly. This was especially important, given that I was on nixOS, which can sometimes be picky with system paths and environment variables. Luckily, everything worked fine. If I continue down the Go path, I might write a "Getting started" post to detail how to setup a proper Go environment on Linux.</p><h2><a name="first&#95;steps"></a>First Steps</h2><p>After confirming my install, I went back and continued  <a href='https://tour.golang.org/welcome/1'>A Tour of Go</a> to better learn the language. I am interested to eventually read the <a href='https://golang.org/doc/effective_go.html'>Effective Go</a> documentation. It will be interesting to simply <em>read</em> the correct style and conventions for the language, instead of trudging through a holly war to find answers.</p><p>After working on the tutorial for awhile, I started playing around with the language on my own.  Below is a snippet of code I wrote while fooling around. It's nothing fancy. I was impressed though with how easy it really was to pick up the basics of the language and get going. I am excited to learn more.</p><pre><code>package main
+
+import &#40;
+	&quot;fmt&quot;
+	&quot;runtime&quot;
+&#41;
+
+func main&#40;&#41; {
+	fmt.Printf&#40;&quot;hello, world\n&quot;&#41;
+	getOS&#40;&#41;
+	fmt.Printf&#40;&quot;\n&quot;&#41; // I know this is dumb
+
+	x, y := 74, 83
+	sum := sumInts&#40;x, y&#41;
+	fsum := factorial&#40;sum&#41;
+
+	fmt.Printf&#40;&quot;sum: %v\n&quot;, sum&#41;
+	fmt.Printf&#40;&quot;Factorial of sum&#40;%v&#41;: %v\n&quot;, sum, fsum&#41;
+}
+
+func sumInts&#40;x int, y int&#41; int {
+	sum := x + y
+	return sum
+}
+
+func factorial&#40;n int&#41; int {
+	if n &lt;= 1 {
+		return 1
+	} else {
+		return n + factorial&#40;n-1&#41;
+	}
+}
+
+func getOS&#40;&#41; {
+	os := runtime.GOOS
+	fmt.Printf&#40;&quot;OS: %v\n&quot;, os&#41; // impure
+}
+
+</code></pre>
+</div>
+
+<div id="post-tags">
+    <b>Tags: </b>
     
-    <div class="post-header">
-            <h2><a href="/posts/LFS-Getting-Started/">Linux from Scratch - Getting Started</a></h2>
-        <div id="preview-meta">
-            March 1, 2017
-        </div>
-    </div>
-    <p>When I started using <a href="https://www.archlinux.org" shape="rect">Arch Linux</a> a while back, I learn about some of the internals of Linux quickly. Ever since then, I have considered building a Linux From Scratch by following the guidelines outlined in <a href="http://www.linuxfromscratch.org" shape="rect">the book</a>. Based on my experience with Arch Linux, I'm sure that compiling a system from scratch will continue to teach me about Linux at a much deeper level.</p><p></p>
-    <a href="/posts/LFS-Getting-Started/">Continue reading &#8594;</a>
-    <hr>
+    <a href="/tags-output/GO/">[GO]</a>
     
-    <div class="post-header">
-            <h2><a href="/posts/introducing-kadabra/">Introducing Kadabra - My New, Used x230</a></h2>
-        <div id="preview-meta">
-            November 29, 2016
-        </div>
-    </div>
-    <p>As I start to do more with a computer on the go, the netbooks I previously used just are not cutting it anymore. They were great for minimal use, but couldn't run VMs, over-heated, and didn't have great battery life. Now that I am going to libraries and other locations to work on personal and open source projects, I really needed a better mobile pc setup. </p><p></p>
-    <a href="/posts/introducing-kadabra/">Continue reading &#8594;</a>
-    <hr>
+    <a href="/tags-output/Programming/">[Programming]</a>
     
-    <div class="post-header">
-            <h2><a href="/posts/snapd-on-arch/">Trying out snapd on Arch Linux</a></h2>
-        <div id="preview-meta">
-            July 17, 2016
-        </div>
-    </div>
-    <p>The past few weeks I have been listening to all of the buzz about Ubuntu "snaps", but I just recently decided to try this new technology out.</p><p></p>
-    <a href="/posts/snapd-on-arch/">Continue reading &#8594;</a>
-    <hr>
+    <a href="/tags-output/Dev/">[Dev]</a>
     
+</div>
+
 
     <div id="prev-next">
         
-        <a class="left" href="/p/3/">&laquo; Prev</a>
         
-        
-        <a class="right" href="/p/5/">Next &raquo;</a>
+        <a class="right" href="/posts/solus-to-fedora/">Migrating from Solus to Fedora for now &raquo;</a>
         
     </div>
+
+    
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = '//himmAllRight.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    
+
+
 </div>
 
             </div>

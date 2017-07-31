@@ -12,11 +12,74 @@ http://ryan.himmelwright.net
 Software Developer, Functional Programming and Linux Enthusiast
 </description>
 <lastBuildDate>
-Tue, 25 Jul 2017 06:59:05 -0400
+Sun, 30 Jul 2017 21:25:03 -0400
 </lastBuildDate>
 <generator>
 clj-rss
 </generator>
+<item>
+<guid>
+http://ryan.himmelwright.net/posts/dabbling-with-go/
+</guid>
+<link>
+http://ryan.himmelwright.net/posts/dabbling-with-go/
+</link>
+<title>
+Dabbling with GO
+</title>
+<description>
+&lt;p&gt;After spending most of this month's dedicated learning time working on &lt;a href='../solus-to-fedora/'&gt;system&lt;/a&gt;, &lt;a href='../creating-a-git-remote/'&gt;server&lt;/a&gt;, and &lt;a href='../issues-setting-up-ubiquiti-network/'&gt;network&lt;/a&gt; activities,  I have been itching to start some home programming again. To motivate myself, I even considered dabbling with a new programming language... and with very little internal debate, I decided to just &lt;a href='https://golang.org'&gt;Gopher&lt;/a&gt; it (I'm so sorry).&lt;/p&gt;&lt;p&gt;&lt;!&amp;ndash; more &amp;ndash;&gt;&lt;/p&gt;&lt;h2&gt;&lt;a name=&quot;what&amp;#95;is&amp;#95;go?&quot;&gt;&lt;/a&gt;What is GO?&lt;/h2&gt;&lt;img src=&quot;../../img/posts/dabbling-with-go/gopher.png&quot; style=&quot;width: 30%; float: right; margin: 0px 10px 0px 10px;&quot;/)&lt;p&gt;Go (sometimes referred to as &quot;golang&quot;) is an open source programming language, developed in 2007 by a team at Google (Robert Griesemer, Rob Pike, and Ken Thompson). Distributed under a &lt;a href='https://golang.org/LICENSE'&gt;BSD-like license&lt;/a&gt;, Go is also maintained and developed by open source volunteers all over the world. &lt;/p&gt;&lt;p&gt;Like C, it is a compiled and statically typed language. Unlike C, Go includes garbage collection and memory safety features, as well as other design aspects that are reminiscent of modern dynamic languages like python (ex: type inference and package &lt;code&gt;import&lt;/code&gt; statements). Lastly, Go has a concurrent programming implementation that utilizes what are known as '&lt;a href='https://tour.golang.org/concurrency/1'&gt;goroutines&lt;/a&gt;'. Goroutines are special light-weight &quot;threads&quot; that can process many concurrent tasks. All of these features work together to form an extremely relevant language for modern computing.&lt;/p&gt;&lt;p&gt;Like the programming language itself, the Go project summarizes all of this in a nice and concise statement on their &lt;a href='https://golang.org/doc/'&gt;documentation page&lt;/a&gt;:&lt;/p&gt;&lt;blockquote&gt;&lt;p&gt; The Go programming language is an open source project to make programmers more productive. Go is expressive, concise, clean, and efficient. Its concurrency mechanisms make it easy to write programs that get the most out of multicore and networked machines, while its novel type system enables flexible and modular program construction. Go compiles quickly to machine code yet has the convenience of garbage collection and the power of run-time reflection. It's a fast, statically typed, compiled language that feels like a dynamically typed, interpreted language.&lt;br /&gt;&lt;/p&gt;&lt;/blockquote&gt;&lt;h2&gt;&lt;a name=&quot;motivation&quot;&gt;&lt;/a&gt;Motivation&lt;/h2&gt;&lt;p&gt;I've wanted to try &lt;a href='https://golang.org/'&gt;Go&lt;/a&gt; for a long time now. A couple of months ago, I was trying to decide if I should pursue learning Rust or Go. At the time, I ultimately ended up experimenting with &lt;a href='https://www.rust-lang.org/en-US/'&gt;Rust&lt;/a&gt;. I was toying with the idea of creating an experimental lisp, and Rust's feature set makes it great language for writing compilers and interpreters. However, while Rust is a great language, it can be quite complicated to learn. Go on the other hand, is apparently simpler and quick to grasp, which is &lt;a href='https://golang.org/doc/faq#creating_a_new_language'&gt;why it was created&lt;/a&gt; in the first place.&lt;/p&gt;&lt;p&gt;When the Solus team &lt;a href='https://solus-project.com/forums/viewtopic.php?f=13&amp;t=2634'&gt;announced&lt;/a&gt; that they were declaring Go a first class citizen language of the project, my interest peaked. &lt;a href='https://github.com/solus-project/solbuild'&gt;Solbuild&lt;/a&gt;, the Solus package build system was written in Go. In the announcement, the project stated that they intended to use Go for building tools. True to that statement, this past week, Ikey (the creator of Solus) published a patreon post detailing the new repo manager (&lt;a href='https://github.com/solus-project/ferryd'&gt;ferryd&lt;/a&gt;) he's been working on... again in Go. After reading that post, I decided it was time for me to give it a Go (again, very sorry).&lt;/p&gt;&lt;h2&gt;&lt;a name=&quot;installation&quot;&gt;&lt;/a&gt;Installation&lt;/h2&gt;&lt;p&gt;I first went to the Go &lt;a href='https://golang.org/doc/install'&gt;install page&lt;/a&gt; to figure out if there were any odd components to install. It didn't appear so. &lt;/p&gt;&lt;p&gt;&lt;em&gt;Note:&lt;/em&gt; Before progressing any further, I should point out that if you just want to &lt;em&gt;try&lt;/em&gt; go, the project has a little embedded editor/compiler on the &lt;a href='https://golang.org'&gt;home page&lt;/a&gt; of the website. Beyond that, they have an amazing &lt;a href='https://tour.golang.org/welcome/1'&gt;Go tour&lt;/a&gt; that also has an embedded programming environment, and can be completed entirely in a web browser.&lt;/p&gt;&lt;p&gt;After playing with the online editor online for a bit, I decided that I wanted to install Go on my system. I was on my NixOS laptop at the time, so I installed go with the command: &lt;/p&gt;&lt;pre&gt;&lt;code&gt;nix-env -i go
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;On Alakazam, it was&lt;/p&gt;&lt;pre&gt;&lt;code&gt;sudo dnf install golang
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;em&gt;(... and then when I jumped back to Solus on Alakazam, it was &lt;code&gt;sudo eopkg it golang&lt;/code&gt;... but more on that later...)&lt;/em&gt;&lt;/p&gt;&lt;p&gt;Next, I walked through the &lt;a href='https://golang.org/doc/install#testing'&gt;test your install&lt;/a&gt; steps, building a simple &quot;hello world&quot; app to make sure everything was working properly. This was especially important, given that I was on nixOS, which can sometimes be picky with system paths and environment variables. Luckily, everything worked fine. If I continue down the Go path, I might write a &quot;Getting started&quot; post to detail how to setup a proper Go environment on Linux.&lt;/p&gt;&lt;h2&gt;&lt;a name=&quot;first&amp;#95;steps&quot;&gt;&lt;/a&gt;First Steps&lt;/h2&gt;&lt;p&gt;After confirming my install, I went back and continued  &lt;a href='https://tour.golang.org/welcome/1'&gt;A Tour of Go&lt;/a&gt; to better learn the language. I am interested to eventually read the &lt;a href='https://golang.org/doc/effective_go.html'&gt;Effective Go&lt;/a&gt; documentation. It will be interesting to simply &lt;em&gt;read&lt;/em&gt; the correct style and conventions for the language, instead of trudging through a holly war to find answers.&lt;/p&gt;&lt;p&gt;After working on the tutorial for awhile, I started playing around with the language on my own.  Below is a snippet of code I wrote while fooling around. It's nothing fancy. I was impressed though with how easy it really was to pick up the basics of the language and get going. I am excited to learn more.&lt;/p&gt;&lt;pre&gt;&lt;code&gt;package main
+
+import &amp;#40;
+	&amp;quot;fmt&amp;quot;
+	&amp;quot;runtime&amp;quot;
+&amp;#41;
+
+func main&amp;#40;&amp;#41; {
+	fmt.Printf&amp;#40;&amp;quot;hello, world\n&amp;quot;&amp;#41;
+	getOS&amp;#40;&amp;#41;
+	fmt.Printf&amp;#40;&amp;quot;\n&amp;quot;&amp;#41; // I know this is dumb
+
+	x, y := 74, 83
+	sum := sumInts&amp;#40;x, y&amp;#41;
+	fsum := factorial&amp;#40;sum&amp;#41;
+
+	fmt.Printf&amp;#40;&amp;quot;sum: %v\n&amp;quot;, sum&amp;#41;
+	fmt.Printf&amp;#40;&amp;quot;Factorial of sum&amp;#40;%v&amp;#41;: %v\n&amp;quot;, sum, fsum&amp;#41;
+}
+
+func sumInts&amp;#40;x int, y int&amp;#41; int {
+	sum := x + y
+	return sum
+}
+
+func factorial&amp;#40;n int&amp;#41; int {
+	if n &amp;lt;= 1 {
+		return 1
+	} else {
+		return n + factorial&amp;#40;n-1&amp;#41;
+	}
+}
+
+func getOS&amp;#40;&amp;#41; {
+	os := runtime.GOOS
+	fmt.Printf&amp;#40;&amp;quot;OS: %v\n&amp;quot;, os&amp;#41; // impure
+}
+
+&lt;/code&gt;&lt;/pre&gt;
+</description>
+<author>
+Ryan Himmelwright
+</author>
+<enclosure>
+
+</enclosure>
+<pubDate>
+Sun, 30 Jul 2017 00:00:00 -0400
+</pubDate>
+</item>
 <item>
 <guid>
 http://ryan.himmelwright.net/posts/solus-to-fedora/
@@ -319,38 +382,6 @@ Configuring Ansible on the Pi Cluster
 &lt;p&gt;In my &lt;a href='http://ryan.himmelwright.net/posts/Setting-up-the-pi-cluster/'&gt;previous post&lt;/a&gt;, I pieced together my &lt;a href='http://ryan.himmelwright.net/pages/homelab/#cluster'&gt;pi cluster&lt;/a&gt;, and installed variations of Ubuntu 16.04 Server on each of its nodes. With the cluster built, I quickly needed an easy way to maintain and interact with the system as a whole. This, is where &lt;a href='https://www.ansible.com/'&gt;Ansible&lt;/a&gt; comes in. In this post, I will walk through the steps I took to setup Ansible on my Cluster.&lt;/p&gt;&lt;p&gt;&lt;!&amp;ndash; more &amp;ndash;&gt;&lt;/p&gt;&lt;h2&gt;&lt;a name=&quot;ansible&quot;&gt;&lt;/a&gt;Ansible&lt;/h2&gt;&lt;p&gt;&lt;img src=&quot;../../img/posts/setting-up-ansible-pi-cluster/ansible-logo.png&quot; style=&quot;width: 150px; float: left; margin: 0px 15px 5px 5px;&quot;/)&lt;/p&gt;&lt;p&gt;Ansible is an open source, configuration management and automation system. It is written in Python, and financially backed by &lt;a href='http://www.redhat.com'&gt;Red Hat&lt;/a&gt;. It simplifies the management of groups of computers, through the use of modules (standalone units of work. for example, apt, ping, rpm, etc). Ansible is script-able using simple YAML files, known as playbooks, that define a set of orchestration tasks for one or many computers. These scripts can be edited and version controlled, creating a simple &lt;a href='https://en.wikipedia.org/wiki/Infrastructure_as_Code'&gt;infrastructure as code&lt;/a&gt; setup.&lt;/p&gt;&lt;h2&gt;&lt;a name=&quot;setting&amp;#95;up&amp;#95;the&amp;#95;user&amp;#95;account&quot;&gt;&lt;/a&gt;Setting up the User Account&lt;/h2&gt;When Ansible executes commands on the PIs, it will do so from the user-account (ryan) that I setup in the last post. However, many of these commands will require Root privledges. While I previously setup sudo and added the &lt;code&gt;ryan&lt;/code&gt; account to the &lt;code&gt;sudo&lt;/code&gt; group ... it required that I manually enter my password. Ansible did not like this, so I had to update the sudo configuration to allow the &lt;code&gt;ryan&lt;/code&gt; account to run &lt;code&gt;sudo&lt;/code&gt; commands with out a password. To do this, I opened the &lt;code&gt;sudoers&lt;/code&gt; file:&lt;pre&gt;&lt;code&gt;sudo visudo
 &lt;/code&gt;&lt;/pre&gt;&lt;p&gt;and added the following line to the end of the file:&lt;/p&gt;&lt;pre&gt;&lt;code&gt;ryan  ALL=&amp;#40;ALL:ALL&amp;#41; NOPASSWD: ALL
 &lt;/code&gt;&lt;/pre&gt;&lt;p&gt;I repeated this on each of the nodes, and afterwards was no longer promted for a password when running &lt;code&gt;sudo&lt;/code&gt; commands. This made Ansible happy.&lt;/p&gt;&lt;p&gt;&lt;a name=&quot;ssh&quot;&gt;&lt;/a&gt;&lt;h2&gt;&lt;a name=&quot;setup&amp;#95;ssh&amp;#95;keys&quot;&gt;&lt;/a&gt;Setup SSH Keys&lt;/h2&gt;Well... &lt;em&gt;almost&lt;/em&gt; happy. &lt;/p&gt;&lt;p&gt;Ansible's main method of communication is via ssh, which by default, prompts me for a password when connecting. Ansible &lt;em&gt;really&lt;/em&gt; hates passwords. So, I had to configure ssh to use keys instead. Honestly, this is proabaly a good step to do regardless, now that the &lt;code&gt;ryan&lt;/code&gt; account no longer uses a password when running &lt;code&gt;sudo&lt;/code&gt;. To setup key-based logins, I appended the contents of my &lt;a href='../../pages/homelab/#alakazam'&gt;main computer&lt;/a&gt;'s ssh public key*, to each pi's &lt;code&gt;authorized&amp;#95;keys&lt;/code&gt; file. This can all be done using a magic one-line pipe command (x3, one for each pi):&lt;/p&gt;&lt;pre&gt;&lt;code&gt;cat &amp;#126;/.ssh/id&amp;#95;rsa.pub | ssh pi0 &amp;quot;cat &amp;gt;&amp;gt; &amp;#126;/.ssh/authorized&amp;#95;keys&amp;quot;
-cat &amp;#126;/.ssh/id&amp;#95;rsa.pub | ssh pi1 &amp;quot;cat &amp;gt;&amp;gt; &amp;#126;/.ssh/authorized&amp;#95;keys&amp;quot;
-cat &amp;#126;/.ssh/id&amp;#95;rsa.pub | ssh bpi &amp;quot;cat &amp;gt;&amp;gt; &amp;#126;/.ssh/authorized&amp;#95;keys&amp;quot;
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;em&gt;&amp;#42;Note: If keys are not already generated, they can be created using the command:&lt;/em&gt;&lt;/p&gt;&lt;pre&gt;&lt;code&gt;ssh-keygen
-&lt;/code&gt;&lt;/pre&gt;&lt;h4&gt;&lt;a name=&quot;key&amp;#95;only&amp;#95;login&quot;&gt;&lt;/a&gt;Key Only Login&lt;/h4&gt;To help secure access to the PIs (and to get on Ansible's good side), I configured sshd to disable password logins, and only allow connections from clients with approved keys. To disable password authentication, I opened the &lt;code&gt;/etc/ssh/sshd&amp;#95;config&lt;/code&gt; file, found the line containing &lt;code&gt;# PasswordAuthentication yes&lt;/code&gt;, changed the &lt;code&gt;yes&lt;/code&gt; to a &lt;code&gt;no&lt;/code&gt;, and unncommented it by removing the &lt;code&gt;#&lt;/code&gt;.&lt;p&gt;While I was in the &lt;code&gt;sshd&amp;#95;config&lt;/code&gt; file, I also set &lt;code&gt;PermitRootLogin&lt;/code&gt; to &lt;code&gt;no&lt;/code&gt;, for good measure.&lt;/p&gt;&lt;p&gt;Lastly, I reset the &lt;code&gt;sshd&lt;/code&gt; service and repeated the steps for each pi:&lt;/p&gt;&lt;pre&gt;&lt;code&gt;sudo systemctl restart sshd
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Afterwards, I was unable to login to the PIs from a computer with unauthorized ssh keys.&lt;/p&gt;&lt;p&gt;&lt;img src=&quot;../../img/posts/setting-up-ansible-pi-cluster/terminal-play.png&quot; name=&quot;pic&quot; onmouseover=&quot;this.src='../../img/posts/setting-up-ansible-pi-cluster/blocked-ssh-attempt.gif'&quot; onmouseout=&quot;this.src='../../img/posts/setting-up-ansible-pi-cluster/terminal-play.png'&quot;&gt; &lt;/p&gt;&lt;p&gt;But, I was still able to loging from the authorized computer.&lt;/p&gt;&lt;p&gt;&lt;img src=&quot;../../img/posts/setting-up-ansible-pi-cluster/terminal-play.png&quot; name=&quot;pic&quot; onmouseover=&quot;this.src='../../img/posts/setting-up-ansible-pi-cluster/accepted-ssh-attempt.gif'&quot; onmouseout=&quot;this.src='../../img/posts/setting-up-ansible-pi-cluster/terminal-play.png'&quot;&gt; &lt;/p&gt;&lt;h2&gt;&lt;a name=&quot;install&amp;#95;python&quot;&gt;&lt;/a&gt;Install Python&lt;/h2&gt;The last issue Ansible complained about was that it needed python installed on the Pis. Like everything else, the Bananna Pi already had this setup, but I had to install it on the two Raspberry Pis. It was simple enough:&lt;pre&gt;&lt;code&gt;sudo apt-get install python
-&lt;/code&gt;&lt;/pre&gt;&lt;h2&gt;&lt;a name=&quot;install&amp;#95;ansible&quot;&gt;&lt;/a&gt;Install Ansible&lt;/h2&gt;&lt;p&gt;I have a confession. So, you know how I have been fun and cheery by anthropomorphisizing Ansible, saying that it was &lt;em&gt;&quot;happy&quot;&lt;/em&gt; or &lt;em&gt;&quot;frusterated&quot;&lt;/em&gt; during the previous steps? That wasn't true. I made it up. Ansible wasn't &lt;em&gt;actually&lt;/em&gt; installed yet. &lt;em&gt;So... to install Ansible...&lt;/em&gt;&lt;/p&gt;&lt;pre&gt;&lt;code&gt;sudo eopkg it ansible
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;I used &lt;code&gt;eopkg&lt;/code&gt; because I am currently running &lt;a href='https://solus-project.com'&gt;Solus&lt;/a&gt;. You might use &lt;code&gt;sudo apt-get install ansible&lt;/code&gt;, &lt;code&gt;sudo dnf install ansible&lt;/code&gt;, or &lt;code&gt;pacaur -S ansible&lt;/code&gt; depending on whatever distro you are using.&lt;/p&gt;&lt;p&gt;That's all for &lt;em&gt;setting up&lt;/em&gt; Ansible. I'll cut this post off here, but in the next post, I'll walk through the steps on how to get Ansible to be useful.&lt;/p&gt;
-</description>
-<author>
-Ryan Himmelwright
-</author>
-<enclosure>
-
-</enclosure>
-<pubDate>
-Sun, 21 May 2017 00:00:00 -0400
-</pubDate>
-</item>
-<item>
-<guid>
-http://ryan.himmelwright.net/posts/Ansible-On-Pi-Cluster.sync-conflict-20170720-214507/
-</guid>
-<link>
-http://ryan.himmelwright.net/posts/Ansible-On-Pi-Cluster.sync-conflict-20170720-214507/
-</link>
-<title>
-Configuring Ansible on the Pi Cluster
-</title>
-<description>
-&lt;p&gt;In my &lt;a href='http://ryan.himmelwright.net/posts/Setting-up-the-pi-cluster/'&gt;previous post&lt;/a&gt;, I pieced together my &lt;a href='http://ryan.himmelwright.net/pages/homelab/#cluster'&gt;pi cluster&lt;/a&gt;, and installed variations of Ubuntu 16.04 Server on each of its nodes. With the cluster built, I quickly needed an easy way to maintain and interact with the system as a whole. This, is where &lt;a href='https://www.ansible.com/'&gt;Ansible&lt;/a&gt; comes in. In this post, I will walk through the steps I took to setup Ansible on my Cluster.&lt;/p&gt;&lt;p&gt;&lt;!&amp;ndash; more &amp;ndash;&gt;&lt;/p&gt;&lt;h2&gt;&lt;a name=&quot;ansible&quot;&gt;&lt;/a&gt;Ansible&lt;/h2&gt;&lt;p&gt;&lt;img src=&quot;../../img/posts/setting-up-ansible-pi-cluster/ansible-logo.png&quot; style=&quot;width: 150px; float: left; margin: 0px 15px 5px 5px;&quot;/)&lt;/p&gt;&lt;p&gt;Ansible is an open source, configuration management and automation system. It is written in Python, and financially backed by &lt;a href='http://www.redhat.com'&gt;Red Hat&lt;/a&gt;. It simplifies the management of groups of computers, through the use of modules (standalone units of work. for example, apt, ping, rpm, etc). Ansible is script-able using simple YAML files, known as playbooks, that define a set of orchestration tasks for one or many computers. These scripts can be edited and version controlled, creating a simple &lt;a href='https://en.wikipedia.org/wiki/Infrastructure_as_Code'&gt;infrastructure as code&lt;/a&gt; setup.&lt;/p&gt;&lt;h2&gt;&lt;a name=&quot;setting&amp;#95;up&amp;#95;the&amp;#95;user&amp;#95;account&quot;&gt;&lt;/a&gt;Setting up the User Account&lt;/h2&gt;When Ansible executes commands on the PIs, it will do so from the user-account (ryan) that I setup in the last post. However, many of these commands will require Root privledges. While I previously setup sudo and added the &lt;code&gt;ryan&lt;/code&gt; account to the &lt;code&gt;sudo&lt;/code&gt; group ... it required that I manually enter my password. Ansible did not like this, so I had to update the sudo configuration to allow the &lt;code&gt;ryan&lt;/code&gt; account to run &lt;code&gt;sudo&lt;/code&gt; commands with out a password. To do this, I opened the &lt;code&gt;sudoers&lt;/code&gt; file:&lt;pre&gt;&lt;code&gt;sudo visudo
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;and added the following line to the end of the file:&lt;/p&gt;&lt;pre&gt;&lt;code&gt;ryan  ALL=&amp;#40;ALL:ALL&amp;#41; NOPASSWD: ALL
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;I repeated this on each of the nodes, and afterwards was no longer promted for a password when running &lt;code&gt;sudo&lt;/code&gt; commands. This made Ansible happy.&lt;/p&gt;&lt;h2&gt;&lt;a name=&quot;setup&amp;#95;ssh&amp;#95;keys&quot;&gt;&lt;/a&gt;Setup SSH Keys&lt;/h2&gt;Well... &lt;em&gt;almost&lt;/em&gt; happy. &lt;p&gt;Ansible's main method of communication is via ssh, which by default, prompts me for a password when connecting. Ansible &lt;em&gt;really&lt;/em&gt; hates passwords. So, I had to configure ssh to use keys instead. Honestly, this is proabaly a good step to do regardless, now that the &lt;code&gt;ryan&lt;/code&gt; account no longer uses a password when running &lt;code&gt;sudo&lt;/code&gt;. To setup key-based logins, I appended the contents of my &lt;a href='../../pages/homelab/#alakazam'&gt;main computer&lt;/a&gt;'s ssh public key*, to each pi's &lt;code&gt;authorized&amp;#95;keys&lt;/code&gt; file. This can all be done using a magic one-line pipe command (x3, one for each pi):&lt;/p&gt;&lt;pre&gt;&lt;code&gt;cat &amp;#126;/.ssh/id&amp;#95;rsa.pub | ssh pi0 &amp;quot;cat &amp;gt;&amp;gt; &amp;#126;/.ssh/authorized&amp;#95;keys&amp;quot;
 cat &amp;#126;/.ssh/id&amp;#95;rsa.pub | ssh pi1 &amp;quot;cat &amp;gt;&amp;gt; &amp;#126;/.ssh/authorized&amp;#95;keys&amp;quot;
 cat &amp;#126;/.ssh/id&amp;#95;rsa.pub | ssh bpi &amp;quot;cat &amp;gt;&amp;gt; &amp;#126;/.ssh/authorized&amp;#95;keys&amp;quot;
 &lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;em&gt;&amp;#42;Note: If keys are not already generated, they can be created using the command:&lt;/em&gt;&lt;/p&gt;&lt;pre&gt;&lt;code&gt;ssh-keygen
