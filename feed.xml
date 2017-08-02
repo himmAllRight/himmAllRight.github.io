@@ -12,11 +12,34 @@ http://ryan.himmelwright.net
 Software Developer, Functional Programming and Linux Enthusiast
 </description>
 <lastBuildDate>
-Mon, 31 Jul 2017 07:08:10 -0400
+Wed, 02 Aug 2017 06:14:21 -0400
 </lastBuildDate>
 <generator>
 clj-rss
 </generator>
+<item>
+<guid>
+http://ryan.himmelwright.net/posts/back-to-solus/
+</guid>
+<link>
+http://ryan.himmelwright.net/posts/back-to-solus/
+</link>
+<title>
+Back to Solus
+</title>
+<description>
+&lt;p&gt;Well, that was faster than I expected. This past weekend, I wiped the Fedora installation on my main computer, and replaced it with Solus. My Fedora install broke, and I needed to use a Fedora Live CD to fix it. I thought that if I had to use a live CD to fix the issue, I might as well just do a clean install. With the idea of a clean install in my head... I thought (possibly influenced by my recent &lt;a href='http://ryan.himmelwright.net/posts/dabbling-with-go/#motivation'&gt;motivation&lt;/a&gt; to play with Go), that I might as well do the clean install with &lt;a href='solus-project.com/'&gt;Solus&lt;/a&gt;...&lt;/p&gt;&lt;p&gt;&lt;!&amp;ndash; more&amp;ndash;&gt;&lt;/p&gt;&lt;h2&gt;&lt;a name=&quot;nvidia&amp;#95;issues&quot;&gt;&lt;/a&gt;Nvidia Issues&lt;/h2&gt;&lt;p&gt;&lt;div class=&quot;video-container&quot;&gt; &lt;iframe width=&quot;640&quot; height=&quot;360&quot; src=&quot;https://www.youtube.com/embed/IVpOyKCNZYw?start=101&quot; frameborder=&quot;0&quot; allowfullscreen&gt;&lt;/iframe&gt; &lt;/div&gt; &lt;div id=&quot;caption&quot;&gt;Linus Torvalds famously flipped off Nvidia during a Q&amp;A&lt;/div&gt;&lt;/p&gt;&lt;p&gt;Basically, what I think happened was that my Nvidia drivers got messed up during an update. When I rebooted my computer, my screens were black. This happened no matter which kernel I booted into from Grub. I assumed it was a graphics problem and preceded to switch to another tty to login and fix the problem. I was able to get to a CLI login screen (with the normal &lt;code&gt;user:&lt;/code&gt; prompt) and tried login in. However, after typing in my user name and hitting enter, instead of being promoted for a password, I received an &quot;Error Logging In&quot; message. So, I tried the same thing with the root user account. Same thing. After typing in a user name, it yelled at me. There was no way to log in.&lt;/p&gt;&lt;p&gt;I jumped into the IRC chat and started asking around for advice. As always, everyone was very helpful and tried to help me troubleshoot. They shared my bewilderment. We came to the conclusion that it must of been something with the Nvidia drivers. I was told that it is common to have issues when installing the drivers from Nvidia's web site instead of the &lt;a href='https://rpmfusion.org/'&gt;RPM Fusion Repos&lt;/a&gt; (I intended to install from the RPM fusion repos, but I went to the nvidia site to find out what version to should use... and then just downloaded it from there. My bad :P).&lt;/p&gt;&lt;p&gt;Anyway, I quickly realized that at the very least, I would have to boot up and log into a Live CD to fix the problem. As stated in the intro paragraph, while waiting for the ISO image to download I thought that if I have to load up the CD, I might as well just do a clean Fedora 26 install. A couple minutes later as I was booting up the Live CD, I through that as long as I was reinstalling my OS... l should consider installing... Solus.&lt;/p&gt;&lt;h2&gt;&lt;a name=&quot;installed&amp;#95;solus&quot;&gt;&lt;/a&gt;Installed Solus&lt;/h2&gt;&lt;p&gt;&lt;img src=&quot;../../img/posts/back-to-solus/install.png&quot; alt=&quot;Installing Solus&quot; /&gt; &lt;div id=&quot;caption&quot;&gt;Installing Solus&lt;/div&gt;&lt;/p&gt;&lt;p&gt;With the Fedora live environment all booted and ready, I started downloading the latest Solus ISO (Budgie) on my other laptop. Once the ISO image was mounted to a drive, I booted it up and started installing Solus. After the install, I immediately updated because I knew there have been a TON of updates since the last ISO snapshot (mid-April). When I rebooted, I absolutely loved what I saw. It is amazing how much Solus and Budgie have improved, even during my short distro-hopping vacation.&lt;/p&gt;&lt;p&gt;Looking at my post history, it may appear as though I used Fedora for a few days, became fed up with it, and came running back to Solus. That is not entirely true. The reality is that I sat on writing my &lt;a href='../solus-to-fedora/'&gt;Fedora post&lt;/a&gt; for a long time. I used Fedora for about a month, and it was generally a great experience. If it didn't break, I probably would have stayed for a bit longer. When considering a new install though, I realized that I had missed Solus.&lt;/p&gt;&lt;p&gt;As of now, my plan is to keep using Solus, at least on my main computer. I am also hoping to get more involved with the project, and start packing up some software again. Maybe I can even help with some debugging and development. We shall see...&lt;/p&gt;
+</description>
+<author>
+Ryan Himmelwright
+</author>
+<enclosure>
+
+</enclosure>
+<pubDate>
+Mon, 31 Jul 2017 00:00:00 -0400
+</pubDate>
+</item>
 <item>
 <guid>
 http://ryan.himmelwright.net/posts/dabbling-with-go/
