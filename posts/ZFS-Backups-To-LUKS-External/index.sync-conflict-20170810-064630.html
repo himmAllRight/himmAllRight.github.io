@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <title>λ ryan himmelwright . net: ZFS Snapshot Backups to an External Drive with LUKS</title>
+    <link rel="canonical" href="http://ryan.himmelwright.net/posts/ZFS-Backups-To-LUKS-External/">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/font-hack/2.020/css/hack-extended.min.css">
+    <link href='http://fonts.googleapis.com/css?family=Alegreya:400italic,700italic,400,700' rel='stylesheet'
+          type='text/css'>
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css">
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.1/styles/default.min.css">
+    <link href="/css/screen.css" rel="stylesheet" type="text/css" />
+
+
+    <!-- Piwik -->
+    <script type="text/javascript">
+      var _paq = _paq || [];
+      /* tracker methods like "setCustomDimension" should be called before "trackPageView" */
+      _paq.push(["setDocumentTitle", document.domain + "/" + document.title]);
+      _paq.push(["setCookieDomain", "*.ryan.himmelwright.net"]);
+      _paq.push(['trackPageView']);
+      _paq.push(['enableLinkTracking']);
+      (function() {
+      var u="//cloud.himmelwright.net/piwik/";
+      _paq.push(['setTrackerUrl', u+'piwik.php']);
+      _paq.push(['setSiteId', '1']);
+      var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+      g.type='text/javascript'; g.async=true; g.defer=true; g.src=u+'piwik.js'; s.parentNode.insertBefore(g,s);
+      })();
+    </script>
+    <noscript><p><img src="//cloud.himmelwright.net/piwik/piwik.php?idsite=1&rec=1" style="border:0;" alt="" /></p></noscript>
+    <!-- End Piwik Code -->
+</head>
+<body>
+
+
+<nav class="navbar navbar-default">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">λ ryan himmelwright . net</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav navbar-right">
+                <li ><a href="/">Home</a></li>
+                
+                <li
+                >
+                <a href="/pages/about/">About</a>
+                </li>
+                
+                <li
+                >
+                <a href="/pages/homelab/">Homelab</a>
+                </li>
+                
+                <li
+                ><a href="/archives">Archives</a></li>
+                <li><a href="/feed.xml">RSS</a></li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                        More <span class="caret"></span></a>
+                    <ul class="dropdown-menu" role="menu">
+                        <!-- 
+                           -->
+                        <li class="dropdown-header">Links</li>
+                        <li><a href="https://github.com/himmAllRight"><img src=http://ryan.himmelwright.net/img/icons/Github.png width="30px">Github</a></li>
+                        <li><a href="https://www.linkedin.com/in/ryan-himmelwright-b3891774/"><img src=http://ryan.himmelwright.net/img/icons/Linkedin.png width="30px">LinkedIn</a></li>
+                        <li><a href="https://www.instagram.com/himmelwr/"><img src=http://ryan.himmelwright.net/img/icons/Instagram.png width="30px">Instagram</a></li>
+                        <li><a href="https://twitter.com/himmAllRight17"><img src=http://ryan.himmelwright.net/img/icons/Twitter.png width="30px">Twitter</a></li>
+                               
+                        <li class="divider"></li>
+                        <li class="dropdown-header">Recent Posts</li>
+                        
+                        <li><a href="/posts/creating-a-git-remote/">Creating a git Repo Remote</a></li>
+                        
+                        <li><a href="/posts/issues-setting-up-ubiquiti-network/">Encountered Issues Setting Up Ubiquiti Network</a></li>
+                        
+                        <li><a href="/posts/upgrading-network-to-ubiquiti/">Home Network Ubiquiti Upgrade</a></li>
+                        
+                        <li><a href="/posts/Started-Using-i3blocks/">Refreshing my i3 setup with i3blocks</a></li>
+                        
+                        <li><a href="/posts/exporting-proxmox-vms/">Exporting Proxmox VMs</a></li>
+                        
+                        
+
+                        
+                        <li class="divider"></li>
+                        <li class="dropdown-header">Tags</li>
+                        
+                        <li><a href="/tags-output/wifi/"><b>[wifi]</b></a></li>
+                        
+                        <li><a href="/tags-output/Python/"><b>[Python]</b></a></li>
+                        
+                        <li><a href="/tags-output/customization/"><b>[customization]</b></a></li>
+                        
+                        <li><a href="/tags-output/i3/"><b>[i3]</b></a></li>
+                        
+                        <li><a href="/tags-output/ubiquiti/"><b>[ubiquiti]</b></a></li>
+                        
+                        <li><a href="/tags-output/Cryogen/"><b>[Cryogen]</b></a></li>
+                        
+                        <li><a href="/tags-output/KVM/"><b>[KVM]</b></a></li>
+                        
+                        <li><a href="/tags-output/Homelab/"><b>[Homelab]</b></a></li>
+                        
+                        <li><a href="/tags-output/snapd/"><b>[snapd]</b></a></li>
+                        
+                        <li><a href="/tags-output/Pi/"><b>[Pi]</b></a></li>
+                        
+                        <li><a href="/tags-output/Wedding/"><b>[Wedding]</b></a></li>
+                        
+                        <li><a href="/tags-output/KDE/"><b>[KDE]</b></a></li>
+                        
+                        <li><a href="/tags-output/Arch Linux/"><b>[Arch Linux]</b></a></li>
+                        
+                        <li><a href="/tags-output/Website/"><b>[Website]</b></a></li>
+                        
+                        <li><a href="/tags-output/C/"><b>[C]</b></a></li>
+                        
+                        <li><a href="/tags-output/Cluster/"><b>[Cluster]</b></a></li>
+                        
+                        <li><a href="/tags-output/dev/"><b>[dev]</b></a></li>
+                        
+                        <li><a href="/tags-output/Network/"><b>[Network]</b></a></li>
+                        
+                        <li><a href="/tags-output/LFS/"><b>[LFS]</b></a></li>
+                        
+                        <li><a href="/tags-output/Linux/"><b>[Linux]</b></a></li>
+                        
+                        <li><a href="/tags-output/Clojure/"><b>[Clojure]</b></a></li>
+                        
+                        <li><a href="/tags-output/git/"><b>[git]</b></a></li>
+                        
+                        <li><a href="/tags-output/ZFS/"><b>[ZFS]</b></a></li>
+                        
+                        <li><a href="/tags-output/Proxmox/"><b>[Proxmox]</b></a></li>
+                        
+                        <li><a href="/tags-output/DevOps/"><b>[DevOps]</b></a></li>
+                        
+                        <li><a href="/tags-output/Thinkpad/"><b>[Thinkpad]</b></a></li>
+                        
+                        <li><a href="/tags-output/Ledger/"><b>[Ledger]</b></a></li>
+                        
+                        <li><a href="/tags-output/dotfiles/"><b>[dotfiles]</b></a></li>
+                        
+                        <li><a href="/tags-output/Devops/"><b>[Devops]</b></a></li>
+                        
+                        <li><a href="/tags-output/Programming/"><b>[Programming]</b></a></li>
+                        
+                        <li><a href="/tags-output/Solus/"><b>[Solus]</b></a></li>
+                        
+                        <li><a href="/tags-output/Ansible/"><b>[Ansible]</b></a></li>
+                        
+                        <li><a href="/tags-output/SSH/"><b>[SSH]</b></a></li>
+                        
+                        <li><a href="/tags-output/Dev/"><b>[Dev]</b></a></li>
+                        
+                        <li><a href="/tags-output/Korora/"><b>[Korora]</b></a></li>
+                        
+                        
+                    </ul>
+                </li>
+            </ul>
+        </div><!--/.nav-collapse -->
+    </div><!--/.container-fluid -->
+</nav>
+
+
+<div class="container">
+
+
+    <div class="row">
+        <div class="col-lg-12">
+            <div id="content">
+                
+<div id="post">
+    <div class="post-header">
+    <h2>ZFS Snapshot Backups to an External Drive with LUKS</h2>
+    <div id="post-meta" class="row">
+        
+        <span class="col-lg-6 left">By: Ryan Himmelwright</span>
+        
+        <div class="col-lg-6 right">April 20, 2017</div>
+    </div>
+</div>
+<div>
+    
+    <p>I have been using <a href='https://en.wikipedia.org/wiki/ZFS'>ZFS</a> data pools to store data on <a href='../../pages/homelab/#ninetales'>my server</a> for some time now. As great as that is, I am ashamed to admit that I have not had a <em>true</em> backup system in place (raid/mirrors are not backup). I have a backup solution that I have attempted in the past, but ran into an issue and let it drift to the side. That changes now. It's time to revisit my solution, and complete it to the end.</p><p><!&ndash; more &ndash;></p><p><img src="../../img/posts/ZFS-Backups-To-LUKS-External/drives.png"" alt="Server and External Drives" /> <div id="caption">My server's hot-swap drive bays and the external backup drive</div></p><p>Currently, my server is configured with two main zfs mirrored pools. The first one, <code>Data</code>, is built on 2 x 3TB hard drives, providing 2.72 TB of usable disk space. It contains all of my wife's and my data, organized into sub-category pools (ex: <code>Data/Music</code>, <code>Data/Pictures</code>, <code>Data/ryan</code>, etc). The second, <code>Backups</code>, is built on the 2 x 1TB hard drives from my old desktop, creating a 928 GB usable pool . It stores the automatic backups of some of the VMs and LXC containers hosted on the server.</p><p>Before I had my 3TB drives, I bought a 2TB external hard drive to backup the 1TB drives to. While it isn't as large as the total usable space on my server, it is enough to store my data backups to, for the time being.</p><p>My goal is to setup a zfs pool on the external drive, so I can use zfs's send & receive functionality to send bi-weekly-ish incremental snapshots to it. When I am not running backups, I want to store the drive at an off-site location. With the drive being stored elsewhere, I want to ensure that the data is protected, so I will be encrypting the it using <a href='https://en.wikipedia.org/wiki/Linux_Unified_Key_Setup'>LUKS</a>, the Linux disk encryption software.</p><h3><a name="setting&#95;up&#95;luks"></a>Setting up LUKS</h3><p><a href='https://gitlab.com/cryptsetup/cryptsetup/blob/master/README.md'>LUKS</a> (Linux Unified Key Setup) is the standard for Linux disk encryption. I will use it to encrypt the external drive, and then present the LUKS mapper devices to ZFS as a block device. To do this, we need to first install <code>cryptsetup</code> with <code>sudo apt-get install cryptsetup</code> (Assuming you are on a Debian-based operating system). Once that is installed, we can use the <code>cryptsetup</code> command to configure LUKS on the drive.</p><p>The cryptsetup tool has a plethora of settings and options. After researching around, I decided to use options that the author of <a href='http://www.makethenmakeinstall.com/2014/10/zfs-on-linux-with-luks-encrypted-disks/'>this post</a> used, because they were doing something very similar to what I am trying. I configured LUKS on my external drive using the following command:</p><pre><code>cryptsetup luksFormat --cipher aes-xts-plain64 --key-size 512 --iter-time 10000 --use-random -y /dev/sdf
+</code></pre><code>&ndash;cipher aex-xts-plain64</code>and <code>&ndash;key-size 512</code> refer to the algorithm and key size used to encrypt the data. In general, the larger the key, the harder the encryption is to crack.<p><code>&ndash;iter-time 10000</code> and <code>&ndash;use-random -y</code> are additional precautions to make it more difficult to crack the encryption. The <code>&ndash;iter-time 10000</code> means it will spend at least 10 seconds processing the passphrase each time the disk is unlocked. This makes it much harder to brute-force the passphrase. </p><p>Once the device is encrypted, we need to unlock it and map it as a device. This is done using the command:</p><pre><code>sudo cryptsetup luksOpen /dev/sdf sdf-enc
+</code></pre><p><code>/dev/sdf</code> is the external disk, and <code>sdf-enc</code> is whatever you want to name the unlocked device. This is the name that what will be used when referring to the unlocked device. With the drive is encrypted and unlocked, it's time for some ZFS magic.</p><h3><a name="creating&#95;a&#95;zfs&#95;pool"></a>Creating a ZFS Pool</h3><p>I am creating a zpool using just my single external drive, so the setup is very basic. No mirrors, no zvols. A simple zpool is created with the simple command:</p><pre><code>sudo zpool create externalBackup sdf-enc
+</code></pre><p>That's it. </p><h3><a name="taking&#95;base&#95;snapshots"></a>Taking Base Snapshots</h3><p><img src="../../img/posts/ZFS-Backups-To-LUKS-External/snapshot.gif" alt="Taking a ZFS snapshot" /> <div id="caption">Taking a ZFS snapshot</div></p><p>With a zpool initialized on the externalDrive, I can now send snapshots to it. To start, I created a base snapshot to send. Starting with the smaller pool, <code>/Backups</code>:</p><pre><code>sudo zfs snapshot -r Backups@VM-LXC-BackupBase
+</code></pre><p>This command creates a recursive snapshot of my <code>Backups</code> zpool, named <code>VM-LXC-BackupBase</code>. Making a base snapshot for my <code>/Data</code> zpool is nearly the same:</p><pre><code>sudo zfs snapshot -r Data/DataBackupBase
+</code></pre><h3><a name="sending&#95;the&#95;base&#95;snapshots"></a>Sending the Base Snapshots</h3><p>After taking base snapshots of the zpools, I can transfer them to the external drive using the zfs <code>send</code> and <code>recv</code> commands. Again, starting with the <code>VM-LXC-BackupBase</code>:</p><pre><code>sudo zfs send Backups@VM-LXC-BackupBase | sudo zfs recv externalBackup/VM-LXC-BackupBase
+</code></pre><div id="caption">Looking back, I realized I named this poorly... The external zpool should be <code>/externalBackup/VM-LXC-Backup</code>, not <code>BackupBase</code>, that name is just for the first <em>snapshot</em>. Oh well.</div><p>Now for the slightly harder pool, <code>/Data</code>, with all of the sub zpools. The first time I attempted this, only the parent <code>Data</code> snapshot was copied, but none of the children were (<code>Data/Music</code>, <code>Data/Pictures</code>, etc). After some digging around the docs and online I realized I was missing the <code>-R</code> to my <code>zfs send</code> command.  Also note, that when using the <code>-R</code> flag, the snapshot name for the destination pool are not specified (because it is copying multiple). It will use the same snapshot names from the source pool.</p><pre><code>sudo zfs send -R Data@DataBackupBase | sudo zfs recv externalBackup/DataBackup
+</code></pre><h3><a name="incremental&#95;backups"></a>Incremental Backups</h3><p>Taking a snapshot of my data and sending it to an external drive is nice, but I don't want to send all of the data each time I backup. Transferring can take a very long time, especially as my data pools continue to grow. I don't want to sit around all day, listening to hard drives hum as my data transfers.</p><p><center><img src="../../img/posts/ZFS-Backups-To-LUKS-External/aint-nobody-got-time-for-that.gif" alt="no time" /></center></p><p>A useful feature of the zfs <code>send</code> and <code>recv</code> commands is the ability to send <em>incremental</em> snapshots. This means when I want to update my backups, I can just send the <em>changes</em> between the two snapshots. This is similar to <a href='https://en.wikipedia.org/wiki/Diff_utility'>source code diffs</a>, but for file systems.</p><p>To send incremental snapshots, the <code>-i</code> or <code>-I</code> flag is used. The difference between the two is that the <code>-i</code> flag will send the difference between the two snapshots listed, whereas <code>-I</code> will send a series of snapshots between the two listed. For example, if I've taken several snapshots of my data (<code>A</code>, <code>B</code>, <code>C</code>, and <code>D</code>), but have neglected to copy them to the external drive since snapshot <code>A</code>, I can use <code>-I A D</code> in my <code>zfs send</code> command, and all four of the snapshots will be sent to the external.</p><p>To send an incremental update to my backup, I first created new snapshot for my pools (this time with a date):</p><pre><code>sudo zfs snapshot -r Backups@VM-LXC-Backup20170418
+sudo zfs snapshot -r Data@DataBackup20170418
+</code></pre><p>Next, I sent the incremental changes between the base snapshots, and new ones I just made:</p><pre><code>sudo zfs send -R -i Backups@VM-LXC-BackupBase Backups@VM-LXC-Backup20170418 | sudo zfs recv externalBackup/VM-LXC-BackupBase
+sudo zfs send -R -i Data@DataBackupBase Data@DataBackup20170418 | sudo zfs recv externalBackup/DataBackup
+</code></pre><p>Notice that I specify <em>two</em> snapshots in the send command, to define the range of differences to send. </p><h4><a name="a&#95;minor&#95;issue"></a>A Minor Issue</h4><p>The first time I tried sending an incremental backup, I encountered a minor issue. ZFS gave me an error stating that my destination had been changed since last snapshot (meaning the base snapshot on the externalBackup pool). I looked this up online and it seems that sometimes, just looking around the pool can change files. Some people recommended setting the destination pool to read-only, so I did that to my backup pool with:</p><pre><code>sudo zfs set readonly=on externalBackup
+</code></pre><p>I am not sure if this will eliminate this problem in the future, but I guess I will find out.</p><p>I still had the error when sending, so I added the <code>-F</code> flag to the <code>zfs recv</code> command. I am not sure if this was the <em>best</em> solution, but it seemed to be okay. I also thought about rolling back to the snapshot, and then copying which is likely a safer method (if you don't mind losing the "changes" on the destination pool).</p><h3><a name="safely&#95;closing&#95;and&#95;removing&#95;the&#95;external&#95;drive"></a>Safely Closing and Removing the External Drive</h3><p><img src="../../img/posts/ZFS-Backups-To-LUKS-External/export-drive.gif" alt="Exporting the zpool" /> <div id="caption">Exporting the zpool and closing the LUKS device</div></p><p>When the incremental backups finishes transferring, the external drive can be removed. The sequence of steps to do this safely are 1) export the zpool 2) close the LUKS device, and 3) unplug the drive. To export the zpool and close the LUKS device I used the commands:</p><pre><code>sudo zpool export externalBackup
+sudo cryptSetup luksClose sdf-enc
+</code></pre><p>After that, I was able to unplug the external drive, and store it in a safe location, until I need to backup data to it again.</p><h3><a name="opening&#95;and&#95;importing&#95;zpool&#95;for&#95;recurring&#95;backups"></a>Opening and Importing zpool for Recurring Backups</h3>Lastly, there are a few steps to take when reconnecting the drive to run a daily/monthly/weekly (whatever) backup. First, the drive must be decrypted and mounted, using the same command as above: <pre><code>sudo cryptSetup luksOpen /dev/sdf sdf-enc
+</code></pre><p>Next, the zpool on the drive must be imported so that it can be used from the main system. Like exporting the pool, the command is simple:</p><pre><code>sudo zpool import externalBackup
+</code></pre><p>That's it. Now the steps detailing taking snapshots and sending incremental backups can be repeated.</p><h3><a name="summary"></a>Summary</h3>I am happy with this solution for now. It allows me to leverage ZFS a bit more, and become more familiar with it. The biggest issue I will likely face is space on the external drive. Luckily, ZFS makes it easy to delete old snapshots. In the future, I might also consider using an online backup solution like <a href='https://www.tarsnap.com/'>Tarsnap</a>, but I need to find a cost-effective one first. I'll be sure to update as I continue to expand my backup solution.<p><div id="post-meta" style="float: right;">Post Updated 05/12/2017</a></p>
+</div>
+
+<div id="post-tags">
+    <b>Tags: </b>
+    
+    <a href="/tags-output/Homelab/">[Homelab]</a>
+    
+    <a href="/tags-output/Linux/">[Linux]</a>
+    
+    <a href="/tags-output/ZFS/">[ZFS]</a>
+    
+</div>
+
+
+    <div id="prev-next">
+        
+        <a href="/posts/Setting-up-the-pi-cluster/">&laquo; Setting Up My Pi Cluster</a>
+        
+        
+        <a class="right" href="/posts/LIA-1-0-Beta-Released/">LIA 1.0 Beta Released &raquo;</a>
+        
+    </div>
+
+    
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = '//himmAllRight.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    
+
+
+</div>
+
+            </div>
+        </div>
+    </div>
+    <footer>Copyright &copy;  Ryan Himmelwright
+        <p style="text-align: center;">Generated using <a href="http://cryogenweb.org">Cryogen</a></p></footer>
+</div>
+<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+<script src="/js/highlight.pack.js" type="text/javascript"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+</body>
+</html>
+

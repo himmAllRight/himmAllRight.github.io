@@ -79,15 +79,15 @@
                         <li class="divider"></li>
                         <li class="dropdown-header">Recent Posts</li>
                         
+                        <li><a href="/posts/simple-reverse-ssh-tunnel/">Simple Reverse SSH Tunnels</a></li>
+                        
                         <li><a href="/posts/back-to-solus/">Back to Solus</a></li>
                         
                         <li><a href="/posts/dabbling-with-go/">Dabbling with GO</a></li>
                         
                         <li><a href="/posts/solus-to-fedora/">Migrating from Solus to Fedora for now</a></li>
                         
-                        <li><a href="/posts/creating-a-git-remote/">Creating a git Repo Remote</a></li>
-                        
-                        <li><a href="/posts/issues-setting-up-ubiquiti-network/">Encountered Issues Setting Up Ubiquiti Network</a></li>
+                        <li><a href="/posts/solus-to-fedora.sync-conflict-20170810-062209/">Migrating from Solus to Fedora for a bit</a></li>
                         
                         
 
@@ -188,6 +188,36 @@
 <div id="post">
     
     <div class="post-header">
+            <h2><a href="/posts/Updating-Pi-Cluster-With-Ansible/">Updating the Pi Cluster with Ansible</a></h2>
+        <div id="preview-meta">
+            May 25, 2017
+        </div>
+    </div>
+    <p>With Ansible configured on the Pi cluster, it is time to have it do something useful. When working with a clustered system, even the simplest tasks become tedious and time consuming. For example, updating the system. While I could manually update each of the 3 pi nodes, it is not scalable to 10 or 30 nodes, let alone hundreds or thousands. Tools like Ansible, make doing tasks such a supdating clustered systems, trivial again. In this post, I will walk through setting up an Ansible playbook to update my Pi cluster.</p><p></p>
+    <a href="/posts/Updating-Pi-Cluster-With-Ansible/">Continue reading &#8594;</a>
+    <hr>
+    
+    <div class="post-header">
+            <h2><a href="/posts/Ansible-On-Pi-Cluster/">Configuring Ansible on the Pi Cluster</a></h2>
+        <div id="preview-meta">
+            May 21, 2017
+        </div>
+    </div>
+    <p>In my <a href="http://ryan.himmelwright.net/posts/Setting-up-the-pi-cluster/" shape="rect">previous post</a>, I pieced together my <a href="http://ryan.himmelwright.net/pages/homelab/#cluster" shape="rect">pi cluster</a>, and installed variations of Ubuntu 16.04 Server on each of its nodes. With the cluster built, I quickly needed an easy way to maintain and interact with the system as a whole. This, is where <a href="https://www.ansible.com/" shape="rect">Ansible</a> comes in. In this post, I will walk through the steps I took to setup Ansible on my Cluster.</p><p></p>
+    <a href="/posts/Ansible-On-Pi-Cluster/">Continue reading &#8594;</a>
+    <hr>
+    
+    <div class="post-header">
+            <h2><a href="/posts/Ansible-On-Pi-Cluster.sync-conflict-20170720-214507/">Configuring Ansible on the Pi Cluster</a></h2>
+        <div id="preview-meta">
+            May 21, 2017
+        </div>
+    </div>
+    <p>In my <a href="http://ryan.himmelwright.net/posts/Setting-up-the-pi-cluster/" shape="rect">previous post</a>, I pieced together my <a href="http://ryan.himmelwright.net/pages/homelab/#cluster" shape="rect">pi cluster</a>, and installed variations of Ubuntu 16.04 Server on each of its nodes. With the cluster built, I quickly needed an easy way to maintain and interact with the system as a whole. This, is where <a href="https://www.ansible.com/" shape="rect">Ansible</a> comes in. In this post, I will walk through the steps I took to setup Ansible on my Cluster.</p><p></p>
+    <a href="/posts/Ansible-On-Pi-Cluster.sync-conflict-20170720-214507/">Continue reading &#8594;</a>
+    <hr>
+    
+    <div class="post-header">
             <h2><a href="/posts/Setting-up-the-pi-cluster/">Setting Up My Pi Cluster</a></h2>
         <div id="preview-meta">
             May 5, 2017
@@ -205,36 +235,6 @@
     </div>
     <p>I have been using <a href="https://en.wikipedia.org/wiki/ZFS" shape="rect">ZFS</a> data pools to store data on <a href="../../pages/homelab/#ninetales" shape="rect">my server</a> for some time now. As great as that is, I am ashamed to admit that I have not had a <em>true</em> backup system in place (raid/mirrors are not backup). I have a backup solution that I have attempted in the past, but ran into an issue and let it drift to the side. That changes now. It's time to revisit my solution, and complete it to the end.</p><p></p>
     <a href="/posts/ZFS-Backups-To-LUKS-External/">Continue reading &#8594;</a>
-    <hr>
-    
-    <div class="post-header">
-            <h2><a href="/posts/LIA-1-0-Beta-Released/">LIA 1.0 Beta Released</a></h2>
-        <div id="preview-meta">
-            April 17, 2017
-        </div>
-    </div>
-    <p>I have released the 1.0 Beta version for a personal project of mine: the <strong>L</strong>edger <strong>I</strong>mport <strong>A</strong>ssistant, or <a href="https://github.com/himmALlRight/LIA/" shape="rect">LIA</a>. This post will talk briefly about the background of LIA, what it does, and explain the beta release. </p><p></p>
-    <a href="/posts/LIA-1-0-Beta-Released/">Continue reading &#8594;</a>
-    <hr>
-    
-    <div class="post-header">
-            <h2><a href="/posts/New-Theme-Immutable/">New Website Theme: Immutable</a></h2>
-        <div id="preview-meta">
-            April 11, 2017
-        </div>
-    </div>
-    <p>When I first started using <a href="http://cryogenweb.org" shape="rect">Cryogen</a> to generate this website, I wanted to create a personalized theme. This desire led me to hack a the default theme into a mutant, which I boringly named "<i>ryan1</i>" (I anticipated it to be temporary). It looked like a relic, designed from when I first learned how to make a web page... the early 2000's. Like <del>many</del> all websites from that time, it was not mobile friendly. I hope to change all of that, by introducing my new website theme: <b><i>Immutable</i></b>.</p><p></p>
-    <a href="/posts/New-Theme-Immutable/">Continue reading &#8594;</a>
-    <hr>
-    
-    <div class="post-header">
-            <h2><a href="/posts/LFS-SBUs-and-Binutils/">Linux from Scratch - SBUs and Binutils</a></h2>
-        <div id="preview-meta">
-            April 4, 2017
-        </div>
-    </div>
-    <p>Well, after all of the preparation, we are ready to start compiling packages. This post cover compiling all the packages, but it will detail the first build of <a href="https://www.gnu.org/software/binutils/" shape="rect">Binutils</a>, which is arguably the most important package to compile. Why is Binutils so crucial? It determines the SBU time for your build system. What's an SBU? Read on to find out!</p><p></p>
-    <a href="/posts/LFS-SBUs-and-Binutils/">Continue reading &#8594;</a>
     <hr>
     
 

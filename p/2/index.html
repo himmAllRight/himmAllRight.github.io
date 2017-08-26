@@ -79,15 +79,15 @@
                         <li class="divider"></li>
                         <li class="dropdown-header">Recent Posts</li>
                         
+                        <li><a href="/posts/simple-reverse-ssh-tunnel/">Simple Reverse SSH Tunnels</a></li>
+                        
                         <li><a href="/posts/back-to-solus/">Back to Solus</a></li>
                         
                         <li><a href="/posts/dabbling-with-go/">Dabbling with GO</a></li>
                         
                         <li><a href="/posts/solus-to-fedora/">Migrating from Solus to Fedora for now</a></li>
                         
-                        <li><a href="/posts/creating-a-git-remote/">Creating a git Repo Remote</a></li>
-                        
-                        <li><a href="/posts/issues-setting-up-ubiquiti-network/">Encountered Issues Setting Up Ubiquiti Network</a></li>
+                        <li><a href="/posts/solus-to-fedora.sync-conflict-20170810-062209/">Migrating from Solus to Fedora for a bit</a></li>
                         
                         
 
@@ -188,6 +188,26 @@
 <div id="post">
     
     <div class="post-header">
+            <h2><a href="/posts/creating-a-git-remote/">Creating a git Repo Remote</a></h2>
+        <div id="preview-meta">
+            July 19, 2017
+        </div>
+    </div>
+    <p>For over a year or so, I have been using a self-hosted <a href="https://about.gitlab.com/" shape="rect">Gitlab</a> to host all of my private repos. For a few months now, I have been meaning to migrate my Gitlab repos to bare, minimal ones, hosted directly on a server. The majority of my code/configs are hosted publicly on <a href="https://github.com/himmAllRight" shape="rect">my Github</a> page, and it really doesn't make sense to maintain a full Gitlab instance for the few (like...2) private repositories that I keep. Moving the git repos to new ones right on the server is actually fairly simple. For such a simple process, all the guides I saw online went way above and beyond what I needed. So, here are the <em>two</em> steps I did to migrate my repos.</p><p></p>
+    <a href="/posts/creating-a-git-remote/">Continue reading &#8594;</a>
+    <hr>
+    
+    <div class="post-header">
+            <h2><a href="/posts/issues-setting-up-ubiquiti-network/">Encountered Issues Setting Up Ubiquiti Network</a></h2>
+        <div id="preview-meta">
+            June 29, 2017
+        </div>
+    </div>
+    <p>This past weekend, I setup my new ubiquiti network. It actually took up a good portion of Sunday, because I ran into a few minor issues. Fortunately/Unfortunately, these issues were mostly because it my first time configuring this type of setup, and there was a lot of trial and error. The basic network is now all configured and has been running great. It was a good day and I learned a lot :). In fact, I am confident that if I had to start over from scratch, the process would take me about 10-15 minutes. Just to be sure, I'm  going to quickly jot down the major pain points I experienced my first time around. </p><p></p>
+    <a href="/posts/issues-setting-up-ubiquiti-network/">Continue reading &#8594;</a>
+    <hr>
+    
+    <div class="post-header">
             <h2><a href="/posts/upgrading-network-to-ubiquiti/">Home Network Ubiquiti Upgrade</a></h2>
         <div id="preview-meta">
             June 26, 2017
@@ -215,26 +235,6 @@
     </div>
     <p>For a long time I have been thinking about replacing my server's proxmox install with vanilla Debian or CentOS, mostly for learning purposes. I would first setup zfs on the new system and import my existing data pools. Then, I would use either a system like ovrit or just plain kvm/lxc to run my VMs and containers. In order to do this though... I have to first figure out how export my containers and VMs running in Proxmox. As it turns out... exporting the VMs wasn't very hard...</p><p></p>
     <a href="/posts/exporting-proxmox-vms/">Continue reading &#8594;</a>
-    <hr>
-    
-    <div class="post-header">
-            <h2><a href="/posts/Updating-Pi-Cluster-With-Ansible/">Updating the Pi Cluster with Ansible</a></h2>
-        <div id="preview-meta">
-            May 25, 2017
-        </div>
-    </div>
-    <p>With Ansible configured on the Pi cluster, it is time to have it do something useful. When working with a clustered system, even the simplest tasks become tedious and time consuming. For example, updating the system. While I could manually update each of the 3 pi nodes, it is not scalable to 10 or 30 nodes, let alone hundreds or thousands. Tools like Ansible, make doing tasks such a supdating clustered systems, trivial again. In this post, I will walk through setting up an Ansible playbook to update my Pi cluster.</p><p></p>
-    <a href="/posts/Updating-Pi-Cluster-With-Ansible/">Continue reading &#8594;</a>
-    <hr>
-    
-    <div class="post-header">
-            <h2><a href="/posts/Ansible-On-Pi-Cluster/">Configuring Ansible on the Pi Cluster</a></h2>
-        <div id="preview-meta">
-            May 21, 2017
-        </div>
-    </div>
-    <p>In my <a href="http://ryan.himmelwright.net/posts/Setting-up-the-pi-cluster/" shape="rect">previous post</a>, I pieced together my <a href="http://ryan.himmelwright.net/pages/homelab/#cluster" shape="rect">pi cluster</a>, and installed variations of Ubuntu 16.04 Server on each of its nodes. With the cluster built, I quickly needed an easy way to maintain and interact with the system as a whole. This, is where <a href="https://www.ansible.com/" shape="rect">Ansible</a> comes in. In this post, I will walk through the steps I took to setup Ansible on my Cluster.</p><p></p>
-    <a href="/posts/Ansible-On-Pi-Cluster/">Continue reading &#8594;</a>
     <hr>
     
 

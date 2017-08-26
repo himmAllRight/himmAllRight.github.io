@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <title>λ ryan himmelwright . net: Refreshing my i3 setup with i3blocks</title>
+    <link rel="canonical" href="http://ryan.himmelwright.net/posts/Started-Using-i3blocks/">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/font-hack/2.020/css/hack-extended.min.css">
+    <link href='http://fonts.googleapis.com/css?family=Alegreya:400italic,700italic,400,700' rel='stylesheet'
+          type='text/css'>
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css">
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.1/styles/default.min.css">
+    <link href="/css/screen.css" rel="stylesheet" type="text/css" />
+
+
+    <!-- Piwik -->
+    <script type="text/javascript">
+      var _paq = _paq || [];
+      /* tracker methods like "setCustomDimension" should be called before "trackPageView" */
+      _paq.push(["setDocumentTitle", document.domain + "/" + document.title]);
+      _paq.push(["setCookieDomain", "*.ryan.himmelwright.net"]);
+      _paq.push(['trackPageView']);
+      _paq.push(['enableLinkTracking']);
+      (function() {
+      var u="//cloud.himmelwright.net/piwik/";
+      _paq.push(['setTrackerUrl', u+'piwik.php']);
+      _paq.push(['setSiteId', '1']);
+      var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+      g.type='text/javascript'; g.async=true; g.defer=true; g.src=u+'piwik.js'; s.parentNode.insertBefore(g,s);
+      })();
+    </script>
+    <noscript><p><img src="//cloud.himmelwright.net/piwik/piwik.php?idsite=1&rec=1" style="border:0;" alt="" /></p></noscript>
+    <!-- End Piwik Code -->
+</head>
+<body>
+
+
+<nav class="navbar navbar-default">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">λ ryan himmelwright . net</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav navbar-right">
+                <li ><a href="/">Home</a></li>
+                
+                <li
+                >
+                <a href="/pages/about/">About</a>
+                </li>
+                
+                <li
+                >
+                <a href="/pages/homelab/">Homelab</a>
+                </li>
+                
+                <li
+                ><a href="/archives">Archives</a></li>
+                <li><a href="/feed.xml">RSS</a></li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                        More <span class="caret"></span></a>
+                    <ul class="dropdown-menu" role="menu">
+                        <!-- 
+                           -->
+                        <li class="dropdown-header">Links</li>
+                        <li><a href="https://github.com/himmAllRight"><img src=http://ryan.himmelwright.net/img/icons/Github.png width="30px">Github</a></li>
+                        <li><a href="https://www.linkedin.com/in/ryan-himmelwright-b3891774/"><img src=http://ryan.himmelwright.net/img/icons/Linkedin.png width="30px">LinkedIn</a></li>
+                        <li><a href="https://www.instagram.com/himmelwr/"><img src=http://ryan.himmelwright.net/img/icons/Instagram.png width="30px">Instagram</a></li>
+                        <li><a href="https://twitter.com/himmAllRight17"><img src=http://ryan.himmelwright.net/img/icons/Twitter.png width="30px">Twitter</a></li>
+                               
+                        <li class="divider"></li>
+                        <li class="dropdown-header">Recent Posts</li>
+                        
+                        <li><a href="/posts/creating-a-git-remote/">Creating a git Repo Remote</a></li>
+                        
+                        <li><a href="/posts/issues-setting-up-ubiquiti-network/">Encountered Issues Setting Up Ubiquiti Network</a></li>
+                        
+                        <li><a href="/posts/upgrading-network-to-ubiquiti/">Home Network Ubiquiti Upgrade</a></li>
+                        
+                        <li><a href="/posts/Started-Using-i3blocks/">Refreshing my i3 setup with i3blocks</a></li>
+                        
+                        <li><a href="/posts/exporting-proxmox-vms/">Exporting Proxmox VMs</a></li>
+                        
+                        
+
+                        
+                        <li class="divider"></li>
+                        <li class="dropdown-header">Tags</li>
+                        
+                        <li><a href="/tags-output/wifi/"><b>[wifi]</b></a></li>
+                        
+                        <li><a href="/tags-output/Python/"><b>[Python]</b></a></li>
+                        
+                        <li><a href="/tags-output/customization/"><b>[customization]</b></a></li>
+                        
+                        <li><a href="/tags-output/i3/"><b>[i3]</b></a></li>
+                        
+                        <li><a href="/tags-output/ubiquiti/"><b>[ubiquiti]</b></a></li>
+                        
+                        <li><a href="/tags-output/Cryogen/"><b>[Cryogen]</b></a></li>
+                        
+                        <li><a href="/tags-output/KVM/"><b>[KVM]</b></a></li>
+                        
+                        <li><a href="/tags-output/Homelab/"><b>[Homelab]</b></a></li>
+                        
+                        <li><a href="/tags-output/snapd/"><b>[snapd]</b></a></li>
+                        
+                        <li><a href="/tags-output/Pi/"><b>[Pi]</b></a></li>
+                        
+                        <li><a href="/tags-output/Wedding/"><b>[Wedding]</b></a></li>
+                        
+                        <li><a href="/tags-output/KDE/"><b>[KDE]</b></a></li>
+                        
+                        <li><a href="/tags-output/Arch Linux/"><b>[Arch Linux]</b></a></li>
+                        
+                        <li><a href="/tags-output/Website/"><b>[Website]</b></a></li>
+                        
+                        <li><a href="/tags-output/C/"><b>[C]</b></a></li>
+                        
+                        <li><a href="/tags-output/Cluster/"><b>[Cluster]</b></a></li>
+                        
+                        <li><a href="/tags-output/dev/"><b>[dev]</b></a></li>
+                        
+                        <li><a href="/tags-output/Network/"><b>[Network]</b></a></li>
+                        
+                        <li><a href="/tags-output/LFS/"><b>[LFS]</b></a></li>
+                        
+                        <li><a href="/tags-output/Linux/"><b>[Linux]</b></a></li>
+                        
+                        <li><a href="/tags-output/Clojure/"><b>[Clojure]</b></a></li>
+                        
+                        <li><a href="/tags-output/git/"><b>[git]</b></a></li>
+                        
+                        <li><a href="/tags-output/ZFS/"><b>[ZFS]</b></a></li>
+                        
+                        <li><a href="/tags-output/Proxmox/"><b>[Proxmox]</b></a></li>
+                        
+                        <li><a href="/tags-output/DevOps/"><b>[DevOps]</b></a></li>
+                        
+                        <li><a href="/tags-output/Thinkpad/"><b>[Thinkpad]</b></a></li>
+                        
+                        <li><a href="/tags-output/Ledger/"><b>[Ledger]</b></a></li>
+                        
+                        <li><a href="/tags-output/dotfiles/"><b>[dotfiles]</b></a></li>
+                        
+                        <li><a href="/tags-output/Devops/"><b>[Devops]</b></a></li>
+                        
+                        <li><a href="/tags-output/Programming/"><b>[Programming]</b></a></li>
+                        
+                        <li><a href="/tags-output/Solus/"><b>[Solus]</b></a></li>
+                        
+                        <li><a href="/tags-output/Ansible/"><b>[Ansible]</b></a></li>
+                        
+                        <li><a href="/tags-output/SSH/"><b>[SSH]</b></a></li>
+                        
+                        <li><a href="/tags-output/Dev/"><b>[Dev]</b></a></li>
+                        
+                        <li><a href="/tags-output/Korora/"><b>[Korora]</b></a></li>
+                        
+                        
+                    </ul>
+                </li>
+            </ul>
+        </div><!--/.nav-collapse -->
+    </div><!--/.container-fluid -->
+</nav>
+
+
+<div class="container">
+
+
+    <div class="row">
+        <div class="col-lg-12">
+            <div id="content">
+                
+<div id="post">
+    <div class="post-header">
+    <h2>Refreshing my i3 setup with i3blocks</h2>
+    <div id="post-meta" class="row">
+        
+        <span class="col-lg-6 left">By: Ryan Himmelwright</span>
+        
+        <div class="col-lg-6 right">June 22, 2017</div>
+    </div>
+</div>
+<div>
+    
+    <p>The last couple of weeks I have shifted back to using the i3 window mangers. When I fired it up, my fingers danced across the keyboard, remembering all of the personalized keybindings I have cultivated in my i3 configuration over the years. It is a simple, beautiful setup... well, beautiful minus one of the components. My i3status bar was looking rather bland and dated, especially compared some of the i3 setups posted by all the cool kids over at <a href='https://www.reddit.com/r/unixporn/'>/r/unixporn</a>. I decided it was time for a refresh.</p><p><!&ndash; more &ndash;></p><h2><a name="i3status"></a>i3status</h2><p><img src="../../img/posts/starting-i3/i3status.png" alt="One of my simple i3status setups" /> <div id="caption">One of my simple i3status setups</div></p><p>When I first configured i3 several years ago, I used i3status because it was easy to use with i3 and did everything by default. Over time, I learned how to create and modify <a href='https://github.com/himmAllRight/dotfiles/blob/master/i3/.config/i3/i3status.conf'>my own .i3status.conf</a> so that I could get it to play nice with un-standerd configurations (ex: <code>/Data</code> partitions and such). While i3status served me well for many years, using the same-old setup has become boring. I started noticing several other nice looking status bar tools being used in i3 setups, and wanted to try them out.</p><h2><a name="polybar"></a>Polybar</h2><p><img src="../../img/posts/starting-i3/polybar.png" alt="The example polybar" /> <div id="caption">The example polybar</div></p><p>The first bar I saw and tried was <a href='https://github.com/jaagr/polybar'>polybar</a>. I started with it because some of the examples look awesome. It looks very modern and has an infinite number of features. I set it up and was able to use the example bar just fine. However, when I started to customize my own, I started to run into a few issues. The biggest issue was polybar not detecting my work-space names, along with other elements. Additionally, due to the support for several window managers, the example configuration file seemed cluttered, and I was never sure what I could edit, and what I should delete. After some frustration, I decided put it aside for now. I might come back to it one day when I'm bored.</p><h2><a name="i3blocks"></a>i3blocks</h2>Next, I learned of <a href='https://github.com/vivien/i3blocks'>i3blocks</a>. It appeared to have everything I wanted in a status bar, yet remained simple, respecting the <a href='https://i3wm.org/docs/i3bar-protocol.html'>i3bar protocol</a>. So I gave it a whirl.<h3><a name="downloading&#95;from&#95;the&#95;repos"></a>Downloading from the Repos</h3>Just like installing any other package on Linux, I decided to first check to see it it was in the <a href='https://dev.solus-project.com/'>Solus Repos</a>:<pre><code>sudo eopkg sr i3block
+</code></pre><p>It was. So, I installed it (<code>sudo eopkg it i3blocks</code>) and started learning how to setup my configuration.</p><h3><a name="fonts"></a>Fonts</h3><p><img src="../../img/posts/starting-i3/awesome-font.png" alt="A Very Small Sampling of the Awesome Fonts" /> <div id="caption">A <em>Very Small</em> Sampling of the Awesome Fonts</div></p><p>The first hurdle I came across when first launching i3blocks was that I did not have all the fonts used in the default configuration installed. I temporarily removed the special fonts from the config, just so I could check that everything was working. But what's the fun in that? One of the biggest reasons I wanted to redo my bar was to have cool modern icon fonts! So, I found the <a href='http://fontawesome.io/'>font awesome</a> package in the Solus repos and installed it.</p><pre><code>sudo eopkg it font-awesome-ttf
+</code></pre><p>With the awesome fonts at my disposal, I had a plethora of icons to use. So I went through and picked out icons for each of the work-space tabs and status markers.</p><h3><a name="finding&#95;git&#95;repos"></a>Finding Git Repos</h3><p><img src="../../img/posts/starting-i3/i3block-new-repo-examples.png" alt="The example polybar" /> <div id="caption">Example of Modules in new i3-block repo</div></p><p>While researching how to configure i3blocks, I started encountering several different GitHub repos and forks of the project. Some forks seemed to have additional modules that my repo version didn't. I downloaded and built <a href='https://github.com/Anachron/i3blocks'>this one</a> to try out. I then configured i3 to point to the new build instead, and got started setting up my own blocks.</p><h3><a name="forking&#95;my&#95;own&#95;for&#95;solus&#95;tweaks"></a>Forking my own for Solus Tweaks</h3>As I was configuring the individual blocks, I noticed that many of them didn't work by default on my computers. I dug deeper by opening up and peeking at the actual bash scripts blocks refer to. I noticed that many of them were trying to query data from applications that are <em>not</em> used in Solus. For example, the <code>battery</code> block didn't work for me because it relied on <code>acpi</code>, which, while often used in Arch Linux for battery information (I use it myself when on arch) is not packaged in Solus. Instead, Solus relies on <code>upower</code>. To fix my issues, I cobbled together my own <code>battery</code> bash script, that queried battery information using <code>upower</code> instead. Note, the <code>BATTERY&#95;ICON</code> uses the battery fonts (which likely won't show in the browser). Unless it is charging... then it uses a lightning bolt :) .<p><p><pre><code>#!/bin/bash
+
+BATTERY=0
+BATTERY&#95;STATE=$&#40;echo &quot;${BATTERY&#95;INFO}&quot; | upower -i $&#40;upower -e | grep 'BAT'&#41; | grep -E &quot;state|to\ full&quot; | awk '{print $2}'&#41;
+BATTERY&#95;POWER=$&#40;echo &quot;${BATTERY&#95;INFO}&quot; | upower -i $&#40;upower -e | grep 'BAT'&#41; | grep -E &quot;percentage&quot; | awk '{print $2}' | tr -d '%'&#41;
+URGENT&#95;VALUE=10
+
+if &#91;&#91; &quot;${BATTERY&#95;POWER}&quot; -gt 87 &#93;&#93;; then
+    BATTERY&#95;ICON=&quot;&quot;
+elif &#91;&#91; &quot;${BATTERY&#95;POWER}&quot; -gt 63 &#93;&#93;; then
+     BATTERY&#95;ICON=&quot;&quot;
+elif &#91;&#91; &quot;${BATTERY&#95;POWER}&quot; -gt 38 &#93;&#93;; then
+     BATTERY&#95;ICON=&quot;&quot;
+elif &#91;&#91; &quot;${BATTERY&#95;POWER}&quot; -gt 13 &#93;&#93;; then
+     BATTERY&#95;ICON=&quot;&quot;
+elif &#91;&#91; &quot;${BATTERY&#95;POWER}&quot; -le 13 &#93;&#93;; then
+     BATTERY&#95;ICON=&quot;&quot;
+else
+    BATTERY&#95;ICON=&quot;&quot;
+fi
+
+
+if &#91;&#91; &quot;${BATTERY&#95;STATE}&quot; = &quot;discharging&quot; &#93;&#93;; then
+    echo &quot;${BATTERY&#95;ICON} ${BATTERY&#95;POWER}%&quot;
+    echo &quot;${BATTERY&#95;ICON} ${BATTERY&#95;POWER}%&quot;
+    echo &quot;&quot;
+else
+    echo &quot; ${BATTERY&#95;POWER}%&quot;
+    echo &quot; ${BATTERY&#95;POWER}%&quot;
+    echo &quot;&quot;
+fi
+
+if &#91;&#91; &quot;${BATTERY&#95;POWER}&quot; -le &quot;${URGENT&#95;VALUE}&quot; &#93;&#93;; then
+  exit 33
+fi
+ </code></pre> </p></p><p>Over the past few weeks, it seems to work well enough. As I continued to <em>tweak</em>, or downright <em>create</em> blocks to work well in Solus, I eventually decided that it might be a good idea to just <a href='https://github.com/himmAllRight/i3blocks'>create my own fork</a> of the repo. This way, I can have my own i3blocks repo that works well with Solus. I noticed that the implementation of <code>i3blocks</code> found in the Solus repos is also using non-Solus items for it's scripts (ex: acpi for the battery). Maybe one of these days I'll jump into irc and see how people feel about swapping in mine instead (or at least one that works better in Solus)...</p><h3><a name="color&#95;update&#95;for&#95;i3&#95;&&#95;rofi"></a>Color Update for i3 & rofi</h3><p><img src="../../img/posts/starting-i3/rofi-run.png" alt="New Color Scheme for rofi launcher" /> <div id="caption">New color scheme for rofi launcher</div></p><p>When I started using i3 several years ago, I used <a href='http://tools.suckless.org/dmenu/'>dmenu</a> as my launcher (it's the launcher used in <a href='http://dwm.suckless.org/'>dwm</a>, another tiling window manager I used to use). I eventually switched to <a href='https://davedavenport.github.io/rofi/'>rofi</a> after seeing it used in some very nice window manager setups (sound familiar?). However, I always used the plain default theme and never bothered to improve it. With all the work I did making i3bars look nice, I thought I should at least make rofi match. Making the color theme wasn't nearly as hard as I anticipated it to be. That's mostly because I found and used the <a href='https://davedavenport.github.io/rofi/p11-Generator.html'>rofi theme generator</a>. </p><p><center> <img src="../../img/posts/starting-i3/rofi-window.png" alt="New rofi window switcher" /> </center> <div id="caption">Newly configured rofi window switcher</div></p><p>While touching up rofi, I learned it can also switch through already opened windows (Previously, I  only used it to launch new programs). I really liked that in my new i3 setup, it also displayed the work-spaces, icon font and all. I immediately bound it to my Super+Tab key for easy use.</p><h2><a name="conclusion"></a>Conclusion</h2><video width=100% controls>  <source src="../../img/posts/starting-i3/i3-gaps-demo.mp4" type="video/mp4">  <source src="movie.ogg" type="video/ogg">Your browser does not support the video tag.</video><div id="caption">Little video demoing my new i3gaps setup with i3blocks</div><p>Thus far, I have been very satisfied with my current i3 setup. Replacing i3status with i3blocks, combined with adding small improvements, for example, the awesome fonts, really helped to enhance the look and feel of my i3 configuration. Additionally, ROFI much better now that it matches everything.</p><p>I am glad to be using i3 again. It is so efficient to use and I love flying around the work-spaces and windows. It is particularly useful on <a href='../../pages/homelab/#kadabra'>kedabra's</a> 12" screen, as it utilizes all of the limited resolution. If you have never used a tiling window manager in Linux, I strongly suggest you give it a shot. It can take some time to get up and going the first time, but once a custom configuration is built, it always feels like home.</p><p>To show off my new i3 setup with i3bars, I've posted a small video at the top of this section. Enjoy!</p>
+</div>
+
+<div id="post-tags">
+    <b>Tags: </b>
+    
+    <a href="/tags-output/customization/">[customization]</a>
+    
+    <a href="/tags-output/i3/">[i3]</a>
+    
+    <a href="/tags-output/Linux/">[Linux]</a>
+    
+    <a href="/tags-output/Solus/">[Solus]</a>
+    
+</div>
+
+
+    <div id="prev-next">
+        
+        <a href="/posts/upgrading-network-to-ubiquiti/">&laquo; Home Network Ubiquiti Upgrade</a>
+        
+        
+        <a class="right" href="/posts/exporting-proxmox-vms/">Exporting Proxmox VMs &raquo;</a>
+        
+    </div>
+
+    
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = '//himmAllRight.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    
+
+
+</div>
+
+            </div>
+        </div>
+    </div>
+    <footer>Copyright &copy;  Ryan Himmelwright
+        <p style="text-align: center;">Generated using <a href="http://cryogenweb.org">Cryogen</a></p></footer>
+</div>
+<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+<script src="/js/highlight.pack.js" type="text/javascript"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+</body>
+</html>
+

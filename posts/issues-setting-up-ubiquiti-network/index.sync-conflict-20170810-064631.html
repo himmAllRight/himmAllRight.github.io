@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <title>λ ryan himmelwright . net: Encountered Issues Setting Up Ubiquiti Network</title>
+    <link rel="canonical" href="http://ryan.himmelwright.net/posts/issues-setting-up-ubiquiti-network/">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/font-hack/2.020/css/hack-extended.min.css">
+    <link href='http://fonts.googleapis.com/css?family=Alegreya:400italic,700italic,400,700' rel='stylesheet'
+          type='text/css'>
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css">
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.1/styles/default.min.css">
+    <link href="/css/screen.css" rel="stylesheet" type="text/css" />
+
+
+    <!-- Piwik -->
+    <script type="text/javascript">
+      var _paq = _paq || [];
+      /* tracker methods like "setCustomDimension" should be called before "trackPageView" */
+      _paq.push(["setDocumentTitle", document.domain + "/" + document.title]);
+      _paq.push(["setCookieDomain", "*.ryan.himmelwright.net"]);
+      _paq.push(['trackPageView']);
+      _paq.push(['enableLinkTracking']);
+      (function() {
+      var u="//cloud.himmelwright.net/piwik/";
+      _paq.push(['setTrackerUrl', u+'piwik.php']);
+      _paq.push(['setSiteId', '1']);
+      var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+      g.type='text/javascript'; g.async=true; g.defer=true; g.src=u+'piwik.js'; s.parentNode.insertBefore(g,s);
+      })();
+    </script>
+    <noscript><p><img src="//cloud.himmelwright.net/piwik/piwik.php?idsite=1&rec=1" style="border:0;" alt="" /></p></noscript>
+    <!-- End Piwik Code -->
+</head>
+<body>
+
+
+<nav class="navbar navbar-default">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">λ ryan himmelwright . net</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav navbar-right">
+                <li ><a href="/">Home</a></li>
+                
+                <li
+                >
+                <a href="/pages/about/">About</a>
+                </li>
+                
+                <li
+                >
+                <a href="/pages/homelab/">Homelab</a>
+                </li>
+                
+                <li
+                ><a href="/archives">Archives</a></li>
+                <li><a href="/feed.xml">RSS</a></li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                        More <span class="caret"></span></a>
+                    <ul class="dropdown-menu" role="menu">
+                        <!-- 
+                           -->
+                        <li class="dropdown-header">Links</li>
+                        <li><a href="https://github.com/himmAllRight"><img src=http://ryan.himmelwright.net/img/icons/Github.png width="30px">Github</a></li>
+                        <li><a href="https://www.linkedin.com/in/ryan-himmelwright-b3891774/"><img src=http://ryan.himmelwright.net/img/icons/Linkedin.png width="30px">LinkedIn</a></li>
+                        <li><a href="https://www.instagram.com/himmelwr/"><img src=http://ryan.himmelwright.net/img/icons/Instagram.png width="30px">Instagram</a></li>
+                        <li><a href="https://twitter.com/himmAllRight17"><img src=http://ryan.himmelwright.net/img/icons/Twitter.png width="30px">Twitter</a></li>
+                               
+                        <li class="divider"></li>
+                        <li class="dropdown-header">Recent Posts</li>
+                        
+                        <li><a href="/posts/creating-a-git-remote/">Creating a git Repo Remote</a></li>
+                        
+                        <li><a href="/posts/issues-setting-up-ubiquiti-network/">Encountered Issues Setting Up Ubiquiti Network</a></li>
+                        
+                        <li><a href="/posts/upgrading-network-to-ubiquiti/">Home Network Ubiquiti Upgrade</a></li>
+                        
+                        <li><a href="/posts/Started-Using-i3blocks/">Refreshing my i3 setup with i3blocks</a></li>
+                        
+                        <li><a href="/posts/exporting-proxmox-vms/">Exporting Proxmox VMs</a></li>
+                        
+                        
+
+                        
+                        <li class="divider"></li>
+                        <li class="dropdown-header">Tags</li>
+                        
+                        <li><a href="/tags-output/wifi/"><b>[wifi]</b></a></li>
+                        
+                        <li><a href="/tags-output/Python/"><b>[Python]</b></a></li>
+                        
+                        <li><a href="/tags-output/customization/"><b>[customization]</b></a></li>
+                        
+                        <li><a href="/tags-output/i3/"><b>[i3]</b></a></li>
+                        
+                        <li><a href="/tags-output/ubiquiti/"><b>[ubiquiti]</b></a></li>
+                        
+                        <li><a href="/tags-output/Cryogen/"><b>[Cryogen]</b></a></li>
+                        
+                        <li><a href="/tags-output/KVM/"><b>[KVM]</b></a></li>
+                        
+                        <li><a href="/tags-output/Homelab/"><b>[Homelab]</b></a></li>
+                        
+                        <li><a href="/tags-output/snapd/"><b>[snapd]</b></a></li>
+                        
+                        <li><a href="/tags-output/Pi/"><b>[Pi]</b></a></li>
+                        
+                        <li><a href="/tags-output/Wedding/"><b>[Wedding]</b></a></li>
+                        
+                        <li><a href="/tags-output/KDE/"><b>[KDE]</b></a></li>
+                        
+                        <li><a href="/tags-output/Arch Linux/"><b>[Arch Linux]</b></a></li>
+                        
+                        <li><a href="/tags-output/Website/"><b>[Website]</b></a></li>
+                        
+                        <li><a href="/tags-output/C/"><b>[C]</b></a></li>
+                        
+                        <li><a href="/tags-output/Cluster/"><b>[Cluster]</b></a></li>
+                        
+                        <li><a href="/tags-output/dev/"><b>[dev]</b></a></li>
+                        
+                        <li><a href="/tags-output/Network/"><b>[Network]</b></a></li>
+                        
+                        <li><a href="/tags-output/LFS/"><b>[LFS]</b></a></li>
+                        
+                        <li><a href="/tags-output/Linux/"><b>[Linux]</b></a></li>
+                        
+                        <li><a href="/tags-output/Clojure/"><b>[Clojure]</b></a></li>
+                        
+                        <li><a href="/tags-output/git/"><b>[git]</b></a></li>
+                        
+                        <li><a href="/tags-output/ZFS/"><b>[ZFS]</b></a></li>
+                        
+                        <li><a href="/tags-output/Proxmox/"><b>[Proxmox]</b></a></li>
+                        
+                        <li><a href="/tags-output/DevOps/"><b>[DevOps]</b></a></li>
+                        
+                        <li><a href="/tags-output/Thinkpad/"><b>[Thinkpad]</b></a></li>
+                        
+                        <li><a href="/tags-output/Ledger/"><b>[Ledger]</b></a></li>
+                        
+                        <li><a href="/tags-output/dotfiles/"><b>[dotfiles]</b></a></li>
+                        
+                        <li><a href="/tags-output/Devops/"><b>[Devops]</b></a></li>
+                        
+                        <li><a href="/tags-output/Programming/"><b>[Programming]</b></a></li>
+                        
+                        <li><a href="/tags-output/Solus/"><b>[Solus]</b></a></li>
+                        
+                        <li><a href="/tags-output/Ansible/"><b>[Ansible]</b></a></li>
+                        
+                        <li><a href="/tags-output/SSH/"><b>[SSH]</b></a></li>
+                        
+                        <li><a href="/tags-output/Dev/"><b>[Dev]</b></a></li>
+                        
+                        <li><a href="/tags-output/Korora/"><b>[Korora]</b></a></li>
+                        
+                        
+                    </ul>
+                </li>
+            </ul>
+        </div><!--/.nav-collapse -->
+    </div><!--/.container-fluid -->
+</nav>
+
+
+<div class="container">
+
+
+    <div class="row">
+        <div class="col-lg-12">
+            <div id="content">
+                
+<div id="post">
+    <div class="post-header">
+    <h2>Encountered Issues Setting Up Ubiquiti Network</h2>
+    <div id="post-meta" class="row">
+        
+        <span class="col-lg-6 left">By: Ryan Himmelwright</span>
+        
+        <div class="col-lg-6 right">June 29, 2017</div>
+    </div>
+</div>
+<div>
+    
+    <p>This past weekend, I setup my new ubiquiti network. It actually took up a good portion of Sunday, because I ran into a few minor issues. Fortunately/Unfortunately, these issues were mostly because it my first time configuring this type of setup, and there was a lot of trial and error. The basic network is now all configured and has been running great. It was a good day and I learned a lot :). In fact, I am confident that if I had to start over from scratch, the process would take me about 10-15 minutes. Just to be sure, I'm  going to quickly jot down the major pain points I experienced my first time around. </p><p><!&ndash; more &ndash;></p><h2><a name="trouble&#95;connecting&#95;to&#95;the&#95;edgerouter-x&#95;for&#95;initial&#95;setup"></a>Trouble Connecting to the EdgeRouter-x for Initial Setup</h2><center><img alt="During initial setup, I was connecting the router wrong" src="../../img/posts/ubiquiti-setup-issues/wrong-router-connection.png" width="90%"></center><div id="caption">During initial setup, I was connecting the router wrong</div><p>The edgerouter needed to be directly connected to a computer during its initial setup, to make the EdgeOS configuration wizard accessible. The instructions clearly stated to connect an ethernet cable from my laptop to the <code>eth0/POE</code> port on the edgerouter, but I guess I didn't believe them.</p><p>Instead, I plugged the ethernet cable from my modem into <code>eth0</code>, and my computer to <code>eth1</code>. That didn't work. However, once I <em>properly</em> connected the devices (and manually set a static IP on my laptop, <code>192.168.1.2</code> for example), I was able to access the configuration page in my browser via <code>https://192.168.1.1</code> (don't forget the <em>s</em> in <em>https</em>). Lesson Learned: manuals are (<em>usually</em>) not out to get you.</p><h2><a name="setting&#95;up&#95;poe&#95;and&#95;connecting&#95;the&#95;ap"></a>Setting up POE and Connecting the AP</h2>This was not actually an issue I encountered, but rather a confusion. I was unsure what the best setup for the <a href='https://en.wikipedia.org/wiki/Power_over_Ethernet'>POE</a> hardware was. At first, I had the POE adaptor connected between the edgerouter and the AP, because I wasn't sure if it could optimally power both devices. I found an <a href='https://www.youtube.com/watch?v=f7FeYsJqotc&list=PLDBkup9c8YMgZaE50hAjP7rbbVriTlyQf&index=1'>informative guide</a> that indicated that the POE adaptor could indeed power both.<p><p><pre><code>Modem  --
+        |
+         --&gt; POE Adaptor --&gt; &#40;&#42;eth0&#42;&#41;  edgerouter-x  &#40;&#42;eth4&#42;&#41; --&gt; AP Lite
+        |
+Power  --
+ </code></pre> <div id="caption">Digram describing the correct link up</div> </p></p><p>Once I swapped the cables all around, I had to go into the router configuration and enable the POE for <code>eth4</code>. Afterwards, the AP lit up, indicating that it was connected and powered.</p><h2><a name="issues&#95;linking/configuring&#95;the&#95;ap"></a>Issues linking/configuring the AP</h2>This was the problem I spent the most time on. I had to install the configuration software for the Ubiquiti access point, but the "Linux binary" was a .deb, and I didn't feel like extracting the contents of the package so that I could install it on Solus (yet). So instead, I spun up a few Ubuntu VMs to try it out, but I over-looked the fact that VMs on my laptop use a different subnet (192.168.<strong>122</strong>. &#42;) for the virtual network. I had hoped that because the VM's network was routed through my laptop, which was connected directly to the edgerouter, it would still be able to see the access point. Regardless... the AP couldn't see the VM and vice versa. Finally, I admitted that the issues were most likely caused by the 192.168.122.* IP address that the VM was assigned.<p><center> <img alt="During initial setup, I was connecting the router wrong" src="../../img/posts/ubiquiti-setup-issues/ubuntu.png" width="45%"> <img alt="During initial setup, I was connecting the router wrong" src="../../img/posts/ubiquiti-setup-issues/venomoth.png" width="35%"> </center> <div id="caption">I spun up a new Ubuntu VM (Venomoth) to host the Ubifi controller</div></p><p>By this point, I had also learned that the Linux software is more of a server service, and not a GUI desktop application. So, I concluded that spinning up a dedicated VM on my server to host the wifi controller was worth it. Virtual machines hosted on my server automatically get configured on the main subnet, so it also resolved my issue. I was able to detect and configure the access point immediately. This setup made more sense anyway, as I can always connect to the AP controller by going to the VM's IP on my browser,  just like I can with my router.</p><p>Well, that was all of my setup "<em>issues</em>". There was nothing I would consider to be an actual <em>issue</em>, just some confusions of an Ubiquiti/POE first-timer. Like I stated earlier, I am sure I could redo the setup in about 15 minutes without any issues... 10 now that I recorded everything in the post!</p>
+</div>
+
+<div id="post-tags">
+    <b>Tags: </b>
+    
+    <a href="/tags-output/wifi/">[wifi]</a>
+    
+    <a href="/tags-output/ubiquiti/">[ubiquiti]</a>
+    
+    <a href="/tags-output/Homelab/">[Homelab]</a>
+    
+    <a href="/tags-output/Network/">[Network]</a>
+    
+</div>
+
+
+    <div id="prev-next">
+        
+        <a href="/posts/creating-a-git-remote/">&laquo; Creating a git Repo Remote</a>
+        
+        
+        <a class="right" href="/posts/upgrading-network-to-ubiquiti/">Home Network Ubiquiti Upgrade &raquo;</a>
+        
+    </div>
+
+    
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = '//himmAllRight.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    
+
+
+</div>
+
+            </div>
+        </div>
+    </div>
+    <footer>Copyright &copy;  Ryan Himmelwright
+        <p style="text-align: center;">Generated using <a href="http://cryogenweb.org">Cryogen</a></p></footer>
+</div>
+<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+<script src="/js/highlight.pack.js" type="text/javascript"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+</body>
+</html>
+

@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <title>λ ryan himmelwright . net: Setting Up My Pi Cluster</title>
+    <link rel="canonical" href="http://ryan.himmelwright.net/posts/Setting-up-the-pi-cluster/">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/font-hack/2.020/css/hack-extended.min.css">
+    <link href='http://fonts.googleapis.com/css?family=Alegreya:400italic,700italic,400,700' rel='stylesheet'
+          type='text/css'>
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css">
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.1/styles/default.min.css">
+    <link href="/css/screen.css" rel="stylesheet" type="text/css" />
+
+
+    <!-- Piwik -->
+    <script type="text/javascript">
+      var _paq = _paq || [];
+      /* tracker methods like "setCustomDimension" should be called before "trackPageView" */
+      _paq.push(["setDocumentTitle", document.domain + "/" + document.title]);
+      _paq.push(["setCookieDomain", "*.ryan.himmelwright.net"]);
+      _paq.push(['trackPageView']);
+      _paq.push(['enableLinkTracking']);
+      (function() {
+      var u="//cloud.himmelwright.net/piwik/";
+      _paq.push(['setTrackerUrl', u+'piwik.php']);
+      _paq.push(['setSiteId', '1']);
+      var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+      g.type='text/javascript'; g.async=true; g.defer=true; g.src=u+'piwik.js'; s.parentNode.insertBefore(g,s);
+      })();
+    </script>
+    <noscript><p><img src="//cloud.himmelwright.net/piwik/piwik.php?idsite=1&rec=1" style="border:0;" alt="" /></p></noscript>
+    <!-- End Piwik Code -->
+</head>
+<body>
+
+
+<nav class="navbar navbar-default">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">λ ryan himmelwright . net</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav navbar-right">
+                <li ><a href="/">Home</a></li>
+                
+                <li
+                >
+                <a href="/pages/about/">About</a>
+                </li>
+                
+                <li
+                >
+                <a href="/pages/homelab/">Homelab</a>
+                </li>
+                
+                <li
+                ><a href="/archives">Archives</a></li>
+                <li><a href="/feed.xml">RSS</a></li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                        More <span class="caret"></span></a>
+                    <ul class="dropdown-menu" role="menu">
+                        <!-- 
+                           -->
+                        <li class="dropdown-header">Links</li>
+                        <li><a href="https://github.com/himmAllRight"><img src=http://ryan.himmelwright.net/img/icons/Github.png width="30px">Github</a></li>
+                        <li><a href="https://www.linkedin.com/in/ryan-himmelwright-b3891774/"><img src=http://ryan.himmelwright.net/img/icons/Linkedin.png width="30px">LinkedIn</a></li>
+                        <li><a href="https://www.instagram.com/himmelwr/"><img src=http://ryan.himmelwright.net/img/icons/Instagram.png width="30px">Instagram</a></li>
+                        <li><a href="https://twitter.com/himmAllRight17"><img src=http://ryan.himmelwright.net/img/icons/Twitter.png width="30px">Twitter</a></li>
+                               
+                        <li class="divider"></li>
+                        <li class="dropdown-header">Recent Posts</li>
+                        
+                        <li><a href="/posts/creating-a-git-remote/">Creating a git Repo Remote</a></li>
+                        
+                        <li><a href="/posts/issues-setting-up-ubiquiti-network/">Encountered Issues Setting Up Ubiquiti Network</a></li>
+                        
+                        <li><a href="/posts/upgrading-network-to-ubiquiti/">Home Network Ubiquiti Upgrade</a></li>
+                        
+                        <li><a href="/posts/Started-Using-i3blocks/">Refreshing my i3 setup with i3blocks</a></li>
+                        
+                        <li><a href="/posts/exporting-proxmox-vms/">Exporting Proxmox VMs</a></li>
+                        
+                        
+
+                        
+                        <li class="divider"></li>
+                        <li class="dropdown-header">Tags</li>
+                        
+                        <li><a href="/tags-output/wifi/"><b>[wifi]</b></a></li>
+                        
+                        <li><a href="/tags-output/Python/"><b>[Python]</b></a></li>
+                        
+                        <li><a href="/tags-output/customization/"><b>[customization]</b></a></li>
+                        
+                        <li><a href="/tags-output/i3/"><b>[i3]</b></a></li>
+                        
+                        <li><a href="/tags-output/ubiquiti/"><b>[ubiquiti]</b></a></li>
+                        
+                        <li><a href="/tags-output/Cryogen/"><b>[Cryogen]</b></a></li>
+                        
+                        <li><a href="/tags-output/KVM/"><b>[KVM]</b></a></li>
+                        
+                        <li><a href="/tags-output/Homelab/"><b>[Homelab]</b></a></li>
+                        
+                        <li><a href="/tags-output/snapd/"><b>[snapd]</b></a></li>
+                        
+                        <li><a href="/tags-output/Pi/"><b>[Pi]</b></a></li>
+                        
+                        <li><a href="/tags-output/Wedding/"><b>[Wedding]</b></a></li>
+                        
+                        <li><a href="/tags-output/KDE/"><b>[KDE]</b></a></li>
+                        
+                        <li><a href="/tags-output/Arch Linux/"><b>[Arch Linux]</b></a></li>
+                        
+                        <li><a href="/tags-output/Website/"><b>[Website]</b></a></li>
+                        
+                        <li><a href="/tags-output/C/"><b>[C]</b></a></li>
+                        
+                        <li><a href="/tags-output/Cluster/"><b>[Cluster]</b></a></li>
+                        
+                        <li><a href="/tags-output/dev/"><b>[dev]</b></a></li>
+                        
+                        <li><a href="/tags-output/Network/"><b>[Network]</b></a></li>
+                        
+                        <li><a href="/tags-output/LFS/"><b>[LFS]</b></a></li>
+                        
+                        <li><a href="/tags-output/Linux/"><b>[Linux]</b></a></li>
+                        
+                        <li><a href="/tags-output/Clojure/"><b>[Clojure]</b></a></li>
+                        
+                        <li><a href="/tags-output/git/"><b>[git]</b></a></li>
+                        
+                        <li><a href="/tags-output/ZFS/"><b>[ZFS]</b></a></li>
+                        
+                        <li><a href="/tags-output/Proxmox/"><b>[Proxmox]</b></a></li>
+                        
+                        <li><a href="/tags-output/DevOps/"><b>[DevOps]</b></a></li>
+                        
+                        <li><a href="/tags-output/Thinkpad/"><b>[Thinkpad]</b></a></li>
+                        
+                        <li><a href="/tags-output/Ledger/"><b>[Ledger]</b></a></li>
+                        
+                        <li><a href="/tags-output/dotfiles/"><b>[dotfiles]</b></a></li>
+                        
+                        <li><a href="/tags-output/Devops/"><b>[Devops]</b></a></li>
+                        
+                        <li><a href="/tags-output/Programming/"><b>[Programming]</b></a></li>
+                        
+                        <li><a href="/tags-output/Solus/"><b>[Solus]</b></a></li>
+                        
+                        <li><a href="/tags-output/Ansible/"><b>[Ansible]</b></a></li>
+                        
+                        <li><a href="/tags-output/SSH/"><b>[SSH]</b></a></li>
+                        
+                        <li><a href="/tags-output/Dev/"><b>[Dev]</b></a></li>
+                        
+                        <li><a href="/tags-output/Korora/"><b>[Korora]</b></a></li>
+                        
+                        
+                    </ul>
+                </li>
+            </ul>
+        </div><!--/.nav-collapse -->
+    </div><!--/.container-fluid -->
+</nav>
+
+
+<div class="container">
+
+
+    <div class="row">
+        <div class="col-lg-12">
+            <div id="content">
+                
+<div id="post">
+    <div class="post-header">
+    <h2>Setting Up My Pi Cluster</h2>
+    <div id="post-meta" class="row">
+        
+        <span class="col-lg-6 left">By: Ryan Himmelwright</span>
+        
+        <div class="col-lg-6 right">May 5, 2017</div>
+    </div>
+</div>
+<div>
+    
+    <p>I have a Raspberry Pi 2, a Raspberry Pi 3, and a Banana Pi. A while ago, I constructed a small tower to house my pi devices. Since then, I have additionally acquired a power source, and some CAT6 cable to connect them all up to a switch. I hope to use the Pis as a mini clustered environment, where I can learn (and play) with some of the "Devops" technologies/techniques out there. This post will briefly explain the initial setup of <a href='../../pages/homelab/#cluster'>my cluster</a>.</p><p><!&ndash; more &ndash;></p><h1><a name="setting&#95;up&#95;the&#95;os&#95;images"></a>Setting up the OS Images</h1>Before doing anything with the hardware, I had to setup the pi "hard drives" (micro SD cards), so they could boot. <h3><a name="ubuntu&#95;for&#95;raspberry&#95;pi"></a>Ubuntu for Raspberry PI</h3><p><img src="../../img/posts/Setting-Up-Pi-Cluster/ubuntu-logo.jpg" style="width: 200px%; float: right; margin: 0px 10px 0px 10px;"/></p><p>After mucking around with Rapsbian and Hypriot one Sunday, I decided to just go with a plain Ubuntu image for the Raspberry Pis. I don't have anything against these specific OSes, but I am mostly setting up this cluster to simulate what I would do on a "real" system. For me, that often means using a straight OS like Ubuntu.</p><p>Luckily, Canonical makes special <a href='https://wiki.ubuntu.com/ARM/RaspberryPi'>Ubuntu ARM images</a>, specifically for the Raspberry Pi. I download the 16.04 server version for both the <a href='http://cdimage.ubuntu.com/ubuntu/releases/16.04/release/ubuntu-16.04.2-preinstalled-server-armhf+raspi2.img.xz'>raspberry pi 2</a> and <a href='http://www.finnie.org/software/raspberrypi/ubuntu-rpi3/ubuntu-16.04-preinstalled-server-armhf+raspi3.img.xz'>raspberry pi 3</a>. The process to write these images to the microSD card differs slightly from ones I've used in the past. It still uses <code>dd</code>, but the image is first piped through <code>xzcat</code>, as such:</p><pre><code>xzcat ubuntu-16.04.2-preinstalled-server-armhf+raspi2.img.xz | sudo dd bs=4M of=/dev/mmcblk0
+xzcat ubuntu-16.04-preinstalled-server-armhf+raspi3.img.xz   | sudo dd bs=4M of=/dev/mmcblk0
+</code></pre><h3><a name="armbian"></a>Armbian</h3><p>The one issue that I have with the Banana Pi compared to the Raspberry Pi, is that it is commonly not supported. It can be hard to find a bananna pi specific image, and the raspberry pi ones usually do not work. For example, while Canonical linked to Raspberry Pi images, it did not mention the banana pie.  This is where <a href='https://www.armbian.com/'>Armbian</a> comes in.</p><p>Armbian is a lightweight Debian and Ubuntu based distribution, that provides builds for various ARM devices. Thus the name, <em>ARM-bian</em>. One of these many supported devices... is the <a href='https://www.armbian.com/banana-pi/'>banana pi</a>. I downloaded the Ubuntu 16.04 Server flavor of Armbian for the Banana PI, and copied it to my micro SD card with the command:</p><pre><code>sudo dd if=Armbian&#95;5.25&#95;Bananapi&#95;Ubuntu&#95;xenial&#95;next&#95;4.9.7.img  of=/dev/mmcblk0 bs=1M
+</code></pre><h3><a name="hardware&#95;setup"></a>Hardware Setup</h3><p><img src="../../img/posts/Setting-Up-Pi-Cluster/pi-cluster.png" style="width: 40%; float: right; margin: 0px 10px 0px 10px;"/></p><p>After the operating system images have been copied the SD cards, the hardware can be setup. I started by inserting the microSD cards into the PIs, being careful to use the correct card with each device. Unlike the Raspberry PIs, the Bananna PI uses a normal SD card instead of a microSD, so I just left it in the converter card I used to connect it to my computer when imaging.</p><p>After adding the "hard drives", I connected each PI to my network switch, via Ethernet. In the future, I would like to put the cluster on it's own mini (managed?) switch so that I can have the nodes on their own private network, but connected to my main network. For now, this works.</p><p>Lastly, plug in the power connectors. Pi devices can be very finicky when not properly powered, so it is a good idea to use an capable USB charging device. I have had trouble in the past with my devices not working correctly due to insufficient power (especially the bpi). I knew this problem would be an even more pronounced with the cluster because I planned to connect a HD to the bpi with a SATA connector. So, I picked up an <a href='https://www.amazon.com/Anker-Charger-PowerPort-Multi-Port-Samsung/dp/B00VH8ZW02/ref=sr_1_1?ie=UTF8&qid=1493860165&sr=8-1&keywords=Anker+power+port+5'>Anker Power Port 5</a> and it has been working great.</p><p>Lastly, two nice features of the banana pi is that it has a 1 GB ethernet port, <em>and</em> a SATA connector with power. So, to utilize this functionality, and get the most out of the bpi, I ordered <a href='https://www.amazon.com/JBtek-Connectors-Banana-Supply-Terminals/dp/B00ZP0L0VS/ref=sr_1_1?ie=UTF8&qid=1493860481&sr=8-1&keywords=banana+pi+sata'>the appropriate SATA connector</a> from amazon for a few bucks. When it arrived, I connected it to the SATA and SATA power ports on the pi, and then to an old 300GB laptop HD I had laying around (it was the drive that came with <a href='../introducing-kadabra/'>kadabra</a>). After the drive was connected, running <code>lsblk</code> on the bpi automatically showed a <code>/dev/sda</code> device, in addition to the typical <code>mmcblk0</code> microSD device. I  mounted the drive to a folder using the following command to test it out:</p><pre><code>sudo mount /dev/sda1 Data
+</code></pre><p>With the hard drive mounted, I was able to browse its contents and see of all the crap still on it. The combination of the GB network and large HD makes the bpi a great little storage node, which is how I intend to use it.</p><h3><a name="bootup&#95;and&#95;connecting&#95;via&#95;ssh"></a>Bootup and Connecting via SSH</h3><p>When the Pis are plugged in, they should automatically boot up. In order to connect to them, I found their IPs from my main computer using <code>nmap</code>:</p><pre><code>sudo nmap -sP 192.168.1.0/24
+</code></pre><div id="caption">This command may differ depending on your network setup</div><p>The Raspberry PIs have <code>&#40;Raspberry Pi Foundation&#41;</code> in the MAC address lines, and my Banana Pi had <code>bananapi</code> in the host name. Once I had the IP addresses, I could ssh in using the default usernames and passwords for the images (the user/pass should be listed on the sites). After logging in for the first time, each PI prompted me to change the password (as it should).</p><h3><a name="adding&#95;a&#95;sudo&#95;user"></a>Adding A Sudo User</h3><p>When connecting to remote devices, I don't like to be logged in as root, so the first thing I did was setup my user account with sudo privileges, on the two Raspberry Pis (Armbian actually prompted me through these steps the first time I logged into the Banana pi. Kudos to them).</p><p>To add the user, set it's password (important), and then add it to the sudo group, I used the following commands:</p><pre><code>useradd -m -s /bin/bash ryan
+passwd ryan
+usermod -a -G sudo ryan
+</code></pre><div id="caption">Yes, I know I can add the user to the sudo group in the <code>useradd</code> command, but I prefer to do it with <code>usermod</code>. Personal Preference.</div><p>That's it. At this point, all of my the PIs are minimally set up accessible. The next steps include updating packages, setting up ssh keys, and configuring .... <a href='https://www.ansible.com'>Ansible</a>. But that will all be in the <em>next post</em>. See you then!</p>
+</div>
+
+<div id="post-tags">
+    <b>Tags: </b>
+    
+    <a href="/tags-output/Homelab/">[Homelab]</a>
+    
+    <a href="/tags-output/Pi/">[Pi]</a>
+    
+    <a href="/tags-output/Cluster/">[Cluster]</a>
+    
+    <a href="/tags-output/Linux/">[Linux]</a>
+    
+    <a href="/tags-output/Devops/">[Devops]</a>
+    
+</div>
+
+
+    <div id="prev-next">
+        
+        <a href="/posts/Ansible-On-Pi-Cluster/">&laquo; Configuring Ansible on the Pi Cluster</a>
+        
+        
+        <a class="right" href="/posts/ZFS-Backups-To-LUKS-External/">ZFS Snapshot Backups to an External Drive with LUKS &raquo;</a>
+        
+    </div>
+
+    
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = '//himmAllRight.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    
+
+
+</div>
+
+            </div>
+        </div>
+    </div>
+    <footer>Copyright &copy;  Ryan Himmelwright
+        <p style="text-align: center;">Generated using <a href="http://cryogenweb.org">Cryogen</a></p></footer>
+</div>
+<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+<script src="/js/highlight.pack.js" type="text/javascript"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+</body>
+</html>
+
