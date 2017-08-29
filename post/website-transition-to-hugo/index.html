@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Transitioning Website to Hugo -- λ ryan. himmelwright. net</title>
+
+    
+
+    
+    <link href="http://ryan.himmelwright.net/css/bootstrap.min.css" rel="stylesheet">
+
+    
+    <link href="http://ryan.himmelwright.net/css/clean-blog.min.css" rel="stylesheet">
+
+    
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href='//fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+
+    
+    
+    
+
+</head>
+
+<body>
+
+    
+    <nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+        <div class="container-fluid">
+            
+            <div class="navbar-header page-scroll">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="http://ryan.himmelwright.net">λ ryan. himmelwright. net</a>
+            </div>
+
+                       
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    
+                    <li>
+                        <a href="http://ryan.himmelwright.net/">home</a>
+                    </li>
+                    
+                    <li>
+                        <a href="http://ryan.himmelwright.net/pages/about/">About</a>
+                    </li>
+                    
+                    <li>
+                        <a href="http://ryan.himmelwright.net/pages/homelab/">Homelab</a>
+                    </li>
+                    
+                    <li>
+                        <a href="http://ryan.himmelwright.net/post/">Archives</a>
+                    </li>
+                    
+                    <li>
+                        <a href="http://ryan.himmelwright.net/post/index.xml">RSS</a>
+                    </li>
+                    
+                  </ul>
+            </div>
+           
+
+        </div>
+        
+    </nav>
+
+
+    
+    
+    <header class="intro-header" style="background-image: url('http://ryan.himmelwright.net/img/header-images/st-lucia-cannon.jpg')">
+      
+      <div class="container">
+        <div class="row">
+           <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+             <div class="post-heading">
+               <h1>Transitioning Website to Hugo</h1>
+               <h2 class="subheading"></h2>
+               <span class="meta">
+                 
+  A 8 minute read,
+
+Posted by <a href="#">Ryan Himmelwright</a> on Sun, Aug 27, 2017
+
+<br />
+Tags <a href="http://ryan.himmelwright.net/tags/website">website</a>, <a href="http://ryan.himmelwright.net/tags/hugo">hugo</a>, <a href="http://ryan.himmelwright.net/tags/go">go</a>
+
+               </span>
+             </div>
+           </div>
+        </div>
+      </div>
+    </header>
+
+    
+    <article>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                  
+
+<p>While I have loved using <a href="http://cryogenweb.org">Cryogen</a> to create this website for over a year and a half now, I have started the transition to using another static website generator. Specifically, I have been experimenting with <a href="https://gohugo.io">Hugo</a>. This post will detail why I am switching, what I have ported over thus far, and what still needs to be completed before generating the official site with hugo.</p>
+
+<!-- more -->
+
+<h3 id="from-cryogen-to-hugo">From Cryogen to Hugo</h3>
+
+<p>My departure from Cryogen really has nothing to do with the project itself. It is a prime example of what <a href="https://clojure.org/">clojure</a> is capable of, and I feel that more people should give it a shot. Recently though, I&rsquo;ve been itching to switch up my website&rsquo;s theme a bit. While I fancy my <a href="../new-theme-immutable/">Immutable Theme</a> I created a couple months ago, it isn&rsquo;t quite doing what I had hoped for. I love dark themes, but the type of posts I&rsquo;ve been creating really don&rsquo;t look good with them. I like to add diagrams, code snippets, and images to all of my posts. Diagram posts look wonderful with a white background, but are garbage in a dark theme. This difference was glaring last week as I switched between my markdown editor&rsquo;s preview window (default white theme), and the website&rsquo;s live preview view, while writing my <a href="../simple-reverse-ssh-tunnel/">reverse tunnels</a> post.</p>
+
+<p>Similar to the logic I employed earlier this month when <a href="../back-to-solus/">switching back to Solus</a>, I thought that if I was going to scrap my theme and start from scratch, I might as well check out different website generator. I had been keeping an eye on the various site generators, but the one I considered the most (and even dabbled with a bit last month), was <a href="https://gohugo.io">Hugo</a>.</p>
+
+<h3 id="what-i-ve-done-so-far">What I&rsquo;ve Done So Far</h3>
+
+<p>I started the process of transporting my website from cryogen to hugo. So far, my experience with Hugo has been great. Here is what I&rsquo;ve done:</p>
+
+<h4 id="installed-setup-a-test-hugo-site">Installed &amp; Setup a test Hugo site</h4>
+
+<p>Obtaining and installing Hugo on my computers was very simple, as it was in the reops (Solus). I just had to run the command:</p>
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span>sudo eopkg it hugo
+</pre></div>
+
+<p>After I had hugo installed, I experimented with creating new website projects for a few minutes before finally creating one to start my transition. To create a new website, I used the command:</p>
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span>hugo new site ryan-hugo-test
+</pre></div>
+
+<p>This created a new directory with all the project&rsquo;s default core files, and adhering to the required hugo <a href="https://gohugo.io/content-management/organization/">directory structure</a>.</p>
+
+<p>Like cryogen, hugo can spin up a website in a test server during development. To do this, use the command:</p>
+
+<pre><code>hugo serve -D
+</code></pre>
+
+<p><em>Note: I used the <code>-D</code> flag to additionally include any files marked as &ldquo;drafts.&rdquo;</em></p>
+
+<h4 id="setup-a-theme-and-started-tweaking-it">Setup a Theme and started tweaking it</h4>
+
+<p>With the hugo site generated, I wanted to setup a proper theme. After sampling a handful of demo sites from hugo&rsquo;s <a href="https://gohugo.io/themes/">theme page</a>, I decided on the <a href="https://themes.gohugo.io/startbootstrap-clean-blog/">startbootstrap-clean-theme</a>. I&rsquo;ve seen it used on other sites, and I think it is a commonly used theme with other site generators. However, it is clean and simple, with a white-background base like I wanted. Additionally, I love having header images for posts and pages. It lets me better personalize the website by exclusively using images I&rsquo;ve photographed myself.</p>
+
+<p>To get the theme, I cloned it from git:</p>
+
+<pre><code>git clone git@github.com:humboldtux/startbootstrap-clean-blog.git
+</code></pre>
+
+<p><em>Note: this particular theme has an abundant amount of features, so it is a good idea to copy the provided example config.toml and build off of it. This is one reason why I started with configuring the theme right off the bat.</em></p>
+
+<p>Before I started ripping into the theme too much, I copied the theme directory to make my own version, and set the <code>theme</code> line in my <code>config.toml</code> to reflect the change. I also went through all the lines of the example <code>config.toml</code> and  changed them accordingly.</p>
+
+<p>With the theme setup, and the configuration edited, I started making some minor tweak to the site. The main tweak I made was to add the <code>Summary</code> contents to the post list on the home page. I currently use this feature in Cryogen, so all of my posts are written to support it. Summaries are baked into hugo, but I needed to edit the theme to include it on the posts page. To achieve this, I edited the <code>/layouts/post/summary.html</code> file of the theme slightly:</p>
+
+<p>original:</p>
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #f8f8f2">&lt;</span><span style="color: #f92672">div</span> <span style="color: #a6e22e">class</span><span style="color: #f92672">=</span><span style="color: #e6db74">&quot;post-preview&quot;</span><span style="color: #f8f8f2">&gt;</span>
+  <span style="color: #f8f8f2">&lt;</span><span style="color: #f92672">a</span> <span style="color: #a6e22e">href</span><span style="color: #f92672">=</span><span style="color: #e6db74">&quot;{{ .Permalink }}&quot;</span><span style="color: #f8f8f2">&gt;</span>
+    <span style="color: #f8f8f2">&lt;</span><span style="color: #f92672">h2</span> <span style="color: #a6e22e">class</span><span style="color: #f92672">=</span><span style="color: #e6db74">&quot;post-title&quot;</span><span style="color: #f8f8f2">&gt;</span>{{ .Title }}<span style="color: #f8f8f2">&lt;/</span><span style="color: #f92672">h2</span><span style="color: #f8f8f2">&gt;</span>
+    <span style="color: #f8f8f2">&lt;</span><span style="color: #f92672">h3</span> <span style="color: #a6e22e">class</span><span style="color: #f92672">=</span><span style="color: #e6db74">&quot;post-subtitle&quot;</span><span style="color: #f8f8f2">&gt;</span>{{ .Description }}<span style="color: #f8f8f2">&lt;/</span><span style="color: #f92672">h3</span><span style="color: #f8f8f2">&gt;</span>
+  <span style="color: #f8f8f2">&lt;/</span><span style="color: #f92672">a</span><span style="color: #f8f8f2">&gt;</span>
+  <span style="color: #f8f8f2">&lt;</span><span style="color: #f92672">p</span> <span style="color: #a6e22e">class</span><span style="color: #f92672">=</span><span style="color: #e6db74">&quot;post-meta&quot;</span><span style="color: #f8f8f2">&gt;</span>
+      {{ partial &quot;meta.html&quot; .}}
+ <span style="color: #f8f8f2">&lt;/</span><span style="color: #f92672">p</span><span style="color: #f8f8f2">&gt;</span>
+<span style="color: #f8f8f2">&lt;/</span><span style="color: #f92672">div</span><span style="color: #f8f8f2">&gt;</span>
+<span style="color: #f8f8f2">&lt;</span><span style="color: #f92672">hr</span><span style="color: #f8f8f2">&gt;</span>
+</pre></div>
+
+<p>with post summaries:</p>
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #f8f8f2">&lt;</span><span style="color: #f92672">div</span> <span style="color: #a6e22e">class</span><span style="color: #f92672">=</span><span style="color: #e6db74">&quot;post-preview&quot;</span><span style="color: #f8f8f2">&gt;</span>
+    <span style="color: #f8f8f2">&lt;</span><span style="color: #f92672">a</span> <span style="color: #a6e22e">href</span><span style="color: #f92672">=</span><span style="color: #e6db74">&quot;{{ .Permalink }}&quot;</span><span style="color: #f8f8f2">&gt;</span>
+        <span style="color: #f8f8f2">&lt;</span><span style="color: #f92672">h2</span> <span style="color: #a6e22e">class</span><span style="color: #f92672">=</span><span style="color: #e6db74">&quot;post-title&quot;</span><span style="color: #f8f8f2">&gt;</span>{{ .Title }}<span style="color: #f8f8f2">&lt;/</span><span style="color: #f92672">h2</span><span style="color: #f8f8f2">&gt;</span>
+        <span style="color: #f8f8f2">&lt;</span><span style="color: #f92672">h3</span> <span style="color: #a6e22e">class</span><span style="color: #f92672">=</span><span style="color: #e6db74">&quot;post-subtitle&quot;</span><span style="color: #f8f8f2">&gt;</span>{{ .Description }}<span style="color: #f8f8f2">&lt;/</span><span style="color: #f92672">h3</span><span style="color: #f8f8f2">&gt;</span>
+    <span style="color: #f8f8f2">&lt;/</span><span style="color: #f92672">a</span><span style="color: #f8f8f2">&gt;</span>
+    <span style="color: #f8f8f2">&lt;</span><span style="color: #f92672">p</span> <span style="color: #a6e22e">class</span><span style="color: #f92672">=</span><span style="color: #e6db74">&quot;post-meta&quot;</span><span style="color: #f8f8f2">&gt;</span>
+        {{ partial &quot;meta.html&quot; .}}
+        <span style="color: #f8f8f2">&lt;</span><span style="color: #f92672">div</span> <span style="color: #a6e22e">class</span><span style="color: #f92672">=</span><span style="color: #e6db74">&quot;summary&quot;</span><span style="color: #f8f8f2">&gt;</span>
+            {{ .Summary }}
+        <span style="color: #f8f8f2">&lt;/</span><span style="color: #f92672">div</span><span style="color: #f8f8f2">&gt;</span>
+    <span style="color: #f8f8f2">&lt;/</span><span style="color: #f92672">p</span><span style="color: #f8f8f2">&gt;</span>
+    <span style="color: #f8f8f2">&lt;</span><span style="color: #f92672">p</span> <span style="color: #a6e22e">class</span><span style="color: #f92672">=</span><span style="color: #e6db74">&quot;post-meta&quot;</span><span style="color: #f8f8f2">&gt;</span> 
+        <span style="color: #f8f8f2">&lt;</span><span style="color: #f92672">a</span> <span style="color: #a6e22e">href</span><span style="color: #f92672">=</span><span style="color: #e6db74">&quot;{{ .Permalink }}&quot;</span><span style="color: #f8f8f2">&gt;</span> Click to Read More --&gt;<span style="color: #f8f8f2">&lt;/</span><span style="color: #f92672">a</span><span style="color: #f8f8f2">&gt;</span>
+    <span style="color: #f8f8f2">&lt;/</span><span style="color: #f92672">p</span><span style="color: #f8f8f2">&gt;</span>
+<span style="color: #f8f8f2">&lt;/</span><span style="color: #f92672">div</span><span style="color: #f8f8f2">&gt;</span>
+<span style="color: #f8f8f2">&lt;</span><span style="color: #f92672">hr</span><span style="color: #f8f8f2">&gt;</span>
+</pre></div>
+
+<p>I also setup and fixed the code syntax highlighting. I first installed pygments, which again was <em>very</em> easy to do on my Solus computers:</p>
+
+<pre><code>sudo eopkg it pygments
+</code></pre>
+
+<p>After that, I just made sure that the language was specified at the start of each code snippet. I ran into an issue where the colors for the code were poorly selected, resulting in some invisable text. Apparently, this is a common issue, and I found some <em>.css</em> code to add to the <code>pre</code> section of my <code>/static/css/clean-blog-min.css</code> file that resolved the issue.</p>
+
+<p>If all went well, the code above should have proper syntax highlighting.</p>
+
+<h4 id="dumped-my-backlog-of-posts-and-altered-the-header-content">Dumped my Backlog of Posts and altered the header content</h4>
+
+<p>To test out if the website worked properly, I wanted to import all of my posts. First&hellip; I needed to figure out where to put them. Hugo has a slightly different file structure, but I eventually figured out that I could create a <code>/content/post/</code> directory, and dump them there.</p>
+
+<p>Cryogen, written in <a href="https://clojure.org/">clojure</a>, uses a clojure map for the post&rsquo;s meta data. Hugo on the other hand, uses a several <a href="https://gohugo.io/content-management/front-matter/">font matter formats</a> (<code>toml</code>, <code>yaml</code>, <code>json</code>) for meta data. So, I had to convert the post headers. I&rsquo;m sure that there was a simple, programmatic way, or even a tool, created to accomplish this&hellip; but I just did it by hand. It wasn&rsquo;t so bad. I used emacs.</p>
+
+<p>After importing the markdown files for the posts, I needed to add all the images the posts contain. Again, this took a tiny bit of research to figure out the file structure, but I quickly learned that anything in the <code>/static/</code> directory gets copied to the site&rsquo;s root directory when the site is compiled. So, I was able to copy my cryogen <code>/img/</code> folder directly to <code>/static/img/</code> in hugo, and all my image paths worked out-of-the-box!</p>
+
+<p>Unfortunately, I immediately noticed that some images in the posts were massive, and not constrained to the content width. I looked for a solution, and tried editing the <code>css</code>, but I eventually just started to convert the markdown syntax images, to use normal html <code>&lt;img&gt;</code> tags, with a <code>width=100%</code> parameter. Ultimately, this gives me a bit more power with how I set images anyway.</p>
+
+<h4 id="made-a-bunch-of-header-images">Made a bunch of header images</h4>
+
+<p>After fixing my in-post images, I started to play with post/page header images. I figured out where they were located in the theme, and added two of my own to replace the defaults. I read that a header image can be set with the <code>image == &quot;...&quot;</code> option in a post/page&rsquo;s font matter&hellip; so I went a little crazy. I stayed up late browsing through some of my photos, and converting them to header images (I did this by shading them a just a tad, so the overlaying text is legible).</p>
+
+<h3 id="what-needs-to-be-done">What Needs to be Done</h3>
+
+<p>This post has turned out to be a giant monster, so I&rsquo;ll be brief here and turn the sub-sections into a quick list instead.</p>
+
+<ul>
+<li><p><strong>Create Single Pages (About/Homelab)</strong> - I still need to figure out and create my website&rsquo;s single pages. These include the <em>About Me</em> and <em>Homelab</em> pages. The content of those pages has also been slipping out of date&hellip; but I won&rsquo;t let that hold me up from switching the site over first.</p></li>
+
+<li><p><strong>Setting up an RSS Feed</strong> - Similar to the task above, I want to make sure I have an RSS feed for the blog configured, and accessible in the main menu.</p></li>
+
+<li><p><strong>Check how the posts display</strong> - I need to go through the posts and make sure they are displaying content correctly. I&rsquo;ll check that links work, images aren&rsquo;t massive, code syntax languages are set, etc. This actually shouldn&rsquo;t be as bad as it sounds because I&rsquo;ve done much of it already.</p></li>
+
+<li><p><strong>Small tweaks</strong> - There are bound to be a few tweaks here or there that I&rsquo;ll notice and want to changed (<em>example from above: I&rsquo;ve already added the post summaries to the home page post list</em>). One item that comes to mind is adding <em>next</em> and <em>previous</em> post markers at the bottom of each post. Again, I won&rsquo;t let that hold me up though.</p></li>
+</ul>
+
+<p>Well, that&rsquo;s about it. I&rsquo;ll work now on editing and publishing this post, and with any luck, the website should switch over to the Hugo generated one within a few days. I hope you enjoy it!</p>
+
+                  
+
+                </div>
+            </div>
+        </div>
+    </article>
+
+    <hr>
+    
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                  <ul class="list-inline text-center">
+                    
+                      <li>
+                        <a href="mailto:ryan@himmelwright.net">
+                          <span class="fa-stack fa-lg">
+                            <i class="fa fa-circle fa-stack-2x"></i>
+                            <i class="fa fa-envelope-o fa-stack-1x fa-inverse"></i>
+                          </span>
+                        </a>
+                      </li>
+                    
+                    
+                    <li>
+                      <a href="https://github.com/himmAllRight">
+                        <span class="fa-stack fa-lg">
+                          <i class="fa fa-circle fa-stack-2x"></i>
+                          <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                        </span>
+                      </a>
+                    </li>
+                    
+                    <li>
+                      <a href="https://www.linkedin.com/in/ryan-himmelwright-b3891774/">
+                        <span class="fa-stack fa-lg">
+                          <i class="fa fa-circle fa-stack-2x"></i>
+                          <i class="fa fa-linkedin fa-stack-1x fa-inverse"></i>
+                        </span>
+                      </a>
+                    </li>
+                    
+                    <li>
+                      <a href="https://www.instagram.com/himmelwr/">
+                        <span class="fa-stack fa-lg">
+                          <i class="fa fa-circle fa-stack-2x"></i>
+                          <i class="fa fa-instagram fa-stack-1x fa-inverse"></i>
+                        </span>
+                      </a>
+                    </li>
+                    
+                    <li>
+                      <a href="https://twitter.com/himmAllRight17">
+                        <span class="fa-stack fa-lg">
+                          <i class="fa fa-circle fa-stack-2x"></i>
+                          <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+                        </span>
+                      </a>
+                    </li>
+                    
+                  </ul>
+                  <p class="copyright text-muted">Copyright © Ryan Himmelwright. Site created with Hugo</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    
+    <script src="http://ryan.himmelwright.net/js/jquery.min.js"></script>
+
+    
+    <script src="http://ryan.himmelwright.net/js/bootstrap.min.js"></script>
+
+    
+    <script src="http://ryan.himmelwright.net/js/clean-blog.js"></script>
+
+    
+<script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-123-45', 'auto');
+ga('send', 'pageview');
+</script>
+
+
+</body>
+
+</html>
+

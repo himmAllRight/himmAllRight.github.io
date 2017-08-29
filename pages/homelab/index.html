@@ -1,291 +1,385 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<html lang="en-us">
+
 <head>
-    <meta charset="utf-8"/>
-    <title>λ ryan himmelwright . net: Homelab</title>
-    <link rel="canonical" href="http://ryan.himmelwright.net/pages/homelab/">
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="//cdn.jsdelivr.net/font-hack/2.020/css/hack-extended.min.css">
-    <link href='http://fonts.googleapis.com/css?family=Alegreya:400italic,700italic,400,700' rel='stylesheet'
-          type='text/css'>
-    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css">
-    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.1/styles/default.min.css">
-    <link href="/css/screen.css" rel="stylesheet" type="text/css" />
+    <meta name="description" content="">
+    <meta name="author" content="">
 
+    <title>Homelab -- λ ryan. himmelwright. net</title>
 
-    <!-- Piwik -->
-    <script type="text/javascript">
-      var _paq = _paq || [];
-      /* tracker methods like "setCustomDimension" should be called before "trackPageView" */
-      _paq.push(["setDocumentTitle", document.domain + "/" + document.title]);
-      _paq.push(["setCookieDomain", "*.ryan.himmelwright.net"]);
-      _paq.push(['trackPageView']);
-      _paq.push(['enableLinkTracking']);
-      (function() {
-      var u="//cloud.himmelwright.net/piwik/";
-      _paq.push(['setTrackerUrl', u+'piwik.php']);
-      _paq.push(['setSiteId', '1']);
-      var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
-      g.type='text/javascript'; g.async=true; g.defer=true; g.src=u+'piwik.js'; s.parentNode.insertBefore(g,s);
-      })();
-    </script>
-    <noscript><p><img src="//cloud.himmelwright.net/piwik/piwik.php?idsite=1&rec=1" style="border:0;" alt="" /></p></noscript>
-    <!-- End Piwik Code -->
+    
+
+    
+    <link href="http://ryan.himmelwright.net/css/bootstrap.min.css" rel="stylesheet">
+
+    
+    <link href="http://ryan.himmelwright.net/css/clean-blog.min.css" rel="stylesheet">
+
+    
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href='//fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+
+    
+    
+    
+
 </head>
+
 <body>
 
-
-<nav class="navbar navbar-default">
-    <div class="container">
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="/">λ ryan himmelwright . net</a>
-        </div>
-        <div id="navbar" class="navbar-collapse collapse">
-            <ul class="nav navbar-nav navbar-right">
-                <li ><a href="/">Home</a></li>
-                
-                <li
-                >
-                <a href="/pages/about/">About</a>
-                </li>
-                
-                <li
-                 class="active" >
-                <a href="/pages/homelab/">Homelab</a>
-                </li>
-                
-                <li
-                ><a href="/archives">Archives</a></li>
-                <li><a href="/feed.xml">RSS</a></li>
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                        More <span class="caret"></span></a>
-                    <ul class="dropdown-menu" role="menu">
-                        <!-- 
-                           -->
-                        <li class="dropdown-header">Links</li>
-                        <li><a href="https://github.com/himmAllRight"><img src=http://ryan.himmelwright.net/img/icons/Github.png width="30px">Github</a></li>
-                        <li><a href="https://www.linkedin.com/in/ryan-himmelwright-b3891774/"><img src=http://ryan.himmelwright.net/img/icons/Linkedin.png width="30px">LinkedIn</a></li>
-                        <li><a href="https://www.instagram.com/himmelwr/"><img src=http://ryan.himmelwright.net/img/icons/Instagram.png width="30px">Instagram</a></li>
-                        <li><a href="https://twitter.com/himmAllRight17"><img src=http://ryan.himmelwright.net/img/icons/Twitter.png width="30px">Twitter</a></li>
-                               
-                        <li class="divider"></li>
-                        <li class="dropdown-header">Recent Posts</li>
-                        
-                        <li><a href="/posts/simple-reverse-ssh-tunnel/">Simple Reverse SSH Tunnels</a></li>
-                        
-                        <li><a href="/posts/back-to-solus/">Back to Solus</a></li>
-                        
-                        <li><a href="/posts/dabbling-with-go/">Dabbling with GO</a></li>
-                        
-                        <li><a href="/posts/solus-to-fedora/">Migrating from Solus to Fedora for now</a></li>
-                        
-                        <li><a href="/posts/solus-to-fedora.sync-conflict-20170810-062209/">Migrating from Solus to Fedora for a bit</a></li>
-                        
-                        
-
-                        
-                        <li class="divider"></li>
-                        <li class="dropdown-header">Tags</li>
-                        
-                        <li><a href="/tags-output/Fedora/"><b>[Fedora]</b></a></li>
-                        
-                        <li><a href="/tags-output/wifi/"><b>[wifi]</b></a></li>
-                        
-                        <li><a href="/tags-output/Python/"><b>[Python]</b></a></li>
-                        
-                        <li><a href="/tags-output/customization/"><b>[customization]</b></a></li>
-                        
-                        <li><a href="/tags-output/i3/"><b>[i3]</b></a></li>
-                        
-                        <li><a href="/tags-output/ubiquiti/"><b>[ubiquiti]</b></a></li>
-                        
-                        <li><a href="/tags-output/Cryogen/"><b>[Cryogen]</b></a></li>
-                        
-                        <li><a href="/tags-output/KVM/"><b>[KVM]</b></a></li>
-                        
-                        <li><a href="/tags-output/Homelab/"><b>[Homelab]</b></a></li>
-                        
-                        <li><a href="/tags-output/snapd/"><b>[snapd]</b></a></li>
-                        
-                        <li><a href="/tags-output/Pi/"><b>[Pi]</b></a></li>
-                        
-                        <li><a href="/tags-output/GO/"><b>[GO]</b></a></li>
-                        
-                        <li><a href="/tags-output/Wedding/"><b>[Wedding]</b></a></li>
-                        
-                        <li><a href="/tags-output/KDE/"><b>[KDE]</b></a></li>
-                        
-                        <li><a href="/tags-output/Arch Linux/"><b>[Arch Linux]</b></a></li>
-                        
-                        <li><a href="/tags-output/Website/"><b>[Website]</b></a></li>
-                        
-                        <li><a href="/tags-output/C/"><b>[C]</b></a></li>
-                        
-                        <li><a href="/tags-output/Cluster/"><b>[Cluster]</b></a></li>
-                        
-                        <li><a href="/tags-output/dev/"><b>[dev]</b></a></li>
-                        
-                        <li><a href="/tags-output/Network/"><b>[Network]</b></a></li>
-                        
-                        <li><a href="/tags-output/LFS/"><b>[LFS]</b></a></li>
-                        
-                        <li><a href="/tags-output/Linux/"><b>[Linux]</b></a></li>
-                        
-                        <li><a href="/tags-output/Clojure/"><b>[Clojure]</b></a></li>
-                        
-                        <li><a href="/tags-output/git/"><b>[git]</b></a></li>
-                        
-                        <li><a href="/tags-output/ZFS/"><b>[ZFS]</b></a></li>
-                        
-                        <li><a href="/tags-output/Proxmox/"><b>[Proxmox]</b></a></li>
-                        
-                        <li><a href="/tags-output/DevOps/"><b>[DevOps]</b></a></li>
-                        
-                        <li><a href="/tags-output/Thinkpad/"><b>[Thinkpad]</b></a></li>
-                        
-                        <li><a href="/tags-output/Ledger/"><b>[Ledger]</b></a></li>
-                        
-                        <li><a href="/tags-output/dotfiles/"><b>[dotfiles]</b></a></li>
-                        
-                        <li><a href="/tags-output/Devops/"><b>[Devops]</b></a></li>
-                        
-                        <li><a href="/tags-output/Programming/"><b>[Programming]</b></a></li>
-                        
-                        <li><a href="/tags-output/Solus/"><b>[Solus]</b></a></li>
-                        
-                        <li><a href="/tags-output/Ansible/"><b>[Ansible]</b></a></li>
-                        
-                        <li><a href="/tags-output/SSH/"><b>[SSH]</b></a></li>
-                        
-                        <li><a href="/tags-output/Dev/"><b>[Dev]</b></a></li>
-                        
-                        <li><a href="/tags-output/Korora/"><b>[Korora]</b></a></li>
-                        
-                        
-                    </ul>
-                </li>
-            </ul>
-        </div><!--/.nav-collapse -->
-    </div><!--/.container-fluid -->
-</nav>
-
-
-<div class="container">
-
-
-    <div class="row">
-        <div class="col-lg-12">
-            <div id="content">
-                
-<div id="custom-page">
-    <div id="page-header">
-        <h2>Homelab</h2>
-    </div>
     
-    <p>This is a page where I maintain the status of the computers in my “Homelab”. I will list my current systems here (potentially with screenshots of my current desktop setup for my workstations), as well as network diagrams of our current setup.</p><h2><a name="network"></a>Network</h2><h3><a name="network&#95;diagram"></a>Network Diagram</h3><a href='../../img/homelab/NetworkDiagram.png'><img src="../../img/homelab/NetworkDiagram.png" alt="Himmelwright Network" /></a><em>&#42; A Little Out of Date</em><h2><a name="computers"></a>Computers</h2><h3><a name="ryan&#95;(me)"></a>Ryan (Me)</h3><p><a href='../../img/homelab/alakazam.jpg'><img src="../../img/homelab/alakazam.jpg" alt="Ryan's Workstation" /></a> <em>My Main Computer Setup (Alakazam)</em></p><p><a href='../../img/homelab/alakazam_chair.jpg'><img src="../../img/homelab/alakazam_chair.jpg" alt="Ryan's Desk - Chair" /></a> <em>My Workstation Area</em></p><p><a href='../../img/homelab/alakazam_desk.jpg'><img src="../../img/homelab/alakazam_desk.jpg" alt="Ryan's Desk" /></a> <em>My Workstation Standing Desk</em></p><p><a name="alakazam"></a><h4><a name="alakazam&#95;(main&#95;workstation&#95;laptop)"></a>Alakazam (Main Workstation Laptop)</h4><pre><code>System76 Bonobo Extreme
-Intel i7 4810-MQ &#91;2.8 Ghz &#40;3.8 Ghz Turbo&#41;, 6M Cache, 4 Cores, 8 Threads&#93;
+    <nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+        <div class="container-fluid">
+            
+            <div class="navbar-header page-scroll">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="http://ryan.himmelwright.net">λ ryan. himmelwright. net</a>
+            </div>
+
+                       
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    
+                    <li>
+                        <a href="http://ryan.himmelwright.net/">home</a>
+                    </li>
+                    
+                    <li>
+                        <a href="http://ryan.himmelwright.net/pages/about/">About</a>
+                    </li>
+                    
+                    <li>
+                        <a href="http://ryan.himmelwright.net/pages/homelab/">Homelab</a>
+                    </li>
+                    
+                    <li>
+                        <a href="http://ryan.himmelwright.net/post/">Archives</a>
+                    </li>
+                    
+                    <li>
+                        <a href="http://ryan.himmelwright.net/post/index.xml">RSS</a>
+                    </li>
+                    
+                  </ul>
+            </div>
+           
+
+        </div>
+        
+    </nav>
+
+
+
+
+<header class="intro-header" style="background-image: url('http://ryan.himmelwright.net/img/header-images/alakazam.jpg')">
+    
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <h1>Homelab</h1>
+                    <h2 class="subheading"></h2>
+                    <span class="meta">
+                        
+  A 3 minute read,
+
+Posted by <a href="#">Ryan Himmelwright</a> on Mon, Aug 28, 2017
+
+<br />
+Tags 
+
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+    </header>
+
+    
+    <article>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                    
+
+<p>This is a page where I maintain the status of the computers in my “Homelab”. I will list my current systems here (potentially with screenshots of my current desktop setup for my workstations), as well as network diagrams of our current setup.</p>
+
+<h2 id="network">Network</h2>
+
+<h3 id="network-diagram">Network Diagram</h3>
+
+<p><img alt="Himmelwright Network" src="../../img/homelab/NetworkDiagram.png" width=100%>
+<em>* A Little Out of Date</em></p>
+
+<h2 id="computers">Computers</h2>
+
+<h3 id="ryan-me">Ryan (Me)</h3>
+
+<p><img alt="Ryan's Workstation" src="../../img/homelab/alakazam.jpg" width=100%>
+<em>My Main Computer Setup (Alakazam)</em></p>
+
+<p><img alt="Ryan's Desk - Chair" src="../../img/homelab/alakazam_chair.jpg" width=100%>
+<em>My Workstation Area</em></p>
+
+<p><img alt="Ryan's Desk" src="../../img/homelab/alakazam_desk.jpg" width=100%>
+<em>My Workstation Standing Desk</em></p>
+
+<p><a name="alakazam"></a></p>
+
+<h4 id="alakazam-main-workstation-laptop">- Alakazam (Main Workstation Laptop)</h4>
+
+<pre><code>System76 Bonobo Extreme
+Intel i7 4810-MQ [2.8 Ghz (3.8 Ghz Turbo), 6M Cache, 4 Cores, 8 Threads]
 16 GB RAM
 Nvidia GTX 970M
 120 GB Samsung EVO SSD
 1 TB 7200 RPM HDD
 17.3” 1920x1080 Display 
-Monitors&#41;
+Monitors)
 Solus
-</code></pre><h5><a name="periphery"></a>Periphery</h5><pre><code>2 x 23.6&quot; ASUS 1920x1080 Monitors
+</code></pre>
+
+<h5 id="periphery">Periphery</h5>
+
+<pre><code>2 x 23.6&quot; ASUS 1920x1080 Monitors
 Happy Hacking Keyboard Lite 2
 Audioengine A2+ Speakers &amp; Stands
 Bose AE2 Headphones
 Logitech HD Pro Webcam c920 Widescreen
 Blue Yeti Microphone - Backout Edition
 Inateck USB 3.0 to SATA Dual-Bay Hard Drive Docking Station
-</code></pre></p><p><a name="kadabra"></a><h4><a name="kadabra&#95;(portable&#95;laptop)"></a>Kadabra (Portable Laptop)</h4><pre><code>Lenovo x230
-Intel i5-3320M &#91;2.6 GHz &#40;3.3 GHz Turbo&#41;, 3M Cache, 2 Cores, 4 Threads&#93;
+</code></pre>
+
+<p><a name="kadabra"></a></p>
+
+<h4 id="kadabra-portable-laptop">- Kadabra (Portable Laptop)</h4>
+
+<pre><code>Lenovo x230
+Intel i5-3320M [2.6 GHz (3.3 GHz Turbo), 3M Cache, 2 Cores, 4 Threads]
 8 GB RAM
 250 GB Samsung 850 EVO SSD
 12.5&quot; HD LED 1366x768 Display
 9-Cell Battery
 Solus
-</code></pre></p><h3><a name="rebecca&#95;(wife)"></a>Rebecca (Wife)</h3><h4><a name="bellsprout&#95;(2014)"></a>Bellsprout (2014)</h4><pre><code>Macbook Air
-Intel i5 &#40;1.4 GHz &#40;2.7 GHz Turbo&#41;, 3M Cache, 2 Cores, 2 Threads&#41; ?
+</code></pre>
+
+<h3 id="rebecca-wife">Rebecca (Wife)</h3>
+
+<h4 id="bellsprout-2014">- Bellsprout (2014)</h4>
+
+<pre><code>Macbook Air
+Intel i5 (1.4 GHz (2.7 GHz Turbo), 3M Cache, 2 Cores, 2 Threads) ?
 4 GB RAM
 128 GB PCIe Flash HD
 13.3” 1440x900 LED Display
-2.96 Lbs and &#126;0.7” thick
+2.96 Lbs and ~0.7” thick
 Mac OS
-</code></pre><p><a name="servers"></a><h3><a name="servers"></a>Servers</h3><a href='../../img/homelab/rack.jpg'><img src="../../img/homelab/rack.jpg" alt="Lack Rack" /></a></p><p><a name="ninetales"></a><h4><a name="ninetales&#95;(vm&#95;host&#95;/&#95;home&#95;server)"></a>Ninetales (VM Host / Home Server)</h4><pre><code>Lenovo ThinkServer 440
-Intel Xeon E3-1225 v3 &#91;3.2 GHz &#40;3.6 GHz Turbo&#41;, 8M Cache, 4 Cores, 4 Threads&#93;
+</code></pre>
+
+<p><a name="servers"></a></p>
+
+<h3 id="servers">Servers</h3>
+
+<p><img alt="Lack Rack" src="../../img/homelab/rack.jpg" width=100%></p>
+
+<p><a name="ninetales"></a></p>
+
+<h4 id="ninetales-vm-host-home-server">- Ninetales (VM Host / Home Server)</h4>
+
+<pre><code>Lenovo ThinkServer 440
+Intel Xeon E3-1225 v3 [3.2 GHz (3.6 GHz Turbo), 8M Cache, 4 Cores, 4 Threads]
 20 GB ECC RAM
-250 GB Samsung EVO SSD &#40;OS Partition + LVM partion for VM Volumes&#41;
-2 x 1TB WD 7200 RPM HDD &#40;ZFS Mirror, for Backups&#41; &#40;Hotswap&#41;
-2 x 3TB TOSHIBA 7200 RPM HDD &#40;ZFS Mirror, for Storage&#41; &#40;Hotswap&#41;
+250 GB Samsung EVO SSD (OS Partition + LVM partion for VM Volumes)
+2 x 1TB WD 7200 RPM HDD (ZFS Mirror, for Backups) (Hotswap)
+2 x 3TB TOSHIBA 7200 RPM HDD (ZFS Mirror, for Storage) (Hotswap)
 Proxmox VE 4.4
-</code></pre></p><h5><a name="ninetales&#95;kvm&#95;vms:"></a>Ninetales KVM VMs:</h5><pre><code>Gentoo  - Gentoo     - Vm to play with Gentoo Linux
+</code></pre>
+
+<h5 id="ninetales-kvm-vms">Ninetales KVM VMs:</h5>
+
+<pre><code>Gentoo  - Gentoo     - Vm to play with Gentoo Linux
 Vomonat - Kali Linux - Used for learning PenTesting techniques
 test-vm - Various    - VM used to test out differnt distros
-</code></pre><h5><a name="ninetales&#95;lxc&#95;containers:"></a>Ninetales LXC Containers:</h5><pre><code>Diglet  &#40;50&#41;  - Arch Linux   - Minecraft Server
-Staryu  &#40;120&#41; - Arch Linux   - Plex Server
-Meowth  &#40;52&#41;  - Arch Linux   - Remote Website Writting/ Other
-Kakuna  &#40;14&#41;  - Ubuntu 16.04 - Experimenting with Ledger syncing methods
-Tangela &#40;114&#41; - Centos 7     - Nginx for Port and Subdomain Proxy
-Geodude &#40;74&#41;  - Ubuntu 16.04 - Gitlab Server
-</code></pre><h4><a name="charmander&#95;(test&#95;server&#95;/&#95;rebecca’s&#95;gaming&#95;computer)"></a>Charmander (Test Server / Rebecca’s Gaming Computer)</h4><pre><code>My old desktop &#40;first computer build&#41;
-Intel i7-930 &#91;2.8 GHz &#40;3.06 GHz Turbo&#41;, 8M Cache, 4 Cores, 8 Threads&#93;
+</code></pre>
+
+<h5 id="ninetales-lxc-containers">Ninetales LXC Containers:</h5>
+
+<pre><code>Diglet  (50)  - Arch Linux   - Minecraft Server
+Staryu  (120) - Arch Linux   - Plex Server
+Meowth  (52)  - Arch Linux   - Remote Website Writting/ Other
+Kakuna  (14)  - Ubuntu 16.04 - Experimenting with Ledger syncing methods
+Tangela (114) - Centos 7     - Nginx for Port and Subdomain Proxy
+Geodude (74)  - Ubuntu 16.04 - Gitlab Server
+</code></pre>
+
+<h4 id="charmander-test-server-rebecca-s-gaming-computer">- Charmander (Test Server / Rebecca’s Gaming Computer)</h4>
+
+<pre><code>My old desktop (first computer build)
+Intel i7-930 [2.8 GHz (3.06 GHz Turbo), 8M Cache, 4 Cores, 8 Threads]
 6 GB RAM
 Nvidia GTX 260
 120 GB Kingston SSD
-Ubuntu MATE 15.10 OS</code></pre><h4><a name="cyberpower&#95;1500va/900w&#95;ups"></a>CyberPower 1500VA/900W UPS</h4><h4><a name="xbox&#95;one"></a>Xbox One</h4><p><a name="cluster"></a><h3><a name="pi&#95;cluster"></a>PI Cluster</h3><a href='../../img/homelab/pi-cluster.png'><img src="../../img/homelab/pi-cluster.png" alt="PI Cluster" /></a></p><h4><a name="node&#95;1"></a>Node 1</h4><pre><code>Raspberry Pi 3
-ARM v8 CPU &#40;1.2 GHz, 4 Cores, 4 Threads&#41;
+Ubuntu MATE 15.10 OS
+</code></pre>
+
+<h4 id="cyberpower-1500va-900w-ups">- CyberPower 1500VA/900W UPS</h4>
+
+<h4 id="xbox-one">- Xbox One</h4>
+
+<p><a name="cluster"></a></p>
+
+<h3 id="pi-cluster">PI Cluster</h3>
+
+<p><img alt="PI Cluster" src="../../img/homelab/pi-cluster.png" width=100%></p>
+
+<h4 id="node-1">Node 1</h4>
+
+<pre><code>Raspberry Pi 3
+ARM v8 CPU (1.2 GHz, 4 Cores, 4 Threads)
 1 GB RAM
 MicroSD card for HD
 Ubuntu 16.04 ARM
-</code></pre><h4><a name="node&#95;2"></a>Node 2</h4><pre><code>Raspberry Pi 2
-ARM Coretx-A7 &#40;900 MHz, 4 Cores, 4 Threads&#41;
+</code></pre>
+
+<h4 id="node-2">Node 2</h4>
+
+<pre><code>Raspberry Pi 2
+ARM Coretx-A7 (900 MHz, 4 Cores, 4 Threads)
 1 GB RAM
 MicroSD card for HD
 Ubuntu 16.04 ARM
-</code></pre><h4><a name="node&#95;3"></a>Node 3</h4><pre><code>Banana Pi M1
-A20 ARM Cortex-A7 Dual Core &#40;2 Cores, 2 Threads&#41;
+</code></pre>
+
+<h4 id="node-3">Node 3</h4>
+
+<pre><code>Banana Pi M1
+A20 ARM Cortex-A7 Dual Core (2 Cores, 2 Threads)
 1 GB RAM
 10/100/1000 Ethernet
 MicroSD card for HD
-Armbian &#40;Ubuntu 16.04 version&#41;
-</code></pre><h3><a name="digital&#95;ocean&#95;droplets"></a>Digital Ocean Droplets</h3><h4><a name="pidgey&#95;(nextcloud/test&#95;cloud&#95;server)"></a>Pidgey (Nextcloud/Test Cloud Server)</h4><pre><code>Digital Ocean KVM Droplet
+Armbian (Ubuntu 16.04 version)
+</code></pre>
+
+<h3 id="digital-ocean-droplets">Digital Ocean Droplets</h3>
+
+<h4 id="pidgey-nextcloud-test-cloud-server">Pidgey (Nextcloud/Test Cloud Server)</h4>
+
+<pre><code>Digital Ocean KVM Droplet
 1 Core
 512 MB RAM
 20 GB SSD
-Ubuntu 16.04 OS</code></pre><h4><a name="wedding-server&#95;(himmelwright&#95;wedding&#95;website&#95;host)"></a>Wedding-Server (Himmelwright Wedding Website Host)</h4><pre><code>Digital Ocean KVM Droplet
+Ubuntu 16.04 OS
+</code></pre>
+
+<h4 id="wedding-server-himmelwright-wedding-website-host">Wedding-Server (Himmelwright Wedding Website Host)</h4>
+
+<pre><code>Digital Ocean KVM Droplet
 1 Core
 512 MB RAM
 20 GB SSD
-Ubuntu 14.04 LTS OS</code></pre>
+Ubuntu 14.04 LTS OS
+</code></pre>
 
-    <!-- <div id="prev-next"> -->
-    <!--  -->
-    <!-- <a href="/pages/about/">&laquo; About</a> -->
-    <!--  -->
-    <!--  -->
-    <!--  -->
-    <!-- </div> -->
-</div>
+                    
 
+                </div>
             </div>
         </div>
-    </div>
-    <footer>Copyright &copy;  Ryan Himmelwright
-        <p style="text-align: center;">Generated using <a href="http://cryogenweb.org">Cryogen</a></p></footer>
-</div>
-<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
-<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
-<script src="/js/highlight.pack.js" type="text/javascript"></script>
-<script>hljs.initHighlightingOnLoad();</script>
+    </article>
+
+        <hr>
+    
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                  <ul class="list-inline text-center">
+                    
+                      <li>
+                        <a href="mailto:ryan@himmelwright.net">
+                          <span class="fa-stack fa-lg">
+                            <i class="fa fa-circle fa-stack-2x"></i>
+                            <i class="fa fa-envelope-o fa-stack-1x fa-inverse"></i>
+                          </span>
+                        </a>
+                      </li>
+                    
+                    
+                    <li>
+                      <a href="https://github.com/himmAllRight">
+                        <span class="fa-stack fa-lg">
+                          <i class="fa fa-circle fa-stack-2x"></i>
+                          <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                        </span>
+                      </a>
+                    </li>
+                    
+                    <li>
+                      <a href="https://www.linkedin.com/in/ryan-himmelwright-b3891774/">
+                        <span class="fa-stack fa-lg">
+                          <i class="fa fa-circle fa-stack-2x"></i>
+                          <i class="fa fa-linkedin fa-stack-1x fa-inverse"></i>
+                        </span>
+                      </a>
+                    </li>
+                    
+                    <li>
+                      <a href="https://www.instagram.com/himmelwr/">
+                        <span class="fa-stack fa-lg">
+                          <i class="fa fa-circle fa-stack-2x"></i>
+                          <i class="fa fa-instagram fa-stack-1x fa-inverse"></i>
+                        </span>
+                      </a>
+                    </li>
+                    
+                    <li>
+                      <a href="https://twitter.com/himmAllRight17">
+                        <span class="fa-stack fa-lg">
+                          <i class="fa fa-circle fa-stack-2x"></i>
+                          <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+                        </span>
+                      </a>
+                    </li>
+                    
+                  </ul>
+                  <p class="copyright text-muted">Copyright © Ryan Himmelwright. Site created with Hugo</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    
+    <script src="http://ryan.himmelwright.net/js/jquery.min.js"></script>
+
+    
+    <script src="http://ryan.himmelwright.net/js/bootstrap.min.js"></script>
+
+    
+    <script src="http://ryan.himmelwright.net/js/clean-blog.js"></script>
+
+    
+<script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-123-45', 'auto');
+ga('send', 'pageview');
+</script>
+
+
 </body>
+
 </html>
 
