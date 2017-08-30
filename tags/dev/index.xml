@@ -31,5 +31,15 @@ What is GO? Go (sometimes referred to as &amp;ldquo;golang&amp;rdquo;) is an ope
       <description>For over a year or so, I have been using a self-hosted Gitlab to host all of my private repos. For a few months now, I have been meaning to migrate my Gitlab repos to bare, minimal ones, hosted directly on a server. The majority of my code/configs are hosted publicly on my Github page, and it really doesn&amp;rsquo;t make sense to maintain a full Gitlab instance for the few (like&amp;hellip;2) private repositories that I keep.</description>
     </item>
     
+    <item>
+      <title>LIA 1.0 Beta Released</title>
+      <link>http://ryan.himmelwright.net/post/lia-1-0-beta-released/</link>
+      <pubDate>Mon, 17 Apr 2017 00:00:00 +0000</pubDate>
+      
+      <guid>http://ryan.himmelwright.net/post/lia-1-0-beta-released/</guid>
+      <description>I have released the 1.0 Beta version for a personal project of mine: the Ledger Import Assistant, or LIA. This post will talk briefly about the background of LIA, what it does, and explain the beta release. What is LIA? Example Cred Card Statement CSV File
+A while ago, I discovered Ledger, the command line double-entry accounting application. Its powerful, yet simple design attracted me, and I wanted to try it out.</description>
+    </item>
+    
   </channel>
 </rss>

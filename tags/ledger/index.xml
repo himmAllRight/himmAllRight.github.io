@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Ledger on λ ryan. himmelwright. net</title>
+    <link>http://ryan.himmelwright.net/tags/ledger/</link>
+    <description>Recent content in Ledger on λ ryan. himmelwright. net</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>Copyright © Ryan Himmelwright. Site created with Hugo</copyright>
+    <lastBuildDate>Mon, 17 Apr 2017 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="http://ryan.himmelwright.net/tags/ledger/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>LIA 1.0 Beta Released</title>
+      <link>http://ryan.himmelwright.net/post/lia-1-0-beta-released/</link>
+      <pubDate>Mon, 17 Apr 2017 00:00:00 +0000</pubDate>
+      
+      <guid>http://ryan.himmelwright.net/post/lia-1-0-beta-released/</guid>
+      <description>I have released the 1.0 Beta version for a personal project of mine: the Ledger Import Assistant, or LIA. This post will talk briefly about the background of LIA, what it does, and explain the beta release. What is LIA? Example Cred Card Statement CSV File
+A while ago, I discovered Ledger, the command line double-entry accounting application. Its powerful, yet simple design attracted me, and I wanted to try it out.</description>
+    </item>
+    
+  </channel>
+</rss>

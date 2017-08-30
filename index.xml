@@ -7,7 +7,7 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>Copyright © Ryan Himmelwright. Site created with Hugo</copyright>
-    <lastBuildDate>Mon, 28 Aug 2017 10:44:34 -0400</lastBuildDate>
+    <lastBuildDate>Wed, 30 Aug 2017 05:44:01 -0400</lastBuildDate>
     
 	<atom:link href="http://ryan.himmelwright.net/index.xml" rel="self" type="application/rss+xml" />
     
@@ -15,7 +15,7 @@
     <item>
       <title>Homelab</title>
       <link>http://ryan.himmelwright.net/pages/homelab/</link>
-      <pubDate>Mon, 28 Aug 2017 10:44:34 -0400</pubDate>
+      <pubDate>Wed, 30 Aug 2017 05:44:01 -0400</pubDate>
       
       <guid>http://ryan.himmelwright.net/pages/homelab/</guid>
       <description>This is a page where I maintain the status of the computers in my “Homelab”. I will list my current systems here (potentially with screenshots of my current desktop setup for my workstations), as well as network diagrams of our current setup.
@@ -164,6 +164,16 @@ Ansible Ansible is an open source, configuration management and automation syste
       
       <guid>http://ryan.himmelwright.net/post/zfs-backups-to-luks-external/</guid>
       <description>I have been using ZFS data pools to store data on my server for some time now. As great as that is, I am ashamed to admit that I have not had a true backup system in place (raid/mirrors are not backup). I have a backup solution that I have attempted in the past, but ran into an issue and let it drift to the side. That changes now. It&amp;rsquo;s time to revisit my solution, and complete it to the end.</description>
+    </item>
+    
+    <item>
+      <title>LIA 1.0 Beta Released</title>
+      <link>http://ryan.himmelwright.net/post/lia-1-0-beta-released/</link>
+      <pubDate>Mon, 17 Apr 2017 00:00:00 +0000</pubDate>
+      
+      <guid>http://ryan.himmelwright.net/post/lia-1-0-beta-released/</guid>
+      <description>I have released the 1.0 Beta version for a personal project of mine: the Ledger Import Assistant, or LIA. This post will talk briefly about the background of LIA, what it does, and explain the beta release. What is LIA? Example Cred Card Statement CSV File
+A while ago, I discovered Ledger, the command line double-entry accounting application. Its powerful, yet simple design attracted me, and I wanted to try it out.</description>
     </item>
     
     <item>
