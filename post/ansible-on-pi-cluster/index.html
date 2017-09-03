@@ -79,30 +79,36 @@
     </nav>
 
 
+
+
+<header class="intro-header" style="background-image: url('http://ryan.himmelwright.net/img/header-images/pi-board.jpg')">
     
-    
-    <header class="intro-header" style="background-image: url('http://ryan.himmelwright.net/img/header-images/pi-board.jpg')">
-      
-      <div class="container">
+    <div class="container">
         <div class="row">
-           <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-             <div class="post-heading">
-               <h1>Configuring Ansible on the Pi Cluster</h1>
-               <h2 class="subheading"></h2>
-               <span class="meta">
-                 
-  A 4 minute read,
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <h1>Configuring Ansible on the Pi Cluster</h1>
+                    <h2 class="subheading"></h2>
+                    <span class="meta">
+                        
+    A 4 minute read,
 
 Posted by <a href="#">Ryan Himmelwright</a> on Sun, May 21, 2017
+
+
+
+
+
+
 
 <br />
 Tags <a href="http://ryan.himmelwright.net/tags/homelab">homelab</a>, <a href="http://ryan.himmelwright.net/tags/cluster">cluster</a>, <a href="http://ryan.himmelwright.net/tags/pi">pi</a>, <a href="http://ryan.himmelwright.net/tags/devops">devops</a>, <a href="http://ryan.himmelwright.net/tags/ansible">ansible</a>, <a href="http://ryan.himmelwright.net/tags/ssh">ssh</a>
 
-               </span>
-             </div>
-           </div>
+                    </span>
+                </div>
+            </div>
         </div>
-      </div>
+    </div>
     </header>
 
     
@@ -110,15 +116,14 @@ Tags <a href="http://ryan.himmelwright.net/tags/homelab">homelab</a>, <a href="h
         <div class="container">
             <div class="row">
                 <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-                  
+                    
+                    <p>In my <a href="http://ryan.himmelwright.net/posts/Setting-up-the-pi-cluster/">previous post</a>, I pieced together my <a href="http://ryan.himmelwright.net/pages/homelab/#cluster">pi cluster</a>, and installed variations of Ubuntu 16.04 Server on each of its nodes. With the cluster built, I quickly needed an easy way to maintain and interact with the system as a whole. This, is where <a href="https://www.ansible.com/">Ansible</a> comes in. In this post, I will walk through the steps I took to setup Ansible on my Cluster.</p>
 
-<p>In my <a href="http://ryan.himmelwright.net/posts/Setting-up-the-pi-cluster/">previous post</a>, I pieced together my <a href="http://ryan.himmelwright.net/pages/homelab/#cluster">pi cluster</a>, and installed variations of Ubuntu 16.04 Server on each of its nodes. With the cluster built, I quickly needed an easy way to maintain and interact with the system as a whole. This, is where <a href="https://www.ansible.com/">Ansible</a> comes in. In this post, I will walk through the steps I took to setup Ansible on my Cluster.</p>
-
-<!-- more -->
+<p></p>
 
 <h2 id="ansible">Ansible</h2>
 
-<p><img src="../../img/posts/setting-up-ansible-pi-cluster/ansible-logo.png" style="width: 150px; float: left; margin: 0px 15px 5px 5px;"/></p>
+<p><img src="../../img/posts/setting-up-ansible-pi-cluster/ansible-logo.png" style="max-width: 50%; width: 150px; float: left; margin: 0px 15px 5px 5px;"/></p>
 
 <p>Ansible is an open source, configuration management and automation system. It is written in Python, and financially backed by <a href="http://www.redhat.com">Red Hat</a>. It simplifies the management of groups of computers, through the use of modules (standalone units of work. for example, apt, ping, rpm, etc). Ansible is script-able using simple YAML files, known as playbooks, that define a set of orchestration tasks for one or many computers. These scripts can be edited and version controlled, creating a simple <a href="https://en.wikipedia.org/wiki/Infrastructure_as_Code">infrastructure as code</a> setup.</p>
 
@@ -167,11 +172,11 @@ cat ~/.ssh/id_rsa.pub | ssh bpi &quot;cat &gt;&gt; ~/.ssh/authorized_keys&quot;
 
 <p>Afterwards, I was unable to login to the PIs from a computer with unauthorized ssh keys.</p>
 
-<p><img src="../../img/posts/setting-up-ansible-pi-cluster/terminal-play.png" name="pic" onmouseover="this.src='../../img/posts/setting-up-ansible-pi-cluster/blocked-ssh-attempt.gif'" onmouseout="this.src='../../img/posts/setting-up-ansible-pi-cluster/terminal-play.png'"></p>
+<p><img src="../../img/posts/setting-up-ansible-pi-cluster/terminal-play.png" name="pic" onmouseover="this.src='../../img/posts/setting-up-ansible-pi-cluster/blocked-ssh-attempt.gif'" onmouseout="this.src='../../img/posts/setting-up-ansible-pi-cluster/terminal-play.png'" style="max-width: 100%;"/></p>
 
 <p>But, I was still able to loging from the authorized computer.</p>
 
-<p><img src="../../img/posts/setting-up-ansible-pi-cluster/terminal-play.png" name="pic" onmouseover="this.src='../../img/posts/setting-up-ansible-pi-cluster/accepted-ssh-attempt.gif'" onmouseout="this.src='../../img/posts/setting-up-ansible-pi-cluster/terminal-play.png'"></p>
+<p><img src="../../img/posts/setting-up-ansible-pi-cluster/terminal-play.png" name="pic" onmouseover="this.src='../../img/posts/setting-up-ansible-pi-cluster/accepted-ssh-attempt.gif'" onmouseout="this.src='../../img/posts/setting-up-ansible-pi-cluster/terminal-play.png'" style="max-width: 100%;"/></p>
 
 <h2 id="install-python">Install Python</h2>
 
@@ -191,14 +196,31 @@ cat ~/.ssh/id_rsa.pub | ssh bpi &quot;cat &gt;&gt; ~/.ssh/authorized_keys&quot;
 
 <p>That&rsquo;s all for <em>setting up</em> Ansible. I&rsquo;ll cut this post off here, but in the next post, I&rsquo;ll walk through the steps on how to get Ansible to be useful.</p>
 
-                  
+                    
+                    
+                        <div style="float: left; text-decoration: underline; text-align: right;">Next Post:</div>
+                    
+                    
+                         <div style="float: right; text-decoration: underline; text-align: right;">Prev Post:</div>
+                    
+                    <br>
+                    
+                        <a href="http://ryan.himmelwright.net/post/updating-pi-cluster-with-ansible/" style="text-align: left; float: left; max-width: 40%;">Updating the Pi Cluster with Ansible</a>
+                    
+                    
+                        <a href="http://ryan.himmelwright.net/post/setting-up-the-pi-cluster/" style="text-align: right; float: right; max-width: 40%">Setting Up My Pi Cluster</a>
+                    
+
+
+                    
+                    
 
                 </div>
             </div>
         </div>
     </article>
 
-    <hr>
+        <hr>
     
     <footer>
         <div class="container">

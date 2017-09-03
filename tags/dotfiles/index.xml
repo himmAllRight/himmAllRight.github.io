@@ -18,7 +18,9 @@
       <pubDate>Tue, 07 Mar 2017 00:00:00 +0000</pubDate>
       
       <guid>http://ryan.himmelwright.net/post/new-dotfiles/</guid>
-      <description>I have maintained a &amp;ldquo;dotfiles&amp;rdquo; repository since I made my github account in 2013. However, overtime it became more of a post-apocalyptic wasteland, cluttered with remnants of obsolete configurations and scraps of scripts. It was no longer the pristine, culled, collection that I desired. I also did not have an efficient method of easily linking the files on a new system. I had to manually make symlinks for each dotfile.</description>
+      <description>&lt;p&gt;I have maintained a &amp;ldquo;dotfiles&amp;rdquo; repository since I made my github account in 2013. However, overtime it became more of a post-apocalyptic wasteland, cluttered with remnants of obsolete configurations and scraps of scripts. It was no longer the pristine, culled, collection that I desired. I also did not have an efficient method of easily linking the files on a new system. I had to manually make symlinks for each dotfile. I knew there were &lt;em&gt;much&lt;/em&gt; better dotfiles setups out there, but I never got around to it. Until now.&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
   </channel>

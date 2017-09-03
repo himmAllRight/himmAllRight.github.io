@@ -79,30 +79,36 @@
     </nav>
 
 
+
+
+<header class="intro-header" style="background-image: url('http://ryan.himmelwright.net/img/header-images/st-lucia-fort1.jpg')">
     
-    
-    <header class="intro-header" style="background-image: url('http://ryan.himmelwright.net/img/header-images/st-lucia-fort1.jpg')">
-      
-      <div class="container">
+    <div class="container">
         <div class="row">
-           <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-             <div class="post-heading">
-               <h1>Transitioning Website to Hugo</h1>
-               <h2 class="subheading"></h2>
-               <span class="meta">
-                 
-  A 8 minute read,
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <h1>Transitioning Website to Hugo</h1>
+                    <h2 class="subheading"></h2>
+                    <span class="meta">
+                        
+    A 8 minute read,
 
 Posted by <a href="#">Ryan Himmelwright</a> on Sun, Aug 27, 2017
+
+
+
+
+
+
 
 <br />
 Tags <a href="http://ryan.himmelwright.net/tags/website">website</a>, <a href="http://ryan.himmelwright.net/tags/hugo">hugo</a>, <a href="http://ryan.himmelwright.net/tags/cryogen">cryogen</a>, <a href="http://ryan.himmelwright.net/tags/go">go</a>
 
-               </span>
-             </div>
-           </div>
+                    </span>
+                </div>
+            </div>
         </div>
-      </div>
+    </div>
     </header>
 
     
@@ -110,11 +116,10 @@ Tags <a href="http://ryan.himmelwright.net/tags/website">website</a>, <a href="h
         <div class="container">
             <div class="row">
                 <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-                  
+                    
+                    <p>While I have loved using <a href="http://cryogenweb.org">Cryogen</a> to create this website for over a year and a half now, I have started the transition to using another static website generator. Specifically, I have been experimenting with <a href="https://gohugo.io">Hugo</a>. This post will detail why I am switching, what I have ported over thus far, and what still needs to be completed before generating the official site with hugo.</p>
 
-<p>While I have loved using <a href="http://cryogenweb.org">Cryogen</a> to create this website for over a year and a half now, I have started the transition to using another static website generator. Specifically, I have been experimenting with <a href="https://gohugo.io">Hugo</a>. This post will detail why I am switching, what I have ported over thus far, and what still needs to be completed before generating the official site with hugo.</p>
-
-<!-- more -->
+<p></p>
 
 <h3 id="from-cryogen-to-hugo">From Cryogen to Hugo</h3>
 
@@ -158,7 +163,8 @@ Tags <a href="http://ryan.himmelwright.net/tags/website">website</a>, <a href="h
 
 <p>Before I started ripping into the theme too much, I copied the theme directory to make my own version, and set the <code>theme</code> line in my <code>config.toml</code> to reflect the change. I also went through all the lines of the example <code>config.toml</code> and  changed them accordingly.</p>
 
-<p>With the theme setup, and the configuration edited, I started making some minor tweak to the site. The main tweak I made was to add the <code>Summary</code> contents to the post list on the home page. I currently use this feature in Cryogen, so all of my posts are written to support it. Summaries are baked into hugo, but I needed to edit the theme to include it on the posts page. To achieve this, I edited the <code>/layouts/post/summary.html</code> file of the theme slightly:</p>
+<p><a name="summary-setup"></a>
+With the theme setup, and the configuration edited, I started making some minor tweak to the site. The main tweak I made was to add the <code>Summary</code> contents to the post list on the home page. I currently use this feature in Cryogen, so all of my posts are written to support it. Summaries are baked into hugo, but I needed to edit the theme to include it on the posts page. To achieve this, I edited the <code>/layouts/post/summary.html</code> file of the theme slightly:</p>
 
 <p>original:</p>
 <div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #f8f8f2">&lt;</span><span style="color: #f92672">div</span> <span style="color: #a6e22e">class</span><span style="color: #f92672">=</span><span style="color: #e6db74">&quot;post-preview&quot;</span><span style="color: #f8f8f2">&gt;</span>
@@ -209,7 +215,8 @@ Tags <a href="http://ryan.himmelwright.net/tags/website">website</a>, <a href="h
 
 <p>After importing the markdown files for the posts, I needed to add all the images the posts contain. Again, this took a tiny bit of research to figure out the file structure, but I quickly learned that anything in the <code>/static/</code> directory gets copied to the site&rsquo;s root directory when the site is compiled. So, I was able to copy my cryogen <code>/img/</code> folder directly to <code>/static/img/</code> in hugo, and all my image paths worked out-of-the-box!</p>
 
-<p>Unfortunately, I immediately noticed that some images in the posts were massive, and not constrained to the content width. I looked for a solution, and tried editing the <code>css</code>, but I eventually just started to convert the markdown syntax images, to use normal html <code>&lt;img&gt;</code> tags, with a <code>width=100%</code> parameter. Ultimately, this gives me a bit more power with how I set images anyway.</p>
+<p><a name="image-size"></a>
+Unfortunately, I immediately noticed that some images in the posts were massive, and not constrained to the content width. I looked for a solution, and tried editing the <code>css</code>, but I eventually just started to convert the markdown syntax images, to use normal html <code>&lt;img&gt;</code> tags, with a <code>width=100%</code> parameter. Ultimately, this gives me a bit more power with how I set images anyway.</p>
 
 <h4 id="made-a-bunch-of-header-images">Made a bunch of header images</h4>
 
@@ -231,14 +238,31 @@ Tags <a href="http://ryan.himmelwright.net/tags/website">website</a>, <a href="h
 
 <p>Well, that&rsquo;s about it. I&rsquo;ll work now on editing and publishing this post, and with any luck, the website should switch over to the Hugo generated one within a few days. I hope you enjoy it!</p>
 
-                  
+                    
+                    
+                        <div style="float: left; text-decoration: underline; text-align: right;">Next Post:</div>
+                    
+                    
+                         <div style="float: right; text-decoration: underline; text-align: right;">Prev Post:</div>
+                    
+                    <br>
+                    
+                        <a href="http://ryan.himmelwright.net/post/website-switched-to-hugo/" style="text-align: left; float: left; max-width: 40%;">Website Switched to Hugo</a>
+                    
+                    
+                        <a href="http://ryan.himmelwright.net/post/simple-reverse-ssh-tunnel/" style="text-align: right; float: right; max-width: 40%">Simple Reverse SSH Tunnels</a>
+                    
+
+
+                    
+                    
 
                 </div>
             </div>
         </div>
     </article>
 
-    <hr>
+        <hr>
     
     <footer>
         <div class="container">

@@ -79,30 +79,36 @@
     </nav>
 
 
+
+
+<header class="intro-header" style="background-image: url('http://ryan.himmelwright.net/img/header-images/pipe.jpg')">
     
-    
-    <header class="intro-header" style="background-image: url('http://ryan.himmelwright.net/img/header-images/pipe.jpg')">
-      
-      <div class="container">
+    <div class="container">
         <div class="row">
-           <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-             <div class="post-heading">
-               <h1>Simple Reverse SSH Tunnels</h1>
-               <h2 class="subheading"></h2>
-               <span class="meta">
-                 
-  A 5 minute read,
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <h1>Simple Reverse SSH Tunnels</h1>
+                    <h2 class="subheading"></h2>
+                    <span class="meta">
+                        
+    A 5 minute read,
 
 Posted by <a href="#">Ryan Himmelwright</a> on Sat, Aug 26, 2017
+
+
+
+
+
+
 
 <br />
 Tags <a href="http://ryan.himmelwright.net/tags/linux">linux</a>, <a href="http://ryan.himmelwright.net/tags/ssh">ssh</a>, <a href="http://ryan.himmelwright.net/tags/homelab">homelab</a>, <a href="http://ryan.himmelwright.net/tags/network">network</a>
 
-               </span>
-             </div>
-           </div>
+                    </span>
+                </div>
+            </div>
         </div>
-      </div>
+    </div>
     </header>
 
     
@@ -110,13 +116,14 @@ Tags <a href="http://ryan.himmelwright.net/tags/linux">linux</a>, <a href="http:
         <div class="container">
             <div class="row">
                 <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-                  
+                    
+                    
 
 <p>Last week, I was on vacation with my family. While I didn&rsquo;t work a <em>ton</em> on personal projects, I was at least able to spend some time on my <a href="https://github.com/himmAllRight/TunnelBeacon">TunelBeacon</a> project again. I will write a dedicated post about that project down the road when I am further along. Basically, it will be a simple GUI to create reverse ssh tunnels, that family and friends can startup in order grant me temporary access to their computer when they need support. Reverse SSH tunnels are <em>very</em> useful and simple to setup, but can be a bit tricky to figure out at first. So, here&rsquo;s a brief and simple guide on how to easily create reverse tunnels.</p>
 
 <hr />
 
-<!-- more -->
+<!--more -->
 
 <h3 id="ssh-tunnels">SSH Tunnels</h3>
 
@@ -128,17 +135,17 @@ Tags <a href="http://ryan.himmelwright.net/tags/linux">linux</a>, <a href="http:
 
 <p>To make all of this (hopefully) easier to understand, I have drafted up a few diagrams. For the example, lets say I am away and my wife wants me to fix something on her laptop. Unless I have her <em>properly</em> configure the router to forward ssh traffic to her laptop, I normally cannot do this. Additionally, she might be at a friends house, office, or other public place where there is no access to the router controls (well, she <em>shouldn&rsquo;t</em>). So, her laptop doesn&rsquo;t have a direct public IP address, but our server <em>does</em>.</p>
 
-<p><img alt="Computer behind firewall" src="../../img/posts/simple-reverse-ssh-tunnel/network-diagram.png" width=100%>
+<p><a href="../../img/posts/simple-reverse-ssh-tunnel/network-diagram.png"><img alt="Computer behind firewall" src="../../img/posts/simple-reverse-ssh-tunnel/network-diagram.png" style="max-width: 100%;"/><a>
 <em>Two computers (at least one without a direct public IP), both with access to a cloud server with a public IP</em></p>
 
 <p>Because my wife can connect to the public cloud server, she can initiate a reverse tunnel from her laptop, with the server. The tunnel directly connects the server to her laptop.</p>
 
-<p><img alt="Computer behind firewall" src="../../img/posts/simple-reverse-ssh-tunnel/ssh-tunnel.png" width=100%>
+<p><a href="../../img/posts/simple-reverse-ssh-tunnel/ssh-tunnel.png"><img alt="Computer behind firewall" src="../../img/posts/simple-reverse-ssh-tunnel/ssh-tunnel.png" style="max-width: 100%;"/></a>
 <em>The laptop computer creates a reverse ssh tunnel to the cloud server.</em></p>
 
 <p>On my end, I first ssh to the server from my computer. Once the tunnel is started, I can then ssh again to a specified local port on the server, and it will tunnel me directly to her laptop. This will give me a command prompt as if I was sitting with an open terminal at her computer.</p>
 
-<p><img alt="Computer behind firewall" src="../../img/posts/simple-reverse-ssh-tunnel/connect-through-tunnel.png" width=100%>
+<p><a href="../../img/posts/simple-reverse-ssh-tunnel/connect-through-tunnel.png"><img alt="Computer behind firewall" src="../../img/posts/simple-reverse-ssh-tunnel/connect-through-tunnel.png" style="max-width: 100%;"/></a>
 <em>With the reverse tunnel setup, the first computer can ssh to the second via the cloud server and tunnel connection.</em></p>
 
 <p>When I am done working, my wife can close the tunnel, and I will no longer be able to access her computer.</p>
@@ -172,14 +179,32 @@ Tags <a href="http://ryan.himmelwright.net/tags/linux">linux</a>, <a href="http:
 
 <p>So, that&rsquo;s reverse tunnels in a nutshell. With any luck, I should be posting more about them as I progress with TunnelBeacon. Have fun tunneling!</p>
 
-                  
+
+                    
+                    
+                        <div style="float: left; text-decoration: underline; text-align: right;">Next Post:</div>
+                    
+                    
+                         <div style="float: right; text-decoration: underline; text-align: right;">Prev Post:</div>
+                    
+                    <br>
+                    
+                        <a href="http://ryan.himmelwright.net/post/website-transition-to-hugo/" style="text-align: left; float: left; max-width: 40%;">Transitioning Website to Hugo</a>
+                    
+                    
+                        <a href="http://ryan.himmelwright.net/post/back-to-solus/" style="text-align: right; float: right; max-width: 40%">Back to Solus</a>
+                    
+
+
+                    
+                    
 
                 </div>
             </div>
         </div>
     </article>
 
-    <hr>
+        <hr>
     
     <footer>
         <div class="container">

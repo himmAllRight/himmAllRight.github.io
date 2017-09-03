@@ -79,30 +79,36 @@
     </nav>
 
 
+
+
+<header class="intro-header" style="background-image: url('http://ryan.himmelwright.net/img/header-images/laptop-screen.jpg')">
     
-    
-    <header class="intro-header" style="background-image: url('http://ryan.himmelwright.net/img/post-bg.jpg')">
-    
-      <div class="container">
+    <div class="container">
         <div class="row">
-           <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-             <div class="post-heading">
-               <h1>Linux from Scratch - SBUs and Binutils</h1>
-               <h2 class="subheading"></h2>
-               <span class="meta">
-                 
-  A 7 minute read,
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <h1>Linux from Scratch - SBUs and Binutils</h1>
+                    <h2 class="subheading"></h2>
+                    <span class="meta">
+                        
+    A 7 minute read,
 
 Posted by <a href="#">Ryan Himmelwright</a> on Tue, Apr 4, 2017
+
+
+
+
+
+
 
 <br />
 Tags <a href="http://ryan.himmelwright.net/tags/linux">linux</a>, <a href="http://ryan.himmelwright.net/tags/lfs">lfs</a>
 
-               </span>
-             </div>
-           </div>
+                    </span>
+                </div>
+            </div>
         </div>
-      </div>
+    </div>
     </header>
 
     
@@ -110,7 +116,8 @@ Tags <a href="http://ryan.himmelwright.net/tags/linux">linux</a>, <a href="http:
         <div class="container">
             <div class="row">
                 <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-                  
+                    
+                    
 
 <p>Well, after all of the preparation, we are ready to start compiling packages. This post cover compiling all the packages, but it will detail the first build of <a href="https://www.gnu.org/software/binutils/">Binutils</a>, which is arguably the most important package to compile. Why is Binutils so crucial? It determines the SBU time for your build system. What&rsquo;s an SBU? Read on to find out!</p>
 
@@ -118,7 +125,7 @@ Tags <a href="http://ryan.himmelwright.net/tags/linux">linux</a>, <a href="http:
 
 <h3 id="sbus">SBUs</h3>
 
-<p><img src="../../img/posts/LFS-SBUs-Binutils/SBU-table.png" alt="SBU Table" /></p>
+<p><img alt="SBU Table" src="../../img/posts/LFS-SBUs-Binutils/SBU-table.png" style="max-width: 100%;"/></p>
 
 <p><em>A table of package SBUs and their predicted build time</em></p>
 
@@ -134,7 +141,7 @@ Tags <a href="http://ryan.himmelwright.net/tags/linux">linux</a>, <a href="http:
 
 <h3 id="my-encountered-issues-with-tar">My Encountered Issues with tar&hellip;</h3>
 
-<p><img src="../../img/posts/LFS-SBUs-Binutils/tar-error.png" alt="Tar issues" /></p>
+<p><img alt="Tar issues" src="../../img/posts/LFS-SBUs-Binutils/tar-error.png" style="max-width: 100%;"/></p>
 
 <p>The first time I attempted to make binutils, I encountered a few errors. The gist of it was that I was not able untar the package correctly, at least from the <em>lfs</em> user. Everything worked fine from the <em>root</em> or even <em>ryan</em> user accounts, but running tar on <em>lfs</em> returned the following error:</p>
 
@@ -159,7 +166,7 @@ ln -sv $LFS/tools /
 <h3 id="extracting-binutils">Extracting BinUtils</h3>
 
 <p><center>
-<img src="../../img/posts/LFS-SBUs-Binutils/tar-binutils.png" name="pic" onmouseover="this.src='../../img/posts/LFS-SBUs-Binutils/tar-binutils.gif'" onmouseout="this.src='../../img/posts/LFS-SBUs-Binutils/tar-binutils.png'">
+<img src="../../img/posts/LFS-SBUs-Binutils/tar-binutils.png" name="pic" onmouseover="this.src='../../img/posts/LFS-SBUs-Binutils/tar-binutils.gif'" onmouseout="this.src='../../img/posts/LFS-SBUs-Binutils/tar-binutils.png'" style="max-width: 100%;"/>
 </center></p>
 
 <p>It is important that Binutils is built first in the process. This is mostly because when Glibc and GCC are built, they perform various tests on the linker and assembler to figure out which of their own features to enable.</p>
@@ -180,7 +187,7 @@ cd build
 <h3 id="making-executing-a-build-script">Making &amp; Executing a Build Script</h3>
 
 <p><center>
-<img src="../../img/posts/LFS-SBUs-Binutils/binutils-script-start-play.png" name="pic" onmouseover="this.src='../../img/posts/LFS-SBUs-Binutils/binutils-script-start.gif'" onmouseout="this.src='../../img/posts/LFS-SBUs-Binutils/binutils-script-start-play.png'">
+<img src="../../img/posts/LFS-SBUs-Binutils/binutils-script-start-play.png" name="pic" onmouseover="this.src='../../img/posts/LFS-SBUs-Binutils/binutils-script-start.gif'" onmouseout="this.src='../../img/posts/LFS-SBUs-Binutils/binutils-script-start-play.png'" style="max-width: 100%;"/>
 </center></p>
 
 <p>Now it is time to build. Normally, this would best be done by sequentially performing a series of <em>configure</em>, <em>make</em>, and <em>make install</em> commands, but for the first binutils compilation, we want to get an accurate reading on how long it takes (to determine our SBU time). To accomplish this easily, I put all of the commands into a bash script. This way, I could execute the script, and easily time the whole process using the <code>time</code> utility. To create the script, I wrote the following commands into a file (<code>build-binutils.sh</code>):</p>
@@ -232,7 +239,7 @@ make install
 <h3 id="checking-the-build">Checking the Build</h3>
 
 <p><center>
-<img src="../../img/posts/LFS-SBUs-Binutils/binutils-check-play.png" name="pic" onmouseover="this.src='../../img/posts/LFS-SBUs-Binutils/binutils-check.gif'" onmouseout="this.src='../../img/posts/LFS-SBUs-Binutils/binutils-check-play.png'">
+<img src="../../img/posts/LFS-SBUs-Binutils/binutils-check-play.png" name="pic" onmouseover="this.src='../../img/posts/LFS-SBUs-Binutils/binutils-check.gif'" onmouseout="this.src='../../img/posts/LFS-SBUs-Binutils/binutils-check-play.png'" style="max-width: 100%;"/>
 </center></p>
 
 <p>After the build is complete, it is a good idea to run the tests, <em>especially</em> for binutils. In this case, use the make command:</p>
@@ -244,14 +251,32 @@ make install
 
 <p>For the sake of time, I will not be writing posts detailing the build process for each of the remaining packages in Chapter 5. I might keep a little log about how each of the builds went and post it, but I am unsure. If I encounter any major snags along the way, I will be sure to write a post detailing them. Otherwise, with any luck, my plan is to keep compiling and see you in Chapter 6!</p>
 
-                  
+
+                    
+                    
+                        <div style="float: left; text-decoration: underline; text-align: right;">Next Post:</div>
+                    
+                    
+                         <div style="float: right; text-decoration: underline; text-align: right;">Prev Post:</div>
+                    
+                    <br>
+                    
+                        <a href="http://ryan.himmelwright.net/post/new-theme-immutable/" style="text-align: left; float: left; max-width: 40%;">New Website Theme: Immutable</a>
+                    
+                    
+                        <a href="http://ryan.himmelwright.net/post/lfs-final-preparation-steps/" style="text-align: right; float: right; max-width: 40%">Linux from Scratch - Final Preparation Steps</a>
+                    
+
+
+                    
+                    
 
                 </div>
             </div>
         </div>
     </article>
 
-    <hr>
+        <hr>
     
     <footer>
         <div class="container">

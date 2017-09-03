@@ -79,30 +79,36 @@
     </nav>
 
 
+
+
+<header class="intro-header" style="background-image: url('http://ryan.himmelwright.net//img/header-images/st-lucia-beach-feet.jpg')">
     
-    
-    <header class="intro-header" style="background-image: url('http://ryan.himmelwright.net/img/post-bg.jpg')">
-    
-      <div class="container">
+    <div class="container">
         <div class="row">
-           <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-             <div class="post-heading">
-               <h1>My New Dotfiles Management - Using GNU Stow</h1>
-               <h2 class="subheading"></h2>
-               <span class="meta">
-                 
-  A 2 minute read,
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <h1>My New Dotfiles Management - Using GNU Stow</h1>
+                    <h2 class="subheading"></h2>
+                    <span class="meta">
+                        
+    A 2 minute read,
 
 Posted by <a href="#">Ryan Himmelwright</a> on Tue, Mar 7, 2017
+
+
+
+
+
+
 
 <br />
 Tags <a href="http://ryan.himmelwright.net/tags/linux">linux</a>, <a href="http://ryan.himmelwright.net/tags/dotfiles">dotfiles</a>
 
-               </span>
-             </div>
-           </div>
+                    </span>
+                </div>
+            </div>
         </div>
-      </div>
+    </div>
     </header>
 
     
@@ -110,11 +116,10 @@ Tags <a href="http://ryan.himmelwright.net/tags/linux">linux</a>, <a href="http:
         <div class="container">
             <div class="row">
                 <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-                  
+                    
+                    <p>I have maintained a &ldquo;dotfiles&rdquo; repository since I made my github account in 2013. However, overtime it became more of a post-apocalyptic wasteland, cluttered with remnants of obsolete configurations and scraps of scripts. It was no longer the pristine, culled, collection that I desired. I also did not have an efficient method of easily linking the files on a new system. I had to manually make symlinks for each dotfile. I knew there were <em>much</em> better dotfiles setups out there, but I never got around to it. Until now.</p>
 
-<p>I have maintained a &ldquo;dotfiles&rdquo; repository since I made my github account in 2013. However, overtime it became more of a post-apocalyptic wasteland, cluttered with remnants of obsolete configurations and scraps of scripts. It was no longer the pristine, culled, collection that I desired. I also did not have an efficient method of easily linking the files on a new system. I had to manually make symlinks for each dotfile. I knew there were <em>much</em> better dotfiles setups out there, but I never got around to it. Until now.</p>
-
-<!-- more-->
+<p></p>
 
 <p>One day, after reading <a href="http://brandon.invergo.net/news/2012-05-26-using-gnu-stow-to-manage-your-dotfiles.html">this post</a>, I finally decided to sit down and clean up my dotfiles directory. I wanted to re-organize it so that I could use <a href="http://freecode.com/projects/gnustow">GNU Stow</a> to initialize my dotfiles.</p>
 
@@ -124,11 +129,11 @@ Tags <a href="http://ryan.himmelwright.net/tags/linux">linux</a>, <a href="http:
 
 <p>If you haven&rsquo;t seen it before, I highly suggest reading the post I have linked above. But in the meantime, I can provide a quick summary of how my dotfiles are setup.</p>
 
-<p><center><img alt="My Dotfiles Dir" src="../../img/posts/new-dotfiles/dotfiles.png"></center></p>
+<p><center><img alt="My Dotfiles Dir" src="../../img/posts/new-dotfiles/dotfiles.png" style="max-width: 100%;"/></center></p>
 
 <p>Each application has an associated sub-directory (ex: <code>dotfiles/emacs</code>), which contains all of the dotfiles/folders associated with that application. Structurally, I treat the items in each application directory as if they were in my <code>~</code>. For example, the <code>vim</code> sub-directory has my <code>.vimrc</code>, as well as the <code>.vim/colors/</code> directory. This is so that when I use stow, it will properly link them in <code>~</code>.</p>
 
-<p><center><img alt="Vim dotfiles directory" src="../../img/posts/new-dotfiles/vim-dots.png"></center></p>
+<p><center><img alt="Vim dotfiles directory" src="../../img/posts/new-dotfiles/vim-dots.png" style="max-width: 100%;"/></center></p>
 
 <p>When I setup my dotfiles on a new system, or install an application for which I already have dotfiles saved for, setting them up is as easy as typing:</p>
 
@@ -136,7 +141,7 @@ Tags <a href="http://ryan.himmelwright.net/tags/linux">linux</a>, <a href="http:
 
 <p>GNU Stow then links the files under my home directory. In my vim example, this means symlinks are created for <code>~/.vimrc</code> and <code>~/.vim/colors/*</code>, pointing to their respective locations in <code>~/dotfiles/vim/</code>.</p>
 
-<p><center><img alt="Vim dotfiles in Home" src="../../img/posts/new-dotfiles/vim-home.png"></center></p>
+<p><center><img alt="Vim dotfiles in Home" src="../../img/posts/new-dotfiles/vim-home.png" style="max-width: 100%;"/></center></p>
 
 <p>I think this setup is brilliant. Initializing an application&rsquo;s directory is so simple, and I can choose to only initialize specific sub-directories.</p>
 
@@ -144,14 +149,31 @@ Tags <a href="http://ryan.himmelwright.net/tags/linux">linux</a>, <a href="http:
 
 <p>Anyway, that&rsquo;s the new setup. Enjoy :-D</p>
 
-                  
+                    
+                    
+                        <div style="float: left; text-decoration: underline; text-align: right;">Next Post:</div>
+                    
+                    
+                         <div style="float: right; text-decoration: underline; text-align: right;">Prev Post:</div>
+                    
+                    <br>
+                    
+                        <a href="http://ryan.himmelwright.net/post/lfs-repeated-setup-steps/" style="text-align: left; float: left; max-width: 40%;">Linux from Scratch - Repeated Setup Steps</a>
+                    
+                    
+                        <a href="http://ryan.himmelwright.net/post/lfs-getting-started/" style="text-align: right; float: right; max-width: 40%">Linux from Scratch - Getting Started</a>
+                    
+
+
+                    
+                    
 
                 </div>
             </div>
         </div>
     </article>
 
-    <hr>
+        <hr>
     
     <footer>
         <div class="container">

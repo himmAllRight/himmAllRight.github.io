@@ -7,10 +7,21 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>Copyright © Ryan Himmelwright. Site created with Hugo</copyright>
-    <lastBuildDate>Sun, 27 Aug 2017 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 02 Sep 2017 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="http://ryan.himmelwright.net/tags/website/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Website Switched to Hugo</title>
+      <link>http://ryan.himmelwright.net/post/website-switched-to-hugo/</link>
+      <pubDate>Sat, 02 Sep 2017 00:00:00 +0000</pubDate>
+      
+      <guid>http://ryan.himmelwright.net/post/website-switched-to-hugo/</guid>
+      <description>&lt;p&gt;In my &lt;a href=&#34;../website-transition-to-hugo/&#34;&gt;last post&lt;/a&gt;, I stated that &lt;em&gt;within a few days&lt;/em&gt;, I would officially generate and publish the website using &lt;a href=&#34;https://gohugo.io&#34;&gt;Hugo&lt;/a&gt;. I then proceeded to publish &lt;em&gt;that&lt;/em&gt; post using Hugo. Close enough. If I remember correctly, I ended that post listing off a few tasks that I wanted to complete &lt;em&gt;before&lt;/em&gt; switching the site (oops). Well&amp;hellip; they&amp;rsquo;re complete &lt;em&gt;now&lt;/em&gt;. Here&amp;rsquo;s how.&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>Transitioning Website to Hugo</title>
@@ -18,8 +29,9 @@
       <pubDate>Sun, 27 Aug 2017 00:00:00 +0000</pubDate>
       
       <guid>http://ryan.himmelwright.net/post/website-transition-to-hugo/</guid>
-      <description>While I have loved using Cryogen to create this website for over a year and a half now, I have started the transition to using another static website generator. Specifically, I have been experimenting with Hugo. This post will detail why I am switching, what I have ported over thus far, and what still needs to be completed before generating the official site with hugo.
-From Cryogen to Hugo My departure from Cryogen really has nothing to do with the project itself.</description>
+      <description>&lt;p&gt;While I have loved using &lt;a href=&#34;http://cryogenweb.org&#34;&gt;Cryogen&lt;/a&gt; to create this website for over a year and a half now, I have started the transition to using another static website generator. Specifically, I have been experimenting with &lt;a href=&#34;https://gohugo.io&#34;&gt;Hugo&lt;/a&gt;. This post will detail why I am switching, what I have ported over thus far, and what still needs to be completed before generating the official site with hugo.&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -37,8 +49,16 @@ From Cryogen to Hugo My departure from Cryogen really has nothing to do with the
       <pubDate>Wed, 13 Apr 2016 00:00:00 +0000</pubDate>
       
       <guid>http://ryan.himmelwright.net/post/website-switched-to-cryogen/</guid>
-      <description>Ever since resurrecting my personal website, I have experimented with several static website generators. Thus far, I have tried org-page, Jekyll (several times), and even (almost) made my own emacs org-page solution. Now that I have started using the clojure programming language, I have come across cryogen. As you may have already guessed, this site is now being generated using cryogen.
-Emacs/org-mode Solutions About a year ago, obsession with emacs (and more importantly, org-mode) eventually led me to try out org-page while revitalizing my personal website.</description>
+      <description>&lt;p&gt;Ever since resurrecting my personal website, I have experimented with several
+static website generators. Thus far, I have tried
+&lt;a href=&#34;https://github.com/kelvinh/org-page&#34;&gt;org-page&lt;/a&gt;,
+&lt;a href=&#34;http://jekyllrb.com/&#34;&gt;Jekyll&lt;/a&gt; (&lt;em&gt;several&lt;/em&gt; times), and even (almost) made
+&lt;a href=&#34;https://github.com/himmAllRight/ryBlog/blob/master/org-blog.el&#34;&gt;my own emacs org-page solution&lt;/a&gt;. Now that I have
+started using the &lt;a href=&#34;http://clojure.org/&#34;&gt;clojure&lt;/a&gt; programming language, I have come across
+&lt;a href=&#34;http://cryogenweb.org/&#34;&gt;cryogen&lt;/a&gt;. As you may have already guessed, this site is now
+being generated using cryogen.&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
   </channel>

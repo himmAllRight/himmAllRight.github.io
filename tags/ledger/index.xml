@@ -18,8 +18,8 @@
       <pubDate>Mon, 17 Apr 2017 00:00:00 +0000</pubDate>
       
       <guid>http://ryan.himmelwright.net/post/lia-1-0-beta-released/</guid>
-      <description>I have released the 1.0 Beta version for a personal project of mine: the Ledger Import Assistant, or LIA. This post will talk briefly about the background of LIA, what it does, and explain the beta release. What is LIA? Example Cred Card Statement CSV File
-A while ago, I discovered Ledger, the command line double-entry accounting application. Its powerful, yet simple design attracted me, and I wanted to try it out.</description>
+      <description>&lt;p&gt;I have released the 1.0 Beta version for a personal project of mine: the &lt;strong&gt;L&lt;/strong&gt;edger &lt;strong&gt;I&lt;/strong&gt;mport &lt;strong&gt;A&lt;/strong&gt;ssistant, or &lt;a href=&#34;https://github.com/himmALlRight/LIA/&#34;&gt;LIA&lt;/a&gt;. This post will talk briefly about the background of LIA, what it does, and explain the beta release.
+&lt;/p&gt;</description>
     </item>
     
   </channel>

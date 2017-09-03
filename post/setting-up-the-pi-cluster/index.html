@@ -79,30 +79,36 @@
     </nav>
 
 
+
+
+<header class="intro-header" style="background-image: url('http://ryan.himmelwright.net/img/header-images/cluster-boards.jpg')">
     
-    
-    <header class="intro-header" style="background-image: url('http://ryan.himmelwright.net/img/header-images/cluster-boards.jpg')">
-      
-      <div class="container">
+    <div class="container">
         <div class="row">
-           <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-             <div class="post-heading">
-               <h1>Setting Up My Pi Cluster</h1>
-               <h2 class="subheading"></h2>
-               <span class="meta">
-                 
-  A 5 minute read,
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <h1>Setting Up My Pi Cluster</h1>
+                    <h2 class="subheading"></h2>
+                    <span class="meta">
+                        
+    A 5 minute read,
 
 Posted by <a href="#">Ryan Himmelwright</a> on Fri, May 5, 2017
+
+
+
+
+
+
 
 <br />
 Tags <a href="http://ryan.himmelwright.net/tags/homelab">homelab</a>, <a href="http://ryan.himmelwright.net/tags/linux">linux</a>, <a href="http://ryan.himmelwright.net/tags/cluster">cluster</a>, <a href="http://ryan.himmelwright.net/tags/pi">pi</a>, <a href="http://ryan.himmelwright.net/tags/devops">devops</a>
 
-               </span>
-             </div>
-           </div>
+                    </span>
+                </div>
+            </div>
         </div>
-      </div>
+    </div>
     </header>
 
     
@@ -110,11 +116,10 @@ Tags <a href="http://ryan.himmelwright.net/tags/homelab">homelab</a>, <a href="h
         <div class="container">
             <div class="row">
                 <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-                  
+                    
+                    <p>I have a Raspberry Pi 2, a Raspberry Pi 3, and a Banana Pi. A while ago, I constructed a small tower to house my pi devices. Since then, I have additionally acquired a power source, and some CAT6 cable to connect them all up to a switch. I hope to use the Pis as a mini clustered environment, where I can learn (and play) with some of the &ldquo;Devops&rdquo; technologies/techniques out there. This post will briefly explain the initial setup of <a href="../../pages/homelab/#cluster">my cluster</a>.</p>
 
-<p>I have a Raspberry Pi 2, a Raspberry Pi 3, and a Banana Pi. A while ago, I constructed a small tower to house my pi devices. Since then, I have additionally acquired a power source, and some CAT6 cable to connect them all up to a switch. I hope to use the Pis as a mini clustered environment, where I can learn (and play) with some of the &ldquo;Devops&rdquo; technologies/techniques out there. This post will briefly explain the initial setup of <a href="../../pages/homelab/#cluster">my cluster</a>.</p>
-
-<!-- more -->
+<p></p>
 
 <h1 id="setting-up-the-os-images">Setting up the OS Images</h1>
 
@@ -122,7 +127,7 @@ Tags <a href="http://ryan.himmelwright.net/tags/homelab">homelab</a>, <a href="h
 
 <h3 id="ubuntu-for-raspberry-pi">Ubuntu for Raspberry PI</h3>
 
-<p><img src="../../img/posts/Setting-Up-Pi-Cluster/ubuntu-logo.jpg" style="width: 200px%; float: right; margin: 0px 10px 0px 10px;"/></p>
+<p><img src="../../img/posts/Setting-Up-Pi-Cluster/ubuntu-logo.jpg" style="max-width: 50%; height: auto; float: right; margin: 0px 2px 2px 2px;"/></p>
 
 <p>After mucking around with Rapsbian and Hypriot one Sunday, I decided to just go with a plain Ubuntu image for the Raspberry Pis. I don&rsquo;t have anything against these specific OSes, but I am mostly setting up this cluster to simulate what I would do on a &ldquo;real&rdquo; system. For me, that often means using a straight OS like Ubuntu.</p>
 
@@ -143,7 +148,7 @@ xzcat ubuntu-16.04-preinstalled-server-armhf+raspi3.img.xz   | sudo dd bs=4M of=
 
 <h3 id="hardware-setup">Hardware Setup</h3>
 
-<p><img src="../../img/posts/Setting-Up-Pi-Cluster/pi-cluster.png" style="width: 40%; float: right; margin: 0px 10px 0px 10px;"/></p>
+<p><img src="../../img/posts/Setting-Up-Pi-Cluster/pi-cluster.png" style="max-width: 40%; float: right; margin: 10px 10px 5px 10px;"/></p>
 
 <p>After the operating system images have been copied the SD cards, the hardware can be setup. I started by inserting the microSD cards into the PIs, being careful to use the correct card with each device. Unlike the Raspberry PIs, the Bananna PI uses a normal SD card instead of a microSD, so I just left it in the converter card I used to connect it to my computer when imaging.</p>
 
@@ -184,14 +189,31 @@ usermod -a -G sudo ryan
 
 <p>That&rsquo;s it. At this point, all of my the PIs are minimally set up accessible. The next steps include updating packages, setting up ssh keys, and configuring &hellip;. <a href="https://www.ansible.com">Ansible</a>. But that will all be in the <em>next post</em>. See you then!</p>
 
-                  
+                    
+                    
+                        <div style="float: left; text-decoration: underline; text-align: right;">Next Post:</div>
+                    
+                    
+                         <div style="float: right; text-decoration: underline; text-align: right;">Prev Post:</div>
+                    
+                    <br>
+                    
+                        <a href="http://ryan.himmelwright.net/post/ansible-on-pi-cluster/" style="text-align: left; float: left; max-width: 40%;">Configuring Ansible on the Pi Cluster</a>
+                    
+                    
+                        <a href="http://ryan.himmelwright.net/post/zfs-backups-to-luks-external/" style="text-align: right; float: right; max-width: 40%">ZFS Snapshot Backups to an External Drive with LUKS</a>
+                    
+
+
+                    
+                    
 
                 </div>
             </div>
         </div>
     </article>
 
-    <hr>
+        <hr>
     
     <footer>
         <div class="container">

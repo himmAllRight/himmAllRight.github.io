@@ -79,30 +79,36 @@
     </nav>
 
 
+
+
+<header class="intro-header" style="background-image: url('http://ryan.himmelwright.net/img/posts/back-to-solus/install-header.png')">
     
-    
-    <header class="intro-header" style="background-image: url('http://ryan.himmelwright.net/img/post-bg.jpg')">
-    
-      <div class="container">
+    <div class="container">
         <div class="row">
-           <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-             <div class="post-heading">
-               <h1>Back to Solus</h1>
-               <h2 class="subheading"></h2>
-               <span class="meta">
-                 
-  A 4 minute read,
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <h1>Back to Solus</h1>
+                    <h2 class="subheading"></h2>
+                    <span class="meta">
+                        
+    A 4 minute read,
 
 Posted by <a href="#">Ryan Himmelwright</a> on Mon, Jul 31, 2017
+
+
+
+
+
+
 
 <br />
 Tags <a href="http://ryan.himmelwright.net/tags/linux">linux</a>, <a href="http://ryan.himmelwright.net/tags/solus">solus</a>, <a href="http://ryan.himmelwright.net/tags/fedora">fedora</a>
 
-               </span>
-             </div>
-           </div>
+                    </span>
+                </div>
+            </div>
         </div>
-      </div>
+    </div>
     </header>
 
     
@@ -110,18 +116,18 @@ Tags <a href="http://ryan.himmelwright.net/tags/linux">linux</a>, <a href="http:
         <div class="container">
             <div class="row">
                 <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-                  
+                    
+                    <p>Well, that was faster than I expected. This past weekend, I wiped the Fedora installation on my main computer, and replaced it with Solus. My Fedora install broke, and I needed to use a Fedora Live CD to fix it. I thought that if I had to use a live CD to fix the issue, I might as well just do a clean install. With the idea of a clean install in my head&hellip; I thought (possibly influenced by my recent <a href="http://ryan.himmelwright.net/posts/dabbling-with-go/#motivation">motivation</a> to play with Go), that I might as well do the clean install with <a href="solus-project.com/">Solus</a>&hellip;</p>
 
-<p>Well, that was faster than I expected. This past weekend, I wiped the Fedora installation on my main computer, and replaced it with Solus. My Fedora install broke, and I needed to use a Fedora Live CD to fix it. I thought that if I had to use a live CD to fix the issue, I might as well just do a clean install. With the idea of a clean install in my head&hellip; I thought (possibly influenced by my recent <a href="http://ryan.himmelwright.net/posts/dabbling-with-go/#motivation">motivation</a> to play with Go), that I might as well do the clean install with <a href="solus-project.com/">Solus</a>&hellip;</p>
-
-<!-- more-->
+<p></p>
 
 <h2 id="nvidia-issues">Nvidia Issues</h2>
 
 <div class="video-container">
-<iframe width="640" height="360" src="https://www.youtube.com/embed/IVpOyKCNZYw?start=101" frameborder="0" allowfullscreen></iframe>
+<iframe width="100%" height="360" src="https://www.youtube.com/embed/IVpOyKCNZYw?start=101" frameborder="0" allowfullscreen></iframe>
 </div>
-<div id="caption">Linus Torvalds famously flipped off Nvidia during a Q&A</div>
+
+<p><em>Linus Torvalds famously flipped off Nvidia during a Q&amp;A</em></p>
 
 <p>Basically, what I think happened was that my Nvidia drivers got messed up during an update. When I rebooted my computer, my screens were black. This happened no matter which kernel I booted into from Grub. I assumed it was a graphics problem and preceded to switch to another tty to login and fix the problem. I was able to get to a CLI login screen (with the normal <code>user:</code> prompt) and tried login in. However, after typing in my user name and hitting enter, instead of being promoted for a password, I received an &ldquo;Error Logging In&rdquo; message. So, I tried the same thing with the root user account. Same thing. After typing in a user name, it yelled at me. There was no way to log in.</p>
 
@@ -131,8 +137,8 @@ Tags <a href="http://ryan.himmelwright.net/tags/linux">linux</a>, <a href="http:
 
 <h2 id="installed-solus">Installed Solus</h2>
 
-<p><img alt="Installing Solus" src="../../img/posts/back-to-solus/install.png" width=100%>
-<div id="caption">Installing Solus</div></p>
+<p><img alt="Installing Solus" src="../../img/posts/back-to-solus/install.png" style="max-width: 100%;"/>
+<em>Installing Solus</em></p>
 
 <p>With the Fedora live environment all booted and ready, I started downloading the latest Solus ISO (Budgie) on my other laptop. Once the ISO image was mounted to a drive, I booted it up and started installing Solus. After the install, I immediately updated because I knew there have been a TON of updates since the last ISO snapshot (mid-April). When I rebooted, I absolutely loved what I saw. It is amazing how much Solus and Budgie have improved, even during my short distro-hopping vacation.</p>
 
@@ -140,14 +146,31 @@ Tags <a href="http://ryan.himmelwright.net/tags/linux">linux</a>, <a href="http:
 
 <p>As of now, my plan is to keep using Solus, at least on my main computer. I am also hoping to get more involved with the project, and start packing up some software again. Maybe I can even help with some debugging and development. We shall see&hellip;</p>
 
-                  
+                    
+                    
+                        <div style="float: left; text-decoration: underline; text-align: right;">Next Post:</div>
+                    
+                    
+                         <div style="float: right; text-decoration: underline; text-align: right;">Prev Post:</div>
+                    
+                    <br>
+                    
+                        <a href="http://ryan.himmelwright.net/post/simple-reverse-ssh-tunnel/" style="text-align: left; float: left; max-width: 40%;">Simple Reverse SSH Tunnels</a>
+                    
+                    
+                        <a href="http://ryan.himmelwright.net/post/dabbling-with-go/" style="text-align: right; float: right; max-width: 40%">Dabbling with GO</a>
+                    
+
+
+                    
+                    
 
                 </div>
             </div>
         </div>
     </article>
 
-    <hr>
+        <hr>
     
     <footer>
         <div class="container">

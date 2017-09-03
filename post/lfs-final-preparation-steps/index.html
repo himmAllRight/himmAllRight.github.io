@@ -79,30 +79,36 @@
     </nav>
 
 
+
+
+<header class="intro-header" style="background-image: url('http://ryan.himmelwright.net/img/header-images/laptop-screen.jpg')">
     
-    
-    <header class="intro-header" style="background-image: url('http://ryan.himmelwright.net/img/post-bg.jpg')">
-    
-      <div class="container">
+    <div class="container">
         <div class="row">
-           <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-             <div class="post-heading">
-               <h1>Linux from Scratch - Final Preparation Steps</h1>
-               <h2 class="subheading"></h2>
-               <span class="meta">
-                 
-  A 6 minute read,
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <h1>Linux from Scratch - Final Preparation Steps</h1>
+                    <h2 class="subheading"></h2>
+                    <span class="meta">
+                        
+    A 6 minute read,
 
 Posted by <a href="#">Ryan Himmelwright</a> on Tue, Mar 21, 2017
+
+
+
+
+
+
 
 <br />
 Tags <a href="http://ryan.himmelwright.net/tags/linux">linux</a>, <a href="http://ryan.himmelwright.net/tags/lfs">lfs</a>
 
-               </span>
-             </div>
-           </div>
+                    </span>
+                </div>
+            </div>
         </div>
-      </div>
+    </div>
     </header>
 
     
@@ -110,7 +116,8 @@ Tags <a href="http://ryan.himmelwright.net/tags/linux">linux</a>, <a href="http:
         <div class="container">
             <div class="row">
                 <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-                  
+                    
+                    
 
 <p>Now that the <em>repeated</em> setup steps have been defined in <a href="http://ryan.himmelwright.net/posts/LFS-Repeated-Setup-Steps/">my previous LFS post</a>, there are a <em>few</em> more preparation steps to complete in order to start building the LFS system. I promise&hellip; we will start compiling soon. If all goes well, this should be the last preparation post.</p>
 
@@ -121,7 +128,7 @@ Tags <a href="http://ryan.himmelwright.net/tags/linux">linux</a>, <a href="http:
 <p>When it comes down to it, Linux from scratch is just a bunch of packages, and the Linux kernel, all compiled from source and linked together. To build all of this, we need to download the source code&hellip; for <em>all</em> of those packages. Luckily, LFS keeps a list of what is needed, and downloading it is trivial. <em>(Note: These commands should be run as <b>root</b>)</em></p>
 
 <p><center>
-<img src="../../img/posts/LFS-Final-Preparation-Steps/make-sources-dir.png" alt="Making the sources directory" />
+<img alt="Making the sources directory" src="../../img/posts/LFS-Final-Preparation-Steps/make-sources-dir.png" style="max-width: 100%;"/>
 </center></p>
 
 <p>First, lets make a new directory to put all of the source code. To make the directory:</p>
@@ -135,7 +142,7 @@ Tags <a href="http://ryan.himmelwright.net/tags/linux">linux</a>, <a href="http:
 </code></pre>
 
 <p><center>
-<img src="../../img/posts/LFS-Final-Preparation-Steps/wget-sources-play.png" name="pic" onmouseover="this.src='../../img/posts/LFS-Final-Preparation-Steps/wget-sources.gif'" onmouseout="this.src='../../img/posts/LFS-Final-Preparation-Steps/wget-sources-play.png'">
+<img src="../../img/posts/LFS-Final-Preparation-Steps/wget-sources-play.png" name="pic" onmouseover="this.src='../../img/posts/LFS-Final-Preparation-Steps/wget-sources.gif'" onmouseout="this.src='../../img/posts/LFS-Final-Preparation-Steps/wget-sources-play.png'" style="max-width: 100%;"/>
 </center></p>
 
 <p>To download all of the source packages at once, download <a href="http://www.linuxfromscratch.org/lfs/view/stable-systemd/wget-list">the LFS wget list</a>:</p>
@@ -151,7 +158,7 @@ Tags <a href="http://ryan.himmelwright.net/tags/linux">linux</a>, <a href="http:
 <p>It should take a few minutes to download everything (or longer if on a poor connection).</p>
 
 <p><center>
-<img src="../../img/posts/LFS-Final-Preparation-Steps/sources-md5-play.png" name="pic" onmouseover="this.src='../../img/posts/LFS-Final-Preparation-Steps/sources-md5.gif'" onmouseout="this.src='../../img/posts/LFS-Final-Preparation-Steps/sources-md5-play.png'">
+<img src="../../img/posts/LFS-Final-Preparation-Steps/sources-md5-play.png" name="pic" onmouseover="this.src='../../img/posts/LFS-Final-Preparation-Steps/sources-md5.gif'" onmouseout="this.src='../../img/posts/LFS-Final-Preparation-Steps/sources-md5-play.png'" style="max-width: 100%;"/>
 </center></p>
 
 <p>Ever since LFS-7.0, a <a href="http://www.linuxfromscratch.org/lfs/view/stable-systemd/md5sums">md5sums file</a> is provided, which can be downloaded and used to verify the integrity of downloaded packages. Download this file, again with <em>wget</em>:</p>
@@ -230,7 +237,7 @@ useradd -s /bin/bash -g lfs -m -k /dev/null lfs
 <h5 id="creating-bash-profile">Creating .bash_profile</h5>
 
 <p><center>
-<img src="../../img/posts/LFS-Final-Preparation-Steps/set-bash-profile.png" name="pic" onmouseover="this.src='../../img/posts/LFS-Final-Preparation-Steps/set-bash-profile.gif'" onmouseout="this.src='../../img/posts/LFS-Final-Preparation-Steps/set-bash-profile.png'">
+<img src="../../img/posts/LFS-Final-Preparation-Steps/set-bash-profile.png" name="pic" onmouseover="this.src='../../img/posts/LFS-Final-Preparation-Steps/set-bash-profile.gif'" onmouseout="this.src='../../img/posts/LFS-Final-Preparation-Steps/set-bash-profile.png'" style="max-width: 100%;"/>
 </center></p>
 
 <p>When logging in as the <em>lfs</em> user, the shell first reads the <code>/etc/profile</code> of the host, followed by the <code>.bash_profile</code>. So, lets start with the <code>.bash_profile</code>. Create/open <code>.bash_profile</code> and add the following line to it:</p>
@@ -243,7 +250,7 @@ useradd -s /bin/bash -g lfs -m -k /dev/null lfs
 <h5 id="creating-bashrc">Creating .bashrc</h5>
 
 <p><center>
-<img src="../../img/posts/LFS-Final-Preparation-Steps/set-bashrc.png" name="pic" onmouseover="this.src='../../img/posts/LFS-Final-Preparation-Steps/set-bashrc.gif'" onmouseout="this.src='../../img/posts/LFS-Final-Preparation-Steps/set-bashrc.png'">
+<img src="../../img/posts/LFS-Final-Preparation-Steps/set-bashrc.png" name="pic" onmouseover="this.src='../../img/posts/LFS-Final-Preparation-Steps/set-bashrc.gif'" onmouseout="this.src='../../img/posts/LFS-Final-Preparation-Steps/set-bashrc.png'" style="max-width: 100%;"/>
 </center></p>
 
 <p>The new instance of this the shell is a non-login shell, so it does not read the <code>/etc/profile</code> or <code>.bash_profile</code> files. However, it does read the <code>.bashrc, so lets go ahead and create that. Open</code>~/.bashrc` and add the following lines:</p>
@@ -273,14 +280,32 @@ export LFS LC_ALL LFS_TGT PATH
 
 <p>Congratulations! We are now ready to start compiling some code in the next post!</p>
 
-                  
+
+                    
+                    
+                        <div style="float: left; text-decoration: underline; text-align: right;">Next Post:</div>
+                    
+                    
+                         <div style="float: right; text-decoration: underline; text-align: right;">Prev Post:</div>
+                    
+                    <br>
+                    
+                        <a href="http://ryan.himmelwright.net/post/lfs-sbus-and-binutils/" style="text-align: left; float: left; max-width: 40%;">Linux from Scratch - SBUs and Binutils</a>
+                    
+                    
+                        <a href="http://ryan.himmelwright.net/post/lfs-repeated-setup-steps/" style="text-align: right; float: right; max-width: 40%">Linux from Scratch - Repeated Setup Steps</a>
+                    
+
+
+                    
+                    
 
                 </div>
             </div>
         </div>
     </article>
 
-    <hr>
+        <hr>
     
     <footer>
         <div class="container">

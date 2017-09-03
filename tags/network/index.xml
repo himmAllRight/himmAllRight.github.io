@@ -27,7 +27,16 @@
       <pubDate>Thu, 29 Jun 2017 00:00:00 +0000</pubDate>
       
       <guid>http://ryan.himmelwright.net/post/issues-setting-up-ubiquiti-network/</guid>
-      <description>This past weekend, I setup my new ubiquiti network. It actually took up a good portion of Sunday, because I ran into a few minor issues. Fortunately/Unfortunately, these issues were mostly because it my first time configuring this type of setup, and there was a lot of trial and error. The basic network is now all configured and has been running great. It was a good day and I learned a lot :).</description>
+      <description>&lt;p&gt;This past weekend, I setup my new ubiquiti network. It actually took up a good
+portion of Sunday, because I ran into a few minor issues.
+Fortunately/Unfortunately, these issues were mostly because it my first time
+configuring this type of setup, and there was a lot of trial and error. The basic
+network is now all configured and has been running great. It was a good day and I
+learned a lot :). In fact, I am confident that if I had to start over from
+scratch, the process would take me about 10-15 minutes. Just to be sure, I&amp;rsquo;m
+ going to quickly jot down the major pain points I experienced my first time around.&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -36,7 +45,14 @@
       <pubDate>Mon, 26 Jun 2017 00:00:00 +0000</pubDate>
       
       <guid>http://ryan.himmelwright.net/post/upgrading-network-to-ubiquiti/</guid>
-      <description>A few weeks ago, I went back to Pennsylvania for a week to attend my college swim team reunion, and my brother&amp;rsquo;s high school graduation. While I was away, the wifi-router Rebecca and I were using decided to die (of course). When I returned, I setup our old router as a temporary fix. It was terrible. So, I began researching how I should upgrade our network. This time around, I am doing this correctly.</description>
+      <description>&lt;p&gt;A few weeks ago, I went back to Pennsylvania for a week to attend my college swim
+team reunion, and my brother&amp;rsquo;s high school graduation. While I was away, the
+wifi-router Rebecca and I were using decided to die (of course). When I returned, I
+setup our old router as a &lt;em&gt;temporary&lt;/em&gt; fix. It was terrible. So, I began
+researching how I should upgrade our network. This time around, I am doing this
+&lt;em&gt;correctly&lt;/em&gt;.&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
   </channel>

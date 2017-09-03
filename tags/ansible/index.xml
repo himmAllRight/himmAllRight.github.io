@@ -27,8 +27,9 @@
       <pubDate>Sun, 21 May 2017 00:00:00 +0000</pubDate>
       
       <guid>http://ryan.himmelwright.net/post/ansible-on-pi-cluster/</guid>
-      <description>In my previous post, I pieced together my pi cluster, and installed variations of Ubuntu 16.04 Server on each of its nodes. With the cluster built, I quickly needed an easy way to maintain and interact with the system as a whole. This, is where Ansible comes in. In this post, I will walk through the steps I took to setup Ansible on my Cluster.
-Ansible Ansible is an open source, configuration management and automation system.</description>
+      <description>&lt;p&gt;In my &lt;a href=&#34;http://ryan.himmelwright.net/posts/Setting-up-the-pi-cluster/&#34;&gt;previous post&lt;/a&gt;, I pieced together my &lt;a href=&#34;http://ryan.himmelwright.net/pages/homelab/#cluster&#34;&gt;pi cluster&lt;/a&gt;, and installed variations of Ubuntu 16.04 Server on each of its nodes. With the cluster built, I quickly needed an easy way to maintain and interact with the system as a whole. This, is where &lt;a href=&#34;https://www.ansible.com/&#34;&gt;Ansible&lt;/a&gt; comes in. In this post, I will walk through the steps I took to setup Ansible on my Cluster.&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
   </channel>

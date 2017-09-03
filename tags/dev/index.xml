@@ -18,8 +18,9 @@
       <pubDate>Sun, 30 Jul 2017 00:00:00 +0000</pubDate>
       
       <guid>http://ryan.himmelwright.net/post/dabbling-with-go/</guid>
-      <description>After spending most of this month&amp;rsquo;s dedicated learning time working on system, server, and network activities, I have been itching to start some home programming again. To motivate myself, I even considered dabbling with a new programming language&amp;hellip; and with very little internal debate, I decided to just Gopher it (I&amp;rsquo;m so sorry).
-What is GO? Go (sometimes referred to as &amp;ldquo;golang&amp;rdquo;) is an open source programming language, developed in 2007 by a team at Google (Robert Griesemer, Rob Pike, and Ken Thompson).</description>
+      <description>&lt;p&gt;After spending most of this month&amp;rsquo;s dedicated learning time working on &lt;a href=&#34;http://ryan.himmelwright.net/posts/solus-to-fedora/&#34;&gt;system&lt;/a&gt;, &lt;a href=&#34;http://ryan.himmelwright.net/posts/creating-a-git-remote/&#34;&gt;server&lt;/a&gt;, and &lt;a href=&#34;http://ryan.himmelwright.net/posts/issues-setting-up-ubiquiti-network/&#34;&gt;network&lt;/a&gt; activities,  I have been itching to start some home programming again. To motivate myself, I even considered dabbling with a new programming language&amp;hellip; and with very little internal debate, I decided to just &lt;a href=&#34;https://golang.org&#34;&gt;Gopher&lt;/a&gt; it (I&amp;rsquo;m so sorry).&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -28,7 +29,18 @@ What is GO? Go (sometimes referred to as &amp;ldquo;golang&amp;rdquo;) is an ope
       <pubDate>Wed, 19 Jul 2017 00:00:00 +0000</pubDate>
       
       <guid>http://ryan.himmelwright.net/post/creating-a-git-remote/</guid>
-      <description>For over a year or so, I have been using a self-hosted Gitlab to host all of my private repos. For a few months now, I have been meaning to migrate my Gitlab repos to bare, minimal ones, hosted directly on a server. The majority of my code/configs are hosted publicly on my Github page, and it really doesn&amp;rsquo;t make sense to maintain a full Gitlab instance for the few (like&amp;hellip;2) private repositories that I keep.</description>
+      <description>&lt;p&gt;For over a year or so, I have been using a
+self-hosted &lt;a href=&#34;https://about.gitlab.com/&#34;&gt;Gitlab&lt;/a&gt; to host all of my private repos.
+For a few months now, I have been meaning to migrate my Gitlab repos to bare, minimal
+ones, hosted directly on a server. The majority of my code/configs are hosted
+publicly on &lt;a href=&#34;https://github.com/himmAllRight&#34;&gt;my Github&lt;/a&gt; page, and it really
+doesn&amp;rsquo;t make sense to maintain a full Gitlab instance for the few (like&amp;hellip;2)
+private repositories that I keep. Moving the git repos to new ones right on the server
+is actually fairly simple. For such a simple process, all the guides I saw
+online went way above and beyond what I needed. So, here are the &lt;em&gt;two&lt;/em&gt; steps I
+did to migrate my repos.&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -37,8 +49,8 @@ What is GO? Go (sometimes referred to as &amp;ldquo;golang&amp;rdquo;) is an ope
       <pubDate>Mon, 17 Apr 2017 00:00:00 +0000</pubDate>
       
       <guid>http://ryan.himmelwright.net/post/lia-1-0-beta-released/</guid>
-      <description>I have released the 1.0 Beta version for a personal project of mine: the Ledger Import Assistant, or LIA. This post will talk briefly about the background of LIA, what it does, and explain the beta release. What is LIA? Example Cred Card Statement CSV File
-A while ago, I discovered Ledger, the command line double-entry accounting application. Its powerful, yet simple design attracted me, and I wanted to try it out.</description>
+      <description>&lt;p&gt;I have released the 1.0 Beta version for a personal project of mine: the &lt;strong&gt;L&lt;/strong&gt;edger &lt;strong&gt;I&lt;/strong&gt;mport &lt;strong&gt;A&lt;/strong&gt;ssistant, or &lt;a href=&#34;https://github.com/himmALlRight/LIA/&#34;&gt;LIA&lt;/a&gt;. This post will talk briefly about the background of LIA, what it does, and explain the beta release.
+&lt;/p&gt;</description>
     </item>
     
   </channel>

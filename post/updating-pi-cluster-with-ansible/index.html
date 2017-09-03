@@ -79,30 +79,36 @@
     </nav>
 
 
+
+
+<header class="intro-header" style="background-image: url('http://ryan.himmelwright.net/img/post-bg.jpg')">
     
-    
-    <header class="intro-header" style="background-image: url('http://ryan.himmelwright.net/img/post-bg.jpg')">
-    
-      <div class="container">
+    <div class="container">
         <div class="row">
-           <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-             <div class="post-heading">
-               <h1>Updating the Pi Cluster with Ansible</h1>
-               <h2 class="subheading"></h2>
-               <span class="meta">
-                 
-  A 6 minute read,
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <h1>Updating the Pi Cluster with Ansible</h1>
+                    <h2 class="subheading"></h2>
+                    <span class="meta">
+                        
+    A 6 minute read,
 
 Posted by <a href="#">Ryan Himmelwright</a> on Thu, May 25, 2017
+
+
+
+
+
+
 
 <br />
 Tags <a href="http://ryan.himmelwright.net/tags/homelab">homelab</a>, <a href="http://ryan.himmelwright.net/tags/cluster">cluster</a>, <a href="http://ryan.himmelwright.net/tags/pi">pi</a>, <a href="http://ryan.himmelwright.net/tags/devops">devops</a>, <a href="http://ryan.himmelwright.net/tags/ansible">ansible</a>
 
-               </span>
-             </div>
-           </div>
+                    </span>
+                </div>
+            </div>
         </div>
-      </div>
+    </div>
     </header>
 
     
@@ -110,7 +116,8 @@ Tags <a href="http://ryan.himmelwright.net/tags/homelab">homelab</a>, <a href="h
         <div class="container">
             <div class="row">
                 <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-                  
+                    
+                    
 
 <p>With Ansible configured on the Pi cluster, it is time to have it do something useful. When working with a clustered system, even the simplest tasks become tedious and time consuming. For example, updating the system. While I could manually update each of the 3 pi nodes, it is not scalable to 10 or 30 nodes, let alone hundreds or thousands. Tools like Ansible, make doing tasks such a supdating clustered systems, trivial again. In this post, I will walk through setting up an Ansible playbook to update my Pi cluster.</p>
 
@@ -254,14 +261,32 @@ ansible cluster -m ping
 
 <p>When running the playbook, ansible will first attempt to gather facts about each node, and then begin to run each of the tasks defined in the playbook. At each step, it will print out the <code>name</code> of each task, followed by the status/result for each node. When it completes, all the nodes in the cluster should be updated. Now you can update three+ computers with a single command! Enjoy!</p>
 
-                  
+
+                    
+                    
+                        <div style="float: left; text-decoration: underline; text-align: right;">Next Post:</div>
+                    
+                    
+                         <div style="float: right; text-decoration: underline; text-align: right;">Prev Post:</div>
+                    
+                    <br>
+                    
+                        <a href="http://ryan.himmelwright.net/post/exporting-proxmox-vms/" style="text-align: left; float: left; max-width: 40%;">Exporting Proxmox VMs</a>
+                    
+                    
+                        <a href="http://ryan.himmelwright.net/post/ansible-on-pi-cluster/" style="text-align: right; float: right; max-width: 40%">Configuring Ansible on the Pi Cluster</a>
+                    
+
+
+                    
+                    
 
                 </div>
             </div>
         </div>
     </article>
 
-    <hr>
+        <hr>
     
     <footer>
         <div class="container">

@@ -38,8 +38,9 @@ Downloading Sources When it comes down to it, Linux from scratch is just a bunch
       <pubDate>Mon, 13 Mar 2017 00:00:00 +0000</pubDate>
       
       <guid>http://ryan.himmelwright.net/post/lfs-repeated-setup-steps/</guid>
-      <description>During the Linux From Scratch process, there may be times when the build environment (computer, VM, chroot, whatever) must be restarted. If so, there are a few steps from the setup phase that have to be re-initialized. This post maps out those steps.
-Setting The $LFS Variable After setting up the virtual disk for my LFS build, I needed to define where I wanted to eventually mount it. This location is important, because it is the path that the $LFS variable is set to.</description>
+      <description>&lt;p&gt;During the Linux From Scratch process, there may be times when the build environment (computer, VM, chroot, whatever) must be restarted. If so, there are a few steps from the setup phase that have to be re-initialized. This post maps out those steps.&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -48,8 +49,9 @@ Setting The $LFS Variable After setting up the virtual disk for my LFS build, I 
       <pubDate>Wed, 01 Mar 2017 00:00:00 +0000</pubDate>
       
       <guid>http://ryan.himmelwright.net/post/lfs-getting-started/</guid>
-      <description>When I started using Arch Linux a while back, I learn about some of the internals of Linux quickly. Ever since then, I have considered building a Linux From Scratch by following the guidelines outlined in the book. Based on my experience with Arch Linux, I&amp;rsquo;m sure that compiling a system from scratch will continue to teach me about Linux at a much deeper level.
-Getting Started First, it should be known that this process follows a book that is freely available at www.</description>
+      <description>&lt;p&gt;When I started using &lt;a href=&#34;https://www.archlinux.org&#34;&gt;Arch Linux&lt;/a&gt; a while back, I learn about some of the internals of Linux quickly. Ever since then, I have considered building a Linux From Scratch by following the guidelines outlined in &lt;a href=&#34;http://www.linuxfromscratch.org&#34;&gt;the book&lt;/a&gt;. Based on my experience with Arch Linux, I&amp;rsquo;m sure that compiling a system from scratch will continue to teach me about Linux at a much deeper level.&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
   </channel>

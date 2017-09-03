@@ -27,7 +27,9 @@
       <pubDate>Mon, 31 Jul 2017 00:00:00 +0000</pubDate>
       
       <guid>http://ryan.himmelwright.net/post/back-to-solus/</guid>
-      <description>Well, that was faster than I expected. This past weekend, I wiped the Fedora installation on my main computer, and replaced it with Solus. My Fedora install broke, and I needed to use a Fedora Live CD to fix it. I thought that if I had to use a live CD to fix the issue, I might as well just do a clean install. With the idea of a clean install in my head&amp;hellip; I thought (possibly influenced by my recent motivation to play with Go), that I might as well do the clean install with Solus&amp;hellip;</description>
+      <description>&lt;p&gt;Well, that was faster than I expected. This past weekend, I wiped the Fedora installation on my main computer, and replaced it with Solus. My Fedora install broke, and I needed to use a Fedora Live CD to fix it. I thought that if I had to use a live CD to fix the issue, I might as well just do a clean install. With the idea of a clean install in my head&amp;hellip; I thought (possibly influenced by my recent &lt;a href=&#34;http://ryan.himmelwright.net/posts/dabbling-with-go/#motivation&#34;&gt;motivation&lt;/a&gt; to play with Go), that I might as well do the clean install with &lt;a href=&#34;solus-project.com/&#34;&gt;Solus&lt;/a&gt;&amp;hellip;&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -36,7 +38,9 @@
       <pubDate>Tue, 25 Jul 2017 00:00:00 +0000</pubDate>
       
       <guid>http://ryan.himmelwright.net/post/solus-to-fedora/</guid>
-      <description>For awhile, I have been debating the idea of switching back to Fedora (from Solus). At least on my main computer. First, let me state this right up front: I am still very satisfied with Solus. I think it is one of the best current Linux distros, and I want to still contribute to the project. However, there are a few reasons why Solus isn&amp;rsquo;t the best fit for my needs right now, and I will highlight them below.</description>
+      <description>&lt;p&gt;For awhile, I have been debating the idea of switching back to Fedora (from Solus). At least on my &lt;a href=&#34;../../pages/homelab/#alakazam&#34;&gt;main computer&lt;/a&gt;. First, let me state this right up front: I am still &lt;em&gt;very&lt;/em&gt; satisfied with Solus. I think it is one of the best current Linux distros, and I want to still contribute to the project. However, there are a few reasons why Solus isn&amp;rsquo;t the best fit for my needs &lt;em&gt;right now&lt;/em&gt;, and I will highlight them below.&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -45,7 +49,18 @@
       <pubDate>Wed, 19 Jul 2017 00:00:00 +0000</pubDate>
       
       <guid>http://ryan.himmelwright.net/post/creating-a-git-remote/</guid>
-      <description>For over a year or so, I have been using a self-hosted Gitlab to host all of my private repos. For a few months now, I have been meaning to migrate my Gitlab repos to bare, minimal ones, hosted directly on a server. The majority of my code/configs are hosted publicly on my Github page, and it really doesn&amp;rsquo;t make sense to maintain a full Gitlab instance for the few (like&amp;hellip;2) private repositories that I keep.</description>
+      <description>&lt;p&gt;For over a year or so, I have been using a
+self-hosted &lt;a href=&#34;https://about.gitlab.com/&#34;&gt;Gitlab&lt;/a&gt; to host all of my private repos.
+For a few months now, I have been meaning to migrate my Gitlab repos to bare, minimal
+ones, hosted directly on a server. The majority of my code/configs are hosted
+publicly on &lt;a href=&#34;https://github.com/himmAllRight&#34;&gt;my Github&lt;/a&gt; page, and it really
+doesn&amp;rsquo;t make sense to maintain a full Gitlab instance for the few (like&amp;hellip;2)
+private repositories that I keep. Moving the git repos to new ones right on the server
+is actually fairly simple. For such a simple process, all the guides I saw
+online went way above and beyond what I needed. So, here are the &lt;em&gt;two&lt;/em&gt; steps I
+did to migrate my repos.&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -54,7 +69,9 @@
       <pubDate>Thu, 22 Jun 2017 00:00:00 +0000</pubDate>
       
       <guid>http://ryan.himmelwright.net/post/started-using-i3blocks/</guid>
-      <description>The last couple of weeks I have shifted back to using the i3 window mangers. When I fired it up, my fingers danced across the keyboard, remembering all of the personalized keybindings I have cultivated in my i3 configuration over the years. It is a simple, beautiful setup&amp;hellip; well, beautiful minus one of the components. My i3status bar was looking rather bland and dated, especially compared some of the i3 setups posted by all the cool kids over at /r/unixporn.</description>
+      <description>&lt;p&gt;The last couple of weeks I have shifted back to using the i3 window mangers. When I fired it up, my fingers danced across the keyboard, remembering all of the personalized keybindings I have cultivated in my i3 configuration over the years. It is a simple, beautiful setup&amp;hellip; well, beautiful minus one of the components. My i3status bar was looking rather bland and dated, especially compared some of the i3 setups posted by all the cool kids over at &lt;a href=&#34;https://www.reddit.com/r/unixporn/&#34;&gt;/r/unixporn&lt;/a&gt;. I decided it was time for a refresh.&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -63,7 +80,9 @@
       <pubDate>Fri, 16 Jun 2017 00:00:00 +0000</pubDate>
       
       <guid>http://ryan.himmelwright.net/post/exporting-proxmox-vms/</guid>
-      <description>For a long time I have been thinking about replacing my server&amp;rsquo;s proxmox install with vanilla Debian or CentOS, mostly for learning purposes. I would first setup zfs on the new system and import my existing data pools. Then, I would use either a system like ovrit or just plain kvm/lxc to run my VMs and containers. In order to do this though&amp;hellip; I have to first figure out how export my containers and VMs running in Proxmox.</description>
+      <description>&lt;p&gt;For a long time I have been thinking about replacing my server&amp;rsquo;s proxmox install with vanilla Debian or CentOS, mostly for learning purposes. I would first setup zfs on the new system and import my existing data pools. Then, I would use either a system like ovrit or just plain kvm/lxc to run my VMs and containers. In order to do this though&amp;hellip; I have to first figure out how export my containers and VMs running in Proxmox. As it turns out&amp;hellip; exporting the VMs wasn&amp;rsquo;t very hard&amp;hellip;&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -72,7 +91,9 @@
       <pubDate>Fri, 05 May 2017 00:00:00 +0000</pubDate>
       
       <guid>http://ryan.himmelwright.net/post/setting-up-the-pi-cluster/</guid>
-      <description>I have a Raspberry Pi 2, a Raspberry Pi 3, and a Banana Pi. A while ago, I constructed a small tower to house my pi devices. Since then, I have additionally acquired a power source, and some CAT6 cable to connect them all up to a switch. I hope to use the Pis as a mini clustered environment, where I can learn (and play) with some of the &amp;ldquo;Devops&amp;rdquo; technologies/techniques out there.</description>
+      <description>&lt;p&gt;I have a Raspberry Pi 2, a Raspberry Pi 3, and a Banana Pi. A while ago, I constructed a small tower to house my pi devices. Since then, I have additionally acquired a power source, and some CAT6 cable to connect them all up to a switch. I hope to use the Pis as a mini clustered environment, where I can learn (and play) with some of the &amp;ldquo;Devops&amp;rdquo; technologies/techniques out there. This post will briefly explain the initial setup of &lt;a href=&#34;../../pages/homelab/#cluster&#34;&gt;my cluster&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -81,7 +102,9 @@
       <pubDate>Thu, 20 Apr 2017 00:00:00 +0000</pubDate>
       
       <guid>http://ryan.himmelwright.net/post/zfs-backups-to-luks-external/</guid>
-      <description>I have been using ZFS data pools to store data on my server for some time now. As great as that is, I am ashamed to admit that I have not had a true backup system in place (raid/mirrors are not backup). I have a backup solution that I have attempted in the past, but ran into an issue and let it drift to the side. That changes now. It&amp;rsquo;s time to revisit my solution, and complete it to the end.</description>
+      <description>&lt;p&gt;I have been using &lt;a href=&#34;https://en.wikipedia.org/wiki/ZFS&#34;&gt;ZFS&lt;/a&gt; data pools to store data on &lt;a href=&#34;../../pages/homelab/#ninetales&#34;&gt;my server&lt;/a&gt; for some time now. As great as that is, I am ashamed to admit that I have not had a &lt;em&gt;true&lt;/em&gt; backup system in place (raid/mirrors are not backup). I have a backup solution that I have attempted in the past, but ran into an issue and let it drift to the side. That changes now. It&amp;rsquo;s time to revisit my solution, and complete it to the end.&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -110,8 +133,9 @@ Downloading Sources When it comes down to it, Linux from scratch is just a bunch
       <pubDate>Mon, 13 Mar 2017 00:00:00 +0000</pubDate>
       
       <guid>http://ryan.himmelwright.net/post/lfs-repeated-setup-steps/</guid>
-      <description>During the Linux From Scratch process, there may be times when the build environment (computer, VM, chroot, whatever) must be restarted. If so, there are a few steps from the setup phase that have to be re-initialized. This post maps out those steps.
-Setting The $LFS Variable After setting up the virtual disk for my LFS build, I needed to define where I wanted to eventually mount it. This location is important, because it is the path that the $LFS variable is set to.</description>
+      <description>&lt;p&gt;During the Linux From Scratch process, there may be times when the build environment (computer, VM, chroot, whatever) must be restarted. If so, there are a few steps from the setup phase that have to be re-initialized. This post maps out those steps.&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -120,7 +144,9 @@ Setting The $LFS Variable After setting up the virtual disk for my LFS build, I 
       <pubDate>Tue, 07 Mar 2017 00:00:00 +0000</pubDate>
       
       <guid>http://ryan.himmelwright.net/post/new-dotfiles/</guid>
-      <description>I have maintained a &amp;ldquo;dotfiles&amp;rdquo; repository since I made my github account in 2013. However, overtime it became more of a post-apocalyptic wasteland, cluttered with remnants of obsolete configurations and scraps of scripts. It was no longer the pristine, culled, collection that I desired. I also did not have an efficient method of easily linking the files on a new system. I had to manually make symlinks for each dotfile.</description>
+      <description>&lt;p&gt;I have maintained a &amp;ldquo;dotfiles&amp;rdquo; repository since I made my github account in 2013. However, overtime it became more of a post-apocalyptic wasteland, cluttered with remnants of obsolete configurations and scraps of scripts. It was no longer the pristine, culled, collection that I desired. I also did not have an efficient method of easily linking the files on a new system. I had to manually make symlinks for each dotfile. I knew there were &lt;em&gt;much&lt;/em&gt; better dotfiles setups out there, but I never got around to it. Until now.&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -129,8 +155,9 @@ Setting The $LFS Variable After setting up the virtual disk for my LFS build, I 
       <pubDate>Wed, 01 Mar 2017 00:00:00 +0000</pubDate>
       
       <guid>http://ryan.himmelwright.net/post/lfs-getting-started/</guid>
-      <description>When I started using Arch Linux a while back, I learn about some of the internals of Linux quickly. Ever since then, I have considered building a Linux From Scratch by following the guidelines outlined in the book. Based on my experience with Arch Linux, I&amp;rsquo;m sure that compiling a system from scratch will continue to teach me about Linux at a much deeper level.
-Getting Started First, it should be known that this process follows a book that is freely available at www.</description>
+      <description>&lt;p&gt;When I started using &lt;a href=&#34;https://www.archlinux.org&#34;&gt;Arch Linux&lt;/a&gt; a while back, I learn about some of the internals of Linux quickly. Ever since then, I have considered building a Linux From Scratch by following the guidelines outlined in &lt;a href=&#34;http://www.linuxfromscratch.org&#34;&gt;the book&lt;/a&gt;. Based on my experience with Arch Linux, I&amp;rsquo;m sure that compiling a system from scratch will continue to teach me about Linux at a much deeper level.&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -139,8 +166,14 @@ Getting Started First, it should be known that this process follows a book that 
       <pubDate>Tue, 29 Nov 2016 00:00:00 +0000</pubDate>
       
       <guid>http://ryan.himmelwright.net/post/introducing-kadabra/</guid>
-      <description>As I start to do more with a computer on the go, the netbooks I previously used just are not cutting it anymore. They were great for minimal use, but couldn&amp;rsquo;t run VMs, over-heated, and didn&amp;rsquo;t have great battery life. Now that I am going to libraries and other locations to work on personal and open source projects, I really needed a better mobile pc setup.
-Other Considerations I had been keeping an eye open for a new mobile computer for well over a year to find out what is out there.</description>
+      <description>&lt;p&gt;As I start to do more with a computer on the go, the netbooks I
+previously used just are not cutting it anymore. They were great for minimal
+use, but couldn&amp;rsquo;t run VMs, over-heated, and didn&amp;rsquo;t have great
+battery life. Now that I am going to libraries and other locations to
+work on personal and open source projects, I really needed a better
+mobile pc setup.&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -149,10 +182,11 @@ Other Considerations I had been keeping an eye open for a new mobile computer fo
       <pubDate>Sun, 17 Jul 2016 00:00:00 +0000</pubDate>
       
       <guid>http://ryan.himmelwright.net/post/snapd-on-arch/</guid>
-      <description>The past few weeks I have been listening to all of the buzz about Ubuntu &amp;ldquo;snaps&amp;rdquo;, but I just recently decided to try this new technology out.
-Snapd Install and Setup I decided to install snapd on my small netbook (Abra), which is running Arch Linux. So, installing snapd was as easy as running:
-pacaur -S snapd
-Now, I use pacaur so that I can install packages from Arch Linux&amp;rsquo;s main repos, as well as the AUR.</description>
+      <description>&lt;p&gt;The past few weeks I have been listening to all of the buzz about
+Ubuntu &amp;ldquo;snaps&amp;rdquo;, but I just recently decided to try this new technology
+out.&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -161,7 +195,16 @@ Now, I use pacaur so that I can install packages from Arch Linux&amp;rsquo;s mai
       <pubDate>Sun, 26 Jun 2016 00:00:00 +0000</pubDate>
       
       <guid>http://ryan.himmelwright.net/post/trying-out-plasma5/</guid>
-      <description>After watching the continued development of the Plasma 5 desktop environment from a distance, I determined I needed to give it another try. It was just before version 5.6 was released, and the project appeared to be finding it&amp;rsquo;s stride. Right up front, I want to come clean and admit that I have never really liked the KDE/Plasma desktop environment (more on that below). However, with that said&amp;hellip; I am still using the plasma desktop on my main computer (months later, and haven&amp;rsquo;t aborted yet**&amp;hellip;).</description>
+      <description>&lt;p&gt;After watching the continued development of the Plasma 5 desktop
+environment from a distance, I determined I needed to give it another
+try. It was just before version 5.6 was released, and the project
+appeared to be finding it&amp;rsquo;s stride. Right up front, I want to come
+clean and admit that I have never really liked the KDE/Plasma desktop
+environment (more on that below). However, with that said&amp;hellip; I am still
+using the plasma desktop on my main computer (months later, and
+haven&amp;rsquo;t aborted yet**&amp;hellip;). Here are my thoughts.&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
     <item>

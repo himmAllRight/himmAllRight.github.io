@@ -27,7 +27,16 @@
       <pubDate>Thu, 29 Jun 2017 00:00:00 +0000</pubDate>
       
       <guid>http://ryan.himmelwright.net/post/issues-setting-up-ubiquiti-network/</guid>
-      <description>This past weekend, I setup my new ubiquiti network. It actually took up a good portion of Sunday, because I ran into a few minor issues. Fortunately/Unfortunately, these issues were mostly because it my first time configuring this type of setup, and there was a lot of trial and error. The basic network is now all configured and has been running great. It was a good day and I learned a lot :).</description>
+      <description>&lt;p&gt;This past weekend, I setup my new ubiquiti network. It actually took up a good
+portion of Sunday, because I ran into a few minor issues.
+Fortunately/Unfortunately, these issues were mostly because it my first time
+configuring this type of setup, and there was a lot of trial and error. The basic
+network is now all configured and has been running great. It was a good day and I
+learned a lot :). In fact, I am confident that if I had to start over from
+scratch, the process would take me about 10-15 minutes. Just to be sure, I&amp;rsquo;m
+ going to quickly jot down the major pain points I experienced my first time around.&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -36,7 +45,14 @@
       <pubDate>Mon, 26 Jun 2017 00:00:00 +0000</pubDate>
       
       <guid>http://ryan.himmelwright.net/post/upgrading-network-to-ubiquiti/</guid>
-      <description>A few weeks ago, I went back to Pennsylvania for a week to attend my college swim team reunion, and my brother&amp;rsquo;s high school graduation. While I was away, the wifi-router Rebecca and I were using decided to die (of course). When I returned, I setup our old router as a temporary fix. It was terrible. So, I began researching how I should upgrade our network. This time around, I am doing this correctly.</description>
+      <description>&lt;p&gt;A few weeks ago, I went back to Pennsylvania for a week to attend my college swim
+team reunion, and my brother&amp;rsquo;s high school graduation. While I was away, the
+wifi-router Rebecca and I were using decided to die (of course). When I returned, I
+setup our old router as a &lt;em&gt;temporary&lt;/em&gt; fix. It was terrible. So, I began
+researching how I should upgrade our network. This time around, I am doing this
+&lt;em&gt;correctly&lt;/em&gt;.&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -54,8 +70,9 @@
       <pubDate>Sun, 21 May 2017 00:00:00 +0000</pubDate>
       
       <guid>http://ryan.himmelwright.net/post/ansible-on-pi-cluster/</guid>
-      <description>In my previous post, I pieced together my pi cluster, and installed variations of Ubuntu 16.04 Server on each of its nodes. With the cluster built, I quickly needed an easy way to maintain and interact with the system as a whole. This, is where Ansible comes in. In this post, I will walk through the steps I took to setup Ansible on my Cluster.
-Ansible Ansible is an open source, configuration management and automation system.</description>
+      <description>&lt;p&gt;In my &lt;a href=&#34;http://ryan.himmelwright.net/posts/Setting-up-the-pi-cluster/&#34;&gt;previous post&lt;/a&gt;, I pieced together my &lt;a href=&#34;http://ryan.himmelwright.net/pages/homelab/#cluster&#34;&gt;pi cluster&lt;/a&gt;, and installed variations of Ubuntu 16.04 Server on each of its nodes. With the cluster built, I quickly needed an easy way to maintain and interact with the system as a whole. This, is where &lt;a href=&#34;https://www.ansible.com/&#34;&gt;Ansible&lt;/a&gt; comes in. In this post, I will walk through the steps I took to setup Ansible on my Cluster.&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -64,7 +81,9 @@ Ansible Ansible is an open source, configuration management and automation syste
       <pubDate>Fri, 05 May 2017 00:00:00 +0000</pubDate>
       
       <guid>http://ryan.himmelwright.net/post/setting-up-the-pi-cluster/</guid>
-      <description>I have a Raspberry Pi 2, a Raspberry Pi 3, and a Banana Pi. A while ago, I constructed a small tower to house my pi devices. Since then, I have additionally acquired a power source, and some CAT6 cable to connect them all up to a switch. I hope to use the Pis as a mini clustered environment, where I can learn (and play) with some of the &amp;ldquo;Devops&amp;rdquo; technologies/techniques out there.</description>
+      <description>&lt;p&gt;I have a Raspberry Pi 2, a Raspberry Pi 3, and a Banana Pi. A while ago, I constructed a small tower to house my pi devices. Since then, I have additionally acquired a power source, and some CAT6 cable to connect them all up to a switch. I hope to use the Pis as a mini clustered environment, where I can learn (and play) with some of the &amp;ldquo;Devops&amp;rdquo; technologies/techniques out there. This post will briefly explain the initial setup of &lt;a href=&#34;../../pages/homelab/#cluster&#34;&gt;my cluster&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -73,7 +92,9 @@ Ansible Ansible is an open source, configuration management and automation syste
       <pubDate>Thu, 20 Apr 2017 00:00:00 +0000</pubDate>
       
       <guid>http://ryan.himmelwright.net/post/zfs-backups-to-luks-external/</guid>
-      <description>I have been using ZFS data pools to store data on my server for some time now. As great as that is, I am ashamed to admit that I have not had a true backup system in place (raid/mirrors are not backup). I have a backup solution that I have attempted in the past, but ran into an issue and let it drift to the side. That changes now. It&amp;rsquo;s time to revisit my solution, and complete it to the end.</description>
+      <description>&lt;p&gt;I have been using &lt;a href=&#34;https://en.wikipedia.org/wiki/ZFS&#34;&gt;ZFS&lt;/a&gt; data pools to store data on &lt;a href=&#34;../../pages/homelab/#ninetales&#34;&gt;my server&lt;/a&gt; for some time now. As great as that is, I am ashamed to admit that I have not had a &lt;em&gt;true&lt;/em&gt; backup system in place (raid/mirrors are not backup). I have a backup solution that I have attempted in the past, but ran into an issue and let it drift to the side. That changes now. It&amp;rsquo;s time to revisit my solution, and complete it to the end.&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
   </channel>

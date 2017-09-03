@@ -79,30 +79,36 @@
     </nav>
 
 
+
+
+<header class="intro-header" style="background-image: url('http://ryan.himmelwright.net/img/header-images/boston2.jpg')">
     
-    
-    <header class="intro-header" style="background-image: url('http://ryan.himmelwright.net/img/post-bg.jpg')">
-    
-      <div class="container">
+    <div class="container">
         <div class="row">
-           <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-             <div class="post-heading">
-               <h1>Creating a git Repo Remote</h1>
-               <h2 class="subheading"></h2>
-               <span class="meta">
-                 
-  A 3 minute read,
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <h1>Creating a git Repo Remote</h1>
+                    <h2 class="subheading"></h2>
+                    <span class="meta">
+                        
+    A 3 minute read,
 
 Posted by <a href="#">Ryan Himmelwright</a> on Wed, Jul 19, 2017
+
+
+
+
+
+
 
 <br />
 Tags <a href="http://ryan.himmelwright.net/tags/git">git</a>, <a href="http://ryan.himmelwright.net/tags/linux">linux</a>, <a href="http://ryan.himmelwright.net/tags/dev">dev</a>
 
-               </span>
-             </div>
-           </div>
+                    </span>
+                </div>
+            </div>
         </div>
-      </div>
+    </div>
     </header>
 
     
@@ -110,9 +116,8 @@ Tags <a href="http://ryan.himmelwright.net/tags/git">git</a>, <a href="http://ry
         <div class="container">
             <div class="row">
                 <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-                  
-
-<p>For over a year or so, I have been using a
+                    
+                    <p>For over a year or so, I have been using a
 self-hosted <a href="https://about.gitlab.com/">Gitlab</a> to host all of my private repos.
 For a few months now, I have been meaning to migrate my Gitlab repos to bare, minimal
 ones, hosted directly on a server. The majority of my code/configs are hosted
@@ -123,7 +128,7 @@ is actually fairly simple. For such a simple process, all the guides I saw
 online went way above and beyond what I needed. So, here are the <em>two</em> steps I
 did to migrate my repos.</p>
 
-<!-- more -->
+<p></p>
 
 <h3 id="ssh-keys">SSH Keys</h3>
 
@@ -133,9 +138,9 @@ do not know how to configure ssh keys, I included a small ssh key how-to <a href
 <h3 id="creating-server-repo">Creating Server Repo</h3>
 
 <p><center>
-<img src="../../img/posts/creating-remote-git-repo/init-bare-repo.png" name="bare init" onmouseover="this.src='../../img/posts/creating-remote-git-repo/init-bare-repo.gif'" onmouseout="this.src='../../img/posts/creating-remote-git-repo/init-bare-repo.png'">
+<img src="../../img/posts/creating-remote-git-repo/init-bare-repo.png" name="bare init" onmouseover="this.src='../../img/posts/creating-remote-git-repo/init-bare-repo.gif'" onmouseout="this.src='../../img/posts/creating-remote-git-repo/init-bare-repo.png'" style="max-width: 100%;"/>
 </center>
-<div id="caption">Creating the remote git repo</div></p>
+<em>Creating the remote git repo</em></p>
 
 <p>Once ssh authentication is configured, ssh into the remote server that will host the git repository. Creating the remote repo is a simple process. First, make a directory for the repo (the normal convention is to use a <code>.git</code> ending: <code>REPO-NAME.git</code>). Next, jump into the created directory (<code>cd</code>) and run the command <code>git init --bare</code>.</p>
 
@@ -149,9 +154,9 @@ git init --bare
 <h3 id="cloning-repo">Cloning Repo</h3>
 
 <p><center>
-<img src="../../img/posts/creating-remote-git-repo/clone-new-remote.png" name="bare init" onmouseover="this.src='../../img/posts/creating-remote-git-repo/clone-new-remote.gif'" onmouseout="this.src='../../img/posts/creating-remote-git-repo/clone-new-remote.png'">
+<img src="../../img/posts/creating-remote-git-repo/clone-new-remote.png" name="bare init" onmouseover="this.src='../../img/posts/creating-remote-git-repo/clone-new-remote.gif'" onmouseout="this.src='../../img/posts/creating-remote-git-repo/clone-new-remote.png'" style="max-width: 100%;"/>
 </center>
-<div id="caption">Clone the Remote to a Local Dir</div></p>
+<em>Clone the Remote to a Local Dir</em></p>
 
 <p>If the remote git repository is a totally new repository, it can be cloned down to a working directory on a developer machine fairly easily:</p>
 
@@ -161,9 +166,9 @@ git init --bare
 <h3 id="pointing-local-repo-to-server">Pointing Local Repo to Server</h3>
 
 <p><center>
-<img src="../../img/posts/creating-remote-git-repo/point-to-new-remote.png" name="bare init" onmouseover="this.src='../../img/posts/creating-remote-git-repo/point-to-new-remote.gif'" onmouseout="this.src='../../img/posts/creating-remote-git-repo/point-to-new-remote.png'">
+<img src="../../img/posts/creating-remote-git-repo/point-to-new-remote.png" name="bare init" onmouseover="this.src='../../img/posts/creating-remote-git-repo/point-to-new-remote.gif'" onmouseout="this.src='../../img/posts/creating-remote-git-repo/point-to-new-remote.png'" style="max-width: 100%;"/>
 </center>
-<div id="caption">Pointing a working repo to the new remote</div></p>
+<em>Pointing a working repo to the new remote</em></p>
 
 <p>However, I already had an existing working repository that I wanted to sync with the new remote shared repo. With the remote repo initialized, I wanted to point my existing git repository on the local machine to it. To do this, enter the directory of the git repository, and edit the config the (<code>.git/config</code>). To redirect the repo to point to the new remote, edit the <code>url</code> line to the location of the repo:</p>
 
@@ -182,14 +187,31 @@ git push origin master
 
 <p>And that&rsquo;s it. Enjoy spinning up and using your own personal git repositories!</p>
 
-                  
+                    
+                    
+                        <div style="float: left; text-decoration: underline; text-align: right;">Next Post:</div>
+                    
+                    
+                         <div style="float: right; text-decoration: underline; text-align: right;">Prev Post:</div>
+                    
+                    <br>
+                    
+                        <a href="http://ryan.himmelwright.net/post/solus-to-fedora/" style="text-align: left; float: left; max-width: 40%;">Migrating from Solus to Fedora for now</a>
+                    
+                    
+                        <a href="http://ryan.himmelwright.net/post/issues-setting-up-ubiquiti-network/" style="text-align: right; float: right; max-width: 40%">Encountered Issues Setting Up Ubiquiti Network</a>
+                    
+
+
+                    
+                    
 
                 </div>
             </div>
         </div>
     </article>
 
-    <hr>
+        <hr>
     
     <footer>
         <div class="container">

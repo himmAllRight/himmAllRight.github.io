@@ -79,30 +79,36 @@
     </nav>
 
 
+
+
+<header class="intro-header" style="background-image: url('http://ryan.himmelwright.net/img/header-images/laptop-screen.jpg')">
     
-    
-    <header class="intro-header" style="background-image: url('http://ryan.himmelwright.net/img/post-bg.jpg')">
-    
-      <div class="container">
+    <div class="container">
         <div class="row">
-           <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-             <div class="post-heading">
-               <h1>Linux from Scratch - Repeated Setup Steps</h1>
-               <h2 class="subheading"></h2>
-               <span class="meta">
-                 
-  A 3 minute read,
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <h1>Linux from Scratch - Repeated Setup Steps</h1>
+                    <h2 class="subheading"></h2>
+                    <span class="meta">
+                        
+    A 3 minute read,
 
 Posted by <a href="#">Ryan Himmelwright</a> on Mon, Mar 13, 2017
+
+
+
+
+
+
 
 <br />
 Tags <a href="http://ryan.himmelwright.net/tags/linux">linux</a>, <a href="http://ryan.himmelwright.net/tags/lfs">lfs</a>
 
-               </span>
-             </div>
-           </div>
+                    </span>
+                </div>
+            </div>
         </div>
-      </div>
+    </div>
     </header>
 
     
@@ -110,17 +116,16 @@ Tags <a href="http://ryan.himmelwright.net/tags/linux">linux</a>, <a href="http:
         <div class="container">
             <div class="row">
                 <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-                  
+                    
+                    <p>During the Linux From Scratch process, there may be times when the build environment (computer, VM, chroot, whatever) must be restarted. If so, there are a few steps from the setup phase that have to be re-initialized. This post maps out those steps.</p>
 
-<p>During the Linux From Scratch process, there may be times when the build environment (computer, VM, chroot, whatever) must be restarted. If so, there are a few steps from the setup phase that have to be re-initialized. This post maps out those steps.</p>
-
-<!-- more -->
+<p></p>
 
 <h3 id="setting-the-lfs-variable">Setting The $LFS Variable</h3>
 
 <p>After setting up the virtual disk for my LFS build, I needed to define where I wanted to eventually mount it. This location is important, because it is the path that the $LFS variable is set to. The $LFS variable is used throughout the book, to easily point to where the LFS system is being built.</p>
 
-<p><center><a href="../../img/posts/LFS-Repeated-Setup-Steps/Setting-LFS-var.png"><img src="../../img/posts/LFS-Repeated-Setup-Steps/Setting-LFS-var.png" alt="Setting the LFS variable" /></a></center></p>
+<p><center><img alt="Setting the LFS variable" src="../../img/posts/LFS-Repeated-Setup-Steps/Setting-LFS-var.png" style="max-width: 100%;"/></center></p>
 
 <p>To set the #LFS variable, I ran the following command: *</p>
 
@@ -149,7 +154,7 @@ Tags <a href="http://ryan.himmelwright.net/tags/linux">linux</a>, <a href="http:
 <p>If multiple partitions are being used for the LFS build (<em>such as a separate <code>/home</code> partition</em>), they should also be mounted at this time.</p>
 
 <p><center>
-<img src="../../img/posts/LFS-Repeated-Setup-Steps/mounting-play.png" name="pic" onmouseover="this.src='../../img/posts/LFS-Repeated-Setup-Steps/mount-check.gif'" onmouseout="this.src='../../img/posts/LFS-Repeated-Setup-Steps/mounting-play.png'")>
+<img src="../../img/posts/LFS-Repeated-Setup-Steps/mounting-play.png" name="pic" onmouseover="this.src='../../img/posts/LFS-Repeated-Setup-Steps/mount-check.gif'" onmouseout="this.src='../../img/posts/LFS-Repeated-Setup-Steps/mounting-play.png'" style="max-width: 100%;"/>
 </center></p>
 
 <p>After mounting my partition, the LFS book recommended that I check that the partition was not mounted with restrictive permissions. To do this, I ran the <code>mount</code> command again, but this time without any parameters. From the output, I was able to see and confirm that the partition was not mounted with restrictive permissions, such as <code>nosuid</code> or <code>nodev</code>. If either of these options are set, the partition should be remounted.</p>
@@ -162,14 +167,31 @@ Tags <a href="http://ryan.himmelwright.net/tags/linux">linux</a>, <a href="http:
 
 <p>Remember, if the LFS host system is restarted for any reason, these steps must be completed upon logging into the rebooted system. Even if measures were taking to <em>always</em> complete these steps (such as adding the <em>$LFS</em> variable to the bash profile, or mounting the partitions via the <em>fstab</em> file), it is still a good idea to check and make sure that they <em>actually</em> initialized as  intended. This can prevent several headaches down the road.</p>
 
-                  
+                    
+                    
+                        <div style="float: left; text-decoration: underline; text-align: right;">Next Post:</div>
+                    
+                    
+                         <div style="float: right; text-decoration: underline; text-align: right;">Prev Post:</div>
+                    
+                    <br>
+                    
+                        <a href="http://ryan.himmelwright.net/post/lfs-final-preparation-steps/" style="text-align: left; float: left; max-width: 40%;">Linux from Scratch - Final Preparation Steps</a>
+                    
+                    
+                        <a href="http://ryan.himmelwright.net/post/new-dotfiles/" style="text-align: right; float: right; max-width: 40%">My New Dotfiles Management - Using GNU Stow</a>
+                    
+
+
+                    
+                    
 
                 </div>
             </div>
         </div>
     </article>
 
-    <hr>
+        <hr>
     
     <footer>
         <div class="container">
