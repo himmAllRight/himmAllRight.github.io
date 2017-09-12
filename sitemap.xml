@@ -3,6 +3,11 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>http://ryan.himmelwright.net/pages/homelab/</loc>
+    <lastmod>2017-09-12T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>http://ryan.himmelwright.net/pages/about/</loc>
     <lastmod>2017-09-06T05:51:18-04:00</lastmod>
   </url>
@@ -10,11 +15,6 @@
   <url>
     <loc>http://ryan.himmelwright.net/post/website-switched-to-hugo/</loc>
     <lastmod>2017-09-02T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://ryan.himmelwright.net/pages/homelab/</loc>
-    <lastmod>2017-08-30T05:44:01-04:00</lastmod>
   </url>
   
   <url>
@@ -302,7 +302,7 @@
   
   <url>
     <loc>http://ryan.himmelwright.net/pages/</loc>
-    <lastmod>2017-09-06T05:51:18-04:00</lastmod>
+    <lastmod>2017-09-12T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -398,7 +398,7 @@
   
   <url>
     <loc>http://ryan.himmelwright.net/</loc>
-    <lastmod>2017-09-06T05:51:18-04:00</lastmod>
+    <lastmod>2017-09-12T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   

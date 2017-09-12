@@ -7,10 +7,25 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>Copyright © Ryan Himmelwright. Site created with Hugo</copyright>
-    <lastBuildDate>Wed, 06 Sep 2017 05:51:18 -0400</lastBuildDate>
+    <lastBuildDate>Tue, 12 Sep 2017 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="http://ryan.himmelwright.net/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Homelab</title>
+      <link>http://ryan.himmelwright.net/pages/homelab/</link>
+      <pubDate>Tue, 12 Sep 2017 00:00:00 +0000</pubDate>
+      
+      <guid>http://ryan.himmelwright.net/pages/homelab/</guid>
+      <description>This is a page where I maintain the status of the computers in my “Homelab”. I will list my current systems here (potentially with screenshots of my current desktop setup for my workstations), as well as network diagrams of our current setup.
+Network Network Diagram * A Little Out of Date
+Computers Ryan (Me) My Main Computer Setup (Alakazam)
+My Workstation Area
+My Workstation Standing Desk
+
+- Alakazam (Main Workstation Laptop) System76 Bonobo Extreme Intel i7 4810-MQ [2.</description>
+    </item>
     
     <item>
       <title>About</title>
@@ -31,21 +46,6 @@ Outside of work, I am an enthusiastic Linux user that loves learning about compu
       <description>&lt;p&gt;In my &lt;a href=&#34;../website-transition-to-hugo/&#34;&gt;last post&lt;/a&gt;, I stated that &lt;em&gt;within a few days&lt;/em&gt;, I would officially generate and publish the website using &lt;a href=&#34;https://gohugo.io&#34;&gt;Hugo&lt;/a&gt;. I then proceeded to publish &lt;em&gt;that&lt;/em&gt; post using Hugo. Close enough. If I remember correctly, I ended that post listing off a few tasks that I wanted to complete &lt;em&gt;before&lt;/em&gt; switching the site (oops). Well&amp;hellip; they&amp;rsquo;re complete &lt;em&gt;now&lt;/em&gt;. Here&amp;rsquo;s how.&lt;/p&gt;
 
 &lt;p&gt;&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>Homelab</title>
-      <link>http://ryan.himmelwright.net/pages/homelab/</link>
-      <pubDate>Wed, 30 Aug 2017 05:44:01 -0400</pubDate>
-      
-      <guid>http://ryan.himmelwright.net/pages/homelab/</guid>
-      <description>This is a page where I maintain the status of the computers in my “Homelab”. I will list my current systems here (potentially with screenshots of my current desktop setup for my workstations), as well as network diagrams of our current setup.
-Network Network Diagram * A Little Out of Date
-Computers Ryan (Me) My Main Computer Setup (Alakazam)
-My Workstation Area
-My Workstation Standing Desk
-
-- Alakazam (Main Workstation Laptop) System76 Bonobo Extreme Intel i7 4810-MQ [2.</description>
     </item>
     
     <item>

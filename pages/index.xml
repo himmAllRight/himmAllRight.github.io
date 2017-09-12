@@ -7,25 +7,15 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>Copyright © Ryan Himmelwright. Site created with Hugo</copyright>
-    <lastBuildDate>Wed, 06 Sep 2017 05:51:18 -0400</lastBuildDate>
+    <lastBuildDate>Tue, 12 Sep 2017 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="http://ryan.himmelwright.net/pages/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
-      <title>About</title>
-      <link>http://ryan.himmelwright.net/pages/about/</link>
-      <pubDate>Wed, 06 Sep 2017 05:51:18 -0400</pubDate>
-      
-      <guid>http://ryan.himmelwright.net/pages/about/</guid>
-      <description>I am a 26 year-old software developer working in Walpole MA. I work at a company that predominantly develops in Allegro Common Lisp, as a member of the applications team. I primarily focus on our back-end build and deployment infrastructure but, as with any small company, I wear many hats and jump around assisting in whatever is needed.
-Outside of work, I am an enthusiastic Linux user that loves learning about computers, programming languages (especially functional ones), and open source technologies.</description>
-    </item>
-    
-    <item>
       <title>Homelab</title>
       <link>http://ryan.himmelwright.net/pages/homelab/</link>
-      <pubDate>Wed, 30 Aug 2017 05:44:01 -0400</pubDate>
+      <pubDate>Tue, 12 Sep 2017 00:00:00 +0000</pubDate>
       
       <guid>http://ryan.himmelwright.net/pages/homelab/</guid>
       <description>This is a page where I maintain the status of the computers in my “Homelab”. I will list my current systems here (potentially with screenshots of my current desktop setup for my workstations), as well as network diagrams of our current setup.
@@ -35,6 +25,16 @@ My Workstation Area
 My Workstation Standing Desk
 
 - Alakazam (Main Workstation Laptop) System76 Bonobo Extreme Intel i7 4810-MQ [2.</description>
+    </item>
+    
+    <item>
+      <title>About</title>
+      <link>http://ryan.himmelwright.net/pages/about/</link>
+      <pubDate>Wed, 06 Sep 2017 05:51:18 -0400</pubDate>
+      
+      <guid>http://ryan.himmelwright.net/pages/about/</guid>
+      <description>I am a 26 year-old software developer working in Walpole MA. I work at a company that predominantly develops in Allegro Common Lisp, as a member of the applications team. I primarily focus on our back-end build and deployment infrastructure but, as with any small company, I wear many hats and jump around assisting in whatever is needed.
+Outside of work, I am an enthusiastic Linux user that loves learning about computers, programming languages (especially functional ones), and open source technologies.</description>
     </item>
     
   </channel>
