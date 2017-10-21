@@ -154,27 +154,23 @@ Tags <a href="http://ryan.himmelwright.net/tags/website">website</a>, <a href="h
 <p>After that realization, I created a new layout directory (in my theme directory) for each of the pages to add: <code>/layouts/about/</code> and <code>/layouts/homelab/</code>. I then copied the <code>/layouts/post/single.html</code> file into the two directories  to use as a template for the two new layouts (<code>/layouts/about/about-page.html</code> and <code>/layouts/homelab/homelab-page.html</code>). The pages only required a basic layout that would inject the <code>.Content</code> from the markdown files. Additionally, I tweaked the header slightly to display an &ldquo;<em>updated on</em>&rdquo; date, rather than a &ldquo;<em>posted on</em>&rdquo; date.</p>
 
 <p>With the templates made, I  constructed a new <code>/content/pages/</code> category, and added  <code>about.md</code> and <code>homelab.md</code> files to it. In both files, I defined the <code>type</code> and <code>layout</code> parameters, so that the new layouts would be used. Lastly, I used the <code>menu</code> parameter to declare that each page would be part of the main menu.</p>
-<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #f8f8f2">---</span>
-<span style="color: #ae81ff">title</span><span style="color: #f8f8f2">:</span> <span style="color: #ae81ff">About</span>
-<span style="color: #ae81ff">date</span><span style="color: #f8f8f2">:</span> <span style="color: #ae81ff">2017-08-28T09:51:18-04:00</span>
-<span style="color: #ae81ff">type</span><span style="color: #f8f8f2">:</span> <span style="color: #ae81ff">about</span>
-<span style="color: #ae81ff">menu</span> <span style="color: #f8f8f2">:</span> 
-  <span style="color: #ae81ff">main</span><span style="color: #f8f8f2">:</span>
-    <span style="color: #ae81ff">weight</span><span style="color: #f8f8f2">:</span> <span style="color: #ae81ff">-150</span>
-<span style="color: #ae81ff">layout</span><span style="color: #f8f8f2">:</span> <span style="color: #ae81ff">about-page</span>
-<span style="color: #ae81ff">image</span><span style="color: #f8f8f2">:</span> <span style="color: #ae81ff">img/header-images/park-books.jpg</span>
-<span style="color: #f8f8f2">---</span>
-</pre></div>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml">---
+title: About
+date: <span style="color:#e6db74">2017-08-28T09:51:18</span>-<span style="color:#ae81ff">04</span>:<span style="color:#ae81ff">00</span>
+type: about
+menu : 
+  main:
+    weight: -<span style="color:#ae81ff">150</span>
+layout: about-page
+image: img/header-images/park-books.jpg
+---</code></pre></div>
 <h3 id="setting-up-an-rss-feed">Setting up an RSS Feed</h3>
 
 <p>It turns out that <a href="https://gohugo.io/templates/rss/">Hugo ships with its own RSS 2.0 template</a> by default. When I first saw this, I thought that I may still have to dash off a layout or markdown page for the feed, but even that was unnecessary. Each &ldquo;content&rdquo; section (<em>ex: post or pages</em>) has an RSS automatically generated at <code>/section-name/index.rss</code>. I don&rsquo;t need a feed for my static pages, so I just found the <a href="http://ryan.himmelwright.net/post/index.xml">feed for my posts</a>. To make it easily accessible, I added a menu link.  Without a defined markdown file for the rss feed page, I needed another way to add to the navigation menu. I accomplished this by adding the following code to the bottom of my <code>config.toml</code> file:</p>
-<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #f8f8f2">[[menu.main]]</span>
-  <span style="color: #ae81ff">name = &quot;RSS&quot;</span>
-  <span style="color: #ae81ff">url = &quot;/post/index.xml&quot;</span>
-  <span style="color: #ae81ff">weight = 0</span>
-</pre></div>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml">[[menu.main]]
+  name = <span style="color:#e6db74">&#34;RSS&#34;</span>
+  url = <span style="color:#e6db74">&#34;/post/index.xml&#34;</span>
+  weight = <span style="color:#ae81ff">0</span></code></pre></div>
 <p>This is how both the <code>Home</code> and <code>Archives</code> links were already been added to the navigation bar by default in the theme. I just added another item for the RSS link, and adjusted the weight to have it to show up at the end of the menu. That was it.</p>
 
 <h3 id="check-how-the-posts-display">Check how the posts display</h3>
@@ -198,24 +194,22 @@ Tags <a href="http://ryan.himmelwright.net/tags/website">website</a>, <a href="h
 <h3 id="next-prev-posts">Next/Prev Posts</h3>
 
 <p>The main &ldquo;<em>Small Tweak</em>&rdquo; that I wanted to figure out was setting up navigation links at the bottom of each post page. I added some code between the  <code>{{ .Content }}</code> and <code>{{ partial &quot;coments,html&quot; .}}</code> tags of my theme&rsquo;s <code>/layout/post/single.html</code> file. I first made a section using <code>if</code> statements to establish the &ldquo;Next Post&rdquo; and &ldquo;Prev Post&rdquo; header line. Then in a second block, I placed the actual links using on the next line using  <code>with</code> statements. The <code>if</code> and <code>when</code> statements are required so that previous and next posts are  only linked <em>if they exist</em>. So, the first and last post will only display one of the two links.</p>
-<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #75715e">&lt;!-- Next Post/ Previous Post Links --&gt;</span>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-html" data-lang="html"><span style="color:#75715e">&lt;!-- Next Post/ Previous Post Links --&gt;</span>
 {{ if .NextInSection }}
-    <span style="color: #f8f8f2">&lt;</span><span style="color: #f92672">div</span> <span style="color: #a6e22e">style</span><span style="color: #f92672">=</span><span style="color: #e6db74">&quot;float: left; text-decoration: underline; text-align: right;&quot;</span><span style="color: #f8f8f2">&gt;</span>Next Post:<span style="color: #f8f8f2">&lt;/</span><span style="color: #f92672">div</span><span style="color: #f8f8f2">&gt;</span>
+    &lt;<span style="color:#f92672">div</span> <span style="color:#a6e22e">style</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;float: left; text-decoration: underline; text-align: right;&#34;</span>&gt;Next Post:&lt;/<span style="color:#f92672">div</span>&gt;
 {{ end }}
 {{ if .PrevInSection }}
-     <span style="color: #f8f8f2">&lt;</span><span style="color: #f92672">div</span> <span style="color: #a6e22e">style</span><span style="color: #f92672">=</span><span style="color: #e6db74">&quot;float: right; text-decoration: underline; text-align: right;&quot;</span><span style="color: #f8f8f2">&gt;</span>Prev Post:<span style="color: #f8f8f2">&lt;/</span><span style="color: #f92672">div</span><span style="color: #f8f8f2">&gt;</span>
+     &lt;<span style="color:#f92672">div</span> <span style="color:#a6e22e">style</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;float: right; text-decoration: underline; text-align: right;&#34;</span>&gt;Prev Post:&lt;/<span style="color:#f92672">div</span>&gt;
 {{ end }}
 
-<span style="color: #f8f8f2">&lt;</span><span style="color: #f92672">br</span><span style="color: #f8f8f2">&gt;</span>
+&lt;<span style="color:#f92672">br</span>&gt;
 
 {{ with .NextInSection }}
-    <span style="color: #f8f8f2">&lt;</span><span style="color: #f92672">a</span> <span style="color: #a6e22e">href</span><span style="color: #f92672">=</span><span style="color: #e6db74">&quot;{{ .Permalink }}&quot;</span> <span style="color: #a6e22e">style</span><span style="color: #f92672">=</span><span style="color: #e6db74">&quot;text-align: left; float: left; max-width: 40%;&quot;</span><span style="color: #f8f8f2">&gt;</span>{{ .Title }}<span style="color: #f8f8f2">&lt;/</span><span style="color: #f92672">a</span><span style="color: #f8f8f2">&gt;</span>
+    &lt;<span style="color:#f92672">a</span> <span style="color:#a6e22e">href</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;{{ .Permalink }}&#34;</span> <span style="color:#a6e22e">style</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;text-align: left; float: left; max-width: 40%;&#34;</span>&gt;{{ .Title }}&lt;/<span style="color:#f92672">a</span>&gt;
 {{ end }}
 {{ with .PrevInSection }}
-    <span style="color: #f8f8f2">&lt;</span><span style="color: #f92672">a</span> <span style="color: #a6e22e">href</span><span style="color: #f92672">=</span><span style="color: #e6db74">&quot;{{ .Permalink }}&quot;</span> <span style="color: #a6e22e">style</span><span style="color: #f92672">=</span><span style="color: #e6db74">&quot;text-align: right; float: right; max-width: 40%&quot;</span><span style="color: #f8f8f2">&gt;</span>{{ .Title }}<span style="color: #f8f8f2">&lt;/</span><span style="color: #f92672">a</span><span style="color: #f8f8f2">&gt;</span>
-{{ end }}
-</pre></div>
-
+    &lt;<span style="color:#f92672">a</span> <span style="color:#a6e22e">href</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;{{ .Permalink }}&#34;</span> <span style="color:#a6e22e">style</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;text-align: right; float: right; max-width: 40%&#34;</span>&gt;{{ .Title }}&lt;/<span style="color:#f92672">a</span>&gt;
+{{ end }}</code></pre></div>
 <h3 id="conclusion">Conclusion</h3>
 
 <p>I have continued to enjoy using Hugo. The few issues I had with it, keep being quickly dismissed as I learn more about the system. It is simple to use, but at the same time provides an immense level power and control. I will continue tweak the site here and there, but I think for the most part, I can consider the transition complete. Which I am very happy about :).</p>

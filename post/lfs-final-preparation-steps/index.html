@@ -191,11 +191,9 @@ Tags <a href="http://ryan.himmelwright.net/tags/linux">linux</a>, <a href="http:
 </code></pre>
 
 <p>Then, compare the hashes in the list to the <a href="https://en.wikipedia.org/wiki/Md5sum">md5sum</a> for each of the source packages. This is done with the commands:</p>
-<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #f8f8f2">pushd</span> <span style="color: #f8f8f2">$LFS</span>/sources
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">pushd $LFS/sources
 md5sum -c md5sums
-<span style="color: #f8f8f2">popd</span>
-</pre></div>
-
+popd</code></pre></div>
 <p>The results should all say <em>OK</em>. If not, try re-downloading the sources and verifying again.</p>
 
 <h3 id="creating-the-lfs-tools-directory">Creating the $LFS/tools Directory</h3>

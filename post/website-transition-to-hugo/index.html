@@ -158,13 +158,9 @@ Tags <a href="http://ryan.himmelwright.net/tags/website">website</a>, <a href="h
 <h4 id="installed-setup-a-test-hugo-site">Installed &amp; Setup a test Hugo site</h4>
 
 <p>Obtaining and installing Hugo on my computers was very simple, as it was in the reops (Solus). I just had to run the command:</p>
-<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span>sudo eopkg it hugo
-</pre></div>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">sudo eopkg it hugo</code></pre></div>
 <p>After I had hugo installed, I experimented with creating new website projects for a few minutes before finally creating one to start my transition. To create a new website, I used the command:</p>
-<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span>hugo new site ryan-hugo-test
-</pre></div>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">hugo new site ryan-hugo-test</code></pre></div>
 <p>This created a new directory with all the project&rsquo;s default core files, and adhering to the required hugo <a href="https://gohugo.io/content-management/organization/">directory structure</a>.</p>
 
 <p>Like cryogen, hugo can spin up a website in a test server during development. To do this, use the command:</p>
@@ -191,37 +187,33 @@ Tags <a href="http://ryan.himmelwright.net/tags/website">website</a>, <a href="h
 With the theme setup, and the configuration edited, I started making some minor tweak to the site. The main tweak I made was to add the <code>Summary</code> contents to the post list on the home page. I currently use this feature in Cryogen, so all of my posts are written to support it. Summaries are baked into hugo, but I needed to edit the theme to include it on the posts page. To achieve this, I edited the <code>/layouts/post/summary.html</code> file of the theme slightly:</p>
 
 <p>original:</p>
-<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #f8f8f2">&lt;</span><span style="color: #f92672">div</span> <span style="color: #a6e22e">class</span><span style="color: #f92672">=</span><span style="color: #e6db74">&quot;post-preview&quot;</span><span style="color: #f8f8f2">&gt;</span>
-  <span style="color: #f8f8f2">&lt;</span><span style="color: #f92672">a</span> <span style="color: #a6e22e">href</span><span style="color: #f92672">=</span><span style="color: #e6db74">&quot;{{ .Permalink }}&quot;</span><span style="color: #f8f8f2">&gt;</span>
-    <span style="color: #f8f8f2">&lt;</span><span style="color: #f92672">h2</span> <span style="color: #a6e22e">class</span><span style="color: #f92672">=</span><span style="color: #e6db74">&quot;post-title&quot;</span><span style="color: #f8f8f2">&gt;</span>{{ .Title }}<span style="color: #f8f8f2">&lt;/</span><span style="color: #f92672">h2</span><span style="color: #f8f8f2">&gt;</span>
-    <span style="color: #f8f8f2">&lt;</span><span style="color: #f92672">h3</span> <span style="color: #a6e22e">class</span><span style="color: #f92672">=</span><span style="color: #e6db74">&quot;post-subtitle&quot;</span><span style="color: #f8f8f2">&gt;</span>{{ .Description }}<span style="color: #f8f8f2">&lt;/</span><span style="color: #f92672">h3</span><span style="color: #f8f8f2">&gt;</span>
-  <span style="color: #f8f8f2">&lt;/</span><span style="color: #f92672">a</span><span style="color: #f8f8f2">&gt;</span>
-  <span style="color: #f8f8f2">&lt;</span><span style="color: #f92672">p</span> <span style="color: #a6e22e">class</span><span style="color: #f92672">=</span><span style="color: #e6db74">&quot;post-meta&quot;</span><span style="color: #f8f8f2">&gt;</span>
-      {{ partial &quot;meta.html&quot; .}}
- <span style="color: #f8f8f2">&lt;/</span><span style="color: #f92672">p</span><span style="color: #f8f8f2">&gt;</span>
-<span style="color: #f8f8f2">&lt;/</span><span style="color: #f92672">div</span><span style="color: #f8f8f2">&gt;</span>
-<span style="color: #f8f8f2">&lt;</span><span style="color: #f92672">hr</span><span style="color: #f8f8f2">&gt;</span>
-</pre></div>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-html" data-lang="html">&lt;<span style="color:#f92672">div</span> <span style="color:#a6e22e">class</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;post-preview&#34;</span>&gt;
+  &lt;<span style="color:#f92672">a</span> <span style="color:#a6e22e">href</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;{{ .Permalink }}&#34;</span>&gt;
+    &lt;<span style="color:#f92672">h2</span> <span style="color:#a6e22e">class</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;post-title&#34;</span>&gt;{{ .Title }}&lt;/<span style="color:#f92672">h2</span>&gt;
+    &lt;<span style="color:#f92672">h3</span> <span style="color:#a6e22e">class</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;post-subtitle&#34;</span>&gt;{{ .Description }}&lt;/<span style="color:#f92672">h3</span>&gt;
+  &lt;/<span style="color:#f92672">a</span>&gt;
+  &lt;<span style="color:#f92672">p</span> <span style="color:#a6e22e">class</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;post-meta&#34;</span>&gt;
+      {{ partial &#34;meta.html&#34; .}}
+ &lt;/<span style="color:#f92672">p</span>&gt;
+&lt;/<span style="color:#f92672">div</span>&gt;
+&lt;<span style="color:#f92672">hr</span>&gt;</code></pre></div>
 <p>with post summaries:</p>
-<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #f8f8f2">&lt;</span><span style="color: #f92672">div</span> <span style="color: #a6e22e">class</span><span style="color: #f92672">=</span><span style="color: #e6db74">&quot;post-preview&quot;</span><span style="color: #f8f8f2">&gt;</span>
-    <span style="color: #f8f8f2">&lt;</span><span style="color: #f92672">a</span> <span style="color: #a6e22e">href</span><span style="color: #f92672">=</span><span style="color: #e6db74">&quot;{{ .Permalink }}&quot;</span><span style="color: #f8f8f2">&gt;</span>
-        <span style="color: #f8f8f2">&lt;</span><span style="color: #f92672">h2</span> <span style="color: #a6e22e">class</span><span style="color: #f92672">=</span><span style="color: #e6db74">&quot;post-title&quot;</span><span style="color: #f8f8f2">&gt;</span>{{ .Title }}<span style="color: #f8f8f2">&lt;/</span><span style="color: #f92672">h2</span><span style="color: #f8f8f2">&gt;</span>
-        <span style="color: #f8f8f2">&lt;</span><span style="color: #f92672">h3</span> <span style="color: #a6e22e">class</span><span style="color: #f92672">=</span><span style="color: #e6db74">&quot;post-subtitle&quot;</span><span style="color: #f8f8f2">&gt;</span>{{ .Description }}<span style="color: #f8f8f2">&lt;/</span><span style="color: #f92672">h3</span><span style="color: #f8f8f2">&gt;</span>
-    <span style="color: #f8f8f2">&lt;/</span><span style="color: #f92672">a</span><span style="color: #f8f8f2">&gt;</span>
-    <span style="color: #f8f8f2">&lt;</span><span style="color: #f92672">p</span> <span style="color: #a6e22e">class</span><span style="color: #f92672">=</span><span style="color: #e6db74">&quot;post-meta&quot;</span><span style="color: #f8f8f2">&gt;</span>
-        {{ partial &quot;meta.html&quot; .}}
-        <span style="color: #f8f8f2">&lt;</span><span style="color: #f92672">div</span> <span style="color: #a6e22e">class</span><span style="color: #f92672">=</span><span style="color: #e6db74">&quot;summary&quot;</span><span style="color: #f8f8f2">&gt;</span>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-html" data-lang="html">&lt;<span style="color:#f92672">div</span> <span style="color:#a6e22e">class</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;post-preview&#34;</span>&gt;
+    &lt;<span style="color:#f92672">a</span> <span style="color:#a6e22e">href</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;{{ .Permalink }}&#34;</span>&gt;
+        &lt;<span style="color:#f92672">h2</span> <span style="color:#a6e22e">class</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;post-title&#34;</span>&gt;{{ .Title }}&lt;/<span style="color:#f92672">h2</span>&gt;
+        &lt;<span style="color:#f92672">h3</span> <span style="color:#a6e22e">class</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;post-subtitle&#34;</span>&gt;{{ .Description }}&lt;/<span style="color:#f92672">h3</span>&gt;
+    &lt;/<span style="color:#f92672">a</span>&gt;
+    &lt;<span style="color:#f92672">p</span> <span style="color:#a6e22e">class</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;post-meta&#34;</span>&gt;
+        {{ partial &#34;meta.html&#34; .}}
+        &lt;<span style="color:#f92672">div</span> <span style="color:#a6e22e">class</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;summary&#34;</span>&gt;
             {{ .Summary }}
-        <span style="color: #f8f8f2">&lt;/</span><span style="color: #f92672">div</span><span style="color: #f8f8f2">&gt;</span>
-    <span style="color: #f8f8f2">&lt;/</span><span style="color: #f92672">p</span><span style="color: #f8f8f2">&gt;</span>
-    <span style="color: #f8f8f2">&lt;</span><span style="color: #f92672">p</span> <span style="color: #a6e22e">class</span><span style="color: #f92672">=</span><span style="color: #e6db74">&quot;post-meta&quot;</span><span style="color: #f8f8f2">&gt;</span> 
-        <span style="color: #f8f8f2">&lt;</span><span style="color: #f92672">a</span> <span style="color: #a6e22e">href</span><span style="color: #f92672">=</span><span style="color: #e6db74">&quot;{{ .Permalink }}&quot;</span><span style="color: #f8f8f2">&gt;</span> Click to Read More --&gt;<span style="color: #f8f8f2">&lt;/</span><span style="color: #f92672">a</span><span style="color: #f8f8f2">&gt;</span>
-    <span style="color: #f8f8f2">&lt;/</span><span style="color: #f92672">p</span><span style="color: #f8f8f2">&gt;</span>
-<span style="color: #f8f8f2">&lt;/</span><span style="color: #f92672">div</span><span style="color: #f8f8f2">&gt;</span>
-<span style="color: #f8f8f2">&lt;</span><span style="color: #f92672">hr</span><span style="color: #f8f8f2">&gt;</span>
-</pre></div>
-
+        &lt;/<span style="color:#f92672">div</span>&gt;
+    &lt;/<span style="color:#f92672">p</span>&gt;
+    &lt;<span style="color:#f92672">p</span> <span style="color:#a6e22e">class</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;post-meta&#34;</span>&gt; 
+        &lt;<span style="color:#f92672">a</span> <span style="color:#a6e22e">href</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;{{ .Permalink }}&#34;</span>&gt; Click to Read More --&gt;&lt;/<span style="color:#f92672">a</span>&gt;
+    &lt;/<span style="color:#f92672">p</span>&gt;
+&lt;/<span style="color:#f92672">div</span>&gt;
+&lt;<span style="color:#f92672">hr</span>&gt;</code></pre></div>
 <p>I also setup and fixed the code syntax highlighting. I first installed pygments, which again was <em>very</em> easy to do on my Solus computers:</p>
 
 <pre><code>sudo eopkg it pygments

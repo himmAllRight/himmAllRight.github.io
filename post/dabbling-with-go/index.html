@@ -193,44 +193,43 @@ Go is expressive, concise, clean, and efficient. Its concurrency mechanisms make
 <p>After confirming my install, I went back and continued  <a href="https://tour.golang.org/welcome/1">A Tour of Go</a> to better learn the language. I am interested to eventually read the <a href="https://golang.org/doc/effective_go.html">Effective Go</a> documentation. It will be interesting to simply <em>read</em> the correct style and conventions for the language, instead of trudging through a holly war to find answers.</p>
 
 <p>After working on the tutorial for awhile, I started playing around with the language on my own.  Below is a snippet of code I wrote while fooling around. It&rsquo;s nothing fancy. I was impressed though with how easy it really was to pick up the basics of the language and get going. I am excited to learn more.</p>
-<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #f92672">package</span> <span style="color: #a6e22e">main</span>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#f92672">package</span> <span style="color:#a6e22e">main</span>
 
-<span style="color: #f92672">import</span> <span style="color: #f8f8f2">(</span>
-	<span style="color: #e6db74">&quot;fmt&quot;</span>
-	<span style="color: #e6db74">&quot;runtime&quot;</span>
-<span style="color: #f8f8f2">)</span>
+<span style="color:#f92672">import</span> (
+	<span style="color:#e6db74">&#34;fmt&#34;</span>
+	<span style="color:#e6db74">&#34;runtime&#34;</span>
+)
 
-<span style="color: #66d9ef">func</span> <span style="color: #a6e22e">main</span><span style="color: #f8f8f2">()</span> <span style="color: #f8f8f2">{</span>
-	<span style="color: #a6e22e">fmt</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">Printf</span><span style="color: #f8f8f2">(</span><span style="color: #e6db74">&quot;hello, world\n&quot;</span><span style="color: #f8f8f2">)</span>
-	<span style="color: #a6e22e">getOS</span><span style="color: #f8f8f2">()</span>
-	<span style="color: #a6e22e">fmt</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">Printf</span><span style="color: #f8f8f2">(</span><span style="color: #e6db74">&quot;\n&quot;</span><span style="color: #f8f8f2">)</span> <span style="color: #75715e">// I know this is dumb</span>
+<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">main</span>() {
+	<span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Printf</span>(<span style="color:#e6db74">&#34;hello, world\n&#34;</span>)
+	<span style="color:#a6e22e">getOS</span>()
+	<span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Printf</span>(<span style="color:#e6db74">&#34;\n&#34;</span>) <span style="color:#75715e">// I know this is dumb
+</span><span style="color:#75715e"></span>
+	<span style="color:#a6e22e">x</span>, <span style="color:#a6e22e">y</span> <span style="color:#f92672">:=</span> <span style="color:#ae81ff">74</span>, <span style="color:#ae81ff">83</span>
+	<span style="color:#a6e22e">sum</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">sumInts</span>(<span style="color:#a6e22e">x</span>, <span style="color:#a6e22e">y</span>)
+	<span style="color:#a6e22e">fsum</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">factorial</span>(<span style="color:#a6e22e">sum</span>)
 
-	<span style="color: #a6e22e">x</span><span style="color: #f8f8f2">,</span> <span style="color: #a6e22e">y</span> <span style="color: #f92672">:=</span> <span style="color: #ae81ff">74</span><span style="color: #f8f8f2">,</span> <span style="color: #ae81ff">83</span>
-	<span style="color: #a6e22e">sum</span> <span style="color: #f92672">:=</span> <span style="color: #a6e22e">sumInts</span><span style="color: #f8f8f2">(</span><span style="color: #a6e22e">x</span><span style="color: #f8f8f2">,</span> <span style="color: #a6e22e">y</span><span style="color: #f8f8f2">)</span>
-	<span style="color: #a6e22e">fsum</span> <span style="color: #f92672">:=</span> <span style="color: #a6e22e">factorial</span><span style="color: #f8f8f2">(</span><span style="color: #a6e22e">sum</span><span style="color: #f8f8f2">)</span>
+	<span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Printf</span>(<span style="color:#e6db74">&#34;sum: %v\n&#34;</span>, <span style="color:#a6e22e">sum</span>)
+	<span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Printf</span>(<span style="color:#e6db74">&#34;Factorial of sum(%v): %v\n&#34;</span>, <span style="color:#a6e22e">sum</span>, <span style="color:#a6e22e">fsum</span>)
+}
 
-	<span style="color: #a6e22e">fmt</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">Printf</span><span style="color: #f8f8f2">(</span><span style="color: #e6db74">&quot;sum: %v\n&quot;</span><span style="color: #f8f8f2">,</span> <span style="color: #a6e22e">sum</span><span style="color: #f8f8f2">)</span>
-	<span style="color: #a6e22e">fmt</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">Printf</span><span style="color: #f8f8f2">(</span><span style="color: #e6db74">&quot;Factorial of sum(%v): %v\n&quot;</span><span style="color: #f8f8f2">,</span> <span style="color: #a6e22e">sum</span><span style="color: #f8f8f2">,</span> <span style="color: #a6e22e">fsum</span><span style="color: #f8f8f2">)</span>
-<span style="color: #f8f8f2">}</span>
+<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">sumInts</span>(<span style="color:#a6e22e">x</span> <span style="color:#66d9ef">int</span>, <span style="color:#a6e22e">y</span> <span style="color:#66d9ef">int</span>) <span style="color:#66d9ef">int</span> {
+	<span style="color:#a6e22e">sum</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">x</span> <span style="color:#f92672">+</span> <span style="color:#a6e22e">y</span>
+	<span style="color:#66d9ef">return</span> <span style="color:#a6e22e">sum</span>
+}
 
-<span style="color: #66d9ef">func</span> <span style="color: #a6e22e">sumInts</span><span style="color: #f8f8f2">(</span><span style="color: #a6e22e">x</span> <span style="color: #66d9ef">int</span><span style="color: #f8f8f2">,</span> <span style="color: #a6e22e">y</span> <span style="color: #66d9ef">int</span><span style="color: #f8f8f2">)</span> <span style="color: #66d9ef">int</span> <span style="color: #f8f8f2">{</span>
-	<span style="color: #a6e22e">sum</span> <span style="color: #f92672">:=</span> <span style="color: #a6e22e">x</span> <span style="color: #f92672">+</span> <span style="color: #a6e22e">y</span>
-	<span style="color: #66d9ef">return</span> <span style="color: #a6e22e">sum</span>
-<span style="color: #f8f8f2">}</span>
+<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">factorial</span>(<span style="color:#a6e22e">n</span> <span style="color:#66d9ef">int</span>) <span style="color:#66d9ef">int</span> {
+	<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">n</span> <span style="color:#f92672">&lt;=</span> <span style="color:#ae81ff">1</span> {
+		<span style="color:#66d9ef">return</span> <span style="color:#ae81ff">1</span>
+	} <span style="color:#66d9ef">else</span> {
+		<span style="color:#66d9ef">return</span> <span style="color:#a6e22e">n</span> <span style="color:#f92672">+</span> <span style="color:#a6e22e">factorial</span>(<span style="color:#a6e22e">n</span><span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>)
+	}
+}
 
-<span style="color: #66d9ef">func</span> <span style="color: #a6e22e">factorial</span><span style="color: #f8f8f2">(</span><span style="color: #a6e22e">n</span> <span style="color: #66d9ef">int</span><span style="color: #f8f8f2">)</span> <span style="color: #66d9ef">int</span> <span style="color: #f8f8f2">{</span>
-	<span style="color: #66d9ef">if</span> <span style="color: #a6e22e">n</span> <span style="color: #f92672">&lt;=</span> <span style="color: #ae81ff">1</span> <span style="color: #f8f8f2">{</span>
-		<span style="color: #66d9ef">return</span> <span style="color: #ae81ff">1</span>
-	<span style="color: #f8f8f2">}</span> <span style="color: #66d9ef">else</span> <span style="color: #f8f8f2">{</span>
-		<span style="color: #66d9ef">return</span> <span style="color: #a6e22e">n</span> <span style="color: #f92672">+</span> <span style="color: #a6e22e">factorial</span><span style="color: #f8f8f2">(</span><span style="color: #a6e22e">n</span><span style="color: #f92672">-</span><span style="color: #ae81ff">1</span><span style="color: #f8f8f2">)</span>
-	<span style="color: #f8f8f2">}</span>
-<span style="color: #f8f8f2">}</span>
-
-<span style="color: #66d9ef">func</span> <span style="color: #a6e22e">getOS</span><span style="color: #f8f8f2">()</span> <span style="color: #f8f8f2">{</span>
-	<span style="color: #a6e22e">os</span> <span style="color: #f92672">:=</span> <span style="color: #a6e22e">runtime</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">GOOS</span>
-	<span style="color: #a6e22e">fmt</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">Printf</span><span style="color: #f8f8f2">(</span><span style="color: #e6db74">&quot;OS: %v\n&quot;</span><span style="color: #f8f8f2">,</span> <span style="color: #a6e22e">os</span><span style="color: #f8f8f2">)</span> <span style="color: #75715e">// impure</span>
-<span style="color: #f8f8f2">}</span>
-</pre></div>
+<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">getOS</span>() {
+	<span style="color:#a6e22e">os</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">runtime</span>.<span style="color:#a6e22e">GOOS</span>
+	<span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Printf</span>(<span style="color:#e6db74">&#34;OS: %v\n&#34;</span>, <span style="color:#a6e22e">os</span>) <span style="color:#75715e">// impure
+</span><span style="color:#75715e"></span>}</code></pre></div>
 
                     
                     

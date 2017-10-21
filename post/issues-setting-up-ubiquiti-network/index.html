@@ -179,13 +179,11 @@ because I wasn&rsquo;t sure if it could optimally power both devices. I found
 an
 <a href="https://www.youtube.com/watch?v=f7FeYsJqotc&amp;list=PLDBkup9c8YMgZaE50hAjP7rbbVriTlyQf&amp;index=1">informative guide</a> that
 indicated that the POE adaptor could indeed power both.</p>
-<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #f8f8f2">Modem</span>  <span style="color: #f8f8f2">--</span>
-        <span style="color: #f8f8f2">|</span>
-         <span style="color: #f8f8f2">--&gt;</span> <span style="color: #f8f8f2">POE</span> <span style="color: #f8f8f2">Adaptor</span> <span style="color: #f8f8f2">--&gt;</span> <span style="color: #f8f8f2">(</span><span style="color: #a6e22e">*eth0*</span><span style="color: #f8f8f2">)</span>  <span style="color: #f8f8f2">edgerouter-x</span>  <span style="color: #f8f8f2">(</span><span style="color: #a6e22e">*eth4*</span><span style="color: #f8f8f2">)</span> <span style="color: #f8f8f2">--&gt;</span> <span style="color: #f8f8f2">AP</span> <span style="color: #f8f8f2">Lite</span>
-        <span style="color: #f8f8f2">|</span>
-<span style="color: #f8f8f2">Power</span>  <span style="color: #f8f8f2">--</span>
-</pre></div>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scheme" data-lang="scheme">Modem  --
+        |
+         --&gt; POE Adaptor --&gt; (*eth0*)  edgerouter-x  (*eth4*) --&gt; AP Lite
+        |
+Power  --</code></pre></div>
 <p><em>Digram describing the correct link up</em></p>
 
 <p>Once I swapped the cables all around, I had to go into the router
