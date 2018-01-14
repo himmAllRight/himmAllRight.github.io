@@ -7,10 +7,26 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>Copyright © Ryan Himmelwright. Site created with Hugo</copyright>
-    <lastBuildDate>Sat, 26 Aug 2017 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 14 Jan 2018 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="http://ryan.himmelwright.net/tags/homelab/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Sold My Bonobo</title>
+      <link>http://ryan.himmelwright.net/post/sold-my-bonobo/</link>
+      <pubDate>Sun, 14 Jan 2018 00:00:00 +0000</pubDate>
+      
+      <guid>http://ryan.himmelwright.net/post/sold-my-bonobo/</guid>
+      <description>&lt;p&gt;Last fall, I did something I didn&amp;rsquo;t think I would do anytime soon&amp;hellip;. I sold my
+main workstation computer. Specifically, my System76 Bonobo Extreme laptop.
+Several events over the last year have led me to the realization that my
+&lt;em&gt;actual&lt;/em&gt; computing &lt;em&gt;needs&lt;/em&gt; are drastically different than what they were when I
+purchased the Bonobo in early 2015. This post will highlight some of those
+realizations, and why I ultimately decided to sell my Bonobo laptop.&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>Simple Reverse SSH Tunnels</title>

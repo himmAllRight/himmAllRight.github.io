@@ -3,6 +3,11 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>http://ryan.himmelwright.net/post/sold-my-bonobo/</loc>
+    <lastmod>2018-01-14T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>http://ryan.himmelwright.net/post/new-hhkb-pro2/</loc>
     <lastmod>2017-12-28T00:00:00+00:00</lastmod>
   </url>
@@ -128,8 +133,8 @@
   </url>
   
   <url>
-    <loc>http://ryan.himmelwright.net/post/introducing-kadabra/</loc>
-    <lastmod>2016-11-29T00:00:00+00:00</lastmod>
+    <loc>http://ryan.himmelwright.net/post/my-new-used-x230/</loc>
+    <lastmod>2018-01-12T00:00:00+00:00</lastmod>
   </url>
   
   <url>
@@ -247,7 +252,7 @@
   
   <url>
     <loc>http://ryan.himmelwright.net/tags/hardware/</loc>
-    <lastmod>2017-12-28T00:00:00+00:00</lastmod>
+    <lastmod>2018-01-14T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -259,7 +264,7 @@
   
   <url>
     <loc>http://ryan.himmelwright.net/tags/homelab/</loc>
-    <lastmod>2017-08-26T00:00:00+00:00</lastmod>
+    <lastmod>2018-01-14T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -289,7 +294,7 @@
   
   <url>
     <loc>http://ryan.himmelwright.net/tags/korora/</loc>
-    <lastmod>2016-11-29T00:00:00+00:00</lastmod>
+    <lastmod>2018-01-12T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -313,7 +318,7 @@
   
   <url>
     <loc>http://ryan.himmelwright.net/tags/linux/</loc>
-    <lastmod>2017-08-26T00:00:00+00:00</lastmod>
+    <lastmod>2018-01-14T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -337,7 +342,7 @@
   
   <url>
     <loc>http://ryan.himmelwright.net/post/</loc>
-    <lastmod>2017-12-28T00:00:00+00:00</lastmod>
+    <lastmod>2018-01-14T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -385,7 +390,7 @@
   
   <url>
     <loc>http://ryan.himmelwright.net/tags/thinkpad/</loc>
-    <lastmod>2016-11-29T00:00:00+00:00</lastmod>
+    <lastmod>2018-01-12T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -421,7 +426,7 @@
   
   <url>
     <loc>http://ryan.himmelwright.net/</loc>
-    <lastmod>2017-12-28T00:00:00+00:00</lastmod>
+    <lastmod>2018-01-14T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   

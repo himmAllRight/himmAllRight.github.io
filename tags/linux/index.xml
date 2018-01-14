@@ -7,10 +7,26 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>Copyright © Ryan Himmelwright. Site created with Hugo</copyright>
-    <lastBuildDate>Sat, 26 Aug 2017 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 14 Jan 2018 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="http://ryan.himmelwright.net/tags/linux/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Sold My Bonobo</title>
+      <link>http://ryan.himmelwright.net/post/sold-my-bonobo/</link>
+      <pubDate>Sun, 14 Jan 2018 00:00:00 +0000</pubDate>
+      
+      <guid>http://ryan.himmelwright.net/post/sold-my-bonobo/</guid>
+      <description>&lt;p&gt;Last fall, I did something I didn&amp;rsquo;t think I would do anytime soon&amp;hellip;. I sold my
+main workstation computer. Specifically, my System76 Bonobo Extreme laptop.
+Several events over the last year have led me to the realization that my
+&lt;em&gt;actual&lt;/em&gt; computing &lt;em&gt;needs&lt;/em&gt; are drastically different than what they were when I
+purchased the Bonobo in early 2015. This post will highlight some of those
+realizations, and why I ultimately decided to sell my Bonobo laptop.&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>Simple Reverse SSH Tunnels</title>
@@ -161,11 +177,11 @@ Downloading Sources When it comes down to it, Linux from scratch is just a bunch
     </item>
     
     <item>
-      <title>Introducing Kadabra - My New, Used x230</title>
-      <link>http://ryan.himmelwright.net/post/introducing-kadabra/</link>
+      <title>My New, Used x230</title>
+      <link>http://ryan.himmelwright.net/post/my-new-used-x230/</link>
       <pubDate>Tue, 29 Nov 2016 00:00:00 +0000</pubDate>
       
-      <guid>http://ryan.himmelwright.net/post/introducing-kadabra/</guid>
+      <guid>http://ryan.himmelwright.net/post/my-new-used-x230/</guid>
       <description>&lt;p&gt;As I start to do more with a computer on the go, the netbooks I
 previously used just are not cutting it anymore. They were great for minimal
 use, but couldn&amp;rsquo;t run VMs, over-heated, and didn&amp;rsquo;t have great
