@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Notes on λ ryan. himmelwright. net</title>
+    <link>http://ryan.himmelwright.net/notes/</link>
+    <description>Recent content in Notes on λ ryan. himmelwright. net</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>Copyright © Ryan Himmelwright. Site created with Hugo</copyright>
+    
+	<atom:link href="http://ryan.himmelwright.net/notes/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title></title>
+      <link>http://ryan.himmelwright.net/notes/postgresql/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://ryan.himmelwright.net/notes/postgresql/</guid>
+      <description>Notes for Postgresql
+Install Just installed from the repos at first&amp;hellip; was in Solus.
+Pulling down for latest Went to website and got commands to pull down latest in Fedora (I&amp;rsquo;m in an lxc container).
+Init DB sudo /usr/pgsql-10/bin/postgresql-10-setup initdb  I wasn&amp;rsquo;t sure how to do this on Solus, so I didn&amp;rsquo;t&amp;hellip;
+Start/Enable service sudo systemctl enable postgresql sudo systemctl start postgresql  Test out DB Switch to postgres user su - postgres  *Note: I had to add a shell for the user</description>
+    </item>
+    
+  </channel>
+</rss>

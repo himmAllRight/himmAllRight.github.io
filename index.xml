@@ -7,10 +7,24 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>Copyright © Ryan Himmelwright. Site created with Hugo</copyright>
-    <lastBuildDate>Sun, 14 Jan 2018 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 01 Feb 2018 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="http://ryan.himmelwright.net/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Living the Dock Life: My Thinkpad T470</title>
+      <link>http://ryan.himmelwright.net/post/my-t470/</link>
+      <pubDate>Thu, 01 Feb 2018 00:00:00 +0000</pubDate>
+      
+      <guid>http://ryan.himmelwright.net/post/my-t470/</guid>
+      <description>&lt;p&gt;In my previous post, I discussed how I sold off my System76 Bonobo laptop, and
+ planned to replace it with a new computer. Well, I did&amp;hellip; awhile ago. For the
+ last few months, I have been using a Lenovo T470 Thinkpad (with dock) as my new
+ daily driver. Here are my thoughts.&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>Sold My Bonobo</title>
@@ -49,7 +63,7 @@ realizations, and why I ultimately decided to sell my Bonobo laptop.&lt;/p&gt;
 Computers Ryan (Me)  My Home Workstation Area
  My Main Computer Setup (with lights on) (Kadabra)
 
-- Kadabra (Main Laptop) T470 Thinkpad Intel i5-7200u [2.5 Ghz (3.1 Ghz Turbo), 2 Cores, 4 Threads] 8 GB RAM 250 GB Samsung EVO SSD 14&amp;quot; 1920x1080 IPS Display Solus  Periphery Thinkpad Ultra Dock 40A2 2 x 23.</description>
+- Kadabra (Main Laptop) T470 Thinkpad Intel i5-7200u [2.5 Ghz (3.1 Ghz Turbo), 2 Cores, 4 Threads] 8 GB RAM 500 GB Samsung EVO SSD 14&amp;quot; 1920x1080 IPS Display Solus  Periphery Thinkpad Ultra Dock 40A2 2 x 23.</description>
     </item>
     
     <item>
@@ -412,6 +426,19 @@ being generated using cryogen.&lt;/p&gt;
       <description>&lt;p&gt;As I continue to learn more and more programming languages, I am somewhat ashamed to admit that I have yet to learn C. However, it is not because I am trying to avoid it.&lt;/p&gt;
 
 &lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>http://ryan.himmelwright.net/notes/postgresql/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://ryan.himmelwright.net/notes/postgresql/</guid>
+      <description>Notes for Postgresql
+Install Just installed from the repos at first&amp;hellip; was in Solus.
+Pulling down for latest Went to website and got commands to pull down latest in Fedora (I&amp;rsquo;m in an lxc container).
+Init DB sudo /usr/pgsql-10/bin/postgresql-10-setup initdb  I wasn&amp;rsquo;t sure how to do this on Solus, so I didn&amp;rsquo;t&amp;hellip;
+Start/Enable service sudo systemctl enable postgresql sudo systemctl start postgresql  Test out DB Switch to postgres user su - postgres  *Note: I had to add a shell for the user</description>
     </item>
     
   </channel>
