@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Docker on λ ryan. himmelwright. net</title>
+    <link>http://ryan.himmelwright.net/tags/docker/</link>
+    <description>Recent content in Docker on λ ryan. himmelwright. net</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>Copyright © Ryan Himmelwright. Site created with Hugo</copyright>
+    <lastBuildDate>Sun, 25 Feb 2018 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="http://ryan.himmelwright.net/tags/docker/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Quick Start to Docker</title>
+      <link>http://ryan.himmelwright.net/post/docker-quickstart/</link>
+      <pubDate>Sun, 25 Feb 2018 00:00:00 +0000</pubDate>
+      
+      <guid>http://ryan.himmelwright.net/post/docker-quickstart/</guid>
+      <description>&lt;p&gt;Over the past few months (particularly over the holiday season), I started to
+explore and learn several technologies I&amp;rsquo;ve had my eye on the last few years.
+First on the list: &lt;a href=&#34;https://docker.io&#34;&gt;Docker&lt;/a&gt;. These days, Docker has a massive
+ecosystem surrounding it, and can take years to truly master. This post on the
+other hand, will &lt;em&gt;hopefully&lt;/em&gt; help you get up and playing with docker containers in
+just a few minutes. Lets get started.&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>
