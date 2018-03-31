@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>About -- λ ryan. himmelwright. net</title>
+    <title>Transitioning Server from Proxmox -- λ ryan. himmelwright. net</title>
 
     
 
@@ -105,17 +105,16 @@
 
 
 
-<header class="intro-header" style="background-image: url('http://ryan.himmelwright.net/img/header-images/park-books.jpg')">
+<header class="intro-header" style="background-image: url('http://ryan.himmelwright.net/img/header-images/drives1.png')">
     
     <div class="container">
         <div class="row">
             <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
                 <div class="post-heading">
-                    <h1>About</h1>
+                    <h1>Transitioning Server from Proxmox</h1>
                     <h2 class="subheading"></h2>
                     <span class="meta">
-                        
-                        Last Updated by Ryan Himmelwright on Sat, Mar 31, 2018.
+                        Last Updated by Ryan Himmelwright on Mon, Mar 5, 2018.
                     </span>
                 </div>
             </div>
@@ -130,28 +129,109 @@
                 <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
                     
 
-<p><img src="../../img/notch-avatar.jpg" style="width: 45%; float: left; margin: 10px 10px 10px 10px;"/></p>
+<p>I&rsquo;ve been planning to move my server from Proxmox to just a normal server
+install, to give me more control over everything. However, I don&rsquo;t want this to
+be like the wild west of servers, where it is basically just a desktop with a
+bunch of crap on it. I like how easy it is to spin up both containers and VMs,
+and then continue to monitor/manage everything.</p>
 
-<p>I am a 26 year-old software developer working at a company in Walpole MA, that heavily utilizes <a href="http://franz.com/products/allegro-common-lisp/">Allegro Common Lisp</a> for our applications. I primarily focus on our back-end build and deployment infrastructure, but as with any small company, I wear many hats and jump around assisting wherever I am needed.</p>
+<p>So, I am creating a list of things I want to have at least <em>somewhat</em> figured
+out before officially making the switch. Some things might be un-check even
+though I have an idea about what to do. I will check things off as I go through
+and fully ensure I know what to do for that task, and optionally write something
+down about it.</p>
 
-<p>Outside of work, I am an enthusiastic Linux user that loves learning about computers,
-programming languages (especially functional ones), and open source technologies. I majored in Neuroscience with a minor in Computer Science at <a href="https://www.lafayette.edu/">Lafayette College</a>, but am mostly a self-taught learner and continue to study computer science and IT topics by working on <a href="https://github.com/himmAllRight?tab=repositories">personal projects</a>, taking courses, and maintaining my <a href="http://ryan.himmelwright.net/pages/homelab/">homelab</a>. This website exists to help document the personal projects I work on, and what I&rsquo;ve learned.</p>
+<h3 id="host">Host</h3>
 
-<p>Beyond technology, I love music, writing, the outdoors, and swimming (I competitively swam from the age of 8, through college). I am married to an amazing fourth year Medical Student (Rebecca) at the Warren Alpert Medical School of Brown University. We have been together for over 11 years and were married on September 17th, 2016 (the day before our 10th anniversary).</p>
+<p>The host system needs a few things it needs to support. Most are broken down
+into the other categories below, but some are specific to the Host, which will
+be here.</p>
 
-<p>This summer, Rebecca will start her medical residency in <a href="https://anesthesia.mc.duke.edu/">Anesthesiology</a> at Duke University Medical Center, so we will be moving to <a href="https://www.durham-nc.com/">Durham</a>, North Carolina in June.</p>
+<p><strong>Checklist</strong>:</p>
 
-<p>Feel free to contact me using any of the methods below.</p>
+<ul class="task-list">
+<li><label><input type="checkbox" disabled class="task-list-item"> Determine OS/Distro to use</label></li>
+<li><label><input type="checkbox" disabled class="task-list-item"> Monitoring System</label></li>
+<li><label><input type="checkbox" disabled class="task-list-item"> Easy Management System for Containers/VMs (ex: Ansible/Chef)</label></li>
+</ul>
 
-<h3 id="contact">Contact</h3>
+<h3 id="data">Data</h3>
 
-<p>In addition to the contact icons at the bottom of the website, I can be reached via these additional methods:</p>
+<p>Need to continue to use ZFS, and be able to import my current ZFS pools. It also
+needs to support LUKS, since I use it for my backups. Lastly, it would be nice
+if it was easy enough to setup samba shares.</p>
+
+<p><strong>Checklist</strong>:</p>
+
+<ul class="task-list">
+<li><label><input type="checkbox" disabled class="task-list-item"> Test OS ZFS install/Setup</label></li>
+<li><label><input type="checkbox" disabled class="task-list-item"> Import ZFS Pools</label></li>
+<li><label><input type="checkbox" disabled class="task-list-item"> LUKs setup and working</label></li>
+<li><label><input type="checkbox" disabled class="task-list-item"> Ensure Backup Process Works</label></li>
+</ul>
+
+<h3 id="vms">VMs</h3>
+
+<p>Want to continue to use KVM. Needs to allow me to use ~virsh~ and other tools.
+Ideally, I&rsquo;d like to be able to connect using ~virt-manager~ and similar GUI
+tools, even from Distros without ~ssh-askpass~, like Solus. I need to figure out
+and export just a couple of VMs, but I think that just requires me to export
+them to qcow2 images, and use the &ldquo;disk&rdquo; into a new VM. Additionally, I think I
+<a href="http://ryan.himmelwright.net/post/exporting-proxmox-vms/">already figured that
+out</a>. The main things
+I need to learn/do for the VM stuff is to figure out the tool set I want to use
+for management, especially remotely.</p>
+
+<p><strong>Checklist</strong>:</p>
+
+<ul class="task-list">
+<li><label><input type="checkbox" checked disabled class="task-list-item"> Export desired VMs</label></li>
+<li><label><input type="checkbox" disabled class="task-list-item"> Run VMs on ZFS or LVM pools</label></li>
+<li><label><input type="checkbox" disabled class="task-list-item"> Learn how to create VMs</label></li>
+<li><label><input type="checkbox" disabled class="task-list-item"> Network so VMs on main network</label></li>
+<li><label><input type="checkbox" disabled class="task-list-item"> Remotely View GUI VMs</label></li>
+<li><label><input type="checkbox" disabled class="task-list-item"> Remotely Edit VMs (Easily)</label></li>
+<li><label><input type="checkbox" disabled class="task-list-item"> Auto Backups for VMs</label></li>
+</ul>
+
+<h3 id="containers">Containers</h3>
+
+<p>I want to continue to use LXC containers for a large majority of the server&rsquo;s
+tasks. So, I plan to use LXD, and many of these tasks will be about configuring
+it so that I have all the ease of managing containers as I did in Proxmox. Also,
+unlike Proxmox, I want to have the server run and support Docker cotnainers.</p>
+
+<h4 id="lxc-lxd">LXC/LXD</h4>
+
+<p><strong>Checklist</strong>:</p>
+
+<ul class="task-list">
+<li><label><input type="checkbox" checked disabled class="task-list-item"> Install Setup LXC</label></li>
+<li><label><input type="checkbox" disabled class="task-list-item"> Run Containers on ZFS or LVM pools?</label></li>
+<li><label><input type="checkbox" disabled class="task-list-item"> Easily Create New (with options Proxmox provides)</label></li>
+<li><label><input type="checkbox" disabled class="task-list-item"> Network so Containers on main network</label></li>
+<li><label><input type="checkbox" disabled class="task-list-item"> Remotely Edit Containers (Easily)</label></li>
+<li><label><input type="checkbox" disabled class="task-list-item"> Auto Backups</label></li>
+</ul>
+
+<h4 id="docker">Docker</h4>
+
+<p><strong>Checklist</strong>:</p>
+
+<ul class="task-list">
+<li><label><input type="checkbox" checked disabled class="task-list-item"> Docker Setup</label></li>
+<li><label><input type="checkbox" disabled class="task-list-item"> Containers on ZFS or LVM pools?</label></li>
+<li><label><input type="checkbox" disabled class="task-list-item"> Network so Containers on main network</label></li>
+<li><label><input type="checkbox" disabled class="task-list-item"> Auto Backups</label></li>
+</ul>
+
+<h2 id="notes">Notes</h2>
 
 <ul>
-<li>Email: <a href="mailto:ryan.himmelwright@gmail.com">ryan.himmelwright@gmail.com</a></li>
-<li>IRC: I&rsquo;m often on geekshed and freenode channels as <code>himmAllRight</code></li>
-<li>Telegram: <code>@himmAllRight</code></li>
-<li>Wire: <code>@himmallright</code></li>
+<li>So, I just installed <a href="http://cockpit-project.org/">cockpit</a> on the test
+server. It&rsquo;s been a long time since I have used it, and it has really
+improved. It has interfaces to my VMs and docker containers. It&rsquo;s not as
+extensive as Proxmox, but honestly, goes enough of the way there for me.</li>
 </ul>
 
                     
