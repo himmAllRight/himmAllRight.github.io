@@ -7,10 +7,25 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>Copyright © Ryan Himmelwright. Site created with Hugo</copyright>
-    <lastBuildDate>Sat, 31 Mar 2018 15:15:18 -0400</lastBuildDate>
+    <lastBuildDate>Sun, 01 Apr 2018 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="http://ryan.himmelwright.net/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Trying Out Seafile</title>
+      <link>http://ryan.himmelwright.net/post/trying-out-seafile/</link>
+      <pubDate>Sun, 01 Apr 2018 00:00:00 +0000</pubDate>
+      
+      <guid>http://ryan.himmelwright.net/post/trying-out-seafile/</guid>
+      <description>&lt;p&gt;In college, I mostly used Dropbox to handle all of my file syncing needs. As I
+approached graduation, I setup an Owncloud droplet (which is now a Nextcloud
+instance) to supplant my Dropbox usage. While it has worked fairly well, I&amp;rsquo;ve
+been watching &lt;a href=&#34;https://www.seafile.com/en/home/&#34;&gt;seafile&lt;/a&gt; from a distance the
+last few years, but haven&amp;rsquo;t taken the time to try it out. I have now.&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>About</title>

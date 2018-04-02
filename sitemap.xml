@@ -3,6 +3,11 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>http://ryan.himmelwright.net/post/trying-out-seafile/</loc>
+    <lastmod>2018-04-01T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>http://ryan.himmelwright.net/pages/about/</loc>
     <lastmod>2018-03-31T15:15:18-04:00</lastmod>
   </url>
@@ -303,7 +308,7 @@
   
   <url>
     <loc>http://ryan.himmelwright.net/tags/homelab/</loc>
-    <lastmod>2018-02-25T00:00:00+00:00</lastmod>
+    <lastmod>2018-04-01T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -357,7 +362,7 @@
   
   <url>
     <loc>http://ryan.himmelwright.net/tags/linux/</loc>
-    <lastmod>2018-02-25T00:00:00+00:00</lastmod>
+    <lastmod>2018-04-01T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -387,7 +392,7 @@
   
   <url>
     <loc>http://ryan.himmelwright.net/post/</loc>
-    <lastmod>2018-02-25T00:00:00+00:00</lastmod>
+    <lastmod>2018-04-01T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -412,6 +417,12 @@
   <url>
     <loc>http://ryan.himmelwright.net/tags/snapd/</loc>
     <lastmod>2016-07-17T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://ryan.himmelwright.net/tags/software/</loc>
+    <lastmod>2018-04-01T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -471,7 +482,7 @@
   
   <url>
     <loc>http://ryan.himmelwright.net/</loc>
-    <lastmod>2018-03-31T15:15:18-04:00</lastmod>
+    <lastmod>2018-04-01T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
