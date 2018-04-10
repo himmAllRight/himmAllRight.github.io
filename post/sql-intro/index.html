@@ -1,0 +1,820 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>SQL Intro -- λ ryan. himmelwright. net</title>
+
+    
+
+    
+    <link href="http://ryan.himmelwright.net/css/bootstrap.min.css" rel="stylesheet">
+
+    
+    <link href="http://ryan.himmelwright.net/css/clean-blog.min.css" rel="stylesheet">
+
+    
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href='//fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+
+    
+    
+    
+
+
+
+    
+    <script type="text/javascript">
+        var _paq = _paq || [];
+         
+        _paq.push(["setDocumentTitle", document.domain + "/" + document.title]);
+        _paq.push(["setCookieDomain", "*.ryan.himmelwright.net"]);
+        _paq.push(["setDomains", ["*.ryan.himmelwright.net"]]);
+        _paq.push(['trackPageView']);
+        _paq.push(['enableLinkTracking']);
+        (function() {
+        var u="//cloud.himmelwright.net/piwik/";
+        _paq.push(['setTrackerUrl', u+'piwik.php']);
+        _paq.push(['setSiteId', '1']);
+        var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+        g.type='text/javascript'; g.async=true; g.defer=true; g.src=u+'piwik.js'; s.parentNode.insertBefore(g,s);
+        })();
+        </script>
+        <noscript><p><img src="//cloud.himmelwright.net/piwik/piwik.php?idsite=1&rec=1" style="border:0;" alt="" /></p></noscript>
+        
+
+
+
+</head>
+
+<body>
+
+    
+    <nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+        <div class="container-fluid">
+            
+            <div class="navbar-header page-scroll">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="http://ryan.himmelwright.net">λ ryan. himmelwright. net</a>
+            </div>
+
+                       
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    
+                    <li>
+                        <a href="http://ryan.himmelwright.net/">home</a>
+                    </li>
+                    
+                    <li>
+                        <a href="http://ryan.himmelwright.net/pages/about/">About</a>
+                    </li>
+                    
+                    <li>
+                        <a href="http://ryan.himmelwright.net/pages/homelab/">Homelab</a>
+                    </li>
+                    
+                    <li>
+                        <a href="http://ryan.himmelwright.net/post/">Archives</a>
+                    </li>
+                    
+                    <li>
+                        <a href="http://ryan.himmelwright.net/post/index.xml">RSS</a>
+                    </li>
+                    
+                  </ul>
+            </div>
+           
+
+        </div>
+        
+    </nav>
+
+
+
+
+<header class="intro-header" style="background-image: url('http://ryan.himmelwright.net/img/header-images/container-building-umich.jpg')">
+    
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <h1>SQL Intro</h1>
+                    <h2 class="subheading"></h2>
+                    <span class="meta">
+                        
+    A 16 minute read,
+
+Posted by <a href="#">Ryan Himmelwright</a> on Wed, Mar 14, 2018
+
+
+
+
+
+
+
+<br />
+Tags <a href="http://ryan.himmelwright.net/tags/devops">devops</a>, <a href="http://ryan.himmelwright.net/tags/linux">linux</a>, <a href="http://ryan.himmelwright.net/tags/database">database</a>
+
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+    </header>
+
+    
+    <article>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                    
+                    <p>After putting postgresql on pause for a bit, I have switched our rue-rss app to
+use SQLite3. In doing so, I figured it would be useful to finally dig in and learn some SQL.</p>
+
+<p></p>
+
+<h2 id="install-setup">Install Setup</h2>
+
+<p>Started with mysql for some testing. Went to the <a href="https://dev.mysql.com/downloads">mySQL download
+Page</a> and installed the version for me VM. This
+may differ based on Distro/DB.</p>
+
+<p>Update&hellip; can&rsquo;t get <code>/usr/bin/mysql_secure_installation</code> command to run&hellip;
+getting a permission denied issue&hellip;</p>
+
+<p>I think I figured it out&hellip; the first time mysql is run it creates a temp
+password in the log, located at <code>/var/log/mysqld.log</code>. Lets test it out.</p>
+
+<p>It worked. I guess that&rsquo;s something that&rsquo;s out of date from my tutorial video&hellip;</p>
+
+<h4 id="create-user">create user</h4>
+
+<p>From shell: <code>mysql -u root -p mysql</code>, where <code>-u</code> is for the user, and <code>-p</code> is
+for the DB to connect to.</p>
+
+<h4 id="installing-mariadb-on-ubuntu">Installing MariaDB on Ubuntu</h4>
+
+<p>Going over the new videos, they actually explain a way to fix this. Also, there
+is a section that talks about how MariaDB is kind of replacing mySQL because
+people aren&rsquo;t sure what Oracle&rsquo;s game plan is.</p>
+
+<p>Still should run the secure setup to make it a bit safer:
+<code>mysql_secure_installation</code>.</p>
+
+<h2 id="dbs-and-commands">DBs and Commands:</h2>
+
+<p>Generally, SQL commands are typed in all CAPS. Also, statements end with a <code>;</code>
+to terminate.</p>
+
+<p>Show databases: <code>SHOW DATABASES;</code></p>
+
+<p>Create database: <code>CREATE DATABASE dbTest;</code></p>
+
+<p>Drop a database (delete): <code>DROP DATABASE dbTest</code></p>
+
+<p>Select DB to use: <code>USER dbTest;</code></p>
+
+<h3 id="tables">Tables</h3>
+
+<p>Show Tables: <code>SHOW TABLES;</code></p>
+
+<p>Create Table:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-SQL" data-lang="SQL"><span style="color:#66d9ef">CREATE</span> <span style="color:#66d9ef">TABLE</span> tblCustomerInfo (custInfoFirstName varchar(<span style="color:#ae81ff">50</span>),custInfoLastName varchar(<span style="color:#ae81ff">50</span>),custInfoAddr1 varchar(<span style="color:#ae81ff">50</span>),custInfoAddr2 varchar(<span style="color:#ae81ff">50</span>),custInfoCityName varchar(<span style="color:#ae81ff">50</span>),custInfoState varchar(<span style="color:#ae81ff">10</span>),custInfoZipCode varchar(<span style="color:#ae81ff">10</span>),custInfoPhone varchar(<span style="color:#ae81ff">12</span>));</code></pre></div>
+<p>Drop (delete) Table: <code>DROP TABLE tblTest;</code></p>
+
+<p><strong>NOTE: Using <code>DROP</code> commands will delete the entire structure, even if there is
+data in it. Be Careful!</strong></p>
+
+<h4 id="constraints">Constraints</h4>
+
+<p>Show the fields and types for a table: <code>SHOW FIELDS FROM tblCustomerInfo;</code></p>
+
+<p>To add constraints to an item, they come after the type. EX: <code>CREATE TABLE
+tblCustomerIDInfo (custID varchar(10) PRIMARY KEY,...</code> creates an ID values that
+is a PRIMARY KEY meaning it is <em>unique</em> and <em>not null</em>.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-SQL" data-lang="SQL">mysql<span style="color:#f92672">&gt;</span> <span style="color:#66d9ef">SHOW</span> FIELDS <span style="color:#66d9ef">FROM</span> tblCustomerIDInfo;
+<span style="color:#f92672">+</span><span style="color:#75715e">-------------------|-------------|------|-----|---------|-------+
+</span><span style="color:#75715e"></span><span style="color:#f92672">|</span> Field             <span style="color:#f92672">|</span> <span style="color:#66d9ef">Type</span>        <span style="color:#f92672">|</span> <span style="color:#66d9ef">Null</span> <span style="color:#f92672">|</span> <span style="color:#66d9ef">Key</span> <span style="color:#f92672">|</span> <span style="color:#66d9ef">Default</span> <span style="color:#f92672">|</span> Extra <span style="color:#f92672">|</span>
+<span style="color:#f92672">+</span><span style="color:#75715e">-------------------|-------------|------|-----|---------|-------+
+</span><span style="color:#75715e"></span><span style="color:#f92672">|</span> custID            <span style="color:#f92672">|</span> varchar(<span style="color:#ae81ff">10</span>) <span style="color:#f92672">|</span> <span style="color:#66d9ef">NO</span>   <span style="color:#f92672">|</span> PRI <span style="color:#f92672">|</span> <span style="color:#66d9ef">NULL</span>    <span style="color:#f92672">|</span>       <span style="color:#f92672">|</span>
+<span style="color:#f92672">|</span> custInfoFirstName <span style="color:#f92672">|</span> varchar(<span style="color:#ae81ff">50</span>) <span style="color:#f92672">|</span> YES  <span style="color:#f92672">|</span>     <span style="color:#f92672">|</span> <span style="color:#66d9ef">NULL</span>    <span style="color:#f92672">|</span>       <span style="color:#f92672">|</span>
+<span style="color:#f92672">|</span> custInfoLastName  <span style="color:#f92672">|</span> varchar(<span style="color:#ae81ff">50</span>) <span style="color:#f92672">|</span> YES  <span style="color:#f92672">|</span>     <span style="color:#f92672">|</span> <span style="color:#66d9ef">NULL</span>    <span style="color:#f92672">|</span>       <span style="color:#f92672">|</span>
+<span style="color:#f92672">|</span> custInfoAddr1     <span style="color:#f92672">|</span> varchar(<span style="color:#ae81ff">50</span>) <span style="color:#f92672">|</span> YES  <span style="color:#f92672">|</span>     <span style="color:#f92672">|</span> <span style="color:#66d9ef">NULL</span>    <span style="color:#f92672">|</span>       <span style="color:#f92672">|</span>
+<span style="color:#f92672">|</span> custInfoAddr2     <span style="color:#f92672">|</span> varchar(<span style="color:#ae81ff">50</span>) <span style="color:#f92672">|</span> YES  <span style="color:#f92672">|</span>     <span style="color:#f92672">|</span> <span style="color:#66d9ef">NULL</span>    <span style="color:#f92672">|</span>       <span style="color:#f92672">|</span>
+<span style="color:#f92672">|</span> custInfoCityName  <span style="color:#f92672">|</span> varchar(<span style="color:#ae81ff">50</span>) <span style="color:#f92672">|</span> YES  <span style="color:#f92672">|</span>     <span style="color:#f92672">|</span> <span style="color:#66d9ef">NULL</span>    <span style="color:#f92672">|</span>       <span style="color:#f92672">|</span>
+<span style="color:#f92672">|</span> custInfoState     <span style="color:#f92672">|</span> varchar(<span style="color:#ae81ff">10</span>) <span style="color:#f92672">|</span> YES  <span style="color:#f92672">|</span>     <span style="color:#f92672">|</span> <span style="color:#66d9ef">NULL</span>    <span style="color:#f92672">|</span>       <span style="color:#f92672">|</span>
+<span style="color:#f92672">|</span> custInfoZipCode   <span style="color:#f92672">|</span> varchar(<span style="color:#ae81ff">10</span>) <span style="color:#f92672">|</span> YES  <span style="color:#f92672">|</span>     <span style="color:#f92672">|</span> <span style="color:#66d9ef">NULL</span>    <span style="color:#f92672">|</span>       <span style="color:#f92672">|</span>
+<span style="color:#f92672">|</span> custInfoPhone     <span style="color:#f92672">|</span> varchar(<span style="color:#ae81ff">12</span>) <span style="color:#f92672">|</span> YES  <span style="color:#f92672">|</span>     <span style="color:#f92672">|</span> <span style="color:#66d9ef">NULL</span>    <span style="color:#f92672">|</span>       <span style="color:#f92672">|</span>
+<span style="color:#f92672">+</span><span style="color:#75715e">-------------------|-------------|------|-----|---------|-------+
+</span><span style="color:#75715e"></span><span style="color:#ae81ff">9</span> <span style="color:#66d9ef">rows</span> <span style="color:#66d9ef">in</span> <span style="color:#66d9ef">set</span> (<span style="color:#ae81ff">0</span>.<span style="color:#ae81ff">00</span> sec)</code></pre></div>
+<p>Add an item to the table using <code>INSERT INTO</code>:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-SQL" data-lang="SQL">mysql<span style="color:#f92672">&gt;</span> <span style="color:#66d9ef">INSERT</span> <span style="color:#66d9ef">INTO</span> tblCustomerInfo (custInfoFirstname,custInfoLastName,custInfoAddr1,custInfoAddr2,custInfoCityName,custInfoState,custInfoZipCode,custInfoPhone) <span style="color:#66d9ef">VALUES</span> (<span style="color:#e6db74">&#39;John&#39;</span>,<span style="color:#e6db74">&#39;Smith&#39;</span>,<span style="color:#e6db74">&#39;111 Main St&#39;</span>,<span style="color:#e6db74">&#39;&#39;</span>,<span style="color:#e6db74">&#39;Anytown&#39;</span>,<span style="color:#e6db74">&#39;NY&#39;</span>,<span style="color:#e6db74">&#39;43211&#39;</span>,<span style="color:#e6db74">&#39;2123445533&#39;</span>);
+Query OK, <span style="color:#ae81ff">1</span> <span style="color:#66d9ef">row</span> affected (<span style="color:#ae81ff">0</span>.<span style="color:#ae81ff">00</span> sec)</code></pre></div>
+<p>View table information using a <code>SELECT FROM</code>:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-SQL" data-lang="SQL">mysql<span style="color:#f92672">&gt;</span> <span style="color:#66d9ef">SeLECT</span> <span style="color:#f92672">*</span> <span style="color:#66d9ef">FROM</span> tblCustomerInfo;
+<span style="color:#f92672">+</span><span style="color:#75715e">-------------------|------------------|---------------|---------------|------------------|---------------|-----------------|---------------+
+</span><span style="color:#75715e"></span><span style="color:#f92672">|</span> custInfoFirstName <span style="color:#f92672">|</span> custInfoLastName <span style="color:#f92672">|</span> custInfoAddr1 <span style="color:#f92672">|</span> custInfoAddr2 <span style="color:#f92672">|</span> custInfoCityName <span style="color:#f92672">|</span> custInfoState <span style="color:#f92672">|</span> custInfoZipCode <span style="color:#f92672">|</span> custInfoPhone <span style="color:#f92672">|</span>
+<span style="color:#f92672">+</span><span style="color:#75715e">-------------------|------------------|---------------|---------------|------------------|---------------|-----------------|---------------+
+</span><span style="color:#75715e"></span><span style="color:#f92672">|</span> John              <span style="color:#f92672">|</span> Smith            <span style="color:#f92672">|</span> <span style="color:#ae81ff">111</span> Main St   <span style="color:#f92672">|</span>               <span style="color:#f92672">|</span> Anytown          <span style="color:#f92672">|</span> NY            <span style="color:#f92672">|</span> <span style="color:#ae81ff">43211</span>           <span style="color:#f92672">|</span> <span style="color:#ae81ff">2123445533</span>    <span style="color:#f92672">|</span>
+<span style="color:#f92672">|</span> Jane              <span style="color:#f92672">|</span> Smith            <span style="color:#f92672">|</span> <span style="color:#ae81ff">111</span> Main St   <span style="color:#f92672">|</span>               <span style="color:#f92672">|</span> Anytown          <span style="color:#f92672">|</span> NY            <span style="color:#f92672">|</span> <span style="color:#ae81ff">43211</span>           <span style="color:#f92672">|</span> <span style="color:#ae81ff">2123443833</span>    <span style="color:#f92672">|</span>
+<span style="color:#f92672">|</span> Jan               <span style="color:#f92672">|</span> Jones            <span style="color:#f92672">|</span> <span style="color:#ae81ff">111</span> Main St   <span style="color:#f92672">|</span>               <span style="color:#f92672">|</span> City             <span style="color:#f92672">|</span> OH            <span style="color:#f92672">|</span> <span style="color:#ae81ff">43200</span>           <span style="color:#f92672">|</span> <span style="color:#ae81ff">2123447333</span>    <span style="color:#f92672">|</span>
+<span style="color:#f92672">+</span><span style="color:#75715e">-------------------|------------------|---------------|---------------|------------------|---------------|-----------------|---------------+
+</span><span style="color:#75715e"></span><span style="color:#ae81ff">3</span> <span style="color:#66d9ef">rows</span> <span style="color:#66d9ef">in</span> <span style="color:#66d9ef">set</span> (<span style="color:#ae81ff">0</span>.<span style="color:#ae81ff">00</span> sec)</code></pre></div>
+<p>Can insert contents of one table INTO another, with the <code>INSERT INTO</code> command,
+mixed with the <code>SELECT FROM</code>. Good for doing a quick backup.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-SQL" data-lang="SQL">mysql<span style="color:#f92672">&gt;</span> <span style="color:#66d9ef">INSERT</span> <span style="color:#66d9ef">INTO</span> tblCustomerInfoBkup (custInfoFirstname,custInfoLastName,custInfoAddr1,custInfoAddr2,custInfoCityName,custInfoState,custInfoZipCode,custInfoPhone) <span style="color:#66d9ef">VALUES</span> (<span style="color:#e6db74">&#39;June&#39;</span>,<span style="color:#e6db74">&#39;Fill&#39;</span>,<span style="color:#e6db74">&#39;1191 Oak St&#39;</span>,<span style="color:#e6db74">&#39;&#39;</span>,<span style="color:#e6db74">&#39;Allston&#39;</span>,<span style="color:#e6db74">&#39;CA&#39;</span>,<span style="color:#e6db74">&#39;90200&#39;</span>,<span style="color:#e6db74">&#39;2127447333&#39;</span>);
+Query OK, <span style="color:#ae81ff">1</span> <span style="color:#66d9ef">row</span> affected (<span style="color:#ae81ff">0</span>.<span style="color:#ae81ff">00</span> sec)
+
+mysql<span style="color:#f92672">&gt;</span> <span style="color:#66d9ef">SELECT</span> <span style="color:#f92672">*</span> <span style="color:#66d9ef">FROM</span> tblCustomerInfoBkup;
+<span style="color:#f92672">+</span><span style="color:#75715e">-------------------|------------------|---------------|---------------|------------------|---------------|-----------------|---------------+
+</span><span style="color:#75715e"></span><span style="color:#f92672">|</span> custInfoFirstName <span style="color:#f92672">|</span> custInfoLastName <span style="color:#f92672">|</span> custInfoAddr1 <span style="color:#f92672">|</span> custInfoAddr2 <span style="color:#f92672">|</span> custInfoCityName <span style="color:#f92672">|</span> custInfoState <span style="color:#f92672">|</span> custInfoZipCode <span style="color:#f92672">|</span> custInfoPhone <span style="color:#f92672">|</span>
+<span style="color:#f92672">+</span><span style="color:#75715e">-------------------|------------------|---------------|---------------|------------------|---------------|-----------------|---------------+
+</span><span style="color:#75715e"></span><span style="color:#f92672">|</span> June              <span style="color:#f92672">|</span> Fill             <span style="color:#f92672">|</span> <span style="color:#ae81ff">1191</span> Oak St   <span style="color:#f92672">|</span>               <span style="color:#f92672">|</span> Allston          <span style="color:#f92672">|</span> CA            <span style="color:#f92672">|</span> <span style="color:#ae81ff">90200</span>           <span style="color:#f92672">|</span> <span style="color:#ae81ff">2127447333</span>    <span style="color:#f92672">|</span>
+<span style="color:#f92672">+</span><span style="color:#75715e">-------------------|------------------|---------------|---------------|------------------|---------------|-----------------|---------------+
+</span><span style="color:#75715e"></span><span style="color:#ae81ff">1</span> <span style="color:#66d9ef">row</span> <span style="color:#66d9ef">in</span> <span style="color:#66d9ef">set</span> (<span style="color:#ae81ff">0</span>.<span style="color:#ae81ff">00</span> sec)
+
+mysql<span style="color:#f92672">&gt;</span> <span style="color:#66d9ef">INSERT</span> <span style="color:#66d9ef">INTO</span> tblCustomerInfoBkup <span style="color:#66d9ef">SELECT</span> <span style="color:#f92672">*</span> <span style="color:#66d9ef">FROM</span> tblCustomerInfo;
+Query OK, <span style="color:#ae81ff">3</span> <span style="color:#66d9ef">rows</span> affected (<span style="color:#ae81ff">0</span>.<span style="color:#ae81ff">03</span> sec)
+Records: <span style="color:#ae81ff">3</span>  Duplicates: <span style="color:#ae81ff">0</span>  Warnings: <span style="color:#ae81ff">0</span>
+
+mysql<span style="color:#f92672">&gt;</span> <span style="color:#66d9ef">SELECT</span> <span style="color:#f92672">*</span> <span style="color:#66d9ef">FROM</span> tblCustomerInfoBkup;
+<span style="color:#f92672">+</span><span style="color:#75715e">-------------------|------------------|---------------|---------------|------------------|---------------|-----------------|---------------+
+</span><span style="color:#75715e"></span><span style="color:#f92672">|</span> custInfoFirstName <span style="color:#f92672">|</span> custInfoLastName <span style="color:#f92672">|</span> custInfoAddr1 <span style="color:#f92672">|</span> custInfoAddr2 <span style="color:#f92672">|</span> custInfoCityName <span style="color:#f92672">|</span> custInfoState <span style="color:#f92672">|</span> custInfoZipCode <span style="color:#f92672">|</span> custInfoPhone <span style="color:#f92672">|</span>
+<span style="color:#f92672">+</span><span style="color:#75715e">-------------------|------------------|---------------|---------------|------------------|---------------|-----------------|---------------+
+</span><span style="color:#75715e"></span><span style="color:#f92672">|</span> June              <span style="color:#f92672">|</span> Fill             <span style="color:#f92672">|</span> <span style="color:#ae81ff">1191</span> Oak St   <span style="color:#f92672">|</span>               <span style="color:#f92672">|</span> Allston          <span style="color:#f92672">|</span> CA            <span style="color:#f92672">|</span> <span style="color:#ae81ff">90200</span>           <span style="color:#f92672">|</span> <span style="color:#ae81ff">2127447333</span>    <span style="color:#f92672">|</span>
+<span style="color:#f92672">|</span> John              <span style="color:#f92672">|</span> Smith            <span style="color:#f92672">|</span> <span style="color:#ae81ff">111</span> Main St   <span style="color:#f92672">|</span>               <span style="color:#f92672">|</span> Anytown          <span style="color:#f92672">|</span> NY            <span style="color:#f92672">|</span> <span style="color:#ae81ff">43211</span>           <span style="color:#f92672">|</span> <span style="color:#ae81ff">2123445533</span>    <span style="color:#f92672">|</span>
+<span style="color:#f92672">|</span> Jane              <span style="color:#f92672">|</span> Smith            <span style="color:#f92672">|</span> <span style="color:#ae81ff">111</span> Main St   <span style="color:#f92672">|</span>               <span style="color:#f92672">|</span> Anytown          <span style="color:#f92672">|</span> NY            <span style="color:#f92672">|</span> <span style="color:#ae81ff">43211</span>           <span style="color:#f92672">|</span> <span style="color:#ae81ff">2123443833</span>    <span style="color:#f92672">|</span>
+<span style="color:#f92672">|</span> Jan               <span style="color:#f92672">|</span> Jones            <span style="color:#f92672">|</span> <span style="color:#ae81ff">111</span> Main St   <span style="color:#f92672">|</span>               <span style="color:#f92672">|</span> City             <span style="color:#f92672">|</span> OH            <span style="color:#f92672">|</span> <span style="color:#ae81ff">43200</span>           <span style="color:#f92672">|</span> <span style="color:#ae81ff">2123447333</span>    <span style="color:#f92672">|</span>
+<span style="color:#f92672">+</span><span style="color:#75715e">-------------------|------------------|---------------|---------------|------------------|---------------|-----------------|---------------+
+</span><span style="color:#75715e"></span><span style="color:#ae81ff">4</span> <span style="color:#66d9ef">rows</span> <span style="color:#66d9ef">in</span> <span style="color:#66d9ef">set</span> (<span style="color:#ae81ff">0</span>.<span style="color:#ae81ff">00</span> sec)</code></pre></div>
+<p>Can also select specific columns from the table:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-SQL" data-lang="SQL">mysql<span style="color:#f92672">&gt;</span> <span style="color:#66d9ef">SELECT</span> custInfoCityName,custInfoState <span style="color:#66d9ef">FROM</span> tblCustomerInfo;
+<span style="color:#f92672">+</span><span style="color:#75715e">------------------|---------------+
+</span><span style="color:#75715e"></span><span style="color:#f92672">|</span> custInfoCityName <span style="color:#f92672">|</span> custInfoState <span style="color:#f92672">|</span>
+<span style="color:#f92672">+</span><span style="color:#75715e">------------------|---------------+
+</span><span style="color:#75715e"></span><span style="color:#f92672">|</span> Anytown          <span style="color:#f92672">|</span> NY            <span style="color:#f92672">|</span>
+<span style="color:#f92672">|</span> Anytown          <span style="color:#f92672">|</span> NY            <span style="color:#f92672">|</span>
+<span style="color:#f92672">|</span> City             <span style="color:#f92672">|</span> OH            <span style="color:#f92672">|</span>
+<span style="color:#f92672">+</span><span style="color:#75715e">------------------|---------------+
+</span><span style="color:#75715e"></span><span style="color:#ae81ff">3</span> <span style="color:#66d9ef">rows</span> <span style="color:#66d9ef">in</span> <span style="color:#66d9ef">set</span> (<span style="color:#ae81ff">0</span>.<span style="color:#ae81ff">00</span> sec)</code></pre></div>
+<p>Can also grab a column, after matching in another:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-SQL" data-lang="SQL">mysql<span style="color:#f92672">&gt;</span> <span style="color:#66d9ef">SELECT</span> custInfoLastName <span style="color:#66d9ef">FROM</span> tblCustomerInfo <span style="color:#66d9ef">WHERE</span> custInfoState<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;NY&#39;</span>;
+<span style="color:#f92672">+</span><span style="color:#75715e">------------------+
+</span><span style="color:#75715e"></span><span style="color:#f92672">|</span> custInfoLastName <span style="color:#f92672">|</span>
+<span style="color:#f92672">+</span><span style="color:#75715e">------------------+
+</span><span style="color:#75715e"></span><span style="color:#f92672">|</span> Smith            <span style="color:#f92672">|</span>
+<span style="color:#f92672">|</span> Smith            <span style="color:#f92672">|</span>
+<span style="color:#f92672">+</span><span style="color:#75715e">------------------+
+</span><span style="color:#75715e"></span><span style="color:#ae81ff">2</span> <span style="color:#66d9ef">rows</span> <span style="color:#66d9ef">in</span> <span style="color:#66d9ef">set</span> (<span style="color:#ae81ff">0</span>.<span style="color:#ae81ff">00</span> sec)</code></pre></div>
+<p>Can use LIKE to search or a pattern in a field. =, has to match exactly. &lt;&gt; is
+not equal. When using number values, can use &lt; and &gt;.</p>
+
+<p>Can change the table schema (Add or edit fields), the <code>ALTER</code> command can be
+used.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-SQL" data-lang="SQL"><span style="color:#66d9ef">ALTER</span> <span style="color:#66d9ef">TABLE</span> tblCustomerInfoBkup <span style="color:#66d9ef">DROP</span> custInfoDOB varchar(<span style="color:#ae81ff">10</span>)</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-SQL" data-lang="SQL">mysql<span style="color:#f92672">&gt;</span> <span style="color:#66d9ef">ALTER</span> <span style="color:#66d9ef">TABLE</span> tblCustomerInfoBkup <span style="color:#66d9ef">MODIFY</span> custInfoDOB <span style="color:#66d9ef">year</span>;
+Query OK, <span style="color:#ae81ff">4</span> <span style="color:#66d9ef">rows</span> affected (<span style="color:#ae81ff">0</span>.<span style="color:#ae81ff">03</span> sec)
+Records: <span style="color:#ae81ff">4</span>  Duplicates: <span style="color:#ae81ff">0</span>  Warnings: <span style="color:#ae81ff">0</span></code></pre></div>
+<p>NOTE: Depending on the type of SQL database being used, the command may be:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-SQL" data-lang="SQL">mysql<span style="color:#f92672">&gt;</span> <span style="color:#66d9ef">ALTER</span> <span style="color:#66d9ef">TABLE</span> tblCustomerInfoBkup <span style="color:#66d9ef">ALTER</span> <span style="color:#66d9ef">COLUMN</span> custInfoDOB <span style="color:#66d9ef">year</span>;</code></pre></div>
+<h4 id="delete">Delete</h4>
+
+<p>First, we can delete all the <em>data</em> in a table with <code>DELETE * FROM tblName</code>,
+<em>without</em> deleting the table schema. However, this is almost never used because
+there are better commands to do that.</p>
+
+<p>Specific items from the table can be removed using more specific <code>DELETE FROM</code>
+commands:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-SQL" data-lang="SQL">mysql<span style="color:#f92672">&gt;</span> <span style="color:#66d9ef">SELECT</span> <span style="color:#f92672">*</span> <span style="color:#66d9ef">FROM</span> tblCustomerInfoBkup;
+<span style="color:#f92672">+</span><span style="color:#75715e">-------------------|------------------|---------------|---------------|------------------|---------------|-----------------|---------------|-------------+
+</span><span style="color:#75715e"></span><span style="color:#f92672">|</span> custInfoFirstName <span style="color:#f92672">|</span> custInfoLastName <span style="color:#f92672">|</span> custInfoAddr1 <span style="color:#f92672">|</span> custInfoAddr2 <span style="color:#f92672">|</span> custInfoCityName <span style="color:#f92672">|</span> custInfoState <span style="color:#f92672">|</span> custInfoZipCode <span style="color:#f92672">|</span> custInfoPhone <span style="color:#f92672">|</span> custInfoDOB <span style="color:#f92672">|</span>
+<span style="color:#f92672">+</span><span style="color:#75715e">-------------------|------------------|---------------|---------------|------------------|---------------|-----------------|---------------|-------------+
+</span><span style="color:#75715e"></span><span style="color:#f92672">|</span> June              <span style="color:#f92672">|</span> Fill             <span style="color:#f92672">|</span> <span style="color:#ae81ff">1191</span> Oak St   <span style="color:#f92672">|</span>               <span style="color:#f92672">|</span> Allston          <span style="color:#f92672">|</span> CA            <span style="color:#f92672">|</span> <span style="color:#ae81ff">90200</span>           <span style="color:#f92672">|</span> <span style="color:#ae81ff">2127447333</span>    <span style="color:#f92672">|</span>        <span style="color:#66d9ef">NULL</span> <span style="color:#f92672">|</span>
+<span style="color:#f92672">|</span> John              <span style="color:#f92672">|</span> Smith            <span style="color:#f92672">|</span> <span style="color:#ae81ff">111</span> Main St   <span style="color:#f92672">|</span>               <span style="color:#f92672">|</span> Anytown          <span style="color:#f92672">|</span> NY            <span style="color:#f92672">|</span> <span style="color:#ae81ff">43211</span>           <span style="color:#f92672">|</span> <span style="color:#ae81ff">2123445533</span>    <span style="color:#f92672">|</span>        <span style="color:#66d9ef">NULL</span> <span style="color:#f92672">|</span>
+<span style="color:#f92672">|</span> Jane              <span style="color:#f92672">|</span> Smith            <span style="color:#f92672">|</span> <span style="color:#ae81ff">111</span> Main St   <span style="color:#f92672">|</span>               <span style="color:#f92672">|</span> Anytown          <span style="color:#f92672">|</span> NY            <span style="color:#f92672">|</span> <span style="color:#ae81ff">43211</span>           <span style="color:#f92672">|</span> <span style="color:#ae81ff">2123443833</span>    <span style="color:#f92672">|</span>        <span style="color:#66d9ef">NULL</span> <span style="color:#f92672">|</span>
+<span style="color:#f92672">|</span> Jan               <span style="color:#f92672">|</span> Jones            <span style="color:#f92672">|</span> <span style="color:#ae81ff">111</span> Main St   <span style="color:#f92672">|</span>               <span style="color:#f92672">|</span> City             <span style="color:#f92672">|</span> OH            <span style="color:#f92672">|</span> <span style="color:#ae81ff">43200</span>           <span style="color:#f92672">|</span> <span style="color:#ae81ff">2123447333</span>    <span style="color:#f92672">|</span>        <span style="color:#66d9ef">NULL</span> <span style="color:#f92672">|</span>
+<span style="color:#f92672">+</span><span style="color:#75715e">-------------------|------------------|---------------|---------------|------------------|---------------|-----------------|---------------|-------------+
+</span><span style="color:#75715e"></span><span style="color:#ae81ff">4</span> <span style="color:#66d9ef">rows</span> <span style="color:#66d9ef">in</span> <span style="color:#66d9ef">set</span> (<span style="color:#ae81ff">0</span>.<span style="color:#ae81ff">00</span> sec)
+
+mysql<span style="color:#f92672">&gt;</span> <span style="color:#66d9ef">DELETE</span> <span style="color:#66d9ef">FROM</span> tblCustomerInfoBkup <span style="color:#66d9ef">WHERE</span> custInfoState<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;CA&#39;</span>;
+Query OK, <span style="color:#ae81ff">1</span> <span style="color:#66d9ef">row</span> affected (<span style="color:#ae81ff">0</span>.<span style="color:#ae81ff">00</span> sec)
+
+mysql<span style="color:#f92672">&gt;</span> <span style="color:#66d9ef">SELECT</span> <span style="color:#f92672">*</span> <span style="color:#66d9ef">FROM</span> tblCustomerInfoBkup;
+<span style="color:#f92672">+</span><span style="color:#75715e">-------------------|------------------|---------------|---------------|------------------|---------------|-----------------|---------------|-------------+
+</span><span style="color:#75715e"></span><span style="color:#f92672">|</span> custInfoFirstName <span style="color:#f92672">|</span> custInfoLastName <span style="color:#f92672">|</span> custInfoAddr1 <span style="color:#f92672">|</span> custInfoAddr2 <span style="color:#f92672">|</span> custInfoCityName <span style="color:#f92672">|</span> custInfoState <span style="color:#f92672">|</span> custInfoZipCode <span style="color:#f92672">|</span> custInfoPhone <span style="color:#f92672">|</span> custInfoDOB <span style="color:#f92672">|</span>
+<span style="color:#f92672">+</span><span style="color:#75715e">-------------------|------------------|---------------|---------------|------------------|---------------|-----------------|---------------|-------------+
+</span><span style="color:#75715e"></span><span style="color:#f92672">|</span> John              <span style="color:#f92672">|</span> Smith            <span style="color:#f92672">|</span> <span style="color:#ae81ff">111</span> Main St   <span style="color:#f92672">|</span>               <span style="color:#f92672">|</span> Anytown          <span style="color:#f92672">|</span> NY            <span style="color:#f92672">|</span> <span style="color:#ae81ff">43211</span>           <span style="color:#f92672">|</span> <span style="color:#ae81ff">2123445533</span>    <span style="color:#f92672">|</span>        <span style="color:#66d9ef">NULL</span> <span style="color:#f92672">|</span>
+<span style="color:#f92672">|</span> Jane              <span style="color:#f92672">|</span> Smith            <span style="color:#f92672">|</span> <span style="color:#ae81ff">111</span> Main St   <span style="color:#f92672">|</span>               <span style="color:#f92672">|</span> Anytown          <span style="color:#f92672">|</span> NY            <span style="color:#f92672">|</span> <span style="color:#ae81ff">43211</span>           <span style="color:#f92672">|</span> <span style="color:#ae81ff">2123443833</span>    <span style="color:#f92672">|</span>        <span style="color:#66d9ef">NULL</span> <span style="color:#f92672">|</span>
+<span style="color:#f92672">|</span> Jan               <span style="color:#f92672">|</span> Jones            <span style="color:#f92672">|</span> <span style="color:#ae81ff">111</span> Main St   <span style="color:#f92672">|</span>               <span style="color:#f92672">|</span> City             <span style="color:#f92672">|</span> OH            <span style="color:#f92672">|</span> <span style="color:#ae81ff">43200</span>           <span style="color:#f92672">|</span> <span style="color:#ae81ff">2123447333</span>    <span style="color:#f92672">|</span>        <span style="color:#66d9ef">NULL</span> <span style="color:#f92672">|</span>
+<span style="color:#f92672">+</span><span style="color:#75715e">-------------------|------------------|---------------|---------------|------------------|---------------|-----------------|---------------|-------------+
+</span><span style="color:#75715e"></span><span style="color:#ae81ff">3</span> <span style="color:#66d9ef">rows</span> <span style="color:#66d9ef">in</span> <span style="color:#66d9ef">set</span> (<span style="color:#ae81ff">0</span>.<span style="color:#ae81ff">00</span> sec)</code></pre></div>
+<p>You can also use multiple criteria:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-SQL" data-lang="SQL">mysql<span style="color:#f92672">&gt;</span> <span style="color:#66d9ef">DELETE</span> <span style="color:#66d9ef">FROM</span> tblCustomerInfoBkup <span style="color:#66d9ef">WHERE</span> custInfoState<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;John&#39;</span> <span style="color:#66d9ef">AND</span> custInfoLastName<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;Johnson&#39;</span>;
+Query OK, <span style="color:#ae81ff">0</span> <span style="color:#66d9ef">rows</span> affected (<span style="color:#ae81ff">0</span>.<span style="color:#ae81ff">00</span> sec)</code></pre></div>
+<h4 id="indexes">Indexes</h4>
+
+<p>Speeds up access to getting values in a table. However, comes at a speed cost
+for updating the table. Want to index columns or tables that are frequently
+searched on. Want to have unique values as often as possible.</p>
+
+<p>Use with <code>CREATE INDEX</code>. Again though, different dbs may have different
+commands.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-SQL" data-lang="SQL">mysql<span style="color:#f92672">&gt;</span> <span style="color:#66d9ef">SHOW</span> FIELDS <span style="color:#66d9ef">FROM</span> tblCustomerIDInfo;
+<span style="color:#f92672">+</span><span style="color:#75715e">-------------------|-------------|------|-----|---------|-------+
+</span><span style="color:#75715e"></span><span style="color:#f92672">|</span> Field             <span style="color:#f92672">|</span> <span style="color:#66d9ef">Type</span>        <span style="color:#f92672">|</span> <span style="color:#66d9ef">Null</span> <span style="color:#f92672">|</span> <span style="color:#66d9ef">Key</span> <span style="color:#f92672">|</span> <span style="color:#66d9ef">Default</span> <span style="color:#f92672">|</span> Extra <span style="color:#f92672">|</span>
+<span style="color:#f92672">+</span><span style="color:#75715e">-------------------|-------------|------|-----|---------|-------+
+</span><span style="color:#75715e"></span><span style="color:#f92672">|</span> custID            <span style="color:#f92672">|</span> varchar(<span style="color:#ae81ff">10</span>) <span style="color:#f92672">|</span> <span style="color:#66d9ef">NO</span>   <span style="color:#f92672">|</span> PRI <span style="color:#f92672">|</span> <span style="color:#66d9ef">NULL</span>    <span style="color:#f92672">|</span>       <span style="color:#f92672">|</span>
+<span style="color:#f92672">|</span> custInfoFirstName <span style="color:#f92672">|</span> varchar(<span style="color:#ae81ff">50</span>) <span style="color:#f92672">|</span> YES  <span style="color:#f92672">|</span>     <span style="color:#f92672">|</span> <span style="color:#66d9ef">NULL</span>    <span style="color:#f92672">|</span>       <span style="color:#f92672">|</span>
+<span style="color:#f92672">|</span> custInfoLastName  <span style="color:#f92672">|</span> varchar(<span style="color:#ae81ff">50</span>) <span style="color:#f92672">|</span> YES  <span style="color:#f92672">|</span>     <span style="color:#f92672">|</span> <span style="color:#66d9ef">NULL</span>    <span style="color:#f92672">|</span>       <span style="color:#f92672">|</span>
+<span style="color:#f92672">|</span> custInfoAddr1     <span style="color:#f92672">|</span> varchar(<span style="color:#ae81ff">50</span>) <span style="color:#f92672">|</span> YES  <span style="color:#f92672">|</span>     <span style="color:#f92672">|</span> <span style="color:#66d9ef">NULL</span>    <span style="color:#f92672">|</span>       <span style="color:#f92672">|</span>
+<span style="color:#f92672">|</span> custInfoAddr2     <span style="color:#f92672">|</span> varchar(<span style="color:#ae81ff">50</span>) <span style="color:#f92672">|</span> YES  <span style="color:#f92672">|</span>     <span style="color:#f92672">|</span> <span style="color:#66d9ef">NULL</span>    <span style="color:#f92672">|</span>       <span style="color:#f92672">|</span>
+<span style="color:#f92672">|</span> custInfoCityName  <span style="color:#f92672">|</span> varchar(<span style="color:#ae81ff">50</span>) <span style="color:#f92672">|</span> YES  <span style="color:#f92672">|</span>     <span style="color:#f92672">|</span> <span style="color:#66d9ef">NULL</span>    <span style="color:#f92672">|</span>       <span style="color:#f92672">|</span>
+<span style="color:#f92672">|</span> custInfoState     <span style="color:#f92672">|</span> varchar(<span style="color:#ae81ff">10</span>) <span style="color:#f92672">|</span> YES  <span style="color:#f92672">|</span>     <span style="color:#f92672">|</span> <span style="color:#66d9ef">NULL</span>    <span style="color:#f92672">|</span>       <span style="color:#f92672">|</span>
+<span style="color:#f92672">|</span> custInfoZipCode   <span style="color:#f92672">|</span> varchar(<span style="color:#ae81ff">10</span>) <span style="color:#f92672">|</span> YES  <span style="color:#f92672">|</span>     <span style="color:#f92672">|</span> <span style="color:#66d9ef">NULL</span>    <span style="color:#f92672">|</span>       <span style="color:#f92672">|</span>
+<span style="color:#f92672">|</span> custInfoPhone     <span style="color:#f92672">|</span> varchar(<span style="color:#ae81ff">12</span>) <span style="color:#f92672">|</span> YES  <span style="color:#f92672">|</span>     <span style="color:#f92672">|</span> <span style="color:#66d9ef">NULL</span>    <span style="color:#f92672">|</span>       <span style="color:#f92672">|</span>
+<span style="color:#f92672">+</span><span style="color:#75715e">-------------------|-------------|------|-----|---------|-------+
+</span><span style="color:#75715e"></span><span style="color:#ae81ff">9</span> <span style="color:#66d9ef">rows</span> <span style="color:#66d9ef">in</span> <span style="color:#66d9ef">set</span> (<span style="color:#ae81ff">0</span>.<span style="color:#ae81ff">00</span> sec)
+
+mysql<span style="color:#f92672">&gt;</span> <span style="color:#66d9ef">CREATE</span> <span style="color:#66d9ef">INDEX</span> indexCustInfoID <span style="color:#66d9ef">ON</span> tblCustomerIDInfo (custID);
+Query OK, <span style="color:#ae81ff">0</span> <span style="color:#66d9ef">rows</span> affected (<span style="color:#ae81ff">0</span>.<span style="color:#ae81ff">01</span> sec)
+Records: <span style="color:#ae81ff">0</span>  Duplicates: <span style="color:#ae81ff">0</span>  Warnings: <span style="color:#ae81ff">0</span></code></pre></div>
+<h4 id="drop-table">Drop Table</h4>
+
+<p>As we already know, you can drop the whole table:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-SQL" data-lang="SQL">mysql<span style="color:#f92672">&gt;</span> <span style="color:#66d9ef">SHOW</span> TABLES;
+<span style="color:#f92672">+</span><span style="color:#75715e">--------------------------+
+</span><span style="color:#75715e"></span><span style="color:#f92672">|</span> Tables_in_dbCustomerInfo <span style="color:#f92672">|</span>
+<span style="color:#f92672">+</span><span style="color:#75715e">--------------------------+
+</span><span style="color:#75715e"></span><span style="color:#f92672">|</span> tblCustomerIDInfo        <span style="color:#f92672">|</span>
+<span style="color:#f92672">|</span> tblCustomerInfo          <span style="color:#f92672">|</span>
+<span style="color:#f92672">|</span> tblCustomerInfoBkup      <span style="color:#f92672">|</span>
+<span style="color:#f92672">|</span> tblTest                  <span style="color:#f92672">|</span>
+<span style="color:#f92672">+</span><span style="color:#75715e">--------------------------+
+</span><span style="color:#75715e"></span><span style="color:#ae81ff">4</span> <span style="color:#66d9ef">rows</span> <span style="color:#66d9ef">in</span> <span style="color:#66d9ef">set</span> (<span style="color:#ae81ff">0</span>.<span style="color:#ae81ff">00</span> sec)
+
+mysql<span style="color:#f92672">&gt;</span> <span style="color:#66d9ef">DROP</span> <span style="color:#66d9ef">TABLE</span> tblTest;
+Query OK, <span style="color:#ae81ff">0</span> <span style="color:#66d9ef">rows</span> affected (<span style="color:#ae81ff">0</span>.<span style="color:#ae81ff">00</span> sec)
+
+mysql<span style="color:#f92672">&gt;</span> <span style="color:#66d9ef">SHOW</span> TABLES;
+<span style="color:#f92672">+</span><span style="color:#75715e">--------------------------+
+</span><span style="color:#75715e"></span><span style="color:#f92672">|</span> Tables_in_dbCustomerInfo <span style="color:#f92672">|</span>
+<span style="color:#f92672">+</span><span style="color:#75715e">--------------------------+
+</span><span style="color:#75715e"></span><span style="color:#f92672">|</span> tblCustomerIDInfo        <span style="color:#f92672">|</span>
+<span style="color:#f92672">|</span> tblCustomerInfo          <span style="color:#f92672">|</span>
+<span style="color:#f92672">|</span> tblCustomerInfoBkup      <span style="color:#f92672">|</span>
+<span style="color:#f92672">+</span><span style="color:#75715e">--------------------------+
+</span><span style="color:#75715e"></span><span style="color:#ae81ff">3</span> <span style="color:#66d9ef">rows</span> <span style="color:#66d9ef">in</span> <span style="color:#66d9ef">set</span> (<span style="color:#ae81ff">0</span>.<span style="color:#ae81ff">00</span> sec)</code></pre></div>
+<p>However, like many things, <code>DROP</code> can be used with other specifications&hellip;</p>
+
+<p>Some versions will use <code>ALTERTABLE tblCustomerIDInfo DROP INDEX
+indexCustInfoID;</code>, while others may have a different command:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-SQL" data-lang="SQL">mysql<span style="color:#f92672">&gt;</span> <span style="color:#66d9ef">DROP</span> <span style="color:#66d9ef">INDEX</span> indexCustInfoID <span style="color:#66d9ef">ON</span> tblCustomerIDInfo;
+Query OK, <span style="color:#ae81ff">0</span> <span style="color:#66d9ef">rows</span> affected (<span style="color:#ae81ff">0</span>.<span style="color:#ae81ff">00</span> sec)
+Records: <span style="color:#ae81ff">0</span>  Duplicates: <span style="color:#ae81ff">0</span>  Warnings: <span style="color:#ae81ff">0</span></code></pre></div>
+<h4 id="truncate">Truncate</h4>
+
+<p>Delete the data, but leave table with names of columns all the same&hellip; again,
+still be careful because it <em>will</em> delete all the data.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-SQL" data-lang="SQL">mysql<span style="color:#f92672">&gt;</span> <span style="color:#66d9ef">TRUNCATE</span> <span style="color:#66d9ef">TABLE</span> tblCustomerInfoBkup;
+Query OK, <span style="color:#ae81ff">0</span> <span style="color:#66d9ef">rows</span> affected (<span style="color:#ae81ff">0</span>.<span style="color:#ae81ff">01</span> sec)
+
+mysql<span style="color:#f92672">&gt;</span> <span style="color:#66d9ef">SELECT</span> <span style="color:#f92672">*</span> <span style="color:#66d9ef">FROM</span> tblCustomerInfoBkup;
+Empty <span style="color:#66d9ef">set</span> (<span style="color:#ae81ff">0</span>.<span style="color:#ae81ff">00</span> sec)</code></pre></div>
+<h4 id="auto-increment">Auto Increment</h4>
+
+<p>An Integer value, that once assigned, auto increments by 1 everytime the table
+is updated.</p>
+
+<p>You can auto increment a key. Very useful for IDs in a table.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-SQL" data-lang="SQL">mysql<span style="color:#f92672">&gt;</span> <span style="color:#66d9ef">CREATE</span> <span style="color:#66d9ef">TABLE</span> tblEmpInfo(empID int <span style="color:#66d9ef">PRIMARY</span> <span style="color:#66d9ef">KEY</span> AUTO_INCREMENT,empLastName varchar(<span style="color:#ae81ff">50</span>),empSSN varchar(<span style="color:#ae81ff">11</span>)); 
+Query OK, <span style="color:#ae81ff">0</span> <span style="color:#66d9ef">rows</span> affected (<span style="color:#ae81ff">0</span>.<span style="color:#ae81ff">01</span> sec)
+
+mysql<span style="color:#f92672">&gt;</span> <span style="color:#66d9ef">SHOW</span> FIELDS <span style="color:#66d9ef">FROM</span> tblEmpInfo;
+<span style="color:#f92672">+</span><span style="color:#75715e">-------------|-------------|------|-----|---------|----------------+
+</span><span style="color:#75715e"></span><span style="color:#f92672">|</span> Field       <span style="color:#f92672">|</span> <span style="color:#66d9ef">Type</span>        <span style="color:#f92672">|</span> <span style="color:#66d9ef">Null</span> <span style="color:#f92672">|</span> <span style="color:#66d9ef">Key</span> <span style="color:#f92672">|</span> <span style="color:#66d9ef">Default</span> <span style="color:#f92672">|</span> Extra          <span style="color:#f92672">|</span>
+<span style="color:#f92672">+</span><span style="color:#75715e">-------------|-------------|------|-----|---------|----------------+
+</span><span style="color:#75715e"></span><span style="color:#f92672">|</span> empID       <span style="color:#f92672">|</span> int(<span style="color:#ae81ff">11</span>)     <span style="color:#f92672">|</span> <span style="color:#66d9ef">NO</span>   <span style="color:#f92672">|</span> PRI <span style="color:#f92672">|</span> <span style="color:#66d9ef">NULL</span>    <span style="color:#f92672">|</span> auto_increment <span style="color:#f92672">|</span>
+<span style="color:#f92672">|</span> empLastName <span style="color:#f92672">|</span> varchar(<span style="color:#ae81ff">50</span>) <span style="color:#f92672">|</span> YES  <span style="color:#f92672">|</span>     <span style="color:#f92672">|</span> <span style="color:#66d9ef">NULL</span>    <span style="color:#f92672">|</span>                <span style="color:#f92672">|</span>
+<span style="color:#f92672">|</span> empSSN      <span style="color:#f92672">|</span> varchar(<span style="color:#ae81ff">11</span>) <span style="color:#f92672">|</span> YES  <span style="color:#f92672">|</span>     <span style="color:#f92672">|</span> <span style="color:#66d9ef">NULL</span>    <span style="color:#f92672">|</span>                <span style="color:#f92672">|</span>
+<span style="color:#f92672">+</span><span style="color:#75715e">-------------|-------------|------|-----|---------|----------------+
+</span><span style="color:#75715e"></span><span style="color:#ae81ff">3</span> <span style="color:#66d9ef">rows</span> <span style="color:#66d9ef">in</span> <span style="color:#66d9ef">set</span> (<span style="color:#ae81ff">0</span>.<span style="color:#ae81ff">00</span> sec)
+
+mysql<span style="color:#f92672">&gt;</span> <span style="color:#66d9ef">INSERT</span> <span style="color:#66d9ef">INTO</span> tblEmpInfo (empLastName,empSSN) <span style="color:#66d9ef">VALUES</span> (<span style="color:#e6db74">&#39;Smith&#39;</span>,<span style="color:#e6db74">&#39;11112223344&#39;</span>);
+Query OK, <span style="color:#ae81ff">1</span> <span style="color:#66d9ef">row</span> affected (<span style="color:#ae81ff">0</span>.<span style="color:#ae81ff">00</span> sec)
+
+mysql<span style="color:#f92672">&gt;</span> <span style="color:#66d9ef">INSERT</span> <span style="color:#66d9ef">INTO</span> tblEmpInfo (empLastName,empSSN) <span style="color:#66d9ef">VALUES</span> (<span style="color:#e6db74">&#39;Jones&#39;</span>,<span style="color:#e6db74">&#39;11199223344&#39;</span>);
+Query OK, <span style="color:#ae81ff">1</span> <span style="color:#66d9ef">row</span> affected (<span style="color:#ae81ff">0</span>.<span style="color:#ae81ff">00</span> sec)
+
+mysql<span style="color:#f92672">&gt;</span> <span style="color:#66d9ef">SELECT</span> <span style="color:#f92672">*</span> <span style="color:#66d9ef">FROM</span> tblEmpInfo;
+<span style="color:#f92672">+</span><span style="color:#75715e">-------|-------------|-------------+
+</span><span style="color:#75715e"></span><span style="color:#f92672">|</span> empID <span style="color:#f92672">|</span> empLastName <span style="color:#f92672">|</span> empSSN      <span style="color:#f92672">|</span>
+<span style="color:#f92672">+</span><span style="color:#75715e">-------|-------------|-------------+
+</span><span style="color:#75715e"></span><span style="color:#f92672">|</span>     <span style="color:#ae81ff">1</span> <span style="color:#f92672">|</span> Smith       <span style="color:#f92672">|</span> <span style="color:#ae81ff">11112223344</span> <span style="color:#f92672">|</span>
+<span style="color:#f92672">|</span>     <span style="color:#ae81ff">2</span> <span style="color:#f92672">|</span> Jones       <span style="color:#f92672">|</span> <span style="color:#ae81ff">11199223344</span> <span style="color:#f92672">|</span>
+<span style="color:#f92672">+</span><span style="color:#75715e">-------|-------------|-------------+
+</span><span style="color:#75715e"></span><span style="color:#ae81ff">2</span> <span style="color:#66d9ef">rows</span> <span style="color:#66d9ef">in</span> <span style="color:#66d9ef">set</span> (<span style="color:#ae81ff">0</span>.<span style="color:#ae81ff">00</span> sec)</code></pre></div>
+<p>You can also set the auto increment value:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-SQL" data-lang="SQL">mysql<span style="color:#f92672">&gt;</span> <span style="color:#66d9ef">ALTER</span> <span style="color:#66d9ef">TABLE</span> tblEmpInfo AUTO_INCREMENT<span style="color:#f92672">=</span><span style="color:#ae81ff">1000</span>;
+Query OK, <span style="color:#ae81ff">0</span> <span style="color:#66d9ef">rows</span> affected (<span style="color:#ae81ff">0</span>.<span style="color:#ae81ff">00</span> sec)
+Records: <span style="color:#ae81ff">0</span>  Duplicates: <span style="color:#ae81ff">0</span>  Warnings: <span style="color:#ae81ff">0</span>
+
+mysql<span style="color:#f92672">&gt;</span> <span style="color:#66d9ef">INSERT</span> <span style="color:#66d9ef">INTO</span> tblEmpInfo (empLastName,empSSN) <span style="color:#66d9ef">VALUES</span> (<span style="color:#e6db74">&#39;Banard&#39;</span>,<span style="color:#e6db74">&#39;27199223344&#39;</span>);
+Query OK, <span style="color:#ae81ff">1</span> <span style="color:#66d9ef">row</span> affected (<span style="color:#ae81ff">0</span>.<span style="color:#ae81ff">00</span> sec)
+
+mysql<span style="color:#f92672">&gt;</span> <span style="color:#66d9ef">SELECT</span> <span style="color:#f92672">*</span> <span style="color:#66d9ef">FROM</span> tblEmpInfo;
+<span style="color:#f92672">+</span><span style="color:#75715e">-------|-------------|-------------+
+</span><span style="color:#75715e"></span><span style="color:#f92672">|</span> empID <span style="color:#f92672">|</span> empLastName <span style="color:#f92672">|</span> empSSN      <span style="color:#f92672">|</span>
+<span style="color:#f92672">+</span><span style="color:#75715e">-------|-------------|-------------+
+</span><span style="color:#75715e"></span><span style="color:#f92672">|</span>     <span style="color:#ae81ff">1</span> <span style="color:#f92672">|</span> Smith       <span style="color:#f92672">|</span> <span style="color:#ae81ff">11112223344</span> <span style="color:#f92672">|</span>
+<span style="color:#f92672">|</span>     <span style="color:#ae81ff">2</span> <span style="color:#f92672">|</span> Jones       <span style="color:#f92672">|</span> <span style="color:#ae81ff">11199223344</span> <span style="color:#f92672">|</span>
+<span style="color:#f92672">|</span>  <span style="color:#ae81ff">1000</span> <span style="color:#f92672">|</span> Banard      <span style="color:#f92672">|</span> <span style="color:#ae81ff">27199223344</span> <span style="color:#f92672">|</span>
+<span style="color:#f92672">+</span><span style="color:#75715e">-------|-------------|-------------+
+</span><span style="color:#75715e"></span><span style="color:#ae81ff">3</span> <span style="color:#66d9ef">rows</span> <span style="color:#66d9ef">in</span> <span style="color:#66d9ef">set</span> (<span style="color:#ae81ff">0</span>.<span style="color:#ae81ff">00</span> sec)</code></pre></div>
+<p>Just be careful when setting the auto increment value that it isn&rsquo;t set to
+something that could eventually overwrite a value in a table that has to be
+unique, or it will error.</p>
+
+<p>To change a varchar column to an INT, if empty:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-SQL" data-lang="SQL">mysql<span style="color:#f92672">&gt;</span> <span style="color:#66d9ef">SELECT</span> <span style="color:#f92672">*</span> <span style="color:#66d9ef">FROM</span> tblCustomerIDInfo;
+Empty <span style="color:#66d9ef">set</span> (<span style="color:#ae81ff">0</span>.<span style="color:#ae81ff">01</span> sec)
+
+mysql<span style="color:#f92672">&gt;</span> <span style="color:#66d9ef">ALTER</span> <span style="color:#66d9ef">TABLE</span> tblCustomerIDInfo <span style="color:#66d9ef">MODIFY</span> custID int AUTO_INCREMENT;
+Query OK, <span style="color:#ae81ff">0</span> <span style="color:#66d9ef">rows</span> affected (<span style="color:#ae81ff">0</span>.<span style="color:#ae81ff">02</span> sec)
+Records: <span style="color:#ae81ff">0</span>  Duplicates: <span style="color:#ae81ff">0</span>  Warnings: <span style="color:#ae81ff">0</span></code></pre></div>
+<h3 id="sql-functions">SQL Functions</h3>
+
+<p>SQL statements that don&rsquo;t directly manipulate data, but are related to the
+SELECT function.</p>
+
+<h4 id="count">COUNT</h4>
+
+<p>Shows us the result of a function was ask it to do. In this case, the count of
+items fitting that criteria.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-SQL" data-lang="SQL">mysql<span style="color:#f92672">&gt;</span> <span style="color:#66d9ef">SELECT</span> <span style="color:#f92672">*</span> <span style="color:#66d9ef">FROM</span> tblCustomerInfo;
+<span style="color:#f92672">+</span><span style="color:#75715e">-------------------|------------------|---------------|---------------|------------------|---------------|-----------------|---------------+
+</span><span style="color:#75715e"></span><span style="color:#f92672">|</span> custInfoFirstName <span style="color:#f92672">|</span> custInfoLastName <span style="color:#f92672">|</span> custInfoAddr1 <span style="color:#f92672">|</span> custInfoAddr2 <span style="color:#f92672">|</span> custInfoCityName <span style="color:#f92672">|</span> custInfoState <span style="color:#f92672">|</span> custInfoZipCode <span style="color:#f92672">|</span> custInfoPhone <span style="color:#f92672">|</span>
+<span style="color:#f92672">+</span><span style="color:#75715e">-------------------|------------------|---------------|---------------|------------------|---------------|-----------------|---------------+
+</span><span style="color:#75715e"></span><span style="color:#f92672">|</span> John              <span style="color:#f92672">|</span> Smith            <span style="color:#f92672">|</span> <span style="color:#ae81ff">111</span> Main St   <span style="color:#f92672">|</span>               <span style="color:#f92672">|</span> Anytown          <span style="color:#f92672">|</span> NY            <span style="color:#f92672">|</span> <span style="color:#ae81ff">43211</span>           <span style="color:#f92672">|</span> <span style="color:#ae81ff">2123445533</span>    <span style="color:#f92672">|</span>
+<span style="color:#f92672">|</span> Jane              <span style="color:#f92672">|</span> Smith            <span style="color:#f92672">|</span> <span style="color:#ae81ff">111</span> Main St   <span style="color:#f92672">|</span>               <span style="color:#f92672">|</span> Anytown          <span style="color:#f92672">|</span> NY            <span style="color:#f92672">|</span> <span style="color:#ae81ff">43211</span>           <span style="color:#f92672">|</span> <span style="color:#ae81ff">2123443833</span>    <span style="color:#f92672">|</span>
+<span style="color:#f92672">|</span> Jan               <span style="color:#f92672">|</span> Jones            <span style="color:#f92672">|</span> <span style="color:#ae81ff">111</span> Main St   <span style="color:#f92672">|</span>               <span style="color:#f92672">|</span> City             <span style="color:#f92672">|</span> OH            <span style="color:#f92672">|</span> <span style="color:#ae81ff">43200</span>           <span style="color:#f92672">|</span> <span style="color:#ae81ff">2123447333</span>    <span style="color:#f92672">|</span>
+<span style="color:#f92672">+</span><span style="color:#75715e">-------------------|------------------|---------------|---------------|------------------|---------------|-----------------|---------------+
+</span><span style="color:#75715e"></span><span style="color:#ae81ff">3</span> <span style="color:#66d9ef">rows</span> <span style="color:#66d9ef">in</span> <span style="color:#66d9ef">set</span> (<span style="color:#ae81ff">0</span>.<span style="color:#ae81ff">00</span> sec)
+
+mysql<span style="color:#f92672">&gt;</span> <span style="color:#66d9ef">SELECT</span> <span style="color:#66d9ef">COUNT</span>(<span style="color:#f92672">*</span>) <span style="color:#66d9ef">FROM</span> tblCustomerInfo;
+<span style="color:#f92672">+</span><span style="color:#75715e">----------+
+</span><span style="color:#75715e"></span><span style="color:#f92672">|</span> <span style="color:#66d9ef">COUNT</span>(<span style="color:#f92672">*</span>) <span style="color:#f92672">|</span>
+<span style="color:#f92672">+</span><span style="color:#75715e">----------+
+</span><span style="color:#75715e"></span><span style="color:#f92672">|</span>        <span style="color:#ae81ff">3</span> <span style="color:#f92672">|</span>
+<span style="color:#f92672">+</span><span style="color:#75715e">----------+
+</span><span style="color:#75715e"></span><span style="color:#ae81ff">1</span> <span style="color:#66d9ef">row</span> <span style="color:#66d9ef">in</span> <span style="color:#66d9ef">set</span> (<span style="color:#ae81ff">0</span>.<span style="color:#ae81ff">00</span> sec)
+
+mysql<span style="color:#f92672">&gt;</span> <span style="color:#66d9ef">SELECT</span> <span style="color:#f92672">*</span> <span style="color:#66d9ef">FROM</span> tblCustomerInfo;
+<span style="color:#f92672">+</span><span style="color:#75715e">-------------------|------------------|---------------|---------------|------------------|---------------|-----------------|---------------+
+</span><span style="color:#75715e"></span><span style="color:#f92672">|</span> custInfoFirstName <span style="color:#f92672">|</span> custInfoLastName <span style="color:#f92672">|</span> custInfoAddr1 <span style="color:#f92672">|</span> custInfoAddr2 <span style="color:#f92672">|</span> custInfoCityName <span style="color:#f92672">|</span> custInfoState <span style="color:#f92672">|</span> custInfoZipCode <span style="color:#f92672">|</span> custInfoPhone <span style="color:#f92672">|</span>
+<span style="color:#f92672">+</span><span style="color:#75715e">-------------------|------------------|---------------|---------------|------------------|---------------|-----------------|---------------+
+</span><span style="color:#75715e"></span><span style="color:#f92672">|</span> John              <span style="color:#f92672">|</span> Smith            <span style="color:#f92672">|</span> <span style="color:#ae81ff">111</span> Main St   <span style="color:#f92672">|</span>               <span style="color:#f92672">|</span> Anytown          <span style="color:#f92672">|</span> NY            <span style="color:#f92672">|</span> <span style="color:#ae81ff">43211</span>           <span style="color:#f92672">|</span> <span style="color:#ae81ff">2123445533</span>    <span style="color:#f92672">|</span>
+<span style="color:#f92672">|</span> Jane              <span style="color:#f92672">|</span> Smith            <span style="color:#f92672">|</span> <span style="color:#ae81ff">111</span> Main St   <span style="color:#f92672">|</span>               <span style="color:#f92672">|</span> Anytown          <span style="color:#f92672">|</span> NY            <span style="color:#f92672">|</span> <span style="color:#ae81ff">43211</span>           <span style="color:#f92672">|</span> <span style="color:#ae81ff">2123443833</span>    <span style="color:#f92672">|</span>
+<span style="color:#f92672">|</span> Jan               <span style="color:#f92672">|</span> Jones            <span style="color:#f92672">|</span> <span style="color:#ae81ff">111</span> Main St   <span style="color:#f92672">|</span>               <span style="color:#f92672">|</span> City             <span style="color:#f92672">|</span> OH            <span style="color:#f92672">|</span> <span style="color:#ae81ff">43200</span>           <span style="color:#f92672">|</span> <span style="color:#ae81ff">2123447333</span>    <span style="color:#f92672">|</span>
+<span style="color:#f92672">+</span><span style="color:#75715e">-------------------|------------------|---------------|---------------|------------------|---------------|-----------------|---------------+
+</span><span style="color:#75715e"></span><span style="color:#ae81ff">3</span> <span style="color:#66d9ef">rows</span> <span style="color:#66d9ef">in</span> <span style="color:#66d9ef">set</span> (<span style="color:#ae81ff">0</span>.<span style="color:#ae81ff">00</span> sec)
+
+mysql<span style="color:#f92672">&gt;</span> <span style="color:#66d9ef">SELECT</span> <span style="color:#66d9ef">COUNT</span>(<span style="color:#f92672">*</span>) <span style="color:#66d9ef">FROM</span> tblCustomerInfo;
+<span style="color:#f92672">+</span><span style="color:#75715e">----------+
+</span><span style="color:#75715e"></span><span style="color:#f92672">|</span> <span style="color:#66d9ef">COUNT</span>(<span style="color:#f92672">*</span>) <span style="color:#f92672">|</span>
+<span style="color:#f92672">+</span><span style="color:#75715e">----------+
+</span><span style="color:#75715e"></span><span style="color:#f92672">|</span>        <span style="color:#ae81ff">3</span> <span style="color:#f92672">|</span>
+<span style="color:#f92672">+</span><span style="color:#75715e">----------+
+</span><span style="color:#75715e"></span><span style="color:#ae81ff">1</span> <span style="color:#66d9ef">row</span> <span style="color:#66d9ef">in</span> <span style="color:#66d9ef">set</span> (<span style="color:#ae81ff">0</span>.<span style="color:#ae81ff">00</span> sec)</code></pre></div>
+<h4 id="average-and-sum-functions">Average and Sum Functions</h4>
+
+<p>Starting out with a new test table:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-SQL" data-lang="SQL">mysql<span style="color:#f92672">&gt;</span> <span style="color:#66d9ef">SELECT</span> <span style="color:#f92672">*</span> <span style="color:#66d9ef">FROM</span> tblItems;
+<span style="color:#f92672">+</span><span style="color:#75715e">-------|----------|----------+
+</span><span style="color:#75715e"></span><span style="color:#f92672">|</span> empID <span style="color:#f92672">|</span> name     <span style="color:#f92672">|</span> numItems <span style="color:#f92672">|</span>
+<span style="color:#f92672">+</span><span style="color:#75715e">-------|----------|----------+
+</span><span style="color:#75715e"></span><span style="color:#f92672">|</span>     <span style="color:#ae81ff">1</span> <span style="color:#f92672">|</span> Person A <span style="color:#f92672">|</span>     <span style="color:#ae81ff">2343</span> <span style="color:#f92672">|</span>
+<span style="color:#f92672">|</span>     <span style="color:#ae81ff">2</span> <span style="color:#f92672">|</span> Person B <span style="color:#f92672">|</span>    <span style="color:#ae81ff">24573</span> <span style="color:#f92672">|</span>
+<span style="color:#f92672">|</span>     <span style="color:#ae81ff">3</span> <span style="color:#f92672">|</span> Person <span style="color:#66d9ef">C</span> <span style="color:#f92672">|</span>  <span style="color:#ae81ff">4844573</span> <span style="color:#f92672">|</span>
+<span style="color:#f92672">|</span>     <span style="color:#ae81ff">4</span> <span style="color:#f92672">|</span> Person D <span style="color:#f92672">|</span>   <span style="color:#ae81ff">234234</span> <span style="color:#f92672">|</span>
+<span style="color:#f92672">|</span>     <span style="color:#ae81ff">5</span> <span style="color:#f92672">|</span> Person E <span style="color:#f92672">|</span>   <span style="color:#ae81ff">834234</span> <span style="color:#f92672">|</span>
+<span style="color:#f92672">|</span>     <span style="color:#ae81ff">6</span> <span style="color:#f92672">|</span> Person F <span style="color:#f92672">|</span>   <span style="color:#ae81ff">783641</span> <span style="color:#f92672">|</span>
+<span style="color:#f92672">+</span><span style="color:#75715e">-------|----------|----------+
+</span><span style="color:#75715e"></span><span style="color:#ae81ff">6</span> <span style="color:#66d9ef">rows</span> <span style="color:#66d9ef">in</span> <span style="color:#66d9ef">set</span> (<span style="color:#ae81ff">0</span>.<span style="color:#ae81ff">00</span> sec)</code></pre></div>
+<p>To get an average of the numbers in a column, use the <code>AVG</code> function:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-SQL" data-lang="SQL">mysql<span style="color:#f92672">&gt;</span> <span style="color:#66d9ef">SELECT</span> <span style="color:#66d9ef">AVG</span>(numItems) <span style="color:#66d9ef">from</span> tblItems;
+<span style="color:#f92672">+</span><span style="color:#75715e">---------------+
+</span><span style="color:#75715e"></span><span style="color:#f92672">|</span> <span style="color:#66d9ef">AVG</span>(numItems) <span style="color:#f92672">|</span>
+<span style="color:#f92672">+</span><span style="color:#75715e">---------------+
+</span><span style="color:#75715e"></span><span style="color:#f92672">|</span>  <span style="color:#ae81ff">1120599</span>.<span style="color:#ae81ff">6667</span> <span style="color:#f92672">|</span>
+<span style="color:#f92672">+</span><span style="color:#75715e">---------------+
+</span><span style="color:#75715e"></span><span style="color:#ae81ff">1</span> <span style="color:#66d9ef">row</span> <span style="color:#66d9ef">in</span> <span style="color:#66d9ef">set</span> (<span style="color:#ae81ff">0</span>.<span style="color:#ae81ff">00</span> sec)</code></pre></div>
+<p>To get a total, use the <code>SUM</code> function:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-SQL" data-lang="SQL">mysql<span style="color:#f92672">&gt;</span> <span style="color:#66d9ef">SELECT</span> <span style="color:#66d9ef">SUM</span>(numItems) <span style="color:#66d9ef">from</span> tblItems;
+<span style="color:#f92672">+</span><span style="color:#75715e">---------------+
+</span><span style="color:#75715e"></span><span style="color:#f92672">|</span> <span style="color:#66d9ef">SUM</span>(numItems) <span style="color:#f92672">|</span>
+<span style="color:#f92672">+</span><span style="color:#75715e">---------------+
+</span><span style="color:#75715e"></span><span style="color:#f92672">|</span>       <span style="color:#ae81ff">6723598</span> <span style="color:#f92672">|</span>
+<span style="color:#f92672">+</span><span style="color:#75715e">---------------+
+</span><span style="color:#75715e"></span><span style="color:#ae81ff">1</span> <span style="color:#66d9ef">row</span> <span style="color:#66d9ef">in</span> <span style="color:#66d9ef">set</span> (<span style="color:#ae81ff">0</span>.<span style="color:#ae81ff">00</span> sec)</code></pre></div>
+<p>Note again, statements can be combined:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-SQL" data-lang="SQL">mysql<span style="color:#f92672">&gt;</span> <span style="color:#66d9ef">SELECT</span> <span style="color:#66d9ef">COUNT</span>(<span style="color:#f92672">*</span>),<span style="color:#66d9ef">AVG</span>(numItems),<span style="color:#66d9ef">SUM</span>(numItems) <span style="color:#66d9ef">from</span> tblItems;
+<span style="color:#f92672">+</span><span style="color:#75715e">----------|---------------|---------------+
+</span><span style="color:#75715e"></span><span style="color:#f92672">|</span> <span style="color:#66d9ef">COUNT</span>(<span style="color:#f92672">*</span>) <span style="color:#f92672">|</span> <span style="color:#66d9ef">AVG</span>(numItems) <span style="color:#f92672">|</span> <span style="color:#66d9ef">SUM</span>(numItems) <span style="color:#f92672">|</span>
+<span style="color:#f92672">+</span><span style="color:#75715e">----------|---------------|---------------+
+</span><span style="color:#75715e"></span><span style="color:#f92672">|</span>        <span style="color:#ae81ff">6</span> <span style="color:#f92672">|</span>  <span style="color:#ae81ff">1120599</span>.<span style="color:#ae81ff">6667</span> <span style="color:#f92672">|</span>       <span style="color:#ae81ff">6723598</span> <span style="color:#f92672">|</span>
+<span style="color:#f92672">+</span><span style="color:#75715e">----------|---------------|---------------+
+</span><span style="color:#75715e"></span><span style="color:#ae81ff">1</span> <span style="color:#66d9ef">row</span> <span style="color:#66d9ef">in</span> <span style="color:#66d9ef">set</span> (<span style="color:#ae81ff">0</span>.<span style="color:#ae81ff">00</span> sec)</code></pre></div>
+<h3 id="the-like-operator">The Like Operator</h3>
+
+<p>The <code>LIKE</code> operator can be used to fix matching, with wildcards, <code>%</code>. For
+example in the following searches, <code>%S</code> and <code>S%</code> yield different results because
+the first looks for last names which <em>end</em> in an &ldquo;s&rdquo;, and the second grabs last
+names which <em>start</em> with &ldquo;s&rdquo;.</p>
+
+<p>Note, <code>LIKE</code> uses higher CPU usage. If possible, try to use it on columns which
+are indexed.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-SQL" data-lang="SQL">mysql<span style="color:#f92672">&gt;</span> <span style="color:#66d9ef">SELECT</span> <span style="color:#f92672">*</span><span style="color:#66d9ef">FROM</span> tblCustomerInfo <span style="color:#66d9ef">WHERE</span> custInfoLastName <span style="color:#66d9ef">LIKE</span> <span style="color:#e6db74">&#39;%s&#39;</span>;
+<span style="color:#f92672">+</span><span style="color:#75715e">-------------------|------------------|---------------|---------------|------------------|---------------|-----------------|---------------+
+</span><span style="color:#75715e"></span><span style="color:#f92672">|</span> custInfoFirstName <span style="color:#f92672">|</span> custInfoLastName <span style="color:#f92672">|</span> custInfoAddr1 <span style="color:#f92672">|</span> custInfoAddr2 <span style="color:#f92672">|</span> custInfoCityName <span style="color:#f92672">|</span> custInfoState <span style="color:#f92672">|</span> custInfoZipCode <span style="color:#f92672">|</span> custInfoPhone <span style="color:#f92672">|</span>
+<span style="color:#f92672">+</span><span style="color:#75715e">-------------------|------------------|---------------|---------------|------------------|---------------|-----------------|---------------+
+</span><span style="color:#75715e"></span><span style="color:#f92672">|</span> Jan               <span style="color:#f92672">|</span> Jones            <span style="color:#f92672">|</span> <span style="color:#ae81ff">111</span> Main St   <span style="color:#f92672">|</span>               <span style="color:#f92672">|</span> City             <span style="color:#f92672">|</span> OH            <span style="color:#f92672">|</span> <span style="color:#ae81ff">43200</span>           <span style="color:#f92672">|</span> <span style="color:#ae81ff">2123447333</span>    <span style="color:#f92672">|</span>
+<span style="color:#f92672">+</span><span style="color:#75715e">-------------------|------------------|---------------|---------------|------------------|---------------|-----------------|---------------+
+</span><span style="color:#75715e"></span><span style="color:#ae81ff">1</span> <span style="color:#66d9ef">row</span> <span style="color:#66d9ef">in</span> <span style="color:#66d9ef">set</span> (<span style="color:#ae81ff">0</span>.<span style="color:#ae81ff">00</span> sec)
+
+mysql<span style="color:#f92672">&gt;</span> <span style="color:#66d9ef">SELECT</span> <span style="color:#f92672">*</span><span style="color:#66d9ef">FROM</span> tblCustomerInfo <span style="color:#66d9ef">WHERE</span> custInfoLastName <span style="color:#66d9ef">LIKE</span> <span style="color:#e6db74">&#39;s%&#39;</span>;
+<span style="color:#f92672">+</span><span style="color:#75715e">-------------------|------------------|---------------|---------------|------------------|---------------|-----------------|---------------+
+</span><span style="color:#75715e"></span><span style="color:#f92672">|</span> custInfoFirstName <span style="color:#f92672">|</span> custInfoLastName <span style="color:#f92672">|</span> custInfoAddr1 <span style="color:#f92672">|</span> custInfoAddr2 <span style="color:#f92672">|</span> custInfoCityName <span style="color:#f92672">|</span> custInfoState <span style="color:#f92672">|</span> custInfoZipCode <span style="color:#f92672">|</span> custInfoPhone <span style="color:#f92672">|</span>
+<span style="color:#f92672">+</span><span style="color:#75715e">-------------------|------------------|---------------|---------------|------------------|---------------|-----------------|---------------+
+</span><span style="color:#75715e"></span><span style="color:#f92672">|</span> John              <span style="color:#f92672">|</span> Smith            <span style="color:#f92672">|</span> <span style="color:#ae81ff">111</span> Main St   <span style="color:#f92672">|</span>               <span style="color:#f92672">|</span> Anytown          <span style="color:#f92672">|</span> NY            <span style="color:#f92672">|</span> <span style="color:#ae81ff">43211</span>           <span style="color:#f92672">|</span> <span style="color:#ae81ff">2123445533</span>    <span style="color:#f92672">|</span>
+<span style="color:#f92672">|</span> Jane              <span style="color:#f92672">|</span> Smith            <span style="color:#f92672">|</span> <span style="color:#ae81ff">111</span> Main St   <span style="color:#f92672">|</span>               <span style="color:#f92672">|</span> Anytown          <span style="color:#f92672">|</span> NY            <span style="color:#f92672">|</span> <span style="color:#ae81ff">43211</span>           <span style="color:#f92672">|</span> <span style="color:#ae81ff">2123443833</span>    <span style="color:#f92672">|</span>
+<span style="color:#f92672">+</span><span style="color:#75715e">-------------------|------------------|---------------|---------------|------------------|---------------|-----------------|---------------+
+</span><span style="color:#75715e"></span><span style="color:#ae81ff">2</span> <span style="color:#66d9ef">rows</span> <span style="color:#66d9ef">in</span> <span style="color:#66d9ef">set</span> (<span style="color:#ae81ff">0</span>.<span style="color:#ae81ff">00</span> sec)</code></pre></div>
+<h3 id="views">Views</h3>
+
+<p>Let you create a custom filter and display set of data to use. This can be
+useful for difference scenarios. For example, the view can just be updated when
+querying for dash boards, or reports, instead of going through everything.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-SQL" data-lang="SQL">mysql<span style="color:#f92672">&gt;</span> <span style="color:#66d9ef">SELECT</span> <span style="color:#f92672">*</span> <span style="color:#66d9ef">FROM</span> tblItems;                                                                   <span style="color:#f92672">+</span><span style="color:#75715e">-------|----------|----------+
+</span><span style="color:#75715e"></span><span style="color:#f92672">|</span> empID <span style="color:#f92672">|</span> name     <span style="color:#f92672">|</span> numItems <span style="color:#f92672">|</span>
+<span style="color:#f92672">+</span><span style="color:#75715e">-------|----------|----------+
+</span><span style="color:#75715e"></span><span style="color:#f92672">|</span>     <span style="color:#ae81ff">1</span> <span style="color:#f92672">|</span> Person A <span style="color:#f92672">|</span>     <span style="color:#ae81ff">2343</span> <span style="color:#f92672">|</span>
+<span style="color:#f92672">|</span>     <span style="color:#ae81ff">2</span> <span style="color:#f92672">|</span> Person B <span style="color:#f92672">|</span>    <span style="color:#ae81ff">24573</span> <span style="color:#f92672">|</span>
+<span style="color:#f92672">|</span>     <span style="color:#ae81ff">3</span> <span style="color:#f92672">|</span> Person <span style="color:#66d9ef">C</span> <span style="color:#f92672">|</span>  <span style="color:#ae81ff">4844573</span> <span style="color:#f92672">|</span>
+<span style="color:#f92672">|</span>     <span style="color:#ae81ff">4</span> <span style="color:#f92672">|</span> Person D <span style="color:#f92672">|</span>   <span style="color:#ae81ff">234234</span> <span style="color:#f92672">|</span>
+<span style="color:#f92672">|</span>     <span style="color:#ae81ff">5</span> <span style="color:#f92672">|</span> Person E <span style="color:#f92672">|</span>   <span style="color:#ae81ff">834234</span> <span style="color:#f92672">|</span>
+<span style="color:#f92672">|</span>     <span style="color:#ae81ff">6</span> <span style="color:#f92672">|</span> Person F <span style="color:#f92672">|</span>   <span style="color:#ae81ff">783641</span> <span style="color:#f92672">|</span>
+<span style="color:#f92672">+</span><span style="color:#75715e">-------|----------|----------+
+</span><span style="color:#75715e"></span><span style="color:#ae81ff">6</span> <span style="color:#66d9ef">rows</span> <span style="color:#66d9ef">in</span> <span style="color:#66d9ef">set</span> (<span style="color:#ae81ff">0</span>.<span style="color:#ae81ff">00</span> sec)
+
+mysql<span style="color:#f92672">&gt;</span> <span style="color:#66d9ef">CREATE</span> <span style="color:#66d9ef">VIEW</span> myView <span style="color:#66d9ef">AS</span> <span style="color:#66d9ef">SELECT</span> <span style="color:#66d9ef">COUNT</span>(<span style="color:#f92672">*</span>),<span style="color:#66d9ef">AVG</span>(numItems),<span style="color:#66d9ef">SUM</span>(numItems) <span style="color:#66d9ef">FROM</span> tblItems <span style="color:#66d9ef">WHERE</span> numItems <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">50000</span>;
+Query OK, <span style="color:#ae81ff">0</span> <span style="color:#66d9ef">rows</span> affected (<span style="color:#ae81ff">0</span>.<span style="color:#ae81ff">00</span> sec)
+
+mysql<span style="color:#f92672">&gt;</span> <span style="color:#66d9ef">SELECT</span> <span style="color:#f92672">*</span> <span style="color:#66d9ef">FROM</span> myView;
+<span style="color:#f92672">+</span><span style="color:#75715e">----------|---------------|---------------+
+</span><span style="color:#75715e"></span><span style="color:#f92672">|</span> <span style="color:#66d9ef">COUNT</span>(<span style="color:#f92672">*</span>) <span style="color:#f92672">|</span> <span style="color:#66d9ef">AVG</span>(numItems) <span style="color:#f92672">|</span> <span style="color:#66d9ef">SUM</span>(numItems) <span style="color:#f92672">|</span>
+<span style="color:#f92672">+</span><span style="color:#75715e">----------|---------------|---------------+
+</span><span style="color:#75715e"></span><span style="color:#f92672">|</span>        <span style="color:#ae81ff">4</span> <span style="color:#f92672">|</span>  <span style="color:#ae81ff">1674170</span>.<span style="color:#ae81ff">5000</span> <span style="color:#f92672">|</span>       <span style="color:#ae81ff">6696682</span> <span style="color:#f92672">|</span>
+<span style="color:#f92672">+</span><span style="color:#75715e">----------|---------------|---------------+
+</span><span style="color:#75715e"></span><span style="color:#ae81ff">1</span> <span style="color:#66d9ef">row</span> <span style="color:#66d9ef">in</span> <span style="color:#66d9ef">set</span> (<span style="color:#ae81ff">0</span>.<span style="color:#ae81ff">00</span> sec)</code></pre></div>
+<h3 id="joins">Joins</h3>
+
+<h4 id="inner-join">Inner Join</h4>
+
+<p>An Inner join will return the selected rows from multiple tables, when there is
+at least one match in each table. For example:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-SQL" data-lang="SQL">mysql<span style="color:#f92672">&gt;</span> <span style="color:#66d9ef">SELECT</span> <span style="color:#f92672">*</span> <span style="color:#66d9ef">FROM</span> tblItems;
+<span style="color:#f92672">+</span><span style="color:#75715e">-------|----------|----------+
+</span><span style="color:#75715e"></span><span style="color:#f92672">|</span> empID <span style="color:#f92672">|</span> name     <span style="color:#f92672">|</span> numItems <span style="color:#f92672">|</span>
+<span style="color:#f92672">+</span><span style="color:#75715e">-------|----------|----------+
+</span><span style="color:#75715e"></span><span style="color:#f92672">|</span>     <span style="color:#ae81ff">1</span> <span style="color:#f92672">|</span> Person A <span style="color:#f92672">|</span>     <span style="color:#ae81ff">2343</span> <span style="color:#f92672">|</span>
+<span style="color:#f92672">|</span>     <span style="color:#ae81ff">2</span> <span style="color:#f92672">|</span> Person B <span style="color:#f92672">|</span>    <span style="color:#ae81ff">24573</span> <span style="color:#f92672">|</span>
+<span style="color:#f92672">|</span>     <span style="color:#ae81ff">3</span> <span style="color:#f92672">|</span> Person <span style="color:#66d9ef">C</span> <span style="color:#f92672">|</span>  <span style="color:#ae81ff">4844573</span> <span style="color:#f92672">|</span>
+<span style="color:#f92672">|</span>     <span style="color:#ae81ff">4</span> <span style="color:#f92672">|</span> Person D <span style="color:#f92672">|</span>   <span style="color:#ae81ff">234234</span> <span style="color:#f92672">|</span>
+<span style="color:#f92672">|</span>     <span style="color:#ae81ff">5</span> <span style="color:#f92672">|</span> Person E <span style="color:#f92672">|</span>   <span style="color:#ae81ff">834234</span> <span style="color:#f92672">|</span>
+<span style="color:#f92672">|</span>     <span style="color:#ae81ff">6</span> <span style="color:#f92672">|</span> Person F <span style="color:#f92672">|</span>   <span style="color:#ae81ff">783641</span> <span style="color:#f92672">|</span>
+<span style="color:#f92672">+</span><span style="color:#75715e">-------|----------|----------+
+</span><span style="color:#75715e"></span><span style="color:#ae81ff">6</span> <span style="color:#66d9ef">rows</span> <span style="color:#66d9ef">in</span> <span style="color:#66d9ef">set</span> (<span style="color:#ae81ff">0</span>.<span style="color:#ae81ff">00</span> sec)
+
+mysql<span style="color:#f92672">&gt;</span> <span style="color:#66d9ef">SELECT</span> <span style="color:#f92672">*</span> <span style="color:#66d9ef">FROM</span> tblEmpInfo;
+<span style="color:#f92672">+</span><span style="color:#75715e">-------|-------------|-------------+
+</span><span style="color:#75715e"></span><span style="color:#f92672">|</span> empID <span style="color:#f92672">|</span> empLastName <span style="color:#f92672">|</span> empSSN      <span style="color:#f92672">|</span>
+<span style="color:#f92672">+</span><span style="color:#75715e">-------|-------------|-------------+
+</span><span style="color:#75715e"></span><span style="color:#f92672">|</span>     <span style="color:#ae81ff">1</span> <span style="color:#f92672">|</span> Smith       <span style="color:#f92672">|</span> <span style="color:#ae81ff">11112223344</span> <span style="color:#f92672">|</span>
+<span style="color:#f92672">|</span>     <span style="color:#ae81ff">2</span> <span style="color:#f92672">|</span> Jones       <span style="color:#f92672">|</span> <span style="color:#ae81ff">11199223344</span> <span style="color:#f92672">|</span>
+<span style="color:#f92672">|</span>  <span style="color:#ae81ff">1000</span> <span style="color:#f92672">|</span> Banard      <span style="color:#f92672">|</span> <span style="color:#ae81ff">27199223344</span> <span style="color:#f92672">|</span>
+<span style="color:#f92672">+</span><span style="color:#75715e">-------|-------------|-------------+
+</span><span style="color:#75715e"></span><span style="color:#ae81ff">3</span> <span style="color:#66d9ef">rows</span> <span style="color:#66d9ef">in</span> <span style="color:#66d9ef">set</span> (<span style="color:#ae81ff">0</span>.<span style="color:#ae81ff">00</span> sec)
+
+mysql<span style="color:#f92672">&gt;</span> <span style="color:#66d9ef">SELECT</span> tblItems.empID, tblItems.name, tblItems.numItems <span style="color:#66d9ef">FROM</span> tblItems <span style="color:#66d9ef">INNER</span> <span style="color:#66d9ef">JOIN</span> tblEmpInfo <span style="color:#66d9ef">ON</span> tblItems.empID<span style="color:#f92672">=</span>tblEmpInfo.empID;
+<span style="color:#f92672">+</span><span style="color:#75715e">-------|----------|----------+
+</span><span style="color:#75715e"></span><span style="color:#f92672">|</span> empID <span style="color:#f92672">|</span> name     <span style="color:#f92672">|</span> numItems <span style="color:#f92672">|</span>
+<span style="color:#f92672">+</span><span style="color:#75715e">-------|----------|----------+
+</span><span style="color:#75715e"></span><span style="color:#f92672">|</span>     <span style="color:#ae81ff">1</span> <span style="color:#f92672">|</span> Person A <span style="color:#f92672">|</span>     <span style="color:#ae81ff">2343</span> <span style="color:#f92672">|</span>
+<span style="color:#f92672">|</span>     <span style="color:#ae81ff">2</span> <span style="color:#f92672">|</span> Person B <span style="color:#f92672">|</span>    <span style="color:#ae81ff">24573</span> <span style="color:#f92672">|</span>
+<span style="color:#f92672">+</span><span style="color:#75715e">-------|----------|----------+
+</span><span style="color:#75715e"></span><span style="color:#ae81ff">2</span> <span style="color:#66d9ef">rows</span> <span style="color:#66d9ef">in</span> <span style="color:#66d9ef">set</span> (<span style="color:#ae81ff">0</span>.<span style="color:#ae81ff">00</span> sec)</code></pre></div>
+<h4 id="left-join">Left Join</h4>
+
+<p>Will give everything on the left table, and existing or matched items on the
+right, but will display as null for non matching data.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-SQL" data-lang="SQL">mysql<span style="color:#f92672">&gt;</span> <span style="color:#66d9ef">SELECT</span> <span style="color:#f92672">*</span> <span style="color:#66d9ef">FROM</span> tblEmpInfo;
+<span style="color:#f92672">+</span><span style="color:#75715e">-------|-------------|-------------+
+</span><span style="color:#75715e"></span><span style="color:#f92672">|</span> empID <span style="color:#f92672">|</span> empLastName <span style="color:#f92672">|</span> empSSN      <span style="color:#f92672">|</span>
+<span style="color:#f92672">+</span><span style="color:#75715e">-------|-------------|-------------+
+</span><span style="color:#75715e"></span><span style="color:#f92672">|</span>     <span style="color:#ae81ff">1</span> <span style="color:#f92672">|</span> Smith       <span style="color:#f92672">|</span> <span style="color:#ae81ff">11112223344</span> <span style="color:#f92672">|</span>
+<span style="color:#f92672">|</span>     <span style="color:#ae81ff">2</span> <span style="color:#f92672">|</span> Jones       <span style="color:#f92672">|</span> <span style="color:#ae81ff">11199223344</span> <span style="color:#f92672">|</span>
+<span style="color:#f92672">|</span>  <span style="color:#ae81ff">1000</span> <span style="color:#f92672">|</span> Banard      <span style="color:#f92672">|</span> <span style="color:#ae81ff">27199223344</span> <span style="color:#f92672">|</span>
+<span style="color:#f92672">+</span><span style="color:#75715e">-------|-------------|-------------+
+</span><span style="color:#75715e"></span><span style="color:#ae81ff">3</span> <span style="color:#66d9ef">rows</span> <span style="color:#66d9ef">in</span> <span style="color:#66d9ef">set</span> (<span style="color:#ae81ff">0</span>.<span style="color:#ae81ff">00</span> sec)
+
+mysql<span style="color:#f92672">&gt;</span> <span style="color:#66d9ef">SELECT</span> <span style="color:#f92672">*</span> <span style="color:#66d9ef">FROM</span> tblItems;
+<span style="color:#f92672">+</span><span style="color:#75715e">-------|----------|----------+
+</span><span style="color:#75715e"></span><span style="color:#f92672">|</span> empID <span style="color:#f92672">|</span> name     <span style="color:#f92672">|</span> numItems <span style="color:#f92672">|</span>
+<span style="color:#f92672">+</span><span style="color:#75715e">-------|----------|----------+
+</span><span style="color:#75715e"></span><span style="color:#f92672">|</span>     <span style="color:#ae81ff">1</span> <span style="color:#f92672">|</span> Person A <span style="color:#f92672">|</span>     <span style="color:#ae81ff">2343</span> <span style="color:#f92672">|</span>
+<span style="color:#f92672">|</span>     <span style="color:#ae81ff">2</span> <span style="color:#f92672">|</span> Person B <span style="color:#f92672">|</span>    <span style="color:#ae81ff">24573</span> <span style="color:#f92672">|</span>
+<span style="color:#f92672">|</span>     <span style="color:#ae81ff">3</span> <span style="color:#f92672">|</span> Person <span style="color:#66d9ef">C</span> <span style="color:#f92672">|</span>  <span style="color:#ae81ff">4844573</span> <span style="color:#f92672">|</span>
+<span style="color:#f92672">|</span>     <span style="color:#ae81ff">4</span> <span style="color:#f92672">|</span> Person D <span style="color:#f92672">|</span>   <span style="color:#ae81ff">234234</span> <span style="color:#f92672">|</span>
+<span style="color:#f92672">|</span>     <span style="color:#ae81ff">5</span> <span style="color:#f92672">|</span> Person E <span style="color:#f92672">|</span>   <span style="color:#ae81ff">834234</span> <span style="color:#f92672">|</span>
+<span style="color:#f92672">|</span>     <span style="color:#ae81ff">6</span> <span style="color:#f92672">|</span> Person F <span style="color:#f92672">|</span>   <span style="color:#ae81ff">783641</span> <span style="color:#f92672">|</span>
+<span style="color:#f92672">+</span><span style="color:#75715e">-------|----------|----------+
+</span><span style="color:#75715e"></span><span style="color:#ae81ff">6</span> <span style="color:#66d9ef">rows</span> <span style="color:#66d9ef">in</span> <span style="color:#66d9ef">set</span> (<span style="color:#ae81ff">0</span>.<span style="color:#ae81ff">00</span> sec)
+
+mysql<span style="color:#f92672">&gt;</span> <span style="color:#66d9ef">SELECT</span> tblEmpInfo.empID, empLastName, numItems <span style="color:#66d9ef">FROM</span> tblEmpInfo <span style="color:#66d9ef">LEFT</span> <span style="color:#66d9ef">Join</span> tblItems <span style="color:#66d9ef">ON</span> tblEmpInfo.empID<span style="color:#f92672">=</span>tblItems.empID;
+<span style="color:#f92672">+</span><span style="color:#75715e">-------|-------------|----------+
+</span><span style="color:#75715e"></span><span style="color:#f92672">|</span> empID <span style="color:#f92672">|</span> empLastName <span style="color:#f92672">|</span> numItems <span style="color:#f92672">|</span>
+<span style="color:#f92672">+</span><span style="color:#75715e">-------|-------------|----------+
+</span><span style="color:#75715e"></span><span style="color:#f92672">|</span>     <span style="color:#ae81ff">1</span> <span style="color:#f92672">|</span> Smith       <span style="color:#f92672">|</span>     <span style="color:#ae81ff">2343</span> <span style="color:#f92672">|</span>
+<span style="color:#f92672">|</span>     <span style="color:#ae81ff">2</span> <span style="color:#f92672">|</span> Jones       <span style="color:#f92672">|</span>    <span style="color:#ae81ff">24573</span> <span style="color:#f92672">|</span>
+<span style="color:#f92672">|</span>  <span style="color:#ae81ff">1000</span> <span style="color:#f92672">|</span> Banard      <span style="color:#f92672">|</span>     <span style="color:#66d9ef">NULL</span> <span style="color:#f92672">|</span>
+<span style="color:#f92672">+</span><span style="color:#75715e">-------|-------------|----------+
+</span><span style="color:#75715e"></span><span style="color:#ae81ff">3</span> <span style="color:#66d9ef">rows</span> <span style="color:#66d9ef">in</span> <span style="color:#66d9ef">set</span> (<span style="color:#ae81ff">0</span>.<span style="color:#ae81ff">00</span> sec)</code></pre></div>
+<h4 id="right-join">Right Join</h4>
+
+<p>Basically the same as a <code>LEFT</code> join, but with the right table items all joining.
+Swapping the example from above for example:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-SQL" data-lang="SQL">mysql<span style="color:#f92672">&gt;</span> <span style="color:#66d9ef">SELECT</span> tblEmpInfo.empID, empLastName, numItems <span style="color:#66d9ef">FROM</span> tblEmpInfo <span style="color:#66d9ef">RIGHT</span> <span style="color:#66d9ef">JOIN</span> tblItems <span style="color:#66d9ef">ON</span> tblEmpInfo.empID<span style="color:#f92672">=</span>tblItems.empID;
+<span style="color:#f92672">+</span><span style="color:#75715e">-------|-------------|----------+
+</span><span style="color:#75715e"></span><span style="color:#f92672">|</span> empID <span style="color:#f92672">|</span> empLastName <span style="color:#f92672">|</span> numItems <span style="color:#f92672">|</span>
+<span style="color:#f92672">+</span><span style="color:#75715e">-------|-------------|----------+
+</span><span style="color:#75715e"></span><span style="color:#f92672">|</span>     <span style="color:#ae81ff">1</span> <span style="color:#f92672">|</span> Smith       <span style="color:#f92672">|</span>     <span style="color:#ae81ff">2343</span> <span style="color:#f92672">|</span>
+<span style="color:#f92672">|</span>     <span style="color:#ae81ff">2</span> <span style="color:#f92672">|</span> Jones       <span style="color:#f92672">|</span>    <span style="color:#ae81ff">24573</span> <span style="color:#f92672">|</span>
+<span style="color:#f92672">|</span>  <span style="color:#66d9ef">NULL</span> <span style="color:#f92672">|</span> <span style="color:#66d9ef">NULL</span>        <span style="color:#f92672">|</span>  <span style="color:#ae81ff">4844573</span> <span style="color:#f92672">|</span>
+<span style="color:#f92672">|</span>  <span style="color:#66d9ef">NULL</span> <span style="color:#f92672">|</span> <span style="color:#66d9ef">NULL</span>        <span style="color:#f92672">|</span>   <span style="color:#ae81ff">234234</span> <span style="color:#f92672">|</span>
+<span style="color:#f92672">|</span>  <span style="color:#66d9ef">NULL</span> <span style="color:#f92672">|</span> <span style="color:#66d9ef">NULL</span>        <span style="color:#f92672">|</span>   <span style="color:#ae81ff">834234</span> <span style="color:#f92672">|</span>
+<span style="color:#f92672">|</span>  <span style="color:#66d9ef">NULL</span> <span style="color:#f92672">|</span> <span style="color:#66d9ef">NULL</span>        <span style="color:#f92672">|</span>   <span style="color:#ae81ff">783641</span> <span style="color:#f92672">|</span>
+<span style="color:#f92672">+</span><span style="color:#75715e">-------|-------------|----------+
+</span><span style="color:#75715e"></span><span style="color:#ae81ff">6</span> <span style="color:#66d9ef">rows</span> <span style="color:#66d9ef">in</span> <span style="color:#66d9ef">set</span> (<span style="color:#ae81ff">0</span>.<span style="color:#ae81ff">00</span> sec)</code></pre></div>
+<h4 id="full-join">Full Join</h4>
+
+<p>A full join shows <em>all</em> records from both the right and left table, regardless
+of matching the relation records of either.</p>
+
+<p>NOTE: Full outer joins do not work on mysql, but would on postresql. It is
+recommended to use Unions to emulate it.</p>
+
+<h3 id="unions">Unions</h3>
+
+<p>Unions are used to combine and concatenate <code>SELECT</code> statements from multiple
+tables.</p>
+
+<p>Doesn&rsquo;t work well in this example because the <code>empSSN</code> column doesn&rsquo;t actually
+match up across both tables&hellip;</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-SQL" data-lang="SQL">mysql<span style="color:#f92672">&gt;</span> <span style="color:#66d9ef">SELECT</span> tblEmpInfo.empID,tblEmpInfo.empLastName,tblEmpInfo.empSSN <span style="color:#66d9ef">FROM</span> tblEmpInfo <span style="color:#66d9ef">UNION</span> <span style="color:#66d9ef">SELECT</span> <span style="color:#f92672">*</span> <span style="color:#66d9ef">FROM</span> tblItems;
+<span style="color:#f92672">+</span><span style="color:#75715e">-------|-------------|-------------+
+</span><span style="color:#75715e"></span><span style="color:#f92672">|</span> empID <span style="color:#f92672">|</span> empLastName <span style="color:#f92672">|</span> empSSN      <span style="color:#f92672">|</span>
+<span style="color:#f92672">+</span><span style="color:#75715e">-------|-------------|-------------+
+</span><span style="color:#75715e"></span><span style="color:#f92672">|</span>     <span style="color:#ae81ff">1</span> <span style="color:#f92672">|</span> Smith       <span style="color:#f92672">|</span> <span style="color:#ae81ff">11112223344</span> <span style="color:#f92672">|</span>
+<span style="color:#f92672">|</span>     <span style="color:#ae81ff">2</span> <span style="color:#f92672">|</span> Jones       <span style="color:#f92672">|</span> <span style="color:#ae81ff">11199223344</span> <span style="color:#f92672">|</span>
+<span style="color:#f92672">|</span>  <span style="color:#ae81ff">1000</span> <span style="color:#f92672">|</span> Banard      <span style="color:#f92672">|</span> <span style="color:#ae81ff">27199223344</span> <span style="color:#f92672">|</span>
+<span style="color:#f92672">|</span>     <span style="color:#ae81ff">1</span> <span style="color:#f92672">|</span> Person A    <span style="color:#f92672">|</span> <span style="color:#ae81ff">2343</span>        <span style="color:#f92672">|</span>
+<span style="color:#f92672">|</span>     <span style="color:#ae81ff">2</span> <span style="color:#f92672">|</span> Person B    <span style="color:#f92672">|</span> <span style="color:#ae81ff">24573</span>       <span style="color:#f92672">|</span>
+<span style="color:#f92672">|</span>     <span style="color:#ae81ff">3</span> <span style="color:#f92672">|</span> Person <span style="color:#66d9ef">C</span>    <span style="color:#f92672">|</span> <span style="color:#ae81ff">4844573</span>     <span style="color:#f92672">|</span>
+<span style="color:#f92672">|</span>     <span style="color:#ae81ff">4</span> <span style="color:#f92672">|</span> Person D    <span style="color:#f92672">|</span> <span style="color:#ae81ff">234234</span>      <span style="color:#f92672">|</span>
+<span style="color:#f92672">|</span>     <span style="color:#ae81ff">5</span> <span style="color:#f92672">|</span> Person E    <span style="color:#f92672">|</span> <span style="color:#ae81ff">834234</span>      <span style="color:#f92672">|</span>
+<span style="color:#f92672">|</span>     <span style="color:#ae81ff">6</span> <span style="color:#f92672">|</span> Person F    <span style="color:#f92672">|</span> <span style="color:#ae81ff">783641</span>      <span style="color:#f92672">|</span>
+<span style="color:#f92672">+</span><span style="color:#75715e">-------|-------------|-------------+
+</span><span style="color:#75715e"></span><span style="color:#ae81ff">9</span> <span style="color:#66d9ef">rows</span> <span style="color:#66d9ef">in</span> <span style="color:#66d9ef">set</span> (<span style="color:#ae81ff">0</span>.<span style="color:#ae81ff">00</span> sec)</code></pre></div>
+
+                    
+                    
+                        <div style="float: left; text-decoration: underline; text-align: right;">Next Post:</div>
+                    
+                    
+                         <div style="float: right; text-decoration: underline; text-align: right;">Prev Post:</div>
+                    
+                    <br>
+                    
+                        <a href="http://ryan.himmelwright.net/post/trying-out-seafile/" style="text-align: left; float: left; max-width: 40%;">Trying Out Seafile</a>
+                    
+                    
+                        <a href="http://ryan.himmelwright.net/post/docker-quickstart/" style="text-align: right; float: right; max-width: 40%">Docker Quick Start</a>
+                    
+
+
+                    
+                    
+
+                </div>
+            </div>
+        </div>
+    </article>
+
+        <hr>
+    
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                  <ul class="list-inline text-center">
+                    
+                      <li>
+                        <a href="mailto:ryan@himmelwright.net">
+                          <span class="fa-stack fa-lg">
+                            <i class="fa fa-circle fa-stack-2x"></i>
+                            <i class="fa fa-envelope-o fa-stack-1x fa-inverse"></i>
+                          </span>
+                        </a>
+                      </li>
+                    
+                    
+                    <li>
+                      <a href="https://github.com/himmAllRight">
+                        <span class="fa-stack fa-lg">
+                          <i class="fa fa-circle fa-stack-2x"></i>
+                          <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                        </span>
+                      </a>
+                    </li>
+                    
+                    <li>
+                      <a href="https://www.linkedin.com/in/ryan-himmelwright-b3891774/">
+                        <span class="fa-stack fa-lg">
+                          <i class="fa fa-circle fa-stack-2x"></i>
+                          <i class="fa fa-linkedin fa-stack-1x fa-inverse"></i>
+                        </span>
+                      </a>
+                    </li>
+                    
+                    <li>
+                      <a href="https://www.instagram.com/himmelwr/">
+                        <span class="fa-stack fa-lg">
+                          <i class="fa fa-circle fa-stack-2x"></i>
+                          <i class="fa fa-instagram fa-stack-1x fa-inverse"></i>
+                        </span>
+                      </a>
+                    </li>
+                    
+                    <li>
+                      <a href="https://twitter.com/himmAllRight17">
+                        <span class="fa-stack fa-lg">
+                          <i class="fa fa-circle fa-stack-2x"></i>
+                          <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+                        </span>
+                      </a>
+                    </li>
+                    
+                  </ul>
+                  <p class="copyright text-muted">Copyright © Ryan Himmelwright. Site created with Hugo</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    
+    <script src="http://ryan.himmelwright.net/js/jquery.min.js"></script>
+
+    
+    <script src="http://ryan.himmelwright.net/js/bootstrap.min.js"></script>
+
+    
+    <script src="http://ryan.himmelwright.net/js/clean-blog.js"></script>
+
+    
+<script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-123-45', 'auto');
+ga('send', 'pageview');
+</script>
+
+
+</body>
+
+</html>
+
