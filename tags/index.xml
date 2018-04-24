@@ -85,9 +85,18 @@
     </item>
     
     <item>
+      <title>Database</title>
+      <link>http://ryan.himmelwright.net/tags/database/</link>
+      <pubDate>Tue, 24 Apr 2018 00:00:00 +0000</pubDate>
+      
+      <guid>http://ryan.himmelwright.net/tags/database/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>Dev</title>
       <link>http://ryan.himmelwright.net/tags/dev/</link>
-      <pubDate>Sun, 30 Jul 2017 00:00:00 +0000</pubDate>
+      <pubDate>Tue, 24 Apr 2018 00:00:00 +0000</pubDate>
       
       <guid>http://ryan.himmelwright.net/tags/dev/</guid>
       <description></description>
@@ -249,7 +258,7 @@
     <item>
       <title>Linux</title>
       <link>http://ryan.himmelwright.net/tags/linux/</link>
-      <pubDate>Sun, 01 Apr 2018 00:00:00 +0000</pubDate>
+      <pubDate>Tue, 24 Apr 2018 00:00:00 +0000</pubDate>
       
       <guid>http://ryan.himmelwright.net/tags/linux/</guid>
       <description></description>
@@ -276,7 +285,7 @@
     <item>
       <title>Programming</title>
       <link>http://ryan.himmelwright.net/tags/programming/</link>
-      <pubDate>Sun, 30 Jul 2017 00:00:00 +0000</pubDate>
+      <pubDate>Tue, 24 Apr 2018 00:00:00 +0000</pubDate>
       
       <guid>http://ryan.himmelwright.net/tags/programming/</guid>
       <description></description>
@@ -324,6 +333,15 @@
       <pubDate>Sun, 25 Feb 2018 00:00:00 +0000</pubDate>
       
       <guid>http://ryan.himmelwright.net/tags/solus/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Sql</title>
+      <link>http://ryan.himmelwright.net/tags/sql/</link>
+      <pubDate>Tue, 24 Apr 2018 00:00:00 +0000</pubDate>
+      
+      <guid>http://ryan.himmelwright.net/tags/sql/</guid>
       <description></description>
     </item>
     

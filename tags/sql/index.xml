@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Database on λ ryan. himmelwright. net</title>
-    <link>http://ryan.himmelwright.net/tags/database/</link>
-    <description>Recent content in Database on λ ryan. himmelwright. net</description>
+    <title>Sql on λ ryan. himmelwright. net</title>
+    <link>http://ryan.himmelwright.net/tags/sql/</link>
+    <description>Recent content in Sql on λ ryan. himmelwright. net</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>Copyright © Ryan Himmelwright. Site created with Hugo</copyright>
     <lastBuildDate>Tue, 24 Apr 2018 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="http://ryan.himmelwright.net/tags/database/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="http://ryan.himmelwright.net/tags/sql/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>

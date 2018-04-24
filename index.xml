@@ -7,10 +7,24 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>Copyright © Ryan Himmelwright. Site created with Hugo</copyright>
-    <lastBuildDate>Sun, 01 Apr 2018 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 24 Apr 2018 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="http://ryan.himmelwright.net/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>SQL Intro</title>
+      <link>http://ryan.himmelwright.net/post/sql-intro/</link>
+      <pubDate>Tue, 24 Apr 2018 00:00:00 +0000</pubDate>
+      
+      <guid>http://ryan.himmelwright.net/post/sql-intro/</guid>
+      <description>&lt;p&gt;SQL is one of those technologies that which to be everywhere, but yet&amp;hellip; I
+somehow haven&amp;rsquo;t &lt;em&gt;had&lt;/em&gt; to use it for anything in school or at work. I know, I
+know&amp;hellip; it&amp;rsquo;s quite a feat. Still, the pervasiveness of SQL-like databases argues
+that I really &lt;em&gt;should&lt;/em&gt; learn it. So I am.&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>Trying Out Seafile</title>

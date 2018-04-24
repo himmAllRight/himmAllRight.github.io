@@ -3,6 +3,11 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>http://ryan.himmelwright.net/post/sql-intro/</loc>
+    <lastmod>2018-04-24T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>http://ryan.himmelwright.net/post/trying-out-seafile/</loc>
     <lastmod>2018-04-01T00:00:00+00:00</lastmod>
   </url>
@@ -253,8 +258,14 @@
   </url>
   
   <url>
+    <loc>http://ryan.himmelwright.net/tags/database/</loc>
+    <lastmod>2018-04-24T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>http://ryan.himmelwright.net/tags/dev/</loc>
-    <lastmod>2017-07-30T00:00:00+00:00</lastmod>
+    <lastmod>2018-04-24T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -362,7 +373,7 @@
   
   <url>
     <loc>http://ryan.himmelwright.net/tags/linux/</loc>
-    <lastmod>2018-04-01T00:00:00+00:00</lastmod>
+    <lastmod>2018-04-24T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -392,13 +403,13 @@
   
   <url>
     <loc>http://ryan.himmelwright.net/post/</loc>
-    <lastmod>2018-04-01T00:00:00+00:00</lastmod>
+    <lastmod>2018-04-24T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>http://ryan.himmelwright.net/tags/programming/</loc>
-    <lastmod>2017-07-30T00:00:00+00:00</lastmod>
+    <lastmod>2018-04-24T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -429,6 +440,12 @@
   <url>
     <loc>http://ryan.himmelwright.net/tags/solus/</loc>
     <lastmod>2018-02-25T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://ryan.himmelwright.net/tags/sql/</loc>
+    <lastmod>2018-04-24T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -482,7 +499,7 @@
   
   <url>
     <loc>http://ryan.himmelwright.net/</loc>
-    <lastmod>2018-04-01T00:00:00+00:00</lastmod>
+    <lastmod>2018-04-24T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
