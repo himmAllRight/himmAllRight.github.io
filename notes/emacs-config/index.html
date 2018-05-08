@@ -1,0 +1,775 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>My Emacs Config -- λ ryan. himmelwright. net</title>
+
+    
+
+    
+    <link href="http://ryan.himmelwright.net/css/bootstrap.min.css" rel="stylesheet">
+
+    
+    <link href="http://ryan.himmelwright.net/css/clean-blog.min.css" rel="stylesheet">
+
+    
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href='//fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+
+    
+    
+    
+
+
+
+    
+    <script type="text/javascript">
+        var _paq = _paq || [];
+         
+        _paq.push(["setDocumentTitle", document.domain + "/" + document.title]);
+        _paq.push(["setCookieDomain", "*.ryan.himmelwright.net"]);
+        _paq.push(["setDomains", ["*.ryan.himmelwright.net"]]);
+        _paq.push(['trackPageView']);
+        _paq.push(['enableLinkTracking']);
+        (function() {
+        var u="//cloud.himmelwright.net/piwik/";
+        _paq.push(['setTrackerUrl', u+'piwik.php']);
+        _paq.push(['setSiteId', '1']);
+        var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+        g.type='text/javascript'; g.async=true; g.defer=true; g.src=u+'piwik.js'; s.parentNode.insertBefore(g,s);
+        })();
+        </script>
+        <noscript><p><img src="//cloud.himmelwright.net/piwik/piwik.php?idsite=1&rec=1" style="border:0;" alt="" /></p></noscript>
+        
+
+
+
+</head>
+
+<body>
+
+    
+    <nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+        <div class="container-fluid">
+            
+            <div class="navbar-header page-scroll">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="http://ryan.himmelwright.net">λ ryan. himmelwright. net</a>
+            </div>
+
+                       
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    
+                    <li>
+                        <a href="http://ryan.himmelwright.net/">home</a>
+                    </li>
+                    
+                    <li>
+                        <a href="http://ryan.himmelwright.net/pages/about/">About</a>
+                    </li>
+                    
+                    <li>
+                        <a href="http://ryan.himmelwright.net/pages/homelab/">Homelab</a>
+                    </li>
+                    
+                    <li>
+                        <a href="http://ryan.himmelwright.net/post/">Archives</a>
+                    </li>
+                    
+                    <li>
+                        <a href="http://ryan.himmelwright.net/post/index.xml">RSS</a>
+                    </li>
+                    
+                  </ul>
+            </div>
+           
+
+        </div>
+        
+    </nav>
+
+
+
+
+<header class="intro-header" style="background-image: url('http://ryan.himmelwright.net/img/post-bg.jpg')">
+    
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <h1>My Emacs Config</h1>
+                    <h2 class="subheading"></h2>
+                    <span class="meta">
+                        Last Updated by Ryan Himmelwright on Mon, Mar 5, 2018.
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+    </header>
+
+    
+    <article>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                    
+
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#sec-1">Repos &amp; Core Packages</a>
+<ul>
+<li><a href="#sec-1-1">Melpa</a></li>
+<li><a href="#sec-1-2">Setup <code>use-package</code> if isn't already</a></li>
+</ul>
+</li>
+<li><a href="#sec-2">Core Setup</a>
+<ul>
+<li><a href="#sec-2-1">Basic Stuff</a></li>
+<li><a href="#sec-2-2">Themes</a></li>
+</ul>
+</li>
+<li><a href="#sec-3">Evil Mode</a></li>
+<li><a href="#sec-4">Ivy</a></li>
+<li><a href="#sec-5">Key Bindings</a></li>
+<li><a href="#sec-6">Writting</a>
+<ul>
+<li><a href="#sec-6-1">Org Mode</a></li>
+<li><a href="#sec-6-2">Markdown</a></li>
+</ul>
+</li>
+<li><a href="#sec-7">Development</a>
+<ul>
+<li><a href="#sec-7-1">Auto Complete</a></li>
+<li><a href="#sec-7-2">Indentation</a></li>
+<li><a href="#sec-7-3">Parens</a></li>
+<li><a href="#sec-7-4">Git</a></li>
+<li><a href="#sec-7-5">Projects</a></li>
+<li><a href="#sec-7-6">Pretty Code</a></li>
+</ul>
+</li>
+<li><a href="#sec-8">My Random Functions</a>
+<ul>
+<li><a href="#sec-8-1">Zoom-Window</a></li>
+<li><a href="#sec-8-2">eshell-clear-buffer</a></li>
+</ul>
+</li>
+<li><a href="#sec-9">Load Other Configs</a>
+<ul>
+<li><a href="#sec-9-1">Work Settings</a></li>
+<li><a href="#sec-9-2">Linux</a></li>
+</ul>
+</li>
+<li><a href="#sec-10">The Rest</a>
+<ul>
+<li><a href="#sec-10-1">Auto Generated Stuff</a></li>
+<li><a href="#sec-10-2">Theme Load</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+
+<p>So I just learned about the org babel stuff, and I think I might save
+my emacs configuration in an org file like this, and then have emacs
+just load it with org-babel&#x2026; It deff makes it easier to navigate
+around the file&#x2026;</p>
+
+<h1 id="repos-core-packages-a-id-sec-1-name-sec-1-a">Repos &amp; Core Packages<a id="sec-1" name="sec-1"></a></h1>
+
+<h2 id="melpa-a-id-sec-1-1-name-sec-1-1-a">Melpa<a id="sec-1-1" name="sec-1-1"></a></h2>
+
+<p>Melpa is the big package repo that nearly <em>everything</em> can be
+found. It&rsquo;s a must for emacs configs.</p>
+
+<pre><code>(require 'package)
+(add-to-list 'package-archives '(&quot;melpa&quot; . &quot;http://melpa.org/packages/&quot;))
+(package-initialize)
+</code></pre>
+
+<h2 id="setup-use-package-if-isn-t-already-a-id-sec-1-2-name-sec-1-2-a">Setup <code>use-package</code> if isn&rsquo;t already<a id="sec-1-2" name="sec-1-2"></a></h2>
+
+<pre><code>(unless (package-installed-p 'use-package)
+  (package-refresh-contents)
+  (package-install 'use-package))
+
+(eval-when-compile
+  (require 'use-package))
+</code></pre>
+
+<h1 id="core-setup-a-id-sec-2-name-sec-2-a">Core Setup<a id="sec-2" name="sec-2"></a></h1>
+
+<h2 id="basic-stuff-a-id-sec-2-1-name-sec-2-1-a">Basic Stuff<a id="sec-2-1" name="sec-2-1"></a></h2>
+
+<p>Remove splash screen and use <strong>scratch</strong> instead as the home buffer</p>
+
+<pre><code>(setq inhibit-startup-message t
+      inhibit-startup-echo-area-message t)
+</code></pre>
+
+<p>Funnel all the auto backup files to one location.</p>
+
+<pre><code>(setq backup-directory-alist '((&quot;.&quot; . &quot;~/nextcloud/emacs/backups&quot;)))
+</code></pre>
+
+<p>Switch line numbers on by default in all buffers</p>
+
+<pre><code>(global-linum-mode 1)
+</code></pre>
+
+<p>Switch the Menubar off by default (I like to keep everything clean)</p>
+
+<pre><code>(menu-bar-mode -1)
+</code></pre>
+
+<p>New lines auto indents</p>
+
+<pre><code>(define-key global-map (kbd &quot;RET&quot;)
+  'newline-and-indent)
+</code></pre>
+
+<p>Tool Tips in echo area</p>
+
+<pre><code>(tooltip-mode -1)
+(setq tooltip-use-echo-area t)
+</code></pre>
+
+<p>Smooth Scrolling</p>
+
+<pre><code>;;(require 'smooth-scroll)
+</code></pre>
+
+<h2 id="themes-a-id-sec-2-2-name-sec-2-2-a">Themes<a id="sec-2-2" name="sec-2-2"></a></h2>
+
+<pre><code>(use-package monokai-alt-theme
+  :ensure t)
+;;  (use-package gruvbox-theme
+;;         :ensure t)
+;; (use-package darkokai-theme
+;;         :ensure t)
+;; (use-package darktooth-theme
+;;         :ensure t)
+;; (use-package creamsody-theme
+;;         :ensure t)
+;; (use-package github-theme
+;;   :ensure t)
+</code></pre>
+
+<h1 id="evil-mode-a-id-sec-3-name-sec-3-a">Evil Mode<a id="sec-3" name="sec-3"></a></h1>
+
+<p>Here is my Evile Mode setup. I&rsquo;ve nested other <code>use-pacages</code> inside of
+it, so that if I am using <code>evil</code>, the packages that depend on it go
+ahead and configure themselves.</p>
+
+<pre><code>;; Evil Mode
+(use-package evil
+  :ensure t
+  :config
+
+  (evil-mode 1)
+  (use-package evil-leader
+    :ensure t
+    :config
+    (global-evil-leader-mode t)
+    (evil-leader/set-leader &quot;&lt;SPC&gt;&quot;)
+    (evil-leader/set-key
+      &quot;s s&quot; 'swiper
+      &quot;d x w&quot; 'delete-trailing-whitespace)) 
+
+  (use-package evil-surround
+    :ensure t
+    :config (global-evil-surround-mode))
+
+  (use-package evil-indent-textobject
+    :ensure t)
+
+  (use-package evil-org
+    :ensure t
+    :config
+    (evil-org-set-key-theme '(textobjects insert navigation additional shift todo heading))
+    (add-hook 'org-mode-hook (lambda () (evil-org-mode))))
+
+  (use-package powerline-evil
+    :ensure t
+    :config
+    (powerline-evil-vim-color-theme)
+    )
+  )
+</code></pre>
+
+<h1 id="ivy-a-id-sec-4-name-sec-4-a">Ivy<a id="sec-4" name="sec-4"></a></h1>
+
+<p>Setup and use Ivy</p>
+
+<pre><code>(use-package ivy
+  :ensure t
+  :config
+  (ivy-mode 1)
+  (setq ivy-use-virtual-buffers t)
+  (setq enable-recursive-minibuffers t)
+  ;; Ivy Keybindings
+  (global-set-key (kbd &quot;C-c C-r&quot;) 'ivy-resume))
+</code></pre>
+
+<p>Configure Swiper</p>
+
+<pre><code>(use-package swiper
+  :ensure t
+  :config
+  (global-set-key &quot;\C-s&quot; 'swiper)
+  )
+</code></pre>
+
+<p>Counsel configuration</p>
+
+<pre><code>(use-package counsel 
+  :ensure t
+  :config 
+  (global-set-key (kbd &quot;M-x&quot;) 'counsel-M-x)
+  (global-set-key (kbd &quot;C-x C-f&quot;) 'counsel-find-file))
+</code></pre>
+
+<h1 id="key-bindings-a-id-sec-5-name-sec-5-a">Key Bindings<a id="sec-5" name="sec-5"></a></h1>
+
+<p>These will eventually be relocations to just be included with their
+respective <code>use-package</code> calls&#x2026;</p>
+
+<pre><code>;; Spell Check Word key-binds
+(global-set-key (kbd &quot;C-c w&quot;) 'ispell-word)
+(global-set-key (kbd &quot;C-c r&quot;) 'ispell-region)
+
+;; ;; Toggle menubar keybind
+(global-set-key (kbd &quot;C-c m&quot;) 'menu-bar-mode)
+
+;; ;; Eshell launch keybind
+(global-set-key (kbd &quot;C-c t&quot;) 'eshell)
+
+;; ;; Comment/Uncomment region
+(global-set-key (kbd &quot;C-c ;&quot;) 'comment-region)
+
+
+;; Previous Window shortcut
+(global-set-key (kbd &quot;C-x p&quot;)
+                (lambda() (interactive) (other-window -1)))
+(global-set-key (kbd &quot;C-x O&quot;)
+                (lambda() (interactive) (switch-window)))
+(global-set-key (kbd &quot;C-x o&quot;)
+                (lambda() (interactive) (other-window 1)))
+(global-set-key (kbd &quot;C-x \)&quot;)
+                (lambda() (interactive) (other-frame 1)))
+(global-set-key (kbd &quot;C-x 0&quot;)
+                (lambda() (interactive) (delete-window)))
+
+(global-set-key (kbd &quot;C-c z&quot;) 'zoom-window)
+</code></pre>
+
+<h1 id="writting-a-id-sec-6-name-sec-6-a">Writting<a id="sec-6" name="sec-6"></a></h1>
+
+<h2 id="org-mode-a-id-sec-6-1-name-sec-6-1-a">Org Mode<a id="sec-6-1" name="sec-6-1"></a></h2>
+
+<p>Yes. It get&rsquo;s it&rsquo;s own section. Again, I&rsquo;ve nested everything. I might
+break that up though now if I the babel stuff to generate my
+configs&#x2026;</p>
+
+<pre><code>(use-package org
+  :ensure t
+  :config
+
+  (setq org-todo-keywords '((sequence &quot;TODO&quot; &quot;In Progress&quot; &quot;|&quot; &quot;Waiting&quot; &quot;DONE&quot; &quot;DONE DONE&quot;)))
+
+  (evil-leader/set-key-for-mode 'org-mode
+    &quot;m i&quot; 'org-clock-in
+    &quot;m C&quot; 'org-toggle-checkbox
+    &quot;m o&quot; 'org-clock-out
+    &quot;m c&quot; 'org-clock-jump-to-current-clock
+    &quot;m d&quot; 'org-clock-display
+    &quot;m e&quot; 'org-set-effort
+    &quot;m p&quot; 'org-pomodoro
+    &quot;m t&quot; 'org-set-tags-command
+    &quot;m m&quot; 'org-clock-modify-effort-estimate
+    &quot;m s&quot; 'org-schedule)
+
+  ;; ;; Org Agenda stuff
+  (setq org-agenda-files '(&quot;~/nextcloud/emacs/org/archive/work.org&quot;))
+
+  (defun org-code (start end)
+    &quot;Wraps selected text with org code tags&quot;
+    (interactive &quot;r&quot;)
+    (let ((selected-text (buffer-substring (mark) (point)))
+          (db-name (read-from-minibuffer &quot;Language[common-lisp]: &quot;)))
+      (when (eq db-name &quot;&quot;)
+        (setf db-name &quot;common-lisp&quot;))
+      (kill-region start end)
+      (insert (format &quot;#+BEGIN_SRC %s \n%s \n#+END_SRC&quot; db-name selected-text))))
+
+  (use-package org-pomodoro
+    :ensure t
+    :config
+    ;; Persistent Clocking
+    (setq org-clock-persist 'history)
+    (org-clock-persistence-insinuate)
+
+    ;; Default Table Params
+    (setq org-clock-clocktable-default-properties '(:maxlevel 3 :scope subtree :tags &quot;-Lunch&quot;))
+
+
+    ;; Org Pomodoro ;;
+    ;; Setup pomodoro timer keybind
+    (global-set-key (kbd &quot;C-S-c C-S-p&quot;) 'org-pomodoro)
+    (global-set-key (kbd &quot;C-S-c C-S-e&quot;) 'org-pomodoro-extend-last-clock)
+
+    (defun org-pomodoro-get-times ()
+      (interactive)
+      (message &quot;work length: %s  short break: %s  long break: %s&quot;
+               org-pomodoro-length
+               org-pomodoro-short-break-length
+               org-pomodoro-long-break-length))
+
+    (defun org-pomodoro-set-pomodoro ()
+      (interactive)
+      (setf org-pomodoro-length 35)
+      (setf org-pomodoro-short-break-length 9)
+      (setf org-pomodoro-long-break-length 15))
+
+
+    (org-pomodoro-set-pomodoro)
+
+    (defun org-pomodoro-set-52-17 ()
+      (interactive)
+      (setf org-pomodoro-length 52)
+      (setf org-pomodoro-short-break-length 17)
+      (setf org-pomodoro-long-break-length 17)))
+  )
+</code></pre>
+
+<h2 id="markdown-a-id-sec-6-2-name-sec-6-2-a">Markdown<a id="sec-6-2" name="sec-6-2"></a></h2>
+
+<pre><code>(use-package markdown-mode
+  :ensure t)
+</code></pre>
+
+<h1 id="development-a-id-sec-7-name-sec-7-a">Development<a id="sec-7" name="sec-7"></a></h1>
+
+<h2 id="auto-complete-a-id-sec-7-1-name-sec-7-1-a">Auto Complete<a id="sec-7-1" name="sec-7-1"></a></h2>
+
+<pre><code>(use-package auto-complete
+  :ensure t
+  :config
+  (ac-config-default))
+</code></pre>
+
+<h2 id="indentation-a-id-sec-7-2-name-sec-7-2-a">Indentation<a id="sec-7-2" name="sec-7-2"></a></h2>
+
+<p><code>aggressive-indent</code> automatically indents buffers as I type out my
+code. I love it.</p>
+
+<pre><code>(use-package aggressive-indent
+  :ensure t
+  :config
+  (global-aggressive-indent-mode t))
+</code></pre>
+
+<h2 id="parens-a-id-sec-7-3-name-sec-7-3-a">Parens<a id="sec-7-3" name="sec-7-3"></a></h2>
+
+<p>smart parens does auto paring for my parenthesis</p>
+
+<pre><code>(use-package smartparens
+  :ensure t
+  :config
+  ;; Remove ' and  from pairing
+  (sp-pair &quot;'&quot; nil :actions :rem)
+  (sp-pair &quot;`&quot; &quot;'&quot; :actions :rem))
+</code></pre>
+
+<h2 id="git-a-id-sec-7-4-name-sec-7-4-a">Git<a id="sec-7-4" name="sec-7-4"></a></h2>
+
+<p>I use magit for easy git management</p>
+
+<pre><code>(use-package magit
+  :ensure t
+  :config 
+  (global-set-key (kbd &quot;C-c g&quot;) 'magit-status))
+</code></pre>
+
+<h2 id="projects-a-id-sec-7-5-name-sec-7-5-a">Projects<a id="sec-7-5" name="sec-7-5"></a></h2>
+
+<p>Starting to learn projectile a little bit&#x2026;</p>
+
+<pre><code>(use-package projectile
+  :ensure t
+  :config
+  (projectile-global-mode)
+
+  (use-package counsel-projectile
+    :ensure t
+    )
+  )
+</code></pre>
+
+<h2 id="pretty-code-a-id-sec-7-6-name-sec-7-6-a">Pretty Code<a id="sec-7-6" name="sec-7-6"></a></h2>
+
+<pre><code>;; (require 'pretty-mode)
+;; (pretty-lambda-mode t)
+
+;;(global-pretty-lambda-mode t)
+</code></pre>
+
+<h1 id="my-random-functions-a-id-sec-8-name-sec-8-a">My Random Functions<a id="sec-8" name="sec-8"></a></h1>
+
+<h2 id="zoom-window-a-id-sec-8-1-name-sec-8-1-a">Zoom-Window<a id="sec-8-1" name="sec-8-1"></a></h2>
+
+<p>Saves the current state of the buffers, and then zooms the current
+buffer full screen. When called again, goes back to origonal buffer
+setup.</p>
+
+<pre><code>(defun zoom-window ()
+  (interactive)
+  (if zoom-temp-window-configuration
+      (progn
+        (set-window-configuration zoom-temp-window-configuration)
+        (setq zoom-temp-window-configuration nil)
+        (message &quot;Window un-zoomed&quot;))
+    (progn
+      (setq zoom-temp-window-configuration (current-window-configuration))
+      (delete-other-windows)
+      (message &quot;Window zoomed&quot;))))
+</code></pre>
+
+<h2 id="eshell-clear-buffer-a-id-sec-8-2-name-sec-8-2-a">eshell-clear-buffer<a id="sec-8-2" name="sec-8-2"></a></h2>
+
+<p>Clears my eshell more like a normal terminal would</p>
+
+<pre><code>(defun eshell-clear-buffer ()
+  &quot;Clear terminal&quot;
+  (interactive)
+  (let ((inhibit-read-only t))
+    (erase-buffer)
+    (eshell-send-input)))
+</code></pre>
+
+<p>I need this hook for the function, and I like to set it to a keybind:</p>
+
+<pre><code>(add-hook 'eshell-mode-hook
+          '(lambda()
+             (local-set-key (kbd &quot;C-l&quot;) 'eshell-clear-buffer)))
+
+(global-set-key (kbd &quot;C-c &lt;delete&gt;&quot;) 'eshell-clear-buffer)
+</code></pre>
+
+<h1 id="load-other-configs-a-id-sec-9-name-sec-9-a">Load Other Configs<a id="sec-9" name="sec-9"></a></h1>
+
+<h2 id="work-settings-a-id-sec-9-1-name-sec-9-1-a">Work Settings<a id="sec-9-1" name="sec-9-1"></a></h2>
+
+<p>Load functions for using Allegro when on Work computer</p>
+
+<pre><code>(when (string-equal (upcase system-name) &quot;LAFAYETTE&quot;)
+  (load &quot;~/.emacs-work.el&quot;))
+</code></pre>
+
+<h2 id="linux-a-id-sec-9-2-name-sec-9-2-a">Linux<a id="sec-9-2" name="sec-9-2"></a></h2>
+
+<p>Load my Linux-specific configs</p>
+
+<pre><code>(when (string-equal system-type &quot;gnu/linux&quot;)
+  (load &quot;~/.emacs-linux.el&quot;))
+</code></pre>
+
+<h1 id="the-rest-a-id-sec-10-name-sec-10-a">The Rest<a id="sec-10" name="sec-10"></a></h1>
+
+<h2 id="auto-generated-stuff-a-id-sec-10-1-name-sec-10-1-a">Auto Generated Stuff<a id="sec-10-1" name="sec-10-1"></a></h2>
+
+<p>Not sure what to do with this crap in my babel org config&#x2026;</p>
+
+<pre><code>;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Settings added by emacs GUI options
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(ansi-color-names-vector
+   [&quot;#242728&quot; &quot;#ff0066&quot; &quot;#63de5d&quot; &quot;#E6DB74&quot; &quot;#06d8ff&quot; &quot;#ff8eff&quot; &quot;#53f2dc&quot; &quot;#f8fbfc&quot;])
+ '(column-number-mode t)
+ '(compilation-message-face (quote default))
+ '(custom-safe-themes
+   (quote
+    (&quot;0ee3fc6d2e0fc8715ff59aed2432510d98f7e76fe81d183a0eb96789f4d897ca&quot; &quot;3b5ce826b9c9f455b7c4c8bff22c020779383a12f2f57bf2eb25139244bb7290&quot; &quot;021720af46e6e78e2be7875b2b5b05344f4e21fad70d17af7acfd6922386b61e&quot; &quot;6ac7c0f959f0d7853915012e78ff70150bfbe2a69a1b703c3ac4184f9ae3ae02&quot; &quot;ed0b4fc082715fc1d6a547650752cd8ec76c400ef72eb159543db1770a27caa7&quot; &quot;6ee6f99dc6219b65f67e04149c79ea316ca4bcd769a9e904030d38908fd7ccf9&quot; &quot;a4d03266add9a1c8f12b5309612cbbf96e1291773c7bc4fb685bfdaf83b721c6&quot; &quot;eea01f540a0f3bc7c755410ea146943688c4e29bea74a29568635670ab22f9bc&quot; default)))
+ '(display-battery-mode t)
+ '(display-time-mode t)
+ '(fci-rule-color &quot;#424748&quot;)
+ '(highlight-changes-colors (quote (&quot;#ff8eff&quot; &quot;#ab7eff&quot;)))
+ '(highlight-tail-colors
+   (quote
+    ((&quot;#424748&quot; . 0)
+     (&quot;#63de5d&quot; . 20)
+     (&quot;#4BBEAE&quot; . 30)
+     (&quot;#1DB4D0&quot; . 50)
+     (&quot;#9A8F21&quot; . 60)
+     (&quot;#A75B00&quot; . 70)
+     (&quot;#F309DF&quot; . 85)
+     (&quot;#424748&quot; . 100))))
+ '(magit-diff-use-overlays nil)
+ '(nrepl-message-colors
+   (quote
+    (&quot;#183691&quot; &quot;#969896&quot; &quot;#a71d5d&quot; &quot;#969896&quot; &quot;#0086b3&quot; &quot;#795da3&quot; &quot;#a71d5d&quot; &quot;#969896&quot;)))
+ '(package-selected-packages
+   (quote
+    (counsel-projectile projectile ess org-babel-eval-in-repl org-beautify-theme sly sly-mode markdown-mode magit aggressive-indent smartparens auto-complete org-pomodoro counsel swiper ivy monokai-alt-theme powerline-evil evil-org evil-indent-textobject evil-surround evil-leader evil use-package)))
+ '(pdf-view-midnight-colors (quote (&quot;#969896&quot; . &quot;#f8eec7&quot;)))
+ '(pos-tip-background-color &quot;#E6DB74&quot;)
+ '(pos-tip-foreground-color &quot;#242728&quot;)
+ '(scroll-bar-mode nil)
+ '(size-indication-mode t)
+ '(tool-bar-mode nil)
+ '(vc-annotate-background nil)
+ '(vc-annotate-color-map
+   (quote
+    ((20 . &quot;#ff0066&quot;)
+     (40 . &quot;#CF4F1F&quot;)
+     (60 . &quot;#C26C0F&quot;)
+     (80 . &quot;#E6DB74&quot;)
+     (100 . &quot;#AB8C00&quot;)
+     (120 . &quot;#A18F00&quot;)
+     (140 . &quot;#989200&quot;)
+     (160 . &quot;#8E9500&quot;)
+     (180 . &quot;#63de5d&quot;)
+     (200 . &quot;#729A1E&quot;)
+     (220 . &quot;#609C3C&quot;)
+     (240 . &quot;#4E9D5B&quot;)
+     (260 . &quot;#3C9F79&quot;)
+     (280 . &quot;#53f2dc&quot;)
+     (300 . &quot;#299BA6&quot;)
+     (320 . &quot;#2896B5&quot;)
+     (340 . &quot;#2790C3&quot;)
+     (360 . &quot;#06d8ff&quot;))))
+ '(vc-annotate-very-old-color nil)
+ '(weechat-color-list
+   (unspecified &quot;#242728&quot; &quot;#424748&quot; &quot;#F70057&quot; &quot;#ff0066&quot; &quot;#86C30D&quot; &quot;#63de5d&quot; &quot;#BEB244&quot; &quot;#E6DB74&quot; &quot;#40CAE4&quot; &quot;#06d8ff&quot; &quot;#FF61FF&quot; &quot;#ff8eff&quot; &quot;#00b2ac&quot; &quot;#53f2dc&quot; &quot;#f8fbfc&quot; &quot;#ffffff&quot;)))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(default ((((class color) (min-colors 89)) (:background &quot;#262626&quot; :foreground &quot;#f8f8f2&quot;)))))
+</code></pre>
+
+<h2 id="theme-load-a-id-sec-10-2-name-sec-10-2-a">Theme Load<a id="sec-10-2" name="sec-10-2"></a></h2>
+
+<p>I like to load the theme after the custom stuff the GUI adds, so I
+don&rsquo;t have to verify loading it whenever emacs boots up.</p>
+
+<pre><code>;; Load Theme
+(when (package-installed-p 'creamsody-theme)
+  (load-theme 'creamsody))
+(put 'dired-find-alternate-file 'disabled nil)
+</code></pre>
+
+                    
+
+                </div>
+            </div>
+        </div>
+    </article>
+
+        <hr>
+    
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                  <ul class="list-inline text-center">
+                    
+                      <li>
+                        <a href="mailto:ryan@himmelwright.net">
+                          <span class="fa-stack fa-lg">
+                            <i class="fa fa-circle fa-stack-2x"></i>
+                            <i class="fa fa-envelope-o fa-stack-1x fa-inverse"></i>
+                          </span>
+                        </a>
+                      </li>
+                    
+                    
+                    <li>
+                      <a href="https://github.com/himmAllRight">
+                        <span class="fa-stack fa-lg">
+                          <i class="fa fa-circle fa-stack-2x"></i>
+                          <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                        </span>
+                      </a>
+                    </li>
+                    
+                    <li>
+                      <a href="https://www.linkedin.com/in/ryan-himmelwright-b3891774/">
+                        <span class="fa-stack fa-lg">
+                          <i class="fa fa-circle fa-stack-2x"></i>
+                          <i class="fa fa-linkedin fa-stack-1x fa-inverse"></i>
+                        </span>
+                      </a>
+                    </li>
+                    
+                    <li>
+                      <a href="https://www.instagram.com/himmelwr/">
+                        <span class="fa-stack fa-lg">
+                          <i class="fa fa-circle fa-stack-2x"></i>
+                          <i class="fa fa-instagram fa-stack-1x fa-inverse"></i>
+                        </span>
+                      </a>
+                    </li>
+                    
+                    <li>
+                      <a href="https://twitter.com/himmAllRight17">
+                        <span class="fa-stack fa-lg">
+                          <i class="fa fa-circle fa-stack-2x"></i>
+                          <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+                        </span>
+                      </a>
+                    </li>
+                    
+                  </ul>
+                  <p class="copyright text-muted">Copyright © Ryan Himmelwright. Site created with Hugo</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    
+    <script src="http://ryan.himmelwright.net/js/jquery.min.js"></script>
+
+    
+    <script src="http://ryan.himmelwright.net/js/bootstrap.min.js"></script>
+
+    
+    <script src="http://ryan.himmelwright.net/js/clean-blog.js"></script>
+
+    
+<script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-123-45', 'auto');
+ga('send', 'pageview');
+</script>
+
+
+</body>
+
+</html>
+

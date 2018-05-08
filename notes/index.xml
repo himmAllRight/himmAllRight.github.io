@@ -13,6 +13,15 @@
     
     
     <item>
+      <title>My Emacs Config</title>
+      <link>http://ryan.himmelwright.net/notes/emacs-config/</link>
+      <pubDate>Mon, 05 Mar 2018 00:00:00 +0000</pubDate>
+      
+      <guid>http://ryan.himmelwright.net/notes/emacs-config/</guid>
+      <description>Table of Contents  Repos &amp;amp; Core Packages  Melpa Setup use-package if isn&#39;t already   Core Setup  Basic Stuff Themes   Evil Mode Ivy Key Bindings Writting  Org Mode Markdown   Development  Auto Complete Indentation Parens Git Projects Pretty Code   My Random Functions  Zoom-Window eshell-clear-buffer   Load Other Configs  Work Settings Linux   The Rest  Auto Generated Stuff Theme Load      So I just learned about the org babel stuff, and I think I might save my emacs configuration in an org file like this, and then have emacs just load it with org-babel&amp;#x2026; It deff makes it easier to navigate around the file&amp;#x2026;</description>
+    </item>
+    
+    <item>
       <title>Transitioning Server from Proxmox</title>
       <link>http://ryan.himmelwright.net/notes/server-transition-plan/</link>
       <pubDate>Mon, 05 Mar 2018 00:00:00 +0000</pubDate>
@@ -20,6 +29,18 @@
       <guid>http://ryan.himmelwright.net/notes/server-transition-plan/</guid>
       <description>I&amp;rsquo;ve been planning to move my server from Proxmox to just a normal server install, to give me more control over everything. However, I don&amp;rsquo;t want this to be like the wild west of servers, where it is basically just a desktop with a bunch of crap on it. I like how easy it is to spin up both containers and VMs, and then continue to monitor/manage everything.
 So, I am creating a list of things I want to have at least somewhat figured out before officially making the switch.</description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>http://ryan.himmelwright.net/notes/emacs-config.md/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://ryan.himmelwright.net/notes/emacs-config.md/</guid>
+      <description>&amp;#x2014; title: &amp;ldquo;My Emacs Config&amp;rdquo; date: 2018-03-05 type: homelab layout: homelab-page &amp;#x2014;
+So I just learned about the org babel stuff, and I think I might save my emacs configuration in an org file like this, and then have emacs just load it with org-babel&amp;#x2026; It deff makes it easier to navigate around the file&amp;#x2026;
+## Melpa
+Melpa is the big package repo that nearly everything can be found. It&amp;rsquo;s a must for emacs configs.</description>
     </item>
     
     <item>
