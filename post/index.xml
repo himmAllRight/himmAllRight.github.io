@@ -7,10 +7,26 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>Copyright © Ryan Himmelwright. Site created with Hugo</copyright>
-    <lastBuildDate>Tue, 24 Apr 2018 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 18 May 2018 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="http://ryan.himmelwright.net/post/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Emacs Config Redo - Evil &amp; Use-Package</title>
+      <link>http://ryan.himmelwright.net/post/emacs-update-evil-usepackage/</link>
+      <pubDate>Fri, 18 May 2018 00:00:00 +0000</pubDate>
+      
+      <guid>http://ryan.himmelwright.net/post/emacs-update-evil-usepackage/</guid>
+      <description>&lt;p&gt;After switching to &lt;a href=&#34;http://spacemacs.org&#34;&gt;Spacemacs&lt;/a&gt; for the last year
+or two, it&amp;rsquo;s about time to back and pull togeather &lt;em&gt;my own&lt;/em&gt; emacs
+configuration again. However, spacemacs has shown me several packages
+that I want to incorporate into my new emacs setup. Rather than
+resuruct and Frankenstein the changes into my old &lt;code&gt;.emacs&lt;/code&gt;
+file&amp;hellip; I&amp;rsquo;m starting from scratch.&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>SQL Intro</title>

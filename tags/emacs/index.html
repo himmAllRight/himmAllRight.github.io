@@ -9,8 +9,11 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Home Network Ubiquiti Upgrade -- λ ryan. himmelwright. net</title>
+    <title>Emacs -- λ ryan. himmelwright. net</title>
 
+    
+    <link href="http://ryan.himmelwright.net/tags/emacs/index.xml" rel="alternate" type="application/rss+xml" title="λ ryan. himmelwright. net" />
+    <link href="http://ryan.himmelwright.net/tags/emacs/index.xml" rel="feed" type="application/rss+xml" title="λ ryan. himmelwright. net" />
     
 
     
@@ -103,130 +106,43 @@
     </nav>
 
 
-
-
-<header class="intro-header" style="background-image: url('http://ryan.himmelwright.net/img/header-images/router.jpg')">
     
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-                <div class="post-heading">
-                    <h1>Home Network Ubiquiti Upgrade</h1>
-                    <h2 class="subheading"></h2>
-                    <span class="meta">
-                        
-    A 0 minute read,
-
-Posted by <a href="#">Ryan Himmelwright</a> on Mon, Jun 26, 2017
-
-
-
-
-
-
-
-<br />
-Tags <a href="http://ryan.himmelwright.net/tags/homelab">homelab</a>, <a href="http://ryan.himmelwright.net/tags/network">network</a>, <a href="http://ryan.himmelwright.net/tags/ubiquiti">ubiquiti</a>, <a href="http://ryan.himmelwright.net/tags/wifi">wifi</a>
-
-                    </span>
-                </div>
-            </div>
-        </div>
-    </div>
-    
+    <header class="intro-header" style="background-image: url('http://ryan.himmelwright.net/img/home-bg.jpg')">
+     <div class="container">
+       <div class="row">
+         <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+           <div class="site-heading">
+             <h1>Emacs</h1>
+             <hr class="small">
+             <span class="subheading"></span>
+           </div>
+         </div>
+       </div>
+     </div>
     </header>
 
     
-    <article>
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-                    
-                    <p>A few weeks ago, I went back to Pennsylvania for a week to attend my college swim
-team reunion, and my brother&rsquo;s high school graduation. While I was away, the
-wifi-router Rebecca and I were using decided to die (of course). When I returned, I
-setup our old router as a <em>temporary</em> fix. It was terrible. So, I began
-researching how I should upgrade our network. This time around, I am doing this
-<em>correctly</em>.</p>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+          
+                             <div class="post-preview">
+                  <p class="post-meta"><a href="http://ryan.himmelwright.net/post/emacs-update-evil-usepackage/">Emacs Config Redo - Evil &amp; Use-Package</a> on Fri, May 18, 2018
+                    <br />
+                    In 
 
-<p></p>
+                    Tags <a href="http://ryan.himmelwright.net/tags/linux">linux</a>, <a href="http://ryan.himmelwright.net/tags/programming">programming</a>, <a href="http://ryan.himmelwright.net/tags/dev">dev</a>, <a href="http://ryan.himmelwright.net/tags/emacs">emacs</a>, <a href="http://ryan.himmelwright.net/tags/dotfiles">dotfiles</a>
+                  </p>
+               </div>
 
-<p><center>
-<img src="../../img/posts/upgrading-to-ubiquiti-edgerouter/linksys-WRT1900.png"
-width= 45%>
-<img src="../../img/posts/upgrading-to-ubiquiti-edgerouter/linksys-E1200.png"
-width= 45%>
-</center>
-<em>The Linksys WRT-1900 that died (left), and the terrible backup Linksys E1200 (right)</em></p>
+          
+          
 
-<p>The router that died was a Linksys WRT 1900. When I got home, I setup our old
-router as a temporary fix. It&rsquo;s a very basic Linksys E1200. After using it for
-just a few hours, I remembered why I hated it so much. It is slower than a
-snail, and seems to stop working each day or so, requiring me to unplug and
-re-plug it daily (I think it is something with DHCP. It keeps trying to reassign
-IPs to devices, and then doesn&rsquo;t seem to understand how to accept their requests
-afterwards). Thus, the more <em>temporary</em> this solution was, the better.</p>
-
-<p>If I am redoing our network setup, I want to do it <em>properly</em> this time,
-splitting out the router from the wireless access point using <em>good</em> hardware and
-software. My plan is to get an ubiquity edge-router-x, and pair it with an Ubiquiti
-wireless access point.</p>
-
-<p><center>
-<img src="../../img/posts/upgrading-to-ubiquiti-edgerouter/edgerouter-x.png"
-alt="Ubiquity Edgerouter-x" width="45%">
-<img src="../../img/posts/upgrading-to-ubiquiti-edgerouter/ap-ac-lite.png" alt="Ubiquity Access Point Lite" width="45%">
-</center>
-<em>The EdgeRouter-x (right) and an Ubiquity access point lite (right)</em></p>
-
-<p>Originally I wanted to build a small pfsense box to use as a router, but after
-digging a little deeper and doing some research, I saw that the EdgeRouter would
-more than meet my needs and is a great start to a network upgrade. Additionally,
-at $50 (USD), it truly is a great deal. As for the wireless access point, I was
-always considering an UniFi device, and I thought the EdgeRouter should
-pair rather seamlessly, considering both products are made by Ubiquiti.</p>
-
-<p>From what I read, the EdgeRouter is a great router with an okay firewall, while
-pfsense is an amazing firewall that can do routing. So, if I want to dig more
-into pfsense in the future, I can still set up a firewall box, and connect it in front of
-the router.</p>
-
-<pre><code>Modem --&gt; pfsense --&gt; EdgeRouter-x -&gt; devices
-</code></pre>
-
-<p>So&hellip; I think I&rsquo;ve finalized my decision and will purchase the items soon. I
-will update when I get them.</p>
-
-<p><em>Update (06/24/2017): I have followed through with this
-purchase, and the items arrived from Amazon. Expect a post or two about my
-experience setting them up (and yes, I added this update before actually
-publishing this post)</em></p>
-
-                    
-                    
-                        <div style="float: left; text-decoration: underline; text-align: right;">Next Post:</div>
-                    
-                    
-                         <div style="float: right; text-decoration: underline; text-align: right;">Prev Post:</div>
-                    
-                    <br>
-                    
-                        <a href="http://ryan.himmelwright.net/post/issues-setting-up-ubiquiti-network/" style="text-align: left; float: left; max-width: 40%;">Encountered Issues Setting Up Ubiquiti Network</a>
-                    
-                    
-                        <a href="http://ryan.himmelwright.net/post/started-using-i3blocks/" style="text-align: right; float: right; max-width: 40%">Refreshing my i3 setup with i3blocks</a>
-                    
-
-
-                    
-                    
-
-                </div>
-            </div>
         </div>
-    </article>
+      </div>
+    </div>
 
-        <hr>
+    <hr>
     
     <footer>
         <div class="container">

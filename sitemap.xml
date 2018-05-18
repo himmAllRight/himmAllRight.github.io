@@ -3,6 +3,11 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>http://ryan.himmelwright.net/post/emacs-update-evil-usepackage/</loc>
+    <lastmod>2018-05-18T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>http://ryan.himmelwright.net/post/sql-intro/</loc>
     <lastmod>2018-04-24T00:00:00+00:00</lastmod>
   </url>
@@ -15,11 +20,6 @@
   <url>
     <loc>http://ryan.himmelwright.net/pages/about/</loc>
     <lastmod>2018-03-31T15:15:18-04:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://ryan.himmelwright.net/notes/emacs-config/</loc>
-    <lastmod>2018-03-05T00:00:00+00:00</lastmod>
   </url>
   
   <url>
@@ -198,15 +198,7 @@
   </url>
   
   <url>
-    <loc>http://ryan.himmelwright.net/notes/emacs-config.md/</loc>
-  </url>
-  
-  <url>
     <loc>http://ryan.himmelwright.net/notes/focus-account/</loc>
-  </url>
-  
-  <url>
-    <loc>http://ryan.himmelwright.net/notes/lxd-quickstart/</loc>
   </url>
   
   <url>
@@ -274,7 +266,7 @@
   
   <url>
     <loc>http://ryan.himmelwright.net/tags/dev/</loc>
-    <lastmod>2018-04-24T00:00:00+00:00</lastmod>
+    <lastmod>2018-05-18T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -292,7 +284,13 @@
   
   <url>
     <loc>http://ryan.himmelwright.net/tags/dotfiles/</loc>
-    <lastmod>2017-03-07T00:00:00+00:00</lastmod>
+    <lastmod>2018-05-18T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://ryan.himmelwright.net/tags/emacs/</loc>
+    <lastmod>2018-05-18T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -382,7 +380,7 @@
   
   <url>
     <loc>http://ryan.himmelwright.net/tags/linux/</loc>
-    <lastmod>2018-04-24T00:00:00+00:00</lastmod>
+    <lastmod>2018-05-18T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -412,13 +410,13 @@
   
   <url>
     <loc>http://ryan.himmelwright.net/post/</loc>
-    <lastmod>2018-04-24T00:00:00+00:00</lastmod>
+    <lastmod>2018-05-18T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>http://ryan.himmelwright.net/tags/programming/</loc>
-    <lastmod>2018-04-24T00:00:00+00:00</lastmod>
+    <lastmod>2018-05-18T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -508,7 +506,7 @@
   
   <url>
     <loc>http://ryan.himmelwright.net/</loc>
-    <lastmod>2018-04-24T00:00:00+00:00</lastmod>
+    <lastmod>2018-05-18T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
