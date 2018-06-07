@@ -141,11 +141,13 @@ though I have an idea about what to do. I will check things off as I go through
 and fully ensure I know what to do for that task, and optionally write something
 down about it.</p>
 
+<h2 id="pre-planning">Pre Planning</h2>
+
 <h3 id="host">Host</h3>
 
-<p>The host system needs a few things it needs to support. Most are broken down
-into the other categories below, but some are specific to the Host, which will
-be here.</p>
+<p>The host system needs a few things it needs to support. Most are
+broken down into the other categories below, but some are specific to
+the Host, which will be here.</p>
 
 <p><strong>Checklist</strong>:</p>
 
@@ -164,8 +166,8 @@ if it was easy enough to setup samba shares.</p>
 <p><strong>Checklist</strong>:</p>
 
 <ul class="task-list">
-<li><label><input type="checkbox" disabled class="task-list-item"> Test OS ZFS install/Setup</label></li>
-<li><label><input type="checkbox" disabled class="task-list-item"> Import ZFS Pools</label></li>
+<li><label><input type="checkbox" checked disabled class="task-list-item"> Test OS ZFS install/Setup</label></li>
+<li><label><input type="checkbox" checked disabled class="task-list-item"> Import ZFS Pools</label></li>
 <li><label><input type="checkbox" disabled class="task-list-item"> LUKs setup and working</label></li>
 <li><label><input type="checkbox" disabled class="task-list-item"> Ensure Backup Process Works</label></li>
 </ul>
@@ -185,12 +187,11 @@ for management, especially remotely.</p>
 <p><strong>Checklist</strong>:</p>
 
 <ul class="task-list">
-<li><label><input type="checkbox" disabled class="task-list-item"> Replace Meowth with new VM</label></li>
+<li><label><input type="checkbox" checked disabled class="task-list-item"> Replace Meowth with new VM</label></li>
 <li><label><input type="checkbox" checked disabled class="task-list-item"> Export desired VMs</label></li>
-<li><label><input type="checkbox" disabled class="task-list-item"> Run VMs on ZFS or LVM pools</label></li>
-<li><label><input type="checkbox" disabled class="task-list-item"> Learn how to create VMs</label></li>
-<li><label><input type="checkbox" disabled class="task-list-item"> Network so VMs on main network</label></li>
-<li><label><input type="checkbox" disabled class="task-list-item"> Remotely View GUI VMs</label></li>
+<li><label><input type="checkbox" checked disabled class="task-list-item"> Learn how to create VMs</label></li>
+<li><label><input type="checkbox" checked disabled class="task-list-item"> Network so VMs on main network</label></li>
+<li><label><input type="checkbox" checked disabled class="task-list-item"> Remotely View GUI VMs</label></li>
 <li><label><input type="checkbox" disabled class="task-list-item"> Remotely Edit VMs (Easily)</label></li>
 <li><label><input type="checkbox" disabled class="task-list-item"> Auto Backups for VMs</label></li>
 </ul>
@@ -208,7 +209,6 @@ unlike Proxmox, I want to have the server run and support Docker cotnainers.</p>
 
 <ul class="task-list">
 <li><label><input type="checkbox" checked disabled class="task-list-item"> Install Setup LXC</label></li>
-<li><label><input type="checkbox" disabled class="task-list-item"> Run Containers on ZFS or LVM pools?</label></li>
 <li><label><input type="checkbox" disabled class="task-list-item"> Easily Create New (with options Proxmox provides)</label></li>
 <li><label><input type="checkbox" disabled class="task-list-item"> Network so Containers on main network</label></li>
 <li><label><input type="checkbox" disabled class="task-list-item"> Remotely Edit Containers (Easily)</label></li>
@@ -221,18 +221,93 @@ unlike Proxmox, I want to have the server run and support Docker cotnainers.</p>
 
 <ul class="task-list">
 <li><label><input type="checkbox" checked disabled class="task-list-item"> Docker Setup</label></li>
-<li><label><input type="checkbox" disabled class="task-list-item"> Containers on ZFS or LVM pools?</label></li>
 <li><label><input type="checkbox" disabled class="task-list-item"> Network so Containers on main network</label></li>
 <li><label><input type="checkbox" disabled class="task-list-item"> Auto Backups</label></li>
+</ul>
+
+<h2 id="transition-steps">Transition Steps</h2>
+
+<ul class="task-list">
+<li><label><input type="checkbox" checked disabled class="task-list-item"> Export All Proxmox VMs</label></li>
+<li><label><input type="checkbox" checked disabled class="task-list-item"> Export All Proxmox Containers</label></li>
+<li><label><input type="checkbox" checked disabled class="task-list-item"> Run Test install (attached drive)</label></li>
+<li><label><input type="checkbox" checked disabled class="task-list-item"> Install OS</label></li>
+<li><label><input type="checkbox" checked disabled class="task-list-item"> Setup ZFS</label></li>
+<li><label><input type="checkbox" checked disabled class="task-list-item"> Import Pools</label></li>
+<li><label><input type="checkbox" checked disabled class="task-list-item"> Setup KVM/QEMU</label></li>
+<li><label><input type="checkbox" disabled class="task-list-item"> Setup LXC/LCD</label></li>
+<li><label><input type="checkbox" checked disabled class="task-list-item"> Configure Bridged Network</label></li>
+<li><label><input type="checkbox" disabled class="task-list-item"> Import VMs/Contaienrs</label></li>
 </ul>
 
 <h2 id="notes">Notes</h2>
 
 <ul>
-<li>So, I just installed <a href="http://cockpit-project.org/">cockpit</a> on the test
-server. It&rsquo;s been a long time since I have used it, and it has really
-improved. It has interfaces to my VMs and docker containers. It&rsquo;s not as
-extensive as Proxmox, but honestly, goes enough of the way there for me.</li>
+<li><p>So, I just installed <a href="http://cockpit-project.org/">cockpit</a> on the
+test server. It&rsquo;s been a long time since I have used it, and it has
+really improved. It has interfaces to my VMs and docker
+containers. It&rsquo;s not as extensive as Proxmox, but honestly, goes
+enough of the way there for me.</p></li>
+
+<li><p>Now that I am using Ubuntu/Fedora systems as my main OS, I should be
+able to easily remote manage using virt-manager as well. Works so
+far on my test server.</p></li>
+
+<li><p>I have setup ZFS stuff on the test server. However, I won&rsquo;t really
+be able to test the pool import until I test it on the actual
+server.</p></li>
+
+<li><p>I am thinking that I will setup a vpn VM that I can use for remote
+access to the network. This might be the most secure way to do
+remote management anyway.</p></li>
+</ul>
+
+<p>&ndash; Doing it</p>
+
+<ul>
+<li><p>Okay, I exported most of the VMs this morning and imaged my
+Ubuntu 18.04 Server USB drive. Tonight, I&rsquo;ve swapped the SSDs, which
+are luckily the same one :).</p></li>
+
+<li><p>I installed Ubuntu Server on the new SSD.</p></li>
+
+<li><p>I first ran updated and setup ssh. No issue. Then I decided to try
+the part that is more difficult&hellip; at least for me right
+now. Setting up the VM bridge. It actually wasn&rsquo;t that bad and seems
+to be working :). I owe all thanks to <a href="https://www.linuxtechi.com/install-configure-kvm-ubuntu-18-04-server/">this
+post</a>
+though&hellip; it was <em>very</em> helpful.</p></li>
+
+<li><p>I just installed <code>zfsutils-linux</code> and <code>zfs-initramfs</code>. I think I am
+going to try a reboot and insert my drives (took them out for
+safety). Will I be able to detect and then just import the pools? I
+guess I&rsquo;ll find out in a few minutes&hellip;</p></li>
+</ul>
+
+<p>Fingers crossed&hellip;</p>
+
+<ul>
+<li><p>It worked, although I didn&rsquo;t actually install the packages before
+the upgrade. Opps.</p></li>
+
+<li><p>I imported the pools and everything. This morning, I&rsquo;ve upgraded the
+pools and am now in the process of scrubbing them.</p></li>
+
+<li><p>I also setup ansible and ran my ubuntu server playbooks :)</p></li>
+</ul>
+
+<p>&ndash;</p>
+
+<ul>
+<li><p>So it&rsquo;s been a few days, and everything still seems to be up and
+working. I&rsquo;ve easily setup and configured a few dev VMs through
+virt-manger on kadabra, and it works great. I would still like a
+better way to do it remotely, but I think setting up my VPN like
+I&rsquo;ve planned will be the best way to do that, and cockpit will be
+enough for when I am truely remote.</p></li>
+
+<li><p>I still need to set up the container stuff, and put in place some
+automation system, but the basics are all up and running.</p></li>
 </ul>
 
                     
