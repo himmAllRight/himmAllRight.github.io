@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Organizing my Emacs config with Org-Babel -- λ ryan. himmelwright. net</title>
+
+    
+
+    
+    <link href="http://ryan.himmelwright.net/css/bootstrap.min.css" rel="stylesheet">
+
+    
+    <link href="http://ryan.himmelwright.net/css/clean-blog.min.css" rel="stylesheet">
+
+    
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href='//fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+
+    
+    
+    
+
+
+
+    
+    <script type="text/javascript">
+        var _paq = _paq || [];
+         
+        _paq.push(["setDocumentTitle", document.domain + "/" + document.title]);
+        _paq.push(["setCookieDomain", "*.ryan.himmelwright.net"]);
+        _paq.push(["setDomains", ["*.ryan.himmelwright.net"]]);
+        _paq.push(['trackPageView']);
+        _paq.push(['enableLinkTracking']);
+        (function() {
+        var u="//cloud.himmelwright.net/piwik/";
+        _paq.push(['setTrackerUrl', u+'piwik.php']);
+        _paq.push(['setSiteId', '1']);
+        var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+        g.type='text/javascript'; g.async=true; g.defer=true; g.src=u+'piwik.js'; s.parentNode.insertBefore(g,s);
+        })();
+        </script>
+        <noscript><p><img src="//cloud.himmelwright.net/piwik/piwik.php?idsite=1&rec=1" style="border:0;" alt="" /></p></noscript>
+        
+
+
+
+</head>
+
+<body>
+
+    
+    <nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+        <div class="container-fluid">
+            
+            <div class="navbar-header page-scroll">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="http://ryan.himmelwright.net">λ ryan. himmelwright. net</a>
+            </div>
+
+                       
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    
+                    <li>
+                        <a href="http://ryan.himmelwright.net/">home</a>
+                    </li>
+                    
+                    <li>
+                        <a href="http://ryan.himmelwright.net/pages/about/">About</a>
+                    </li>
+                    
+                    <li>
+                        <a href="http://ryan.himmelwright.net/pages/homelab/">Homelab</a>
+                    </li>
+                    
+                    <li>
+                        <a href="http://ryan.himmelwright.net/post/">Archives</a>
+                    </li>
+                    
+                    <li>
+                        <a href="http://ryan.himmelwright.net/post/index.xml">RSS</a>
+                    </li>
+                    
+                  </ul>
+            </div>
+           
+
+        </div>
+        
+    </nav>
+
+
+
+
+<header class="intro-header" style="background-image: url('http://ryan.himmelwright.net/img/header-images/golden-co-mountains.jpg')">
+    
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <h1>Organizing my Emacs config with Org-Babel</h1>
+                    <h2 class="subheading"></h2>
+                    <span class="meta">
+                        
+Posted by <a href="#">Ryan Himmelwright</a> on Wed, Jun 27, 2018
+
+
+
+
+
+
+
+<br />
+Tags <a href="http://ryan.himmelwright.net/tags/linux">linux</a>, <a href="http://ryan.himmelwright.net/tags/programming">programming</a>, <a href="http://ryan.himmelwright.net/tags/dev">dev</a>, <a href="http://ryan.himmelwright.net/tags/emacs">emacs</a>, <a href="http://ryan.himmelwright.net/tags/dotfiles">dotfiles</a>
+
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <span class="header-caption">Golden, CO</span>
+    
+    </header>
+
+    
+    <article>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                    
+                    <p>In my <a href="../emacs-update-evil-usepackage/">previous post</a>, I completely
+redid my emacs configuration from scratch, building it around the use
+of evil mode and use-package. As I was wrapping up, I learned of yet
+<em>another</em> emacs package that wil forever change how I maintain my
+emacs
+configuration&hellip; <a href="https://orgmode.org/worg/org-contrib/babel/intro.html">org-babel</a>.</p>
+
+<p></p>
+
+<h2 id="org-babel">Org Babel</h2>
+
+<p>Org-babel is an emacs package, that lets take an
+<a href="https://orgmode.org/">org-mode</a> file, and evaluates all of the <a href="https://orgmode.org/org.html#Literal-examples">code
+blocks</a> contained
+within it. This means I can write an annotated org file, filled with
+<code>emacs-lisp</code> code blocks, and export just the emacs-lisp code. After
+testing it out, I realized that the main emacs lisp file I use is&hellip; my
+<code>.emacs</code> file&hellip;</p>
+
+<h2 id="setup">Setup</h2>
+
+<p>Installing babel couldn&rsquo;t be simpler. If you are running Emacs version
+24 or higher, and a current version of Org-mode, Babel is already
+available by default. In order to generate an <code>.emacs</code> config from an
+<code>.org</code> file, we need to first setup a <code>config.org</code> file, and then tell
+<code>.emacs</code> to load it with org-babel.</p>
+
+<h3 id="config-org">config.org</h3>
+
+<p>First, start by creating an <code>.org</code> file to use for all of the
+configuration content. This can be named anything, and exist anywhere,
+but I like to keep mine in the emacs section of my <a href="https://github.com/himmAllRight/dotfiles">dotfiles
+repo</a>, named
+<code>config.org</code>. This file functions like any other org file, so I added
+a small header section at the top&hellip; because why not?</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-org" data-lang="org">#+TITLE: My Emacs Configuration
+#+AUTHOR: Ryan Himmelwright
+#+EMAIL: ryan@himmelwright.net
+#+OPTIONS: num:nil </code></pre></div>
+<p>After that, I broke down my file by creating org headings for the
+different groups of the configuration. For example, I started with the
+headings <code>Repos &amp; Core Packages</code>, <code>Core Setup</code>, <code>Evil Mode</code>, <code>Ivy</code>,
+<code>Writing</code>, <code>Development</code>&hellip; etc.</p>
+
+<p><em>Note: In org-mode, use &ldquo;*&rdquo; to create headings. Each contiguous &ldquo;*&ldquo;
+corresponds to the equivalent HTML heading level. Ex: <code>*</code> == <code>&lt;h1&gt;</code>,
+<code>**</code> == <code>&lt;h2&gt;</code>, and so on.</em></p>
+
+<p>I started transferring the emacs-lisp code from my previous <code>.emacs</code>
+file, to under each heading in <code>config.org</code>. As I transferred text, I
+transformed the comments that described each code snippet into normal
+org text, and wrapped the <code>emacs-lisp</code> inside an org code block.</p>
+
+<p><a href="../../img/posts/org-babel-setup/config-org-example1.png"><img src="../../img/posts/org-babel-setup/config-org-example1.png" style="max-width: 100%; float: left; margin: 0px 15px 0px 0px;" alt="Example snippet of my org-babel config.org file" /></a>
+<br clear="all">
+<div class="caption">Example snippet of my org-babel config.org file</div></p>
+
+<p>To create a code block, use the <code>#+BEGIN_SRC emacs-lisp</code> and
+<code>#+END_SRC</code> org tags to encapsulate the <code>emacs-lisp</code> code. Continue to
+do this until all of the desired emacs-lisp code is contained inside
+org code blocks.</p>
+
+<h5 id="side-note-easy-org-code-blocks">Side Note: Easy Org Code Blocks</h5>
+
+<p><a href="../../img/posts/org-babel-setup/easy-org-mode-code.gif"><img
+src="../../img/posts/org-babel-setup/easy-org-mode-code.gif"
+style="max-width: 100%; float: left; margin: 0px 15px 0px 0px;"
+alt="Example snippet of my org-babel config.org file" /></a> <br
+clear="all"> <div class="caption">Code block can be easily created
+with <code>&lt;s</code> and <code>TAB</code>.</div></p>
+
+<p>In org-mode, you can write <code>&lt;s</code>, then hit <code>TAB</code> and it will expand
+into the <code>BEGIN_SRC</code> and <code>END_SRC</code> tags. Just don&rsquo;t forget to add
+<code>emacs-lisp</code> to the <code>BEGIN_SRC</code> tag!</p>
+
+<h3 id="emacs">.emacs</h3>
+
+<p>For the contents of <code>.emacs</code>, call <code>package-initialize</code> and then have
+<code>org-babel</code> load the <code>config.org</code> file.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-emacs-lisp" data-lang="emacs-lisp">(package-initialize)
+(org-babel-load-file <span style="color:#e6db74">&#34;~/dotfiles/emacs/config.org&#34;</span>)</code></pre></div>
+<p>That&rsquo;s it. Assuming the <code>config.org</code> is complete, emacs should now
+initialize using the code snippets from <em>it</em>. While these are the only
+two <em>required</em> lines, do note that emacs will still write the
+<code>#'custom-set-variables</code> to the bottom of the <code>.emacs</code> file. That&rsquo;s
+fine. If anything, it makes it easier to source control the <em>actual</em>
+configuration file, since emacs isn&rsquo;t constantly adding to it,
+changing the diff.</p>
+
+<h2 id="what-i-like">What I like</h2>
+
+<h3 id="organized">Organized</h3>
+
+<p><a href="../../img/posts/org-babel-setup/org-expand-example.gif"><img
+src="../../img/posts/org-babel-setup/org-expand-example.gif"
+style="max-width: 100%; float: left; margin: 0px 15px 0px 0px;"
+alt="Example snippet of expanding org headers to easily find code."
+/></a> <br clear="all"> <div class="caption">Expanding org headers to
+easily find code.</div></p>
+
+<p>Org mode&rsquo;s hierarchical structure inherently organizes the content of
+files. Using it for my emacs configuration is no different. I can use
+org headers to easily break down my file into sections and
+sub-sections, which I can then expand and collapse as needed. For
+example, my <code>config.org</code> is currently over 500 lines long, but with
+all the headers collapsed, it displays in less than 20. From there I
+can just expand to the section I need.</p>
+
+<h3 id="maintainable">Maintainable</h3>
+
+<p>Being so organized, the <code>config.org</code> file is very easy to maintain. If
+I want to edit a setting, I can just search through the headers for
+the section, and then edit the code block and/or text. If I want to
+add a new item, I can just insert a new header, add the code block I
+want, and maybe some explanatory text. Done. Most importantly, the
+structure helps prevent it from turning into an <em>in-production
+&ldquo;scratch code&rdquo;</em> file&hellip;</p>
+
+<h3 id="easy-to-read">Easy to Read</h3>
+
+<p>It should go without saying that the organization and maintainability
+of org-mode configurations make them extremely <em>readable</em>. Not only is
+the source code easier to read, but org files can be
+<a href="https://orgmode.org/manual/Exporting.html">exported</a> to all sorts of
+outputs (HTML, LaTeX, OpenDocument, etc). Combined with a style-sheet,
+these outputs can look quite professional.</p>
+
+<p><a href="../../img/posts/org-babel-setup/github-config.png"><img
+src="../../img/posts/org-babel-setup/github-config.png"
+style="max-width: 100%; float: left; margin: 0px 15px 0px 0px;"
+alt="Example of how Github renders org files as a markdown" /></a> <br
+clear="all"> <div class="caption">Github renders org files as a markdown.</div></p>
+
+<p>Beyond normal <code>org</code> exporting, <a href="http://www.github.com">Github</a> does
+something awesome&hellip; they <em>render</em> <code>org</code> files as a known markup
+language on their website! This means that if you click an <code>*.org</code>
+file on Gihub&rsquo;s web interface, it will display a rendered version of
+the content, instead of defaulting to the raw org text.</p>
+
+<h2 id="speaking-of-github">Speaking of Github&hellip;</h2>
+
+<p>While I have always maintained my emacs configuration in <a href="https://github.com/himmAllRight/dotfiles">my dotfiles
+repo</a>, org-babel has helped
+me step up my game. My current <a href="http://ryan.himmelwright.net/post/new-dotfiles/">dotfile
+system</a> has all of my
+emacs files in a separate <code>emacs</code> folder. On Github, each directory in
+a repo can contain a <code>README</code> file (or&hellip;. a symlink to <em>another</em>
+file&hellip;)  to be displayed below the list of files.</p>
+
+<h2 id="my-maintained-config">My Maintained Config</h2>
+
+<p><a href="../../img/posts/org-babel-setup/github-emacs.png"><img
+src="../../img/posts/org-babel-setup/github-emacs.png"
+style="max-width: 100%; float: left; margin: 0px 15px 0px 0px;"
+alt="Example of how Github renders org files as a markdown" /></a> <br
+clear="all"> <div class="caption">Github renders org files as a
+markdown.</div></p>
+
+<p>In the emacs section of my dotfiles, I have created a symlink,
+<code>README.org</code>, to my <code>config.org</code> file:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">sudo ln -s config.org README.org</code></pre></div>
+<p>Github recognizes this, so my <code>README</code> file &ldquo;contains&rdquo; whatever the
+contents of <code>config.org</code> are. Now, when one visits the <a href="https://github.com/himmAllRight/dotfiles/tree/master/emacs">emacs
+section</a>
+of my dotfiles repo, an organized, annotated, and always up-to-date
+version of my &ldquo;<code>.emacs</code>&rdquo; file is displayed as the <code>README</code>.</p>
+
+<p>The Github support was the cherry on top of a new emacs configuration
+system I am already ecstatic about. I&rsquo;ve been a fan of org-mode for
+years, and org-babel is one more feature to add to the growing list of
+reasons <em>why</em> I love it. I highly recommend checking it out.</p>
+
+                    
+                    
+                    
+                         <div style="float: right; text-decoration: underline; text-align: right;">Prev Post:</div>
+                    
+                    <br>
+                    
+                    
+                        <a href="http://ryan.himmelwright.net/post/emacs-update-evil-usepackage/" style="text-align: right; float: right; max-width: 40%">Emacs Config Redo - Evil &amp; Use-Package</a>
+                    
+
+			
+			<div class="comment-section">
+			  
+   <div id="disqus_thread"></div>
+<script>
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "ryan-himmelwright" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+			</div>
+                </div>
+            </div>
+        </div>
+    </article>
+
+        <hr>
+    
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                  <ul class="list-inline text-center">
+                    
+                      <li>
+                        <a href="mailto:ryan@himmelwright.net">
+                          <span class="fa-stack fa-lg">
+                            <i class="fa fa-circle fa-stack-2x"></i>
+                            <i class="fa fa-envelope-o fa-stack-1x fa-inverse"></i>
+                          </span>
+                        </a>
+                      </li>
+                    
+                    
+                    <li>
+                      <a href="https://github.com/himmAllRight">
+                        <span class="fa-stack fa-lg">
+                          <i class="fa fa-circle fa-stack-2x"></i>
+                          <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                        </span>
+                      </a>
+                    </li>
+                    
+                    <li>
+                      <a href="https://www.linkedin.com/in/ryan-himmelwright-b3891774/">
+                        <span class="fa-stack fa-lg">
+                          <i class="fa fa-circle fa-stack-2x"></i>
+                          <i class="fa fa-linkedin fa-stack-1x fa-inverse"></i>
+                        </span>
+                      </a>
+                    </li>
+                    
+                    <li>
+                      <a href="https://www.instagram.com/himmelwr/">
+                        <span class="fa-stack fa-lg">
+                          <i class="fa fa-circle fa-stack-2x"></i>
+                          <i class="fa fa-instagram fa-stack-1x fa-inverse"></i>
+                        </span>
+                      </a>
+                    </li>
+                    
+                    <li>
+                      <a href="https://twitter.com/himmAllRight17">
+                        <span class="fa-stack fa-lg">
+                          <i class="fa fa-circle fa-stack-2x"></i>
+                          <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+                        </span>
+                      </a>
+                    </li>
+                    
+                  </ul>
+                  <p class="copyright text-muted">Copyright © Ryan Himmelwright. Site created with Hugo</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    
+    <script src="http://ryan.himmelwright.net/js/jquery.min.js"></script>
+
+    
+    <script src="http://ryan.himmelwright.net/js/bootstrap.min.js"></script>
+
+    
+    <script src="http://ryan.himmelwright.net/js/clean-blog.js"></script>
+
+    
+<script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-123-45', 'auto');
+ga('send', 'pageview');
+</script>
+
+
+</body>
+
+</html>
+

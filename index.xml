@@ -7,10 +7,26 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>Copyright © Ryan Himmelwright. Site created with Hugo</copyright>
-    <lastBuildDate>Mon, 18 Jun 2018 08:00:00 -0400</lastBuildDate>
+    <lastBuildDate>Wed, 27 Jun 2018 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="http://ryan.himmelwright.net/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Organizing my Emacs config with Org-Babel</title>
+      <link>http://ryan.himmelwright.net/post/org-babel-setup/</link>
+      <pubDate>Wed, 27 Jun 2018 00:00:00 +0000</pubDate>
+      
+      <guid>http://ryan.himmelwright.net/post/org-babel-setup/</guid>
+      <description>&lt;p&gt;In my &lt;a href=&#34;../emacs-update-evil-usepackage/&#34;&gt;previous post&lt;/a&gt;, I completely
+redid my emacs configuration from scratch, building it around the use
+of evil mode and use-package. As I was wrapping up, I learned of yet
+&lt;em&gt;another&lt;/em&gt; emacs package that wil forever change how I maintain my
+emacs
+configuration&amp;hellip; &lt;a href=&#34;https://orgmode.org/worg/org-contrib/babel/intro.html&#34;&gt;org-babel&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>About</title>
