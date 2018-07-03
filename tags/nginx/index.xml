@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Nginx on λ ryan. himmelwright. net</title>
+    <link>http://ryan.himmelwright.net/tags/nginx/</link>
+    <description>Recent content in Nginx on λ ryan. himmelwright. net</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>Copyright © Ryan Himmelwright. Site created with Hugo</copyright>
+    <lastBuildDate>Tue, 03 Jul 2018 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="http://ryan.himmelwright.net/tags/nginx/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Nginx as a Reverse Proxy to Forward Sub-Domains</title>
+      <link>http://ryan.himmelwright.net/post/nginx-subdomain-reverse-proxy/</link>
+      <pubDate>Tue, 03 Jul 2018 00:00:00 +0000</pubDate>
+      
+      <guid>http://ryan.himmelwright.net/post/nginx-subdomain-reverse-proxy/</guid>
+      <description>&lt;p&gt;Last month, Rebecca and I moved to Durham, North Carolina. As a
+result, I&amp;rsquo;ve had to re-setup our home network. In years past, I setup
+a virtual machine running &lt;a href=&#34;https://www.nginx.com/&#34;&gt;Nginx&lt;/a&gt; as a
+reverse-proxy (Tangela), and I decided to do that again on the new
+network. While it is a simple process, it is one that other people often
+ask me about. So, this time&amp;hellip; I&amp;rsquo;m taking notes!&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

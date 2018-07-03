@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Nginx as a Reverse Proxy to Forward Sub-Domains -- λ ryan. himmelwright. net</title>
+
+    
+
+    
+    <link href="http://ryan.himmelwright.net/css/bootstrap.min.css" rel="stylesheet">
+
+    
+    <link href="http://ryan.himmelwright.net/css/clean-blog.min.css" rel="stylesheet">
+
+    
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href='//fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+
+    
+    
+    
+
+
+
+    
+    <script type="text/javascript">
+        var _paq = _paq || [];
+         
+        _paq.push(["setDocumentTitle", document.domain + "/" + document.title]);
+        _paq.push(["setCookieDomain", "*.ryan.himmelwright.net"]);
+        _paq.push(["setDomains", ["*.ryan.himmelwright.net"]]);
+        _paq.push(['trackPageView']);
+        _paq.push(['enableLinkTracking']);
+        (function() {
+        var u="//cloud.himmelwright.net/piwik/";
+        _paq.push(['setTrackerUrl', u+'piwik.php']);
+        _paq.push(['setSiteId', '1']);
+        var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+        g.type='text/javascript'; g.async=true; g.defer=true; g.src=u+'piwik.js'; s.parentNode.insertBefore(g,s);
+        })();
+        </script>
+        <noscript><p><img src="//cloud.himmelwright.net/piwik/piwik.php?idsite=1&rec=1" style="border:0;" alt="" /></p></noscript>
+        
+
+
+
+</head>
+
+<body>
+
+    
+    <nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+        <div class="container-fluid">
+            
+            <div class="navbar-header page-scroll">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="http://ryan.himmelwright.net">λ ryan. himmelwright. net</a>
+            </div>
+
+                       
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    
+                    <li>
+                        <a href="http://ryan.himmelwright.net/">home</a>
+                    </li>
+                    
+                    <li>
+                        <a href="http://ryan.himmelwright.net/pages/about/">About</a>
+                    </li>
+                    
+                    <li>
+                        <a href="http://ryan.himmelwright.net/pages/homelab/">Homelab</a>
+                    </li>
+                    
+                    <li>
+                        <a href="http://ryan.himmelwright.net/post/">Archives</a>
+                    </li>
+                    
+                    <li>
+                        <a href="http://ryan.himmelwright.net/post/index.xml">RSS</a>
+                    </li>
+                    
+                  </ul>
+            </div>
+           
+
+        </div>
+        
+    </nav>
+
+
+
+
+<header class="intro-header" style="background-image: url('http://ryan.himmelwright.net/img/header-images/foster-street-farmers-market1.jpg')">
+    
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <h1>Nginx as a Reverse Proxy to Forward Sub-Domains</h1>
+                    <h2 class="subheading"></h2>
+                    <span class="meta">
+                        
+Posted by <a href="#">Ryan Himmelwright</a> on Tue, Jul 3, 2018
+
+
+
+
+
+
+
+<br />
+Tags <a href="http://ryan.himmelwright.net/tags/linux">linux</a>, <a href="http://ryan.himmelwright.net/tags/homelab">homelab</a>, <a href="http://ryan.himmelwright.net/tags/network">network</a>, <a href="http://ryan.himmelwright.net/tags/nginx">nginx</a>, <a href="http://ryan.himmelwright.net/tags/website">website</a>
+
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <span class="header-caption">Farmers Market, Foster Street, Durham NC</span>
+    
+    </header>
+
+    
+    <article>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                    
+                    <p>Last month, Rebecca and I moved to Durham, North Carolina. As a
+result, I&rsquo;ve had to re-setup our home network. In years past, I setup
+a virtual machine running <a href="https://www.nginx.com/">Nginx</a> as a
+reverse-proxy (Tangela), and I decided to do that again on the new
+network. While it is a simple process, it is one that other people often
+ask me about. So, this time&hellip; I&rsquo;m taking notes!</p>
+
+<p></p>
+
+<h2 id="why">Why?</h2>
+
+<p>The purpose of this reverse proxy is to direct outside traffic to the
+appropriate host internally, by looking at the sub-domain of the URL
+request. For example, I may have servers for both
+<code>website.himmelwright.net</code> and <code>dashboard.himmelwright.net</code> running
+internally on my network, but they will have the same public IP. Using
+nginx, I can point all of my web traffic to <em>tangela</em>, my
+reverse-proxy. If tangela sees that the incoming request is for
+<code>website.himmelwright.net</code>, it will forward that traffic to the
+website server. On the other hand, if the request is for
+<code>dashboard.himmelwright.net</code>, it will direct it to the dashboard
+server. A reverse-proxy expands what can be accomplished on a single network,
+and is a cleaner (and possibly safer) method than doing everything through
+port-forwarding.</p>
+
+<p><a href="../../img/posts/nginx-reverse-proxy/tangela.png"><img
+src="../../img/posts/nginx-reverse-proxy/tangela.png" style="max-width:
+50%; float: right; margin: 0px 0px 0px 0px;" alt="Example snippet of
+my org-babel config.org file" /></a></p>
+
+<h2 id="setup-server">Setup Server</h2>
+
+<p>To get started, configure a server/container/droplet that will host
+nginx. I&rsquo;m using a CentOS 7 minimal install VM on
+<a href="http://ryan.himmelwright.net/pages/homelab/#ninetales">Nintales</a> (my
+home server). I don&rsquo;t have a bunch of traffic (well, I <em>shouldn&rsquo;t</em>), so I&rsquo;m
+just giving it 1 core and 512MB RAM.</p>
+
+<h3 id="setup-nginx">Setup Nginx</h3>
+
+<p>Next, it&rsquo;s time to setup and install Nginx.</p>
+
+<p><em>Note</em>: the rest of the post will be focused on using a CentOS 7 base,
+since that is what I am using. Adjust for your distro accordingly.</p>
+
+<p>Add the nginx repo, and install it:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">sudo rpm -Uvh http://nginx.org/packages/centos/7/noarch/RPMS/nginx-release-centos-7-0.el7.ngx.noarch.rpm
+sudo yum -y install nginx</code></pre></div>
+<p>Tell the firewall to allow http traffic:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">sudo firewall-cmd --permanent --add-service<span style="color:#f92672">=</span>http
+sudo systemctl reload firewalld</code></pre></div>
+<p>Start and enable nginx:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">sudo systemctl start nginx
+sudo systemctl enable nginx</code></pre></div>
+<h2 id="configure-nginx">Configure Nginx</h2>
+
+<p>Examine the config file, just to check that everything looks alright.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">vim /etc/nginx/nginx.conf</code></pre></div>
+<p>Specifically, we want to ensure that the following line exists before
+proceeding:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">include /etc/nginx/conf.d/*.conf;</code></pre></div>
+<p>That line basically states that any *.conf file inside the <code>/etc/nginx/conf.d/</code>
+directory will also be loaded and used by nginx. This allows us to add our own configuration file in the next step.</p>
+
+<h2 id="configure-proxy">Configure Proxy</h2>
+
+<p>I created a <code>reverse-proxies.config</code> (it can be named anything with a
+<code>.config</code> extension) file in <code>/etc/nginx/conf.d/</code> to contain all of
+the reverse proxy definitions. These are just server block
+entries. For example:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">server <span style="color:#f92672">{</span>
+        listen <span style="color:#ae81ff">80</span>;
+        server_name website.himmelwright.net;
+        location / <span style="color:#f92672">{</span>
+                proxy_pass      http://192.168.1.198:80;
+        <span style="color:#f92672">}</span>
+<span style="color:#f92672">}</span>
+
+server <span style="color:#f92672">{</span>
+        listen <span style="color:#ae81ff">80</span>;
+        server_name dashboard.himmelwright.net;
+        location / <span style="color:#f92672">{</span>
+                proxy_pass      http://192.168.1.200:8080;
+        <span style="color:#f92672">}</span>
+<span style="color:#f92672">}</span></code></pre></div>
+<p>Restart nginx for the changes to take effect:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">sudo systemctl restart nginx</code></pre></div>
+<h4 id="side-note">Side Note:</h4>
+
+<p>For some applications, you may need to add the URL to the <code>/etc/hosts</code>
+file, and use that for nginx. I have experienced this in the past with
+<a href="https://about.gitlab.com/">Gitlab</a>. For example:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">/etc/hosts
+---
+<span style="color:#ae81ff">192</span>.168.1.201  git.himmelwright.net</code></pre></div>
+<p>and then in the config file:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">/etc/nginx/config.d/reverse-proxies.config
+---
+server <span style="color:#f92672">{</span>
+        listen <span style="color:#ae81ff">80</span>;
+        server_name git.himmelwright.net;
+        location / <span style="color:#f92672">{</span>
+                proxy_pass      http://git.himmelwright.net:80;
+        <span style="color:#f92672">}</span>
+<span style="color:#f92672">}</span></code></pre></div>
+<h2 id="selinux-fixes">SELinux Fixes</h2>
+
+<p>At this point, you may be done. However, I was having issues getting
+nginx to forward some of my ports&hellip; until I remembered that I was on
+CentOS and it may be an issue with SELinux. It was.</p>
+
+<p>One &ldquo;<em>fix</em>&rdquo; is to just disable SELinux. A <em>better</em> solution is to use
+setools to allow the http connections:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">sudo yum install -y setools
+setsebool -P httpd_can_network_connect true</code></pre></div>
+<h2 id="conclusion">Conclusion</h2>
+
+<p>Besides having to configure your router to forward http traffic to the
+server, that is really it. This is a real basic configuration, but it
+has worked well for me over the years. If I start doing something more
+complex, I may write provide an update. Until then, enjoy!</p>
+
+                    
+                    
+                    
+                         <div style="float: right; text-decoration: underline; text-align: right;">Prev Post:</div>
+                    
+                    <br>
+                    
+                    
+                        <a href="http://ryan.himmelwright.net/post/org-babel-setup/" style="text-align: right; float: right; max-width: 40%">Organizing my Emacs config with Org-Babel</a>
+                    
+
+			
+			<div class="comment-section">
+			  
+   <div id="disqus_thread"></div>
+<script>
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "himmallright" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+			</div>
+                </div>
+            </div>
+        </div>
+    </article>
+
+        <hr>
+    
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                  <ul class="list-inline text-center">
+                    
+                      <li>
+                        <a href="mailto:ryan@himmelwright.net">
+                          <span class="fa-stack fa-lg">
+                            <i class="fa fa-circle fa-stack-2x"></i>
+                            <i class="fa fa-envelope-o fa-stack-1x fa-inverse"></i>
+                          </span>
+                        </a>
+                      </li>
+                    
+                    
+                    <li>
+                      <a href="https://github.com/himmAllRight">
+                        <span class="fa-stack fa-lg">
+                          <i class="fa fa-circle fa-stack-2x"></i>
+                          <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                        </span>
+                      </a>
+                    </li>
+                    
+                    <li>
+                      <a href="https://www.linkedin.com/in/ryan-himmelwright-b3891774/">
+                        <span class="fa-stack fa-lg">
+                          <i class="fa fa-circle fa-stack-2x"></i>
+                          <i class="fa fa-linkedin fa-stack-1x fa-inverse"></i>
+                        </span>
+                      </a>
+                    </li>
+                    
+                    <li>
+                      <a href="https://www.instagram.com/himmelwr/">
+                        <span class="fa-stack fa-lg">
+                          <i class="fa fa-circle fa-stack-2x"></i>
+                          <i class="fa fa-instagram fa-stack-1x fa-inverse"></i>
+                        </span>
+                      </a>
+                    </li>
+                    
+                    <li>
+                      <a href="https://twitter.com/himmAllRight17">
+                        <span class="fa-stack fa-lg">
+                          <i class="fa fa-circle fa-stack-2x"></i>
+                          <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+                        </span>
+                      </a>
+                    </li>
+                    
+                  </ul>
+                  <p class="copyright text-muted">Copyright © Ryan Himmelwright. Site created with Hugo</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    
+    <script src="http://ryan.himmelwright.net/js/jquery.min.js"></script>
+
+    
+    <script src="http://ryan.himmelwright.net/js/bootstrap.min.js"></script>
+
+    
+    <script src="http://ryan.himmelwright.net/js/clean-blog.js"></script>
+
+    
+<script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-123-45', 'auto');
+ga('send', 'pageview');
+</script>
+
+
+</body>
+
+</html>
+
