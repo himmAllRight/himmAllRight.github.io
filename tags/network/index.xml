@@ -7,10 +7,27 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>Copyright © Ryan Himmelwright. Site created with Hugo</copyright>
-    <lastBuildDate>Tue, 03 Jul 2018 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 15 Aug 2018 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="http://ryan.himmelwright.net/tags/network/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Creating a CI/CD &#39;Draft&#39; Website with Jenkins (and Hugo)</title>
+      <link>http://ryan.himmelwright.net/post/draft-website-with-jenkins/</link>
+      <pubDate>Wed, 15 Aug 2018 00:00:00 +0000</pubDate>
+      
+      <guid>http://ryan.himmelwright.net/post/draft-website-with-jenkins/</guid>
+      <description>&lt;p&gt;The last few months I have been working more with the open source
+automation server, &lt;a href=&#34;https://jenkins.io/&#34;&gt;Jenkins&lt;/a&gt;. While digging into
+it, I have been thinking of ways to improve my home build
+environment. One idea, was to utilize Jenkins to automatically build
+and deploy a &amp;ldquo;draft&amp;rdquo; website, so I can stage new posts/website change
+on my home network, before publishing it to the &amp;ldquo;production&amp;rdquo;
+website. Here is how that idea was Instantiated&amp;hellip;&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>Nginx as a Reverse Proxy to Forward Sub-Domains</title>

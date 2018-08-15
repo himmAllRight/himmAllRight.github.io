@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Creating a CI/CD &#39;Draft&#39; Website with Jenkins (and Hugo) -- λ ryan. himmelwright. net</title>
+
+    
+
+    
+    <link href="http://ryan.himmelwright.net/css/bootstrap.min.css" rel="stylesheet">
+
+    
+    <link href="http://ryan.himmelwright.net/css/clean-blog.min.css" rel="stylesheet">
+
+    
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href='//fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+
+    
+    
+    
+
+
+
+    
+    <script type="text/javascript">
+        var _paq = _paq || [];
+         
+        _paq.push(["setDocumentTitle", document.domain + "/" + document.title]);
+        _paq.push(["setCookieDomain", "*.ryan.himmelwright.net"]);
+        _paq.push(["setDomains", ["*.ryan.himmelwright.net"]]);
+        _paq.push(['trackPageView']);
+        _paq.push(['enableLinkTracking']);
+        (function() {
+        var u="//cloud.himmelwright.net/piwik/";
+        _paq.push(['setTrackerUrl', u+'piwik.php']);
+        _paq.push(['setSiteId', '1']);
+        var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+        g.type='text/javascript'; g.async=true; g.defer=true; g.src=u+'piwik.js'; s.parentNode.insertBefore(g,s);
+        })();
+        </script>
+        <noscript><p><img src="//cloud.himmelwright.net/piwik/piwik.php?idsite=1&rec=1" style="border:0;" alt="" /></p></noscript>
+        
+
+
+
+</head>
+
+<body>
+
+    
+    <nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+        <div class="container-fluid">
+            
+            <div class="navbar-header page-scroll">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="http://ryan.himmelwright.net">λ ryan. himmelwright. net</a>
+            </div>
+
+                       
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    
+                    <li>
+                        <a href="http://ryan.himmelwright.net/">home</a>
+                    </li>
+                    
+                    <li>
+                        <a href="http://ryan.himmelwright.net/pages/about/">About</a>
+                    </li>
+                    
+                    <li>
+                        <a href="http://ryan.himmelwright.net/pages/homelab/">Homelab</a>
+                    </li>
+                    
+                    <li>
+                        <a href="http://ryan.himmelwright.net/post/">Archives</a>
+                    </li>
+                    
+                    <li>
+                        <a href="http://ryan.himmelwright.net/post/index.xml">RSS</a>
+                    </li>
+                    
+                  </ul>
+            </div>
+           
+
+        </div>
+        
+    </nav>
+
+
+
+
+<header class="intro-header" style="background-image: url('http://ryan.himmelwright.net/img/header-images/atc-back1.jpg')">
+    
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <h1>Creating a CI/CD &#39;Draft&#39; Website with Jenkins (and Hugo)</h1>
+                    <h2 class="subheading"></h2>
+                    <span class="meta">
+                        
+Posted by <a href="#">Ryan Himmelwright</a> on Wed, Aug 15, 2018
+
+
+
+
+
+
+
+<br />
+Tags <a href="http://ryan.himmelwright.net/tags/linux">linux</a>, <a href="http://ryan.himmelwright.net/tags/homelab">homelab</a>, <a href="http://ryan.himmelwright.net/tags/network">network</a>, <a href="http://ryan.himmelwright.net/tags/nginx">nginx</a>, <a href="http://ryan.himmelwright.net/tags/website">website</a>, <a href="http://ryan.himmelwright.net/tags/devops">devops</a>, <a href="http://ryan.himmelwright.net/tags/hugo">hugo</a>
+
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <span class="header-caption">American Tobacco Campus, Durham NC</span>
+    
+    </header>
+
+    
+    <article>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                    
+                    <p>The last few months I have been working more with the open source
+automation server, <a href="https://jenkins.io/">Jenkins</a>. While digging into
+it, I have been thinking of ways to improve my home build
+environment. One idea, was to utilize Jenkins to automatically build
+and deploy a &ldquo;draft&rdquo; website, so I can stage new posts/website change
+on my home network, before publishing it to the &ldquo;production&rdquo;
+website. Here is how that idea was Instantiated&hellip;</p>
+
+<p></p>
+
+<h2 id="my-website">My Website</h2>
+
+<p><a href="../../img/posts/draft-website-jenkins/jenkins-logo.png"><img
+src="../../img/posts/draft-website-jenkins/jenkins-logo.png" style="max-width:
+50%; float: left; margin: 0px 12px 0px 0px;" alt="Jenkins Logo" /></a></p>
+
+<p>I have previously <a href="../website-transition-to-hugo/">described</a> how my
+website is <a href="../website-switched-to-hugo/">currently generated</a>, using
+the <a href="https://gohugo.io">Hugo</a> static website generator. To organize
+this system, I have two git repos: One that consists of all the hugo
+source files (where I write content), and one that contains the
+generated static website (that gets deployed to my web host).</p>
+
+<p>When writing a post, I use <code>hugo server -D -F</code> to live view the page
+in my browser. However, I occasionally want to view the state of all
+the <em>committed code</em> in the <em>repo</em>, to see what the site would look
+like if I decided to publish a post. So, I created a &ldquo;drafts&rdquo; website,
+which shows the current state of my website&rsquo;s <em>source</em> repo (including
+draft and future posts). If I want to check how a post looks on my
+phone, or any other device, I can just open up the draft website after
+pushing my changes.</p>
+
+<p><a href="../../img/posts/draft-website-jenkins/mr-mime.png"><img
+src="../../img/posts/draft-website-jenkins/mr-mime.png" style="max-width:
+45%; float: right; margin: 20px 0px 0px 10px;" alt="Jenkins Logo" /></a></p>
+
+<h2 id="jenkins">Jenkins</h2>
+
+<p>I had previously created a dedicated Jenkins server on my home network
+(Mr. Mime), using a CentOS 7 VM hosted on my home server. However, any
+Jenkins setup should work for this project (including a <a href="on my home network">docker
+container</a>). To get started, checkout the <a href="https://jenkins.io/download/">Jenkins
+Website</a>, and be sure to take advantage
+of the <a href="https://jenkins.io/doc/">the documentation</a> for help.</p>
+
+<p><em>Note: just make sure hugo is installed on the Jenkins server, as we need
+it to generate the website.</em></p>
+
+<h3 id="github-integration">GitHub Integration</h3>
+
+<h4 id="jenkins-service">Jenkins Service</h4>
+
+<p>My website repo is hosted on GitHub, so we need to configure it to
+work with our Jenkins server. To do that, go to the project&rsquo;s GitHub
+page, and navigate through <strong>Settings</strong> -&gt; <strong>Integrations &amp;
+services</strong>. Click the <strong>Add service</strong> drop-down and select <em>Jenkins
+(Git Plugin)</em>. Next, add the Jenkins server url (assuming the server
+is accessible from the internet. If not, hosting the Jenkins server on
+something like <a href="http://digitalocean.com">Digital Ocean</a> might be an
+easy solution). Lastly, make sure the <strong>Activate</strong> box is selected,
+and click the <strong>Add Service</strong> button.</p>
+
+<h4 id="ssh-keys">SSH Keys</h4>
+
+<p>While on the project&rsquo;s GitHub page, make sure that the Jenkins
+server&rsquo;s ssh keys are added to the project. To add them, navigate to
+the <strong>Deploy Keys</strong> page (under the project&rsquo;s <strong>Settings</strong> tab). Then
+select <strong>Add deploy key</strong>, and add the public key.</p>
+
+<h2 id="a-nginx-server">A Nginx Server</h2>
+
+<p><a href="../../img/posts/draft-website-jenkins/nginx.png"><img
+src="../../img/posts/draft-website-jenkins/nginx.png" style="max-width:
+100%; float: center; margin: 0px 0px 0px 0px;" alt="Default Nginx Page" /></a></p>
+
+<p>With Jenkins ready, let&rsquo;s quickly setup the web server before
+configuring the Jenkins project. Any web server will do (it just needs
+to serve the generated <em>static</em> website content). I used
+<a href="https://nginx.org/en/">nginx</a> in for setup. After installing, make
+sure it is running. To install and check the status of nginx on an
+Ubuntu System:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e">## Install
+</span><span style="color:#75715e"></span>sudo apt install -y nginx
+
+<span style="color:#75715e">## Check it is running
+</span><span style="color:#75715e"></span>sudo systemctl status nginx
+
+<span style="color:#75715e">## Optional: Ensure it is enabled to start up after reboots
+</span><span style="color:#75715e"></span>sudo systemctl enable nginx</code></pre></div>
+<p>With the web server running, we need to know <em>where</em> the website files
+need to go. Nginx will by default serve content at
+<code>/user/share/nginx/html/</code>, so remember that location for later&hellip;</p>
+
+<p><em>Note: Don&rsquo;t forget to add the <code>jenkins</code> user&rsquo;s ssh key from the
+jenkins server to the <code>authorized_keys</code> file of the nginx server. This
+will make file transfers easier when setting up the jenkins project.</em></p>
+
+<h2 id="configuring-a-project">Configuring a Project</h2>
+
+<p>Let&rsquo;s configure our Jenkins project! Log in to the Jenkins
+server and click the <strong>New Item</strong> option on the left side bar. Enter a
+name for the project, select the <strong>Freestyle Project</strong> option, and hit
+<strong>OK</strong>.</p>
+
+<p><a href="../../img/posts/draft-website-jenkins/general-config.png"><img
+src="../../img/posts/draft-website-jenkins/general-config.png" style="max-width:
+100%; float: center; margin: 0px 0px 0px 0px;" alt="The Project's General Configuration Section" /></a>
+<div class="caption">The Project&rsquo;s General Configuration Section</div></p>
+
+<p>In the <strong>General</strong> section of the configuration screen, optionally
+write a description about the project. Next, select the &ldquo;<em>GitHub
+Project</em>&rdquo; check-box, and add the GitHub repo&rsquo;s url into the <em>Project
+url</em> text box.</p>
+
+<h4 id="source-control">Source Control</h4>
+
+<p><a href="../../img/posts/draft-website-jenkins/credentials.png"><img
+src="../../img/posts/draft-website-jenkins/credentials.png"
+style="max-width: 100%; float: center; margin: 0px 0px 0px 0px;"
+alt="Setting Credentials" /></a>
+<div class="caption">Setting Credentials</div></p>
+
+<p>In the <strong>Source Code Management</strong> section of the configuration, select
+the <em>Git</em> option. Then, enter the repo&rsquo;s url for the <em>Repository URL</em>
+box (I did the ssh url). For <em>Credentials</em>, select <em>Add</em> to configure a
+new credential. Select <em>SSH Username with private key</em> for <em>Kind</em>,
+use <code>jenkins</code> for the <em>Username</em>.</p>
+
+<p>More source control options can be configured, but this should be the
+minimum setup required. <em>Again, for this to work public keys for the
+<code>jenkins</code> user on the jenkins server must be generated, and added as a
+deployment key on GitHub.</em></p>
+
+<h4 id="build-trigger">Build Trigger</h4>
+
+<p>Under the <strong>Build Triggers</strong> section, select <em>Poll SCM</em>. Without
+adding any schedule parameters, it will trigger each time a new commit
+is detected. This is what we want.</p>
+
+<h4 id="build-step">Build Step</h4>
+
+<p>In the <strong>Build</strong> section, click <strong>Add build step</strong>, and select
+<strong>Execute shell</strong>. This is where we can add the shell commands to
+build the website with hugo. Add the following command to the box
+(don&rsquo;t forget to change the url):</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">hugo -D -F -b <span style="color:#e6db74">&#34;http://10.1.1.77&#34;</span> -d public</code></pre></div>
+<p>The <code>-D</code> flag tells hugo to include all draft posts, while the <code>-F</code> flag
+has it include all posts with a future date. The <code>-b</code> flag sets the
+url for the generated website. This should the be url or IP address of
+the nginx server setup previously. Lastly, the <code>-d</code> flag tells hugo to
+output the generated static website to the <code>public</code> directory. This
+will be useful to know when deploying the build.</p>
+
+<h4 id="deploy-to-webserver">Deploy to Webserver</h4>
+
+<p>For deployment, I used rsync to copy the build files to the nginx
+web server. This step will be another shell command, so I&rsquo;ve actually
+added it as another &ldquo;build&rdquo; step. Add another <strong>Execute shell</strong> and
+paste the following command inside the text box (again, changing the url):</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">rsync -r <span style="color:#e6db74">&#34;</span>$WORKSPACE<span style="color:#e6db74">/public/&#34;</span> ryan@10.1.1.77:/usr/share/nginx/html/</code></pre></div>
+<p>I used the Jenkins <code>$WORKSPACE</code> variable to get the location of the
+build, and was able to append the <code>public</code> directory to that, since we
+defined it with the <code>-d</code> flag in the hugo build step above. This will
+copy the generated website, to the web server.</p>
+
+<p>Hit <strong>Save</strong>, and test it out by clicking the <strong>Build Now</strong> link on the
+left. If the build is successful, check the nginx website to see if
+the website was deployed!</p>
+
+<p><em>Note: If it doesn&rsquo;t work, double check all permissions and
+credentials between accounts and servers.</em></p>
+
+<h2 id="better-yet-pipelines">Better Yet&hellip; Pipelines</h2>
+
+<p>What&rsquo;s better than using Jenkins for automated &ldquo;draft website&rdquo;
+deployments?  Using a <a href="https://jenkins.io/doc/book/pipeline/">Jenkins
+Pipeline</a>. A Pipeline allows
+the jenkins project steps to be defined in a <em>Jenkinsfile</em> that, among
+other benefits, can be source controlled. In fact, by default a
+Jenkins pipeline searches for the <code>Jenkinsfile</code> right in the root
+directory of a project&rsquo;s git repo.</p>
+
+<p>While a pipeline and
+<a href="https://jenkins.io/doc/book/pipeline/jenkinsfile/">Jenkinsfile</a> might
+be a bit more confusing to <em>learn</em> how to setup, it is well worth it. For
+example, the following Jenkinsfile can be used to do essentially what
+we setup in the previous steps:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-groovy" data-lang="groovy">pipeline <span style="color:#f92672">{</span>
+    agent <span style="color:#f92672">{</span>
+	label <span style="color:#e6db74">&#39;mr-mime&#39;</span>
+    <span style="color:#f92672">}</span>
+    stages <span style="color:#f92672">{</span>
+	stage <span style="color:#f92672">(</span><span style="color:#e6db74">&#39;build&#39;</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+	    steps<span style="color:#f92672">{</span>
+		sh <span style="color:#e6db74">&#39;hugo -D -F -b &#34;http://10.1.1.77&#34;&#39;</span>
+	    <span style="color:#f92672">}</span>
+	<span style="color:#f92672">}</span>
+	stage <span style="color:#f92672">(</span><span style="color:#e6db74">&#39;deploy&#39;</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+	    steps<span style="color:#f92672">{</span>
+		sh <span style="color:#e6db74">&#39;rsync -r &#34;$WORKSPACE/public/&#34; ryan@ponyta:/usr/share/nginx/html/&#39;</span>
+	    <span style="color:#f92672">}</span>
+	<span style="color:#f92672">}</span>
+
+    <span style="color:#f92672">}</span>
+<span style="color:#f92672">}</span></code></pre></div>
+<p>I&rsquo;m not going to cover pipelines in <em>this</em> post. However, I do
+encourage readers to check them out.</p>
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p>That&rsquo;s it. While I currently host my website using <a href="https://pages.github.com/">GitHub
+pages</a>, if I ever self-host it again, I
+will definitely automate publishing it using Jenkins as well. This has
+been a <em>very</em> basic example of what Jenkins can be used for, but I
+have found it rather useful when working on the content of this
+website. There is so much more it can do. Have fun!</p>
+
+                    
+                    
+                    
+                         <div style="float: right; text-decoration: underline; text-align: right;">Prev Post:</div>
+                    
+                    <br>
+                    
+                    
+                        <a href="http://ryan.himmelwright.net/post/nginx-subdomain-reverse-proxy/" style="text-align: right; float: right; max-width: 40%">Nginx as a Reverse Proxy to Forward Sub-Domains</a>
+                    
+
+			
+			<div class="comment-section">
+			  
+   <div id="disqus_thread"></div>
+<script>
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "himmallright" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+			</div>
+                </div>
+            </div>
+        </div>
+    </article>
+
+        <hr>
+    
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                  <ul class="list-inline text-center">
+                    
+                      <li>
+                        <a href="mailto:ryan@himmelwright.net">
+                          <span class="fa-stack fa-lg">
+                            <i class="fa fa-circle fa-stack-2x"></i>
+                            <i class="fa fa-envelope-o fa-stack-1x fa-inverse"></i>
+                          </span>
+                        </a>
+                      </li>
+                    
+                    
+                    <li>
+                      <a href="https://github.com/himmAllRight">
+                        <span class="fa-stack fa-lg">
+                          <i class="fa fa-circle fa-stack-2x"></i>
+                          <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                        </span>
+                      </a>
+                    </li>
+                    
+                    <li>
+                      <a href="https://www.linkedin.com/in/ryan-himmelwright-b3891774/">
+                        <span class="fa-stack fa-lg">
+                          <i class="fa fa-circle fa-stack-2x"></i>
+                          <i class="fa fa-linkedin fa-stack-1x fa-inverse"></i>
+                        </span>
+                      </a>
+                    </li>
+                    
+                    <li>
+                      <a href="https://www.instagram.com/himmelwr/">
+                        <span class="fa-stack fa-lg">
+                          <i class="fa fa-circle fa-stack-2x"></i>
+                          <i class="fa fa-instagram fa-stack-1x fa-inverse"></i>
+                        </span>
+                      </a>
+                    </li>
+                    
+                    <li>
+                      <a href="https://twitter.com/himmAllRight17">
+                        <span class="fa-stack fa-lg">
+                          <i class="fa fa-circle fa-stack-2x"></i>
+                          <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+                        </span>
+                      </a>
+                    </li>
+                    
+                  </ul>
+                  <p class="copyright text-muted">Copyright © Ryan Himmelwright. Site created with Hugo</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    
+    <script src="http://ryan.himmelwright.net/js/jquery.min.js"></script>
+
+    
+    <script src="http://ryan.himmelwright.net/js/bootstrap.min.js"></script>
+
+    
+    <script src="http://ryan.himmelwright.net/js/clean-blog.js"></script>
+
+    
+<script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-123-45', 'auto');
+ga('send', 'pageview');
+</script>
+
+
+</body>
+
+</html>
+
