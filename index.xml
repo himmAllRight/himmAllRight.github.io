@@ -7,7 +7,7 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>Copyright © Ryan Himmelwright. Site created with Hugo</copyright>
-    <lastBuildDate>Sun, 23 Sep 2018 07:14:00 -0400</lastBuildDate>
+    <lastBuildDate>Sun, 21 Oct 2018 07:14:00 -0400</lastBuildDate>
     
 	<atom:link href="http://ryan.himmelwright.net/index.xml" rel="self" type="application/rss+xml" />
     
@@ -15,11 +15,11 @@
     <item>
       <title>About</title>
       <link>http://ryan.himmelwright.net/pages/about/</link>
-      <pubDate>Sun, 23 Sep 2018 07:14:00 -0400</pubDate>
+      <pubDate>Sun, 21 Oct 2018 07:14:00 -0400</pubDate>
       
       <guid>http://ryan.himmelwright.net/pages/about/</guid>
-      <description>I am a 27 year-old software developer working at a Walpole, MA based company (although I recently moved to Durham, NC), that heavily utilizes Allegro Common Lisp for its applications. I primarily focus on our back-end build and deployment infrastructure, but as with any small company, I wear many hats and jump around assisting wherever I am needed.
-Outside of work, I am an enthusiastic Linux user that loves learning about computers, programming languages (especially functional ones), and open source technologies.</description>
+      <description>I am a 27 year-old Quality Engineer at Red Hat, living and working in Durham, NC. Previously, I worked at 2Is-Inc as a Back-end Software Developer, creating applications and build systems (mostly in Allegro Common Lisp). Before that, I was a student at Lafayette College, where I majored in Neuroscience and minored in Computer Science.
+Outside of work, I am still an enthusiastic Linux user that loves learning about computers, programming languages (especially functional ones), and open source technologies.</description>
     </item>
     
     <item>
