@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Reset Plasma 5 Monitor Configuration -- λ ryan. himmelwright. net</title>
+
+    
+
+    
+    <link href="http://ryan.himmelwright.net/css/bootstrap.min.css" rel="stylesheet">
+
+    
+    <link href="http://ryan.himmelwright.net/css/clean-blog.min.css" rel="stylesheet">
+
+    
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href='//fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+
+    
+    
+    
+
+
+
+    
+    <script type="text/javascript">
+        var _paq = _paq || [];
+         
+        _paq.push(["setDocumentTitle", document.domain + "/" + document.title]);
+        _paq.push(["setCookieDomain", "*.ryan.himmelwright.net"]);
+        _paq.push(["setDomains", ["*.ryan.himmelwright.net"]]);
+        _paq.push(['trackPageView']);
+        _paq.push(['enableLinkTracking']);
+        (function() {
+        var u="//cloud.himmelwright.net/piwik/";
+        _paq.push(['setTrackerUrl', u+'piwik.php']);
+        _paq.push(['setSiteId', '1']);
+        var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+        g.type='text/javascript'; g.async=true; g.defer=true; g.src=u+'piwik.js'; s.parentNode.insertBefore(g,s);
+        })();
+        </script>
+        <noscript><p><img src="//cloud.himmelwright.net/piwik/piwik.php?idsite=1&rec=1" style="border:0;" alt="" /></p></noscript>
+        
+
+
+
+</head>
+
+<body>
+
+    
+    <nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+        <div class="container-fluid">
+            
+            <div class="navbar-header page-scroll">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="http://ryan.himmelwright.net">λ ryan. himmelwright. net</a>
+            </div>
+
+                       
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    
+                    <li>
+                        <a href="http://ryan.himmelwright.net/">home</a>
+                    </li>
+                    
+                    <li>
+                        <a href="http://ryan.himmelwright.net/pages/about/">About</a>
+                    </li>
+                    
+                    <li>
+                        <a href="http://ryan.himmelwright.net/pages/homelab/">Homelab</a>
+                    </li>
+                    
+                    <li>
+                        <a href="http://ryan.himmelwright.net/tags">tags</a>
+                    </li>
+                    
+                    <li>
+                        <a href="http://ryan.himmelwright.net/post/">Archives</a>
+                    </li>
+                    
+                    <li>
+                        <a href="http://ryan.himmelwright.net/post/index.xml">RSS</a>
+                    </li>
+                    
+                  </ul>
+            </div>
+           
+
+        </div>
+        
+    </nav>
+
+
+
+
+<header class="intro-header" style="background-image: url('http://ryan.himmelwright.net/img/header-images/nc-sun-in-trees1.jpg')">
+    
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <h1>Reset Plasma 5 Monitor Configuration</h1>
+                    <h2 class="subheading"></h2>
+                    <span class="meta">
+                        
+Posted by <a href="#">Ryan Himmelwright</a> on Wed, Nov 14, 2018
+
+
+
+
+
+
+
+<br />
+Tags <a href="http://ryan.himmelwright.net/tags/hardware">hardware</a>, <a href="http://ryan.himmelwright.net/tags/monitors">monitors</a>, <a href="http://ryan.himmelwright.net/tags/linux">linux</a>, <a href="http://ryan.himmelwright.net/tags/kde">kde</a>
+
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <span class="header-caption">North Carolina Arboretum (Pisgah National Forest), Asheville, NC</span>
+    
+    </header>
+
+    
+    <article>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                    
+                    <p>Extending a laptop&rsquo;s screen to an external display can often be a nightmare.
+Sometimes, it might be best to just hit the reset button and configure from
+scratch. With KDE Plasma 5, you can. Here&rsquo;s how.</p>
+
+<p></p>
+
+<h2 id="issue">Issue</h2>
+
+<p>While I love having a <a href="../my-t470/">dock-able laptop</a> and <a href="new-lgud4379b">my 43&rdquo; 4k LG
+monitor</a>, getting them configured and agreeing with each other
+can sometimes be a headache. Luckily, KDE Plasma 5 (the desktop environment
+I&rsquo;ve been using for awhile now) is fantastic and remembers previous display
+configurations.</p>
+
+<p>However, when I am playing around with resolutions or multiple inputs,
+sometimes I set something that doesn&rsquo;t work&hellip; and it is remembered, causing
+more problems.</p>
+
+<h2 id="the-fix">The Fix</h2>
+
+<p>Luckily, there is an easy fix: just delete the saved profile, and
+re-setup the display again. However, I often forget these very simple steps&hellip;
+hence, this post (and to help anyone else that needs it, of course :P).</p>
+
+<h4 id="delete-old-profile">Delete old profile</h4>
+
+<p>The first step is to delete the plasma profile that saves the screen settings.
+Note, this may remove the profiles for <em>all</em> previously configured displays,
+but I am okay with it for <em>my</em> use case.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">cd ~/.local.share
+rm -rf kscreen</code></pre></div>
+<h4 id="extend-monitors-when-docked">Extend monitors when docked</h4>
+
+<p><a href="../../img/posts/reset-plasma5-monitor-config/extended-monitor.png"><img alt="The KDE Plasma 5 extend display GUI" src="../../img/posts/reset-plasma5-monitor-config/extend-monitor.png" style="max-width: 100%;"/></a>
+<div class="caption">The KDE Plasma 5 extend display GUI.</div></p>
+
+<p>After deleting the config, dock or reconnect the laptop to the display. A GUI
+with extension layout options should pop up. If it does, select the preferred
+layout option.</p>
+
+<h4 id="close-laptop-lid-don-t-disable">Close laptop lid (don&rsquo;t disable)</h4>
+
+<p>After extending the display, I usually try to make the monitor the primary
+display and disable the laptop screen. This doesn&rsquo;t seem to work (It causes my
+monitor to blank). However, I have learned that if I simply <em>close my laptop
+lid</em> once it is connected&hellip; it does both of those things for me. I always
+forget this&hellip; but now it&rsquo;s documented!</p>
+
+<h4 id="optional-reset-kscreen">(Optional) Reset kscreen</h4>
+
+<p>After flipping around the displays so much, plasma shell may have gotten a bit
+frazzled. If so, just reset it using the following command:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">kquitapp5 plasmashell <span style="color:#f92672">&amp;&amp;</span> kstart plasmashell</code></pre></div>
+<p>I like to execute this in krunner (alt-F2) so that it runs in the background,
+and because I can usually still get to krunner, even if something goes terribly
+wrong with plasmashell during the process.</p>
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p>That&rsquo;s it. While this post is rather short (for once), hopefully it will be useful. Enjoy!</p>
+
+                    
+                    
+                    
+                         <div style="float: right; text-decoration: underline; text-align: right;">Prev Post:</div>
+                    
+                    <br>
+                    
+                    
+                        <a href="http://ryan.himmelwright.net/post/draft-website-with-jenkins/" style="text-align: right; float: right; max-width: 40%">Creating a CI/CD &#39;Draft&#39; Website with Jenkins (and Hugo)</a>
+                    
+
+			
+			<div class="comment-section">
+			  
+   <div id="disqus_thread"></div>
+<script>
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "himmallright" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+			</div>
+                </div>
+            </div>
+        </div>
+    </article>
+
+        <hr>
+    
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                  <ul class="list-inline text-center">
+                    
+                      <li>
+                        <a href="mailto:ryan@himmelwright.net">
+                          <span class="fa-stack fa-lg">
+                            <i class="fa fa-circle fa-stack-2x"></i>
+                            <i class="fa fa-envelope-o fa-stack-1x fa-inverse"></i>
+                          </span>
+                        </a>
+                      </li>
+                    
+                    
+                    <li>
+                      <a href="https://github.com/himmAllRight">
+                        <span class="fa-stack fa-lg">
+                          <i class="fa fa-circle fa-stack-2x"></i>
+                          <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                        </span>
+                      </a>
+                    </li>
+                    
+                    <li>
+                      <a href="https://www.linkedin.com/in/ryan-himmelwright-b3891774/">
+                        <span class="fa-stack fa-lg">
+                          <i class="fa fa-circle fa-stack-2x"></i>
+                          <i class="fa fa-linkedin fa-stack-1x fa-inverse"></i>
+                        </span>
+                      </a>
+                    </li>
+                    
+                  </ul>
+                  <p class="copyright text-muted">Copyright © Ryan Himmelwright. Site created with Hugo</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    
+    <script src="http://ryan.himmelwright.net/js/jquery.min.js"></script>
+
+    
+    <script src="http://ryan.himmelwright.net/js/bootstrap.min.js"></script>
+
+    
+    <script src="http://ryan.himmelwright.net/js/clean-blog.js"></script>
+
+    
+<script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-123-45', 'auto');
+ga('send', 'pageview');
+</script>
+
+
+</body>
+
+</html>
+

@@ -7,10 +7,23 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>Copyright © Ryan Himmelwright. Site created with Hugo</copyright>
-    <lastBuildDate>Wed, 15 Aug 2018 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 14 Nov 2018 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="http://ryan.himmelwright.net/tags/linux/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Reset Plasma 5 Monitor Configuration</title>
+      <link>http://ryan.himmelwright.net/post/reset-plasma5-monitor-config/</link>
+      <pubDate>Wed, 14 Nov 2018 00:00:00 +0000</pubDate>
+      
+      <guid>http://ryan.himmelwright.net/post/reset-plasma5-monitor-config/</guid>
+      <description>&lt;p&gt;Extending a laptop&amp;rsquo;s screen to an external display can often be a nightmare.
+Sometimes, it might be best to just hit the reset button and configure from
+scratch. With KDE Plasma 5, you can. Here&amp;rsquo;s how.&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>Creating a CI/CD &#39;Draft&#39; Website with Jenkins (and Hugo)</title>
