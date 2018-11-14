@@ -35,7 +35,7 @@ configuration&amp;hellip; &lt;a href=&#34;https://orgmode.org/worg/org-contrib/b
       
       <guid>http://ryan.himmelwright.net/post/emacs-update-evil-usepackage/</guid>
       <description>&lt;p&gt;After switching to &lt;a href=&#34;http://spacemacs.org&#34;&gt;Spacemacs&lt;/a&gt; for the last year
-or two, it&amp;rsquo;s about time to back and pull togeather &lt;em&gt;my own&lt;/em&gt; emacs
+or two, it&amp;rsquo;s about time to back and pull together &lt;em&gt;my own&lt;/em&gt; emacs
 configuration again. However, spacemacs has shown me several packages
 that I want to incorporate into my new emacs setup. Rather than
 resurrect and Frankenstein the changes into my old &lt;code&gt;.emacs&lt;/code&gt;
