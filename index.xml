@@ -6,10 +6,20 @@
     <description>Recent content on λ ryan. himmelwright. net</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 14 Nov 2018 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 18 Nov 2018 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="http://ryan.himmelwright.net/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Homelab</title>
+      <link>http://ryan.himmelwright.net/pages/homelab/</link>
+      <pubDate>Sun, 18 Nov 2018 00:00:00 +0000</pubDate>
+      
+      <guid>http://ryan.himmelwright.net/pages/homelab/</guid>
+      <description>This is a page where I maintain the status of the computers in my “Homelab”. I will list my current systems here (potentially with screenshots of my current desktop setup for my workstations).
+Computers Ryan (Me) Having recently moved to Durham NC, I built a new standing desk and am slowly putting my space together. So for now &amp;hellip; don&amp;rsquo;t mind the wires :P. I&amp;rsquo;ll try to keep updating this page as I progress.</description>
+    </item>
     
     <item>
       <title>Reset Plasma 5 Monitor Configuration</title>
@@ -35,16 +45,6 @@ have decided to upgrade to using a single, but &lt;em&gt;better&lt;/em&gt;,
 monitor. After two years of debating, I have finally made my choice.&lt;/p&gt;
 
 &lt;p&gt;&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>Homelab</title>
-      <link>http://ryan.himmelwright.net/pages/homelab/</link>
-      <pubDate>Sat, 03 Nov 2018 00:00:00 +0000</pubDate>
-      
-      <guid>http://ryan.himmelwright.net/pages/homelab/</guid>
-      <description>This is a page where I maintain the status of the computers in my “Homelab”. I will list my current systems here (potentially with screenshots of my current desktop setup for my workstations).
-Computers Ryan (Me) Having recently moved to Durham NC, I built a new standing desk and am slowly putting my space together. So for now &amp;hellip; don&amp;rsquo;t mind the wires :P. I&amp;rsquo;ll try to keep updating this page as I progress.</description>
     </item>
     
     <item>
