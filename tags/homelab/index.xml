@@ -6,10 +6,27 @@
     <description>Recent content in Homelab on λ ryan. himmelwright. net</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 12 Nov 2018 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 26 Nov 2018 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="http://ryan.himmelwright.net/tags/homelab/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Designing my new Ryzen Workstation</title>
+      <link>http://ryan.himmelwright.net/post/charmeleon-desktop-design/</link>
+      <pubDate>Mon, 26 Nov 2018 00:00:00 +0000</pubDate>
+      
+      <guid>http://ryan.himmelwright.net/post/charmeleon-desktop-design/</guid>
+      <description>&lt;p&gt;Over the past few years (particularly after moving to the &lt;a href=&#34;../my-t470/&#34;&gt;T470&lt;/a&gt;
+as my main device), I have been anticipating what my next desktop
+workstation build will look like. For a period of time, I was convinced that
+I would build a &lt;a href=&#34;https://www.techspot.com/review/1155-affordable-dual-xeon-pc/&#34;&gt;muti-socket, used xeon
+build&lt;/a&gt;. Then, in 2017
+AMD released their &lt;a href=&#34;https://en.wikipedia.org/wiki/Ryzen&#34;&gt;Ryzen&lt;/a&gt;
+series CPUs&amp;hellip;&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>Monitor Selection: My New LG-UD4329b</title>
