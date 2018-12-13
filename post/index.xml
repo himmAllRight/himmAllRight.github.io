@@ -6,10 +6,24 @@
     <description>Recent content in Posts on λ ryan. himmelwright. net</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 26 Nov 2018 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 12 Dec 2018 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="http://ryan.himmelwright.net/post/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Configuring Pass, the Standard Unix Password Manager</title>
+      <link>http://ryan.himmelwright.net/post/setting-up-pass/</link>
+      <pubDate>Wed, 12 Dec 2018 00:00:00 +0000</pubDate>
+      
+      <guid>http://ryan.himmelwright.net/post/setting-up-pass/</guid>
+      <description>&lt;p&gt;I&amp;rsquo;ve been using &lt;code&gt;pass&lt;/code&gt; to manage my passwords for quite some time.
+During the early days of use, I occasionally had difficulty configuring it on
+new machines, but those days appear to be long gone. It is a simple, generic,
+yet flexible system.  Here&amp;rsquo;s how to get started.&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>Designing my new Ryzen Workstation</title>

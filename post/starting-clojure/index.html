@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Starting Clojure, as a Common Lisp Deveoper -- λ ryan. himmelwright. net</title>
+
+    
+
+    
+    <link href="http://ryan.himmelwright.net/css/bootstrap.min.css" rel="stylesheet">
+
+    
+    <link href="http://ryan.himmelwright.net/css/clean-blog.min.css" rel="stylesheet">
+
+    
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href='//fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+
+    
+    
+    
+
+
+
+    
+    <script type="text/javascript">
+        var _paq = _paq || [];
+         
+        _paq.push(["setDocumentTitle", document.domain + "/" + document.title]);
+        _paq.push(["setCookieDomain", "*.ryan.himmelwright.net"]);
+        _paq.push(["setDomains", ["*.ryan.himmelwright.net"]]);
+        _paq.push(['trackPageView']);
+        _paq.push(['enableLinkTracking']);
+        (function() {
+        var u="//cloud.himmelwright.net/piwik/";
+        _paq.push(['setTrackerUrl', u+'piwik.php']);
+        _paq.push(['setSiteId', '1']);
+        var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+        g.type='text/javascript'; g.async=true; g.defer=true; g.src=u+'piwik.js'; s.parentNode.insertBefore(g,s);
+        })();
+        </script>
+        <noscript><p><img src="//cloud.himmelwright.net/piwik/piwik.php?idsite=1&rec=1" style="border:0;" alt="" /></p></noscript>
+        
+
+
+
+</head>
+
+<body>
+
+    
+    <nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+        <div class="container-fluid">
+            
+            <div class="navbar-header page-scroll">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="http://ryan.himmelwright.net">λ ryan. himmelwright. net</a>
+            </div>
+
+                       
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    
+                    <li>
+                        <a href="http://ryan.himmelwright.net/">home</a>
+                    </li>
+                    
+                    <li>
+                        <a href="http://ryan.himmelwright.net/pages/about/">About</a>
+                    </li>
+                    
+                    <li>
+                        <a href="http://ryan.himmelwright.net/pages/homelab/">Homelab</a>
+                    </li>
+                    
+                    <li>
+                        <a href="http://ryan.himmelwright.net/tags">tags</a>
+                    </li>
+                    
+                    <li>
+                        <a href="http://ryan.himmelwright.net/post/">Archives</a>
+                    </li>
+                    
+                    <li>
+                        <a href="http://ryan.himmelwright.net/post/index.xml">RSS</a>
+                    </li>
+                    
+                  </ul>
+            </div>
+           
+
+        </div>
+        
+    </nav>
+
+
+
+
+<header class="intro-header" style="background-image: url('http://ryan.himmelwright.net/img/header-images/container-building-umich.jpg')">
+    
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <h1>Starting Clojure, as a Common Lisp Deveoper</h1>
+                    <h2 class="subheading"></h2>
+                    <span class="meta">
+                        
+Posted by <a href="#">Ryan Himmelwright</a> on Fri, Apr 20, 2018
+
+
+
+
+
+
+
+<br />
+Tags <a href="http://ryan.himmelwright.net/tags/programming">programming</a>, <a href="http://ryan.himmelwright.net/tags/linux">linux</a>, <a href="http://ryan.himmelwright.net/tags/lisp">lisp</a>, <a href="http://ryan.himmelwright.net/tags/clojure">clojure</a>
+
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    </header>
+
+    
+    <article>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                    
+                    <p>I have started to get into clojure again. This is just a spot for me to take
+notes for now. I&rsquo;ll turn this into a post that is mostly notes to myself about
+the basics of clojure, but also comparing it to what I know about common lisp.
+So sort of a &ldquo;clojure from a common lisp developer&rdquo;. This might be the first
+post of a series&hellip;</p>
+
+<p></p>
+
+<h2 id="install-clojure">Install Clojure</h2>
+
+<p><code>lein</code> setup</p>
+
+<p>maybe install Java if not already?</p>
+
+<h2 id="configuring-and-using-spacemacs-cider">Configuring and Using Spacemacs Cider</h2>
+
+<h2 id="language">Language</h2>
+
+<ul>
+<li>Normal lisp syntax, for the most part
+
+<ul>
+<li>Parens</li>
+<li>no <code>,</code></li>
+<li>Operator followed by operands (prefix**</li>
+<li>Simple, Nested structure
+<br /></li>
+</ul></li>
+</ul>
+
+<p><strong>NOTE: I&rsquo;ll probably keep comparing clojure to common-lisp&hellip; since that&rsquo;s
+  what I know and use at my day job.</strong></p>
+
+<h3 id="control-flow">Control Flow</h3>
+
+<h4 id="if">If</h4>
+
+<p><code>if</code> seems to work the same as in common lisp, and has the form:</p>
+
+<blockquote>
+<p>(if boolean-form
+   then-form
+   optional-else-form)</p>
+</blockquote>
+
+<p>So, the first thing provided is the boolean form. If it evalutates to <code>true</code> (or
+a &ldquo;truthy&rdquo; value, just as in Common Lisp), the second form is evaluated and
+returned. Otherwise, the second form is evaluated and returned (if provided.
+Otherwise, returns <code>nil</code>).</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-clojure" data-lang="clojure">user&gt; (<span style="color:#66d9ef">if </span>true
+        <span style="color:#e6db74">&#34;True Condition&#34;</span>
+        <span style="color:#e6db74">&#34;False Condition&#34;</span>)
+=&gt; <span style="color:#e6db74">&#34;True Condition&#34;</span>
+user&gt; (<span style="color:#66d9ef">if </span>false
+        <span style="color:#e6db74">&#34;True Condition&#34;</span>
+        <span style="color:#e6db74">&#34;False Condition&#34;</span>)
+=&gt; <span style="color:#e6db74">&#34;False Condition&#34;</span></code></pre></div>
+<p>Notice that just as in common lisp, both the if and else conditional branches
+can only have one form. The way around this in common lisp is to wrap multiple
+forms using a function like <code>progn</code>, a <code>let</code> closure, or to use <code>if*</code> instead
+(my preferred method recently). In clojure, <code>do</code> can be used.</p>
+
+<h4 id="do">do</h4>
+
+<p>Do wraps up multiple forms into a single one and evaluates them, returning the
+last item, <em>much</em> like <code>progn</code> in common lisp. As stated above, this is be used
+in an <code>if</code> to place multiple forms in the <em>if</em> or <em>else</em> conditional branches:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-clojure" data-lang="clojure">user&gt; (do
+        (println <span style="color:#e6db74">&#34;Print this line&#34;</span>)
+        (println <span style="color:#e6db74">&#34;And also this line...&#34;</span>)
+        <span style="color:#e6db74">&#34;return this line&#34;</span>)
+=&gt; Print this line
+=&gt; And also this line...
+=&gt; <span style="color:#e6db74">&#34;return this line&#34;</span></code></pre></div>
+<h4 id="when">when</h4>
+
+<p>In some languages, the <em>else</em> conditional branch of an <code>if</code> function is
+mandatory (ex: Haskell), the benefit being that <em>all</em> conditions are <em>defined</em>.
+However, sometimes when using <code>if</code>, it might only be desired to do something
+<em>if</em> the conditional is true. In other words&hellip; we don&rsquo;t really care about the
+<em>else</em> condition, <em>or</em> more likely, we intend the <code>else</code> to just return <code>nil</code>.</p>
+
+<p>In lisp languages, we have <code>when</code> to handle this scenario. <code>When</code> essentially
+combines the functionality of an else-less <code>if</code>, with a <code>do</code>. It takes a boolean
+form, and when &ldquo;true&rdquo;, it will evaluate the remaining forms wrapped inside the
+<code>when</code>. Otherwise, it will return <code>nil</code>. So for example, the following two
+pieces of code are essentially the same:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-clojure" data-lang="clojure">user&gt; (<span style="color:#66d9ef">if </span>true
+        (do
+          (println <span style="color:#e6db74">&#34;If true, run me&#34;</span>)
+          (println <span style="color:#e6db74">&#34;...don&#39;t forget about me&#34;</span>)
+          <span style="color:#e6db74">&#34;I&#39;m the return value! (in Ralph Wiggum voice...)&#34;</span>)
+        nil)
+        
+=&gt; If true, run me
+=&gt; ...don<span style="color:#e6db74">&#39;t</span> forget about me
+=&gt; <span style="color:#e6db74">&#34;I&#39;m the return value! (in Ralph Wiggum voice...)&#34;</span>
+
+user&gt; (<span style="color:#66d9ef">if </span>false
+        (do
+          (println <span style="color:#e6db74">&#34;If true, run me&#34;</span>)
+          (println <span style="color:#e6db74">&#34;...don&#39;t forget about me&#34;</span>)
+          <span style="color:#e6db74">&#34;I&#39;m the return value! (in Ralph Wiggum voice...)&#34;</span>)
+        nil)
+=&gt; nil</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-clojure" data-lang="clojure">user&gt; (when true
+        (println <span style="color:#e6db74">&#34;If true, run me&#34;</span>)
+        (println <span style="color:#e6db74">&#34;...don&#39;t forget about me&#34;</span>)
+        <span style="color:#e6db74">&#34;I&#39;m the return value! (in Ralph Wiggum voice...)&#34;</span>)
+If true, run me
+...don<span style="color:#e6db74">&#39;t</span> forget about me
+<span style="color:#e6db74">&#34;I&#39;m the return value! (in Ralph Wiggum voice...)&#34;</span>
+
+user&gt; (when false
+        (println <span style="color:#e6db74">&#34;If true, run me&#34;</span>)
+        (println <span style="color:#e6db74">&#34;...don&#39;t forget about me&#34;</span>)
+        <span style="color:#e6db74">&#34;I&#39;m the return value! (in Ralph Wiggum voice...)&#34;</span>)
+nil</code></pre></div>
+
+                    
+                    
+                        <div style="float: left; text-decoration: underline; text-align: right;">Next Post:</div>
+                    
+                    
+                         <div style="float: right; text-decoration: underline; text-align: right;">Prev Post:</div>
+                    
+                    <br>
+                    
+                        <a href="http://ryan.himmelwright.net/post/sql-intro/" style="text-align: left; float: left; max-width: 40%;">SQL Intro</a>
+                    
+                    
+                        <a href="http://ryan.himmelwright.net/post/trying-out-seafile/" style="text-align: right; float: right; max-width: 40%">Trying Out Seafile</a>
+                    
+
+			
+			<div class="comment-section">
+			  
+
+			</div>
+                </div>
+            </div>
+        </div>
+    </article>
+
+        <hr>
+    
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                  <ul class="list-inline text-center">
+                    
+                      <li>
+                        <a href="mailto:ryan@himmelwright.net">
+                          <span class="fa-stack fa-lg">
+                            <i class="fa fa-circle fa-stack-2x"></i>
+                            <i class="fa fa-envelope-o fa-stack-1x fa-inverse"></i>
+                          </span>
+                        </a>
+                      </li>
+                    
+                    
+                    <li>
+                      <a href="https://github.com/himmAllRight">
+                        <span class="fa-stack fa-lg">
+                          <i class="fa fa-circle fa-stack-2x"></i>
+                          <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                        </span>
+                      </a>
+                    </li>
+                    
+                    <li>
+                      <a href="https://www.linkedin.com/in/ryan-himmelwright-b3891774/">
+                        <span class="fa-stack fa-lg">
+                          <i class="fa fa-circle fa-stack-2x"></i>
+                          <i class="fa fa-linkedin fa-stack-1x fa-inverse"></i>
+                        </span>
+                      </a>
+                    </li>
+                    
+                  </ul>
+<p class="copyright text-muted">
+
+<a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img
+  alt="Creative Commons License" style="border-width:0"
+  src="https://i.creativecommons.org/l/by/4.0/88x31.png" /></a><br />This work
+by <a xmlns:cc="http://creativecommons.org/ns#" href="http://ryan.himmelwright.net" property="cc:attributionName" rel="cc:attributionURL">Ryan Himmelwright</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
+</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    
+    <script src="http://ryan.himmelwright.net/js/jquery.min.js"></script>
+
+    
+    <script src="http://ryan.himmelwright.net/js/bootstrap.min.js"></script>
+
+    
+    <script src="http://ryan.himmelwright.net/js/clean-blog.js"></script>
+
+    
+<script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-123-45', 'auto');
+ga('send', 'pageview');
+</script>
+
+
+</body>
+
+</html>
+

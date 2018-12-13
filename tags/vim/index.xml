@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Vim on λ ryan. himmelwright. net</title>
+    <link>http://ryan.himmelwright.net/tags/vim/</link>
+    <description>Recent content in Vim on λ ryan. himmelwright. net</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Fri, 30 Nov 2018 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="http://ryan.himmelwright.net/tags/vim/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Creating a Real .vimrc</title>
+      <link>http://ryan.himmelwright.net/post/creating-a-real-vimrc/</link>
+      <pubDate>Fri, 30 Nov 2018 00:00:00 +0000</pubDate>
+      
+      <guid>http://ryan.himmelwright.net/post/creating-a-real-vimrc/</guid>
+      <description>&lt;p&gt;While vim was the first power editor I learned and used in college, I quickly
+forgot about most of it&amp;rsquo;s commands after switching to Emacs over the last few
+years. At my new job, I work more in remote terminal sessions, where VIM really
+is king. So, I figured it was time to scrape off the rust and actually setup a
+&lt;em&gt;real&lt;/em&gt; &lt;code&gt;.vimrc&lt;/code&gt; configuration again.&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

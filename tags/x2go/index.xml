@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>X2go on λ ryan. himmelwright. net</title>
+    <link>http://ryan.himmelwright.net/tags/x2go/</link>
+    <description>Recent content in X2go on λ ryan. himmelwright. net</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sat, 21 Jul 2018 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="http://ryan.himmelwright.net/tags/x2go/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Creating &#34;Cloud&#34; Workspace at Home</title>
+      <link>http://ryan.himmelwright.net/post/home-cloud-workspaces/</link>
+      <pubDate>Sat, 21 Jul 2018 00:00:00 +0000</pubDate>
+      
+      <guid>http://ryan.himmelwright.net/post/home-cloud-workspaces/</guid>
+      <description>&lt;p&gt;In the age of services such as &lt;a href=&#34;https://aws.amazon.com/workspaces/&#34;&gt;Amazon
+Workspaces&lt;/a&gt;,and &lt;a href=&#34;https://v2cloud.com/products/workspaces/&#34;&gt;V2 Cloud
+Workspaces&lt;/a&gt;, amung many
+others, I feel obligated it point out that virtual &amp;ldquo;cloud&amp;rdquo; workspaces
+can be easily setup and created at home, using Linux. While these
+services provide the obvious advantage of being hosted and maintained
+in a large data-center, if you don&amp;rsquo;t need that&amp;hellip; roll your own. I&amp;rsquo;ll
+show you how.&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

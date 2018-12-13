@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Lisp on λ ryan. himmelwright. net</title>
+    <link>http://ryan.himmelwright.net/tags/lisp/</link>
+    <description>Recent content in Lisp on λ ryan. himmelwright. net</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Fri, 20 Apr 2018 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="http://ryan.himmelwright.net/tags/lisp/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Starting Clojure, as a Common Lisp Deveoper</title>
+      <link>http://ryan.himmelwright.net/post/starting-clojure/</link>
+      <pubDate>Fri, 20 Apr 2018 00:00:00 +0000</pubDate>
+      
+      <guid>http://ryan.himmelwright.net/post/starting-clojure/</guid>
+      <description>&lt;p&gt;I have started to get into clojure again. This is just a spot for me to take
+notes for now. I&amp;rsquo;ll turn this into a post that is mostly notes to myself about
+the basics of clojure, but also comparing it to what I know about common lisp.
+So sort of a &amp;ldquo;clojure from a common lisp developer&amp;rdquo;. This might be the first
+post of a series&amp;hellip;&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

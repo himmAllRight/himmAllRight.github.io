@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Configuring Pass, the Standard Unix Password Manager -- λ ryan. himmelwright. net</title>
+
+    
+
+    
+    <link href="http://ryan.himmelwright.net/css/bootstrap.min.css" rel="stylesheet">
+
+    
+    <link href="http://ryan.himmelwright.net/css/clean-blog.min.css" rel="stylesheet">
+
+    
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href='//fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+
+    
+    
+    
+
+
+
+    
+    <script type="text/javascript">
+        var _paq = _paq || [];
+         
+        _paq.push(["setDocumentTitle", document.domain + "/" + document.title]);
+        _paq.push(["setCookieDomain", "*.ryan.himmelwright.net"]);
+        _paq.push(["setDomains", ["*.ryan.himmelwright.net"]]);
+        _paq.push(['trackPageView']);
+        _paq.push(['enableLinkTracking']);
+        (function() {
+        var u="//cloud.himmelwright.net/piwik/";
+        _paq.push(['setTrackerUrl', u+'piwik.php']);
+        _paq.push(['setSiteId', '1']);
+        var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+        g.type='text/javascript'; g.async=true; g.defer=true; g.src=u+'piwik.js'; s.parentNode.insertBefore(g,s);
+        })();
+        </script>
+        <noscript><p><img src="//cloud.himmelwright.net/piwik/piwik.php?idsite=1&rec=1" style="border:0;" alt="" /></p></noscript>
+        
+
+
+
+</head>
+
+<body>
+
+    
+    <nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+        <div class="container-fluid">
+            
+            <div class="navbar-header page-scroll">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="http://ryan.himmelwright.net">λ ryan. himmelwright. net</a>
+            </div>
+
+                       
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    
+                    <li>
+                        <a href="http://ryan.himmelwright.net/">home</a>
+                    </li>
+                    
+                    <li>
+                        <a href="http://ryan.himmelwright.net/pages/about/">About</a>
+                    </li>
+                    
+                    <li>
+                        <a href="http://ryan.himmelwright.net/pages/homelab/">Homelab</a>
+                    </li>
+                    
+                    <li>
+                        <a href="http://ryan.himmelwright.net/tags">tags</a>
+                    </li>
+                    
+                    <li>
+                        <a href="http://ryan.himmelwright.net/post/">Archives</a>
+                    </li>
+                    
+                    <li>
+                        <a href="http://ryan.himmelwright.net/post/index.xml">RSS</a>
+                    </li>
+                    
+                  </ul>
+            </div>
+           
+
+        </div>
+        
+    </nav>
+
+
+
+
+<header class="intro-header" style="background-image: url('http://ryan.himmelwright.net/img/header-images/liberty-brick-lock.jpg')">
+    
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <h1>Configuring Pass, the Standard Unix Password Manager</h1>
+                    <h2 class="subheading"></h2>
+                    <span class="meta">
+                        
+Posted by <a href="#">Ryan Himmelwright</a> on Wed, Dec 12, 2018
+
+
+
+
+
+
+
+<br />
+Tags <a href="http://ryan.himmelwright.net/tags/linux">linux</a>, <a href="http://ryan.himmelwright.net/tags/homelab">homelab</a>, <a href="http://ryan.himmelwright.net/tags/network">network</a>, <a href="http://ryan.himmelwright.net/tags/dotfiles">dotfiles</a>
+
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <span class="header-caption">Liberty Warehouse Apartments, Durham, NC</span>
+    
+    </header>
+
+    
+    <article>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                    
+                    <p>I&rsquo;ve been using <code>pass</code> to manage my passwords for quite some time.
+During the early days of use, I occasionally had difficulty configuring it on
+new machines, but those days appear to be long gone. It is a simple, generic,
+yet flexible system.  Here&rsquo;s how to get started.</p>
+
+<p></p>
+
+<p><em>(but first, some background&hellip; feel free to skip ahead)</em></p>
+
+<h2 id="my-password-manager-history">My Password Manager History</h2>
+
+<p>For the longest time, I didn&rsquo;t use a password manager (in my defence, not many
+people did). Then in college, I started using
+<a href="https://www.lastpass.com/">LastPass</a>. It was simple and made it easy to switch
+all of my passwords to randomly generated ones. I had a good system that
+worked for a few years, and  was even able to integrate my
+<a href="https://www.yubico.com">yubikey</a> with it.</p>
+
+<p><center>
+<a href="../../img/posts/setting-up-pass/LastPass-Logo.png"><img alt="LastPass logo" src="../../img/posts/setting-up-pass/LastPass-Logo.png" style="max-width: 100%;"/></a>
+</center></p>
+
+<p>Then in 2015, Lastpass was acquired by <a href="https://www.logmeininc.com">LogMeIn</a>,
+which had a questionable past of Linux support. Like many others in the open
+source community&hellip; I started looking for alternatives.</p>
+
+<p>I had already been searching for a LastPass replacement even before the
+acquisition. My search was mainly fueled by one big issue I had with
+LastPass&hellip; it required a web browser to use.  Additionally, to utilize it&rsquo;s full
+feature set, it needed to run as a Chrome or Firefox plugin. As someone who
+often uses alternative web browsers (like <a href="https://qutebrowser.org">qutebrowser</a>),
+or works on headless machines, I try not to use applications that exist solely
+as a FireFox/Chome app.  I am also not a fan of pure website-apps in
+general.</p>
+
+<p>So, as the I watched others switch password managers amongst the acquisition
+hype, one switch I remember seeing was Chris Fischer of the Linux Action Show.
+In episode 387 of LAS, Chris and Noah (his co-host) discussed LastPass alternatives, and
+Chris highlighted his switch to
+<a href="https://www.youtube.com/watch?v=OfgZ5Fh-NfE&amp;feature=youtu.be&amp;t=4935">pass</a>.
+While I don&rsquo;t think he kept with the system long-term&hellip; I have.</p>
+
+<h2 id="what-i-like-about-pass-https-www-passwordstore-org">What I like about <a href="https://www.passwordstore.org">pass</a></h2>
+
+<h4 id="unix-philosophy-simplicity">Unix Philosophy &ldquo;Simplicity&rdquo;</h4>
+
+<p>Okay. The average computer user will not think <code>pass</code> is &ldquo;simple&rdquo;. I agree.
+However, being designed to follow the <a href="https://en.wikipedia.org/wiki/Unix_philosophy">Unix
+philosophy</a>, pass&rsquo;s <em>architecture
+is</em>. Basically, pass is just a nice wrapper around a bunch of
+<a href="https://en.wikipedia.org/wiki/GNU_Privacy_Guard">gpg</a> encrypted text files. It
+is a minimal, but tested solution.  This model makes pass easily compatible
+with many other great tools, such as bash, git,
+<a href="https://git.zx2c4.com/password-store/tree/contrib/dmenu">dmenu</a>,
+<a href="https://hackage.haskell.org/package/xmonad-contrib-0.13/docs/XMonad-Prompt-Pass.html">xmonad</a>
+and <a href="https://git.zx2c4.com/password-store/tree/contrib/emacs">emacs</a>.</p>
+
+<h4 id="command-line-tool">Command Line Tool</h4>
+
+<p>As a command-line tool, I can use pass anywhere. It doesn&rsquo;t matter how conventional or strange the
+setup may be. I can have it on my desktop, on a headless server, or even inside a container. It
+makes no difference.  Even if I am on a public computer, if I can <code>ssh</code> into one of my servers, I
+can access my passwords.</p>
+
+<h4 id="flexible">Flexible</h4>
+
+<p>By default, pass assumes the first line of a store file is the password.  However, the
+multi-line contents of a pass file can be anything. For example, pass could be used securely store
+encrypted notes. This gives the system a ton of flexibility, as the password items don&rsquo;t <em>have</em> to
+conform to any sort of template.</p>
+
+<h2 id="installing-pass-help-packages">Installing Pass &amp; Help Packages</h2>
+
+<p>On Fedora, pass can be installed using <code>dnf</code>. For other systems, check out the
+&ldquo;Download&rdquo; section of the <a href="https://www.passwordstore.org/">pass website</a>.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">sudo dnf install pass</code></pre></div>
+<h2 id="configuring-pass">Configuring Pass</h2>
+
+<p>After installing pass, there are few steps to configure it. First, we need to create a gpg key if
+one doesn&rsquo;t already exist. Then, we need to initialize a password-store using that key.</p>
+
+<p><strong>Note:</strong> <em>I went a little heavy with the animation images in the remainder of
+the post. Sorry. I hope they are more useful than annoying. Being a visual learner, at the very
+least they are helpful for me when I reference this post in the future. &hellip;</em></p>
+
+<h3 id="new-gpg-key">New GPG Key</h3>
+
+<p><img alt="animation running gpg --gen-key" src="../../img/posts/setting-up-pass/animation-hover.png" onmouseover="this.src='../../img/posts/setting-up-pass/generate-gpg-keys.gif'" onmouseout="this.src='../../img/posts/setting-up-pass/animation-hover.png'" style="max-width: 100%;"/>
+<div class="caption">Generate a new gpg key with <code>gpg2 --full-gen-key</code>.</div></p>
+
+<p>To create a gpg key, the <code>gpg2 --gen-key</code> command is normally used.  However, I opted to use <code>gpg2
+--full-gen-key</code>, which allows for a bit more control during setup.  The command will prompt for
+several bits of information, and the default selections are generally fine for most of the options
+(Personally, I use a 4096-bit key, because&hellip; why not?). At the end it will ask for a
+name, Password, and optional comment.</p>
+
+<p><em>It should be noted that <code>gpg2</code> most likely needs to be used instead of <code>gpg</code>
+for pass. However, it may vary depending on distribution and the package
+versions.</em></p>
+
+<h3 id="pass-init">Pass Init</h3>
+
+<p><img alt="Crating new pass store with pass init" src="../../img/posts/setting-up-pass/animation-hover.png" onmouseover="this.src='../../img/posts/setting-up-pass/pass-init.gif'" onmouseout="this.src='../../img/posts/setting-up-pass/animation-hover.png'" style="max-width: 100%;"/>
+<div class="caption">Initialize a new pass store with <code>pass init</code>.</div></p>
+
+<p>After a gpg key has been generated, it can be used with pass.  First, find the key&rsquo;s ID by using
+<code>gpg2 --list-secret-keys</code>. Then, configure pass with <code>pass init GPG-KEY-ID</code>. This will create a
+password-store directory, located by default at <code>~/.password-store/</code>.</p>
+
+<h3 id="add-some-items">Add some items</h3>
+
+<p><img alt="Adding, editing, and retrieving some passwords with `pass`, `pass insert`, `pass generate`, and `pass edit`" src="../../img/posts/setting-up-pass/animation-hover.png" onmouseover="this.src='../../img/posts/setting-up-pass/pass-add-demo.gif'" onmouseout="this.src='../../img/posts/setting-up-pass/animation-hover.png'" style="max-width: 100%;"/>
+<div class="caption">Adding, editing, and retrieving some passwords with <code>pass</code>, <code>pass insert</code>, <code>pass generate</code>, and <code>pass edit</code>.</div></p>
+
+<p>With pass initialized, lets start adding passwords to it! Here are <em>some</em> of
+the most common commands to do so:</p>
+
+<h4 id="insert">insert</h4>
+
+<p>Simply put, <code>pass insert</code> &hellip; inserts a password. Call it with the desired folder/file
+structure for the password, and pass will then prompt for the password to
+save. That&rsquo;s it.</p>
+
+<pre><code>pass insert Shopping/amazon.com/ryan
+</code></pre>
+
+<h4 id="pass-generate">pass generate</h4>
+
+<p>In addition to inserting existing passwords, pass can also <em>generate new</em> ones
+using <code>pass generate</code>. Just provide the password path, and optionally the
+length of the password. Pass will then generate a random password, spit it out
+on screen, and insert the entry to the password-store.</p>
+
+<pre><code>pass generate Shopping/SomeFakeStore/ryan 35
+</code></pre>
+
+<h4 id="pass-edit">pass edit</h4>
+
+<p>Generating passwords is great, but being a forgetful person, I like to keep additional information
+in my pass entries (username, email, website url). This is where <code>pass edit</code> comes in. When called,
+<code>pass edit</code> will open up the contents of the entry in the default editor. From there, make the
+changes, and save.</p>
+
+<p>For example:</p>
+
+<pre><code>pass edit Shopping/SomeFakeStore/ryan
+</code></pre>
+
+<p>Then, in vim:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">&lt;&amp;DdU1x&lt;&amp;~&amp;<span style="color:#f92672">{</span>;w7w<span style="color:#e6db74">&#34;kvsWdHAF-\Vi&#34;</span>I9Q<span style="color:#f92672">)</span>I
+---
+Username: ryan
+Password: &lt;&amp;DdU1x&lt;&amp;~&amp;<span style="color:#f92672">{</span>;w7w<span style="color:#e6db74">&#34;kvsWdHAF-\Vi&#34;</span>I9Q<span style="color:#f92672">)</span>I
+URL: https://www.some-bs-store.com
+Notes: I love this place!</code></pre></div>
+<h4 id="pass">pass</h4>
+
+<p>Lastly, to retrieve stored passwords, call <code>pass</code> with the
+password entry. Optionally, use the <code>-c</code> flag to copy the password
+(first line if a multi-line entry) to the clipboard instead of spewing it into
+the terminal.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">pass Shopping/SomeFakeStore/ryan
+<span style="color:#75715e">## or ##
+</span><span style="color:#75715e"></span>pass -c Shopping/SomeFakeStore/ryan</code></pre></div>
+<h2 id="making-pass-better">Making Pass Better</h2>
+
+<p>With pass&rsquo;s flexibility, there are many additional features to help improve it for each user&rsquo;s
+needs.  For me, there are two extensions that make my pass experience <em>much</em> more enjoyable.</p>
+
+<h3 id="pass-git">Pass Git</h3>
+
+<p><img alt="Managing and maintaining the password-store with `pass git`" src="../../img/posts/setting-up-pass/animation-hover.png" onmouseover="this.src='../../img/posts/setting-up-pass/pass-git.gif'" onmouseout="this.src='../../img/posts/setting-up-pass/animation-hover.png'" style="max-width: 100%;"/>
+<div class="caption">Use git to automatically maintain your password-store</div></p>
+
+<p>Password-Store items are text files, which allows them to be easily version controlled.
+Consequently, pass has built in support for git with the <code>pass git</code> command. If a password-store
+is linked up to a git repo, normal git commands (<code>add</code>, <code>mv</code>, <code>rm</code>&hellip;) can be used with the store.</p>
+
+<p>Additionally, when modifying the store&rsquo;s contents, <code>pass git</code> will automatically create commits
+that reflect the changes. After adding or modifying a password, issue the command <code>pass git push</code> on the updated
+machine, and then <code>pass git pull</code> on others to sync the changes.</p>
+
+<h3 id="passmeu">Passmeu</h3>
+
+<p><center>
+<video style="max-width:100%;" controls>
+  <source src="../../img/posts/setting-up-pass/passmenu_demo.mp4" type="video/mp4">
+  <source src="movie.ogg" type="video/ogg">
+Your browser does not support the video tag.
+</video>
+<div id="caption"><code>passmenu</code> lets you easily search and select a pass item.</div>
+</center></p>
+
+<p>While having a CLI password manager is nice when working with headless systems, it can be a bit
+cumbersome for normal day-to-day use. Hence,
+<a href="https://git.zx2c4.com/password-store/tree/contrib/dmenu/passmenu">passmenu</a>.</p>
+
+<p>Passmenu is a script (now built into the upstream project) that wraps
+<a href="https://tools.suckless.org/dmenu/">dmenu</a> around pass. When <code>passmenu</code> is run, <code>dmenu</code> opens up
+with all the password-store items to search/filter from. When an item is
+selected in dmenu, the user is prompted for the gpg password (if it hasn&rsquo;t been unlocked recently),
+after which the password is then temporarily added to the user&rsquo;s clipboard.</p>
+
+<p>On all my computers, I bind the command <code>passmenu</code> to the keys <code>SUPER</code> + <code>SHIFT</code> + <code>P</code>.  Whenever I
+need a password, I just hit those three keys, and dmenu pops up so I can search for the password I
+want.  After typing in my master passphrase, I can paste the password wherever I need it.  Passmenu
+makes pass much more reasonable to use.</p>
+
+<p><em>See Also: <a href="https://github.com/carnager/rofi-pass">rofi-pass</a></em></p>
+
+<h2 id="setting-up-your-pass-setup-on-a-new-system">Setting up your pass setup on a new system</h2>
+
+<p>Now that I&rsquo;ve done it over a hundred times, setting up a new system is easy. Here&rsquo;s my usual steps:</p>
+
+<h4 id="export-gpg-key">Export GPG Key</h4>
+
+<p><img alt="Export a gpg key to use with pass on another system" src="../../img/posts/setting-up-pass/animation-hover.png" onmouseover="this.src='../../img/posts/setting-up-pass/export-key.gif'" onmouseout="this.src='../../img/posts/setting-up-pass/animation-hover.png'" style="max-width: 100%;"/>
+<div class="caption">Export a gpg key to save or use on another system.</div></p>
+
+<p>First, export the password-store&rsquo;s gpg key.  To do that, use <code>gpg2 --list-secret-keys</code> to confirm the
+key&rsquo;s ID, then export that key to a file with the following command:</p>
+
+<pre><code>gpg2 --export-secret-keys KEY-ID &gt;&gt; key-filename.gpg
+</code></pre>
+
+<p>Next, transfer that file to the new machine.</p>
+
+<h4 id="import-gpg-key">Import GPG Key</h4>
+
+<p><img alt="Import a gpg key and trust it to use with pass" src="../../img/posts/setting-up-pass/animation-hover.png" onmouseover="this.src='../../img/posts/setting-up-pass/pass-import-gpg-key.gif'" onmouseout="this.src='../../img/posts/setting-up-pass/animation-hover.png'" style="max-width: 100%;"/>
+<div class="caption">Import and trust a gpg key to use it with pass.</div></p>
+
+<p>On the new machine, import the gpg key using the following command (note, you
+will be required to enter the key&rsquo;s passphrase):</p>
+
+<pre><code>gpg2 --import key-filename.gpg
+</code></pre>
+
+<p>After the key is imported, its <em>trust level</em> will have to be set to <em>ultimate</em>. Use the command
+<code>gpg2 --edit-key KEY-ID</code> to enter the edit prompt. From there, type <code>trust</code> and hit <code>ENTER</code>. The
+various levels will be shown on screen. Enter and confirm <code>5</code>, to select &lsquo;Ultimate&rsquo;. Lastly, use
+<code>quit</code> to leave the gpg key editor.</p>
+
+<h4 id="pull-pass-repo">Pull Pass Repo</h4>
+
+<p>With the keys configured, the last step is to pull down the password-store to the new machine. If using git, this can be done with <code>pass git
+clone</code>&hellip; but if I&rsquo;m being honest, I usually just do a normal <code>git clone</code>, and then move
+the folder to <code>~/.password-store/</code>. If not using git, just copy the store&rsquo;s directory and files to
+the new machine. The important thing is that the store can be found at <code>~/.password-store</code> (by
+default, this of course can be changed using <code>pass init</code>).</p>
+
+<h3 id="conclusion">Conclusion</h3>
+
+<p>That&rsquo;s about it. As I previously stated, I&rsquo;ve been loving pass for years, and I
+don&rsquo;t plan to be switching off of it any time soon. At this point, if there is
+something I want to improve with my password setup&hellip; I&rsquo;m sure the community
+has already figured out how to do it with pass!</p>
+
+                    
+                    
+                    
+                         <div style="float: right; text-decoration: underline; text-align: right;">Prev Post:</div>
+                    
+                    <br>
+                    
+                    
+                        <a href="http://ryan.himmelwright.net/post/charmeleon-desktop-design/" style="text-align: right; float: right; max-width: 40%">Designing my new Ryzen Workstation</a>
+                    
+
+			
+			<div class="comment-section">
+			  
+   <div id="disqus_thread"></div>
+<script>
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "himmallright" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+			</div>
+                </div>
+            </div>
+        </div>
+    </article>
+
+        <hr>
+    
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                  <ul class="list-inline text-center">
+                    
+                      <li>
+                        <a href="mailto:ryan@himmelwright.net">
+                          <span class="fa-stack fa-lg">
+                            <i class="fa fa-circle fa-stack-2x"></i>
+                            <i class="fa fa-envelope-o fa-stack-1x fa-inverse"></i>
+                          </span>
+                        </a>
+                      </li>
+                    
+                    
+                    <li>
+                      <a href="https://github.com/himmAllRight">
+                        <span class="fa-stack fa-lg">
+                          <i class="fa fa-circle fa-stack-2x"></i>
+                          <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                        </span>
+                      </a>
+                    </li>
+                    
+                    <li>
+                      <a href="https://www.linkedin.com/in/ryan-himmelwright-b3891774/">
+                        <span class="fa-stack fa-lg">
+                          <i class="fa fa-circle fa-stack-2x"></i>
+                          <i class="fa fa-linkedin fa-stack-1x fa-inverse"></i>
+                        </span>
+                      </a>
+                    </li>
+                    
+                  </ul>
+<p class="copyright text-muted">
+
+<a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img
+  alt="Creative Commons License" style="border-width:0"
+  src="https://i.creativecommons.org/l/by/4.0/88x31.png" /></a><br />This work
+by <a xmlns:cc="http://creativecommons.org/ns#" href="http://ryan.himmelwright.net" property="cc:attributionName" rel="cc:attributionURL">Ryan Himmelwright</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
+</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    
+    <script src="http://ryan.himmelwright.net/js/jquery.min.js"></script>
+
+    
+    <script src="http://ryan.himmelwright.net/js/bootstrap.min.js"></script>
+
+    
+    <script src="http://ryan.himmelwright.net/js/clean-blog.js"></script>
+
+    
+<script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-123-45', 'auto');
+ga('send', 'pageview');
+</script>
+
+
+</body>
+
+</html>
+
