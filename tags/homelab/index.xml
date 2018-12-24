@@ -8,7 +8,7 @@
     <language>en-us</language>
     <lastBuildDate>Wed, 12 Dec 2018 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="http://ryan.himmelwright.net/tags/homelab/index.xml" rel="self" type="application/rss+xml" />
+        <atom:link href="http://ryan.himmelwright.net/tags/homelab/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
@@ -22,7 +22,258 @@ During the early days of use, I occasionally had difficulty configuring it on
 new machines, but those days appear to be long gone. It is a simple, generic,
 yet flexible system.  Here&amp;rsquo;s how to get started.&lt;/p&gt;
 
-&lt;p&gt;&lt;/p&gt;</description>
+&lt;p&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;(but first, some background&amp;hellip; feel free to skip ahead)&lt;/em&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;my-password-manager-history&#34;&gt;My Password Manager History&lt;/h2&gt;
+
+&lt;p&gt;For the longest time, I didn&amp;rsquo;t use a password manager (in my defence, not many
+people did). Then in college, I started using
+&lt;a href=&#34;https://www.lastpass.com/&#34;&gt;LastPass&lt;/a&gt;. It was simple and made it easy to switch
+all of my passwords to randomly generated ones. I had a good system that
+worked for a few years, and  was even able to integrate my
+&lt;a href=&#34;https://www.yubico.com&#34;&gt;yubikey&lt;/a&gt; with it.&lt;/p&gt;
+
+&lt;p&gt;&lt;center&gt;
+&lt;a href=&#34;../../img/posts/setting-up-pass/LastPass-Logo.png&#34;&gt;&lt;img alt=&#34;LastPass logo&#34; src=&#34;../../img/posts/setting-up-pass/LastPass-Logo.png&#34; style=&#34;max-width: 100%;&#34;/&gt;&lt;/a&gt;
+&lt;/center&gt;&lt;/p&gt;
+
+&lt;p&gt;Then in 2015, Lastpass was acquired by &lt;a href=&#34;https://www.logmeininc.com&#34;&gt;LogMeIn&lt;/a&gt;,
+which had a questionable past of Linux support. Like many others in the open
+source community&amp;hellip; I started looking for alternatives.&lt;/p&gt;
+
+&lt;p&gt;I had already been searching for a LastPass replacement even before the
+acquisition. My search was mainly fueled by one big issue I had with
+LastPass&amp;hellip; it required a web browser to use.  Additionally, to utilize it&amp;rsquo;s full
+feature set, it needed to run as a Chrome or Firefox plugin. As someone who
+often uses alternative web browsers (like &lt;a href=&#34;https://qutebrowser.org&#34;&gt;qutebrowser&lt;/a&gt;),
+or works on headless machines, I try not to use applications that exist solely
+as a FireFox/Chome app.  I am also not a fan of pure website-apps in
+general.&lt;/p&gt;
+
+&lt;p&gt;So, as the I watched others switch password managers amongst the acquisition
+hype, one switch I remember seeing was Chris Fischer of the Linux Action Show.
+In episode 387 of LAS, Chris and Noah (his co-host) discussed LastPass alternatives, and
+Chris highlighted his switch to
+&lt;a href=&#34;https://www.youtube.com/watch?v=OfgZ5Fh-NfE&amp;amp;feature=youtu.be&amp;amp;t=4935&#34;&gt;pass&lt;/a&gt;.
+While I don&amp;rsquo;t think he kept with the system long-term&amp;hellip; I have.&lt;/p&gt;
+
+&lt;h2 id=&#34;what-i-like-about-pass-https-www-passwordstore-org&#34;&gt;What I like about &lt;a href=&#34;https://www.passwordstore.org&#34;&gt;pass&lt;/a&gt;&lt;/h2&gt;
+
+&lt;h4 id=&#34;unix-philosophy-simplicity&#34;&gt;Unix Philosophy &amp;ldquo;Simplicity&amp;rdquo;&lt;/h4&gt;
+
+&lt;p&gt;Okay. The average computer user will not think &lt;code&gt;pass&lt;/code&gt; is &amp;ldquo;simple&amp;rdquo;. I agree.
+However, being designed to follow the &lt;a href=&#34;https://en.wikipedia.org/wiki/Unix_philosophy&#34;&gt;Unix
+philosophy&lt;/a&gt;, pass&amp;rsquo;s &lt;em&gt;architecture
+is&lt;/em&gt;. Basically, pass is just a nice wrapper around a bunch of
+&lt;a href=&#34;https://en.wikipedia.org/wiki/GNU_Privacy_Guard&#34;&gt;gpg&lt;/a&gt; encrypted text files. It
+is a minimal, but tested solution.  This model makes pass easily compatible
+with many other great tools, such as bash, git,
+&lt;a href=&#34;https://git.zx2c4.com/password-store/tree/contrib/dmenu&#34;&gt;dmenu&lt;/a&gt;,
+&lt;a href=&#34;https://hackage.haskell.org/package/xmonad-contrib-0.13/docs/XMonad-Prompt-Pass.html&#34;&gt;xmonad&lt;/a&gt;
+and &lt;a href=&#34;https://git.zx2c4.com/password-store/tree/contrib/emacs&#34;&gt;emacs&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h4 id=&#34;command-line-tool&#34;&gt;Command Line Tool&lt;/h4&gt;
+
+&lt;p&gt;As a command-line tool, I can use pass anywhere. It doesn&amp;rsquo;t matter how conventional or strange the
+setup may be. I can have it on my desktop, on a headless server, or even inside a container. It
+makes no difference.  Even if I am on a public computer, if I can &lt;code&gt;ssh&lt;/code&gt; into one of my servers, I
+can access my passwords.&lt;/p&gt;
+
+&lt;h4 id=&#34;flexible&#34;&gt;Flexible&lt;/h4&gt;
+
+&lt;p&gt;By default, pass assumes the first line of a store file is the password.  However, the
+multi-line contents of a pass file can be anything. For example, pass could be used securely store
+encrypted notes. This gives the system a ton of flexibility, as the password items don&amp;rsquo;t &lt;em&gt;have&lt;/em&gt; to
+conform to any sort of template.&lt;/p&gt;
+
+&lt;h2 id=&#34;installing-pass-help-packages&#34;&gt;Installing Pass &amp;amp; Help Packages&lt;/h2&gt;
+
+&lt;p&gt;On Fedora, pass can be installed using &lt;code&gt;dnf&lt;/code&gt;. For other systems, check out the
+&amp;ldquo;Download&amp;rdquo; section of the &lt;a href=&#34;https://www.passwordstore.org/&#34;&gt;pass website&lt;/a&gt;.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;sudo dnf install pass&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h2 id=&#34;configuring-pass&#34;&gt;Configuring Pass&lt;/h2&gt;
+
+&lt;p&gt;After installing pass, there are few steps to configure it. First, we need to create a gpg key if
+one doesn&amp;rsquo;t already exist. Then, we need to initialize a password-store using that key.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Note:&lt;/strong&gt; &lt;em&gt;I went a little heavy with the animation images in the remainder of
+the post. Sorry. I hope they are more useful than annoying. Being a visual learner, at the very
+least they are helpful for me when I reference this post in the future. &amp;hellip;&lt;/em&gt;&lt;/p&gt;
+
+&lt;h3 id=&#34;new-gpg-key&#34;&gt;New GPG Key&lt;/h3&gt;
+
+&lt;p&gt;&lt;img alt=&#34;animation running gpg --gen-key&#34; src=&#34;../../img/posts/setting-up-pass/animation-hover.png&#34; onmouseover=&#34;this.src=&#39;../../img/posts/setting-up-pass/generate-gpg-keys.gif&#39;&#34; onmouseout=&#34;this.src=&#39;../../img/posts/setting-up-pass/animation-hover.png&#39;&#34; style=&#34;max-width: 100%;&#34;/&gt;
+&lt;div class=&#34;caption&#34;&gt;Generate a new gpg key with &lt;code&gt;gpg2 --full-gen-key&lt;/code&gt;.&lt;/div&gt;&lt;/p&gt;
+
+&lt;p&gt;To create a gpg key, the &lt;code&gt;gpg2 --gen-key&lt;/code&gt; command is normally used.  However, I opted to use &lt;code&gt;gpg2
+--full-gen-key&lt;/code&gt;, which allows for a bit more control during setup.  The command will prompt for
+several bits of information, and the default selections are generally fine for most of the options
+(Personally, I use a 4096-bit key, because&amp;hellip; why not?). At the end it will ask for a
+name, Password, and optional comment.&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;It should be noted that &lt;code&gt;gpg2&lt;/code&gt; most likely needs to be used instead of &lt;code&gt;gpg&lt;/code&gt;
+for pass. However, it may vary depending on distribution and the package
+versions.&lt;/em&gt;&lt;/p&gt;
+
+&lt;h3 id=&#34;pass-init&#34;&gt;Pass Init&lt;/h3&gt;
+
+&lt;p&gt;&lt;img alt=&#34;Crating new pass store with pass init&#34; src=&#34;../../img/posts/setting-up-pass/animation-hover.png&#34; onmouseover=&#34;this.src=&#39;../../img/posts/setting-up-pass/pass-init.gif&#39;&#34; onmouseout=&#34;this.src=&#39;../../img/posts/setting-up-pass/animation-hover.png&#39;&#34; style=&#34;max-width: 100%;&#34;/&gt;
+&lt;div class=&#34;caption&#34;&gt;Initialize a new pass store with &lt;code&gt;pass init&lt;/code&gt;.&lt;/div&gt;&lt;/p&gt;
+
+&lt;p&gt;After a gpg key has been generated, it can be used with pass.  First, find the key&amp;rsquo;s ID by using
+&lt;code&gt;gpg2 --list-secret-keys&lt;/code&gt;. Then, configure pass with &lt;code&gt;pass init GPG-KEY-ID&lt;/code&gt;. This will create a
+password-store directory, located by default at &lt;code&gt;~/.password-store/&lt;/code&gt;.&lt;/p&gt;
+
+&lt;h3 id=&#34;add-some-items&#34;&gt;Add some items&lt;/h3&gt;
+
+&lt;p&gt;&lt;img alt=&#34;Adding, editing, and retrieving some passwords with `pass`, `pass insert`, `pass generate`, and `pass edit`&#34; src=&#34;../../img/posts/setting-up-pass/animation-hover.png&#34; onmouseover=&#34;this.src=&#39;../../img/posts/setting-up-pass/pass-add-demo.gif&#39;&#34; onmouseout=&#34;this.src=&#39;../../img/posts/setting-up-pass/animation-hover.png&#39;&#34; style=&#34;max-width: 100%;&#34;/&gt;
+&lt;div class=&#34;caption&#34;&gt;Adding, editing, and retrieving some passwords with &lt;code&gt;pass&lt;/code&gt;, &lt;code&gt;pass insert&lt;/code&gt;, &lt;code&gt;pass generate&lt;/code&gt;, and &lt;code&gt;pass edit&lt;/code&gt;.&lt;/div&gt;&lt;/p&gt;
+
+&lt;p&gt;With pass initialized, lets start adding passwords to it! Here are &lt;em&gt;some&lt;/em&gt; of
+the most common commands to do so:&lt;/p&gt;
+
+&lt;h4 id=&#34;insert&#34;&gt;insert&lt;/h4&gt;
+
+&lt;p&gt;Simply put, &lt;code&gt;pass insert&lt;/code&gt; &amp;hellip; inserts a password. Call it with the desired folder/file
+structure for the password, and pass will then prompt for the password to
+save. That&amp;rsquo;s it.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;pass insert Shopping/amazon.com/ryan
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h4 id=&#34;pass-generate&#34;&gt;pass generate&lt;/h4&gt;
+
+&lt;p&gt;In addition to inserting existing passwords, pass can also &lt;em&gt;generate new&lt;/em&gt; ones
+using &lt;code&gt;pass generate&lt;/code&gt;. Just provide the password path, and optionally the
+length of the password. Pass will then generate a random password, spit it out
+on screen, and insert the entry to the password-store.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;pass generate Shopping/SomeFakeStore/ryan 35
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h4 id=&#34;pass-edit&#34;&gt;pass edit&lt;/h4&gt;
+
+&lt;p&gt;Generating passwords is great, but being a forgetful person, I like to keep additional information
+in my pass entries (username, email, website url). This is where &lt;code&gt;pass edit&lt;/code&gt; comes in. When called,
+&lt;code&gt;pass edit&lt;/code&gt; will open up the contents of the entry in the default editor. From there, make the
+changes, and save.&lt;/p&gt;
+
+&lt;p&gt;For example:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;pass edit Shopping/SomeFakeStore/ryan
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Then, in vim:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&amp;lt;&amp;amp;DdU1x&amp;lt;&amp;amp;~&amp;amp;&lt;span style=&#34;color:#f92672&#34;&gt;{&lt;/span&gt;;w7w&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;kvsWdHAF-\Vi&amp;#34;&lt;/span&gt;I9Q&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt;I
+---
+Username: ryan
+Password: &amp;lt;&amp;amp;DdU1x&amp;lt;&amp;amp;~&amp;amp;&lt;span style=&#34;color:#f92672&#34;&gt;{&lt;/span&gt;;w7w&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;kvsWdHAF-\Vi&amp;#34;&lt;/span&gt;I9Q&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt;I
+URL: https://www.some-bs-store.com
+Notes: I love this place!&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h4 id=&#34;pass&#34;&gt;pass&lt;/h4&gt;
+
+&lt;p&gt;Lastly, to retrieve stored passwords, call &lt;code&gt;pass&lt;/code&gt; with the
+password entry. Optionally, use the &lt;code&gt;-c&lt;/code&gt; flag to copy the password
+(first line if a multi-line entry) to the clipboard instead of spewing it into
+the terminal.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;pass Shopping/SomeFakeStore/ryan
+&lt;span style=&#34;color:#75715e&#34;&gt;## or ##
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;pass -c Shopping/SomeFakeStore/ryan&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h2 id=&#34;making-pass-better&#34;&gt;Making Pass Better&lt;/h2&gt;
+
+&lt;p&gt;With pass&amp;rsquo;s flexibility, there are many additional features to help improve it for each user&amp;rsquo;s
+needs.  For me, there are two extensions that make my pass experience &lt;em&gt;much&lt;/em&gt; more enjoyable.&lt;/p&gt;
+
+&lt;h3 id=&#34;pass-git&#34;&gt;Pass Git&lt;/h3&gt;
+
+&lt;p&gt;&lt;img alt=&#34;Managing and maintaining the password-store with `pass git`&#34; src=&#34;../../img/posts/setting-up-pass/animation-hover.png&#34; onmouseover=&#34;this.src=&#39;../../img/posts/setting-up-pass/pass-git.gif&#39;&#34; onmouseout=&#34;this.src=&#39;../../img/posts/setting-up-pass/animation-hover.png&#39;&#34; style=&#34;max-width: 100%;&#34;/&gt;
+&lt;div class=&#34;caption&#34;&gt;Use git to automatically maintain your password-store&lt;/div&gt;&lt;/p&gt;
+
+&lt;p&gt;Password-Store items are text files, which allows them to be easily version controlled.
+Consequently, pass has built in support for git with the &lt;code&gt;pass git&lt;/code&gt; command. If a password-store
+is linked up to a git repo, normal git commands (&lt;code&gt;add&lt;/code&gt;, &lt;code&gt;mv&lt;/code&gt;, &lt;code&gt;rm&lt;/code&gt;&amp;hellip;) can be used with the store.&lt;/p&gt;
+
+&lt;p&gt;Additionally, when modifying the store&amp;rsquo;s contents, &lt;code&gt;pass git&lt;/code&gt; will automatically create commits
+that reflect the changes. After adding or modifying a password, issue the command &lt;code&gt;pass git push&lt;/code&gt; on the updated
+machine, and then &lt;code&gt;pass git pull&lt;/code&gt; on others to sync the changes.&lt;/p&gt;
+
+&lt;h3 id=&#34;passmeu&#34;&gt;Passmeu&lt;/h3&gt;
+
+&lt;p&gt;&lt;center&gt;
+&lt;video style=&#34;max-width:100%;&#34; controls&gt;
+  &lt;source src=&#34;../../img/posts/setting-up-pass/passmenu_demo.mp4&#34; type=&#34;video/mp4&#34;&gt;
+  &lt;source src=&#34;movie.ogg&#34; type=&#34;video/ogg&#34;&gt;
+Your browser does not support the video tag.
+&lt;/video&gt;
+&lt;div id=&#34;caption&#34;&gt;&lt;code&gt;passmenu&lt;/code&gt; lets you easily search and select a pass item.&lt;/div&gt;
+&lt;/center&gt;&lt;/p&gt;
+
+&lt;p&gt;While having a CLI password manager is nice when working with headless systems, it can be a bit
+cumbersome for normal day-to-day use. Hence,
+&lt;a href=&#34;https://git.zx2c4.com/password-store/tree/contrib/dmenu/passmenu&#34;&gt;passmenu&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;Passmenu is a script (now built into the upstream project) that wraps
+&lt;a href=&#34;https://tools.suckless.org/dmenu/&#34;&gt;dmenu&lt;/a&gt; around pass. When &lt;code&gt;passmenu&lt;/code&gt; is run, &lt;code&gt;dmenu&lt;/code&gt; opens up
+with all the password-store items to search/filter from. When an item is
+selected in dmenu, the user is prompted for the gpg password (if it hasn&amp;rsquo;t been unlocked recently),
+after which the password is then temporarily added to the user&amp;rsquo;s clipboard.&lt;/p&gt;
+
+&lt;p&gt;On all my computers, I bind the command &lt;code&gt;passmenu&lt;/code&gt; to the keys &lt;code&gt;SUPER&lt;/code&gt; + &lt;code&gt;SHIFT&lt;/code&gt; + &lt;code&gt;P&lt;/code&gt;.  Whenever I
+need a password, I just hit those three keys, and dmenu pops up so I can search for the password I
+want.  After typing in my master passphrase, I can paste the password wherever I need it.  Passmenu
+makes pass much more reasonable to use.&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;See Also: &lt;a href=&#34;https://github.com/carnager/rofi-pass&#34;&gt;rofi-pass&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;setting-up-your-pass-setup-on-a-new-system&#34;&gt;Setting up your pass setup on a new system&lt;/h2&gt;
+
+&lt;p&gt;Now that I&amp;rsquo;ve done it over a hundred times, setting up a new system is easy. Here&amp;rsquo;s my usual steps:&lt;/p&gt;
+
+&lt;h4 id=&#34;export-gpg-key&#34;&gt;Export GPG Key&lt;/h4&gt;
+
+&lt;p&gt;&lt;img alt=&#34;Export a gpg key to use with pass on another system&#34; src=&#34;../../img/posts/setting-up-pass/animation-hover.png&#34; onmouseover=&#34;this.src=&#39;../../img/posts/setting-up-pass/export-key.gif&#39;&#34; onmouseout=&#34;this.src=&#39;../../img/posts/setting-up-pass/animation-hover.png&#39;&#34; style=&#34;max-width: 100%;&#34;/&gt;
+&lt;div class=&#34;caption&#34;&gt;Export a gpg key to save or use on another system.&lt;/div&gt;&lt;/p&gt;
+
+&lt;p&gt;First, export the password-store&amp;rsquo;s gpg key.  To do that, use &lt;code&gt;gpg2 --list-secret-keys&lt;/code&gt; to confirm the
+key&amp;rsquo;s ID, then export that key to a file with the following command:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;gpg2 --export-secret-keys KEY-ID &amp;gt;&amp;gt; key-filename.gpg
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Next, transfer that file to the new machine.&lt;/p&gt;
+
+&lt;h4 id=&#34;import-gpg-key&#34;&gt;Import GPG Key&lt;/h4&gt;
+
+&lt;p&gt;&lt;img alt=&#34;Import a gpg key and trust it to use with pass&#34; src=&#34;../../img/posts/setting-up-pass/animation-hover.png&#34; onmouseover=&#34;this.src=&#39;../../img/posts/setting-up-pass/pass-import-gpg-key.gif&#39;&#34; onmouseout=&#34;this.src=&#39;../../img/posts/setting-up-pass/animation-hover.png&#39;&#34; style=&#34;max-width: 100%;&#34;/&gt;
+&lt;div class=&#34;caption&#34;&gt;Import and trust a gpg key to use it with pass.&lt;/div&gt;&lt;/p&gt;
+
+&lt;p&gt;On the new machine, import the gpg key using the following command (note, you
+will be required to enter the key&amp;rsquo;s passphrase):&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;gpg2 --import key-filename.gpg
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;After the key is imported, its &lt;em&gt;trust level&lt;/em&gt; will have to be set to &lt;em&gt;ultimate&lt;/em&gt;. Use the command
+&lt;code&gt;gpg2 --edit-key KEY-ID&lt;/code&gt; to enter the edit prompt. From there, type &lt;code&gt;trust&lt;/code&gt; and hit &lt;code&gt;ENTER&lt;/code&gt;. The
+various levels will be shown on screen. Enter and confirm &lt;code&gt;5&lt;/code&gt;, to select &amp;lsquo;Ultimate&amp;rsquo;. Lastly, use
+&lt;code&gt;quit&lt;/code&gt; to leave the gpg key editor.&lt;/p&gt;
+
+&lt;h4 id=&#34;pull-pass-repo&#34;&gt;Pull Pass Repo&lt;/h4&gt;
+
+&lt;p&gt;With the keys configured, the last step is to pull down the password-store to the new machine. If using git, this can be done with &lt;code&gt;pass git
+clone&lt;/code&gt;&amp;hellip; but if I&amp;rsquo;m being honest, I usually just do a normal &lt;code&gt;git clone&lt;/code&gt;, and then move
+the folder to &lt;code&gt;~/.password-store/&lt;/code&gt;. If not using git, just copy the store&amp;rsquo;s directory and files to
+the new machine. The important thing is that the store can be found at &lt;code&gt;~/.password-store&lt;/code&gt; (by
+default, this of course can be changed using &lt;code&gt;pass init&lt;/code&gt;).&lt;/p&gt;
+
+&lt;h3 id=&#34;conclusion&#34;&gt;Conclusion&lt;/h3&gt;
+
+&lt;p&gt;That&amp;rsquo;s about it. As I previously stated, I&amp;rsquo;ve been loving pass for years, and I
+don&amp;rsquo;t plan to be switching off of it any time soon. At this point, if there is
+something I want to improve with my password setup&amp;hellip; I&amp;rsquo;m sure the community
+has already figured out how to do it with pass!&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -39,7 +290,186 @@ build&lt;/a&gt;. Then, in 2017
 AMD released their &lt;a href=&#34;https://en.wikipedia.org/wiki/Ryzen&#34;&gt;Ryzen&lt;/a&gt;
 series CPUs&amp;hellip;&lt;/p&gt;
 
-&lt;p&gt;&lt;/p&gt;</description>
+&lt;p&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;why-a-desktop&#34;&gt;Why a Desktop?&lt;/h2&gt;
+
+&lt;p&gt;&lt;a href=&#34;../../img/posts/chameleon-desktop-design/kadabra-cpu-usage.png&#34;&gt;&lt;img alt=&#34;Full system monitor on Laptop&#34; src=&#34;../../img/posts/charmeleon-desktop-design/kadabra-cpu-usage.png&#34; style=&#34;max-width: 100%;&#34;/&gt;&lt;/a&gt;
+&lt;div class=&#34;caption&#34;&gt;My T470 has been a little tight on resources.&lt;/div&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;../sold-my-bonobo/&#34;&gt;My&lt;/a&gt; &lt;a href=&#34;../my-t470/&#34;&gt;laptops&lt;/a&gt; &lt;a href=&#34;../my-new-used-x230&#34;&gt;have&lt;/a&gt;
+served the majority of my needs these last few years, but I have been feeling
+a bit restricted when trying to do more demanding workloads.
+While I still side with a &amp;ldquo;&lt;em&gt;use low-powered, portable computers, and remote
+into more powerful ones when needed&lt;/em&gt;&amp;rdquo; mentality, I enjoy having &lt;em&gt;one&lt;/em&gt; of those
+power computers being my physical, main workstation desktop.&lt;/p&gt;
+
+&lt;h2 id=&#34;workstation-goals&#34;&gt;Workstation Goals&lt;/h2&gt;
+
+&lt;p&gt;&lt;a href=&#34;../../img/posts/chameleon-desktop-design/ryzen-logo.png&#34;&gt;&lt;img alt=&#34;Ryzen Logo&#34; src=&#34;../../img/posts/charmeleon-desktop-design/ryzen-logo.png&#34; style=&#34;max-width: 100%;&#34;/&gt;&lt;/a&gt;
+&lt;div class=&#34;caption&#34;&gt;My T470 has been a little tight on resources.&lt;/div&gt;&lt;/p&gt;
+
+&lt;p&gt;While building a new workstation may be fun, I have particular goals I want it
+to achieve. Additionally, it seems like 98% of online build guides are for
+designing &lt;em&gt;gaming&lt;/em&gt; desktops&amp;hellip; which is not exactly what I want. So, the
+features I wanted in &lt;em&gt;my build&lt;/em&gt;, likely deviate from much of the
+&lt;em&gt;suggested&lt;/em&gt; guidance found online, which tends to focus entirely on gaming
+performance (more FPS). Here is the breakdown of what I was looking for:&lt;/p&gt;
+
+&lt;h4 id=&#34;more-cores&#34;&gt;More Cores&lt;/h4&gt;
+
+&lt;p&gt;I tend to have workloads that benefit from multiple cores (and threads). For
+example, I run a bunch of virtual machines, often at the same time. While my
+server&amp;rsquo;s 4 core Xeon handles day to day VMs just fine, it is nice to have a
+workstation with several cores to spin up a virtualized cluster across. Beyond
+VMs, I compile code, compress/decompress file packages, and occasionally encode
+audio/video files. These are all tasks that love having many threads at their
+disposal.&lt;/p&gt;
+
+&lt;h4 id=&#34;lots-of-fast-ram&#34;&gt;Lots of (&lt;em&gt;fast&lt;/em&gt;) Ram&lt;/h4&gt;
+
+&lt;p&gt;When running VMs, the amount of available RAM is usually more limiting than the
+number of cpu cores. For example, when running 6 VM&amp;rsquo;s, my server&amp;rsquo;s 4-core Xeon
+will typically be 15-35% utilized, whereas it&amp;rsquo;s 20GB of RAM is nearly full.  If
+I want more cores, I should supplement it with lots of RAM. In addition&amp;hellip; I
+use electron apps (Slack, Spotify,  etc.) and modern web browsers&amp;hellip; so yea&amp;hellip;. more RAM.&lt;/p&gt;
+
+&lt;p&gt;Being a Ryzen build, the RAM also needs to be &lt;em&gt;fast&lt;/em&gt;.  More than other CPU
+architectures, Ryzen CPUs actually &lt;a href=&#34;https://www.youtube.com/watch?v=g0SDr3EHHmY&#34;&gt;&lt;em&gt;run better&lt;/em&gt; with faster
+RAM&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h4 id=&#34;fast-storage&#34;&gt;Fast Storage&lt;/h4&gt;
+
+&lt;p&gt;This main goal of this build is for it to be a multi-tasking beast. If I am
+running several VMs and a bunch of applications, utilizing a stack of &lt;em&gt;fast&lt;/em&gt; RAM
+to move data around&amp;hellip; I need good &lt;em&gt;fast&lt;/em&gt; storage with &lt;a href=&#34;https://www.youtube.com/watch?v=Bh_f0uof7Jw&amp;amp;feature=youtu.be&amp;amp;t=359&#34;&gt;MOAR
+IOPs&lt;/a&gt; to
+support of these operations, which will all be competing for disk access. While I
+wouldn&amp;rsquo;t mind having space to eventually throw in a pair 3.5&amp;rdquo; rust drives to configure as a
+ZFS data pool, the goal for the initial &lt;em&gt;primary&lt;/em&gt; drive of this
+machine is the most IOPs I can &lt;em&gt;afford&lt;/em&gt;. So, I ideally &lt;em&gt;want&lt;/em&gt; a m.2 NVMe SSD,
+but &lt;em&gt;need&lt;/em&gt; a normal 2.5&amp;rdquo; SATA SSD at the very least.&lt;/p&gt;
+
+&lt;h4 id=&#34;some-gaming-ability&#34;&gt;&lt;em&gt;Some&lt;/em&gt; Gaming Ability&lt;/h4&gt;
+
+&lt;p&gt;While it doesn&amp;rsquo;t have to be a &lt;em&gt;gaming machine&lt;/em&gt;&amp;hellip; I would like to be able to
+play the &lt;em&gt;occasional&lt;/em&gt; game. I don&amp;rsquo;t mind playing games with lower graphic
+settings on my laptops, but I &lt;em&gt;do mind&lt;/em&gt; that even with the lower settings, the
+CPUs nearly max out, which spikes up the temperature.
+Increased graphics performance would also better support &lt;a href=&#34;../new-lgud4379b/&#34;&gt;my large
+monitor&lt;/a&gt;.  A discrete graphics card would be nice, ideally
+an AMD one due to their recent work on improving their open source drivers.&lt;/p&gt;
+
+&lt;h4 id=&#34;ability-to-upgrade&#34;&gt;Ability to Upgrade&lt;/h4&gt;
+
+&lt;p&gt;Most importantly, I want this computer to be a solid &lt;em&gt;base&lt;/em&gt; that I can upgrade
+over the next several years. Upgradability is hands-down &lt;em&gt;the main&lt;/em&gt; advantage
+of switching to a desktop over a laptop for my main rig. I want this build
+designed so that as my needs grow, I can easily max out the RAM, add storage,
+or upgrade the CPU and/or GPU.&lt;/p&gt;
+
+&lt;h2 id=&#34;final-build-selections&#34;&gt;Final Build Selections&lt;/h2&gt;
+
+&lt;p&gt;&lt;a href=&#34;../../img/posts/chameleon-desktop-design/charmeleon.png&#34;&gt;&lt;img alt=&#34;Chameleon Picture&#34; src=&#34;../../img/posts/charmeleon-desktop-design/charmeleon.png&#34; style=&#34;max-width: 40%; float: right;&#34;/&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;After spending weeks researching all the parts on the market and building
+probably 50 theoretical builds, I eventually settled on &lt;a href=&#34;https://pcpartpicker.com/user/himmelwr/saved/#view=MhbcYJ&#34;&gt;my final part list&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h4 id=&#34;name-charmeleon&#34;&gt;Name: Charmeleon&lt;/h4&gt;
+
+&lt;p&gt;Since my last desktop build was named &amp;ldquo;Charmander&amp;rdquo;, I figured &amp;ldquo;Charmeleon&amp;rdquo; was
+fitting. Also, I&amp;rsquo;m then free to rename it to &amp;ldquo;Charzard&amp;rdquo; in the future if I &lt;em&gt;evolve&lt;/em&gt;
+the build to a next-generation Ryzen 7&amp;hellip;&lt;/p&gt;
+
+&lt;h4 id=&#34;cpu-ryzen-5-2600-https-www-amd-com-en-products-cpu-amd-ryzen-5-2600&#34;&gt;CPU: &lt;a href=&#34;https://www.amd.com/en/products/cpu/amd-ryzen-5-2600&#34;&gt;Ryzen 5 2600&lt;/a&gt;&lt;/h4&gt;
+
+&lt;p&gt;&lt;a href=&#34;../../img/posts/chameleon-desktop-design/ryzen2600.jpg&#34;&gt;&lt;img alt=&#34;ryzen 2600&#34; src=&#34;../../img/posts/charmeleon-desktop-design/ryzen2600.jpg&#34; style=&#34;max-width: 40%; float: left;&#34;/&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;While I initially wanted a Ryzen 2700, it pushed the build out of budget.
+Coming from a 4 core/4 thread system&amp;hellip; it&amp;rsquo;s likely that I don&amp;rsquo;t &lt;em&gt;need&lt;/em&gt; 8
+cores/16 threads right off the bat. Honestly, 4 cores/8 threads would be a
+noticeable improvement from what I&amp;rsquo;ve been using&amp;hellip; which is why I first
+considered the Ryzen 5 2400g. I planned to start with the 2400g and upgrade to
+the 2700 and a GPU once I had more cash. However, &lt;a href=&#34;https://forum.level1techs.com/t/finalizing-an-upgradable-ryzen-linux-build/134670/2&#34;&gt;someone on the level1tech
+forums&lt;/a&gt;
+reminded me that the 2600 was the same price as the 2400g, and I could get that
+plus a GPU for not much more cost (considering I don&amp;rsquo;t need an expensive GPU).
+After thinking it over, I realized that was my best option, and should
+&lt;em&gt;actually&lt;/em&gt; fit my needs for quite awhile.&lt;/p&gt;
+
+&lt;h4 id=&#34;motherboard-msi-b450-tomahawk-https-www-msi-com-motherboard-b450-tomahawk&#34;&gt;Motherboard: &lt;a href=&#34;https://www.msi.com/Motherboard/B450-TOMAHAWK&#34;&gt;MSI B450 Tomahawk&lt;/a&gt;&lt;/h4&gt;
+
+&lt;p&gt;&lt;a href=&#34;../../img/posts/chameleon-desktop-design/tomahawk.jpg&#34;&gt;&lt;img alt=&#34;B450 Tomahawk motherboard&#34; src=&#34;../../img/posts/charmeleon-desktop-design/tomahawk.jpg&#34; style=&#34;max-width: 40%; float: right;&#34;/&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;I had selected the MSI B450 Tomahawk after &lt;a href=&#34;https://www.youtube.com/watch?v=lxtrHDJUMt4&#34;&gt;Wendell reviewed
+it&lt;/a&gt;. &lt;a href=&#34;https://www.youtube.com/watch?v=MWGzmbbimPw&amp;amp;feature=youtu.be&amp;amp;t=145&#34;&gt;Several
+other&lt;/a&gt; &lt;a href=&#34;https://www.youtube.com/watch?v=MMJoLyrWa7E&amp;amp;feature=youtu.be&amp;amp;t=1260&#34;&gt;reviews
+confirmed&lt;/a&gt; that it was a solid board, especially for the price. When I was
+considering the 2400g, I had to switch to the &lt;a href=&#34;https://www.newegg.com/Product/Product.aspx?Item=N82E16813144188&#34;&gt;MSI B450 Gaming Pro Carbon
+AC&lt;/a&gt;, because
+the Tomahawk didn&amp;rsquo;t have a display output that the integrated graphics could
+properly use with &lt;a href=&#34;../new-lgud4379b/&#34;&gt;my UHD monitor&lt;/a&gt;&amp;rsquo;s resolution (I need a
+display port). When I switched to the 2600, I was able to go back to the
+TOMAHAWK, and funnel the cost savings towards getting my GPU.&lt;/p&gt;
+
+&lt;h4 id=&#34;gpu-sapphire-1024-4gb-pulse-radeon-rx-560-http-www-sapphiretech-com-productdetial-asp-pid-3ecead87-2972-477a-a3be-480194d9fd6e-lang-eng&#34;&gt;GPU: &lt;a href=&#34;http://www.sapphiretech.com/productdetial.asp?pid=3ECEAD87-2972-477A-A3BE-480194D9FD6E&amp;amp;lang=eng&#34;&gt;Sapphire 1024 4GB PULSE Radeon RX 560&lt;/a&gt;&lt;/h4&gt;
+
+&lt;p&gt;&lt;a href=&#34;../../img/posts/chameleon-desktop-design/rx560.png&#34;&gt;&lt;img alt=&#34;The KDE Plasma 5 extend display GUI&#34; src=&#34;../../img/posts/charmeleon-desktop-design/rx560.png&#34; style=&#34;max-width: 35%; float: left;&#34;/&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;As discussed above, I don&amp;rsquo;t need a killer GPU as I don&amp;rsquo;t play very demanding
+games. However, I did want something that could perform at least a &lt;em&gt;little
+bit&lt;/em&gt;. So, &lt;a href=&#34;https://www.youtube.com/watch?v=237L9UGQtGk&amp;amp;t=422s&#34;&gt;I picked the rx560 over the
+rx550&lt;/a&gt;. At first I planned
+to get something like a rx580, which I still might eventually do&amp;hellip; but
+I don&amp;rsquo;t think I will &lt;em&gt;need&lt;/em&gt; to for a long time.&lt;/p&gt;
+
+&lt;h4 id=&#34;ram-g-skill-trident-z-32gb-2-x-16gb-ddr4-3200mhz-ram&#34;&gt;RAM: G.Skill - Trident Z 32GB (2 x 16GB) DDR4-3200Mhz RAM&lt;/h4&gt;
+
+&lt;p&gt;&lt;a href=&#34;../../img/posts/chameleon-desktop-design/ram.png&#34;&gt;&lt;img alt=&#34;The KDE Plasma 5 extend display GUI&#34; src=&#34;../../img/posts/charmeleon-desktop-design/ram.png&#34; style=&#34;max-width: 40%; float: right;&#34;/&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;I wanted to start out with 32GB of RAM, with the ability to easily upgrade to
+64GB down the road. This meant that I needed a 2x16GB pack. Additionally, I
+needed the RAM to be &lt;em&gt;fast&lt;/em&gt;, but still not &lt;em&gt;overpriced&lt;/em&gt;. Some research showed
+that at least right now, &lt;a href=&#34;https://youtu.be/lxtrHDJUMt4?t=752&#34;&gt;3200Mhz seems to be the sweet spot, especially for my
+particular motherboard&lt;/a&gt;. I originally
+picked another kit, but the reviews for it weren&amp;rsquo;t great, so I switched to the
+G.Skill kit for only a few dollars more, but with much better reviews. I also
+briefly searched for kits with tighter timings, but they were &lt;em&gt;way&lt;/em&gt; more expensive and not worth it.&lt;/p&gt;
+
+&lt;h4 id=&#34;case-fractal-design-meshify-c-dark-tg-atx-mid-tower-https-www-fractal-design-com-home-product-cases-meshify-meshify-c&#34;&gt;Case: &lt;a href=&#34;https://www.fractal-design.com/home/product/cases/meshify/meshify-c&#34;&gt;Fractal Design - Meshify C Dark TG ATX Mid Tower&lt;/a&gt;&lt;/h4&gt;
+
+&lt;p&gt;&lt;a href=&#34;../../img/posts/chameleon-desktop-design/meshifyc.png&#34;&gt;&lt;img alt=&#34;The KDE Plasma 5 extend display GUI&#34; src=&#34;../../img/posts/charmeleon-desktop-design/meshifyc.png&#34; style=&#34;max-width: 30%; float: left; margin-bottom: 10px;&#34;/&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;I wanted a case that was sturdy, sleek, but not too flashy or expensive. During my
+search, the Fractal Design cases kept catching eye. Eventually, I found the
+Meshify C TG Dark, which seemed to be universally loved by reviewers. Additionally,
+it appeared to have &lt;a href=&#34;https://www.fractal-design.com/home/product/cases/meshify/meshify-c&#34;&gt;good
+thermals&lt;/a&gt;,
+which I liked. This was my easiest part to pick.&lt;/p&gt;
+
+&lt;h4 id=&#34;psu-evga-supernova-g4-650w-80-gold-fully-modular-atx-psu-https-www-evga-com-products-product-aspx-pn-120-g1-0650-xr&#34;&gt;PSU: EVGA - &lt;a href=&#34;https://www.evga.com/products/product.aspx?pn=120-g1-0650-xr&#34;&gt;SuperNOVA G4 650W 80+ Gold, fully modular ATX PSU&lt;/a&gt;&lt;/h4&gt;
+
+&lt;p&gt;&lt;a href=&#34;../../img/posts/chameleon-desktop-design/psu.png&#34;&gt;&lt;img alt=&#34;The KDE Plasma 5 extend display GUI&#34; src=&#34;../../img/posts/charmeleon-desktop-design/psu.png&#34; style=&#34;max-width: 35%; float: right; margin-bottom: 10px;&#34;/&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;For the power supply, I wanted one that was at least gold rated, and fully
+modular. So I searched for the highest rated PSUs fitting those requirements&amp;hellip;
+and SuperNova popped up all over the place. At first I picked a 550w model, but
+upped to the 650w at the last minute because it was about the same price and
+gives me a little more room as I upgrade.&lt;/p&gt;
+
+&lt;h4 id=&#34;storage-one-of-my-samsung-850-evo-ssds-temp&#34;&gt;Storage: One of my Samsung 850 Evo SSDs (temp)&lt;/h4&gt;
+
+&lt;p&gt;Lastly, storage. For now I am just going to use a spare 250GB Samsung 850 Evo SSD
+I had in my test laptop. I plan to eventually upgrade to a &lt;a href=&#34;https://www.samsung.com/semiconductor/minisite/ssd/product/consumer/970evo/&#34;&gt;500GB Samsung 970 Evo
+m.2 NVMe
+drive&lt;/a&gt;,
+but the 850 will work for now.&lt;/p&gt;
+
+&lt;h2 id=&#34;conclusion&#34;&gt;Conclusion&lt;/h2&gt;
+
+&lt;p&gt;So after months of planing and research, my desktop parts have all been
+ordered. Hopefully, it meets the goals I set out to solve, and I will be able
+to upgrade it over the next few years&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -52,7 +482,218 @@ series CPUs&amp;hellip;&lt;/p&gt;
 have decided to upgrade to using a single, but &lt;em&gt;better&lt;/em&gt;,
 monitor. After two years of debating, I have finally made my choice.&lt;/p&gt;
 
-&lt;p&gt;&lt;/p&gt;</description>
+&lt;p&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;monitor-history&#34;&gt;Monitor History&lt;/h2&gt;
+
+&lt;p&gt;&lt;a href=&#34;../../img/posts/new-lgud4379b-monitor/pre-college-monitors.jpg&#34;&gt;&lt;img alt=&#34;Pre College monitors&#34; src=&#34;../../img/posts/new-lgud4379b-monitor/pre-college-monitors.jpg&#34; style=&#34;max-width: 100%;&#34;/&gt;&lt;/a&gt;
+&lt;div class=&#34;caption&#34;&gt;My monitor setup right before moving to college&lt;/div&gt;&lt;/p&gt;
+
+&lt;p&gt;Half way through high school, I purchased my first laptop (it also happens to
+be the first computer I installed Linux on. I had a special edition model, but it was
+very similar to &lt;a href=&#34;https://www.cnet.com/products/hp-pavilion-dv6000/specs/&#34;&gt;this
+one&lt;/a&gt;). The laptop was
+replacing an old standard E-machines desktop, so I kept the spare monitor to
+use with the laptop. From that point on, I &lt;em&gt;usually&lt;/em&gt; had two screens to look
+at, even if one was just my laptop&amp;rsquo;s screen at the far end of my desk, with an
+&lt;a href=&#34;https://en.wikipedia.org/wiki/AIM_(software)&#34;&gt;AIM&lt;/a&gt; window open in it. Before
+moving to college, I built a desktop computer with a new monitor (picture
+above), and utilized the old one as a secondary display.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;../../img/posts/new-lgud4379b-monitor/college-desk.jpg&#34;&gt;&lt;img alt=&#34;College Desk&#34; src=&#34;../../img/posts/new-lgud4379b-monitor/college-desk.jpg&#34; style=&#34;max-width: 100%; padding: 10px;&#34;/&gt;&lt;/a&gt;
+&lt;div class=&#34;caption&#34;&gt;My desk during my senior year of collage&lt;/div&gt;&lt;/p&gt;
+
+&lt;p&gt;Throughout college, as I started to explore Linux and programming more,
+I began to experiment with using monitors in portrait orientations.
+Eventually, I purchased a second 23.6&amp;rdquo; 1080p monitor so they would
+match when paired. This gave me much more vertical real estate, which was
+useful when writing code, essays, or lab reports.&lt;/p&gt;
+
+&lt;h2 id=&#34;why-go-from-two-to-one&#34;&gt;Why go from two, to one?&lt;/h2&gt;
+
+&lt;p&gt;&lt;a href=&#34;../../img/homelab/kadabra1.jpg&#34;&gt;&lt;img alt=&#34;MA Desk&#34; src=&#34;../../img/homelab/kadabra1.jpg&#34; style=&#34;max-width: 100%; padding: 10px;&#34;/&gt;&lt;/a&gt;
+&lt;div class=&#34;caption&#34;&gt;When using two monitors, I always had to have a primary and secondary.&lt;/div&gt;&lt;/p&gt;
+
+&lt;p&gt;While I like having the &lt;em&gt;screen real estate&lt;/em&gt; of two monitors, I was never able
+to optimally use them because of the bezels between the monitors.  While
+working, I would naturally shift over and use one monitor as a &lt;em&gt;primary&lt;/em&gt;
+display, and the other as a &lt;em&gt;secondary&lt;/em&gt; display. This was okay for some tasks,
+but it usually just meant that I just used the primary monitor, and &lt;em&gt;half&lt;/em&gt; of
+the secondary one, because it was too hard to see the far end of the screen.&lt;/p&gt;
+
+&lt;p&gt;This issue was &lt;em&gt;slightly&lt;/em&gt; better when using my displays in portrait mode, but
+that wasn&amp;rsquo;t always ideal when connecting to remote machines, or viewing wide
+content (videos, for example). It also didn&amp;rsquo;t solve the main issue. When
+looking at the screens in a natural position (head centered, looking strait
+forward)&amp;hellip; I still saw two pieces of black plastic. I wanted to see my
+&lt;em&gt;primary&lt;/em&gt; window directly in front of me, with some auxiliary space on either
+side for documentation and terminal windows. I wanted a wide screen display.&lt;/p&gt;
+
+&lt;h2 id=&#34;ultra-wide-or-large-16-9-uhd&#34;&gt;Ultra-wide or &lt;em&gt;Large&lt;/em&gt; 16:9 UHD?&lt;/h2&gt;
+
+&lt;p&gt;Luckily, the once &lt;em&gt;extremely&lt;/em&gt; expensive ultra-wide and large UHD monitors have
+started to come down in price. After following the market for a few years, I
+narrowed my decision to my favorite choice in each category: The &lt;a href=&#34;https://www.dell.com/en-us/shop/dell-ultrasharp-34-curved-ultrawide-monitor-u3415w/apd/210-adtr/monitors-monitor-accessories&#34;&gt;Dell
+u3415w&lt;/a&gt;
+and the &lt;a href=&#34;https://www.lg.com/us/monitors/lg-43UD79-B-4k-uhd-led-monitor&#34;&gt;LG
+ud4379b&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;../../img/posts/new-lgud4379b-monitor/dellu3415w.jpg&#34;&gt;&lt;img alt=&#34;Dell u3415w&#34; src=&#34;../../img/posts/new-lgud4379b-monitor/dellu3415w.jpg&#34; style=&#34;max-width: 100%;&#34;/&gt;&lt;/a&gt;
+&lt;div class=&#34;caption&#34;&gt;The Dell u3415w 34&amp;rdquo; 3440x1440p Ultra Wide Monitor &lt;/div&gt;&lt;/p&gt;
+
+&lt;p&gt;The Dell u3415w is the slightly older (compared to the
+&lt;a href=&#34;https://www.dell.com/ed/business/p/dell-u3417w-monitor/pd&#34;&gt;u34&lt;strong&gt;17&lt;/strong&gt;w&lt;/a&gt;) 34&amp;rdquo;
+ultra-wide monitor offering from Dell. It has a 3440x1440, 60 Hz,
+slightly-curved, IPS panel sitting on a solid and adjustable monitor stand. I
+preferred it over other ultra-wides because it could be found for a reasonable
+price, and had a professional build quality.&lt;/p&gt;
+
+&lt;p&gt;Based on my reasoning explained in the section above, an ultra-wide (1440p
+ones&amp;hellip; not 1080p) would fit my mostly programmer use-case very well. Being a
+single monitor, I could position it directly in front of me, with my main
+code/content centered. The 3440px wide resolution would also allow enough
+horizontal space to have a full web page of documentation, and several terminal
+windows open on either side of the main display. Lastly, the 1440px vertical
+resolution would be an adequate improvement from my &lt;em&gt;&amp;ldquo;starting to feel tight&amp;rdquo;&lt;/em&gt;,
+1080p monitors.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;../../img/posts/new-lgud4379b-monitor/ud4379b.jpg&#34;&gt;&lt;img alt=&#34;Dell u3415w&#34; src=&#34;../../img/posts/new-lgud4379b-monitor/ud4379b.jpg&#34; style=&#34;max-width: 100%;&#34;/&gt;&lt;/a&gt;
+&lt;div class=&#34;caption&#34;&gt;The LG ud4379b 42.5&amp;rdquo; 3440x2160p Monitor&lt;/div&gt;&lt;/p&gt;
+
+&lt;p&gt;The massive LG ud4379b is a 42.5&amp;rdquo; 3840x2160px IPS display. At this size and
+resolution, it is roughly the equivalent of having four 21&amp;rdquo; 1920x1080px
+monitors aligned in a 2x2 grid&amp;hellip; except with 0 bezel between them. Compared to
+other 40&amp;rdquo;+ 4K displays, I preferred this one because once again, it was
+reasonably priced, had great input options, and also seemed to have a half
+decent panel. Reviewers consistently said it had vibrant colors and minimal
+back light bleed.&lt;/p&gt;
+
+&lt;p&gt;Being single monitor, I could easily sit myself in front of it, and have my
+main content centered, just like with the ultra-wide. Being so large, I could
+still have auxiliary windows opened on either side. One advantage the ud4379
+had over the ultra-wide however, was that being a massive 16:9 screen, it could
+easily be divided into 4 1080p screens. In fact, this model supports spitting
+the screen into four separate displays, each taking a different input (more on
+that later..). While the ultra-wides often support splitting and
+picture-in-picture, it seems more natural on the 43&amp;rdquo; monitor.&lt;/p&gt;
+
+&lt;h2 id=&#34;deciding-on-the-43-uhd&#34;&gt;Deciding on the 43&amp;rdquo; UHD&lt;/h2&gt;
+
+&lt;p&gt;&lt;a href=&#34;../../img/posts/new-lgud4379b-monitor/multi-input.jpg&#34;&gt;&lt;img
+alt=&#34;Shipped Box&#34; src=&#34;../../img/posts/new-lgud4379b-monitor/multi-input.jpg&#34;
+style=&#34;max-width: 100%;&#34;/&gt;&lt;/a&gt; &lt;div class=&#34;caption&#34;&gt;The LG ud4379 can support
+multiple inputs at a time to the single display&lt;/div&gt;&lt;/p&gt;
+
+&lt;p&gt;I went back and forth on which monitor I wanted several times. Eventually, I
+realized the long term versatility of the LG monitor was just something I could
+not ignore. Being able to use it as one massive display that I could fit
+several full VM windows in, or even as 1,2, or 4 discrete monitors makes it
+extremely useful for me. I tend to be playing with more than one computer or VM
+at a time, and it is VERY nice to have them all fit on a single display. I
+&lt;em&gt;was&lt;/em&gt; worried it would be a bit &lt;em&gt;too&lt;/em&gt; large and look stupid on my desk,
+especially compared to how slick the ultra-wide would look. However, in the
+end, practicality won out.&lt;/p&gt;
+
+&lt;h2 id=&#34;getting-the-ud4379b&#34;&gt;Getting the UD4379b&lt;/h2&gt;
+
+&lt;p&gt;&lt;a href=&#34;../../img/posts/new-lgud4379b-monitor/box.jpg&#34;&gt;&lt;img alt=&#34;Shipped Box&#34;
+src=&#34;../../img/posts/new-lgud4379b-monitor/box.jpg&#34; style=&#34;max-width:
+100%;&#34;/&gt;&lt;/a&gt; &lt;div class=&#34;caption&#34;&gt;The Monitor arrived a few days later
+perfectly safe, despite the beat up box&lt;/div&gt;&lt;/p&gt;
+
+&lt;p&gt;After deciding that we would likely order the monitor as my birthday gift, my
+wife and I started watching the price a few weeks before. One day, we noticed
+the price had dropped $200&amp;hellip; so we ordered it. The price soon went back up, so
+I&amp;rsquo;m glad we snatched it when we did!&lt;/p&gt;
+
+&lt;p&gt;It came a few days latter in a massive box that I happily carted up to our
+apartment. The box was a bit beat up, but after opening it, all the components
+were fine.&lt;/p&gt;
+
+&lt;h2 id=&#34;what-i-like&#34;&gt;What I like&lt;/h2&gt;
+
+&lt;p&gt;&lt;a href=&#34;../../img/posts/new-lgud4379b-monitor/monitor-working.png&#34;&gt;&lt;img alt=&#34;Monitor Working&#34; src=&#34;../../img/posts/new-lgud4379b-monitor/monitor-working.png&#34; style=&#34;max-width: 100%;&#34;/&gt;&lt;/a&gt;
+&lt;div class=&#34;caption&#34;&gt;I can have my main content front and center, with other windows on the sides&lt;/div&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;Screen Resolution&lt;/strong&gt; - The most obvious pro using a monitor at this
+size and resolution&amp;hellip; is the screen real estate. As explained above, it&amp;rsquo;s
+twice the space of my old, dual 1080p monitor setup. With this space, I can
+easily have several source code files, documentation, a few terminals, a
+chat window, and even a video opened on my single screen as I work.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;IPS Display&lt;/strong&gt; - Many people might assume that the driving factor
+pushing me to &lt;em&gt;finally&lt;/em&gt; update my monitors was my desire for more screen
+resolution. While that was &lt;em&gt;part&lt;/em&gt; of my goal&amp;hellip; what truly motivated me was
+a desire to switch to an IPS display on my main setup after almost a year
+using my T470&amp;rsquo;s IPS display (which by the way, is &lt;em&gt;not a good IPS panel&lt;/em&gt;).
+As someone who spends a large percentage of their computing time in dark
+terminals and IDEs, an IPS panel really does help text and colors to pop,
+because the darks look &lt;em&gt;so&lt;/em&gt; much better. It turns out, this panel is
+actually quite good for it&amp;rsquo;s price, and I am very happy with it.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;../../img/posts/new-lgud4379b-monitor/new-monitor.jpg&#34;&gt;&lt;img alt=&#34;Monitor Shading&#34; src=&#34;../../img/posts/new-lgud4379b-monitor/new-monitor.jpg&#34; style=&#34;max-width: 100%;&#34;/&gt;&lt;/a&gt;
+&lt;div class=&#34;caption&#34;&gt;When working, I can look straight at a single display and still have enough room.&lt;/div&gt;&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;Single Monitor, No (center) Bezels&lt;/strong&gt; - As explained earlier in this
+post, I like that this is is a &lt;em&gt;single&lt;/em&gt; monitor. This means that I no
+longer need to twist my head back and forth, or stare at bezels. I can
+looks straight ahead and see my main content, with &amp;ldquo;auxiliary&amp;rdquo; windows
+view-able in my periphery.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;Flexibility, multiple inputs&lt;/strong&gt; - Lastly, I enjoy the multiple
+inputs and excellent PIP system of this monitor. Combined with something
+like &lt;a href=&#34;https://symless.com/synergy&#34;&gt;Synergy&lt;/a&gt;, I can easily use this one
+display with several devices at a time. This is great when working with
+more than one device, or potentially watching content on something like a
+chromecast stick, while still working on the computer. It really is the
+advantage of having 4 monitors, but in a single package.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;Speakers&lt;/strong&gt; - They aren&amp;rsquo;t &lt;em&gt;amazing&lt;/em&gt;, and I don&amp;rsquo;t use them too often
+too often, but for &amp;ldquo;monitor&amp;rdquo; speakers, they really aren&amp;rsquo;t half bad. They&amp;rsquo;re
+what you&amp;rsquo;d expect from a TV. However, this means that if I were to use
+something like a media stick, the built-in speaker is acceptable enough for
+such a device.&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;what-i-don-t-like&#34;&gt;What I don&amp;rsquo;t like&lt;/h2&gt;
+
+&lt;p&gt;&lt;a href=&#34;../../img/posts/new-lgud4379b-monitor/monitor-shading.png&#34;&gt;&lt;img alt=&#34;Monitor Shading&#34; src=&#34;../../img/posts/new-lgud4379b-monitor/monitor-shading.png&#34; style=&#34;max-width: 100%;&#34;/&gt;&lt;/a&gt;
+&lt;div class=&#34;caption&#34;&gt;Viewed from the center, the monitor edges have shadowing.&lt;/div&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;Edge Shadowing&lt;/strong&gt; - The one issue that myself
+&lt;a href=&#34;https://youtu.be/yA6hL3inqRc?t=250&#34;&gt;and&lt;/a&gt;
+&lt;a href=&#34;https://youtu.be/3BSaPRHrA_U?t=667&#34;&gt;others&lt;/a&gt; have experienced with
+this monitor is a sort of &amp;ldquo;edge shadowing&amp;rdquo;. This is apparently
+something that is common on monitors this massive, and it&amp;rsquo;s
+really hard to engineer around. If I sit back far enough from the
+display, you can&amp;rsquo;t see it anymore. (But I don&amp;rsquo;t normally sit like that)&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;Input Switching Lag?&lt;/strong&gt; - While this is more of a critique of
+&lt;em&gt;monitors&lt;/em&gt; in general, one thing I wish was a bit better was the input
+switching. Having so many inputs, it can get confusing remembering which one is
+attached to what device, or trying to quickly configure a 2x2 multi-input
+layout. Having to &lt;em&gt;wait&lt;/em&gt; for each device to connect when flipping through all
+the inputs makes it that much more frustrating (and disappointing when it&amp;rsquo;s the
+wrong input&amp;hellip;).&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;Corners Out of View&lt;/strong&gt; - Being such a large display, one issue I
+sometimes have is that the outside corners are out of my field of view.
+I mostly notice this when I occasionally miss notification pop-ups
+that I &lt;em&gt;want&lt;/em&gt; to see. On the flip-side, notifications don&amp;rsquo;t seem to
+distract me as much now when I&amp;rsquo;m trying to focus :P.&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;conclusion&#34;&gt;Conclusion&lt;/h2&gt;
+
+&lt;p&gt;&lt;a href=&#34;../../img/posts/new-lgud4379b-monitor/new-monitor-desk.jpg&#34;&gt;&lt;img alt=&#34;Monitor Shading&#34; src=&#34;../../img/posts/new-lgud4379b-monitor/new-monitor-desk.jpg&#34; style=&#34;max-width: 100%;&#34;/&gt;&lt;/a&gt;
+&lt;div class=&#34;caption&#34;&gt;New monitor on my desk.&lt;/div&gt;&lt;/p&gt;
+
+&lt;p&gt;In conclusion, I an &lt;em&gt;very&lt;/em&gt; happy with my new monitor. It fits all of the
+criteria I had, and works for my use-case perfectly. While I wouldn&amp;rsquo;t
+recommend it for a pure gaming machine, it might be one of the best deal
+&lt;em&gt;productivity&lt;/em&gt; monitors out there.&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -69,7 +710,214 @@ and deploy a &amp;ldquo;draft&amp;rdquo; website, so I can stage new posts/websi
 on my home network, before publishing it to the &amp;ldquo;production&amp;rdquo;
 website. Here is how that idea was Instantiated&amp;hellip;&lt;/p&gt;
 
-&lt;p&gt;&lt;/p&gt;</description>
+&lt;p&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;my-website&#34;&gt;My Website&lt;/h2&gt;
+
+&lt;p&gt;&lt;a href=&#34;../../img/posts/draft-website-jenkins/jenkins-logo.png&#34;&gt;&lt;img
+src=&#34;../../img/posts/draft-website-jenkins/jenkins-logo.png&#34; style=&#34;max-width:
+50%; float: left; margin: 0px 12px 0px 0px;&#34; alt=&#34;Jenkins Logo&#34; /&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;I have previously &lt;a href=&#34;../website-transition-to-hugo/&#34;&gt;described&lt;/a&gt; how my
+website is &lt;a href=&#34;../website-switched-to-hugo/&#34;&gt;currently generated&lt;/a&gt;, using
+the &lt;a href=&#34;https://gohugo.io&#34;&gt;Hugo&lt;/a&gt; static website generator. To organize
+this system, I have two git repos: One that consists of all the hugo
+source files (where I write content), and one that contains the
+generated static website (that gets deployed to my web host).&lt;/p&gt;
+
+&lt;p&gt;When writing a post, I use &lt;code&gt;hugo server -D -F&lt;/code&gt; to live view the page
+in my browser. However, I occasionally want to view the state of all
+the &lt;em&gt;committed code&lt;/em&gt; in the &lt;em&gt;repo&lt;/em&gt;, to see what the site would look
+like if I decided to publish a post. So, I created a &amp;ldquo;drafts&amp;rdquo; website,
+which shows the current state of my website&amp;rsquo;s &lt;em&gt;source&lt;/em&gt; repo (including
+draft and future posts). If I want to check how a post looks on my
+phone, or any other device, I can just open up the draft website after
+pushing my changes.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;../../img/posts/draft-website-jenkins/mr-mime.png&#34;&gt;&lt;img
+src=&#34;../../img/posts/draft-website-jenkins/mr-mime.png&#34; style=&#34;max-width:
+45%; float: right; margin: 20px 0px 0px 10px;&#34; alt=&#34;Jenkins Logo&#34; /&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;jenkins&#34;&gt;Jenkins&lt;/h2&gt;
+
+&lt;p&gt;I had previously created a dedicated Jenkins server on my home network
+(Mr. Mime), using a CentOS 7 VM hosted on my home server. However, any
+Jenkins setup should work for this project (including a &lt;a href=&#34;on my home network&#34;&gt;docker
+container&lt;/a&gt;). To get started, checkout the &lt;a href=&#34;https://jenkins.io/download/&#34;&gt;Jenkins
+Website&lt;/a&gt;, and be sure to take advantage
+of the &lt;a href=&#34;https://jenkins.io/doc/&#34;&gt;the documentation&lt;/a&gt; for help.&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;Note: just make sure hugo is installed on the Jenkins server, as we need
+it to generate the website.&lt;/em&gt;&lt;/p&gt;
+
+&lt;h3 id=&#34;github-integration&#34;&gt;GitHub Integration&lt;/h3&gt;
+
+&lt;h4 id=&#34;jenkins-service&#34;&gt;Jenkins Service&lt;/h4&gt;
+
+&lt;p&gt;My website repo is hosted on GitHub, so we need to configure it to
+work with our Jenkins server. To do that, go to the project&amp;rsquo;s GitHub
+page, and navigate through &lt;strong&gt;Settings&lt;/strong&gt; -&amp;gt; &lt;strong&gt;Integrations &amp;amp;
+services&lt;/strong&gt;. Click the &lt;strong&gt;Add service&lt;/strong&gt; drop-down and select &lt;em&gt;Jenkins
+(Git Plugin)&lt;/em&gt;. Next, add the Jenkins server url (assuming the server
+is accessible from the internet. If not, hosting the Jenkins server on
+something like &lt;a href=&#34;http://digitalocean.com&#34;&gt;Digital Ocean&lt;/a&gt; might be an
+easy solution). Lastly, make sure the &lt;strong&gt;Activate&lt;/strong&gt; box is selected,
+and click the &lt;strong&gt;Add Service&lt;/strong&gt; button.&lt;/p&gt;
+
+&lt;h4 id=&#34;ssh-keys&#34;&gt;SSH Keys&lt;/h4&gt;
+
+&lt;p&gt;While on the project&amp;rsquo;s GitHub page, make sure that the Jenkins
+server&amp;rsquo;s ssh keys are added to the project. To add them, navigate to
+the &lt;strong&gt;Deploy Keys&lt;/strong&gt; page (under the project&amp;rsquo;s &lt;strong&gt;Settings&lt;/strong&gt; tab). Then
+select &lt;strong&gt;Add deploy key&lt;/strong&gt;, and add the public key.&lt;/p&gt;
+
+&lt;h2 id=&#34;a-nginx-server&#34;&gt;A Nginx Server&lt;/h2&gt;
+
+&lt;p&gt;&lt;a href=&#34;../../img/posts/draft-website-jenkins/nginx.png&#34;&gt;&lt;img
+src=&#34;../../img/posts/draft-website-jenkins/nginx.png&#34; style=&#34;max-width:
+100%; float: center; margin: 0px 0px 0px 0px;&#34; alt=&#34;Default Nginx Page&#34; /&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;With Jenkins ready, let&amp;rsquo;s quickly setup the web server before
+configuring the Jenkins project. Any web server will do (it just needs
+to serve the generated &lt;em&gt;static&lt;/em&gt; website content). I used
+&lt;a href=&#34;https://nginx.org/en/&#34;&gt;nginx&lt;/a&gt; in for setup. After installing, make
+sure it is running. To install and check the status of nginx on an
+Ubuntu System:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;color:#75715e&#34;&gt;## Install
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;sudo apt install -y nginx
+
+&lt;span style=&#34;color:#75715e&#34;&gt;## Check it is running
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;sudo systemctl status nginx
+
+&lt;span style=&#34;color:#75715e&#34;&gt;## Optional: Ensure it is enabled to start up after reboots
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;sudo systemctl enable nginx&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;With the web server running, we need to know &lt;em&gt;where&lt;/em&gt; the website files
+need to go. Nginx will by default serve content at
+&lt;code&gt;/user/share/nginx/html/&lt;/code&gt;, so remember that location for later&amp;hellip;&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;Note: Don&amp;rsquo;t forget to add the &lt;code&gt;jenkins&lt;/code&gt; user&amp;rsquo;s ssh key from the
+jenkins server to the &lt;code&gt;authorized_keys&lt;/code&gt; file of the nginx server. This
+will make file transfers easier when setting up the jenkins project.&lt;/em&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;configuring-a-project&#34;&gt;Configuring a Project&lt;/h2&gt;
+
+&lt;p&gt;Let&amp;rsquo;s configure our Jenkins project! Log in to the Jenkins
+server and click the &lt;strong&gt;New Item&lt;/strong&gt; option on the left side bar. Enter a
+name for the project, select the &lt;strong&gt;Freestyle Project&lt;/strong&gt; option, and hit
+&lt;strong&gt;OK&lt;/strong&gt;.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;../../img/posts/draft-website-jenkins/general-config.png&#34;&gt;&lt;img
+src=&#34;../../img/posts/draft-website-jenkins/general-config.png&#34; style=&#34;max-width:
+100%; float: center; margin: 0px 0px 0px 0px;&#34; alt=&#34;The Project&#39;s General Configuration Section&#34; /&gt;&lt;/a&gt;
+&lt;div class=&#34;caption&#34;&gt;The Project&amp;rsquo;s General Configuration Section&lt;/div&gt;&lt;/p&gt;
+
+&lt;p&gt;In the &lt;strong&gt;General&lt;/strong&gt; section of the configuration screen, optionally
+write a description about the project. Next, select the &amp;ldquo;&lt;em&gt;GitHub
+Project&lt;/em&gt;&amp;rdquo; check-box, and add the GitHub repo&amp;rsquo;s url into the &lt;em&gt;Project
+url&lt;/em&gt; text box.&lt;/p&gt;
+
+&lt;h4 id=&#34;source-control&#34;&gt;Source Control&lt;/h4&gt;
+
+&lt;p&gt;&lt;a href=&#34;../../img/posts/draft-website-jenkins/credentials.png&#34;&gt;&lt;img
+src=&#34;../../img/posts/draft-website-jenkins/credentials.png&#34;
+style=&#34;max-width: 100%; float: center; margin: 0px 0px 0px 0px;&#34;
+alt=&#34;Setting Credentials&#34; /&gt;&lt;/a&gt;
+&lt;div class=&#34;caption&#34;&gt;Setting Credentials&lt;/div&gt;&lt;/p&gt;
+
+&lt;p&gt;In the &lt;strong&gt;Source Code Management&lt;/strong&gt; section of the configuration, select
+the &lt;em&gt;Git&lt;/em&gt; option. Then, enter the repo&amp;rsquo;s url for the &lt;em&gt;Repository URL&lt;/em&gt;
+box (I did the ssh url). For &lt;em&gt;Credentials&lt;/em&gt;, select &lt;em&gt;Add&lt;/em&gt; to configure a
+new credential. Select &lt;em&gt;SSH Username with private key&lt;/em&gt; for &lt;em&gt;Kind&lt;/em&gt;,
+use &lt;code&gt;jenkins&lt;/code&gt; for the &lt;em&gt;Username&lt;/em&gt;.&lt;/p&gt;
+
+&lt;p&gt;More source control options can be configured, but this should be the
+minimum setup required. &lt;em&gt;Again, for this to work public keys for the
+&lt;code&gt;jenkins&lt;/code&gt; user on the jenkins server must be generated, and added as a
+deployment key on GitHub.&lt;/em&gt;&lt;/p&gt;
+
+&lt;h4 id=&#34;build-trigger&#34;&gt;Build Trigger&lt;/h4&gt;
+
+&lt;p&gt;Under the &lt;strong&gt;Build Triggers&lt;/strong&gt; section, select &lt;em&gt;Poll SCM&lt;/em&gt;. Without
+adding any schedule parameters, it will trigger each time a new commit
+is detected. This is what we want.&lt;/p&gt;
+
+&lt;h4 id=&#34;build-step&#34;&gt;Build Step&lt;/h4&gt;
+
+&lt;p&gt;In the &lt;strong&gt;Build&lt;/strong&gt; section, click &lt;strong&gt;Add build step&lt;/strong&gt;, and select
+&lt;strong&gt;Execute shell&lt;/strong&gt;. This is where we can add the shell commands to
+build the website with hugo. Add the following command to the box
+(don&amp;rsquo;t forget to change the url):&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;hugo -D -F -b &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;http://10.1.1.77&amp;#34;&lt;/span&gt; -d public&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;The &lt;code&gt;-D&lt;/code&gt; flag tells hugo to include all draft posts, while the &lt;code&gt;-F&lt;/code&gt; flag
+has it include all posts with a future date. The &lt;code&gt;-b&lt;/code&gt; flag sets the
+url for the generated website. This should the be url or IP address of
+the nginx server setup previously. Lastly, the &lt;code&gt;-d&lt;/code&gt; flag tells hugo to
+output the generated static website to the &lt;code&gt;public&lt;/code&gt; directory. This
+will be useful to know when deploying the build.&lt;/p&gt;
+
+&lt;h4 id=&#34;deploy-to-webserver&#34;&gt;Deploy to Webserver&lt;/h4&gt;
+
+&lt;p&gt;For deployment, I used rsync to copy the build files to the nginx
+web server. This step will be another shell command, so I&amp;rsquo;ve actually
+added it as another &amp;ldquo;build&amp;rdquo; step. Add another &lt;strong&gt;Execute shell&lt;/strong&gt; and
+paste the following command inside the text box (again, changing the url):&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;rsync -r &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;$WORKSPACE&lt;span style=&#34;color:#e6db74&#34;&gt;/public/&amp;#34;&lt;/span&gt; ryan@10.1.1.77:/usr/share/nginx/html/&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;I used the Jenkins &lt;code&gt;$WORKSPACE&lt;/code&gt; variable to get the location of the
+build, and was able to append the &lt;code&gt;public&lt;/code&gt; directory to that, since we
+defined it with the &lt;code&gt;-d&lt;/code&gt; flag in the hugo build step above. This will
+copy the generated website, to the web server.&lt;/p&gt;
+
+&lt;p&gt;Hit &lt;strong&gt;Save&lt;/strong&gt;, and test it out by clicking the &lt;strong&gt;Build Now&lt;/strong&gt; link on the
+left. If the build is successful, check the nginx website to see if
+the website was deployed!&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;Note: If it doesn&amp;rsquo;t work, double check all permissions and
+credentials between accounts and servers.&lt;/em&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;better-yet-pipelines&#34;&gt;Better Yet&amp;hellip; Pipelines&lt;/h2&gt;
+
+&lt;p&gt;What&amp;rsquo;s better than using Jenkins for automated &amp;ldquo;draft website&amp;rdquo;
+deployments?  Using a &lt;a href=&#34;https://jenkins.io/doc/book/pipeline/&#34;&gt;Jenkins
+Pipeline&lt;/a&gt;. A Pipeline allows
+the jenkins project steps to be defined in a &lt;em&gt;Jenkinsfile&lt;/em&gt; that, among
+other benefits, can be source controlled. In fact, by default a
+Jenkins pipeline searches for the &lt;code&gt;Jenkinsfile&lt;/code&gt; right in the root
+directory of a project&amp;rsquo;s git repo.&lt;/p&gt;
+
+&lt;p&gt;While a pipeline and
+&lt;a href=&#34;https://jenkins.io/doc/book/pipeline/jenkinsfile/&#34;&gt;Jenkinsfile&lt;/a&gt; might
+be a bit more confusing to &lt;em&gt;learn&lt;/em&gt; how to setup, it is well worth it. For
+example, the following Jenkinsfile can be used to do essentially what
+we setup in the previous steps:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-groovy&#34; data-lang=&#34;groovy&#34;&gt;pipeline &lt;span style=&#34;color:#f92672&#34;&gt;{&lt;/span&gt;
+    agent &lt;span style=&#34;color:#f92672&#34;&gt;{&lt;/span&gt;
+	label &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;mr-mime&amp;#39;&lt;/span&gt;
+    &lt;span style=&#34;color:#f92672&#34;&gt;}&lt;/span&gt;
+    stages &lt;span style=&#34;color:#f92672&#34;&gt;{&lt;/span&gt;
+	stage &lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;build&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;{&lt;/span&gt;
+	    steps&lt;span style=&#34;color:#f92672&#34;&gt;{&lt;/span&gt;
+		sh &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;hugo -D -F -b &amp;#34;http://10.1.1.77&amp;#34;&amp;#39;&lt;/span&gt;
+	    &lt;span style=&#34;color:#f92672&#34;&gt;}&lt;/span&gt;
+	&lt;span style=&#34;color:#f92672&#34;&gt;}&lt;/span&gt;
+	stage &lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;deploy&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;{&lt;/span&gt;
+	    steps&lt;span style=&#34;color:#f92672&#34;&gt;{&lt;/span&gt;
+		sh &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;rsync -r &amp;#34;$WORKSPACE/public/&amp;#34; ryan@ponyta:/usr/share/nginx/html/&amp;#39;&lt;/span&gt;
+	    &lt;span style=&#34;color:#f92672&#34;&gt;}&lt;/span&gt;
+	&lt;span style=&#34;color:#f92672&#34;&gt;}&lt;/span&gt;
+
+    &lt;span style=&#34;color:#f92672&#34;&gt;}&lt;/span&gt;
+&lt;span style=&#34;color:#f92672&#34;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;I&amp;rsquo;m not going to cover pipelines in &lt;em&gt;this&lt;/em&gt; post. However, I do
+encourage readers to check them out.&lt;/p&gt;
+
+&lt;h2 id=&#34;conclusion&#34;&gt;Conclusion&lt;/h2&gt;
+
+&lt;p&gt;That&amp;rsquo;s it. While I currently host my website using &lt;a href=&#34;https://pages.github.com/&#34;&gt;GitHub
+pages&lt;/a&gt;, if I ever self-host it again, I
+will definitely automate publishing it using Jenkins as well. This has
+been a &lt;em&gt;very&lt;/em&gt; basic example of what Jenkins can be used for, but I
+have found it rather useful when working on the content of this
+website. There is so much more it can do. Have fun!&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -85,7 +933,120 @@ reverse-proxy (Tangela), and I decided to do that again on the new
 network. While it is a simple process, it is one that other people often
 ask me about. So, this time&amp;hellip; I&amp;rsquo;m taking notes!&lt;/p&gt;
 
-&lt;p&gt;&lt;/p&gt;</description>
+&lt;p&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;why&#34;&gt;Why?&lt;/h2&gt;
+
+&lt;p&gt;The purpose of this reverse proxy is to direct outside traffic to the
+appropriate host internally, by looking at the sub-domain of the URL
+request. For example, I may have servers for both
+&lt;code&gt;website.himmelwright.net&lt;/code&gt; and &lt;code&gt;dashboard.himmelwright.net&lt;/code&gt; running
+internally on my network, but they will have the same public IP. Using
+nginx, I can point all of my web traffic to &lt;em&gt;tangela&lt;/em&gt;, my
+reverse-proxy. If tangela sees that the incoming request is for
+&lt;code&gt;website.himmelwright.net&lt;/code&gt;, it will forward that traffic to the
+website server. On the other hand, if the request is for
+&lt;code&gt;dashboard.himmelwright.net&lt;/code&gt;, it will direct it to the dashboard
+server. A reverse-proxy expands what can be accomplished on a single network,
+and is a cleaner (and possibly safer) method than doing everything through
+port-forwarding.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;../../img/posts/nginx-reverse-proxy/tangela.png&#34;&gt;&lt;img
+src=&#34;../../img/posts/nginx-reverse-proxy/tangela.png&#34; style=&#34;max-width:
+50%; float: right; margin: 0px 0px 0px 0px;&#34; alt=&#34;Example snippet of
+my org-babel config.org file&#34; /&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;setup-server&#34;&gt;Setup Server&lt;/h2&gt;
+
+&lt;p&gt;To get started, configure a server/container/droplet that will host
+nginx. I&amp;rsquo;m using a CentOS 7 minimal install VM on
+&lt;a href=&#34;http://ryan.himmelwright.net/pages/homelab/#ninetales&#34;&gt;Nintales&lt;/a&gt; (my
+home server). I don&amp;rsquo;t have a bunch of traffic (well, I &lt;em&gt;shouldn&amp;rsquo;t&lt;/em&gt;), so I&amp;rsquo;m
+just giving it 1 core and 512MB RAM.&lt;/p&gt;
+
+&lt;h3 id=&#34;setup-nginx&#34;&gt;Setup Nginx&lt;/h3&gt;
+
+&lt;p&gt;Next, it&amp;rsquo;s time to setup and install Nginx.&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;Note&lt;/em&gt;: the rest of the post will be focused on using a CentOS 7 base,
+since that is what I am using. Adjust for your distro accordingly.&lt;/p&gt;
+
+&lt;p&gt;Add the nginx repo, and install it:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;sudo rpm -Uvh http://nginx.org/packages/centos/7/noarch/RPMS/nginx-release-centos-7-0.el7.ngx.noarch.rpm
+sudo yum -y install nginx&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Tell the firewall to allow http traffic:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;sudo firewall-cmd --permanent --add-service&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;http
+sudo systemctl reload firewalld&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Start and enable nginx:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;sudo systemctl start nginx
+sudo systemctl enable nginx&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h2 id=&#34;configure-nginx&#34;&gt;Configure Nginx&lt;/h2&gt;
+
+&lt;p&gt;Examine the config file, just to check that everything looks alright.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;vim /etc/nginx/nginx.conf&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Specifically, we want to ensure that the following line exists before
+proceeding:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;include /etc/nginx/conf.d/*.conf;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;That line basically states that any *.conf file inside the &lt;code&gt;/etc/nginx/conf.d/&lt;/code&gt;
+directory will also be loaded and used by nginx. This allows us to add our own configuration file in the next step.&lt;/p&gt;
+
+&lt;h2 id=&#34;configure-proxy&#34;&gt;Configure Proxy&lt;/h2&gt;
+
+&lt;p&gt;I created a &lt;code&gt;reverse-proxies.config&lt;/code&gt; (it can be named anything with a
+&lt;code&gt;.config&lt;/code&gt; extension) file in &lt;code&gt;/etc/nginx/conf.d/&lt;/code&gt; to contain all of
+the reverse proxy definitions. These are just server block
+entries. For example:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;server &lt;span style=&#34;color:#f92672&#34;&gt;{&lt;/span&gt;
+        listen &lt;span style=&#34;color:#ae81ff&#34;&gt;80&lt;/span&gt;;
+        server_name website.himmelwright.net;
+        location / &lt;span style=&#34;color:#f92672&#34;&gt;{&lt;/span&gt;
+                proxy_pass      http://192.168.1.198:80;
+        &lt;span style=&#34;color:#f92672&#34;&gt;}&lt;/span&gt;
+&lt;span style=&#34;color:#f92672&#34;&gt;}&lt;/span&gt;
+
+server &lt;span style=&#34;color:#f92672&#34;&gt;{&lt;/span&gt;
+        listen &lt;span style=&#34;color:#ae81ff&#34;&gt;80&lt;/span&gt;;
+        server_name dashboard.himmelwright.net;
+        location / &lt;span style=&#34;color:#f92672&#34;&gt;{&lt;/span&gt;
+                proxy_pass      http://192.168.1.200:8080;
+        &lt;span style=&#34;color:#f92672&#34;&gt;}&lt;/span&gt;
+&lt;span style=&#34;color:#f92672&#34;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Restart nginx for the changes to take effect:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;sudo systemctl restart nginx&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h4 id=&#34;side-note&#34;&gt;Side Note:&lt;/h4&gt;
+
+&lt;p&gt;For some applications, you may need to add the URL to the &lt;code&gt;/etc/hosts&lt;/code&gt;
+file, and use that for nginx. I have experienced this in the past with
+&lt;a href=&#34;https://about.gitlab.com/&#34;&gt;Gitlab&lt;/a&gt;. For example:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;/etc/hosts
+---
+&lt;span style=&#34;color:#ae81ff&#34;&gt;192&lt;/span&gt;.168.1.201  git.himmelwright.net&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;and then in the config file:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;/etc/nginx/config.d/reverse-proxies.config
+---
+server &lt;span style=&#34;color:#f92672&#34;&gt;{&lt;/span&gt;
+        listen &lt;span style=&#34;color:#ae81ff&#34;&gt;80&lt;/span&gt;;
+        server_name git.himmelwright.net;
+        location / &lt;span style=&#34;color:#f92672&#34;&gt;{&lt;/span&gt;
+                proxy_pass      http://git.himmelwright.net:80;
+        &lt;span style=&#34;color:#f92672&#34;&gt;}&lt;/span&gt;
+&lt;span style=&#34;color:#f92672&#34;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h2 id=&#34;selinux-fixes&#34;&gt;SELinux Fixes&lt;/h2&gt;
+
+&lt;p&gt;At this point, you may be done. However, I was having issues getting
+nginx to forward some of my ports&amp;hellip; until I remembered that I was on
+CentOS and it may be an issue with SELinux. It was.&lt;/p&gt;
+
+&lt;p&gt;One &amp;ldquo;&lt;em&gt;fix&lt;/em&gt;&amp;rdquo; is to just disable SELinux. A &lt;em&gt;better&lt;/em&gt; solution is to use
+setools to allow the http connections:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;sudo yum install -y setools
+setsebool -P httpd_can_network_connect true&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h2 id=&#34;conclusion&#34;&gt;Conclusion&lt;/h2&gt;
+
+&lt;p&gt;Besides having to configure your router to forward http traffic to the
+server, that is really it. This is a real basic configuration, but it
+has worked well for me over the years. If I start doing something more
+complex, I may provide an update. Until then, enjoy!&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -100,7 +1061,208 @@ instance) to supplant my Dropbox usage. While it has worked fairly well, I&amp;r
 been watching &lt;a href=&#34;https://www.seafile.com/en/home/&#34;&gt;seafile&lt;/a&gt; from a distance the
 last few years, but haven&amp;rsquo;t taken the time to try it out. I have now.&lt;/p&gt;
 
-&lt;p&gt;&lt;/p&gt;</description>
+&lt;p&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;seafile&#34;&gt;Seafile&lt;/h2&gt;
+
+&lt;p&gt;&lt;a href=&#34;../../img/posts/trying-out-seafile/seafilelogo.png&#34;&gt;&lt;img src=&#34;../../img/posts/trying-out-seafile/seafilelogo.png&#34; style=&#34;max-width: 95%; float: left; margin: 0px 15px 0px 0px;&#34; alt=&#34;Docker ps&#34; /&gt;&lt;/a&gt;
+&lt;div class=&#34;caption&#34;&gt;The Seafile Logo&lt;/div&gt;&lt;/p&gt;
+
+&lt;p&gt;As stated on their website:&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;Seafile is an enterprise file hosting platform with high reliability and
+performance. Put files on your own server. Sync and share files across
+different devices, or access all the files as a virtual disk.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;While self-defined as an &amp;ldquo;&lt;em&gt;enterprise&lt;/em&gt; file hosting platform&amp;rdquo;, there is a
+Community Edition that is &lt;em&gt;Free &amp;amp; Open Source&lt;/em&gt;.. which is exactly how I like my
+software. So lets get started.&lt;/p&gt;
+
+&lt;h2 id=&#34;setup&#34;&gt;Setup&lt;/h2&gt;
+
+&lt;p&gt;Similar to a Nextcloud configuration, to get seafile up and running, a server
+ component is first installed. Afterwards, clients connect to it.&lt;/p&gt;
+
+&lt;h3 id=&#34;server&#34;&gt;Server&lt;/h3&gt;
+
+&lt;p&gt;The countless number of configurations seafile supports may make setting up the
+server component for the first time a bit intimidating. There are several
+database back-ends (SQLite, MySQL&amp;hellip;), web servers (Nginx, Apache), and
+advanced options (Memcached, LDAP, etc) which can be selected. However, the
+seafile developers &lt;em&gt;do&lt;/em&gt; provide an &lt;a href=&#34;https://github.com/haiwen/seafile-server-installer&#34;&gt;installation
+script&lt;/a&gt; to easily install
+both the Pro and Community editions under Linux. Which is what I used.&lt;/p&gt;
+
+&lt;h4 id=&#34;download&#34;&gt;Download&lt;/h4&gt;
+
+&lt;p&gt;The first step is to download the server application. A link for the
+install package can found &lt;a href=&#34;https://www.seafile.com/en/download/#server&#34;&gt;partway down the download
+page&lt;/a&gt;. After Downloading, extract
+the contents of the package.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;wget https://download.seadrive.org/seafile-server_6.2.5_x86-64.tar.gz
+tar xf seafile-server*.tar.gz&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Inside the extracted directory, there are several &lt;code&gt;setup-seafile-*.sh*&lt;/code&gt; scripts.
+I just used the basic &lt;code&gt;setup-seafile.sh&lt;/code&gt; one.&lt;/p&gt;
+
+&lt;h4 id=&#34;dependencies&#34;&gt;Dependencies&lt;/h4&gt;
+
+&lt;p&gt;&lt;a href=&#34;../../img/posts/trying-out-seafile/ubuntu-logo.jpg&#34;&gt;&lt;img
+src=&#34;../../img/posts/trying-out-seafile/ubuntu-logo.jpg&#34; style=&#34;max-width:
+100%; float: right; margin: 5px 10px 10px 10px;&#34; alt=&#34;Ubuntu Logo&#34; /&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Depending on which setup script it used, and the state of the host machine,
+there may be some missing dependencies. While I am sure there is a nice list of
+the required dependencies posted &lt;em&gt;somewhere&lt;/em&gt;&amp;hellip; I didn&amp;rsquo;t look for it. If I am
+being completely honest&amp;hellip; I just kept repeatedly running the script, and
+installed whichever package it yelled at me for each time. Eventually, the install
+worked. On my fresh install of Ubuntu 16.04 server, this meant
+installing the following dependency packages:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;python-setuptools&lt;/li&gt;
+&lt;li&gt;python-imaging&lt;/li&gt;
+&lt;li&gt;sqlite3&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;This means that on an Ubuntu 16.04 server, a simple &lt;code&gt;sudo apt install python-setuptools
+python-imaging sqlite3&lt;/code&gt; should do the trick&amp;hellip;&lt;/p&gt;
+
+&lt;h4 id=&#34;install-script&#34;&gt;Install Script&lt;/h4&gt;
+
+&lt;p&gt;With the dependencies installed, the script should run through without screaming
+for missing packages. However, it &lt;em&gt;will&lt;/em&gt; ask for a few pieces of information
+including &lt;em&gt;server-name&lt;/em&gt;, &lt;em&gt;server-ip/domain&lt;/em&gt;, &lt;em&gt;data-dir&lt;/em&gt;, and &lt;em&gt;fileserver port&lt;/em&gt;
+to install the fileserver component. Answer accordingly.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;../../img/posts/trying-out-seafile/seahub-web.png&#34;&gt;&lt;img src=&#34;../../img/posts/trying-out-seafile/seahub-web.png&#34; style=&#34;max-width: 100%; float: left; margin: 0px 15px 0px 0px;&#34; alt=&#34;Docker ps&#34; /&gt;&lt;/a&gt;
+&lt;div class=&#34;caption&#34;&gt;The Seafile Web Client, Seahub&lt;/div&gt;&lt;/p&gt;
+
+&lt;p&gt;After configuring the fileserver, the script will flow right into configuring
+&lt;a href=&#34;https://github.com/haiwen/seahub&#34;&gt;Seahub&lt;/a&gt;, the web interface that sits on top
+of the fileserver. This part is less needy, and will only require an &lt;em&gt;[Enter]&lt;/em&gt;
+press to continue.&lt;/p&gt;
+
+&lt;p&gt;At the end, the script should display useful information about how to
+start/stop/reset the servers, as well as what ports each part is running on.&lt;/p&gt;
+
+&lt;h4 id=&#34;run-start&#34;&gt;Run &amp;amp; Start&lt;/h4&gt;
+
+&lt;p&gt;Starting the servers is done by doing what the script says&amp;hellip; run the
+following commands:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;./seafile.sh start
+./seahub.sh start&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;With the servers running, it may be necessary to configure the firewall to allow
+their ports. On Ubuntu 16.04:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;sudo ufw allow &lt;span style=&#34;color:#ae81ff&#34;&gt;8000&lt;/span&gt;/tcp
+sudo ufw allow &lt;span style=&#34;color:#ae81ff&#34;&gt;8082&lt;/span&gt;/tcp&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;That&amp;rsquo;s it. With any luck, clients should be able to connect to the server
+(assuming the server is reachable from the client computer&amp;hellip; but that&amp;rsquo;s a
+lesson for another day).&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;Note: The first time seahub is run, it will need to setup an admin account. So
+while it was nice and considerate in the last step&amp;hellip; it will insist on being
+supplied a username (email) and password for the new admin account. Again, just
+comply.&lt;/em&gt;&lt;/p&gt;
+
+&lt;h3 id=&#34;client&#34;&gt;Client&lt;/h3&gt;
+
+&lt;p&gt;The seafile desktop client was trivial to install. It was in the Solus repos, so
+I just needed to run &lt;code&gt;sudo eopkg it seafile-client&lt;/code&gt;, and I was done. I also
+installed it on my work computers (which unfortunately runs Windows 10), and
+even that was simple. I just downloaded and installed the Windows &amp;ldquo;Desktop
+Syncing Client&amp;rdquo; at the top of the &lt;a href=&#34;https://www.seafile.com/en/download/&#34;&gt;download
+page&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h2 id=&#34;my-thoughts&#34;&gt;My Thoughts&lt;/h2&gt;
+
+&lt;p&gt;&lt;a href=&#34;../../img/posts/trying-out-seafile/seafile-client.png&#34;&gt;&lt;img
+src=&#34;../../img/posts/trying-out-seafile/seafile-client.png&#34; style=&#34;max-width:
+100%; float: right; margin: 0px 0px 0px 0px;&#34; alt=&#34;Seafile Desktop Client&#34; /&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;I have been using seafile as a syncing solution for the past few weeks. After
+the initial setup, it has been rather uneventful&amp;hellip; which is a good thing. It
+just runs in the background, and I don&amp;rsquo;t really think about it. Exactly what you
+want with a syncing solution.&lt;/p&gt;
+
+&lt;p&gt;That being said, I haven&amp;rsquo;t fully dug into all of the details of the application
+yet. So, if I incorrectly critique something due to my own ignorance that
+simply isn&amp;rsquo;t true, I apologize in advance.&lt;/p&gt;
+
+&lt;h3 id=&#34;what-i-like&#34;&gt;What I Like&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;Desktop Client&lt;/strong&gt; - The desktop client is simple. It responds quickly, and is
+a nice little command center where I can view how seafile is configured on each
+individual system.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;Select &lt;em&gt;which&lt;/em&gt; Libraries to sync&lt;/strong&gt; - Seafile libraries allow me to sync only
+what I need. Nextcloud had this feature, but it was implemented a little differently. I
+had to go to the &lt;code&gt;Nextcloud&lt;/code&gt; folder in the client UI, and then check/uncheck all
+of the sub-folders I wanted to sync on my machine.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;Pick &lt;em&gt;where each&lt;/em&gt; libraries sync&lt;/strong&gt; - Even better than being able to pick
+&lt;em&gt;which&lt;/em&gt; libraries to sync, is having the power to choose &lt;em&gt;where&lt;/em&gt; each one will
+reside. In seafile, the location of each library is completely independent.
+For example, I can sync my &lt;code&gt;work&lt;/code&gt; library to &lt;code&gt;~/Documents/Work/&lt;/code&gt;, my &lt;code&gt;Music&lt;/code&gt;
+to &lt;code&gt;~/Music&lt;/code&gt;, and &lt;code&gt;emacs&lt;/code&gt; to
+&lt;code&gt;~/Documents/Programming/Editors/why/so/many/diectories/emacs/&lt;/code&gt;. On another
+computer, I may choose to only sync my &lt;code&gt;work&lt;/code&gt; library to &lt;code&gt;~/Desktop/work&lt;/code&gt; (It
+doesn&amp;rsquo;t have to be the same across computers). I love this. It lets seafile &lt;em&gt;integrate&lt;/em&gt; with my
+workflow, rather than forcing me to make &lt;em&gt;it be&lt;/em&gt; my workflow.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;Encrypted Libraries&lt;/strong&gt; - When creating a new library, it is possible to
+make an &lt;a href=&#34;https://www.seafile.com/en/help/encrypted_libraries/&#34;&gt;encrypted
+one&lt;/a&gt;. These libraries
+use client-side, end-to-end encryption and require a password. The file
+&lt;em&gt;contents&lt;/em&gt; (Note: not directory or file &lt;em&gt;names&lt;/em&gt;) are encrypted on the client
+side, and not on the server. This means that even the server admin cannot access the file
+contents on the server. This is a feature I&amp;rsquo;d like to see in more applications.&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;a href=&#34;../../img/posts/trying-out-seafile/encrypt-library.png&#34;&gt;&lt;img
+src=&#34;../../img/posts/trying-out-seafile/encrypt-library.png&#34; style=&#34;max-width:
+100%; align: center; float: center; margin: 0px 0px 0px 0px;&#34; alt=&#34;Docker ps&#34; /&gt;&lt;/a&gt;
+&lt;div class=&#34;caption&#34;&gt;When syncing an encrypted library, a password must be entered.&lt;/div&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Fast Sync&lt;/strong&gt; - I only have anecdotal evidence, but the syncing in seafile
+&lt;em&gt;feels fast&lt;/em&gt;. Files seem to pull down very quickly, and setting up my
+libraries on a new device doesn&amp;rsquo;t take a very long time. I might have to
+actually &lt;em&gt;measure&lt;/em&gt; if it&amp;rsquo;s any better than something like nextcloud, but if I&amp;rsquo;m
+happy&amp;hellip; does it really &lt;em&gt;matter&lt;/em&gt;?&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&#34;what-i-don-t-like&#34;&gt;What I Don&amp;rsquo;t Like&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;No Folders/Nested libraries&lt;/strong&gt; - As far as I can tell, I don&amp;rsquo;t think it is
+possible to organize seafile libraries with folders, or a nested library
+structure. Admittedly, this is one of those areas that I haven&amp;rsquo;t had to look
+too much into yet. However, as I start to increase my seafile usage and the
+number of my libraries increases, I could see this being a feature I&amp;rsquo;d really
+enjoy.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;Phone Sync Tricky&lt;/strong&gt; - The phone sync (specifically auto photo upload) was
+tricky to get working at first. After setting it up, it didn&amp;rsquo;t seem to work,
+or at least not as promptly as nextcloud does. I took a few photos to test it
+out today, it seemed to work &lt;em&gt;okay&lt;/em&gt;, but I don&amp;rsquo;t think it started syncing
+right away. Right now, I don&amp;rsquo;t 100% trust it to work without me thinking
+about it. Hopefully this improves with time.&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&#34;future-plans&#34;&gt;Future Plans&lt;/h3&gt;
+
+&lt;p&gt;To summarize, I have been loving seafile, and I think I have only scratched the
+surface. I haven&amp;rsquo;t even tried playing with features like &lt;a href=&#34;https://www.seafile.com/en/help/snapshot/&#34;&gt;History and
+Snapshots&lt;/a&gt;, &lt;a href=&#34;https://www.seafile.com/en/help/search/&#34;&gt;Full Text File
+Search&lt;/a&gt;, &lt;a href=&#34;https://www.seafile.com/en/help/share/&#34;&gt;Sharing
+File&lt;/a&gt;, or &lt;a href=&#34;https://www.seafile.com/en/help/file_lock/&#34;&gt;Locking
+Files&lt;/a&gt; yet. My plan is to continue
+experimenting a bit more, and then switch to it as my main syncing system when I
+redo my main server setup in a couple of weeks. If you haven&amp;rsquo;t given seafile a
+try recently, I recommend it.&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -116,7 +1278,264 @@ ecosystem surrounding it, and can take years to truly master. This post on the
 other hand, will &lt;em&gt;hopefully&lt;/em&gt; help you get up and playing with docker containers in
 just a few minutes. Lets get started.&lt;/p&gt;
 
-&lt;p&gt;&lt;/p&gt;</description>
+&lt;p&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;installing-docker&#34;&gt;Installing Docker&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src=&#34;../../img/posts/docker-quickstart/docker-logo.png&#34; style=&#34;max-width: 100%; width: 400px; float: right; margin: 0px 15px 5px 5px;&#34; alt=&#34;Docker Logo&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Installing docker on &lt;a href=&#34;https://solus-project.com&#34;&gt;Solus&lt;/a&gt; was easy enough. I just
+had to install the package, and then enable the service:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;sudo eopkg it docker
+sudo systemctl enable docker
+sudo systemctl start docker&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;On other distributions, it may not be in the package manager, or it might be
+under a different name. To be sure, check out the community edition
+&lt;a href=&#34;https://docs.docker.com/install/linux/docker-ce/fedora/#set-up-the-repository&#34;&gt;installation
+documentation&lt;/a&gt;
+for your specific distro.&lt;/p&gt;
+
+&lt;h2 id=&#34;adding-user-to-docker-group&#34;&gt;Adding User to Docker Group&lt;/h2&gt;
+
+&lt;p&gt;By default, user accounts will not have permission to run docker commands
+without root access. So, after first installing docker, it might be tempting to
+just run everything using &lt;code&gt;sudo&lt;/code&gt;, but that isn&amp;rsquo;t the best idea. To get around
+this, simply add the user account to the &lt;code&gt;docker&lt;/code&gt; group:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;sudo usermod -a -G docker ryan&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;If the docker group is not created for some reason, it can be added:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;sudo groupadd docker&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Afterwards, that user should be able to run docker commands without requiring
+&lt;code&gt;sudo&lt;/code&gt;. They &lt;em&gt;might&lt;/em&gt; have to log out and back in first.&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;Note: These commands may differ based on distro.&lt;/em&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;some-useful-commands&#34;&gt;Some Useful Commands&lt;/h2&gt;
+
+&lt;p&gt;Before getting too caught up in creating and using containers, lets first go
+over a few useful commands that make navigating docker a bit easier.&lt;/p&gt;
+
+&lt;h4 id=&#34;docker-ps&#34;&gt;docker ps&lt;/h4&gt;
+
+&lt;p&gt;&lt;a href=&#34;../../img/posts/docker-quickstart/docker-ps.png&#34;&gt;&lt;img src=&#34;../../img/posts/docker-quickstart/docker-ps.png&#34; style=&#34;max-width: 100%; float: left; margin: 0px 15px 0px 0px;&#34; alt=&#34;Docker ps&#34; /&gt;&lt;/a&gt;
+&lt;div class=&#34;caption&#34;&gt;Example of the docker ps and docker ps -a commands&lt;/div&gt;&lt;/p&gt;
+
+&lt;p&gt;Similar to how Unix-based systems have the &lt;code&gt;ps&lt;/code&gt; command to see running
+processes, docker has &lt;code&gt;docker ps&lt;/code&gt; to see created and running containers. To
+view the currently running containers, use the basic &lt;code&gt;docker ps&lt;/code&gt; command:&lt;/p&gt;
+
+&lt;p&gt;The base command however, doesn&amp;rsquo;t always tell the whole story. A system might
+have containers that &lt;em&gt;exist&lt;/em&gt; but are not running. A container may have been
+stopped, &lt;em&gt;or&lt;/em&gt; exited if it encountered an error. Containers that are stopped or
+exited &lt;em&gt;will not&lt;/em&gt; show up in the default &lt;code&gt;docker ps&lt;/code&gt; command. To see &lt;em&gt;all&lt;/em&gt; of the
+current containers on the system, run &lt;code&gt;ps&lt;/code&gt; with the &lt;code&gt;-a&lt;/code&gt; flag.&lt;/p&gt;
+
+&lt;h4 id=&#34;docker-inspect&#34;&gt;docker inspect&lt;/h4&gt;
+
+&lt;p&gt;&lt;a href=&#34;../../img/posts/docker-quickstart/docker-inspect.png&#34;&gt;&lt;img src=&#34;../../img/posts/docker-quickstart/docker-inspect.png&#34; style=&#34;max-width: 100%; float: left; margin: 0px 15px 0px 0px;&#34; alt=&#34;Docker inspect examples: docker inspect web-test | grep Status and docker inspect web-test | grep IPAddress&#34; /&gt;&lt;/a&gt;
+&lt;div class=&#34;caption&#34;&gt;Using the docker inspect command to get the container&amp;rsquo;s status and IP address&lt;/div&gt;&lt;/p&gt;
+
+&lt;p&gt;Another useful command when working with docker containers is &lt;code&gt;docker inspect&lt;/code&gt;.
+The &lt;code&gt;inspect&lt;/code&gt; command will dump the xml for all the low level information of the
+container/docker object. The output contains basically &lt;em&gt;everything&lt;/em&gt; about the
+container: Full ID, time created, state, volumes, network information&amp;hellip;
+everything. It can be useful to pipe the output of &lt;code&gt;inspect&lt;/code&gt; to grep, in order
+to get specific information about the container quickly.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;docker inspect container_name | grep IPAddress&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;For example, the above command will grab and return only the lines which contain
+&amp;ldquo;IPAddress&amp;rdquo;.&lt;/p&gt;
+
+&lt;h4 id=&#34;help&#34;&gt;help&lt;/h4&gt;
+
+&lt;p&gt;&lt;a href=&#34;../../img/posts/docker-quickstart/docker-help.png&#34;&gt;&lt;img src=&#34;../../img/posts/docker-quickstart/docker-help.png&#34; style=&#34;max-width: 100%; float: left; margin: 0px 15px 0px 0px;&#34; alt=&#34;Using the docker help command flags. For Example: docker inspect --help&#34; /&gt;&lt;/a&gt;
+&lt;div class=&#34;caption&#34;&gt;Using the docker help command flags.&lt;/div&gt;&lt;/p&gt;
+
+&lt;p&gt;Last but not least, don&amp;rsquo;t forget about the &lt;code&gt;help&lt;/code&gt; command. To see all the
+available docker commands, run &lt;code&gt;docker help&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;Additionally, when using each of those specific commands, (&lt;code&gt;inspect&lt;/code&gt; for
+example), a description and possible options can be shown using the &lt;code&gt;--help&lt;/code&gt;
+flag (as in &lt;code&gt;docker inspect --help&lt;/code&gt;).&lt;/p&gt;
+
+&lt;p&gt;Just as man pages can be extremely valuable when working on a Linux system,
+&lt;code&gt;help&lt;/code&gt; is just as essential when using docker.&lt;/p&gt;
+
+&lt;h2 id=&#34;images&#34;&gt;Images&lt;/h2&gt;
+
+&lt;p&gt;A docker container is created from a base &lt;em&gt;image&lt;/em&gt;. Images can be pulled down
+from &lt;a href=&#34;https://hub.docker.com/&#34;&gt;Dockerhub&lt;/a&gt;. To search docker hub from command
+line, use the &lt;code&gt;docker search&lt;/code&gt; command. For example, &lt;code&gt;docker search nginx&lt;/code&gt; will
+search for images related to nginx.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;../../img/posts/docker-quickstart/docker-search.png&#34;&gt;&lt;img src=&#34;../../img/posts/docker-quickstart/docker-search.png&#34; style=&#34;max-width: 100%; float: left; margin: 0px 15px 0px 0px;&#34; alt=&#34;Docker Search output. Ex: docker search nginx&#34; /&gt;&lt;/a&gt;
+&lt;div class=&#34;caption&#34;&gt;The search output for nginx images&lt;/div&gt;&lt;/p&gt;
+
+&lt;p&gt;The search will list all of the public images in order, from most to least
+stars. When a desired image is found, pull it down using the &lt;code&gt;docker pull&lt;/code&gt;
+command. For example, &lt;code&gt;docker pull nginx&lt;/code&gt; will pull down the &lt;a href=&#34;https://hub.docker.com/_/nginx/&#34;&gt;nginx
+image&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;../../img/posts/docker-quickstart/docker-pull.png&#34;&gt;&lt;img src=&#34;../../img/posts/docker-quickstart/docker-pull.png&#34; style=&#34;max-width: 100%; width:100%; float: left; margin: 0px 15px 0px 0px;&#34; alt=&#34;Docker Pull output. Ex: docker pull nginx&#34; /&gt;&lt;/a&gt;
+&lt;div class=&#34;caption&#34;&gt;Pulling the latest nginx image&lt;/div&gt;&lt;/p&gt;
+
+&lt;p&gt;Docker will then download all the layers for the image. When the download
+completes, the image will be locally available to create docker containers
+from. To see all of the local images, use the &lt;code&gt;docker images&lt;/code&gt; command:&lt;/p&gt;
+
+&lt;p&gt;To delete an image, use the &lt;code&gt;docker images rm&lt;/code&gt; command, or my preferred, lazier
+command, &lt;code&gt;docker rmi&lt;/code&gt;:&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;../../img/posts/docker-quickstart/docker-images.png&#34;&gt;&lt;img src=&#34;../../img/posts/docker-quickstart/docker-images.png&#34; style=&#34;max-width: 100%; float: left; margin: 0px 15px 0px 0px;&#34; alt=&#34;docker images and docker rmi. Ex: docker images, then docker rmi test-ubuntu&#34; /&gt;&lt;/a&gt;
+&lt;div class=&#34;caption&#34;&gt;Viewing downloaded images with the docker images command, then deleting the &amp;ldquo;test-ubuntu&amp;rdquo; image using the docker rmi command&lt;/div&gt;&lt;/p&gt;
+
+&lt;p&gt;Lastly, it should be noted that custom images can be created/tailored using a
+&lt;a href=&#34;https://docs.docker.com/engine/reference/builder/#usage&#34;&gt;Dockerfile&lt;/a&gt;. With a
+Dockerfile is defined, an image can be created from it using the &lt;code&gt;docker build&lt;/code&gt;
+command. For example, the following Dockerfile would use an
+&lt;a href=&#34;https://hub.docker.com/_/ubuntu/&#34;&gt;ubuntu&lt;/a&gt; image for the base, but also update &amp;amp;
+install several packages in the image:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# This is a custom ubuntu image with SSH already installed&lt;/span&gt;
+FROM ubuntu:latest
+MAINTAINER himmallright &amp;lt;ryan.himmelwright@gmail.com&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;gt;
+&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;RUN apt-get update
+&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;RUN apt-get install -y vim stow git tmux fish htop emacs&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;To build the image, run the following command in the same directory as the
+Dockerfile (if defining a specific file, the &lt;code&gt;-f&lt;/code&gt; flag can be used):&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;docker build -t ubuntu-base:v1 .&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;I like to use the &lt;code&gt;-t&lt;/code&gt; flag, so that I can specify a &lt;code&gt;name:tag&lt;/code&gt; for the image.
+This helps to make it easier to find it in the &lt;code&gt;docker images&lt;/code&gt; list.&lt;/p&gt;
+
+&lt;h2 id=&#34;creating-containers&#34;&gt;Creating Containers&lt;/h2&gt;
+
+&lt;p&gt;Docker containers can be &lt;em&gt;created&lt;/em&gt; (but not run) with the &lt;code&gt;docker create&lt;/code&gt;
+command. When creating containers, it is useful to use flags to tailor the
+details of the container. For example, the &lt;code&gt;-m&lt;/code&gt; flag can be used to create a
+memory limit, &lt;code&gt;--name&lt;/code&gt; to name the container, and so on. To create a simple nginx
+container from the image we previously pulled:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;docker create --name web-test nginx:latest&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h2 id=&#34;starting-running-containers&#34;&gt;Starting &amp;amp; Running Containers&lt;/h2&gt;
+
+&lt;p&gt;To &lt;em&gt;start&lt;/em&gt; a container created with &lt;code&gt;docker create&lt;/code&gt;, or one that has been previously
+stopped, use the &lt;code&gt;docker start&lt;/code&gt; command. For example, to start
+the container created in the previous step:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;docker start web-test
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Similarly, a container can be stopped with &lt;code&gt;docker stop&lt;/code&gt;, or restarted with
+&lt;code&gt;docker restart&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;Instead of using a &lt;code&gt;docker create&lt;/code&gt; and &lt;code&gt;docker start&lt;/code&gt; combination, &lt;code&gt;docker run&lt;/code&gt;
+can be used to both instantiate &lt;em&gt;and&lt;/em&gt; start a container. To create and start the
+&amp;ldquo;web-test&amp;rdquo; container from the previous examples:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;docker run --name web-test -d nginx:latest
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h4 id=&#34;cleaning-containers&#34;&gt;Cleaning containers&lt;/h4&gt;
+
+&lt;p&gt;&lt;a href=&#34;../../img/posts/docker-quickstart/docker-rm.png&#34;&gt;&lt;img src=&#34;../../img/posts/docker-quickstart/docker-rm.png&#34; style=&#34;max-width: 100%; float: left; width: 95%;&#34; alt=&#34;Docker rm all images. Ex: docker rm `docker ps -aq`&#34; /&gt;&lt;/a&gt;
+&lt;div class=&#34;caption&#34;&gt;Removing all the older container images&lt;/div&gt;&lt;/p&gt;
+
+&lt;p&gt;Over time, old containers may build up on the system. To remove an old (but not
+running) container, use &lt;code&gt;docker rm&lt;/code&gt; with either the container name, &lt;em&gt;or&lt;/em&gt; the id.
+Note, to easily delete &lt;em&gt;all&lt;/em&gt; of the containers on the system, &lt;code&gt;docker rm&lt;/code&gt; can be
+fed the output of &lt;code&gt;docker ps -aq&lt;/code&gt;, where the &lt;code&gt;-aq&lt;/code&gt; flag returns a list of all
+the container ids.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;docker rm &lt;span style=&#34;color:#e6db74&#34;&gt;`&lt;/span&gt;docker ps -aq&lt;span style=&#34;color:#e6db74&#34;&gt;`&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;&lt;em&gt;(Note: this doesn&amp;rsquo;t work in my Fish shell, but does in bash)&lt;/em&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;attaching-to-containers&#34;&gt;Attaching to Containers&lt;/h2&gt;
+
+&lt;p&gt;After a container is running, it might occasionally be necessary to attach to
+it and poke around with a shell. There is the obvious way to do this,
+&lt;code&gt;docker attach&lt;/code&gt;, and a somewhat work-around way, which I prefer to use: &lt;code&gt;docker
+exec&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;../../img/posts/docker-quickstart/docker-attach.png&#34;&gt;&lt;img src=&#34;../../img/posts/docker-quickstart/docker-attach.png&#34; style=&#34;max-width: 100%; float: left;&#34; alt=&#34;Docker attach example&#34; /&gt;&lt;/a&gt;
+&lt;div class=&#34;caption&#34;&gt;An example using the docker attach command&lt;/div&gt;&lt;/p&gt;
+
+&lt;p&gt;The attach command works as one would expect. It allows a user to &amp;ldquo;Attach local
+standard input, output, and error streams to a running container&amp;rdquo;. This is all
+well an good, except for one issue: when exiting the attached container, the
+&lt;em&gt;container also&lt;/em&gt; exits.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;../../img/posts/docker-quickstart/docker-exec-bash.png&#34;&gt;&lt;img src=&#34;../../img/posts/docker-quickstart/docker-exec-bash.png&#34; style=&#34;max-width: 100%; float: left;&#34; alt=&#34;Docker exec bash example&#34; /&gt;&lt;/a&gt;
+&lt;div class=&#34;caption&#34;&gt;An example using docker exec with a bash shell, as an alternative to docker attach&lt;/div&gt;&lt;/p&gt;
+
+&lt;p&gt;A way around this annoyance is to utilize the &lt;code&gt;docker exec&lt;/code&gt; command, which
+allows a command to be executed inside a container. Executing a shell program
+inside the container, such as &lt;code&gt;bash&lt;/code&gt;, mimics the &lt;code&gt;attach&lt;/code&gt; command, but with the
+added benefit that when exiting, only the shell exits, and &lt;em&gt;not&lt;/em&gt; the entire
+container.&lt;/p&gt;
+
+&lt;h2 id=&#34;ports-volumes&#34;&gt;Ports &amp;amp; Volumes&lt;/h2&gt;
+
+&lt;p&gt;As mentioned earlier, docker containers can be built and run using many specific
+commands to tailor the container and how it interfaces with the host system.
+There are two concepts in particular that I want to briefly touch on in this
+&lt;em&gt;quick start&lt;/em&gt; post. Those two items, are &lt;code&gt;ports&lt;/code&gt; and &lt;code&gt;volumes&lt;/code&gt;.&lt;/p&gt;
+
+&lt;h4 id=&#34;ports&#34;&gt;Ports&lt;/h4&gt;
+
+&lt;p&gt;&lt;a href=&#34;../../img/posts/docker-quickstart/nginx-firefox-port.png&#34;&gt;&lt;img src=&#34;../../img/posts/docker-quickstart/nginx-firefox-port.png&#34; style=&#34;max-width: 100%; float: center;&#34; alt=&#34;Containerized nginx server connected to through localhost&#34; /&gt;&lt;/a&gt;
+&lt;div class=&#34;caption&#34;&gt;Container ports can be forwarded to the host&amp;rsquo;s ports.&lt;/div&gt;&lt;/p&gt;
+
+&lt;p&gt;While it is nice to spin up a web server inside a docker container, it isn&amp;rsquo;t
+always very useful to only have it available to the host machine. By using the
+&lt;code&gt;-p&lt;/code&gt; flag when running a container, the container&amp;rsquo;s ports can be forwarded to
+ports on the host system.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;../../img/posts/docker-quickstart/docker-port.png&#34;&gt;&lt;img src=&#34;../../img/posts/docker-quickstart/docker-port.png&#34; style=&#34;max-width: 100%; float: center;&#34; alt=&#34;Creating an nginx container, forwarding port 80 to he host&#39;s 8081&#34; /&gt;&lt;/a&gt;
+&lt;div class=&#34;caption&#34;&gt;Creating an nginx container, forwarding it&amp;rsquo;s port 80 to the host&amp;rsquo;s port 8081&lt;/div&gt;&lt;/p&gt;
+
+&lt;p&gt;Using &lt;code&gt;-p&lt;/code&gt; with just a single number, as in &lt;code&gt;-p 8080&lt;/code&gt;, will declare that port of
+the container to be exposed. To forward exposed ports to the host, use &lt;em&gt;two&lt;/em&gt;
+port numbers, separated with a &lt;code&gt;:&lt;/code&gt;. The first number is the host port to bind
+to, and the second is the container port to expose and forward.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;docker run -itd --name webtest -p 8081:80 nginx:latest
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The above example, a nginx container is started with port 80 forwarded to port
+8081 on the host. As a result, any computer connecting to port 8081 of the host
+machine will be directed to the nginx web server inside the container.&lt;/p&gt;
+
+&lt;h4 id=&#34;volumes&#34;&gt;Volumes&lt;/h4&gt;
+
+&lt;p&gt;&lt;a href=&#34;../../img/posts/docker-quickstart/nginx-firefox-volume.png&#34;&gt;&lt;img src=&#34;../../img/posts/docker-quickstart/nginx-firefox-volume.png&#34; style=&#34;max-width: 100%; float: center;&#34; alt=&#34;Nginx container with website pages in a volume from the host.&#34; /&gt;&lt;/a&gt;
+&lt;div class=&#34;caption&#34;&gt;Containers can attach volumes from the host system for persistent data.&lt;/div&gt;&lt;/p&gt;
+
+&lt;p&gt;Lastly, by design docker containers are mean to be expendable. They are run, and then
+disposed. It should not be assumed that &lt;em&gt;any&lt;/em&gt; data inside the container will
+be preserved by default. That is, unless
+&lt;a href=&#34;https://docs.docker.com/storage/volumes/&#34;&gt;volumes&lt;/a&gt; are used.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;../../img/posts/docker-quickstart/docker-volume.png&#34;&gt;&lt;img src=&#34;../../img/posts/docker-quickstart/docker-volume.png&#34; style=&#34;max-width: 100%; float: center;&#34; alt=&#34;Creating an nginx container, forwarding port 80 to he host&#39;s 8081&#34; /&gt;&lt;/a&gt;
+&lt;div class=&#34;caption&#34;&gt;Creating an nginx container, forwarding it&amp;rsquo;s port 80 to the host&amp;rsquo;s port 8081&lt;/div&gt;&lt;/p&gt;
+
+&lt;p&gt;Docker volumes are the preferred mechanism for preserving data across container
+runs, and are specified using the &lt;code&gt;-v&lt;/code&gt; flag. Similar to setting ports, volumes
+can be created by providing either a single path, or two separated by a &lt;code&gt;:&lt;/code&gt;.
+When a single path is provided, as in &lt;code&gt;-v /Data&lt;/code&gt;, docker will create a volume
+and bind it to that location within the container. Two locations can be provided
+to bind a directory on the host system, to the volume inside to container.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;docker run -d --name testsite -v /home/ryan/testsite/:/usr/share/nginx/html nginx:latest
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;In the above command, for example, &lt;code&gt;-v
+/home/ryan/testsite/:/usr/share/nginx/html&lt;/code&gt; will use the &lt;code&gt;/home/ryan/testsite/&lt;/code&gt;
+directory of the host system, as a volume located at &lt;code&gt;/usr/share/nginx/html&lt;/code&gt;
+inside the container. This means that the container will server the website
+files, which are located (and can be easily edited), on the host system.&lt;/p&gt;
+
+&lt;h2 id=&#34;in-conclusion&#34;&gt;In Conclusion&lt;/h2&gt;
+
+&lt;p&gt;So, this has been&amp;hellip; a rather long post. However, when it comes to Docker, this
+&lt;em&gt;really is just the tip of the iceberg&lt;/em&gt;. With any luck though, you should now
+know the basic to at &lt;em&gt;least&lt;/em&gt; get &lt;em&gt;started&lt;/em&gt;. So&amp;hellip; go ahead and have some fun!.&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -130,7 +1549,183 @@ just a few minutes. Lets get started.&lt;/p&gt;
  last few months, I have been using a Lenovo T470 Thinkpad (with dock) as my new
  daily driver. Here are my thoughts.&lt;/p&gt;
 
-&lt;p&gt;&lt;/p&gt;</description>
+&lt;p&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;the-choice&#34;&gt;The Choice&lt;/h2&gt;
+
+&lt;p&gt;&lt;a href=&#34;../../img/posts/my-t470/coffee-picture.jpg&#34;&gt;&lt;img alt=&#34;T470 Coffee&#34; src=&#34;../../img/posts/my-t470/coffee-picture.jpg&#34; style=&#34;max-width: 100%;&#34;/&gt;&lt;/a&gt;
+&lt;div class=&#34;caption&#34;&gt;My T470 on a Sunday morning&lt;/div&gt;&lt;/p&gt;
+
+&lt;p&gt;The
+&lt;a href=&#34;https://www.notebookcheck.net/Lenovo-ThinkPad-T470-Core-i5-Full-HD-Notebook-Review.198130.0.html&#34;&gt;T470&lt;/a&gt;
+is the 14&amp;rdquo; model of Lenovo&amp;rsquo;s &amp;ldquo;business&amp;rdquo; laptop lineup. The T470 series actually
+has several variants itself, including the &amp;ldquo;high end&amp;rdquo;
+&lt;a href=&#34;https://www.notebookcheck.net/Lenovo-ThinkPad-T470s-Core-i7-WQHD-Laptop-Review.200880.0.html&#34;&gt;T470s&lt;/a&gt;,
+that has a slimmer chassis, made from &amp;ldquo;higher quality materials&amp;rdquo;, and a better
+screen compared to the T470. There is also the &amp;ldquo;high
+performance&amp;rdquo;&lt;a href=&#34;https://www.notebookcheck.net/Lenovo-ThinkPad-T470p-Core-i7-GeForce-940MX-Laptop-Review.226802.0.html&#34;&gt;T470p&lt;/a&gt;,
+which features a faster, quad-core CPU, but a slightly larger chassis. While
+these variants caught my attention, I ultimately decided on the normal T470.
+This was partially because I could max the T470 out at 32GBs of RAM (The T470s
+can only hit 24GB due to one of the sticks being soldered in), but mostly
+because I assumed that the combination of having a lower powered CPU (compared
+to the T70p), but a slightly larger case (compared to the T480s) would make it
+the optimal choice concerning my heat/noise concerns outlined in the previous
+post.&lt;/p&gt;
+
+&lt;h2 id=&#34;the-specs&#34;&gt;The Specs&lt;/h2&gt;
+
+&lt;p&gt;&lt;a href=&#34;../../img/posts/my-t470/inside.jpg&#34;&gt;&lt;img alt=&#34;Inside T470&#34; src=&#34;../../img/posts/my-t470/inside.jpg&#34; style=&#34;max-width: 100%;&#34;/&gt;&lt;/a&gt;
+&lt;div class=&#34;caption&#34;&gt;The Guts of the T470&lt;/div&gt;&lt;/p&gt;
+
+&lt;p&gt;So, the T470 then&amp;hellip;&lt;/p&gt;
+
+&lt;p&gt;I got my T470 from a vendor on Ebay. It came configured with a 2.5GHz (3.1 GHz
+Turbo) i5-7200u cpu, 8 GBs of DDR4 RAM, a 14&amp;rdquo; 1920x1080 screen, and a 500GB Hard
+Drive with Windows 10 on it. After checking that it booted up fine, I
+immediately swapped the slow HD with the 250GB SSD that was in my x230, and
+installed &lt;a href=&#34;https://solus-project.com&#34;&gt;Solus&lt;/a&gt; on it. In Solus, everything worked
+&amp;ldquo;out of the box&amp;rdquo;, and I would guess other Linux distributions would as well. For
+Christmas, I got a new 500GB Samsung EVO SSD to upgrade the 250GB one. In total,
+the T470 has less total storage than the Bonobo had, but &lt;em&gt;all&lt;/em&gt; of it is fast SSD
+storage. I am getting better at using my server for network storage anyway, so
+it all works out &lt;i class=&#34;fa fa-smile-o&#34; aria-hidden=&#34;true&#34;&gt;&lt;/i&gt;.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;../../img/posts/my-t470/solus-install.jpg&#34;&gt;&lt;img alt=&#34;Solus Install&#34; src=&#34;../../img/posts/my-t470/solus-install.jpg&#34; style=&#34;max-width: 100%;&#34;/&gt;&lt;/a&gt;
+&lt;div class=&#34;caption&#34;&gt;Installing Solus the first night&lt;/div&gt;&lt;/p&gt;
+
+&lt;p&gt;While I still plan to upgrade the T470 in the future, here are it&amp;rsquo;s specs at the
+time of writing this post:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;T470 Thinkpad
+Intel i5-7200u [2.5 Ghz (3.1 Ghz Turbo), 2 Cores, 4 Threads]
+8 GB RAM
+500 GB Samsung EVO SSD
+14&amp;quot; 1920x1080 IPS Display 
+Solus
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The hardware on the T470 is nice, and the technical specs are &lt;em&gt;okay&lt;/em&gt;, but the
+real killer feature of switching to a Thinkpad for my main computer is that I
+also purchased the ThinkPad Ultra Dock (40A2). This means that I am able to
+&lt;em&gt;easily&lt;/em&gt; take advantage of my periphery devices whenever I am working at my
+desk.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;Thinkpad Ultra Dock 40A2
+2 x 23.6&amp;quot; ASUS 1920x1080 Monitors
+Happy Hacking Keyboard Pro2 
+Audioengine A2+ Speakers &amp;amp; Stands
+Bose AE2 Headphones
+Logitech HD Pro Webcam c920 Widescreen
+Blue Yeti Microphone - Backout Edition
+Inateck USB 3.0 to SATA Dual-Bay Hard Drive Docking Station
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;what-i-like&#34;&gt;What I like&lt;/h2&gt;
+
+&lt;p&gt;&lt;a href=&#34;../../img/posts/my-t470/hotel.jpg&#34;&gt;&lt;img alt=&#34;T470 in Hotel&#34; src=&#34;../../img/posts/my-t470/hotel.jpg&#34; style=&#34;max-width: 100%;&#34;/&gt;&lt;/a&gt;
+&lt;div class=&#34;caption&#34;&gt;I&amp;rsquo;ve enjoyed the portability and great keyboard of the T470&lt;/div&gt;&lt;/p&gt;
+
+&lt;p&gt;Now that I&amp;rsquo;ve provided some background information and a summary, I&amp;rsquo;ll quickly
+list what I &lt;em&gt;like&lt;/em&gt; and &lt;em&gt;do not like&lt;/em&gt; about my new T470.&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;Cool &amp;amp; Quiet&lt;/strong&gt; - After realizing that I am picky about heat and noise in
+computers, one of my biggest goals when replacing my old computer was to find
+one that ran cooler and quieter. I think I did well here. &lt;em&gt;This thing is
+silent.&lt;/em&gt; Using one of my new favorite command line applications,
+&lt;a href=&#34;https://amanusk.github.io/s-tui/&#34;&gt;s-tui&lt;/a&gt;, I have observed that most of the
+time when I&amp;rsquo;m writing code, browsing the web, or listening to music, the fans
+in the T470 don&amp;rsquo;t even kick on. When I do push the machine a little by
+running VMs, or being on a video conference, the do kick up, but even then I
+have to put my ear right against the computer to hear anything. At it&amp;rsquo;s
+loudest, the T470 is still a very quiet device.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;Size &amp;amp; Portability&lt;/strong&gt; - I love the size and portability of this laptop. The
+14&amp;rdquo; form factor is large enough that I don&amp;rsquo;t feel cramped when using it as a
+stand-alone device, but still small enough that I can easily throw it in my
+bag and bring it with me. While I wouldn&amp;rsquo;t mind the T470 shedding a &lt;em&gt;little&lt;/em&gt;
+weight (which is mostly from the battery), I find it&amp;rsquo;s thickness perfectly
+acceptable for my uses (hear that Apple?). As far as build quality, it is a
+solid machine. When I rest my hands on it to type, they feel fully supported
+and there is &lt;em&gt;zero&lt;/em&gt; flex. When holding the closed laptop, it feels as though
+it could take quite a beating and still be fine. I love that.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;Keyboard &amp;amp; Track-point/pad&lt;/strong&gt; - It&amp;rsquo;s a Thinkpad keyboard, what else do I have
+to say? The keys are adequately spaced, have travel (though not as much as my
+x230), and feel &lt;em&gt;crisp&lt;/em&gt; when pressed, not mushy. It has a track&lt;em&gt;point&lt;/em&gt; with
+physical buttons, which at this point I don&amp;rsquo;t think I could do without (Crap.
+Unintentional pun. Oh well, I&amp;rsquo;m leaving it.). While I don&amp;rsquo;t use it often, the
+track&lt;em&gt;pad&lt;/em&gt; is also quite nice. I find it to be an ideal size, and has
+rubberized texture which prevents my fingers from feeling raw after long use.
+I find it hard these days for others laptops to compete with the Thinkpad&amp;rsquo;s
+keyboard/track-point setup.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;Dock-able&lt;/strong&gt; - I&amp;rsquo;ve already mentioned this above, but I love that the T470 is
+dock-able. This is becoming more common with the pervasiveness of USB-C, but
+Thinkpads have been in the dock game for years. It works well, and fits my
+current computing use-case perfectly.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;Thunderbolt/USB C&lt;/strong&gt; - The big difference between the T470 and the T460
+essentially comes down to the Thunderbolt 3/USB-C port on the T470. I don&amp;rsquo;t
+use it much &lt;em&gt;so far&lt;/em&gt;, but I hope the industry continues the move down the this
+route, and I will be glad to already have the port as they do.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;Battery(s)&lt;/strong&gt; - The battery configuration and life on this laptop is great.
+The T470 can get a 3-cell battery that doesn&amp;rsquo;t stick out, or an extended
+battery that comes in 6 and 9 cell variations (Note: the 6 and 9 cell are the
+same size). The T470 also supports an internal 3 cell battery, that can be
+used to keep the laptop powered on while the external battery is swapped. I
+currently have the least optimal configuration: A bulky 6-cell external, with
+no internal battery. Even so, it easily lasts me throughout the day, and I can
+always upgrade it down the road. I love the flexibility.&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;what-i-don-t-like&#34;&gt;What I don&amp;rsquo;t like&lt;/h2&gt;
+
+&lt;p&gt;While I overall love the T470, there are a few things I&amp;rsquo;m not thrilled about.&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;The Screen&lt;/strong&gt; - When I first got my laptop&amp;hellip; I thought the screen was
+defective. I had read in reviews that it wasn&amp;rsquo;t very &lt;em&gt;bright&lt;/em&gt;, but the colors
+were terrible. My screen always looked as if I was using something like
+&lt;a href=&#34;https://justgetflux.com/&#34;&gt;f.lux&lt;/a&gt;. After doing some reading, it turns out that
+IPS panels (which I had never owned before) can appear warmer in color. That
+combined with the low brightness and &lt;em&gt;not great&lt;/em&gt; color accuracy of the T470
+panel, made it appear particularly awful to me. I found and configured a &lt;a href=&#34;https://www.notebookcheck.net/uploads/tx_nbc2/N140HCA_EAB_01.icm&#34;&gt;ICC
+file&lt;/a&gt; which
+helped, but the biggest fix was time. As terrible as it was at first, I really
+don&amp;rsquo;t mind the screen. Yea, it could be brighter with better colors, but now I
+think it looks nice, and colors on top of black really pop.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;Track-point&lt;/strong&gt; - I stated in the section above that the track-point was one of
+the features I loved about this laptop. That is true&amp;hellip; but, if I &lt;em&gt;had&lt;/em&gt; to get
+picky, the track-point itself is not that great. It&amp;rsquo;s hard to move around with
+and it&amp;rsquo;s sensitivity differs depending on which direction it is traveling. At
+times it can be a real pain. By contrast, my x230 is very stable and precise.
+I wish the T470&amp;rsquo;s track-point was like the one on my x230&amp;rsquo;s.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;Graphics&lt;/strong&gt; - I can&amp;rsquo;t complain too much here because I knew what I was
+getting myself into, but&amp;hellip; the graphics performance isn&amp;rsquo;t the best. I know
+&lt;em&gt;not&lt;/em&gt; having dedicated graphics is what allows the T470 to run cool and sip
+power, but I wouldn&amp;rsquo;t mind a &lt;em&gt;little&lt;/em&gt; more umph. I don&amp;rsquo;t expect to do heavy
+gaming on the T470. If I want to game, I am going to build a gaming computer.
+However, I do wish I could play basic games a &lt;em&gt;little&lt;/em&gt; better in the meantime.
+(&lt;em&gt;On the bright side&amp;hellip;with the thunderbolt 3 port&amp;hellip; an eGPU is a
+possibility&amp;hellip;hmmm&amp;hellip;&lt;/em&gt;)&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;future-plans&#34;&gt;Future Plans&lt;/h2&gt;
+
+&lt;p&gt;&lt;a href=&#34;../../img/posts/my-t470/ram-upgrade.jpg&#34;&gt;&lt;img alt=&#34;T470 Ram Slot&#34; src=&#34;../../img/posts/my-t470/ram-upgrade.jpg&#34; style=&#34;max-width: 100%;&#34;/&gt;&lt;/a&gt;
+&lt;div class=&#34;caption&#34;&gt;The empty RAM slot I hope to add a 16GB stick to&amp;hellip; if prices ever drop again&amp;hellip;&lt;/div&gt;&lt;/p&gt;
+
+&lt;p&gt;Overall, I have been very happy with the T470 as my main computer. I&amp;rsquo;d still
+like to upgrade the RAM at some point, and I &lt;em&gt;have&lt;/em&gt; entertained the idea of
+trying an eGPU setup&amp;hellip; I might &lt;em&gt;eventually&lt;/em&gt; build a new desktop, but even then,
+I would likely have it headless, running VMs and connect to it remotely from the
+T470 (except for occasional gaming). That being said, right now, the T470 is
+working great as is!&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -146,7 +1741,172 @@ Several events over the last year have led me to the realization that my
 purchased the Bonobo in early 2015. This post will highlight some of those
 realizations, and why I ultimately decided to sell my Bonobo laptop.&lt;/p&gt;
 
-&lt;p&gt;&lt;/p&gt;</description>
+&lt;p&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;why-i-got-the-bonobo&#34;&gt;Why I got the Bonobo&lt;/h2&gt;
+
+&lt;p&gt;&lt;a href=&#34;../../img/posts/sold-bonobo/alakazam.jpg&#34;&gt;&lt;img alt=&#34;Bonobo Setup&#34; src=&#34;../../img/posts/sold-bonobo/alakazam.jpg&#34; style=&#34;max-width: 100%;&#34;/&gt;&lt;/a&gt;
+&lt;div class=&#34;caption&#34;&gt;Bonobo Workstation Setup&lt;/div&gt;&lt;/p&gt;
+
+&lt;p&gt;I bought my Bonobo laptop from &lt;a href=&#34;https://www.system76.com&#34;&gt;System76&lt;/a&gt; during my
+first post-college year. I needed to replace my old workstation: an aging
+desktop that I built before my High School graduation. While its i7-930 CPU,
+6GB of RAM, NVIDIA GTX 260, and hodgepodge of hard drives (SSD and HHD) serverd
+my needs throughout college, I was starting to feel restricted. After some
+research, I came to the conclusion that it would be better to get a new system,
+instead of trying to upgrade my old desktop. I wanted a new, powerful computer
+that could easily run multiple VMs, play some video games, and compile
+software/run models &lt;em&gt;fast&lt;/em&gt;.&lt;/p&gt;
+
+&lt;p&gt;After a few months at my new job, I noticed I didn&amp;rsquo;t use a portable computer
+as much. I went to work, used my work computer, and then came home to my
+desktop. So portability wasn&amp;rsquo;t the &lt;em&gt;biggest&lt;/em&gt; concern when searching. That being
+said, I still lived out of state from my family, and would leave for a week or
+more at a time during hollidays or vacation. I wanted to still &lt;em&gt;be able&lt;/em&gt; to lug
+my computer with me during family vists. I also liked to game &lt;em&gt;a little bit&lt;/em&gt;
+when visiting with my brothers, or after work, so I added a dedicated GPU to the search criteria.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;../../img/posts/sold-bonobo/portable-setup.jpg&#34;&gt;&lt;img alt=&#34;Portable Bonobo Setup&#34; src=&#34;../../img/posts/sold-bonobo/portable-setup.jpg&#34; style=&#34;max-width: 100%;&#34;/&gt;&lt;/a&gt;
+&lt;div class=&#34;caption&#34;&gt;Portable Bonobo Setup&lt;/div&gt;&lt;/p&gt;
+
+&lt;p&gt;All of this pointed me towards desktop-replacement laptops. I wanted to support
+a Linux-only vendoor, so I looked at System76. The Bonobo seemed comparable to
+other laptops on the market, but being a System76 device, I felt more confident
+all the hardware would play nicely with Linux. It was a big laptop, but my plan
+was to use it mostly as a desktop computer, with the option to still travel with
+it when I needed to go somewhere for more than just a day or two. Besides, I
+liked that the case was larger, as I hoped it would help increase airflow
+to help with heat management.&lt;/p&gt;
+
+&lt;p&gt;I purchased the Bonobo, and it worked out very well for several years. It was a
+very powerful computer (more than my old &lt;em&gt;desktop&lt;/em&gt;), but still portable &lt;em&gt;enough&lt;/em&gt;
+for when I wanted to take it somewhere.&lt;/p&gt;
+
+&lt;h2 id=&#34;the-modern-reality&#34;&gt;The Modern Reality&lt;/h2&gt;
+
+&lt;p&gt;&lt;a href=&#34;../../img/posts/sold-bonobo/side-view.jpg&#34;&gt;&lt;img alt=&#34;Bonobo Thickness&#34; src=&#34;../../img/posts/sold-bonobo/side-view.jpg&#34; style=&#34;max-width: 100%;&#34;/&gt;&lt;/a&gt;
+&lt;div class=&#34;caption&#34;&gt;Bonobo Side View&lt;/div&gt;&lt;/p&gt;
+
+&lt;p&gt;As the years passed, my computing needs changed. On top of that, some of the
+initial assumptions about my computer use turned out to not be entirely true.&lt;/p&gt;
+
+&lt;h4 id=&#34;i-m-not-a-big-pc-gamer&#34;&gt;I&amp;rsquo;m Not a Big &lt;del&gt;PC&lt;/del&gt; Gamer.&lt;/h4&gt;
+
+&lt;p&gt;For example, when my brothers and I would pull out our laptops to play games
+together, the games we played were never highly demanding. Our top played games
+were Minecraft, Serious Sam 3, Dungeon Defenders, and &lt;em&gt;maybe&lt;/em&gt; CS GO. Needless to
+say, the Bonobo was a little overkill. Unfortunately, with my brothers and I all
+living in different states now, we really don&amp;rsquo;t see each other in person enough
+to play computer games in the same room anymore. These days, when we want to
+remotely play video games together&amp;hellip; we play on the Xbox ONE (which I bought
+mostly to keep in touch with my friends and family. I didn&amp;rsquo;t own one when I
+purchased the Bonobo).&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;../../img/posts/sold-bonobo/xboxone.png&#34;&gt;&lt;img alt=&#34;xbox one&#34; src=&#34;../../img/posts/sold-bonobo/xboxone.png&#34; style=&#34;max-width: 100%;&#34;/&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;I have enjoyed owning a computer that can handle most of games I throw at
+it, but if I&amp;rsquo;m being honest&amp;hellip; I don&amp;rsquo;t play games too often. Even on the Xbox,
+I go in bursts of playing once or twice a week, and then don&amp;rsquo;t touch a game for
+months. While I wouldn&amp;rsquo;t mind having the ability to play more demanding games on
+my computer, it isn&amp;rsquo;t a &lt;em&gt;requirement&lt;/em&gt; for me&amp;hellip; expecially on a laptop.&lt;/p&gt;
+
+&lt;h4 id=&#34;i-travel-more-sometimes-on-airplanes&#34;&gt;I Travel More. Sometimes On Airplanes.&lt;/h4&gt;
+
+&lt;p&gt;One change compared to when I originally bought my bonobo is that I travel more.
+When I first moved to Massachusetts, I figured most of my traveling would be
+from here back to Pennsylvania, or to vacation once a year. However, my
+wife and I have managed to keep in touch with some of our old friends&amp;hellip; who
+live all over the country. Plus, now that my brothers have moved out of
+the house, they have started to spread out too (as already mentioned in the
+section above). So, I travel more often. In particular, I fly more
+frequently.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;../../img/posts/sold-bonobo/tsa.png&#34;&gt;&lt;img alt=&#34;TSA logo&#34; src=&#34;../../img/posts/sold-bonobo/tsa.png&#34; style=&#34;max-width: 80%;&#34;/&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;To say it bluntly, the Bonobo sucks to travel with. It takes up the majority of
+my bag, and most bags don&amp;rsquo;t even fit it. Besides the laptop size, TSA is often
+freaked out by the MASSIVE power supply, and has had to re-scan my bag several
+times, thinking I had a &amp;ldquo;bluetooth speaker&amp;rdquo; or something else I neglected to
+tell them about (despite my polite warnings that &amp;ldquo;my laptop&amp;rsquo;s power charger is
+massive&amp;rdquo;). Beyond security, It isn&amp;rsquo;t a computer I can pull out of my bag
+and easily use in an airport terminal. In fact, the last time I flew with it, I
+tried to work on it at table, but couldn&amp;rsquo; because the power
+outlet didn&amp;rsquo;t supply enough juice to charge the laptop. So, I was
+forced to switch to my phone for entertainment while waiting several hours
+for my flight, despite having a massive gaming laptop in my bag.&lt;/p&gt;
+
+&lt;h4 id=&#34;it-turns-out-i-m-noise-picky&#34;&gt;It turns out I&amp;rsquo;m noise picky.&lt;/h4&gt;
+
+&lt;p&gt;When building or purchasing a computer, something to consider is noise. With my
+previous machines, I didn&amp;rsquo;t worry about it. I&amp;rsquo;d joke to myself, &amp;ldquo;Noise? Why
+should I be concerned about that? I&amp;rsquo;m not building a recording studio&amp;rdquo;! After
+several years of focusing on how I &lt;em&gt;actually&lt;/em&gt; use my computing devices, I&amp;rsquo;ve
+noticed that I am very picky with noise, and on a related note, heat. Every time
+I hear the fans kick up, I start to worry that I am over-taxing the system and
+start to monitor the biggest culprits. When running taxing processes, I watch
+the cpu temps and hate seeing them high.&lt;/p&gt;
+
+&lt;p&gt;&lt;center&gt;
+&lt;a href=&#34;../../img/posts/sold-bonobo/temps.jpg&#34;&gt;&lt;img alt=&#34;Temp Sensors&#34; src=&#34;../../img/posts/sold-bonobo/temps.jpg&#34; style=&#34;max-width: 80%;&#34;/&gt;&lt;/a&gt;
+&lt;/center&gt;
+&lt;div class=&#34;caption&#34;&gt;Parallel Compression on the Bonobo Spiked the Temps&lt;/div&gt;&lt;/p&gt;
+
+&lt;p&gt;I hoped the extra &lt;em&gt;thickness&lt;/em&gt; of the Bonobo would help with any heating issues.
+While it might have a little bit, when you shove a decent GPU into a laptop&amp;hellip;
+it&amp;rsquo;s going to give off heat. Additionally, when using a powerful CPU to it&amp;rsquo;s
+full potential, it is very difficult for a laptop to compete with a
+desktop-level cooling system. The Bonobo is a very powerful laptop, but the loud
+fans prevented me from actually &lt;em&gt;using&lt;/em&gt; it to its full potential, because I
+would immediately start shutting down processes when the noise kicked up. I know
+the fans spin up to &lt;em&gt;help&lt;/em&gt; with thermals, the Bonobo was just a tad to hot and
+loud for my taste.&lt;/p&gt;
+
+&lt;h4 id=&#34;a-desktop-replacement&#34;&gt;A Desktop Replacement?&lt;/h4&gt;
+
+&lt;p&gt;My issues with the Bonobo boiled down to the fact that based on &lt;em&gt;my current
+computing use-case&lt;/em&gt;, the Bonobo functioned less as a
+&lt;em&gt;desktop-replacement-laptop&lt;/em&gt;, and more of just a &lt;em&gt;shitty, somewhat portable,
+desktop&lt;/em&gt;. Most of the time, I am just browsing or writing code on the machine in
+front of me. If I need more power, I connect remotely to a bigger, better,
+computer. I also never game &amp;ldquo;on the go&amp;rdquo;, so if I want to have a computer for
+gaming, it makes much more sense to eventually have a half-decent desktop (or
+invest in an eGPU), which will fit my needs much better that even high-end
+gaming laptops.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;../../img/posts/sold-bonobo/power-cord.jpg&#34;&gt;&lt;img alt=&#34;Bonobo Power Cord&#34; src=&#34;../../img/posts/sold-bonobo/power-cord.jpg&#34; style=&#34;max-width: 100%;&#34;/&gt;&lt;/a&gt;
+&lt;div&gt;The power cord alone made it difficult to pick up the Bonobo and move it elsewhere&lt;/div&gt;&lt;/p&gt;
+
+&lt;p&gt;The Bonobo is great if you sit it on a desk and use it as your full computer. I
+did not. I have a ton of periphery devices, and started to even use it in
+clam-shell mode, making the nice 17&amp;rdquo; screen a waste. Additionally, I hated
+having to unplug and re-plug all the devices when I wanted to move the computer.
+&lt;em&gt;In theory&lt;/em&gt;, I could move the Bonobo from my desk into the other room and work
+with my wife at the kitchen table whenever we wanted, but I &lt;em&gt;rarely&lt;/em&gt; did.
+Unplugging all my devices and fishing the massive power cable out from behind my
+desk (because the battery life is &amp;hellip; yea, I don&amp;rsquo;t think I need to explain
+this), was usually enough to prompt me to treat the Bonobo as a desktop, rather
+than a laptop.&lt;/p&gt;
+
+&lt;h2 id=&#34;recent-discoveries-my-new-plan&#34;&gt;Recent Discoveries &amp;amp; My New Plan&lt;/h2&gt;
+
+&lt;p&gt;A while back, I bought a &lt;a href=&#34;../my-new-used-x230/&#34;&gt;used x230 Thinkpad&lt;/a&gt;. Last
+summer, I finally purchased a &lt;a href=&#34;https://www.ebay.com/itm/Lenovo-Thinkpad-Mini-Docking-Station-Series-3-USB-3-0-T410-L420-L520-X230-T530/272238176342?epid=562055390&amp;amp;hash=item3f62a8e856:g:PbIAAOSw2x1XMPHU:sc:USPSPriority!02703!US!-1&#34;&gt;used docking
+station&lt;/a&gt;
+for it, so I could try out a docked setup. I loved it. It matched my needs
+exceptionally. I was able to have &lt;em&gt;all&lt;/em&gt; of my periphery devices attached to the
+dock and thus, the x230, but with the push of a button I could detach the laptop be
+on my way. The setup worked so well in fact, that I started to use my x230 as my
+desk computer, and would remote to my Bonobo on the other side of the room when
+I needed it. At that point, I realized I might want to switch things up.&lt;/p&gt;
+
+&lt;p&gt;I want to conclude by again stating that my System76 Bonobo Extreme was &lt;em&gt;not&lt;/em&gt; a
+bad machine. It is great when used as a standalone, semi-portable computer. I
+didn&amp;rsquo;t use it that way, and as a result, it just wasn&amp;rsquo;t for me anymore. I
+learned that a quite, cool, portable, but dockable, laptop is ideal for my main
+device &lt;em&gt;right now&lt;/em&gt;, even if it isn&amp;rsquo;t as powerful. Unfortunately, System76
+doesn&amp;rsquo;t offer such a machine at this time. So, my plan is to replace the Bonobo
+with newer thinkpad + dock combination. Hopefully that combination will give me
+a nice dock setup that I have grown to appreciate and love.&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -155,7 +1915,68 @@ realizations, and why I ultimately decided to sell my Bonobo laptop.&lt;/p&gt;
       <pubDate>Sat, 26 Aug 2017 00:00:00 +0000</pubDate>
       
       <guid>http://ryan.himmelwright.net/post/simple-reverse-ssh-tunnel/</guid>
-      <description>Last week, I was on vacation with my family. While I didn&amp;rsquo;t work a ton on personal projects, I was at least able to spend some time on my TunelBeacon project again. I will write a dedicated post about that project down the road when I am further along. Basically, it will be a simple GUI to create reverse ssh tunnels, that family and friends can startup in order grant me temporary access to their computer when they need support.</description>
+      <description>
+
+&lt;p&gt;Last week, I was on vacation with my family. While I didn&amp;rsquo;t work a &lt;em&gt;ton&lt;/em&gt; on personal projects, I was at least able to spend some time on my &lt;a href=&#34;https://github.com/himmAllRight/TunnelBeacon&#34;&gt;TunelBeacon&lt;/a&gt; project again. I will write a dedicated post about that project down the road when I am further along. Basically, it will be a simple GUI to create reverse ssh tunnels, that family and friends can startup in order grant me temporary access to their computer when they need support. Reverse SSH tunnels are &lt;em&gt;very&lt;/em&gt; useful and simple to setup, but can be a bit tricky to figure out at first. So, here&amp;rsquo;s a brief and simple guide on how to easily create reverse tunnels.&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;!--more --&gt;
+
+&lt;h3 id=&#34;ssh-tunnels&#34;&gt;SSH Tunnels&lt;/h3&gt;
+
+&lt;p&gt;A secured shell (SSH) tunnel is an encrypted tunnel, created with a connection using the ssh protocol. It can be thought of as a pipe between two computers that data travels through. Being encrypted, people outside the pipe can only see that data packages are traveling through it, but cannot read the actual contents of the package. SSH tunnels are used to securely connect between devices, as well as forward ports between devices. For example, if I am working on a website hosted on port 3000 of my internally networked laptop, I can use a ssh tunnel to forward that port to one on a public server so that friends can view the website.&lt;/p&gt;
+
+&lt;h3 id=&#34;reverse-tunnels&#34;&gt;Reverse Tunnels&lt;/h3&gt;
+
+&lt;p&gt;Reverse tunnels are just like normal ssh tunnels except&amp;hellip; well&amp;hellip; in reverse. This means that I can connect to a remote computer, and have &lt;em&gt;its&lt;/em&gt; port tunneled to &lt;em&gt;me&lt;/em&gt;, which can be very handy. This is largely used for one particular usecase: providing easy, temporarily, ssh access to computers behind a network and/or firewall.&lt;/p&gt;
+
+&lt;p&gt;To make all of this (hopefully) easier to understand, I have drafted up a few diagrams. For the example, lets say I am away and my wife wants me to fix something on her laptop. Unless I have her &lt;em&gt;properly&lt;/em&gt; configure the router to forward ssh traffic to her laptop, I normally cannot do this. Additionally, she might be at a friends house, office, or other public place where there is no access to the router controls (well, she &lt;em&gt;shouldn&amp;rsquo;t&lt;/em&gt;). So, her laptop doesn&amp;rsquo;t have a direct public IP address, but our server &lt;em&gt;does&lt;/em&gt;.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;../../img/posts/simple-reverse-ssh-tunnel/network-diagram.png&#34;&gt;&lt;img alt=&#34;Computer behind firewall&#34; src=&#34;../../img/posts/simple-reverse-ssh-tunnel/network-diagram.png&#34; style=&#34;max-width: 100%;&#34;/&gt;&lt;a&gt;
+&lt;em&gt;Two computers (at least one without a direct public IP), both with access to a cloud server with a public IP&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;Because my wife can connect to the public cloud server, she can initiate a reverse tunnel from her laptop, with the server. The tunnel directly connects the server to her laptop.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;../../img/posts/simple-reverse-ssh-tunnel/ssh-tunnel.png&#34;&gt;&lt;img alt=&#34;Computer behind firewall&#34; src=&#34;../../img/posts/simple-reverse-ssh-tunnel/ssh-tunnel.png&#34; style=&#34;max-width: 100%;&#34;/&gt;&lt;/a&gt;
+&lt;em&gt;The laptop computer creates a reverse ssh tunnel to the cloud server.&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;On my end, I first ssh to the server from my computer. Once the tunnel is started, I can then ssh again to a specified local port on the server, and it will tunnel me directly to her laptop. This will give me a command prompt as if I was sitting with an open terminal at her computer.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;../../img/posts/simple-reverse-ssh-tunnel/connect-through-tunnel.png&#34;&gt;&lt;img alt=&#34;Computer behind firewall&#34; src=&#34;../../img/posts/simple-reverse-ssh-tunnel/connect-through-tunnel.png&#34; style=&#34;max-width: 100%;&#34;/&gt;&lt;/a&gt;
+&lt;em&gt;With the reverse tunnel setup, the first computer can ssh to the second via the cloud server and tunnel connection.&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;When I am done working, my wife can close the tunnel, and I will no longer be able to access her computer.&lt;/p&gt;
+
+&lt;h3 id=&#34;creating-the-reverse-tunnel&#34;&gt;Creating The Reverse Tunnel&lt;/h3&gt;
+
+&lt;p&gt;SSH tunnels can be initiated on linux easily from the command line (assuming ssh is setup and properly configured). To create a reverse tunnel, use the &lt;code&gt;-R&lt;/code&gt; flag. After the flag, provide what I call the &amp;ldquo;path&amp;rdquo; of the tunnel. So, the server&amp;rsquo;s port where the tunnel will be found, the host of that port (I almost always use &lt;code&gt;localhost&lt;/code&gt;), and the port to be tunneled. Lastly, make sure to specify the &lt;em&gt;IP&lt;/em&gt; or &lt;em&gt;hostname&lt;/em&gt; of the remote computer just like in a typical plain &lt;code&gt;ssh hostname&lt;/code&gt;.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;ssh -R remote-port:localhost:local-port host
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Example:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;ssh -R 19999:localhost:22 meowth
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;connecting&#34;&gt;Connecting&lt;/h3&gt;
+
+&lt;p&gt;After setting up the tunnel, the initializing computer can be accessed &lt;em&gt;from the server&lt;/em&gt; by ssh&amp;rsquo;ing to the &lt;em&gt;remote-port&lt;/em&gt; of &lt;em&gt;localhost&lt;/em&gt; (defined above):&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;ssh -p 19999 localhost
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;This should start an ssh session to the initializing computer. In my example, this is the laptop.&lt;/p&gt;
+
+&lt;h3 id=&#34;tunnel-beacon&#34;&gt;Tunnel Beacon&lt;/h3&gt;
+
+&lt;p&gt;SSH tunnels are a fascinating and useful piece of technology. The ssh protocol makes modern computing much more secure, and easier to manage multiple computers. While ssh tunnels are already widely utilized, I think there are still many applications where it the technology can be applied.&lt;/p&gt;
+
+&lt;p&gt;For example, I mentioned in the intro post about my small project, &lt;a href=&#34;https://github.com/himmAllRight/TunnelBeacon&#34;&gt;TunelBeacon&lt;/a&gt; (&lt;em&gt;Note: this is by no means ready. I&amp;rsquo;ve just started playing with it&lt;/em&gt;). TunnelBeacon will be a very simple GUI application used to initiate a tunnel from a computer, specifically to receive support. For example, if my wife or any of our parents switch to Linux in the future, we could configure TunnelBeacon on their computer. Then, if they need help they can just open it and hit a button, which will initiate a reverse tunnel to a predefined secure server (or spin up an AWS/DO server&amp;hellip; I have ideas). From there, I can remote into their computer no matter what network they are on (as long as ssh isn&amp;rsquo;t blocked). No headache from having them find their public IP, no redirecting router ports, just hitting a button.&lt;/p&gt;
+
+&lt;p&gt;So, that&amp;rsquo;s reverse tunnels in a nutshell. With any luck, I should be posting more about them as I progress with TunnelBeacon. Have fun tunneling!&lt;/p&gt;
+</description>
     </item>
     
     <item>
@@ -173,7 +1994,79 @@ learned a lot :). In fact, I am confident that if I had to start over from
 scratch, the process would take me about 10-15 minutes. Just to be sure, I&amp;rsquo;m
  going to quickly jot down the major pain points I experienced my first time around.&lt;/p&gt;
 
-&lt;p&gt;&lt;/p&gt;</description>
+&lt;p&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;trouble-connecting-to-the-edgerouter-x-for-initial-setup&#34;&gt;Trouble Connecting to the EdgeRouter-x for Initial Setup&lt;/h2&gt;
+
+&lt;p&gt;&lt;center&gt;
+&lt;img alt=&#34;During initial setup, I was connecting the router wrong&#34; src=&#34;../../img/posts/ubiquiti-setup-issues/wrong-router-connection.png&#34; style=&#34;max-width: 100%;&#34;/&gt;
+&lt;/center&gt;
+&lt;em&gt;During initial setup, I was connecting the router wrong&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;The edgerouter needed to be directly connected to a computer during its initial
+setup, to make the EdgeOS configuration wizard accessible. The
+instructions clearly stated to connect an ethernet cable from my laptop to the
+&lt;code&gt;eth0/POE&lt;/code&gt; port on the edgerouter, but I guess I didn&amp;rsquo;t believe them.&lt;/p&gt;
+
+&lt;p&gt;Instead, I plugged the ethernet cable from my modem into &lt;code&gt;eth0&lt;/code&gt;, and my computer
+to &lt;code&gt;eth1&lt;/code&gt;. That didn&amp;rsquo;t work. However, once I &lt;em&gt;properly&lt;/em&gt; connected the devices (and
+manually set a static IP on my laptop, &lt;code&gt;192.168.1.2&lt;/code&gt; for example), I was able to access
+the configuration page in my browser via &lt;code&gt;https://192.168.1.1&lt;/code&gt; (don&amp;rsquo;t forget
+the &lt;em&gt;s&lt;/em&gt; in &lt;em&gt;https&lt;/em&gt;). Lesson Learned: manuals are (&lt;em&gt;usually&lt;/em&gt;) not out to get you.&lt;/p&gt;
+
+&lt;h2 id=&#34;setting-up-poe-and-connecting-the-ap&#34;&gt;Setting up POE and Connecting the AP&lt;/h2&gt;
+
+&lt;p&gt;This was not actually an issue I encountered, but rather a confusion. I was unsure what the best setup for
+the &lt;a href=&#34;https://en.wikipedia.org/wiki/Power_over_Ethernet&#34;&gt;POE&lt;/a&gt; hardware was. At
+first, I had the POE adaptor connected between the edgerouter and the AP,
+because I wasn&amp;rsquo;t sure if it could optimally power both devices. I found
+an
+&lt;a href=&#34;https://www.youtube.com/watch?v=f7FeYsJqotc&amp;amp;list=PLDBkup9c8YMgZaE50hAjP7rbbVriTlyQf&amp;amp;index=1&#34;&gt;informative guide&lt;/a&gt; that
+indicated that the POE adaptor could indeed power both.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-scheme&#34; data-lang=&#34;scheme&#34;&gt;Modem  --
+        |
+         --&amp;gt; POE Adaptor --&amp;gt; (*eth0*)  edgerouter-x  (*eth4*) --&amp;gt; AP Lite
+        |
+Power  --&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;&lt;em&gt;Digram describing the correct link up&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;Once I swapped the cables all around, I had to go into the router
+configuration and enable the POE for &lt;code&gt;eth4&lt;/code&gt;. Afterwards, the AP lit up,
+indicating that it was connected and powered.&lt;/p&gt;
+
+&lt;h2 id=&#34;issues-linking-configuring-the-ap&#34;&gt;Issues linking/configuring the AP&lt;/h2&gt;
+
+&lt;p&gt;This was the problem I spent the most time on. I had to install the
+configuration software for the Ubiquiti access point, but the &amp;ldquo;Linux binary&amp;rdquo; was
+a .deb, and I didn&amp;rsquo;t feel like extracting the contents of the package so that I
+could install it on Solus (yet). So instead, I spun up a few Ubuntu VMs to try
+it out, but I over-looked the fact that VMs on my laptop use a
+different subnet (192.168.&lt;strong&gt;122&lt;/strong&gt;. *) for the virtual network. I had hoped that
+because the VM&amp;rsquo;s network was routed through my laptop, which was connected
+directly to the edgerouter, it would still be able to see the access point.
+Regardless&amp;hellip; the AP couldn&amp;rsquo;t see the VM and vice versa. Finally, I admitted
+that the issues were most likely caused by the 192.168.122.* IP address that the VM was
+assigned.&lt;/p&gt;
+
+&lt;p&gt;&lt;center&gt;
+&lt;img alt=&#34;During initial setup, I was connecting the router wrong&#34; src=&#34;../../img/posts/ubiquiti-setup-issues/ubuntu.png&#34; width=&#34;45%&#34;&gt;
+&lt;img alt=&#34;During initial setup, I was connecting the router wrong&#34; src=&#34;../../img/posts/ubiquiti-setup-issues/venomoth.png&#34; width=&#34;35%&#34;&gt;
+&lt;/center&gt;
+&lt;em&gt;I spun up a new Ubuntu VM (Venomoth) to host the Ubifi controller&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;By this point, I had also learned that the Linux software is more of a server
+service, and not a GUI desktop application. So, I concluded that spinning up a
+dedicated VM on my server to host the wifi controller was worth it. Virtual
+machines hosted on my server automatically get configured on the main
+subnet, so it also resolved my issue. I was able to detect and configure the
+access point immediately. This setup made more sense anyway, as I can always
+connect to the AP controller by going to the VM&amp;rsquo;s IP on my browser,  just like I
+can with my router.&lt;/p&gt;
+
+&lt;p&gt;Well, that was all of my setup &amp;ldquo;&lt;em&gt;issues&lt;/em&gt;&amp;rdquo;. There was nothing I would consider to
+be an actual &lt;em&gt;issue&lt;/em&gt;, just some confusions of an Ubiquiti/POE first-timer. Like
+I stated earlier, I am sure I could redo the setup in about 15 minutes without any
+issues&amp;hellip; 10 now that I recorded everything in the post!&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -189,7 +2082,58 @@ setup our old router as a &lt;em&gt;temporary&lt;/em&gt; fix. It was terrible. S
 researching how I should upgrade our network. This time around, I am doing this
 &lt;em&gt;correctly&lt;/em&gt;.&lt;/p&gt;
 
-&lt;p&gt;&lt;/p&gt;</description>
+&lt;p&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;center&gt;
+&lt;img src=&#34;../../img/posts/upgrading-to-ubiquiti-edgerouter/linksys-WRT1900.png&#34;
+width= 45%&gt;
+&lt;img src=&#34;../../img/posts/upgrading-to-ubiquiti-edgerouter/linksys-E1200.png&#34;
+width= 45%&gt;
+&lt;/center&gt;
+&lt;em&gt;The Linksys WRT-1900 that died (left), and the terrible backup Linksys E1200 (right)&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;The router that died was a Linksys WRT 1900. When I got home, I setup our old
+router as a temporary fix. It&amp;rsquo;s a very basic Linksys E1200. After using it for
+just a few hours, I remembered why I hated it so much. It is slower than a
+snail, and seems to stop working each day or so, requiring me to unplug and
+re-plug it daily (I think it is something with DHCP. It keeps trying to reassign
+IPs to devices, and then doesn&amp;rsquo;t seem to understand how to accept their requests
+afterwards). Thus, the more &lt;em&gt;temporary&lt;/em&gt; this solution was, the better.&lt;/p&gt;
+
+&lt;p&gt;If I am redoing our network setup, I want to do it &lt;em&gt;properly&lt;/em&gt; this time,
+splitting out the router from the wireless access point using &lt;em&gt;good&lt;/em&gt; hardware and
+software. My plan is to get an ubiquity edge-router-x, and pair it with an Ubiquiti
+wireless access point.&lt;/p&gt;
+
+&lt;p&gt;&lt;center&gt;
+&lt;img src=&#34;../../img/posts/upgrading-to-ubiquiti-edgerouter/edgerouter-x.png&#34;
+alt=&#34;Ubiquity Edgerouter-x&#34; width=&#34;45%&#34;&gt;
+&lt;img src=&#34;../../img/posts/upgrading-to-ubiquiti-edgerouter/ap-ac-lite.png&#34; alt=&#34;Ubiquity Access Point Lite&#34; width=&#34;45%&#34;&gt;
+&lt;/center&gt;
+&lt;em&gt;The EdgeRouter-x (right) and an Ubiquity access point lite (right)&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;Originally I wanted to build a small pfsense box to use as a router, but after
+digging a little deeper and doing some research, I saw that the EdgeRouter would
+more than meet my needs and is a great start to a network upgrade. Additionally,
+at $50 (USD), it truly is a great deal. As for the wireless access point, I was
+always considering an UniFi device, and I thought the EdgeRouter should
+pair rather seamlessly, considering both products are made by Ubiquiti.&lt;/p&gt;
+
+&lt;p&gt;From what I read, the EdgeRouter is a great router with an okay firewall, while
+pfsense is an amazing firewall that can do routing. So, if I want to dig more
+into pfsense in the future, I can still set up a firewall box, and connect it in front of
+the router.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;Modem --&amp;gt; pfsense --&amp;gt; EdgeRouter-x -&amp;gt; devices
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;So&amp;hellip; I think I&amp;rsquo;ve finalized my decision and will purchase the items soon. I
+will update when I get them.&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;Update (06/24/2017): I have followed through with this
+purchase, and the items arrived from Amazon. Expect a post or two about my
+experience setting them up (and yes, I added this update before actually
+publishing this post)&lt;/em&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -198,7 +2142,150 @@ researching how I should upgrade our network. This time around, I am doing this
       <pubDate>Thu, 25 May 2017 00:00:00 +0000</pubDate>
       
       <guid>http://ryan.himmelwright.net/post/updating-pi-cluster-with-ansible/</guid>
-      <description>With Ansible configured on the Pi cluster, it is time to have it do something useful. When working with a clustered system, even the simplest tasks become tedious and time consuming. For example, updating the system. While I could manually update each of the 3 pi nodes, it is not scalable to 10 or 30 nodes, let alone hundreds or thousands. Tools like Ansible, make doing tasks such a supdating clustered systems, trivial again.</description>
+      <description>
+
+&lt;p&gt;With Ansible configured on the Pi cluster, it is time to have it do something useful. When working with a clustered system, even the simplest tasks become tedious and time consuming. For example, updating the system. While I could manually update each of the 3 pi nodes, it is not scalable to 10 or 30 nodes, let alone hundreds or thousands. Tools like Ansible, make doing tasks such a supdating clustered systems, trivial again. In this post, I will walk through setting up an Ansible playbook to update my Pi cluster.&lt;/p&gt;
+
+&lt;!-- more --&gt;
+
+&lt;h3 id=&#34;hosts-file&#34;&gt;Hosts File&lt;/h3&gt;
+
+&lt;p&gt;The first task when using Ansible is to setup the &lt;code&gt;hosts&lt;/code&gt; file. No, not the normal &lt;code&gt;/etc/hosts&lt;/code&gt; file, but the &lt;em&gt;other&lt;/em&gt; one &lt;em&gt;just&lt;/em&gt; for Ansible, which can be found at &lt;code&gt;/etc/ansible/hosts&lt;/code&gt;. Configuring the Ansible hosts file is fairly straightforward. Groups of computers are defined using &lt;code&gt;[brackets]&lt;/code&gt;, with computer ip/hostnames of the group are listed below. For example:&lt;/p&gt;
+
+&lt;p&gt;A nice feature of group definitions is that hierical structures can be constructed using the &lt;code&gt;:child&lt;/code&gt; suffix in order to create groups of groups. For example, for my &lt;a href=&#34;../../pages/homelab&#34;&gt;homelab&lt;/a&gt;, I like to make an ansible hosts file that splits out my servers based on their distribution, and then group those by their packaging type. This makes it easier for me to do generic updates, which is what I mostly use ansible for (at this point). So, for example:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;[ubuntu]
+mrmime
+geodude
+
+[debian]
+ninetales
+
+[fedora]
+fedora-test
+
+[centos]
+tangels
+
+[arch]
+meowth
+staryu
+diglet
+
+[deb:children]
+ubuntu
+debian
+
+[rpm:children]
+fedora
+centos
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;For use with the cluster, I kept it simple, although I did opt to create rpi/bpi subgroups:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;[cluster:children]
+rpis
+bpis
+
+[rpis]
+pi0
+pi1
+
+[bpis]
+bpi
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;ping-hosts&#34;&gt;Ping Hosts&lt;/h3&gt;
+
+&lt;p&gt;Once the hosts file is setup, it can be tested using the &lt;code&gt;ping&lt;/code&gt; module. I tested my &lt;code&gt;cluser&lt;/code&gt; group, as well as the &lt;code&gt;rpis&lt;/code&gt; and &lt;code&gt;bpis&lt;/code&gt; subgroups.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;ansible rpis -m ping
+ansible bpis -m ping
+ansible cluster -m ping
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Assuming the steps of &lt;a href=&#34;../Ansible-On-Pi-Cluster&#34;&gt;the last post&lt;/a&gt; were done correctly, this should work. If not, double check that post and make sure everything looks correct.&lt;/p&gt;
+
+&lt;h3 id=&#34;playbooks&#34;&gt;Playbooks&lt;/h3&gt;
+
+&lt;p&gt;After confirming that the hosts file is properly configured, I started to dig into playbooks. Playbooks are Ansible&amp;rsquo;s scripting system used to configure, deploy, and orcistrate systems. They can describe ways in which systems should be configured (ex: enable ssh), or outline a set of steps for an IT task (ex: running updates, restarting a server). As stated in the &lt;a href=&#34;https://docs.ansible.com/ansible/playbooks.html&#34;&gt;playbook documentation&lt;/a&gt;:&lt;/p&gt;
+
+&lt;div id=&#34;post-quote&#34;&gt;
+*&#34;If Ansible modules are the tools in your workshop, playbooks are your instruction manuals, and your inventory of hosts are your raw material.&#34;*
+&lt;/div&gt;
+
+&lt;p&gt;Playbook files are expressed using &lt;a href=&#34;https://docs.ansible.com/ansible/YAMLSyntax.html&#34;&gt;YAML syntax&lt;/a&gt;, which is easy to read, but still powerful. The first step when creating a new playbook, being a YAML file, is to set the header and footer. The header consists of three &lt;code&gt;-&lt;/code&gt;&amp;rsquo;s at the top of the file, and the footer ends the file with three periods (&lt;code&gt;.&lt;/code&gt;). This indicates the start and end of the document.&lt;/p&gt;
+
+&lt;p&gt;When writing a playbook to update the pi cluster, I first needed to declare what systems the playbook is used with. To do that, I used the &lt;code&gt;hosts&lt;/code&gt; key, and provided it with the &lt;code&gt;cluster&lt;/code&gt; group name, which is defined in my &lt;code&gt;/etc/ansible/hosts&lt;/code&gt; file, as the value.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;---
+- hosts: cluster
+
+...
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;After the hosts are defined, modules can be added to update the nodes. To list the tasks, I used the &lt;code&gt;taks:&lt;/code&gt; key, with the same indentation as the &lt;code&gt;hosts:&lt;/code&gt; keyword. Instead of using a single value, I provided the &lt;code&gt;tasks:&lt;/code&gt; keyword with a list of things to do. The first task I want to do when updating the nodes is to check that they running and connected. This can be accomplised with the &lt;a href=&#34;https://docs.ansible.com/ansible/ping_module.html&#34;&gt;ping module&lt;/a&gt; that I used earlier in the post. The ping module will try to connect to each node, verify that a usable python is installed, and return &lt;code&gt;pong&lt;/code&gt; upon success. To add the module, I added &lt;code&gt;- ping: ~&lt;/code&gt;, indented, to the line below &lt;code&gt;tasks:&lt;/code&gt;:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;---
+- hosts: cluster
+
+  tasks:
+    - ping: ~
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;apt-module&#34;&gt;Apt Module&lt;/h3&gt;
+
+&lt;p&gt;After defining the ping module, I started to get a bit fancier. Well&amp;hellip; a little bit fancier. Each node in my pi cluster is running some verison of Ubuntu, which uses apt as it&amp;rsquo;s package manager. If I wanted to ssh into each node and update them manually, the steps I would follow would be to 1) run the command &lt;code&gt;sudo apt-get update&lt;/code&gt; to update the repository cache, and 2) run &lt;code&gt;sudo apt-get upgrade&lt;/code&gt; to actually install the updates. To recreate these commands in the playbook, I used the &lt;a href=&#34;https://docs.ansible.com/ansible/apt_module.html&#34;&gt;apt module&lt;/a&gt;. To start with updating the repository cache, I added the following lines to my playbook:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;- name: Update APT package manager repositories cache
+  become: true
+  apt:
+    update_cache: yes
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The &lt;code&gt;name:&lt;/code&gt; defines the name of the task, and is the text printed out to the console when executing this step of the playbook. Setting the &lt;a href=&#34;https://docs.ansible.com/ansible/become.html&#34;&gt;&lt;code&gt;become&lt;/code&gt;&lt;/a&gt; key to &lt;code&gt;true&lt;/code&gt; tells Ansible to run the command with privilege escalation (sudo). Lastly, the remaining two lines run the &lt;code&gt;update_cache:&lt;/code&gt; functionality of the apt module.&lt;/p&gt;
+
+&lt;p&gt;With the repositories updated on each node, I can have ansible run the updates by adding the following lines to the playbook (after the cache update ones):&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;- name: Upgrade installed packages
+  become: true
+  apt:
+    upgrade: dist
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;This set of commands is very similar to the last group. The &lt;code&gt;name:&lt;/code&gt; again provides a description of what the task is doing, and privilege escalation is used again via &lt;code&gt;become: true&lt;/code&gt;. The only difference is that the apt module is using the &lt;code&gt;upgrade: dist&lt;/code&gt; command instead. This will run the updates for any installed packages on the system.&lt;/p&gt;
+
+&lt;h3 id=&#34;update-cluster-playbook&#34;&gt;Update Cluster Playbook&lt;/h3&gt;
+
+&lt;p&gt;I then had a completed playbook to update the pi cluster:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;---
+- hosts: cluster
+
+  tasks:
+    - ping: ~
+
+    - name: Update APT package manager repositories cache
+      become: true
+      apt:
+        update_cache: yes
+
+    - name: Upgrade installed packages
+      become: true
+      apt:
+        upgrade: dist
+...
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The last step is to test it out! Playbooks can be executed using the &lt;code&gt;ansible-playbook&lt;/code&gt; command:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;ansible-playbook update-cluster.yml
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;When running the playbook, ansible will first attempt to gather facts about each node, and then begin to run each of the tasks defined in the playbook. At each step, it will print out the &lt;code&gt;name&lt;/code&gt; of each task, followed by the status/result for each node. When it completes, all the nodes in the cluster should be updated. Now you can update three+ computers with a single command! Enjoy!&lt;/p&gt;
+</description>
     </item>
     
     <item>
@@ -209,7 +2296,82 @@ researching how I should upgrade our network. This time around, I am doing this
       <guid>http://ryan.himmelwright.net/post/ansible-on-pi-cluster/</guid>
       <description>&lt;p&gt;In my &lt;a href=&#34;http://ryan.himmelwright.net/posts/Setting-up-the-pi-cluster/&#34;&gt;previous post&lt;/a&gt;, I pieced together my &lt;a href=&#34;http://ryan.himmelwright.net/pages/homelab/#cluster&#34;&gt;pi cluster&lt;/a&gt;, and installed variations of Ubuntu 16.04 Server on each of its nodes. With the cluster built, I quickly needed an easy way to maintain and interact with the system as a whole. This, is where &lt;a href=&#34;https://www.ansible.com/&#34;&gt;Ansible&lt;/a&gt; comes in. In this post, I will walk through the steps I took to setup Ansible on my Cluster.&lt;/p&gt;
 
-&lt;p&gt;&lt;/p&gt;</description>
+&lt;p&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;ansible&#34;&gt;Ansible&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src=&#34;../../img/posts/setting-up-ansible-pi-cluster/ansible-logo.png&#34; style=&#34;max-width: 50%; width: 150px; float: left; margin: 0px 15px 5px 5px;&#34;/&gt;&lt;/p&gt;
+
+&lt;p&gt;Ansible is an open source, configuration management and automation system. It is written in Python, and financially backed by &lt;a href=&#34;http://www.redhat.com&#34;&gt;Red Hat&lt;/a&gt;. It simplifies the management of groups of computers, through the use of modules (standalone units of work. for example, apt, ping, rpm, etc). Ansible is script-able using simple YAML files, known as playbooks, that define a set of orchestration tasks for one or many computers. These scripts can be edited and version controlled, creating a simple &lt;a href=&#34;https://en.wikipedia.org/wiki/Infrastructure_as_Code&#34;&gt;infrastructure as code&lt;/a&gt; setup.&lt;/p&gt;
+
+&lt;h2 id=&#34;setting-up-the-user-account&#34;&gt;Setting up the User Account&lt;/h2&gt;
+
+&lt;p&gt;When Ansible executes commands on the PIs, it will do so from the user-account (ryan) that I setup in the last post. However, many of these commands will require Root privledges. While I previously setup sudo and added the &lt;code&gt;ryan&lt;/code&gt; account to the &lt;code&gt;sudo&lt;/code&gt; group &amp;hellip; it required that I manually enter my password. Ansible did not like this, so I had to update the sudo configuration to allow the &lt;code&gt;ryan&lt;/code&gt; account to run &lt;code&gt;sudo&lt;/code&gt; commands with out a password. To do this, I opened the &lt;code&gt;sudoers&lt;/code&gt; file:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;sudo visudo
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;and added the following line to the end of the file:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;ryan  ALL=(ALL:ALL) NOPASSWD: ALL
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;I repeated this on each of the nodes, and afterwards was no longer promted for a password when running &lt;code&gt;sudo&lt;/code&gt; commands. This made Ansible happy.&lt;/p&gt;
+
+&lt;p&gt;&lt;a name=&#34;ssh&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;setup-ssh-keys&#34;&gt;Setup SSH Keys&lt;/h2&gt;
+
+&lt;p&gt;Well&amp;hellip; &lt;em&gt;almost&lt;/em&gt; happy.&lt;/p&gt;
+
+&lt;p&gt;Ansible&amp;rsquo;s main method of communication is via ssh, which by default, prompts me for a password when connecting. Ansible &lt;em&gt;really&lt;/em&gt; hates passwords. So, I had to configure ssh to use keys instead. Honestly, this is proabaly a good step to do regardless, now that the &lt;code&gt;ryan&lt;/code&gt; account no longer uses a password when running &lt;code&gt;sudo&lt;/code&gt;. To setup key-based logins, I appended the contents of my &lt;a href=&#34;../../pages/homelab/#alakazam&#34;&gt;main computer&lt;/a&gt;&amp;rsquo;s ssh public key*, to each pi&amp;rsquo;s &lt;code&gt;authorized_keys&lt;/code&gt; file. This can all be done using a magic one-line pipe command (x3, one for each pi):&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;cat ~/.ssh/id_rsa.pub | ssh pi0 &amp;quot;cat &amp;gt;&amp;gt; ~/.ssh/authorized_keys&amp;quot;
+cat ~/.ssh/id_rsa.pub | ssh pi1 &amp;quot;cat &amp;gt;&amp;gt; ~/.ssh/authorized_keys&amp;quot;
+cat ~/.ssh/id_rsa.pub | ssh bpi &amp;quot;cat &amp;gt;&amp;gt; ~/.ssh/authorized_keys&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;em&gt;*Note: If keys are not already generated, they can be created using the command:&lt;/em&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;ssh-keygen
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h4 id=&#34;key-only-login&#34;&gt;Key Only Login&lt;/h4&gt;
+
+&lt;p&gt;To help secure access to the PIs (and to get on Ansible&amp;rsquo;s good side), I configured sshd to disable password logins, and only allow connections from clients with approved keys. To disable password authentication, I opened the &lt;code&gt;/etc/ssh/sshd_config&lt;/code&gt; file, found the line containing &lt;code&gt;# PasswordAuthentication yes&lt;/code&gt;, changed the &lt;code&gt;yes&lt;/code&gt; to a &lt;code&gt;no&lt;/code&gt;, and unncommented it by removing the &lt;code&gt;#&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;While I was in the &lt;code&gt;sshd_config&lt;/code&gt; file, I also set &lt;code&gt;PermitRootLogin&lt;/code&gt; to &lt;code&gt;no&lt;/code&gt;, for good measure.&lt;/p&gt;
+
+&lt;p&gt;Lastly, I reset the &lt;code&gt;sshd&lt;/code&gt; service and repeated the steps for each pi:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;sudo systemctl restart sshd
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Afterwards, I was unable to login to the PIs from a computer with unauthorized ssh keys.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;../../img/posts/setting-up-ansible-pi-cluster/terminal-play.png&#34; name=&#34;pic&#34; onmouseover=&#34;this.src=&#39;../../img/posts/setting-up-ansible-pi-cluster/blocked-ssh-attempt.gif&#39;&#34; onmouseout=&#34;this.src=&#39;../../img/posts/setting-up-ansible-pi-cluster/terminal-play.png&#39;&#34; style=&#34;max-width: 100%;&#34;/&gt;&lt;/p&gt;
+
+&lt;p&gt;But, I was still able to loging from the authorized computer.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;../../img/posts/setting-up-ansible-pi-cluster/terminal-play.png&#34; name=&#34;pic&#34; onmouseover=&#34;this.src=&#39;../../img/posts/setting-up-ansible-pi-cluster/accepted-ssh-attempt.gif&#39;&#34; onmouseout=&#34;this.src=&#39;../../img/posts/setting-up-ansible-pi-cluster/terminal-play.png&#39;&#34; style=&#34;max-width: 100%;&#34;/&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;install-python&#34;&gt;Install Python&lt;/h2&gt;
+
+&lt;p&gt;The last issue Ansible complained about was that it needed python installed on the Pis. Like everything else, the Bananna Pi already had this setup, but I had to install it on the two Raspberry Pis. It was simple enough:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;sudo apt-get install python
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;install-ansible&#34;&gt;Install Ansible&lt;/h2&gt;
+
+&lt;p&gt;I have a confession. So, you know how I have been fun and cheery by anthropomorphisizing Ansible, saying that it was &lt;em&gt;&amp;ldquo;happy&amp;rdquo;&lt;/em&gt; or &lt;em&gt;&amp;ldquo;frusterated&amp;rdquo;&lt;/em&gt; during the previous steps? That wasn&amp;rsquo;t true. I made it up. Ansible wasn&amp;rsquo;t &lt;em&gt;actually&lt;/em&gt; installed yet. &lt;em&gt;So&amp;hellip; to install Ansible&amp;hellip;&lt;/em&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;sudo eopkg it ansible
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;I used &lt;code&gt;eopkg&lt;/code&gt; because I am currently running &lt;a href=&#34;https://solus-project.com&#34;&gt;Solus&lt;/a&gt;. You might use &lt;code&gt;sudo apt-get install ansible&lt;/code&gt;, &lt;code&gt;sudo dnf install ansible&lt;/code&gt;, or &lt;code&gt;pacaur -S ansible&lt;/code&gt; depending on whatever distro you are using.&lt;/p&gt;
+
+&lt;p&gt;That&amp;rsquo;s all for &lt;em&gt;setting up&lt;/em&gt; Ansible. I&amp;rsquo;ll cut this post off here, but in the next post, I&amp;rsquo;ll walk through the steps on how to get Ansible to be useful.&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -220,7 +2382,75 @@ researching how I should upgrade our network. This time around, I am doing this
       <guid>http://ryan.himmelwright.net/post/setting-up-the-pi-cluster/</guid>
       <description>&lt;p&gt;I have a Raspberry Pi 2, a Raspberry Pi 3, and a Banana Pi. A while ago, I constructed a small tower to house my pi devices. Since then, I have additionally acquired a power source, and some CAT6 cable to connect them all up to a switch. I hope to use the Pis as a mini clustered environment, where I can learn (and play) with some of the &amp;ldquo;Devops&amp;rdquo; technologies/techniques out there. This post will briefly explain the initial setup of &lt;a href=&#34;../../pages/homelab/#cluster&#34;&gt;my cluster&lt;/a&gt;.&lt;/p&gt;
 
-&lt;p&gt;&lt;/p&gt;</description>
+&lt;p&gt;&lt;/p&gt;
+
+&lt;h1 id=&#34;setting-up-the-os-images&#34;&gt;Setting up the OS Images&lt;/h1&gt;
+
+&lt;p&gt;Before doing anything with the hardware, I had to setup the pi &amp;ldquo;hard drives&amp;rdquo; (micro SD cards), so they could boot.&lt;/p&gt;
+
+&lt;h3 id=&#34;ubuntu-for-raspberry-pi&#34;&gt;Ubuntu for Raspberry PI&lt;/h3&gt;
+
+&lt;p&gt;&lt;img src=&#34;../../img/posts/Setting-Up-Pi-Cluster/ubuntu-logo.jpg&#34; style=&#34;max-width: 50%; height: auto; float: right; margin: 0px 2px 2px 2px;&#34;/&gt;&lt;/p&gt;
+
+&lt;p&gt;After mucking around with Rapsbian and Hypriot one Sunday, I decided to just go with a plain Ubuntu image for the Raspberry Pis. I don&amp;rsquo;t have anything against these specific OSes, but I am mostly setting up this cluster to simulate what I would do on a &amp;ldquo;real&amp;rdquo; system. For me, that often means using a straight OS like Ubuntu.&lt;/p&gt;
+
+&lt;p&gt;Luckily, Canonical makes special &lt;a href=&#34;https://wiki.ubuntu.com/ARM/RaspberryPi&#34;&gt;Ubuntu ARM images&lt;/a&gt;, specifically for the Raspberry Pi. I download the 16.04 server version for both the &lt;a href=&#34;http://cdimage.ubuntu.com/ubuntu/releases/16.04/release/ubuntu-16.04.2-preinstalled-server-armhf+raspi2.img.xz&#34;&gt;raspberry pi 2&lt;/a&gt; and &lt;a href=&#34;http://www.finnie.org/software/raspberrypi/ubuntu-rpi3/ubuntu-16.04-preinstalled-server-armhf+raspi3.img.xz&#34;&gt;raspberry pi 3&lt;/a&gt;. The process to write these images to the microSD card differs slightly from ones I&amp;rsquo;ve used in the past. It still uses &lt;code&gt;dd&lt;/code&gt;, but the image is first piped through &lt;code&gt;xzcat&lt;/code&gt;, as such:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;xzcat ubuntu-16.04.2-preinstalled-server-armhf+raspi2.img.xz | sudo dd bs=4M of=/dev/mmcblk0
+xzcat ubuntu-16.04-preinstalled-server-armhf+raspi3.img.xz   | sudo dd bs=4M of=/dev/mmcblk0
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;armbian&#34;&gt;Armbian&lt;/h3&gt;
+
+&lt;p&gt;The one issue that I have with the Banana Pi compared to the Raspberry Pi, is that it is commonly not supported. It can be hard to find a bananna pi specific image, and the raspberry pi ones usually do not work. For example, while Canonical linked to Raspberry Pi images, it did not mention the banana pie.  This is where &lt;a href=&#34;https://www.armbian.com/&#34;&gt;Armbian&lt;/a&gt; comes in.&lt;/p&gt;
+
+&lt;p&gt;Armbian is a lightweight Debian and Ubuntu based distribution, that provides builds for various ARM devices. Thus the name, &lt;em&gt;ARM-bian&lt;/em&gt;. One of these many supported devices&amp;hellip; is the &lt;a href=&#34;https://www.armbian.com/banana-pi/&#34;&gt;banana pi&lt;/a&gt;. I downloaded the Ubuntu 16.04 Server flavor of Armbian for the Banana PI, and copied it to my micro SD card with the command:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;sudo dd if=Armbian_5.25_Bananapi_Ubuntu_xenial_next_4.9.7.img  of=/dev/mmcblk0 bs=1M
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;hardware-setup&#34;&gt;Hardware Setup&lt;/h3&gt;
+
+&lt;p&gt;&lt;img src=&#34;../../img/posts/Setting-Up-Pi-Cluster/pi-cluster.png&#34; style=&#34;max-width: 40%; float: right; margin: 10px 10px 5px 10px;&#34;/&gt;&lt;/p&gt;
+
+&lt;p&gt;After the operating system images have been copied the SD cards, the hardware can be setup. I started by inserting the microSD cards into the PIs, being careful to use the correct card with each device. Unlike the Raspberry PIs, the Bananna PI uses a normal SD card instead of a microSD, so I just left it in the converter card I used to connect it to my computer when imaging.&lt;/p&gt;
+
+&lt;p&gt;After adding the &amp;ldquo;hard drives&amp;rdquo;, I connected each PI to my network switch, via Ethernet. In the future, I would like to put the cluster on it&amp;rsquo;s own mini (managed?) switch so that I can have the nodes on their own private network, but connected to my main network. For now, this works.&lt;/p&gt;
+
+&lt;p&gt;Lastly, plug in the power connectors. Pi devices can be very finicky when not properly powered, so it is a good idea to use an capable USB charging device. I have had trouble in the past with my devices not working correctly due to insufficient power (especially the bpi). I knew this problem would be an even more pronounced with the cluster because I planned to connect a HD to the bpi with a SATA connector. So, I picked up an &lt;a href=&#34;https://www.amazon.com/Anker-Charger-PowerPort-Multi-Port-Samsung/dp/B00VH8ZW02/ref=sr_1_1?ie=UTF8&amp;amp;qid=1493860165&amp;amp;sr=8-1&amp;amp;keywords=Anker+power+port+5&#34;&gt;Anker Power Port 5&lt;/a&gt; and it has been working great.&lt;/p&gt;
+
+&lt;p&gt;Lastly, two nice features of the banana pi is that it has a 1 GB ethernet port, &lt;em&gt;and&lt;/em&gt; a SATA connector with power. So, to utilize this functionality, and get the most out of the bpi, I ordered &lt;a href=&#34;https://www.amazon.com/JBtek-Connectors-Banana-Supply-Terminals/dp/B00ZP0L0VS/ref=sr_1_1?ie=UTF8&amp;amp;qid=1493860481&amp;amp;sr=8-1&amp;amp;keywords=banana+pi+sata&#34;&gt;the appropriate SATA connector&lt;/a&gt; from amazon for a few bucks. When it arrived, I connected it to the SATA and SATA power ports on the pi, and then to an old 300GB laptop HD I had laying around (it was the drive that came with &lt;a href=&#34;../my-new-used-x230/&#34;&gt;my x230&lt;/a&gt;). After the drive was connected, running &lt;code&gt;lsblk&lt;/code&gt; on the bpi automatically showed a &lt;code&gt;/dev/sda&lt;/code&gt; device, in addition to the typical &lt;code&gt;mmcblk0&lt;/code&gt; microSD device. I  mounted the drive to a folder using the following command to test it out:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;sudo mount /dev/sda1 Data
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;With the hard drive mounted, I was able to browse its contents and see of all the crap still on it. The combination of the GB network and large HD makes the bpi a great little storage node, which is how I intend to use it.&lt;/p&gt;
+
+&lt;h3 id=&#34;bootup-and-connecting-via-ssh&#34;&gt;Bootup and Connecting via SSH&lt;/h3&gt;
+
+&lt;p&gt;When the Pis are plugged in, they should automatically boot up. In order to connect to them, I found their IPs from my main computer using &lt;code&gt;nmap&lt;/code&gt;:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;sudo nmap -sP 192.168.1.0/24
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;div id=&#34;caption&#34;&gt;This command may differ depending on your network setup&lt;/div&gt;
+
+&lt;p&gt;The Raspberry PIs have &lt;code&gt;(Raspberry Pi Foundation)&lt;/code&gt; in the MAC address lines, and my Banana Pi had &lt;code&gt;bananapi&lt;/code&gt; in the host name. Once I had the IP addresses, I could ssh in using the default usernames and passwords for the images (the user/pass should be listed on the sites). After logging in for the first time, each PI prompted me to change the password (as it should).&lt;/p&gt;
+
+&lt;h3 id=&#34;adding-a-sudo-user&#34;&gt;Adding A Sudo User&lt;/h3&gt;
+
+&lt;p&gt;When connecting to remote devices, I don&amp;rsquo;t like to be logged in as root, so the first thing I did was setup my user account with sudo privileges, on the two Raspberry Pis (Armbian actually prompted me through these steps the first time I logged into the Banana pi. Kudos to them).&lt;/p&gt;
+
+&lt;p&gt;To add the user, set it&amp;rsquo;s password (important), and then add it to the sudo group, I used the following commands:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;useradd -m -s /bin/bash ryan
+passwd ryan
+usermod -a -G sudo ryan
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;div id=&#34;caption&#34;&gt;Yes, I know I can add the user to the sudo group in the `useradd` command, but I prefer to do it with `usermod`. Personal Preference.&lt;/div&gt;
+
+&lt;p&gt;That&amp;rsquo;s it. At this point, all of my the PIs are minimally set up accessible. The next steps include updating packages, setting up ssh keys, and configuring &amp;hellip;. &lt;a href=&#34;https://www.ansible.com&#34;&gt;Ansible&lt;/a&gt;. But that will all be in the &lt;em&gt;next post&lt;/em&gt;. See you then!&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -231,7 +2461,137 @@ researching how I should upgrade our network. This time around, I am doing this
       <guid>http://ryan.himmelwright.net/post/zfs-backups-to-luks-external/</guid>
       <description>&lt;p&gt;I have been using &lt;a href=&#34;https://en.wikipedia.org/wiki/ZFS&#34;&gt;ZFS&lt;/a&gt; data pools to store data on &lt;a href=&#34;../../pages/homelab/#ninetales&#34;&gt;my server&lt;/a&gt; for some time now. As great as that is, I am ashamed to admit that I have not had a &lt;em&gt;true&lt;/em&gt; backup system in place (raid/mirrors are not backup). I have a backup solution that I have attempted in the past, but ran into an issue and let it drift to the side. That changes now. It&amp;rsquo;s time to revisit my solution, and complete it to the end.&lt;/p&gt;
 
-&lt;p&gt;&lt;/p&gt;</description>
+&lt;p&gt;&lt;/p&gt;
+
+&lt;p&gt;Currently, my server is configured with two main zfs mirrored pools. The first one, &lt;code&gt;Data&lt;/code&gt;, is built on 2 x 3TB hard drives, providing 2.72 TB of usable disk space. It contains all of my wife&amp;rsquo;s and my data, organized into sub-category pools (ex: &lt;code&gt;Data/Music&lt;/code&gt;, &lt;code&gt;Data/Pictures&lt;/code&gt;, &lt;code&gt;Data/ryan&lt;/code&gt;, etc). The second, &lt;code&gt;Backups&lt;/code&gt;, is built on the 2 x 1TB hard drives from my old desktop, creating a 928 GB usable pool . It stores the automatic backups of some of the VMs and LXC containers hosted on the server.&lt;/p&gt;
+
+&lt;p&gt;Before I had my 3TB drives, I bought a 2TB external hard drive to backup the 1TB drives to. While it isn&amp;rsquo;t as large as the total usable space on my server, it is enough to store my data backups to, for the time being.&lt;/p&gt;
+
+&lt;p&gt;My goal is to setup a zfs pool on the external drive, so I can use zfs&amp;rsquo;s send &amp;amp; receive functionality to send bi-weekly-ish incremental snapshots to it. When I am not running backups, I want to store the drive at an off-site location. With the drive being stored elsewhere, I want to ensure that the data is protected, so I will be encrypting the it using &lt;a href=&#34;https://en.wikipedia.org/wiki/Linux_Unified_Key_Setup&#34;&gt;LUKS&lt;/a&gt;, the Linux disk encryption software.&lt;/p&gt;
+
+&lt;h3 id=&#34;setting-up-luks&#34;&gt;Setting up LUKS&lt;/h3&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://gitlab.com/cryptsetup/cryptsetup/blob/master/README.md&#34;&gt;LUKS&lt;/a&gt; (Linux Unified Key Setup) is the standard for Linux disk encryption. I will use it to encrypt the external drive, and then present the LUKS mapper devices to ZFS as a block device. To do this, we need to first install &lt;code&gt;cryptsetup&lt;/code&gt; with &lt;code&gt;sudo apt-get install cryptsetup&lt;/code&gt; (Assuming you are on a Debian-based operating system). Once that is installed, we can use the &lt;code&gt;cryptsetup&lt;/code&gt; command to configure LUKS on the drive.&lt;/p&gt;
+
+&lt;p&gt;The cryptsetup tool has a plethora of settings and options. After researching around, I decided to use options that the author of &lt;a href=&#34;http://www.makethenmakeinstall.com/2014/10/zfs-on-linux-with-luks-encrypted-disks/&#34;&gt;this post&lt;/a&gt; used, because they were doing something very similar to what I am trying. I configured LUKS on my external drive using the following command:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;cryptsetup luksFormat --cipher aes-xts-plain64 --key-size 512 --iter-time 10000 --use-random -y /dev/sdf
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;code&gt;--cipher aex-xts-plain64&lt;/code&gt;and &lt;code&gt;--key-size 512&lt;/code&gt; refer to the algorithm and key size used to encrypt the data. In general, the larger the key, the harder the encryption is to crack.&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;--iter-time 10000&lt;/code&gt; and &lt;code&gt;--use-random -y&lt;/code&gt; are additional precautions to make it more difficult to crack the encryption. The &lt;code&gt;--iter-time 10000&lt;/code&gt; means it will spend at least 10 seconds processing the passphrase each time the disk is unlocked. This makes it much harder to brute-force the passphrase.&lt;/p&gt;
+
+&lt;p&gt;Once the device is encrypted, we need to unlock it and map it as a device. This is done using the command:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;sudo cryptsetup luksOpen /dev/sdf sdf-enc
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;code&gt;/dev/sdf&lt;/code&gt; is the external disk, and &lt;code&gt;sdf-enc&lt;/code&gt; is whatever you want to name the unlocked device. This is the name that what will be used when referring to the unlocked device. With the drive is encrypted and unlocked, it&amp;rsquo;s time for some ZFS magic.&lt;/p&gt;
+
+&lt;h3 id=&#34;creating-a-zfs-pool&#34;&gt;Creating a ZFS Pool&lt;/h3&gt;
+
+&lt;p&gt;I am creating a zpool using just my single external drive, so the setup is very basic. No mirrors, no zvols. A simple zpool is created with the simple command:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;sudo zpool create externalBackup sdf-enc
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;That&amp;rsquo;s it.&lt;/p&gt;
+
+&lt;h3 id=&#34;taking-base-snapshots&#34;&gt;Taking Base Snapshots&lt;/h3&gt;
+
+&lt;p&gt;&lt;img alt=&#34;Taking a ZFS snapshot&#34; src=&#34;../../img/posts/ZFS-Backups-To-LUKS-External/snapshot.gif&#34; style=&#34;max-width: 100%;&#34;/&gt;
+&lt;div id=&#34;caption&#34;&gt;Taking a ZFS snapshot&lt;/div&gt;&lt;/p&gt;
+
+&lt;p&gt;With a zpool initialized on the externalDrive, I can now send snapshots to it. To start, I created a base snapshot to send. Starting with the smaller pool, &lt;code&gt;/Backups&lt;/code&gt;:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;sudo zfs snapshot -r Backups@VM-LXC-BackupBase
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;This command creates a recursive snapshot of my &lt;code&gt;Backups&lt;/code&gt; zpool, named &lt;code&gt;VM-LXC-BackupBase&lt;/code&gt;. Making a base snapshot for my &lt;code&gt;/Data&lt;/code&gt; zpool is nearly the same:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;sudo zfs snapshot -r Data/DataBackupBase
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;sending-the-base-snapshots&#34;&gt;Sending the Base Snapshots&lt;/h3&gt;
+
+&lt;p&gt;After taking base snapshots of the zpools, I can transfer them to the external drive using the zfs &lt;code&gt;send&lt;/code&gt; and &lt;code&gt;recv&lt;/code&gt; commands. Again, starting with the &lt;code&gt;VM-LXC-BackupBase&lt;/code&gt;:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;sudo zfs send Backups@VM-LXC-BackupBase | sudo zfs recv externalBackup/VM-LXC-BackupBase
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;div id=&#34;caption&#34;&gt;Looking back, I realized I named this poorly... The external zpool should be `/externalBackup/VM-LXC-Backup`, not `BackupBase`, that name is just for the first *snapshot*. Oh well.&lt;/div&gt;
+
+&lt;p&gt;Now for the slightly harder pool, &lt;code&gt;/Data&lt;/code&gt;, with all of the sub zpools. The first time I attempted this, only the parent &lt;code&gt;Data&lt;/code&gt; snapshot was copied, but none of the children were (&lt;code&gt;Data/Music&lt;/code&gt;, &lt;code&gt;Data/Pictures&lt;/code&gt;, etc). After some digging around the docs and online I realized I was missing the &lt;code&gt;-R&lt;/code&gt; to my &lt;code&gt;zfs send&lt;/code&gt; command.  Also note, that when using the &lt;code&gt;-R&lt;/code&gt; flag, the snapshot name for the destination pool are not specified (because it is copying multiple). It will use the same snapshot names from the source pool.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;sudo zfs send -R Data@DataBackupBase | sudo zfs recv externalBackup/DataBackup
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;incremental-backups&#34;&gt;Incremental Backups&lt;/h3&gt;
+
+&lt;p&gt;Taking a snapshot of my data and sending it to an external drive is nice, but I don&amp;rsquo;t want to send all of the data each time I backup. Transferring can take a very long time, especially as my data pools continue to grow. I don&amp;rsquo;t want to sit around all day, listening to hard drives hum as my data transfers.&lt;/p&gt;
+
+&lt;p&gt;&lt;center&gt;&lt;img alt=&#34;no time&#34; src=&#34;../../img/posts/ZFS-Backups-To-LUKS-External/aint-nobody-got-time-for-that.gif&#34; style=&#34;max-width: 100%;&#34;/&gt;&lt;/center&gt;&lt;/p&gt;
+
+&lt;p&gt;A useful feature of the zfs &lt;code&gt;send&lt;/code&gt; and &lt;code&gt;recv&lt;/code&gt; commands is the ability to send &lt;em&gt;incremental&lt;/em&gt; snapshots. This means when I want to update my backups, I can just send the &lt;em&gt;changes&lt;/em&gt; between the two snapshots. This is similar to &lt;a href=&#34;https://en.wikipedia.org/wiki/Diff_utility&#34;&gt;source code diffs&lt;/a&gt;, but for file systems.&lt;/p&gt;
+
+&lt;p&gt;To send incremental snapshots, the &lt;code&gt;-i&lt;/code&gt; or &lt;code&gt;-I&lt;/code&gt; flag is used. The difference between the two is that the &lt;code&gt;-i&lt;/code&gt; flag will send the difference between the two snapshots listed, whereas &lt;code&gt;-I&lt;/code&gt; will send a series of snapshots between the two listed. For example, if I&amp;rsquo;ve taken several snapshots of my data (&lt;code&gt;A&lt;/code&gt;, &lt;code&gt;B&lt;/code&gt;, &lt;code&gt;C&lt;/code&gt;, and &lt;code&gt;D&lt;/code&gt;), but have neglected to copy them to the external drive since snapshot &lt;code&gt;A&lt;/code&gt;, I can use &lt;code&gt;-I A D&lt;/code&gt; in my &lt;code&gt;zfs send&lt;/code&gt; command, and all four of the snapshots will be sent to the external.&lt;/p&gt;
+
+&lt;p&gt;To send an incremental update to my backup, I first created new snapshot for my pools (this time with a date):&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;sudo zfs snapshot -r Backups@VM-LXC-Backup20170418
+sudo zfs snapshot -r Data@DataBackup20170418
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Next, I sent the incremental changes between the base snapshots, and new ones I just made:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;sudo zfs send -R -i Backups@VM-LXC-BackupBase Backups@VM-LXC-Backup20170418 | sudo zfs recv externalBackup/VM-LXC-BackupBase
+sudo zfs send -R -i Data@DataBackupBase Data@DataBackup20170418 | sudo zfs recv externalBackup/DataBackup
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Notice that I specify &lt;em&gt;two&lt;/em&gt; snapshots in the send command, to define the range of differences to send.&lt;/p&gt;
+
+&lt;h4 id=&#34;a-minor-issue&#34;&gt;A Minor Issue&lt;/h4&gt;
+
+&lt;p&gt;The first time I tried sending an incremental backup, I encountered a minor issue. ZFS gave me an error stating that my destination had been changed since last snapshot (meaning the base snapshot on the externalBackup pool). I looked this up online and it seems that sometimes, just looking around the pool can change files. Some people recommended setting the destination pool to read-only, so I did that to my backup pool with:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;sudo zfs set readonly=on externalBackup
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;I am not sure if this will eliminate this problem in the future, but I guess I will find out.&lt;/p&gt;
+
+&lt;p&gt;I still had the error when sending, so I added the &lt;code&gt;-F&lt;/code&gt; flag to the &lt;code&gt;zfs recv&lt;/code&gt; command. I am not sure if this was the &lt;em&gt;best&lt;/em&gt; solution, but it seemed to be okay. I also thought about rolling back to the snapshot, and then copying which is likely a safer method (if you don&amp;rsquo;t mind losing the &amp;ldquo;changes&amp;rdquo; on the destination pool).&lt;/p&gt;
+
+&lt;h3 id=&#34;safely-closing-and-removing-the-external-drive&#34;&gt;Safely Closing and Removing the External Drive&lt;/h3&gt;
+
+&lt;p&gt;&lt;img alt=&#34;Exporting the zpool&#34; src=&#34;../../img/posts/ZFS-Backups-To-LUKS-External/export-drive.gif&#34; style=&#34;max-width: 100%;&#34;/&gt;
+&lt;div id=&#34;caption&#34;&gt;Exporting the zpool and closing the LUKS device&lt;/div&gt;&lt;/p&gt;
+
+&lt;p&gt;When the incremental backups finishes transferring, the external drive can be removed. The sequence of steps to do this safely are 1) export the zpool 2) close the LUKS device, and 3) unplug the drive. To export the zpool and close the LUKS device I used the commands:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;sudo zpool export externalBackup
+sudo cryptSetup luksClose sdf-enc
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;After that, I was able to unplug the external drive, and store it in a safe location, until I need to backup data to it again.&lt;/p&gt;
+
+&lt;h3 id=&#34;opening-and-importing-zpool-for-recurring-backups&#34;&gt;Opening and Importing zpool for Recurring Backups&lt;/h3&gt;
+
+&lt;p&gt;Lastly, there are a few steps to take when reconnecting the drive to run a daily/monthly/weekly (whatever) backup. First, the drive must be decrypted and mounted, using the same command as above:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;sudo cryptSetup luksOpen /dev/sdf sdf-enc
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Next, the zpool on the drive must be imported so that it can be used from the main system. Like exporting the pool, the command is simple:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;sudo zpool import externalBackup
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;That&amp;rsquo;s it. Now the steps detailing taking snapshots and sending incremental backups can be repeated.&lt;/p&gt;
+
+&lt;h3 id=&#34;summary&#34;&gt;Summary&lt;/h3&gt;
+
+&lt;p&gt;I am happy with this solution for now. It allows me to leverage ZFS a bit more, and become more familiar with it. The biggest issue I will likely face is space on the external drive. Luckily, ZFS makes it easy to delete old snapshots. In the future, I might also consider using an online backup solution like &lt;a href=&#34;https://www.tarsnap.com/&#34;&gt;Tarsnap&lt;/a&gt;, but I need to find a cost-effective one first. I&amp;rsquo;ll be sure to update as I continue to expand my backup solution.&lt;/p&gt;</description>
     </item>
     
   </channel>

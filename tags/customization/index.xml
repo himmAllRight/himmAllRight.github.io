@@ -8,7 +8,7 @@
     <language>en-us</language>
     <lastBuildDate>Thu, 22 Jun 2017 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="http://ryan.himmelwright.net/tags/customization/index.xml" rel="self" type="application/rss+xml" />
+        <atom:link href="http://ryan.himmelwright.net/tags/customization/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
@@ -19,7 +19,125 @@
       <guid>http://ryan.himmelwright.net/post/started-using-i3blocks/</guid>
       <description>&lt;p&gt;The last couple of weeks I have shifted back to using the i3 window mangers. When I fired it up, my fingers danced across the keyboard, remembering all of the personalized keybindings I have cultivated in my i3 configuration over the years. It is a simple, beautiful setup&amp;hellip; well, beautiful minus one of the components. My i3status bar was looking rather bland and dated, especially compared some of the i3 setups posted by all the cool kids over at &lt;a href=&#34;https://www.reddit.com/r/unixporn/&#34;&gt;/r/unixporn&lt;/a&gt;. I decided it was time for a refresh.&lt;/p&gt;
 
-&lt;p&gt;&lt;/p&gt;</description>
+&lt;p&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;i3status&#34;&gt;i3status&lt;/h2&gt;
+
+&lt;p&gt;&lt;img alt=&#34;One of my simple i3status setups&#34; src=&#34;../../img/posts/starting-i3/i3status.png&#34; style=&#34;max-width: 100%;&#34;/&gt;
+&lt;div id=&#34;caption&#34;&gt;One of my simple i3status setups&lt;/div&gt;&lt;/p&gt;
+
+&lt;p&gt;When I first configured i3 several years ago, I used i3status because it was easy to use with i3 and did everything by default. Over time, I learned how to create and modify &lt;a href=&#34;https://github.com/himmAllRight/dotfiles/blob/master/i3/.config/i3/i3status.conf&#34;&gt;my own .i3status.conf&lt;/a&gt; so that I could get it to play nice with un-standerd configurations (ex: &lt;code&gt;/Data&lt;/code&gt; partitions and such). While i3status served me well for many years, using the same-old setup has become boring. I started noticing several other nice looking status bar tools being used in i3 setups, and wanted to try them out.&lt;/p&gt;
+
+&lt;h2 id=&#34;polybar&#34;&gt;Polybar&lt;/h2&gt;
+
+&lt;p&gt;&lt;img alt=&#34;The example polybar&#34; src=&#34;../../img/posts/starting-i3/polybar.png&#34; style=&#34;max-width: 100%;&#34;/&gt;
+&lt;div id=&#34;caption&#34;&gt;The example polybar&lt;/div&gt;&lt;/p&gt;
+
+&lt;p&gt;The first bar I saw and tried was &lt;a href=&#34;https://github.com/jaagr/polybar&#34;&gt;polybar&lt;/a&gt;. I started with it because some of the examples look awesome. It looks very modern and has an infinite number of features. I set it up and was able to use the example bar just fine. However, when I started to customize my own, I started to run into a few issues. The biggest issue was polybar not detecting my work-space names, along with other elements. Additionally, due to the support for several window managers, the example configuration file seemed cluttered, and I was never sure what I could edit, and what I should delete. After some frustration, I decided put it aside for now. I might come back to it one day when I&amp;rsquo;m bored.&lt;/p&gt;
+
+&lt;h2 id=&#34;i3blocks&#34;&gt;i3blocks&lt;/h2&gt;
+
+&lt;p&gt;Next, I learned of &lt;a href=&#34;https://github.com/vivien/i3blocks&#34;&gt;i3blocks&lt;/a&gt;. It appeared to have everything I wanted in a status bar, yet remained simple, respecting the &lt;a href=&#34;https://i3wm.org/docs/i3bar-protocol.html&#34;&gt;i3bar protocol&lt;/a&gt;. So I gave it a whirl.&lt;/p&gt;
+
+&lt;h3 id=&#34;downloading-from-the-repos&#34;&gt;Downloading from the Repos&lt;/h3&gt;
+
+&lt;p&gt;Just like installing any other package on Linux, I decided to first check to see it it was in the &lt;a href=&#34;https://dev.solus-project.com/&#34;&gt;Solus Repos&lt;/a&gt;:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;sudo eopkg sr i3block
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;It was. So, I installed it (&lt;code&gt;sudo eopkg it i3blocks&lt;/code&gt;) and started learning how to setup my configuration.&lt;/p&gt;
+
+&lt;h3 id=&#34;fonts&#34;&gt;Fonts&lt;/h3&gt;
+
+&lt;p&gt;&lt;img alt=&#34;A Very Small Sampling of the Awesome Fonts&#34; src=&#34;../../img/posts/starting-i3/awesome-font.png&#34; style=&#34;max-width: 100%;&#34;/&gt;
+&lt;div id=&#34;caption&#34;&gt;A &lt;em&gt;Very Small&lt;/em&gt; Sampling of the Awesome Fonts&lt;/div&gt;&lt;/p&gt;
+
+&lt;p&gt;The first hurdle I came across when first launching i3blocks was that I did not have all the fonts used in the default configuration installed. I temporarily removed the special fonts from the config, just so I could check that everything was working. But what&amp;rsquo;s the fun in that? One of the biggest reasons I wanted to redo my bar was to have cool modern icon fonts! So, I found the &lt;a href=&#34;http://fontawesome.io/&#34;&gt;font awesome&lt;/a&gt; package in the Solus repos and installed it.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;sudo eopkg it font-awesome-ttf
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;With the awesome fonts at my disposal, I had a plethora of icons to use. So I went through and picked out icons for each of the work-space tabs and status markers.&lt;/p&gt;
+
+&lt;h3 id=&#34;finding-git-repos&#34;&gt;Finding Git Repos&lt;/h3&gt;
+
+&lt;p&gt;&lt;img alt=&#34;Example of Modules in new i3-block repo&#34; src=&#34;../../img/posts/starting-i3/i3block-new-repo-examples.png&#34; style=&#34;max-width: 100%;&#34;/&gt;
+&lt;div id=&#34;caption&#34;&gt;Example of Modules in new i3-block repo&lt;/div&gt;&lt;/p&gt;
+
+&lt;p&gt;While researching how to configure i3blocks, I started encountering several different GitHub repos and forks of the project. Some forks seemed to have additional modules that my repo version didn&amp;rsquo;t. I downloaded and built &lt;a href=&#34;https://github.com/Anachron/i3blocks&#34;&gt;this one&lt;/a&gt; to try out. I then configured i3 to point to the new build instead, and got started setting up my own blocks.&lt;/p&gt;
+
+&lt;h3 id=&#34;forking-my-own-for-solus-tweaks&#34;&gt;Forking my own for Solus Tweaks&lt;/h3&gt;
+
+&lt;p&gt;As I was configuring the individual blocks, I noticed that many of them didn&amp;rsquo;t work by default on my computers. I dug deeper by opening up and peeking at the actual bash scripts blocks refer to. I noticed that many of them were trying to query data from applications that are &lt;em&gt;not&lt;/em&gt; used in Solus. For example, the &lt;code&gt;battery&lt;/code&gt; block didn&amp;rsquo;t work for me because it relied on &lt;code&gt;acpi&lt;/code&gt;, which, while often used in Arch Linux for battery information (I use it myself when on arch) is not packaged in Solus. Instead, Solus relies on &lt;code&gt;upower&lt;/code&gt;. To fix my issues, I cobbled together my own &lt;code&gt;battery&lt;/code&gt; bash script, that queried battery information using &lt;code&gt;upower&lt;/code&gt; instead. Note, the &lt;code&gt;BATTERY_ICON&lt;/code&gt; uses the battery fonts (which likely won&amp;rsquo;t show in the browser). Unless it is charging&amp;hellip; then it uses a lightning bolt :) .&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;#!/bin/bash
+
+BATTERY=0
+BATTERY_STATE=$(echo &amp;quot;${BATTERY_INFO}&amp;quot; | upower -i $(upower -e | grep &#39;BAT&#39;) | grep -E &amp;quot;state|to\ full&amp;quot; | awk &#39;{print $2}&#39;)
+BATTERY_POWER=$(echo &amp;quot;${BATTERY_INFO}&amp;quot; | upower -i $(upower -e | grep &#39;BAT&#39;) | grep -E &amp;quot;percentage&amp;quot; | awk &#39;{print $2}&#39; | tr -d &#39;%&#39;)
+URGENT_VALUE=10
+
+if [[ &amp;quot;${BATTERY_POWER}&amp;quot; -gt 87 ]]; then
+    BATTERY_ICON=&amp;quot;&amp;quot;
+elif [[ &amp;quot;${BATTERY_POWER}&amp;quot; -gt 63 ]]; then
+     BATTERY_ICON=&amp;quot;&amp;quot;
+elif [[ &amp;quot;${BATTERY_POWER}&amp;quot; -gt 38 ]]; then
+     BATTERY_ICON=&amp;quot;&amp;quot;
+elif [[ &amp;quot;${BATTERY_POWER}&amp;quot; -gt 13 ]]; then
+     BATTERY_ICON=&amp;quot;&amp;quot;
+elif [[ &amp;quot;${BATTERY_POWER}&amp;quot; -le 13 ]]; then
+     BATTERY_ICON=&amp;quot;&amp;quot;
+else
+    BATTERY_ICON=&amp;quot;&amp;quot;
+fi
+
+
+if [[ &amp;quot;${BATTERY_STATE}&amp;quot; = &amp;quot;discharging&amp;quot; ]]; then
+    echo &amp;quot;${BATTERY_ICON} ${BATTERY_POWER}%&amp;quot;
+    echo &amp;quot;${BATTERY_ICON} ${BATTERY_POWER}%&amp;quot;
+    echo &amp;quot;&amp;quot;
+else
+    echo &amp;quot; ${BATTERY_POWER}%&amp;quot;
+    echo &amp;quot; ${BATTERY_POWER}%&amp;quot;
+    echo &amp;quot;&amp;quot;
+fi
+
+if [[ &amp;quot;${BATTERY_POWER}&amp;quot; -le &amp;quot;${URGENT_VALUE}&amp;quot; ]]; then
+  exit 33
+fi
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Over the past few weeks, it seems to work well enough. As I continued to &lt;em&gt;tweak&lt;/em&gt;, or downright &lt;em&gt;create&lt;/em&gt; blocks to work well in Solus, I eventually decided that it might be a good idea to just &lt;a href=&#34;https://github.com/himmAllRight/i3blocks&#34;&gt;create my own fork&lt;/a&gt; of the repo. This way, I can have my own i3blocks repo that works well with Solus. I noticed that the implementation of &lt;code&gt;i3blocks&lt;/code&gt; found in the Solus repos is also using non-Solus items for it&amp;rsquo;s scripts (ex: acpi for the battery). Maybe one of these days I&amp;rsquo;ll jump into irc and see how people feel about swapping in mine instead (or at least one that works better in Solus)&amp;hellip;&lt;/p&gt;
+
+&lt;h3 id=&#34;color-update-for-i3-rofi&#34;&gt;Color Update for i3 &amp;amp; rofi&lt;/h3&gt;
+
+&lt;p&gt;&lt;img alt=&#34;New Color Scheme for rofi launcher&#34; src=&#34;../../img/posts/starting-i3/rofi-run.png&#34; style=&#34;max-width: 100%;&#34;/&gt;
+&lt;div id=&#34;caption&#34;&gt;New color scheme for rofi launcher&lt;/div&gt;&lt;/p&gt;
+
+&lt;p&gt;When I started using i3 several years ago, I used &lt;a href=&#34;http://tools.suckless.org/dmenu/&#34;&gt;dmenu&lt;/a&gt; as my launcher (it&amp;rsquo;s the launcher used in &lt;a href=&#34;http://dwm.suckless.org/&#34;&gt;dwm&lt;/a&gt;, another tiling window manager I used to use). I eventually switched to &lt;a href=&#34;https://davedavenport.github.io/rofi/&#34;&gt;rofi&lt;/a&gt; after seeing it used in some very nice window manager setups (sound familiar?). However, I always used the plain default theme and never bothered to improve it. With all the work I did making i3bars look nice, I thought I should at least make rofi match. Making the color theme wasn&amp;rsquo;t nearly as hard as I anticipated it to be. That&amp;rsquo;s mostly because I found and used the &lt;a href=&#34;https://davedavenport.github.io/rofi/p11-Generator.html&#34;&gt;rofi theme generator&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;&lt;center&gt;
+&lt;img alt=&#34;New rofi window switcher&#34; src=&#34;../../img/posts/starting-i3/rofi-window.png&#34; style=&#34;max-width: 100%;&#34;/&gt;
+&lt;/center&gt;
+&lt;div id=&#34;caption&#34;&gt;Newly configured rofi window switcher&lt;/div&gt;&lt;/p&gt;
+
+&lt;p&gt;While touching up rofi, I learned it can also switch through already opened windows (Previously, I  only used it to launch new programs). I really liked that in my new i3 setup, it also displayed the work-spaces, icon font and all. I immediately bound it to my Super+Tab key for easy use.&lt;/p&gt;
+
+&lt;h2 id=&#34;conclusion&#34;&gt;Conclusion&lt;/h2&gt;
+
+&lt;p&gt;&lt;video style=&#34;max-width:100%;&#34; controls&gt;
+  &lt;source src=&#34;../../img/posts/starting-i3/i3-gaps-demo.mp4&#34; type=&#34;video/mp4&#34;&gt;
+  &lt;source src=&#34;movie.ogg&#34; type=&#34;video/ogg&#34;&gt;
+Your browser does not support the video tag.
+&lt;/video&gt;
+&lt;div id=&#34;caption&#34;&gt;Little video demoing my new i3gaps setup with i3blocks&lt;/div&gt;&lt;/p&gt;
+
+&lt;p&gt;Thus far, I have been very satisfied with my current i3 setup. Replacing i3status with i3blocks, combined with adding small improvements, for example, the awesome fonts, really helped to enhance the look and feel of my i3 configuration. Additionally, ROFI much better now that it matches everything.&lt;/p&gt;
+
+&lt;p&gt;I am glad to be using i3 again. It is so efficient to use and I love flying around the work-spaces and windows. It is particularly useful on my x230&amp;rsquo;s 12&amp;rdquo; screen, as it utilizes all of the limited resolution. If you have never used a tiling window manager in Linux, I strongly suggest you give it a shot. It can take some time to get up and going the first time, but once a custom configuration is built, it always feels like home.&lt;/p&gt;
+
+&lt;p&gt;To show off my new i3 setup with i3bars, I&amp;rsquo;ve posted a small video at the top of this section. Enjoy!&lt;/p&gt;</description>
     </item>
     
   </channel>

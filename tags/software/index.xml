@@ -8,7 +8,7 @@
     <language>en-us</language>
     <lastBuildDate>Sun, 01 Apr 2018 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="http://ryan.himmelwright.net/tags/software/index.xml" rel="self" type="application/rss+xml" />
+        <atom:link href="http://ryan.himmelwright.net/tags/software/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
@@ -23,7 +23,208 @@ instance) to supplant my Dropbox usage. While it has worked fairly well, I&amp;r
 been watching &lt;a href=&#34;https://www.seafile.com/en/home/&#34;&gt;seafile&lt;/a&gt; from a distance the
 last few years, but haven&amp;rsquo;t taken the time to try it out. I have now.&lt;/p&gt;
 
-&lt;p&gt;&lt;/p&gt;</description>
+&lt;p&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;seafile&#34;&gt;Seafile&lt;/h2&gt;
+
+&lt;p&gt;&lt;a href=&#34;../../img/posts/trying-out-seafile/seafilelogo.png&#34;&gt;&lt;img src=&#34;../../img/posts/trying-out-seafile/seafilelogo.png&#34; style=&#34;max-width: 95%; float: left; margin: 0px 15px 0px 0px;&#34; alt=&#34;Docker ps&#34; /&gt;&lt;/a&gt;
+&lt;div class=&#34;caption&#34;&gt;The Seafile Logo&lt;/div&gt;&lt;/p&gt;
+
+&lt;p&gt;As stated on their website:&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;Seafile is an enterprise file hosting platform with high reliability and
+performance. Put files on your own server. Sync and share files across
+different devices, or access all the files as a virtual disk.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;While self-defined as an &amp;ldquo;&lt;em&gt;enterprise&lt;/em&gt; file hosting platform&amp;rdquo;, there is a
+Community Edition that is &lt;em&gt;Free &amp;amp; Open Source&lt;/em&gt;.. which is exactly how I like my
+software. So lets get started.&lt;/p&gt;
+
+&lt;h2 id=&#34;setup&#34;&gt;Setup&lt;/h2&gt;
+
+&lt;p&gt;Similar to a Nextcloud configuration, to get seafile up and running, a server
+ component is first installed. Afterwards, clients connect to it.&lt;/p&gt;
+
+&lt;h3 id=&#34;server&#34;&gt;Server&lt;/h3&gt;
+
+&lt;p&gt;The countless number of configurations seafile supports may make setting up the
+server component for the first time a bit intimidating. There are several
+database back-ends (SQLite, MySQL&amp;hellip;), web servers (Nginx, Apache), and
+advanced options (Memcached, LDAP, etc) which can be selected. However, the
+seafile developers &lt;em&gt;do&lt;/em&gt; provide an &lt;a href=&#34;https://github.com/haiwen/seafile-server-installer&#34;&gt;installation
+script&lt;/a&gt; to easily install
+both the Pro and Community editions under Linux. Which is what I used.&lt;/p&gt;
+
+&lt;h4 id=&#34;download&#34;&gt;Download&lt;/h4&gt;
+
+&lt;p&gt;The first step is to download the server application. A link for the
+install package can found &lt;a href=&#34;https://www.seafile.com/en/download/#server&#34;&gt;partway down the download
+page&lt;/a&gt;. After Downloading, extract
+the contents of the package.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;wget https://download.seadrive.org/seafile-server_6.2.5_x86-64.tar.gz
+tar xf seafile-server*.tar.gz&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Inside the extracted directory, there are several &lt;code&gt;setup-seafile-*.sh*&lt;/code&gt; scripts.
+I just used the basic &lt;code&gt;setup-seafile.sh&lt;/code&gt; one.&lt;/p&gt;
+
+&lt;h4 id=&#34;dependencies&#34;&gt;Dependencies&lt;/h4&gt;
+
+&lt;p&gt;&lt;a href=&#34;../../img/posts/trying-out-seafile/ubuntu-logo.jpg&#34;&gt;&lt;img
+src=&#34;../../img/posts/trying-out-seafile/ubuntu-logo.jpg&#34; style=&#34;max-width:
+100%; float: right; margin: 5px 10px 10px 10px;&#34; alt=&#34;Ubuntu Logo&#34; /&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Depending on which setup script it used, and the state of the host machine,
+there may be some missing dependencies. While I am sure there is a nice list of
+the required dependencies posted &lt;em&gt;somewhere&lt;/em&gt;&amp;hellip; I didn&amp;rsquo;t look for it. If I am
+being completely honest&amp;hellip; I just kept repeatedly running the script, and
+installed whichever package it yelled at me for each time. Eventually, the install
+worked. On my fresh install of Ubuntu 16.04 server, this meant
+installing the following dependency packages:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;python-setuptools&lt;/li&gt;
+&lt;li&gt;python-imaging&lt;/li&gt;
+&lt;li&gt;sqlite3&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;This means that on an Ubuntu 16.04 server, a simple &lt;code&gt;sudo apt install python-setuptools
+python-imaging sqlite3&lt;/code&gt; should do the trick&amp;hellip;&lt;/p&gt;
+
+&lt;h4 id=&#34;install-script&#34;&gt;Install Script&lt;/h4&gt;
+
+&lt;p&gt;With the dependencies installed, the script should run through without screaming
+for missing packages. However, it &lt;em&gt;will&lt;/em&gt; ask for a few pieces of information
+including &lt;em&gt;server-name&lt;/em&gt;, &lt;em&gt;server-ip/domain&lt;/em&gt;, &lt;em&gt;data-dir&lt;/em&gt;, and &lt;em&gt;fileserver port&lt;/em&gt;
+to install the fileserver component. Answer accordingly.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;../../img/posts/trying-out-seafile/seahub-web.png&#34;&gt;&lt;img src=&#34;../../img/posts/trying-out-seafile/seahub-web.png&#34; style=&#34;max-width: 100%; float: left; margin: 0px 15px 0px 0px;&#34; alt=&#34;Docker ps&#34; /&gt;&lt;/a&gt;
+&lt;div class=&#34;caption&#34;&gt;The Seafile Web Client, Seahub&lt;/div&gt;&lt;/p&gt;
+
+&lt;p&gt;After configuring the fileserver, the script will flow right into configuring
+&lt;a href=&#34;https://github.com/haiwen/seahub&#34;&gt;Seahub&lt;/a&gt;, the web interface that sits on top
+of the fileserver. This part is less needy, and will only require an &lt;em&gt;[Enter]&lt;/em&gt;
+press to continue.&lt;/p&gt;
+
+&lt;p&gt;At the end, the script should display useful information about how to
+start/stop/reset the servers, as well as what ports each part is running on.&lt;/p&gt;
+
+&lt;h4 id=&#34;run-start&#34;&gt;Run &amp;amp; Start&lt;/h4&gt;
+
+&lt;p&gt;Starting the servers is done by doing what the script says&amp;hellip; run the
+following commands:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;./seafile.sh start
+./seahub.sh start&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;With the servers running, it may be necessary to configure the firewall to allow
+their ports. On Ubuntu 16.04:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;sudo ufw allow &lt;span style=&#34;color:#ae81ff&#34;&gt;8000&lt;/span&gt;/tcp
+sudo ufw allow &lt;span style=&#34;color:#ae81ff&#34;&gt;8082&lt;/span&gt;/tcp&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;That&amp;rsquo;s it. With any luck, clients should be able to connect to the server
+(assuming the server is reachable from the client computer&amp;hellip; but that&amp;rsquo;s a
+lesson for another day).&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;Note: The first time seahub is run, it will need to setup an admin account. So
+while it was nice and considerate in the last step&amp;hellip; it will insist on being
+supplied a username (email) and password for the new admin account. Again, just
+comply.&lt;/em&gt;&lt;/p&gt;
+
+&lt;h3 id=&#34;client&#34;&gt;Client&lt;/h3&gt;
+
+&lt;p&gt;The seafile desktop client was trivial to install. It was in the Solus repos, so
+I just needed to run &lt;code&gt;sudo eopkg it seafile-client&lt;/code&gt;, and I was done. I also
+installed it on my work computers (which unfortunately runs Windows 10), and
+even that was simple. I just downloaded and installed the Windows &amp;ldquo;Desktop
+Syncing Client&amp;rdquo; at the top of the &lt;a href=&#34;https://www.seafile.com/en/download/&#34;&gt;download
+page&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h2 id=&#34;my-thoughts&#34;&gt;My Thoughts&lt;/h2&gt;
+
+&lt;p&gt;&lt;a href=&#34;../../img/posts/trying-out-seafile/seafile-client.png&#34;&gt;&lt;img
+src=&#34;../../img/posts/trying-out-seafile/seafile-client.png&#34; style=&#34;max-width:
+100%; float: right; margin: 0px 0px 0px 0px;&#34; alt=&#34;Seafile Desktop Client&#34; /&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;I have been using seafile as a syncing solution for the past few weeks. After
+the initial setup, it has been rather uneventful&amp;hellip; which is a good thing. It
+just runs in the background, and I don&amp;rsquo;t really think about it. Exactly what you
+want with a syncing solution.&lt;/p&gt;
+
+&lt;p&gt;That being said, I haven&amp;rsquo;t fully dug into all of the details of the application
+yet. So, if I incorrectly critique something due to my own ignorance that
+simply isn&amp;rsquo;t true, I apologize in advance.&lt;/p&gt;
+
+&lt;h3 id=&#34;what-i-like&#34;&gt;What I Like&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;Desktop Client&lt;/strong&gt; - The desktop client is simple. It responds quickly, and is
+a nice little command center where I can view how seafile is configured on each
+individual system.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;Select &lt;em&gt;which&lt;/em&gt; Libraries to sync&lt;/strong&gt; - Seafile libraries allow me to sync only
+what I need. Nextcloud had this feature, but it was implemented a little differently. I
+had to go to the &lt;code&gt;Nextcloud&lt;/code&gt; folder in the client UI, and then check/uncheck all
+of the sub-folders I wanted to sync on my machine.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;Pick &lt;em&gt;where each&lt;/em&gt; libraries sync&lt;/strong&gt; - Even better than being able to pick
+&lt;em&gt;which&lt;/em&gt; libraries to sync, is having the power to choose &lt;em&gt;where&lt;/em&gt; each one will
+reside. In seafile, the location of each library is completely independent.
+For example, I can sync my &lt;code&gt;work&lt;/code&gt; library to &lt;code&gt;~/Documents/Work/&lt;/code&gt;, my &lt;code&gt;Music&lt;/code&gt;
+to &lt;code&gt;~/Music&lt;/code&gt;, and &lt;code&gt;emacs&lt;/code&gt; to
+&lt;code&gt;~/Documents/Programming/Editors/why/so/many/diectories/emacs/&lt;/code&gt;. On another
+computer, I may choose to only sync my &lt;code&gt;work&lt;/code&gt; library to &lt;code&gt;~/Desktop/work&lt;/code&gt; (It
+doesn&amp;rsquo;t have to be the same across computers). I love this. It lets seafile &lt;em&gt;integrate&lt;/em&gt; with my
+workflow, rather than forcing me to make &lt;em&gt;it be&lt;/em&gt; my workflow.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;Encrypted Libraries&lt;/strong&gt; - When creating a new library, it is possible to
+make an &lt;a href=&#34;https://www.seafile.com/en/help/encrypted_libraries/&#34;&gt;encrypted
+one&lt;/a&gt;. These libraries
+use client-side, end-to-end encryption and require a password. The file
+&lt;em&gt;contents&lt;/em&gt; (Note: not directory or file &lt;em&gt;names&lt;/em&gt;) are encrypted on the client
+side, and not on the server. This means that even the server admin cannot access the file
+contents on the server. This is a feature I&amp;rsquo;d like to see in more applications.&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;a href=&#34;../../img/posts/trying-out-seafile/encrypt-library.png&#34;&gt;&lt;img
+src=&#34;../../img/posts/trying-out-seafile/encrypt-library.png&#34; style=&#34;max-width:
+100%; align: center; float: center; margin: 0px 0px 0px 0px;&#34; alt=&#34;Docker ps&#34; /&gt;&lt;/a&gt;
+&lt;div class=&#34;caption&#34;&gt;When syncing an encrypted library, a password must be entered.&lt;/div&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Fast Sync&lt;/strong&gt; - I only have anecdotal evidence, but the syncing in seafile
+&lt;em&gt;feels fast&lt;/em&gt;. Files seem to pull down very quickly, and setting up my
+libraries on a new device doesn&amp;rsquo;t take a very long time. I might have to
+actually &lt;em&gt;measure&lt;/em&gt; if it&amp;rsquo;s any better than something like nextcloud, but if I&amp;rsquo;m
+happy&amp;hellip; does it really &lt;em&gt;matter&lt;/em&gt;?&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&#34;what-i-don-t-like&#34;&gt;What I Don&amp;rsquo;t Like&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;No Folders/Nested libraries&lt;/strong&gt; - As far as I can tell, I don&amp;rsquo;t think it is
+possible to organize seafile libraries with folders, or a nested library
+structure. Admittedly, this is one of those areas that I haven&amp;rsquo;t had to look
+too much into yet. However, as I start to increase my seafile usage and the
+number of my libraries increases, I could see this being a feature I&amp;rsquo;d really
+enjoy.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;Phone Sync Tricky&lt;/strong&gt; - The phone sync (specifically auto photo upload) was
+tricky to get working at first. After setting it up, it didn&amp;rsquo;t seem to work,
+or at least not as promptly as nextcloud does. I took a few photos to test it
+out today, it seemed to work &lt;em&gt;okay&lt;/em&gt;, but I don&amp;rsquo;t think it started syncing
+right away. Right now, I don&amp;rsquo;t 100% trust it to work without me thinking
+about it. Hopefully this improves with time.&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&#34;future-plans&#34;&gt;Future Plans&lt;/h3&gt;
+
+&lt;p&gt;To summarize, I have been loving seafile, and I think I have only scratched the
+surface. I haven&amp;rsquo;t even tried playing with features like &lt;a href=&#34;https://www.seafile.com/en/help/snapshot/&#34;&gt;History and
+Snapshots&lt;/a&gt;, &lt;a href=&#34;https://www.seafile.com/en/help/search/&#34;&gt;Full Text File
+Search&lt;/a&gt;, &lt;a href=&#34;https://www.seafile.com/en/help/share/&#34;&gt;Sharing
+File&lt;/a&gt;, or &lt;a href=&#34;https://www.seafile.com/en/help/file_lock/&#34;&gt;Locking
+Files&lt;/a&gt; yet. My plan is to continue
+experimenting a bit more, and then switch to it as my main syncing system when I
+redo my main server setup in a couple of weeks. If you haven&amp;rsquo;t given seafile a
+try recently, I recommend it.&lt;/p&gt;</description>
     </item>
     
   </channel>

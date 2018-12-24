@@ -8,7 +8,7 @@
     <language>en-us</language>
     <lastBuildDate>Wed, 14 Nov 2018 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="http://ryan.himmelwright.net/tags/monitors/index.xml" rel="self" type="application/rss+xml" />
+        <atom:link href="http://ryan.himmelwright.net/tags/monitors/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
@@ -21,7 +21,62 @@
 Sometimes, it might be best to just hit the reset button and configure from
 scratch. With KDE Plasma 5, you can. Here&amp;rsquo;s how.&lt;/p&gt;
 
-&lt;p&gt;&lt;/p&gt;</description>
+&lt;p&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;issue&#34;&gt;Issue&lt;/h2&gt;
+
+&lt;p&gt;While I love having a &lt;a href=&#34;../my-t470/&#34;&gt;dock-able laptop&lt;/a&gt; and &lt;a href=&#34;new-lgud4379b&#34;&gt;my 43&amp;rdquo; 4k LG
+monitor&lt;/a&gt;, getting them configured and agreeing with each other
+can sometimes be a headache. Luckily, KDE Plasma 5 (the desktop environment
+I&amp;rsquo;ve been using for awhile now) is fantastic and remembers previous display
+configurations.&lt;/p&gt;
+
+&lt;p&gt;However, when I am playing around with resolutions or multiple inputs,
+sometimes I set something that doesn&amp;rsquo;t work&amp;hellip; and it is remembered, causing
+more problems.&lt;/p&gt;
+
+&lt;h2 id=&#34;the-fix&#34;&gt;The Fix&lt;/h2&gt;
+
+&lt;p&gt;Luckily, there is an easy fix: just delete the saved profile, and
+re-setup the display again. However, I often forget these very simple steps&amp;hellip;
+hence, this post (and to help anyone else that needs it, of course :P).&lt;/p&gt;
+
+&lt;h4 id=&#34;delete-old-profile&#34;&gt;Delete old profile&lt;/h4&gt;
+
+&lt;p&gt;The first step is to delete the plasma profile that saves the screen settings.
+Note, this may remove the profiles for &lt;em&gt;all&lt;/em&gt; previously configured displays,
+but I am okay with it for &lt;em&gt;my&lt;/em&gt; use case.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;cd ~/.local.share
+rm -rf kscreen&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h4 id=&#34;extend-monitors-when-docked&#34;&gt;Extend monitors when docked&lt;/h4&gt;
+
+&lt;p&gt;&lt;a href=&#34;../../img/posts/reset-plasma5-monitor-config/extended-monitor.png&#34;&gt;&lt;img alt=&#34;The KDE Plasma 5 extend display GUI&#34; src=&#34;../../img/posts/reset-plasma5-monitor-config/extend-monitor.png&#34; style=&#34;max-width: 100%;&#34;/&gt;&lt;/a&gt;
+&lt;div class=&#34;caption&#34;&gt;The KDE Plasma 5 extend display GUI.&lt;/div&gt;&lt;/p&gt;
+
+&lt;p&gt;After deleting the config, dock or reconnect the laptop to the display. A GUI
+with extension layout options should pop up. If it does, select the preferred
+layout option.&lt;/p&gt;
+
+&lt;h4 id=&#34;close-laptop-lid-don-t-disable&#34;&gt;Close laptop lid (don&amp;rsquo;t disable)&lt;/h4&gt;
+
+&lt;p&gt;After extending the display, I usually try to make the monitor the primary
+display and disable the laptop screen. This doesn&amp;rsquo;t seem to work (It causes my
+monitor to blank). However, I have learned that if I simply &lt;em&gt;close my laptop
+lid&lt;/em&gt; once it is connected&amp;hellip; it does both of those things for me. I always
+forget this&amp;hellip; but now it&amp;rsquo;s documented!&lt;/p&gt;
+
+&lt;h4 id=&#34;optional-reset-kscreen&#34;&gt;(Optional) Reset kscreen&lt;/h4&gt;
+
+&lt;p&gt;After flipping around the displays so much, plasma shell may have gotten a bit
+frazzled. If so, just reset it using the following command:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;kquitapp5 plasmashell &lt;span style=&#34;color:#f92672&#34;&gt;&amp;amp;&amp;amp;&lt;/span&gt; kstart plasmashell&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;I like to execute this in krunner (alt-F2) so that it runs in the background,
+and because I can usually still get to krunner, even if something goes terribly
+wrong with plasmashell during the process.&lt;/p&gt;
+
+&lt;h2 id=&#34;conclusion&#34;&gt;Conclusion&lt;/h2&gt;
+
+&lt;p&gt;That&amp;rsquo;s it. While this post is rather short (for once), hopefully it will be useful. Enjoy!&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -34,7 +89,218 @@ scratch. With KDE Plasma 5, you can. Here&amp;rsquo;s how.&lt;/p&gt;
 have decided to upgrade to using a single, but &lt;em&gt;better&lt;/em&gt;,
 monitor. After two years of debating, I have finally made my choice.&lt;/p&gt;
 
-&lt;p&gt;&lt;/p&gt;</description>
+&lt;p&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;monitor-history&#34;&gt;Monitor History&lt;/h2&gt;
+
+&lt;p&gt;&lt;a href=&#34;../../img/posts/new-lgud4379b-monitor/pre-college-monitors.jpg&#34;&gt;&lt;img alt=&#34;Pre College monitors&#34; src=&#34;../../img/posts/new-lgud4379b-monitor/pre-college-monitors.jpg&#34; style=&#34;max-width: 100%;&#34;/&gt;&lt;/a&gt;
+&lt;div class=&#34;caption&#34;&gt;My monitor setup right before moving to college&lt;/div&gt;&lt;/p&gt;
+
+&lt;p&gt;Half way through high school, I purchased my first laptop (it also happens to
+be the first computer I installed Linux on. I had a special edition model, but it was
+very similar to &lt;a href=&#34;https://www.cnet.com/products/hp-pavilion-dv6000/specs/&#34;&gt;this
+one&lt;/a&gt;). The laptop was
+replacing an old standard E-machines desktop, so I kept the spare monitor to
+use with the laptop. From that point on, I &lt;em&gt;usually&lt;/em&gt; had two screens to look
+at, even if one was just my laptop&amp;rsquo;s screen at the far end of my desk, with an
+&lt;a href=&#34;https://en.wikipedia.org/wiki/AIM_(software)&#34;&gt;AIM&lt;/a&gt; window open in it. Before
+moving to college, I built a desktop computer with a new monitor (picture
+above), and utilized the old one as a secondary display.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;../../img/posts/new-lgud4379b-monitor/college-desk.jpg&#34;&gt;&lt;img alt=&#34;College Desk&#34; src=&#34;../../img/posts/new-lgud4379b-monitor/college-desk.jpg&#34; style=&#34;max-width: 100%; padding: 10px;&#34;/&gt;&lt;/a&gt;
+&lt;div class=&#34;caption&#34;&gt;My desk during my senior year of collage&lt;/div&gt;&lt;/p&gt;
+
+&lt;p&gt;Throughout college, as I started to explore Linux and programming more,
+I began to experiment with using monitors in portrait orientations.
+Eventually, I purchased a second 23.6&amp;rdquo; 1080p monitor so they would
+match when paired. This gave me much more vertical real estate, which was
+useful when writing code, essays, or lab reports.&lt;/p&gt;
+
+&lt;h2 id=&#34;why-go-from-two-to-one&#34;&gt;Why go from two, to one?&lt;/h2&gt;
+
+&lt;p&gt;&lt;a href=&#34;../../img/homelab/kadabra1.jpg&#34;&gt;&lt;img alt=&#34;MA Desk&#34; src=&#34;../../img/homelab/kadabra1.jpg&#34; style=&#34;max-width: 100%; padding: 10px;&#34;/&gt;&lt;/a&gt;
+&lt;div class=&#34;caption&#34;&gt;When using two monitors, I always had to have a primary and secondary.&lt;/div&gt;&lt;/p&gt;
+
+&lt;p&gt;While I like having the &lt;em&gt;screen real estate&lt;/em&gt; of two monitors, I was never able
+to optimally use them because of the bezels between the monitors.  While
+working, I would naturally shift over and use one monitor as a &lt;em&gt;primary&lt;/em&gt;
+display, and the other as a &lt;em&gt;secondary&lt;/em&gt; display. This was okay for some tasks,
+but it usually just meant that I just used the primary monitor, and &lt;em&gt;half&lt;/em&gt; of
+the secondary one, because it was too hard to see the far end of the screen.&lt;/p&gt;
+
+&lt;p&gt;This issue was &lt;em&gt;slightly&lt;/em&gt; better when using my displays in portrait mode, but
+that wasn&amp;rsquo;t always ideal when connecting to remote machines, or viewing wide
+content (videos, for example). It also didn&amp;rsquo;t solve the main issue. When
+looking at the screens in a natural position (head centered, looking strait
+forward)&amp;hellip; I still saw two pieces of black plastic. I wanted to see my
+&lt;em&gt;primary&lt;/em&gt; window directly in front of me, with some auxiliary space on either
+side for documentation and terminal windows. I wanted a wide screen display.&lt;/p&gt;
+
+&lt;h2 id=&#34;ultra-wide-or-large-16-9-uhd&#34;&gt;Ultra-wide or &lt;em&gt;Large&lt;/em&gt; 16:9 UHD?&lt;/h2&gt;
+
+&lt;p&gt;Luckily, the once &lt;em&gt;extremely&lt;/em&gt; expensive ultra-wide and large UHD monitors have
+started to come down in price. After following the market for a few years, I
+narrowed my decision to my favorite choice in each category: The &lt;a href=&#34;https://www.dell.com/en-us/shop/dell-ultrasharp-34-curved-ultrawide-monitor-u3415w/apd/210-adtr/monitors-monitor-accessories&#34;&gt;Dell
+u3415w&lt;/a&gt;
+and the &lt;a href=&#34;https://www.lg.com/us/monitors/lg-43UD79-B-4k-uhd-led-monitor&#34;&gt;LG
+ud4379b&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;../../img/posts/new-lgud4379b-monitor/dellu3415w.jpg&#34;&gt;&lt;img alt=&#34;Dell u3415w&#34; src=&#34;../../img/posts/new-lgud4379b-monitor/dellu3415w.jpg&#34; style=&#34;max-width: 100%;&#34;/&gt;&lt;/a&gt;
+&lt;div class=&#34;caption&#34;&gt;The Dell u3415w 34&amp;rdquo; 3440x1440p Ultra Wide Monitor &lt;/div&gt;&lt;/p&gt;
+
+&lt;p&gt;The Dell u3415w is the slightly older (compared to the
+&lt;a href=&#34;https://www.dell.com/ed/business/p/dell-u3417w-monitor/pd&#34;&gt;u34&lt;strong&gt;17&lt;/strong&gt;w&lt;/a&gt;) 34&amp;rdquo;
+ultra-wide monitor offering from Dell. It has a 3440x1440, 60 Hz,
+slightly-curved, IPS panel sitting on a solid and adjustable monitor stand. I
+preferred it over other ultra-wides because it could be found for a reasonable
+price, and had a professional build quality.&lt;/p&gt;
+
+&lt;p&gt;Based on my reasoning explained in the section above, an ultra-wide (1440p
+ones&amp;hellip; not 1080p) would fit my mostly programmer use-case very well. Being a
+single monitor, I could position it directly in front of me, with my main
+code/content centered. The 3440px wide resolution would also allow enough
+horizontal space to have a full web page of documentation, and several terminal
+windows open on either side of the main display. Lastly, the 1440px vertical
+resolution would be an adequate improvement from my &lt;em&gt;&amp;ldquo;starting to feel tight&amp;rdquo;&lt;/em&gt;,
+1080p monitors.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;../../img/posts/new-lgud4379b-monitor/ud4379b.jpg&#34;&gt;&lt;img alt=&#34;Dell u3415w&#34; src=&#34;../../img/posts/new-lgud4379b-monitor/ud4379b.jpg&#34; style=&#34;max-width: 100%;&#34;/&gt;&lt;/a&gt;
+&lt;div class=&#34;caption&#34;&gt;The LG ud4379b 42.5&amp;rdquo; 3440x2160p Monitor&lt;/div&gt;&lt;/p&gt;
+
+&lt;p&gt;The massive LG ud4379b is a 42.5&amp;rdquo; 3840x2160px IPS display. At this size and
+resolution, it is roughly the equivalent of having four 21&amp;rdquo; 1920x1080px
+monitors aligned in a 2x2 grid&amp;hellip; except with 0 bezel between them. Compared to
+other 40&amp;rdquo;+ 4K displays, I preferred this one because once again, it was
+reasonably priced, had great input options, and also seemed to have a half
+decent panel. Reviewers consistently said it had vibrant colors and minimal
+back light bleed.&lt;/p&gt;
+
+&lt;p&gt;Being single monitor, I could easily sit myself in front of it, and have my
+main content centered, just like with the ultra-wide. Being so large, I could
+still have auxiliary windows opened on either side. One advantage the ud4379
+had over the ultra-wide however, was that being a massive 16:9 screen, it could
+easily be divided into 4 1080p screens. In fact, this model supports spitting
+the screen into four separate displays, each taking a different input (more on
+that later..). While the ultra-wides often support splitting and
+picture-in-picture, it seems more natural on the 43&amp;rdquo; monitor.&lt;/p&gt;
+
+&lt;h2 id=&#34;deciding-on-the-43-uhd&#34;&gt;Deciding on the 43&amp;rdquo; UHD&lt;/h2&gt;
+
+&lt;p&gt;&lt;a href=&#34;../../img/posts/new-lgud4379b-monitor/multi-input.jpg&#34;&gt;&lt;img
+alt=&#34;Shipped Box&#34; src=&#34;../../img/posts/new-lgud4379b-monitor/multi-input.jpg&#34;
+style=&#34;max-width: 100%;&#34;/&gt;&lt;/a&gt; &lt;div class=&#34;caption&#34;&gt;The LG ud4379 can support
+multiple inputs at a time to the single display&lt;/div&gt;&lt;/p&gt;
+
+&lt;p&gt;I went back and forth on which monitor I wanted several times. Eventually, I
+realized the long term versatility of the LG monitor was just something I could
+not ignore. Being able to use it as one massive display that I could fit
+several full VM windows in, or even as 1,2, or 4 discrete monitors makes it
+extremely useful for me. I tend to be playing with more than one computer or VM
+at a time, and it is VERY nice to have them all fit on a single display. I
+&lt;em&gt;was&lt;/em&gt; worried it would be a bit &lt;em&gt;too&lt;/em&gt; large and look stupid on my desk,
+especially compared to how slick the ultra-wide would look. However, in the
+end, practicality won out.&lt;/p&gt;
+
+&lt;h2 id=&#34;getting-the-ud4379b&#34;&gt;Getting the UD4379b&lt;/h2&gt;
+
+&lt;p&gt;&lt;a href=&#34;../../img/posts/new-lgud4379b-monitor/box.jpg&#34;&gt;&lt;img alt=&#34;Shipped Box&#34;
+src=&#34;../../img/posts/new-lgud4379b-monitor/box.jpg&#34; style=&#34;max-width:
+100%;&#34;/&gt;&lt;/a&gt; &lt;div class=&#34;caption&#34;&gt;The Monitor arrived a few days later
+perfectly safe, despite the beat up box&lt;/div&gt;&lt;/p&gt;
+
+&lt;p&gt;After deciding that we would likely order the monitor as my birthday gift, my
+wife and I started watching the price a few weeks before. One day, we noticed
+the price had dropped $200&amp;hellip; so we ordered it. The price soon went back up, so
+I&amp;rsquo;m glad we snatched it when we did!&lt;/p&gt;
+
+&lt;p&gt;It came a few days latter in a massive box that I happily carted up to our
+apartment. The box was a bit beat up, but after opening it, all the components
+were fine.&lt;/p&gt;
+
+&lt;h2 id=&#34;what-i-like&#34;&gt;What I like&lt;/h2&gt;
+
+&lt;p&gt;&lt;a href=&#34;../../img/posts/new-lgud4379b-monitor/monitor-working.png&#34;&gt;&lt;img alt=&#34;Monitor Working&#34; src=&#34;../../img/posts/new-lgud4379b-monitor/monitor-working.png&#34; style=&#34;max-width: 100%;&#34;/&gt;&lt;/a&gt;
+&lt;div class=&#34;caption&#34;&gt;I can have my main content front and center, with other windows on the sides&lt;/div&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;Screen Resolution&lt;/strong&gt; - The most obvious pro using a monitor at this
+size and resolution&amp;hellip; is the screen real estate. As explained above, it&amp;rsquo;s
+twice the space of my old, dual 1080p monitor setup. With this space, I can
+easily have several source code files, documentation, a few terminals, a
+chat window, and even a video opened on my single screen as I work.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;IPS Display&lt;/strong&gt; - Many people might assume that the driving factor
+pushing me to &lt;em&gt;finally&lt;/em&gt; update my monitors was my desire for more screen
+resolution. While that was &lt;em&gt;part&lt;/em&gt; of my goal&amp;hellip; what truly motivated me was
+a desire to switch to an IPS display on my main setup after almost a year
+using my T470&amp;rsquo;s IPS display (which by the way, is &lt;em&gt;not a good IPS panel&lt;/em&gt;).
+As someone who spends a large percentage of their computing time in dark
+terminals and IDEs, an IPS panel really does help text and colors to pop,
+because the darks look &lt;em&gt;so&lt;/em&gt; much better. It turns out, this panel is
+actually quite good for it&amp;rsquo;s price, and I am very happy with it.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;../../img/posts/new-lgud4379b-monitor/new-monitor.jpg&#34;&gt;&lt;img alt=&#34;Monitor Shading&#34; src=&#34;../../img/posts/new-lgud4379b-monitor/new-monitor.jpg&#34; style=&#34;max-width: 100%;&#34;/&gt;&lt;/a&gt;
+&lt;div class=&#34;caption&#34;&gt;When working, I can look straight at a single display and still have enough room.&lt;/div&gt;&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;Single Monitor, No (center) Bezels&lt;/strong&gt; - As explained earlier in this
+post, I like that this is is a &lt;em&gt;single&lt;/em&gt; monitor. This means that I no
+longer need to twist my head back and forth, or stare at bezels. I can
+looks straight ahead and see my main content, with &amp;ldquo;auxiliary&amp;rdquo; windows
+view-able in my periphery.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;Flexibility, multiple inputs&lt;/strong&gt; - Lastly, I enjoy the multiple
+inputs and excellent PIP system of this monitor. Combined with something
+like &lt;a href=&#34;https://symless.com/synergy&#34;&gt;Synergy&lt;/a&gt;, I can easily use this one
+display with several devices at a time. This is great when working with
+more than one device, or potentially watching content on something like a
+chromecast stick, while still working on the computer. It really is the
+advantage of having 4 monitors, but in a single package.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;Speakers&lt;/strong&gt; - They aren&amp;rsquo;t &lt;em&gt;amazing&lt;/em&gt;, and I don&amp;rsquo;t use them too often
+too often, but for &amp;ldquo;monitor&amp;rdquo; speakers, they really aren&amp;rsquo;t half bad. They&amp;rsquo;re
+what you&amp;rsquo;d expect from a TV. However, this means that if I were to use
+something like a media stick, the built-in speaker is acceptable enough for
+such a device.&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;what-i-don-t-like&#34;&gt;What I don&amp;rsquo;t like&lt;/h2&gt;
+
+&lt;p&gt;&lt;a href=&#34;../../img/posts/new-lgud4379b-monitor/monitor-shading.png&#34;&gt;&lt;img alt=&#34;Monitor Shading&#34; src=&#34;../../img/posts/new-lgud4379b-monitor/monitor-shading.png&#34; style=&#34;max-width: 100%;&#34;/&gt;&lt;/a&gt;
+&lt;div class=&#34;caption&#34;&gt;Viewed from the center, the monitor edges have shadowing.&lt;/div&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;Edge Shadowing&lt;/strong&gt; - The one issue that myself
+&lt;a href=&#34;https://youtu.be/yA6hL3inqRc?t=250&#34;&gt;and&lt;/a&gt;
+&lt;a href=&#34;https://youtu.be/3BSaPRHrA_U?t=667&#34;&gt;others&lt;/a&gt; have experienced with
+this monitor is a sort of &amp;ldquo;edge shadowing&amp;rdquo;. This is apparently
+something that is common on monitors this massive, and it&amp;rsquo;s
+really hard to engineer around. If I sit back far enough from the
+display, you can&amp;rsquo;t see it anymore. (But I don&amp;rsquo;t normally sit like that)&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;Input Switching Lag?&lt;/strong&gt; - While this is more of a critique of
+&lt;em&gt;monitors&lt;/em&gt; in general, one thing I wish was a bit better was the input
+switching. Having so many inputs, it can get confusing remembering which one is
+attached to what device, or trying to quickly configure a 2x2 multi-input
+layout. Having to &lt;em&gt;wait&lt;/em&gt; for each device to connect when flipping through all
+the inputs makes it that much more frustrating (and disappointing when it&amp;rsquo;s the
+wrong input&amp;hellip;).&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;Corners Out of View&lt;/strong&gt; - Being such a large display, one issue I
+sometimes have is that the outside corners are out of my field of view.
+I mostly notice this when I occasionally miss notification pop-ups
+that I &lt;em&gt;want&lt;/em&gt; to see. On the flip-side, notifications don&amp;rsquo;t seem to
+distract me as much now when I&amp;rsquo;m trying to focus :P.&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;conclusion&#34;&gt;Conclusion&lt;/h2&gt;
+
+&lt;p&gt;&lt;a href=&#34;../../img/posts/new-lgud4379b-monitor/new-monitor-desk.jpg&#34;&gt;&lt;img alt=&#34;Monitor Shading&#34; src=&#34;../../img/posts/new-lgud4379b-monitor/new-monitor-desk.jpg&#34; style=&#34;max-width: 100%;&#34;/&gt;&lt;/a&gt;
+&lt;div class=&#34;caption&#34;&gt;New monitor on my desk.&lt;/div&gt;&lt;/p&gt;
+
+&lt;p&gt;In conclusion, I an &lt;em&gt;very&lt;/em&gt; happy with my new monitor. It fits all of the
+criteria I had, and works for my use-case perfectly. While I wouldn&amp;rsquo;t
+recommend it for a pure gaming machine, it might be one of the best deal
+&lt;em&gt;productivity&lt;/em&gt; monitors out there.&lt;/p&gt;</description>
     </item>
     
   </channel>

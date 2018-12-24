@@ -8,7 +8,7 @@
     <language>en-us</language>
     <lastBuildDate>Mon, 05 Mar 2018 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="http://ryan.himmelwright.net/notes/index.xml" rel="self" type="application/rss+xml" />
+        <atom:link href="http://ryan.himmelwright.net/notes/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
@@ -17,8 +17,189 @@
       <pubDate>Mon, 05 Mar 2018 00:00:00 +0000</pubDate>
       
       <guid>http://ryan.himmelwright.net/notes/server-transition-plan/</guid>
-      <description>I&amp;rsquo;ve been planning to move my server from Proxmox to just a normal server install, to give me more control over everything. However, I don&amp;rsquo;t want this to be like the wild west of servers, where it is basically just a desktop with a bunch of crap on it. I like how easy it is to spin up both containers and VMs, and then continue to monitor/manage everything.
-So, I am creating a list of things I want to have at least somewhat figured out before officially making the switch.</description>
+      <description>
+
+&lt;p&gt;I&amp;rsquo;ve been planning to move my server from Proxmox to just a normal server
+install, to give me more control over everything. However, I don&amp;rsquo;t want this to
+be like the wild west of servers, where it is basically just a desktop with a
+bunch of crap on it. I like how easy it is to spin up both containers and VMs,
+and then continue to monitor/manage everything.&lt;/p&gt;
+
+&lt;p&gt;So, I am creating a list of things I want to have at least &lt;em&gt;somewhat&lt;/em&gt; figured
+out before officially making the switch. Some things might be un-check even
+though I have an idea about what to do. I will check things off as I go through
+and fully ensure I know what to do for that task, and optionally write something
+down about it.&lt;/p&gt;
+
+&lt;h2 id=&#34;pre-planning&#34;&gt;Pre Planning&lt;/h2&gt;
+
+&lt;h3 id=&#34;host&#34;&gt;Host&lt;/h3&gt;
+
+&lt;p&gt;The host system needs a few things it needs to support. Most are
+broken down into the other categories below, but some are specific to
+the Host, which will be here.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Checklist&lt;/strong&gt;:&lt;/p&gt;
+
+&lt;ul class=&#34;task-list&#34;&gt;
+&lt;li&gt;&lt;label&gt;&lt;input type=&#34;checkbox&#34; checked disabled class=&#34;task-list-item&#34;&gt; Determine OS/Distro to use (Ubuntu 18.04, 16.04 fallback)&lt;/label&gt;&lt;/li&gt;
+&lt;li&gt;&lt;label&gt;&lt;input type=&#34;checkbox&#34; disabled class=&#34;task-list-item&#34;&gt; Monitoring System&lt;/label&gt;&lt;/li&gt;
+&lt;li&gt;&lt;label&gt;&lt;input type=&#34;checkbox&#34; disabled class=&#34;task-list-item&#34;&gt; Easy Management System for Containers/VMs (ex: Ansible/Chef)&lt;/label&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&#34;data&#34;&gt;Data&lt;/h3&gt;
+
+&lt;p&gt;Need to continue to use ZFS, and be able to import my current ZFS pools. It also
+needs to support LUKS, since I use it for my backups. Lastly, it would be nice
+if it was easy enough to setup samba shares.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Checklist&lt;/strong&gt;:&lt;/p&gt;
+
+&lt;ul class=&#34;task-list&#34;&gt;
+&lt;li&gt;&lt;label&gt;&lt;input type=&#34;checkbox&#34; checked disabled class=&#34;task-list-item&#34;&gt; Test OS ZFS install/Setup&lt;/label&gt;&lt;/li&gt;
+&lt;li&gt;&lt;label&gt;&lt;input type=&#34;checkbox&#34; checked disabled class=&#34;task-list-item&#34;&gt; Import ZFS Pools&lt;/label&gt;&lt;/li&gt;
+&lt;li&gt;&lt;label&gt;&lt;input type=&#34;checkbox&#34; disabled class=&#34;task-list-item&#34;&gt; LUKs setup and working&lt;/label&gt;&lt;/li&gt;
+&lt;li&gt;&lt;label&gt;&lt;input type=&#34;checkbox&#34; disabled class=&#34;task-list-item&#34;&gt; Ensure Backup Process Works&lt;/label&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&#34;vms&#34;&gt;VMs&lt;/h3&gt;
+
+&lt;p&gt;Want to continue to use KVM. Needs to allow me to use ~virsh~ and other tools.
+Ideally, I&amp;rsquo;d like to be able to connect using ~virt-manager~ and similar GUI
+tools, even from Distros without ~ssh-askpass~, like Solus. I need to figure out
+and export just a couple of VMs, but I think that just requires me to export
+them to qcow2 images, and use the &amp;ldquo;disk&amp;rdquo; into a new VM. Additionally, I think I
+&lt;a href=&#34;http://ryan.himmelwright.net/post/exporting-proxmox-vms/&#34;&gt;already figured that
+out&lt;/a&gt;. The main things
+I need to learn/do for the VM stuff is to figure out the tool set I want to use
+for management, especially remotely.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Checklist&lt;/strong&gt;:&lt;/p&gt;
+
+&lt;ul class=&#34;task-list&#34;&gt;
+&lt;li&gt;&lt;label&gt;&lt;input type=&#34;checkbox&#34; checked disabled class=&#34;task-list-item&#34;&gt; Replace Meowth with new VM&lt;/label&gt;&lt;/li&gt;
+&lt;li&gt;&lt;label&gt;&lt;input type=&#34;checkbox&#34; checked disabled class=&#34;task-list-item&#34;&gt; Export desired VMs&lt;/label&gt;&lt;/li&gt;
+&lt;li&gt;&lt;label&gt;&lt;input type=&#34;checkbox&#34; checked disabled class=&#34;task-list-item&#34;&gt; Learn how to create VMs&lt;/label&gt;&lt;/li&gt;
+&lt;li&gt;&lt;label&gt;&lt;input type=&#34;checkbox&#34; checked disabled class=&#34;task-list-item&#34;&gt; Network so VMs on main network&lt;/label&gt;&lt;/li&gt;
+&lt;li&gt;&lt;label&gt;&lt;input type=&#34;checkbox&#34; checked disabled class=&#34;task-list-item&#34;&gt; Remotely View GUI VMs&lt;/label&gt;&lt;/li&gt;
+&lt;li&gt;&lt;label&gt;&lt;input type=&#34;checkbox&#34; disabled class=&#34;task-list-item&#34;&gt; Remotely Edit VMs (Easily)&lt;/label&gt;&lt;/li&gt;
+&lt;li&gt;&lt;label&gt;&lt;input type=&#34;checkbox&#34; disabled class=&#34;task-list-item&#34;&gt; Auto Backups for VMs&lt;/label&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&#34;containers&#34;&gt;Containers&lt;/h3&gt;
+
+&lt;p&gt;I want to continue to use LXC containers for a large majority of the server&amp;rsquo;s
+tasks. So, I plan to use LXD, and many of these tasks will be about configuring
+it so that I have all the ease of managing containers as I did in Proxmox. Also,
+unlike Proxmox, I want to have the server run and support Docker cotnainers.&lt;/p&gt;
+
+&lt;h4 id=&#34;lxc-lxd&#34;&gt;LXC/LXD&lt;/h4&gt;
+
+&lt;p&gt;&lt;strong&gt;Checklist&lt;/strong&gt;:&lt;/p&gt;
+
+&lt;ul class=&#34;task-list&#34;&gt;
+&lt;li&gt;&lt;label&gt;&lt;input type=&#34;checkbox&#34; checked disabled class=&#34;task-list-item&#34;&gt; Install Setup LXC&lt;/label&gt;&lt;/li&gt;
+&lt;li&gt;&lt;label&gt;&lt;input type=&#34;checkbox&#34; disabled class=&#34;task-list-item&#34;&gt; Easily Create New (with options Proxmox provides)&lt;/label&gt;&lt;/li&gt;
+&lt;li&gt;&lt;label&gt;&lt;input type=&#34;checkbox&#34; disabled class=&#34;task-list-item&#34;&gt; Network so Containers on main network&lt;/label&gt;&lt;/li&gt;
+&lt;li&gt;&lt;label&gt;&lt;input type=&#34;checkbox&#34; disabled class=&#34;task-list-item&#34;&gt; Remotely Edit Containers (Easily)&lt;/label&gt;&lt;/li&gt;
+&lt;li&gt;&lt;label&gt;&lt;input type=&#34;checkbox&#34; disabled class=&#34;task-list-item&#34;&gt; Auto Backups&lt;/label&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4 id=&#34;docker&#34;&gt;Docker&lt;/h4&gt;
+
+&lt;p&gt;&lt;strong&gt;Checklist&lt;/strong&gt;:&lt;/p&gt;
+
+&lt;ul class=&#34;task-list&#34;&gt;
+&lt;li&gt;&lt;label&gt;&lt;input type=&#34;checkbox&#34; checked disabled class=&#34;task-list-item&#34;&gt; Docker Setup&lt;/label&gt;&lt;/li&gt;
+&lt;li&gt;&lt;label&gt;&lt;input type=&#34;checkbox&#34; disabled class=&#34;task-list-item&#34;&gt; Network so Containers on main network&lt;/label&gt;&lt;/li&gt;
+&lt;li&gt;&lt;label&gt;&lt;input type=&#34;checkbox&#34; disabled class=&#34;task-list-item&#34;&gt; Auto Backups&lt;/label&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;transition-steps&#34;&gt;Transition Steps&lt;/h2&gt;
+
+&lt;ul class=&#34;task-list&#34;&gt;
+&lt;li&gt;&lt;label&gt;&lt;input type=&#34;checkbox&#34; checked disabled class=&#34;task-list-item&#34;&gt; Export All Proxmox VMs&lt;/label&gt;&lt;/li&gt;
+&lt;li&gt;&lt;label&gt;&lt;input type=&#34;checkbox&#34; checked disabled class=&#34;task-list-item&#34;&gt; Export All Proxmox Containers&lt;/label&gt;&lt;/li&gt;
+&lt;li&gt;&lt;label&gt;&lt;input type=&#34;checkbox&#34; checked disabled class=&#34;task-list-item&#34;&gt; Run Test install (attached drive)&lt;/label&gt;&lt;/li&gt;
+&lt;li&gt;&lt;label&gt;&lt;input type=&#34;checkbox&#34; checked disabled class=&#34;task-list-item&#34;&gt; Install OS&lt;/label&gt;&lt;/li&gt;
+&lt;li&gt;&lt;label&gt;&lt;input type=&#34;checkbox&#34; checked disabled class=&#34;task-list-item&#34;&gt; Setup ZFS&lt;/label&gt;&lt;/li&gt;
+&lt;li&gt;&lt;label&gt;&lt;input type=&#34;checkbox&#34; checked disabled class=&#34;task-list-item&#34;&gt; Import Pools&lt;/label&gt;&lt;/li&gt;
+&lt;li&gt;&lt;label&gt;&lt;input type=&#34;checkbox&#34; checked disabled class=&#34;task-list-item&#34;&gt; Setup KVM/QEMU&lt;/label&gt;&lt;/li&gt;
+&lt;li&gt;&lt;label&gt;&lt;input type=&#34;checkbox&#34; disabled class=&#34;task-list-item&#34;&gt; Setup LXC/LCD&lt;/label&gt;&lt;/li&gt;
+&lt;li&gt;&lt;label&gt;&lt;input type=&#34;checkbox&#34; checked disabled class=&#34;task-list-item&#34;&gt; Configure Bridged Network&lt;/label&gt;&lt;/li&gt;
+&lt;li&gt;&lt;label&gt;&lt;input type=&#34;checkbox&#34; disabled class=&#34;task-list-item&#34;&gt; Import VMs/Contaienrs&lt;/label&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;notes&#34;&gt;Notes&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;So, I just installed &lt;a href=&#34;http://cockpit-project.org/&#34;&gt;cockpit&lt;/a&gt; on the
+test server. It&amp;rsquo;s been a long time since I have used it, and it has
+really improved. It has interfaces to my VMs and docker
+containers. It&amp;rsquo;s not as extensive as Proxmox, but honestly, goes
+enough of the way there for me.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Now that I am using Ubuntu/Fedora systems as my main OS, I should be
+able to easily remote manage using virt-manager as well. Works so
+far on my test server.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;I have setup ZFS stuff on the test server. However, I won&amp;rsquo;t really
+be able to test the pool import until I test it on the actual
+server.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;I am thinking that I will setup a vpn VM that I can use for remote
+access to the network. This might be the most secure way to do
+remote management anyway.&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&amp;ndash; Doing it&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;Okay, I exported most of the VMs this morning and imaged my
+Ubuntu 18.04 Server USB drive. Tonight, I&amp;rsquo;ve swapped the SSDs, which
+are luckily the same one :).&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;I installed Ubuntu Server on the new SSD.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;I first ran updated and setup ssh. No issue. Then I decided to try
+the part that is more difficult&amp;hellip; at least for me right
+now. Setting up the VM bridge. It actually wasn&amp;rsquo;t that bad and seems
+to be working :). I owe all thanks to &lt;a href=&#34;https://www.linuxtechi.com/install-configure-kvm-ubuntu-18-04-server/&#34;&gt;this
+post&lt;/a&gt;
+though&amp;hellip; it was &lt;em&gt;very&lt;/em&gt; helpful.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;I just installed &lt;code&gt;zfsutils-linux&lt;/code&gt; and &lt;code&gt;zfs-initramfs&lt;/code&gt;. I think I am
+going to try a reboot and insert my drives (took them out for
+safety). Will I be able to detect and then just import the pools? I
+guess I&amp;rsquo;ll find out in a few minutes&amp;hellip;&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Fingers crossed&amp;hellip;&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;It worked, although I didn&amp;rsquo;t actually install the packages before
+the upgrade. Opps.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;I imported the pools and everything. This morning, I&amp;rsquo;ve upgraded the
+pools and am now in the process of scrubbing them.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;I also setup ansible and ran my ubuntu server playbooks :)&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&amp;ndash;&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;So it&amp;rsquo;s been a few days, and everything still seems to be up and
+working. I&amp;rsquo;ve easily setup and configured a few dev VMs through
+virt-manger on kadabra, and it works great. I would still like a
+better way to do it remotely, but I think setting up my VPN like
+I&amp;rsquo;ve planned will be the best way to do that, and cockpit will be
+enough for when I am truely remote.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;I still need to set up the container stuff, and put in place some
+automation system, but the basics are all up and running.&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
     </item>
     
     <item>
@@ -27,8 +208,16 @@ So, I am creating a list of things I want to have at least somewhat figured out 
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>http://ryan.himmelwright.net/notes/focus-account/</guid>
-      <description>Notes on making a locked down account for Focusing:
- No Sudo Disabled su for the account using PAM I needed to add user groups to get the desktop stuff working Plan on using PAM more Need to figure out how to prevent ssh on other accounts to effectively do su  </description>
+      <description>&lt;p&gt;Notes on making a locked down account for Focusing:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;No Sudo&lt;/li&gt;
+&lt;li&gt;Disabled &lt;code&gt;su&lt;/code&gt; for the account using PAM&lt;/li&gt;
+&lt;li&gt;I needed to add user groups to get the desktop stuff working&lt;/li&gt;
+&lt;li&gt;Plan on using PAM more&lt;/li&gt;
+&lt;li&gt;Need to figure out how to prevent ssh on other accounts to effectively do &lt;code&gt;su&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
     </item>
     
     <item>
@@ -37,10 +226,211 @@ So, I am creating a list of things I want to have at least somewhat figured out 
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>http://ryan.himmelwright.net/notes/postgresql/</guid>
-      <description>Notes for Postgresql
-Install Just installed from the repos at first&amp;hellip; was in Solus.
-Pulling down for latest Went to website and got commands to pull down latest for Centos (I&amp;rsquo;m using an lxc container). The website has you choose what system you are on, and customizes the commands for you, which is nice :) .
-Init DB sudo /usr/pgsql-10/bin/postgresql-10-setup initdb  I wasn&amp;rsquo;t sure how to do this on Solus, so I didn&amp;rsquo;t&amp;hellip;</description>
+      <description>
+
+&lt;p&gt;Notes for Postgresql&lt;/p&gt;
+
+&lt;h2 id=&#34;install&#34;&gt;Install&lt;/h2&gt;
+
+&lt;p&gt;Just installed from the repos at first&amp;hellip; was in Solus.&lt;/p&gt;
+
+&lt;h3 id=&#34;pulling-down-for-latest&#34;&gt;Pulling down for latest&lt;/h3&gt;
+
+&lt;p&gt;Went to &lt;a href=&#34;https://www.postgresql.org/download/linux/&#34;&gt;website&lt;/a&gt; and got commands
+to pull down latest for Centos (I&amp;rsquo;m using an lxc container). The website has you
+choose what system you are on, and customizes the commands for you, which is
+nice :) .&lt;/p&gt;
+
+&lt;h4 id=&#34;init-db&#34;&gt;Init DB&lt;/h4&gt;
+
+&lt;pre&gt;&lt;code&gt;sudo /usr/pgsql-10/bin/postgresql-10-setup initdb
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;I wasn&amp;rsquo;t sure how to do this on Solus, so I didn&amp;rsquo;t&amp;hellip;&lt;/p&gt;
+
+&lt;h4 id=&#34;start-enable-service&#34;&gt;Start/Enable service&lt;/h4&gt;
+
+&lt;pre&gt;&lt;code&gt;sudo systemctl enable postgresql
+sudo systemctl start postgresql
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;test-out-db&#34;&gt;Test out DB&lt;/h2&gt;
+
+&lt;h4 id=&#34;switch-to-postgres-user&#34;&gt;Switch to postgres user&lt;/h4&gt;
+
+&lt;pre&gt;&lt;code&gt;su - postgres
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;To quit: &lt;code&gt;\quit&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;*Note: Might a shell for the user?&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;sudo usermod -s /bin/bash postgres
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h4 id=&#34;connect-to-db-command-lineup&#34;&gt;Connect to DB command lineup&lt;/h4&gt;
+
+&lt;pre&gt;&lt;code&gt;psql
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h4 id=&#34;change-postgres-password&#34;&gt;Change postgres password&lt;/h4&gt;
+
+&lt;pre&gt;&lt;code&gt;\password postgres
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h4 id=&#34;add-admin-pack-for-later&#34;&gt;Add admin pack for later&lt;/h4&gt;
+
+&lt;p&gt;I couldn&amp;rsquo;t get this to work&amp;hellip; it might be not initializing my DB coming back to
+haunt me&amp;hellip;&lt;/p&gt;
+
+&lt;p&gt;Still can&amp;rsquo;t get it to work&amp;hellip;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;postgres=# CREATE EXTENSION adminpack;
+ERROR:  could not open extension control file &amp;quot;/usr/pgsql-10/share/extension/adminpack.control&amp;quot;: No such file or directory
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Figured it out!&lt;/p&gt;
+
+&lt;p&gt;Had to install &lt;code&gt;postgres-contrib&lt;/code&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;creating-dbs&#34;&gt;Creating DBs&lt;/h2&gt;
+
+&lt;p&gt;in Bash:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;createdb mytestdb
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;creating-tables&#34;&gt;Creating Tables&lt;/h2&gt;
+
+&lt;h4 id=&#34;create-table&#34;&gt;Create Table&lt;/h4&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-SQL&#34; data-lang=&#34;SQL&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;CREATE&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;TABLE&lt;/span&gt; cities (
+cityid varchar(&lt;span style=&#34;color:#ae81ff&#34;&gt;5&lt;/span&gt;),
+cityname varchar(&lt;span style=&#34;color:#ae81ff&#34;&gt;80&lt;/span&gt;),
+&lt;span style=&#34;color:#66d9ef&#34;&gt;state&lt;/span&gt; varchar(&lt;span style=&#34;color:#ae81ff&#34;&gt;20&lt;/span&gt;) );&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h4 id=&#34;insert-values&#34;&gt;Insert Values&lt;/h4&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-SQL&#34; data-lang=&#34;SQL&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;INSERT&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;INTO&lt;/span&gt; citiies &lt;span style=&#34;color:#66d9ef&#34;&gt;VALUES&lt;/span&gt; (
+&lt;span style=&#34;color:#ae81ff&#34;&gt;12345&lt;/span&gt;,
+&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;Cincinnati&amp;#39;&lt;/span&gt;,
+&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;Ohio&amp;#39;&lt;/span&gt;);&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;to see the table quickly:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-SQL&#34; data-lang=&#34;SQL&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;Select&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;FROM&lt;/span&gt; cities;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h2 id=&#34;creating-and-deleting-users&#34;&gt;Creating and Deleting Users&lt;/h2&gt;
+
+&lt;p&gt;in BASH under postgres user:&lt;/p&gt;
+
+&lt;p&gt;create user&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;createuser mytestuser&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;create db with user name&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;createdb mytest&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Set user password for authentication (in psql):&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-SQL&#34; data-lang=&#34;SQL&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;ALTER&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;USER&lt;/span&gt; mytestuser &lt;span style=&#34;color:#66d9ef&#34;&gt;WITH&lt;/span&gt; PASSWORD &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;password&amp;#39;&lt;/span&gt;;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;in Bash, set auth. Edit file &lt;code&gt;/var/lib/pgsql/10/data/pg_hba.conf&lt;/code&gt;. Change the
+Unix domain socket and IPv3 local connects to use the &lt;code&gt;password&lt;/code&gt; method.&lt;/p&gt;
+
+&lt;p&gt;to apply setting, make sure to restart postgreql (from root/admin account, not
+&lt;code&gt;postgres&lt;/code&gt; user): &lt;code&gt;systemctl restart postgreql-10&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;Then, to log into with psql with the new user, &lt;code&gt;psql -U mytestuser&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;To remove user in bash, &lt;code&gt;dropuser mytestuser&lt;/code&gt;. However, cannot delete user if it
+owns tables/ other objects.&lt;/p&gt;
+
+&lt;p&gt;Roles&lt;/p&gt;
+
+&lt;p&gt;create db&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;\du&lt;/code&gt; shows roles&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;GRANT INSERT ON tblTest TO test;&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;or&lt;/p&gt;
+
+&lt;p&gt;user &lt;code&gt;test&lt;/code&gt; can now insert to tblTest of the testdb, but ONLY INSERT. Can grant
+ALL to do all the stuff. ex: &lt;code&gt;GRANT ALL ON tblTest TO test;&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;can also &lt;code&gt;REVOKE&lt;/code&gt; roles.&lt;/p&gt;
+
+&lt;h2 id=&#34;mypgadmin&#34;&gt;myPgAdmin&lt;/h2&gt;
+
+&lt;p&gt;Install epel-release:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;sudo yum install epel-release
+sudo yum update
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&amp;ndash; Restart postgresql-10 service &amp;ndash;&lt;/p&gt;
+
+&lt;p&gt;Install:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;yum install phpPgAdmin httpd
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Edit phpPgAdmin configuration file (&lt;code&gt;/etc/httpd/conf.d/phpPgAdmin.conf&lt;/code&gt;):&lt;/p&gt;
+
+&lt;p&gt;Replace &lt;code&gt;Require local&lt;/code&gt; to &lt;code&gt;Require all granted&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;change &lt;code&gt;Deny from all&lt;/code&gt; to &lt;code&gt;Allow from all&lt;/code&gt;, and then comment out other Allows.&lt;/p&gt;
+
+&lt;p&gt;Enable and start apache:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;systemctl enable httpd
+systemctl start httpd
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;I had errors because of permissions&amp;hellip; something with the kernel.
+I wonder if it&amp;rsquo;s because of being in a container&amp;hellip;&lt;/p&gt;
+
+&lt;p&gt;Can&amp;rsquo;t figure this out. I might just watch this section, and if it isn&amp;rsquo;t really
+used after this point it might be okay&amp;hellip;&lt;/p&gt;
+
+&lt;p&gt;Realized the &lt;code&gt;httpd&lt;/code&gt; start also had issues. Installing a centos7 VM on kadabra
+to work with this&amp;hellip;&lt;/p&gt;
+
+&lt;p&gt;So, I think the issues are because the container is an &lt;code&gt;unprivledged&lt;/code&gt; one, when
+I need a &lt;em&gt;privileged&lt;/em&gt; container&amp;hellip; Going to see if I can transfer/convert it if
+that&amp;rsquo;s the case&amp;hellip; Might start taking these notes on my LXC one&amp;hellip;&lt;/p&gt;
+
+&lt;p&gt;Spinning up a Linux Academy server to use for this stuff. I should take
+advantage of it more for things like this&amp;hellip;&lt;/p&gt;
+
+&lt;h2 id=&#34;edit-php-admin&#34;&gt;Edit php admin&lt;/h2&gt;
+
+&lt;p&gt;&lt;code&gt;/etc/phpPgAdmin/config.inc.php&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;Change &lt;code&gt;$conf[&#39;servers&#39;][0][&#39;host&#39;] = &#39;&#39;;&lt;/code&gt; with `$conf[&amp;lsquo;servers&amp;rsquo;][0][&amp;lsquo;host&amp;rsquo;] = &amp;lsquo;localhost&amp;rsquo;;&lt;/p&gt;
+
+&lt;p&gt;Change &lt;code&gt;$conf[&#39;extra_login_security&#39;] = true;&lt;/code&gt; to &lt;code&gt;$conf[&#39;extra_login_security&#39;] = false&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;Change &lt;code&gt;$conf[&#39;owned_only&#39;] = false;&lt;/code&gt; to &lt;code&gt;$conf[&#39;owned_only&#39;] = true;&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;Restart both &lt;code&gt;httpd&lt;/code&gt; and &lt;code&gt;postresql-10&lt;/code&gt;&lt;/p&gt;
+
+&lt;h4 id=&#34;config-stuff-for-the-site&#34;&gt;Config stuff for the site&lt;/h4&gt;
+
+&lt;p&gt;in &lt;code&gt;/var/lib/pgsql/10/data/&lt;/code&gt;, make sure in pg_hba.conf &lt;code&gt;method&lt;/code&gt; is set to
+&lt;code&gt;password&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;in &lt;code&gt;postgresql.comf&lt;/code&gt;, change &lt;code&gt;listen_address&lt;/code&gt; from &lt;code&gt;localhost&lt;/code&gt; to &lt;code&gt;*&lt;/code&gt; to connect
+from the web.&lt;/p&gt;
+
+&lt;p&gt;in &lt;code&gt;/etc/httpd/conf.d/&lt;/code&gt;, check that &lt;code&gt;phpPgAdmin.conf&lt;/code&gt; (same as above)&lt;/p&gt;
+
+&lt;p&gt;Restart&amp;hellip;&lt;/p&gt;
+
+&lt;p&gt;Login &amp;ldquo;worked&amp;rdquo; but I got the error message &lt;code&gt;Version of PostgreSQL not supported. Please upgrade to version or later.&lt;/code&gt;&amp;hellip;.&lt;/p&gt;
+
+&lt;p&gt;So&amp;hellip; it looks like phpPgAdmin hasn&amp;rsquo;t been maintained in years and doesn&amp;rsquo;t
+support postgresql 10&amp;hellip; However, I found
+&lt;a href=&#34;https://stackoverflow.com/questions/46794672/installing-phppgadmin-5-1-on-ubuntu-16-04-with-postgresql-10-not-supported&#34;&gt;here&lt;/a&gt;
+that I might be able to hack together a work-around. It might be worth it, just
+for learning purposes if it works&amp;hellip;&lt;/p&gt;
+
+&lt;p&gt;I couldn&amp;rsquo;t find the file at first, but a simple &lt;code&gt;find&lt;/code&gt; and &lt;code&gt;grep&lt;/code&gt; combo lead me to &lt;code&gt;/usr/share/phpPgAdmin/classes/database/Connection.php&lt;/code&gt; :).&lt;/p&gt;
+
+&lt;p&gt;Ugh. This doesn&amp;rsquo;t seem to want to work. I might restart &lt;em&gt;AGAIN&lt;/em&gt; with the proper
+version. I might break for a bit though&amp;hellip;&lt;/p&gt;
+</description>
     </item>
     
   </channel>

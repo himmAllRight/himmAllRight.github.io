@@ -8,7 +8,7 @@
     <language>en-us</language>
     <lastBuildDate>Wed, 12 Dec 2018 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="http://ryan.himmelwright.net/tags/network/index.xml" rel="self" type="application/rss+xml" />
+        <atom:link href="http://ryan.himmelwright.net/tags/network/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
@@ -22,7 +22,258 @@ During the early days of use, I occasionally had difficulty configuring it on
 new machines, but those days appear to be long gone. It is a simple, generic,
 yet flexible system.  Here&amp;rsquo;s how to get started.&lt;/p&gt;
 
-&lt;p&gt;&lt;/p&gt;</description>
+&lt;p&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;(but first, some background&amp;hellip; feel free to skip ahead)&lt;/em&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;my-password-manager-history&#34;&gt;My Password Manager History&lt;/h2&gt;
+
+&lt;p&gt;For the longest time, I didn&amp;rsquo;t use a password manager (in my defence, not many
+people did). Then in college, I started using
+&lt;a href=&#34;https://www.lastpass.com/&#34;&gt;LastPass&lt;/a&gt;. It was simple and made it easy to switch
+all of my passwords to randomly generated ones. I had a good system that
+worked for a few years, and  was even able to integrate my
+&lt;a href=&#34;https://www.yubico.com&#34;&gt;yubikey&lt;/a&gt; with it.&lt;/p&gt;
+
+&lt;p&gt;&lt;center&gt;
+&lt;a href=&#34;../../img/posts/setting-up-pass/LastPass-Logo.png&#34;&gt;&lt;img alt=&#34;LastPass logo&#34; src=&#34;../../img/posts/setting-up-pass/LastPass-Logo.png&#34; style=&#34;max-width: 100%;&#34;/&gt;&lt;/a&gt;
+&lt;/center&gt;&lt;/p&gt;
+
+&lt;p&gt;Then in 2015, Lastpass was acquired by &lt;a href=&#34;https://www.logmeininc.com&#34;&gt;LogMeIn&lt;/a&gt;,
+which had a questionable past of Linux support. Like many others in the open
+source community&amp;hellip; I started looking for alternatives.&lt;/p&gt;
+
+&lt;p&gt;I had already been searching for a LastPass replacement even before the
+acquisition. My search was mainly fueled by one big issue I had with
+LastPass&amp;hellip; it required a web browser to use.  Additionally, to utilize it&amp;rsquo;s full
+feature set, it needed to run as a Chrome or Firefox plugin. As someone who
+often uses alternative web browsers (like &lt;a href=&#34;https://qutebrowser.org&#34;&gt;qutebrowser&lt;/a&gt;),
+or works on headless machines, I try not to use applications that exist solely
+as a FireFox/Chome app.  I am also not a fan of pure website-apps in
+general.&lt;/p&gt;
+
+&lt;p&gt;So, as the I watched others switch password managers amongst the acquisition
+hype, one switch I remember seeing was Chris Fischer of the Linux Action Show.
+In episode 387 of LAS, Chris and Noah (his co-host) discussed LastPass alternatives, and
+Chris highlighted his switch to
+&lt;a href=&#34;https://www.youtube.com/watch?v=OfgZ5Fh-NfE&amp;amp;feature=youtu.be&amp;amp;t=4935&#34;&gt;pass&lt;/a&gt;.
+While I don&amp;rsquo;t think he kept with the system long-term&amp;hellip; I have.&lt;/p&gt;
+
+&lt;h2 id=&#34;what-i-like-about-pass-https-www-passwordstore-org&#34;&gt;What I like about &lt;a href=&#34;https://www.passwordstore.org&#34;&gt;pass&lt;/a&gt;&lt;/h2&gt;
+
+&lt;h4 id=&#34;unix-philosophy-simplicity&#34;&gt;Unix Philosophy &amp;ldquo;Simplicity&amp;rdquo;&lt;/h4&gt;
+
+&lt;p&gt;Okay. The average computer user will not think &lt;code&gt;pass&lt;/code&gt; is &amp;ldquo;simple&amp;rdquo;. I agree.
+However, being designed to follow the &lt;a href=&#34;https://en.wikipedia.org/wiki/Unix_philosophy&#34;&gt;Unix
+philosophy&lt;/a&gt;, pass&amp;rsquo;s &lt;em&gt;architecture
+is&lt;/em&gt;. Basically, pass is just a nice wrapper around a bunch of
+&lt;a href=&#34;https://en.wikipedia.org/wiki/GNU_Privacy_Guard&#34;&gt;gpg&lt;/a&gt; encrypted text files. It
+is a minimal, but tested solution.  This model makes pass easily compatible
+with many other great tools, such as bash, git,
+&lt;a href=&#34;https://git.zx2c4.com/password-store/tree/contrib/dmenu&#34;&gt;dmenu&lt;/a&gt;,
+&lt;a href=&#34;https://hackage.haskell.org/package/xmonad-contrib-0.13/docs/XMonad-Prompt-Pass.html&#34;&gt;xmonad&lt;/a&gt;
+and &lt;a href=&#34;https://git.zx2c4.com/password-store/tree/contrib/emacs&#34;&gt;emacs&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h4 id=&#34;command-line-tool&#34;&gt;Command Line Tool&lt;/h4&gt;
+
+&lt;p&gt;As a command-line tool, I can use pass anywhere. It doesn&amp;rsquo;t matter how conventional or strange the
+setup may be. I can have it on my desktop, on a headless server, or even inside a container. It
+makes no difference.  Even if I am on a public computer, if I can &lt;code&gt;ssh&lt;/code&gt; into one of my servers, I
+can access my passwords.&lt;/p&gt;
+
+&lt;h4 id=&#34;flexible&#34;&gt;Flexible&lt;/h4&gt;
+
+&lt;p&gt;By default, pass assumes the first line of a store file is the password.  However, the
+multi-line contents of a pass file can be anything. For example, pass could be used securely store
+encrypted notes. This gives the system a ton of flexibility, as the password items don&amp;rsquo;t &lt;em&gt;have&lt;/em&gt; to
+conform to any sort of template.&lt;/p&gt;
+
+&lt;h2 id=&#34;installing-pass-help-packages&#34;&gt;Installing Pass &amp;amp; Help Packages&lt;/h2&gt;
+
+&lt;p&gt;On Fedora, pass can be installed using &lt;code&gt;dnf&lt;/code&gt;. For other systems, check out the
+&amp;ldquo;Download&amp;rdquo; section of the &lt;a href=&#34;https://www.passwordstore.org/&#34;&gt;pass website&lt;/a&gt;.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;sudo dnf install pass&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h2 id=&#34;configuring-pass&#34;&gt;Configuring Pass&lt;/h2&gt;
+
+&lt;p&gt;After installing pass, there are few steps to configure it. First, we need to create a gpg key if
+one doesn&amp;rsquo;t already exist. Then, we need to initialize a password-store using that key.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Note:&lt;/strong&gt; &lt;em&gt;I went a little heavy with the animation images in the remainder of
+the post. Sorry. I hope they are more useful than annoying. Being a visual learner, at the very
+least they are helpful for me when I reference this post in the future. &amp;hellip;&lt;/em&gt;&lt;/p&gt;
+
+&lt;h3 id=&#34;new-gpg-key&#34;&gt;New GPG Key&lt;/h3&gt;
+
+&lt;p&gt;&lt;img alt=&#34;animation running gpg --gen-key&#34; src=&#34;../../img/posts/setting-up-pass/animation-hover.png&#34; onmouseover=&#34;this.src=&#39;../../img/posts/setting-up-pass/generate-gpg-keys.gif&#39;&#34; onmouseout=&#34;this.src=&#39;../../img/posts/setting-up-pass/animation-hover.png&#39;&#34; style=&#34;max-width: 100%;&#34;/&gt;
+&lt;div class=&#34;caption&#34;&gt;Generate a new gpg key with &lt;code&gt;gpg2 --full-gen-key&lt;/code&gt;.&lt;/div&gt;&lt;/p&gt;
+
+&lt;p&gt;To create a gpg key, the &lt;code&gt;gpg2 --gen-key&lt;/code&gt; command is normally used.  However, I opted to use &lt;code&gt;gpg2
+--full-gen-key&lt;/code&gt;, which allows for a bit more control during setup.  The command will prompt for
+several bits of information, and the default selections are generally fine for most of the options
+(Personally, I use a 4096-bit key, because&amp;hellip; why not?). At the end it will ask for a
+name, Password, and optional comment.&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;It should be noted that &lt;code&gt;gpg2&lt;/code&gt; most likely needs to be used instead of &lt;code&gt;gpg&lt;/code&gt;
+for pass. However, it may vary depending on distribution and the package
+versions.&lt;/em&gt;&lt;/p&gt;
+
+&lt;h3 id=&#34;pass-init&#34;&gt;Pass Init&lt;/h3&gt;
+
+&lt;p&gt;&lt;img alt=&#34;Crating new pass store with pass init&#34; src=&#34;../../img/posts/setting-up-pass/animation-hover.png&#34; onmouseover=&#34;this.src=&#39;../../img/posts/setting-up-pass/pass-init.gif&#39;&#34; onmouseout=&#34;this.src=&#39;../../img/posts/setting-up-pass/animation-hover.png&#39;&#34; style=&#34;max-width: 100%;&#34;/&gt;
+&lt;div class=&#34;caption&#34;&gt;Initialize a new pass store with &lt;code&gt;pass init&lt;/code&gt;.&lt;/div&gt;&lt;/p&gt;
+
+&lt;p&gt;After a gpg key has been generated, it can be used with pass.  First, find the key&amp;rsquo;s ID by using
+&lt;code&gt;gpg2 --list-secret-keys&lt;/code&gt;. Then, configure pass with &lt;code&gt;pass init GPG-KEY-ID&lt;/code&gt;. This will create a
+password-store directory, located by default at &lt;code&gt;~/.password-store/&lt;/code&gt;.&lt;/p&gt;
+
+&lt;h3 id=&#34;add-some-items&#34;&gt;Add some items&lt;/h3&gt;
+
+&lt;p&gt;&lt;img alt=&#34;Adding, editing, and retrieving some passwords with `pass`, `pass insert`, `pass generate`, and `pass edit`&#34; src=&#34;../../img/posts/setting-up-pass/animation-hover.png&#34; onmouseover=&#34;this.src=&#39;../../img/posts/setting-up-pass/pass-add-demo.gif&#39;&#34; onmouseout=&#34;this.src=&#39;../../img/posts/setting-up-pass/animation-hover.png&#39;&#34; style=&#34;max-width: 100%;&#34;/&gt;
+&lt;div class=&#34;caption&#34;&gt;Adding, editing, and retrieving some passwords with &lt;code&gt;pass&lt;/code&gt;, &lt;code&gt;pass insert&lt;/code&gt;, &lt;code&gt;pass generate&lt;/code&gt;, and &lt;code&gt;pass edit&lt;/code&gt;.&lt;/div&gt;&lt;/p&gt;
+
+&lt;p&gt;With pass initialized, lets start adding passwords to it! Here are &lt;em&gt;some&lt;/em&gt; of
+the most common commands to do so:&lt;/p&gt;
+
+&lt;h4 id=&#34;insert&#34;&gt;insert&lt;/h4&gt;
+
+&lt;p&gt;Simply put, &lt;code&gt;pass insert&lt;/code&gt; &amp;hellip; inserts a password. Call it with the desired folder/file
+structure for the password, and pass will then prompt for the password to
+save. That&amp;rsquo;s it.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;pass insert Shopping/amazon.com/ryan
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h4 id=&#34;pass-generate&#34;&gt;pass generate&lt;/h4&gt;
+
+&lt;p&gt;In addition to inserting existing passwords, pass can also &lt;em&gt;generate new&lt;/em&gt; ones
+using &lt;code&gt;pass generate&lt;/code&gt;. Just provide the password path, and optionally the
+length of the password. Pass will then generate a random password, spit it out
+on screen, and insert the entry to the password-store.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;pass generate Shopping/SomeFakeStore/ryan 35
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h4 id=&#34;pass-edit&#34;&gt;pass edit&lt;/h4&gt;
+
+&lt;p&gt;Generating passwords is great, but being a forgetful person, I like to keep additional information
+in my pass entries (username, email, website url). This is where &lt;code&gt;pass edit&lt;/code&gt; comes in. When called,
+&lt;code&gt;pass edit&lt;/code&gt; will open up the contents of the entry in the default editor. From there, make the
+changes, and save.&lt;/p&gt;
+
+&lt;p&gt;For example:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;pass edit Shopping/SomeFakeStore/ryan
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Then, in vim:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&amp;lt;&amp;amp;DdU1x&amp;lt;&amp;amp;~&amp;amp;&lt;span style=&#34;color:#f92672&#34;&gt;{&lt;/span&gt;;w7w&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;kvsWdHAF-\Vi&amp;#34;&lt;/span&gt;I9Q&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt;I
+---
+Username: ryan
+Password: &amp;lt;&amp;amp;DdU1x&amp;lt;&amp;amp;~&amp;amp;&lt;span style=&#34;color:#f92672&#34;&gt;{&lt;/span&gt;;w7w&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;kvsWdHAF-\Vi&amp;#34;&lt;/span&gt;I9Q&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt;I
+URL: https://www.some-bs-store.com
+Notes: I love this place!&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h4 id=&#34;pass&#34;&gt;pass&lt;/h4&gt;
+
+&lt;p&gt;Lastly, to retrieve stored passwords, call &lt;code&gt;pass&lt;/code&gt; with the
+password entry. Optionally, use the &lt;code&gt;-c&lt;/code&gt; flag to copy the password
+(first line if a multi-line entry) to the clipboard instead of spewing it into
+the terminal.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;pass Shopping/SomeFakeStore/ryan
+&lt;span style=&#34;color:#75715e&#34;&gt;## or ##
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;pass -c Shopping/SomeFakeStore/ryan&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h2 id=&#34;making-pass-better&#34;&gt;Making Pass Better&lt;/h2&gt;
+
+&lt;p&gt;With pass&amp;rsquo;s flexibility, there are many additional features to help improve it for each user&amp;rsquo;s
+needs.  For me, there are two extensions that make my pass experience &lt;em&gt;much&lt;/em&gt; more enjoyable.&lt;/p&gt;
+
+&lt;h3 id=&#34;pass-git&#34;&gt;Pass Git&lt;/h3&gt;
+
+&lt;p&gt;&lt;img alt=&#34;Managing and maintaining the password-store with `pass git`&#34; src=&#34;../../img/posts/setting-up-pass/animation-hover.png&#34; onmouseover=&#34;this.src=&#39;../../img/posts/setting-up-pass/pass-git.gif&#39;&#34; onmouseout=&#34;this.src=&#39;../../img/posts/setting-up-pass/animation-hover.png&#39;&#34; style=&#34;max-width: 100%;&#34;/&gt;
+&lt;div class=&#34;caption&#34;&gt;Use git to automatically maintain your password-store&lt;/div&gt;&lt;/p&gt;
+
+&lt;p&gt;Password-Store items are text files, which allows them to be easily version controlled.
+Consequently, pass has built in support for git with the &lt;code&gt;pass git&lt;/code&gt; command. If a password-store
+is linked up to a git repo, normal git commands (&lt;code&gt;add&lt;/code&gt;, &lt;code&gt;mv&lt;/code&gt;, &lt;code&gt;rm&lt;/code&gt;&amp;hellip;) can be used with the store.&lt;/p&gt;
+
+&lt;p&gt;Additionally, when modifying the store&amp;rsquo;s contents, &lt;code&gt;pass git&lt;/code&gt; will automatically create commits
+that reflect the changes. After adding or modifying a password, issue the command &lt;code&gt;pass git push&lt;/code&gt; on the updated
+machine, and then &lt;code&gt;pass git pull&lt;/code&gt; on others to sync the changes.&lt;/p&gt;
+
+&lt;h3 id=&#34;passmeu&#34;&gt;Passmeu&lt;/h3&gt;
+
+&lt;p&gt;&lt;center&gt;
+&lt;video style=&#34;max-width:100%;&#34; controls&gt;
+  &lt;source src=&#34;../../img/posts/setting-up-pass/passmenu_demo.mp4&#34; type=&#34;video/mp4&#34;&gt;
+  &lt;source src=&#34;movie.ogg&#34; type=&#34;video/ogg&#34;&gt;
+Your browser does not support the video tag.
+&lt;/video&gt;
+&lt;div id=&#34;caption&#34;&gt;&lt;code&gt;passmenu&lt;/code&gt; lets you easily search and select a pass item.&lt;/div&gt;
+&lt;/center&gt;&lt;/p&gt;
+
+&lt;p&gt;While having a CLI password manager is nice when working with headless systems, it can be a bit
+cumbersome for normal day-to-day use. Hence,
+&lt;a href=&#34;https://git.zx2c4.com/password-store/tree/contrib/dmenu/passmenu&#34;&gt;passmenu&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;Passmenu is a script (now built into the upstream project) that wraps
+&lt;a href=&#34;https://tools.suckless.org/dmenu/&#34;&gt;dmenu&lt;/a&gt; around pass. When &lt;code&gt;passmenu&lt;/code&gt; is run, &lt;code&gt;dmenu&lt;/code&gt; opens up
+with all the password-store items to search/filter from. When an item is
+selected in dmenu, the user is prompted for the gpg password (if it hasn&amp;rsquo;t been unlocked recently),
+after which the password is then temporarily added to the user&amp;rsquo;s clipboard.&lt;/p&gt;
+
+&lt;p&gt;On all my computers, I bind the command &lt;code&gt;passmenu&lt;/code&gt; to the keys &lt;code&gt;SUPER&lt;/code&gt; + &lt;code&gt;SHIFT&lt;/code&gt; + &lt;code&gt;P&lt;/code&gt;.  Whenever I
+need a password, I just hit those three keys, and dmenu pops up so I can search for the password I
+want.  After typing in my master passphrase, I can paste the password wherever I need it.  Passmenu
+makes pass much more reasonable to use.&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;See Also: &lt;a href=&#34;https://github.com/carnager/rofi-pass&#34;&gt;rofi-pass&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;setting-up-your-pass-setup-on-a-new-system&#34;&gt;Setting up your pass setup on a new system&lt;/h2&gt;
+
+&lt;p&gt;Now that I&amp;rsquo;ve done it over a hundred times, setting up a new system is easy. Here&amp;rsquo;s my usual steps:&lt;/p&gt;
+
+&lt;h4 id=&#34;export-gpg-key&#34;&gt;Export GPG Key&lt;/h4&gt;
+
+&lt;p&gt;&lt;img alt=&#34;Export a gpg key to use with pass on another system&#34; src=&#34;../../img/posts/setting-up-pass/animation-hover.png&#34; onmouseover=&#34;this.src=&#39;../../img/posts/setting-up-pass/export-key.gif&#39;&#34; onmouseout=&#34;this.src=&#39;../../img/posts/setting-up-pass/animation-hover.png&#39;&#34; style=&#34;max-width: 100%;&#34;/&gt;
+&lt;div class=&#34;caption&#34;&gt;Export a gpg key to save or use on another system.&lt;/div&gt;&lt;/p&gt;
+
+&lt;p&gt;First, export the password-store&amp;rsquo;s gpg key.  To do that, use &lt;code&gt;gpg2 --list-secret-keys&lt;/code&gt; to confirm the
+key&amp;rsquo;s ID, then export that key to a file with the following command:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;gpg2 --export-secret-keys KEY-ID &amp;gt;&amp;gt; key-filename.gpg
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Next, transfer that file to the new machine.&lt;/p&gt;
+
+&lt;h4 id=&#34;import-gpg-key&#34;&gt;Import GPG Key&lt;/h4&gt;
+
+&lt;p&gt;&lt;img alt=&#34;Import a gpg key and trust it to use with pass&#34; src=&#34;../../img/posts/setting-up-pass/animation-hover.png&#34; onmouseover=&#34;this.src=&#39;../../img/posts/setting-up-pass/pass-import-gpg-key.gif&#39;&#34; onmouseout=&#34;this.src=&#39;../../img/posts/setting-up-pass/animation-hover.png&#39;&#34; style=&#34;max-width: 100%;&#34;/&gt;
+&lt;div class=&#34;caption&#34;&gt;Import and trust a gpg key to use it with pass.&lt;/div&gt;&lt;/p&gt;
+
+&lt;p&gt;On the new machine, import the gpg key using the following command (note, you
+will be required to enter the key&amp;rsquo;s passphrase):&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;gpg2 --import key-filename.gpg
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;After the key is imported, its &lt;em&gt;trust level&lt;/em&gt; will have to be set to &lt;em&gt;ultimate&lt;/em&gt;. Use the command
+&lt;code&gt;gpg2 --edit-key KEY-ID&lt;/code&gt; to enter the edit prompt. From there, type &lt;code&gt;trust&lt;/code&gt; and hit &lt;code&gt;ENTER&lt;/code&gt;. The
+various levels will be shown on screen. Enter and confirm &lt;code&gt;5&lt;/code&gt;, to select &amp;lsquo;Ultimate&amp;rsquo;. Lastly, use
+&lt;code&gt;quit&lt;/code&gt; to leave the gpg key editor.&lt;/p&gt;
+
+&lt;h4 id=&#34;pull-pass-repo&#34;&gt;Pull Pass Repo&lt;/h4&gt;
+
+&lt;p&gt;With the keys configured, the last step is to pull down the password-store to the new machine. If using git, this can be done with &lt;code&gt;pass git
+clone&lt;/code&gt;&amp;hellip; but if I&amp;rsquo;m being honest, I usually just do a normal &lt;code&gt;git clone&lt;/code&gt;, and then move
+the folder to &lt;code&gt;~/.password-store/&lt;/code&gt;. If not using git, just copy the store&amp;rsquo;s directory and files to
+the new machine. The important thing is that the store can be found at &lt;code&gt;~/.password-store&lt;/code&gt; (by
+default, this of course can be changed using &lt;code&gt;pass init&lt;/code&gt;).&lt;/p&gt;
+
+&lt;h3 id=&#34;conclusion&#34;&gt;Conclusion&lt;/h3&gt;
+
+&lt;p&gt;That&amp;rsquo;s about it. As I previously stated, I&amp;rsquo;ve been loving pass for years, and I
+don&amp;rsquo;t plan to be switching off of it any time soon. At this point, if there is
+something I want to improve with my password setup&amp;hellip; I&amp;rsquo;m sure the community
+has already figured out how to do it with pass!&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -39,7 +290,214 @@ and deploy a &amp;ldquo;draft&amp;rdquo; website, so I can stage new posts/websi
 on my home network, before publishing it to the &amp;ldquo;production&amp;rdquo;
 website. Here is how that idea was Instantiated&amp;hellip;&lt;/p&gt;
 
-&lt;p&gt;&lt;/p&gt;</description>
+&lt;p&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;my-website&#34;&gt;My Website&lt;/h2&gt;
+
+&lt;p&gt;&lt;a href=&#34;../../img/posts/draft-website-jenkins/jenkins-logo.png&#34;&gt;&lt;img
+src=&#34;../../img/posts/draft-website-jenkins/jenkins-logo.png&#34; style=&#34;max-width:
+50%; float: left; margin: 0px 12px 0px 0px;&#34; alt=&#34;Jenkins Logo&#34; /&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;I have previously &lt;a href=&#34;../website-transition-to-hugo/&#34;&gt;described&lt;/a&gt; how my
+website is &lt;a href=&#34;../website-switched-to-hugo/&#34;&gt;currently generated&lt;/a&gt;, using
+the &lt;a href=&#34;https://gohugo.io&#34;&gt;Hugo&lt;/a&gt; static website generator. To organize
+this system, I have two git repos: One that consists of all the hugo
+source files (where I write content), and one that contains the
+generated static website (that gets deployed to my web host).&lt;/p&gt;
+
+&lt;p&gt;When writing a post, I use &lt;code&gt;hugo server -D -F&lt;/code&gt; to live view the page
+in my browser. However, I occasionally want to view the state of all
+the &lt;em&gt;committed code&lt;/em&gt; in the &lt;em&gt;repo&lt;/em&gt;, to see what the site would look
+like if I decided to publish a post. So, I created a &amp;ldquo;drafts&amp;rdquo; website,
+which shows the current state of my website&amp;rsquo;s &lt;em&gt;source&lt;/em&gt; repo (including
+draft and future posts). If I want to check how a post looks on my
+phone, or any other device, I can just open up the draft website after
+pushing my changes.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;../../img/posts/draft-website-jenkins/mr-mime.png&#34;&gt;&lt;img
+src=&#34;../../img/posts/draft-website-jenkins/mr-mime.png&#34; style=&#34;max-width:
+45%; float: right; margin: 20px 0px 0px 10px;&#34; alt=&#34;Jenkins Logo&#34; /&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;jenkins&#34;&gt;Jenkins&lt;/h2&gt;
+
+&lt;p&gt;I had previously created a dedicated Jenkins server on my home network
+(Mr. Mime), using a CentOS 7 VM hosted on my home server. However, any
+Jenkins setup should work for this project (including a &lt;a href=&#34;on my home network&#34;&gt;docker
+container&lt;/a&gt;). To get started, checkout the &lt;a href=&#34;https://jenkins.io/download/&#34;&gt;Jenkins
+Website&lt;/a&gt;, and be sure to take advantage
+of the &lt;a href=&#34;https://jenkins.io/doc/&#34;&gt;the documentation&lt;/a&gt; for help.&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;Note: just make sure hugo is installed on the Jenkins server, as we need
+it to generate the website.&lt;/em&gt;&lt;/p&gt;
+
+&lt;h3 id=&#34;github-integration&#34;&gt;GitHub Integration&lt;/h3&gt;
+
+&lt;h4 id=&#34;jenkins-service&#34;&gt;Jenkins Service&lt;/h4&gt;
+
+&lt;p&gt;My website repo is hosted on GitHub, so we need to configure it to
+work with our Jenkins server. To do that, go to the project&amp;rsquo;s GitHub
+page, and navigate through &lt;strong&gt;Settings&lt;/strong&gt; -&amp;gt; &lt;strong&gt;Integrations &amp;amp;
+services&lt;/strong&gt;. Click the &lt;strong&gt;Add service&lt;/strong&gt; drop-down and select &lt;em&gt;Jenkins
+(Git Plugin)&lt;/em&gt;. Next, add the Jenkins server url (assuming the server
+is accessible from the internet. If not, hosting the Jenkins server on
+something like &lt;a href=&#34;http://digitalocean.com&#34;&gt;Digital Ocean&lt;/a&gt; might be an
+easy solution). Lastly, make sure the &lt;strong&gt;Activate&lt;/strong&gt; box is selected,
+and click the &lt;strong&gt;Add Service&lt;/strong&gt; button.&lt;/p&gt;
+
+&lt;h4 id=&#34;ssh-keys&#34;&gt;SSH Keys&lt;/h4&gt;
+
+&lt;p&gt;While on the project&amp;rsquo;s GitHub page, make sure that the Jenkins
+server&amp;rsquo;s ssh keys are added to the project. To add them, navigate to
+the &lt;strong&gt;Deploy Keys&lt;/strong&gt; page (under the project&amp;rsquo;s &lt;strong&gt;Settings&lt;/strong&gt; tab). Then
+select &lt;strong&gt;Add deploy key&lt;/strong&gt;, and add the public key.&lt;/p&gt;
+
+&lt;h2 id=&#34;a-nginx-server&#34;&gt;A Nginx Server&lt;/h2&gt;
+
+&lt;p&gt;&lt;a href=&#34;../../img/posts/draft-website-jenkins/nginx.png&#34;&gt;&lt;img
+src=&#34;../../img/posts/draft-website-jenkins/nginx.png&#34; style=&#34;max-width:
+100%; float: center; margin: 0px 0px 0px 0px;&#34; alt=&#34;Default Nginx Page&#34; /&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;With Jenkins ready, let&amp;rsquo;s quickly setup the web server before
+configuring the Jenkins project. Any web server will do (it just needs
+to serve the generated &lt;em&gt;static&lt;/em&gt; website content). I used
+&lt;a href=&#34;https://nginx.org/en/&#34;&gt;nginx&lt;/a&gt; in for setup. After installing, make
+sure it is running. To install and check the status of nginx on an
+Ubuntu System:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;color:#75715e&#34;&gt;## Install
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;sudo apt install -y nginx
+
+&lt;span style=&#34;color:#75715e&#34;&gt;## Check it is running
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;sudo systemctl status nginx
+
+&lt;span style=&#34;color:#75715e&#34;&gt;## Optional: Ensure it is enabled to start up after reboots
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;sudo systemctl enable nginx&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;With the web server running, we need to know &lt;em&gt;where&lt;/em&gt; the website files
+need to go. Nginx will by default serve content at
+&lt;code&gt;/user/share/nginx/html/&lt;/code&gt;, so remember that location for later&amp;hellip;&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;Note: Don&amp;rsquo;t forget to add the &lt;code&gt;jenkins&lt;/code&gt; user&amp;rsquo;s ssh key from the
+jenkins server to the &lt;code&gt;authorized_keys&lt;/code&gt; file of the nginx server. This
+will make file transfers easier when setting up the jenkins project.&lt;/em&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;configuring-a-project&#34;&gt;Configuring a Project&lt;/h2&gt;
+
+&lt;p&gt;Let&amp;rsquo;s configure our Jenkins project! Log in to the Jenkins
+server and click the &lt;strong&gt;New Item&lt;/strong&gt; option on the left side bar. Enter a
+name for the project, select the &lt;strong&gt;Freestyle Project&lt;/strong&gt; option, and hit
+&lt;strong&gt;OK&lt;/strong&gt;.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;../../img/posts/draft-website-jenkins/general-config.png&#34;&gt;&lt;img
+src=&#34;../../img/posts/draft-website-jenkins/general-config.png&#34; style=&#34;max-width:
+100%; float: center; margin: 0px 0px 0px 0px;&#34; alt=&#34;The Project&#39;s General Configuration Section&#34; /&gt;&lt;/a&gt;
+&lt;div class=&#34;caption&#34;&gt;The Project&amp;rsquo;s General Configuration Section&lt;/div&gt;&lt;/p&gt;
+
+&lt;p&gt;In the &lt;strong&gt;General&lt;/strong&gt; section of the configuration screen, optionally
+write a description about the project. Next, select the &amp;ldquo;&lt;em&gt;GitHub
+Project&lt;/em&gt;&amp;rdquo; check-box, and add the GitHub repo&amp;rsquo;s url into the &lt;em&gt;Project
+url&lt;/em&gt; text box.&lt;/p&gt;
+
+&lt;h4 id=&#34;source-control&#34;&gt;Source Control&lt;/h4&gt;
+
+&lt;p&gt;&lt;a href=&#34;../../img/posts/draft-website-jenkins/credentials.png&#34;&gt;&lt;img
+src=&#34;../../img/posts/draft-website-jenkins/credentials.png&#34;
+style=&#34;max-width: 100%; float: center; margin: 0px 0px 0px 0px;&#34;
+alt=&#34;Setting Credentials&#34; /&gt;&lt;/a&gt;
+&lt;div class=&#34;caption&#34;&gt;Setting Credentials&lt;/div&gt;&lt;/p&gt;
+
+&lt;p&gt;In the &lt;strong&gt;Source Code Management&lt;/strong&gt; section of the configuration, select
+the &lt;em&gt;Git&lt;/em&gt; option. Then, enter the repo&amp;rsquo;s url for the &lt;em&gt;Repository URL&lt;/em&gt;
+box (I did the ssh url). For &lt;em&gt;Credentials&lt;/em&gt;, select &lt;em&gt;Add&lt;/em&gt; to configure a
+new credential. Select &lt;em&gt;SSH Username with private key&lt;/em&gt; for &lt;em&gt;Kind&lt;/em&gt;,
+use &lt;code&gt;jenkins&lt;/code&gt; for the &lt;em&gt;Username&lt;/em&gt;.&lt;/p&gt;
+
+&lt;p&gt;More source control options can be configured, but this should be the
+minimum setup required. &lt;em&gt;Again, for this to work public keys for the
+&lt;code&gt;jenkins&lt;/code&gt; user on the jenkins server must be generated, and added as a
+deployment key on GitHub.&lt;/em&gt;&lt;/p&gt;
+
+&lt;h4 id=&#34;build-trigger&#34;&gt;Build Trigger&lt;/h4&gt;
+
+&lt;p&gt;Under the &lt;strong&gt;Build Triggers&lt;/strong&gt; section, select &lt;em&gt;Poll SCM&lt;/em&gt;. Without
+adding any schedule parameters, it will trigger each time a new commit
+is detected. This is what we want.&lt;/p&gt;
+
+&lt;h4 id=&#34;build-step&#34;&gt;Build Step&lt;/h4&gt;
+
+&lt;p&gt;In the &lt;strong&gt;Build&lt;/strong&gt; section, click &lt;strong&gt;Add build step&lt;/strong&gt;, and select
+&lt;strong&gt;Execute shell&lt;/strong&gt;. This is where we can add the shell commands to
+build the website with hugo. Add the following command to the box
+(don&amp;rsquo;t forget to change the url):&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;hugo -D -F -b &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;http://10.1.1.77&amp;#34;&lt;/span&gt; -d public&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;The &lt;code&gt;-D&lt;/code&gt; flag tells hugo to include all draft posts, while the &lt;code&gt;-F&lt;/code&gt; flag
+has it include all posts with a future date. The &lt;code&gt;-b&lt;/code&gt; flag sets the
+url for the generated website. This should the be url or IP address of
+the nginx server setup previously. Lastly, the &lt;code&gt;-d&lt;/code&gt; flag tells hugo to
+output the generated static website to the &lt;code&gt;public&lt;/code&gt; directory. This
+will be useful to know when deploying the build.&lt;/p&gt;
+
+&lt;h4 id=&#34;deploy-to-webserver&#34;&gt;Deploy to Webserver&lt;/h4&gt;
+
+&lt;p&gt;For deployment, I used rsync to copy the build files to the nginx
+web server. This step will be another shell command, so I&amp;rsquo;ve actually
+added it as another &amp;ldquo;build&amp;rdquo; step. Add another &lt;strong&gt;Execute shell&lt;/strong&gt; and
+paste the following command inside the text box (again, changing the url):&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;rsync -r &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;$WORKSPACE&lt;span style=&#34;color:#e6db74&#34;&gt;/public/&amp;#34;&lt;/span&gt; ryan@10.1.1.77:/usr/share/nginx/html/&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;I used the Jenkins &lt;code&gt;$WORKSPACE&lt;/code&gt; variable to get the location of the
+build, and was able to append the &lt;code&gt;public&lt;/code&gt; directory to that, since we
+defined it with the &lt;code&gt;-d&lt;/code&gt; flag in the hugo build step above. This will
+copy the generated website, to the web server.&lt;/p&gt;
+
+&lt;p&gt;Hit &lt;strong&gt;Save&lt;/strong&gt;, and test it out by clicking the &lt;strong&gt;Build Now&lt;/strong&gt; link on the
+left. If the build is successful, check the nginx website to see if
+the website was deployed!&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;Note: If it doesn&amp;rsquo;t work, double check all permissions and
+credentials between accounts and servers.&lt;/em&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;better-yet-pipelines&#34;&gt;Better Yet&amp;hellip; Pipelines&lt;/h2&gt;
+
+&lt;p&gt;What&amp;rsquo;s better than using Jenkins for automated &amp;ldquo;draft website&amp;rdquo;
+deployments?  Using a &lt;a href=&#34;https://jenkins.io/doc/book/pipeline/&#34;&gt;Jenkins
+Pipeline&lt;/a&gt;. A Pipeline allows
+the jenkins project steps to be defined in a &lt;em&gt;Jenkinsfile&lt;/em&gt; that, among
+other benefits, can be source controlled. In fact, by default a
+Jenkins pipeline searches for the &lt;code&gt;Jenkinsfile&lt;/code&gt; right in the root
+directory of a project&amp;rsquo;s git repo.&lt;/p&gt;
+
+&lt;p&gt;While a pipeline and
+&lt;a href=&#34;https://jenkins.io/doc/book/pipeline/jenkinsfile/&#34;&gt;Jenkinsfile&lt;/a&gt; might
+be a bit more confusing to &lt;em&gt;learn&lt;/em&gt; how to setup, it is well worth it. For
+example, the following Jenkinsfile can be used to do essentially what
+we setup in the previous steps:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-groovy&#34; data-lang=&#34;groovy&#34;&gt;pipeline &lt;span style=&#34;color:#f92672&#34;&gt;{&lt;/span&gt;
+    agent &lt;span style=&#34;color:#f92672&#34;&gt;{&lt;/span&gt;
+	label &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;mr-mime&amp;#39;&lt;/span&gt;
+    &lt;span style=&#34;color:#f92672&#34;&gt;}&lt;/span&gt;
+    stages &lt;span style=&#34;color:#f92672&#34;&gt;{&lt;/span&gt;
+	stage &lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;build&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;{&lt;/span&gt;
+	    steps&lt;span style=&#34;color:#f92672&#34;&gt;{&lt;/span&gt;
+		sh &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;hugo -D -F -b &amp;#34;http://10.1.1.77&amp;#34;&amp;#39;&lt;/span&gt;
+	    &lt;span style=&#34;color:#f92672&#34;&gt;}&lt;/span&gt;
+	&lt;span style=&#34;color:#f92672&#34;&gt;}&lt;/span&gt;
+	stage &lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;deploy&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;{&lt;/span&gt;
+	    steps&lt;span style=&#34;color:#f92672&#34;&gt;{&lt;/span&gt;
+		sh &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;rsync -r &amp;#34;$WORKSPACE/public/&amp;#34; ryan@ponyta:/usr/share/nginx/html/&amp;#39;&lt;/span&gt;
+	    &lt;span style=&#34;color:#f92672&#34;&gt;}&lt;/span&gt;
+	&lt;span style=&#34;color:#f92672&#34;&gt;}&lt;/span&gt;
+
+    &lt;span style=&#34;color:#f92672&#34;&gt;}&lt;/span&gt;
+&lt;span style=&#34;color:#f92672&#34;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;I&amp;rsquo;m not going to cover pipelines in &lt;em&gt;this&lt;/em&gt; post. However, I do
+encourage readers to check them out.&lt;/p&gt;
+
+&lt;h2 id=&#34;conclusion&#34;&gt;Conclusion&lt;/h2&gt;
+
+&lt;p&gt;That&amp;rsquo;s it. While I currently host my website using &lt;a href=&#34;https://pages.github.com/&#34;&gt;GitHub
+pages&lt;/a&gt;, if I ever self-host it again, I
+will definitely automate publishing it using Jenkins as well. This has
+been a &lt;em&gt;very&lt;/em&gt; basic example of what Jenkins can be used for, but I
+have found it rather useful when working on the content of this
+website. There is so much more it can do. Have fun!&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -55,7 +513,120 @@ reverse-proxy (Tangela), and I decided to do that again on the new
 network. While it is a simple process, it is one that other people often
 ask me about. So, this time&amp;hellip; I&amp;rsquo;m taking notes!&lt;/p&gt;
 
-&lt;p&gt;&lt;/p&gt;</description>
+&lt;p&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;why&#34;&gt;Why?&lt;/h2&gt;
+
+&lt;p&gt;The purpose of this reverse proxy is to direct outside traffic to the
+appropriate host internally, by looking at the sub-domain of the URL
+request. For example, I may have servers for both
+&lt;code&gt;website.himmelwright.net&lt;/code&gt; and &lt;code&gt;dashboard.himmelwright.net&lt;/code&gt; running
+internally on my network, but they will have the same public IP. Using
+nginx, I can point all of my web traffic to &lt;em&gt;tangela&lt;/em&gt;, my
+reverse-proxy. If tangela sees that the incoming request is for
+&lt;code&gt;website.himmelwright.net&lt;/code&gt;, it will forward that traffic to the
+website server. On the other hand, if the request is for
+&lt;code&gt;dashboard.himmelwright.net&lt;/code&gt;, it will direct it to the dashboard
+server. A reverse-proxy expands what can be accomplished on a single network,
+and is a cleaner (and possibly safer) method than doing everything through
+port-forwarding.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;../../img/posts/nginx-reverse-proxy/tangela.png&#34;&gt;&lt;img
+src=&#34;../../img/posts/nginx-reverse-proxy/tangela.png&#34; style=&#34;max-width:
+50%; float: right; margin: 0px 0px 0px 0px;&#34; alt=&#34;Example snippet of
+my org-babel config.org file&#34; /&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;setup-server&#34;&gt;Setup Server&lt;/h2&gt;
+
+&lt;p&gt;To get started, configure a server/container/droplet that will host
+nginx. I&amp;rsquo;m using a CentOS 7 minimal install VM on
+&lt;a href=&#34;http://ryan.himmelwright.net/pages/homelab/#ninetales&#34;&gt;Nintales&lt;/a&gt; (my
+home server). I don&amp;rsquo;t have a bunch of traffic (well, I &lt;em&gt;shouldn&amp;rsquo;t&lt;/em&gt;), so I&amp;rsquo;m
+just giving it 1 core and 512MB RAM.&lt;/p&gt;
+
+&lt;h3 id=&#34;setup-nginx&#34;&gt;Setup Nginx&lt;/h3&gt;
+
+&lt;p&gt;Next, it&amp;rsquo;s time to setup and install Nginx.&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;Note&lt;/em&gt;: the rest of the post will be focused on using a CentOS 7 base,
+since that is what I am using. Adjust for your distro accordingly.&lt;/p&gt;
+
+&lt;p&gt;Add the nginx repo, and install it:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;sudo rpm -Uvh http://nginx.org/packages/centos/7/noarch/RPMS/nginx-release-centos-7-0.el7.ngx.noarch.rpm
+sudo yum -y install nginx&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Tell the firewall to allow http traffic:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;sudo firewall-cmd --permanent --add-service&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;http
+sudo systemctl reload firewalld&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Start and enable nginx:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;sudo systemctl start nginx
+sudo systemctl enable nginx&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h2 id=&#34;configure-nginx&#34;&gt;Configure Nginx&lt;/h2&gt;
+
+&lt;p&gt;Examine the config file, just to check that everything looks alright.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;vim /etc/nginx/nginx.conf&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Specifically, we want to ensure that the following line exists before
+proceeding:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;include /etc/nginx/conf.d/*.conf;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;That line basically states that any *.conf file inside the &lt;code&gt;/etc/nginx/conf.d/&lt;/code&gt;
+directory will also be loaded and used by nginx. This allows us to add our own configuration file in the next step.&lt;/p&gt;
+
+&lt;h2 id=&#34;configure-proxy&#34;&gt;Configure Proxy&lt;/h2&gt;
+
+&lt;p&gt;I created a &lt;code&gt;reverse-proxies.config&lt;/code&gt; (it can be named anything with a
+&lt;code&gt;.config&lt;/code&gt; extension) file in &lt;code&gt;/etc/nginx/conf.d/&lt;/code&gt; to contain all of
+the reverse proxy definitions. These are just server block
+entries. For example:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;server &lt;span style=&#34;color:#f92672&#34;&gt;{&lt;/span&gt;
+        listen &lt;span style=&#34;color:#ae81ff&#34;&gt;80&lt;/span&gt;;
+        server_name website.himmelwright.net;
+        location / &lt;span style=&#34;color:#f92672&#34;&gt;{&lt;/span&gt;
+                proxy_pass      http://192.168.1.198:80;
+        &lt;span style=&#34;color:#f92672&#34;&gt;}&lt;/span&gt;
+&lt;span style=&#34;color:#f92672&#34;&gt;}&lt;/span&gt;
+
+server &lt;span style=&#34;color:#f92672&#34;&gt;{&lt;/span&gt;
+        listen &lt;span style=&#34;color:#ae81ff&#34;&gt;80&lt;/span&gt;;
+        server_name dashboard.himmelwright.net;
+        location / &lt;span style=&#34;color:#f92672&#34;&gt;{&lt;/span&gt;
+                proxy_pass      http://192.168.1.200:8080;
+        &lt;span style=&#34;color:#f92672&#34;&gt;}&lt;/span&gt;
+&lt;span style=&#34;color:#f92672&#34;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Restart nginx for the changes to take effect:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;sudo systemctl restart nginx&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h4 id=&#34;side-note&#34;&gt;Side Note:&lt;/h4&gt;
+
+&lt;p&gt;For some applications, you may need to add the URL to the &lt;code&gt;/etc/hosts&lt;/code&gt;
+file, and use that for nginx. I have experienced this in the past with
+&lt;a href=&#34;https://about.gitlab.com/&#34;&gt;Gitlab&lt;/a&gt;. For example:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;/etc/hosts
+---
+&lt;span style=&#34;color:#ae81ff&#34;&gt;192&lt;/span&gt;.168.1.201  git.himmelwright.net&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;and then in the config file:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;/etc/nginx/config.d/reverse-proxies.config
+---
+server &lt;span style=&#34;color:#f92672&#34;&gt;{&lt;/span&gt;
+        listen &lt;span style=&#34;color:#ae81ff&#34;&gt;80&lt;/span&gt;;
+        server_name git.himmelwright.net;
+        location / &lt;span style=&#34;color:#f92672&#34;&gt;{&lt;/span&gt;
+                proxy_pass      http://git.himmelwright.net:80;
+        &lt;span style=&#34;color:#f92672&#34;&gt;}&lt;/span&gt;
+&lt;span style=&#34;color:#f92672&#34;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h2 id=&#34;selinux-fixes&#34;&gt;SELinux Fixes&lt;/h2&gt;
+
+&lt;p&gt;At this point, you may be done. However, I was having issues getting
+nginx to forward some of my ports&amp;hellip; until I remembered that I was on
+CentOS and it may be an issue with SELinux. It was.&lt;/p&gt;
+
+&lt;p&gt;One &amp;ldquo;&lt;em&gt;fix&lt;/em&gt;&amp;rdquo; is to just disable SELinux. A &lt;em&gt;better&lt;/em&gt; solution is to use
+setools to allow the http connections:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;sudo yum install -y setools
+setsebool -P httpd_can_network_connect true&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h2 id=&#34;conclusion&#34;&gt;Conclusion&lt;/h2&gt;
+
+&lt;p&gt;Besides having to configure your router to forward http traffic to the
+server, that is really it. This is a real basic configuration, but it
+has worked well for me over the years. If I start doing something more
+complex, I may provide an update. Until then, enjoy!&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -64,7 +635,68 @@ ask me about. So, this time&amp;hellip; I&amp;rsquo;m taking notes!&lt;/p&gt;
       <pubDate>Sat, 26 Aug 2017 00:00:00 +0000</pubDate>
       
       <guid>http://ryan.himmelwright.net/post/simple-reverse-ssh-tunnel/</guid>
-      <description>Last week, I was on vacation with my family. While I didn&amp;rsquo;t work a ton on personal projects, I was at least able to spend some time on my TunelBeacon project again. I will write a dedicated post about that project down the road when I am further along. Basically, it will be a simple GUI to create reverse ssh tunnels, that family and friends can startup in order grant me temporary access to their computer when they need support.</description>
+      <description>
+
+&lt;p&gt;Last week, I was on vacation with my family. While I didn&amp;rsquo;t work a &lt;em&gt;ton&lt;/em&gt; on personal projects, I was at least able to spend some time on my &lt;a href=&#34;https://github.com/himmAllRight/TunnelBeacon&#34;&gt;TunelBeacon&lt;/a&gt; project again. I will write a dedicated post about that project down the road when I am further along. Basically, it will be a simple GUI to create reverse ssh tunnels, that family and friends can startup in order grant me temporary access to their computer when they need support. Reverse SSH tunnels are &lt;em&gt;very&lt;/em&gt; useful and simple to setup, but can be a bit tricky to figure out at first. So, here&amp;rsquo;s a brief and simple guide on how to easily create reverse tunnels.&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;!--more --&gt;
+
+&lt;h3 id=&#34;ssh-tunnels&#34;&gt;SSH Tunnels&lt;/h3&gt;
+
+&lt;p&gt;A secured shell (SSH) tunnel is an encrypted tunnel, created with a connection using the ssh protocol. It can be thought of as a pipe between two computers that data travels through. Being encrypted, people outside the pipe can only see that data packages are traveling through it, but cannot read the actual contents of the package. SSH tunnels are used to securely connect between devices, as well as forward ports between devices. For example, if I am working on a website hosted on port 3000 of my internally networked laptop, I can use a ssh tunnel to forward that port to one on a public server so that friends can view the website.&lt;/p&gt;
+
+&lt;h3 id=&#34;reverse-tunnels&#34;&gt;Reverse Tunnels&lt;/h3&gt;
+
+&lt;p&gt;Reverse tunnels are just like normal ssh tunnels except&amp;hellip; well&amp;hellip; in reverse. This means that I can connect to a remote computer, and have &lt;em&gt;its&lt;/em&gt; port tunneled to &lt;em&gt;me&lt;/em&gt;, which can be very handy. This is largely used for one particular usecase: providing easy, temporarily, ssh access to computers behind a network and/or firewall.&lt;/p&gt;
+
+&lt;p&gt;To make all of this (hopefully) easier to understand, I have drafted up a few diagrams. For the example, lets say I am away and my wife wants me to fix something on her laptop. Unless I have her &lt;em&gt;properly&lt;/em&gt; configure the router to forward ssh traffic to her laptop, I normally cannot do this. Additionally, she might be at a friends house, office, or other public place where there is no access to the router controls (well, she &lt;em&gt;shouldn&amp;rsquo;t&lt;/em&gt;). So, her laptop doesn&amp;rsquo;t have a direct public IP address, but our server &lt;em&gt;does&lt;/em&gt;.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;../../img/posts/simple-reverse-ssh-tunnel/network-diagram.png&#34;&gt;&lt;img alt=&#34;Computer behind firewall&#34; src=&#34;../../img/posts/simple-reverse-ssh-tunnel/network-diagram.png&#34; style=&#34;max-width: 100%;&#34;/&gt;&lt;a&gt;
+&lt;em&gt;Two computers (at least one without a direct public IP), both with access to a cloud server with a public IP&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;Because my wife can connect to the public cloud server, she can initiate a reverse tunnel from her laptop, with the server. The tunnel directly connects the server to her laptop.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;../../img/posts/simple-reverse-ssh-tunnel/ssh-tunnel.png&#34;&gt;&lt;img alt=&#34;Computer behind firewall&#34; src=&#34;../../img/posts/simple-reverse-ssh-tunnel/ssh-tunnel.png&#34; style=&#34;max-width: 100%;&#34;/&gt;&lt;/a&gt;
+&lt;em&gt;The laptop computer creates a reverse ssh tunnel to the cloud server.&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;On my end, I first ssh to the server from my computer. Once the tunnel is started, I can then ssh again to a specified local port on the server, and it will tunnel me directly to her laptop. This will give me a command prompt as if I was sitting with an open terminal at her computer.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;../../img/posts/simple-reverse-ssh-tunnel/connect-through-tunnel.png&#34;&gt;&lt;img alt=&#34;Computer behind firewall&#34; src=&#34;../../img/posts/simple-reverse-ssh-tunnel/connect-through-tunnel.png&#34; style=&#34;max-width: 100%;&#34;/&gt;&lt;/a&gt;
+&lt;em&gt;With the reverse tunnel setup, the first computer can ssh to the second via the cloud server and tunnel connection.&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;When I am done working, my wife can close the tunnel, and I will no longer be able to access her computer.&lt;/p&gt;
+
+&lt;h3 id=&#34;creating-the-reverse-tunnel&#34;&gt;Creating The Reverse Tunnel&lt;/h3&gt;
+
+&lt;p&gt;SSH tunnels can be initiated on linux easily from the command line (assuming ssh is setup and properly configured). To create a reverse tunnel, use the &lt;code&gt;-R&lt;/code&gt; flag. After the flag, provide what I call the &amp;ldquo;path&amp;rdquo; of the tunnel. So, the server&amp;rsquo;s port where the tunnel will be found, the host of that port (I almost always use &lt;code&gt;localhost&lt;/code&gt;), and the port to be tunneled. Lastly, make sure to specify the &lt;em&gt;IP&lt;/em&gt; or &lt;em&gt;hostname&lt;/em&gt; of the remote computer just like in a typical plain &lt;code&gt;ssh hostname&lt;/code&gt;.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;ssh -R remote-port:localhost:local-port host
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Example:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;ssh -R 19999:localhost:22 meowth
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;connecting&#34;&gt;Connecting&lt;/h3&gt;
+
+&lt;p&gt;After setting up the tunnel, the initializing computer can be accessed &lt;em&gt;from the server&lt;/em&gt; by ssh&amp;rsquo;ing to the &lt;em&gt;remote-port&lt;/em&gt; of &lt;em&gt;localhost&lt;/em&gt; (defined above):&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;ssh -p 19999 localhost
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;This should start an ssh session to the initializing computer. In my example, this is the laptop.&lt;/p&gt;
+
+&lt;h3 id=&#34;tunnel-beacon&#34;&gt;Tunnel Beacon&lt;/h3&gt;
+
+&lt;p&gt;SSH tunnels are a fascinating and useful piece of technology. The ssh protocol makes modern computing much more secure, and easier to manage multiple computers. While ssh tunnels are already widely utilized, I think there are still many applications where it the technology can be applied.&lt;/p&gt;
+
+&lt;p&gt;For example, I mentioned in the intro post about my small project, &lt;a href=&#34;https://github.com/himmAllRight/TunnelBeacon&#34;&gt;TunelBeacon&lt;/a&gt; (&lt;em&gt;Note: this is by no means ready. I&amp;rsquo;ve just started playing with it&lt;/em&gt;). TunnelBeacon will be a very simple GUI application used to initiate a tunnel from a computer, specifically to receive support. For example, if my wife or any of our parents switch to Linux in the future, we could configure TunnelBeacon on their computer. Then, if they need help they can just open it and hit a button, which will initiate a reverse tunnel to a predefined secure server (or spin up an AWS/DO server&amp;hellip; I have ideas). From there, I can remote into their computer no matter what network they are on (as long as ssh isn&amp;rsquo;t blocked). No headache from having them find their public IP, no redirecting router ports, just hitting a button.&lt;/p&gt;
+
+&lt;p&gt;So, that&amp;rsquo;s reverse tunnels in a nutshell. With any luck, I should be posting more about them as I progress with TunnelBeacon. Have fun tunneling!&lt;/p&gt;
+</description>
     </item>
     
     <item>
@@ -82,7 +714,79 @@ learned a lot :). In fact, I am confident that if I had to start over from
 scratch, the process would take me about 10-15 minutes. Just to be sure, I&amp;rsquo;m
  going to quickly jot down the major pain points I experienced my first time around.&lt;/p&gt;
 
-&lt;p&gt;&lt;/p&gt;</description>
+&lt;p&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;trouble-connecting-to-the-edgerouter-x-for-initial-setup&#34;&gt;Trouble Connecting to the EdgeRouter-x for Initial Setup&lt;/h2&gt;
+
+&lt;p&gt;&lt;center&gt;
+&lt;img alt=&#34;During initial setup, I was connecting the router wrong&#34; src=&#34;../../img/posts/ubiquiti-setup-issues/wrong-router-connection.png&#34; style=&#34;max-width: 100%;&#34;/&gt;
+&lt;/center&gt;
+&lt;em&gt;During initial setup, I was connecting the router wrong&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;The edgerouter needed to be directly connected to a computer during its initial
+setup, to make the EdgeOS configuration wizard accessible. The
+instructions clearly stated to connect an ethernet cable from my laptop to the
+&lt;code&gt;eth0/POE&lt;/code&gt; port on the edgerouter, but I guess I didn&amp;rsquo;t believe them.&lt;/p&gt;
+
+&lt;p&gt;Instead, I plugged the ethernet cable from my modem into &lt;code&gt;eth0&lt;/code&gt;, and my computer
+to &lt;code&gt;eth1&lt;/code&gt;. That didn&amp;rsquo;t work. However, once I &lt;em&gt;properly&lt;/em&gt; connected the devices (and
+manually set a static IP on my laptop, &lt;code&gt;192.168.1.2&lt;/code&gt; for example), I was able to access
+the configuration page in my browser via &lt;code&gt;https://192.168.1.1&lt;/code&gt; (don&amp;rsquo;t forget
+the &lt;em&gt;s&lt;/em&gt; in &lt;em&gt;https&lt;/em&gt;). Lesson Learned: manuals are (&lt;em&gt;usually&lt;/em&gt;) not out to get you.&lt;/p&gt;
+
+&lt;h2 id=&#34;setting-up-poe-and-connecting-the-ap&#34;&gt;Setting up POE and Connecting the AP&lt;/h2&gt;
+
+&lt;p&gt;This was not actually an issue I encountered, but rather a confusion. I was unsure what the best setup for
+the &lt;a href=&#34;https://en.wikipedia.org/wiki/Power_over_Ethernet&#34;&gt;POE&lt;/a&gt; hardware was. At
+first, I had the POE adaptor connected between the edgerouter and the AP,
+because I wasn&amp;rsquo;t sure if it could optimally power both devices. I found
+an
+&lt;a href=&#34;https://www.youtube.com/watch?v=f7FeYsJqotc&amp;amp;list=PLDBkup9c8YMgZaE50hAjP7rbbVriTlyQf&amp;amp;index=1&#34;&gt;informative guide&lt;/a&gt; that
+indicated that the POE adaptor could indeed power both.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-scheme&#34; data-lang=&#34;scheme&#34;&gt;Modem  --
+        |
+         --&amp;gt; POE Adaptor --&amp;gt; (*eth0*)  edgerouter-x  (*eth4*) --&amp;gt; AP Lite
+        |
+Power  --&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;&lt;em&gt;Digram describing the correct link up&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;Once I swapped the cables all around, I had to go into the router
+configuration and enable the POE for &lt;code&gt;eth4&lt;/code&gt;. Afterwards, the AP lit up,
+indicating that it was connected and powered.&lt;/p&gt;
+
+&lt;h2 id=&#34;issues-linking-configuring-the-ap&#34;&gt;Issues linking/configuring the AP&lt;/h2&gt;
+
+&lt;p&gt;This was the problem I spent the most time on. I had to install the
+configuration software for the Ubiquiti access point, but the &amp;ldquo;Linux binary&amp;rdquo; was
+a .deb, and I didn&amp;rsquo;t feel like extracting the contents of the package so that I
+could install it on Solus (yet). So instead, I spun up a few Ubuntu VMs to try
+it out, but I over-looked the fact that VMs on my laptop use a
+different subnet (192.168.&lt;strong&gt;122&lt;/strong&gt;. *) for the virtual network. I had hoped that
+because the VM&amp;rsquo;s network was routed through my laptop, which was connected
+directly to the edgerouter, it would still be able to see the access point.
+Regardless&amp;hellip; the AP couldn&amp;rsquo;t see the VM and vice versa. Finally, I admitted
+that the issues were most likely caused by the 192.168.122.* IP address that the VM was
+assigned.&lt;/p&gt;
+
+&lt;p&gt;&lt;center&gt;
+&lt;img alt=&#34;During initial setup, I was connecting the router wrong&#34; src=&#34;../../img/posts/ubiquiti-setup-issues/ubuntu.png&#34; width=&#34;45%&#34;&gt;
+&lt;img alt=&#34;During initial setup, I was connecting the router wrong&#34; src=&#34;../../img/posts/ubiquiti-setup-issues/venomoth.png&#34; width=&#34;35%&#34;&gt;
+&lt;/center&gt;
+&lt;em&gt;I spun up a new Ubuntu VM (Venomoth) to host the Ubifi controller&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;By this point, I had also learned that the Linux software is more of a server
+service, and not a GUI desktop application. So, I concluded that spinning up a
+dedicated VM on my server to host the wifi controller was worth it. Virtual
+machines hosted on my server automatically get configured on the main
+subnet, so it also resolved my issue. I was able to detect and configure the
+access point immediately. This setup made more sense anyway, as I can always
+connect to the AP controller by going to the VM&amp;rsquo;s IP on my browser,  just like I
+can with my router.&lt;/p&gt;
+
+&lt;p&gt;Well, that was all of my setup &amp;ldquo;&lt;em&gt;issues&lt;/em&gt;&amp;rdquo;. There was nothing I would consider to
+be an actual &lt;em&gt;issue&lt;/em&gt;, just some confusions of an Ubiquiti/POE first-timer. Like
+I stated earlier, I am sure I could redo the setup in about 15 minutes without any
+issues&amp;hellip; 10 now that I recorded everything in the post!&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -98,7 +802,58 @@ setup our old router as a &lt;em&gt;temporary&lt;/em&gt; fix. It was terrible. S
 researching how I should upgrade our network. This time around, I am doing this
 &lt;em&gt;correctly&lt;/em&gt;.&lt;/p&gt;
 
-&lt;p&gt;&lt;/p&gt;</description>
+&lt;p&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;center&gt;
+&lt;img src=&#34;../../img/posts/upgrading-to-ubiquiti-edgerouter/linksys-WRT1900.png&#34;
+width= 45%&gt;
+&lt;img src=&#34;../../img/posts/upgrading-to-ubiquiti-edgerouter/linksys-E1200.png&#34;
+width= 45%&gt;
+&lt;/center&gt;
+&lt;em&gt;The Linksys WRT-1900 that died (left), and the terrible backup Linksys E1200 (right)&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;The router that died was a Linksys WRT 1900. When I got home, I setup our old
+router as a temporary fix. It&amp;rsquo;s a very basic Linksys E1200. After using it for
+just a few hours, I remembered why I hated it so much. It is slower than a
+snail, and seems to stop working each day or so, requiring me to unplug and
+re-plug it daily (I think it is something with DHCP. It keeps trying to reassign
+IPs to devices, and then doesn&amp;rsquo;t seem to understand how to accept their requests
+afterwards). Thus, the more &lt;em&gt;temporary&lt;/em&gt; this solution was, the better.&lt;/p&gt;
+
+&lt;p&gt;If I am redoing our network setup, I want to do it &lt;em&gt;properly&lt;/em&gt; this time,
+splitting out the router from the wireless access point using &lt;em&gt;good&lt;/em&gt; hardware and
+software. My plan is to get an ubiquity edge-router-x, and pair it with an Ubiquiti
+wireless access point.&lt;/p&gt;
+
+&lt;p&gt;&lt;center&gt;
+&lt;img src=&#34;../../img/posts/upgrading-to-ubiquiti-edgerouter/edgerouter-x.png&#34;
+alt=&#34;Ubiquity Edgerouter-x&#34; width=&#34;45%&#34;&gt;
+&lt;img src=&#34;../../img/posts/upgrading-to-ubiquiti-edgerouter/ap-ac-lite.png&#34; alt=&#34;Ubiquity Access Point Lite&#34; width=&#34;45%&#34;&gt;
+&lt;/center&gt;
+&lt;em&gt;The EdgeRouter-x (right) and an Ubiquity access point lite (right)&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;Originally I wanted to build a small pfsense box to use as a router, but after
+digging a little deeper and doing some research, I saw that the EdgeRouter would
+more than meet my needs and is a great start to a network upgrade. Additionally,
+at $50 (USD), it truly is a great deal. As for the wireless access point, I was
+always considering an UniFi device, and I thought the EdgeRouter should
+pair rather seamlessly, considering both products are made by Ubiquiti.&lt;/p&gt;
+
+&lt;p&gt;From what I read, the EdgeRouter is a great router with an okay firewall, while
+pfsense is an amazing firewall that can do routing. So, if I want to dig more
+into pfsense in the future, I can still set up a firewall box, and connect it in front of
+the router.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;Modem --&amp;gt; pfsense --&amp;gt; EdgeRouter-x -&amp;gt; devices
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;So&amp;hellip; I think I&amp;rsquo;ve finalized my decision and will purchase the items soon. I
+will update when I get them.&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;Update (06/24/2017): I have followed through with this
+purchase, and the items arrived from Amazon. Expect a post or two about my
+experience setting them up (and yes, I added this update before actually
+publishing this post)&lt;/em&gt;&lt;/p&gt;</description>
     </item>
     
   </channel>

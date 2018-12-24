@@ -8,7 +8,7 @@
     <language>en-us</language>
     <lastBuildDate>Mon, 26 Nov 2018 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="http://ryan.himmelwright.net/tags/hardware/index.xml" rel="self" type="application/rss+xml" />
+        <atom:link href="http://ryan.himmelwright.net/tags/hardware/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
@@ -25,7 +25,186 @@ build&lt;/a&gt;. Then, in 2017
 AMD released their &lt;a href=&#34;https://en.wikipedia.org/wiki/Ryzen&#34;&gt;Ryzen&lt;/a&gt;
 series CPUs&amp;hellip;&lt;/p&gt;
 
-&lt;p&gt;&lt;/p&gt;</description>
+&lt;p&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;why-a-desktop&#34;&gt;Why a Desktop?&lt;/h2&gt;
+
+&lt;p&gt;&lt;a href=&#34;../../img/posts/chameleon-desktop-design/kadabra-cpu-usage.png&#34;&gt;&lt;img alt=&#34;Full system monitor on Laptop&#34; src=&#34;../../img/posts/charmeleon-desktop-design/kadabra-cpu-usage.png&#34; style=&#34;max-width: 100%;&#34;/&gt;&lt;/a&gt;
+&lt;div class=&#34;caption&#34;&gt;My T470 has been a little tight on resources.&lt;/div&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;../sold-my-bonobo/&#34;&gt;My&lt;/a&gt; &lt;a href=&#34;../my-t470/&#34;&gt;laptops&lt;/a&gt; &lt;a href=&#34;../my-new-used-x230&#34;&gt;have&lt;/a&gt;
+served the majority of my needs these last few years, but I have been feeling
+a bit restricted when trying to do more demanding workloads.
+While I still side with a &amp;ldquo;&lt;em&gt;use low-powered, portable computers, and remote
+into more powerful ones when needed&lt;/em&gt;&amp;rdquo; mentality, I enjoy having &lt;em&gt;one&lt;/em&gt; of those
+power computers being my physical, main workstation desktop.&lt;/p&gt;
+
+&lt;h2 id=&#34;workstation-goals&#34;&gt;Workstation Goals&lt;/h2&gt;
+
+&lt;p&gt;&lt;a href=&#34;../../img/posts/chameleon-desktop-design/ryzen-logo.png&#34;&gt;&lt;img alt=&#34;Ryzen Logo&#34; src=&#34;../../img/posts/charmeleon-desktop-design/ryzen-logo.png&#34; style=&#34;max-width: 100%;&#34;/&gt;&lt;/a&gt;
+&lt;div class=&#34;caption&#34;&gt;My T470 has been a little tight on resources.&lt;/div&gt;&lt;/p&gt;
+
+&lt;p&gt;While building a new workstation may be fun, I have particular goals I want it
+to achieve. Additionally, it seems like 98% of online build guides are for
+designing &lt;em&gt;gaming&lt;/em&gt; desktops&amp;hellip; which is not exactly what I want. So, the
+features I wanted in &lt;em&gt;my build&lt;/em&gt;, likely deviate from much of the
+&lt;em&gt;suggested&lt;/em&gt; guidance found online, which tends to focus entirely on gaming
+performance (more FPS). Here is the breakdown of what I was looking for:&lt;/p&gt;
+
+&lt;h4 id=&#34;more-cores&#34;&gt;More Cores&lt;/h4&gt;
+
+&lt;p&gt;I tend to have workloads that benefit from multiple cores (and threads). For
+example, I run a bunch of virtual machines, often at the same time. While my
+server&amp;rsquo;s 4 core Xeon handles day to day VMs just fine, it is nice to have a
+workstation with several cores to spin up a virtualized cluster across. Beyond
+VMs, I compile code, compress/decompress file packages, and occasionally encode
+audio/video files. These are all tasks that love having many threads at their
+disposal.&lt;/p&gt;
+
+&lt;h4 id=&#34;lots-of-fast-ram&#34;&gt;Lots of (&lt;em&gt;fast&lt;/em&gt;) Ram&lt;/h4&gt;
+
+&lt;p&gt;When running VMs, the amount of available RAM is usually more limiting than the
+number of cpu cores. For example, when running 6 VM&amp;rsquo;s, my server&amp;rsquo;s 4-core Xeon
+will typically be 15-35% utilized, whereas it&amp;rsquo;s 20GB of RAM is nearly full.  If
+I want more cores, I should supplement it with lots of RAM. In addition&amp;hellip; I
+use electron apps (Slack, Spotify,  etc.) and modern web browsers&amp;hellip; so yea&amp;hellip;. more RAM.&lt;/p&gt;
+
+&lt;p&gt;Being a Ryzen build, the RAM also needs to be &lt;em&gt;fast&lt;/em&gt;.  More than other CPU
+architectures, Ryzen CPUs actually &lt;a href=&#34;https://www.youtube.com/watch?v=g0SDr3EHHmY&#34;&gt;&lt;em&gt;run better&lt;/em&gt; with faster
+RAM&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h4 id=&#34;fast-storage&#34;&gt;Fast Storage&lt;/h4&gt;
+
+&lt;p&gt;This main goal of this build is for it to be a multi-tasking beast. If I am
+running several VMs and a bunch of applications, utilizing a stack of &lt;em&gt;fast&lt;/em&gt; RAM
+to move data around&amp;hellip; I need good &lt;em&gt;fast&lt;/em&gt; storage with &lt;a href=&#34;https://www.youtube.com/watch?v=Bh_f0uof7Jw&amp;amp;feature=youtu.be&amp;amp;t=359&#34;&gt;MOAR
+IOPs&lt;/a&gt; to
+support of these operations, which will all be competing for disk access. While I
+wouldn&amp;rsquo;t mind having space to eventually throw in a pair 3.5&amp;rdquo; rust drives to configure as a
+ZFS data pool, the goal for the initial &lt;em&gt;primary&lt;/em&gt; drive of this
+machine is the most IOPs I can &lt;em&gt;afford&lt;/em&gt;. So, I ideally &lt;em&gt;want&lt;/em&gt; a m.2 NVMe SSD,
+but &lt;em&gt;need&lt;/em&gt; a normal 2.5&amp;rdquo; SATA SSD at the very least.&lt;/p&gt;
+
+&lt;h4 id=&#34;some-gaming-ability&#34;&gt;&lt;em&gt;Some&lt;/em&gt; Gaming Ability&lt;/h4&gt;
+
+&lt;p&gt;While it doesn&amp;rsquo;t have to be a &lt;em&gt;gaming machine&lt;/em&gt;&amp;hellip; I would like to be able to
+play the &lt;em&gt;occasional&lt;/em&gt; game. I don&amp;rsquo;t mind playing games with lower graphic
+settings on my laptops, but I &lt;em&gt;do mind&lt;/em&gt; that even with the lower settings, the
+CPUs nearly max out, which spikes up the temperature.
+Increased graphics performance would also better support &lt;a href=&#34;../new-lgud4379b/&#34;&gt;my large
+monitor&lt;/a&gt;.  A discrete graphics card would be nice, ideally
+an AMD one due to their recent work on improving their open source drivers.&lt;/p&gt;
+
+&lt;h4 id=&#34;ability-to-upgrade&#34;&gt;Ability to Upgrade&lt;/h4&gt;
+
+&lt;p&gt;Most importantly, I want this computer to be a solid &lt;em&gt;base&lt;/em&gt; that I can upgrade
+over the next several years. Upgradability is hands-down &lt;em&gt;the main&lt;/em&gt; advantage
+of switching to a desktop over a laptop for my main rig. I want this build
+designed so that as my needs grow, I can easily max out the RAM, add storage,
+or upgrade the CPU and/or GPU.&lt;/p&gt;
+
+&lt;h2 id=&#34;final-build-selections&#34;&gt;Final Build Selections&lt;/h2&gt;
+
+&lt;p&gt;&lt;a href=&#34;../../img/posts/chameleon-desktop-design/charmeleon.png&#34;&gt;&lt;img alt=&#34;Chameleon Picture&#34; src=&#34;../../img/posts/charmeleon-desktop-design/charmeleon.png&#34; style=&#34;max-width: 40%; float: right;&#34;/&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;After spending weeks researching all the parts on the market and building
+probably 50 theoretical builds, I eventually settled on &lt;a href=&#34;https://pcpartpicker.com/user/himmelwr/saved/#view=MhbcYJ&#34;&gt;my final part list&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h4 id=&#34;name-charmeleon&#34;&gt;Name: Charmeleon&lt;/h4&gt;
+
+&lt;p&gt;Since my last desktop build was named &amp;ldquo;Charmander&amp;rdquo;, I figured &amp;ldquo;Charmeleon&amp;rdquo; was
+fitting. Also, I&amp;rsquo;m then free to rename it to &amp;ldquo;Charzard&amp;rdquo; in the future if I &lt;em&gt;evolve&lt;/em&gt;
+the build to a next-generation Ryzen 7&amp;hellip;&lt;/p&gt;
+
+&lt;h4 id=&#34;cpu-ryzen-5-2600-https-www-amd-com-en-products-cpu-amd-ryzen-5-2600&#34;&gt;CPU: &lt;a href=&#34;https://www.amd.com/en/products/cpu/amd-ryzen-5-2600&#34;&gt;Ryzen 5 2600&lt;/a&gt;&lt;/h4&gt;
+
+&lt;p&gt;&lt;a href=&#34;../../img/posts/chameleon-desktop-design/ryzen2600.jpg&#34;&gt;&lt;img alt=&#34;ryzen 2600&#34; src=&#34;../../img/posts/charmeleon-desktop-design/ryzen2600.jpg&#34; style=&#34;max-width: 40%; float: left;&#34;/&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;While I initially wanted a Ryzen 2700, it pushed the build out of budget.
+Coming from a 4 core/4 thread system&amp;hellip; it&amp;rsquo;s likely that I don&amp;rsquo;t &lt;em&gt;need&lt;/em&gt; 8
+cores/16 threads right off the bat. Honestly, 4 cores/8 threads would be a
+noticeable improvement from what I&amp;rsquo;ve been using&amp;hellip; which is why I first
+considered the Ryzen 5 2400g. I planned to start with the 2400g and upgrade to
+the 2700 and a GPU once I had more cash. However, &lt;a href=&#34;https://forum.level1techs.com/t/finalizing-an-upgradable-ryzen-linux-build/134670/2&#34;&gt;someone on the level1tech
+forums&lt;/a&gt;
+reminded me that the 2600 was the same price as the 2400g, and I could get that
+plus a GPU for not much more cost (considering I don&amp;rsquo;t need an expensive GPU).
+After thinking it over, I realized that was my best option, and should
+&lt;em&gt;actually&lt;/em&gt; fit my needs for quite awhile.&lt;/p&gt;
+
+&lt;h4 id=&#34;motherboard-msi-b450-tomahawk-https-www-msi-com-motherboard-b450-tomahawk&#34;&gt;Motherboard: &lt;a href=&#34;https://www.msi.com/Motherboard/B450-TOMAHAWK&#34;&gt;MSI B450 Tomahawk&lt;/a&gt;&lt;/h4&gt;
+
+&lt;p&gt;&lt;a href=&#34;../../img/posts/chameleon-desktop-design/tomahawk.jpg&#34;&gt;&lt;img alt=&#34;B450 Tomahawk motherboard&#34; src=&#34;../../img/posts/charmeleon-desktop-design/tomahawk.jpg&#34; style=&#34;max-width: 40%; float: right;&#34;/&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;I had selected the MSI B450 Tomahawk after &lt;a href=&#34;https://www.youtube.com/watch?v=lxtrHDJUMt4&#34;&gt;Wendell reviewed
+it&lt;/a&gt;. &lt;a href=&#34;https://www.youtube.com/watch?v=MWGzmbbimPw&amp;amp;feature=youtu.be&amp;amp;t=145&#34;&gt;Several
+other&lt;/a&gt; &lt;a href=&#34;https://www.youtube.com/watch?v=MMJoLyrWa7E&amp;amp;feature=youtu.be&amp;amp;t=1260&#34;&gt;reviews
+confirmed&lt;/a&gt; that it was a solid board, especially for the price. When I was
+considering the 2400g, I had to switch to the &lt;a href=&#34;https://www.newegg.com/Product/Product.aspx?Item=N82E16813144188&#34;&gt;MSI B450 Gaming Pro Carbon
+AC&lt;/a&gt;, because
+the Tomahawk didn&amp;rsquo;t have a display output that the integrated graphics could
+properly use with &lt;a href=&#34;../new-lgud4379b/&#34;&gt;my UHD monitor&lt;/a&gt;&amp;rsquo;s resolution (I need a
+display port). When I switched to the 2600, I was able to go back to the
+TOMAHAWK, and funnel the cost savings towards getting my GPU.&lt;/p&gt;
+
+&lt;h4 id=&#34;gpu-sapphire-1024-4gb-pulse-radeon-rx-560-http-www-sapphiretech-com-productdetial-asp-pid-3ecead87-2972-477a-a3be-480194d9fd6e-lang-eng&#34;&gt;GPU: &lt;a href=&#34;http://www.sapphiretech.com/productdetial.asp?pid=3ECEAD87-2972-477A-A3BE-480194D9FD6E&amp;amp;lang=eng&#34;&gt;Sapphire 1024 4GB PULSE Radeon RX 560&lt;/a&gt;&lt;/h4&gt;
+
+&lt;p&gt;&lt;a href=&#34;../../img/posts/chameleon-desktop-design/rx560.png&#34;&gt;&lt;img alt=&#34;The KDE Plasma 5 extend display GUI&#34; src=&#34;../../img/posts/charmeleon-desktop-design/rx560.png&#34; style=&#34;max-width: 35%; float: left;&#34;/&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;As discussed above, I don&amp;rsquo;t need a killer GPU as I don&amp;rsquo;t play very demanding
+games. However, I did want something that could perform at least a &lt;em&gt;little
+bit&lt;/em&gt;. So, &lt;a href=&#34;https://www.youtube.com/watch?v=237L9UGQtGk&amp;amp;t=422s&#34;&gt;I picked the rx560 over the
+rx550&lt;/a&gt;. At first I planned
+to get something like a rx580, which I still might eventually do&amp;hellip; but
+I don&amp;rsquo;t think I will &lt;em&gt;need&lt;/em&gt; to for a long time.&lt;/p&gt;
+
+&lt;h4 id=&#34;ram-g-skill-trident-z-32gb-2-x-16gb-ddr4-3200mhz-ram&#34;&gt;RAM: G.Skill - Trident Z 32GB (2 x 16GB) DDR4-3200Mhz RAM&lt;/h4&gt;
+
+&lt;p&gt;&lt;a href=&#34;../../img/posts/chameleon-desktop-design/ram.png&#34;&gt;&lt;img alt=&#34;The KDE Plasma 5 extend display GUI&#34; src=&#34;../../img/posts/charmeleon-desktop-design/ram.png&#34; style=&#34;max-width: 40%; float: right;&#34;/&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;I wanted to start out with 32GB of RAM, with the ability to easily upgrade to
+64GB down the road. This meant that I needed a 2x16GB pack. Additionally, I
+needed the RAM to be &lt;em&gt;fast&lt;/em&gt;, but still not &lt;em&gt;overpriced&lt;/em&gt;. Some research showed
+that at least right now, &lt;a href=&#34;https://youtu.be/lxtrHDJUMt4?t=752&#34;&gt;3200Mhz seems to be the sweet spot, especially for my
+particular motherboard&lt;/a&gt;. I originally
+picked another kit, but the reviews for it weren&amp;rsquo;t great, so I switched to the
+G.Skill kit for only a few dollars more, but with much better reviews. I also
+briefly searched for kits with tighter timings, but they were &lt;em&gt;way&lt;/em&gt; more expensive and not worth it.&lt;/p&gt;
+
+&lt;h4 id=&#34;case-fractal-design-meshify-c-dark-tg-atx-mid-tower-https-www-fractal-design-com-home-product-cases-meshify-meshify-c&#34;&gt;Case: &lt;a href=&#34;https://www.fractal-design.com/home/product/cases/meshify/meshify-c&#34;&gt;Fractal Design - Meshify C Dark TG ATX Mid Tower&lt;/a&gt;&lt;/h4&gt;
+
+&lt;p&gt;&lt;a href=&#34;../../img/posts/chameleon-desktop-design/meshifyc.png&#34;&gt;&lt;img alt=&#34;The KDE Plasma 5 extend display GUI&#34; src=&#34;../../img/posts/charmeleon-desktop-design/meshifyc.png&#34; style=&#34;max-width: 30%; float: left; margin-bottom: 10px;&#34;/&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;I wanted a case that was sturdy, sleek, but not too flashy or expensive. During my
+search, the Fractal Design cases kept catching eye. Eventually, I found the
+Meshify C TG Dark, which seemed to be universally loved by reviewers. Additionally,
+it appeared to have &lt;a href=&#34;https://www.fractal-design.com/home/product/cases/meshify/meshify-c&#34;&gt;good
+thermals&lt;/a&gt;,
+which I liked. This was my easiest part to pick.&lt;/p&gt;
+
+&lt;h4 id=&#34;psu-evga-supernova-g4-650w-80-gold-fully-modular-atx-psu-https-www-evga-com-products-product-aspx-pn-120-g1-0650-xr&#34;&gt;PSU: EVGA - &lt;a href=&#34;https://www.evga.com/products/product.aspx?pn=120-g1-0650-xr&#34;&gt;SuperNOVA G4 650W 80+ Gold, fully modular ATX PSU&lt;/a&gt;&lt;/h4&gt;
+
+&lt;p&gt;&lt;a href=&#34;../../img/posts/chameleon-desktop-design/psu.png&#34;&gt;&lt;img alt=&#34;The KDE Plasma 5 extend display GUI&#34; src=&#34;../../img/posts/charmeleon-desktop-design/psu.png&#34; style=&#34;max-width: 35%; float: right; margin-bottom: 10px;&#34;/&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;For the power supply, I wanted one that was at least gold rated, and fully
+modular. So I searched for the highest rated PSUs fitting those requirements&amp;hellip;
+and SuperNova popped up all over the place. At first I picked a 550w model, but
+upped to the 650w at the last minute because it was about the same price and
+gives me a little more room as I upgrade.&lt;/p&gt;
+
+&lt;h4 id=&#34;storage-one-of-my-samsung-850-evo-ssds-temp&#34;&gt;Storage: One of my Samsung 850 Evo SSDs (temp)&lt;/h4&gt;
+
+&lt;p&gt;Lastly, storage. For now I am just going to use a spare 250GB Samsung 850 Evo SSD
+I had in my test laptop. I plan to eventually upgrade to a &lt;a href=&#34;https://www.samsung.com/semiconductor/minisite/ssd/product/consumer/970evo/&#34;&gt;500GB Samsung 970 Evo
+m.2 NVMe
+drive&lt;/a&gt;,
+but the 850 will work for now.&lt;/p&gt;
+
+&lt;h2 id=&#34;conclusion&#34;&gt;Conclusion&lt;/h2&gt;
+
+&lt;p&gt;So after months of planing and research, my desktop parts have all been
+ordered. Hopefully, it meets the goals I set out to solve, and I will be able
+to upgrade it over the next few years&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -38,7 +217,62 @@ series CPUs&amp;hellip;&lt;/p&gt;
 Sometimes, it might be best to just hit the reset button and configure from
 scratch. With KDE Plasma 5, you can. Here&amp;rsquo;s how.&lt;/p&gt;
 
-&lt;p&gt;&lt;/p&gt;</description>
+&lt;p&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;issue&#34;&gt;Issue&lt;/h2&gt;
+
+&lt;p&gt;While I love having a &lt;a href=&#34;../my-t470/&#34;&gt;dock-able laptop&lt;/a&gt; and &lt;a href=&#34;new-lgud4379b&#34;&gt;my 43&amp;rdquo; 4k LG
+monitor&lt;/a&gt;, getting them configured and agreeing with each other
+can sometimes be a headache. Luckily, KDE Plasma 5 (the desktop environment
+I&amp;rsquo;ve been using for awhile now) is fantastic and remembers previous display
+configurations.&lt;/p&gt;
+
+&lt;p&gt;However, when I am playing around with resolutions or multiple inputs,
+sometimes I set something that doesn&amp;rsquo;t work&amp;hellip; and it is remembered, causing
+more problems.&lt;/p&gt;
+
+&lt;h2 id=&#34;the-fix&#34;&gt;The Fix&lt;/h2&gt;
+
+&lt;p&gt;Luckily, there is an easy fix: just delete the saved profile, and
+re-setup the display again. However, I often forget these very simple steps&amp;hellip;
+hence, this post (and to help anyone else that needs it, of course :P).&lt;/p&gt;
+
+&lt;h4 id=&#34;delete-old-profile&#34;&gt;Delete old profile&lt;/h4&gt;
+
+&lt;p&gt;The first step is to delete the plasma profile that saves the screen settings.
+Note, this may remove the profiles for &lt;em&gt;all&lt;/em&gt; previously configured displays,
+but I am okay with it for &lt;em&gt;my&lt;/em&gt; use case.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;cd ~/.local.share
+rm -rf kscreen&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h4 id=&#34;extend-monitors-when-docked&#34;&gt;Extend monitors when docked&lt;/h4&gt;
+
+&lt;p&gt;&lt;a href=&#34;../../img/posts/reset-plasma5-monitor-config/extended-monitor.png&#34;&gt;&lt;img alt=&#34;The KDE Plasma 5 extend display GUI&#34; src=&#34;../../img/posts/reset-plasma5-monitor-config/extend-monitor.png&#34; style=&#34;max-width: 100%;&#34;/&gt;&lt;/a&gt;
+&lt;div class=&#34;caption&#34;&gt;The KDE Plasma 5 extend display GUI.&lt;/div&gt;&lt;/p&gt;
+
+&lt;p&gt;After deleting the config, dock or reconnect the laptop to the display. A GUI
+with extension layout options should pop up. If it does, select the preferred
+layout option.&lt;/p&gt;
+
+&lt;h4 id=&#34;close-laptop-lid-don-t-disable&#34;&gt;Close laptop lid (don&amp;rsquo;t disable)&lt;/h4&gt;
+
+&lt;p&gt;After extending the display, I usually try to make the monitor the primary
+display and disable the laptop screen. This doesn&amp;rsquo;t seem to work (It causes my
+monitor to blank). However, I have learned that if I simply &lt;em&gt;close my laptop
+lid&lt;/em&gt; once it is connected&amp;hellip; it does both of those things for me. I always
+forget this&amp;hellip; but now it&amp;rsquo;s documented!&lt;/p&gt;
+
+&lt;h4 id=&#34;optional-reset-kscreen&#34;&gt;(Optional) Reset kscreen&lt;/h4&gt;
+
+&lt;p&gt;After flipping around the displays so much, plasma shell may have gotten a bit
+frazzled. If so, just reset it using the following command:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;kquitapp5 plasmashell &lt;span style=&#34;color:#f92672&#34;&gt;&amp;amp;&amp;amp;&lt;/span&gt; kstart plasmashell&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;I like to execute this in krunner (alt-F2) so that it runs in the background,
+and because I can usually still get to krunner, even if something goes terribly
+wrong with plasmashell during the process.&lt;/p&gt;
+
+&lt;h2 id=&#34;conclusion&#34;&gt;Conclusion&lt;/h2&gt;
+
+&lt;p&gt;That&amp;rsquo;s it. While this post is rather short (for once), hopefully it will be useful. Enjoy!&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -51,7 +285,218 @@ scratch. With KDE Plasma 5, you can. Here&amp;rsquo;s how.&lt;/p&gt;
 have decided to upgrade to using a single, but &lt;em&gt;better&lt;/em&gt;,
 monitor. After two years of debating, I have finally made my choice.&lt;/p&gt;
 
-&lt;p&gt;&lt;/p&gt;</description>
+&lt;p&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;monitor-history&#34;&gt;Monitor History&lt;/h2&gt;
+
+&lt;p&gt;&lt;a href=&#34;../../img/posts/new-lgud4379b-monitor/pre-college-monitors.jpg&#34;&gt;&lt;img alt=&#34;Pre College monitors&#34; src=&#34;../../img/posts/new-lgud4379b-monitor/pre-college-monitors.jpg&#34; style=&#34;max-width: 100%;&#34;/&gt;&lt;/a&gt;
+&lt;div class=&#34;caption&#34;&gt;My monitor setup right before moving to college&lt;/div&gt;&lt;/p&gt;
+
+&lt;p&gt;Half way through high school, I purchased my first laptop (it also happens to
+be the first computer I installed Linux on. I had a special edition model, but it was
+very similar to &lt;a href=&#34;https://www.cnet.com/products/hp-pavilion-dv6000/specs/&#34;&gt;this
+one&lt;/a&gt;). The laptop was
+replacing an old standard E-machines desktop, so I kept the spare monitor to
+use with the laptop. From that point on, I &lt;em&gt;usually&lt;/em&gt; had two screens to look
+at, even if one was just my laptop&amp;rsquo;s screen at the far end of my desk, with an
+&lt;a href=&#34;https://en.wikipedia.org/wiki/AIM_(software)&#34;&gt;AIM&lt;/a&gt; window open in it. Before
+moving to college, I built a desktop computer with a new monitor (picture
+above), and utilized the old one as a secondary display.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;../../img/posts/new-lgud4379b-monitor/college-desk.jpg&#34;&gt;&lt;img alt=&#34;College Desk&#34; src=&#34;../../img/posts/new-lgud4379b-monitor/college-desk.jpg&#34; style=&#34;max-width: 100%; padding: 10px;&#34;/&gt;&lt;/a&gt;
+&lt;div class=&#34;caption&#34;&gt;My desk during my senior year of collage&lt;/div&gt;&lt;/p&gt;
+
+&lt;p&gt;Throughout college, as I started to explore Linux and programming more,
+I began to experiment with using monitors in portrait orientations.
+Eventually, I purchased a second 23.6&amp;rdquo; 1080p monitor so they would
+match when paired. This gave me much more vertical real estate, which was
+useful when writing code, essays, or lab reports.&lt;/p&gt;
+
+&lt;h2 id=&#34;why-go-from-two-to-one&#34;&gt;Why go from two, to one?&lt;/h2&gt;
+
+&lt;p&gt;&lt;a href=&#34;../../img/homelab/kadabra1.jpg&#34;&gt;&lt;img alt=&#34;MA Desk&#34; src=&#34;../../img/homelab/kadabra1.jpg&#34; style=&#34;max-width: 100%; padding: 10px;&#34;/&gt;&lt;/a&gt;
+&lt;div class=&#34;caption&#34;&gt;When using two monitors, I always had to have a primary and secondary.&lt;/div&gt;&lt;/p&gt;
+
+&lt;p&gt;While I like having the &lt;em&gt;screen real estate&lt;/em&gt; of two monitors, I was never able
+to optimally use them because of the bezels between the monitors.  While
+working, I would naturally shift over and use one monitor as a &lt;em&gt;primary&lt;/em&gt;
+display, and the other as a &lt;em&gt;secondary&lt;/em&gt; display. This was okay for some tasks,
+but it usually just meant that I just used the primary monitor, and &lt;em&gt;half&lt;/em&gt; of
+the secondary one, because it was too hard to see the far end of the screen.&lt;/p&gt;
+
+&lt;p&gt;This issue was &lt;em&gt;slightly&lt;/em&gt; better when using my displays in portrait mode, but
+that wasn&amp;rsquo;t always ideal when connecting to remote machines, or viewing wide
+content (videos, for example). It also didn&amp;rsquo;t solve the main issue. When
+looking at the screens in a natural position (head centered, looking strait
+forward)&amp;hellip; I still saw two pieces of black plastic. I wanted to see my
+&lt;em&gt;primary&lt;/em&gt; window directly in front of me, with some auxiliary space on either
+side for documentation and terminal windows. I wanted a wide screen display.&lt;/p&gt;
+
+&lt;h2 id=&#34;ultra-wide-or-large-16-9-uhd&#34;&gt;Ultra-wide or &lt;em&gt;Large&lt;/em&gt; 16:9 UHD?&lt;/h2&gt;
+
+&lt;p&gt;Luckily, the once &lt;em&gt;extremely&lt;/em&gt; expensive ultra-wide and large UHD monitors have
+started to come down in price. After following the market for a few years, I
+narrowed my decision to my favorite choice in each category: The &lt;a href=&#34;https://www.dell.com/en-us/shop/dell-ultrasharp-34-curved-ultrawide-monitor-u3415w/apd/210-adtr/monitors-monitor-accessories&#34;&gt;Dell
+u3415w&lt;/a&gt;
+and the &lt;a href=&#34;https://www.lg.com/us/monitors/lg-43UD79-B-4k-uhd-led-monitor&#34;&gt;LG
+ud4379b&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;../../img/posts/new-lgud4379b-monitor/dellu3415w.jpg&#34;&gt;&lt;img alt=&#34;Dell u3415w&#34; src=&#34;../../img/posts/new-lgud4379b-monitor/dellu3415w.jpg&#34; style=&#34;max-width: 100%;&#34;/&gt;&lt;/a&gt;
+&lt;div class=&#34;caption&#34;&gt;The Dell u3415w 34&amp;rdquo; 3440x1440p Ultra Wide Monitor &lt;/div&gt;&lt;/p&gt;
+
+&lt;p&gt;The Dell u3415w is the slightly older (compared to the
+&lt;a href=&#34;https://www.dell.com/ed/business/p/dell-u3417w-monitor/pd&#34;&gt;u34&lt;strong&gt;17&lt;/strong&gt;w&lt;/a&gt;) 34&amp;rdquo;
+ultra-wide monitor offering from Dell. It has a 3440x1440, 60 Hz,
+slightly-curved, IPS panel sitting on a solid and adjustable monitor stand. I
+preferred it over other ultra-wides because it could be found for a reasonable
+price, and had a professional build quality.&lt;/p&gt;
+
+&lt;p&gt;Based on my reasoning explained in the section above, an ultra-wide (1440p
+ones&amp;hellip; not 1080p) would fit my mostly programmer use-case very well. Being a
+single monitor, I could position it directly in front of me, with my main
+code/content centered. The 3440px wide resolution would also allow enough
+horizontal space to have a full web page of documentation, and several terminal
+windows open on either side of the main display. Lastly, the 1440px vertical
+resolution would be an adequate improvement from my &lt;em&gt;&amp;ldquo;starting to feel tight&amp;rdquo;&lt;/em&gt;,
+1080p monitors.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;../../img/posts/new-lgud4379b-monitor/ud4379b.jpg&#34;&gt;&lt;img alt=&#34;Dell u3415w&#34; src=&#34;../../img/posts/new-lgud4379b-monitor/ud4379b.jpg&#34; style=&#34;max-width: 100%;&#34;/&gt;&lt;/a&gt;
+&lt;div class=&#34;caption&#34;&gt;The LG ud4379b 42.5&amp;rdquo; 3440x2160p Monitor&lt;/div&gt;&lt;/p&gt;
+
+&lt;p&gt;The massive LG ud4379b is a 42.5&amp;rdquo; 3840x2160px IPS display. At this size and
+resolution, it is roughly the equivalent of having four 21&amp;rdquo; 1920x1080px
+monitors aligned in a 2x2 grid&amp;hellip; except with 0 bezel between them. Compared to
+other 40&amp;rdquo;+ 4K displays, I preferred this one because once again, it was
+reasonably priced, had great input options, and also seemed to have a half
+decent panel. Reviewers consistently said it had vibrant colors and minimal
+back light bleed.&lt;/p&gt;
+
+&lt;p&gt;Being single monitor, I could easily sit myself in front of it, and have my
+main content centered, just like with the ultra-wide. Being so large, I could
+still have auxiliary windows opened on either side. One advantage the ud4379
+had over the ultra-wide however, was that being a massive 16:9 screen, it could
+easily be divided into 4 1080p screens. In fact, this model supports spitting
+the screen into four separate displays, each taking a different input (more on
+that later..). While the ultra-wides often support splitting and
+picture-in-picture, it seems more natural on the 43&amp;rdquo; monitor.&lt;/p&gt;
+
+&lt;h2 id=&#34;deciding-on-the-43-uhd&#34;&gt;Deciding on the 43&amp;rdquo; UHD&lt;/h2&gt;
+
+&lt;p&gt;&lt;a href=&#34;../../img/posts/new-lgud4379b-monitor/multi-input.jpg&#34;&gt;&lt;img
+alt=&#34;Shipped Box&#34; src=&#34;../../img/posts/new-lgud4379b-monitor/multi-input.jpg&#34;
+style=&#34;max-width: 100%;&#34;/&gt;&lt;/a&gt; &lt;div class=&#34;caption&#34;&gt;The LG ud4379 can support
+multiple inputs at a time to the single display&lt;/div&gt;&lt;/p&gt;
+
+&lt;p&gt;I went back and forth on which monitor I wanted several times. Eventually, I
+realized the long term versatility of the LG monitor was just something I could
+not ignore. Being able to use it as one massive display that I could fit
+several full VM windows in, or even as 1,2, or 4 discrete monitors makes it
+extremely useful for me. I tend to be playing with more than one computer or VM
+at a time, and it is VERY nice to have them all fit on a single display. I
+&lt;em&gt;was&lt;/em&gt; worried it would be a bit &lt;em&gt;too&lt;/em&gt; large and look stupid on my desk,
+especially compared to how slick the ultra-wide would look. However, in the
+end, practicality won out.&lt;/p&gt;
+
+&lt;h2 id=&#34;getting-the-ud4379b&#34;&gt;Getting the UD4379b&lt;/h2&gt;
+
+&lt;p&gt;&lt;a href=&#34;../../img/posts/new-lgud4379b-monitor/box.jpg&#34;&gt;&lt;img alt=&#34;Shipped Box&#34;
+src=&#34;../../img/posts/new-lgud4379b-monitor/box.jpg&#34; style=&#34;max-width:
+100%;&#34;/&gt;&lt;/a&gt; &lt;div class=&#34;caption&#34;&gt;The Monitor arrived a few days later
+perfectly safe, despite the beat up box&lt;/div&gt;&lt;/p&gt;
+
+&lt;p&gt;After deciding that we would likely order the monitor as my birthday gift, my
+wife and I started watching the price a few weeks before. One day, we noticed
+the price had dropped $200&amp;hellip; so we ordered it. The price soon went back up, so
+I&amp;rsquo;m glad we snatched it when we did!&lt;/p&gt;
+
+&lt;p&gt;It came a few days latter in a massive box that I happily carted up to our
+apartment. The box was a bit beat up, but after opening it, all the components
+were fine.&lt;/p&gt;
+
+&lt;h2 id=&#34;what-i-like&#34;&gt;What I like&lt;/h2&gt;
+
+&lt;p&gt;&lt;a href=&#34;../../img/posts/new-lgud4379b-monitor/monitor-working.png&#34;&gt;&lt;img alt=&#34;Monitor Working&#34; src=&#34;../../img/posts/new-lgud4379b-monitor/monitor-working.png&#34; style=&#34;max-width: 100%;&#34;/&gt;&lt;/a&gt;
+&lt;div class=&#34;caption&#34;&gt;I can have my main content front and center, with other windows on the sides&lt;/div&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;Screen Resolution&lt;/strong&gt; - The most obvious pro using a monitor at this
+size and resolution&amp;hellip; is the screen real estate. As explained above, it&amp;rsquo;s
+twice the space of my old, dual 1080p monitor setup. With this space, I can
+easily have several source code files, documentation, a few terminals, a
+chat window, and even a video opened on my single screen as I work.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;IPS Display&lt;/strong&gt; - Many people might assume that the driving factor
+pushing me to &lt;em&gt;finally&lt;/em&gt; update my monitors was my desire for more screen
+resolution. While that was &lt;em&gt;part&lt;/em&gt; of my goal&amp;hellip; what truly motivated me was
+a desire to switch to an IPS display on my main setup after almost a year
+using my T470&amp;rsquo;s IPS display (which by the way, is &lt;em&gt;not a good IPS panel&lt;/em&gt;).
+As someone who spends a large percentage of their computing time in dark
+terminals and IDEs, an IPS panel really does help text and colors to pop,
+because the darks look &lt;em&gt;so&lt;/em&gt; much better. It turns out, this panel is
+actually quite good for it&amp;rsquo;s price, and I am very happy with it.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;../../img/posts/new-lgud4379b-monitor/new-monitor.jpg&#34;&gt;&lt;img alt=&#34;Monitor Shading&#34; src=&#34;../../img/posts/new-lgud4379b-monitor/new-monitor.jpg&#34; style=&#34;max-width: 100%;&#34;/&gt;&lt;/a&gt;
+&lt;div class=&#34;caption&#34;&gt;When working, I can look straight at a single display and still have enough room.&lt;/div&gt;&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;Single Monitor, No (center) Bezels&lt;/strong&gt; - As explained earlier in this
+post, I like that this is is a &lt;em&gt;single&lt;/em&gt; monitor. This means that I no
+longer need to twist my head back and forth, or stare at bezels. I can
+looks straight ahead and see my main content, with &amp;ldquo;auxiliary&amp;rdquo; windows
+view-able in my periphery.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;Flexibility, multiple inputs&lt;/strong&gt; - Lastly, I enjoy the multiple
+inputs and excellent PIP system of this monitor. Combined with something
+like &lt;a href=&#34;https://symless.com/synergy&#34;&gt;Synergy&lt;/a&gt;, I can easily use this one
+display with several devices at a time. This is great when working with
+more than one device, or potentially watching content on something like a
+chromecast stick, while still working on the computer. It really is the
+advantage of having 4 monitors, but in a single package.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;Speakers&lt;/strong&gt; - They aren&amp;rsquo;t &lt;em&gt;amazing&lt;/em&gt;, and I don&amp;rsquo;t use them too often
+too often, but for &amp;ldquo;monitor&amp;rdquo; speakers, they really aren&amp;rsquo;t half bad. They&amp;rsquo;re
+what you&amp;rsquo;d expect from a TV. However, this means that if I were to use
+something like a media stick, the built-in speaker is acceptable enough for
+such a device.&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;what-i-don-t-like&#34;&gt;What I don&amp;rsquo;t like&lt;/h2&gt;
+
+&lt;p&gt;&lt;a href=&#34;../../img/posts/new-lgud4379b-monitor/monitor-shading.png&#34;&gt;&lt;img alt=&#34;Monitor Shading&#34; src=&#34;../../img/posts/new-lgud4379b-monitor/monitor-shading.png&#34; style=&#34;max-width: 100%;&#34;/&gt;&lt;/a&gt;
+&lt;div class=&#34;caption&#34;&gt;Viewed from the center, the monitor edges have shadowing.&lt;/div&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;Edge Shadowing&lt;/strong&gt; - The one issue that myself
+&lt;a href=&#34;https://youtu.be/yA6hL3inqRc?t=250&#34;&gt;and&lt;/a&gt;
+&lt;a href=&#34;https://youtu.be/3BSaPRHrA_U?t=667&#34;&gt;others&lt;/a&gt; have experienced with
+this monitor is a sort of &amp;ldquo;edge shadowing&amp;rdquo;. This is apparently
+something that is common on monitors this massive, and it&amp;rsquo;s
+really hard to engineer around. If I sit back far enough from the
+display, you can&amp;rsquo;t see it anymore. (But I don&amp;rsquo;t normally sit like that)&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;Input Switching Lag?&lt;/strong&gt; - While this is more of a critique of
+&lt;em&gt;monitors&lt;/em&gt; in general, one thing I wish was a bit better was the input
+switching. Having so many inputs, it can get confusing remembering which one is
+attached to what device, or trying to quickly configure a 2x2 multi-input
+layout. Having to &lt;em&gt;wait&lt;/em&gt; for each device to connect when flipping through all
+the inputs makes it that much more frustrating (and disappointing when it&amp;rsquo;s the
+wrong input&amp;hellip;).&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;Corners Out of View&lt;/strong&gt; - Being such a large display, one issue I
+sometimes have is that the outside corners are out of my field of view.
+I mostly notice this when I occasionally miss notification pop-ups
+that I &lt;em&gt;want&lt;/em&gt; to see. On the flip-side, notifications don&amp;rsquo;t seem to
+distract me as much now when I&amp;rsquo;m trying to focus :P.&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;conclusion&#34;&gt;Conclusion&lt;/h2&gt;
+
+&lt;p&gt;&lt;a href=&#34;../../img/posts/new-lgud4379b-monitor/new-monitor-desk.jpg&#34;&gt;&lt;img alt=&#34;Monitor Shading&#34; src=&#34;../../img/posts/new-lgud4379b-monitor/new-monitor-desk.jpg&#34; style=&#34;max-width: 100%;&#34;/&gt;&lt;/a&gt;
+&lt;div class=&#34;caption&#34;&gt;New monitor on my desk.&lt;/div&gt;&lt;/p&gt;
+
+&lt;p&gt;In conclusion, I an &lt;em&gt;very&lt;/em&gt; happy with my new monitor. It fits all of the
+criteria I had, and works for my use-case perfectly. While I wouldn&amp;rsquo;t
+recommend it for a pure gaming machine, it might be one of the best deal
+&lt;em&gt;productivity&lt;/em&gt; monitors out there.&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -65,7 +510,183 @@ monitor. After two years of debating, I have finally made my choice.&lt;/p&gt;
  last few months, I have been using a Lenovo T470 Thinkpad (with dock) as my new
  daily driver. Here are my thoughts.&lt;/p&gt;
 
-&lt;p&gt;&lt;/p&gt;</description>
+&lt;p&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;the-choice&#34;&gt;The Choice&lt;/h2&gt;
+
+&lt;p&gt;&lt;a href=&#34;../../img/posts/my-t470/coffee-picture.jpg&#34;&gt;&lt;img alt=&#34;T470 Coffee&#34; src=&#34;../../img/posts/my-t470/coffee-picture.jpg&#34; style=&#34;max-width: 100%;&#34;/&gt;&lt;/a&gt;
+&lt;div class=&#34;caption&#34;&gt;My T470 on a Sunday morning&lt;/div&gt;&lt;/p&gt;
+
+&lt;p&gt;The
+&lt;a href=&#34;https://www.notebookcheck.net/Lenovo-ThinkPad-T470-Core-i5-Full-HD-Notebook-Review.198130.0.html&#34;&gt;T470&lt;/a&gt;
+is the 14&amp;rdquo; model of Lenovo&amp;rsquo;s &amp;ldquo;business&amp;rdquo; laptop lineup. The T470 series actually
+has several variants itself, including the &amp;ldquo;high end&amp;rdquo;
+&lt;a href=&#34;https://www.notebookcheck.net/Lenovo-ThinkPad-T470s-Core-i7-WQHD-Laptop-Review.200880.0.html&#34;&gt;T470s&lt;/a&gt;,
+that has a slimmer chassis, made from &amp;ldquo;higher quality materials&amp;rdquo;, and a better
+screen compared to the T470. There is also the &amp;ldquo;high
+performance&amp;rdquo;&lt;a href=&#34;https://www.notebookcheck.net/Lenovo-ThinkPad-T470p-Core-i7-GeForce-940MX-Laptop-Review.226802.0.html&#34;&gt;T470p&lt;/a&gt;,
+which features a faster, quad-core CPU, but a slightly larger chassis. While
+these variants caught my attention, I ultimately decided on the normal T470.
+This was partially because I could max the T470 out at 32GBs of RAM (The T470s
+can only hit 24GB due to one of the sticks being soldered in), but mostly
+because I assumed that the combination of having a lower powered CPU (compared
+to the T70p), but a slightly larger case (compared to the T480s) would make it
+the optimal choice concerning my heat/noise concerns outlined in the previous
+post.&lt;/p&gt;
+
+&lt;h2 id=&#34;the-specs&#34;&gt;The Specs&lt;/h2&gt;
+
+&lt;p&gt;&lt;a href=&#34;../../img/posts/my-t470/inside.jpg&#34;&gt;&lt;img alt=&#34;Inside T470&#34; src=&#34;../../img/posts/my-t470/inside.jpg&#34; style=&#34;max-width: 100%;&#34;/&gt;&lt;/a&gt;
+&lt;div class=&#34;caption&#34;&gt;The Guts of the T470&lt;/div&gt;&lt;/p&gt;
+
+&lt;p&gt;So, the T470 then&amp;hellip;&lt;/p&gt;
+
+&lt;p&gt;I got my T470 from a vendor on Ebay. It came configured with a 2.5GHz (3.1 GHz
+Turbo) i5-7200u cpu, 8 GBs of DDR4 RAM, a 14&amp;rdquo; 1920x1080 screen, and a 500GB Hard
+Drive with Windows 10 on it. After checking that it booted up fine, I
+immediately swapped the slow HD with the 250GB SSD that was in my x230, and
+installed &lt;a href=&#34;https://solus-project.com&#34;&gt;Solus&lt;/a&gt; on it. In Solus, everything worked
+&amp;ldquo;out of the box&amp;rdquo;, and I would guess other Linux distributions would as well. For
+Christmas, I got a new 500GB Samsung EVO SSD to upgrade the 250GB one. In total,
+the T470 has less total storage than the Bonobo had, but &lt;em&gt;all&lt;/em&gt; of it is fast SSD
+storage. I am getting better at using my server for network storage anyway, so
+it all works out &lt;i class=&#34;fa fa-smile-o&#34; aria-hidden=&#34;true&#34;&gt;&lt;/i&gt;.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;../../img/posts/my-t470/solus-install.jpg&#34;&gt;&lt;img alt=&#34;Solus Install&#34; src=&#34;../../img/posts/my-t470/solus-install.jpg&#34; style=&#34;max-width: 100%;&#34;/&gt;&lt;/a&gt;
+&lt;div class=&#34;caption&#34;&gt;Installing Solus the first night&lt;/div&gt;&lt;/p&gt;
+
+&lt;p&gt;While I still plan to upgrade the T470 in the future, here are it&amp;rsquo;s specs at the
+time of writing this post:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;T470 Thinkpad
+Intel i5-7200u [2.5 Ghz (3.1 Ghz Turbo), 2 Cores, 4 Threads]
+8 GB RAM
+500 GB Samsung EVO SSD
+14&amp;quot; 1920x1080 IPS Display 
+Solus
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The hardware on the T470 is nice, and the technical specs are &lt;em&gt;okay&lt;/em&gt;, but the
+real killer feature of switching to a Thinkpad for my main computer is that I
+also purchased the ThinkPad Ultra Dock (40A2). This means that I am able to
+&lt;em&gt;easily&lt;/em&gt; take advantage of my periphery devices whenever I am working at my
+desk.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;Thinkpad Ultra Dock 40A2
+2 x 23.6&amp;quot; ASUS 1920x1080 Monitors
+Happy Hacking Keyboard Pro2 
+Audioengine A2+ Speakers &amp;amp; Stands
+Bose AE2 Headphones
+Logitech HD Pro Webcam c920 Widescreen
+Blue Yeti Microphone - Backout Edition
+Inateck USB 3.0 to SATA Dual-Bay Hard Drive Docking Station
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;what-i-like&#34;&gt;What I like&lt;/h2&gt;
+
+&lt;p&gt;&lt;a href=&#34;../../img/posts/my-t470/hotel.jpg&#34;&gt;&lt;img alt=&#34;T470 in Hotel&#34; src=&#34;../../img/posts/my-t470/hotel.jpg&#34; style=&#34;max-width: 100%;&#34;/&gt;&lt;/a&gt;
+&lt;div class=&#34;caption&#34;&gt;I&amp;rsquo;ve enjoyed the portability and great keyboard of the T470&lt;/div&gt;&lt;/p&gt;
+
+&lt;p&gt;Now that I&amp;rsquo;ve provided some background information and a summary, I&amp;rsquo;ll quickly
+list what I &lt;em&gt;like&lt;/em&gt; and &lt;em&gt;do not like&lt;/em&gt; about my new T470.&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;Cool &amp;amp; Quiet&lt;/strong&gt; - After realizing that I am picky about heat and noise in
+computers, one of my biggest goals when replacing my old computer was to find
+one that ran cooler and quieter. I think I did well here. &lt;em&gt;This thing is
+silent.&lt;/em&gt; Using one of my new favorite command line applications,
+&lt;a href=&#34;https://amanusk.github.io/s-tui/&#34;&gt;s-tui&lt;/a&gt;, I have observed that most of the
+time when I&amp;rsquo;m writing code, browsing the web, or listening to music, the fans
+in the T470 don&amp;rsquo;t even kick on. When I do push the machine a little by
+running VMs, or being on a video conference, the do kick up, but even then I
+have to put my ear right against the computer to hear anything. At it&amp;rsquo;s
+loudest, the T470 is still a very quiet device.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;Size &amp;amp; Portability&lt;/strong&gt; - I love the size and portability of this laptop. The
+14&amp;rdquo; form factor is large enough that I don&amp;rsquo;t feel cramped when using it as a
+stand-alone device, but still small enough that I can easily throw it in my
+bag and bring it with me. While I wouldn&amp;rsquo;t mind the T470 shedding a &lt;em&gt;little&lt;/em&gt;
+weight (which is mostly from the battery), I find it&amp;rsquo;s thickness perfectly
+acceptable for my uses (hear that Apple?). As far as build quality, it is a
+solid machine. When I rest my hands on it to type, they feel fully supported
+and there is &lt;em&gt;zero&lt;/em&gt; flex. When holding the closed laptop, it feels as though
+it could take quite a beating and still be fine. I love that.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;Keyboard &amp;amp; Track-point/pad&lt;/strong&gt; - It&amp;rsquo;s a Thinkpad keyboard, what else do I have
+to say? The keys are adequately spaced, have travel (though not as much as my
+x230), and feel &lt;em&gt;crisp&lt;/em&gt; when pressed, not mushy. It has a track&lt;em&gt;point&lt;/em&gt; with
+physical buttons, which at this point I don&amp;rsquo;t think I could do without (Crap.
+Unintentional pun. Oh well, I&amp;rsquo;m leaving it.). While I don&amp;rsquo;t use it often, the
+track&lt;em&gt;pad&lt;/em&gt; is also quite nice. I find it to be an ideal size, and has
+rubberized texture which prevents my fingers from feeling raw after long use.
+I find it hard these days for others laptops to compete with the Thinkpad&amp;rsquo;s
+keyboard/track-point setup.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;Dock-able&lt;/strong&gt; - I&amp;rsquo;ve already mentioned this above, but I love that the T470 is
+dock-able. This is becoming more common with the pervasiveness of USB-C, but
+Thinkpads have been in the dock game for years. It works well, and fits my
+current computing use-case perfectly.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;Thunderbolt/USB C&lt;/strong&gt; - The big difference between the T470 and the T460
+essentially comes down to the Thunderbolt 3/USB-C port on the T470. I don&amp;rsquo;t
+use it much &lt;em&gt;so far&lt;/em&gt;, but I hope the industry continues the move down the this
+route, and I will be glad to already have the port as they do.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;Battery(s)&lt;/strong&gt; - The battery configuration and life on this laptop is great.
+The T470 can get a 3-cell battery that doesn&amp;rsquo;t stick out, or an extended
+battery that comes in 6 and 9 cell variations (Note: the 6 and 9 cell are the
+same size). The T470 also supports an internal 3 cell battery, that can be
+used to keep the laptop powered on while the external battery is swapped. I
+currently have the least optimal configuration: A bulky 6-cell external, with
+no internal battery. Even so, it easily lasts me throughout the day, and I can
+always upgrade it down the road. I love the flexibility.&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;what-i-don-t-like&#34;&gt;What I don&amp;rsquo;t like&lt;/h2&gt;
+
+&lt;p&gt;While I overall love the T470, there are a few things I&amp;rsquo;m not thrilled about.&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;The Screen&lt;/strong&gt; - When I first got my laptop&amp;hellip; I thought the screen was
+defective. I had read in reviews that it wasn&amp;rsquo;t very &lt;em&gt;bright&lt;/em&gt;, but the colors
+were terrible. My screen always looked as if I was using something like
+&lt;a href=&#34;https://justgetflux.com/&#34;&gt;f.lux&lt;/a&gt;. After doing some reading, it turns out that
+IPS panels (which I had never owned before) can appear warmer in color. That
+combined with the low brightness and &lt;em&gt;not great&lt;/em&gt; color accuracy of the T470
+panel, made it appear particularly awful to me. I found and configured a &lt;a href=&#34;https://www.notebookcheck.net/uploads/tx_nbc2/N140HCA_EAB_01.icm&#34;&gt;ICC
+file&lt;/a&gt; which
+helped, but the biggest fix was time. As terrible as it was at first, I really
+don&amp;rsquo;t mind the screen. Yea, it could be brighter with better colors, but now I
+think it looks nice, and colors on top of black really pop.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;Track-point&lt;/strong&gt; - I stated in the section above that the track-point was one of
+the features I loved about this laptop. That is true&amp;hellip; but, if I &lt;em&gt;had&lt;/em&gt; to get
+picky, the track-point itself is not that great. It&amp;rsquo;s hard to move around with
+and it&amp;rsquo;s sensitivity differs depending on which direction it is traveling. At
+times it can be a real pain. By contrast, my x230 is very stable and precise.
+I wish the T470&amp;rsquo;s track-point was like the one on my x230&amp;rsquo;s.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;Graphics&lt;/strong&gt; - I can&amp;rsquo;t complain too much here because I knew what I was
+getting myself into, but&amp;hellip; the graphics performance isn&amp;rsquo;t the best. I know
+&lt;em&gt;not&lt;/em&gt; having dedicated graphics is what allows the T470 to run cool and sip
+power, but I wouldn&amp;rsquo;t mind a &lt;em&gt;little&lt;/em&gt; more umph. I don&amp;rsquo;t expect to do heavy
+gaming on the T470. If I want to game, I am going to build a gaming computer.
+However, I do wish I could play basic games a &lt;em&gt;little&lt;/em&gt; better in the meantime.
+(&lt;em&gt;On the bright side&amp;hellip;with the thunderbolt 3 port&amp;hellip; an eGPU is a
+possibility&amp;hellip;hmmm&amp;hellip;&lt;/em&gt;)&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;future-plans&#34;&gt;Future Plans&lt;/h2&gt;
+
+&lt;p&gt;&lt;a href=&#34;../../img/posts/my-t470/ram-upgrade.jpg&#34;&gt;&lt;img alt=&#34;T470 Ram Slot&#34; src=&#34;../../img/posts/my-t470/ram-upgrade.jpg&#34; style=&#34;max-width: 100%;&#34;/&gt;&lt;/a&gt;
+&lt;div class=&#34;caption&#34;&gt;The empty RAM slot I hope to add a 16GB stick to&amp;hellip; if prices ever drop again&amp;hellip;&lt;/div&gt;&lt;/p&gt;
+
+&lt;p&gt;Overall, I have been very happy with the T470 as my main computer. I&amp;rsquo;d still
+like to upgrade the RAM at some point, and I &lt;em&gt;have&lt;/em&gt; entertained the idea of
+trying an eGPU setup&amp;hellip; I might &lt;em&gt;eventually&lt;/em&gt; build a new desktop, but even then,
+I would likely have it headless, running VMs and connect to it remotely from the
+T470 (except for occasional gaming). That being said, right now, the T470 is
+working great as is!&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -81,7 +702,172 @@ Several events over the last year have led me to the realization that my
 purchased the Bonobo in early 2015. This post will highlight some of those
 realizations, and why I ultimately decided to sell my Bonobo laptop.&lt;/p&gt;
 
-&lt;p&gt;&lt;/p&gt;</description>
+&lt;p&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;why-i-got-the-bonobo&#34;&gt;Why I got the Bonobo&lt;/h2&gt;
+
+&lt;p&gt;&lt;a href=&#34;../../img/posts/sold-bonobo/alakazam.jpg&#34;&gt;&lt;img alt=&#34;Bonobo Setup&#34; src=&#34;../../img/posts/sold-bonobo/alakazam.jpg&#34; style=&#34;max-width: 100%;&#34;/&gt;&lt;/a&gt;
+&lt;div class=&#34;caption&#34;&gt;Bonobo Workstation Setup&lt;/div&gt;&lt;/p&gt;
+
+&lt;p&gt;I bought my Bonobo laptop from &lt;a href=&#34;https://www.system76.com&#34;&gt;System76&lt;/a&gt; during my
+first post-college year. I needed to replace my old workstation: an aging
+desktop that I built before my High School graduation. While its i7-930 CPU,
+6GB of RAM, NVIDIA GTX 260, and hodgepodge of hard drives (SSD and HHD) serverd
+my needs throughout college, I was starting to feel restricted. After some
+research, I came to the conclusion that it would be better to get a new system,
+instead of trying to upgrade my old desktop. I wanted a new, powerful computer
+that could easily run multiple VMs, play some video games, and compile
+software/run models &lt;em&gt;fast&lt;/em&gt;.&lt;/p&gt;
+
+&lt;p&gt;After a few months at my new job, I noticed I didn&amp;rsquo;t use a portable computer
+as much. I went to work, used my work computer, and then came home to my
+desktop. So portability wasn&amp;rsquo;t the &lt;em&gt;biggest&lt;/em&gt; concern when searching. That being
+said, I still lived out of state from my family, and would leave for a week or
+more at a time during hollidays or vacation. I wanted to still &lt;em&gt;be able&lt;/em&gt; to lug
+my computer with me during family vists. I also liked to game &lt;em&gt;a little bit&lt;/em&gt;
+when visiting with my brothers, or after work, so I added a dedicated GPU to the search criteria.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;../../img/posts/sold-bonobo/portable-setup.jpg&#34;&gt;&lt;img alt=&#34;Portable Bonobo Setup&#34; src=&#34;../../img/posts/sold-bonobo/portable-setup.jpg&#34; style=&#34;max-width: 100%;&#34;/&gt;&lt;/a&gt;
+&lt;div class=&#34;caption&#34;&gt;Portable Bonobo Setup&lt;/div&gt;&lt;/p&gt;
+
+&lt;p&gt;All of this pointed me towards desktop-replacement laptops. I wanted to support
+a Linux-only vendoor, so I looked at System76. The Bonobo seemed comparable to
+other laptops on the market, but being a System76 device, I felt more confident
+all the hardware would play nicely with Linux. It was a big laptop, but my plan
+was to use it mostly as a desktop computer, with the option to still travel with
+it when I needed to go somewhere for more than just a day or two. Besides, I
+liked that the case was larger, as I hoped it would help increase airflow
+to help with heat management.&lt;/p&gt;
+
+&lt;p&gt;I purchased the Bonobo, and it worked out very well for several years. It was a
+very powerful computer (more than my old &lt;em&gt;desktop&lt;/em&gt;), but still portable &lt;em&gt;enough&lt;/em&gt;
+for when I wanted to take it somewhere.&lt;/p&gt;
+
+&lt;h2 id=&#34;the-modern-reality&#34;&gt;The Modern Reality&lt;/h2&gt;
+
+&lt;p&gt;&lt;a href=&#34;../../img/posts/sold-bonobo/side-view.jpg&#34;&gt;&lt;img alt=&#34;Bonobo Thickness&#34; src=&#34;../../img/posts/sold-bonobo/side-view.jpg&#34; style=&#34;max-width: 100%;&#34;/&gt;&lt;/a&gt;
+&lt;div class=&#34;caption&#34;&gt;Bonobo Side View&lt;/div&gt;&lt;/p&gt;
+
+&lt;p&gt;As the years passed, my computing needs changed. On top of that, some of the
+initial assumptions about my computer use turned out to not be entirely true.&lt;/p&gt;
+
+&lt;h4 id=&#34;i-m-not-a-big-pc-gamer&#34;&gt;I&amp;rsquo;m Not a Big &lt;del&gt;PC&lt;/del&gt; Gamer.&lt;/h4&gt;
+
+&lt;p&gt;For example, when my brothers and I would pull out our laptops to play games
+together, the games we played were never highly demanding. Our top played games
+were Minecraft, Serious Sam 3, Dungeon Defenders, and &lt;em&gt;maybe&lt;/em&gt; CS GO. Needless to
+say, the Bonobo was a little overkill. Unfortunately, with my brothers and I all
+living in different states now, we really don&amp;rsquo;t see each other in person enough
+to play computer games in the same room anymore. These days, when we want to
+remotely play video games together&amp;hellip; we play on the Xbox ONE (which I bought
+mostly to keep in touch with my friends and family. I didn&amp;rsquo;t own one when I
+purchased the Bonobo).&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;../../img/posts/sold-bonobo/xboxone.png&#34;&gt;&lt;img alt=&#34;xbox one&#34; src=&#34;../../img/posts/sold-bonobo/xboxone.png&#34; style=&#34;max-width: 100%;&#34;/&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;I have enjoyed owning a computer that can handle most of games I throw at
+it, but if I&amp;rsquo;m being honest&amp;hellip; I don&amp;rsquo;t play games too often. Even on the Xbox,
+I go in bursts of playing once or twice a week, and then don&amp;rsquo;t touch a game for
+months. While I wouldn&amp;rsquo;t mind having the ability to play more demanding games on
+my computer, it isn&amp;rsquo;t a &lt;em&gt;requirement&lt;/em&gt; for me&amp;hellip; expecially on a laptop.&lt;/p&gt;
+
+&lt;h4 id=&#34;i-travel-more-sometimes-on-airplanes&#34;&gt;I Travel More. Sometimes On Airplanes.&lt;/h4&gt;
+
+&lt;p&gt;One change compared to when I originally bought my bonobo is that I travel more.
+When I first moved to Massachusetts, I figured most of my traveling would be
+from here back to Pennsylvania, or to vacation once a year. However, my
+wife and I have managed to keep in touch with some of our old friends&amp;hellip; who
+live all over the country. Plus, now that my brothers have moved out of
+the house, they have started to spread out too (as already mentioned in the
+section above). So, I travel more often. In particular, I fly more
+frequently.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;../../img/posts/sold-bonobo/tsa.png&#34;&gt;&lt;img alt=&#34;TSA logo&#34; src=&#34;../../img/posts/sold-bonobo/tsa.png&#34; style=&#34;max-width: 80%;&#34;/&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;To say it bluntly, the Bonobo sucks to travel with. It takes up the majority of
+my bag, and most bags don&amp;rsquo;t even fit it. Besides the laptop size, TSA is often
+freaked out by the MASSIVE power supply, and has had to re-scan my bag several
+times, thinking I had a &amp;ldquo;bluetooth speaker&amp;rdquo; or something else I neglected to
+tell them about (despite my polite warnings that &amp;ldquo;my laptop&amp;rsquo;s power charger is
+massive&amp;rdquo;). Beyond security, It isn&amp;rsquo;t a computer I can pull out of my bag
+and easily use in an airport terminal. In fact, the last time I flew with it, I
+tried to work on it at table, but couldn&amp;rsquo; because the power
+outlet didn&amp;rsquo;t supply enough juice to charge the laptop. So, I was
+forced to switch to my phone for entertainment while waiting several hours
+for my flight, despite having a massive gaming laptop in my bag.&lt;/p&gt;
+
+&lt;h4 id=&#34;it-turns-out-i-m-noise-picky&#34;&gt;It turns out I&amp;rsquo;m noise picky.&lt;/h4&gt;
+
+&lt;p&gt;When building or purchasing a computer, something to consider is noise. With my
+previous machines, I didn&amp;rsquo;t worry about it. I&amp;rsquo;d joke to myself, &amp;ldquo;Noise? Why
+should I be concerned about that? I&amp;rsquo;m not building a recording studio&amp;rdquo;! After
+several years of focusing on how I &lt;em&gt;actually&lt;/em&gt; use my computing devices, I&amp;rsquo;ve
+noticed that I am very picky with noise, and on a related note, heat. Every time
+I hear the fans kick up, I start to worry that I am over-taxing the system and
+start to monitor the biggest culprits. When running taxing processes, I watch
+the cpu temps and hate seeing them high.&lt;/p&gt;
+
+&lt;p&gt;&lt;center&gt;
+&lt;a href=&#34;../../img/posts/sold-bonobo/temps.jpg&#34;&gt;&lt;img alt=&#34;Temp Sensors&#34; src=&#34;../../img/posts/sold-bonobo/temps.jpg&#34; style=&#34;max-width: 80%;&#34;/&gt;&lt;/a&gt;
+&lt;/center&gt;
+&lt;div class=&#34;caption&#34;&gt;Parallel Compression on the Bonobo Spiked the Temps&lt;/div&gt;&lt;/p&gt;
+
+&lt;p&gt;I hoped the extra &lt;em&gt;thickness&lt;/em&gt; of the Bonobo would help with any heating issues.
+While it might have a little bit, when you shove a decent GPU into a laptop&amp;hellip;
+it&amp;rsquo;s going to give off heat. Additionally, when using a powerful CPU to it&amp;rsquo;s
+full potential, it is very difficult for a laptop to compete with a
+desktop-level cooling system. The Bonobo is a very powerful laptop, but the loud
+fans prevented me from actually &lt;em&gt;using&lt;/em&gt; it to its full potential, because I
+would immediately start shutting down processes when the noise kicked up. I know
+the fans spin up to &lt;em&gt;help&lt;/em&gt; with thermals, the Bonobo was just a tad to hot and
+loud for my taste.&lt;/p&gt;
+
+&lt;h4 id=&#34;a-desktop-replacement&#34;&gt;A Desktop Replacement?&lt;/h4&gt;
+
+&lt;p&gt;My issues with the Bonobo boiled down to the fact that based on &lt;em&gt;my current
+computing use-case&lt;/em&gt;, the Bonobo functioned less as a
+&lt;em&gt;desktop-replacement-laptop&lt;/em&gt;, and more of just a &lt;em&gt;shitty, somewhat portable,
+desktop&lt;/em&gt;. Most of the time, I am just browsing or writing code on the machine in
+front of me. If I need more power, I connect remotely to a bigger, better,
+computer. I also never game &amp;ldquo;on the go&amp;rdquo;, so if I want to have a computer for
+gaming, it makes much more sense to eventually have a half-decent desktop (or
+invest in an eGPU), which will fit my needs much better that even high-end
+gaming laptops.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;../../img/posts/sold-bonobo/power-cord.jpg&#34;&gt;&lt;img alt=&#34;Bonobo Power Cord&#34; src=&#34;../../img/posts/sold-bonobo/power-cord.jpg&#34; style=&#34;max-width: 100%;&#34;/&gt;&lt;/a&gt;
+&lt;div&gt;The power cord alone made it difficult to pick up the Bonobo and move it elsewhere&lt;/div&gt;&lt;/p&gt;
+
+&lt;p&gt;The Bonobo is great if you sit it on a desk and use it as your full computer. I
+did not. I have a ton of periphery devices, and started to even use it in
+clam-shell mode, making the nice 17&amp;rdquo; screen a waste. Additionally, I hated
+having to unplug and re-plug all the devices when I wanted to move the computer.
+&lt;em&gt;In theory&lt;/em&gt;, I could move the Bonobo from my desk into the other room and work
+with my wife at the kitchen table whenever we wanted, but I &lt;em&gt;rarely&lt;/em&gt; did.
+Unplugging all my devices and fishing the massive power cable out from behind my
+desk (because the battery life is &amp;hellip; yea, I don&amp;rsquo;t think I need to explain
+this), was usually enough to prompt me to treat the Bonobo as a desktop, rather
+than a laptop.&lt;/p&gt;
+
+&lt;h2 id=&#34;recent-discoveries-my-new-plan&#34;&gt;Recent Discoveries &amp;amp; My New Plan&lt;/h2&gt;
+
+&lt;p&gt;A while back, I bought a &lt;a href=&#34;../my-new-used-x230/&#34;&gt;used x230 Thinkpad&lt;/a&gt;. Last
+summer, I finally purchased a &lt;a href=&#34;https://www.ebay.com/itm/Lenovo-Thinkpad-Mini-Docking-Station-Series-3-USB-3-0-T410-L420-L520-X230-T530/272238176342?epid=562055390&amp;amp;hash=item3f62a8e856:g:PbIAAOSw2x1XMPHU:sc:USPSPriority!02703!US!-1&#34;&gt;used docking
+station&lt;/a&gt;
+for it, so I could try out a docked setup. I loved it. It matched my needs
+exceptionally. I was able to have &lt;em&gt;all&lt;/em&gt; of my periphery devices attached to the
+dock and thus, the x230, but with the push of a button I could detach the laptop be
+on my way. The setup worked so well in fact, that I started to use my x230 as my
+desk computer, and would remote to my Bonobo on the other side of the room when
+I needed it. At that point, I realized I might want to switch things up.&lt;/p&gt;
+
+&lt;p&gt;I want to conclude by again stating that my System76 Bonobo Extreme was &lt;em&gt;not&lt;/em&gt; a
+bad machine. It is great when used as a standalone, semi-portable computer. I
+didn&amp;rsquo;t use it that way, and as a result, it just wasn&amp;rsquo;t for me anymore. I
+learned that a quite, cool, portable, but dockable, laptop is ideal for my main
+device &lt;em&gt;right now&lt;/em&gt;, even if it isn&amp;rsquo;t as powerful. Unfortunately, System76
+doesn&amp;rsquo;t offer such a machine at this time. So, my plan is to replace the Bonobo
+with newer thinkpad + dock combination. Hopefully that combination will give me
+a nice dock setup that I have grown to appreciate and love.&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -92,7 +878,95 @@ realizations, and why I ultimately decided to sell my Bonobo laptop.&lt;/p&gt;
       <guid>http://ryan.himmelwright.net/post/new-hhkb-pro2/</guid>
       <description>&lt;p&gt;After years of using a Happy Hacking Keyboard Lite, I have &lt;em&gt;finally&lt;/em&gt; decided to splurge on a Happy Hacking Professional 2 keyboard. And I love it.&lt;/p&gt;
 
-&lt;p&gt;&lt;/p&gt;</description>
+&lt;p&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;Note: I have been slowly chipping away at this post for the last few months. I have been very busy, but I should be able to get back into the swing of writing again.&lt;/em&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;my-history-with-the-hhkb-lite&#34;&gt;My history with the HHKB Lite&lt;/h2&gt;
+
+&lt;p&gt;&lt;a href=&#34;../../img/posts/new-hhkb-pro2/college-computer.jpg&#34;&gt;&lt;img alt=&#34;Getting the HHKB Keyboard&#34; src=&#34;../../img/posts/new-hhkb-pro2/college-computer.jpg&#34; style=&#34;max-width: 100%;&#34;/&gt;&lt;/a&gt;
+&lt;div id=&#34;caption&#34;&gt;My Computer (HHKB lite included) during my senior year of college&lt;/div&gt;&lt;/p&gt;
+
+&lt;p&gt;I started using Linux during my senior year of high school. In college, I started diving deeper down the rabbit hole, learning more about shells, window managers, and programming. By senior year, I found myself sitting in front of an &lt;a href=&#34;http://www.archlinux.org&#34;&gt;Arch Linux&lt;/a&gt; install, configured with a tiling window manger to organize the scattering of VIM and VIM-like terminal applications I used every day. To be kind to my wrists, I wanted something that was optimized at the hardware level for my heavy &lt;em&gt;CTRL&lt;/em&gt; key use. This is when I first learned about the HHKB. However, as a broke college student, I opted for the much cheaper &lt;em&gt;lite&lt;/em&gt; version to test out. I enjoyed the layout so much, that years later when I needed to replace a keyboard at work, I had them order me a HHKB lite (again, the Pro was very expensive).&lt;/p&gt;
+
+&lt;h2 id=&#34;time-for-a-mechanical-keyboard&#34;&gt;Time for a Mechanical Keyboard&lt;/h2&gt;
+
+&lt;p&gt;After years of using the standard rubber dome HHKB lite, I wanted to finally switch to a true mechanical keyboard. I searched long and hard, looking at different layouts designs, and learning about the various switch types (mostly the commony &lt;a href=&#34;https://en.wikipedia.org/wiki/Cherry_(keyboards)&#34;&gt;cherry MX switches&lt;/a&gt;). After purchasing and playing with a &lt;a href=&#34;https://mechanicalkeyboards.com/shop/index.php?l=product_detail&amp;amp;p=1620&#34;&gt;switch tester&lt;/a&gt;, I confirmed that I would likely enjoy MX clear switches best. They are quiet enough I could still reasonably use them in an office, but still had the nice tactile bump that I love (more than what I experienced on the Browns). Additionally, I knew that I wanted to stick with a small, minimalist layout, so I exclusively looked at &lt;a href=&#34;https://deskthority.net/wiki/60%25&#34;&gt;60% keyboards&lt;/a&gt;, with the occasional &lt;a href=&#34;https://deskthority.net/wiki/40%25&#34;&gt;40%&lt;/a&gt; board catching my eye.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://i.ytimg.com/vi/8wjW-Or1jg8/maxresdefault.jpg&#34;&gt;&lt;img alt=&#34;The Pok3r Keyboard&#34; src=&#34;../../img/posts/new-hhkb-pro2/pok3r.jpg&#34; style=&#34;max-width: 100%;&#34;/&gt;&lt;/a&gt;
+&lt;div id=&#34;caption&#34;&gt;The Pok3r Keyboard&lt;/div&gt;&lt;/p&gt;
+
+&lt;p&gt;Like many, I eventually landed at the &lt;a href=&#34;https://deskthority.net/wiki/Vortex_Pok3r&#34;&gt;Vortex Pok3r&lt;/a&gt;. It is beautiful, with a minimal, but sturdy appearance, and has a MX clear variant. I had made my decision, but at the time, new boards weren&amp;rsquo;t available. I decided to sit back and wait to see if it would drop on &lt;a href=&#34;https://www.massdrop.com/&#34;&gt;Massdrop&lt;/a&gt; any time soon. I had waited years to purchase a mechanical keyboard, and I could wait a little longer to get the one I wanted.&lt;/p&gt;
+
+&lt;h2 id=&#34;the-planck-drop&#34;&gt;The Planck Drop&lt;/h2&gt;
+
+&lt;p&gt;&lt;img alt=&#34;The Planck Keyboard&#34; src=&#34;../../img/posts/new-hhkb-pro2/planck.jpg&#34; style=&#34;max-width: 100%;&#34;/&gt;
+&lt;div id=&#34;caption&#34;&gt;The Planck Keyboard&lt;/div&gt;&lt;/p&gt;
+
+&lt;p&gt;While I was waiting for a Pok3r drop&amp;hellip; something interesting caught my eye on Massdrop&amp;hellip; the &lt;a href=&#34;https://www.massdrop.com/buy/planck-mechanical-keyboard&#34;&gt;Planck keyboard&lt;/a&gt;&amp;hellip; The planck is a keyboard kit that you solder together to create a programmable, &lt;em&gt;ortholinear&lt;/em&gt;, 40% keyboard. When I say &lt;em&gt;programmable&lt;/em&gt;, I don&amp;rsquo;t mean that you can just bind some keys. The Planck is fully open and the firmware C code is available on Github for modification. So, you can actually customize and hack together the firmware, which was very appealing to me. So I joined the drop.&lt;/p&gt;
+
+&lt;p&gt;After joining, I purchased a soldering kit so that I could construct the keyboard once it finally shipped. Unfortunately, the planck drop had &lt;em&gt;several&lt;/em&gt; delays, but as I previously stated, I didn&amp;rsquo;t waiting. The planck got delayed &lt;em&gt;so&lt;/em&gt; much, that they eventually allowed people to cancel their order and receive a refund. I thought the order cancellation was something you &lt;em&gt;opted in&lt;/em&gt; to do, but it was actually an &lt;em&gt;opt out&lt;/em&gt; situation&amp;hellip; so my lack of response had my order canceled, pre-maturely ending my planck experience.&lt;/p&gt;
+
+&lt;h2 id=&#34;deciding-on-the-hhkb-pro&#34;&gt;Deciding on the HHKB Pro&lt;/h2&gt;
+
+&lt;p&gt;With my planck order canceled, and a refund imminent, I started to look at other options again. The main contender was still the Pok3r. I started researching it again and learning about how I could program the layers to have a layout I would like&amp;hellip; and eventually realized I just kept re-creating the infamous HHKB layout.&lt;/p&gt;
+
+&lt;p&gt;So I started to consider the HHKB again. My main reasons for not getting it originally was that it is a good bit more expensive than the majority of mechanical keyboards on the market. However, after waiting months for the planck, and noticing I kept comparing everything to the HHKB, I realized I would eventually end up with an HHKB anyway, and decided to just go for it now. Decision made.&lt;/p&gt;
+
+&lt;h2 id=&#34;getting-the-hhkb&#34;&gt;Getting the HHKB&lt;/h2&gt;
+
+&lt;p&gt;&lt;a href=&#34;../../img/posts/new-hhkb-pro2/got-hhkb.jpg&#34;&gt;&lt;img alt=&#34;Getting the HHKB Keyboard&#34; src=&#34;../../img/posts/new-hhkb-pro2/got-hhkb.jpg&#34; style=&#34;max-width: 100%;&#34;/&gt;&lt;/a&gt;
+&lt;div id=&#34;caption&#34;&gt;My HHKB&lt;/div&gt;&lt;/p&gt;
+
+&lt;p&gt;Once I decided on the HHKB, (and it was approved by my wife :P ), I purchased it on Amazon. The one thing I did contemplate about was which color to get. I didn&amp;rsquo;t know if I wanted to get the black or white model. I knew I wanted printed key-caps, and that made the white board very appealing. The printed keys on it look &lt;em&gt;so crisp&lt;/em&gt;. Eventually, I decided on the dark gray because it matches everything else I own, whereas the white board would drastically stick out.&lt;/p&gt;
+
+&lt;p&gt;I placed the order and within a few days, it was on my doorstep (well, the neighbor&amp;rsquo;s, but that&amp;rsquo;s an issue with our post&amp;hellip;).&lt;/p&gt;
+
+&lt;h2 id=&#34;what-i-like&#34;&gt;What I like&lt;/h2&gt;
+
+&lt;h4 id=&#34;layout&#34;&gt;Layout&lt;/h4&gt;
+
+&lt;p&gt;As already mentioned, I love they HHKB layout. It was a bit tricky to get accustomed to at first, but that was &lt;em&gt;several years&lt;/em&gt; ago at this point. The HKKB Pro does have a few difference in layout when compared to the lite version (the pro does not have a bottom left &lt;code&gt;fn&lt;/code&gt; key, or any dedicated arrow keys). However, I had prepared myself for this change over the last few years by only using the right &lt;code&gt;fn&lt;/code&gt; key and the &lt;code&gt;fn&lt;/code&gt; arrow keys. The hardest thing to adjust to was the slightly different sized &lt;code&gt;alt&lt;/code&gt; and &lt;code&gt;super&lt;/code&gt; keys on the left (due to the missing &lt;code&gt;fn&lt;/code&gt; key).&lt;/p&gt;
+
+&lt;p&gt;I have learned to appreciate all the little HHKB layout differences. This includes the &amp;ldquo;delete&amp;rdquo; by default backspace key, with the &lt;code&gt;~&lt;/code&gt; key above it, and the &lt;code&gt;ESC&lt;/code&gt; key next to &lt;code&gt;1&lt;/code&gt;. Last but not least, &lt;strong&gt;the CTRL in the CAPS location&lt;/strong&gt; &lt;em&gt;(with CAPs still available as &lt;code&gt;fn&lt;/code&gt; + &lt;code&gt;Tab&lt;/code&gt;)&lt;/em&gt;. I honestly think this should be the standard keyboard layout.&lt;/p&gt;
+
+&lt;h4 id=&#34;pbt-key-caps&#34;&gt;PBT key-caps&lt;/h4&gt;
+
+&lt;p&gt;I didn&amp;rsquo;t expect the PBT key-caps to be such a big deal, but I absolutely love them. I could tell from images that they would &lt;em&gt;look&lt;/em&gt; better (especially the white ones), but I didn&amp;rsquo;t anticipate how great they would feel. They are solid, but with a soft touch, and are a &lt;em&gt;much&lt;/em&gt; better improvement over every keyboard I have previously owned/used.&lt;/p&gt;
+
+&lt;h4 id=&#34;the-switches&#34;&gt;The Switches&lt;/h4&gt;
+
+&lt;p&gt;I wasn&amp;rsquo;t sure how I would like the topre switches after getting excited for Cherry MX clears. However, I seem to really like them&amp;hellip; at least on the HHKB. I have heard that they feel different on the HHKB compared to other Topre keyboards due to the HHKBs plastic back. I&amp;rsquo;m not sure if this is true or not, but I like the result. Key presses are smooth but at the same time very crisp. Being a heavy typist, I often bottom out, but when I do it feels very soft, and not harsh at all. I figure that if I am going to bottom out on my keys regardless of what keyboard I have, it is probably best to handle it how the HHKB does.&lt;/p&gt;
+
+&lt;h4 id=&#34;can-i-say-sound&#34;&gt;&amp;hellip; Can I say sound?&lt;/h4&gt;
+
+&lt;p&gt;I love the sound of typing on this keyboard. While it is definitely an audible keyboard, it isn&amp;rsquo;t nearly as obnoxious as louder clicky switches, like MX Blues or Greens. It has a soft, muted, lower pitched sound as I type (compared to normal &amp;ldquo;clicky&amp;rdquo; switches). I really do enjoy hearing it, and find myself sometimes taking off my headphones to listen to it if I need motivation to get more characters on the screen.&lt;/p&gt;
+
+&lt;h2 id=&#34;what-i-don-t-like&#34;&gt;What I don&amp;rsquo;t like&lt;/h2&gt;
+
+&lt;h4 id=&#34;cost&#34;&gt;Cost&lt;/h4&gt;
+
+&lt;p&gt;As I&amp;rsquo;ve mentioned earlier in the post, probably the &lt;em&gt;biggest&lt;/em&gt; downside to the HHKB is the substantial cost. At &amp;gt;$230 USD, it is expensive, even for mechanical keyboards. The cost is the single problem that kept me from buying it all these years. Eventually, I realized it is what I wanted, and it would likely last me &lt;em&gt;years&lt;/em&gt;, so it all works out. Additionally, if I didn&amp;rsquo;t like the PRO, or didn&amp;rsquo;t want it anymore, they &lt;em&gt;do&lt;/em&gt; have an incredible resale value, so I could likely get a large chunk of my money back fairly easily.&lt;/p&gt;
+
+&lt;h4 id=&#34;transporting-it-related-to-cost&#34;&gt;Transporting it (related to cost)&lt;/h4&gt;
+
+&lt;p&gt;While the cost issue is mitigated after just biting the bullet and hitting the &amp;ldquo;check out&amp;rdquo; button, there is another minor annoyance that is &lt;em&gt;related&lt;/em&gt; to the high price. Ideally, I&amp;rsquo;d like to use my HKKB whenever I am at the computer. Being a software developer&amp;hellip; I use a computer for 8+ hours a day at work. So, I like to use my keyboard at work&amp;hellip; but I also like to bring it home. Ideally, I&amp;rsquo;d get two: one for home and one for at the office. At the high price point though&amp;hellip; I might have to wait to make that purchase. As far as keyboards go, I&amp;rsquo;d say the HHKB is probably one of the best travel boards out there. It&amp;rsquo;s light, but sturdy, and there is even a &lt;a href=&#34;https://www.amazon.com/Carrying-Happy-Hacking-Keyboard-PD-KB01SD/dp/B000FHSNFW/ref=sr_1_1?ie=UTF8&amp;amp;qid=1514499138&amp;amp;sr=8-1&amp;amp;keywords=HHKB+case go&#34;&gt;travel case designed specifically for it&lt;/a&gt;. So far I&amp;rsquo;ve been using the box to transport it, but am going to get the traveling case soon. That should hold me over until it is justifiable to get a second board. One day&amp;hellip;&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;I actually was just gifted the carrying case for Christmas. I will check out how it works in the new year. It should at the very least be better than the cardboard box it came in&amp;hellip;&lt;/em&gt;&lt;/p&gt;
+
+&lt;h4 id=&#34;mac-mode-delete-fix&#34;&gt;&amp;ldquo;Mac&amp;rdquo; mode / Delete &amp;ldquo;fix&amp;rdquo;&lt;/h4&gt;
+
+&lt;p&gt;One benefit of getting the HHKB &lt;em&gt;Pro&lt;/em&gt; over the &lt;em&gt;lite&lt;/em&gt; version, is that it has some media key functionality (volume, start/stop). However, these keys only work when the dip switches are configured to put the board in &amp;ldquo;Mac mode&amp;rdquo;. In addition to enabling the media keys, it changes a few other things, like changing the iconic HHKB &amp;ldquo;Delete&amp;rdquo; key to a more traditional &amp;ldquo;Backspace&amp;rdquo; default. Now, I understand that 99% of people probably welcome this change with open arms. However&amp;hellip; after using the HHKB lite for so many years, I have &lt;em&gt;really&lt;/em&gt; become accustomed to the &amp;ldquo;delete&amp;rdquo; key there, and actually prefer it now. With how I jump around my editor/terminals with emacs bindings, I have actually developed a workflow where I use &lt;em&gt;delete&lt;/em&gt; more often than &lt;em&gt;backspace&lt;/em&gt;.&lt;/p&gt;
+
+&lt;p&gt;I cannot figure out a way to have &lt;em&gt;both&lt;/em&gt; the &lt;em&gt;mac mode&lt;/em&gt; and &amp;ldquo;delete key default&amp;rdquo; functionality enabled at the same time. So&amp;hellip; I have opted to just forgo the new media keys, which is unfortunate. It&amp;rsquo;s a nice upgrade from the &lt;em&gt;lite&lt;/em&gt; version, and a shame I can&amp;rsquo;t take advantage of it just because I &lt;em&gt;prefer&lt;/em&gt; the default layout of the keyboard.&lt;/p&gt;
+
+&lt;h4 id=&#34;missing-more-modern-features-perks&#34;&gt;Missing more &amp;ldquo;Modern&amp;rdquo; Features/Perks&lt;/h4&gt;
+
+&lt;p&gt;The HHKB being a &amp;ldquo;&lt;em&gt;classic&lt;/em&gt;&amp;rdquo;, seems to be lacking in some of the more &amp;ldquo;modern&amp;rdquo; features of high-end keyboards. There is no backlighting, no custom programming/macro setups, or wireless connectivity. I even believe that the two USB ports on the back are USB 2, not 3 (let alone C). While it would be &lt;em&gt;nice&lt;/em&gt; to have some of these features in the HHKB, I&amp;rsquo;m not hurting &lt;em&gt;too badly&lt;/em&gt; for them&amp;hellip; &lt;em&gt;yet&lt;/em&gt;. A modern refresh would be amazing though.&lt;/p&gt;
+
+&lt;h2 id=&#34;conclusion&#34;&gt;Conclusion&lt;/h2&gt;
+
+&lt;p&gt;All in all, it is a great keyboard and I plan to use it for a long time. Typing on it feels and sounds so natural, and it has the same layout I have grown to love over the last few years. I am thrilled to finally upgrade to the pro, and wish I did so years ago.&lt;/p&gt;</description>
     </item>
     
   </channel>

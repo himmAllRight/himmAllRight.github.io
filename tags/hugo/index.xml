@@ -8,7 +8,7 @@
     <language>en-us</language>
     <lastBuildDate>Wed, 15 Aug 2018 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="http://ryan.himmelwright.net/tags/hugo/index.xml" rel="self" type="application/rss+xml" />
+        <atom:link href="http://ryan.himmelwright.net/tags/hugo/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
@@ -25,7 +25,214 @@ and deploy a &amp;ldquo;draft&amp;rdquo; website, so I can stage new posts/websi
 on my home network, before publishing it to the &amp;ldquo;production&amp;rdquo;
 website. Here is how that idea was Instantiated&amp;hellip;&lt;/p&gt;
 
-&lt;p&gt;&lt;/p&gt;</description>
+&lt;p&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;my-website&#34;&gt;My Website&lt;/h2&gt;
+
+&lt;p&gt;&lt;a href=&#34;../../img/posts/draft-website-jenkins/jenkins-logo.png&#34;&gt;&lt;img
+src=&#34;../../img/posts/draft-website-jenkins/jenkins-logo.png&#34; style=&#34;max-width:
+50%; float: left; margin: 0px 12px 0px 0px;&#34; alt=&#34;Jenkins Logo&#34; /&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;I have previously &lt;a href=&#34;../website-transition-to-hugo/&#34;&gt;described&lt;/a&gt; how my
+website is &lt;a href=&#34;../website-switched-to-hugo/&#34;&gt;currently generated&lt;/a&gt;, using
+the &lt;a href=&#34;https://gohugo.io&#34;&gt;Hugo&lt;/a&gt; static website generator. To organize
+this system, I have two git repos: One that consists of all the hugo
+source files (where I write content), and one that contains the
+generated static website (that gets deployed to my web host).&lt;/p&gt;
+
+&lt;p&gt;When writing a post, I use &lt;code&gt;hugo server -D -F&lt;/code&gt; to live view the page
+in my browser. However, I occasionally want to view the state of all
+the &lt;em&gt;committed code&lt;/em&gt; in the &lt;em&gt;repo&lt;/em&gt;, to see what the site would look
+like if I decided to publish a post. So, I created a &amp;ldquo;drafts&amp;rdquo; website,
+which shows the current state of my website&amp;rsquo;s &lt;em&gt;source&lt;/em&gt; repo (including
+draft and future posts). If I want to check how a post looks on my
+phone, or any other device, I can just open up the draft website after
+pushing my changes.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;../../img/posts/draft-website-jenkins/mr-mime.png&#34;&gt;&lt;img
+src=&#34;../../img/posts/draft-website-jenkins/mr-mime.png&#34; style=&#34;max-width:
+45%; float: right; margin: 20px 0px 0px 10px;&#34; alt=&#34;Jenkins Logo&#34; /&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;jenkins&#34;&gt;Jenkins&lt;/h2&gt;
+
+&lt;p&gt;I had previously created a dedicated Jenkins server on my home network
+(Mr. Mime), using a CentOS 7 VM hosted on my home server. However, any
+Jenkins setup should work for this project (including a &lt;a href=&#34;on my home network&#34;&gt;docker
+container&lt;/a&gt;). To get started, checkout the &lt;a href=&#34;https://jenkins.io/download/&#34;&gt;Jenkins
+Website&lt;/a&gt;, and be sure to take advantage
+of the &lt;a href=&#34;https://jenkins.io/doc/&#34;&gt;the documentation&lt;/a&gt; for help.&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;Note: just make sure hugo is installed on the Jenkins server, as we need
+it to generate the website.&lt;/em&gt;&lt;/p&gt;
+
+&lt;h3 id=&#34;github-integration&#34;&gt;GitHub Integration&lt;/h3&gt;
+
+&lt;h4 id=&#34;jenkins-service&#34;&gt;Jenkins Service&lt;/h4&gt;
+
+&lt;p&gt;My website repo is hosted on GitHub, so we need to configure it to
+work with our Jenkins server. To do that, go to the project&amp;rsquo;s GitHub
+page, and navigate through &lt;strong&gt;Settings&lt;/strong&gt; -&amp;gt; &lt;strong&gt;Integrations &amp;amp;
+services&lt;/strong&gt;. Click the &lt;strong&gt;Add service&lt;/strong&gt; drop-down and select &lt;em&gt;Jenkins
+(Git Plugin)&lt;/em&gt;. Next, add the Jenkins server url (assuming the server
+is accessible from the internet. If not, hosting the Jenkins server on
+something like &lt;a href=&#34;http://digitalocean.com&#34;&gt;Digital Ocean&lt;/a&gt; might be an
+easy solution). Lastly, make sure the &lt;strong&gt;Activate&lt;/strong&gt; box is selected,
+and click the &lt;strong&gt;Add Service&lt;/strong&gt; button.&lt;/p&gt;
+
+&lt;h4 id=&#34;ssh-keys&#34;&gt;SSH Keys&lt;/h4&gt;
+
+&lt;p&gt;While on the project&amp;rsquo;s GitHub page, make sure that the Jenkins
+server&amp;rsquo;s ssh keys are added to the project. To add them, navigate to
+the &lt;strong&gt;Deploy Keys&lt;/strong&gt; page (under the project&amp;rsquo;s &lt;strong&gt;Settings&lt;/strong&gt; tab). Then
+select &lt;strong&gt;Add deploy key&lt;/strong&gt;, and add the public key.&lt;/p&gt;
+
+&lt;h2 id=&#34;a-nginx-server&#34;&gt;A Nginx Server&lt;/h2&gt;
+
+&lt;p&gt;&lt;a href=&#34;../../img/posts/draft-website-jenkins/nginx.png&#34;&gt;&lt;img
+src=&#34;../../img/posts/draft-website-jenkins/nginx.png&#34; style=&#34;max-width:
+100%; float: center; margin: 0px 0px 0px 0px;&#34; alt=&#34;Default Nginx Page&#34; /&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;With Jenkins ready, let&amp;rsquo;s quickly setup the web server before
+configuring the Jenkins project. Any web server will do (it just needs
+to serve the generated &lt;em&gt;static&lt;/em&gt; website content). I used
+&lt;a href=&#34;https://nginx.org/en/&#34;&gt;nginx&lt;/a&gt; in for setup. After installing, make
+sure it is running. To install and check the status of nginx on an
+Ubuntu System:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;color:#75715e&#34;&gt;## Install
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;sudo apt install -y nginx
+
+&lt;span style=&#34;color:#75715e&#34;&gt;## Check it is running
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;sudo systemctl status nginx
+
+&lt;span style=&#34;color:#75715e&#34;&gt;## Optional: Ensure it is enabled to start up after reboots
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;sudo systemctl enable nginx&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;With the web server running, we need to know &lt;em&gt;where&lt;/em&gt; the website files
+need to go. Nginx will by default serve content at
+&lt;code&gt;/user/share/nginx/html/&lt;/code&gt;, so remember that location for later&amp;hellip;&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;Note: Don&amp;rsquo;t forget to add the &lt;code&gt;jenkins&lt;/code&gt; user&amp;rsquo;s ssh key from the
+jenkins server to the &lt;code&gt;authorized_keys&lt;/code&gt; file of the nginx server. This
+will make file transfers easier when setting up the jenkins project.&lt;/em&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;configuring-a-project&#34;&gt;Configuring a Project&lt;/h2&gt;
+
+&lt;p&gt;Let&amp;rsquo;s configure our Jenkins project! Log in to the Jenkins
+server and click the &lt;strong&gt;New Item&lt;/strong&gt; option on the left side bar. Enter a
+name for the project, select the &lt;strong&gt;Freestyle Project&lt;/strong&gt; option, and hit
+&lt;strong&gt;OK&lt;/strong&gt;.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;../../img/posts/draft-website-jenkins/general-config.png&#34;&gt;&lt;img
+src=&#34;../../img/posts/draft-website-jenkins/general-config.png&#34; style=&#34;max-width:
+100%; float: center; margin: 0px 0px 0px 0px;&#34; alt=&#34;The Project&#39;s General Configuration Section&#34; /&gt;&lt;/a&gt;
+&lt;div class=&#34;caption&#34;&gt;The Project&amp;rsquo;s General Configuration Section&lt;/div&gt;&lt;/p&gt;
+
+&lt;p&gt;In the &lt;strong&gt;General&lt;/strong&gt; section of the configuration screen, optionally
+write a description about the project. Next, select the &amp;ldquo;&lt;em&gt;GitHub
+Project&lt;/em&gt;&amp;rdquo; check-box, and add the GitHub repo&amp;rsquo;s url into the &lt;em&gt;Project
+url&lt;/em&gt; text box.&lt;/p&gt;
+
+&lt;h4 id=&#34;source-control&#34;&gt;Source Control&lt;/h4&gt;
+
+&lt;p&gt;&lt;a href=&#34;../../img/posts/draft-website-jenkins/credentials.png&#34;&gt;&lt;img
+src=&#34;../../img/posts/draft-website-jenkins/credentials.png&#34;
+style=&#34;max-width: 100%; float: center; margin: 0px 0px 0px 0px;&#34;
+alt=&#34;Setting Credentials&#34; /&gt;&lt;/a&gt;
+&lt;div class=&#34;caption&#34;&gt;Setting Credentials&lt;/div&gt;&lt;/p&gt;
+
+&lt;p&gt;In the &lt;strong&gt;Source Code Management&lt;/strong&gt; section of the configuration, select
+the &lt;em&gt;Git&lt;/em&gt; option. Then, enter the repo&amp;rsquo;s url for the &lt;em&gt;Repository URL&lt;/em&gt;
+box (I did the ssh url). For &lt;em&gt;Credentials&lt;/em&gt;, select &lt;em&gt;Add&lt;/em&gt; to configure a
+new credential. Select &lt;em&gt;SSH Username with private key&lt;/em&gt; for &lt;em&gt;Kind&lt;/em&gt;,
+use &lt;code&gt;jenkins&lt;/code&gt; for the &lt;em&gt;Username&lt;/em&gt;.&lt;/p&gt;
+
+&lt;p&gt;More source control options can be configured, but this should be the
+minimum setup required. &lt;em&gt;Again, for this to work public keys for the
+&lt;code&gt;jenkins&lt;/code&gt; user on the jenkins server must be generated, and added as a
+deployment key on GitHub.&lt;/em&gt;&lt;/p&gt;
+
+&lt;h4 id=&#34;build-trigger&#34;&gt;Build Trigger&lt;/h4&gt;
+
+&lt;p&gt;Under the &lt;strong&gt;Build Triggers&lt;/strong&gt; section, select &lt;em&gt;Poll SCM&lt;/em&gt;. Without
+adding any schedule parameters, it will trigger each time a new commit
+is detected. This is what we want.&lt;/p&gt;
+
+&lt;h4 id=&#34;build-step&#34;&gt;Build Step&lt;/h4&gt;
+
+&lt;p&gt;In the &lt;strong&gt;Build&lt;/strong&gt; section, click &lt;strong&gt;Add build step&lt;/strong&gt;, and select
+&lt;strong&gt;Execute shell&lt;/strong&gt;. This is where we can add the shell commands to
+build the website with hugo. Add the following command to the box
+(don&amp;rsquo;t forget to change the url):&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;hugo -D -F -b &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;http://10.1.1.77&amp;#34;&lt;/span&gt; -d public&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;The &lt;code&gt;-D&lt;/code&gt; flag tells hugo to include all draft posts, while the &lt;code&gt;-F&lt;/code&gt; flag
+has it include all posts with a future date. The &lt;code&gt;-b&lt;/code&gt; flag sets the
+url for the generated website. This should the be url or IP address of
+the nginx server setup previously. Lastly, the &lt;code&gt;-d&lt;/code&gt; flag tells hugo to
+output the generated static website to the &lt;code&gt;public&lt;/code&gt; directory. This
+will be useful to know when deploying the build.&lt;/p&gt;
+
+&lt;h4 id=&#34;deploy-to-webserver&#34;&gt;Deploy to Webserver&lt;/h4&gt;
+
+&lt;p&gt;For deployment, I used rsync to copy the build files to the nginx
+web server. This step will be another shell command, so I&amp;rsquo;ve actually
+added it as another &amp;ldquo;build&amp;rdquo; step. Add another &lt;strong&gt;Execute shell&lt;/strong&gt; and
+paste the following command inside the text box (again, changing the url):&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;rsync -r &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;$WORKSPACE&lt;span style=&#34;color:#e6db74&#34;&gt;/public/&amp;#34;&lt;/span&gt; ryan@10.1.1.77:/usr/share/nginx/html/&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;I used the Jenkins &lt;code&gt;$WORKSPACE&lt;/code&gt; variable to get the location of the
+build, and was able to append the &lt;code&gt;public&lt;/code&gt; directory to that, since we
+defined it with the &lt;code&gt;-d&lt;/code&gt; flag in the hugo build step above. This will
+copy the generated website, to the web server.&lt;/p&gt;
+
+&lt;p&gt;Hit &lt;strong&gt;Save&lt;/strong&gt;, and test it out by clicking the &lt;strong&gt;Build Now&lt;/strong&gt; link on the
+left. If the build is successful, check the nginx website to see if
+the website was deployed!&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;Note: If it doesn&amp;rsquo;t work, double check all permissions and
+credentials between accounts and servers.&lt;/em&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;better-yet-pipelines&#34;&gt;Better Yet&amp;hellip; Pipelines&lt;/h2&gt;
+
+&lt;p&gt;What&amp;rsquo;s better than using Jenkins for automated &amp;ldquo;draft website&amp;rdquo;
+deployments?  Using a &lt;a href=&#34;https://jenkins.io/doc/book/pipeline/&#34;&gt;Jenkins
+Pipeline&lt;/a&gt;. A Pipeline allows
+the jenkins project steps to be defined in a &lt;em&gt;Jenkinsfile&lt;/em&gt; that, among
+other benefits, can be source controlled. In fact, by default a
+Jenkins pipeline searches for the &lt;code&gt;Jenkinsfile&lt;/code&gt; right in the root
+directory of a project&amp;rsquo;s git repo.&lt;/p&gt;
+
+&lt;p&gt;While a pipeline and
+&lt;a href=&#34;https://jenkins.io/doc/book/pipeline/jenkinsfile/&#34;&gt;Jenkinsfile&lt;/a&gt; might
+be a bit more confusing to &lt;em&gt;learn&lt;/em&gt; how to setup, it is well worth it. For
+example, the following Jenkinsfile can be used to do essentially what
+we setup in the previous steps:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-groovy&#34; data-lang=&#34;groovy&#34;&gt;pipeline &lt;span style=&#34;color:#f92672&#34;&gt;{&lt;/span&gt;
+    agent &lt;span style=&#34;color:#f92672&#34;&gt;{&lt;/span&gt;
+	label &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;mr-mime&amp;#39;&lt;/span&gt;
+    &lt;span style=&#34;color:#f92672&#34;&gt;}&lt;/span&gt;
+    stages &lt;span style=&#34;color:#f92672&#34;&gt;{&lt;/span&gt;
+	stage &lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;build&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;{&lt;/span&gt;
+	    steps&lt;span style=&#34;color:#f92672&#34;&gt;{&lt;/span&gt;
+		sh &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;hugo -D -F -b &amp;#34;http://10.1.1.77&amp;#34;&amp;#39;&lt;/span&gt;
+	    &lt;span style=&#34;color:#f92672&#34;&gt;}&lt;/span&gt;
+	&lt;span style=&#34;color:#f92672&#34;&gt;}&lt;/span&gt;
+	stage &lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;deploy&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;{&lt;/span&gt;
+	    steps&lt;span style=&#34;color:#f92672&#34;&gt;{&lt;/span&gt;
+		sh &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;rsync -r &amp;#34;$WORKSPACE/public/&amp;#34; ryan@ponyta:/usr/share/nginx/html/&amp;#39;&lt;/span&gt;
+	    &lt;span style=&#34;color:#f92672&#34;&gt;}&lt;/span&gt;
+	&lt;span style=&#34;color:#f92672&#34;&gt;}&lt;/span&gt;
+
+    &lt;span style=&#34;color:#f92672&#34;&gt;}&lt;/span&gt;
+&lt;span style=&#34;color:#f92672&#34;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;I&amp;rsquo;m not going to cover pipelines in &lt;em&gt;this&lt;/em&gt; post. However, I do
+encourage readers to check them out.&lt;/p&gt;
+
+&lt;h2 id=&#34;conclusion&#34;&gt;Conclusion&lt;/h2&gt;
+
+&lt;p&gt;That&amp;rsquo;s it. While I currently host my website using &lt;a href=&#34;https://pages.github.com/&#34;&gt;GitHub
+pages&lt;/a&gt;, if I ever self-host it again, I
+will definitely automate publishing it using Jenkins as well. This has
+been a &lt;em&gt;very&lt;/em&gt; basic example of what Jenkins can be used for, but I
+have found it rather useful when working on the content of this
+website. There is so much more it can do. Have fun!&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -36,7 +243,76 @@ website. Here is how that idea was Instantiated&amp;hellip;&lt;/p&gt;
       <guid>http://ryan.himmelwright.net/post/website-switched-to-hugo/</guid>
       <description>&lt;p&gt;In my &lt;a href=&#34;../website-transition-to-hugo/&#34;&gt;last post&lt;/a&gt;, I stated that &lt;em&gt;within a few days&lt;/em&gt;, I would officially generate and publish the website using &lt;a href=&#34;https://gohugo.io&#34;&gt;Hugo&lt;/a&gt;. I then proceeded to publish &lt;em&gt;that&lt;/em&gt; post using Hugo. Close enough. If I remember correctly, I ended that post listing off a few tasks that I wanted to complete &lt;em&gt;before&lt;/em&gt; switching the site (oops). Well&amp;hellip; they&amp;rsquo;re complete &lt;em&gt;now&lt;/em&gt;. Here&amp;rsquo;s how.&lt;/p&gt;
 
-&lt;p&gt;&lt;/p&gt;</description>
+&lt;p&gt;&lt;/p&gt;
+
+&lt;h3 id=&#34;create-single-pages-about-homelab&#34;&gt;Create Single Pages (About/Homelab)&lt;/h3&gt;
+
+&lt;p&gt;&lt;img alt=&#34;Hugo Logo&#34; src=&#34;../../img/posts/website-switched-to-hugo/hugo-logo.png&#34; style=&#34;width: 40%; float: right; margin: 0px 15px 5px 10px;&#34;/&gt;&lt;/p&gt;
+
+&lt;p&gt;This wasn&amp;rsquo;t so hard to do once setup, but it took a little while for me to get to that point. I was unaware that I needed to configure a layout for the pages, which was the source of most of my confusion.&lt;/p&gt;
+
+&lt;p&gt;After that realization, I created a new layout directory (in my theme directory) for each of the pages to add: &lt;code&gt;/layouts/about/&lt;/code&gt; and &lt;code&gt;/layouts/homelab/&lt;/code&gt;. I then copied the &lt;code&gt;/layouts/post/single.html&lt;/code&gt; file into the two directories  to use as a template for the two new layouts (&lt;code&gt;/layouts/about/about-page.html&lt;/code&gt; and &lt;code&gt;/layouts/homelab/homelab-page.html&lt;/code&gt;). The pages only required a basic layout that would inject the &lt;code&gt;.Content&lt;/code&gt; from the markdown files. Additionally, I tweaked the header slightly to display an &amp;ldquo;&lt;em&gt;updated on&lt;/em&gt;&amp;rdquo; date, rather than a &amp;ldquo;&lt;em&gt;posted on&lt;/em&gt;&amp;rdquo; date.&lt;/p&gt;
+
+&lt;p&gt;With the templates made, I  constructed a new &lt;code&gt;/content/pages/&lt;/code&gt; category, and added  &lt;code&gt;about.md&lt;/code&gt; and &lt;code&gt;homelab.md&lt;/code&gt; files to it. In both files, I defined the &lt;code&gt;type&lt;/code&gt; and &lt;code&gt;layout&lt;/code&gt; parameters, so that the new layouts would be used. Lastly, I used the &lt;code&gt;menu&lt;/code&gt; parameter to declare that each page would be part of the main menu.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;---
+title: About
+date: &lt;span style=&#34;color:#e6db74&#34;&gt;2017-08-28T09:51:18&lt;/span&gt;-&lt;span style=&#34;color:#ae81ff&#34;&gt;04&lt;/span&gt;:&lt;span style=&#34;color:#ae81ff&#34;&gt;00&lt;/span&gt;
+type: about
+menu : 
+  main:
+    weight: -&lt;span style=&#34;color:#ae81ff&#34;&gt;150&lt;/span&gt;
+layout: about-page
+image: img/header-images/park-books.jpg
+---&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h3 id=&#34;setting-up-an-rss-feed&#34;&gt;Setting up an RSS Feed&lt;/h3&gt;
+
+&lt;p&gt;It turns out that &lt;a href=&#34;https://gohugo.io/templates/rss/&#34;&gt;Hugo ships with its own RSS 2.0 template&lt;/a&gt; by default. When I first saw this, I thought that I may still have to dash off a layout or markdown page for the feed, but even that was unnecessary. Each &amp;ldquo;content&amp;rdquo; section (&lt;em&gt;ex: post or pages&lt;/em&gt;) has an RSS automatically generated at &lt;code&gt;/section-name/index.rss&lt;/code&gt;. I don&amp;rsquo;t need a feed for my static pages, so I just found the &lt;a href=&#34;http://ryan.himmelwright.net/post/index.xml&#34;&gt;feed for my posts&lt;/a&gt;. To make it easily accessible, I added a menu link.  Without a defined markdown file for the rss feed page, I needed another way to add to the navigation menu. I accomplished this by adding the following code to the bottom of my &lt;code&gt;config.toml&lt;/code&gt; file:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;[[menu.main]]
+  name = &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;RSS&amp;#34;&lt;/span&gt;
+  url = &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;/post/index.xml&amp;#34;&lt;/span&gt;
+  weight = &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;This is how both the &lt;code&gt;Home&lt;/code&gt; and &lt;code&gt;Archives&lt;/code&gt; links were already been added to the navigation bar by default in the theme. I just added another item for the RSS link, and adjusted the weight to have it to show up at the end of the menu. That was it.&lt;/p&gt;
+
+&lt;h3 id=&#34;check-how-the-posts-display&#34;&gt;Check how the posts display&lt;/h3&gt;
+
+&lt;p&gt;One task I needed to complete was going through and editing each post. The main issue that requiring a fix, which I &lt;a href=&#34;../website-transition-to-hugo/#image-size&#34;&gt;explained in the previous post&lt;/a&gt;, was that the image tags needed to be switched from markdown to html syntax. While I originally planned to set a &lt;code&gt;width=100%&lt;/code&gt; parameter for the image tags, I learned that using a &lt;code&gt;max-width: 100%;&lt;/code&gt; worked much better for my use-case. I know this can be handled in the overall css file, but I like explicitly defining how to handle each image when I write a post.&lt;/p&gt;
+
+&lt;p&gt;While editing the posts, I noticed that the &lt;a href=&#34;../website-transition-to-hugo/#summary-setup&#34;&gt;post summaries&lt;/a&gt; weren&amp;rsquo;t displaying the content that I intended them to. I have hugo configured so that I manually cut off the summary location using a &lt;code&gt;more&lt;/code&gt; tag in the markdown.But it didn&amp;rsquo;t appear to be doing that.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;../../img/posts/website-switched-to-hugo/summary-fix-spread.png&#34;&gt;&lt;img alt=&#34;Hugo Logo&#34; src=&#34;../../img/posts/website-switched-to-hugo/summary-fix-spread.png&#34; style=&#34;width: 100%; float: right; margin: 0px 15px 5px 5px;&#34;/&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;em&gt;A: An over-extended post summary&lt;/em&gt;.&lt;/li&gt;
+&lt;li&gt;&lt;em&gt;B: The extra content of the post that was included in the summary&lt;/em&gt;.&lt;/li&gt;
+&lt;li&gt;&lt;em&gt;C: The corrected post summary.&lt;/em&gt;
+
+&lt;br /&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Some of the summaries seemed to extend beyond the cutoff point, still including the next section header, and some of the section&amp;rsquo;s content. After further inspection, I noticed that I had a space on either side of the &amp;ldquo;more&amp;rdquo; in the tag. So, I had to go through and delete the extra spaces in each post.&lt;/p&gt;
+
+&lt;h3 id=&#34;next-prev-posts&#34;&gt;Next/Prev Posts&lt;/h3&gt;
+
+&lt;p&gt;The main &amp;ldquo;&lt;em&gt;Small Tweak&lt;/em&gt;&amp;rdquo; that I wanted to figure out was setting up navigation links at the bottom of each post page. I added some code between the  &lt;code&gt;{{ .Content }}&lt;/code&gt; and &lt;code&gt;{{ partial &amp;quot;coments,html&amp;quot; .}}&lt;/code&gt; tags of my theme&amp;rsquo;s &lt;code&gt;/layout/post/single.html&lt;/code&gt; file. I first made a section using &lt;code&gt;if&lt;/code&gt; statements to establish the &amp;ldquo;Next Post&amp;rdquo; and &amp;ldquo;Prev Post&amp;rdquo; header line. Then in a second block, I placed the actual links using on the next line using  &lt;code&gt;with&lt;/code&gt; statements. The &lt;code&gt;if&lt;/code&gt; and &lt;code&gt;when&lt;/code&gt; statements are required so that previous and next posts are  only linked &lt;em&gt;if they exist&lt;/em&gt;. So, the first and last post will only display one of the two links.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-html&#34; data-lang=&#34;html&#34;&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&amp;lt;!-- Next Post/ Previous Post Links --&amp;gt;&lt;/span&gt;
+{{ if .NextInSection }}
+    &amp;lt;&lt;span style=&#34;color:#f92672&#34;&gt;div&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;style&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;float: left; text-decoration: underline; text-align: right;&amp;#34;&lt;/span&gt;&amp;gt;Next Post:&amp;lt;/&lt;span style=&#34;color:#f92672&#34;&gt;div&lt;/span&gt;&amp;gt;
+{{ end }}
+{{ if .PrevInSection }}
+     &amp;lt;&lt;span style=&#34;color:#f92672&#34;&gt;div&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;style&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;float: right; text-decoration: underline; text-align: right;&amp;#34;&lt;/span&gt;&amp;gt;Prev Post:&amp;lt;/&lt;span style=&#34;color:#f92672&#34;&gt;div&lt;/span&gt;&amp;gt;
+{{ end }}
+
+&amp;lt;&lt;span style=&#34;color:#f92672&#34;&gt;br&lt;/span&gt;&amp;gt;
+
+{{ with .NextInSection }}
+    &amp;lt;&lt;span style=&#34;color:#f92672&#34;&gt;a&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;href&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;{{ .Permalink }}&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;style&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;text-align: left; float: left; max-width: 40%;&amp;#34;&lt;/span&gt;&amp;gt;{{ .Title }}&amp;lt;/&lt;span style=&#34;color:#f92672&#34;&gt;a&lt;/span&gt;&amp;gt;
+{{ end }}
+{{ with .PrevInSection }}
+    &amp;lt;&lt;span style=&#34;color:#f92672&#34;&gt;a&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;href&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;{{ .Permalink }}&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;style&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;text-align: right; float: right; max-width: 40%&amp;#34;&lt;/span&gt;&amp;gt;{{ .Title }}&amp;lt;/&lt;span style=&#34;color:#f92672&#34;&gt;a&lt;/span&gt;&amp;gt;
+{{ end }}&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h3 id=&#34;conclusion&#34;&gt;Conclusion&lt;/h3&gt;
+
+&lt;p&gt;I have continued to enjoy using Hugo. The few issues I had with it, keep being quickly dismissed as I learn more about the system. It is simple to use, but at the same time provides an immense level power and control. I will continue tweak the site here and there, but I think for the most part, I can consider the transition complete. Which I am very happy about :).&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -47,7 +323,116 @@ website. Here is how that idea was Instantiated&amp;hellip;&lt;/p&gt;
       <guid>http://ryan.himmelwright.net/post/website-transition-to-hugo/</guid>
       <description>&lt;p&gt;While I have loved using &lt;a href=&#34;http://cryogenweb.org&#34;&gt;Cryogen&lt;/a&gt; to create this website for over a year and a half now, I have started the transition to using another static website generator. Specifically, I have been experimenting with &lt;a href=&#34;https://gohugo.io&#34;&gt;Hugo&lt;/a&gt;. This post will detail why I am switching, what I have ported over thus far, and what still needs to be completed before generating the official site with hugo.&lt;/p&gt;
 
-&lt;p&gt;&lt;/p&gt;</description>
+&lt;p&gt;&lt;/p&gt;
+
+&lt;h3 id=&#34;from-cryogen-to-hugo&#34;&gt;From Cryogen to Hugo&lt;/h3&gt;
+
+&lt;p&gt;My departure from Cryogen really has nothing to do with the project itself. It is a prime example of what &lt;a href=&#34;https://clojure.org/&#34;&gt;clojure&lt;/a&gt; is capable of, and I feel that more people should give it a shot. Recently though, I&amp;rsquo;ve been itching to switch up my website&amp;rsquo;s theme a bit. While I fancy my &lt;a href=&#34;../new-theme-immutable/&#34;&gt;Immutable Theme&lt;/a&gt; I created a couple months ago, it isn&amp;rsquo;t quite doing what I had hoped for. I love dark themes, but the type of posts I&amp;rsquo;ve been creating really don&amp;rsquo;t look good with them. I like to add diagrams, code snippets, and images to all of my posts. Diagram posts look wonderful with a white background, but are garbage in a dark theme. This difference was glaring last week as I switched between my markdown editor&amp;rsquo;s preview window (default white theme), and the website&amp;rsquo;s live preview view, while writing my &lt;a href=&#34;../simple-reverse-ssh-tunnel/&#34;&gt;reverse tunnels&lt;/a&gt; post.&lt;/p&gt;
+
+&lt;p&gt;Similar to the logic I employed earlier this month when &lt;a href=&#34;../back-to-solus/&#34;&gt;switching back to Solus&lt;/a&gt;, I thought that if I was going to scrap my theme and start from scratch, I might as well check out different website generator. I had been keeping an eye on the various site generators, but the one I considered the most (and even dabbled with a bit last month), was &lt;a href=&#34;https://gohugo.io&#34;&gt;Hugo&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h3 id=&#34;what-i-ve-done-so-far&#34;&gt;What I&amp;rsquo;ve Done So Far&lt;/h3&gt;
+
+&lt;p&gt;I started the process of transporting my website from cryogen to hugo. So far, my experience with Hugo has been great. Here is what I&amp;rsquo;ve done:&lt;/p&gt;
+
+&lt;h4 id=&#34;installed-setup-a-test-hugo-site&#34;&gt;Installed &amp;amp; Setup a test Hugo site&lt;/h4&gt;
+
+&lt;p&gt;Obtaining and installing Hugo on my computers was very simple, as it was in the reops (Solus). I just had to run the command:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;sudo eopkg it hugo&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;After I had hugo installed, I experimented with creating new website projects for a few minutes before finally creating one to start my transition. To create a new website, I used the command:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;hugo new site ryan-hugo-test&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;This created a new directory with all the project&amp;rsquo;s default core files, and adhering to the required hugo &lt;a href=&#34;https://gohugo.io/content-management/organization/&#34;&gt;directory structure&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;Like cryogen, hugo can spin up a website in a test server during development. To do this, use the command:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;hugo serve -D
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;em&gt;Note: I used the &lt;code&gt;-D&lt;/code&gt; flag to additionally include any files marked as &amp;ldquo;drafts.&amp;rdquo;&lt;/em&gt;&lt;/p&gt;
+
+&lt;h4 id=&#34;setup-a-theme-and-started-tweaking-it&#34;&gt;Setup a Theme and started tweaking it&lt;/h4&gt;
+
+&lt;p&gt;With the hugo site generated, I wanted to setup a proper theme. After sampling a handful of demo sites from hugo&amp;rsquo;s &lt;a href=&#34;https://gohugo.io/themes/&#34;&gt;theme page&lt;/a&gt;, I decided on the &lt;a href=&#34;https://themes.gohugo.io/startbootstrap-clean-blog/&#34;&gt;startbootstrap-clean-theme&lt;/a&gt;. I&amp;rsquo;ve seen it used on other sites, and I think it is a commonly used theme with other site generators. However, it is clean and simple, with a white-background base like I wanted. Additionally, I love having header images for posts and pages. It lets me better personalize the website by exclusively using images I&amp;rsquo;ve photographed myself.&lt;/p&gt;
+
+&lt;p&gt;To get the theme, I cloned it from git:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;git clone git@github.com:humboldtux/startbootstrap-clean-blog.git
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;em&gt;Note: this particular theme has an abundant amount of features, so it is a good idea to copy the provided example config.toml and build off of it. This is one reason why I started with configuring the theme right off the bat.&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;Before I started ripping into the theme too much, I copied the theme directory to make my own version, and set the &lt;code&gt;theme&lt;/code&gt; line in my &lt;code&gt;config.toml&lt;/code&gt; to reflect the change. I also went through all the lines of the example &lt;code&gt;config.toml&lt;/code&gt; and  changed them accordingly.&lt;/p&gt;
+
+&lt;p&gt;&lt;a name=&#34;summary-setup&#34;&gt;&lt;/a&gt;
+With the theme setup, and the configuration edited, I started making some minor tweak to the site. The main tweak I made was to add the &lt;code&gt;Summary&lt;/code&gt; contents to the post list on the home page. I currently use this feature in Cryogen, so all of my posts are written to support it. Summaries are baked into hugo, but I needed to edit the theme to include it on the posts page. To achieve this, I edited the &lt;code&gt;/layouts/post/summary.html&lt;/code&gt; file of the theme slightly:&lt;/p&gt;
+
+&lt;p&gt;original:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-html&#34; data-lang=&#34;html&#34;&gt;&amp;lt;&lt;span style=&#34;color:#f92672&#34;&gt;div&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;class&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;post-preview&amp;#34;&lt;/span&gt;&amp;gt;
+  &amp;lt;&lt;span style=&#34;color:#f92672&#34;&gt;a&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;href&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;{{ .Permalink }}&amp;#34;&lt;/span&gt;&amp;gt;
+    &amp;lt;&lt;span style=&#34;color:#f92672&#34;&gt;h2&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;class&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;post-title&amp;#34;&lt;/span&gt;&amp;gt;{{ .Title }}&amp;lt;/&lt;span style=&#34;color:#f92672&#34;&gt;h2&lt;/span&gt;&amp;gt;
+    &amp;lt;&lt;span style=&#34;color:#f92672&#34;&gt;h3&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;class&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;post-subtitle&amp;#34;&lt;/span&gt;&amp;gt;{{ .Description }}&amp;lt;/&lt;span style=&#34;color:#f92672&#34;&gt;h3&lt;/span&gt;&amp;gt;
+  &amp;lt;/&lt;span style=&#34;color:#f92672&#34;&gt;a&lt;/span&gt;&amp;gt;
+  &amp;lt;&lt;span style=&#34;color:#f92672&#34;&gt;p&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;class&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;post-meta&amp;#34;&lt;/span&gt;&amp;gt;
+      {{ partial &amp;#34;meta.html&amp;#34; .}}
+ &amp;lt;/&lt;span style=&#34;color:#f92672&#34;&gt;p&lt;/span&gt;&amp;gt;
+&amp;lt;/&lt;span style=&#34;color:#f92672&#34;&gt;div&lt;/span&gt;&amp;gt;
+&amp;lt;&lt;span style=&#34;color:#f92672&#34;&gt;hr&lt;/span&gt;&amp;gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;with post summaries:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-html&#34; data-lang=&#34;html&#34;&gt;&amp;lt;&lt;span style=&#34;color:#f92672&#34;&gt;div&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;class&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;post-preview&amp;#34;&lt;/span&gt;&amp;gt;
+    &amp;lt;&lt;span style=&#34;color:#f92672&#34;&gt;a&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;href&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;{{ .Permalink }}&amp;#34;&lt;/span&gt;&amp;gt;
+        &amp;lt;&lt;span style=&#34;color:#f92672&#34;&gt;h2&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;class&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;post-title&amp;#34;&lt;/span&gt;&amp;gt;{{ .Title }}&amp;lt;/&lt;span style=&#34;color:#f92672&#34;&gt;h2&lt;/span&gt;&amp;gt;
+        &amp;lt;&lt;span style=&#34;color:#f92672&#34;&gt;h3&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;class&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;post-subtitle&amp;#34;&lt;/span&gt;&amp;gt;{{ .Description }}&amp;lt;/&lt;span style=&#34;color:#f92672&#34;&gt;h3&lt;/span&gt;&amp;gt;
+    &amp;lt;/&lt;span style=&#34;color:#f92672&#34;&gt;a&lt;/span&gt;&amp;gt;
+    &amp;lt;&lt;span style=&#34;color:#f92672&#34;&gt;p&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;class&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;post-meta&amp;#34;&lt;/span&gt;&amp;gt;
+        {{ partial &amp;#34;meta.html&amp;#34; .}}
+        &amp;lt;&lt;span style=&#34;color:#f92672&#34;&gt;div&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;class&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;summary&amp;#34;&lt;/span&gt;&amp;gt;
+            {{ .Summary }}
+        &amp;lt;/&lt;span style=&#34;color:#f92672&#34;&gt;div&lt;/span&gt;&amp;gt;
+    &amp;lt;/&lt;span style=&#34;color:#f92672&#34;&gt;p&lt;/span&gt;&amp;gt;
+    &amp;lt;&lt;span style=&#34;color:#f92672&#34;&gt;p&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;class&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;post-meta&amp;#34;&lt;/span&gt;&amp;gt; 
+        &amp;lt;&lt;span style=&#34;color:#f92672&#34;&gt;a&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;href&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;{{ .Permalink }}&amp;#34;&lt;/span&gt;&amp;gt; Click to Read More --&amp;gt;&amp;lt;/&lt;span style=&#34;color:#f92672&#34;&gt;a&lt;/span&gt;&amp;gt;
+    &amp;lt;/&lt;span style=&#34;color:#f92672&#34;&gt;p&lt;/span&gt;&amp;gt;
+&amp;lt;/&lt;span style=&#34;color:#f92672&#34;&gt;div&lt;/span&gt;&amp;gt;
+&amp;lt;&lt;span style=&#34;color:#f92672&#34;&gt;hr&lt;/span&gt;&amp;gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;I also setup and fixed the code syntax highlighting. I first installed pygments, which again was &lt;em&gt;very&lt;/em&gt; easy to do on my Solus computers:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;sudo eopkg it pygments
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;After that, I just made sure that the language was specified at the start of each code snippet. I ran into an issue where the colors for the code were poorly selected, resulting in some invisable text. Apparently, this is a common issue, and I found some &lt;em&gt;.css&lt;/em&gt; code to add to the &lt;code&gt;pre&lt;/code&gt; section of my &lt;code&gt;/static/css/clean-blog-min.css&lt;/code&gt; file that resolved the issue.&lt;/p&gt;
+
+&lt;p&gt;If all went well, the code above should have proper syntax highlighting.&lt;/p&gt;
+
+&lt;h4 id=&#34;dumped-my-backlog-of-posts-and-altered-the-header-content&#34;&gt;Dumped my Backlog of Posts and altered the header content&lt;/h4&gt;
+
+&lt;p&gt;To test out if the website worked properly, I wanted to import all of my posts. First&amp;hellip; I needed to figure out where to put them. Hugo has a slightly different file structure, but I eventually figured out that I could create a &lt;code&gt;/content/post/&lt;/code&gt; directory, and dump them there.&lt;/p&gt;
+
+&lt;p&gt;Cryogen, written in &lt;a href=&#34;https://clojure.org/&#34;&gt;clojure&lt;/a&gt;, uses a clojure map for the post&amp;rsquo;s meta data. Hugo on the other hand, uses a several &lt;a href=&#34;https://gohugo.io/content-management/front-matter/&#34;&gt;font matter formats&lt;/a&gt; (&lt;code&gt;toml&lt;/code&gt;, &lt;code&gt;yaml&lt;/code&gt;, &lt;code&gt;json&lt;/code&gt;) for meta data. So, I had to convert the post headers. I&amp;rsquo;m sure that there was a simple, programmatic way, or even a tool, created to accomplish this&amp;hellip; but I just did it by hand. It wasn&amp;rsquo;t so bad. I used emacs.&lt;/p&gt;
+
+&lt;p&gt;After importing the markdown files for the posts, I needed to add all the images the posts contain. Again, this took a tiny bit of research to figure out the file structure, but I quickly learned that anything in the &lt;code&gt;/static/&lt;/code&gt; directory gets copied to the site&amp;rsquo;s root directory when the site is compiled. So, I was able to copy my cryogen &lt;code&gt;/img/&lt;/code&gt; folder directly to &lt;code&gt;/static/img/&lt;/code&gt; in hugo, and all my image paths worked out-of-the-box!&lt;/p&gt;
+
+&lt;p&gt;&lt;a name=&#34;image-size&#34;&gt;&lt;/a&gt;
+Unfortunately, I immediately noticed that some images in the posts were massive, and not constrained to the content width. I looked for a solution, and tried editing the &lt;code&gt;css&lt;/code&gt;, but I eventually just started to convert the markdown syntax images, to use normal html &lt;code&gt;&amp;lt;img&amp;gt;&lt;/code&gt; tags, with a &lt;code&gt;width=100%&lt;/code&gt; parameter. Ultimately, this gives me a bit more power with how I set images anyway.&lt;/p&gt;
+
+&lt;h4 id=&#34;made-a-bunch-of-header-images&#34;&gt;Made a bunch of header images&lt;/h4&gt;
+
+&lt;p&gt;After fixing my in-post images, I started to play with post/page header images. I figured out where they were located in the theme, and added two of my own to replace the defaults. I read that a header image can be set with the &lt;code&gt;image == &amp;quot;...&amp;quot;&lt;/code&gt; option in a post/page&amp;rsquo;s font matter&amp;hellip; so I went a little crazy. I stayed up late browsing through some of my photos, and converting them to header images (I did this by shading them a just a tad, so the overlaying text is legible).&lt;/p&gt;
+
+&lt;h3 id=&#34;what-needs-to-be-done&#34;&gt;What Needs to be Done&lt;/h3&gt;
+
+&lt;p&gt;This post has turned out to be a giant monster, so I&amp;rsquo;ll be brief here and turn the sub-sections into a quick list instead.&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;Create Single Pages (About/Homelab)&lt;/strong&gt; - I still need to figure out and create my website&amp;rsquo;s single pages. These include the &lt;em&gt;About Me&lt;/em&gt; and &lt;em&gt;Homelab&lt;/em&gt; pages. The content of those pages has also been slipping out of date&amp;hellip; but I won&amp;rsquo;t let that hold me up from switching the site over first.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;Setting up an RSS Feed&lt;/strong&gt; - Similar to the task above, I want to make sure I have an RSS feed for the blog configured, and accessible in the main menu.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;Check how the posts display&lt;/strong&gt; - I need to go through the posts and make sure they are displaying content correctly. I&amp;rsquo;ll check that links work, images aren&amp;rsquo;t massive, code syntax languages are set, etc. This actually shouldn&amp;rsquo;t be as bad as it sounds because I&amp;rsquo;ve done much of it already.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;Small tweaks&lt;/strong&gt; - There are bound to be a few tweaks here or there that I&amp;rsquo;ll notice and want to changed (&lt;em&gt;example from above: I&amp;rsquo;ve already added the post summaries to the home page post list&lt;/em&gt;). One item that comes to mind is adding &lt;em&gt;next&lt;/em&gt; and &lt;em&gt;previous&lt;/em&gt; post markers at the bottom of each post. Again, I won&amp;rsquo;t let that hold me up though.&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Well, that&amp;rsquo;s about it. I&amp;rsquo;ll work now on editing and publishing this post, and with any luck, the website should switch over to the Hugo generated one within a few days. I hope you enjoy it!&lt;/p&gt;</description>
     </item>
     
   </channel>

@@ -8,7 +8,7 @@
     <language>en-us</language>
     <lastBuildDate>Thu, 25 May 2017 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="http://ryan.himmelwright.net/tags/ansible/index.xml" rel="self" type="application/rss+xml" />
+        <atom:link href="http://ryan.himmelwright.net/tags/ansible/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
@@ -17,7 +17,150 @@
       <pubDate>Thu, 25 May 2017 00:00:00 +0000</pubDate>
       
       <guid>http://ryan.himmelwright.net/post/updating-pi-cluster-with-ansible/</guid>
-      <description>With Ansible configured on the Pi cluster, it is time to have it do something useful. When working with a clustered system, even the simplest tasks become tedious and time consuming. For example, updating the system. While I could manually update each of the 3 pi nodes, it is not scalable to 10 or 30 nodes, let alone hundreds or thousands. Tools like Ansible, make doing tasks such a supdating clustered systems, trivial again.</description>
+      <description>
+
+&lt;p&gt;With Ansible configured on the Pi cluster, it is time to have it do something useful. When working with a clustered system, even the simplest tasks become tedious and time consuming. For example, updating the system. While I could manually update each of the 3 pi nodes, it is not scalable to 10 or 30 nodes, let alone hundreds or thousands. Tools like Ansible, make doing tasks such a supdating clustered systems, trivial again. In this post, I will walk through setting up an Ansible playbook to update my Pi cluster.&lt;/p&gt;
+
+&lt;!-- more --&gt;
+
+&lt;h3 id=&#34;hosts-file&#34;&gt;Hosts File&lt;/h3&gt;
+
+&lt;p&gt;The first task when using Ansible is to setup the &lt;code&gt;hosts&lt;/code&gt; file. No, not the normal &lt;code&gt;/etc/hosts&lt;/code&gt; file, but the &lt;em&gt;other&lt;/em&gt; one &lt;em&gt;just&lt;/em&gt; for Ansible, which can be found at &lt;code&gt;/etc/ansible/hosts&lt;/code&gt;. Configuring the Ansible hosts file is fairly straightforward. Groups of computers are defined using &lt;code&gt;[brackets]&lt;/code&gt;, with computer ip/hostnames of the group are listed below. For example:&lt;/p&gt;
+
+&lt;p&gt;A nice feature of group definitions is that hierical structures can be constructed using the &lt;code&gt;:child&lt;/code&gt; suffix in order to create groups of groups. For example, for my &lt;a href=&#34;../../pages/homelab&#34;&gt;homelab&lt;/a&gt;, I like to make an ansible hosts file that splits out my servers based on their distribution, and then group those by their packaging type. This makes it easier for me to do generic updates, which is what I mostly use ansible for (at this point). So, for example:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;[ubuntu]
+mrmime
+geodude
+
+[debian]
+ninetales
+
+[fedora]
+fedora-test
+
+[centos]
+tangels
+
+[arch]
+meowth
+staryu
+diglet
+
+[deb:children]
+ubuntu
+debian
+
+[rpm:children]
+fedora
+centos
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;For use with the cluster, I kept it simple, although I did opt to create rpi/bpi subgroups:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;[cluster:children]
+rpis
+bpis
+
+[rpis]
+pi0
+pi1
+
+[bpis]
+bpi
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;ping-hosts&#34;&gt;Ping Hosts&lt;/h3&gt;
+
+&lt;p&gt;Once the hosts file is setup, it can be tested using the &lt;code&gt;ping&lt;/code&gt; module. I tested my &lt;code&gt;cluser&lt;/code&gt; group, as well as the &lt;code&gt;rpis&lt;/code&gt; and &lt;code&gt;bpis&lt;/code&gt; subgroups.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;ansible rpis -m ping
+ansible bpis -m ping
+ansible cluster -m ping
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Assuming the steps of &lt;a href=&#34;../Ansible-On-Pi-Cluster&#34;&gt;the last post&lt;/a&gt; were done correctly, this should work. If not, double check that post and make sure everything looks correct.&lt;/p&gt;
+
+&lt;h3 id=&#34;playbooks&#34;&gt;Playbooks&lt;/h3&gt;
+
+&lt;p&gt;After confirming that the hosts file is properly configured, I started to dig into playbooks. Playbooks are Ansible&amp;rsquo;s scripting system used to configure, deploy, and orcistrate systems. They can describe ways in which systems should be configured (ex: enable ssh), or outline a set of steps for an IT task (ex: running updates, restarting a server). As stated in the &lt;a href=&#34;https://docs.ansible.com/ansible/playbooks.html&#34;&gt;playbook documentation&lt;/a&gt;:&lt;/p&gt;
+
+&lt;div id=&#34;post-quote&#34;&gt;
+*&#34;If Ansible modules are the tools in your workshop, playbooks are your instruction manuals, and your inventory of hosts are your raw material.&#34;*
+&lt;/div&gt;
+
+&lt;p&gt;Playbook files are expressed using &lt;a href=&#34;https://docs.ansible.com/ansible/YAMLSyntax.html&#34;&gt;YAML syntax&lt;/a&gt;, which is easy to read, but still powerful. The first step when creating a new playbook, being a YAML file, is to set the header and footer. The header consists of three &lt;code&gt;-&lt;/code&gt;&amp;rsquo;s at the top of the file, and the footer ends the file with three periods (&lt;code&gt;.&lt;/code&gt;). This indicates the start and end of the document.&lt;/p&gt;
+
+&lt;p&gt;When writing a playbook to update the pi cluster, I first needed to declare what systems the playbook is used with. To do that, I used the &lt;code&gt;hosts&lt;/code&gt; key, and provided it with the &lt;code&gt;cluster&lt;/code&gt; group name, which is defined in my &lt;code&gt;/etc/ansible/hosts&lt;/code&gt; file, as the value.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;---
+- hosts: cluster
+
+...
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;After the hosts are defined, modules can be added to update the nodes. To list the tasks, I used the &lt;code&gt;taks:&lt;/code&gt; key, with the same indentation as the &lt;code&gt;hosts:&lt;/code&gt; keyword. Instead of using a single value, I provided the &lt;code&gt;tasks:&lt;/code&gt; keyword with a list of things to do. The first task I want to do when updating the nodes is to check that they running and connected. This can be accomplised with the &lt;a href=&#34;https://docs.ansible.com/ansible/ping_module.html&#34;&gt;ping module&lt;/a&gt; that I used earlier in the post. The ping module will try to connect to each node, verify that a usable python is installed, and return &lt;code&gt;pong&lt;/code&gt; upon success. To add the module, I added &lt;code&gt;- ping: ~&lt;/code&gt;, indented, to the line below &lt;code&gt;tasks:&lt;/code&gt;:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;---
+- hosts: cluster
+
+  tasks:
+    - ping: ~
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;apt-module&#34;&gt;Apt Module&lt;/h3&gt;
+
+&lt;p&gt;After defining the ping module, I started to get a bit fancier. Well&amp;hellip; a little bit fancier. Each node in my pi cluster is running some verison of Ubuntu, which uses apt as it&amp;rsquo;s package manager. If I wanted to ssh into each node and update them manually, the steps I would follow would be to 1) run the command &lt;code&gt;sudo apt-get update&lt;/code&gt; to update the repository cache, and 2) run &lt;code&gt;sudo apt-get upgrade&lt;/code&gt; to actually install the updates. To recreate these commands in the playbook, I used the &lt;a href=&#34;https://docs.ansible.com/ansible/apt_module.html&#34;&gt;apt module&lt;/a&gt;. To start with updating the repository cache, I added the following lines to my playbook:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;- name: Update APT package manager repositories cache
+  become: true
+  apt:
+    update_cache: yes
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The &lt;code&gt;name:&lt;/code&gt; defines the name of the task, and is the text printed out to the console when executing this step of the playbook. Setting the &lt;a href=&#34;https://docs.ansible.com/ansible/become.html&#34;&gt;&lt;code&gt;become&lt;/code&gt;&lt;/a&gt; key to &lt;code&gt;true&lt;/code&gt; tells Ansible to run the command with privilege escalation (sudo). Lastly, the remaining two lines run the &lt;code&gt;update_cache:&lt;/code&gt; functionality of the apt module.&lt;/p&gt;
+
+&lt;p&gt;With the repositories updated on each node, I can have ansible run the updates by adding the following lines to the playbook (after the cache update ones):&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;- name: Upgrade installed packages
+  become: true
+  apt:
+    upgrade: dist
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;This set of commands is very similar to the last group. The &lt;code&gt;name:&lt;/code&gt; again provides a description of what the task is doing, and privilege escalation is used again via &lt;code&gt;become: true&lt;/code&gt;. The only difference is that the apt module is using the &lt;code&gt;upgrade: dist&lt;/code&gt; command instead. This will run the updates for any installed packages on the system.&lt;/p&gt;
+
+&lt;h3 id=&#34;update-cluster-playbook&#34;&gt;Update Cluster Playbook&lt;/h3&gt;
+
+&lt;p&gt;I then had a completed playbook to update the pi cluster:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;---
+- hosts: cluster
+
+  tasks:
+    - ping: ~
+
+    - name: Update APT package manager repositories cache
+      become: true
+      apt:
+        update_cache: yes
+
+    - name: Upgrade installed packages
+      become: true
+      apt:
+        upgrade: dist
+...
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The last step is to test it out! Playbooks can be executed using the &lt;code&gt;ansible-playbook&lt;/code&gt; command:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;ansible-playbook update-cluster.yml
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;When running the playbook, ansible will first attempt to gather facts about each node, and then begin to run each of the tasks defined in the playbook. At each step, it will print out the &lt;code&gt;name&lt;/code&gt; of each task, followed by the status/result for each node. When it completes, all the nodes in the cluster should be updated. Now you can update three+ computers with a single command! Enjoy!&lt;/p&gt;
+</description>
     </item>
     
     <item>
@@ -28,7 +171,82 @@
       <guid>http://ryan.himmelwright.net/post/ansible-on-pi-cluster/</guid>
       <description>&lt;p&gt;In my &lt;a href=&#34;http://ryan.himmelwright.net/posts/Setting-up-the-pi-cluster/&#34;&gt;previous post&lt;/a&gt;, I pieced together my &lt;a href=&#34;http://ryan.himmelwright.net/pages/homelab/#cluster&#34;&gt;pi cluster&lt;/a&gt;, and installed variations of Ubuntu 16.04 Server on each of its nodes. With the cluster built, I quickly needed an easy way to maintain and interact with the system as a whole. This, is where &lt;a href=&#34;https://www.ansible.com/&#34;&gt;Ansible&lt;/a&gt; comes in. In this post, I will walk through the steps I took to setup Ansible on my Cluster.&lt;/p&gt;
 
-&lt;p&gt;&lt;/p&gt;</description>
+&lt;p&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;ansible&#34;&gt;Ansible&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src=&#34;../../img/posts/setting-up-ansible-pi-cluster/ansible-logo.png&#34; style=&#34;max-width: 50%; width: 150px; float: left; margin: 0px 15px 5px 5px;&#34;/&gt;&lt;/p&gt;
+
+&lt;p&gt;Ansible is an open source, configuration management and automation system. It is written in Python, and financially backed by &lt;a href=&#34;http://www.redhat.com&#34;&gt;Red Hat&lt;/a&gt;. It simplifies the management of groups of computers, through the use of modules (standalone units of work. for example, apt, ping, rpm, etc). Ansible is script-able using simple YAML files, known as playbooks, that define a set of orchestration tasks for one or many computers. These scripts can be edited and version controlled, creating a simple &lt;a href=&#34;https://en.wikipedia.org/wiki/Infrastructure_as_Code&#34;&gt;infrastructure as code&lt;/a&gt; setup.&lt;/p&gt;
+
+&lt;h2 id=&#34;setting-up-the-user-account&#34;&gt;Setting up the User Account&lt;/h2&gt;
+
+&lt;p&gt;When Ansible executes commands on the PIs, it will do so from the user-account (ryan) that I setup in the last post. However, many of these commands will require Root privledges. While I previously setup sudo and added the &lt;code&gt;ryan&lt;/code&gt; account to the &lt;code&gt;sudo&lt;/code&gt; group &amp;hellip; it required that I manually enter my password. Ansible did not like this, so I had to update the sudo configuration to allow the &lt;code&gt;ryan&lt;/code&gt; account to run &lt;code&gt;sudo&lt;/code&gt; commands with out a password. To do this, I opened the &lt;code&gt;sudoers&lt;/code&gt; file:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;sudo visudo
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;and added the following line to the end of the file:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;ryan  ALL=(ALL:ALL) NOPASSWD: ALL
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;I repeated this on each of the nodes, and afterwards was no longer promted for a password when running &lt;code&gt;sudo&lt;/code&gt; commands. This made Ansible happy.&lt;/p&gt;
+
+&lt;p&gt;&lt;a name=&#34;ssh&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;setup-ssh-keys&#34;&gt;Setup SSH Keys&lt;/h2&gt;
+
+&lt;p&gt;Well&amp;hellip; &lt;em&gt;almost&lt;/em&gt; happy.&lt;/p&gt;
+
+&lt;p&gt;Ansible&amp;rsquo;s main method of communication is via ssh, which by default, prompts me for a password when connecting. Ansible &lt;em&gt;really&lt;/em&gt; hates passwords. So, I had to configure ssh to use keys instead. Honestly, this is proabaly a good step to do regardless, now that the &lt;code&gt;ryan&lt;/code&gt; account no longer uses a password when running &lt;code&gt;sudo&lt;/code&gt;. To setup key-based logins, I appended the contents of my &lt;a href=&#34;../../pages/homelab/#alakazam&#34;&gt;main computer&lt;/a&gt;&amp;rsquo;s ssh public key*, to each pi&amp;rsquo;s &lt;code&gt;authorized_keys&lt;/code&gt; file. This can all be done using a magic one-line pipe command (x3, one for each pi):&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;cat ~/.ssh/id_rsa.pub | ssh pi0 &amp;quot;cat &amp;gt;&amp;gt; ~/.ssh/authorized_keys&amp;quot;
+cat ~/.ssh/id_rsa.pub | ssh pi1 &amp;quot;cat &amp;gt;&amp;gt; ~/.ssh/authorized_keys&amp;quot;
+cat ~/.ssh/id_rsa.pub | ssh bpi &amp;quot;cat &amp;gt;&amp;gt; ~/.ssh/authorized_keys&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;em&gt;*Note: If keys are not already generated, they can be created using the command:&lt;/em&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;ssh-keygen
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h4 id=&#34;key-only-login&#34;&gt;Key Only Login&lt;/h4&gt;
+
+&lt;p&gt;To help secure access to the PIs (and to get on Ansible&amp;rsquo;s good side), I configured sshd to disable password logins, and only allow connections from clients with approved keys. To disable password authentication, I opened the &lt;code&gt;/etc/ssh/sshd_config&lt;/code&gt; file, found the line containing &lt;code&gt;# PasswordAuthentication yes&lt;/code&gt;, changed the &lt;code&gt;yes&lt;/code&gt; to a &lt;code&gt;no&lt;/code&gt;, and unncommented it by removing the &lt;code&gt;#&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;While I was in the &lt;code&gt;sshd_config&lt;/code&gt; file, I also set &lt;code&gt;PermitRootLogin&lt;/code&gt; to &lt;code&gt;no&lt;/code&gt;, for good measure.&lt;/p&gt;
+
+&lt;p&gt;Lastly, I reset the &lt;code&gt;sshd&lt;/code&gt; service and repeated the steps for each pi:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;sudo systemctl restart sshd
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Afterwards, I was unable to login to the PIs from a computer with unauthorized ssh keys.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;../../img/posts/setting-up-ansible-pi-cluster/terminal-play.png&#34; name=&#34;pic&#34; onmouseover=&#34;this.src=&#39;../../img/posts/setting-up-ansible-pi-cluster/blocked-ssh-attempt.gif&#39;&#34; onmouseout=&#34;this.src=&#39;../../img/posts/setting-up-ansible-pi-cluster/terminal-play.png&#39;&#34; style=&#34;max-width: 100%;&#34;/&gt;&lt;/p&gt;
+
+&lt;p&gt;But, I was still able to loging from the authorized computer.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;../../img/posts/setting-up-ansible-pi-cluster/terminal-play.png&#34; name=&#34;pic&#34; onmouseover=&#34;this.src=&#39;../../img/posts/setting-up-ansible-pi-cluster/accepted-ssh-attempt.gif&#39;&#34; onmouseout=&#34;this.src=&#39;../../img/posts/setting-up-ansible-pi-cluster/terminal-play.png&#39;&#34; style=&#34;max-width: 100%;&#34;/&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;install-python&#34;&gt;Install Python&lt;/h2&gt;
+
+&lt;p&gt;The last issue Ansible complained about was that it needed python installed on the Pis. Like everything else, the Bananna Pi already had this setup, but I had to install it on the two Raspberry Pis. It was simple enough:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;sudo apt-get install python
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;install-ansible&#34;&gt;Install Ansible&lt;/h2&gt;
+
+&lt;p&gt;I have a confession. So, you know how I have been fun and cheery by anthropomorphisizing Ansible, saying that it was &lt;em&gt;&amp;ldquo;happy&amp;rdquo;&lt;/em&gt; or &lt;em&gt;&amp;ldquo;frusterated&amp;rdquo;&lt;/em&gt; during the previous steps? That wasn&amp;rsquo;t true. I made it up. Ansible wasn&amp;rsquo;t &lt;em&gt;actually&lt;/em&gt; installed yet. &lt;em&gt;So&amp;hellip; to install Ansible&amp;hellip;&lt;/em&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;sudo eopkg it ansible
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;I used &lt;code&gt;eopkg&lt;/code&gt; because I am currently running &lt;a href=&#34;https://solus-project.com&#34;&gt;Solus&lt;/a&gt;. You might use &lt;code&gt;sudo apt-get install ansible&lt;/code&gt;, &lt;code&gt;sudo dnf install ansible&lt;/code&gt;, or &lt;code&gt;pacaur -S ansible&lt;/code&gt; depending on whatever distro you are using.&lt;/p&gt;
+
+&lt;p&gt;That&amp;rsquo;s all for &lt;em&gt;setting up&lt;/em&gt; Ansible. I&amp;rsquo;ll cut this post off here, but in the next post, I&amp;rsquo;ll walk through the steps on how to get Ansible to be useful.&lt;/p&gt;</description>
     </item>
     
   </channel>

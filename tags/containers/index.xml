@@ -8,7 +8,7 @@
     <language>en-us</language>
     <lastBuildDate>Sun, 25 Feb 2018 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="http://ryan.himmelwright.net/tags/containers/index.xml" rel="self" type="application/rss+xml" />
+        <atom:link href="http://ryan.himmelwright.net/tags/containers/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
@@ -24,7 +24,264 @@ ecosystem surrounding it, and can take years to truly master. This post on the
 other hand, will &lt;em&gt;hopefully&lt;/em&gt; help you get up and playing with docker containers in
 just a few minutes. Lets get started.&lt;/p&gt;
 
-&lt;p&gt;&lt;/p&gt;</description>
+&lt;p&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;installing-docker&#34;&gt;Installing Docker&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src=&#34;../../img/posts/docker-quickstart/docker-logo.png&#34; style=&#34;max-width: 100%; width: 400px; float: right; margin: 0px 15px 5px 5px;&#34; alt=&#34;Docker Logo&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Installing docker on &lt;a href=&#34;https://solus-project.com&#34;&gt;Solus&lt;/a&gt; was easy enough. I just
+had to install the package, and then enable the service:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;sudo eopkg it docker
+sudo systemctl enable docker
+sudo systemctl start docker&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;On other distributions, it may not be in the package manager, or it might be
+under a different name. To be sure, check out the community edition
+&lt;a href=&#34;https://docs.docker.com/install/linux/docker-ce/fedora/#set-up-the-repository&#34;&gt;installation
+documentation&lt;/a&gt;
+for your specific distro.&lt;/p&gt;
+
+&lt;h2 id=&#34;adding-user-to-docker-group&#34;&gt;Adding User to Docker Group&lt;/h2&gt;
+
+&lt;p&gt;By default, user accounts will not have permission to run docker commands
+without root access. So, after first installing docker, it might be tempting to
+just run everything using &lt;code&gt;sudo&lt;/code&gt;, but that isn&amp;rsquo;t the best idea. To get around
+this, simply add the user account to the &lt;code&gt;docker&lt;/code&gt; group:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;sudo usermod -a -G docker ryan&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;If the docker group is not created for some reason, it can be added:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;sudo groupadd docker&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Afterwards, that user should be able to run docker commands without requiring
+&lt;code&gt;sudo&lt;/code&gt;. They &lt;em&gt;might&lt;/em&gt; have to log out and back in first.&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;Note: These commands may differ based on distro.&lt;/em&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;some-useful-commands&#34;&gt;Some Useful Commands&lt;/h2&gt;
+
+&lt;p&gt;Before getting too caught up in creating and using containers, lets first go
+over a few useful commands that make navigating docker a bit easier.&lt;/p&gt;
+
+&lt;h4 id=&#34;docker-ps&#34;&gt;docker ps&lt;/h4&gt;
+
+&lt;p&gt;&lt;a href=&#34;../../img/posts/docker-quickstart/docker-ps.png&#34;&gt;&lt;img src=&#34;../../img/posts/docker-quickstart/docker-ps.png&#34; style=&#34;max-width: 100%; float: left; margin: 0px 15px 0px 0px;&#34; alt=&#34;Docker ps&#34; /&gt;&lt;/a&gt;
+&lt;div class=&#34;caption&#34;&gt;Example of the docker ps and docker ps -a commands&lt;/div&gt;&lt;/p&gt;
+
+&lt;p&gt;Similar to how Unix-based systems have the &lt;code&gt;ps&lt;/code&gt; command to see running
+processes, docker has &lt;code&gt;docker ps&lt;/code&gt; to see created and running containers. To
+view the currently running containers, use the basic &lt;code&gt;docker ps&lt;/code&gt; command:&lt;/p&gt;
+
+&lt;p&gt;The base command however, doesn&amp;rsquo;t always tell the whole story. A system might
+have containers that &lt;em&gt;exist&lt;/em&gt; but are not running. A container may have been
+stopped, &lt;em&gt;or&lt;/em&gt; exited if it encountered an error. Containers that are stopped or
+exited &lt;em&gt;will not&lt;/em&gt; show up in the default &lt;code&gt;docker ps&lt;/code&gt; command. To see &lt;em&gt;all&lt;/em&gt; of the
+current containers on the system, run &lt;code&gt;ps&lt;/code&gt; with the &lt;code&gt;-a&lt;/code&gt; flag.&lt;/p&gt;
+
+&lt;h4 id=&#34;docker-inspect&#34;&gt;docker inspect&lt;/h4&gt;
+
+&lt;p&gt;&lt;a href=&#34;../../img/posts/docker-quickstart/docker-inspect.png&#34;&gt;&lt;img src=&#34;../../img/posts/docker-quickstart/docker-inspect.png&#34; style=&#34;max-width: 100%; float: left; margin: 0px 15px 0px 0px;&#34; alt=&#34;Docker inspect examples: docker inspect web-test | grep Status and docker inspect web-test | grep IPAddress&#34; /&gt;&lt;/a&gt;
+&lt;div class=&#34;caption&#34;&gt;Using the docker inspect command to get the container&amp;rsquo;s status and IP address&lt;/div&gt;&lt;/p&gt;
+
+&lt;p&gt;Another useful command when working with docker containers is &lt;code&gt;docker inspect&lt;/code&gt;.
+The &lt;code&gt;inspect&lt;/code&gt; command will dump the xml for all the low level information of the
+container/docker object. The output contains basically &lt;em&gt;everything&lt;/em&gt; about the
+container: Full ID, time created, state, volumes, network information&amp;hellip;
+everything. It can be useful to pipe the output of &lt;code&gt;inspect&lt;/code&gt; to grep, in order
+to get specific information about the container quickly.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;docker inspect container_name | grep IPAddress&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;For example, the above command will grab and return only the lines which contain
+&amp;ldquo;IPAddress&amp;rdquo;.&lt;/p&gt;
+
+&lt;h4 id=&#34;help&#34;&gt;help&lt;/h4&gt;
+
+&lt;p&gt;&lt;a href=&#34;../../img/posts/docker-quickstart/docker-help.png&#34;&gt;&lt;img src=&#34;../../img/posts/docker-quickstart/docker-help.png&#34; style=&#34;max-width: 100%; float: left; margin: 0px 15px 0px 0px;&#34; alt=&#34;Using the docker help command flags. For Example: docker inspect --help&#34; /&gt;&lt;/a&gt;
+&lt;div class=&#34;caption&#34;&gt;Using the docker help command flags.&lt;/div&gt;&lt;/p&gt;
+
+&lt;p&gt;Last but not least, don&amp;rsquo;t forget about the &lt;code&gt;help&lt;/code&gt; command. To see all the
+available docker commands, run &lt;code&gt;docker help&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;Additionally, when using each of those specific commands, (&lt;code&gt;inspect&lt;/code&gt; for
+example), a description and possible options can be shown using the &lt;code&gt;--help&lt;/code&gt;
+flag (as in &lt;code&gt;docker inspect --help&lt;/code&gt;).&lt;/p&gt;
+
+&lt;p&gt;Just as man pages can be extremely valuable when working on a Linux system,
+&lt;code&gt;help&lt;/code&gt; is just as essential when using docker.&lt;/p&gt;
+
+&lt;h2 id=&#34;images&#34;&gt;Images&lt;/h2&gt;
+
+&lt;p&gt;A docker container is created from a base &lt;em&gt;image&lt;/em&gt;. Images can be pulled down
+from &lt;a href=&#34;https://hub.docker.com/&#34;&gt;Dockerhub&lt;/a&gt;. To search docker hub from command
+line, use the &lt;code&gt;docker search&lt;/code&gt; command. For example, &lt;code&gt;docker search nginx&lt;/code&gt; will
+search for images related to nginx.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;../../img/posts/docker-quickstart/docker-search.png&#34;&gt;&lt;img src=&#34;../../img/posts/docker-quickstart/docker-search.png&#34; style=&#34;max-width: 100%; float: left; margin: 0px 15px 0px 0px;&#34; alt=&#34;Docker Search output. Ex: docker search nginx&#34; /&gt;&lt;/a&gt;
+&lt;div class=&#34;caption&#34;&gt;The search output for nginx images&lt;/div&gt;&lt;/p&gt;
+
+&lt;p&gt;The search will list all of the public images in order, from most to least
+stars. When a desired image is found, pull it down using the &lt;code&gt;docker pull&lt;/code&gt;
+command. For example, &lt;code&gt;docker pull nginx&lt;/code&gt; will pull down the &lt;a href=&#34;https://hub.docker.com/_/nginx/&#34;&gt;nginx
+image&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;../../img/posts/docker-quickstart/docker-pull.png&#34;&gt;&lt;img src=&#34;../../img/posts/docker-quickstart/docker-pull.png&#34; style=&#34;max-width: 100%; width:100%; float: left; margin: 0px 15px 0px 0px;&#34; alt=&#34;Docker Pull output. Ex: docker pull nginx&#34; /&gt;&lt;/a&gt;
+&lt;div class=&#34;caption&#34;&gt;Pulling the latest nginx image&lt;/div&gt;&lt;/p&gt;
+
+&lt;p&gt;Docker will then download all the layers for the image. When the download
+completes, the image will be locally available to create docker containers
+from. To see all of the local images, use the &lt;code&gt;docker images&lt;/code&gt; command:&lt;/p&gt;
+
+&lt;p&gt;To delete an image, use the &lt;code&gt;docker images rm&lt;/code&gt; command, or my preferred, lazier
+command, &lt;code&gt;docker rmi&lt;/code&gt;:&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;../../img/posts/docker-quickstart/docker-images.png&#34;&gt;&lt;img src=&#34;../../img/posts/docker-quickstart/docker-images.png&#34; style=&#34;max-width: 100%; float: left; margin: 0px 15px 0px 0px;&#34; alt=&#34;docker images and docker rmi. Ex: docker images, then docker rmi test-ubuntu&#34; /&gt;&lt;/a&gt;
+&lt;div class=&#34;caption&#34;&gt;Viewing downloaded images with the docker images command, then deleting the &amp;ldquo;test-ubuntu&amp;rdquo; image using the docker rmi command&lt;/div&gt;&lt;/p&gt;
+
+&lt;p&gt;Lastly, it should be noted that custom images can be created/tailored using a
+&lt;a href=&#34;https://docs.docker.com/engine/reference/builder/#usage&#34;&gt;Dockerfile&lt;/a&gt;. With a
+Dockerfile is defined, an image can be created from it using the &lt;code&gt;docker build&lt;/code&gt;
+command. For example, the following Dockerfile would use an
+&lt;a href=&#34;https://hub.docker.com/_/ubuntu/&#34;&gt;ubuntu&lt;/a&gt; image for the base, but also update &amp;amp;
+install several packages in the image:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# This is a custom ubuntu image with SSH already installed&lt;/span&gt;
+FROM ubuntu:latest
+MAINTAINER himmallright &amp;lt;ryan.himmelwright@gmail.com&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;gt;
+&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;RUN apt-get update
+&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;RUN apt-get install -y vim stow git tmux fish htop emacs&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;To build the image, run the following command in the same directory as the
+Dockerfile (if defining a specific file, the &lt;code&gt;-f&lt;/code&gt; flag can be used):&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;docker build -t ubuntu-base:v1 .&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;I like to use the &lt;code&gt;-t&lt;/code&gt; flag, so that I can specify a &lt;code&gt;name:tag&lt;/code&gt; for the image.
+This helps to make it easier to find it in the &lt;code&gt;docker images&lt;/code&gt; list.&lt;/p&gt;
+
+&lt;h2 id=&#34;creating-containers&#34;&gt;Creating Containers&lt;/h2&gt;
+
+&lt;p&gt;Docker containers can be &lt;em&gt;created&lt;/em&gt; (but not run) with the &lt;code&gt;docker create&lt;/code&gt;
+command. When creating containers, it is useful to use flags to tailor the
+details of the container. For example, the &lt;code&gt;-m&lt;/code&gt; flag can be used to create a
+memory limit, &lt;code&gt;--name&lt;/code&gt; to name the container, and so on. To create a simple nginx
+container from the image we previously pulled:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;docker create --name web-test nginx:latest&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h2 id=&#34;starting-running-containers&#34;&gt;Starting &amp;amp; Running Containers&lt;/h2&gt;
+
+&lt;p&gt;To &lt;em&gt;start&lt;/em&gt; a container created with &lt;code&gt;docker create&lt;/code&gt;, or one that has been previously
+stopped, use the &lt;code&gt;docker start&lt;/code&gt; command. For example, to start
+the container created in the previous step:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;docker start web-test
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Similarly, a container can be stopped with &lt;code&gt;docker stop&lt;/code&gt;, or restarted with
+&lt;code&gt;docker restart&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;Instead of using a &lt;code&gt;docker create&lt;/code&gt; and &lt;code&gt;docker start&lt;/code&gt; combination, &lt;code&gt;docker run&lt;/code&gt;
+can be used to both instantiate &lt;em&gt;and&lt;/em&gt; start a container. To create and start the
+&amp;ldquo;web-test&amp;rdquo; container from the previous examples:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;docker run --name web-test -d nginx:latest
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h4 id=&#34;cleaning-containers&#34;&gt;Cleaning containers&lt;/h4&gt;
+
+&lt;p&gt;&lt;a href=&#34;../../img/posts/docker-quickstart/docker-rm.png&#34;&gt;&lt;img src=&#34;../../img/posts/docker-quickstart/docker-rm.png&#34; style=&#34;max-width: 100%; float: left; width: 95%;&#34; alt=&#34;Docker rm all images. Ex: docker rm `docker ps -aq`&#34; /&gt;&lt;/a&gt;
+&lt;div class=&#34;caption&#34;&gt;Removing all the older container images&lt;/div&gt;&lt;/p&gt;
+
+&lt;p&gt;Over time, old containers may build up on the system. To remove an old (but not
+running) container, use &lt;code&gt;docker rm&lt;/code&gt; with either the container name, &lt;em&gt;or&lt;/em&gt; the id.
+Note, to easily delete &lt;em&gt;all&lt;/em&gt; of the containers on the system, &lt;code&gt;docker rm&lt;/code&gt; can be
+fed the output of &lt;code&gt;docker ps -aq&lt;/code&gt;, where the &lt;code&gt;-aq&lt;/code&gt; flag returns a list of all
+the container ids.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;docker rm &lt;span style=&#34;color:#e6db74&#34;&gt;`&lt;/span&gt;docker ps -aq&lt;span style=&#34;color:#e6db74&#34;&gt;`&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;&lt;em&gt;(Note: this doesn&amp;rsquo;t work in my Fish shell, but does in bash)&lt;/em&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;attaching-to-containers&#34;&gt;Attaching to Containers&lt;/h2&gt;
+
+&lt;p&gt;After a container is running, it might occasionally be necessary to attach to
+it and poke around with a shell. There is the obvious way to do this,
+&lt;code&gt;docker attach&lt;/code&gt;, and a somewhat work-around way, which I prefer to use: &lt;code&gt;docker
+exec&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;../../img/posts/docker-quickstart/docker-attach.png&#34;&gt;&lt;img src=&#34;../../img/posts/docker-quickstart/docker-attach.png&#34; style=&#34;max-width: 100%; float: left;&#34; alt=&#34;Docker attach example&#34; /&gt;&lt;/a&gt;
+&lt;div class=&#34;caption&#34;&gt;An example using the docker attach command&lt;/div&gt;&lt;/p&gt;
+
+&lt;p&gt;The attach command works as one would expect. It allows a user to &amp;ldquo;Attach local
+standard input, output, and error streams to a running container&amp;rdquo;. This is all
+well an good, except for one issue: when exiting the attached container, the
+&lt;em&gt;container also&lt;/em&gt; exits.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;../../img/posts/docker-quickstart/docker-exec-bash.png&#34;&gt;&lt;img src=&#34;../../img/posts/docker-quickstart/docker-exec-bash.png&#34; style=&#34;max-width: 100%; float: left;&#34; alt=&#34;Docker exec bash example&#34; /&gt;&lt;/a&gt;
+&lt;div class=&#34;caption&#34;&gt;An example using docker exec with a bash shell, as an alternative to docker attach&lt;/div&gt;&lt;/p&gt;
+
+&lt;p&gt;A way around this annoyance is to utilize the &lt;code&gt;docker exec&lt;/code&gt; command, which
+allows a command to be executed inside a container. Executing a shell program
+inside the container, such as &lt;code&gt;bash&lt;/code&gt;, mimics the &lt;code&gt;attach&lt;/code&gt; command, but with the
+added benefit that when exiting, only the shell exits, and &lt;em&gt;not&lt;/em&gt; the entire
+container.&lt;/p&gt;
+
+&lt;h2 id=&#34;ports-volumes&#34;&gt;Ports &amp;amp; Volumes&lt;/h2&gt;
+
+&lt;p&gt;As mentioned earlier, docker containers can be built and run using many specific
+commands to tailor the container and how it interfaces with the host system.
+There are two concepts in particular that I want to briefly touch on in this
+&lt;em&gt;quick start&lt;/em&gt; post. Those two items, are &lt;code&gt;ports&lt;/code&gt; and &lt;code&gt;volumes&lt;/code&gt;.&lt;/p&gt;
+
+&lt;h4 id=&#34;ports&#34;&gt;Ports&lt;/h4&gt;
+
+&lt;p&gt;&lt;a href=&#34;../../img/posts/docker-quickstart/nginx-firefox-port.png&#34;&gt;&lt;img src=&#34;../../img/posts/docker-quickstart/nginx-firefox-port.png&#34; style=&#34;max-width: 100%; float: center;&#34; alt=&#34;Containerized nginx server connected to through localhost&#34; /&gt;&lt;/a&gt;
+&lt;div class=&#34;caption&#34;&gt;Container ports can be forwarded to the host&amp;rsquo;s ports.&lt;/div&gt;&lt;/p&gt;
+
+&lt;p&gt;While it is nice to spin up a web server inside a docker container, it isn&amp;rsquo;t
+always very useful to only have it available to the host machine. By using the
+&lt;code&gt;-p&lt;/code&gt; flag when running a container, the container&amp;rsquo;s ports can be forwarded to
+ports on the host system.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;../../img/posts/docker-quickstart/docker-port.png&#34;&gt;&lt;img src=&#34;../../img/posts/docker-quickstart/docker-port.png&#34; style=&#34;max-width: 100%; float: center;&#34; alt=&#34;Creating an nginx container, forwarding port 80 to he host&#39;s 8081&#34; /&gt;&lt;/a&gt;
+&lt;div class=&#34;caption&#34;&gt;Creating an nginx container, forwarding it&amp;rsquo;s port 80 to the host&amp;rsquo;s port 8081&lt;/div&gt;&lt;/p&gt;
+
+&lt;p&gt;Using &lt;code&gt;-p&lt;/code&gt; with just a single number, as in &lt;code&gt;-p 8080&lt;/code&gt;, will declare that port of
+the container to be exposed. To forward exposed ports to the host, use &lt;em&gt;two&lt;/em&gt;
+port numbers, separated with a &lt;code&gt;:&lt;/code&gt;. The first number is the host port to bind
+to, and the second is the container port to expose and forward.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;docker run -itd --name webtest -p 8081:80 nginx:latest
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The above example, a nginx container is started with port 80 forwarded to port
+8081 on the host. As a result, any computer connecting to port 8081 of the host
+machine will be directed to the nginx web server inside the container.&lt;/p&gt;
+
+&lt;h4 id=&#34;volumes&#34;&gt;Volumes&lt;/h4&gt;
+
+&lt;p&gt;&lt;a href=&#34;../../img/posts/docker-quickstart/nginx-firefox-volume.png&#34;&gt;&lt;img src=&#34;../../img/posts/docker-quickstart/nginx-firefox-volume.png&#34; style=&#34;max-width: 100%; float: center;&#34; alt=&#34;Nginx container with website pages in a volume from the host.&#34; /&gt;&lt;/a&gt;
+&lt;div class=&#34;caption&#34;&gt;Containers can attach volumes from the host system for persistent data.&lt;/div&gt;&lt;/p&gt;
+
+&lt;p&gt;Lastly, by design docker containers are mean to be expendable. They are run, and then
+disposed. It should not be assumed that &lt;em&gt;any&lt;/em&gt; data inside the container will
+be preserved by default. That is, unless
+&lt;a href=&#34;https://docs.docker.com/storage/volumes/&#34;&gt;volumes&lt;/a&gt; are used.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;../../img/posts/docker-quickstart/docker-volume.png&#34;&gt;&lt;img src=&#34;../../img/posts/docker-quickstart/docker-volume.png&#34; style=&#34;max-width: 100%; float: center;&#34; alt=&#34;Creating an nginx container, forwarding port 80 to he host&#39;s 8081&#34; /&gt;&lt;/a&gt;
+&lt;div class=&#34;caption&#34;&gt;Creating an nginx container, forwarding it&amp;rsquo;s port 80 to the host&amp;rsquo;s port 8081&lt;/div&gt;&lt;/p&gt;
+
+&lt;p&gt;Docker volumes are the preferred mechanism for preserving data across container
+runs, and are specified using the &lt;code&gt;-v&lt;/code&gt; flag. Similar to setting ports, volumes
+can be created by providing either a single path, or two separated by a &lt;code&gt;:&lt;/code&gt;.
+When a single path is provided, as in &lt;code&gt;-v /Data&lt;/code&gt;, docker will create a volume
+and bind it to that location within the container. Two locations can be provided
+to bind a directory on the host system, to the volume inside to container.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;docker run -d --name testsite -v /home/ryan/testsite/:/usr/share/nginx/html nginx:latest
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;In the above command, for example, &lt;code&gt;-v
+/home/ryan/testsite/:/usr/share/nginx/html&lt;/code&gt; will use the &lt;code&gt;/home/ryan/testsite/&lt;/code&gt;
+directory of the host system, as a volume located at &lt;code&gt;/usr/share/nginx/html&lt;/code&gt;
+inside the container. This means that the container will server the website
+files, which are located (and can be easily edited), on the host system.&lt;/p&gt;
+
+&lt;h2 id=&#34;in-conclusion&#34;&gt;In Conclusion&lt;/h2&gt;
+
+&lt;p&gt;So, this has been&amp;hellip; a rather long post. However, when it comes to Docker, this
+&lt;em&gt;really is just the tip of the iceberg&lt;/em&gt;. With any luck though, you should now
+know the basic to at &lt;em&gt;least&lt;/em&gt; get &lt;em&gt;started&lt;/em&gt;. So&amp;hellip; go ahead and have some fun!.&lt;/p&gt;</description>
     </item>
     
   </channel>

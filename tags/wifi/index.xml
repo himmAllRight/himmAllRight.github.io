@@ -8,7 +8,7 @@
     <language>en-us</language>
     <lastBuildDate>Thu, 29 Jun 2017 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="http://ryan.himmelwright.net/tags/wifi/index.xml" rel="self" type="application/rss+xml" />
+        <atom:link href="http://ryan.himmelwright.net/tags/wifi/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
@@ -26,7 +26,79 @@ learned a lot :). In fact, I am confident that if I had to start over from
 scratch, the process would take me about 10-15 minutes. Just to be sure, I&amp;rsquo;m
  going to quickly jot down the major pain points I experienced my first time around.&lt;/p&gt;
 
-&lt;p&gt;&lt;/p&gt;</description>
+&lt;p&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;trouble-connecting-to-the-edgerouter-x-for-initial-setup&#34;&gt;Trouble Connecting to the EdgeRouter-x for Initial Setup&lt;/h2&gt;
+
+&lt;p&gt;&lt;center&gt;
+&lt;img alt=&#34;During initial setup, I was connecting the router wrong&#34; src=&#34;../../img/posts/ubiquiti-setup-issues/wrong-router-connection.png&#34; style=&#34;max-width: 100%;&#34;/&gt;
+&lt;/center&gt;
+&lt;em&gt;During initial setup, I was connecting the router wrong&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;The edgerouter needed to be directly connected to a computer during its initial
+setup, to make the EdgeOS configuration wizard accessible. The
+instructions clearly stated to connect an ethernet cable from my laptop to the
+&lt;code&gt;eth0/POE&lt;/code&gt; port on the edgerouter, but I guess I didn&amp;rsquo;t believe them.&lt;/p&gt;
+
+&lt;p&gt;Instead, I plugged the ethernet cable from my modem into &lt;code&gt;eth0&lt;/code&gt;, and my computer
+to &lt;code&gt;eth1&lt;/code&gt;. That didn&amp;rsquo;t work. However, once I &lt;em&gt;properly&lt;/em&gt; connected the devices (and
+manually set a static IP on my laptop, &lt;code&gt;192.168.1.2&lt;/code&gt; for example), I was able to access
+the configuration page in my browser via &lt;code&gt;https://192.168.1.1&lt;/code&gt; (don&amp;rsquo;t forget
+the &lt;em&gt;s&lt;/em&gt; in &lt;em&gt;https&lt;/em&gt;). Lesson Learned: manuals are (&lt;em&gt;usually&lt;/em&gt;) not out to get you.&lt;/p&gt;
+
+&lt;h2 id=&#34;setting-up-poe-and-connecting-the-ap&#34;&gt;Setting up POE and Connecting the AP&lt;/h2&gt;
+
+&lt;p&gt;This was not actually an issue I encountered, but rather a confusion. I was unsure what the best setup for
+the &lt;a href=&#34;https://en.wikipedia.org/wiki/Power_over_Ethernet&#34;&gt;POE&lt;/a&gt; hardware was. At
+first, I had the POE adaptor connected between the edgerouter and the AP,
+because I wasn&amp;rsquo;t sure if it could optimally power both devices. I found
+an
+&lt;a href=&#34;https://www.youtube.com/watch?v=f7FeYsJqotc&amp;amp;list=PLDBkup9c8YMgZaE50hAjP7rbbVriTlyQf&amp;amp;index=1&#34;&gt;informative guide&lt;/a&gt; that
+indicated that the POE adaptor could indeed power both.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-scheme&#34; data-lang=&#34;scheme&#34;&gt;Modem  --
+        |
+         --&amp;gt; POE Adaptor --&amp;gt; (*eth0*)  edgerouter-x  (*eth4*) --&amp;gt; AP Lite
+        |
+Power  --&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;&lt;em&gt;Digram describing the correct link up&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;Once I swapped the cables all around, I had to go into the router
+configuration and enable the POE for &lt;code&gt;eth4&lt;/code&gt;. Afterwards, the AP lit up,
+indicating that it was connected and powered.&lt;/p&gt;
+
+&lt;h2 id=&#34;issues-linking-configuring-the-ap&#34;&gt;Issues linking/configuring the AP&lt;/h2&gt;
+
+&lt;p&gt;This was the problem I spent the most time on. I had to install the
+configuration software for the Ubiquiti access point, but the &amp;ldquo;Linux binary&amp;rdquo; was
+a .deb, and I didn&amp;rsquo;t feel like extracting the contents of the package so that I
+could install it on Solus (yet). So instead, I spun up a few Ubuntu VMs to try
+it out, but I over-looked the fact that VMs on my laptop use a
+different subnet (192.168.&lt;strong&gt;122&lt;/strong&gt;. *) for the virtual network. I had hoped that
+because the VM&amp;rsquo;s network was routed through my laptop, which was connected
+directly to the edgerouter, it would still be able to see the access point.
+Regardless&amp;hellip; the AP couldn&amp;rsquo;t see the VM and vice versa. Finally, I admitted
+that the issues were most likely caused by the 192.168.122.* IP address that the VM was
+assigned.&lt;/p&gt;
+
+&lt;p&gt;&lt;center&gt;
+&lt;img alt=&#34;During initial setup, I was connecting the router wrong&#34; src=&#34;../../img/posts/ubiquiti-setup-issues/ubuntu.png&#34; width=&#34;45%&#34;&gt;
+&lt;img alt=&#34;During initial setup, I was connecting the router wrong&#34; src=&#34;../../img/posts/ubiquiti-setup-issues/venomoth.png&#34; width=&#34;35%&#34;&gt;
+&lt;/center&gt;
+&lt;em&gt;I spun up a new Ubuntu VM (Venomoth) to host the Ubifi controller&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;By this point, I had also learned that the Linux software is more of a server
+service, and not a GUI desktop application. So, I concluded that spinning up a
+dedicated VM on my server to host the wifi controller was worth it. Virtual
+machines hosted on my server automatically get configured on the main
+subnet, so it also resolved my issue. I was able to detect and configure the
+access point immediately. This setup made more sense anyway, as I can always
+connect to the AP controller by going to the VM&amp;rsquo;s IP on my browser,  just like I
+can with my router.&lt;/p&gt;
+
+&lt;p&gt;Well, that was all of my setup &amp;ldquo;&lt;em&gt;issues&lt;/em&gt;&amp;rdquo;. There was nothing I would consider to
+be an actual &lt;em&gt;issue&lt;/em&gt;, just some confusions of an Ubiquiti/POE first-timer. Like
+I stated earlier, I am sure I could redo the setup in about 15 minutes without any
+issues&amp;hellip; 10 now that I recorded everything in the post!&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -42,7 +114,58 @@ setup our old router as a &lt;em&gt;temporary&lt;/em&gt; fix. It was terrible. S
 researching how I should upgrade our network. This time around, I am doing this
 &lt;em&gt;correctly&lt;/em&gt;.&lt;/p&gt;
 
-&lt;p&gt;&lt;/p&gt;</description>
+&lt;p&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;center&gt;
+&lt;img src=&#34;../../img/posts/upgrading-to-ubiquiti-edgerouter/linksys-WRT1900.png&#34;
+width= 45%&gt;
+&lt;img src=&#34;../../img/posts/upgrading-to-ubiquiti-edgerouter/linksys-E1200.png&#34;
+width= 45%&gt;
+&lt;/center&gt;
+&lt;em&gt;The Linksys WRT-1900 that died (left), and the terrible backup Linksys E1200 (right)&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;The router that died was a Linksys WRT 1900. When I got home, I setup our old
+router as a temporary fix. It&amp;rsquo;s a very basic Linksys E1200. After using it for
+just a few hours, I remembered why I hated it so much. It is slower than a
+snail, and seems to stop working each day or so, requiring me to unplug and
+re-plug it daily (I think it is something with DHCP. It keeps trying to reassign
+IPs to devices, and then doesn&amp;rsquo;t seem to understand how to accept their requests
+afterwards). Thus, the more &lt;em&gt;temporary&lt;/em&gt; this solution was, the better.&lt;/p&gt;
+
+&lt;p&gt;If I am redoing our network setup, I want to do it &lt;em&gt;properly&lt;/em&gt; this time,
+splitting out the router from the wireless access point using &lt;em&gt;good&lt;/em&gt; hardware and
+software. My plan is to get an ubiquity edge-router-x, and pair it with an Ubiquiti
+wireless access point.&lt;/p&gt;
+
+&lt;p&gt;&lt;center&gt;
+&lt;img src=&#34;../../img/posts/upgrading-to-ubiquiti-edgerouter/edgerouter-x.png&#34;
+alt=&#34;Ubiquity Edgerouter-x&#34; width=&#34;45%&#34;&gt;
+&lt;img src=&#34;../../img/posts/upgrading-to-ubiquiti-edgerouter/ap-ac-lite.png&#34; alt=&#34;Ubiquity Access Point Lite&#34; width=&#34;45%&#34;&gt;
+&lt;/center&gt;
+&lt;em&gt;The EdgeRouter-x (right) and an Ubiquity access point lite (right)&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;Originally I wanted to build a small pfsense box to use as a router, but after
+digging a little deeper and doing some research, I saw that the EdgeRouter would
+more than meet my needs and is a great start to a network upgrade. Additionally,
+at $50 (USD), it truly is a great deal. As for the wireless access point, I was
+always considering an UniFi device, and I thought the EdgeRouter should
+pair rather seamlessly, considering both products are made by Ubiquiti.&lt;/p&gt;
+
+&lt;p&gt;From what I read, the EdgeRouter is a great router with an okay firewall, while
+pfsense is an amazing firewall that can do routing. So, if I want to dig more
+into pfsense in the future, I can still set up a firewall box, and connect it in front of
+the router.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;Modem --&amp;gt; pfsense --&amp;gt; EdgeRouter-x -&amp;gt; devices
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;So&amp;hellip; I think I&amp;rsquo;ve finalized my decision and will purchase the items soon. I
+will update when I get them.&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;Update (06/24/2017): I have followed through with this
+purchase, and the items arrived from Amazon. Expect a post or two about my
+experience setting them up (and yes, I added this update before actually
+publishing this post)&lt;/em&gt;&lt;/p&gt;</description>
     </item>
     
   </channel>

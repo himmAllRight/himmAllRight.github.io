@@ -8,7 +8,7 @@
     <language>en-us</language>
     <lastBuildDate>Wed, 27 Jun 2018 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="http://ryan.himmelwright.net/tags/emacs/index.xml" rel="self" type="application/rss+xml" />
+        <atom:link href="http://ryan.himmelwright.net/tags/emacs/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
@@ -24,7 +24,170 @@ of evil mode and use-package. As I was wrapping up, I learned of yet
 emacs
 configuration&amp;hellip; &lt;a href=&#34;https://orgmode.org/worg/org-contrib/babel/intro.html&#34;&gt;org-babel&lt;/a&gt;.&lt;/p&gt;
 
-&lt;p&gt;&lt;/p&gt;</description>
+&lt;p&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;org-babel&#34;&gt;Org Babel&lt;/h2&gt;
+
+&lt;p&gt;Org-babel is an emacs package, that lets take an
+&lt;a href=&#34;https://orgmode.org/&#34;&gt;org-mode&lt;/a&gt; file, and evaluates all of the &lt;a href=&#34;https://orgmode.org/org.html#Literal-examples&#34;&gt;code
+blocks&lt;/a&gt; contained
+within it. This means I can write an annotated org file, filled with
+&lt;code&gt;emacs-lisp&lt;/code&gt; code blocks, and export just the emacs-lisp code. After
+testing it out, I realized that the main emacs lisp file I use is&amp;hellip; my
+&lt;code&gt;.emacs&lt;/code&gt; file&amp;hellip;&lt;/p&gt;
+
+&lt;h2 id=&#34;setup&#34;&gt;Setup&lt;/h2&gt;
+
+&lt;p&gt;Installing babel couldn&amp;rsquo;t be simpler. If you are running Emacs version
+24 or higher, and a current version of Org-mode, Babel is already
+available by default. In order to generate an &lt;code&gt;.emacs&lt;/code&gt; config from an
+&lt;code&gt;.org&lt;/code&gt; file, we need to first setup a &lt;code&gt;config.org&lt;/code&gt; file, and then tell
+&lt;code&gt;.emacs&lt;/code&gt; to load it with org-babel.&lt;/p&gt;
+
+&lt;h3 id=&#34;config-org&#34;&gt;config.org&lt;/h3&gt;
+
+&lt;p&gt;First, start by creating an &lt;code&gt;.org&lt;/code&gt; file to use for all of the
+configuration content. This can be named anything, and exist anywhere,
+but I like to keep mine in the emacs section of my &lt;a href=&#34;https://github.com/himmAllRight/dotfiles&#34;&gt;dotfiles
+repo&lt;/a&gt;, named
+&lt;code&gt;config.org&lt;/code&gt;. This file functions like any other org file, so I added
+a small header section at the top&amp;hellip; because why not?&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-org&#34; data-lang=&#34;org&#34;&gt;#+TITLE: My Emacs Configuration
+#+AUTHOR: Ryan Himmelwright
+#+EMAIL: ryan@himmelwright.net
+#+OPTIONS: num:nil &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;After that, I broke down my file by creating org headings for the
+different groups of the configuration. For example, I started with the
+headings &lt;code&gt;Repos &amp;amp; Core Packages&lt;/code&gt;, &lt;code&gt;Core Setup&lt;/code&gt;, &lt;code&gt;Evil Mode&lt;/code&gt;, &lt;code&gt;Ivy&lt;/code&gt;,
+&lt;code&gt;Writing&lt;/code&gt;, &lt;code&gt;Development&lt;/code&gt;&amp;hellip; etc.&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;Note: In org-mode, use &amp;ldquo;*&amp;rdquo; to create headings. Each contiguous &amp;ldquo;*&amp;ldquo;
+corresponds to the equivalent HTML heading level. Ex: &lt;code&gt;*&lt;/code&gt; == &lt;code&gt;&amp;lt;h1&amp;gt;&lt;/code&gt;,
+&lt;code&gt;**&lt;/code&gt; == &lt;code&gt;&amp;lt;h2&amp;gt;&lt;/code&gt;, and so on.&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;I started transferring the emacs-lisp code from my previous &lt;code&gt;.emacs&lt;/code&gt;
+file, to under each heading in &lt;code&gt;config.org&lt;/code&gt;. As I transferred text, I
+transformed the comments that described each code snippet into normal
+org text, and wrapped the &lt;code&gt;emacs-lisp&lt;/code&gt; inside an org code block.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;../../img/posts/org-babel-setup/config-org-example1.png&#34;&gt;&lt;img src=&#34;../../img/posts/org-babel-setup/config-org-example1.png&#34; style=&#34;max-width: 100%; float: left; margin: 0px 15px 0px 0px;&#34; alt=&#34;Example snippet of my org-babel config.org file&#34; /&gt;&lt;/a&gt;
+&lt;br clear=&#34;all&#34;&gt;
+&lt;div class=&#34;caption&#34;&gt;Example snippet of my org-babel config.org file&lt;/div&gt;&lt;/p&gt;
+
+&lt;p&gt;To create a code block, use the &lt;code&gt;#+BEGIN_SRC emacs-lisp&lt;/code&gt; and
+&lt;code&gt;#+END_SRC&lt;/code&gt; org tags to encapsulate the &lt;code&gt;emacs-lisp&lt;/code&gt; code. Continue to
+do this until all of the desired emacs-lisp code is contained inside
+org code blocks.&lt;/p&gt;
+
+&lt;h5 id=&#34;side-note-easy-org-code-blocks&#34;&gt;Side Note: Easy Org Code Blocks&lt;/h5&gt;
+
+&lt;p&gt;&lt;a href=&#34;../../img/posts/org-babel-setup/easy-org-mode-code.gif&#34;&gt;&lt;img
+src=&#34;../../img/posts/org-babel-setup/easy-org-mode-code.gif&#34;
+style=&#34;max-width: 100%; float: left; margin: 0px 15px 0px 0px;&#34;
+alt=&#34;Example snippet of my org-babel config.org file&#34; /&gt;&lt;/a&gt; &lt;br
+clear=&#34;all&#34;&gt; &lt;div class=&#34;caption&#34;&gt;Code block can be easily created
+with &lt;code&gt;&amp;lt;s&lt;/code&gt; and &lt;code&gt;TAB&lt;/code&gt;.&lt;/div&gt;&lt;/p&gt;
+
+&lt;p&gt;In org-mode, you can write &lt;code&gt;&amp;lt;s&lt;/code&gt;, then hit &lt;code&gt;TAB&lt;/code&gt; and it will expand
+into the &lt;code&gt;BEGIN_SRC&lt;/code&gt; and &lt;code&gt;END_SRC&lt;/code&gt; tags. Just don&amp;rsquo;t forget to add
+&lt;code&gt;emacs-lisp&lt;/code&gt; to the &lt;code&gt;BEGIN_SRC&lt;/code&gt; tag!&lt;/p&gt;
+
+&lt;h3 id=&#34;emacs&#34;&gt;.emacs&lt;/h3&gt;
+
+&lt;p&gt;For the contents of &lt;code&gt;.emacs&lt;/code&gt;, call &lt;code&gt;package-initialize&lt;/code&gt; and then have
+&lt;code&gt;org-babel&lt;/code&gt; load the &lt;code&gt;config.org&lt;/code&gt; file.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-emacs-lisp&#34; data-lang=&#34;emacs-lisp&#34;&gt;(package-initialize)
+(org-babel-load-file &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;~/dotfiles/emacs/config.org&amp;#34;&lt;/span&gt;)&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;That&amp;rsquo;s it. Assuming the &lt;code&gt;config.org&lt;/code&gt; is complete, emacs should now
+initialize using the code snippets from &lt;em&gt;it&lt;/em&gt;. While these are the only
+two &lt;em&gt;required&lt;/em&gt; lines, do note that emacs will still write the
+&lt;code&gt;#&#39;custom-set-variables&lt;/code&gt; to the bottom of the &lt;code&gt;.emacs&lt;/code&gt; file. That&amp;rsquo;s
+fine. If anything, it makes it easier to source control the &lt;em&gt;actual&lt;/em&gt;
+configuration file, since emacs isn&amp;rsquo;t constantly adding to it,
+changing the diff.&lt;/p&gt;
+
+&lt;h2 id=&#34;what-i-like&#34;&gt;What I like&lt;/h2&gt;
+
+&lt;h3 id=&#34;organized&#34;&gt;Organized&lt;/h3&gt;
+
+&lt;p&gt;&lt;a href=&#34;../../img/posts/org-babel-setup/org-expand-example.gif&#34;&gt;&lt;img
+src=&#34;../../img/posts/org-babel-setup/org-expand-example.gif&#34;
+style=&#34;max-width: 100%; float: left; margin: 0px 15px 0px 0px;&#34;
+alt=&#34;Example snippet of expanding org headers to easily find code.&#34;
+/&gt;&lt;/a&gt; &lt;br clear=&#34;all&#34;&gt; &lt;div class=&#34;caption&#34;&gt;Expanding org headers to
+easily find code.&lt;/div&gt;&lt;/p&gt;
+
+&lt;p&gt;Org mode&amp;rsquo;s hierarchical structure inherently organizes the content of
+files. Using it for my emacs configuration is no different. I can use
+org headers to easily break down my file into sections and
+sub-sections, which I can then expand and collapse as needed. For
+example, my &lt;code&gt;config.org&lt;/code&gt; is currently over 500 lines long, but with
+all the headers collapsed, it displays in less than 20. From there I
+can just expand to the section I need.&lt;/p&gt;
+
+&lt;h3 id=&#34;maintainable&#34;&gt;Maintainable&lt;/h3&gt;
+
+&lt;p&gt;Being so organized, the &lt;code&gt;config.org&lt;/code&gt; file is very easy to maintain. If
+I want to edit a setting, I can just search through the headers for
+the section, and then edit the code block and/or text. If I want to
+add a new item, I can just insert a new header, add the code block I
+want, and maybe some explanatory text. Done. Most importantly, the
+structure helps prevent it from turning into an &lt;em&gt;in-production
+&amp;ldquo;scratch code&amp;rdquo;&lt;/em&gt; file&amp;hellip;&lt;/p&gt;
+
+&lt;h3 id=&#34;easy-to-read&#34;&gt;Easy to Read&lt;/h3&gt;
+
+&lt;p&gt;It should go without saying that the organization and maintainability
+of org-mode configurations make them extremely &lt;em&gt;readable&lt;/em&gt;. Not only is
+the source code easier to read, but org files can be
+&lt;a href=&#34;https://orgmode.org/manual/Exporting.html&#34;&gt;exported&lt;/a&gt; to all sorts of
+outputs (HTML, LaTeX, OpenDocument, etc). Combined with a style-sheet,
+these outputs can look quite professional.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;../../img/posts/org-babel-setup/github-config.png&#34;&gt;&lt;img
+src=&#34;../../img/posts/org-babel-setup/github-config.png&#34;
+style=&#34;max-width: 100%; float: left; margin: 0px 15px 0px 0px;&#34;
+alt=&#34;Example of how Github renders org files as a markdown&#34; /&gt;&lt;/a&gt; &lt;br
+clear=&#34;all&#34;&gt; &lt;div class=&#34;caption&#34;&gt;Github renders org files as a markdown.&lt;/div&gt;&lt;/p&gt;
+
+&lt;p&gt;Beyond normal &lt;code&gt;org&lt;/code&gt; exporting, &lt;a href=&#34;http://www.github.com&#34;&gt;Github&lt;/a&gt; does
+something awesome&amp;hellip; they &lt;em&gt;render&lt;/em&gt; &lt;code&gt;org&lt;/code&gt; files as a known markup
+language on their website! This means that if you click an &lt;code&gt;*.org&lt;/code&gt;
+file on Gihub&amp;rsquo;s web interface, it will display a rendered version of
+the content, instead of defaulting to the raw org text.&lt;/p&gt;
+
+&lt;h2 id=&#34;speaking-of-github&#34;&gt;Speaking of Github&amp;hellip;&lt;/h2&gt;
+
+&lt;p&gt;While I have always maintained my emacs configuration in &lt;a href=&#34;https://github.com/himmAllRight/dotfiles&#34;&gt;my dotfiles
+repo&lt;/a&gt;, org-babel has helped
+me step up my game. My current &lt;a href=&#34;http://ryan.himmelwright.net/post/new-dotfiles/&#34;&gt;dotfile
+system&lt;/a&gt; has all of my
+emacs files in a separate &lt;code&gt;emacs&lt;/code&gt; folder. On Github, each directory in
+a repo can contain a &lt;code&gt;README&lt;/code&gt; file (or&amp;hellip;. a symlink to &lt;em&gt;another&lt;/em&gt;
+file&amp;hellip;)  to be displayed below the list of files.&lt;/p&gt;
+
+&lt;h2 id=&#34;my-maintained-config&#34;&gt;My Maintained Config&lt;/h2&gt;
+
+&lt;p&gt;&lt;a href=&#34;../../img/posts/org-babel-setup/github-emacs.png&#34;&gt;&lt;img
+src=&#34;../../img/posts/org-babel-setup/github-emacs.png&#34;
+style=&#34;max-width: 100%; float: left; margin: 0px 15px 0px 0px;&#34;
+alt=&#34;Example of how Github renders org files as a markdown&#34; /&gt;&lt;/a&gt; &lt;br
+clear=&#34;all&#34;&gt; &lt;div class=&#34;caption&#34;&gt;Github renders org files as a
+markdown.&lt;/div&gt;&lt;/p&gt;
+
+&lt;p&gt;In the emacs section of my dotfiles, I have created a symlink,
+&lt;code&gt;README.org&lt;/code&gt;, to my &lt;code&gt;config.org&lt;/code&gt; file:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;sudo ln -s config.org README.org&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Github recognizes this, so my &lt;code&gt;README&lt;/code&gt; file &amp;ldquo;contains&amp;rdquo; whatever the
+contents of &lt;code&gt;config.org&lt;/code&gt; are. Now, when one visits the &lt;a href=&#34;https://github.com/himmAllRight/dotfiles/tree/master/emacs&#34;&gt;emacs
+section&lt;/a&gt;
+of my dotfiles repo, an organized, annotated, and always up-to-date
+version of my &amp;ldquo;&lt;code&gt;.emacs&lt;/code&gt;&amp;rdquo; file is displayed as the &lt;code&gt;README&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;The Github support was the cherry on top of a new emacs configuration
+system I am already ecstatic about. I&amp;rsquo;ve been a fan of org-mode for
+years, and org-babel is one more feature to add to the growing list of
+reasons &lt;em&gt;why&lt;/em&gt; I love it. I highly recommend checking it out.&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -40,7 +203,205 @@ that I want to incorporate into my new emacs setup. Rather than
 resurrect and Frankenstein the changes into my old &lt;code&gt;.emacs&lt;/code&gt;
 file&amp;hellip; I&amp;rsquo;m starting from scratch.&lt;/p&gt;
 
-&lt;p&gt;&lt;/p&gt;</description>
+&lt;p&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;../../img/posts/emacs-config-evil-usepackage/newemacs1.png&#34;&gt;&lt;img src=&#34;../../img/posts/emacs-config-evil-usepackage/newemacs1.png&#34; style=&#34;max-width: 100%; float: left; margin: 0px 15px 0px 0px;&#34; alt=&#34;New Emacs Window&#34; /&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;div class=&#34;caption&#34;&gt;A window of my New Emacs configuration&lt;/div&gt;
+
+&lt;h2 id=&#34;evil-mode&#34;&gt;Evil Mode&lt;/h2&gt;
+
+&lt;h4 id=&#34;history&#34;&gt;History&lt;/h4&gt;
+
+&lt;p&gt;The one emacs package that spacemacs &lt;em&gt;really&lt;/em&gt; got me addicted to was
+&lt;a href=&#34;https://github.com/emacs-evil/evil&#34;&gt;Evil&lt;/a&gt;, which emulates the main
+features of the &lt;a href=&#34;https://www.vim.org&#34;&gt;vim&lt;/a&gt; text editor. I &lt;em&gt;started&lt;/em&gt;
+with emacs in college, but eventually switched to Vim which, became
+the first power editor that I &lt;em&gt;really&lt;/em&gt; got into (I even bought a
+&lt;a href=&#34;https://www.amazon.com/dp/059652983X/?tag=mh0b-20&amp;amp;hvadid=78271540595342&amp;amp;hvqmt=b&amp;amp;hvbmt=bb&amp;amp;hvdev=c&amp;amp;ref=pd_sl_y7m3vu93e_b&#34;&gt;book&lt;/a&gt;
+to learn it better). I stuck with Vim until I became a professional
+LISP developer, and the switch back to Emacs was impossible to ignore,
+and obvious.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;../../img/posts/emacs-config-evil-usepackage/vim.png&#34;&gt;&lt;img src=&#34;../../img/posts/emacs-config-evil-usepackage/vim.png&#34; style=&#34;max-width: 100%; float: left; margin: 0px 15px 0px 0px;&#34; alt=&#34;A Vim Window&#34; /&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;div class=&#34;caption&#34;&gt;The Vim editor&lt;/div&gt;
+
+&lt;p&gt;Even after switching to back Emacs, I have still enjoyed using command
+line applications like &lt;a href=&#34;https://cmus.github.io&#34;&gt;cmus&lt;/a&gt;,
+&lt;a href=&#34;https://github.com/ranger/ranger&#34;&gt;ranger&lt;/a&gt;, and
+&lt;a href=&#34;http://w3m.sourceforge.net&#34;&gt;w3m&lt;/a&gt;, many of which are influenced by Vim
+and often incorporate similar keyboard commands (at least the &lt;code&gt;j&lt;/code&gt;,
+&lt;code&gt;k&lt;/code&gt;, &lt;code&gt;l&lt;/code&gt;, &lt;code&gt;;&lt;/code&gt; navigation). While it isn&amp;rsquo;t ideal for everything (I
+prefer to &lt;em&gt;write&lt;/em&gt;, but not necessarily &lt;em&gt;edit&lt;/em&gt; code with emacs-syle
+navigation), I never lost my love for the homerow-centric, and
+efficient vim-style movement commands.&lt;/p&gt;
+
+&lt;h4 id=&#34;best-of-both-worlds&#34;&gt;Best of Both Worlds&lt;/h4&gt;
+
+&lt;p&gt;For the last two years, &lt;a href=&#34;http://spacemacs.org/&#34;&gt;Spacemacs&lt;/a&gt;&amp;rsquo;s default
+Vim configuration has provided the best of both worlds. It had all of
+the Evil packages pre-configured and optimized, but I could simply hit
+&lt;code&gt;Ctrl-z&lt;/code&gt;, and jump back to Emacs-mode.&lt;/p&gt;
+
+&lt;p&gt;Spacemacs was easy to use and I enjoyed it, but it really started to
+have stability issues on my Windows 10 work computer. I thought that
+going back to a stock emacs configuration may tone down the
+complexity, and increase stability. I started to build a &lt;em&gt;new&lt;/em&gt;
+configuration based around &lt;code&gt;Evil&lt;/code&gt;. During setup, I was happily
+surprised to learn that the &lt;code&gt;Ctrl-z&lt;/code&gt; option to switch back to
+Emacs-mode was a default &lt;code&gt;Evil&lt;/code&gt; behavior&amp;hellip; so I still have the best of
+both worlds!&lt;/p&gt;
+
+&lt;h4 id=&#34;starting-config&#34;&gt;Starting Config&lt;/h4&gt;
+
+&lt;p&gt;Here is my starting &lt;code&gt;Evil&lt;/code&gt; setup. I&amp;rsquo;ve nested other &lt;code&gt;use-packages&lt;/code&gt;
+inside of it, so that if &lt;code&gt;evil&lt;/code&gt; is configured, the packages that
+depend on it go ahead and configure themselves too. I&amp;rsquo;m sure this will
+grow over time as I add missing packages, but so far, it seems to
+provide all the core functionality I need.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-lisp&#34; data-lang=&#34;lisp&#34;&gt;&lt;span style=&#34;color:#75715e&#34;&gt;;; Evil Mode&lt;/span&gt;
+(use-package evil
+  &lt;span style=&#34;color:#e6db74&#34;&gt;:ensure&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;t&lt;/span&gt;
+  &lt;span style=&#34;color:#e6db74&#34;&gt;:config&lt;/span&gt;
+
+  (evil-mode &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;)
+  (use-package evil-leader
+    &lt;span style=&#34;color:#e6db74&#34;&gt;:ensure&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;t&lt;/span&gt;
+    &lt;span style=&#34;color:#e6db74&#34;&gt;:config&lt;/span&gt;
+    (global-evil-leader-mode &lt;span style=&#34;color:#66d9ef&#34;&gt;t&lt;/span&gt;)
+    (evil-leader/set-leader &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&amp;lt;SPC&amp;gt;&amp;#34;&lt;/span&gt;)
+    (evil-leader/set-key
+      &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;s s&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;swiper&lt;/span&gt;
+      &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;d x w&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;delete-trailing-whitespace&lt;/span&gt;))
+
+  (use-package evil-surround
+    &lt;span style=&#34;color:#e6db74&#34;&gt;:ensure&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;t&lt;/span&gt;
+    &lt;span style=&#34;color:#e6db74&#34;&gt;:config&lt;/span&gt; (global-evil-surround-mode))
+
+  (use-package evil-indent-textobject
+    &lt;span style=&#34;color:#e6db74&#34;&gt;:ensure&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;t&lt;/span&gt;)
+
+  (use-package evil-org
+    &lt;span style=&#34;color:#e6db74&#34;&gt;:ensure&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;t&lt;/span&gt;
+    &lt;span style=&#34;color:#e6db74&#34;&gt;:config&lt;/span&gt;
+    (evil-org-set-key-theme
+	  &lt;span style=&#34;color:#f92672&#34;&gt;&amp;#39;&lt;/span&gt;(textobjects insert navigation additional shift todo heading))
+    (add-hook &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;org-mode-hook&lt;/span&gt; (lambda () (evil-org-mode))))
+
+  (use-package powerline-evil
+    &lt;span style=&#34;color:#e6db74&#34;&gt;:ensure&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;t&lt;/span&gt;
+    &lt;span style=&#34;color:#e6db74&#34;&gt;:config&lt;/span&gt;
+    (powerline-evil-vim-color-theme)))&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;I think it needs more key bindings over time&amp;hellip;&lt;/p&gt;
+
+&lt;h2 id=&#34;use-package&#34;&gt;Use Package&lt;/h2&gt;
+
+&lt;p&gt;After my setting up an initial install of the Evil mode parts, I
+discovered the amazing
+&lt;a href=&#34;https://github.com/jwiegley/use-package&#34;&gt;use-package&lt;/a&gt;. I have come
+across it before reading blog posts, but never actually tried
+it. After realizing how well it worked, I immediately combed through
+my &lt;code&gt;.emacs&lt;/code&gt; file, converting all of my &lt;code&gt;(require &#39;package-name)&lt;/code&gt; calls
+to &lt;code&gt;use-package&lt;/code&gt; forms instead.&lt;/p&gt;
+
+&lt;h4 id=&#34;setup&#34;&gt;Setup&lt;/h4&gt;
+
+&lt;p&gt;After ensuring the &lt;a href=&#34;http://melpa.org&#34;&gt;MELPA&lt;/a&gt; repos are added and
+initialized:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-lisp&#34; data-lang=&#34;lisp&#34;&gt;&lt;span style=&#34;color:#75715e&#34;&gt;;; Add Melpa packages to Repos&lt;/span&gt;
+(require &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;package&lt;/span&gt;)
+(add-to-list &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;package-archives&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;&amp;#39;&lt;/span&gt;(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;melpa&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;http://melpa.org/packages/&amp;#34;&lt;/span&gt;))
+(package-initialize)&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;The &lt;code&gt;use-package&lt;/code&gt; package can be installed next. I wrapped the
+install commands in an &lt;code&gt;unless&lt;/code&gt;, so that when my emacs loads, it
+only installs &lt;code&gt;use-package&lt;/code&gt; if it is not already installed.&lt;/p&gt;
+
+&lt;p&gt;Afterwards, make sure to &lt;code&gt;(require &#39;use-package)&lt;/code&gt;. It only needs to
+happen during compile, so I have mine in an &lt;code&gt;(evail-when compile ...)&lt;/code&gt;.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-lisp&#34; data-lang=&#34;lisp&#34;&gt;(unless (package-installed-p &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;use-package&lt;/span&gt;)
+  (package-refresh-contents)
+  (package-install &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;use-package&lt;/span&gt;))
+
+(eval-when-compile
+  (require &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;use-package&lt;/span&gt;))&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;I keep all of this at the top of my configuration, which works well
+even when initializing a new computer.&lt;/p&gt;
+
+&lt;h4 id=&#34;bye-bye-emacs-init-el&#34;&gt;Bye Bye emacs_init.el&lt;/h4&gt;
+
+&lt;p&gt;When I last had my own custom emacs config, I had to also maintain an
+&lt;code&gt;emacs_init.el&lt;/code&gt; file. This was an emacs-lisp script that used a
+&lt;code&gt;mapcar&lt;/code&gt; to apply &lt;code&gt;#&#39;package-install&lt;/code&gt; across an ever-growing list of
+emacs packages my configuration required. My goal was to have a
+script, so that when configuring Emacs on a new system, I could just load
+and evaluate the contents of &lt;code&gt;emacs_init.el&lt;/code&gt;, and everything required
+for &lt;code&gt;.emacs&lt;/code&gt; would automatically install.&lt;/p&gt;
+
+&lt;p&gt;The reality was that it never fully worked. There were always a few
+packages that would error, or that I had forgotten to add the last time
+I updated my &lt;code&gt;.emacs&lt;/code&gt; file. With &lt;code&gt;use-package&lt;/code&gt;, this might be an issue
+of the past, as it allows me to combine my emacs init script &lt;em&gt;with&lt;/em&gt;
+my configuration files.&lt;/p&gt;
+
+&lt;h4 id=&#34;key-bindings&#34;&gt;Key Bindings&lt;/h4&gt;
+
+&lt;p&gt;After converting all of my &lt;code&gt;(require &#39;PACKAGE-NAME)&lt;/code&gt; calls and related
+expressions to filled &lt;code&gt;use-package&lt;/code&gt; wrappers, I learned about the &lt;code&gt;:bind&lt;/code&gt;
+parameter. Instead of manually setting key binds with a &lt;code&gt;setq&lt;/code&gt;,
+&lt;code&gt;:bind&lt;/code&gt; takes a list of dotted pairs and binds the function (defined
+in the second spot of the pair), to the key sequence stated in the
+first spot of the pair.&lt;/p&gt;
+
+&lt;p&gt;For example, to setup my preferred &lt;code&gt;ispell&lt;/code&gt; key-bindings, I used the
+following &lt;code&gt;:bind&lt;/code&gt; parameter in my &lt;code&gt;ispell&lt;/code&gt; &lt;code&gt;use-package&lt;/code&gt; call:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-emacs-lisp&#34; data-lang=&#34;emacs-lisp&#34;&gt;(use-package ispell
+  :ensure &lt;span style=&#34;color:#66d9ef&#34;&gt;t&lt;/span&gt;
+  :bind
+  ((&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;C-c w&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;ispell-word&lt;/span&gt;)
+   (&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;C-c r&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;ispell-region&lt;/span&gt;)))&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;This helps to keep the configuration a bit cleaner and organized. The
+syntax is also straight-forward and easy to remember.&lt;/p&gt;
+
+&lt;h2 id=&#34;system-specific-load-files&#34;&gt;System Specific Load Files&lt;/h2&gt;
+
+&lt;p&gt;Finally, I moved all my work-specific emacs configuration (setting up
+Allegro Common Lisp, defining some helper functions&amp;hellip; and anything
+Windows specific) into it&amp;rsquo;s own &lt;code&gt;emacs-work.el&lt;/code&gt; file. With that in it&amp;rsquo;s
+own separate file, I just needed to &lt;code&gt;load&lt;/code&gt; it from my main &lt;code&gt;.emacs&lt;/code&gt;
+configuration. The only issue with that, is I only want it to load on
+my &lt;em&gt;work computer&lt;/em&gt;. So, I wrapped it with a nice little handler:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-emacs-lisp&#34; data-lang=&#34;emacs-lisp&#34;&gt;(when (&lt;span style=&#34;color:#a6e22e&#34;&gt;string-equal&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;system-name&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;LAFAYETTE&amp;#34;&lt;/span&gt;)
+  (&lt;span style=&#34;color:#a6e22e&#34;&gt;load&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;~/.emacs-work.el&amp;#34;&lt;/span&gt;))&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;This works because I don&amp;rsquo;t name my home computers with the same name
+as my work machine. This little tweak worked so well, that I decided
+to make another file, &lt;code&gt;emacs-linux.el&lt;/code&gt;, that I could dump my Linux
+and/or home specific configuration into. I only load it when on a
+GNU/Linux machine:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-emacs-lisp&#34; data-lang=&#34;emacs-lisp&#34;&gt;(when (&lt;span style=&#34;color:#a6e22e&#34;&gt;string-equal&lt;/span&gt; system-type &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;gnu/linux&amp;#34;&lt;/span&gt;)
+  (&lt;span style=&#34;color:#a6e22e&#34;&gt;load&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;~/.emacs-linux.el&amp;#34;&lt;/span&gt;))&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;I&amp;rsquo;ve really enjoyed the ability to only load parts of my configuration
+when a certain condition is met. Breaking down my configuration into
+use-specific components seems like a good idea (like abstracting messy
+code to smaller functions). Right now, I try to keep my configuration
+file partitioned into sections, based on use-case (Writing,
+Development, Appearance, etc). However, as I continue to fine-tune my
+emacs setup, I think I might break those sections into actual &lt;em&gt;files&lt;/em&gt;,
+and then &lt;code&gt;load&lt;/code&gt; them from the main config.&lt;/p&gt;
+
+&lt;p&gt;The only issue I can see with that is that it can be confusing with
+ overlapping use-cases. However, I already have to deal with that in a
+ single configuration (which &lt;em&gt;section&lt;/em&gt; to put it in), and my process
+ of converting everything to &lt;code&gt;use-package&lt;/code&gt; has actually started to
+ minimize that issue. So it might work&amp;hellip;&lt;/p&gt;
+
+&lt;h2 id=&#34;next-steps&#34;&gt;Next Steps&lt;/h2&gt;
+
+&lt;p&gt;Now that I have an &amp;ldquo;&lt;code&gt;Evil&lt;/code&gt;&amp;rdquo; Emacs setup configured, things should be
+returning to business as usually. As I work, I sure there&amp;rsquo;ll be a
+forgotten package here or there that needs to added. However, with
+&lt;code&gt;use-package&lt;/code&gt;, that should be a piece of cake, and easy to maintain
+from here on out.&lt;/p&gt;</description>
     </item>
     
   </channel>
