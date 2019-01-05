@@ -6,10 +6,136 @@
     <description>Recent content in Posts on λ ryan. himmelwright. net</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 12 Dec 2018 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 05 Jan 2019 00:00:00 +0000</lastBuildDate>
     
         <atom:link href="http://ryan.himmelwright.net/post/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Shell Stuff: Easy File Cleanup</title>
+      <link>http://ryan.himmelwright.net/post/shell-stuff-find-grep-sub/</link>
+      <pubDate>Sat, 05 Jan 2019 00:00:00 +0000</pubDate>
+      
+      <guid>http://ryan.himmelwright.net/post/shell-stuff-find-grep-sub/</guid>
+      <description>&lt;p&gt;Applications can leave their junk files all over the place. While I
+appreciate that all of the &lt;code&gt;.swp&lt;/code&gt;, &lt;code&gt;.retry&lt;/code&gt;, and &lt;code&gt;&amp;quot;conflict&amp;quot;&lt;/code&gt; files are there to
+help me when things go wrong&amp;hellip; sometimes I just want to clean up my
+file system. So&amp;hellip; here is a simple string of commands I often use to declutter
+my files.&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;DISCLAIMER:&lt;/em&gt; I know there are &lt;em&gt;MANY&lt;/em&gt; ways to accomplish this.  The method
+described in this post is to share &lt;strong&gt;one&lt;/strong&gt; efficient solution I use, that might
+help someone that currently knows &lt;strong&gt;zero&lt;/strong&gt;.&lt;/p&gt;
+
+&lt;h3 id=&#34;the-commands&#34;&gt;The commands&lt;/h3&gt;
+
+&lt;p&gt;First, lets quickly meet the commands we will be using:&lt;/p&gt;
+
+&lt;h3 id=&#34;find&#34;&gt;Find&lt;/h3&gt;
+
+&lt;p&gt;&lt;code&gt;find&lt;/code&gt; is a classic UNIX command that searches for files in a directory
+hierarchy. By default, it writes out the file path for each file/directory that
+it finds.&lt;/p&gt;
+
+&lt;h4 id=&#34;example&#34;&gt;Example&lt;/h4&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;➜  tree
+.
+├── dirA
+│   ├── file3
+│   ├── file4
+│   └── file5
+├── dirB
+│   └── file6
+├── file1
+└── file2
+
+2 directories, 6 files
+
+➜  find .
+.
+./file2
+./file1
+./dirB
+./dirB/file6
+./dirA
+./dirA/file5
+./dirA/file4
+./dirA/file3&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h3 id=&#34;grep&#34;&gt;Grep&lt;/h3&gt;
+
+&lt;p&gt;Another classic. Basically, &lt;code&gt;grep&lt;/code&gt; searches for a pattern in each file
+provided. In addition to files, it can search text passed through a pipe (this
+is important for our use, but more on that later).&lt;/p&gt;
+
+&lt;h4 id=&#34;example-1&#34;&gt;Example&lt;/h4&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;➜  cat file1
+This is a fake file
+with a few lines of content.
+
+However, I want search for something
+without opening it...
+
+Secret: 12345
+
+I wonder if I will be able to get it...
+
+
+➜  grep Secret file1
+Secret: 12345&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h3 id=&#34;command-substitution&#34;&gt;Command Substitution&lt;/h3&gt;
+
+&lt;p&gt;Lastly, &lt;em&gt;command substitution&lt;/em&gt; is taking one command, and using it&amp;rsquo;s output as
+&lt;em&gt;part&lt;/em&gt; of &lt;em&gt;another command&lt;/em&gt;. Traditionally, this was done by calling the
+substitution command `inside backticks`, but it &lt;a href=&#34;http://mywiki.wooledge.org/BashFAQ/082&#34;&gt;is now preferred to use
+$(COMMAND) instead of backticks&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h4 id=&#34;example-2&#34;&gt;Example&lt;/h4&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;➜ echo I am at: `pwd`
+I am at: /tmp/demo&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;or (preferred):&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-test&#34; data-lang=&#34;test&#34;&gt;➜ echo I am at: $(pwd)
+I am at: /tmp/demo&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h3 id=&#34;pipes&#34;&gt;Pipes&lt;/h3&gt;
+
+&lt;p&gt;An &lt;a href=&#34;https://en.wikipedia.org/wiki/Pipeline_(Unix)&#34;&gt;unix pipe&lt;/a&gt; (&lt;code&gt;|&lt;/code&gt;) directs the
+&lt;em&gt;output&lt;/em&gt; of one command, to be used as the &lt;em&gt;input&lt;/em&gt; for another command. Pipes
+can be used to chain together several commands, forming a &lt;em&gt;pipeline&lt;/em&gt;.&lt;/p&gt;
+
+&lt;h4 id=&#34;example-3&#34;&gt;Example&lt;/h4&gt;
+
+&lt;p&gt;The output of &lt;code&gt;ls&lt;/code&gt; can be fed as input to &lt;code&gt;wc&lt;/code&gt; (word count) to create a
+pipeline command that returns the number of files/directories in the current directory.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;➜ ls
+dirA  dirB  file1  file2
+➜ ls | wc -l
+&lt;span style=&#34;color:#ae81ff&#34;&gt;4&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h3 id=&#34;putting-it-all-together&#34;&gt;Putting It All Together&lt;/h3&gt;
+
+&lt;p&gt;Now that we know all the parts, how does it all fit together? One particular
+shell chain I find convenient is pairing &lt;code&gt;find&lt;/code&gt; and &lt;code&gt;grep&lt;/code&gt; to recursively get
+all the paths of a particular file type, and then use it in a command
+substitution to pass that result on to another command (such as &lt;code&gt;rm&lt;/code&gt;).&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;COMMAND &lt;span style=&#34;color:#66d9ef&#34;&gt;$(&lt;/span&gt;find . | grep SEARCHSTRING&lt;span style=&#34;color:#66d9ef&#34;&gt;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;This is the combination I use to clean up my directories. While working on
+writing ansible playbooks, I can generate a few &lt;code&gt;*.retry&lt;/code&gt; files, as well as
+some &lt;code&gt;*.swp&lt;/code&gt; files from editing in vim.&lt;/p&gt;
+
+&lt;h4 id=&#34;example-4&#34;&gt;Example&lt;/h4&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;➜ find . | grep .retry          &lt;span style=&#34;color:#75715e&#34;&gt;## Find *.retry files
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;./file1.retry
+./dirA/file5.retry
+./dirA/file3.retry
+➜ rm &lt;span style=&#34;color:#66d9ef&#34;&gt;$(&lt;/span&gt;find . | grep .retry&lt;span style=&#34;color:#66d9ef&#34;&gt;)&lt;/span&gt;    &lt;span style=&#34;color:#75715e&#34;&gt;## Delete *.retry files
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;➜ find . | grep .retry          &lt;span style=&#34;color:#75715e&#34;&gt;## Check that they were deleted
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;➜&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h3 id=&#34;summary&#34;&gt;Summary&lt;/h3&gt;
+
+&lt;p&gt;That&amp;rsquo;s it. A small post for a &lt;em&gt;simple&lt;/em&gt; but &lt;strong&gt;powerful&lt;/strong&gt; command line set.  If
+you haven&amp;rsquo;t used this team of commands before, give it a try sometime! Have
+fun!&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>Configuring Pass, the Standard Unix Password Manager</title>
