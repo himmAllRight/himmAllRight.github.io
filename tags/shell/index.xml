@@ -109,6 +109,7 @@ can be used to chain together several commands, forming a &lt;em&gt;pipeline&lt;
 pipeline command that returns the number of files/directories in the current directory.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;➜ ls
 dirA  dirB  file1  file2
+
 ➜ ls | wc -l
 &lt;span style=&#34;color:#ae81ff&#34;&gt;4&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;h3 id=&#34;putting-it-all-together&#34;&gt;Putting It All Together&lt;/h3&gt;
@@ -127,9 +128,12 @@ some &lt;code&gt;*.swp&lt;/code&gt; files from editing in vim.&lt;/p&gt;
 &lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;./file1.retry
 ./dirA/file5.retry
 ./dirA/file3.retry
+
 ➜ rm &lt;span style=&#34;color:#66d9ef&#34;&gt;$(&lt;/span&gt;find . | grep .retry&lt;span style=&#34;color:#66d9ef&#34;&gt;)&lt;/span&gt;    &lt;span style=&#34;color:#75715e&#34;&gt;## Delete *.retry files
-&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;➜ find . | grep .retry          &lt;span style=&#34;color:#75715e&#34;&gt;## Check that they were deleted
-&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;➜&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;
+➜ find . | grep .retry          &lt;span style=&#34;color:#75715e&#34;&gt;## Check that they were deleted
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;
+➜&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;h3 id=&#34;summary&#34;&gt;Summary&lt;/h3&gt;
 
 &lt;p&gt;That&amp;rsquo;s it. A small post for a &lt;em&gt;simple&lt;/em&gt; but &lt;strong&gt;powerful&lt;/strong&gt; command line set.  If

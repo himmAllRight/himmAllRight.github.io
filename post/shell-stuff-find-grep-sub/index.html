@@ -238,6 +238,7 @@ can be used to chain together several commands, forming a <em>pipeline</em>.</p>
 pipeline command that returns the number of files/directories in the current directory.</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">➜ ls
 dirA  dirB  file1  file2
+
 ➜ ls | wc -l
 <span style="color:#ae81ff">4</span></code></pre></div>
 <h3 id="putting-it-all-together">Putting It All Together</h3>
@@ -256,9 +257,12 @@ some <code>*.swp</code> files from editing in vim.</p>
 </span><span style="color:#75715e"></span>./file1.retry
 ./dirA/file5.retry
 ./dirA/file3.retry
+
 ➜ rm <span style="color:#66d9ef">$(</span>find . | grep .retry<span style="color:#66d9ef">)</span>    <span style="color:#75715e">## Delete *.retry files
-</span><span style="color:#75715e"></span>➜ find . | grep .retry          <span style="color:#75715e">## Check that they were deleted
-</span><span style="color:#75715e"></span>➜</code></pre></div>
+</span><span style="color:#75715e"></span>
+➜ find . | grep .retry          <span style="color:#75715e">## Check that they were deleted
+</span><span style="color:#75715e"></span>
+➜</code></pre></div>
 <h3 id="summary">Summary</h3>
 
 <p>That&rsquo;s it. A small post for a <em>simple</em> but <strong>powerful</strong> command line set.  If
