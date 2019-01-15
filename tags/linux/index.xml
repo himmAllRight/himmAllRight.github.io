@@ -6,10 +6,202 @@
     <description>Recent content in Linux on λ ryan. himmelwright. net</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 05 Jan 2019 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 15 Jan 2019 00:00:00 +0000</lastBuildDate>
     
         <atom:link href="http://ryan.himmelwright.net/tags/linux/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Replacing a Drive in My ZFS Mirror</title>
+      <link>http://ryan.himmelwright.net/post/replace-zfs-mirror-drive/</link>
+      <pubDate>Tue, 15 Jan 2019 00:00:00 +0000</pubDate>
+      
+      <guid>http://ryan.himmelwright.net/post/replace-zfs-mirror-drive/</guid>
+      <description>&lt;p&gt;Right before Thanksgiving, one of the hard drives in my server started get
+noisy&amp;hellip; very noisy. Fearing the worst, I &lt;a href=&#34;../zfs-backups-to-luks-external&#34;&gt;did a
+backup&lt;/a&gt;, and shutdown the server until I had
+time to investigate further&amp;hellip; and likely replace the drive. That
+time came this past week.&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;
+
+&lt;h3 id=&#34;verifying-the-drive-failed&#34;&gt;Verifying the Drive Failed&lt;/h3&gt;
+
+&lt;p&gt;Before throwing money at the problem, I wanted to see if ZFS was detecting any
+issues. When I ran a &lt;code&gt;zpool status&lt;/code&gt; on my &lt;code&gt;Data&lt;/code&gt; pool, it warned me that one of
+the devices had experienced an error, but that I had not (&lt;em&gt;yet&lt;/em&gt;) encountered
+any data errors. Time to buy a new drive.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;λ ninetales ~ → zpool status Data
+  pool: Data
+ state: ONLINE
+status: One or more devices has experienced an unrecoverable error.  An
+	attempt was made to correct the error.  Applications are unaffected.
+action: Determine &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; the device needs to be replaced, and clear the errors
+	using &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;zpool clear&amp;#39;&lt;/span&gt; or replace the device with &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;zpool replace&amp;#39;&lt;/span&gt;.
+   see: http://zfsonlinux.org/msg/ZFS-8000-9P
+  scan: resilvered &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;.14M in 0h0m with &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt; errors on Sat Jan &lt;span style=&#34;color:#ae81ff&#34;&gt;12&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;10&lt;/span&gt;:49:31 &lt;span style=&#34;color:#ae81ff&#34;&gt;2019&lt;/span&gt;
+config:
+
+	NAME                                  STATE     READ WRITE CKSUM
+	Data                                  ONLINE       &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;     &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;     &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;
+	  mirror-0                            ONLINE       &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;     &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;     &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;
+	    ata-TOSHIBA_DT01ACA300_365XDT3KS  ONLINE       &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;     &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;     &lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;
+	    ata-TOSHIBA_DT01ACA300_365XDR5KS  ONLINE       &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;     &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;     &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;
+
+errors: No known data errors&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h3 id=&#34;ordering-a-new-drive&#34;&gt;Ordering a New Drive&lt;/h3&gt;
+
+&lt;p&gt;When I started shopping for hard drives, I decided to replace my broken 7200 RPM
+one a 5400 RPM one. I&amp;rsquo;d rather have the drives last longer and run quieter,
+than whatever marginal speed difference the faster spinning disks &lt;em&gt;may&lt;/em&gt;
+provide. I decided to finally go with a &lt;a href=&#34;https://www.amazon.com/dp/B008JJLW4M/ref=twister_B07GXT9HNH?_encoding=UTF8&amp;amp;psc=1&#34;&gt;3TB Western Digital RED
+drive&lt;/a&gt;
+this time, even tough it&amp;rsquo;s a bit more expensive&amp;hellip; mostly to try out.&lt;/p&gt;
+
+&lt;h3 id=&#34;replacing-the-drive&#34;&gt;Replacing the Drive&lt;/h3&gt;
+
+&lt;p&gt;&lt;center&gt;
+&lt;a href=&#34;../../img/posts/replace-zfs-mirror-drive/hdd-swap.jpg&#34;&gt;&lt;img alt=&#34;Swapping the two hard drives&#34; src= &#34;../../img/posts/replace-zfs-mirror-drive/hdd-swap.jpg&#34; style=&#34;max-width: 100%;&#34;/&gt;&lt;/a&gt;
+&lt;div class=&#34;caption&#34;&gt;Swapping the hot-swap caddy from the broken hard drive (left) with my new WD Red drive (right)&lt;/div&gt;
+&lt;/center&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;Physically&lt;/em&gt; swapping the hard drives was a breeze. I could easily tell which
+drive was the defective one&amp;hellip; as it caused the entire server to rumble (ಠ_ಠ) .
+So I slid it out, unscrewed the drive from its caddy, and screwed in the new
+one. Lastly, I slide the caddy back into the server and booted it up. I love
+hot-swap drive bays.&lt;/p&gt;
+
+&lt;h4 id=&#34;figuring-out-which-disk-to-replace&#34;&gt;Figuring Out Which Disk To Replace&lt;/h4&gt;
+
+&lt;p&gt;Determining which disk was being replaced &lt;em&gt;in software&lt;/em&gt; was a bit more
+difficult. In order to add the new drive to the &lt;code&gt;Data&lt;/code&gt; pool, I needed to tell
+ZFS which one had been &lt;em&gt;replaced&lt;/em&gt;.  This was made more complicated by the fact
+that previously, the two drives in the mirror were the same model and both showed up
+as &lt;code&gt;/dev/disk/by-id/ata-TOSHIBA_DT01ACA300_365XDR5KS&lt;/code&gt;. So, I needed to find the
+&lt;code&gt;guid&lt;/code&gt; for each drive, because it would differ between them. I used the command
+&lt;code&gt;zdb&lt;/code&gt; to spit out information about of each of my pools:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;λ ninetales ~ → zdb
+... &lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;other pool output&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt;...
+Data:
+    version: &lt;span style=&#34;color:#ae81ff&#34;&gt;5000&lt;/span&gt;
+    name: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;Data&amp;#39;&lt;/span&gt;
+    state: &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;
+    txg: &lt;span style=&#34;color:#ae81ff&#34;&gt;15996848&lt;/span&gt;
+    pool_guid: &lt;span style=&#34;color:#ae81ff&#34;&gt;2285339125999939520&lt;/span&gt;
+    errata: &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;
+    comment: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;iocage&amp;#39;&lt;/span&gt;
+    hostname: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;ninetales&amp;#39;&lt;/span&gt;
+    com.delphix:has_per_vdev_zaps
+    vdev_children: &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;
+    vdev_tree:
+        type: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;root&amp;#39;&lt;/span&gt;
+        id: &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;
+        guid: &lt;span style=&#34;color:#ae81ff&#34;&gt;2285339125999939520&lt;/span&gt;
+        children&lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt;:
+            type: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;mirror&amp;#39;&lt;/span&gt;
+            id: &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;
+            guid: &lt;span style=&#34;color:#ae81ff&#34;&gt;15171243251753521949&lt;/span&gt;
+            metaslab_array: &lt;span style=&#34;color:#ae81ff&#34;&gt;34&lt;/span&gt;
+            metaslab_shift: &lt;span style=&#34;color:#ae81ff&#34;&gt;34&lt;/span&gt;
+            ashift: &lt;span style=&#34;color:#ae81ff&#34;&gt;12&lt;/span&gt;
+            asize: &lt;span style=&#34;color:#ae81ff&#34;&gt;3000588042240&lt;/span&gt;
+            is_log: &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;
+            create_txg: &lt;span style=&#34;color:#ae81ff&#34;&gt;4&lt;/span&gt;
+            com.delphix:vdev_zap_top: &lt;span style=&#34;color:#ae81ff&#34;&gt;125&lt;/span&gt;
+            children&lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt;:
+                type: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;disk&amp;#39;&lt;/span&gt;
+                id: &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;
+                guid: &lt;span style=&#34;color:#ae81ff&#34;&gt;4676737554230074290&lt;/span&gt;
+                path: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;/dev/disk/by-id/ata-TOSHIBA_DT01ACA300_365XDT3KS&amp;#39;&lt;/span&gt;
+                phys_path: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;/dev/ada1&amp;#39;&lt;/span&gt;
+                whole_disk: &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;
+                not_present: &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;
+                DTL: &lt;span style=&#34;color:#ae81ff&#34;&gt;123&lt;/span&gt;
+                create_txg: &lt;span style=&#34;color:#ae81ff&#34;&gt;4&lt;/span&gt;
+                com.delphix:vdev_zap_leaf: &lt;span style=&#34;color:#ae81ff&#34;&gt;126&lt;/span&gt;
+            children&lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt;:
+                type: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;disk&amp;#39;&lt;/span&gt;
+                id: &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;
+                guid: &lt;span style=&#34;color:#ae81ff&#34;&gt;13442522248687181242&lt;/span&gt;
+                path: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;/dev/disk/by-id/ata-TOSHIBA_DT01ACA300_365XDR5KS&amp;#39;&lt;/span&gt;
+                phys_path: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;/dev/ada3&amp;#39;&lt;/span&gt;
+                whole_disk: &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;
+                DTL: &lt;span style=&#34;color:#ae81ff&#34;&gt;122&lt;/span&gt;
+                create_txg: &lt;span style=&#34;color:#ae81ff&#34;&gt;4&lt;/span&gt;
+                com.delphix:vdev_zap_leaf: &lt;span style=&#34;color:#ae81ff&#34;&gt;159&lt;/span&gt;
+    features_for_read:
+        com.delphix:hole_birth
+        com.delphix:embedded_data
+...&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;At first, I still didn&amp;rsquo;t know which drive was which. However, after looking
+deeper, I noticed that &lt;em&gt;one&lt;/em&gt; of the Toshiba drives listed had the line
+&lt;code&gt;not_present: 1&lt;/code&gt;, indicating that it was the broken drive I had removed!&lt;/p&gt;
+
+&lt;h4 id=&#34;replacing-the-drive-1&#34;&gt;Replacing the drive&lt;/h4&gt;
+
+&lt;p&gt;With the &lt;code&gt;guid&lt;/code&gt; of the broken drive known, I was able to start the process of
+replacing it in the pool with the new one. I issued a &lt;code&gt;zpool replace&lt;/code&gt; command
+with the following arguments:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;sudo zpool replace Data &lt;span style=&#34;color:#ae81ff&#34;&gt;4676737554230074290&lt;/span&gt; /dev/sdd&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;&lt;code&gt;Data&lt;/code&gt; - the name of the pool&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;&lt;code&gt;4676737554230074290&lt;/code&gt; - the &lt;code&gt;guid&lt;/code&gt; of the previous drive&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;&lt;code&gt;/dev/sdd&lt;/code&gt; - the path to the new drive&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Afterwards, the resilvering process started (rebuilding the mirror by copying
+data from one drive to the other). I was able to check the status of
+the process using &lt;code&gt;zpool status Data&lt;/code&gt;.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;λ ninetales by-uuid → zpool status Data
+  pool: Data
+ state: DEGRADED
+status: One or more devices is currently being resilvered.  The pool will
+	&lt;span style=&#34;color:#66d9ef&#34;&gt;continue&lt;/span&gt; to &lt;span style=&#34;color:#66d9ef&#34;&gt;function&lt;/span&gt;, possibly in a degraded state.
+action: Wait &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; the resilver to complete.
+  scan: resilver in progress since Sat Jan &lt;span style=&#34;color:#ae81ff&#34;&gt;12&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;11&lt;/span&gt;:29:36 &lt;span style=&#34;color:#ae81ff&#34;&gt;2019&lt;/span&gt;
+	&lt;span style=&#34;color:#ae81ff&#34;&gt;72&lt;/span&gt;.6M scanned out of &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;.03T at &lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;.42M/s, 123h32m to go
+	&lt;span style=&#34;color:#ae81ff&#34;&gt;72&lt;/span&gt;.2M resilvered, &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;.01% &lt;span style=&#34;color:#66d9ef&#34;&gt;done&lt;/span&gt;
+config:
+
+	NAME                                  STATE     READ WRITE CKSUM
+	Data                                  DEGRADED     &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;     &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;     &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;
+	  mirror-0                            DEGRADED     &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;     &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;     &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;
+	    replacing-0                       DEGRADED     &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;     &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;     &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;
+	      &lt;span style=&#34;color:#ae81ff&#34;&gt;4676737554230074290&lt;/span&gt;             UNAVAIL      &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;     &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;     &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;  was /dev/disk/by-id/ata-TOSHIBA_DT01ACA300_365XDT3KS
+	      sdd                             ONLINE       &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;     &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;     &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;  &lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;resilvering&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt;
+	    ata-TOSHIBA_DT01ACA300_365XDR5KS  ONLINE       &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;     &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;     &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;
+
+errors: No known data errors&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Resilvering can take a &lt;em&gt;long&lt;/em&gt; time. Luckily, I only had about ~1 TB of data to
+rebuild, so I hoped it wouldn&amp;rsquo;t &lt;em&gt;actually&lt;/em&gt; take the 123.5 hours that the first
+&lt;code&gt;status&lt;/code&gt; predicted! Regardless, during the resilvering process, the only thing
+to do is wait (&lt;em&gt;and hope that the other drive doesn&amp;rsquo;t break in the process!&lt;/em&gt;).
+So I did.&lt;/p&gt;
+
+&lt;h4 id=&#34;resilver-complete&#34;&gt;Resilver Complete&lt;/h4&gt;
+
+&lt;p&gt;In just over 4 hours, my pool had rebuilt and was back online.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;λ ninetales ~ → zpool status Data
+  pool: Data
+ state: ONLINE
+  scan: resilvered &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;.03T in 4h8m with &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt; errors on Sat Jan &lt;span style=&#34;color:#ae81ff&#34;&gt;12&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;15&lt;/span&gt;:38:26 &lt;span style=&#34;color:#ae81ff&#34;&gt;2019&lt;/span&gt;
+config:
+
+	NAME                                  STATE     READ WRITE CKSUM
+	Data                                  ONLINE       &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;     &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;     &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;
+	  mirror-0                            ONLINE       &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;     &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;     &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;
+	    sdd                               ONLINE       &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;     &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;     &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;
+	    ata-TOSHIBA_DT01ACA300_365XDR5KS  ONLINE       &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;     &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;     &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;
+
+errors: No known data errors&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Looking at this output now, I realize I probably should have added the new
+drive by &lt;code&gt;uuid&lt;/code&gt; instead of pathname&amp;hellip;hmmm&amp;hellip;&lt;/p&gt;
+
+&lt;p&gt;Oh well. That is a post for another day. At least my broken drive
+has &lt;em&gt;finally&lt;/em&gt; been replaced!&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>Shell Stuff: Easy File Cleanup</title>

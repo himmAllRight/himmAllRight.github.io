@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Replacing a Drive in My ZFS Mirror -- λ ryan. himmelwright. net</title>
+
+    
+
+    
+    <link href="http://ryan.himmelwright.net/css/bootstrap.min.css" rel="stylesheet">
+
+    
+    <link href="http://ryan.himmelwright.net/css/clean-blog.min.css" rel="stylesheet">
+
+    
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href='//fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+
+    
+    
+    
+
+
+
+    
+    <script type="text/javascript">
+        var _paq = _paq || [];
+         
+        _paq.push(["setDocumentTitle", document.domain + "/" + document.title]);
+        _paq.push(["setCookieDomain", "*.ryan.himmelwright.net"]);
+        _paq.push(["setDomains", ["*.ryan.himmelwright.net"]]);
+        _paq.push(['trackPageView']);
+        _paq.push(['enableLinkTracking']);
+        (function() {
+        var u="//cloud.himmelwright.net/piwik/";
+        _paq.push(['setTrackerUrl', u+'piwik.php']);
+        _paq.push(['setSiteId', '1']);
+        var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+        g.type='text/javascript'; g.async=true; g.defer=true; g.src=u+'piwik.js'; s.parentNode.insertBefore(g,s);
+        })();
+        </script>
+        <noscript><p><img src="//cloud.himmelwright.net/piwik/piwik.php?idsite=1&rec=1" style="border:0;" alt="" /></p></noscript>
+        
+
+
+
+</head>
+
+<body>
+
+    
+    <nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+        <div class="container-fluid">
+            
+            <div class="navbar-header page-scroll">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="http://ryan.himmelwright.net">λ ryan. himmelwright. net</a>
+            </div>
+
+                       
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    
+                    <li>
+                        <a href="http://ryan.himmelwright.net/">home</a>
+                    </li>
+                    
+                    <li>
+                        <a href="http://ryan.himmelwright.net/pages/about/">About</a>
+                    </li>
+                    
+                    <li>
+                        <a href="http://ryan.himmelwright.net/pages/homelab/">Homelab</a>
+                    </li>
+                    
+                    <li>
+                        <a href="http://ryan.himmelwright.net/tags">tags</a>
+                    </li>
+                    
+                    <li>
+                        <a href="http://ryan.himmelwright.net/post/">Archives</a>
+                    </li>
+                    
+                    <li>
+                        <a href="http://ryan.himmelwright.net/post/index.xml">RSS</a>
+                    </li>
+                    
+                  </ul>
+            </div>
+           
+
+        </div>
+        
+    </nav>
+
+
+
+
+<header class="intro-header" style="background-image: url('http://ryan.himmelwright.net/img/header-images/hdd-replace.jpg')">
+    
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <h1>Replacing a Drive in My ZFS Mirror</h1>
+                    <h2 class="subheading"></h2>
+                    <span class="meta">
+                        
+Posted by <a href="#">Ryan Himmelwright</a> on Tue, Jan 15, 2019
+
+
+
+
+
+
+
+<br />
+Tags <a href="http://ryan.himmelwright.net/tags/linux">linux</a>, <a href="http://ryan.himmelwright.net/tags/homelab">homelab</a>, <a href="http://ryan.himmelwright.net/tags/filesystems">filesystems</a>, <a href="http://ryan.himmelwright.net/tags/zfs">zfs</a>
+
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <span class="header-caption">My Desk, Durham, NC</span>
+    
+    </header>
+
+    
+    <article>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                    
+                    <p>Right before Thanksgiving, one of the hard drives in my server started get
+noisy&hellip; very noisy. Fearing the worst, I <a href="../zfs-backups-to-luks-external">did a
+backup</a>, and shutdown the server until I had
+time to investigate further&hellip; and likely replace the drive. That
+time came this past week.</p>
+
+<p></p>
+
+<h3 id="verifying-the-drive-failed">Verifying the Drive Failed</h3>
+
+<p>Before throwing money at the problem, I wanted to see if ZFS was detecting any
+issues. When I ran a <code>zpool status</code> on my <code>Data</code> pool, it warned me that one of
+the devices had experienced an error, but that I had not (<em>yet</em>) encountered
+any data errors. Time to buy a new drive.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">λ ninetales ~ → zpool status Data
+  pool: Data
+ state: ONLINE
+status: One or more devices has experienced an unrecoverable error.  An
+	attempt was made to correct the error.  Applications are unaffected.
+action: Determine <span style="color:#66d9ef">if</span> the device needs to be replaced, and clear the errors
+	using <span style="color:#e6db74">&#39;zpool clear&#39;</span> or replace the device with <span style="color:#e6db74">&#39;zpool replace&#39;</span>.
+   see: http://zfsonlinux.org/msg/ZFS-8000-9P
+  scan: resilvered <span style="color:#ae81ff">1</span>.14M in 0h0m with <span style="color:#ae81ff">0</span> errors on Sat Jan <span style="color:#ae81ff">12</span> <span style="color:#ae81ff">10</span>:49:31 <span style="color:#ae81ff">2019</span>
+config:
+
+	NAME                                  STATE     READ WRITE CKSUM
+	Data                                  ONLINE       <span style="color:#ae81ff">0</span>     <span style="color:#ae81ff">0</span>     <span style="color:#ae81ff">0</span>
+	  mirror-0                            ONLINE       <span style="color:#ae81ff">0</span>     <span style="color:#ae81ff">0</span>     <span style="color:#ae81ff">0</span>
+	    ata-TOSHIBA_DT01ACA300_365XDT3KS  ONLINE       <span style="color:#ae81ff">0</span>     <span style="color:#ae81ff">0</span>     <span style="color:#ae81ff">2</span>
+	    ata-TOSHIBA_DT01ACA300_365XDR5KS  ONLINE       <span style="color:#ae81ff">0</span>     <span style="color:#ae81ff">0</span>     <span style="color:#ae81ff">0</span>
+
+errors: No known data errors</code></pre></div>
+<h3 id="ordering-a-new-drive">Ordering a New Drive</h3>
+
+<p>When I started shopping for hard drives, I decided to replace my broken 7200 RPM
+one a 5400 RPM one. I&rsquo;d rather have the drives last longer and run quieter,
+than whatever marginal speed difference the faster spinning disks <em>may</em>
+provide. I decided to finally go with a <a href="https://www.amazon.com/dp/B008JJLW4M/ref=twister_B07GXT9HNH?_encoding=UTF8&amp;psc=1">3TB Western Digital RED
+drive</a>
+this time, even tough it&rsquo;s a bit more expensive&hellip; mostly to try out.</p>
+
+<h3 id="replacing-the-drive">Replacing the Drive</h3>
+
+<p><center>
+<a href="../../img/posts/replace-zfs-mirror-drive/hdd-swap.jpg"><img alt="Swapping the two hard drives" src= "../../img/posts/replace-zfs-mirror-drive/hdd-swap.jpg" style="max-width: 100%;"/></a>
+<div class="caption">Swapping the hot-swap caddy from the broken hard drive (left) with my new WD Red drive (right)</div>
+</center></p>
+
+<p><em>Physically</em> swapping the hard drives was a breeze. I could easily tell which
+drive was the defective one&hellip; as it caused the entire server to rumble (ಠ_ಠ) .
+So I slid it out, unscrewed the drive from its caddy, and screwed in the new
+one. Lastly, I slide the caddy back into the server and booted it up. I love
+hot-swap drive bays.</p>
+
+<h4 id="figuring-out-which-disk-to-replace">Figuring Out Which Disk To Replace</h4>
+
+<p>Determining which disk was being replaced <em>in software</em> was a bit more
+difficult. In order to add the new drive to the <code>Data</code> pool, I needed to tell
+ZFS which one had been <em>replaced</em>.  This was made more complicated by the fact
+that previously, the two drives in the mirror were the same model and both showed up
+as <code>/dev/disk/by-id/ata-TOSHIBA_DT01ACA300_365XDR5KS</code>. So, I needed to find the
+<code>guid</code> for each drive, because it would differ between them. I used the command
+<code>zdb</code> to spit out information about of each of my pools:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">λ ninetales ~ → zdb
+... <span style="color:#f92672">(</span>other pool output<span style="color:#f92672">)</span>...
+Data:
+    version: <span style="color:#ae81ff">5000</span>
+    name: <span style="color:#e6db74">&#39;Data&#39;</span>
+    state: <span style="color:#ae81ff">0</span>
+    txg: <span style="color:#ae81ff">15996848</span>
+    pool_guid: <span style="color:#ae81ff">2285339125999939520</span>
+    errata: <span style="color:#ae81ff">0</span>
+    comment: <span style="color:#e6db74">&#39;iocage&#39;</span>
+    hostname: <span style="color:#e6db74">&#39;ninetales&#39;</span>
+    com.delphix:has_per_vdev_zaps
+    vdev_children: <span style="color:#ae81ff">1</span>
+    vdev_tree:
+        type: <span style="color:#e6db74">&#39;root&#39;</span>
+        id: <span style="color:#ae81ff">0</span>
+        guid: <span style="color:#ae81ff">2285339125999939520</span>
+        children<span style="color:#f92672">[</span><span style="color:#ae81ff">0</span><span style="color:#f92672">]</span>:
+            type: <span style="color:#e6db74">&#39;mirror&#39;</span>
+            id: <span style="color:#ae81ff">0</span>
+            guid: <span style="color:#ae81ff">15171243251753521949</span>
+            metaslab_array: <span style="color:#ae81ff">34</span>
+            metaslab_shift: <span style="color:#ae81ff">34</span>
+            ashift: <span style="color:#ae81ff">12</span>
+            asize: <span style="color:#ae81ff">3000588042240</span>
+            is_log: <span style="color:#ae81ff">0</span>
+            create_txg: <span style="color:#ae81ff">4</span>
+            com.delphix:vdev_zap_top: <span style="color:#ae81ff">125</span>
+            children<span style="color:#f92672">[</span><span style="color:#ae81ff">0</span><span style="color:#f92672">]</span>:
+                type: <span style="color:#e6db74">&#39;disk&#39;</span>
+                id: <span style="color:#ae81ff">0</span>
+                guid: <span style="color:#ae81ff">4676737554230074290</span>
+                path: <span style="color:#e6db74">&#39;/dev/disk/by-id/ata-TOSHIBA_DT01ACA300_365XDT3KS&#39;</span>
+                phys_path: <span style="color:#e6db74">&#39;/dev/ada1&#39;</span>
+                whole_disk: <span style="color:#ae81ff">1</span>
+                not_present: <span style="color:#ae81ff">1</span>
+                DTL: <span style="color:#ae81ff">123</span>
+                create_txg: <span style="color:#ae81ff">4</span>
+                com.delphix:vdev_zap_leaf: <span style="color:#ae81ff">126</span>
+            children<span style="color:#f92672">[</span><span style="color:#ae81ff">1</span><span style="color:#f92672">]</span>:
+                type: <span style="color:#e6db74">&#39;disk&#39;</span>
+                id: <span style="color:#ae81ff">1</span>
+                guid: <span style="color:#ae81ff">13442522248687181242</span>
+                path: <span style="color:#e6db74">&#39;/dev/disk/by-id/ata-TOSHIBA_DT01ACA300_365XDR5KS&#39;</span>
+                phys_path: <span style="color:#e6db74">&#39;/dev/ada3&#39;</span>
+                whole_disk: <span style="color:#ae81ff">1</span>
+                DTL: <span style="color:#ae81ff">122</span>
+                create_txg: <span style="color:#ae81ff">4</span>
+                com.delphix:vdev_zap_leaf: <span style="color:#ae81ff">159</span>
+    features_for_read:
+        com.delphix:hole_birth
+        com.delphix:embedded_data
+...</code></pre></div>
+<p>At first, I still didn&rsquo;t know which drive was which. However, after looking
+deeper, I noticed that <em>one</em> of the Toshiba drives listed had the line
+<code>not_present: 1</code>, indicating that it was the broken drive I had removed!</p>
+
+<h4 id="replacing-the-drive-1">Replacing the drive</h4>
+
+<p>With the <code>guid</code> of the broken drive known, I was able to start the process of
+replacing it in the pool with the new one. I issued a <code>zpool replace</code> command
+with the following arguments:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">sudo zpool replace Data <span style="color:#ae81ff">4676737554230074290</span> /dev/sdd</code></pre></div>
+<ul>
+<li><p><code>Data</code> - the name of the pool</p></li>
+
+<li><p><code>4676737554230074290</code> - the <code>guid</code> of the previous drive</p></li>
+
+<li><p><code>/dev/sdd</code> - the path to the new drive</p></li>
+</ul>
+
+<p>Afterwards, the resilvering process started (rebuilding the mirror by copying
+data from one drive to the other). I was able to check the status of
+the process using <code>zpool status Data</code>.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">λ ninetales by-uuid → zpool status Data
+  pool: Data
+ state: DEGRADED
+status: One or more devices is currently being resilvered.  The pool will
+	<span style="color:#66d9ef">continue</span> to <span style="color:#66d9ef">function</span>, possibly in a degraded state.
+action: Wait <span style="color:#66d9ef">for</span> the resilver to complete.
+  scan: resilver in progress since Sat Jan <span style="color:#ae81ff">12</span> <span style="color:#ae81ff">11</span>:29:36 <span style="color:#ae81ff">2019</span>
+	<span style="color:#ae81ff">72</span>.6M scanned out of <span style="color:#ae81ff">1</span>.03T at <span style="color:#ae81ff">2</span>.42M/s, 123h32m to go
+	<span style="color:#ae81ff">72</span>.2M resilvered, <span style="color:#ae81ff">0</span>.01% <span style="color:#66d9ef">done</span>
+config:
+
+	NAME                                  STATE     READ WRITE CKSUM
+	Data                                  DEGRADED     <span style="color:#ae81ff">0</span>     <span style="color:#ae81ff">0</span>     <span style="color:#ae81ff">0</span>
+	  mirror-0                            DEGRADED     <span style="color:#ae81ff">0</span>     <span style="color:#ae81ff">0</span>     <span style="color:#ae81ff">0</span>
+	    replacing-0                       DEGRADED     <span style="color:#ae81ff">0</span>     <span style="color:#ae81ff">0</span>     <span style="color:#ae81ff">0</span>
+	      <span style="color:#ae81ff">4676737554230074290</span>             UNAVAIL      <span style="color:#ae81ff">0</span>     <span style="color:#ae81ff">0</span>     <span style="color:#ae81ff">0</span>  was /dev/disk/by-id/ata-TOSHIBA_DT01ACA300_365XDT3KS
+	      sdd                             ONLINE       <span style="color:#ae81ff">0</span>     <span style="color:#ae81ff">0</span>     <span style="color:#ae81ff">0</span>  <span style="color:#f92672">(</span>resilvering<span style="color:#f92672">)</span>
+	    ata-TOSHIBA_DT01ACA300_365XDR5KS  ONLINE       <span style="color:#ae81ff">0</span>     <span style="color:#ae81ff">0</span>     <span style="color:#ae81ff">0</span>
+
+errors: No known data errors</code></pre></div>
+<p>Resilvering can take a <em>long</em> time. Luckily, I only had about ~1 TB of data to
+rebuild, so I hoped it wouldn&rsquo;t <em>actually</em> take the 123.5 hours that the first
+<code>status</code> predicted! Regardless, during the resilvering process, the only thing
+to do is wait (<em>and hope that the other drive doesn&rsquo;t break in the process!</em>).
+So I did.</p>
+
+<h4 id="resilver-complete">Resilver Complete</h4>
+
+<p>In just over 4 hours, my pool had rebuilt and was back online.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">λ ninetales ~ → zpool status Data
+  pool: Data
+ state: ONLINE
+  scan: resilvered <span style="color:#ae81ff">1</span>.03T in 4h8m with <span style="color:#ae81ff">0</span> errors on Sat Jan <span style="color:#ae81ff">12</span> <span style="color:#ae81ff">15</span>:38:26 <span style="color:#ae81ff">2019</span>
+config:
+
+	NAME                                  STATE     READ WRITE CKSUM
+	Data                                  ONLINE       <span style="color:#ae81ff">0</span>     <span style="color:#ae81ff">0</span>     <span style="color:#ae81ff">0</span>
+	  mirror-0                            ONLINE       <span style="color:#ae81ff">0</span>     <span style="color:#ae81ff">0</span>     <span style="color:#ae81ff">0</span>
+	    sdd                               ONLINE       <span style="color:#ae81ff">0</span>     <span style="color:#ae81ff">0</span>     <span style="color:#ae81ff">0</span>
+	    ata-TOSHIBA_DT01ACA300_365XDR5KS  ONLINE       <span style="color:#ae81ff">0</span>     <span style="color:#ae81ff">0</span>     <span style="color:#ae81ff">0</span>
+
+errors: No known data errors</code></pre></div>
+<p>Looking at this output now, I realize I probably should have added the new
+drive by <code>uuid</code> instead of pathname&hellip;hmmm&hellip;</p>
+
+<p>Oh well. That is a post for another day. At least my broken drive
+has <em>finally</em> been replaced!</p>
+
+                    
+                    
+                    
+                         <div style="float: right; text-decoration: underline; text-align: right;">Prev Post:</div>
+                    
+                    <br>
+                    
+                    
+                        <a href="http://ryan.himmelwright.net/post/shell-stuff-find-grep-sub/" style="text-align: right; float: right; max-width: 40%">Shell Stuff: Easy File Cleanup</a>
+                    
+
+			
+			<div class="comment-section">
+			  
+   <div id="disqus_thread"></div>
+<script>
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "himmallright" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+			</div>
+                </div>
+            </div>
+        </div>
+    </article>
+
+        <hr>
+    
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                  <ul class="list-inline text-center">
+                    
+                      <li>
+                        <a href="mailto:ryan@himmelwright.net">
+                          <span class="fa-stack fa-lg">
+                            <i class="fa fa-circle fa-stack-2x"></i>
+                            <i class="fa fa-envelope-o fa-stack-1x fa-inverse"></i>
+                          </span>
+                        </a>
+                      </li>
+                    
+                    
+                    <li>
+                      <a href="https://github.com/himmAllRight">
+                        <span class="fa-stack fa-lg">
+                          <i class="fa fa-circle fa-stack-2x"></i>
+                          <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                        </span>
+                      </a>
+                    </li>
+                    
+                    <li>
+                      <a href="https://www.linkedin.com/in/ryan-himmelwright-b3891774/">
+                        <span class="fa-stack fa-lg">
+                          <i class="fa fa-circle fa-stack-2x"></i>
+                          <i class="fa fa-linkedin fa-stack-1x fa-inverse"></i>
+                        </span>
+                      </a>
+                    </li>
+                    
+                  </ul>
+<p class="copyright text-muted">
+
+<a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img
+  alt="Creative Commons License" style="border-width:0"
+  src="https://i.creativecommons.org/l/by/4.0/88x31.png" /></a><br />This work
+by <a xmlns:cc="http://creativecommons.org/ns#" href="http://ryan.himmelwright.net" property="cc:attributionName" rel="cc:attributionURL">Ryan Himmelwright</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
+</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    
+    <script src="http://ryan.himmelwright.net/js/jquery.min.js"></script>
+
+    
+    <script src="http://ryan.himmelwright.net/js/bootstrap.min.js"></script>
+
+    
+    <script src="http://ryan.himmelwright.net/js/clean-blog.js"></script>
+
+    
+<script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-123-45', 'auto');
+ga('send', 'pageview');
+</script>
+
+
+</body>
+
+</html>
+
