@@ -1,0 +1,383 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Jenkins on λ ryan. himmelwright. net</title>
+    <link>http://ryan.himmelwright.net/tags/jenkins/</link>
+    <description>Recent content in Jenkins on λ ryan. himmelwright. net</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Thu, 07 Feb 2019 00:00:00 +0000</lastBuildDate>
+    
+        <atom:link href="http://ryan.himmelwright.net/tags/jenkins/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Extending a VM Virtual Disk</title>
+      <link>http://ryan.himmelwright.net/post/extending-vm-hd/</link>
+      <pubDate>Thu, 07 Feb 2019 00:00:00 +0000</pubDate>
+      
+      <guid>http://ryan.himmelwright.net/post/extending-vm-hd/</guid>
+      <description>&lt;p&gt;Last week, I extended the virtual disk of the VM hosting my
+&lt;a href=&#34;https://jenkins.io&#34;&gt;jenkins&lt;/a&gt; server. Shortly after, I increased the maximum
+disk size of one of the job&amp;rsquo;s docker containers, maxing out the disk. This
+meant that I needed to extend the drive&lt;em&gt;&amp;hellip; again&lt;/em&gt;. If you ever do something
+twice, it is &lt;em&gt;best&lt;/em&gt; to have it documented for the potential third time. So,
+here we are.&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;
+
+&lt;h4 id=&#34;assumptions&#34;&gt;Assumptions&lt;/h4&gt;
+
+&lt;p&gt;Before getting started, I want to point out that this method is specific to the
+environment I currently have for &lt;em&gt;my VMs&lt;/em&gt;. Specifically, I am using kvm/qemu
+and virt-manager, with qcow2 images for the virtual disks. Additionally, the
+specific VM I was extending was installed with LVM and it&amp;rsquo;s main partition was
+formatted with a xfs file system. Just note that some steps &lt;em&gt;may&lt;/em&gt; differ
+elsewhere. This is what worked for &lt;em&gt;me&lt;/em&gt;.&lt;/p&gt;
+
+&lt;h2 id=&#34;clone-vm&#34;&gt;Clone VM&lt;/h2&gt;
+
+&lt;p&gt;&lt;center&gt;
+&lt;a href=&#34;../../img/posts/extending-vm-hd/clone-vm.png&#34;&gt;&lt;img alt=&#34;Clone VM window in Virt Manager&#34; src= &#34;../../img/posts/extending-vm-hd/clone-vm.png&#34; style=&#34;max-width: 100%;&#34;/&gt;&lt;/a&gt;
+&lt;div class=&#34;caption&#34;&gt;Cloning the VM in Virt Manager&lt;/div&gt;
+&lt;/center&gt;&lt;/p&gt;
+
+&lt;p&gt;While not &lt;em&gt;required&lt;/em&gt;, it isn&amp;rsquo;t a &lt;em&gt;bad&lt;/em&gt; idea to first clone the VM (just
+in case anything becomes damaged). If using &lt;code&gt;virt-manager&lt;/code&gt;, cloning a
+VM is as simple as right clicking a &lt;em&gt;powered down&lt;/em&gt; VM, and selecting
+&amp;ldquo;&lt;em&gt;Clone&amp;hellip;&lt;/em&gt;&amp;rdquo;. A window will pop up with options for cloning the
+VM. Make the desired name changes and hit &lt;em&gt;Clone&lt;/em&gt;.&lt;/p&gt;
+
+&lt;h2 id=&#34;extend-qcow2-file&#34;&gt;Extend qcow2 file&lt;/h2&gt;
+
+&lt;p&gt;The first step in resizing the virtual drive is to first expand
+the &lt;code&gt;qcow2&lt;/code&gt; image. By default, the images tend to be stored at
+&lt;code&gt;/var/lib/libvirt/images/&lt;/code&gt; and will require &lt;code&gt;root&lt;/code&gt; privileges to
+access. Virt-Manager can be used to double check which image the VM is
+using for its disk. To resize the qcow2 image, use the &lt;code&gt;qemu-img
+resize&lt;/code&gt; command, providing it the image file path/name and then the size
+to expand it. For example, I used &lt;code&gt;+40G&lt;/code&gt; in my command (&lt;code&gt;qemu-img
+resize Jenkins.qcow2 +40G&lt;/code&gt;) to extend the image by 40GB.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;root@ninetales:/var/lib/libvirt/images# qemu-img info Jenkins.qcow2
+image: Jenkins.qcow2
+file format: qcow2
+virtual size: 20G &lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;21474836480&lt;/span&gt; bytes&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt;
+disk size: 20G
+cluster_size: &lt;span style=&#34;color:#ae81ff&#34;&gt;65536&lt;/span&gt;
+Format specific information:
+    compat: &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;.1
+    lazy refcounts: true
+    refcount bits: &lt;span style=&#34;color:#ae81ff&#34;&gt;16&lt;/span&gt;
+    corrupt: false
+
+root@ninetales:/var/lib/libvirt/images# qemu-img resize Jenkins.qcow2 +40G
+Image resized.
+
+root@ninetales:/var/lib/libvirt/images# qemu-img info Jenkins.qcow2
+image: Jenkins.qcow2
+file format: qcow2
+virtual size: 60G &lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;64424509440&lt;/span&gt; bytes&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt;
+disk size: 20G
+cluster_size: &lt;span style=&#34;color:#ae81ff&#34;&gt;65536&lt;/span&gt;
+Format specific information:
+    compat: &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;.1
+    lazy refcounts: true
+    refcount bits: &lt;span style=&#34;color:#ae81ff&#34;&gt;16&lt;/span&gt;
+    corrupt: false
+
+root@ninetales:/var/lib/libvirt/images#&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;The command &lt;code&gt;qemu-image info&lt;/code&gt; can be helpful in verifying that the resize
+worked, by checking the size of the image.&lt;/p&gt;
+
+&lt;h2 id=&#34;gparted-live-iso&#34;&gt;Gparted Live ISO&lt;/h2&gt;
+
+&lt;p&gt;For the next few steps, it is a good idea to boot the system from a live CD.
+This will run the OS in RAM, allowing the disk to be fully unmounted.  With
+access to the VM&amp;rsquo;s display, an ISO such as the &lt;a href=&#34;https://gparted.org/livecd.php&#34;&gt;gparted live
+CD&lt;/a&gt; can be used to resize the partitions,
+as it contains the amazing graphical tool, &lt;code&gt;gparted&lt;/code&gt; (duh).&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Note:&lt;/strong&gt; If you boot up the VM and don&amp;rsquo;t see the new unallocated space available in the
+volume&amp;hellip; make sure you didn&amp;rsquo;t accidentally boot the &lt;em&gt;backup VM&lt;/em&gt;&amp;hellip; Not that
+&lt;strong&gt;I made such a mistake&amp;hellip;&lt;/strong&gt; :P&lt;/p&gt;
+
+&lt;h4 id=&#34;lvm-resize&#34;&gt;LVM Resize&lt;/h4&gt;
+
+&lt;p&gt;My VM is installed using LVM volumes, so I had to resize them
+before I could resize the file system. Gparted will do this
+automatically when resizing a partition.&lt;/p&gt;
+
+&lt;p&gt;&lt;center&gt;
+&lt;a href=&#34;../../img/posts/extending-vm-hd/gparted-live-iso.png&#34;&gt;&lt;img alt=&#34;Booting into the Gparted live ISO&#34; src= &#34;../../img/posts/extending-vm-hd/gparted-live-iso.png&#34; style=&#34;max-width: 100%;&#34;/&gt;&lt;/a&gt;
+&lt;div class=&#34;caption&#34;&gt;Booting into the Gparted live ISO&lt;/div&gt;
+&lt;/center&gt;&lt;/p&gt;
+
+&lt;p&gt;To resize the partition, first verify that the correct virtual disk
+is selected in the top right drop-down the window. Next, select the
+partition to expand, and click the &amp;ldquo;&lt;em&gt;Resize/Move&lt;/em&gt;&amp;rdquo; icon at the top.&lt;/p&gt;
+
+&lt;p&gt;&lt;center&gt;
+&lt;a href=&#34;../../img/posts/extending-vm-hd/gparted-resize.png&#34;&gt;&lt;img alt=&#34;Resizing the partition in Gparted&#34; src= &#34;../../img/posts/extending-vm-hd/gparted-resize.png&#34; style=&#34;max-width: 100%;&#34;/&gt;&lt;/a&gt;
+&lt;div class=&#34;caption&#34;&gt;Resizing the partition in Gparted&lt;/div&gt;
+&lt;/center&gt;&lt;/p&gt;
+
+&lt;p&gt;In the resize window, I changed the &lt;code&gt;Free space following (MiB)&lt;/code&gt;
+value to &lt;code&gt;0&lt;/code&gt;, to expand the partition to use &lt;em&gt;all&lt;/em&gt; of the unallocated space.
+Lastly, I hit the &lt;em&gt;Resize&lt;/em&gt; button and let Gparted do it&amp;rsquo;s magic.&lt;/p&gt;
+
+&lt;h4 id=&#34;grow-xfs&#34;&gt;Grow XFS&lt;/h4&gt;
+
+&lt;p&gt;Finally, with the lvm volume expanded, I just had to grow my file system to use
+the new space. I booted up the VM and logged in. This VM uses an xfs file
+system, so I was able to use the &lt;code&gt;xfs_growfs&lt;/code&gt; command to expand the partition:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;ryan@mr-mime ~&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt;$ sudo xfs_growfs /dev/centos/root
+&lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;... Ryan removed output &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; the post...&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt;
+data blocks changed from &lt;span style=&#34;color:#ae81ff&#34;&gt;4851712&lt;/span&gt; to &lt;span style=&#34;color:#ae81ff&#34;&gt;15322112&lt;/span&gt;
+
+&lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;ryan@mr-mime ~&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt;$ df -h
+Filesystem               Size  Used Avail Use% Mounted on
+/dev/mapper/centos-root   59G   19G   40G  &lt;span style=&#34;color:#ae81ff&#34;&gt;32&lt;/span&gt;% /
+devtmpfs                 &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;.9G     &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;  &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;.9G   &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;% /dev
+tmpfs                    &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;.9G  &lt;span style=&#34;color:#ae81ff&#34;&gt;8&lt;/span&gt;.0K  &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;.9G   &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;% /dev/shm
+tmpfs                    &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;.9G  &lt;span style=&#34;color:#ae81ff&#34;&gt;8&lt;/span&gt;.7M  &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;.9G   &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;% /run
+tmpfs                    &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;.9G     &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;  &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;.9G   &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;% /sys/fs/cgroup
+/dev/vda1                497M  231M  267M  &lt;span style=&#34;color:#ae81ff&#34;&gt;47&lt;/span&gt;% /boot
+tmpfs                    379M     &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;  379M   &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;% /run/user/1000&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;&lt;em&gt;Note: My VM&amp;rsquo;s disk space was COMPLETELY full. This meant that I couldn&amp;rsquo;t use auto
+tab complete in my shell because it spit out there&amp;rsquo;s no disk space. Typing the
+command out fully by hand, still worked.&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;With the xfs partition resized, I rebooted the VM for good measure, and
+everything was up and running again.&lt;/p&gt;
+
+&lt;p&gt;That&amp;rsquo;s about it. Remember, the steps I took might need to be altered for other
+environments, but this post should still be a good &lt;em&gt;starting&lt;/em&gt; point. I know it
+will help me when I acidently overfill this VM &lt;em&gt;again&lt;/em&gt;&amp;hellip; Enjoy!&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Creating a CI/CD &#39;Draft&#39; Website with Jenkins (and Hugo)</title>
+      <link>http://ryan.himmelwright.net/post/draft-website-with-jenkins/</link>
+      <pubDate>Wed, 15 Aug 2018 00:00:00 +0000</pubDate>
+      
+      <guid>http://ryan.himmelwright.net/post/draft-website-with-jenkins/</guid>
+      <description>&lt;p&gt;The last few months I have been working more with the open source
+automation server, &lt;a href=&#34;https://jenkins.io/&#34;&gt;Jenkins&lt;/a&gt;. While digging into
+it, I have been thinking of ways to improve my home build
+environment. One idea, was to utilize Jenkins to automatically build
+and deploy a &amp;ldquo;draft&amp;rdquo; website, so I can stage new posts/website change
+on my home network, before publishing it to the &amp;ldquo;production&amp;rdquo;
+website. Here is how that idea was Instantiated&amp;hellip;&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;my-website&#34;&gt;My Website&lt;/h2&gt;
+
+&lt;p&gt;&lt;a href=&#34;../../img/posts/draft-website-jenkins/jenkins-logo.png&#34;&gt;&lt;img
+src=&#34;../../img/posts/draft-website-jenkins/jenkins-logo.png&#34; style=&#34;max-width:
+50%; float: left; margin: 0px 12px 0px 0px;&#34; alt=&#34;Jenkins Logo&#34; /&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;I have previously &lt;a href=&#34;../website-transition-to-hugo/&#34;&gt;described&lt;/a&gt; how my
+website is &lt;a href=&#34;../website-switched-to-hugo/&#34;&gt;currently generated&lt;/a&gt;, using
+the &lt;a href=&#34;https://gohugo.io&#34;&gt;Hugo&lt;/a&gt; static website generator. To organize
+this system, I have two git repos: One that consists of all the hugo
+source files (where I write content), and one that contains the
+generated static website (that gets deployed to my web host).&lt;/p&gt;
+
+&lt;p&gt;When writing a post, I use &lt;code&gt;hugo server -D -F&lt;/code&gt; to live view the page
+in my browser. However, I occasionally want to view the state of all
+the &lt;em&gt;committed code&lt;/em&gt; in the &lt;em&gt;repo&lt;/em&gt;, to see what the site would look
+like if I decided to publish a post. So, I created a &amp;ldquo;drafts&amp;rdquo; website,
+which shows the current state of my website&amp;rsquo;s &lt;em&gt;source&lt;/em&gt; repo (including
+draft and future posts). If I want to check how a post looks on my
+phone, or any other device, I can just open up the draft website after
+pushing my changes.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;../../img/posts/draft-website-jenkins/mr-mime.png&#34;&gt;&lt;img
+src=&#34;../../img/posts/draft-website-jenkins/mr-mime.png&#34; style=&#34;max-width:
+45%; float: right; margin: 20px 0px 0px 10px;&#34; alt=&#34;Jenkins Logo&#34; /&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;jenkins&#34;&gt;Jenkins&lt;/h2&gt;
+
+&lt;p&gt;I had previously created a dedicated Jenkins server on my home network
+(Mr. Mime), using a CentOS 7 VM hosted on my home server. However, any
+Jenkins setup should work for this project (including a &lt;a href=&#34;on my home network&#34;&gt;docker
+container&lt;/a&gt;). To get started, checkout the &lt;a href=&#34;https://jenkins.io/download/&#34;&gt;Jenkins
+Website&lt;/a&gt;, and be sure to take advantage
+of the &lt;a href=&#34;https://jenkins.io/doc/&#34;&gt;the documentation&lt;/a&gt; for help.&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;Note: just make sure hugo is installed on the Jenkins server, as we need
+it to generate the website.&lt;/em&gt;&lt;/p&gt;
+
+&lt;h3 id=&#34;github-integration&#34;&gt;GitHub Integration&lt;/h3&gt;
+
+&lt;h4 id=&#34;jenkins-service&#34;&gt;Jenkins Service&lt;/h4&gt;
+
+&lt;p&gt;My website repo is hosted on GitHub, so we need to configure it to
+work with our Jenkins server. To do that, go to the project&amp;rsquo;s GitHub
+page, and navigate through &lt;strong&gt;Settings&lt;/strong&gt; -&amp;gt; &lt;strong&gt;Integrations &amp;amp;
+services&lt;/strong&gt;. Click the &lt;strong&gt;Add service&lt;/strong&gt; drop-down and select &lt;em&gt;Jenkins
+(Git Plugin)&lt;/em&gt;. Next, add the Jenkins server url (assuming the server
+is accessible from the internet. If not, hosting the Jenkins server on
+something like &lt;a href=&#34;http://digitalocean.com&#34;&gt;Digital Ocean&lt;/a&gt; might be an
+easy solution). Lastly, make sure the &lt;strong&gt;Activate&lt;/strong&gt; box is selected,
+and click the &lt;strong&gt;Add Service&lt;/strong&gt; button.&lt;/p&gt;
+
+&lt;h4 id=&#34;ssh-keys&#34;&gt;SSH Keys&lt;/h4&gt;
+
+&lt;p&gt;While on the project&amp;rsquo;s GitHub page, make sure that the Jenkins
+server&amp;rsquo;s ssh keys are added to the project. To add them, navigate to
+the &lt;strong&gt;Deploy Keys&lt;/strong&gt; page (under the project&amp;rsquo;s &lt;strong&gt;Settings&lt;/strong&gt; tab). Then
+select &lt;strong&gt;Add deploy key&lt;/strong&gt;, and add the public key.&lt;/p&gt;
+
+&lt;h2 id=&#34;a-nginx-server&#34;&gt;A Nginx Server&lt;/h2&gt;
+
+&lt;p&gt;&lt;a href=&#34;../../img/posts/draft-website-jenkins/nginx.png&#34;&gt;&lt;img
+src=&#34;../../img/posts/draft-website-jenkins/nginx.png&#34; style=&#34;max-width:
+100%; float: center; margin: 0px 0px 0px 0px;&#34; alt=&#34;Default Nginx Page&#34; /&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;With Jenkins ready, let&amp;rsquo;s quickly setup the web server before
+configuring the Jenkins project. Any web server will do (it just needs
+to serve the generated &lt;em&gt;static&lt;/em&gt; website content). I used
+&lt;a href=&#34;https://nginx.org/en/&#34;&gt;nginx&lt;/a&gt; in for setup. After installing, make
+sure it is running. To install and check the status of nginx on an
+Ubuntu System:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;color:#75715e&#34;&gt;## Install
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;sudo apt install -y nginx
+
+&lt;span style=&#34;color:#75715e&#34;&gt;## Check it is running
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;sudo systemctl status nginx
+
+&lt;span style=&#34;color:#75715e&#34;&gt;## Optional: Ensure it is enabled to start up after reboots
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;sudo systemctl enable nginx&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;With the web server running, we need to know &lt;em&gt;where&lt;/em&gt; the website files
+need to go. Nginx will by default serve content at
+&lt;code&gt;/user/share/nginx/html/&lt;/code&gt;, so remember that location for later&amp;hellip;&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;Note: Don&amp;rsquo;t forget to add the &lt;code&gt;jenkins&lt;/code&gt; user&amp;rsquo;s ssh key from the
+jenkins server to the &lt;code&gt;authorized_keys&lt;/code&gt; file of the nginx server. This
+will make file transfers easier when setting up the jenkins project.&lt;/em&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;configuring-a-project&#34;&gt;Configuring a Project&lt;/h2&gt;
+
+&lt;p&gt;Let&amp;rsquo;s configure our Jenkins project! Log in to the Jenkins
+server and click the &lt;strong&gt;New Item&lt;/strong&gt; option on the left side bar. Enter a
+name for the project, select the &lt;strong&gt;Freestyle Project&lt;/strong&gt; option, and hit
+&lt;strong&gt;OK&lt;/strong&gt;.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;../../img/posts/draft-website-jenkins/general-config.png&#34;&gt;&lt;img
+src=&#34;../../img/posts/draft-website-jenkins/general-config.png&#34; style=&#34;max-width:
+100%; float: center; margin: 0px 0px 0px 0px;&#34; alt=&#34;The Project&#39;s General Configuration Section&#34; /&gt;&lt;/a&gt;
+&lt;div class=&#34;caption&#34;&gt;The Project&amp;rsquo;s General Configuration Section&lt;/div&gt;&lt;/p&gt;
+
+&lt;p&gt;In the &lt;strong&gt;General&lt;/strong&gt; section of the configuration screen, optionally
+write a description about the project. Next, select the &amp;ldquo;&lt;em&gt;GitHub
+Project&lt;/em&gt;&amp;rdquo; check-box, and add the GitHub repo&amp;rsquo;s url into the &lt;em&gt;Project
+url&lt;/em&gt; text box.&lt;/p&gt;
+
+&lt;h4 id=&#34;source-control&#34;&gt;Source Control&lt;/h4&gt;
+
+&lt;p&gt;&lt;a href=&#34;../../img/posts/draft-website-jenkins/credentials.png&#34;&gt;&lt;img
+src=&#34;../../img/posts/draft-website-jenkins/credentials.png&#34;
+style=&#34;max-width: 100%; float: center; margin: 0px 0px 0px 0px;&#34;
+alt=&#34;Setting Credentials&#34; /&gt;&lt;/a&gt;
+&lt;div class=&#34;caption&#34;&gt;Setting Credentials&lt;/div&gt;&lt;/p&gt;
+
+&lt;p&gt;In the &lt;strong&gt;Source Code Management&lt;/strong&gt; section of the configuration, select
+the &lt;em&gt;Git&lt;/em&gt; option. Then, enter the repo&amp;rsquo;s url for the &lt;em&gt;Repository URL&lt;/em&gt;
+box (I did the ssh url). For &lt;em&gt;Credentials&lt;/em&gt;, select &lt;em&gt;Add&lt;/em&gt; to configure a
+new credential. Select &lt;em&gt;SSH Username with private key&lt;/em&gt; for &lt;em&gt;Kind&lt;/em&gt;,
+use &lt;code&gt;jenkins&lt;/code&gt; for the &lt;em&gt;Username&lt;/em&gt;.&lt;/p&gt;
+
+&lt;p&gt;More source control options can be configured, but this should be the
+minimum setup required. &lt;em&gt;Again, for this to work public keys for the
+&lt;code&gt;jenkins&lt;/code&gt; user on the jenkins server must be generated, and added as a
+deployment key on GitHub.&lt;/em&gt;&lt;/p&gt;
+
+&lt;h4 id=&#34;build-trigger&#34;&gt;Build Trigger&lt;/h4&gt;
+
+&lt;p&gt;Under the &lt;strong&gt;Build Triggers&lt;/strong&gt; section, select &lt;em&gt;Poll SCM&lt;/em&gt;. Without
+adding any schedule parameters, it will trigger each time a new commit
+is detected. This is what we want.&lt;/p&gt;
+
+&lt;h4 id=&#34;build-step&#34;&gt;Build Step&lt;/h4&gt;
+
+&lt;p&gt;In the &lt;strong&gt;Build&lt;/strong&gt; section, click &lt;strong&gt;Add build step&lt;/strong&gt;, and select
+&lt;strong&gt;Execute shell&lt;/strong&gt;. This is where we can add the shell commands to
+build the website with hugo. Add the following command to the box
+(don&amp;rsquo;t forget to change the url):&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;hugo -D -F -b &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;http://10.1.1.77&amp;#34;&lt;/span&gt; -d public&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;The &lt;code&gt;-D&lt;/code&gt; flag tells hugo to include all draft posts, while the &lt;code&gt;-F&lt;/code&gt; flag
+has it include all posts with a future date. The &lt;code&gt;-b&lt;/code&gt; flag sets the
+url for the generated website. This should the be url or IP address of
+the nginx server setup previously. Lastly, the &lt;code&gt;-d&lt;/code&gt; flag tells hugo to
+output the generated static website to the &lt;code&gt;public&lt;/code&gt; directory. This
+will be useful to know when deploying the build.&lt;/p&gt;
+
+&lt;h4 id=&#34;deploy-to-webserver&#34;&gt;Deploy to Webserver&lt;/h4&gt;
+
+&lt;p&gt;For deployment, I used rsync to copy the build files to the nginx
+web server. This step will be another shell command, so I&amp;rsquo;ve actually
+added it as another &amp;ldquo;build&amp;rdquo; step. Add another &lt;strong&gt;Execute shell&lt;/strong&gt; and
+paste the following command inside the text box (again, changing the url):&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;rsync -r &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;$WORKSPACE&lt;span style=&#34;color:#e6db74&#34;&gt;/public/&amp;#34;&lt;/span&gt; ryan@10.1.1.77:/usr/share/nginx/html/&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;I used the Jenkins &lt;code&gt;$WORKSPACE&lt;/code&gt; variable to get the location of the
+build, and was able to append the &lt;code&gt;public&lt;/code&gt; directory to that, since we
+defined it with the &lt;code&gt;-d&lt;/code&gt; flag in the hugo build step above. This will
+copy the generated website, to the web server.&lt;/p&gt;
+
+&lt;p&gt;Hit &lt;strong&gt;Save&lt;/strong&gt;, and test it out by clicking the &lt;strong&gt;Build Now&lt;/strong&gt; link on the
+left. If the build is successful, check the nginx website to see if
+the website was deployed!&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;Note: If it doesn&amp;rsquo;t work, double check all permissions and
+credentials between accounts and servers.&lt;/em&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;better-yet-pipelines&#34;&gt;Better Yet&amp;hellip; Pipelines&lt;/h2&gt;
+
+&lt;p&gt;What&amp;rsquo;s better than using Jenkins for automated &amp;ldquo;draft website&amp;rdquo;
+deployments?  Using a &lt;a href=&#34;https://jenkins.io/doc/book/pipeline/&#34;&gt;Jenkins
+Pipeline&lt;/a&gt;. A Pipeline allows
+the jenkins project steps to be defined in a &lt;em&gt;Jenkinsfile&lt;/em&gt; that, among
+other benefits, can be source controlled. In fact, by default a
+Jenkins pipeline searches for the &lt;code&gt;Jenkinsfile&lt;/code&gt; right in the root
+directory of a project&amp;rsquo;s git repo.&lt;/p&gt;
+
+&lt;p&gt;While a pipeline and
+&lt;a href=&#34;https://jenkins.io/doc/book/pipeline/jenkinsfile/&#34;&gt;Jenkinsfile&lt;/a&gt; might
+be a bit more confusing to &lt;em&gt;learn&lt;/em&gt; how to setup, it is well worth it. For
+example, the following Jenkinsfile can be used to do essentially what
+we setup in the previous steps:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-groovy&#34; data-lang=&#34;groovy&#34;&gt;pipeline &lt;span style=&#34;color:#f92672&#34;&gt;{&lt;/span&gt;
+    agent &lt;span style=&#34;color:#f92672&#34;&gt;{&lt;/span&gt;
+	label &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;mr-mime&amp;#39;&lt;/span&gt;
+    &lt;span style=&#34;color:#f92672&#34;&gt;}&lt;/span&gt;
+    stages &lt;span style=&#34;color:#f92672&#34;&gt;{&lt;/span&gt;
+	stage &lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;build&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;{&lt;/span&gt;
+	    steps&lt;span style=&#34;color:#f92672&#34;&gt;{&lt;/span&gt;
+		sh &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;hugo -D -F -b &amp;#34;http://10.1.1.77&amp;#34;&amp;#39;&lt;/span&gt;
+	    &lt;span style=&#34;color:#f92672&#34;&gt;}&lt;/span&gt;
+	&lt;span style=&#34;color:#f92672&#34;&gt;}&lt;/span&gt;
+	stage &lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;deploy&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;{&lt;/span&gt;
+	    steps&lt;span style=&#34;color:#f92672&#34;&gt;{&lt;/span&gt;
+		sh &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;rsync -r &amp;#34;$WORKSPACE/public/&amp;#34; ryan@ponyta:/usr/share/nginx/html/&amp;#39;&lt;/span&gt;
+	    &lt;span style=&#34;color:#f92672&#34;&gt;}&lt;/span&gt;
+	&lt;span style=&#34;color:#f92672&#34;&gt;}&lt;/span&gt;
+
+    &lt;span style=&#34;color:#f92672&#34;&gt;}&lt;/span&gt;
+&lt;span style=&#34;color:#f92672&#34;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;I&amp;rsquo;m not going to cover pipelines in &lt;em&gt;this&lt;/em&gt; post. However, I do
+encourage readers to check them out.&lt;/p&gt;
+
+&lt;h2 id=&#34;conclusion&#34;&gt;Conclusion&lt;/h2&gt;
+
+&lt;p&gt;That&amp;rsquo;s it. While I currently host my website using &lt;a href=&#34;https://pages.github.com/&#34;&gt;GitHub
+pages&lt;/a&gt;, if I ever self-host it again, I
+will definitely automate publishing it using Jenkins as well. This has
+been a &lt;em&gt;very&lt;/em&gt; basic example of what Jenkins can be used for, but I
+have found it rather useful when working on the content of this
+website. There is so much more it can do. Have fun!&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

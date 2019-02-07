@@ -6,10 +6,154 @@
     <description>Recent content on λ ryan. himmelwright. net</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 15 Jan 2019 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 07 Feb 2019 00:00:00 +0000</lastBuildDate>
     
         <atom:link href="http://ryan.himmelwright.net/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Extending a VM Virtual Disk</title>
+      <link>http://ryan.himmelwright.net/post/extending-vm-hd/</link>
+      <pubDate>Thu, 07 Feb 2019 00:00:00 +0000</pubDate>
+      
+      <guid>http://ryan.himmelwright.net/post/extending-vm-hd/</guid>
+      <description>&lt;p&gt;Last week, I extended the virtual disk of the VM hosting my
+&lt;a href=&#34;https://jenkins.io&#34;&gt;jenkins&lt;/a&gt; server. Shortly after, I increased the maximum
+disk size of one of the job&amp;rsquo;s docker containers, maxing out the disk. This
+meant that I needed to extend the drive&lt;em&gt;&amp;hellip; again&lt;/em&gt;. If you ever do something
+twice, it is &lt;em&gt;best&lt;/em&gt; to have it documented for the potential third time. So,
+here we are.&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;
+
+&lt;h4 id=&#34;assumptions&#34;&gt;Assumptions&lt;/h4&gt;
+
+&lt;p&gt;Before getting started, I want to point out that this method is specific to the
+environment I currently have for &lt;em&gt;my VMs&lt;/em&gt;. Specifically, I am using kvm/qemu
+and virt-manager, with qcow2 images for the virtual disks. Additionally, the
+specific VM I was extending was installed with LVM and it&amp;rsquo;s main partition was
+formatted with a xfs file system. Just note that some steps &lt;em&gt;may&lt;/em&gt; differ
+elsewhere. This is what worked for &lt;em&gt;me&lt;/em&gt;.&lt;/p&gt;
+
+&lt;h2 id=&#34;clone-vm&#34;&gt;Clone VM&lt;/h2&gt;
+
+&lt;p&gt;&lt;center&gt;
+&lt;a href=&#34;../../img/posts/extending-vm-hd/clone-vm.png&#34;&gt;&lt;img alt=&#34;Clone VM window in Virt Manager&#34; src= &#34;../../img/posts/extending-vm-hd/clone-vm.png&#34; style=&#34;max-width: 100%;&#34;/&gt;&lt;/a&gt;
+&lt;div class=&#34;caption&#34;&gt;Cloning the VM in Virt Manager&lt;/div&gt;
+&lt;/center&gt;&lt;/p&gt;
+
+&lt;p&gt;While not &lt;em&gt;required&lt;/em&gt;, it isn&amp;rsquo;t a &lt;em&gt;bad&lt;/em&gt; idea to first clone the VM (just
+in case anything becomes damaged). If using &lt;code&gt;virt-manager&lt;/code&gt;, cloning a
+VM is as simple as right clicking a &lt;em&gt;powered down&lt;/em&gt; VM, and selecting
+&amp;ldquo;&lt;em&gt;Clone&amp;hellip;&lt;/em&gt;&amp;rdquo;. A window will pop up with options for cloning the
+VM. Make the desired name changes and hit &lt;em&gt;Clone&lt;/em&gt;.&lt;/p&gt;
+
+&lt;h2 id=&#34;extend-qcow2-file&#34;&gt;Extend qcow2 file&lt;/h2&gt;
+
+&lt;p&gt;The first step in resizing the virtual drive is to first expand
+the &lt;code&gt;qcow2&lt;/code&gt; image. By default, the images tend to be stored at
+&lt;code&gt;/var/lib/libvirt/images/&lt;/code&gt; and will require &lt;code&gt;root&lt;/code&gt; privileges to
+access. Virt-Manager can be used to double check which image the VM is
+using for its disk. To resize the qcow2 image, use the &lt;code&gt;qemu-img
+resize&lt;/code&gt; command, providing it the image file path/name and then the size
+to expand it. For example, I used &lt;code&gt;+40G&lt;/code&gt; in my command (&lt;code&gt;qemu-img
+resize Jenkins.qcow2 +40G&lt;/code&gt;) to extend the image by 40GB.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;root@ninetales:/var/lib/libvirt/images# qemu-img info Jenkins.qcow2
+image: Jenkins.qcow2
+file format: qcow2
+virtual size: 20G &lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;21474836480&lt;/span&gt; bytes&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt;
+disk size: 20G
+cluster_size: &lt;span style=&#34;color:#ae81ff&#34;&gt;65536&lt;/span&gt;
+Format specific information:
+    compat: &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;.1
+    lazy refcounts: true
+    refcount bits: &lt;span style=&#34;color:#ae81ff&#34;&gt;16&lt;/span&gt;
+    corrupt: false
+
+root@ninetales:/var/lib/libvirt/images# qemu-img resize Jenkins.qcow2 +40G
+Image resized.
+
+root@ninetales:/var/lib/libvirt/images# qemu-img info Jenkins.qcow2
+image: Jenkins.qcow2
+file format: qcow2
+virtual size: 60G &lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;64424509440&lt;/span&gt; bytes&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt;
+disk size: 20G
+cluster_size: &lt;span style=&#34;color:#ae81ff&#34;&gt;65536&lt;/span&gt;
+Format specific information:
+    compat: &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;.1
+    lazy refcounts: true
+    refcount bits: &lt;span style=&#34;color:#ae81ff&#34;&gt;16&lt;/span&gt;
+    corrupt: false
+
+root@ninetales:/var/lib/libvirt/images#&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;The command &lt;code&gt;qemu-image info&lt;/code&gt; can be helpful in verifying that the resize
+worked, by checking the size of the image.&lt;/p&gt;
+
+&lt;h2 id=&#34;gparted-live-iso&#34;&gt;Gparted Live ISO&lt;/h2&gt;
+
+&lt;p&gt;For the next few steps, it is a good idea to boot the system from a live CD.
+This will run the OS in RAM, allowing the disk to be fully unmounted.  With
+access to the VM&amp;rsquo;s display, an ISO such as the &lt;a href=&#34;https://gparted.org/livecd.php&#34;&gt;gparted live
+CD&lt;/a&gt; can be used to resize the partitions,
+as it contains the amazing graphical tool, &lt;code&gt;gparted&lt;/code&gt; (duh).&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Note:&lt;/strong&gt; If you boot up the VM and don&amp;rsquo;t see the new unallocated space available in the
+volume&amp;hellip; make sure you didn&amp;rsquo;t accidentally boot the &lt;em&gt;backup VM&lt;/em&gt;&amp;hellip; Not that
+&lt;strong&gt;I made such a mistake&amp;hellip;&lt;/strong&gt; :P&lt;/p&gt;
+
+&lt;h4 id=&#34;lvm-resize&#34;&gt;LVM Resize&lt;/h4&gt;
+
+&lt;p&gt;My VM is installed using LVM volumes, so I had to resize them
+before I could resize the file system. Gparted will do this
+automatically when resizing a partition.&lt;/p&gt;
+
+&lt;p&gt;&lt;center&gt;
+&lt;a href=&#34;../../img/posts/extending-vm-hd/gparted-live-iso.png&#34;&gt;&lt;img alt=&#34;Booting into the Gparted live ISO&#34; src= &#34;../../img/posts/extending-vm-hd/gparted-live-iso.png&#34; style=&#34;max-width: 100%;&#34;/&gt;&lt;/a&gt;
+&lt;div class=&#34;caption&#34;&gt;Booting into the Gparted live ISO&lt;/div&gt;
+&lt;/center&gt;&lt;/p&gt;
+
+&lt;p&gt;To resize the partition, first verify that the correct virtual disk
+is selected in the top right drop-down the window. Next, select the
+partition to expand, and click the &amp;ldquo;&lt;em&gt;Resize/Move&lt;/em&gt;&amp;rdquo; icon at the top.&lt;/p&gt;
+
+&lt;p&gt;&lt;center&gt;
+&lt;a href=&#34;../../img/posts/extending-vm-hd/gparted-resize.png&#34;&gt;&lt;img alt=&#34;Resizing the partition in Gparted&#34; src= &#34;../../img/posts/extending-vm-hd/gparted-resize.png&#34; style=&#34;max-width: 100%;&#34;/&gt;&lt;/a&gt;
+&lt;div class=&#34;caption&#34;&gt;Resizing the partition in Gparted&lt;/div&gt;
+&lt;/center&gt;&lt;/p&gt;
+
+&lt;p&gt;In the resize window, I changed the &lt;code&gt;Free space following (MiB)&lt;/code&gt;
+value to &lt;code&gt;0&lt;/code&gt;, to expand the partition to use &lt;em&gt;all&lt;/em&gt; of the unallocated space.
+Lastly, I hit the &lt;em&gt;Resize&lt;/em&gt; button and let Gparted do it&amp;rsquo;s magic.&lt;/p&gt;
+
+&lt;h4 id=&#34;grow-xfs&#34;&gt;Grow XFS&lt;/h4&gt;
+
+&lt;p&gt;Finally, with the lvm volume expanded, I just had to grow my file system to use
+the new space. I booted up the VM and logged in. This VM uses an xfs file
+system, so I was able to use the &lt;code&gt;xfs_growfs&lt;/code&gt; command to expand the partition:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;ryan@mr-mime ~&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt;$ sudo xfs_growfs /dev/centos/root
+&lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;... Ryan removed output &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; the post...&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt;
+data blocks changed from &lt;span style=&#34;color:#ae81ff&#34;&gt;4851712&lt;/span&gt; to &lt;span style=&#34;color:#ae81ff&#34;&gt;15322112&lt;/span&gt;
+
+&lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;ryan@mr-mime ~&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt;$ df -h
+Filesystem               Size  Used Avail Use% Mounted on
+/dev/mapper/centos-root   59G   19G   40G  &lt;span style=&#34;color:#ae81ff&#34;&gt;32&lt;/span&gt;% /
+devtmpfs                 &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;.9G     &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;  &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;.9G   &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;% /dev
+tmpfs                    &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;.9G  &lt;span style=&#34;color:#ae81ff&#34;&gt;8&lt;/span&gt;.0K  &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;.9G   &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;% /dev/shm
+tmpfs                    &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;.9G  &lt;span style=&#34;color:#ae81ff&#34;&gt;8&lt;/span&gt;.7M  &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;.9G   &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;% /run
+tmpfs                    &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;.9G     &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;  &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;.9G   &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;% /sys/fs/cgroup
+/dev/vda1                497M  231M  267M  &lt;span style=&#34;color:#ae81ff&#34;&gt;47&lt;/span&gt;% /boot
+tmpfs                    379M     &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;  379M   &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;% /run/user/1000&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;&lt;em&gt;Note: My VM&amp;rsquo;s disk space was COMPLETELY full. This meant that I couldn&amp;rsquo;t use auto
+tab complete in my shell because it spit out there&amp;rsquo;s no disk space. Typing the
+command out fully by hand, still worked.&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;With the xfs partition resized, I rebooted the VM for good measure, and
+everything was up and running again.&lt;/p&gt;
+
+&lt;p&gt;That&amp;rsquo;s about it. Remember, the steps I took might need to be altered for other
+environments, but this post should still be a good &lt;em&gt;starting&lt;/em&gt; point. I know it
+will help me when I acidently overfill this VM &lt;em&gt;again&lt;/em&gt;&amp;hellip; Enjoy!&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>Replacing a Drive in My ZFS Mirror</title>
