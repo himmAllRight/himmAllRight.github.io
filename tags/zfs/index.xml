@@ -18,7 +18,7 @@
       
       <guid>http://ryan.himmelwright.net/post/replace-zfs-mirror-drive/</guid>
       <description>&lt;p&gt;Right before Thanksgiving, one of the hard drives in my server started get
-noisy&amp;hellip; very noisy. Fearing the worst, I &lt;a href=&#34;../zfs-backups-to-luks-external&#34;&gt;did a
+noisy&amp;hellip; very noisy. Fearing the worst, I &lt;a href=&#34;../../post/zfs-backups-to-luks-external&#34;&gt;did a
 backup&lt;/a&gt;, and shutdown the server until I had
 time to investigate further&amp;hellip; and likely replace the drive. That
 time came this past week.&lt;/p&gt;
@@ -61,7 +61,7 @@ this time, even tough it&amp;rsquo;s a bit more expensive&amp;hellip; mostly to 
 &lt;h3 id=&#34;replacing-the-drive&#34;&gt;Replacing the Drive&lt;/h3&gt;
 
 &lt;p&gt;&lt;center&gt;
-&lt;a href=&#34;../../img/posts/replace-zfs-mirror-drive/hdd-swap.jpg&#34;&gt;&lt;img alt=&#34;Swapping the two hard drives&#34; src= &#34;../../img/posts/replace-zfs-mirror-drive/hdd-swap.jpg&#34; style=&#34;max-width: 100%;&#34;/&gt;&lt;/a&gt;
+&lt;a href=&#34;../../img/posts/replace-zfs-mirror-drive/hdd-swap.jpg&#34;&gt;&lt;img alt=&#34;Swapping the two hard drives&#34; src= &#34;/img/posts/replace-zfs-mirror-drive/hdd-swap.jpg&#34; style=&#34;max-width: 100%;&#34;/&gt;&lt;/a&gt;
 &lt;div class=&#34;caption&#34;&gt;Swapping the hot-swap caddy from the broken hard drive (left) with my new WD Red drive (right)&lt;/div&gt;
 &lt;/center&gt;&lt;/p&gt;
 

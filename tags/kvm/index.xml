@@ -38,7 +38,7 @@ elsewhere. This is what worked for &lt;em&gt;me&lt;/em&gt;.&lt;/p&gt;
 &lt;h2 id=&#34;clone-vm&#34;&gt;Clone VM&lt;/h2&gt;
 
 &lt;p&gt;&lt;center&gt;
-&lt;a href=&#34;../../img/posts/extending-vm-hd/clone-vm.png&#34;&gt;&lt;img alt=&#34;Clone VM window in Virt Manager&#34; src= &#34;../../img/posts/extending-vm-hd/clone-vm.png&#34; style=&#34;max-width: 100%;&#34;/&gt;&lt;/a&gt;
+&lt;a href=&#34;../../img/posts/extending-vm-hd/clone-vm.png&#34;&gt;&lt;img alt=&#34;Clone VM window in Virt Manager&#34; src= &#34;/img/posts/extending-vm-hd/clone-vm.png&#34; style=&#34;max-width: 100%;&#34;/&gt;&lt;/a&gt;
 &lt;div class=&#34;caption&#34;&gt;Cloning the VM in Virt Manager&lt;/div&gt;
 &lt;/center&gt;&lt;/p&gt;
 
@@ -108,7 +108,7 @@ before I could resize the file system. Gparted will do this
 automatically when resizing a partition.&lt;/p&gt;
 
 &lt;p&gt;&lt;center&gt;
-&lt;a href=&#34;../../img/posts/extending-vm-hd/gparted-live-iso.png&#34;&gt;&lt;img alt=&#34;Booting into the Gparted live ISO&#34; src= &#34;../../img/posts/extending-vm-hd/gparted-live-iso.png&#34; style=&#34;max-width: 100%;&#34;/&gt;&lt;/a&gt;
+&lt;a href=&#34;../../img/posts/extending-vm-hd/gparted-live-iso.png&#34;&gt;&lt;img alt=&#34;Booting into the Gparted live ISO&#34; src= &#34;/img/posts/extending-vm-hd/gparted-live-iso.png&#34; style=&#34;max-width: 100%;&#34;/&gt;&lt;/a&gt;
 &lt;div class=&#34;caption&#34;&gt;Booting into the Gparted live ISO&lt;/div&gt;
 &lt;/center&gt;&lt;/p&gt;
 
@@ -117,7 +117,7 @@ is selected in the top right drop-down the window. Next, select the
 partition to expand, and click the &amp;ldquo;&lt;em&gt;Resize/Move&lt;/em&gt;&amp;rdquo; icon at the top.&lt;/p&gt;
 
 &lt;p&gt;&lt;center&gt;
-&lt;a href=&#34;../../img/posts/extending-vm-hd/gparted-resize.png&#34;&gt;&lt;img alt=&#34;Resizing the partition in Gparted&#34; src= &#34;../../img/posts/extending-vm-hd/gparted-resize.png&#34; style=&#34;max-width: 100%;&#34;/&gt;&lt;/a&gt;
+&lt;a href=&#34;../../img/posts/extending-vm-hd/gparted-resize.png&#34;&gt;&lt;img alt=&#34;Resizing the partition in Gparted&#34; src= &#34;/img/posts/extending-vm-hd/gparted-resize.png&#34; style=&#34;max-width: 100%;&#34;/&gt;&lt;/a&gt;
 &lt;div class=&#34;caption&#34;&gt;Resizing the partition in Gparted&lt;/div&gt;
 &lt;/center&gt;&lt;/p&gt;
 
