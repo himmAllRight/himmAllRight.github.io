@@ -6,10 +6,189 @@
     <description>Recent content in Customization on λ ryan. himmelwright. net</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 22 Jun 2017 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 20 Mar 2019 00:00:00 +0000</lastBuildDate>
     
         <atom:link href="http://ryan.himmelwright.net/tags/customization/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Scripting A Tmux Work-space Start-up</title>
+      <link>http://ryan.himmelwright.net/post/scripting-tmux-workspaces/</link>
+      <pubDate>Wed, 20 Mar 2019 00:00:00 +0000</pubDate>
+      
+      <guid>http://ryan.himmelwright.net/post/scripting-tmux-workspaces/</guid>
+      <description>&lt;p&gt;I love the terminal multiplexer, &lt;a href=&#34;http://www.tmux.com&#34;&gt;tmux&lt;/a&gt;. It adds
+functionality to the terminal, such as multiple tabs, pane splitting, and the
+ability to detach and re-attach everything later (which is &lt;em&gt;amazing&lt;/em&gt; when
+combined with &lt;code&gt;ssh&lt;/code&gt;). I have been utilizing tmux even more at work, and recently
+started to script the start up/configuration a tmux session for each project.
+The other day, I decided to write a script to spin up a session for working on my
+website&amp;hellip; and thought it would be a great tutorial!&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;
+
+&lt;h3 id=&#34;tmux&#34;&gt;Tmux&lt;/h3&gt;
+
+&lt;p&gt;&lt;img alt=&#34;tmux demo animation&#34; src=&#34;../../img/posts/scripting-tmux-workspaces/animation-hover.png&#34; onmouseover=&#34;this.src=&#39;../../img/posts/scripting-tmux-workspaces/tmux-demo.gif&#39;&#34; onmouseout=&#34;this.src=&#39;../../img/posts/scripting-tmux-workspaces/animation-hover.png&#39;&#34; style=&#34;max-width: 100%;&#34;/&gt;
+&lt;div class=&#34;caption&#34;&gt;Small tmux demonstration&lt;/div&gt;&lt;/p&gt;
+
+&lt;p&gt;When working on a project, I like to use tmux to maintain all of the terminal
+windows related to it. This keeps everything together, and even allows me to
+detach the session, switch to another computer, ssh into the previous computer,
+and re-attach my working tmux session. Paired with the fact that I&amp;rsquo;ve started
+using VIM again, it works seamlessly. Scripting the initialization makes
+getting started even smoother.&lt;/p&gt;
+
+&lt;h3 id=&#34;automating-tmux-initialization-for-working-on-my-website&#34;&gt;Automating tmux initialization for working on my website&lt;/h3&gt;
+
+&lt;h4 id=&#34;new-script&#34;&gt;New Script&lt;/h4&gt;
+
+&lt;p&gt;First, lets create a new script. Start by opening a new file, and adding a bash
+&lt;a href=&#34;https://en.wikipedia.org/wiki/Shebang_(Unix)&#34;&gt;shebang&lt;/a&gt; line to the top:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;#!/bin/bash&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;This line tells the system that the following text will be a
+&lt;a href=&#34;https://en.wikipedia.org/wiki/Bash_(Unix_shell)&#34;&gt;bash&lt;/a&gt; script.&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;Optional: Save and close the file, then re-open it to take advantage the text
+editor&amp;rsquo;s bash syntax highlighting if it didn&amp;rsquo;t automatically switch it on.&lt;/em&gt;&lt;/p&gt;
+
+&lt;h4 id=&#34;create-a-new-tmux-session-with-var-name&#34;&gt;Create a new tmux session (with var name)&lt;/h4&gt;
+
+&lt;p&gt;Next, lets define a variable to store the tmux session name. This will make it
+easier to change the session name later on. Using the session variable, a new
+tmux-session with our desired name can be created.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# Session Name
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;session&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;Website&amp;#34;&lt;/span&gt;
+
+&lt;span style=&#34;color:#75715e&#34;&gt;# Start New Session with our name
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;tmux new-session -d -s $session&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h4 id=&#34;name-initial-default-window-and-switch-to-zsh&#34;&gt;Name initial default Window (and switch to &lt;code&gt;zsh&lt;/code&gt;)&lt;/h4&gt;
+
+&lt;p&gt;Let&amp;rsquo;s customize the default window and give it a new name. Lets call this first tmux
+window &lt;code&gt;&amp;quot;Main&amp;quot;&lt;/code&gt;, and have it simply run a &lt;a href=&#34;https://ohmyz.sh/&#34;&gt;zsh&lt;/a&gt; shell. After
+creating a new session, there is only one window, so I know it will be
+identified with the number &lt;code&gt;0&lt;/code&gt;. I can use this with &lt;code&gt;-t&lt;/code&gt; to rename the window.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# Name first Window and start zsh
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;tmux rename-window -t &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;Main&amp;#39;&lt;/span&gt;
+tmux send-keys -t &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;Main&amp;#39;&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;zsh&amp;#39;&lt;/span&gt; C-m &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;clear&amp;#39;&lt;/span&gt; C-m&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;I can then use the &lt;code&gt;send-keys&lt;/code&gt; command with the new window name to start zsh.
+This is the equivalent of typing &lt;code&gt;zsh&lt;/code&gt;, &lt;code&gt;[Enter]&lt;/code&gt;, &lt;code&gt;clear&lt;/code&gt;, &lt;code&gt;[Enter]&lt;/code&gt; into the
+command line.&lt;/p&gt;
+
+&lt;h4 id=&#34;add-a-new-named-window-for-hugo-server&#34;&gt;Add a new (named) window for hugo server&lt;/h4&gt;
+
+&lt;p&gt;With the main tmux window setup, I want to add a few more for
+different tasks. First, I want a window that can run the hugo server
+as I&amp;rsquo;m writing a post. With a session already created, I can name the
+window as I create it, using just the &lt;code&gt;new-window&lt;/code&gt; comamnd with the
+&lt;code&gt;-n&lt;/code&gt; flag.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# Create and setup pane for hugo server
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;tmux new-window -t $session:1 -n &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;Hugo Server&amp;#39;&lt;/span&gt;
+tmux send-keys -t &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;Hugo Server&amp;#39;&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;hugo serve -D -F&amp;#39;&lt;/span&gt; C-m&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Again, I used tmux &lt;code&gt;send-keys&lt;/code&gt;, this time to send the &lt;code&gt;hugo serve -D
+-F&lt;/code&gt; command to start up a hugo server for local draft editing.&lt;/p&gt;
+
+&lt;h4 id=&#34;add-a-new-name-pane-for-vim&#34;&gt;Add a new (name) pane for vim&lt;/h4&gt;
+
+&lt;p&gt;Now, I need a place to write website posts&amp;hellip; so lets fire up a new tmux
+window, and open up neovim inside of it.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# setup Writing window
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;tmux new-window -t $SESSION:2 -n &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;Writing&amp;#39;&lt;/span&gt;
+tmux send-keys -t &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;Writing&amp;#39;&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;nvim&amp;#34;&lt;/span&gt; C-m&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h4 id=&#34;another-shell&#34;&gt;Another shell&lt;/h4&gt;
+
+&lt;p&gt;Lastly, lets create one more shell window, just in case it&amp;rsquo;s needed. Why not?&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# Setup an additional shell
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;tmux new-window -t $SESSION:3 -n &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;Shell&amp;#39;&lt;/span&gt;
+tmux send-keys -t &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;Shell&amp;#39;&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;zsh&amp;#34;&lt;/span&gt; C-m &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;clear&amp;#39;&lt;/span&gt; C-m&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h4 id=&#34;attach-session&#34;&gt;Attach Session&lt;/h4&gt;
+
+&lt;p&gt;With the tmux session all configured and customized, we can tell the script to
+go ahead and attach it, using the &lt;code&gt;attach-session&lt;/code&gt; command with the session
+name variable.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# Attach Session, on the Main window
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;tmux attach-session -t $SESSION:0&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;&lt;em&gt;Note: the &lt;code&gt;0&lt;/code&gt; tells tmux to attach the first window (&lt;code&gt;Main&lt;/code&gt;). Using
+another index value will attach a different window. For example, &lt;code&gt;1&lt;/code&gt;
+would open the &lt;code&gt;Hugo Server&lt;/code&gt; window when attaching&lt;/em&gt;&lt;/p&gt;
+
+&lt;h4 id=&#34;bonus-minor-improvement&#34;&gt;Bonus: Minor improvement&lt;/h4&gt;
+
+&lt;p&gt;&lt;img alt=&#34;tmux demo animation&#34; src=&#34;../../img/posts/scripting-tmux-workspaces/animation-hover.png&#34; onmouseover=&#34;this.src=&#39;../../img/posts/scripting-tmux-workspaces/tmux-duplicate-windows.gif&#39;&#34; onmouseout=&#34;this.src=&#39;../../img/posts/scripting-tmux-workspaces/animation-hover.png&#39;&#34; style=&#34;max-width: 100%;&#34;/&gt;
+&lt;div class=&#34;caption&#34;&gt;The script would create duplicate windows if the tmux
+session already existed.&lt;/div&gt;&lt;/p&gt;
+
+&lt;p&gt;At this point, I was done with the tmux script. It worked well for creating my
+session and attaching it. However, there was &lt;em&gt;one&lt;/em&gt; issue I still had. If I ran
+the script when there was a tmux session with the same name &lt;em&gt;already&lt;/em&gt;, it would
+just double up the windows in that session. If I accidentally did this, I would
+have to go through each window, close out whatever and was running, and then
+close the window.&lt;/p&gt;
+
+&lt;p&gt;To fix this issue, I decided to wrap the initialization commands inside of an
+&lt;code&gt;if&lt;/code&gt; statement, and only run them if the tmux session &lt;em&gt;didn&amp;rsquo;t&lt;/em&gt; already exist.&lt;/p&gt;
+
+&lt;h5 id=&#34;checking-if-the-session-already-exists&#34;&gt;Checking if the Session Already Exists&lt;/h5&gt;
+
+&lt;p&gt;First, I needed a way to &lt;em&gt;check&lt;/em&gt; whether the desired tmux session already existed
+or not. This can be done by &amp;ldquo;grep&amp;rsquo;ing&amp;rdquo; the output of &lt;code&gt;tmux list-sessions&lt;/code&gt; for
+the session name, which we&amp;rsquo;ve already conveniently stored in our &lt;code&gt;$SESSION&lt;/code&gt;
+variable. For Cleanliness, I took the output of that process and saved it in a
+&lt;code&gt;SESSIONEXISTS&lt;/code&gt; variable, defined directly under &lt;code&gt;SESSION&lt;/code&gt; in the script.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;SESSIONEXISTS&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;$(&lt;/span&gt;tmux list-sessions | grep $SESSION&lt;span style=&#34;color:#66d9ef&#34;&gt;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;If the session exists, &lt;code&gt;SESSIONEXISTS&lt;/code&gt; will be a string of the line which &lt;code&gt;grep&lt;/code&gt;
+matched. Otherwise, it will just be an empty string (&lt;code&gt;&amp;quot;&amp;quot;&lt;/code&gt;).&lt;/p&gt;
+
+&lt;p&gt;Now, I can use the &lt;code&gt;SESSIONEXISTS&lt;/code&gt; variable with an &lt;code&gt;if&lt;/code&gt; condition to wrap the tmux
+setup code so that it only runs if &lt;code&gt;SESSIONEXISTS&lt;/code&gt; is &lt;code&gt;&amp;quot;&amp;quot;&lt;/code&gt;.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;$SESSIONEXISTS&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt;
+&lt;span style=&#34;color:#66d9ef&#34;&gt;then&lt;/span&gt;
+...
+&lt;span style=&#34;color:#66d9ef&#34;&gt;fi&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;The &lt;code&gt;attach-session&lt;/code&gt; command should be &lt;em&gt;outside&lt;/em&gt; of the &lt;code&gt;if&lt;/code&gt; body,
+because it will be run in both cases (even if the session doesn&amp;rsquo;t have
+to be created, we still want to attach the one that already exists).&lt;/p&gt;
+
+&lt;h3 id=&#34;conclusion&#34;&gt;Conclusion&lt;/h3&gt;
+
+&lt;p&gt;That is it. Here is the script with everything all put together:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;color:#75715e&#34;&gt;#!/bin/sh
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;# Set Session Name
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;SESSION&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;Website&amp;#34;&lt;/span&gt;
+SESSIONEXISTS&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;$(&lt;/span&gt;tmux list-sessions | grep $SESSION&lt;span style=&#34;color:#66d9ef&#34;&gt;)&lt;/span&gt;
+
+&lt;span style=&#34;color:#75715e&#34;&gt;# Only create tmux session if it doesn&amp;#39;t already exist
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;$SESSIONEXISTS&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt;
+&lt;span style=&#34;color:#66d9ef&#34;&gt;then&lt;/span&gt;
+    &lt;span style=&#34;color:#75715e&#34;&gt;# Start New Session with our name
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;    tmux new-session -d -s $SESSION
+
+    &lt;span style=&#34;color:#75715e&#34;&gt;# Name first Pane and start zsh
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;    tmux rename-window -t &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;Main&amp;#39;&lt;/span&gt;
+    tmux send-keys -t &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;Main&amp;#39;&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;zsh&amp;#39;&lt;/span&gt; C-m &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;clear&amp;#39;&lt;/span&gt; C-m &lt;span style=&#34;color:#75715e&#34;&gt;# Switch to bind script?
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;
+    &lt;span style=&#34;color:#75715e&#34;&gt;# Create and setup pane for hugo server
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;    tmux new-window -t $SESSION:1 -n &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;Hugo Server&amp;#39;&lt;/span&gt;
+    tmux send-keys -t &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;Hugo Server&amp;#39;&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;hugo serve -D -F&amp;#39;&lt;/span&gt; C-m &lt;span style=&#34;color:#75715e&#34;&gt;# Switch to bind script?
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;
+    &lt;span style=&#34;color:#75715e&#34;&gt;# setup Writing window
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;    tmux new-window -t $SESSION:2 -n &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;Writing&amp;#39;&lt;/span&gt;
+    tmux send-keys -t &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;Writing&amp;#39;&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;nvim&amp;#34;&lt;/span&gt; C-m
+
+    &lt;span style=&#34;color:#75715e&#34;&gt;# Setup an additional shell
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;    tmux new-window -t $SESSION:3 -n &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;Shell&amp;#39;&lt;/span&gt;
+    tmux send-keys -t &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;Shell&amp;#39;&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;zsh&amp;#34;&lt;/span&gt; C-m &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;clear&amp;#39;&lt;/span&gt; C-m
+&lt;span style=&#34;color:#66d9ef&#34;&gt;fi&lt;/span&gt;
+
+&lt;span style=&#34;color:#75715e&#34;&gt;# Attach Session, on the Main window
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;tmux attach-session -t $SESSION:0&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;I hope this post has been helpful! Although, I have to admit that this post
+&lt;em&gt;may&lt;/em&gt; be moot if I decide check out
+&lt;a href=&#34;https://github.com/tmuxinator/tmuxinator&#34;&gt;tmuxinator&lt;/a&gt; (which a co-worker
+recommended) &amp;hellip; oh well. I guess this endeavor was still a good exercise in
+some bash scripting :P.&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>Refreshing my i3 setup with i3blocks</title>
