@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Scripting A Tmux Work-space Start-up -- λ ryan. himmelwright. net</title>
+
+    
+
+    
+    <link href="http://ryan.himmelwright.net/css/bootstrap.min.css" rel="stylesheet">
+
+    
+    <link href="http://ryan.himmelwright.net/css/clean-blog.min.css" rel="stylesheet">
+
+    
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href='//fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+
+    
+    
+    
+
+
+
+    
+    <script type="text/javascript">
+        var _paq = _paq || [];
+         
+        _paq.push(["setDocumentTitle", document.domain + "/" + document.title]);
+        _paq.push(["setCookieDomain", "*.ryan.himmelwright.net"]);
+        _paq.push(["setDomains", ["*.ryan.himmelwright.net"]]);
+        _paq.push(['trackPageView']);
+        _paq.push(['enableLinkTracking']);
+        (function() {
+        var u="//cloud.himmelwright.net/piwik/";
+        _paq.push(['setTrackerUrl', u+'piwik.php']);
+        _paq.push(['setSiteId', '1']);
+        var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+        g.type='text/javascript'; g.async=true; g.defer=true; g.src=u+'piwik.js'; s.parentNode.insertBefore(g,s);
+        })();
+        </script>
+        <noscript><p><img src="//cloud.himmelwright.net/piwik/piwik.php?idsite=1&rec=1" style="border:0;" alt="" /></p></noscript>
+        
+
+
+
+</head>
+
+<body>
+
+    
+    <nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+        <div class="container-fluid">
+            
+            <div class="navbar-header page-scroll">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="http://ryan.himmelwright.net">λ ryan. himmelwright. net</a>
+            </div>
+
+                       
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    
+                    <li>
+                        <a href="../../">home</a>
+                    </li>
+                    
+                    <li>
+                        <a href="../../pages/about/">About</a>
+                    </li>
+                    
+                    <li>
+                        <a href="../../pages/homelab/">Homelab</a>
+                    </li>
+                    
+                    <li>
+                        <a href="../../tags">tags</a>
+                    </li>
+                    
+                    <li>
+                        <a href="../../post/">Archives</a>
+                    </li>
+                    
+                    <li>
+                        <a href="../../post/index.xml">RSS</a>
+                    </li>
+                    
+                  </ul>
+            </div>
+           
+
+        </div>
+        
+    </nav>
+
+
+
+
+<header class="intro-header" style="background-image: url('http://ryan.himmelwright.net/img/posts/scripting-tmux-workspaces/parking-garage-sunset1.jpg')">
+    
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <h1>Scripting A Tmux Work-space Start-up</h1>
+                    <h2 class="subheading"></h2>
+                    <span class="meta">
+                        
+Posted by <a href="#">Ryan Himmelwright</a> on Wed, Mar 20, 2019
+
+
+
+
+
+
+
+<br />
+Tags <a href="../../tags/linux">linux</a>, <a href="../../tags/dev">dev</a>, <a href="../../tags/dotfiles">dotfiles</a>, <a href="../../tags/customization">customization</a>, <a href="../../tags/shell">shell</a>
+
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <span class="header-caption">Liberty Warehouse, Durham NC</span>
+    
+    </header>
+
+    
+    <article>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                    
+                    <p>I love the terminal multiplexer, <a href="http://www.tmux.com">tmux</a>. It adds
+functionality to the terminal, such as multiple tabs, pane splitting, and the
+ability to detach and re-attach everything later (which is <em>amazing</em> when
+combined with <code>ssh</code>). I have been utilizing tmux even more at work, and recently
+started to script the start up/configuration a tmux session for each project.
+The other day, I decided to write a script to spin up a session for working on my
+website&hellip; and thought it would be a great tutorial!</p>
+
+<p></p>
+
+<h3 id="tmux">Tmux</h3>
+
+<p><img alt="tmux demo animation" src="../../img/posts/scripting-tmux-workspaces/animation-hover.png" onmouseover="this.src='../../img/posts/scripting-tmux-workspaces/tmux-demo.gif'" onmouseout="this.src='../../img/posts/scripting-tmux-workspaces/animation-hover.png'" style="max-width: 100%;"/>
+<div class="caption">Small tmux demonstration</div></p>
+
+<p>When working on a project, I like to use tmux to maintain all of the terminal
+windows related to it. This keeps everything together, and even allows me to
+detach the session, switch to another computer, ssh into the previous computer,
+and re-attach my working tmux session. Paired with the fact that I&rsquo;ve started
+using VIM again, it works seamlessly. Scripting the initialization makes
+getting started even smoother.</p>
+
+<h3 id="automating-tmux-initialization-for-working-on-my-website">Automating tmux initialization for working on my website</h3>
+
+<h4 id="new-script">New Script</h4>
+
+<p>First, lets create a new script. Start by opening a new file, and adding a bash
+<a href="https://en.wikipedia.org/wiki/Shebang_(Unix)">shebang</a> line to the top:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">#!/bin/bash</code></pre></div>
+<p>This line tells the system that the following text will be a
+<a href="https://en.wikipedia.org/wiki/Bash_(Unix_shell)">bash</a> script.</p>
+
+<p><em>Optional: Save and close the file, then re-open it to take advantage the text
+editor&rsquo;s bash syntax highlighting if it didn&rsquo;t automatically switch it on.</em></p>
+
+<h4 id="create-a-new-tmux-session-with-var-name">Create a new tmux session (with var name)</h4>
+
+<p>Next, lets define a variable to store the tmux session name. This will make it
+easier to change the session name later on. Using the session variable, a new
+tmux-session with our desired name can be created.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># Session Name
+</span><span style="color:#75715e"></span>session<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;Website&#34;</span>
+
+<span style="color:#75715e"># Start New Session with our name
+</span><span style="color:#75715e"></span>tmux new-session -d -s $session</code></pre></div>
+<h4 id="name-initial-default-window-and-switch-to-zsh">Name initial default Window (and switch to <code>zsh</code>)</h4>
+
+<p>Let&rsquo;s customize the default window and give it a new name. Lets call this first tmux
+window <code>&quot;Main&quot;</code>, and have it simply run a <a href="https://ohmyz.sh/">zsh</a> shell. After
+creating a new session, there is only one window, so I know it will be
+identified with the number <code>0</code>. I can use this with <code>-t</code> to rename the window.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># Name first Window and start zsh
+</span><span style="color:#75715e"></span>tmux rename-window -t <span style="color:#ae81ff">0</span> <span style="color:#e6db74">&#39;Main&#39;</span>
+tmux send-keys -t <span style="color:#e6db74">&#39;Main&#39;</span> <span style="color:#e6db74">&#39;zsh&#39;</span> C-m <span style="color:#e6db74">&#39;clear&#39;</span> C-m</code></pre></div>
+<p>I can then use the <code>send-keys</code> command with the new window name to start zsh.
+This is the equivalent of typing <code>zsh</code>, <code>[Enter]</code>, <code>clear</code>, <code>[Enter]</code> into the
+command line.</p>
+
+<h4 id="add-a-new-named-window-for-hugo-server">Add a new (named) window for hugo server</h4>
+
+<p>With the main tmux window setup, I want to add a few more for
+different tasks. First, I want a window that can run the hugo server
+as I&rsquo;m writing a post. With a session already created, I can name the
+window as I create it, using just the <code>new-window</code> comamnd with the
+<code>-n</code> flag.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># Create and setup pane for hugo server
+</span><span style="color:#75715e"></span>tmux new-window -t $session:1 -n <span style="color:#e6db74">&#39;Hugo Server&#39;</span>
+tmux send-keys -t <span style="color:#e6db74">&#39;Hugo Server&#39;</span> <span style="color:#e6db74">&#39;hugo serve -D -F&#39;</span> C-m</code></pre></div>
+<p>Again, I used tmux <code>send-keys</code>, this time to send the <code>hugo serve -D
+-F</code> command to start up a hugo server for local draft editing.</p>
+
+<h4 id="add-a-new-name-pane-for-vim">Add a new (name) pane for vim</h4>
+
+<p>Now, I need a place to write website posts&hellip; so lets fire up a new tmux
+window, and open up neovim inside of it.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># setup Writing window
+</span><span style="color:#75715e"></span>tmux new-window -t $SESSION:2 -n <span style="color:#e6db74">&#39;Writing&#39;</span>
+tmux send-keys -t <span style="color:#e6db74">&#39;Writing&#39;</span> <span style="color:#e6db74">&#34;nvim&#34;</span> C-m</code></pre></div>
+<h4 id="another-shell">Another shell</h4>
+
+<p>Lastly, lets create one more shell window, just in case it&rsquo;s needed. Why not?</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># Setup an additional shell
+</span><span style="color:#75715e"></span>tmux new-window -t $SESSION:3 -n <span style="color:#e6db74">&#39;Shell&#39;</span>
+tmux send-keys -t <span style="color:#e6db74">&#39;Shell&#39;</span> <span style="color:#e6db74">&#34;zsh&#34;</span> C-m <span style="color:#e6db74">&#39;clear&#39;</span> C-m</code></pre></div>
+<h4 id="attach-session">Attach Session</h4>
+
+<p>With the tmux session all configured and customized, we can tell the script to
+go ahead and attach it, using the <code>attach-session</code> command with the session
+name variable.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># Attach Session, on the Main window
+</span><span style="color:#75715e"></span>tmux attach-session -t $SESSION:0</code></pre></div>
+<p><em>Note: the <code>0</code> tells tmux to attach the first window (<code>Main</code>). Using
+another index value will attach a different window. For example, <code>1</code>
+would open the <code>Hugo Server</code> window when attaching</em></p>
+
+<h4 id="bonus-minor-improvement">Bonus: Minor improvement</h4>
+
+<p><img alt="tmux demo animation" src="../../img/posts/scripting-tmux-workspaces/animation-hover.png" onmouseover="this.src='../../img/posts/scripting-tmux-workspaces/tmux-duplicate-windows.gif'" onmouseout="this.src='../../img/posts/scripting-tmux-workspaces/animation-hover.png'" style="max-width: 100%;"/>
+<div class="caption">The script would create duplicate windows if the tmux
+session already existed.</div></p>
+
+<p>At this point, I was done with the tmux script. It worked well for creating my
+session and attaching it. However, there was <em>one</em> issue I still had. If I ran
+the script when there was a tmux session with the same name <em>already</em>, it would
+just double up the windows in that session. If I accidentally did this, I would
+have to go through each window, close out whatever and was running, and then
+close the window.</p>
+
+<p>To fix this issue, I decided to wrap the initialization commands inside of an
+<code>if</code> statement, and only run them if the tmux session <em>didn&rsquo;t</em> already exist.</p>
+
+<h5 id="checking-if-the-session-already-exists">Checking if the Session Already Exists</h5>
+
+<p>First, I needed a way to <em>check</em> whether the desired tmux session already existed
+or not. This can be done by &ldquo;grep&rsquo;ing&rdquo; the output of <code>tmux list-sessions</code> for
+the session name, which we&rsquo;ve already conveniently stored in our <code>$SESSION</code>
+variable. For Cleanliness, I took the output of that process and saved it in a
+<code>SESSIONEXISTS</code> variable, defined directly under <code>SESSION</code> in the script.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">SESSIONEXISTS<span style="color:#f92672">=</span><span style="color:#66d9ef">$(</span>tmux list-sessions | grep $SESSION<span style="color:#66d9ef">)</span></code></pre></div>
+<p>If the session exists, <code>SESSIONEXISTS</code> will be a string of the line which <code>grep</code>
+matched. Otherwise, it will just be an empty string (<code>&quot;&quot;</code>).</p>
+
+<p>Now, I can use the <code>SESSIONEXISTS</code> variable with an <code>if</code> condition to wrap the tmux
+setup code so that it only runs if <code>SESSIONEXISTS</code> is <code>&quot;&quot;</code>.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#66d9ef">if</span> <span style="color:#f92672">[</span> <span style="color:#e6db74">&#34;</span>$SESSIONEXISTS<span style="color:#e6db74">&#34;</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;&#34;</span> <span style="color:#f92672">]</span>
+<span style="color:#66d9ef">then</span>
+...
+<span style="color:#66d9ef">fi</span></code></pre></div>
+<p>The <code>attach-session</code> command should be <em>outside</em> of the <code>if</code> body,
+because it will be run in both cases (even if the session doesn&rsquo;t have
+to be created, we still want to attach the one that already exists).</p>
+
+<h3 id="conclusion">Conclusion</h3>
+
+<p>That is it. Here is the script with everything all put together:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e">#!/bin/sh
+</span><span style="color:#75715e"></span>
+<span style="color:#75715e"># Set Session Name
+</span><span style="color:#75715e"></span>SESSION<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;Website&#34;</span>
+SESSIONEXISTS<span style="color:#f92672">=</span><span style="color:#66d9ef">$(</span>tmux list-sessions | grep $SESSION<span style="color:#66d9ef">)</span>
+
+<span style="color:#75715e"># Only create tmux session if it doesn&#39;t already exist
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">if</span> <span style="color:#f92672">[</span> <span style="color:#e6db74">&#34;</span>$SESSIONEXISTS<span style="color:#e6db74">&#34;</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;&#34;</span> <span style="color:#f92672">]</span>
+<span style="color:#66d9ef">then</span>
+    <span style="color:#75715e"># Start New Session with our name
+</span><span style="color:#75715e"></span>    tmux new-session -d -s $SESSION
+
+    <span style="color:#75715e"># Name first Pane and start zsh
+</span><span style="color:#75715e"></span>    tmux rename-window -t <span style="color:#ae81ff">0</span> <span style="color:#e6db74">&#39;Main&#39;</span>
+    tmux send-keys -t <span style="color:#e6db74">&#39;Main&#39;</span> <span style="color:#e6db74">&#39;zsh&#39;</span> C-m <span style="color:#e6db74">&#39;clear&#39;</span> C-m <span style="color:#75715e"># Switch to bind script?
+</span><span style="color:#75715e"></span>
+    <span style="color:#75715e"># Create and setup pane for hugo server
+</span><span style="color:#75715e"></span>    tmux new-window -t $SESSION:1 -n <span style="color:#e6db74">&#39;Hugo Server&#39;</span>
+    tmux send-keys -t <span style="color:#e6db74">&#39;Hugo Server&#39;</span> <span style="color:#e6db74">&#39;hugo serve -D -F&#39;</span> C-m <span style="color:#75715e"># Switch to bind script?
+</span><span style="color:#75715e"></span>
+    <span style="color:#75715e"># setup Writing window
+</span><span style="color:#75715e"></span>    tmux new-window -t $SESSION:2 -n <span style="color:#e6db74">&#39;Writing&#39;</span>
+    tmux send-keys -t <span style="color:#e6db74">&#39;Writing&#39;</span> <span style="color:#e6db74">&#34;nvim&#34;</span> C-m
+
+    <span style="color:#75715e"># Setup an additional shell
+</span><span style="color:#75715e"></span>    tmux new-window -t $SESSION:3 -n <span style="color:#e6db74">&#39;Shell&#39;</span>
+    tmux send-keys -t <span style="color:#e6db74">&#39;Shell&#39;</span> <span style="color:#e6db74">&#34;zsh&#34;</span> C-m <span style="color:#e6db74">&#39;clear&#39;</span> C-m
+<span style="color:#66d9ef">fi</span>
+
+<span style="color:#75715e"># Attach Session, on the Main window
+</span><span style="color:#75715e"></span>tmux attach-session -t $SESSION:0</code></pre></div>
+<p>I hope this post has been helpful! Although, I have to admit that this post
+<em>may</em> be moot if I decide check out
+<a href="https://github.com/tmuxinator/tmuxinator">tmuxinator</a> (which a co-worker
+recommended) &hellip; oh well. I guess this endeavor was still a good exercise in
+some bash scripting :P.</p>
+
+                    
+                    
+                    
+                         <div style="float: right; text-decoration: underline; text-align: right;">Prev Post:</div>
+                    
+                    <br>
+                    
+                    
+                        <a href="http://ryan.himmelwright.net/post/getting-an-ipad/" style="text-align: right; float: right; max-width: 40%">Why I Got an iPad</a>
+                    
+
+			
+			<div class="comment-section">
+			  
+   <div id="disqus_thread"></div>
+<script>
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "himmallright" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+			</div>
+                </div>
+            </div>
+        </div>
+    </article>
+
+        <hr>
+    
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                  <ul class="list-inline text-center">
+                    
+                      <li>
+                        <a href="mailto:ryan@himmelwright.net">
+                          <span class="fa-stack fa-lg">
+                            <i class="fa fa-circle fa-stack-2x"></i>
+                            <i class="fa fa-envelope-o fa-stack-1x fa-inverse"></i>
+                          </span>
+                        </a>
+                      </li>
+                    
+                    
+                    <li>
+                      <a href="https://github.com/himmAllRight">
+                        <span class="fa-stack fa-lg">
+                          <i class="fa fa-circle fa-stack-2x"></i>
+                          <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                        </span>
+                      </a>
+                    </li>
+                    
+                    <li>
+                      <a href="https://www.linkedin.com/in/ryan-himmelwright-b3891774/">
+                        <span class="fa-stack fa-lg">
+                          <i class="fa fa-circle fa-stack-2x"></i>
+                          <i class="fa fa-linkedin fa-stack-1x fa-inverse"></i>
+                        </span>
+                      </a>
+                    </li>
+                    
+                  </ul>
+<p class="copyright text-muted">
+
+<a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img
+  alt="Creative Commons License" style="border-width:0"
+  src="https://i.creativecommons.org/l/by/4.0/88x31.png" /></a><br />This work
+by <a xmlns:cc="http://creativecommons.org/ns#" href="http://ryan.himmelwright.net" property="cc:attributionName" rel="cc:attributionURL">Ryan Himmelwright</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
+</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    
+    <script src="http://ryan.himmelwright.net/js/jquery.min.js"></script>
+
+    
+    <script src="http://ryan.himmelwright.net/js/bootstrap.min.js"></script>
+
+    
+    <script src="http://ryan.himmelwright.net/js/clean-blog.js"></script>
+
+    
+<script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-123-45', 'auto');
+ga('send', 'pageview');
+</script>
+
+
+</body>
+
+</html>
+
