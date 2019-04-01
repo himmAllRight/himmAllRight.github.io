@@ -6,10 +6,146 @@
     <description>Recent content in Homelab on λ ryan. himmelwright. net</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 07 Feb 2019 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 01 Apr 2019 00:00:00 +0000</lastBuildDate>
     
         <atom:link href="http://ryan.himmelwright.net/tags/homelab/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Switching to a Mesh Network</title>
+      <link>http://ryan.himmelwright.net/post/switching-to-mesh-network/</link>
+      <pubDate>Mon, 01 Apr 2019 00:00:00 +0000</pubDate>
+      
+      <guid>http://ryan.himmelwright.net/post/switching-to-mesh-network/</guid>
+      <description>&lt;p&gt;Not too long ago, I updated our home networking equipment to an Ubiqui
+setup. However, we recently moved into a new house and I switched to a
+mesh wifi network. No, the switch was not &lt;em&gt;just&lt;/em&gt; to increase wifi
+coverage throughout the entire house. The real motivator
+(ironically)&amp;hellip; was that I needed a better ethernet connection&amp;hellip;&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;
+
+&lt;h3 id=&#34;history&#34;&gt;History&lt;/h3&gt;
+
+&lt;p&gt;About two years ago, I &lt;a href=&#34;http://ryan.himmelwright.net/post/upgrading-network-to-ubiquiti/&#34;&gt;replaced my Linksys wifi
+router(s)&lt;/a&gt;
+with the tiny-but-mighty &lt;a href=&#34;https://store.ui.com/products/edgerouter-x&#34;&gt;Ubiquity Edge Router
+X&lt;/a&gt;, paired with an &lt;a href=&#34;https://www.ui.com/unifi/unifi-ap-ac-lite/&#34;&gt;Ubiqui AP AC
+lite&lt;/a&gt; wifi access point. I loved
+it. It handled our web traffic flawlessly, and unlike the previous Linksys
+routers, I never had to randomly restart it. It just worked for months on end.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;../../img/posts/switching-to-mesh-network/google-fiber-box.png&#34;&gt;&lt;img alt=&#34;The Google Fiber network box&#34; src=&#34;../../img/posts/switching-to-mesh-network/google-fiber-box.png&#34; style=&#34;max-width: 100%;&#34;/&gt;&lt;/a&gt;
+&lt;div class=&#34;caption&#34;&gt;The Google Fiber &amp;ldquo;network box&amp;rdquo;.&lt;/div&gt;&lt;/p&gt;
+
+&lt;p&gt;I enjoyed the setup &lt;em&gt;so&lt;/em&gt; much in fact, that while I was thrilled to
+have a Google Fiber internet connection when we moved to Durham NC
+last year, I was a little sad that setting up the edgerouter on the
+fiber modem required a little bit of tweaking. I looked into it
+but ultimately decided that figuring it out wasn&amp;rsquo;t worth the hassle
+for the short period of time which we&amp;rsquo;d likely live in the
+apartment. So, I reluctantly used the Google provided box which worked &lt;em&gt;okay&lt;/em&gt;.&lt;/p&gt;
+
+&lt;h3 id=&#34;we-moved&#34;&gt;We Moved&lt;/h3&gt;
+
+&lt;p&gt;The Google fiber was indeed short lived, as my wife and I just moved
+into a house this past month. When working with Spectrum to setup our
+internet (&lt;em&gt;yea&amp;hellip; I know&lt;/em&gt;), we discovered that while there were coax
+plugs in both the living room and master bedroom, we couldn&amp;rsquo;t
+actually find any hook-ups to connect the house to the external cable/internet
+service line.&lt;/p&gt;
+
+&lt;h4 id=&#34;cable-line-in-bedroom&#34;&gt;Cable-line in Bedroom&lt;/h4&gt;
+
+&lt;p&gt;After searching with multiple techs, we decided just to have them
+drill a line into the master bedroom (which is at the back of the
+house and allows the connection box to be with the other utility
+meters). Our house isn&amp;rsquo;t massive, and having the router in the bedroom
+works well enough, except for &lt;em&gt;one&lt;/em&gt; issue.&lt;/p&gt;
+
+&lt;p&gt;I have several servers and desktop computers that &lt;em&gt;require&lt;/em&gt; an
+ethernet connection, either because they don&amp;rsquo;t have wifi cards, and/or
+because I use Wake-On-Lan with them. This means that I need an
+ethernet connection in my office&amp;hellip; at the front of the house. Now
+that the only ethernet router/switch was in the bedroom, and the rest
+of the house relied on wifi&amp;hellip;  I needed to figure something out.&lt;/p&gt;
+
+&lt;h4 id=&#34;power-line-issues&#34;&gt;Power-line Issues&lt;/h4&gt;
+
+&lt;p&gt;In past apartments, I had used power-line ethernet adapters to extend
+ethernet from a router in a different room to my computers. The speeds
+weren&amp;rsquo;t great, but then again, neither was our connection so it wasn&amp;rsquo;t
+a huge problem. This time though, I ran some tests&amp;hellip;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;../../img/posts/switching-to-mesh-network/internet-speed-comparison.png&#34;&gt;
+&lt;img alt=&#34;Diagram comparing internet speeds: 1) Plugged directly into Router: 27 ms ping, 231.44 Mbps Download, 11.79 Mbps upload 2) Wifi in Office: 17 ms ping, 178.74 Mbps Download, 11.72 Mbps Upload 3) Powerline Ethernet in Office: 15 ms ping, 17.66 MBps Download, 11.86 Mbps Upload.&#34; src=&#34;../../img/posts/switching-to-mesh-network/internet-speed-comparison.png&#34; style=&#34;max-width: 100%;&#34;/&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;div class=&#34;caption&#34;&gt;Different internet Speed test results after hooking up
+internet to the house.&lt;/div&gt;
+
+&lt;p&gt;So, while it &lt;em&gt;worked&lt;/em&gt;, this setup wasn&amp;rsquo;t ideal. More importantly, I
+found out a few days later there was a massive problem that
+&lt;em&gt;completely prevents&lt;/em&gt; me from being able to use the power-line
+adapters. The house&amp;rsquo;s electrical panel is between the master bedroom
+and the office, which is the worst case scenario. One day, we turned
+on the washing machine and our internet went down. It wasn&amp;rsquo;t just the
+power-line connections that were effected&amp;hellip; the entire network, wifi
+and router was essentially being
+&lt;a href=&#34;https://en.wikipedia.org/wiki/Denial-of-service_attack&#34;&gt;dos&amp;rsquo;d&lt;/a&gt; by the
+washer. When I unplugged the power-line adapters, it worked
+again. Power-line was not an option anymore.&lt;/p&gt;
+
+&lt;h4 id=&#34;mesh-network&#34;&gt;Mesh Network&lt;/h4&gt;
+
+&lt;p&gt;I wondered if there was another way to connect ethernet in my office,
+beyond having to drop cat6 cable across the house. I looked into wifi
+bridges, but most of the devices were designed for large distances,
+and ones for home use were not much better than a power-line adapters
+when it came to performance/reliability. While looking at wifi
+bridges, a thought occurred to me&amp;hellip; would a mesh network system work?
+If the satellite devices had ethernet ports&amp;hellip; maybe.&lt;/p&gt;
+
+&lt;h4 id=&#34;netgeat-orbi&#34;&gt;Netgeat Orbi&lt;/h4&gt;
+
+&lt;p&gt;When I started researching wifi mesh networks, the orbi systems were consistently
+rated the highest, and people generally reported that they experienced &lt;em&gt;great&lt;/em&gt;
+performance. When I dug further into it, I learned that this high level of performance was
+likely due to the orbi&amp;rsquo;s &lt;a href=&#34;https://www.netgear.com/landings/mesh-network/&#34;&gt;&amp;ldquo;tri-band wifi
+technology&amp;rdquo;&lt;/a&gt;.
+Basically, in addition to the normal 2.4 and 5 Ghz network bands, the orbi
+system has &lt;em&gt;a second 5 Ghz band&lt;/em&gt; dedicated to connecting the orbi router and
+satilites together. In other words&amp;hellip; a dedicated wifi bridge :D.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;../../img/posts/switching-to-mesh-network/rbk50.png&#34;&gt;&lt;img alt=&#34;The RBK50 system comes with 1 router, and 1 satilite
+device. Both have 4 etherent ports.&#34; src=&#34;../../img/posts/switching-to-mesh-network/rbk50.png&#34; style=&#34;max-width: 100%;&#34;/&gt;&lt;/a&gt;
+&lt;div class=&#34;caption&#34;&gt;The RBK50 system comes with 1 router, and 1 satilite
+device. Both have 4 etherent ports.&lt;/div&gt;&lt;/p&gt;
+
+&lt;p&gt;I started looking at the orbi hardware and saw that there were several
+types of
+&lt;a href=&#34;https://www.netgear.com/orbi/products.aspx#filter=.satellites-indoor%2C.satellites%2C.satellites-outdoor%2C.satellites&#34;&gt;satellites&lt;/a&gt;.
+Some were just wall plugs, but a few had 2-4 ethernet
+ports. Perfect. Realizing this, I ended up ordering the
+&lt;a href=&#34;https://www.netgear.com/orbi/rbk50.aspx&#34;&gt;RBK50&lt;/a&gt; system, which
+contained a 4-port orbi router, and a 4-port satellite. My hope was that
+I could set up the router in the master bedroom with our modem, and
+then put the satellite in my office on the other end of the house.
+I could then connect my hardwired devices, or even a network switch, into the
+ethernet ports on the satellite. Problem sovled.&lt;/p&gt;
+
+&lt;h4 id=&#34;conclusion&#34;&gt;Conclusion&lt;/h4&gt;
+
+&lt;p&gt;I have ordered and setup my orbi system, and will write a review post
+about it sometime in the future. This post&amp;rsquo;s intention was mostly to
+just explain &lt;em&gt;why&lt;/em&gt; I ended up getting an orbi system.&lt;/p&gt;
+
+&lt;p&gt;Many people have started to use home wifi &amp;ldquo;mesh&amp;rdquo; systems because they
+provide a simple solution to cover an entire house with a strong wifi
+connection. While this is a great &lt;em&gt;bonus&lt;/em&gt; I get from having the mesh
+system, as this post demonstrates, my &lt;em&gt;main&lt;/em&gt; purpose for purchasing
+the orbi was to be a solid &amp;ldquo;ethernet over wifi&amp;rdquo; system in the new
+house. So far&amp;hellip; it&amp;rsquo;s working great.&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>Extending a VM Virtual Disk</title>
