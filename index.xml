@@ -6,10 +6,160 @@
     <description>Recent content on λ ryan. himmelwright. net</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 01 Apr 2019 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 21 Apr 2019 00:00:00 +0000</lastBuildDate>
     
         <atom:link href="http://ryan.himmelwright.net/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Homelab</title>
+      <link>http://ryan.himmelwright.net/pages/homelab/</link>
+      <pubDate>Sun, 21 Apr 2019 00:00:00 +0000</pubDate>
+      
+      <guid>http://ryan.himmelwright.net/pages/homelab/</guid>
+      <description>
+
+&lt;p&gt;This is a page where I maintain the status of the computers in my “Homelab”. I will list my current systems here (potentially with screenshots of my current desktop setup for my workstations).&lt;/p&gt;
+
+&lt;h2 id=&#34;computers&#34;&gt;Computers&lt;/h2&gt;
+
+&lt;h3 id=&#34;ryan-me&#34;&gt;Ryan (Me)&lt;/h3&gt;
+
+&lt;p&gt;I recently moved into a new house and am still putting this space together&amp;hellip;
+So for now &amp;hellip; don&amp;rsquo;t mind the wires :P. I&amp;rsquo;ll try to keep updating this page as
+I progress.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;../../img/homelab/new_house2.jpg&#34;&gt;&lt;img alt=&#34;Home Office&#34; src=&#34;../../img/homelab/new_house2.jpg&#34; width=100%&gt;&lt;/a&gt;
+&lt;div class=&#34;caption&#34;&gt;My Home Office&lt;/div&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;../../img/homelab/new_house1.jpg&#34;&gt;&lt;img alt=&#34;My Desk&#34; src=&#34;../../img/homelab/new_house1.jpg&#34; width=100%&gt;&lt;/a&gt;
+&lt;div class=&#34;caption&#34;&gt;My Desk&lt;/div&gt;&lt;/p&gt;
+
+&lt;h4 id=&#34;charmeleon-main-workstation&#34;&gt;- Charmeleon (Main Workstation)&lt;/h4&gt;
+
+&lt;pre&gt;&lt;code&gt;Ryzen 5 2600 [3.4 GHz (3.9GHz Turbo), 6 Cores, 12 Threads)
+MSI B450 Tomahawk Motherboard
+32 GB (2x16GB) DDR4-3200 Mhz RAM
+Sapphire 1024 4GB PULSE Radeon RX 560 GPU
+500 GB Samsung 970 EVO NVME SSD
+250 GB Samsung 850 EVO SATA SSD
+Fractal Design Meshify C Dark TG ATX Mid Tower Case
+EVGA SuperNOVA G4 650w 80+ Gold, fully modular PSU
+Fedora 29 (Multiple Desktops)
+*Connected to Periphery devices
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;a name=&#34;kadabra&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;h4 id=&#34;kadabra-laptop&#34;&gt;- Kadabra (Laptop)&lt;/h4&gt;
+
+&lt;pre&gt;&lt;code&gt;T470 Thinkpad
+Intel i5-7200u [2.5 GHz (3.1 GHz Turbo), 2 Cores, 4 Threads]
+16 GB RAM
+500 GB Samsung EVO SSD
+14&amp;quot; 1920x1080 IPS Display
+Thinkpad Ultra Dock 40A2 (to connect to periphery devices below)
+Fedora S29/30 SilverBlue
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;a name=&#34;periphery&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;h5 id=&#34;periphery&#34;&gt;Periphery&lt;/h5&gt;
+
+&lt;pre&gt;&lt;code&gt;LG UD4379-b, 43&amp;quot; IPS UHD (3840x2160px) Monitor
+Happy Hacking Keyboard Pro2
+Audioengine A2+ Speakers &amp;amp; Stands
+Audio Technica M50x Headphones
+Bose AE2 Headphones
+Blue Yeti Microphone - Backout Edition
+Logitech HD Pro Webcam c920 Widescreen
+Inateck USB 3.0 to SATA Dual-Bay Hard Drive Docking Station
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;a name=&#34;servers&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;h3 id=&#34;servers-networking&#34;&gt;Servers &amp;amp; Networking&lt;/h3&gt;
+
+&lt;p&gt;&lt;a name=&#34;ninetales&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;h4 id=&#34;ninetales-vm-host-home-server&#34;&gt;- Ninetales (VM Host / Home Server)&lt;/h4&gt;
+
+&lt;pre&gt;&lt;code&gt;Lenovo ThinkServer 440
+Intel Xeon E3-1225 v3 [3.2 GHz (3.6 GHz Turbo), 8M Cache, 4 Cores, 4 Threads]
+20 GB ECC RAM
+250 GB Samsung EVO SSD (OS + LVM Virtual Disk Drive)
+2 x 1TB WD 7200 RPM HDD (ZFS Mirror, for Backups) (Hotswap)
+2 x 3TB TOSHIBA 7200 RPM HDD (ZFS Mirror, for Storage) (Hotswap)
+Ubuntu Server 18.04
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;a name=&#34;x230&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;h4 id=&#34;abra-test-laptop-server&#34;&gt;- Abra (Test Laptop/&amp;ldquo;server&amp;rdquo;)&lt;/h4&gt;
+
+&lt;pre&gt;&lt;code&gt;Lenovo x230
+Intel i5-3320M [2.6 GHz (3.3 GHz Turbo), 3M Cache, 2 Cores, 4 Threads]
+8 GB RAM
+120 GB SSD
+12.5&amp;quot; HD LED 1366x768 Display
+9-Cell Battery
+Thinkpad Dock
+Centos 7
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h4 id=&#34;networking&#34;&gt;- Networking&lt;/h4&gt;
+
+&lt;pre&gt;&lt;code&gt;Netgear Orbi RBK50 Router (In Bedroom)
+Netgear Orbi RBK50 Satellite (In Office)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h4 id=&#34;cyberpower-1500va-900w-ups&#34;&gt;- CyberPower 1500VA/900W UPS&lt;/h4&gt;
+
+&lt;h3 id=&#34;digital-ocean-droplets&#34;&gt;Digital Ocean Droplets&lt;/h3&gt;
+
+&lt;h4 id=&#34;pidgey-nextcloud-test-cloud-server&#34;&gt;Pidgey (Nextcloud/Test Cloud Server)&lt;/h4&gt;
+
+&lt;pre&gt;&lt;code&gt;Digital Ocean KVM Droplet
+1 Core
+1 GB RAM
+20 GB SSD
+Ubuntu 16.04 OS
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h4 id=&#34;seafile-server&#34;&gt;Seafile Server&lt;/h4&gt;
+
+&lt;pre&gt;&lt;code&gt;Digital Ocean KVM Droplet
+1 Core
+1 GB RAM
+20 GB SSD
+Ubuntu 16.04 OS
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;rebecca-wife&#34;&gt;Rebecca (Wife)&lt;/h3&gt;
+
+&lt;h3 id=&#34;weepinbell&#34;&gt;- Weepinbell&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code&gt;Thinkpad T450s
+Intel i5-5300u [2.3 GHz (2.90 GHz Turbo), 2 Cores, 4 Threads]
+12 GB RAM
+256 GB SSD
+14&amp;quot; 1600x900 LED Display
+6-Cell Battery
+Ubuntu 18.04
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h4 id=&#34;bellsprout-dead&#34;&gt;- Bellsprout (Dead)&lt;/h4&gt;
+
+&lt;pre&gt;&lt;code&gt;Macbook Air (2014)
+Intel i5 (1.4 GHz (2.7 GHz Turbo), 3M Cache, 2 Cores, 2 Threads) ?
+4 GB RAM
+128 GB PCIe Flash HD
+13.3” 1440x900 LED Display
+2.96 Lbs and ~0.7” thick
+Mac OS
+&lt;/code&gt;&lt;/pre&gt;
+</description>
+    </item>
     
     <item>
       <title>Switching to a Mesh Network</title>
@@ -1445,183 +1595,6 @@ but the 850 will work for now.&lt;/p&gt;
 &lt;p&gt;So after months of planing and research, my desktop parts have all been
 ordered. Hopefully, it meets the goals I set out to solve, and I will be able
 to upgrade it over the next few years&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>Homelab</title>
-      <link>http://ryan.himmelwright.net/pages/homelab/</link>
-      <pubDate>Sun, 18 Nov 2018 00:00:00 +0000</pubDate>
-      
-      <guid>http://ryan.himmelwright.net/pages/homelab/</guid>
-      <description>
-
-&lt;p&gt;This is a page where I maintain the status of the computers in my “Homelab”. I will list my current systems here (potentially with screenshots of my current desktop setup for my workstations).&lt;/p&gt;
-
-&lt;h2 id=&#34;computers&#34;&gt;Computers&lt;/h2&gt;
-
-&lt;h3 id=&#34;ryan-me&#34;&gt;Ryan (Me)&lt;/h3&gt;
-
-&lt;p&gt;Having recently moved to Durham NC, I built a new standing desk and am
-slowly putting my space together. So for now &amp;hellip; don&amp;rsquo;t mind the wires
-:P. I&amp;rsquo;ll try to keep updating this page as I progress.&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&#34;../../img/homelab/new_monitor2.jpg&#34;&gt;&lt;img alt=&#34;Ryan&#39;s New Desk&#34; src=&#34;../../img/homelab/new_monitor2.jpg&#34; width=100%&gt;&lt;/a&gt;
-&lt;div class=&#34;caption&#34;&gt;My Home Desk&lt;/div&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&#34;../../img/homelab/new_monitor3.jpg&#34;&gt;&lt;img alt=&#34;Ryan&#39;s New Desk&#34; src=&#34;../../img/homelab/new_monitor3.jpg&#34; width=100%&gt;&lt;/a&gt;
-&lt;div class=&#34;caption&#34;&gt;My Home Workstation&lt;/div&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;a name=&#34;charmeleon&#34;&gt;&lt;/a&gt;&lt;/p&gt;
-
-&lt;h4 id=&#34;charmeleon-main-workstation&#34;&gt;- Charmeleon (Main Workstation)&lt;/h4&gt;
-
-&lt;pre&gt;&lt;code&gt;Ryzen 5 2600 [3.4 GHz (3.9GHz Turbo), 6 Cores, 12 Threads)
-MSI B450 Tomahawk Motherboard
-32 GB (2x16GB) DDR4-3200 Mhz RAM
-Sapphire 1024 4GB PULSE Radeon RX 560 GPU
-500 GB Samsung 970 EVO NVME SSD
-250 GB Samsung 850 EVO SATA SSD
-Fractal Design Meshify C Dark TG ATX Mid Tower Case
-EVGA SuperNOVA G4 650w 80+ Gold, fully modular PSU
-Fedora 29 (KDE Plasma Spin)
-*Connected to Periphery devices
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;&lt;a name=&#34;kadabra&#34;&gt;&lt;/a&gt;&lt;/p&gt;
-
-&lt;h4 id=&#34;kadabra-main-laptop&#34;&gt;- Kadabra (Main Laptop)&lt;/h4&gt;
-
-&lt;pre&gt;&lt;code&gt;T470 Thinkpad
-Intel i5-7200u [2.5 GHz (3.1 GHz Turbo), 2 Cores, 4 Threads]
-16 GB RAM
-500 GB Samsung EVO SSD
-14&amp;quot; 1920x1080 IPS Display
-Thinkpad Ultra Dock 40A2 (to connect to periphery devices below)
-Fedora 29 (KDE Plasma Spin)
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;&lt;a name=&#34;x230&#34;&gt;&lt;/a&gt;&lt;/p&gt;
-
-&lt;h4 id=&#34;abra-test-laptop&#34;&gt;- Abra (Test Laptop)&lt;/h4&gt;
-
-&lt;pre&gt;&lt;code&gt;Lenovo x230
-Intel i5-3320M [2.6 GHz (3.3 GHz Turbo), 3M Cache, 2 Cores, 4 Threads]
-8 GB RAM
-120 GB SSD
-12.5&amp;quot; HD LED 1366x768 Display
-9-Cell Battery
-Thinkpad Dock (to connect to periphery devices below)
-Fedora 29 SilverBlue
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;&lt;a name=&#34;periphery&#34;&gt;&lt;/a&gt;&lt;/p&gt;
-
-&lt;h5 id=&#34;periphery&#34;&gt;Periphery&lt;/h5&gt;
-
-&lt;pre&gt;&lt;code&gt;LG UD4379-b, 43&amp;quot; IPS UHD (3840x2160 px) Monitor
-Happy Hacking Keyboard Pro2
-Audioengine A2+ Speakers &amp;amp; Stands
-Bose AE2 Headphones
-Logitech HD Pro Webcam c920 Widescreen
-Blue Yeti Microphone - Backout Edition
-Inateck USB 3.0 to SATA Dual-Bay Hard Drive Docking Station
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&#34;rebecca-wife&#34;&gt;Rebecca (Wife)&lt;/h3&gt;
-
-&lt;h3 id=&#34;weepinbell&#34;&gt;- Weepinbell&lt;/h3&gt;
-
-&lt;pre&gt;&lt;code&gt;Thinkpad T450s
-Intel i5-5300u [2.3 GHz (2.90 GHz Turbo), 2 Cores, 4 Threads]
-12 GB RAM
-256 GB SSD
-14&amp;quot; 1600x900 LED Display
-6-Cell Battery
-Elementary OS 5 (Juno)
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h4 id=&#34;bellsprout-dead&#34;&gt;- Bellsprout (Dead)&lt;/h4&gt;
-
-&lt;pre&gt;&lt;code&gt;Macbook Air (2014)
-Intel i5 (1.4 GHz (2.7 GHz Turbo), 3M Cache, 2 Cores, 2 Threads) ?
-4 GB RAM
-128 GB PCIe Flash HD
-13.3” 1440x900 LED Display
-2.96 Lbs and ~0.7” thick
-Mac OS
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;&lt;a name=&#34;servers&#34;&gt;&lt;/a&gt;&lt;/p&gt;
-
-&lt;h3 id=&#34;servers&#34;&gt;Servers&lt;/h3&gt;
-
-&lt;p&gt;&lt;a name=&#34;ninetales&#34;&gt;&lt;/a&gt;&lt;/p&gt;
-
-&lt;h4 id=&#34;ninetales-vm-host-home-server&#34;&gt;- Ninetales (VM Host / Home Server)&lt;/h4&gt;
-
-&lt;pre&gt;&lt;code&gt;Lenovo ThinkServer 440
-Intel Xeon E3-1225 v3 [3.2 GHz (3.6 GHz Turbo), 8M Cache, 4 Cores, 4 Threads]
-20 GB ECC RAM
-250 GB Samsung EVO SSD (OS + LVM Virtual Disk Drive)
-2 x 1TB WD 7200 RPM HDD (ZFS Mirror, for Backups) (Hotswap)
-2 x 3TB TOSHIBA 7200 RPM HDD (ZFS Mirror, for Storage) (Hotswap)
-Ubuntu Server 18.04
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h4 id=&#34;cyberpower-1500va-900w-ups&#34;&gt;- CyberPower 1500VA/900W UPS&lt;/h4&gt;
-
-&lt;h4 id=&#34;xbox-one&#34;&gt;- Xbox One&lt;/h4&gt;
-
-&lt;p&gt;&lt;a name=&#34;cluster&#34;&gt;&lt;/a&gt;&lt;/p&gt;
-
-&lt;h3 id=&#34;pi-cluster&#34;&gt;PI Cluster&lt;/h3&gt;
-
-&lt;p&gt;&lt;img alt=&#34;PI Cluster&#34; src=&#34;../../img/homelab/pi-cluster.png&#34; width=100%&gt;&lt;/p&gt;
-
-&lt;h4 id=&#34;node-1&#34;&gt;Node 1&lt;/h4&gt;
-
-&lt;pre&gt;&lt;code&gt;BROKEN
-Raspberry Pi 3
-ARM v8 CPU (1.2 GHz, 4 Cores, 4 Threads)
-1 GB RAM
-MicroSD card for HD
-Ubuntu 16.04 ARM
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h4 id=&#34;node-2&#34;&gt;Node 2&lt;/h4&gt;
-
-&lt;pre&gt;&lt;code&gt;Raspberry Pi 2
-ARM Coretx-A7 (900 MHz, 4 Cores, 4 Threads)
-1 GB RAM
-MicroSD card for HD
-Ubuntu 16.04 ARM
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h4 id=&#34;node-3&#34;&gt;Node 3&lt;/h4&gt;
-
-&lt;pre&gt;&lt;code&gt;Banana Pi M1
-A20 ARM Cortex-A7 Dual Core (2 Cores, 2 Threads)
-1 GB RAM
-10/100/1000 Ethernet
-MicroSD card for HD
-Armbian (Ubuntu 16.04 version)
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&#34;digital-ocean-droplets&#34;&gt;Digital Ocean Droplets&lt;/h3&gt;
-
-&lt;h4 id=&#34;pidgey-nextcloud-test-cloud-server&#34;&gt;Pidgey (Nextcloud/Test Cloud Server)&lt;/h4&gt;
-
-&lt;pre&gt;&lt;code&gt;Digital Ocean KVM Droplet
-1 Core
-512 MB RAM
-20 GB SSD
-Ubuntu 16.04 OS
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&#34;aws&#34;&gt;AWS&lt;/h3&gt;
-
-&lt;p&gt;&lt;em&gt;I have also started playing with AWS, but don&amp;rsquo;t have any persistent servers with it yet.&lt;/em&gt;&lt;/p&gt;
-</description>
     </item>
     
     <item>

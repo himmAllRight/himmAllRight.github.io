@@ -3,6 +3,11 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>http://ryan.himmelwright.net/pages/homelab/</loc>
+    <lastmod>2019-04-21T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>http://ryan.himmelwright.net/post/switching-to-mesh-network/</loc>
     <lastmod>2019-04-01T00:00:00+00:00</lastmod>
   </url>
@@ -40,11 +45,6 @@
   <url>
     <loc>http://ryan.himmelwright.net/post/charmeleon-desktop-design/</loc>
     <lastmod>2018-11-26T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://ryan.himmelwright.net/pages/homelab/</loc>
-    <lastmod>2018-11-18T00:00:00+00:00</lastmod>
   </url>
   
   <url>
@@ -493,7 +493,7 @@
   
   <url>
     <loc>http://ryan.himmelwright.net/pages/</loc>
-    <lastmod>2018-11-18T00:00:00+00:00</lastmod>
+    <lastmod>2019-04-21T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -613,7 +613,7 @@
   
   <url>
     <loc>http://ryan.himmelwright.net/</loc>
-    <lastmod>2019-04-01T00:00:00+00:00</lastmod>
+    <lastmod>2019-04-21T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
