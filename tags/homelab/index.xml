@@ -6,10 +6,256 @@
     <description>Recent content in Homelab on λ ryan. himmelwright. net</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 01 Apr 2019 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 29 Apr 2019 00:00:00 +0000</lastBuildDate>
     
         <atom:link href="http://ryan.himmelwright.net/tags/homelab/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Creating &#34;Sub&#34;-Monitor Workflows Using xrandr</title>
+      <link>http://ryan.himmelwright.net/post/sub-monitor-workflows-with-xrandr/</link>
+      <pubDate>Mon, 29 Apr 2019 00:00:00 +0000</pubDate>
+      
+      <guid>http://ryan.himmelwright.net/post/sub-monitor-workflows-with-xrandr/</guid>
+      <description>&lt;p&gt;A couple months ago I swapped out my dual monitor setup for a single (but
+massive), &lt;a href=&#34;../../post/new-lgud4379b/&#34;&gt;42.5&amp;rdquo; UHD IPS display&lt;/a&gt;. I love it, but admit
+that sometimes, it has &lt;em&gt;too much&lt;/em&gt; workspace. While I still think that the
+larger display was better choice, I sometimes wish that
+I had the more limited, but &lt;em&gt;focused&lt;/em&gt; workspace of an ultrawide or 1440p
+monitor. &lt;em&gt;Maybe I still can&amp;hellip;&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;
+
+&lt;h3 id=&#34;reasoning&#34;&gt;Reasoning&lt;/h3&gt;
+
+&lt;p&gt;Okay. I understand that this post might seem ridiculous to most people.&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&amp;ldquo;But Ryan, if you have a great display with such a large resolution, why
+would you want to &lt;strong&gt;intentionally&lt;/strong&gt; scale it down smaller?!?!?!&amp;ldquo;.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;The truth is, there are a number of occasions when having a single, smaller
+display is helpful.&lt;/p&gt;
+
+&lt;h4 id=&#34;focused-work&#34;&gt;Focused Work&lt;/h4&gt;
+
+&lt;p&gt;First, when trying to focus deeply on a single task, I like to have the windows
+that I &lt;em&gt;need&lt;/em&gt; for the activity opened, and nothing else. Furthermore, I like
+to have these windows opened at a &lt;em&gt;reasonable size&lt;/em&gt; (Note: a full screen
+3840x2160 single terminal looks stupid). With such a big screen, it is just too
+tempting to drag chat windows, monitoring apps, and videos to the sides of the workspace.
+While 1080p is a little cramped, I think a single 1440p resolution is &lt;a href=&#34;https://hackernoon.com/why-i-stopped-using-multiple-monitors-bfd87efa2e5b&#34;&gt;more
+ideal for &lt;em&gt;focused
+work&lt;/em&gt;&lt;/a&gt;
+(especially because I tend to take advantage of &lt;a href=&#34;https://en.wikipedia.org/wiki/Virtual_desktop&#34;&gt;virtual
+desktops&lt;/a&gt;).&lt;/p&gt;
+
+&lt;h4 id=&#34;tiling-window-managers&#34;&gt;Tiling Window Managers&lt;/h4&gt;
+
+&lt;p&gt;&lt;a href=&#34;../../img/posts/sub-monitor-workflows-with-xrandr/i3-writing.png&#34;&gt;&lt;img alt=&#34;writing this post with i3&#34; src=&#34;../../img/posts/sub-monitor-workflows-with-xrandr/i3-writing.png&#34; style=&#34;max-width: 100%;&#34;/&gt;&lt;/a&gt;
+&lt;div class=&#34;caption&#34;&gt;I actually wrote most of the draft for this post in i3&lt;/div&gt;&lt;/p&gt;
+
+&lt;p&gt;Second, when working (especially programming), I often like to use tiling
+window managers (&lt;a href=&#34;../../post/started-using-i3blocks/&#34;&gt;i3 for example&lt;/a&gt;). This lets me
+&lt;em&gt;work&lt;/em&gt; without having to manually move around the windows, or even leave my
+keyboard. In tiling window managers, applications tend to open up full screen by
+default, which again&amp;hellip; is just obnoxious on such a large display.
+Scaling down the display allows me to still use tiling window managers without
+compromise.&lt;/p&gt;
+
+&lt;h4 id=&#34;gaming&#34;&gt;Gaming&lt;/h4&gt;
+
+&lt;p&gt;Lastly, a half-reason is gaming. I&amp;rsquo;m not a huge gamer so I didn&amp;rsquo;t opt for a
+crazy graphics card when I &lt;a href=&#34;http://localhost:1313/post/charmeleon-desktop-design/&#34;&gt;designed and built my
+desktop&lt;/a&gt;. When I &lt;em&gt;do&lt;/em&gt;
+game, I usually play in windowed-mode (which
+is usually a better experience anyway&amp;hellip; again for field of view reasons).
+However, sometimes a game won&amp;rsquo;t support windowed mode, or I want to
+play full screen at a lower resolution so that my GPU can handle it.&lt;/p&gt;
+
+&lt;h2 id=&#34;how&#34;&gt;How&lt;/h2&gt;
+
+&lt;p&gt;Now that it is (hopefully) understood &lt;em&gt;why&lt;/em&gt; I want to setup a &amp;ldquo;sub-display&amp;rdquo;
+inside my monitor, lets switch to &lt;em&gt;how&lt;/em&gt; I did it.&lt;/p&gt;
+
+&lt;h3 id=&#34;problem-1-scaling&#34;&gt;Problem 1: Scaling&lt;/h3&gt;
+
+&lt;p&gt;To get &amp;ldquo;sub&amp;rdquo;-resolutions working, I had to fix two problems. The first was that
+even if I select a smaller resolution on my computer, most monitors will
+display that resolution, but scaled to the size of the display. For example, if
+I set my computer&amp;rsquo;s display settings to 1920x1080 on my 3840x2160 monitor, by
+default it will double up the pixels to get the smaller resolution
+to &lt;em&gt;fit&lt;/em&gt; full-size on the monitor. This makes everything appear gigantic&amp;hellip; which
+is the exact opposite of what I wanted.&lt;/p&gt;
+
+&lt;p&gt;After playing around in my monitor&amp;rsquo;s input settings, I noticed that there is an
+&amp;ldquo;Aspect Ratio&amp;rdquo; field, with a &lt;code&gt;1:1&lt;/code&gt; option. When selected, the monitor displays
+an image at its pixel density. So a 1920x1080 pixel display shows as a smaller
+image in the middle of the screen, but with a &lt;code&gt;1:1&lt;/code&gt; pixel density. Problem #1 solved!&lt;/p&gt;
+
+&lt;h3 id=&#34;problem-2-new-resolution-sets&#34;&gt;Problem 2: New Resolution Sets&lt;/h3&gt;
+
+&lt;p&gt;The second problem was that by default, many of the resolutions I wanted to use
+out do not show up in the display settings. This makes sense, as &lt;em&gt;most&lt;/em&gt; people
+won&amp;rsquo;t be selecting &lt;code&gt;21:9&lt;/code&gt; resolutions on a &lt;code&gt;16:9&lt;/code&gt; panel. I needed to add
+new options using &lt;code&gt;xrandr&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;After spending sometime in a terminal with &lt;code&gt;xrandr&lt;/code&gt;, (and with some help from &lt;a href=&#34;http://www.arunviswanathan.com/node/53&#34;&gt;this post&lt;/a&gt;), I was able to create new &lt;code&gt;xrandr&lt;/code&gt; modes, and set my monitor to use them.&lt;/p&gt;
+
+&lt;h4 id=&#34;creating-a-new-xrandr-mode&#34;&gt;Creating a new xrandr mode&lt;/h4&gt;
+
+&lt;p&gt;To create a new xrandr mode, I first needed to calculate a new modeline. This
+can be done by using the &lt;code&gt;gtf&lt;/code&gt; tool. To calculate a modeline for a
+3440x1440 resolution at 59.9 hertz for example, use the following:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;➜  ~ gtf &lt;span style=&#34;color:#ae81ff&#34;&gt;3440&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1440&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;59&lt;/span&gt;.9
+
+  &lt;span style=&#34;color:#75715e&#34;&gt;# 3440x1440 @ 59.90 Hz (GTF) hsync: 89.25 kHz; pclk: 418.41 MHz
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;  Modeline &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;3440x1440_59.90&amp;#34;&lt;/span&gt;  &lt;span style=&#34;color:#ae81ff&#34;&gt;418&lt;/span&gt;.41  &lt;span style=&#34;color:#ae81ff&#34;&gt;3440&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;3688&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;4064&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;4688&lt;/span&gt;  &lt;span style=&#34;color:#ae81ff&#34;&gt;1440&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1441&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1444&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1490&lt;/span&gt;  -HSync +Vsync
+
+➜  ~&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;The line that starts with &lt;em&gt;Modeline&lt;/em&gt; (but &lt;em&gt;not including&lt;/em&gt; &amp;ldquo;Modeline&amp;rdquo;) is what
+we want. Copy that and give it to &lt;code&gt;xrandr&lt;/code&gt; with the &lt;code&gt;--newmode&lt;/code&gt; flag to create
+a new mode:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;xrandr --newmode &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;3440x1440_59.90&amp;#34;&lt;/span&gt;  &lt;span style=&#34;color:#ae81ff&#34;&gt;418&lt;/span&gt;.41  &lt;span style=&#34;color:#ae81ff&#34;&gt;3440&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;3688&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;4064&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;4688&lt;/span&gt;  &lt;span style=&#34;color:#ae81ff&#34;&gt;1440&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1441&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1444&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1490&lt;/span&gt;  -HSync +Vsync&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Lastly, to add that mode to a display, use that same line but with the
+&lt;code&gt;--addmode&lt;/code&gt; flag, and the monitor to switch (&lt;code&gt;DP-1&lt;/code&gt; in my case):&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;xrandr --addmode DP-1 &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;3440x1440_59.90&amp;#34;&lt;/span&gt;  &lt;span style=&#34;color:#ae81ff&#34;&gt;418&lt;/span&gt;.41  &lt;span style=&#34;color:#ae81ff&#34;&gt;3440&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;3688&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;4064&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;4688&lt;/span&gt;  &lt;span style=&#34;color:#ae81ff&#34;&gt;1440&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1441&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1444&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1490&lt;/span&gt;  -HSync +Vsync&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;&lt;em&gt;Note: To find the available monitor names, enter a plain &lt;code&gt;xrandr&lt;/code&gt; command, and
+it will spit out all the available outputs.&lt;/em&gt;&lt;/p&gt;
+
+&lt;h4 id=&#34;switching-to-the-new-mode&#34;&gt;Switching to the new mode&lt;/h4&gt;
+
+&lt;h5 id=&#34;arandr&#34;&gt;arandr&lt;/h5&gt;
+
+&lt;p&gt;To switch to the new mode, I like to use a GUI tool named &lt;code&gt;arandr&lt;/code&gt;.  Simply right
+click on the display&amp;rsquo;s rectangle, and select the new mode name from the
+&amp;ldquo;Resolution&amp;rdquo; list (Or &lt;em&gt;Outputs&lt;/em&gt; -&amp;gt; &lt;em&gt;Monitor Name&lt;/em&gt; -&amp;gt; &lt;em&gt;Resolution&lt;/em&gt; -&amp;gt; &lt;em&gt;New MODE
+NAME&lt;/em&gt; in the menu bar).&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;../../img/posts/sub-monitor-workflows-with-xrandr/arandr-select-newmode.png&#34;&gt;&lt;img alt=&#34;Using arandr to select new mode&#34; src=&#34;../../img/posts/sub-monitor-workflows-with-xrandr/arandr-select-newmode.png&#34; style=&#34;max-width: 100%;&#34;/&gt;&lt;/a&gt;
+&lt;div class=&#34;caption&#34;&gt;Using &lt;code&gt;arandr&lt;/code&gt; to select new mode (SO many resolutions XD )&lt;/div&gt;&lt;/p&gt;
+
+&lt;h5 id=&#34;xrandr&#34;&gt;xrandr&lt;/h5&gt;
+
+&lt;p&gt;If you are too &lt;a href=&#34;https://en.wikipedia.org/wiki/Leet&#34;&gt;1337&lt;/a&gt; to use a GUI app,
+never fear! The display can be switched to the new mode using &lt;code&gt;xrandr&lt;/code&gt; with the
+&lt;code&gt;--output&lt;/code&gt; and &lt;code&gt;--mode&lt;/code&gt; flags:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;xrandr --output DP-1 --mode &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;3440x1440_59.90&amp;#34;&lt;/span&gt;  &lt;span style=&#34;color:#ae81ff&#34;&gt;418&lt;/span&gt;.41  &lt;span style=&#34;color:#ae81ff&#34;&gt;3440&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;3688&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;4064&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;4688&lt;/span&gt;  &lt;span style=&#34;color:#ae81ff&#34;&gt;1440&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1441&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1444&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1490&lt;/span&gt;  -HSync +Vsync&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h3 id=&#34;but-wait-there-s-more-scripting-it&#34;&gt;But Wait, There&amp;rsquo;s More! Scripting it:&lt;/h3&gt;
+
+&lt;p&gt;After running these commands twice&amp;hellip; I realized it would be easy enough to
+automate. So I did with this script:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;color:#75715e&#34;&gt;#!/bin/bash
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;# A function to prompt the user if they want to switch to the new mode now.
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;switch_to_new_mode &lt;span style=&#34;color:#f92672&#34;&gt;()&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;{&lt;/span&gt;
+	echo -n &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;Switch to mode &lt;/span&gt;$modename&lt;span style=&#34;color:#e6db74&#34;&gt; now? [y/n]: &amp;#34;&lt;/span&gt;
+	read change
+	&lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;$change&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;y&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt;
+	&lt;span style=&#34;color:#66d9ef&#34;&gt;then&lt;/span&gt;
+		echo &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;switching monitor...&amp;#34;&lt;/span&gt;
+		xrandr --output $MONITOR --mode $modename
+	&lt;span style=&#34;color:#66d9ef&#34;&gt;else&lt;/span&gt;
+		echo &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;Okay, no switch. Enjoy!&amp;#34;&lt;/span&gt;
+	&lt;span style=&#34;color:#66d9ef&#34;&gt;fi&lt;/span&gt;
+&lt;span style=&#34;color:#f92672&#34;&gt;}&lt;/span&gt;
+
+&lt;span style=&#34;color:#75715e&#34;&gt;# Create a new mode for the display
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;create_new_mode &lt;span style=&#34;color:#f92672&#34;&gt;()&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;{&lt;/span&gt;
+	echo &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;Adding new mode: &lt;/span&gt;$gtf_output&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;
+	xrandr --newmode $gtf_output
+	echo &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;Adding new mode &lt;/span&gt;$modename&lt;span style=&#34;color:#e6db74&#34;&gt; to display &lt;/span&gt;$MONITOR&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;
+	xrandr --addmode $MONITOR $modename
+	echo &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;Done!&amp;#34;&lt;/span&gt;
+&lt;span style=&#34;color:#f92672&#34;&gt;}&lt;/span&gt;
+
+&lt;span style=&#34;color:#75715e&#34;&gt;# Message if the mode appears to already exist
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;mode_already_exists &lt;span style=&#34;color:#f92672&#34;&gt;()&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;{&lt;/span&gt;
+	echo &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;Hmmm... I think the mode &lt;/span&gt;$modename&lt;span style=&#34;color:#e6db74&#34;&gt; already exists.&amp;#34;&lt;/span&gt;
+&lt;span style=&#34;color:#f92672&#34;&gt;}&lt;/span&gt;
+
+&lt;span style=&#34;color:#75715e&#34;&gt;## Main Function to set vars and code
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;main &lt;span style=&#34;color:#f92672&#34;&gt;()&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;{&lt;/span&gt;
+	&lt;span style=&#34;color:#75715e&#34;&gt;# Input Vars
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;	WIDTH&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;$1
+	HEIGHT&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;$2
+	MONITOR&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;$3
+	ESLEEP&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;3&lt;/span&gt;
+	&lt;span style=&#34;color:#75715e&#34;&gt;# Fancier Vars :P
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;	gtf_output&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;$(&lt;/span&gt;gtf $WIDTH $HEIGHT &lt;span style=&#34;color:#ae81ff&#34;&gt;59&lt;/span&gt;.9 | grep -i &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;modeline&amp;#34;&lt;/span&gt; | sed -e &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;s/\&amp;lt;Modeline\&amp;gt;//g&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;)&lt;/span&gt;
+	modename&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;$(&lt;/span&gt;echo $gtf_output | grep -o  &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;\(\&amp;#34;.*\&amp;#34;\)&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;)&lt;/span&gt;
+	modeexists&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;$(&lt;/span&gt;xrandr | grep -i $modename&lt;span style=&#34;color:#66d9ef&#34;&gt;)&lt;/span&gt;
+
+	&lt;span style=&#34;color:#75715e&#34;&gt;# Run
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;	&lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;$modeexists&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt;
+	&lt;span style=&#34;color:#66d9ef&#34;&gt;then&lt;/span&gt;
+		create_new_mode
+	    switch_to_new_mode
+	&lt;span style=&#34;color:#66d9ef&#34;&gt;else&lt;/span&gt;
+		mode_already_exists
+	    switch_to_new_mode
+	&lt;span style=&#34;color:#66d9ef&#34;&gt;fi&lt;/span&gt;
+&lt;span style=&#34;color:#f92672&#34;&gt;}&lt;/span&gt;
+
+&lt;span style=&#34;color:#75715e&#34;&gt;## Execute Main
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;main &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;$@&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;div class=&#34;caption&#34;&gt;add-xrandr.sh&lt;/div&gt;
+
+&lt;p&gt;Basically, the script is run by providing it the desired width, height, and
+&lt;code&gt;xrandr&lt;/code&gt; display to apply the new mode to. For example, to create a new
+&lt;code&gt;3440x1440&lt;/code&gt; mode for my &lt;code&gt;DP-1&lt;/code&gt; display, I would run the following command:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;./add-xrandr.sh &lt;span style=&#34;color:#ae81ff&#34;&gt;3440&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1440&lt;/span&gt; DP-1.&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;The script will generate a new mode based on the parameters fed it it, and then
+check to see if the mode already exists. If it doesn&amp;rsquo;t, it will create it, add
+it to the display name passed in, and will ask the user if they would like to
+switch to the new mode. If the mode &lt;em&gt;was&lt;/em&gt; already detected, the script will just
+ask the user if they wish to switch to it.&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;Note: The script is hard-coded to always create modes at &lt;code&gt;59.9&lt;/code&gt; Hertz,
+because I don&amp;rsquo;t have any fancy fast monitors. If you want that option, just add
+another parameter and swap out the &lt;code&gt;59.9&lt;/code&gt; with it.&lt;/em&gt;&lt;/p&gt;
+
+&lt;h3 id=&#34;pros-cons&#34;&gt;Pros/Cons&lt;/h3&gt;
+
+&lt;p&gt;&lt;a href=&#34;../../img/posts/sub-monitor-workflows-with-xrandr/ultrawide-mode.jpg&#34;&gt;&lt;img alt=&#34;Monitor in &#39;ultrawide mode&#39;&#34; src=&#34;../../img/posts/sub-monitor-workflows-with-xrandr/ultrawide-mode.jpg&#34; style=&#34;max-width: 100%;&#34;/&gt;&lt;/a&gt;
+&lt;div class=&#34;caption&#34;&gt;Monitor in &amp;lsquo;ultrawide mode&amp;rsquo;. It is set to 3440x1440px and
+measures ~36&amp;rdquo; diagonally.&lt;/div&gt;&lt;/p&gt;
+
+&lt;h4 id=&#34;what-this-solves&#34;&gt;What this solves&lt;/h4&gt;
+
+&lt;ul&gt;
+&lt;li&gt;When I have the monitor set to a sub-resolution, I don&amp;rsquo;t experience any of
+the &amp;ldquo;edge shadowing&amp;rdquo; issues I mentioned in the review post.&lt;/li&gt;
+&lt;li&gt;I can test out any resolution setup less than 2840x2160. (Including Ultrawide
+setups)&lt;/li&gt;
+&lt;li&gt;Using a smaller resolution is friendlier to my tiling wm setups&lt;/li&gt;
+&lt;li&gt;I can use a better &amp;ldquo;single focus&amp;rdquo; monitor setup. For example, the equivalent of a 28&amp;rdquo;
+1440p display.&lt;/li&gt;
+&lt;li&gt;I can set my monitor to a smaller resolution to better play full screen games (so that
+the resolution better fits my GPU performance &lt;em&gt;and&lt;/em&gt; the game is in my
+field of view)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4 id=&#34;what-it-doesn-t-fix&#34;&gt;What it doesn&amp;rsquo;t fix&lt;/h4&gt;
+
+&lt;ul&gt;
+&lt;li&gt;The &lt;em&gt;physical&lt;/em&gt; size of my monitor stays the same. (MASSIVE Bezels :P )&lt;/li&gt;
+&lt;li&gt;I can&amp;rsquo;t really do multiple displays setups. Even though my monitor supports
+multiple inputs and picture-by-picture, I still can&amp;rsquo;t do a &lt;em&gt;good&lt;/em&gt; horizontal +
+vertical 1080p setup, because it will center each one.&lt;/li&gt;
+&lt;li&gt;The DPI is slightly bigger than if I got the &lt;em&gt;common&lt;/em&gt; size/pixel monitors.&lt;/li&gt;
+&lt;li&gt;Any &lt;em&gt;curving&lt;/em&gt; or other physical attributes another monitor form factor has.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&#34;conclusion&#34;&gt;Conclusion&lt;/h3&gt;
+
+&lt;p&gt;In conclusion, I love this setup. With this work-around, I was able to take a few
+use cases where my monitor didn&amp;rsquo;t fully fit my needs, and fix it. I am even
+happier with my monitor selection now, as I can enjoy a massive IPS display when I want it,
+but also have the ability to tone it down when I want to focus in more. So far,
+it&amp;rsquo;s working great!&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>Switching to a Mesh Network</title>

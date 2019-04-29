@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Creating &#34;Sub&#34;-Monitor Workflows Using xrandr -- λ ryan. himmelwright. net</title>
+
+    
+
+    
+    <link href="http://ryan.himmelwright.net/css/bootstrap.min.css" rel="stylesheet">
+
+    
+    <link href="http://ryan.himmelwright.net/css/clean-blog.min.css" rel="stylesheet">
+
+    
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href='//fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+
+    
+    
+    
+
+
+
+    
+    <script type="text/javascript">
+        var _paq = _paq || [];
+         
+        _paq.push(["setDocumentTitle", document.domain + "/" + document.title]);
+        _paq.push(["setCookieDomain", "*.ryan.himmelwright.net"]);
+        _paq.push(["setDomains", ["*.ryan.himmelwright.net"]]);
+        _paq.push(['trackPageView']);
+        _paq.push(['enableLinkTracking']);
+        (function() {
+        var u="//cloud.himmelwright.net/piwik/";
+        _paq.push(['setTrackerUrl', u+'piwik.php']);
+        _paq.push(['setSiteId', '1']);
+        var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+        g.type='text/javascript'; g.async=true; g.defer=true; g.src=u+'piwik.js'; s.parentNode.insertBefore(g,s);
+        })();
+        </script>
+        <noscript><p><img src="//cloud.himmelwright.net/piwik/piwik.php?idsite=1&rec=1" style="border:0;" alt="" /></p></noscript>
+        
+
+
+
+</head>
+
+<body>
+
+    
+    <nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+        <div class="container-fluid">
+            
+            <div class="navbar-header page-scroll">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="http://ryan.himmelwright.net">λ ryan. himmelwright. net</a>
+            </div>
+
+                       
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    
+                    <li>
+                        <a href="../../">home</a>
+                    </li>
+                    
+                    <li>
+                        <a href="../../pages/about/">About</a>
+                    </li>
+                    
+                    <li>
+                        <a href="../../pages/homelab/">Homelab</a>
+                    </li>
+                    
+                    <li>
+                        <a href="../../tags">tags</a>
+                    </li>
+                    
+                    <li>
+                        <a href="../../post/">Archives</a>
+                    </li>
+                    
+                    <li>
+                        <a href="../../post/index.xml">RSS</a>
+                    </li>
+                    
+                  </ul>
+            </div>
+           
+
+        </div>
+        
+    </nav>
+
+
+
+
+<header class="intro-header" style="background-image: url('http://ryan.himmelwright.net/img/header-images/ncsu-bridge1.jpg')">
+    
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <h1>Creating &#34;Sub&#34;-Monitor Workflows Using xrandr</h1>
+                    <h2 class="subheading"></h2>
+                    <span class="meta">
+                        
+Posted by <a href="#">Ryan Himmelwright</a> on Mon, Apr 29, 2019
+
+
+
+
+
+
+
+<br />
+Tags <a href="../../tags/homelab">homelab</a>, <a href="../../tags/hardware">hardware</a>, <a href="../../tags/monitors">monitors</a>, <a href="../../tags/linux">linux</a>
+
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <span class="header-caption">NC State Campus, Raleigh NC</span>
+    
+    </header>
+
+    
+    <article>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                    
+                    <p>A couple months ago I swapped out my dual monitor setup for a single (but
+massive), <a href="../../post/new-lgud4379b/">42.5&rdquo; UHD IPS display</a>. I love it, but admit
+that sometimes, it has <em>too much</em> workspace. While I still think that the
+larger display was better choice, I sometimes wish that
+I had the more limited, but <em>focused</em> workspace of an ultrawide or 1440p
+monitor. <em>Maybe I still can&hellip;</em></p>
+
+<p></p>
+
+<h3 id="reasoning">Reasoning</h3>
+
+<p>Okay. I understand that this post might seem ridiculous to most people.</p>
+
+<blockquote>
+<p>&ldquo;But Ryan, if you have a great display with such a large resolution, why
+would you want to <strong>intentionally</strong> scale it down smaller?!?!?!&ldquo;.</p>
+</blockquote>
+
+<p>The truth is, there are a number of occasions when having a single, smaller
+display is helpful.</p>
+
+<h4 id="focused-work">Focused Work</h4>
+
+<p>First, when trying to focus deeply on a single task, I like to have the windows
+that I <em>need</em> for the activity opened, and nothing else. Furthermore, I like
+to have these windows opened at a <em>reasonable size</em> (Note: a full screen
+3840x2160 single terminal looks stupid). With such a big screen, it is just too
+tempting to drag chat windows, monitoring apps, and videos to the sides of the workspace.
+While 1080p is a little cramped, I think a single 1440p resolution is <a href="https://hackernoon.com/why-i-stopped-using-multiple-monitors-bfd87efa2e5b">more
+ideal for <em>focused
+work</em></a>
+(especially because I tend to take advantage of <a href="https://en.wikipedia.org/wiki/Virtual_desktop">virtual
+desktops</a>).</p>
+
+<h4 id="tiling-window-managers">Tiling Window Managers</h4>
+
+<p><a href="../../img/posts/sub-monitor-workflows-with-xrandr/i3-writing.png"><img alt="writing this post with i3" src="../../img/posts/sub-monitor-workflows-with-xrandr/i3-writing.png" style="max-width: 100%;"/></a>
+<div class="caption">I actually wrote most of the draft for this post in i3</div></p>
+
+<p>Second, when working (especially programming), I often like to use tiling
+window managers (<a href="../../post/started-using-i3blocks/">i3 for example</a>). This lets me
+<em>work</em> without having to manually move around the windows, or even leave my
+keyboard. In tiling window managers, applications tend to open up full screen by
+default, which again&hellip; is just obnoxious on such a large display.
+Scaling down the display allows me to still use tiling window managers without
+compromise.</p>
+
+<h4 id="gaming">Gaming</h4>
+
+<p>Lastly, a half-reason is gaming. I&rsquo;m not a huge gamer so I didn&rsquo;t opt for a
+crazy graphics card when I <a href="http://localhost:1313/post/charmeleon-desktop-design/">designed and built my
+desktop</a>. When I <em>do</em>
+game, I usually play in windowed-mode (which
+is usually a better experience anyway&hellip; again for field of view reasons).
+However, sometimes a game won&rsquo;t support windowed mode, or I want to
+play full screen at a lower resolution so that my GPU can handle it.</p>
+
+<h2 id="how">How</h2>
+
+<p>Now that it is (hopefully) understood <em>why</em> I want to setup a &ldquo;sub-display&rdquo;
+inside my monitor, lets switch to <em>how</em> I did it.</p>
+
+<h3 id="problem-1-scaling">Problem 1: Scaling</h3>
+
+<p>To get &ldquo;sub&rdquo;-resolutions working, I had to fix two problems. The first was that
+even if I select a smaller resolution on my computer, most monitors will
+display that resolution, but scaled to the size of the display. For example, if
+I set my computer&rsquo;s display settings to 1920x1080 on my 3840x2160 monitor, by
+default it will double up the pixels to get the smaller resolution
+to <em>fit</em> full-size on the monitor. This makes everything appear gigantic&hellip; which
+is the exact opposite of what I wanted.</p>
+
+<p>After playing around in my monitor&rsquo;s input settings, I noticed that there is an
+&ldquo;Aspect Ratio&rdquo; field, with a <code>1:1</code> option. When selected, the monitor displays
+an image at its pixel density. So a 1920x1080 pixel display shows as a smaller
+image in the middle of the screen, but with a <code>1:1</code> pixel density. Problem #1 solved!</p>
+
+<h3 id="problem-2-new-resolution-sets">Problem 2: New Resolution Sets</h3>
+
+<p>The second problem was that by default, many of the resolutions I wanted to use
+out do not show up in the display settings. This makes sense, as <em>most</em> people
+won&rsquo;t be selecting <code>21:9</code> resolutions on a <code>16:9</code> panel. I needed to add
+new options using <code>xrandr</code>.</p>
+
+<p>After spending sometime in a terminal with <code>xrandr</code>, (and with some help from <a href="http://www.arunviswanathan.com/node/53">this post</a>), I was able to create new <code>xrandr</code> modes, and set my monitor to use them.</p>
+
+<h4 id="creating-a-new-xrandr-mode">Creating a new xrandr mode</h4>
+
+<p>To create a new xrandr mode, I first needed to calculate a new modeline. This
+can be done by using the <code>gtf</code> tool. To calculate a modeline for a
+3440x1440 resolution at 59.9 hertz for example, use the following:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">➜  ~ gtf <span style="color:#ae81ff">3440</span> <span style="color:#ae81ff">1440</span> <span style="color:#ae81ff">59</span>.9
+
+  <span style="color:#75715e"># 3440x1440 @ 59.90 Hz (GTF) hsync: 89.25 kHz; pclk: 418.41 MHz
+</span><span style="color:#75715e"></span>  Modeline <span style="color:#e6db74">&#34;3440x1440_59.90&#34;</span>  <span style="color:#ae81ff">418</span>.41  <span style="color:#ae81ff">3440</span> <span style="color:#ae81ff">3688</span> <span style="color:#ae81ff">4064</span> <span style="color:#ae81ff">4688</span>  <span style="color:#ae81ff">1440</span> <span style="color:#ae81ff">1441</span> <span style="color:#ae81ff">1444</span> <span style="color:#ae81ff">1490</span>  -HSync +Vsync
+
+➜  ~</code></pre></div>
+<p>The line that starts with <em>Modeline</em> (but <em>not including</em> &ldquo;Modeline&rdquo;) is what
+we want. Copy that and give it to <code>xrandr</code> with the <code>--newmode</code> flag to create
+a new mode:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">xrandr --newmode <span style="color:#e6db74">&#34;3440x1440_59.90&#34;</span>  <span style="color:#ae81ff">418</span>.41  <span style="color:#ae81ff">3440</span> <span style="color:#ae81ff">3688</span> <span style="color:#ae81ff">4064</span> <span style="color:#ae81ff">4688</span>  <span style="color:#ae81ff">1440</span> <span style="color:#ae81ff">1441</span> <span style="color:#ae81ff">1444</span> <span style="color:#ae81ff">1490</span>  -HSync +Vsync</code></pre></div>
+<p>Lastly, to add that mode to a display, use that same line but with the
+<code>--addmode</code> flag, and the monitor to switch (<code>DP-1</code> in my case):</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">xrandr --addmode DP-1 <span style="color:#e6db74">&#34;3440x1440_59.90&#34;</span>  <span style="color:#ae81ff">418</span>.41  <span style="color:#ae81ff">3440</span> <span style="color:#ae81ff">3688</span> <span style="color:#ae81ff">4064</span> <span style="color:#ae81ff">4688</span>  <span style="color:#ae81ff">1440</span> <span style="color:#ae81ff">1441</span> <span style="color:#ae81ff">1444</span> <span style="color:#ae81ff">1490</span>  -HSync +Vsync</code></pre></div>
+<p><em>Note: To find the available monitor names, enter a plain <code>xrandr</code> command, and
+it will spit out all the available outputs.</em></p>
+
+<h4 id="switching-to-the-new-mode">Switching to the new mode</h4>
+
+<h5 id="arandr">arandr</h5>
+
+<p>To switch to the new mode, I like to use a GUI tool named <code>arandr</code>.  Simply right
+click on the display&rsquo;s rectangle, and select the new mode name from the
+&ldquo;Resolution&rdquo; list (Or <em>Outputs</em> -&gt; <em>Monitor Name</em> -&gt; <em>Resolution</em> -&gt; <em>New MODE
+NAME</em> in the menu bar).</p>
+
+<p><a href="../../img/posts/sub-monitor-workflows-with-xrandr/arandr-select-newmode.png"><img alt="Using arandr to select new mode" src="../../img/posts/sub-monitor-workflows-with-xrandr/arandr-select-newmode.png" style="max-width: 100%;"/></a>
+<div class="caption">Using <code>arandr</code> to select new mode (SO many resolutions XD )</div></p>
+
+<h5 id="xrandr">xrandr</h5>
+
+<p>If you are too <a href="https://en.wikipedia.org/wiki/Leet">1337</a> to use a GUI app,
+never fear! The display can be switched to the new mode using <code>xrandr</code> with the
+<code>--output</code> and <code>--mode</code> flags:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">xrandr --output DP-1 --mode <span style="color:#e6db74">&#34;3440x1440_59.90&#34;</span>  <span style="color:#ae81ff">418</span>.41  <span style="color:#ae81ff">3440</span> <span style="color:#ae81ff">3688</span> <span style="color:#ae81ff">4064</span> <span style="color:#ae81ff">4688</span>  <span style="color:#ae81ff">1440</span> <span style="color:#ae81ff">1441</span> <span style="color:#ae81ff">1444</span> <span style="color:#ae81ff">1490</span>  -HSync +Vsync</code></pre></div>
+<h3 id="but-wait-there-s-more-scripting-it">But Wait, There&rsquo;s More! Scripting it:</h3>
+
+<p>After running these commands twice&hellip; I realized it would be easy enough to
+automate. So I did with this script:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e">#!/bin/bash
+</span><span style="color:#75715e"></span>
+<span style="color:#75715e"># A function to prompt the user if they want to switch to the new mode now.
+</span><span style="color:#75715e"></span>switch_to_new_mode <span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+	echo -n <span style="color:#e6db74">&#34;Switch to mode </span>$modename<span style="color:#e6db74"> now? [y/n]: &#34;</span>
+	read change
+	<span style="color:#66d9ef">if</span> <span style="color:#f92672">[</span> <span style="color:#e6db74">&#34;</span>$change<span style="color:#e6db74">&#34;</span> <span style="color:#f92672">==</span> <span style="color:#e6db74">&#34;y&#34;</span> <span style="color:#f92672">]</span>
+	<span style="color:#66d9ef">then</span>
+		echo <span style="color:#e6db74">&#34;switching monitor...&#34;</span>
+		xrandr --output $MONITOR --mode $modename
+	<span style="color:#66d9ef">else</span>
+		echo <span style="color:#e6db74">&#34;Okay, no switch. Enjoy!&#34;</span>
+	<span style="color:#66d9ef">fi</span>
+<span style="color:#f92672">}</span>
+
+<span style="color:#75715e"># Create a new mode for the display
+</span><span style="color:#75715e"></span>create_new_mode <span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+	echo <span style="color:#e6db74">&#34;Adding new mode: </span>$gtf_output<span style="color:#e6db74">&#34;</span>
+	xrandr --newmode $gtf_output
+	echo <span style="color:#e6db74">&#34;Adding new mode </span>$modename<span style="color:#e6db74"> to display </span>$MONITOR<span style="color:#e6db74">&#34;</span>
+	xrandr --addmode $MONITOR $modename
+	echo <span style="color:#e6db74">&#34;Done!&#34;</span>
+<span style="color:#f92672">}</span>
+
+<span style="color:#75715e"># Message if the mode appears to already exist
+</span><span style="color:#75715e"></span>mode_already_exists <span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+	echo <span style="color:#e6db74">&#34;Hmmm... I think the mode </span>$modename<span style="color:#e6db74"> already exists.&#34;</span>
+<span style="color:#f92672">}</span>
+
+<span style="color:#75715e">## Main Function to set vars and code
+</span><span style="color:#75715e"></span>main <span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+	<span style="color:#75715e"># Input Vars
+</span><span style="color:#75715e"></span>	WIDTH<span style="color:#f92672">=</span>$1
+	HEIGHT<span style="color:#f92672">=</span>$2
+	MONITOR<span style="color:#f92672">=</span>$3
+	ESLEEP<span style="color:#f92672">=</span><span style="color:#ae81ff">3</span>
+	<span style="color:#75715e"># Fancier Vars :P
+</span><span style="color:#75715e"></span>	gtf_output<span style="color:#f92672">=</span><span style="color:#66d9ef">$(</span>gtf $WIDTH $HEIGHT <span style="color:#ae81ff">59</span>.9 | grep -i <span style="color:#e6db74">&#34;modeline&#34;</span> | sed -e <span style="color:#e6db74">&#39;s/\&lt;Modeline\&gt;//g&#39;</span><span style="color:#66d9ef">)</span>
+	modename<span style="color:#f92672">=</span><span style="color:#66d9ef">$(</span>echo $gtf_output | grep -o  <span style="color:#e6db74">&#34;\(\&#34;.*\&#34;\)&#34;</span><span style="color:#66d9ef">)</span>
+	modeexists<span style="color:#f92672">=</span><span style="color:#66d9ef">$(</span>xrandr | grep -i $modename<span style="color:#66d9ef">)</span>
+
+	<span style="color:#75715e"># Run
+</span><span style="color:#75715e"></span>	<span style="color:#66d9ef">if</span> <span style="color:#f92672">[</span> <span style="color:#e6db74">&#34;</span>$modeexists<span style="color:#e6db74">&#34;</span> <span style="color:#f92672">==</span> <span style="color:#e6db74">&#34;&#34;</span> <span style="color:#f92672">]</span>
+	<span style="color:#66d9ef">then</span>
+		create_new_mode
+	    switch_to_new_mode
+	<span style="color:#66d9ef">else</span>
+		mode_already_exists
+	    switch_to_new_mode
+	<span style="color:#66d9ef">fi</span>
+<span style="color:#f92672">}</span>
+
+<span style="color:#75715e">## Execute Main
+</span><span style="color:#75715e"></span>main <span style="color:#e6db74">&#34;</span>$@<span style="color:#e6db74">&#34;</span></code></pre></div>
+<div class="caption">add-xrandr.sh</div>
+
+<p>Basically, the script is run by providing it the desired width, height, and
+<code>xrandr</code> display to apply the new mode to. For example, to create a new
+<code>3440x1440</code> mode for my <code>DP-1</code> display, I would run the following command:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">./add-xrandr.sh <span style="color:#ae81ff">3440</span> <span style="color:#ae81ff">1440</span> DP-1.</code></pre></div>
+<p>The script will generate a new mode based on the parameters fed it it, and then
+check to see if the mode already exists. If it doesn&rsquo;t, it will create it, add
+it to the display name passed in, and will ask the user if they would like to
+switch to the new mode. If the mode <em>was</em> already detected, the script will just
+ask the user if they wish to switch to it.</p>
+
+<p><em>Note: The script is hard-coded to always create modes at <code>59.9</code> Hertz,
+because I don&rsquo;t have any fancy fast monitors. If you want that option, just add
+another parameter and swap out the <code>59.9</code> with it.</em></p>
+
+<h3 id="pros-cons">Pros/Cons</h3>
+
+<p><a href="../../img/posts/sub-monitor-workflows-with-xrandr/ultrawide-mode.jpg"><img alt="Monitor in 'ultrawide mode'" src="../../img/posts/sub-monitor-workflows-with-xrandr/ultrawide-mode.jpg" style="max-width: 100%;"/></a>
+<div class="caption">Monitor in &lsquo;ultrawide mode&rsquo;. It is set to 3440x1440px and
+measures ~36&rdquo; diagonally.</div></p>
+
+<h4 id="what-this-solves">What this solves</h4>
+
+<ul>
+<li>When I have the monitor set to a sub-resolution, I don&rsquo;t experience any of
+the &ldquo;edge shadowing&rdquo; issues I mentioned in the review post.</li>
+<li>I can test out any resolution setup less than 2840x2160. (Including Ultrawide
+setups)</li>
+<li>Using a smaller resolution is friendlier to my tiling wm setups</li>
+<li>I can use a better &ldquo;single focus&rdquo; monitor setup. For example, the equivalent of a 28&rdquo;
+1440p display.</li>
+<li>I can set my monitor to a smaller resolution to better play full screen games (so that
+the resolution better fits my GPU performance <em>and</em> the game is in my
+field of view)</li>
+</ul>
+
+<h4 id="what-it-doesn-t-fix">What it doesn&rsquo;t fix</h4>
+
+<ul>
+<li>The <em>physical</em> size of my monitor stays the same. (MASSIVE Bezels :P )</li>
+<li>I can&rsquo;t really do multiple displays setups. Even though my monitor supports
+multiple inputs and picture-by-picture, I still can&rsquo;t do a <em>good</em> horizontal +
+vertical 1080p setup, because it will center each one.</li>
+<li>The DPI is slightly bigger than if I got the <em>common</em> size/pixel monitors.</li>
+<li>Any <em>curving</em> or other physical attributes another monitor form factor has.</li>
+</ul>
+
+<h3 id="conclusion">Conclusion</h3>
+
+<p>In conclusion, I love this setup. With this work-around, I was able to take a few
+use cases where my monitor didn&rsquo;t fully fit my needs, and fix it. I am even
+happier with my monitor selection now, as I can enjoy a massive IPS display when I want it,
+but also have the ability to tone it down when I want to focus in more. So far,
+it&rsquo;s working great!</p>
+
+                    
+                    
+                    
+                         <div style="float: right; text-decoration: underline; text-align: right;">Prev Post:</div>
+                    
+                    <br>
+                    
+                    
+                        <a href="http://ryan.himmelwright.net/post/switching-to-mesh-network/" style="text-align: right; float: right; max-width: 40%">Switching to a Mesh Network</a>
+                    
+
+			
+			<div class="comment-section">
+			  
+   <div id="disqus_thread"></div>
+<script>
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "himmallright" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+			</div>
+                </div>
+            </div>
+        </div>
+    </article>
+
+        <hr>
+    
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                  <ul class="list-inline text-center">
+                    
+                      <li>
+                        <a href="mailto:ryan@himmelwright.net">
+                          <span class="fa-stack fa-lg">
+                            <i class="fa fa-circle fa-stack-2x"></i>
+                            <i class="fa fa-envelope-o fa-stack-1x fa-inverse"></i>
+                          </span>
+                        </a>
+                      </li>
+                    
+                    
+                    <li>
+                      <a href="https://github.com/himmAllRight">
+                        <span class="fa-stack fa-lg">
+                          <i class="fa fa-circle fa-stack-2x"></i>
+                          <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                        </span>
+                      </a>
+                    </li>
+                    
+                    <li>
+                      <a href="https://www.linkedin.com/in/ryan-himmelwright-b3891774/">
+                        <span class="fa-stack fa-lg">
+                          <i class="fa fa-circle fa-stack-2x"></i>
+                          <i class="fa fa-linkedin fa-stack-1x fa-inverse"></i>
+                        </span>
+                      </a>
+                    </li>
+                    
+                  </ul>
+<p class="copyright text-muted">
+
+<a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img
+  alt="Creative Commons License" style="border-width:0"
+  src="https://i.creativecommons.org/l/by/4.0/88x31.png" /></a><br />This work
+by <a xmlns:cc="http://creativecommons.org/ns#" href="http://ryan.himmelwright.net" property="cc:attributionName" rel="cc:attributionURL">Ryan Himmelwright</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
+</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    
+    <script src="http://ryan.himmelwright.net/js/jquery.min.js"></script>
+
+    
+    <script src="http://ryan.himmelwright.net/js/bootstrap.min.js"></script>
+
+    
+    <script src="http://ryan.himmelwright.net/js/clean-blog.js"></script>
+
+    
+<script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-123-45', 'auto');
+ga('send', 'pageview');
+</script>
+
+
+</body>
+
+</html>
+
