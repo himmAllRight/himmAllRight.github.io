@@ -6,10 +6,84 @@
     <description>Recent content in Linux on λ ryan. himmelwright. net</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 29 Apr 2019 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 30 Apr 2019 00:00:00 +0000</lastBuildDate>
     
         <atom:link href="http://ryan.himmelwright.net/tags/linux/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Custom Neofetch ASCII Art</title>
+      <link>http://ryan.himmelwright.net/post/custom-neofetch-ascii-art/</link>
+      <pubDate>Tue, 30 Apr 2019 00:00:00 +0000</pubDate>
+      
+      <guid>http://ryan.himmelwright.net/post/custom-neofetch-ascii-art/</guid>
+      <description>&lt;p&gt;I have been using &lt;a href=&#34;https://github.com/dylanaraps/neofetch&#34;&gt;neofetch&lt;/a&gt; as my
+command-line system information tool for a few years now. While browsing
+&lt;a href=&#34;https://reddit.com/r/unixporn/&#34;&gt;/r/unixporn&lt;/a&gt;, I noticed that several
+of the submissions did not have distro logos in their neofetch/screenfetch
+ascii art. I knew that neofetch was customizable, but have never dug
+into it myself. So I decided to change that.&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;
+
+&lt;h3 id=&#34;custom-neofetch-ascii-art&#34;&gt;Custom Neofetch ASCII Art&lt;/h3&gt;
+
+&lt;p&gt;I started my neofetch investigation the same way one should start researching
+&lt;em&gt;any&lt;/em&gt; Linux command-line tool: &lt;code&gt;man neofetch&lt;/code&gt;. Inside the man pages, I was
+greeted with all sorts of customization options. Eventually, I scrolled down to
+the section I wanted, &lt;code&gt;IMAGE BACKEND&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;There I learned that a custom image could be specified using the &lt;code&gt;--source&lt;/code&gt; flag.
+For example, to set the art to an ascii charmeleon file I &lt;em&gt;just happen&lt;/em&gt; to have
+on my desktop, I tried:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;neofetch --source /home/ryan/Documents/Pokemon-ascii/5.txt&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;AAAAAND&amp;hellip; It didn&amp;rsquo;t work. It was still the Fedora logo. Clearly, I was still
+missing something.&lt;/p&gt;
+
+&lt;p&gt;After some browsing, I found the &lt;a href=&#34;https://github.com/dylanaraps/neofetch/wiki/Custom-Ascii-art-file-format&#34;&gt;ASCII art
+page&lt;/a&gt;
+on neofetch&amp;rsquo;s Github wiki. Reading it, I noticed that I was missing the &lt;code&gt;${c1}&lt;/code&gt;
+in my pokemon ascii files. So, I made a copy of the file and added &lt;code&gt;S{c1}&lt;/code&gt; to
+the top:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;➜  welcome-messages git:(master) ✗ head charmeleon
+${c1}
+                      ,-&#39;`\
+                  _,&amp;quot;&#39;    j
+           __....+       /               .
+       ,-&#39;&amp;quot;             /               ; `-._.&#39;.
+      /                (              ,&#39;       .&#39;
+     |            _.    \             \   ---._ `-.
+     ,|    ,   _.&#39;  Y    \             `- ,&#39;   \   `.`.
+     l&#39;    \ ,&#39;._,\ `.    .              /       ,--. l
+  .,-        `._  |  |    |              \       _   l .
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;div class=&#34;caption&#34;&gt;head output of my modified charmeleon ascii file&lt;/div&gt;
+
+&lt;p&gt;AAAAAND&amp;hellip; It worked!&lt;/p&gt;
+
+&lt;h3 id=&#34;adding-a-shell-alias&#34;&gt;Adding a Shell Alias&lt;/h3&gt;
+
+&lt;p&gt;&lt;a href=&#34;../../img/posts/custom-neofetch-ascii-art/charmeleon-neofetch.png&#34;&gt;&lt;img alt=&#34;Custom Charmeleon ASCII art for my desktop&#39;s neofetch output&#34; src=&#34;../../img/posts/custom-neofetch-ascii-art/charmeleon-neofetch.png&#34; style=&#34;max-width: 100%;&#34;/&gt;&lt;/a&gt;
+&lt;div class=&#34;caption&#34;&gt;Custom Charmeleon ASCII art for my desktop&amp;rsquo;s neofetch output&lt;/div&gt;&lt;/p&gt;
+
+&lt;p&gt;Lastly, I wanted the charmeleon ascii art to be the &lt;em&gt;default&lt;/em&gt; neofetch output on my
+desktop. While I&amp;rsquo;m sure that I could have accomplished this &lt;em&gt;properly&lt;/em&gt; by
+editing the &lt;code&gt;~/.config/neofetch/config.conf&lt;/code&gt; file I learned about, for now&amp;hellip;
+creating an alias seemed easier XD. So I added the following line to my
+&lt;code&gt;~/.zshrc&lt;/code&gt;:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;alias neofetch&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;neofetch --source /home/ryan/Documents/ascii/pokemon/charmeleon&amp;#39;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Now whenever I call plain &lt;code&gt;neofetch&lt;/code&gt; on my desktop, it runs with the charmeleon
+art.&lt;/p&gt;
+
+&lt;h3 id=&#34;conclusion&#34;&gt;Conclusion&lt;/h3&gt;
+
+&lt;p&gt;So that&amp;rsquo;s it. A nice &lt;em&gt;short&lt;/em&gt; post for once! Despite the size, I hope if was
+useful. If you haven&amp;rsquo;t heard of neofetch before, go check it out. If you have,
+I encourage you to go digging through the man pages. I promise you won&amp;rsquo;t regret
+it.  Enjoy!&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>Creating &#34;Sub&#34;-Monitor Workflows Using xrandr</title>
