@@ -1,9 +1,8 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Kvm on λ ryan. himmelwright. net</title>
+    <title>KVM on λ ryan. himmelwright. net</title>
     <link>http://ryan.himmelwright.net/tags/kvm/</link>
-    <description>Recent content in Kvm on λ ryan. himmelwright. net</description>
+    <description>Recent content in KVM on λ ryan. himmelwright. net</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Thu, 07 Feb 2019 00:00:00 +0000</lastBuildDate>
@@ -23,8 +22,6 @@ disk size of one of the job&amp;rsquo;s docker containers, maxing out the disk. 
 meant that I needed to extend the drive&lt;em&gt;&amp;hellip; again&lt;/em&gt;. If you ever do something
 twice, it is &lt;em&gt;best&lt;/em&gt; to have it documented for the potential third time. So,
 here we are.&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;
 
 &lt;h4 id=&#34;assumptions&#34;&gt;Assumptions&lt;/h4&gt;
 
@@ -162,8 +159,6 @@ will help me when I acidently overfill this VM &lt;em&gt;again&lt;/em&gt;&amp;he
       
       <guid>http://ryan.himmelwright.net/post/exporting-proxmox-vms/</guid>
       <description>&lt;p&gt;For a long time I have been thinking about replacing my server&amp;rsquo;s proxmox install with vanilla Debian or CentOS, mostly for learning purposes. I would first setup zfs on the new system and import my existing data pools. Then, I would use either a system like ovrit or just plain kvm/lxc to run my VMs and containers. In order to do this though&amp;hellip; I have to first figure out how export my containers and VMs running in Proxmox. As it turns out&amp;hellip; exporting the VMs wasn&amp;rsquo;t very hard&amp;hellip;&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;
 
 &lt;h2 id=&#34;exporting-proxmox-vm-disk&#34;&gt;Exporting Proxmox VM Disk&lt;/h2&gt;
 

@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Linux on λ ryan. himmelwright. net</title>
@@ -6,10 +5,123 @@
     <description>Recent content in Linux on λ ryan. himmelwright. net</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 30 Apr 2019 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 23 May 2019 00:00:00 +0000</lastBuildDate>
     
         <atom:link href="http://ryan.himmelwright.net/tags/linux/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Setting up Tmuxinator</title>
+      <link>http://ryan.himmelwright.net/post/setting-up-tmuxinator/</link>
+      <pubDate>Thu, 23 May 2019 00:00:00 +0000</pubDate>
+      
+      <guid>http://ryan.himmelwright.net/post/setting-up-tmuxinator/</guid>
+      <description>&lt;p&gt;Several weeks ago I wrote about &lt;a href=&#34;../../post/scripting-tmux-workspaces/&#34;&gt;scripting a tmux session&amp;rsquo;s
+initialization&lt;/a&gt;. At the end of the post I
+mentioned that while writing it, I had learned about
+&lt;a href=&#34;https://github.com/tmuxinator/tmuxinator&#34;&gt;tmuxinator&lt;/a&gt;. I even teased that it
+looked so good, I may switch to it eventually. Well&amp;hellip; that didn&amp;rsquo;t take long. I&amp;rsquo;ve
+scrapped my tmux shell scripts, and have converted to using tmuxinator. Here&amp;rsquo;s
+how.&lt;/p&gt;
+
+&lt;h2 id=&#34;what-is-tmuxinator&#34;&gt;What is Tmuxinator?&lt;/h2&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://github.com/tmuxinator/tmuxinator&#34;&gt;Tmuxinator&lt;/a&gt; is a command line
+application that makes it easy to create and manage tmux sessions. It allows a
+user to define how to setup a session, including naming windows, splitting
+panes, and what commands initially run in each pane. The configuration is done
+in yaml, so it is very easy to figure out and get started.&lt;/p&gt;
+
+&lt;h2 id=&#34;install&#34;&gt;Install&lt;/h2&gt;
+
+&lt;p&gt;Most distros probably have &lt;code&gt;tmuxinator&lt;/code&gt; in their offical repos. These days, I
+mostly run Fedora on all of my machines and I was able to find it there:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;sudo dnf install termixinator&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;&lt;strong&gt;However&lt;/strong&gt;, I found that this version was quite out of date (&lt;code&gt;0.6.11&lt;/code&gt;) even on my new
+Fedora 30 install, so I recommend using the method stated on
+the project&amp;rsquo;s Github page (requires &lt;code&gt;rubygems&lt;/code&gt;) to install a much more current
+version (&lt;code&gt;1.1.0&lt;/code&gt;):&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;gem install tmuxinator&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h2 id=&#34;create&#34;&gt;Create&lt;/h2&gt;
+
+&lt;p&gt;To create a new tmuxinator profile, pass the desired project name to &lt;code&gt;tmuxinator new&lt;/code&gt;:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-sh&#34; data-lang=&#34;sh&#34;&gt;tmuxinator new Website&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;This will open up a new tmuxinator template inside your default editor. The
+default template contains a bunch of comments that help guide how to configure
+it.&lt;/p&gt;
+
+&lt;h4 id=&#34;header&#34;&gt;Header&lt;/h4&gt;
+
+&lt;p&gt;The first thing to set at the top of the template is the &lt;code&gt;name&lt;/code&gt; field, followed
+by the &lt;code&gt;root&lt;/code&gt; directory. The tmux session name is defined with &lt;code&gt;name&lt;/code&gt;, and
+&lt;code&gt;root&lt;/code&gt; will be the directory which all of the windows/panes open up in by
+default. For example, when converting my website script, I set &lt;code&gt;name&lt;/code&gt; to
+&lt;code&gt;Website&lt;/code&gt; and &lt;code&gt;root&lt;/code&gt; to the location where I keep my website&amp;rsquo;s git working
+directory, &lt;code&gt;~/Documents/himmAllRight-source&lt;/code&gt;:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# /home/ryan/.config/tmuxinator/Website.yml&lt;/span&gt;
+
+name: Website
+root: ~/Documents/himmAllRight-source&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h4 id=&#34;windows&#34;&gt;Windows&lt;/h4&gt;
+
+&lt;p&gt;Next, I needed to configure my windows. To convert the script from my previous
+post, I wanted a dedicated &amp;lsquo;Main&amp;rsquo; window, one for the server, one for vim, and
+one for an extra shell. Additionally, since that last post I&amp;rsquo;ve added a window
+that launches my hugo-served website in a web browser. To recreate &lt;em&gt;all of
+that&lt;/em&gt; with tmuxinator:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;windows:
+  - Main:
+      - zsh
+      - clear
+  - Server: hugo serve -D -F
+  - Write: nvim
+  - Shell: zsh; clear
+  - Web: qutebrowser localhost:&lt;span style=&#34;color:#ae81ff&#34;&gt;1313&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Done. Save the file and that&amp;rsquo;s it! See the benefit of using tmuxinator??&lt;/p&gt;
+
+&lt;h4 id=&#34;pane-splits&#34;&gt;Pane splits&lt;/h4&gt;
+
+&lt;p&gt;While I don&amp;rsquo;t use them in this example configuration, it should be noted that
+setting up pane splits is also quite easy with tmuxinator. For example, if I
+wanted to split the server window into two panes, one running the hugo server
+and one running htop, I could use:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;- Server:
+    layout: even-vertical
+    panes:
+        - hugo
+        - htop&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;The &lt;code&gt;layout&lt;/code&gt; key defines which
+&lt;a href=&#34;http://man7.org/linux/man-pages/man1/tmux.1.html#WINDOWS_AND_PANES&#34;&gt;tmux layout&lt;/a&gt; to
+use when splitting the panes, and &lt;code&gt;panes&lt;/code&gt; is a list that defines what to run in
+each pane.&lt;/p&gt;
+
+&lt;h2 id=&#34;launch&#34;&gt;Launch&lt;/h2&gt;
+
+&lt;p&gt;&lt;a href=&#39;../../img/posts/setting-up-tmuxinator/start-website-tmuxinator.gif&#39;&gt;
+&lt;img alt=&#34;Launching Website tmux session with tmuxinator&#34; src=&#34;../../img/posts/setting-up-tmuxinator/starting-website-tmuxinator.png&#34; onmouseover=&#34;this.src=&#39;../../img/posts/setting-up-tmuxinator/start-website-tmuxinator.gif&#39;&#34; onmouseout=&#34;this.src=&#39;../../img/posts/setting-up-tmuxinator/starting-website-tmuxinator.png&#39;&#34; style=&#34;max-width: 100%;&#34;/&gt;
+&lt;/a&gt;
+&lt;div class=&#34;caption&#34;&gt;Launching my website tmux session with tmuxinator&lt;/div&gt;&lt;/p&gt;
+
+&lt;p&gt;To start up the newly defined tmuxinator project, use &lt;code&gt;tmuxinator
+start&lt;/code&gt;:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-sh&#34; data-lang=&#34;sh&#34;&gt;tmuxinator start Website&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h2 id=&#34;manage&#34;&gt;Manage&lt;/h2&gt;
+
+&lt;p&gt;All of the tmuxinator profile templates are stored at &lt;code&gt;~/.config/tmuxinator&lt;/code&gt;,
+which means they can easily be copied to a new machine, or even
+saved/maintained in source control.&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;Note: I think older versions stored them at &lt;code&gt;~/.tmuxinator/&lt;/code&gt;, so check there
+if they are missing.&lt;/em&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;conclusion&#34;&gt;Conclusion&lt;/h2&gt;
+
+&lt;p&gt;That&amp;rsquo;s it. While scripting my own method was a good bash exercise and helped me
+learn the details of &lt;code&gt;tmux&lt;/code&gt; a little bit better, I ultimately think that
+&lt;code&gt;tmuxinator&lt;/code&gt; is the way to go. This is especially true when using tmux to work
+on several projects or even across multiple machines. If you &lt;em&gt;still&lt;/em&gt; haven&amp;rsquo;t
+tried &lt;code&gt;tmux&lt;/code&gt;&amp;hellip; I &lt;em&gt;highly&lt;/em&gt; recommend checking it out!&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>Custom Neofetch ASCII Art</title>
@@ -23,8 +135,6 @@ command-line system information tool for a few years now. While browsing
 of the submissions did not have distro logos in their neofetch/screenfetch
 ascii art. I knew that neofetch was customizable, but have never dug
 into it myself. So I decided to change that.&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;
 
 &lt;h3 id=&#34;custom-neofetch-ascii-art&#34;&gt;Custom Neofetch ASCII Art&lt;/h3&gt;
 
@@ -97,8 +207,6 @@ that sometimes, it has &lt;em&gt;too much&lt;/em&gt; workspace. While I still th
 larger display was better choice, I sometimes wish that
 I had the more limited, but &lt;em&gt;focused&lt;/em&gt; workspace of an ultrawide or 1440p
 monitor. &lt;em&gt;Maybe I still can&amp;hellip;&lt;/em&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;
 
 &lt;h3 id=&#34;reasoning&#34;&gt;Reasoning&lt;/h3&gt;
 
@@ -184,8 +292,8 @@ can be done by using the &lt;code&gt;gtf&lt;/code&gt; tool. To calculate a model
 3440x1440 resolution at 59.9 hertz for example, use the following:&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;➜  ~ gtf &lt;span style=&#34;color:#ae81ff&#34;&gt;3440&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1440&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;59&lt;/span&gt;.9
 
-  &lt;span style=&#34;color:#75715e&#34;&gt;# 3440x1440 @ 59.90 Hz (GTF) hsync: 89.25 kHz; pclk: 418.41 MHz
-&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;  Modeline &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;3440x1440_59.90&amp;#34;&lt;/span&gt;  &lt;span style=&#34;color:#ae81ff&#34;&gt;418&lt;/span&gt;.41  &lt;span style=&#34;color:#ae81ff&#34;&gt;3440&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;3688&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;4064&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;4688&lt;/span&gt;  &lt;span style=&#34;color:#ae81ff&#34;&gt;1440&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1441&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1444&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1490&lt;/span&gt;  -HSync +Vsync
+  &lt;span style=&#34;color:#75715e&#34;&gt;# 3440x1440 @ 59.90 Hz (GTF) hsync: 89.25 kHz; pclk: 418.41 MHz&lt;/span&gt;
+  Modeline &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;3440x1440_59.90&amp;#34;&lt;/span&gt;  &lt;span style=&#34;color:#ae81ff&#34;&gt;418&lt;/span&gt;.41  &lt;span style=&#34;color:#ae81ff&#34;&gt;3440&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;3688&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;4064&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;4688&lt;/span&gt;  &lt;span style=&#34;color:#ae81ff&#34;&gt;1440&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1441&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1444&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1490&lt;/span&gt;  -HSync +Vsync
 
 ➜  ~&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;The line that starts with &lt;em&gt;Modeline&lt;/em&gt; (but &lt;em&gt;not including&lt;/em&gt; &amp;ldquo;Modeline&amp;rdquo;) is what
@@ -222,8 +330,8 @@ never fear! The display can be switched to the new mode using &lt;code&gt;xrandr
 automate. So I did with this script:&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;color:#75715e&#34;&gt;#!/bin/bash
 &lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;
-&lt;span style=&#34;color:#75715e&#34;&gt;# A function to prompt the user if they want to switch to the new mode now.
-&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;switch_to_new_mode &lt;span style=&#34;color:#f92672&#34;&gt;()&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;{&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;# A function to prompt the user if they want to switch to the new mode now.&lt;/span&gt;
+switch_to_new_mode &lt;span style=&#34;color:#f92672&#34;&gt;()&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;{&lt;/span&gt;
 	echo -n &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;Switch to mode &lt;/span&gt;$modename&lt;span style=&#34;color:#e6db74&#34;&gt; now? [y/n]: &amp;#34;&lt;/span&gt;
 	read change
 	&lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;$change&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;y&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt;
@@ -235,8 +343,8 @@ automate. So I did with this script:&lt;/p&gt;
 	&lt;span style=&#34;color:#66d9ef&#34;&gt;fi&lt;/span&gt;
 &lt;span style=&#34;color:#f92672&#34;&gt;}&lt;/span&gt;
 
-&lt;span style=&#34;color:#75715e&#34;&gt;# Create a new mode for the display
-&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;create_new_mode &lt;span style=&#34;color:#f92672&#34;&gt;()&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;{&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;# Create a new mode for the display&lt;/span&gt;
+create_new_mode &lt;span style=&#34;color:#f92672&#34;&gt;()&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;{&lt;/span&gt;
 	echo &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;Adding new mode: &lt;/span&gt;$gtf_output&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;
 	xrandr --newmode $gtf_output
 	echo &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;Adding new mode &lt;/span&gt;$modename&lt;span style=&#34;color:#e6db74&#34;&gt; to display &lt;/span&gt;$MONITOR&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;
@@ -244,25 +352,25 @@ automate. So I did with this script:&lt;/p&gt;
 	echo &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;Done!&amp;#34;&lt;/span&gt;
 &lt;span style=&#34;color:#f92672&#34;&gt;}&lt;/span&gt;
 
-&lt;span style=&#34;color:#75715e&#34;&gt;# Message if the mode appears to already exist
-&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;mode_already_exists &lt;span style=&#34;color:#f92672&#34;&gt;()&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;{&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;# Message if the mode appears to already exist&lt;/span&gt;
+mode_already_exists &lt;span style=&#34;color:#f92672&#34;&gt;()&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;{&lt;/span&gt;
 	echo &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;Hmmm... I think the mode &lt;/span&gt;$modename&lt;span style=&#34;color:#e6db74&#34;&gt; already exists.&amp;#34;&lt;/span&gt;
 &lt;span style=&#34;color:#f92672&#34;&gt;}&lt;/span&gt;
 
-&lt;span style=&#34;color:#75715e&#34;&gt;## Main Function to set vars and code
-&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;main &lt;span style=&#34;color:#f92672&#34;&gt;()&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;{&lt;/span&gt;
-	&lt;span style=&#34;color:#75715e&#34;&gt;# Input Vars
-&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;	WIDTH&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;$1
+&lt;span style=&#34;color:#75715e&#34;&gt;## Main Function to set vars and code&lt;/span&gt;
+main &lt;span style=&#34;color:#f92672&#34;&gt;()&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;{&lt;/span&gt;
+	&lt;span style=&#34;color:#75715e&#34;&gt;# Input Vars&lt;/span&gt;
+	WIDTH&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;$1
 	HEIGHT&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;$2
 	MONITOR&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;$3
 	ESLEEP&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;3&lt;/span&gt;
-	&lt;span style=&#34;color:#75715e&#34;&gt;# Fancier Vars :P
-&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;	gtf_output&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;$(&lt;/span&gt;gtf $WIDTH $HEIGHT &lt;span style=&#34;color:#ae81ff&#34;&gt;59&lt;/span&gt;.9 | grep -i &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;modeline&amp;#34;&lt;/span&gt; | sed -e &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;s/\&amp;lt;Modeline\&amp;gt;//g&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;)&lt;/span&gt;
+	&lt;span style=&#34;color:#75715e&#34;&gt;# Fancier Vars :P&lt;/span&gt;
+	gtf_output&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;$(&lt;/span&gt;gtf $WIDTH $HEIGHT &lt;span style=&#34;color:#ae81ff&#34;&gt;59&lt;/span&gt;.9 | grep -i &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;modeline&amp;#34;&lt;/span&gt; | sed -e &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;s/\&amp;lt;Modeline\&amp;gt;//g&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;)&lt;/span&gt;
 	modename&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;$(&lt;/span&gt;echo $gtf_output | grep -o  &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;\(\&amp;#34;.*\&amp;#34;\)&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;)&lt;/span&gt;
 	modeexists&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;$(&lt;/span&gt;xrandr | grep -i $modename&lt;span style=&#34;color:#66d9ef&#34;&gt;)&lt;/span&gt;
 
-	&lt;span style=&#34;color:#75715e&#34;&gt;# Run
-&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;	&lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;$modeexists&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt;
+	&lt;span style=&#34;color:#75715e&#34;&gt;# Run&lt;/span&gt;
+	&lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;$modeexists&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt;
 	&lt;span style=&#34;color:#66d9ef&#34;&gt;then&lt;/span&gt;
 		create_new_mode
 	    switch_to_new_mode
@@ -272,8 +380,8 @@ automate. So I did with this script:&lt;/p&gt;
 	&lt;span style=&#34;color:#66d9ef&#34;&gt;fi&lt;/span&gt;
 &lt;span style=&#34;color:#f92672&#34;&gt;}&lt;/span&gt;
 
-&lt;span style=&#34;color:#75715e&#34;&gt;## Execute Main
-&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;main &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;$@&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;## Execute Main&lt;/span&gt;
+main &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;$@&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;div class=&#34;caption&#34;&gt;add-xrandr.sh&lt;/div&gt;
 
 &lt;p&gt;Basically, the script is run by providing it the desired width, height, and
@@ -345,8 +453,6 @@ started to script the start up/configuration a tmux session for each project.
 The other day, I decided to write a script to spin up a session for working on my
 website&amp;hellip; and thought it would be a great tutorial!&lt;/p&gt;
 
-&lt;p&gt;&lt;/p&gt;
-
 &lt;h3 id=&#34;tmux&#34;&gt;Tmux&lt;/h3&gt;
 
 &lt;p&gt;&lt;img alt=&#34;tmux demo animation&#34; src=&#34;../../img/posts/scripting-tmux-workspaces/animation-hover.png&#34; onmouseover=&#34;this.src=&#39;../../img/posts/scripting-tmux-workspaces/tmux-demo.gif&#39;&#34; onmouseout=&#34;this.src=&#39;../../img/posts/scripting-tmux-workspaces/animation-hover.png&#39;&#34; style=&#34;max-width: 100%;&#34;/&gt;
@@ -365,7 +471,7 @@ getting started even smoother.&lt;/p&gt;
 
 &lt;p&gt;First, lets create a new script. Start by opening a new file, and adding a bash
 &lt;a href=&#34;https://en.wikipedia.org/wiki/Shebang_(Unix)&#34;&gt;shebang&lt;/a&gt; line to the top:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;#!/bin/bash&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;color:#75715e&#34;&gt;#!/bin/bash&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;This line tells the system that the following text will be a
 &lt;a href=&#34;https://en.wikipedia.org/wiki/Bash_(Unix_shell)&#34;&gt;bash&lt;/a&gt; script.&lt;/p&gt;
 
@@ -377,19 +483,19 @@ editor&amp;rsquo;s bash syntax highlighting if it didn&amp;rsquo;t automatically
 &lt;p&gt;Next, lets define a variable to store the tmux session name. This will make it
 easier to change the session name later on. Using the session variable, a new
 tmux-session with our desired name can be created.&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# Session Name
-&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;session&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;Website&amp;#34;&lt;/span&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# Session Name&lt;/span&gt;
+session&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;Website&amp;#34;&lt;/span&gt;
 
-&lt;span style=&#34;color:#75715e&#34;&gt;# Start New Session with our name
-&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;tmux new-session -d -s $session&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;# Start New Session with our name&lt;/span&gt;
+tmux new-session -d -s $session&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;h4 id=&#34;name-initial-default-window-and-switch-to-zsh&#34;&gt;Name initial default Window (and switch to &lt;code&gt;zsh&lt;/code&gt;)&lt;/h4&gt;
 
 &lt;p&gt;Let&amp;rsquo;s customize the default window and give it a new name. Lets call this first tmux
 window &lt;code&gt;&amp;quot;Main&amp;quot;&lt;/code&gt;, and have it simply run a &lt;a href=&#34;https://ohmyz.sh/&#34;&gt;zsh&lt;/a&gt; shell. After
 creating a new session, there is only one window, so I know it will be
 identified with the number &lt;code&gt;0&lt;/code&gt;. I can use this with &lt;code&gt;-t&lt;/code&gt; to rename the window.&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# Name first Window and start zsh
-&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;tmux rename-window -t &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;Main&amp;#39;&lt;/span&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# Name first Window and start zsh&lt;/span&gt;
+tmux rename-window -t &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;Main&amp;#39;&lt;/span&gt;
 tmux send-keys -t &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;Main&amp;#39;&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;zsh&amp;#39;&lt;/span&gt; C-m &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;clear&amp;#39;&lt;/span&gt; C-m&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;I can then use the &lt;code&gt;send-keys&lt;/code&gt; command with the new window name to start zsh.
 This is the equivalent of typing &lt;code&gt;zsh&lt;/code&gt;, &lt;code&gt;[Enter]&lt;/code&gt;, &lt;code&gt;clear&lt;/code&gt;, &lt;code&gt;[Enter]&lt;/code&gt; into the
@@ -402,8 +508,8 @@ different tasks. First, I want a window that can run the hugo server
 as I&amp;rsquo;m writing a post. With a session already created, I can name the
 window as I create it, using just the &lt;code&gt;new-window&lt;/code&gt; comamnd with the
 &lt;code&gt;-n&lt;/code&gt; flag.&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# Create and setup pane for hugo server
-&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;tmux new-window -t $session:1 -n &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;Hugo Server&amp;#39;&lt;/span&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# Create and setup pane for hugo server&lt;/span&gt;
+tmux new-window -t $session:1 -n &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;Hugo Server&amp;#39;&lt;/span&gt;
 tmux send-keys -t &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;Hugo Server&amp;#39;&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;hugo serve -D -F&amp;#39;&lt;/span&gt; C-m&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;Again, I used tmux &lt;code&gt;send-keys&lt;/code&gt;, this time to send the &lt;code&gt;hugo serve -D
 -F&lt;/code&gt; command to start up a hugo server for local draft editing.&lt;/p&gt;
@@ -412,22 +518,22 @@ tmux send-keys -t &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;Hugo Server
 
 &lt;p&gt;Now, I need a place to write website posts&amp;hellip; so lets fire up a new tmux
 window, and open up neovim inside of it.&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# setup Writing window
-&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;tmux new-window -t $SESSION:2 -n &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;Writing&amp;#39;&lt;/span&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# setup Writing window&lt;/span&gt;
+tmux new-window -t $SESSION:2 -n &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;Writing&amp;#39;&lt;/span&gt;
 tmux send-keys -t &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;Writing&amp;#39;&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;nvim&amp;#34;&lt;/span&gt; C-m&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;h4 id=&#34;another-shell&#34;&gt;Another shell&lt;/h4&gt;
 
 &lt;p&gt;Lastly, lets create one more shell window, just in case it&amp;rsquo;s needed. Why not?&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# Setup an additional shell
-&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;tmux new-window -t $SESSION:3 -n &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;Shell&amp;#39;&lt;/span&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# Setup an additional shell&lt;/span&gt;
+tmux new-window -t $SESSION:3 -n &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;Shell&amp;#39;&lt;/span&gt;
 tmux send-keys -t &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;Shell&amp;#39;&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;zsh&amp;#34;&lt;/span&gt; C-m &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;clear&amp;#39;&lt;/span&gt; C-m&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;h4 id=&#34;attach-session&#34;&gt;Attach Session&lt;/h4&gt;
 
 &lt;p&gt;With the tmux session all configured and customized, we can tell the script to
 go ahead and attach it, using the &lt;code&gt;attach-session&lt;/code&gt; command with the session
 name variable.&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# Attach Session, on the Main window
-&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;tmux attach-session -t $SESSION:0&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# Attach Session, on the Main window&lt;/span&gt;
+tmux attach-session -t $SESSION:0&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;&lt;em&gt;Note: the &lt;code&gt;0&lt;/code&gt; tells tmux to attach the first window (&lt;code&gt;Main&lt;/code&gt;). Using
 another index value will attach a different window. For example, &lt;code&gt;1&lt;/code&gt;
 would open the &lt;code&gt;Hugo Server&lt;/code&gt; window when attaching&lt;/em&gt;&lt;/p&gt;
@@ -474,35 +580,35 @@ to be created, we still want to attach the one that already exists).&lt;/p&gt;
 &lt;p&gt;That is it. Here is the script with everything all put together:&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;color:#75715e&#34;&gt;#!/bin/sh
 &lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;
-&lt;span style=&#34;color:#75715e&#34;&gt;# Set Session Name
-&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;SESSION&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;Website&amp;#34;&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;# Set Session Name&lt;/span&gt;
+SESSION&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;Website&amp;#34;&lt;/span&gt;
 SESSIONEXISTS&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;$(&lt;/span&gt;tmux list-sessions | grep $SESSION&lt;span style=&#34;color:#66d9ef&#34;&gt;)&lt;/span&gt;
 
-&lt;span style=&#34;color:#75715e&#34;&gt;# Only create tmux session if it doesn&amp;#39;t already exist
-&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;$SESSIONEXISTS&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;# Only create tmux session if it doesn&amp;#39;t already exist&lt;/span&gt;
+&lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;$SESSIONEXISTS&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt;
 &lt;span style=&#34;color:#66d9ef&#34;&gt;then&lt;/span&gt;
-    &lt;span style=&#34;color:#75715e&#34;&gt;# Start New Session with our name
-&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;    tmux new-session -d -s $SESSION
+    &lt;span style=&#34;color:#75715e&#34;&gt;# Start New Session with our name&lt;/span&gt;
+    tmux new-session -d -s $SESSION
 
-    &lt;span style=&#34;color:#75715e&#34;&gt;# Name first Pane and start zsh
-&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;    tmux rename-window -t &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;Main&amp;#39;&lt;/span&gt;
-    tmux send-keys -t &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;Main&amp;#39;&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;zsh&amp;#39;&lt;/span&gt; C-m &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;clear&amp;#39;&lt;/span&gt; C-m &lt;span style=&#34;color:#75715e&#34;&gt;# Switch to bind script?
-&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;
-    &lt;span style=&#34;color:#75715e&#34;&gt;# Create and setup pane for hugo server
-&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;    tmux new-window -t $SESSION:1 -n &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;Hugo Server&amp;#39;&lt;/span&gt;
-    tmux send-keys -t &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;Hugo Server&amp;#39;&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;hugo serve -D -F&amp;#39;&lt;/span&gt; C-m &lt;span style=&#34;color:#75715e&#34;&gt;# Switch to bind script?
-&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;
-    &lt;span style=&#34;color:#75715e&#34;&gt;# setup Writing window
-&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;    tmux new-window -t $SESSION:2 -n &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;Writing&amp;#39;&lt;/span&gt;
+    &lt;span style=&#34;color:#75715e&#34;&gt;# Name first Pane and start zsh&lt;/span&gt;
+    tmux rename-window -t &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;Main&amp;#39;&lt;/span&gt;
+    tmux send-keys -t &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;Main&amp;#39;&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;zsh&amp;#39;&lt;/span&gt; C-m &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;clear&amp;#39;&lt;/span&gt; C-m &lt;span style=&#34;color:#75715e&#34;&gt;# Switch to bind script?&lt;/span&gt;
+
+    &lt;span style=&#34;color:#75715e&#34;&gt;# Create and setup pane for hugo server&lt;/span&gt;
+    tmux new-window -t $SESSION:1 -n &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;Hugo Server&amp;#39;&lt;/span&gt;
+    tmux send-keys -t &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;Hugo Server&amp;#39;&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;hugo serve -D -F&amp;#39;&lt;/span&gt; C-m &lt;span style=&#34;color:#75715e&#34;&gt;# Switch to bind script?&lt;/span&gt;
+
+    &lt;span style=&#34;color:#75715e&#34;&gt;# setup Writing window&lt;/span&gt;
+    tmux new-window -t $SESSION:2 -n &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;Writing&amp;#39;&lt;/span&gt;
     tmux send-keys -t &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;Writing&amp;#39;&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;nvim&amp;#34;&lt;/span&gt; C-m
 
-    &lt;span style=&#34;color:#75715e&#34;&gt;# Setup an additional shell
-&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;    tmux new-window -t $SESSION:3 -n &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;Shell&amp;#39;&lt;/span&gt;
+    &lt;span style=&#34;color:#75715e&#34;&gt;# Setup an additional shell&lt;/span&gt;
+    tmux new-window -t $SESSION:3 -n &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;Shell&amp;#39;&lt;/span&gt;
     tmux send-keys -t &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;Shell&amp;#39;&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;zsh&amp;#34;&lt;/span&gt; C-m &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;clear&amp;#39;&lt;/span&gt; C-m
 &lt;span style=&#34;color:#66d9ef&#34;&gt;fi&lt;/span&gt;
 
-&lt;span style=&#34;color:#75715e&#34;&gt;# Attach Session, on the Main window
-&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;tmux attach-session -t $SESSION:0&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;# Attach Session, on the Main window&lt;/span&gt;
+tmux attach-session -t $SESSION:0&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;I hope this post has been helpful! Although, I have to admit that this post
 &lt;em&gt;may&lt;/em&gt; be moot if I decide check out
 &lt;a href=&#34;https://github.com/tmuxinator/tmuxinator&#34;&gt;tmuxinator&lt;/a&gt; (which a co-worker
@@ -522,8 +628,6 @@ disk size of one of the job&amp;rsquo;s docker containers, maxing out the disk. 
 meant that I needed to extend the drive&lt;em&gt;&amp;hellip; again&lt;/em&gt;. If you ever do something
 twice, it is &lt;em&gt;best&lt;/em&gt; to have it documented for the potential third time. So,
 here we are.&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;
 
 &lt;h4 id=&#34;assumptions&#34;&gt;Assumptions&lt;/h4&gt;
 
@@ -665,8 +769,6 @@ noisy&amp;hellip; very noisy. Fearing the worst, I &lt;a href=&#34;../../post/zf
 backup&lt;/a&gt;, and shutdown the server until I had
 time to investigate further&amp;hellip; and likely replace the drive. That
 time came this past week.&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;
 
 &lt;h3 id=&#34;verifying-the-drive-failed&#34;&gt;Verifying the Drive Failed&lt;/h3&gt;
 
@@ -858,8 +960,6 @@ help me when things go wrong&amp;hellip; sometimes I just want to clean up my
 file system. So&amp;hellip; here is a simple string of commands I often use to declutter
 my files.&lt;/p&gt;
 
-&lt;p&gt;&lt;/p&gt;
-
 &lt;p&gt;&lt;em&gt;DISCLAIMER:&lt;/em&gt; I know there are &lt;em&gt;MANY&lt;/em&gt; ways to accomplish this.  The method
 described in this post is to share &lt;strong&gt;one&lt;/strong&gt; efficient solution I use, that might
 help someone that currently knows &lt;strong&gt;zero&lt;/strong&gt;.&lt;/p&gt;
@@ -959,15 +1059,15 @@ writing ansible playbooks, I can generate a few &lt;code&gt;*.retry&lt;/code&gt;
 some &lt;code&gt;*.swp&lt;/code&gt; files from editing in vim.&lt;/p&gt;
 
 &lt;h4 id=&#34;example-4&#34;&gt;Example&lt;/h4&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;➜ find . | grep .retry          &lt;span style=&#34;color:#75715e&#34;&gt;## Find *.retry files
-&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;./file1.retry
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;➜ find . | grep .retry          &lt;span style=&#34;color:#75715e&#34;&gt;## Find *.retry files&lt;/span&gt;
+./file1.retry
 ./dirA/file5.retry
 ./dirA/file3.retry
 
-➜ rm &lt;span style=&#34;color:#66d9ef&#34;&gt;$(&lt;/span&gt;find . | grep .retry&lt;span style=&#34;color:#66d9ef&#34;&gt;)&lt;/span&gt;    &lt;span style=&#34;color:#75715e&#34;&gt;## Delete *.retry files
-&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;
-➜ find . | grep .retry          &lt;span style=&#34;color:#75715e&#34;&gt;## Check that they were deleted
-&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;
+➜ rm &lt;span style=&#34;color:#66d9ef&#34;&gt;$(&lt;/span&gt;find . | grep .retry&lt;span style=&#34;color:#66d9ef&#34;&gt;)&lt;/span&gt;    &lt;span style=&#34;color:#75715e&#34;&gt;## Delete *.retry files&lt;/span&gt;
+
+➜ find . | grep .retry          &lt;span style=&#34;color:#75715e&#34;&gt;## Check that they were deleted&lt;/span&gt;
+
 ➜&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;h3 id=&#34;summary&#34;&gt;Summary&lt;/h3&gt;
 
@@ -986,8 +1086,6 @@ fun!&lt;/p&gt;</description>
 During the early days of use, I occasionally had difficulty configuring it on
 new machines, but those days appear to be long gone. It is a simple, generic,
 yet flexible system.  Here&amp;rsquo;s how to get started.&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;
 
 &lt;p&gt;&lt;em&gt;(but first, some background&amp;hellip; feel free to skip ahead)&lt;/em&gt;&lt;/p&gt;
 
@@ -1144,8 +1242,8 @@ password entry. Optionally, use the &lt;code&gt;-c&lt;/code&gt; flag to copy the
 (first line if a multi-line entry) to the clipboard instead of spewing it into
 the terminal.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;pass Shopping/SomeFakeStore/ryan
-&lt;span style=&#34;color:#75715e&#34;&gt;## or ##
-&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;pass -c Shopping/SomeFakeStore/ryan&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;## or ##&lt;/span&gt;
+pass -c Shopping/SomeFakeStore/ryan&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;h2 id=&#34;making-pass-better&#34;&gt;Making Pass Better&lt;/h2&gt;
 
 &lt;p&gt;With pass&amp;rsquo;s flexibility, there are many additional features to help improve it for each user&amp;rsquo;s
@@ -1254,8 +1352,6 @@ I would build a &lt;a href=&#34;https://www.techspot.com/review/1155-affordable-
 build&lt;/a&gt;. Then, in 2017
 AMD released their &lt;a href=&#34;https://en.wikipedia.org/wiki/Ryzen&#34;&gt;Ryzen&lt;/a&gt;
 series CPUs&amp;hellip;&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;
 
 &lt;h2 id=&#34;why-a-desktop&#34;&gt;Why a Desktop?&lt;/h2&gt;
 
@@ -1447,8 +1543,6 @@ to upgrade it over the next few years&lt;/p&gt;</description>
 Sometimes, it might be best to just hit the reset button and configure from
 scratch. With KDE Plasma 5, you can. Here&amp;rsquo;s how.&lt;/p&gt;
 
-&lt;p&gt;&lt;/p&gt;
-
 &lt;h2 id=&#34;issue&#34;&gt;Issue&lt;/h2&gt;
 
 &lt;p&gt;While I love having a &lt;a href=&#34;../my-t470/&#34;&gt;dock-able laptop&lt;/a&gt; and &lt;a href=&#34;new-lgud4379b&#34;&gt;my 43&amp;rdquo; 4k LG
@@ -1518,8 +1612,6 @@ environment. One idea, was to utilize Jenkins to automatically build
 and deploy a &amp;ldquo;draft&amp;rdquo; website, so I can stage new posts/website change
 on my home network, before publishing it to the &amp;ldquo;production&amp;rdquo;
 website. Here is how that idea was Instantiated&amp;hellip;&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;
 
 &lt;h2 id=&#34;my-website&#34;&gt;My Website&lt;/h2&gt;
 
@@ -1592,14 +1684,14 @@ to serve the generated &lt;em&gt;static&lt;/em&gt; website content). I used
 &lt;a href=&#34;https://nginx.org/en/&#34;&gt;nginx&lt;/a&gt; in for setup. After installing, make
 sure it is running. To install and check the status of nginx on an
 Ubuntu System:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;color:#75715e&#34;&gt;## Install
-&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;sudo apt install -y nginx
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;color:#75715e&#34;&gt;## Install&lt;/span&gt;
+sudo apt install -y nginx
 
-&lt;span style=&#34;color:#75715e&#34;&gt;## Check it is running
-&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;sudo systemctl status nginx
+&lt;span style=&#34;color:#75715e&#34;&gt;## Check it is running&lt;/span&gt;
+sudo systemctl status nginx
 
-&lt;span style=&#34;color:#75715e&#34;&gt;## Optional: Ensure it is enabled to start up after reboots
-&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;sudo systemctl enable nginx&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;## Optional: Ensure it is enabled to start up after reboots&lt;/span&gt;
+sudo systemctl enable nginx&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;With the web server running, we need to know &lt;em&gt;where&lt;/em&gt; the website files
 need to go. Nginx will by default serve content at
 &lt;code&gt;/user/share/nginx/html/&lt;/code&gt;, so remember that location for later&amp;hellip;&lt;/p&gt;
@@ -1742,8 +1834,6 @@ reverse-proxy (Tangela), and I decided to do that again on the new
 network. While it is a simple process, it is one that other people often
 ask me about. So, this time&amp;hellip; I&amp;rsquo;m taking notes!&lt;/p&gt;
 
-&lt;p&gt;&lt;/p&gt;
-
 &lt;h2 id=&#34;why&#34;&gt;Why?&lt;/h2&gt;
 
 &lt;p&gt;The purpose of this reverse proxy is to direct outside traffic to the
@@ -1871,8 +1961,6 @@ of evil mode and use-package. As I was wrapping up, I learned of yet
 emacs
 configuration&amp;hellip; &lt;a href=&#34;https://orgmode.org/worg/org-contrib/babel/intro.html&#34;&gt;org-babel&lt;/a&gt;.&lt;/p&gt;
 
-&lt;p&gt;&lt;/p&gt;
-
 &lt;h2 id=&#34;org-babel&#34;&gt;Org Babel&lt;/h2&gt;
 
 &lt;p&gt;Org-babel is an emacs package, that lets take an
@@ -1899,10 +1987,10 @@ but I like to keep mine in the emacs section of my &lt;a href=&#34;https://githu
 repo&lt;/a&gt;, named
 &lt;code&gt;config.org&lt;/code&gt;. This file functions like any other org file, so I added
 a small header section at the top&amp;hellip; because why not?&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-org&#34; data-lang=&#34;org&#34;&gt;#+TITLE: My Emacs Configuration
-#+AUTHOR: Ryan Himmelwright
-#+EMAIL: ryan@himmelwright.net
-#+OPTIONS: num:nil &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-org&#34; data-lang=&#34;org&#34;&gt;&lt;span style=&#34;color:#75715e&#34;&gt;#+TITLE&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;: My Emacs Configuration&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;#+AUTHOR&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;: Ryan Himmelwright&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;#+EMAIL&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;: ryan@himmelwright.net&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;#+OPTIONS&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;: num:nil &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;After that, I broke down my file by creating org headings for the
 different groups of the configuration. For example, I started with the
 headings &lt;code&gt;Repos &amp;amp; Core Packages&lt;/code&gt;, &lt;code&gt;Core Setup&lt;/code&gt;, &lt;code&gt;Evil Mode&lt;/code&gt;, &lt;code&gt;Ivy&lt;/code&gt;,
@@ -2049,8 +2137,6 @@ configuration again. However, spacemacs has shown me several packages
 that I want to incorporate into my new emacs setup. Rather than
 resurrect and Frankenstein the changes into my old &lt;code&gt;.emacs&lt;/code&gt;
 file&amp;hellip; I&amp;rsquo;m starting from scratch.&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;
 
 &lt;p&gt;&lt;a href=&#34;../../img/posts/emacs-config-evil-usepackage/newemacs1.png&#34;&gt;&lt;img src=&#34;../../img/posts/emacs-config-evil-usepackage/newemacs1.png&#34; style=&#34;max-width: 100%; float: left; margin: 0px 15px 0px 0px;&#34; alt=&#34;New Emacs Window&#34; /&gt;&lt;/a&gt;&lt;/p&gt;
 
@@ -2261,8 +2347,6 @@ from here on out.&lt;/p&gt;</description>
 somehow haven&amp;rsquo;t &lt;em&gt;had&lt;/em&gt; to use it for anything in school or at work. I know, I
 know&amp;hellip; it&amp;rsquo;s quite a feat. Still, the pervasiveness of SQL-like databases argues
 that I really &lt;em&gt;should&lt;/em&gt; learn it. So I am.&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;
 
 &lt;p&gt;The main purpose of this website is to document some of the tech stuff I do in
 my free time. This serves three purposes: 1) Organizing my thoughts into a post
@@ -2492,7 +2576,7 @@ table from above, issue &lt;code&gt;DROP TABLE tblUsersBackup;&lt;/code&gt;:&lt;
 Query OK, &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;rows&lt;/span&gt; affected (&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;.&lt;span style=&#34;color:#ae81ff&#34;&gt;01&lt;/span&gt; sec)
 
 mysql&lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;SELECT&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;FROM&lt;/span&gt; tblUsersBackup;
-ERROR &lt;span style=&#34;color:#ae81ff&#34;&gt;1146&lt;/span&gt; (&lt;span style=&#34;color:#ae81ff&#34;&gt;42&lt;/span&gt;S02): &lt;span style=&#34;color:#66d9ef&#34;&gt;Table&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;dbTest.tblUsersBackup&amp;#39;&lt;/span&gt; doesn&lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;&amp;#39;&lt;/span&gt;t exist&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+ERROR &lt;span style=&#34;color:#ae81ff&#34;&gt;1146&lt;/span&gt; (&lt;span style=&#34;color:#ae81ff&#34;&gt;42&lt;/span&gt;S02): &lt;span style=&#34;color:#66d9ef&#34;&gt;Table&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;dbTest.tblUsersBackup&amp;#39;&lt;/span&gt; doesn&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;t exist&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;&lt;strong&gt;NOTE: Using &lt;code&gt;DROP&lt;/code&gt; commands will delete the entire structure (including the
 schema), even if there is data in it. Be Careful!&lt;/strong&gt;&lt;/p&gt;
 
@@ -3159,8 +3243,6 @@ instance) to supplant my Dropbox usage. While it has worked fairly well, I&amp;r
 been watching &lt;a href=&#34;https://www.seafile.com/en/home/&#34;&gt;seafile&lt;/a&gt; from a distance the
 last few years, but haven&amp;rsquo;t taken the time to try it out. I have now.&lt;/p&gt;
 
-&lt;p&gt;&lt;/p&gt;
-
 &lt;h2 id=&#34;seafile&#34;&gt;Seafile&lt;/h2&gt;
 
 &lt;p&gt;&lt;a href=&#34;../../img/posts/trying-out-seafile/seafilelogo.png&#34;&gt;&lt;img src=&#34;../../img/posts/trying-out-seafile/seafilelogo.png&#34; style=&#34;max-width: 95%; float: left; margin: 0px 15px 0px 0px;&#34; alt=&#34;Docker ps&#34; /&gt;&lt;/a&gt;
@@ -3376,8 +3458,6 @@ ecosystem surrounding it, and can take years to truly master. This post on the
 other hand, will &lt;em&gt;hopefully&lt;/em&gt; help you get up and playing with docker containers in
 just a few minutes. Lets get started.&lt;/p&gt;
 
-&lt;p&gt;&lt;/p&gt;
-
 &lt;h2 id=&#34;installing-docker&#34;&gt;Installing Docker&lt;/h2&gt;
 
 &lt;p&gt;&lt;img src=&#34;../../img/posts/docker-quickstart/docker-logo.png&#34; style=&#34;max-width: 100%; width: 400px; float: right; margin: 0px 15px 5px 5px;&#34; alt=&#34;Docker Logo&#34; /&gt;&lt;/p&gt;
@@ -3495,9 +3575,9 @@ install several packages in the image:&lt;/p&gt;
 FROM ubuntu:latest
 MAINTAINER himmallright &amp;lt;ryan.himmelwright@gmail.com&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;gt;
 &lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;
-&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;RUN apt-get update
-&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;
-&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;RUN apt-get install -y vim stow git tmux fish htop emacs&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;RUN apt-get update&lt;/span&gt;
+
+RUN apt-get install -y vim stow git tmux fish htop emacs&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;To build the image, run the following command in the same directory as the
 Dockerfile (if defining a specific file, the &lt;code&gt;-f&lt;/code&gt; flag can be used):&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;docker build -t ubuntu-base:v1 .&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
@@ -3646,8 +3726,6 @@ know the basic to at &lt;em&gt;least&lt;/em&gt; get &lt;em&gt;started&lt;/em&gt;
  planned to replace it with a new computer. Well, I did&amp;hellip; awhile ago. For the
  last few months, I have been using a Lenovo T470 Thinkpad (with dock) as my new
  daily driver. Here are my thoughts.&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;
 
 &lt;h2 id=&#34;the-choice&#34;&gt;The Choice&lt;/h2&gt;
 
@@ -3838,8 +3916,6 @@ Several events over the last year have led me to the realization that my
 &lt;em&gt;actual&lt;/em&gt; computing &lt;em&gt;needs&lt;/em&gt; are drastically different than what they were when I
 purchased the Bonobo in early 2015. This post will highlight some of those
 realizations, and why I ultimately decided to sell my Bonobo laptop.&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;
 
 &lt;h2 id=&#34;why-i-got-the-bonobo&#34;&gt;Why I got the Bonobo&lt;/h2&gt;
 
@@ -4085,8 +4161,6 @@ a nice dock setup that I have grown to appreciate and love.&lt;/p&gt;</descripti
       <guid>http://ryan.himmelwright.net/post/back-to-solus/</guid>
       <description>&lt;p&gt;Well, that was faster than I expected. This past weekend, I wiped the Fedora installation on my main computer, and replaced it with Solus. My Fedora install broke, and I needed to use a Fedora Live CD to fix it. I thought that if I had to use a live CD to fix the issue, I might as well just do a clean install. With the idea of a clean install in my head&amp;hellip; I thought (possibly influenced by my recent &lt;a href=&#34;http://ryan.himmelwright.net/posts/dabbling-with-go/#motivation&#34;&gt;motivation&lt;/a&gt; to play with Go), that I might as well do the clean install with &lt;a href=&#34;solus-project.com/&#34;&gt;Solus&lt;/a&gt;&amp;hellip;&lt;/p&gt;
 
-&lt;p&gt;&lt;/p&gt;
-
 &lt;h2 id=&#34;nvidia-issues&#34;&gt;Nvidia Issues&lt;/h2&gt;
 
 &lt;div class=&#34;video-container&#34;&gt;
@@ -4120,8 +4194,6 @@ a nice dock setup that I have grown to appreciate and love.&lt;/p&gt;</descripti
       
       <guid>http://ryan.himmelwright.net/post/solus-to-fedora/</guid>
       <description>&lt;p&gt;For awhile, I have been debating the idea of switching back to Fedora (from Solus). At least on my &lt;a href=&#34;../../pages/homelab/#alakazam&#34;&gt;main computer&lt;/a&gt;. First, let me state this right up front: I am still &lt;em&gt;very&lt;/em&gt; satisfied with Solus. I think it is one of the best current Linux distros, and I want to still contribute to the project. However, there are a few reasons why Solus isn&amp;rsquo;t the best fit for my needs &lt;em&gt;right now&lt;/em&gt;, and I will highlight them below.&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;
 
 &lt;h3 id=&#34;why-switch&#34;&gt;Why Switch&lt;/h3&gt;
 
@@ -4262,8 +4334,6 @@ is actually fairly simple. For such a simple process, all the guides I saw
 online went way above and beyond what I needed. So, here are the &lt;em&gt;two&lt;/em&gt; steps I
 did to migrate my repos.&lt;/p&gt;
 
-&lt;p&gt;&lt;/p&gt;
-
 &lt;h3 id=&#34;ssh-keys&#34;&gt;SSH Keys&lt;/h3&gt;
 
 &lt;p&gt;The &lt;em&gt;pre&lt;/em&gt; (and somewhat optional) step to is to setup ssh key authentication. If ssh keys are not configured, git will prompt for the password of the repo&amp;rsquo;s host user . When using a git service (ex: Github or Gitlab), this is usually unknown, so ssh keys are required. When rolling your own remote git repo, the password will likely be known. Still, setting up ssh authentication makes the process easier and more secure. If you
@@ -4329,8 +4399,6 @@ git push origin master
       
       <guid>http://ryan.himmelwright.net/post/started-using-i3blocks/</guid>
       <description>&lt;p&gt;The last couple of weeks I have shifted back to using the i3 window mangers. When I fired it up, my fingers danced across the keyboard, remembering all of the personalized keybindings I have cultivated in my i3 configuration over the years. It is a simple, beautiful setup&amp;hellip; well, beautiful minus one of the components. My i3status bar was looking rather bland and dated, especially compared some of the i3 setups posted by all the cool kids over at &lt;a href=&#34;https://www.reddit.com/r/unixporn/&#34;&gt;/r/unixporn&lt;/a&gt;. I decided it was time for a refresh.&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;
 
 &lt;h2 id=&#34;i3status&#34;&gt;i3status&lt;/h2&gt;
 
@@ -4459,8 +4527,6 @@ Your browser does not support the video tag.
       <guid>http://ryan.himmelwright.net/post/exporting-proxmox-vms/</guid>
       <description>&lt;p&gt;For a long time I have been thinking about replacing my server&amp;rsquo;s proxmox install with vanilla Debian or CentOS, mostly for learning purposes. I would first setup zfs on the new system and import my existing data pools. Then, I would use either a system like ovrit or just plain kvm/lxc to run my VMs and containers. In order to do this though&amp;hellip; I have to first figure out how export my containers and VMs running in Proxmox. As it turns out&amp;hellip; exporting the VMs wasn&amp;rsquo;t very hard&amp;hellip;&lt;/p&gt;
 
-&lt;p&gt;&lt;/p&gt;
-
 &lt;h2 id=&#34;exporting-proxmox-vm-disk&#34;&gt;Exporting Proxmox VM Disk&lt;/h2&gt;
 
 &lt;p&gt;&lt;center&gt;
@@ -4500,8 +4566,6 @@ Your browser does not support the video tag.
       
       <guid>http://ryan.himmelwright.net/post/setting-up-the-pi-cluster/</guid>
       <description>&lt;p&gt;I have a Raspberry Pi 2, a Raspberry Pi 3, and a Banana Pi. A while ago, I constructed a small tower to house my pi devices. Since then, I have additionally acquired a power source, and some CAT6 cable to connect them all up to a switch. I hope to use the Pis as a mini clustered environment, where I can learn (and play) with some of the &amp;ldquo;Devops&amp;rdquo; technologies/techniques out there. This post will briefly explain the initial setup of &lt;a href=&#34;../../pages/homelab/#cluster&#34;&gt;my cluster&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;
 
 &lt;h1 id=&#34;setting-up-the-os-images&#34;&gt;Setting up the OS Images&lt;/h1&gt;
 
@@ -4579,8 +4643,6 @@ usermod -a -G sudo ryan
       
       <guid>http://ryan.himmelwright.net/post/zfs-backups-to-luks-external/</guid>
       <description>&lt;p&gt;I have been using &lt;a href=&#34;https://en.wikipedia.org/wiki/ZFS&#34;&gt;ZFS&lt;/a&gt; data pools to store data on &lt;a href=&#34;../../pages/homelab/#ninetales&#34;&gt;my server&lt;/a&gt; for some time now. As great as that is, I am ashamed to admit that I have not had a &lt;em&gt;true&lt;/em&gt; backup system in place (raid/mirrors are not backup). I have a backup solution that I have attempted in the past, but ran into an issue and let it drift to the side. That changes now. It&amp;rsquo;s time to revisit my solution, and complete it to the end.&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;
 
 &lt;p&gt;Currently, my server is configured with two main zfs mirrored pools. The first one, &lt;code&gt;Data&lt;/code&gt;, is built on 2 x 3TB hard drives, providing 2.72 TB of usable disk space. It contains all of my wife&amp;rsquo;s and my data, organized into sub-category pools (ex: &lt;code&gt;Data/Music&lt;/code&gt;, &lt;code&gt;Data/Pictures&lt;/code&gt;, &lt;code&gt;Data/ryan&lt;/code&gt;, etc). The second, &lt;code&gt;Backups&lt;/code&gt;, is built on the 2 x 1TB hard drives from my old desktop, creating a 928 GB usable pool . It stores the automatic backups of some of the VMs and LXC containers hosted on the server.&lt;/p&gt;
 
@@ -5032,8 +5094,6 @@ export LFS LC_ALL LFS_TGT PATH
       <guid>http://ryan.himmelwright.net/post/lfs-repeated-setup-steps/</guid>
       <description>&lt;p&gt;During the Linux From Scratch process, there may be times when the build environment (computer, VM, chroot, whatever) must be restarted. If so, there are a few steps from the setup phase that have to be re-initialized. This post maps out those steps.&lt;/p&gt;
 
-&lt;p&gt;&lt;/p&gt;
-
 &lt;h3 id=&#34;setting-the-lfs-variable&#34;&gt;Setting The $LFS Variable&lt;/h3&gt;
 
 &lt;p&gt;After setting up the virtual disk for my LFS build, I needed to define where I wanted to eventually mount it. This location is important, because it is the path that the $LFS variable is set to. The $LFS variable is used throughout the book, to easily point to where the LFS system is being built.&lt;/p&gt;
@@ -5089,8 +5149,6 @@ export LFS LC_ALL LFS_TGT PATH
       <guid>http://ryan.himmelwright.net/post/new-dotfiles/</guid>
       <description>&lt;p&gt;I have maintained a &amp;ldquo;dotfiles&amp;rdquo; repository since I made my github account in 2013. However, overtime it became more of a post-apocalyptic wasteland, cluttered with remnants of obsolete configurations and scraps of scripts. It was no longer the pristine, culled, collection that I desired. I also did not have an efficient method of easily linking the files on a new system. I had to manually make symlinks for each dotfile. I knew there were &lt;em&gt;much&lt;/em&gt; better dotfiles setups out there, but I never got around to it. Until now.&lt;/p&gt;
 
-&lt;p&gt;&lt;/p&gt;
-
 &lt;p&gt;One day, after reading &lt;a href=&#34;http://brandon.invergo.net/news/2012-05-26-using-gnu-stow-to-manage-your-dotfiles.html&#34;&gt;this post&lt;/a&gt;, I finally decided to sit down and clean up my dotfiles directory. I wanted to re-organize it so that I could use &lt;a href=&#34;http://freecode.com/projects/gnustow&#34;&gt;GNU Stow&lt;/a&gt; to initialize my dotfiles.&lt;/p&gt;
 
 &lt;p&gt;After setting it all up, I decided to just start from scratch with a &lt;a href=&#34;https://github.com/himmAllRight/dotfiles&#34;&gt;new repository&lt;/a&gt;.&lt;/p&gt;
@@ -5127,8 +5185,6 @@ export LFS LC_ALL LFS_TGT PATH
       
       <guid>http://ryan.himmelwright.net/post/lfs-getting-started/</guid>
       <description>&lt;p&gt;When I started using &lt;a href=&#34;https://www.archlinux.org&#34;&gt;Arch Linux&lt;/a&gt; a while back, I learn about some of the internals of Linux quickly. Ever since then, I have considered building a Linux From Scratch by following the guidelines outlined in &lt;a href=&#34;http://www.linuxfromscratch.org&#34;&gt;the book&lt;/a&gt;. Based on my experience with Arch Linux, I&amp;rsquo;m sure that compiling a system from scratch will continue to teach me about Linux at a much deeper level.&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;
 
 &lt;h3 id=&#34;getting-started&#34;&gt;Getting Started&lt;/h3&gt;
 
@@ -5205,8 +5261,6 @@ use, but couldn&amp;rsquo;t run VMs, over-heated, and didn&amp;rsquo;t have grea
 battery life. Now that I am going to libraries and other locations to
 work on personal and open source projects, I really needed a better
 mobile pc setup.&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;
 
 &lt;h3 id=&#34;other-considerations&#34;&gt;Other Considerations&lt;/h3&gt;
 
@@ -5337,8 +5391,6 @@ music, podcasts, and to have a &lt;em&gt;linux&lt;/em&gt; computer available to 
 Ubuntu &amp;ldquo;snaps&amp;rdquo;, but I just recently decided to try this new technology
 out.&lt;/p&gt;
 
-&lt;p&gt;&lt;/p&gt;
-
 &lt;h3 id=&#34;snapd-install-and-setup&#34;&gt;Snapd Install and Setup&lt;/h3&gt;
 
 &lt;p&gt;I decided to install snapd on my small netbook (Abra), which is running Arch
@@ -5458,8 +5510,6 @@ clean and admit that I have never really liked the KDE/Plasma desktop
 environment (more on that below). However, with that said&amp;hellip; I am still
 using the plasma desktop on my main computer (months later, and
 haven&amp;rsquo;t aborted yet**&amp;hellip;). Here are my thoughts.&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;
 
 &lt;h3 id=&#34;my-history-with-kde-plasma&#34;&gt;My History with KDE/Plasma&lt;/h3&gt;
 
@@ -5598,8 +5648,6 @@ window managers :) )&lt;/i&gt;&lt;/p&gt;</description>
       
       <guid>http://ryan.himmelwright.net/post/back-on-arch/</guid>
       <description>&lt;p&gt;In the last few weeks, I have started my CS masters classes, and needed to setup a productive work environment on my portable laptop (&lt;a href=&#34;../../homelab&#34;&gt;abra&lt;/a&gt;). Also, while I love Fedora, the Nvidia stuff was being a pain on my main computer (&lt;a href=&#34;../../homelab&#34;&gt;alakazam&lt;/a&gt;), and I was looking for a replacement there as well. So, after a long, drawn out battle trying nearly all of my favorite Linux distros, I have found myself once again using &lt;a href=&#34;https://www.archlinux.org/&#34;&gt;Arch Linux&lt;/a&gt; on both of my personal computers.&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;
 
 &lt;p&gt;&lt;a name=&#34;fedora&#34;&gt;&lt;/a&gt;&lt;/p&gt;
 

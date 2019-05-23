@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Containers on λ ryan. himmelwright. net</title>
@@ -23,8 +22,6 @@ First on the list: &lt;a href=&#34;https://docker.io&#34;&gt;Docker&lt;/a&gt;. T
 ecosystem surrounding it, and can take years to truly master. This post on the
 other hand, will &lt;em&gt;hopefully&lt;/em&gt; help you get up and playing with docker containers in
 just a few minutes. Lets get started.&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;
 
 &lt;h2 id=&#34;installing-docker&#34;&gt;Installing Docker&lt;/h2&gt;
 
@@ -143,9 +140,9 @@ install several packages in the image:&lt;/p&gt;
 FROM ubuntu:latest
 MAINTAINER himmallright &amp;lt;ryan.himmelwright@gmail.com&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;gt;
 &lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;
-&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;RUN apt-get update
-&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;
-&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;RUN apt-get install -y vim stow git tmux fish htop emacs&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;RUN apt-get update&lt;/span&gt;
+
+RUN apt-get install -y vim stow git tmux fish htop emacs&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;To build the image, run the following command in the same directory as the
 Dockerfile (if defining a specific file, the &lt;code&gt;-f&lt;/code&gt; flag can be used):&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;docker build -t ubuntu-base:v1 .&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;

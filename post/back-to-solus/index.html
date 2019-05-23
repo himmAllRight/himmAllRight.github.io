@@ -146,8 +146,6 @@ Tags <a href="../../tags/linux">linux</a>, <a href="../../tags/solus">solus</a>,
                     
                     <p>Well, that was faster than I expected. This past weekend, I wiped the Fedora installation on my main computer, and replaced it with Solus. My Fedora install broke, and I needed to use a Fedora Live CD to fix it. I thought that if I had to use a live CD to fix the issue, I might as well just do a clean install. With the idea of a clean install in my head&hellip; I thought (possibly influenced by my recent <a href="http://ryan.himmelwright.net/posts/dabbling-with-go/#motivation">motivation</a> to play with Go), that I might as well do the clean install with <a href="solus-project.com/">Solus</a>&hellip;</p>
 
-<p></p>
-
 <h2 id="nvidia-issues">Nvidia Issues</h2>
 
 <div class="video-container">
@@ -257,14 +255,17 @@ by <a xmlns:cc="http://creativecommons.org/ns#" href="http://ryan.himmelwright.n
     <script src="http://ryan.himmelwright.net/js/clean-blog.js"></script>
 
     
-<script>
-(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-
-ga('create', 'UA-123-45', 'auto');
-ga('send', 'pageview');
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-123-45', 'auto');
+	
+	ga('send', 'pageview');
+}
 </script>
 
 

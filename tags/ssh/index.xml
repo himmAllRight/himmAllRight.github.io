@@ -1,9 +1,8 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Ssh on λ ryan. himmelwright. net</title>
+    <title>SSH on λ ryan. himmelwright. net</title>
     <link>http://ryan.himmelwright.net/tags/ssh/</link>
-    <description>Recent content in Ssh on λ ryan. himmelwright. net</description>
+    <description>Recent content in SSH on λ ryan. himmelwright. net</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Sat, 26 Aug 2017 00:00:00 +0000</lastBuildDate>
@@ -88,8 +87,6 @@
       
       <guid>http://ryan.himmelwright.net/post/ansible-on-pi-cluster/</guid>
       <description>&lt;p&gt;In my &lt;a href=&#34;http://ryan.himmelwright.net/posts/Setting-up-the-pi-cluster/&#34;&gt;previous post&lt;/a&gt;, I pieced together my &lt;a href=&#34;http://ryan.himmelwright.net/pages/homelab/#cluster&#34;&gt;pi cluster&lt;/a&gt;, and installed variations of Ubuntu 16.04 Server on each of its nodes. With the cluster built, I quickly needed an easy way to maintain and interact with the system as a whole. This, is where &lt;a href=&#34;https://www.ansible.com/&#34;&gt;Ansible&lt;/a&gt; comes in. In this post, I will walk through the steps I took to setup Ansible on my Cluster.&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;
 
 &lt;h2 id=&#34;ansible&#34;&gt;Ansible&lt;/h2&gt;
 

@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Proxmox on λ ryan. himmelwright. net</title>
@@ -18,8 +17,6 @@
       
       <guid>http://ryan.himmelwright.net/post/exporting-proxmox-vms/</guid>
       <description>&lt;p&gt;For a long time I have been thinking about replacing my server&amp;rsquo;s proxmox install with vanilla Debian or CentOS, mostly for learning purposes. I would first setup zfs on the new system and import my existing data pools. Then, I would use either a system like ovrit or just plain kvm/lxc to run my VMs and containers. In order to do this though&amp;hellip; I have to first figure out how export my containers and VMs running in Proxmox. As it turns out&amp;hellip; exporting the VMs wasn&amp;rsquo;t very hard&amp;hellip;&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;
 
 &lt;h2 id=&#34;exporting-proxmox-vm-disk&#34;&gt;Exporting Proxmox VM Disk&lt;/h2&gt;
 

@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Solus on λ ryan. himmelwright. net</title>
@@ -23,8 +22,6 @@ First on the list: &lt;a href=&#34;https://docker.io&#34;&gt;Docker&lt;/a&gt;. T
 ecosystem surrounding it, and can take years to truly master. This post on the
 other hand, will &lt;em&gt;hopefully&lt;/em&gt; help you get up and playing with docker containers in
 just a few minutes. Lets get started.&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;
 
 &lt;h2 id=&#34;installing-docker&#34;&gt;Installing Docker&lt;/h2&gt;
 
@@ -143,9 +140,9 @@ install several packages in the image:&lt;/p&gt;
 FROM ubuntu:latest
 MAINTAINER himmallright &amp;lt;ryan.himmelwright@gmail.com&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;gt;
 &lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;
-&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;RUN apt-get update
-&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;
-&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;RUN apt-get install -y vim stow git tmux fish htop emacs&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;RUN apt-get update&lt;/span&gt;
+
+RUN apt-get install -y vim stow git tmux fish htop emacs&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;To build the image, run the following command in the same directory as the
 Dockerfile (if defining a specific file, the &lt;code&gt;-f&lt;/code&gt; flag can be used):&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;docker build -t ubuntu-base:v1 .&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
@@ -292,8 +289,6 @@ know the basic to at &lt;em&gt;least&lt;/em&gt; get &lt;em&gt;started&lt;/em&gt;
       <guid>http://ryan.himmelwright.net/post/back-to-solus/</guid>
       <description>&lt;p&gt;Well, that was faster than I expected. This past weekend, I wiped the Fedora installation on my main computer, and replaced it with Solus. My Fedora install broke, and I needed to use a Fedora Live CD to fix it. I thought that if I had to use a live CD to fix the issue, I might as well just do a clean install. With the idea of a clean install in my head&amp;hellip; I thought (possibly influenced by my recent &lt;a href=&#34;http://ryan.himmelwright.net/posts/dabbling-with-go/#motivation&#34;&gt;motivation&lt;/a&gt; to play with Go), that I might as well do the clean install with &lt;a href=&#34;solus-project.com/&#34;&gt;Solus&lt;/a&gt;&amp;hellip;&lt;/p&gt;
 
-&lt;p&gt;&lt;/p&gt;
-
 &lt;h2 id=&#34;nvidia-issues&#34;&gt;Nvidia Issues&lt;/h2&gt;
 
 &lt;div class=&#34;video-container&#34;&gt;
@@ -327,8 +322,6 @@ know the basic to at &lt;em&gt;least&lt;/em&gt; get &lt;em&gt;started&lt;/em&gt;
       
       <guid>http://ryan.himmelwright.net/post/solus-to-fedora/</guid>
       <description>&lt;p&gt;For awhile, I have been debating the idea of switching back to Fedora (from Solus). At least on my &lt;a href=&#34;../../pages/homelab/#alakazam&#34;&gt;main computer&lt;/a&gt;. First, let me state this right up front: I am still &lt;em&gt;very&lt;/em&gt; satisfied with Solus. I think it is one of the best current Linux distros, and I want to still contribute to the project. However, there are a few reasons why Solus isn&amp;rsquo;t the best fit for my needs &lt;em&gt;right now&lt;/em&gt;, and I will highlight them below.&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;
 
 &lt;h3 id=&#34;why-switch&#34;&gt;Why Switch&lt;/h3&gt;
 
@@ -459,8 +452,6 @@ remain on it until I have a convincing reason to leave.&lt;/p&gt;</description>
       
       <guid>http://ryan.himmelwright.net/post/started-using-i3blocks/</guid>
       <description>&lt;p&gt;The last couple of weeks I have shifted back to using the i3 window mangers. When I fired it up, my fingers danced across the keyboard, remembering all of the personalized keybindings I have cultivated in my i3 configuration over the years. It is a simple, beautiful setup&amp;hellip; well, beautiful minus one of the components. My i3status bar was looking rather bland and dated, especially compared some of the i3 setups posted by all the cool kids over at &lt;a href=&#34;https://www.reddit.com/r/unixporn/&#34;&gt;/r/unixporn&lt;/a&gt;. I decided it was time for a refresh.&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;
 
 &lt;h2 id=&#34;i3status&#34;&gt;i3status&lt;/h2&gt;
 

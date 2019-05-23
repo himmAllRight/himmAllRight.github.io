@@ -151,8 +151,6 @@ somehow haven&rsquo;t <em>had</em> to use it for anything in school or at work. 
 know&hellip; it&rsquo;s quite a feat. Still, the pervasiveness of SQL-like databases argues
 that I really <em>should</em> learn it. So I am.</p>
 
-<p></p>
-
 <p>The main purpose of this website is to document some of the tech stuff I do in
 my free time. This serves three purposes: 1) Organizing my thoughts into a post
 enhances my learning, 2) I can easily refer back to the post to refresh my
@@ -381,7 +379,7 @@ table from above, issue <code>DROP TABLE tblUsersBackup;</code>:</p>
 Query OK, <span style="color:#ae81ff">0</span> <span style="color:#66d9ef">rows</span> affected (<span style="color:#ae81ff">0</span>.<span style="color:#ae81ff">01</span> sec)
 
 mysql<span style="color:#f92672">&gt;</span> <span style="color:#66d9ef">SELECT</span> <span style="color:#f92672">*</span> <span style="color:#66d9ef">FROM</span> tblUsersBackup;
-ERROR <span style="color:#ae81ff">1146</span> (<span style="color:#ae81ff">42</span>S02): <span style="color:#66d9ef">Table</span> <span style="color:#e6db74">&#39;dbTest.tblUsersBackup&#39;</span> doesn<span style="color:#960050;background-color:#1e0010">&#39;</span>t exist</code></pre></div>
+ERROR <span style="color:#ae81ff">1146</span> (<span style="color:#ae81ff">42</span>S02): <span style="color:#66d9ef">Table</span> <span style="color:#e6db74">&#39;dbTest.tblUsersBackup&#39;</span> doesn<span style="color:#e6db74">&#39;t exist</span></code></pre></div>
 <p><strong>NOTE: Using <code>DROP</code> commands will delete the entire structure (including the
 schema), even if there is data in it. Be Careful!</strong></p>
 
@@ -1119,14 +1117,17 @@ by <a xmlns:cc="http://creativecommons.org/ns#" href="http://ryan.himmelwright.n
     <script src="http://ryan.himmelwright.net/js/clean-blog.js"></script>
 
     
-<script>
-(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-
-ga('create', 'UA-123-45', 'auto');
-ga('send', 'pageview');
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-123-45', 'auto');
+	
+	ga('send', 'pageview');
+}
 </script>
 
 

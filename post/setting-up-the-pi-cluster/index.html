@@ -146,8 +146,6 @@ Tags <a href="../../tags/homelab">homelab</a>, <a href="../../tags/linux">linux<
                     
                     <p>I have a Raspberry Pi 2, a Raspberry Pi 3, and a Banana Pi. A while ago, I constructed a small tower to house my pi devices. Since then, I have additionally acquired a power source, and some CAT6 cable to connect them all up to a switch. I hope to use the Pis as a mini clustered environment, where I can learn (and play) with some of the &ldquo;Devops&rdquo; technologies/techniques out there. This post will briefly explain the initial setup of <a href="../../pages/homelab/#cluster">my cluster</a>.</p>
 
-<p></p>
-
 <h1 id="setting-up-the-os-images">Setting up the OS Images</h1>
 
 <p>Before doing anything with the hardware, I had to setup the pi &ldquo;hard drives&rdquo; (micro SD cards), so they could boot.</p>
@@ -300,14 +298,17 @@ by <a xmlns:cc="http://creativecommons.org/ns#" href="http://ryan.himmelwright.n
     <script src="http://ryan.himmelwright.net/js/clean-blog.js"></script>
 
     
-<script>
-(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-
-ga('create', 'UA-123-45', 'auto');
-ga('send', 'pageview');
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-123-45', 'auto');
+	
+	ga('send', 'pageview');
+}
 </script>
 
 

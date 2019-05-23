@@ -1,9 +1,8 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Wifi on λ ryan. himmelwright. net</title>
+    <title>wifi on λ ryan. himmelwright. net</title>
     <link>http://ryan.himmelwright.net/tags/wifi/</link>
-    <description>Recent content in Wifi on λ ryan. himmelwright. net</description>
+    <description>Recent content in wifi on λ ryan. himmelwright. net</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Mon, 01 Apr 2019 00:00:00 +0000</lastBuildDate>
@@ -22,8 +21,6 @@ setup. However, we recently moved into a new house and I switched to a
 mesh wifi network. No, the switch was not &lt;em&gt;just&lt;/em&gt; to increase wifi
 coverage throughout the entire house. The real motivator
 (ironically)&amp;hellip; was that I needed a better ethernet connection&amp;hellip;&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;
 
 &lt;h3 id=&#34;history&#34;&gt;History&lt;/h3&gt;
 
@@ -162,8 +159,6 @@ learned a lot :). In fact, I am confident that if I had to start over from
 scratch, the process would take me about 10-15 minutes. Just to be sure, I&amp;rsquo;m
  going to quickly jot down the major pain points I experienced my first time around.&lt;/p&gt;
 
-&lt;p&gt;&lt;/p&gt;
-
 &lt;h2 id=&#34;trouble-connecting-to-the-edgerouter-x-for-initial-setup&#34;&gt;Trouble Connecting to the EdgeRouter-x for Initial Setup&lt;/h2&gt;
 
 &lt;p&gt;&lt;center&gt;
@@ -249,8 +244,6 @@ wifi-router Rebecca and I were using decided to die (of course). When I returned
 setup our old router as a &lt;em&gt;temporary&lt;/em&gt; fix. It was terrible. So, I began
 researching how I should upgrade our network. This time around, I am doing this
 &lt;em&gt;correctly&lt;/em&gt;.&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;
 
 &lt;p&gt;&lt;center&gt;
 &lt;img src=&#34;../../img/posts/upgrading-to-ubiquiti-edgerouter/linksys-WRT1900.png&#34;

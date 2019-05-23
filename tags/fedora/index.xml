@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Fedora on λ ryan. himmelwright. net</title>
@@ -18,8 +17,6 @@
       
       <guid>http://ryan.himmelwright.net/post/back-to-solus/</guid>
       <description>&lt;p&gt;Well, that was faster than I expected. This past weekend, I wiped the Fedora installation on my main computer, and replaced it with Solus. My Fedora install broke, and I needed to use a Fedora Live CD to fix it. I thought that if I had to use a live CD to fix the issue, I might as well just do a clean install. With the idea of a clean install in my head&amp;hellip; I thought (possibly influenced by my recent &lt;a href=&#34;http://ryan.himmelwright.net/posts/dabbling-with-go/#motivation&#34;&gt;motivation&lt;/a&gt; to play with Go), that I might as well do the clean install with &lt;a href=&#34;solus-project.com/&#34;&gt;Solus&lt;/a&gt;&amp;hellip;&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;
 
 &lt;h2 id=&#34;nvidia-issues&#34;&gt;Nvidia Issues&lt;/h2&gt;
 
@@ -54,8 +51,6 @@
       
       <guid>http://ryan.himmelwright.net/post/solus-to-fedora/</guid>
       <description>&lt;p&gt;For awhile, I have been debating the idea of switching back to Fedora (from Solus). At least on my &lt;a href=&#34;../../pages/homelab/#alakazam&#34;&gt;main computer&lt;/a&gt;. First, let me state this right up front: I am still &lt;em&gt;very&lt;/em&gt; satisfied with Solus. I think it is one of the best current Linux distros, and I want to still contribute to the project. However, there are a few reasons why Solus isn&amp;rsquo;t the best fit for my needs &lt;em&gt;right now&lt;/em&gt;, and I will highlight them below.&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;
 
 &lt;h3 id=&#34;why-switch&#34;&gt;Why Switch&lt;/h3&gt;
 

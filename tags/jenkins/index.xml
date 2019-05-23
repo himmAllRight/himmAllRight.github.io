@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Jenkins on λ ryan. himmelwright. net</title>
@@ -23,8 +22,6 @@ disk size of one of the job&amp;rsquo;s docker containers, maxing out the disk. 
 meant that I needed to extend the drive&lt;em&gt;&amp;hellip; again&lt;/em&gt;. If you ever do something
 twice, it is &lt;em&gt;best&lt;/em&gt; to have it documented for the potential third time. So,
 here we are.&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;
 
 &lt;h4 id=&#34;assumptions&#34;&gt;Assumptions&lt;/h4&gt;
 
@@ -169,8 +166,6 @@ and deploy a &amp;ldquo;draft&amp;rdquo; website, so I can stage new posts/websi
 on my home network, before publishing it to the &amp;ldquo;production&amp;rdquo;
 website. Here is how that idea was Instantiated&amp;hellip;&lt;/p&gt;
 
-&lt;p&gt;&lt;/p&gt;
-
 &lt;h2 id=&#34;my-website&#34;&gt;My Website&lt;/h2&gt;
 
 &lt;p&gt;&lt;a href=&#34;../../img/posts/draft-website-jenkins/jenkins-logo.png&#34;&gt;&lt;img
@@ -242,14 +237,14 @@ to serve the generated &lt;em&gt;static&lt;/em&gt; website content). I used
 &lt;a href=&#34;https://nginx.org/en/&#34;&gt;nginx&lt;/a&gt; in for setup. After installing, make
 sure it is running. To install and check the status of nginx on an
 Ubuntu System:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;color:#75715e&#34;&gt;## Install
-&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;sudo apt install -y nginx
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;color:#75715e&#34;&gt;## Install&lt;/span&gt;
+sudo apt install -y nginx
 
-&lt;span style=&#34;color:#75715e&#34;&gt;## Check it is running
-&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;sudo systemctl status nginx
+&lt;span style=&#34;color:#75715e&#34;&gt;## Check it is running&lt;/span&gt;
+sudo systemctl status nginx
 
-&lt;span style=&#34;color:#75715e&#34;&gt;## Optional: Ensure it is enabled to start up after reboots
-&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;sudo systemctl enable nginx&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;## Optional: Ensure it is enabled to start up after reboots&lt;/span&gt;
+sudo systemctl enable nginx&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;With the web server running, we need to know &lt;em&gt;where&lt;/em&gt; the website files
 need to go. Nginx will by default serve content at
 &lt;code&gt;/user/share/nginx/html/&lt;/code&gt;, so remember that location for later&amp;hellip;&lt;/p&gt;

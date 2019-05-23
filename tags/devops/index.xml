@@ -1,9 +1,8 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Devops on λ ryan. himmelwright. net</title>
+    <title>DevOps on λ ryan. himmelwright. net</title>
     <link>http://ryan.himmelwright.net/tags/devops/</link>
-    <description>Recent content in Devops on λ ryan. himmelwright. net</description>
+    <description>Recent content in DevOps on λ ryan. himmelwright. net</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Wed, 15 Aug 2018 00:00:00 +0000</lastBuildDate>
@@ -24,8 +23,6 @@ environment. One idea, was to utilize Jenkins to automatically build
 and deploy a &amp;ldquo;draft&amp;rdquo; website, so I can stage new posts/website change
 on my home network, before publishing it to the &amp;ldquo;production&amp;rdquo;
 website. Here is how that idea was Instantiated&amp;hellip;&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;
 
 &lt;h2 id=&#34;my-website&#34;&gt;My Website&lt;/h2&gt;
 
@@ -98,14 +95,14 @@ to serve the generated &lt;em&gt;static&lt;/em&gt; website content). I used
 &lt;a href=&#34;https://nginx.org/en/&#34;&gt;nginx&lt;/a&gt; in for setup. After installing, make
 sure it is running. To install and check the status of nginx on an
 Ubuntu System:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;color:#75715e&#34;&gt;## Install
-&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;sudo apt install -y nginx
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;color:#75715e&#34;&gt;## Install&lt;/span&gt;
+sudo apt install -y nginx
 
-&lt;span style=&#34;color:#75715e&#34;&gt;## Check it is running
-&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;sudo systemctl status nginx
+&lt;span style=&#34;color:#75715e&#34;&gt;## Check it is running&lt;/span&gt;
+sudo systemctl status nginx
 
-&lt;span style=&#34;color:#75715e&#34;&gt;## Optional: Ensure it is enabled to start up after reboots
-&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;sudo systemctl enable nginx&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;## Optional: Ensure it is enabled to start up after reboots&lt;/span&gt;
+sudo systemctl enable nginx&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;With the web server running, we need to know &lt;em&gt;where&lt;/em&gt; the website files
 need to go. Nginx will by default serve content at
 &lt;code&gt;/user/share/nginx/html/&lt;/code&gt;, so remember that location for later&amp;hellip;&lt;/p&gt;
@@ -248,8 +245,6 @@ ecosystem surrounding it, and can take years to truly master. This post on the
 other hand, will &lt;em&gt;hopefully&lt;/em&gt; help you get up and playing with docker containers in
 just a few minutes. Lets get started.&lt;/p&gt;
 
-&lt;p&gt;&lt;/p&gt;
-
 &lt;h2 id=&#34;installing-docker&#34;&gt;Installing Docker&lt;/h2&gt;
 
 &lt;p&gt;&lt;img src=&#34;../../img/posts/docker-quickstart/docker-logo.png&#34; style=&#34;max-width: 100%; width: 400px; float: right; margin: 0px 15px 5px 5px;&#34; alt=&#34;Docker Logo&#34; /&gt;&lt;/p&gt;
@@ -367,9 +362,9 @@ install several packages in the image:&lt;/p&gt;
 FROM ubuntu:latest
 MAINTAINER himmallright &amp;lt;ryan.himmelwright@gmail.com&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;gt;
 &lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;
-&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;RUN apt-get update
-&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;
-&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;RUN apt-get install -y vim stow git tmux fish htop emacs&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;RUN apt-get update&lt;/span&gt;
+
+RUN apt-get install -y vim stow git tmux fish htop emacs&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;To build the image, run the following command in the same directory as the
 Dockerfile (if defining a specific file, the &lt;code&gt;-f&lt;/code&gt; flag can be used):&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;docker build -t ubuntu-base:v1 .&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
@@ -668,8 +663,6 @@ ansible cluster -m ping
       <guid>http://ryan.himmelwright.net/post/ansible-on-pi-cluster/</guid>
       <description>&lt;p&gt;In my &lt;a href=&#34;http://ryan.himmelwright.net/posts/Setting-up-the-pi-cluster/&#34;&gt;previous post&lt;/a&gt;, I pieced together my &lt;a href=&#34;http://ryan.himmelwright.net/pages/homelab/#cluster&#34;&gt;pi cluster&lt;/a&gt;, and installed variations of Ubuntu 16.04 Server on each of its nodes. With the cluster built, I quickly needed an easy way to maintain and interact with the system as a whole. This, is where &lt;a href=&#34;https://www.ansible.com/&#34;&gt;Ansible&lt;/a&gt; comes in. In this post, I will walk through the steps I took to setup Ansible on my Cluster.&lt;/p&gt;
 
-&lt;p&gt;&lt;/p&gt;
-
 &lt;h2 id=&#34;ansible&#34;&gt;Ansible&lt;/h2&gt;
 
 &lt;p&gt;&lt;img src=&#34;../../img/posts/setting-up-ansible-pi-cluster/ansible-logo.png&#34; style=&#34;max-width: 50%; width: 150px; float: left; margin: 0px 15px 5px 5px;&#34;/&gt;&lt;/p&gt;
@@ -753,8 +746,6 @@ cat ~/.ssh/id_rsa.pub | ssh bpi &amp;quot;cat &amp;gt;&amp;gt; ~/.ssh/authorized
       
       <guid>http://ryan.himmelwright.net/post/setting-up-the-pi-cluster/</guid>
       <description>&lt;p&gt;I have a Raspberry Pi 2, a Raspberry Pi 3, and a Banana Pi. A while ago, I constructed a small tower to house my pi devices. Since then, I have additionally acquired a power source, and some CAT6 cable to connect them all up to a switch. I hope to use the Pis as a mini clustered environment, where I can learn (and play) with some of the &amp;ldquo;Devops&amp;rdquo; technologies/techniques out there. This post will briefly explain the initial setup of &lt;a href=&#34;../../pages/homelab/#cluster&#34;&gt;my cluster&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;
 
 &lt;h1 id=&#34;setting-up-the-os-images&#34;&gt;Setting up the OS Images&lt;/h1&gt;
 

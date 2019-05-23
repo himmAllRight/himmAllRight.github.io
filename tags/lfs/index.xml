@@ -1,9 +1,8 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Lfs on λ ryan. himmelwright. net</title>
+    <title>LFS on λ ryan. himmelwright. net</title>
     <link>http://ryan.himmelwright.net/tags/lfs/</link>
-    <description>Recent content in Lfs on λ ryan. himmelwright. net</description>
+    <description>Recent content in LFS on λ ryan. himmelwright. net</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Tue, 04 Apr 2017 00:00:00 +0000</lastBuildDate>
@@ -330,8 +329,6 @@ export LFS LC_ALL LFS_TGT PATH
       <guid>http://ryan.himmelwright.net/post/lfs-repeated-setup-steps/</guid>
       <description>&lt;p&gt;During the Linux From Scratch process, there may be times when the build environment (computer, VM, chroot, whatever) must be restarted. If so, there are a few steps from the setup phase that have to be re-initialized. This post maps out those steps.&lt;/p&gt;
 
-&lt;p&gt;&lt;/p&gt;
-
 &lt;h3 id=&#34;setting-the-lfs-variable&#34;&gt;Setting The $LFS Variable&lt;/h3&gt;
 
 &lt;p&gt;After setting up the virtual disk for my LFS build, I needed to define where I wanted to eventually mount it. This location is important, because it is the path that the $LFS variable is set to. The $LFS variable is used throughout the book, to easily point to where the LFS system is being built.&lt;/p&gt;
@@ -386,8 +383,6 @@ export LFS LC_ALL LFS_TGT PATH
       
       <guid>http://ryan.himmelwright.net/post/lfs-getting-started/</guid>
       <description>&lt;p&gt;When I started using &lt;a href=&#34;https://www.archlinux.org&#34;&gt;Arch Linux&lt;/a&gt; a while back, I learn about some of the internals of Linux quickly. Ever since then, I have considered building a Linux From Scratch by following the guidelines outlined in &lt;a href=&#34;http://www.linuxfromscratch.org&#34;&gt;the book&lt;/a&gt;. Based on my experience with Arch Linux, I&amp;rsquo;m sure that compiling a system from scratch will continue to teach me about Linux at a much deeper level.&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;
 
 &lt;h3 id=&#34;getting-started&#34;&gt;Getting Started&lt;/h3&gt;
 

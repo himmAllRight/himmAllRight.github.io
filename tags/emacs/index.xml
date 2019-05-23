@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Emacs on λ ryan. himmelwright. net</title>
@@ -23,8 +22,6 @@ of evil mode and use-package. As I was wrapping up, I learned of yet
 &lt;em&gt;another&lt;/em&gt; emacs package that wil forever change how I maintain my
 emacs
 configuration&amp;hellip; &lt;a href=&#34;https://orgmode.org/worg/org-contrib/babel/intro.html&#34;&gt;org-babel&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;
 
 &lt;h2 id=&#34;org-babel&#34;&gt;Org Babel&lt;/h2&gt;
 
@@ -52,10 +49,10 @@ but I like to keep mine in the emacs section of my &lt;a href=&#34;https://githu
 repo&lt;/a&gt;, named
 &lt;code&gt;config.org&lt;/code&gt;. This file functions like any other org file, so I added
 a small header section at the top&amp;hellip; because why not?&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-org&#34; data-lang=&#34;org&#34;&gt;#+TITLE: My Emacs Configuration
-#+AUTHOR: Ryan Himmelwright
-#+EMAIL: ryan@himmelwright.net
-#+OPTIONS: num:nil &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-org&#34; data-lang=&#34;org&#34;&gt;&lt;span style=&#34;color:#75715e&#34;&gt;#+TITLE&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;: My Emacs Configuration&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;#+AUTHOR&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;: Ryan Himmelwright&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;#+EMAIL&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;: ryan@himmelwright.net&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;#+OPTIONS&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;: num:nil &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;After that, I broke down my file by creating org headings for the
 different groups of the configuration. For example, I started with the
 headings &lt;code&gt;Repos &amp;amp; Core Packages&lt;/code&gt;, &lt;code&gt;Core Setup&lt;/code&gt;, &lt;code&gt;Evil Mode&lt;/code&gt;, &lt;code&gt;Ivy&lt;/code&gt;,
@@ -202,8 +199,6 @@ configuration again. However, spacemacs has shown me several packages
 that I want to incorporate into my new emacs setup. Rather than
 resurrect and Frankenstein the changes into my old &lt;code&gt;.emacs&lt;/code&gt;
 file&amp;hellip; I&amp;rsquo;m starting from scratch.&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;
 
 &lt;p&gt;&lt;a href=&#34;../../img/posts/emacs-config-evil-usepackage/newemacs1.png&#34;&gt;&lt;img src=&#34;../../img/posts/emacs-config-evil-usepackage/newemacs1.png&#34; style=&#34;max-width: 100%; float: left; margin: 0px 15px 0px 0px;&#34; alt=&#34;New Emacs Window&#34; /&gt;&lt;/a&gt;&lt;/p&gt;
 

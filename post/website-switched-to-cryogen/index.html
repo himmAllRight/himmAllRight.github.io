@@ -153,8 +153,6 @@ started using the <a href="http://clojure.org/">clojure</a> programming language
 <a href="http://cryogenweb.org/">cryogen</a>. As you may have already guessed, this site is now
 being generated using cryogen.</p>
 
-<p></p>
-
 <h2 id="emacs-org-mode-solutions">Emacs/org-mode Solutions</h2>
 
 <p><img alt="emacs logo" src="../../img/posts/using-cryogen-for-website/Emacs-icon.png" style="max-width: 40%;"/>
@@ -360,14 +358,17 @@ by <a xmlns:cc="http://creativecommons.org/ns#" href="http://ryan.himmelwright.n
     <script src="http://ryan.himmelwright.net/js/clean-blog.js"></script>
 
     
-<script>
-(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-
-ga('create', 'UA-123-45', 'auto');
-ga('send', 'pageview');
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-123-45', 'auto');
+	
+	ga('send', 'pageview');
+}
 </script>
 
 

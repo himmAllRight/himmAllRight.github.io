@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Cryogen on λ ryan. himmelwright. net</title>
@@ -18,8 +17,6 @@
       
       <guid>http://ryan.himmelwright.net/post/website-transition-to-hugo/</guid>
       <description>&lt;p&gt;While I have loved using &lt;a href=&#34;http://cryogenweb.org&#34;&gt;Cryogen&lt;/a&gt; to create this website for over a year and a half now, I have started the transition to using another static website generator. Specifically, I have been experimenting with &lt;a href=&#34;https://gohugo.io&#34;&gt;Hugo&lt;/a&gt;. This post will detail why I am switching, what I have ported over thus far, and what still needs to be completed before generating the official site with hugo.&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;
 
 &lt;h3 id=&#34;from-cryogen-to-hugo&#34;&gt;From Cryogen to Hugo&lt;/h3&gt;
 
@@ -208,8 +205,6 @@ static website generators. Thus far, I have tried
 started using the &lt;a href=&#34;http://clojure.org/&#34;&gt;clojure&lt;/a&gt; programming language, I have come across
 &lt;a href=&#34;http://cryogenweb.org/&#34;&gt;cryogen&lt;/a&gt;. As you may have already guessed, this site is now
 being generated using cryogen.&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;
 
 &lt;h2 id=&#34;emacs-org-mode-solutions&#34;&gt;Emacs/org-mode Solutions&lt;/h2&gt;
 

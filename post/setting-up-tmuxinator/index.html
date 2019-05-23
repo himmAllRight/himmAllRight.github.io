@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Setting up Tmuxinator -- λ ryan. himmelwright. net</title>
+
+    
+
+    
+    <link href="http://ryan.himmelwright.net/css/bootstrap.min.css" rel="stylesheet">
+
+    
+    <link href="http://ryan.himmelwright.net/css/clean-blog.min.css" rel="stylesheet">
+
+    
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href='//fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+
+    
+    
+    
+
+
+
+    
+    <script type="text/javascript">
+        var _paq = _paq || [];
+         
+        _paq.push(["setDocumentTitle", document.domain + "/" + document.title]);
+        _paq.push(["setCookieDomain", "*.ryan.himmelwright.net"]);
+        _paq.push(["setDomains", ["*.ryan.himmelwright.net"]]);
+        _paq.push(['trackPageView']);
+        _paq.push(['enableLinkTracking']);
+        (function() {
+        var u="//cloud.himmelwright.net/piwik/";
+        _paq.push(['setTrackerUrl', u+'piwik.php']);
+        _paq.push(['setSiteId', '1']);
+        var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+        g.type='text/javascript'; g.async=true; g.defer=true; g.src=u+'piwik.js'; s.parentNode.insertBefore(g,s);
+        })();
+        </script>
+        <noscript><p><img src="//cloud.himmelwright.net/piwik/piwik.php?idsite=1&rec=1" style="border:0;" alt="" /></p></noscript>
+        
+
+
+
+</head>
+
+<body>
+
+    
+    <nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+        <div class="container-fluid">
+            
+            <div class="navbar-header page-scroll">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="http://ryan.himmelwright.net">λ ryan. himmelwright. net</a>
+            </div>
+
+                       
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    
+                    <li>
+                        <a href="../../">home</a>
+                    </li>
+                    
+                    <li>
+                        <a href="../../pages/about/">About</a>
+                    </li>
+                    
+                    <li>
+                        <a href="../../pages/homelab/">Homelab</a>
+                    </li>
+                    
+                    <li>
+                        <a href="../../tags">tags</a>
+                    </li>
+                    
+                    <li>
+                        <a href="../../post/">Archives</a>
+                    </li>
+                    
+                    <li>
+                        <a href="../../post/index.xml">RSS</a>
+                    </li>
+                    
+                  </ul>
+            </div>
+           
+
+        </div>
+        
+    </nav>
+
+
+
+
+<header class="intro-header" style="background-image: url('http://ryan.himmelwright.net/img/posts/setting-up-tmuxinator/mountain-trees.jpg')">
+    
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <h1>Setting up Tmuxinator</h1>
+                    <h2 class="subheading"></h2>
+                    <span class="meta">
+                        
+Posted by <a href="#">Ryan Himmelwright</a> on Thu, May 23, 2019
+
+
+
+
+
+
+
+<br />
+Tags <a href="../../tags/linux">linux</a>, <a href="../../tags/dev">dev</a>, <a href="../../tags/dotfiles">dotfiles</a>, <a href="../../tags/customization">customization</a>, <a href="../../tags/shell">shell</a>
+
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <span class="header-caption">Port Angeles, WA</span>
+    
+    </header>
+
+    
+    <article>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                    
+                    <p>Several weeks ago I wrote about <a href="../../post/scripting-tmux-workspaces/">scripting a tmux session&rsquo;s
+initialization</a>. At the end of the post I
+mentioned that while writing it, I had learned about
+<a href="https://github.com/tmuxinator/tmuxinator">tmuxinator</a>. I even teased that it
+looked so good, I may switch to it eventually. Well&hellip; that didn&rsquo;t take long. I&rsquo;ve
+scrapped my tmux shell scripts, and have converted to using tmuxinator. Here&rsquo;s
+how.</p>
+
+<h2 id="what-is-tmuxinator">What is Tmuxinator?</h2>
+
+<p><a href="https://github.com/tmuxinator/tmuxinator">Tmuxinator</a> is a command line
+application that makes it easy to create and manage tmux sessions. It allows a
+user to define how to setup a session, including naming windows, splitting
+panes, and what commands initially run in each pane. The configuration is done
+in yaml, so it is very easy to figure out and get started.</p>
+
+<h2 id="install">Install</h2>
+
+<p>Most distros probably have <code>tmuxinator</code> in their offical repos. These days, I
+mostly run Fedora on all of my machines and I was able to find it there:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">sudo dnf install termixinator</code></pre></div>
+<p><strong>However</strong>, I found that this version was quite out of date (<code>0.6.11</code>) even on my new
+Fedora 30 install, so I recommend using the method stated on
+the project&rsquo;s Github page (requires <code>rubygems</code>) to install a much more current
+version (<code>1.1.0</code>):</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">gem install tmuxinator</code></pre></div>
+<h2 id="create">Create</h2>
+
+<p>To create a new tmuxinator profile, pass the desired project name to <code>tmuxinator new</code>:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">tmuxinator new Website</code></pre></div>
+<p>This will open up a new tmuxinator template inside your default editor. The
+default template contains a bunch of comments that help guide how to configure
+it.</p>
+
+<h4 id="header">Header</h4>
+
+<p>The first thing to set at the top of the template is the <code>name</code> field, followed
+by the <code>root</code> directory. The tmux session name is defined with <code>name</code>, and
+<code>root</code> will be the directory which all of the windows/panes open up in by
+default. For example, when converting my website script, I set <code>name</code> to
+<code>Website</code> and <code>root</code> to the location where I keep my website&rsquo;s git working
+directory, <code>~/Documents/himmAllRight-source</code>:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#75715e"># /home/ryan/.config/tmuxinator/Website.yml</span>
+
+name: Website
+root: ~/Documents/himmAllRight-source</code></pre></div>
+<h4 id="windows">Windows</h4>
+
+<p>Next, I needed to configure my windows. To convert the script from my previous
+post, I wanted a dedicated &lsquo;Main&rsquo; window, one for the server, one for vim, and
+one for an extra shell. Additionally, since that last post I&rsquo;ve added a window
+that launches my hugo-served website in a web browser. To recreate <em>all of
+that</em> with tmuxinator:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml">windows:
+  - Main:
+      - zsh
+      - clear
+  - Server: hugo serve -D -F
+  - Write: nvim
+  - Shell: zsh; clear
+  - Web: qutebrowser localhost:<span style="color:#ae81ff">1313</span></code></pre></div>
+<p>Done. Save the file and that&rsquo;s it! See the benefit of using tmuxinator??</p>
+
+<h4 id="pane-splits">Pane splits</h4>
+
+<p>While I don&rsquo;t use them in this example configuration, it should be noted that
+setting up pane splits is also quite easy with tmuxinator. For example, if I
+wanted to split the server window into two panes, one running the hugo server
+and one running htop, I could use:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml">- Server:
+    layout: even-vertical
+    panes:
+        - hugo
+        - htop</code></pre></div>
+<p>The <code>layout</code> key defines which
+<a href="http://man7.org/linux/man-pages/man1/tmux.1.html#WINDOWS_AND_PANES">tmux layout</a> to
+use when splitting the panes, and <code>panes</code> is a list that defines what to run in
+each pane.</p>
+
+<h2 id="launch">Launch</h2>
+
+<p><a href='../../img/posts/setting-up-tmuxinator/start-website-tmuxinator.gif'>
+<img alt="Launching Website tmux session with tmuxinator" src="../../img/posts/setting-up-tmuxinator/starting-website-tmuxinator.png" onmouseover="this.src='../../img/posts/setting-up-tmuxinator/start-website-tmuxinator.gif'" onmouseout="this.src='../../img/posts/setting-up-tmuxinator/starting-website-tmuxinator.png'" style="max-width: 100%;"/>
+</a>
+<div class="caption">Launching my website tmux session with tmuxinator</div></p>
+
+<p>To start up the newly defined tmuxinator project, use <code>tmuxinator
+start</code>:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">tmuxinator start Website</code></pre></div>
+<h2 id="manage">Manage</h2>
+
+<p>All of the tmuxinator profile templates are stored at <code>~/.config/tmuxinator</code>,
+which means they can easily be copied to a new machine, or even
+saved/maintained in source control.</p>
+
+<p><em>Note: I think older versions stored them at <code>~/.tmuxinator/</code>, so check there
+if they are missing.</em></p>
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p>That&rsquo;s it. While scripting my own method was a good bash exercise and helped me
+learn the details of <code>tmux</code> a little bit better, I ultimately think that
+<code>tmuxinator</code> is the way to go. This is especially true when using tmux to work
+on several projects or even across multiple machines. If you <em>still</em> haven&rsquo;t
+tried <code>tmux</code>&hellip; I <em>highly</em> recommend checking it out!</p>
+
+                    
+                    
+                    
+                         <div style="float: right; text-decoration: underline; text-align: right;">Prev Post:</div>
+                    
+                    <br>
+                    
+                    
+                        <a href="http://ryan.himmelwright.net/post/custom-neofetch-ascii-art/" style="text-align: right; float: right; max-width: 40%">Custom Neofetch ASCII Art</a>
+                    
+
+			
+			<div class="comment-section">
+			  
+   <div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "himmallright" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+			</div>
+                </div>
+            </div>
+        </div>
+    </article>
+
+        <hr>
+    
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                  <ul class="list-inline text-center">
+                    
+                      <li>
+                        <a href="mailto:ryan@himmelwright.net">
+                          <span class="fa-stack fa-lg">
+                            <i class="fa fa-circle fa-stack-2x"></i>
+                            <i class="fa fa-envelope-o fa-stack-1x fa-inverse"></i>
+                          </span>
+                        </a>
+                      </li>
+                    
+                    
+                    <li>
+                      <a href="https://github.com/himmAllRight">
+                        <span class="fa-stack fa-lg">
+                          <i class="fa fa-circle fa-stack-2x"></i>
+                          <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                        </span>
+                      </a>
+                    </li>
+                    
+                    <li>
+                      <a href="https://www.linkedin.com/in/ryan-himmelwright-b3891774/">
+                        <span class="fa-stack fa-lg">
+                          <i class="fa fa-circle fa-stack-2x"></i>
+                          <i class="fa fa-linkedin fa-stack-1x fa-inverse"></i>
+                        </span>
+                      </a>
+                    </li>
+                    
+                  </ul>
+<p class="copyright text-muted">
+
+<a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img
+  alt="Creative Commons License" style="border-width:0"
+  src="https://i.creativecommons.org/l/by/4.0/88x31.png" /></a><br />This work
+by <a xmlns:cc="http://creativecommons.org/ns#" href="http://ryan.himmelwright.net" property="cc:attributionName" rel="cc:attributionURL">Ryan Himmelwright</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
+</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    
+    <script src="http://ryan.himmelwright.net/js/jquery.min.js"></script>
+
+    
+    <script src="http://ryan.himmelwright.net/js/bootstrap.min.js"></script>
+
+    
+    <script src="http://ryan.himmelwright.net/js/clean-blog.js"></script>
+
+    
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-123-45', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+
+
+</body>
+
+</html>
+

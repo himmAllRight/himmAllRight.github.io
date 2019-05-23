@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Ledger on λ ryan. himmelwright. net</title>
@@ -17,8 +16,7 @@
       <pubDate>Mon, 17 Apr 2017 00:00:00 +0000</pubDate>
       
       <guid>http://ryan.himmelwright.net/post/lia-1-0-beta-released/</guid>
-      <description>&lt;p&gt;I have released the 1.0 Beta version for a personal project of mine: the &lt;strong&gt;L&lt;/strong&gt;edger &lt;strong&gt;I&lt;/strong&gt;mport &lt;strong&gt;A&lt;/strong&gt;ssistant, or &lt;a href=&#34;https://github.com/himmALlRight/LIA/&#34;&gt;LIA&lt;/a&gt;. This post will talk briefly about the background of LIA, what it does, and explain the beta release.
-&lt;/p&gt;
+      <description>&lt;p&gt;I have released the 1.0 Beta version for a personal project of mine: the &lt;strong&gt;L&lt;/strong&gt;edger &lt;strong&gt;I&lt;/strong&gt;mport &lt;strong&gt;A&lt;/strong&gt;ssistant, or &lt;a href=&#34;https://github.com/himmALlRight/LIA/&#34;&gt;LIA&lt;/a&gt;. This post will talk briefly about the background of LIA, what it does, and explain the beta release.&lt;/p&gt;
 
 &lt;h2 id=&#34;what-is-lia&#34;&gt;What is LIA?&lt;/h2&gt;
 

@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Programming on λ ryan. himmelwright. net</title>
@@ -23,8 +22,6 @@ of evil mode and use-package. As I was wrapping up, I learned of yet
 &lt;em&gt;another&lt;/em&gt; emacs package that wil forever change how I maintain my
 emacs
 configuration&amp;hellip; &lt;a href=&#34;https://orgmode.org/worg/org-contrib/babel/intro.html&#34;&gt;org-babel&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;
 
 &lt;h2 id=&#34;org-babel&#34;&gt;Org Babel&lt;/h2&gt;
 
@@ -52,10 +49,10 @@ but I like to keep mine in the emacs section of my &lt;a href=&#34;https://githu
 repo&lt;/a&gt;, named
 &lt;code&gt;config.org&lt;/code&gt;. This file functions like any other org file, so I added
 a small header section at the top&amp;hellip; because why not?&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-org&#34; data-lang=&#34;org&#34;&gt;#+TITLE: My Emacs Configuration
-#+AUTHOR: Ryan Himmelwright
-#+EMAIL: ryan@himmelwright.net
-#+OPTIONS: num:nil &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-org&#34; data-lang=&#34;org&#34;&gt;&lt;span style=&#34;color:#75715e&#34;&gt;#+TITLE&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;: My Emacs Configuration&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;#+AUTHOR&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;: Ryan Himmelwright&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;#+EMAIL&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;: ryan@himmelwright.net&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;#+OPTIONS&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;: num:nil &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;After that, I broke down my file by creating org headings for the
 different groups of the configuration. For example, I started with the
 headings &lt;code&gt;Repos &amp;amp; Core Packages&lt;/code&gt;, &lt;code&gt;Core Setup&lt;/code&gt;, &lt;code&gt;Evil Mode&lt;/code&gt;, &lt;code&gt;Ivy&lt;/code&gt;,
@@ -202,8 +199,6 @@ configuration again. However, spacemacs has shown me several packages
 that I want to incorporate into my new emacs setup. Rather than
 resurrect and Frankenstein the changes into my old &lt;code&gt;.emacs&lt;/code&gt;
 file&amp;hellip; I&amp;rsquo;m starting from scratch.&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;
 
 &lt;p&gt;&lt;a href=&#34;../../img/posts/emacs-config-evil-usepackage/newemacs1.png&#34;&gt;&lt;img src=&#34;../../img/posts/emacs-config-evil-usepackage/newemacs1.png&#34; style=&#34;max-width: 100%; float: left; margin: 0px 15px 0px 0px;&#34; alt=&#34;New Emacs Window&#34; /&gt;&lt;/a&gt;&lt;/p&gt;
 
@@ -414,8 +409,6 @@ from here on out.&lt;/p&gt;</description>
 somehow haven&amp;rsquo;t &lt;em&gt;had&lt;/em&gt; to use it for anything in school or at work. I know, I
 know&amp;hellip; it&amp;rsquo;s quite a feat. Still, the pervasiveness of SQL-like databases argues
 that I really &lt;em&gt;should&lt;/em&gt; learn it. So I am.&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;
 
 &lt;p&gt;The main purpose of this website is to document some of the tech stuff I do in
 my free time. This serves three purposes: 1) Organizing my thoughts into a post
@@ -645,7 +638,7 @@ table from above, issue &lt;code&gt;DROP TABLE tblUsersBackup;&lt;/code&gt;:&lt;
 Query OK, &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;rows&lt;/span&gt; affected (&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;.&lt;span style=&#34;color:#ae81ff&#34;&gt;01&lt;/span&gt; sec)
 
 mysql&lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;SELECT&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;FROM&lt;/span&gt; tblUsersBackup;
-ERROR &lt;span style=&#34;color:#ae81ff&#34;&gt;1146&lt;/span&gt; (&lt;span style=&#34;color:#ae81ff&#34;&gt;42&lt;/span&gt;S02): &lt;span style=&#34;color:#66d9ef&#34;&gt;Table&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;dbTest.tblUsersBackup&amp;#39;&lt;/span&gt; doesn&lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;&amp;#39;&lt;/span&gt;t exist&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+ERROR &lt;span style=&#34;color:#ae81ff&#34;&gt;1146&lt;/span&gt; (&lt;span style=&#34;color:#ae81ff&#34;&gt;42&lt;/span&gt;S02): &lt;span style=&#34;color:#66d9ef&#34;&gt;Table&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;dbTest.tblUsersBackup&amp;#39;&lt;/span&gt; doesn&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;t exist&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;&lt;strong&gt;NOTE: Using &lt;code&gt;DROP&lt;/code&gt; commands will delete the entire structure (including the
 schema), even if there is data in it. Be Careful!&lt;/strong&gt;&lt;/p&gt;
 
@@ -1308,8 +1301,6 @@ a good SQL quick-reference down the road :). Enjoy!&lt;/p&gt;</description>
       <guid>http://ryan.himmelwright.net/post/dabbling-with-go/</guid>
       <description>&lt;p&gt;After spending most of this month&amp;rsquo;s dedicated learning time working on &lt;a href=&#34;http://ryan.himmelwright.net/posts/solus-to-fedora/&#34;&gt;system&lt;/a&gt;, &lt;a href=&#34;http://ryan.himmelwright.net/posts/creating-a-git-remote/&#34;&gt;server&lt;/a&gt;, and &lt;a href=&#34;http://ryan.himmelwright.net/posts/issues-setting-up-ubiquiti-network/&#34;&gt;network&lt;/a&gt; activities,  I have been itching to start some home programming again. To motivate myself, I even considered dabbling with a new programming language&amp;hellip; and with very little internal debate, I decided to just &lt;a href=&#34;https://golang.org&#34;&gt;Gopher&lt;/a&gt; it (I&amp;rsquo;m so sorry).&lt;/p&gt;
 
-&lt;p&gt;&lt;/p&gt;
-
 &lt;h2 id=&#34;what-is-go&#34;&gt;What is GO?&lt;/h2&gt;
 
 &lt;p&gt;&lt;img src=&#34;../../img/posts/dabbling-with-go/gopher.png&#34; style=&#34;width: 30%; float: right; margin: 0px 10px 0px 10px;&#34;/&gt;&lt;/p&gt;
@@ -1404,8 +1395,6 @@ Go is expressive, concise, clean, and efficient. Its concurrency mechanisms make
       
       <guid>http://ryan.himmelwright.net/post/how-i-asked-my-groomsmen/</guid>
       <description>&lt;p&gt;Over the last few months Rebecca (my Fiancee) and I have continued making progress on all the little tasks that we have to complete before our wedding. One of these tasks is asking our intended bridesmaids/groomsmen to be in the wedding.&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;
 
 &lt;p&gt;Rebecca approached this by asking each of the girls in a way that was somewhat unique to each person, over time. Even though each person was asked differently, all the methods were executed in a very &amp;ldquo;Rebecca-like&amp;rdquo; manner.&lt;/p&gt;
 
@@ -1644,8 +1633,6 @@ ask:  Will you be one of my groomsmen?&lt;/p&gt;
       
       <guid>http://ryan.himmelwright.net/post/25-days-of-c/</guid>
       <description>&lt;p&gt;As I continue to learn more and more programming languages, I am somewhat ashamed to admit that I have yet to learn C. However, it is not because I am trying to avoid it.&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;
 
 &lt;h2 id=&#34;the-reason&#34;&gt;The Reason&lt;/h2&gt;
 

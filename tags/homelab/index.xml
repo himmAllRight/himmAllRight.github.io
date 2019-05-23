@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Homelab on λ ryan. himmelwright. net</title>
@@ -23,8 +22,6 @@ that sometimes, it has &lt;em&gt;too much&lt;/em&gt; workspace. While I still th
 larger display was better choice, I sometimes wish that
 I had the more limited, but &lt;em&gt;focused&lt;/em&gt; workspace of an ultrawide or 1440p
 monitor. &lt;em&gt;Maybe I still can&amp;hellip;&lt;/em&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;
 
 &lt;h3 id=&#34;reasoning&#34;&gt;Reasoning&lt;/h3&gt;
 
@@ -110,8 +107,8 @@ can be done by using the &lt;code&gt;gtf&lt;/code&gt; tool. To calculate a model
 3440x1440 resolution at 59.9 hertz for example, use the following:&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;➜  ~ gtf &lt;span style=&#34;color:#ae81ff&#34;&gt;3440&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1440&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;59&lt;/span&gt;.9
 
-  &lt;span style=&#34;color:#75715e&#34;&gt;# 3440x1440 @ 59.90 Hz (GTF) hsync: 89.25 kHz; pclk: 418.41 MHz
-&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;  Modeline &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;3440x1440_59.90&amp;#34;&lt;/span&gt;  &lt;span style=&#34;color:#ae81ff&#34;&gt;418&lt;/span&gt;.41  &lt;span style=&#34;color:#ae81ff&#34;&gt;3440&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;3688&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;4064&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;4688&lt;/span&gt;  &lt;span style=&#34;color:#ae81ff&#34;&gt;1440&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1441&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1444&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1490&lt;/span&gt;  -HSync +Vsync
+  &lt;span style=&#34;color:#75715e&#34;&gt;# 3440x1440 @ 59.90 Hz (GTF) hsync: 89.25 kHz; pclk: 418.41 MHz&lt;/span&gt;
+  Modeline &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;3440x1440_59.90&amp;#34;&lt;/span&gt;  &lt;span style=&#34;color:#ae81ff&#34;&gt;418&lt;/span&gt;.41  &lt;span style=&#34;color:#ae81ff&#34;&gt;3440&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;3688&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;4064&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;4688&lt;/span&gt;  &lt;span style=&#34;color:#ae81ff&#34;&gt;1440&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1441&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1444&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1490&lt;/span&gt;  -HSync +Vsync
 
 ➜  ~&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;The line that starts with &lt;em&gt;Modeline&lt;/em&gt; (but &lt;em&gt;not including&lt;/em&gt; &amp;ldquo;Modeline&amp;rdquo;) is what
@@ -148,8 +145,8 @@ never fear! The display can be switched to the new mode using &lt;code&gt;xrandr
 automate. So I did with this script:&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;color:#75715e&#34;&gt;#!/bin/bash
 &lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;
-&lt;span style=&#34;color:#75715e&#34;&gt;# A function to prompt the user if they want to switch to the new mode now.
-&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;switch_to_new_mode &lt;span style=&#34;color:#f92672&#34;&gt;()&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;{&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;# A function to prompt the user if they want to switch to the new mode now.&lt;/span&gt;
+switch_to_new_mode &lt;span style=&#34;color:#f92672&#34;&gt;()&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;{&lt;/span&gt;
 	echo -n &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;Switch to mode &lt;/span&gt;$modename&lt;span style=&#34;color:#e6db74&#34;&gt; now? [y/n]: &amp;#34;&lt;/span&gt;
 	read change
 	&lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;$change&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;y&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt;
@@ -161,8 +158,8 @@ automate. So I did with this script:&lt;/p&gt;
 	&lt;span style=&#34;color:#66d9ef&#34;&gt;fi&lt;/span&gt;
 &lt;span style=&#34;color:#f92672&#34;&gt;}&lt;/span&gt;
 
-&lt;span style=&#34;color:#75715e&#34;&gt;# Create a new mode for the display
-&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;create_new_mode &lt;span style=&#34;color:#f92672&#34;&gt;()&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;{&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;# Create a new mode for the display&lt;/span&gt;
+create_new_mode &lt;span style=&#34;color:#f92672&#34;&gt;()&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;{&lt;/span&gt;
 	echo &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;Adding new mode: &lt;/span&gt;$gtf_output&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;
 	xrandr --newmode $gtf_output
 	echo &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;Adding new mode &lt;/span&gt;$modename&lt;span style=&#34;color:#e6db74&#34;&gt; to display &lt;/span&gt;$MONITOR&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;
@@ -170,25 +167,25 @@ automate. So I did with this script:&lt;/p&gt;
 	echo &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;Done!&amp;#34;&lt;/span&gt;
 &lt;span style=&#34;color:#f92672&#34;&gt;}&lt;/span&gt;
 
-&lt;span style=&#34;color:#75715e&#34;&gt;# Message if the mode appears to already exist
-&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;mode_already_exists &lt;span style=&#34;color:#f92672&#34;&gt;()&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;{&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;# Message if the mode appears to already exist&lt;/span&gt;
+mode_already_exists &lt;span style=&#34;color:#f92672&#34;&gt;()&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;{&lt;/span&gt;
 	echo &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;Hmmm... I think the mode &lt;/span&gt;$modename&lt;span style=&#34;color:#e6db74&#34;&gt; already exists.&amp;#34;&lt;/span&gt;
 &lt;span style=&#34;color:#f92672&#34;&gt;}&lt;/span&gt;
 
-&lt;span style=&#34;color:#75715e&#34;&gt;## Main Function to set vars and code
-&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;main &lt;span style=&#34;color:#f92672&#34;&gt;()&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;{&lt;/span&gt;
-	&lt;span style=&#34;color:#75715e&#34;&gt;# Input Vars
-&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;	WIDTH&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;$1
+&lt;span style=&#34;color:#75715e&#34;&gt;## Main Function to set vars and code&lt;/span&gt;
+main &lt;span style=&#34;color:#f92672&#34;&gt;()&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;{&lt;/span&gt;
+	&lt;span style=&#34;color:#75715e&#34;&gt;# Input Vars&lt;/span&gt;
+	WIDTH&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;$1
 	HEIGHT&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;$2
 	MONITOR&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;$3
 	ESLEEP&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;3&lt;/span&gt;
-	&lt;span style=&#34;color:#75715e&#34;&gt;# Fancier Vars :P
-&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;	gtf_output&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;$(&lt;/span&gt;gtf $WIDTH $HEIGHT &lt;span style=&#34;color:#ae81ff&#34;&gt;59&lt;/span&gt;.9 | grep -i &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;modeline&amp;#34;&lt;/span&gt; | sed -e &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;s/\&amp;lt;Modeline\&amp;gt;//g&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;)&lt;/span&gt;
+	&lt;span style=&#34;color:#75715e&#34;&gt;# Fancier Vars :P&lt;/span&gt;
+	gtf_output&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;$(&lt;/span&gt;gtf $WIDTH $HEIGHT &lt;span style=&#34;color:#ae81ff&#34;&gt;59&lt;/span&gt;.9 | grep -i &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;modeline&amp;#34;&lt;/span&gt; | sed -e &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;s/\&amp;lt;Modeline\&amp;gt;//g&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;)&lt;/span&gt;
 	modename&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;$(&lt;/span&gt;echo $gtf_output | grep -o  &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;\(\&amp;#34;.*\&amp;#34;\)&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;)&lt;/span&gt;
 	modeexists&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;$(&lt;/span&gt;xrandr | grep -i $modename&lt;span style=&#34;color:#66d9ef&#34;&gt;)&lt;/span&gt;
 
-	&lt;span style=&#34;color:#75715e&#34;&gt;# Run
-&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;	&lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;$modeexists&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt;
+	&lt;span style=&#34;color:#75715e&#34;&gt;# Run&lt;/span&gt;
+	&lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;$modeexists&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt;
 	&lt;span style=&#34;color:#66d9ef&#34;&gt;then&lt;/span&gt;
 		create_new_mode
 	    switch_to_new_mode
@@ -198,8 +195,8 @@ automate. So I did with this script:&lt;/p&gt;
 	&lt;span style=&#34;color:#66d9ef&#34;&gt;fi&lt;/span&gt;
 &lt;span style=&#34;color:#f92672&#34;&gt;}&lt;/span&gt;
 
-&lt;span style=&#34;color:#75715e&#34;&gt;## Execute Main
-&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;main &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;$@&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;## Execute Main&lt;/span&gt;
+main &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;$@&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;div class=&#34;caption&#34;&gt;add-xrandr.sh&lt;/div&gt;
 
 &lt;p&gt;Basically, the script is run by providing it the desired width, height, and
@@ -268,8 +265,6 @@ setup. However, we recently moved into a new house and I switched to a
 mesh wifi network. No, the switch was not &lt;em&gt;just&lt;/em&gt; to increase wifi
 coverage throughout the entire house. The real motivator
 (ironically)&amp;hellip; was that I needed a better ethernet connection&amp;hellip;&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;
 
 &lt;h3 id=&#34;history&#34;&gt;History&lt;/h3&gt;
 
@@ -405,8 +400,6 @@ disk size of one of the job&amp;rsquo;s docker containers, maxing out the disk. 
 meant that I needed to extend the drive&lt;em&gt;&amp;hellip; again&lt;/em&gt;. If you ever do something
 twice, it is &lt;em&gt;best&lt;/em&gt; to have it documented for the potential third time. So,
 here we are.&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;
 
 &lt;h4 id=&#34;assumptions&#34;&gt;Assumptions&lt;/h4&gt;
 
@@ -548,8 +541,6 @@ noisy&amp;hellip; very noisy. Fearing the worst, I &lt;a href=&#34;../../post/zf
 backup&lt;/a&gt;, and shutdown the server until I had
 time to investigate further&amp;hellip; and likely replace the drive. That
 time came this past week.&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;
 
 &lt;h3 id=&#34;verifying-the-drive-failed&#34;&gt;Verifying the Drive Failed&lt;/h3&gt;
 
@@ -740,8 +731,6 @@ During the early days of use, I occasionally had difficulty configuring it on
 new machines, but those days appear to be long gone. It is a simple, generic,
 yet flexible system.  Here&amp;rsquo;s how to get started.&lt;/p&gt;
 
-&lt;p&gt;&lt;/p&gt;
-
 &lt;p&gt;&lt;em&gt;(but first, some background&amp;hellip; feel free to skip ahead)&lt;/em&gt;&lt;/p&gt;
 
 &lt;h2 id=&#34;my-password-manager-history&#34;&gt;My Password Manager History&lt;/h2&gt;
@@ -897,8 +886,8 @@ password entry. Optionally, use the &lt;code&gt;-c&lt;/code&gt; flag to copy the
 (first line if a multi-line entry) to the clipboard instead of spewing it into
 the terminal.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;pass Shopping/SomeFakeStore/ryan
-&lt;span style=&#34;color:#75715e&#34;&gt;## or ##
-&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;pass -c Shopping/SomeFakeStore/ryan&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;## or ##&lt;/span&gt;
+pass -c Shopping/SomeFakeStore/ryan&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;h2 id=&#34;making-pass-better&#34;&gt;Making Pass Better&lt;/h2&gt;
 
 &lt;p&gt;With pass&amp;rsquo;s flexibility, there are many additional features to help improve it for each user&amp;rsquo;s
@@ -1007,8 +996,6 @@ I would build a &lt;a href=&#34;https://www.techspot.com/review/1155-affordable-
 build&lt;/a&gt;. Then, in 2017
 AMD released their &lt;a href=&#34;https://en.wikipedia.org/wiki/Ryzen&#34;&gt;Ryzen&lt;/a&gt;
 series CPUs&amp;hellip;&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;
 
 &lt;h2 id=&#34;why-a-desktop&#34;&gt;Why a Desktop?&lt;/h2&gt;
 
@@ -1199,8 +1186,6 @@ to upgrade it over the next few years&lt;/p&gt;</description>
       <description>&lt;p&gt;After a decade of using several combinations of &lt;em&gt;dual&lt;/em&gt; monitors, I
 have decided to upgrade to using a single, but &lt;em&gt;better&lt;/em&gt;,
 monitor. After two years of debating, I have finally made my choice.&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;
 
 &lt;h2 id=&#34;monitor-history&#34;&gt;Monitor History&lt;/h2&gt;
 
@@ -1428,8 +1413,6 @@ and deploy a &amp;ldquo;draft&amp;rdquo; website, so I can stage new posts/websi
 on my home network, before publishing it to the &amp;ldquo;production&amp;rdquo;
 website. Here is how that idea was Instantiated&amp;hellip;&lt;/p&gt;
 
-&lt;p&gt;&lt;/p&gt;
-
 &lt;h2 id=&#34;my-website&#34;&gt;My Website&lt;/h2&gt;
 
 &lt;p&gt;&lt;a href=&#34;../../img/posts/draft-website-jenkins/jenkins-logo.png&#34;&gt;&lt;img
@@ -1501,14 +1484,14 @@ to serve the generated &lt;em&gt;static&lt;/em&gt; website content). I used
 &lt;a href=&#34;https://nginx.org/en/&#34;&gt;nginx&lt;/a&gt; in for setup. After installing, make
 sure it is running. To install and check the status of nginx on an
 Ubuntu System:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;color:#75715e&#34;&gt;## Install
-&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;sudo apt install -y nginx
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;color:#75715e&#34;&gt;## Install&lt;/span&gt;
+sudo apt install -y nginx
 
-&lt;span style=&#34;color:#75715e&#34;&gt;## Check it is running
-&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;sudo systemctl status nginx
+&lt;span style=&#34;color:#75715e&#34;&gt;## Check it is running&lt;/span&gt;
+sudo systemctl status nginx
 
-&lt;span style=&#34;color:#75715e&#34;&gt;## Optional: Ensure it is enabled to start up after reboots
-&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;sudo systemctl enable nginx&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;## Optional: Ensure it is enabled to start up after reboots&lt;/span&gt;
+sudo systemctl enable nginx&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;With the web server running, we need to know &lt;em&gt;where&lt;/em&gt; the website files
 need to go. Nginx will by default serve content at
 &lt;code&gt;/user/share/nginx/html/&lt;/code&gt;, so remember that location for later&amp;hellip;&lt;/p&gt;
@@ -1651,8 +1634,6 @@ reverse-proxy (Tangela), and I decided to do that again on the new
 network. While it is a simple process, it is one that other people often
 ask me about. So, this time&amp;hellip; I&amp;rsquo;m taking notes!&lt;/p&gt;
 
-&lt;p&gt;&lt;/p&gt;
-
 &lt;h2 id=&#34;why&#34;&gt;Why?&lt;/h2&gt;
 
 &lt;p&gt;The purpose of this reverse proxy is to direct outside traffic to the
@@ -1778,8 +1759,6 @@ approached graduation, I setup an Owncloud droplet (which is now a Nextcloud
 instance) to supplant my Dropbox usage. While it has worked fairly well, I&amp;rsquo;ve
 been watching &lt;a href=&#34;https://www.seafile.com/en/home/&#34;&gt;seafile&lt;/a&gt; from a distance the
 last few years, but haven&amp;rsquo;t taken the time to try it out. I have now.&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;
 
 &lt;h2 id=&#34;seafile&#34;&gt;Seafile&lt;/h2&gt;
 
@@ -1996,8 +1975,6 @@ ecosystem surrounding it, and can take years to truly master. This post on the
 other hand, will &lt;em&gt;hopefully&lt;/em&gt; help you get up and playing with docker containers in
 just a few minutes. Lets get started.&lt;/p&gt;
 
-&lt;p&gt;&lt;/p&gt;
-
 &lt;h2 id=&#34;installing-docker&#34;&gt;Installing Docker&lt;/h2&gt;
 
 &lt;p&gt;&lt;img src=&#34;../../img/posts/docker-quickstart/docker-logo.png&#34; style=&#34;max-width: 100%; width: 400px; float: right; margin: 0px 15px 5px 5px;&#34; alt=&#34;Docker Logo&#34; /&gt;&lt;/p&gt;
@@ -2115,9 +2092,9 @@ install several packages in the image:&lt;/p&gt;
 FROM ubuntu:latest
 MAINTAINER himmallright &amp;lt;ryan.himmelwright@gmail.com&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;gt;
 &lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;
-&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;RUN apt-get update
-&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;
-&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;RUN apt-get install -y vim stow git tmux fish htop emacs&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;RUN apt-get update&lt;/span&gt;
+
+RUN apt-get install -y vim stow git tmux fish htop emacs&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;To build the image, run the following command in the same directory as the
 Dockerfile (if defining a specific file, the &lt;code&gt;-f&lt;/code&gt; flag can be used):&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;docker build -t ubuntu-base:v1 .&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
@@ -2266,8 +2243,6 @@ know the basic to at &lt;em&gt;least&lt;/em&gt; get &lt;em&gt;started&lt;/em&gt;
  planned to replace it with a new computer. Well, I did&amp;hellip; awhile ago. For the
  last few months, I have been using a Lenovo T470 Thinkpad (with dock) as my new
  daily driver. Here are my thoughts.&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;
 
 &lt;h2 id=&#34;the-choice&#34;&gt;The Choice&lt;/h2&gt;
 
@@ -2458,8 +2433,6 @@ Several events over the last year have led me to the realization that my
 &lt;em&gt;actual&lt;/em&gt; computing &lt;em&gt;needs&lt;/em&gt; are drastically different than what they were when I
 purchased the Bonobo in early 2015. This post will highlight some of those
 realizations, and why I ultimately decided to sell my Bonobo laptop.&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;
 
 &lt;h2 id=&#34;why-i-got-the-bonobo&#34;&gt;Why I got the Bonobo&lt;/h2&gt;
 
@@ -2712,8 +2685,6 @@ learned a lot :). In fact, I am confident that if I had to start over from
 scratch, the process would take me about 10-15 minutes. Just to be sure, I&amp;rsquo;m
  going to quickly jot down the major pain points I experienced my first time around.&lt;/p&gt;
 
-&lt;p&gt;&lt;/p&gt;
-
 &lt;h2 id=&#34;trouble-connecting-to-the-edgerouter-x-for-initial-setup&#34;&gt;Trouble Connecting to the EdgeRouter-x for Initial Setup&lt;/h2&gt;
 
 &lt;p&gt;&lt;center&gt;
@@ -2799,8 +2770,6 @@ wifi-router Rebecca and I were using decided to die (of course). When I returned
 setup our old router as a &lt;em&gt;temporary&lt;/em&gt; fix. It was terrible. So, I began
 researching how I should upgrade our network. This time around, I am doing this
 &lt;em&gt;correctly&lt;/em&gt;.&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;
 
 &lt;p&gt;&lt;center&gt;
 &lt;img src=&#34;../../img/posts/upgrading-to-ubiquiti-edgerouter/linksys-WRT1900.png&#34;
@@ -3014,8 +2983,6 @@ ansible cluster -m ping
       <guid>http://ryan.himmelwright.net/post/ansible-on-pi-cluster/</guid>
       <description>&lt;p&gt;In my &lt;a href=&#34;http://ryan.himmelwright.net/posts/Setting-up-the-pi-cluster/&#34;&gt;previous post&lt;/a&gt;, I pieced together my &lt;a href=&#34;http://ryan.himmelwright.net/pages/homelab/#cluster&#34;&gt;pi cluster&lt;/a&gt;, and installed variations of Ubuntu 16.04 Server on each of its nodes. With the cluster built, I quickly needed an easy way to maintain and interact with the system as a whole. This, is where &lt;a href=&#34;https://www.ansible.com/&#34;&gt;Ansible&lt;/a&gt; comes in. In this post, I will walk through the steps I took to setup Ansible on my Cluster.&lt;/p&gt;
 
-&lt;p&gt;&lt;/p&gt;
-
 &lt;h2 id=&#34;ansible&#34;&gt;Ansible&lt;/h2&gt;
 
 &lt;p&gt;&lt;img src=&#34;../../img/posts/setting-up-ansible-pi-cluster/ansible-logo.png&#34; style=&#34;max-width: 50%; width: 150px; float: left; margin: 0px 15px 5px 5px;&#34;/&gt;&lt;/p&gt;
@@ -3100,8 +3067,6 @@ cat ~/.ssh/id_rsa.pub | ssh bpi &amp;quot;cat &amp;gt;&amp;gt; ~/.ssh/authorized
       <guid>http://ryan.himmelwright.net/post/setting-up-the-pi-cluster/</guid>
       <description>&lt;p&gt;I have a Raspberry Pi 2, a Raspberry Pi 3, and a Banana Pi. A while ago, I constructed a small tower to house my pi devices. Since then, I have additionally acquired a power source, and some CAT6 cable to connect them all up to a switch. I hope to use the Pis as a mini clustered environment, where I can learn (and play) with some of the &amp;ldquo;Devops&amp;rdquo; technologies/techniques out there. This post will briefly explain the initial setup of &lt;a href=&#34;../../pages/homelab/#cluster&#34;&gt;my cluster&lt;/a&gt;.&lt;/p&gt;
 
-&lt;p&gt;&lt;/p&gt;
-
 &lt;h1 id=&#34;setting-up-the-os-images&#34;&gt;Setting up the OS Images&lt;/h1&gt;
 
 &lt;p&gt;Before doing anything with the hardware, I had to setup the pi &amp;ldquo;hard drives&amp;rdquo; (micro SD cards), so they could boot.&lt;/p&gt;
@@ -3178,8 +3143,6 @@ usermod -a -G sudo ryan
       
       <guid>http://ryan.himmelwright.net/post/zfs-backups-to-luks-external/</guid>
       <description>&lt;p&gt;I have been using &lt;a href=&#34;https://en.wikipedia.org/wiki/ZFS&#34;&gt;ZFS&lt;/a&gt; data pools to store data on &lt;a href=&#34;../../pages/homelab/#ninetales&#34;&gt;my server&lt;/a&gt; for some time now. As great as that is, I am ashamed to admit that I have not had a &lt;em&gt;true&lt;/em&gt; backup system in place (raid/mirrors are not backup). I have a backup solution that I have attempted in the past, but ran into an issue and let it drift to the side. That changes now. It&amp;rsquo;s time to revisit my solution, and complete it to the end.&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;
 
 &lt;p&gt;Currently, my server is configured with two main zfs mirrored pools. The first one, &lt;code&gt;Data&lt;/code&gt;, is built on 2 x 3TB hard drives, providing 2.72 TB of usable disk space. It contains all of my wife&amp;rsquo;s and my data, organized into sub-category pools (ex: &lt;code&gt;Data/Music&lt;/code&gt;, &lt;code&gt;Data/Pictures&lt;/code&gt;, &lt;code&gt;Data/ryan&lt;/code&gt;, etc). The second, &lt;code&gt;Backups&lt;/code&gt;, is built on the 2 x 1TB hard drives from my old desktop, creating a 928 GB usable pool . It stores the automatic backups of some of the VMs and LXC containers hosted on the server.&lt;/p&gt;
 

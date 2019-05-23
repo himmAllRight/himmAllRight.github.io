@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Filesystems on λ ryan. himmelwright. net</title>
@@ -23,8 +22,6 @@ disk size of one of the job&amp;rsquo;s docker containers, maxing out the disk. 
 meant that I needed to extend the drive&lt;em&gt;&amp;hellip; again&lt;/em&gt;. If you ever do something
 twice, it is &lt;em&gt;best&lt;/em&gt; to have it documented for the potential third time. So,
 here we are.&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;
 
 &lt;h4 id=&#34;assumptions&#34;&gt;Assumptions&lt;/h4&gt;
 
@@ -166,8 +163,6 @@ noisy&amp;hellip; very noisy. Fearing the worst, I &lt;a href=&#34;../../post/zf
 backup&lt;/a&gt;, and shutdown the server until I had
 time to investigate further&amp;hellip; and likely replace the drive. That
 time came this past week.&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;
 
 &lt;h3 id=&#34;verifying-the-drive-failed&#34;&gt;Verifying the Drive Failed&lt;/h3&gt;
 
@@ -354,8 +349,6 @@ has &lt;em&gt;finally&lt;/em&gt; been replaced!&lt;/p&gt;</description>
       
       <guid>http://ryan.himmelwright.net/post/zfs-backups-to-luks-external/</guid>
       <description>&lt;p&gt;I have been using &lt;a href=&#34;https://en.wikipedia.org/wiki/ZFS&#34;&gt;ZFS&lt;/a&gt; data pools to store data on &lt;a href=&#34;../../pages/homelab/#ninetales&#34;&gt;my server&lt;/a&gt; for some time now. As great as that is, I am ashamed to admit that I have not had a &lt;em&gt;true&lt;/em&gt; backup system in place (raid/mirrors are not backup). I have a backup solution that I have attempted in the past, but ran into an issue and let it drift to the side. That changes now. It&amp;rsquo;s time to revisit my solution, and complete it to the end.&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;
 
 &lt;p&gt;Currently, my server is configured with two main zfs mirrored pools. The first one, &lt;code&gt;Data&lt;/code&gt;, is built on 2 x 3TB hard drives, providing 2.72 TB of usable disk space. It contains all of my wife&amp;rsquo;s and my data, organized into sub-category pools (ex: &lt;code&gt;Data/Music&lt;/code&gt;, &lt;code&gt;Data/Pictures&lt;/code&gt;, &lt;code&gt;Data/ryan&lt;/code&gt;, etc). The second, &lt;code&gt;Backups&lt;/code&gt;, is built on the 2 x 1TB hard drives from my old desktop, creating a 928 GB usable pool . It stores the automatic backups of some of the VMs and LXC containers hosted on the server.&lt;/p&gt;
 

@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Network on λ ryan. himmelwright. net</title>
@@ -21,8 +20,6 @@
 During the early days of use, I occasionally had difficulty configuring it on
 new machines, but those days appear to be long gone. It is a simple, generic,
 yet flexible system.  Here&amp;rsquo;s how to get started.&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;
 
 &lt;p&gt;&lt;em&gt;(but first, some background&amp;hellip; feel free to skip ahead)&lt;/em&gt;&lt;/p&gt;
 
@@ -179,8 +176,8 @@ password entry. Optionally, use the &lt;code&gt;-c&lt;/code&gt; flag to copy the
 (first line if a multi-line entry) to the clipboard instead of spewing it into
 the terminal.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;pass Shopping/SomeFakeStore/ryan
-&lt;span style=&#34;color:#75715e&#34;&gt;## or ##
-&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;pass -c Shopping/SomeFakeStore/ryan&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;## or ##&lt;/span&gt;
+pass -c Shopping/SomeFakeStore/ryan&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;h2 id=&#34;making-pass-better&#34;&gt;Making Pass Better&lt;/h2&gt;
 
 &lt;p&gt;With pass&amp;rsquo;s flexibility, there are many additional features to help improve it for each user&amp;rsquo;s
@@ -290,8 +287,6 @@ and deploy a &amp;ldquo;draft&amp;rdquo; website, so I can stage new posts/websi
 on my home network, before publishing it to the &amp;ldquo;production&amp;rdquo;
 website. Here is how that idea was Instantiated&amp;hellip;&lt;/p&gt;
 
-&lt;p&gt;&lt;/p&gt;
-
 &lt;h2 id=&#34;my-website&#34;&gt;My Website&lt;/h2&gt;
 
 &lt;p&gt;&lt;a href=&#34;../../img/posts/draft-website-jenkins/jenkins-logo.png&#34;&gt;&lt;img
@@ -363,14 +358,14 @@ to serve the generated &lt;em&gt;static&lt;/em&gt; website content). I used
 &lt;a href=&#34;https://nginx.org/en/&#34;&gt;nginx&lt;/a&gt; in for setup. After installing, make
 sure it is running. To install and check the status of nginx on an
 Ubuntu System:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;color:#75715e&#34;&gt;## Install
-&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;sudo apt install -y nginx
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;color:#75715e&#34;&gt;## Install&lt;/span&gt;
+sudo apt install -y nginx
 
-&lt;span style=&#34;color:#75715e&#34;&gt;## Check it is running
-&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;sudo systemctl status nginx
+&lt;span style=&#34;color:#75715e&#34;&gt;## Check it is running&lt;/span&gt;
+sudo systemctl status nginx
 
-&lt;span style=&#34;color:#75715e&#34;&gt;## Optional: Ensure it is enabled to start up after reboots
-&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;sudo systemctl enable nginx&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;## Optional: Ensure it is enabled to start up after reboots&lt;/span&gt;
+sudo systemctl enable nginx&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;With the web server running, we need to know &lt;em&gt;where&lt;/em&gt; the website files
 need to go. Nginx will by default serve content at
 &lt;code&gt;/user/share/nginx/html/&lt;/code&gt;, so remember that location for later&amp;hellip;&lt;/p&gt;
@@ -512,8 +507,6 @@ a virtual machine running &lt;a href=&#34;https://www.nginx.com/&#34;&gt;Nginx&l
 reverse-proxy (Tangela), and I decided to do that again on the new
 network. While it is a simple process, it is one that other people often
 ask me about. So, this time&amp;hellip; I&amp;rsquo;m taking notes!&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;
 
 &lt;h2 id=&#34;why&#34;&gt;Why?&lt;/h2&gt;
 
@@ -714,8 +707,6 @@ learned a lot :). In fact, I am confident that if I had to start over from
 scratch, the process would take me about 10-15 minutes. Just to be sure, I&amp;rsquo;m
  going to quickly jot down the major pain points I experienced my first time around.&lt;/p&gt;
 
-&lt;p&gt;&lt;/p&gt;
-
 &lt;h2 id=&#34;trouble-connecting-to-the-edgerouter-x-for-initial-setup&#34;&gt;Trouble Connecting to the EdgeRouter-x for Initial Setup&lt;/h2&gt;
 
 &lt;p&gt;&lt;center&gt;
@@ -801,8 +792,6 @@ wifi-router Rebecca and I were using decided to die (of course). When I returned
 setup our old router as a &lt;em&gt;temporary&lt;/em&gt; fix. It was terrible. So, I began
 researching how I should upgrade our network. This time around, I am doing this
 &lt;em&gt;correctly&lt;/em&gt;.&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;
 
 &lt;p&gt;&lt;center&gt;
 &lt;img src=&#34;../../img/posts/upgrading-to-ubiquiti-edgerouter/linksys-WRT1900.png&#34;

@@ -1,9 +1,8 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>I3 on λ ryan. himmelwright. net</title>
+    <title>i3 on λ ryan. himmelwright. net</title>
     <link>http://ryan.himmelwright.net/tags/i3/</link>
-    <description>Recent content in I3 on λ ryan. himmelwright. net</description>
+    <description>Recent content in i3 on λ ryan. himmelwright. net</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Thu, 22 Jun 2017 00:00:00 +0000</lastBuildDate>
@@ -18,8 +17,6 @@
       
       <guid>http://ryan.himmelwright.net/post/started-using-i3blocks/</guid>
       <description>&lt;p&gt;The last couple of weeks I have shifted back to using the i3 window mangers. When I fired it up, my fingers danced across the keyboard, remembering all of the personalized keybindings I have cultivated in my i3 configuration over the years. It is a simple, beautiful setup&amp;hellip; well, beautiful minus one of the components. My i3status bar was looking rather bland and dated, especially compared some of the i3 setups posted by all the cool kids over at &lt;a href=&#34;https://www.reddit.com/r/unixporn/&#34;&gt;/r/unixporn&lt;/a&gt;. I decided it was time for a refresh.&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;
 
 &lt;h2 id=&#34;i3status&#34;&gt;i3status&lt;/h2&gt;
 

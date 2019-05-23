@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>C on λ ryan. himmelwright. net</title>
@@ -18,8 +17,6 @@
       
       <guid>http://ryan.himmelwright.net/post/25-days-of-c/</guid>
       <description>&lt;p&gt;As I continue to learn more and more programming languages, I am somewhat ashamed to admit that I have yet to learn C. However, it is not because I am trying to avoid it.&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;
 
 &lt;h2 id=&#34;the-reason&#34;&gt;The Reason&lt;/h2&gt;
 

@@ -148,8 +148,6 @@ Tags <a href="../../tags/website">website</a>, <a href="../../tags/hugo">hugo</a
                     
                     <p>While I have loved using <a href="http://cryogenweb.org">Cryogen</a> to create this website for over a year and a half now, I have started the transition to using another static website generator. Specifically, I have been experimenting with <a href="https://gohugo.io">Hugo</a>. This post will detail why I am switching, what I have ported over thus far, and what still needs to be completed before generating the official site with hugo.</p>
 
-<p></p>
-
 <h3 id="from-cryogen-to-hugo">From Cryogen to Hugo</h3>
 
 <p>My departure from Cryogen really has nothing to do with the project itself. It is a prime example of what <a href="https://clojure.org/">clojure</a> is capable of, and I feel that more people should give it a shot. Recently though, I&rsquo;ve been itching to switch up my website&rsquo;s theme a bit. While I fancy my <a href="../new-theme-immutable/">Immutable Theme</a> I created a couple months ago, it isn&rsquo;t quite doing what I had hoped for. I love dark themes, but the type of posts I&rsquo;ve been creating really don&rsquo;t look good with them. I like to add diagrams, code snippets, and images to all of my posts. Diagram posts look wonderful with a white background, but are garbage in a dark theme. This difference was glaring last week as I switched between my markdown editor&rsquo;s preview window (default white theme), and the website&rsquo;s live preview view, while writing my <a href="../simple-reverse-ssh-tunnel/">reverse tunnels</a> post.</p>
@@ -343,14 +341,17 @@ by <a xmlns:cc="http://creativecommons.org/ns#" href="http://ryan.himmelwright.n
     <script src="http://ryan.himmelwright.net/js/clean-blog.js"></script>
 
     
-<script>
-(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-
-ga('create', 'UA-123-45', 'auto');
-ga('send', 'pageview');
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-123-45', 'auto');
+	
+	ga('send', 'pageview');
+}
 </script>
 
 

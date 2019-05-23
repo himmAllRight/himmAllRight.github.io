@@ -1,9 +1,8 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Kde on λ ryan. himmelwright. net</title>
+    <title>KDE on λ ryan. himmelwright. net</title>
     <link>http://ryan.himmelwright.net/tags/kde/</link>
-    <description>Recent content in Kde on λ ryan. himmelwright. net</description>
+    <description>Recent content in KDE on λ ryan. himmelwright. net</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Wed, 14 Nov 2018 00:00:00 +0000</lastBuildDate>
@@ -20,8 +19,6 @@
       <description>&lt;p&gt;Extending a laptop&amp;rsquo;s screen to an external display can often be a nightmare.
 Sometimes, it might be best to just hit the reset button and configure from
 scratch. With KDE Plasma 5, you can. Here&amp;rsquo;s how.&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;
 
 &lt;h2 id=&#34;issue&#34;&gt;Issue&lt;/h2&gt;
 
@@ -86,8 +83,6 @@ wrong with plasmashell during the process.&lt;/p&gt;
       
       <guid>http://ryan.himmelwright.net/post/solus-to-fedora/</guid>
       <description>&lt;p&gt;For awhile, I have been debating the idea of switching back to Fedora (from Solus). At least on my &lt;a href=&#34;../../pages/homelab/#alakazam&#34;&gt;main computer&lt;/a&gt;. First, let me state this right up front: I am still &lt;em&gt;very&lt;/em&gt; satisfied with Solus. I think it is one of the best current Linux distros, and I want to still contribute to the project. However, there are a few reasons why Solus isn&amp;rsquo;t the best fit for my needs &lt;em&gt;right now&lt;/em&gt;, and I will highlight them below.&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;
 
 &lt;h3 id=&#34;why-switch&#34;&gt;Why Switch&lt;/h3&gt;
 
@@ -225,8 +220,6 @@ clean and admit that I have never really liked the KDE/Plasma desktop
 environment (more on that below). However, with that said&amp;hellip; I am still
 using the plasma desktop on my main computer (months later, and
 haven&amp;rsquo;t aborted yet**&amp;hellip;). Here are my thoughts.&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;
 
 &lt;h3 id=&#34;my-history-with-kde-plasma&#34;&gt;My History with KDE/Plasma&lt;/h3&gt;
 

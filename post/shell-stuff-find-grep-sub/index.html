@@ -152,8 +152,6 @@ help me when things go wrong&hellip; sometimes I just want to clean up my
 file system. So&hellip; here is a simple string of commands I often use to declutter
 my files.</p>
 
-<p></p>
-
 <p><em>DISCLAIMER:</em> I know there are <em>MANY</em> ways to accomplish this.  The method
 described in this post is to share <strong>one</strong> efficient solution I use, that might
 help someone that currently knows <strong>zero</strong>.</p>
@@ -253,15 +251,15 @@ writing ansible playbooks, I can generate a few <code>*.retry</code> files, as w
 some <code>*.swp</code> files from editing in vim.</p>
 
 <h4 id="example-4">Example</h4>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">➜ find . | grep .retry          <span style="color:#75715e">## Find *.retry files
-</span><span style="color:#75715e"></span>./file1.retry
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">➜ find . | grep .retry          <span style="color:#75715e">## Find *.retry files</span>
+./file1.retry
 ./dirA/file5.retry
 ./dirA/file3.retry
 
-➜ rm <span style="color:#66d9ef">$(</span>find . | grep .retry<span style="color:#66d9ef">)</span>    <span style="color:#75715e">## Delete *.retry files
-</span><span style="color:#75715e"></span>
-➜ find . | grep .retry          <span style="color:#75715e">## Check that they were deleted
-</span><span style="color:#75715e"></span>
+➜ rm <span style="color:#66d9ef">$(</span>find . | grep .retry<span style="color:#66d9ef">)</span>    <span style="color:#75715e">## Delete *.retry files</span>
+
+➜ find . | grep .retry          <span style="color:#75715e">## Check that they were deleted</span>
+
 ➜</code></pre></div>
 <h3 id="summary">Summary</h3>
 
@@ -288,7 +286,7 @@ fun!</p>
 			<div class="comment-section">
 			  
    <div id="disqus_thread"></div>
-<script>
+<script type="application/javascript">
     var disqus_config = function () {
     
     
@@ -374,14 +372,17 @@ by <a xmlns:cc="http://creativecommons.org/ns#" href="http://ryan.himmelwright.n
     <script src="http://ryan.himmelwright.net/js/clean-blog.js"></script>
 
     
-<script>
-(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-
-ga('create', 'UA-123-45', 'auto');
-ga('send', 'pageview');
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-123-45', 'auto');
+	
+	ga('send', 'pageview');
+}
 </script>
 
 
