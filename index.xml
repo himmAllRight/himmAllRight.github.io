@@ -5,10 +5,104 @@
     <description>Recent content on λ ryan. himmelwright. net</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 23 May 2019 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 05 Jun 2019 00:00:00 +0000</lastBuildDate>
     
         <atom:link href="http://ryan.himmelwright.net/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Creating a RAM Disk with a tmpfs Mount</title>
+      <link>http://ryan.himmelwright.net/post/tmpfs-mount-ramdisk/</link>
+      <pubDate>Wed, 05 Jun 2019 00:00:00 +0000</pubDate>
+      
+      <guid>http://ryan.himmelwright.net/post/tmpfs-mount-ramdisk/</guid>
+      <description>&lt;p&gt;RAM is fun. If a computer has &lt;em&gt;extra&lt;/em&gt; memory, it can be used for fun &lt;em&gt;beyond&lt;/em&gt;
+opening extra chrome tabs, or firing up Slack. Want to mount a partition that
+is &lt;em&gt;fast&lt;/em&gt; and can be entirely wiped out just by rebooting? Or are you just
+bored (guilty)?  Regardless of the reason, lets create and mount a RAM-disk!&lt;/p&gt;
+
+&lt;h3 id=&#34;ram-disks-and-tmpfs&#34;&gt;RAM disks and tmpfs&lt;/h3&gt;
+
+&lt;p&gt;Creating a RAM disk in Linux is actually quite easy. Unlike other OS&amp;rsquo;s, it
+doesn&amp;rsquo;t require special third-party software or digging deep into the registry.
+This is because RAM-based file systems are already heavily used in a Linux system.
+Many root sub-directories are actually mounted
+&lt;a href=&#34;http://man7.org/linux/man-pages/man5/tmpfs.5.html&#34;&gt;tmpfs&lt;/a&gt; objects, most
+notably &lt;code&gt;/tmp&lt;/code&gt;. To see some &lt;code&gt;tmpfs&lt;/code&gt; mounts on a system, &lt;code&gt;grep&lt;/code&gt; the &lt;code&gt;df&lt;/code&gt;
+command for &lt;code&gt;tmpfs&lt;/code&gt;:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;➜  ~ df -h | grep tmpfs
+devtmpfs                  16G     &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;   16G   &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;% /dev
+tmpfs                     16G  299M   16G   &lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;% /dev/shm
+tmpfs                     16G  &lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;.0M   16G   &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;% /run
+tmpfs                     16G     &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;   16G   &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;% /sys/fs/cgroup
+tmpfs                     16G  &lt;span style=&#34;color:#ae81ff&#34;&gt;5&lt;/span&gt;.9M   16G   &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;% /tmp
+tmpfs                    &lt;span style=&#34;color:#ae81ff&#34;&gt;3&lt;/span&gt;.2G  184K  &lt;span style=&#34;color:#ae81ff&#34;&gt;3&lt;/span&gt;.2G   &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;% /run/user/1000
+tmpfs                     12G     &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;   12G   &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;% /var/ramdisk&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;All the contents of a &lt;code&gt;tmpfs&lt;/code&gt; filesystem reside in system memory, typically
+RAM. This allows file access that is &lt;em&gt;fast&lt;/em&gt;.  However, like RAM,
+&lt;code&gt;tmpfs&lt;/code&gt; is also &lt;em&gt;volatile&lt;/em&gt;, meaning it will all be erased if the computer
+restarts or shuts down. So don&amp;rsquo;t store anything important in &lt;code&gt;tmpfs&lt;/code&gt;!&lt;/p&gt;
+
+&lt;h3 id=&#34;fstab&#34;&gt;fstab&lt;/h3&gt;
+
+&lt;p&gt;The easiest way to add a new &amp;lsquo;RAM disk&amp;rsquo; to our system is by adding it as a new
+mount in the &lt;code&gt;/etc/fstab&lt;/code&gt; file. I&amp;rsquo;m currently running &lt;a href=&#34;https://silverblue.fedoraproject.org/&#34;&gt;Fedora
+Silverblue&lt;/a&gt;, so I had to place it under
+&lt;code&gt;/var/&lt;/code&gt; because I don&amp;rsquo;t have write access elsewhere, but feel free to place
+your mount wherever you want. Just &lt;strong&gt;make sure the location exists&lt;/strong&gt;, or the
+system won&amp;rsquo;t boot correctly when loading the &lt;code&gt;fstab&lt;/code&gt;. After adding the following line
+to &lt;code&gt;/etc/fstab&lt;/code&gt;, a 10G &lt;code&gt;tmpfs&lt;/code&gt; &amp;lsquo;device&amp;rsquo; will be mounted at &lt;code&gt;/var/ramdisk&lt;/code&gt; during
+each boot:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# /etc/fstab&lt;/span&gt;
+...
+tmpfs      /var/ramdisk       tmpfs   rw,nodev,nosuid,size&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;10G	&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;  &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;By default, Linux allocates half the RAM available on the system to a new
+&lt;code&gt;tmpfs&lt;/code&gt; mount. However, I wanted to specify my disk size, so I used the &lt;code&gt;size&lt;/code&gt;
+argument to allocate 10G.&lt;/p&gt;
+
+&lt;h3 id=&#34;mounting&#34;&gt;Mounting&lt;/h3&gt;
+
+&lt;p&gt;With the &lt;code&gt;fstab&lt;/code&gt; edited, it is time to mount everything. &lt;a href=&#34;https://wiki.archlinux.org/index.php/Tmpfs&#34;&gt;The arch wiki
+page&lt;/a&gt; cautions &lt;em&gt;against&lt;/em&gt; running
+&lt;code&gt;mount -a&lt;/code&gt; to mount the new &lt;em&gt;tmpfs&lt;/em&gt; disks, but that is because any files that
+might already be in the directories will be removed during the mount. While
+this may be a concern when editing any of the already &amp;ldquo;naturally occurring&amp;rdquo; &lt;code&gt;tmpfs&lt;/code&gt;
+mounts on a system (such as &lt;code&gt;/tmp&lt;/code&gt; and &lt;code&gt;/run&lt;/code&gt;), our use case is adding a
+&lt;em&gt;new&lt;/em&gt; one. So, we &lt;em&gt;should&lt;/em&gt; be safe!&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;sudo mount -a&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;To verify that the RAM disk is mounted, check the &lt;code&gt;df&lt;/code&gt; output. (&lt;em&gt;Note: It
+should be empty since it was just allocated&lt;/em&gt;)&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;$ df -h
+...
+tmpfs                     10G     &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;   10G   &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;% /var/ramdisk
+...&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h3 id=&#34;testing&#34;&gt;Testing&lt;/h3&gt;
+
+&lt;p&gt;With the tmpfs mount, how can we be sure it&amp;rsquo;s actually functioning as a
+RAM disk? The simplest way to test it is&amp;hellip; move some files over to the mount
+location and see if it starts to use up RAM!&lt;/p&gt;
+
+&lt;p&gt;For my quick test, I quickly copied two large &lt;code&gt;iso&lt;/code&gt; files to the new mount:&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#39;../../img/posts/tmpfs-mount-ramdisk/ram-disk-usage.gif&#39;&gt;
+&lt;img alt=&#34;Copied some iso files to ramdisk&#34; src=&#34;../../img/posts/tmpfs-mount-ramdisk/ram-disk-usage.png&#34; onmouseover=&#34;this.src=&#39;../../img/posts/tmpfs-mount-ramdisk/ram-disk-usage.gif&#39;&#34; onmouseout=&#34;this.src=&#39;../../img/posts/tmpfs-mount-ramdisk/ram-disk-usage.png&#39;&#34; style=&#34;max-width: 100%;&#34;/&gt;
+&lt;/a&gt;
+&lt;div class=&#34;caption&#34;&gt;When copying files to a tmpfs mount, RAM usages increases
+by the amount copied.&lt;/div&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;sudo cp -r ./*.iso /var/ramdisk/&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;During the copy, I had the gnome &lt;code&gt;System Monitor&lt;/code&gt; application opened so I could
+see if the RAM usage slowly climbed as the files copied&amp;hellip; and it did!
+Additionally, when I deleted the copied files, the RAM usage went back down.
+Looks like everything worked!&lt;/p&gt;
+
+&lt;h3 id=&#34;conclusion&#34;&gt;Conclusion&lt;/h3&gt;
+
+&lt;p&gt;While RAM disks are less useful these days due to faster and faster
+storage, they can still be fun. I&amp;rsquo;ve placed a full Linux file system in mine,
+ &lt;code&gt;chroot&lt;/code&gt;&amp;lsquo;ed into it, and ran a full DE with xorg and everything! It was quite
+snappy. I also use it as a &amp;lsquo;scratch&amp;rsquo; disk where I can work on a temporary
+project and blow it away when I&amp;rsquo;m done. The options are endless!&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>Homelab</title>

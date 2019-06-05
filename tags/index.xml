@@ -5,10 +5,37 @@
     <description>Recent content in Tags on λ ryan. himmelwright. net</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 23 May 2019 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 05 Jun 2019 00:00:00 +0000</lastBuildDate>
     
         <atom:link href="http://ryan.himmelwright.net/tags/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Hardware</title>
+      <link>http://ryan.himmelwright.net/tags/hardware/</link>
+      <pubDate>Wed, 05 Jun 2019 00:00:00 +0000</pubDate>
+      
+      <guid>http://ryan.himmelwright.net/tags/hardware/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Linux</title>
+      <link>http://ryan.himmelwright.net/tags/linux/</link>
+      <pubDate>Wed, 05 Jun 2019 00:00:00 +0000</pubDate>
+      
+      <guid>http://ryan.himmelwright.net/tags/linux/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>filesystems</title>
+      <link>http://ryan.himmelwright.net/tags/filesystems/</link>
+      <pubDate>Wed, 05 Jun 2019 00:00:00 +0000</pubDate>
+      
+      <guid>http://ryan.himmelwright.net/tags/filesystems/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>Customization</title>
@@ -29,15 +56,6 @@
     </item>
     
     <item>
-      <title>Linux</title>
-      <link>http://ryan.himmelwright.net/tags/linux/</link>
-      <pubDate>Thu, 23 May 2019 00:00:00 +0000</pubDate>
-      
-      <guid>http://ryan.himmelwright.net/tags/linux/</guid>
-      <description></description>
-    </item>
-    
-    <item>
       <title>Shell</title>
       <link>http://ryan.himmelwright.net/tags/shell/</link>
       <pubDate>Thu, 23 May 2019 00:00:00 +0000</pubDate>
@@ -52,15 +70,6 @@
       <pubDate>Thu, 23 May 2019 00:00:00 +0000</pubDate>
       
       <guid>http://ryan.himmelwright.net/tags/dotfiles/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Hardware</title>
-      <link>http://ryan.himmelwright.net/tags/hardware/</link>
-      <pubDate>Mon, 29 Apr 2019 00:00:00 +0000</pubDate>
-      
-      <guid>http://ryan.himmelwright.net/tags/hardware/</guid>
       <description></description>
     </item>
     
@@ -115,15 +124,6 @@
       <pubDate>Thu, 07 Feb 2019 00:00:00 +0000</pubDate>
       
       <guid>http://ryan.himmelwright.net/tags/kvm/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>filesystems</title>
-      <link>http://ryan.himmelwright.net/tags/filesystems/</link>
-      <pubDate>Thu, 07 Feb 2019 00:00:00 +0000</pubDate>
-      
-      <guid>http://ryan.himmelwright.net/tags/filesystems/</guid>
       <description></description>
     </item>
     

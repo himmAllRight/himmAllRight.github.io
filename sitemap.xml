@@ -3,6 +3,47 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>http://ryan.himmelwright.net/post/tmpfs-mount-ramdisk/</loc>
+    <lastmod>2019-06-05T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://ryan.himmelwright.net/tags/hardware/</loc>
+    <lastmod>2019-06-05T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://ryan.himmelwright.net/tags/linux/</loc>
+    <lastmod>2019-06-05T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://ryan.himmelwright.net/post/</loc>
+    <lastmod>2019-06-05T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://ryan.himmelwright.net/tags/</loc>
+    <lastmod>2019-06-05T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://ryan.himmelwright.net/tags/filesystems/</loc>
+    <lastmod>2019-06-05T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://ryan.himmelwright.net/</loc>
+    <lastmod>2019-06-05T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>http://ryan.himmelwright.net/tags/customization/</loc>
     <lastmod>2019-05-23T00:00:00+00:00</lastmod>
     <priority>0</priority>
@@ -20,19 +61,7 @@
   </url>
   
   <url>
-    <loc>http://ryan.himmelwright.net/tags/linux/</loc>
-    <lastmod>2019-05-23T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
     <loc>http://ryan.himmelwright.net/pages/</loc>
-    <lastmod>2019-05-23T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>http://ryan.himmelwright.net/post/</loc>
     <lastmod>2019-05-23T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
@@ -49,19 +78,7 @@
   </url>
   
   <url>
-    <loc>http://ryan.himmelwright.net/tags/</loc>
-    <lastmod>2019-05-23T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
     <loc>http://ryan.himmelwright.net/tags/dotfiles/</loc>
-    <lastmod>2019-05-23T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>http://ryan.himmelwright.net/</loc>
     <lastmod>2019-05-23T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
@@ -74,12 +91,6 @@
   <url>
     <loc>http://ryan.himmelwright.net/post/sub-monitor-workflows-with-xrandr/</loc>
     <lastmod>2019-04-29T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://ryan.himmelwright.net/tags/hardware/</loc>
-    <lastmod>2019-04-29T00:00:00+00:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
@@ -134,12 +145,6 @@
   
   <url>
     <loc>http://ryan.himmelwright.net/tags/kvm/</loc>
-    <lastmod>2019-02-07T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>http://ryan.himmelwright.net/tags/filesystems/</loc>
     <lastmod>2019-02-07T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>

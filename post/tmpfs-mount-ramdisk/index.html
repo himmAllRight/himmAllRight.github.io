@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Creating a RAM Disk with a tmpfs Mount -- λ ryan. himmelwright. net</title>
+
+    
+
+    
+    <link href="http://ryan.himmelwright.net/css/bootstrap.min.css" rel="stylesheet">
+
+    
+    <link href="http://ryan.himmelwright.net/css/clean-blog.min.css" rel="stylesheet">
+
+    
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href='//fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+
+    
+    
+    
+
+
+
+    
+    <script type="text/javascript">
+        var _paq = _paq || [];
+         
+        _paq.push(["setDocumentTitle", document.domain + "/" + document.title]);
+        _paq.push(["setCookieDomain", "*.ryan.himmelwright.net"]);
+        _paq.push(["setDomains", ["*.ryan.himmelwright.net"]]);
+        _paq.push(['trackPageView']);
+        _paq.push(['enableLinkTracking']);
+        (function() {
+        var u="//cloud.himmelwright.net/piwik/";
+        _paq.push(['setTrackerUrl', u+'piwik.php']);
+        _paq.push(['setSiteId', '1']);
+        var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+        g.type='text/javascript'; g.async=true; g.defer=true; g.src=u+'piwik.js'; s.parentNode.insertBefore(g,s);
+        })();
+        </script>
+        <noscript><p><img src="//cloud.himmelwright.net/piwik/piwik.php?idsite=1&rec=1" style="border:0;" alt="" /></p></noscript>
+        
+
+
+
+</head>
+
+<body>
+
+    
+    <nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+        <div class="container-fluid">
+            
+            <div class="navbar-header page-scroll">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="http://ryan.himmelwright.net">λ ryan. himmelwright. net</a>
+            </div>
+
+                       
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    
+                    <li>
+                        <a href="../../">home</a>
+                    </li>
+                    
+                    <li>
+                        <a href="../../pages/about/">About</a>
+                    </li>
+                    
+                    <li>
+                        <a href="../../pages/homelab/">Homelab</a>
+                    </li>
+                    
+                    <li>
+                        <a href="../../tags">tags</a>
+                    </li>
+                    
+                    <li>
+                        <a href="../../post/">Archives</a>
+                    </li>
+                    
+                    <li>
+                        <a href="../../post/index.xml">RSS</a>
+                    </li>
+                    
+                  </ul>
+            </div>
+           
+
+        </div>
+        
+    </nav>
+
+
+
+
+<header class="intro-header" style="background-image: url('http://ryan.himmelwright.net/img/posts/tmpfs-mount-ramdisk/wilmington-riverwalk.jpg')">
+    
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <h1>Creating a RAM Disk with a tmpfs Mount</h1>
+                    <h2 class="subheading"></h2>
+                    <span class="meta">
+                        
+Posted by <a href="#">Ryan Himmelwright</a> on Wed, Jun 5, 2019
+
+
+
+
+
+
+
+<br />
+Tags <a href="../../tags/linux">linux</a>, <a href="../../tags/hardware">hardware</a>, <a href="../../tags/filesystems">filesystems</a>
+
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <span class="header-caption">Riverwalk, Wilmington NC</span>
+    
+    </header>
+
+    
+    <article>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                    
+                    <p>RAM is fun. If a computer has <em>extra</em> memory, it can be used for fun <em>beyond</em>
+opening extra chrome tabs, or firing up Slack. Want to mount a partition that
+is <em>fast</em> and can be entirely wiped out just by rebooting? Or are you just
+bored (guilty)?  Regardless of the reason, lets create and mount a RAM-disk!</p>
+
+<h3 id="ram-disks-and-tmpfs">RAM disks and tmpfs</h3>
+
+<p>Creating a RAM disk in Linux is actually quite easy. Unlike other OS&rsquo;s, it
+doesn&rsquo;t require special third-party software or digging deep into the registry.
+This is because RAM-based file systems are already heavily used in a Linux system.
+Many root sub-directories are actually mounted
+<a href="http://man7.org/linux/man-pages/man5/tmpfs.5.html">tmpfs</a> objects, most
+notably <code>/tmp</code>. To see some <code>tmpfs</code> mounts on a system, <code>grep</code> the <code>df</code>
+command for <code>tmpfs</code>:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">➜  ~ df -h | grep tmpfs
+devtmpfs                  16G     <span style="color:#ae81ff">0</span>   16G   <span style="color:#ae81ff">0</span>% /dev
+tmpfs                     16G  299M   16G   <span style="color:#ae81ff">2</span>% /dev/shm
+tmpfs                     16G  <span style="color:#ae81ff">2</span>.0M   16G   <span style="color:#ae81ff">1</span>% /run
+tmpfs                     16G     <span style="color:#ae81ff">0</span>   16G   <span style="color:#ae81ff">0</span>% /sys/fs/cgroup
+tmpfs                     16G  <span style="color:#ae81ff">5</span>.9M   16G   <span style="color:#ae81ff">1</span>% /tmp
+tmpfs                    <span style="color:#ae81ff">3</span>.2G  184K  <span style="color:#ae81ff">3</span>.2G   <span style="color:#ae81ff">1</span>% /run/user/1000
+tmpfs                     12G     <span style="color:#ae81ff">0</span>   12G   <span style="color:#ae81ff">0</span>% /var/ramdisk</code></pre></div>
+<p>All the contents of a <code>tmpfs</code> filesystem reside in system memory, typically
+RAM. This allows file access that is <em>fast</em>.  However, like RAM,
+<code>tmpfs</code> is also <em>volatile</em>, meaning it will all be erased if the computer
+restarts or shuts down. So don&rsquo;t store anything important in <code>tmpfs</code>!</p>
+
+<h3 id="fstab">fstab</h3>
+
+<p>The easiest way to add a new &lsquo;RAM disk&rsquo; to our system is by adding it as a new
+mount in the <code>/etc/fstab</code> file. I&rsquo;m currently running <a href="https://silverblue.fedoraproject.org/">Fedora
+Silverblue</a>, so I had to place it under
+<code>/var/</code> because I don&rsquo;t have write access elsewhere, but feel free to place
+your mount wherever you want. Just <strong>make sure the location exists</strong>, or the
+system won&rsquo;t boot correctly when loading the <code>fstab</code>. After adding the following line
+to <code>/etc/fstab</code>, a 10G <code>tmpfs</code> &lsquo;device&rsquo; will be mounted at <code>/var/ramdisk</code> during
+each boot:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># /etc/fstab</span>
+...
+tmpfs      /var/ramdisk       tmpfs   rw,nodev,nosuid,size<span style="color:#f92672">=</span>10G	<span style="color:#ae81ff">0</span>  <span style="color:#ae81ff">0</span></code></pre></div>
+<p>By default, Linux allocates half the RAM available on the system to a new
+<code>tmpfs</code> mount. However, I wanted to specify my disk size, so I used the <code>size</code>
+argument to allocate 10G.</p>
+
+<h3 id="mounting">Mounting</h3>
+
+<p>With the <code>fstab</code> edited, it is time to mount everything. <a href="https://wiki.archlinux.org/index.php/Tmpfs">The arch wiki
+page</a> cautions <em>against</em> running
+<code>mount -a</code> to mount the new <em>tmpfs</em> disks, but that is because any files that
+might already be in the directories will be removed during the mount. While
+this may be a concern when editing any of the already &ldquo;naturally occurring&rdquo; <code>tmpfs</code>
+mounts on a system (such as <code>/tmp</code> and <code>/run</code>), our use case is adding a
+<em>new</em> one. So, we <em>should</em> be safe!</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">sudo mount -a</code></pre></div>
+<p>To verify that the RAM disk is mounted, check the <code>df</code> output. (<em>Note: It
+should be empty since it was just allocated</em>)</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">$ df -h
+...
+tmpfs                     10G     <span style="color:#ae81ff">0</span>   10G   <span style="color:#ae81ff">0</span>% /var/ramdisk
+...</code></pre></div>
+<h3 id="testing">Testing</h3>
+
+<p>With the tmpfs mount, how can we be sure it&rsquo;s actually functioning as a
+RAM disk? The simplest way to test it is&hellip; move some files over to the mount
+location and see if it starts to use up RAM!</p>
+
+<p>For my quick test, I quickly copied two large <code>iso</code> files to the new mount:</p>
+
+<p><a href='../../img/posts/tmpfs-mount-ramdisk/ram-disk-usage.gif'>
+<img alt="Copied some iso files to ramdisk" src="../../img/posts/tmpfs-mount-ramdisk/ram-disk-usage.png" onmouseover="this.src='../../img/posts/tmpfs-mount-ramdisk/ram-disk-usage.gif'" onmouseout="this.src='../../img/posts/tmpfs-mount-ramdisk/ram-disk-usage.png'" style="max-width: 100%;"/>
+</a>
+<div class="caption">When copying files to a tmpfs mount, RAM usages increases
+by the amount copied.</div></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">sudo cp -r ./*.iso /var/ramdisk/</code></pre></div>
+<p>During the copy, I had the gnome <code>System Monitor</code> application opened so I could
+see if the RAM usage slowly climbed as the files copied&hellip; and it did!
+Additionally, when I deleted the copied files, the RAM usage went back down.
+Looks like everything worked!</p>
+
+<h3 id="conclusion">Conclusion</h3>
+
+<p>While RAM disks are less useful these days due to faster and faster
+storage, they can still be fun. I&rsquo;ve placed a full Linux file system in mine,
+ <code>chroot</code>&lsquo;ed into it, and ran a full DE with xorg and everything! It was quite
+snappy. I also use it as a &lsquo;scratch&rsquo; disk where I can work on a temporary
+project and blow it away when I&rsquo;m done. The options are endless!</p>
+
+                    
+                    
+                    
+                         <div style="float: right; text-decoration: underline; text-align: right;">Prev Post:</div>
+                    
+                    <br>
+                    
+                    
+                        <a href="http://ryan.himmelwright.net/post/setting-up-tmuxinator/" style="text-align: right; float: right; max-width: 40%">Setting up Tmuxinator</a>
+                    
+
+			
+			<div class="comment-section">
+			  
+   <div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "himmallright" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+			</div>
+                </div>
+            </div>
+        </div>
+    </article>
+
+        <hr>
+    
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                  <ul class="list-inline text-center">
+                    
+                      <li>
+                        <a href="mailto:ryan@himmelwright.net">
+                          <span class="fa-stack fa-lg">
+                            <i class="fa fa-circle fa-stack-2x"></i>
+                            <i class="fa fa-envelope-o fa-stack-1x fa-inverse"></i>
+                          </span>
+                        </a>
+                      </li>
+                    
+                    
+                    <li>
+                      <a href="https://github.com/himmAllRight">
+                        <span class="fa-stack fa-lg">
+                          <i class="fa fa-circle fa-stack-2x"></i>
+                          <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                        </span>
+                      </a>
+                    </li>
+                    
+                    <li>
+                      <a href="https://www.linkedin.com/in/ryan-himmelwright-b3891774/">
+                        <span class="fa-stack fa-lg">
+                          <i class="fa fa-circle fa-stack-2x"></i>
+                          <i class="fa fa-linkedin fa-stack-1x fa-inverse"></i>
+                        </span>
+                      </a>
+                    </li>
+                    
+                  </ul>
+<p class="copyright text-muted">
+
+<a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img
+  alt="Creative Commons License" style="border-width:0"
+  src="https://i.creativecommons.org/l/by/4.0/88x31.png" /></a><br />This work
+by <a xmlns:cc="http://creativecommons.org/ns#" href="http://ryan.himmelwright.net" property="cc:attributionName" rel="cc:attributionURL">Ryan Himmelwright</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
+</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    
+    <script src="http://ryan.himmelwright.net/js/jquery.min.js"></script>
+
+    
+    <script src="http://ryan.himmelwright.net/js/bootstrap.min.js"></script>
+
+    
+    <script src="http://ryan.himmelwright.net/js/clean-blog.js"></script>
+
+    
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-123-45', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+
+
+</body>
+
+</html>
+
