@@ -1,0 +1,118 @@
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Community on λ ryan. himmelwright. net</title>
+    <link>http://ryan.himmelwright.net/tags/community/</link>
+    <description>Recent content in Community on λ ryan. himmelwright. net</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Thu, 20 Jun 2019 00:00:00 +0000</lastBuildDate>
+    
+        <atom:link href="http://ryan.himmelwright.net/tags/community/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>SELF 2019</title>
+      <link>http://ryan.himmelwright.net/post/self2019/</link>
+      <pubDate>Thu, 20 Jun 2019 00:00:00 +0000</pubDate>
+      
+      <guid>http://ryan.himmelwright.net/post/self2019/</guid>
+      <description>&lt;p&gt;The past few years I have watched the South East Linux Fest (SELF) from a
+distance, often via listreams run by &lt;a href=&#34;https://www.jupiterbroadcasting.com/&#34;&gt;Jupiter
+Broadcasting&lt;/a&gt; and/or the &lt;a href=&#34;http://www.asknoahshow.com/&#34;&gt;Ask Noah
+Show&lt;/a&gt;. Last year, I decided to finally travel to
+Charlotte for SELF 2018. While my wife and I &lt;em&gt;did&lt;/em&gt; drive down to North Carolina
+that weekend, it was instead to Durham&amp;hellip; with a moving truck. This year, being
+only two hours away, I decided there was no excuse. I did a day-trip&amp;hellip;.  but I
+went. I&amp;rsquo;m glad I did.&lt;/p&gt;
+
+&lt;h2 id=&#34;self&#34;&gt;SELF&lt;/h2&gt;
+
+&lt;p&gt;I finalized my plans to attend SELF last minute, about two weeks ago. I
+convinced a friend from work to attend with me one day over lunch, and we
+registered right after. So, this past Saturday morning we left Durham around
+6:30 am for the 2-ish hour drive to Charlotte.&lt;/p&gt;
+
+&lt;p&gt;&lt;center&gt;
+&lt;a href=&#39;../../img/posts/self2019/rungcc.png&#39;&gt;
+&lt;img alt=&#34;Run GCC tshirt I saw&#34; src=&#34;../../img/posts/self2019/rungcc.png&#34; style=&#34;max-width: 100%;&#34;/&gt;
+&lt;/a&gt;
+&lt;div class=&#34;caption&#34;&gt;The first thing I saw when I passed through the hotel
+doors.&lt;/div&gt;
+&lt;/center&gt;&lt;/p&gt;
+
+&lt;p&gt;When we got to the hotel parkng lot, we weren&amp;rsquo;t entirely sure where to go.
+Then, we noticed a person walking towards a door carrying a old mechanical
+keyboard under their arm&amp;hellip; a clue. Sure enough, after following that person
+through the same door, we found ourselves in the middle of a hallway filled
+with Linux booths and face-to-face with a &lt;a href=&#34;https://shop.fsf.org/tshirts-hoodies/run-gcc-shirt&#34;&gt;&amp;ldquo;RUN GCC&amp;rdquo;
+T-shirt&lt;/a&gt; on display. We
+found SELF.&lt;/p&gt;
+
+&lt;p&gt;&lt;center&gt;
+&lt;a href=&#39;../../img/posts/self2019/self2019_badge.jpg&#39;&gt;
+&lt;img alt=&#34;My SELF 2019 Badge&#34; src=&#34;../../img/posts/self2019/self2019_badge.jpg&#34; style=&#34;max-width: 100%;&#34;/&gt;
+&lt;/a&gt;
+&lt;div class=&#34;caption&#34;&gt;My SELF 2019 Badge&lt;/div&gt;
+&lt;/center&gt;&lt;/p&gt;
+
+&lt;p&gt;After walking around a bit, we worked our way to registration and received our
+badges. They were little booklets on a lanyard that contained event information and the
+schedule. However, it &lt;em&gt;did&lt;/em&gt; confuse me at first because the one side was
+upside-down compared to the other side&amp;hellip; but then I realized it was so it
+could function as a name-tag, but still be &lt;em&gt;easily&lt;/em&gt; read while still around
+one&amp;rsquo;s neck. Very practical.&lt;/p&gt;
+
+&lt;h2 id=&#34;talks&#34;&gt;Talks&lt;/h2&gt;
+
+&lt;p&gt;Throughout the day, I went to several talks with an array of topics, including building
+personal clouds, 3D printers, security compliance testing, network backups, and
+even building a tiny house. The talks were generally interesting, and I left with a
+bunch of notes on topics and software I might want to dig into at some point.
+For example, I think it might be useful to look into &lt;a href=&#34;https://www.chef.io/products/chef-inspec/&#34;&gt;chef
+inspec&lt;/a&gt; (or at least similar
+alternatives to it), for verifying build/test environments at work.&lt;/p&gt;
+
+&lt;p&gt;The biggest lesson I learned from the talks at SELF wasn&amp;rsquo;t from their
+&lt;em&gt;content&lt;/em&gt;, but rather the &lt;em&gt;environment&lt;/em&gt; they were presented in. Overall, it
+seemed like a very knowledgeable, but supportive audience.&lt;/p&gt;
+
+&lt;p&gt;For example, one of the speakers was a little flustered as it was his first time
+giving a talk. When the speaker stated he was a bit nervous, the room responded
+with &lt;em&gt;&amp;ldquo;don&amp;rsquo;t worry, you&amp;rsquo;re doing great so far! This is how you learn&amp;rdquo;&lt;/em&gt;. Then&amp;hellip;
+the live demo experienced some issues (as they tend to do). The audience
+responded by laughing &lt;em&gt;with&lt;/em&gt; the speaker and shouting out statements like &amp;ldquo;That
+always happens to me! See, you &lt;em&gt;are&lt;/em&gt; one of us!&amp;ldquo;. People then started
+discussing related tips and tricks they&amp;rsquo;ve learned over the years, while we
+&lt;em&gt;all&lt;/em&gt; worked to troubleshoot the demo.&lt;/p&gt;
+
+&lt;p&gt;The room was able to take what &lt;em&gt;could&lt;/em&gt; have been a disaster for the speaker,
+and turn it into an engaging experience where &lt;em&gt;everyone&lt;/em&gt; in the room connected
+and learned from one another.  As a result, a &amp;ldquo;&lt;em&gt;failed&lt;/em&gt;&amp;rdquo; talk ended up being a
+&lt;em&gt;better&lt;/em&gt; experience than originally planned.&lt;/p&gt;
+
+&lt;h2 id=&#34;thoughts&#34;&gt;Thoughts&lt;/h2&gt;
+
+&lt;p&gt;&lt;a href=&#39;../../img/posts/self2019/self_logo.png&#39;&gt;
+&lt;img alt=&#34;The SELF logo&#34; src=&#34;../../img/posts/self2019/self_logo.png&#34; style=&#34;max-width: 100%; width: 300px; float: right;&#34;/&gt;
+&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;I think SELF displayed glimmers of what the Linux and Open Source
+community &lt;em&gt;can be&lt;/em&gt; when at their best. Did I encounter people I disagreed with,
+or thought were a bit too abrasive? You bet. Did it ultimately matter? Not
+really. When we disagree, if we can muster up the maturity to &lt;em&gt;work
+together&lt;/em&gt;, we will learn and grow as a community, even when everything is going wrong.
+Just like in the talk I described above.
+&lt;code&gt;&amp;lt;/soapbox&amp;gt;&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;I am fully aware that I &amp;ldquo;did SELF wrong&amp;rdquo; by only going for
+a single day and mostly watching talks. I didn&amp;rsquo;t spend too much
+time in the &amp;ldquo;&lt;a href=&#34;https://blogs.vmware.com/opensource/2018/05/15/hallway-track-open-source-conferences/&#34;&gt;hallway
+track&lt;/a&gt;&amp;rdquo;,
+and missed out on the late-night antics and philosophical discussions I heard
+about. Regardless, I still learned a bunch and had a great time. Now that I&amp;rsquo;ve scoped out
+SELF, in the future I think I plan to stay for the whole event&amp;hellip; and maybe
+even submit a talk. See you there!&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>
