@@ -5,10 +5,46 @@
     <description>Recent content in Tags on λ ryan. himmelwright. net</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 20 Jun 2019 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 30 Jun 2019 00:00:00 +0000</lastBuildDate>
     
         <atom:link href="http://ryan.himmelwright.net/tags/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Applications</title>
+      <link>http://ryan.himmelwright.net/tags/applications/</link>
+      <pubDate>Sun, 30 Jun 2019 00:00:00 +0000</pubDate>
+      
+      <guid>http://ryan.himmelwright.net/tags/applications/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Linux</title>
+      <link>http://ryan.himmelwright.net/tags/linux/</link>
+      <pubDate>Sun, 30 Jun 2019 00:00:00 +0000</pubDate>
+      
+      <guid>http://ryan.himmelwright.net/tags/linux/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Notes</title>
+      <link>http://ryan.himmelwright.net/tags/notes/</link>
+      <pubDate>Sun, 30 Jun 2019 00:00:00 +0000</pubDate>
+      
+      <guid>http://ryan.himmelwright.net/tags/notes/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Organization</title>
+      <link>http://ryan.himmelwright.net/tags/organization/</link>
+      <pubDate>Sun, 30 Jun 2019 00:00:00 +0000</pubDate>
+      
+      <guid>http://ryan.himmelwright.net/tags/organization/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>Community</title>
@@ -25,15 +61,6 @@
       <pubDate>Thu, 20 Jun 2019 00:00:00 +0000</pubDate>
       
       <guid>http://ryan.himmelwright.net/tags/events/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Linux</title>
-      <link>http://ryan.himmelwright.net/tags/linux/</link>
-      <pubDate>Thu, 20 Jun 2019 00:00:00 +0000</pubDate>
-      
-      <guid>http://ryan.himmelwright.net/tags/linux/</guid>
       <description></description>
     </item>
     
@@ -74,20 +101,20 @@
     </item>
     
     <item>
-      <title>Dotfiles</title>
-      <link>http://ryan.himmelwright.net/tags/dotfiles/</link>
-      <pubDate>Thu, 23 May 2019 00:00:00 +0000</pubDate>
-      
-      <guid>http://ryan.himmelwright.net/tags/dotfiles/</guid>
-      <description></description>
-    </item>
-    
-    <item>
       <title>Shell</title>
       <link>http://ryan.himmelwright.net/tags/shell/</link>
       <pubDate>Thu, 23 May 2019 00:00:00 +0000</pubDate>
       
       <guid>http://ryan.himmelwright.net/tags/shell/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>dotfiles</title>
+      <link>http://ryan.himmelwright.net/tags/dotfiles/</link>
+      <pubDate>Thu, 23 May 2019 00:00:00 +0000</pubDate>
+      
+      <guid>http://ryan.himmelwright.net/tags/dotfiles/</guid>
       <description></description>
     </item>
     
