@@ -3,6 +3,47 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>http://ryan.himmelwright.net/tags/hardware/</loc>
+    <lastmod>2019-07-24T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://ryan.himmelwright.net/tags/homelab/</loc>
+    <lastmod>2019-07-24T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://ryan.himmelwright.net/tags/monitors/</loc>
+    <lastmod>2019-07-24T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://ryan.himmelwright.net/post/new-lg32qk500w/</loc>
+    <lastmod>2019-07-24T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://ryan.himmelwright.net/post/</loc>
+    <lastmod>2019-07-24T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://ryan.himmelwright.net/tags/</loc>
+    <lastmod>2019-07-24T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://ryan.himmelwright.net/</loc>
+    <lastmod>2019-07-24T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>http://ryan.himmelwright.net/tags/applications/</loc>
     <lastmod>2019-06-30T00:00:00+00:00</lastmod>
     <priority>0</priority>
@@ -27,26 +68,8 @@
   </url>
   
   <url>
-    <loc>http://ryan.himmelwright.net/post/</loc>
-    <lastmod>2019-06-30T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
     <loc>http://ryan.himmelwright.net/post/switched-to-joplin-notes/</loc>
     <lastmod>2019-06-30T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://ryan.himmelwright.net/tags/</loc>
-    <lastmod>2019-06-30T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>http://ryan.himmelwright.net/</loc>
-    <lastmod>2019-06-30T00:00:00+00:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
@@ -72,12 +95,6 @@
   </url>
   
   <url>
-    <loc>http://ryan.himmelwright.net/tags/hardware/</loc>
-    <lastmod>2019-06-05T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
     <loc>http://ryan.himmelwright.net/tags/filesystems/</loc>
     <lastmod>2019-06-05T00:00:00+00:00</lastmod>
     <priority>0</priority>
@@ -91,6 +108,12 @@
   
   <url>
     <loc>http://ryan.himmelwright.net/tags/dev/</loc>
+    <lastmod>2019-05-23T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://ryan.himmelwright.net/tags/dotfiles/</loc>
     <lastmod>2019-05-23T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
@@ -118,12 +141,6 @@
   </url>
   
   <url>
-    <loc>http://ryan.himmelwright.net/tags/dotfiles/</loc>
-    <lastmod>2019-05-23T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
     <loc>http://ryan.himmelwright.net/post/custom-neofetch-ascii-art/</loc>
     <lastmod>2019-04-30T00:00:00+00:00</lastmod>
   </url>
@@ -131,18 +148,6 @@
   <url>
     <loc>http://ryan.himmelwright.net/post/sub-monitor-workflows-with-xrandr/</loc>
     <lastmod>2019-04-29T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://ryan.himmelwright.net/tags/homelab/</loc>
-    <lastmod>2019-04-29T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>http://ryan.himmelwright.net/tags/monitors/</loc>
-    <lastmod>2019-04-29T00:00:00+00:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>

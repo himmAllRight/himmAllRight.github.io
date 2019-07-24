@@ -5,10 +5,37 @@
     <description>Recent content in Tags on λ ryan. himmelwright. net</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 30 Jun 2019 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 24 Jul 2019 00:00:00 +0000</lastBuildDate>
     
         <atom:link href="http://ryan.himmelwright.net/tags/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Hardware</title>
+      <link>http://ryan.himmelwright.net/tags/hardware/</link>
+      <pubDate>Wed, 24 Jul 2019 00:00:00 +0000</pubDate>
+      
+      <guid>http://ryan.himmelwright.net/tags/hardware/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Homelab</title>
+      <link>http://ryan.himmelwright.net/tags/homelab/</link>
+      <pubDate>Wed, 24 Jul 2019 00:00:00 +0000</pubDate>
+      
+      <guid>http://ryan.himmelwright.net/tags/homelab/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Monitors</title>
+      <link>http://ryan.himmelwright.net/tags/monitors/</link>
+      <pubDate>Wed, 24 Jul 2019 00:00:00 +0000</pubDate>
+      
+      <guid>http://ryan.himmelwright.net/tags/monitors/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>Applications</title>
@@ -65,15 +92,6 @@
     </item>
     
     <item>
-      <title>Hardware</title>
-      <link>http://ryan.himmelwright.net/tags/hardware/</link>
-      <pubDate>Wed, 05 Jun 2019 00:00:00 +0000</pubDate>
-      
-      <guid>http://ryan.himmelwright.net/tags/hardware/</guid>
-      <description></description>
-    </item>
-    
-    <item>
       <title>filesystems</title>
       <link>http://ryan.himmelwright.net/tags/filesystems/</link>
       <pubDate>Wed, 05 Jun 2019 00:00:00 +0000</pubDate>
@@ -101,16 +119,7 @@
     </item>
     
     <item>
-      <title>Shell</title>
-      <link>http://ryan.himmelwright.net/tags/shell/</link>
-      <pubDate>Thu, 23 May 2019 00:00:00 +0000</pubDate>
-      
-      <guid>http://ryan.himmelwright.net/tags/shell/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>dotfiles</title>
+      <title>Dotfiles</title>
       <link>http://ryan.himmelwright.net/tags/dotfiles/</link>
       <pubDate>Thu, 23 May 2019 00:00:00 +0000</pubDate>
       
@@ -119,20 +128,11 @@
     </item>
     
     <item>
-      <title>Homelab</title>
-      <link>http://ryan.himmelwright.net/tags/homelab/</link>
-      <pubDate>Mon, 29 Apr 2019 00:00:00 +0000</pubDate>
+      <title>Shell</title>
+      <link>http://ryan.himmelwright.net/tags/shell/</link>
+      <pubDate>Thu, 23 May 2019 00:00:00 +0000</pubDate>
       
-      <guid>http://ryan.himmelwright.net/tags/homelab/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Monitors</title>
-      <link>http://ryan.himmelwright.net/tags/monitors/</link>
-      <pubDate>Mon, 29 Apr 2019 00:00:00 +0000</pubDate>
-      
-      <guid>http://ryan.himmelwright.net/tags/monitors/</guid>
+      <guid>http://ryan.himmelwright.net/tags/shell/</guid>
       <description></description>
     </item>
     
@@ -209,7 +209,7 @@
     </item>
     
     <item>
-      <title>Devops</title>
+      <title>DevOps</title>
       <link>http://ryan.himmelwright.net/tags/devops/</link>
       <pubDate>Wed, 15 Aug 2018 00:00:00 +0000</pubDate>
       
@@ -344,7 +344,7 @@
     </item>
     
     <item>
-      <title>Go</title>
+      <title>GO</title>
       <link>http://ryan.himmelwright.net/tags/go/</link>
       <pubDate>Sat, 02 Sep 2017 00:00:00 +0000</pubDate>
       

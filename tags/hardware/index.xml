@@ -5,10 +5,159 @@
     <description>Recent content in Hardware on λ ryan. himmelwright. net</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 05 Jun 2019 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 24 Jul 2019 00:00:00 +0000</lastBuildDate>
     
         <atom:link href="http://ryan.himmelwright.net/tags/hardware/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>New LG-32QK500-w Monitor</title>
+      <link>http://ryan.himmelwright.net/post/new-lg32qk500w/</link>
+      <pubDate>Wed, 24 Jul 2019 00:00:00 +0000</pubDate>
+      
+      <guid>http://ryan.himmelwright.net/post/new-lg32qk500w/</guid>
+      <description>&lt;p&gt;At the beginning of summer, I was entertaining the idea of improving my wife&amp;rsquo;s
+computer setup by adding a new external monitor. She agreed. As a result, we
+have purchased, recieved, and even &lt;em&gt;mounted&lt;/em&gt;, the &lt;a href=&#34;https://www.lg.com/us/monitors/lg-32QK500-W-led-monitor&#34;&gt;LG
+32QK500w&lt;/a&gt; monitor.
+Here are my thoughts.&lt;/p&gt;
+
+&lt;h3 id=&#34;reasoning&#34;&gt;Reasoning&lt;/h3&gt;
+
+&lt;p&gt;Recently, my wife has had to spend more time prepping at night for her next workday, which
+she does on her laptop. This made it a good time to finally setup her
+office space in the guest bedroom. She has an old 21.5&amp;rdquo; 1080p monitor from
+college, but we decided it might not be the best fit for the
+space.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;../../img/posts/new-lg32qk500w/dpi-32.png&#34;&gt;
+&lt;img alt=&#34;Netflix logo&#34; src=&#34;../../img/posts/new-lg32qk500w/netflix.png&#34; style=&#34;max-width: 100%;&#34;/&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;We thought that it would be nice to have a larger screen in that room, guests
+could watch video content. Additionally, my wife and I have a habit of falling
+asleep on the couch watching TV most weekend nights&amp;hellip; but we want to keep our
+bedroom TV free. Having a spot where we can lay down on a bed and prep for the
+inevitable while watching a movie, is probably a good idea (and our backs agree).&lt;/p&gt;
+
+&lt;p&gt;I started looking for slightly larger monitors and quickly noticed something&amp;hellip; the
+2560x1440 32&amp;rdquo; monitors were cheaper than their 27&amp;rdquo; counterparts. This
+made sense, as the dpi is lower. However, after doing the math, 2560x1440 pixels @ 32&amp;rdquo; is
+the same dpi of as a 24&amp;rdquo; 1920x1080 monitor (109 dots per inch). While this
+isn&amp;rsquo;t the &lt;em&gt;sharpest&lt;/em&gt; configuration, it is very common and reasonable for productivity setups.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;../../img/posts/new-lg32qk500w/dpi-32.png&#34;&gt;
+&lt;img alt=&#34;2560 by 1440 pixels at 32 inches has a dpi of 91.&#34; src=&#34;../../img/posts/new-lg32qk500w/dpi-32.png&#34; style=&#34;max-width: 100%;&#34;/&gt;&lt;/a&gt;
+&lt;div class=&#34;caption&#34;&gt;2560x1440 pixels at 32&amp;rdquo; has a dpi of 91&lt;/div&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;../../img/posts/new-lg32qk500w/dpi-24.png&#34;&gt;
+&lt;img alt=&#34;1920 by 1080 pixels at 24 inches also has a dpi of 91.&#34; src=&#34;../../img/posts/new-lg32qk500w/dpi-24.png&#34; style=&#34;max-width: 100%;&#34;/&gt;&lt;/a&gt;
+&lt;div class=&#34;caption&#34;&gt;1920x1080 pixels at 24&amp;rdquo; also has a dpi of 91&lt;/div&gt;&lt;/p&gt;
+
+&lt;p&gt;In fact, my wife doesn&amp;rsquo;t have the best vision (especially at night when she
+tends to work), and tends to actually &lt;em&gt;prefer&lt;/em&gt; the larger scale of 109 dpi. We
+even purposefully picked a 1600x900 resolution screen over a FHD one when
+buying her Thinkpad for the same reason.&lt;/p&gt;
+
+&lt;p&gt;Lastly, while it is scaled up a bit on a physically larger display, these
+monitors still provide a 2560x1440 resolution. Recently, I have decided that this
+particular resolution, may be the best for productivity , at least in the type
+of workflows I use. I even figured out how to &lt;a href=&#34;http://192.168.1.5:1313/post/sub-monitor-workflows-with-xrandr/&#34;&gt;configure a 2560x1440
+&amp;ldquo;sub-monitor&amp;rdquo; on my 43&amp;rdquo; QHD
+monitor&lt;/a&gt; when
+I need to &lt;em&gt;focus&lt;/em&gt;. Having an &lt;em&gt;actual&lt;/em&gt; 2560x1440 monitor in the house would be
+wonderful for both my wife&amp;rsquo;s and my own productivity.&lt;/p&gt;
+
+&lt;h3 id=&#34;selection&#34;&gt;Selection&lt;/h3&gt;
+
+&lt;p&gt;&lt;a href=&#34;../../img/posts/new-lg32qk500w/box.jpg&#34;&gt;
+&lt;img alt=&#34;New monitor box&#34; src=&#34;../../img/posts/new-lg32qk500w/box.jpg&#34; style=&#34;max-width: 100%;&#34;/&gt;&lt;/a&gt;
+&lt;div class=&#34;caption&#34;&gt;The new monitor in it&amp;rsquo;s box&lt;/div&gt;&lt;/p&gt;
+
+&lt;p&gt;So I wanted a 32&amp;rdquo;, 2560x1440 IPS monitor&amp;hellip; at a decent price. After browsing
+around amazon, I came across the &lt;a href=&#34;https://www.amazon.com/gp/product/B07LD6XJ8X/ref=ppx_yo_dt_b_asin_title_o03_s01?ie=UTF8&amp;amp;psc=1&#34;&gt;LG
+32QK500W&lt;/a&gt;.
+It was listed at a very reasonable price (on sale), had a few bonus features
+(75 Hz refresh + freesync options), and was an LG IPS panel, which I felt
+comfortable purchasing considering how much I enjoyed &lt;a href=&#34;../../post/new-lgud4379b/&#34;&gt;my LG
+monitor&amp;rsquo;s&lt;/a&gt; panel.&lt;/p&gt;
+
+&lt;p&gt;In summary, the LG 32QK500-W has the following specs/features:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;32 inch, 2560 x 1440 pixel resolution&lt;/li&gt;
+&lt;li&gt;IPS Panel&lt;/li&gt;
+&lt;li&gt;mDP and 2 HDMI imports&lt;/li&gt;
+&lt;li&gt;VESA mount compatible&lt;/li&gt;
+&lt;li&gt;Decently thin bezels&lt;/li&gt;
+&lt;li&gt;60 &lt;em&gt;and&lt;/em&gt; 75 Hertz refresh rates&lt;/li&gt;
+&lt;li&gt;Freesync&lt;/li&gt;
+&lt;li&gt;On sale for less than $250 (USD)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;We also purchased a cheap &lt;a href=&#34;https://www.amazon.com/gp/product/B01BCUM766/ref=ppx_yo_dt_b_asin_title_o03_s00?ie=UTF8&amp;amp;psc=1&#34;&gt;Amazon basics
+mount&lt;/a&gt;
+to wall mount it, but in hindsight it might of been worth paying a little
+extra for a better one.&lt;/p&gt;
+
+&lt;h3 id=&#34;what-i-like&#34;&gt;What I Like&lt;/h3&gt;
+
+&lt;h4 id=&#34;resolution&#34;&gt;Resolution&lt;/h4&gt;
+
+&lt;p&gt;&lt;a href=&#34;../../img/posts/new-lg32qk500w/screenshot.png&#34;&gt;
+&lt;img alt=&#34;Screenshot of working on monitor&#34; src=&#34;../../img/posts/new-lg32qk500w/screenshot.png&#34; style=&#34;max-width: 100%;&#34;/&gt;&lt;/a&gt;
+&lt;div class=&#34;caption&#34;&gt;The resolution is perfect for productivity work.&lt;/div&gt;&lt;/p&gt;
+
+&lt;p&gt;The &amp;ldquo;2k&amp;rdquo; resolution is perfect. It gives just enough space to get work done,
+but not &lt;em&gt;so&lt;/em&gt; much space that it is distracting. I can perfectly fit two &lt;em&gt;full&lt;/em&gt;
+windows next to each other on the screen. At the same time, it is still a small
+enough resolution that a single focused full screen window doesn&amp;rsquo;t look odd.&lt;/p&gt;
+
+&lt;h4 id=&#34;colors&#34;&gt;Colors&lt;/h4&gt;
+
+&lt;p&gt;The colors look great. They are vivid, and the blacks are &lt;em&gt;dark&lt;/em&gt;.
+I think I may even enjoy them better than on my own monitor&amp;hellip;&lt;/p&gt;
+
+&lt;h4 id=&#34;75-hz-refresh-rate-and-freesync&#34;&gt;75 Hz refresh rate (and Freesync!)&lt;/h4&gt;
+
+&lt;p&gt;Lastly, the 75 Hz refresh rate and Freesync was a nice little bonus. While the
+only computer we have in the house that can &lt;em&gt;really&lt;/em&gt; take advantage of these
+features is &lt;a href=&#34;../../post/charmeleon-desktop-design/&#34;&gt;my desktop&lt;/a&gt; (which is in another
+room)&amp;hellip;  it&amp;rsquo;s nice to know we have the option if I want to test it out.&lt;/p&gt;
+
+&lt;h3 id=&#34;what-i-don-t-like&#34;&gt;What I Don&amp;rsquo;t Like&lt;/h3&gt;
+
+&lt;h4 id=&#34;no-speakers-and-audio-jack-is-noisy&#34;&gt;No speakers&amp;hellip; and audio jack is noisy&lt;/h4&gt;
+
+&lt;p&gt;Normally, I could care less if a monitor has speakers or not. They usually
+sound terrible, and I end up plugging external headphones/speakers to the
+computer directly anyway. However, as we intend to also use this monitor as a
+&amp;ldquo;TV&amp;rdquo; via an &lt;a href=&#34;https://www.amazon.com/Fire-TV-Stick-4K-with-Alexa-Voice-Remote/dp/B079QHML21/ref=sr_1_1?keywords=amazon+fire+stick&amp;amp;qid=1563791000&amp;amp;s=gateway&amp;amp;sr=8-1&#34;&gt;Amazon
+Firestick&lt;/a&gt;,
+it would be nice to have even &lt;em&gt;basic&lt;/em&gt; speakers to pump audio through by
+default. It &lt;em&gt;does&lt;/em&gt; have a 3.5mm headphone jack, but there seemed to be a bit of
+noise when I tried it.&lt;/p&gt;
+
+&lt;h4 id=&#34;while-dpi-is-perfect-for-it-s-use-it-isn-t-the-best&#34;&gt;While dpi is perfect for it&amp;rsquo;s use, it isn&amp;rsquo;t the best&lt;/h4&gt;
+
+&lt;p&gt;As mentioned earlier, the dpi isn&amp;rsquo;t the best, and the image isn&amp;rsquo;t quite as
+&amp;ldquo;crisp&amp;rdquo; as you might find on a high resolution display. Also, at such a large
+screen size, it is almost required to sit back from the screen a little bit
+further than normal. However, as I already described in the sections above&amp;hellip;
+for our use case, this was actually preferred.&lt;/p&gt;
+
+&lt;h3 id=&#34;conclusion&#34;&gt;Conclusion&lt;/h3&gt;
+
+&lt;p&gt;&lt;a href=&#34;../../img/posts/new-lg32qk500w/desk.jpg&#34;&gt;
+&lt;img alt=&#34;Screenshot of working on monitor&#34; src=&#34;../../img/posts/new-lg32qk500w/desk.jpg&#34; style=&#34;max-width: 100%;&#34;/&gt;&lt;/a&gt;
+&lt;div class=&#34;caption&#34;&gt;The monitor all set up mounted above my wife&amp;rsquo;s new
+desk. (Next step&amp;hellip; hide the wires!)&lt;/div&gt;&lt;/p&gt;
+
+&lt;p&gt;There isn&amp;rsquo;t much left to say. At this price point, and for what we wanted this
+monitor for, I think it was a perfect match. While it might not be the absolute
+&lt;em&gt;best&lt;/em&gt; monitor out there, it is a great value. If you&amp;rsquo;re looking for a large
+1440p monitor to get some work done on, that could also be a TV replacement at
+a good price (I&amp;rsquo;m looking at you college students), I highly recommend it.&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>Creating a RAM Disk with a tmpfs Mount</title>
