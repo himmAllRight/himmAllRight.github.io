@@ -604,7 +604,6 @@ Intel i5-7200u [2.5 GHz (3.1 GHz Turbo), 2 Cores, 4 Threads]
 16 GB RAM
 500 GB Samsung EVO SSD
 14&amp;quot; 1920x1080 IPS Display
-Thinkpad Ultra Dock 40A2 (to connect to periphery devices below)
 Fedora 30 SilverBlue
 &lt;/code&gt;&lt;/pre&gt;
 
@@ -683,7 +682,13 @@ Centos 7.6 (Core)
 
 &lt;h3 id=&#34;rebecca-wife&#34;&gt;Rebecca (Wife)&lt;/h3&gt;
 
-&lt;h3 id=&#34;weepinbell&#34;&gt;- Weepinbell&lt;/h3&gt;
+&lt;p&gt;&lt;a href=&#34;../../img/homelab/rebecca_desk.jpg&#34;&gt;&lt;img alt=&#34;Rebecca&#39;s Desk&#34; src=&#34;../../img/homelab/rebecca_desk.jpg&#34; width=100%&gt;&lt;/a&gt;
+&lt;div class=&#34;caption&#34;&gt;Rebecca&amp;rsquo;s Desk (yes, that is my laptop in the dock)&lt;/div&gt;&lt;/p&gt;
+
+&lt;p&gt;Even though this is my wife&amp;rsquo;s gear&amp;hellip; I&amp;rsquo;m in charge of managing it all. So I
+decided to add it here.&lt;/p&gt;
+
+&lt;h4 id=&#34;weepinbell&#34;&gt;- Weepinbell&lt;/h4&gt;
 
 &lt;pre&gt;&lt;code&gt;Thinkpad T450s
 Intel i5-5300u [2.3 GHz (2.90 GHz Turbo), 2 Cores, 4 Threads]
@@ -691,10 +696,18 @@ Intel i5-5300u [2.3 GHz (2.90 GHz Turbo), 2 Cores, 4 Threads]
 256 GB SSD
 14&amp;quot; 1600x900 LED Display
 6-Cell Battery
-Pop_OS! 19.04
+CloudReady (a chromiumos spin)
+
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h4 id=&#34;bellsprout-dead&#34;&gt;- Bellsprout (Dead)&lt;/h4&gt;
+&lt;h4 id=&#34;periphery-1&#34;&gt;- Periphery&lt;/h4&gt;
+
+&lt;pre&gt;&lt;code&gt;Thinkpad Ultra Dock 40A2 (to connect to periphery devices below)
+LG 32QK500W, 32&amp;quot; 2560x1440 IPS Monitor
+Bose AE2 Headphones
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h4 id=&#34;bellsprout&#34;&gt;- Bellsprout&lt;/h4&gt;
 
 &lt;pre&gt;&lt;code&gt;Macbook Air (2014)
 Intel i5 (1.4 GHz (2.7 GHz Turbo), 3M Cache, 2 Cores, 2 Threads) ?
