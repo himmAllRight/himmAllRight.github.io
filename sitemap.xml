@@ -3,6 +3,53 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>http://ryan.himmelwright.net/tags/applications/</loc>
+    <lastmod>2019-08-07T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://ryan.himmelwright.net/post/back-on-org-mode-for-work/</loc>
+    <lastmod>2019-08-07T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://ryan.himmelwright.net/tags/linux/</loc>
+    <lastmod>2019-08-07T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://ryan.himmelwright.net/tags/notes/</loc>
+    <lastmod>2019-08-07T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://ryan.himmelwright.net/tags/organization/</loc>
+    <lastmod>2019-08-07T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://ryan.himmelwright.net/post/</loc>
+    <lastmod>2019-08-07T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://ryan.himmelwright.net/tags/</loc>
+    <lastmod>2019-08-07T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://ryan.himmelwright.net/</loc>
+    <lastmod>2019-08-07T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>http://ryan.himmelwright.net/tags/hardware/</loc>
     <lastmod>2019-07-24T00:00:00+00:00</lastmod>
     <priority>0</priority>
@@ -23,48 +70,6 @@
   <url>
     <loc>http://ryan.himmelwright.net/post/new-lg32qk500w/</loc>
     <lastmod>2019-07-24T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://ryan.himmelwright.net/post/</loc>
-    <lastmod>2019-07-24T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>http://ryan.himmelwright.net/tags/</loc>
-    <lastmod>2019-07-24T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>http://ryan.himmelwright.net/</loc>
-    <lastmod>2019-07-24T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>http://ryan.himmelwright.net/tags/applications/</loc>
-    <lastmod>2019-06-30T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>http://ryan.himmelwright.net/tags/linux/</loc>
-    <lastmod>2019-06-30T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>http://ryan.himmelwright.net/tags/notes/</loc>
-    <lastmod>2019-06-30T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>http://ryan.himmelwright.net/tags/organization/</loc>
-    <lastmod>2019-06-30T00:00:00+00:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
@@ -107,18 +112,6 @@
   </url>
   
   <url>
-    <loc>http://ryan.himmelwright.net/tags/dev/</loc>
-    <lastmod>2019-05-23T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>http://ryan.himmelwright.net/tags/dotfiles/</loc>
-    <lastmod>2019-05-23T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
     <loc>http://ryan.himmelwright.net/pages/homelab/</loc>
     <lastmod>2019-05-23T00:00:00+00:00</lastmod>
   </url>
@@ -136,6 +129,18 @@
   
   <url>
     <loc>http://ryan.himmelwright.net/tags/shell/</loc>
+    <lastmod>2019-05-23T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://ryan.himmelwright.net/tags/dev/</loc>
+    <lastmod>2019-05-23T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://ryan.himmelwright.net/tags/dotfiles/</loc>
     <lastmod>2019-05-23T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
