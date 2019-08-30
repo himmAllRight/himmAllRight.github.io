@@ -24,14 +24,10 @@
 
 &lt;h3 id=&#34;ryan-me&#34;&gt;Ryan (Me)&lt;/h3&gt;
 
-&lt;p&gt;I recently moved into a new house and am still putting this space together&amp;hellip;
-So for now &amp;hellip; don&amp;rsquo;t mind the wires :P. I&amp;rsquo;ll try to keep updating this page as
-I progress.&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&#34;../../img/homelab/new_house2.jpg&#34;&gt;&lt;img alt=&#34;Home Office&#34; src=&#34;../../img/homelab/new_house2.jpg&#34; width=100%&gt;&lt;/a&gt;
+&lt;p&gt;&lt;a href=&#34;../../img/homelab/desk_front_night.jpg&#34;&gt;&lt;img alt=&#34;Home Office&#34; src=&#34;../../img/homelab/desk_front_night.jpg&#34; width=100%&gt;&lt;/a&gt;
 &lt;div class=&#34;caption&#34;&gt;My Home Office&lt;/div&gt;&lt;/p&gt;
 
-&lt;p&gt;&lt;a href=&#34;../../img/homelab/new_house1.jpg&#34;&gt;&lt;img alt=&#34;My Desk&#34; src=&#34;../../img/homelab/new_house1.jpg&#34; width=100%&gt;&lt;/a&gt;
+&lt;p&gt;&lt;a href=&#34;../../img/homelab/desk_night.jpg&#34;&gt;&lt;img alt=&#34;My Desk&#34; src=&#34;../../img/homelab/desk_night.jpg&#34; width=100%&gt;&lt;/a&gt;
 &lt;div class=&#34;caption&#34;&gt;My Desk&lt;/div&gt;&lt;/p&gt;
 
 &lt;h4 id=&#34;charmeleon-main-workstation&#34;&gt;- Charmeleon (Main Workstation)&lt;/h4&gt;
@@ -64,7 +60,7 @@ Fedora 30 SilverBlue
 
 &lt;h5 id=&#34;periphery&#34;&gt;Periphery&lt;/h5&gt;
 
-&lt;pre&gt;&lt;code&gt;LG UD4379-b, 43&amp;quot; IPS UHD (3840x2160px) Monitor
+&lt;pre&gt;&lt;code&gt;Dell 27&amp;quot; 2560x1440 IPS Monitor (Dell u2717d)
 Happy Hacking Keyboard Pro2
 Audioengine A2+ Speakers &amp;amp; Stands
 Audio Technica M50x Headphones
@@ -109,6 +105,11 @@ Whatever disto I&#39;m playing with right now...
 
 &lt;pre&gt;&lt;code&gt;Netgear Orbi RBK50 Router (In Bedroom)
 Netgear Orbi RBK50 Satellite (In Office)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h4 id=&#34;living-room-tv&#34;&gt;- Living Room &amp;ldquo;TV&amp;rdquo;&lt;/h4&gt;
+
+&lt;pre&gt;&lt;code&gt;LG UD4379-b, 43&amp;quot; IPS UHD (3840x2160px) Monitor
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;h4 id=&#34;cyberpower-1500va-900w-ups&#34;&gt;- CyberPower 1500VA/900W UPS&lt;/h4&gt;

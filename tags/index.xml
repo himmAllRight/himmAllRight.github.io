@@ -92,7 +92,7 @@
     </item>
     
     <item>
-      <title>filesystems</title>
+      <title>Filesystems</title>
       <link>http://ryan.himmelwright.net/tags/filesystems/</link>
       <pubDate>Wed, 05 Jun 2019 00:00:00 +0000</pubDate>
       
@@ -106,6 +106,15 @@
       <pubDate>Thu, 23 May 2019 00:00:00 +0000</pubDate>
       
       <guid>http://ryan.himmelwright.net/tags/customization/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Dotfiles</title>
+      <link>http://ryan.himmelwright.net/tags/dotfiles/</link>
+      <pubDate>Thu, 23 May 2019 00:00:00 +0000</pubDate>
+      
+      <guid>http://ryan.himmelwright.net/tags/dotfiles/</guid>
       <description></description>
     </item>
     
@@ -124,15 +133,6 @@
       <pubDate>Thu, 23 May 2019 00:00:00 +0000</pubDate>
       
       <guid>http://ryan.himmelwright.net/tags/dev/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>dotfiles</title>
-      <link>http://ryan.himmelwright.net/tags/dotfiles/</link>
-      <pubDate>Thu, 23 May 2019 00:00:00 +0000</pubDate>
-      
-      <guid>http://ryan.himmelwright.net/tags/dotfiles/</guid>
       <description></description>
     </item>
     
@@ -209,7 +209,7 @@
     </item>
     
     <item>
-      <title>Devops</title>
+      <title>DevOps</title>
       <link>http://ryan.himmelwright.net/tags/devops/</link>
       <pubDate>Wed, 15 Aug 2018 00:00:00 +0000</pubDate>
       
