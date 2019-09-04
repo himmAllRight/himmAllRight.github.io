@@ -5,10 +5,171 @@
     <description>Recent content in Fedora on λ ryan. himmelwright. net</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 31 Jul 2017 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 04 Sep 2019 00:00:00 +0000</lastBuildDate>
     
         <atom:link href="http://ryan.himmelwright.net/tags/fedora/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Setup a Runner VM for Gitlab</title>
+      <link>http://ryan.himmelwright.net/post/create-gitlab-runner/</link>
+      <pubDate>Wed, 04 Sep 2019 00:00:00 +0000</pubDate>
+      
+      <guid>http://ryan.himmelwright.net/post/create-gitlab-runner/</guid>
+      <description>&lt;p&gt;I play around with CI/CD pipelines quite a bit, both at home and at work. I have
+mostly used Jenkins, but I wanted to see how Gitlab&amp;rsquo;s CI/CD tooling has
+progressed over the last year. So, I decided to try to use Gitlab to manage the
+automated build and deployments of a personal project I&amp;rsquo;ve been working on.
+The first step of the process was to setup a runner my Gitlab instance could
+use for the builds.&lt;/p&gt;
+
+&lt;h2 id=&#34;setup-a-machine-vm&#34;&gt;Setup a Machine/VM&lt;/h2&gt;
+
+&lt;p&gt;&lt;center&gt;
+&lt;a href=&#34;../../img/posts/create-gitlab-runner/fedora-vm-install.png&#34;&gt;
+&lt;img alt=&#34;Installing a new Fedora30 VM in Virt-Manager&#34; src=&#34;../../img/posts/create-gitlab-runner/fedora-vm-install.png&#34; style=&#34;max-width: 100%;&#34;/&gt;&lt;/a&gt;
+&lt;div class=&#34;caption&#34;&gt;Installing a new Fedora 30 VM in Virt-Manager for my runner&lt;/div&gt;
+&lt;/center&gt;&lt;/p&gt;
+
+&lt;p&gt;This will be a BYOG post (bring your own Gitlab). I already
+&amp;ldquo;&lt;em&gt;had one laying around&lt;/em&gt;&amp;rdquo;, so I won&amp;rsquo;t cover setting that up.&lt;/p&gt;
+
+&lt;p&gt;Your runner needs may differ, but in this post I am installing runner on a
+Fedora 30 VM. I will also be using both &lt;a href=&#34;https://buildah.io/&#34;&gt;buildah&lt;/a&gt; and
+&lt;a href=&#34;https://podman.io/&#34;&gt;podman&lt;/a&gt; for this project.&lt;/p&gt;
+
+&lt;h4 id=&#34;some-things-to-note-consider-during-vm-setup&#34;&gt;Some things to note/consider during VM setup:&lt;/h4&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Install packages required for pipeline tasks (ex: &lt;code&gt;podman&lt;/code&gt; and &lt;code&gt;buildah&lt;/code&gt;)&lt;/li&gt;
+&lt;li&gt;If &lt;code&gt;sudo&lt;/code&gt; is required, manage the &lt;code&gt;gitlab-runner&lt;/code&gt; user/group using &lt;code&gt;visudo&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;If using docker runners, &lt;code&gt;docker-machine&lt;/code&gt; needs to be installed&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;install-runner&#34;&gt;Install runner&lt;/h2&gt;
+
+&lt;p&gt;First, install the &lt;code&gt;gitlab-runner&lt;/code&gt; package. This can be done using the
+instructions found
+&lt;a href=&#34;https://docs.gitlab.com/runner/install/linux-repository.html&#34;&gt;here&lt;/a&gt;.
+&lt;em&gt;However&lt;/em&gt;, I encountered issues installing it on my Fedora VMs, as this install
+method isn&amp;rsquo;t supported for 30 yet.  (Check out &lt;a href=&#34;https://gitlab.com/gitlab-org/gitlab-runner/issues/4401&#34;&gt;this
+issue&lt;/a&gt; for more info).&lt;/p&gt;
+
+&lt;h4 id=&#34;add-gitlab-s-repo&#34;&gt;Add GitLab&amp;rsquo;s Repo&lt;/h4&gt;
+
+&lt;pre&gt;&lt;code&gt;curl -L https://packages.gitlab.com/install/repositories/runner/gitlab-runner/script.rpm.sh | sudo bash
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h4 id=&#34;install-gitlab-runner&#34;&gt;Install gitlab runner&lt;/h4&gt;
+
+&lt;pre&gt;&lt;code&gt;sudo dnf install gitlab-runner
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;alternative-copr-install&#34;&gt;(Alternative) Copr install&lt;/h2&gt;
+
+&lt;p&gt;For now, I have been using the copr install posted in the comments
+of that issue (linked above). I recommend checking if the issue is resolved first, as it
+might change from the time of writing this post. To install:&lt;/p&gt;
+
+&lt;p&gt;First enable the copr repo:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;sudo dnf copr enable snecker/gitlab-runner -y
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Next, install:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;sudo dnf install gitlab-runner -y
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h4 id=&#34;register-the-runner&#34;&gt;Register the Runner&lt;/h4&gt;
+
+&lt;p&gt;Once installed, register the runner. Instructions on how to register a runner
+can be found &lt;a href=&#34;https://docs.gitlab.com/runner/register/index.html&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;sudo gitlab-runner register
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Enter the coordinator URL (ex: &lt;code&gt;https://gitlab.com&lt;/code&gt;)&lt;/p&gt;
+
+&lt;p&gt;Next, a &lt;em&gt;gitlab-ci&lt;/em&gt; token must be shared with the runner.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;../../img/posts/create-gitlab-runner/gitlab-runner-settings.png&#34;&gt;
+&lt;img alt=&#34;Gitlab Runner Settings&#34; src=&#34;../../img/posts/create-gitlab-runner/gitlab-runner-settings.png&#34; style=&#34;max-width: 100%;&#34;/&gt;&lt;/a&gt;
+&lt;div class=&#34;caption&#34;&gt;Gitlab Runner&lt;strong&gt;s&lt;/strong&gt; Settings Page&lt;/div&gt;&lt;/p&gt;
+
+&lt;p&gt;To obtain a gitlab-ci token, got to &lt;strong&gt;Admin Area&lt;/strong&gt; -&amp;gt; &lt;strong&gt;Overview&lt;/strong&gt; -&amp;gt;
+&lt;strong&gt;Runners&lt;/strong&gt;. On the right, there should be a token to use during setup.&lt;/p&gt;
+
+&lt;p&gt;When the runner registrations asks for the token, use the &amp;ldquo;registration token&amp;rdquo;
+listed in the &amp;ldquo;Set up a shared Runner manually&amp;rdquo; section.&lt;/p&gt;
+
+&lt;p&gt;Next, provide a short description, and add a tag or two (when prompted).&lt;/p&gt;
+
+&lt;p&gt;Lastly, enter the executor (the system on the runner that executes commands). For
+now, I&amp;rsquo;ve been using &lt;code&gt;&amp;quot;shell&amp;quot;&lt;/code&gt; for my needs, as these VMs are fully
+dedicated to be used as the runners for a single project.&lt;/p&gt;
+
+&lt;p&gt;Congrats, the runner should be registered! Now to set it up&amp;hellip;&lt;/p&gt;
+
+&lt;h2 id=&#34;link-to-ci-cd-builds&#34;&gt;Link to CI/CD Builds&lt;/h2&gt;
+
+&lt;p&gt;It is time to link up the runner to a CI/CD job. This can be done with
+tagging, but I currently just have one pipeline using my runners, so haven&amp;rsquo;t
+used the tags as much. Edit the runner by clicking its  &lt;code&gt;edit&lt;/code&gt; icon.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;../../img/posts/create-gitlab-runner/runner-edit.png&#34;&gt;
+&lt;img alt=&#34;Gitlab Runner Settings&#34; src=&#34;../../img/posts/create-gitlab-runner/runner-edit.png&#34; style=&#34;max-width: 100%;&#34;/&gt;&lt;/a&gt;
+&lt;div class=&#34;caption&#34;&gt;Gitlab Runner Edit Page&lt;/div&gt;&lt;/p&gt;
+
+&lt;p&gt;In the runner edit menu, ensure that the &amp;ldquo;&lt;code&gt;Active&lt;/code&gt;&amp;rdquo; checkbox is checked. I&amp;rsquo;ve
+also checked the &amp;ldquo;&lt;code&gt;Run untagged jobs&lt;/code&gt;&amp;rdquo; box for this runner, which will allow it
+to pick up any job that does &lt;em&gt;not&lt;/em&gt; have a tag. If the runner is to be assigned
+to a &lt;em&gt;specific&lt;/em&gt; project, that can be enabled/assigned below in the &amp;ldquo;&lt;code&gt;Restrict
+projects for this Runner&lt;/code&gt;&amp;rdquo; section.&lt;/p&gt;
+
+&lt;h2 id=&#34;test-run&#34;&gt;Test Run&lt;/h2&gt;
+
+&lt;p&gt;To test out the runner, start a new build in a project! (Note, if there are
+several runners already setup, 1. why are you reading this, and 2. it might be a good idea
+to pause the others to ensure the new one will run with the test).&lt;/p&gt;
+
+&lt;p&gt;I won&amp;rsquo;t detail how to write a &lt;code&gt;gitlab-ci.yml&lt;/code&gt; now, but for my test I made an empty
+demo repo with the following pipeline:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;before_script:
+  - whoami
+  - pwd
+  - sudo dnf update -y
+
+build-base:
+  stage: build
+  script:
+    - echo &amp;quot;Hello world!&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;After committing it, a build kicked off with the new runner and finished
+successfully!&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;Notice that the job indeed ran on &lt;code&gt;post-runner&lt;/code&gt;, the runner I setup
+specifically for this post&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;../../img/posts/create-gitlab-runner/pipeline-run.png&#34;&gt;
+&lt;img alt=&#34;Gitlab Runner Settings&#34; src=&#34;../../img/posts/create-gitlab-runner/pipeline-run.png&#34; style=&#34;max-width: 100%;&#34;/&gt;&lt;/a&gt;
+&lt;div class=&#34;caption&#34;&gt;Gitlab Demo Job Run Results&lt;/div&gt;&lt;/p&gt;
+
+&lt;p&gt;If the job is more complicated, more runs might have to be manually started
+after tweaking the runner settings again. Pipelines can be started by going to
+the project&amp;rsquo;s &lt;code&gt;CI/CD-&amp;gt;Pipelines&lt;/code&gt; page via the side menu, and hitting the &lt;code&gt;Run
+Pipeline&lt;/code&gt; button.&lt;/p&gt;
+
+&lt;h2 id=&#34;conclusion&#34;&gt;Conclusion&lt;/h2&gt;
+
+&lt;p&gt;That&amp;rsquo;s it. We should now have a connected runner! So far, the runners have been working
+&lt;em&gt;(mostly)&lt;/em&gt; fine. When they &lt;em&gt;do&lt;/em&gt; break, it is usually because I&amp;rsquo;ve let the disk
+fill up or allowed some other system-related negligence to build up
+&lt;code&gt;¯\_(ツ)_/¯&lt;/code&gt;. I might add some &amp;lsquo;runner maintenance&amp;rsquo; steps to my pipeline&amp;hellip; but
+some other time. Enjoy!&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>Back to Solus</title>
