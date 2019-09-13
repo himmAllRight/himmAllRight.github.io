@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Setup a Runner VM for Gitlab -- λ ryan. himmelwright. net</title>
+    <title>Switching to Bitwarden -- λ ryan. himmelwright. net</title>
 
     
 
@@ -109,17 +109,17 @@
 
 
 
-<header class="intro-header" style="background-image: url('http://ryan.himmelwright.net/img/posts/create-gitlab-runner/keep-off-rocks.jpg')">
+<header class="intro-header" style="background-image: url('http://ryan.himmelwright.net/img/posts/switching-to-bitwarden/trosa-college-dressers.jpg')">
     
     <div class="container">
         <div class="row">
             <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
                 <div class="post-heading">
-                    <h1>Setup a Runner VM for Gitlab</h1>
+                    <h1>Switching to Bitwarden</h1>
                     <h2 class="subheading"></h2>
                     <span class="meta">
                         
-Posted by <a href="#">Ryan Himmelwright</a> on Wed, Sep 4, 2019
+Posted by <a href="#">Ryan Himmelwright</a> on Fri, Sep 13, 2019
 
 
 
@@ -128,7 +128,7 @@ Posted by <a href="#">Ryan Himmelwright</a> on Wed, Sep 4, 2019
 
 
 <br />
-Tags <a href="../../tags/linux">linux</a>, <a href="../../tags/homelab">homelab</a>, <a href="../../tags/git">git</a>, <a href="../../tags/kvm">kvm</a>, <a href="../../tags/dev">dev</a>, <a href="../../tags/devops">devops</a>, <a href="../../tags/fedora">fedora</a>
+Tags <a href="../../tags/linux">linux</a>, <a href="../../tags/homelab">homelab</a>, <a href="../../tags/dotfiles">dotfiles</a>, <a href="../../tags/security">security</a>
 
                     </span>
                 </div>
@@ -136,7 +136,7 @@ Tags <a href="../../tags/linux">linux</a>, <a href="../../tags/homelab">homelab<
         </div>
     </div>
     
-    <span class="header-caption">Sugar Creek Restaurant, Nags Head NC</span>
+    <span class="header-caption">TROSA Thrift Store and Donation Center, Durham NC</span>
     
     </header>
 
@@ -146,173 +146,133 @@ Tags <a href="../../tags/linux">linux</a>, <a href="../../tags/homelab">homelab<
             <div class="row">
                 <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
                     
-                    <p>I play around with CI/CD pipelines quite a bit, both at home and at work. I have
-mostly used Jenkins, but I wanted to see how Gitlab&rsquo;s CI/CD tooling has
-progressed over the last year. So, I decided to try to use Gitlab to manage the
-automated build and deployments of a personal project I&rsquo;ve been working on.
-The first step of the process was to setup a runner my Gitlab instance could
-use for the builds.</p>
+                    <p>After years of using <a href="https://www.passwordstore.org/">pass</a> as my password
+manager, I am mixing things up. Over vacation, I started importing all of my
+passwords into <a href="https://bitwarden.com/">Bitwarden</a>. With all my passwords
+finally transferred, I have now switched to using Bitwarden full-time. Here
+are my thoughts so far.</p>
 
-<h2 id="setup-a-machine-vm">Setup a Machine/VM</h2>
+<h3 id="why-switch">Why Switch?</h3>
+
+<p>Before I start, I want to point out that I had already started my switch <em>before</em>
+the large Bitwarden segment on the <a href="https://linuxunplugged.com/316">recent episode of Linux
+Unplugged</a>. That was just a re-assuring
+coincidence <code>:)</code> .</p>
+
+<p>So, why did I decide to switch?</p>
+
+<h4 id="easier-setup">Easier Setup</h4>
+
+<p><a href="../../img/posts/switching-to-bitwarden/bigtwarden-flathub.png">
+<img alt="Bitwarden on Flathub Page" src="../../img/posts/switching-to-bitwarden/bitwarden-flathub.png" style="max-width: 100%;"/></a>
+<div class="caption">Bitwarden on Flathub</div></p>
+
+<p>The main reason is that when configuring a new system, Bitwarden is simply
+easier to setup. All I need to do is install a Bitwarden client and login. In
+fact, using the hosted service I don&rsquo;t even need to do that. I can just login
+using the <a href="https://vault.bitwarden.com/">web vault</a>. Installing is made even
+easier by the fact that Bitwarden is packaged as a <a href="https://flathub.org/apps/details/com.bitwarden.desktop">Flatpak on
+flathub</a>. So on my
+<a href="https://silverblue.fedoraproject.org/">Fedora Silverblue</a> computers, it works
+out of the box and already fits in with the design philosophy behind Silverblue
+(running all user apps in containers). Perfect.</p>
+
+<h4 id="mobile-support">Mobile Support</h4>
+
+<p><a href="../../img/posts/switching-to-bitwarden/bitwarden-ipad.jpg">
+<img alt="Bitwarden on Flathub Page" src="../../img/posts/switching-to-bitwarden/bitwarden-ipad.jpg" style="float: right;width: 250px; max-width: 100%; padding: 5px 5px 10px 10px"/></a></p>
+
+<p>Over the past few months I have been <a href="../../post/switched-to-joplin-notes/">switching up the tools I
+use</a>, at least the ones I use <a href="../../post/back-on-org-mode-for-work/">outside of
+work</a>. The big driving force behind many of
+these switches is better mobile support. While I still prefer to keep as much
+data off of my phone as possible, there are some things I need to have on the
+go. My password manager is unfortunately one of them.</p>
+
+<p>Additionally, as I start to test out different workloads on alternative devices
+like my ipad, having a mobil-friendly work flow is a godsend. In fact, trying to
+<a href="../../post/setting-up-pass/">setup pass</a> on my iPad is what eventually frustrated
+me enough to give Bitwarden a chance.</p>
+
+<p>Setup on both my phone and ipad was dead-simple. Install the app, and login.
+Done.</p>
+
+<h4 id="wayland-friendly">Wayland Friendly</h4>
+
+<p><a href="../../img/posts/switching-to-bitwarden/wayland-logo.png">
+<img alt="Wayland logo" src="../../img/posts/switching-to-bitwarden/wayland-logo.png" style="float: left; width: 250px; max-width: 100%; padding: 5px 15px 10px 10px"/></a></p>
+
+<p>One of the best features of my pass system was how well it was integrated with
+my desktop environment. <em>However</em>, I want to switch to wayland now more than
+ever, but my pass desktop integration is the biggest blocker preventing me from
+using it on my machines. I access pass using launcher applications like <code>dmenu</code>
+and <code>rofi</code>&hellip; but they do not function correctly in wayland. This forced me to
+use <code>pass</code> from a terminal window while in a wayland session. Bitwarden, at
+least the limited GUI interactions I&rsquo;ve used thus far, appears to work just
+fine in wayland.</p>
+
+<h4 id="easier-to-share-expand">Easier to share/expand</h4>
+
+<p>Lastly, if my wife eventually wants to switch to Bitwarden, I <em>think</em> we can
+share our joint passwords with each other, even being on just the free personal
+plan. If not, we can upgrade to the &ldquo;family plan&rdquo; which is currently $1/mo and
+allows unlimited collections across 5 accounts <em>and</em> optional self hosting. For
+shared family password management&hellip; that&rsquo;s a great deal.</p>
+
+<h3 id="what-i-am-still-learning">What I am still learning</h3>
+
+<p>Normally, this is where I list the few things that I &ldquo;don&rsquo;t like&rdquo;. However,
+this still is all new and I <em>think</em> the majority of my current issues are
+solvable, but I just haven&rsquo;t figured it out yet. So it&rsquo;s a &ldquo;What I&rsquo;m still
+learning&rdquo; section this time (•‿•) .</p>
+
+<h4 id="better-keyboard-de-integration">Better keyboard/DE integration</h4>
+
+<p>The <em>main feature</em> I still seem to be missing is better keyboard
+support/integration with the desktop environment. The GUI app is nice, and
+Bitwarden has <em>much</em> better support for browser extensions and tools. Yet, I
+haven&rsquo;t found a good way to open up Bitwarden (give my master password),
+search for an item, and copy the password&hellip; all from the keyboard.</p>
 
 <p><center>
-<a href="../../img/posts/create-gitlab-runner/fedora-vm-install.png">
-<img alt="Installing a new Fedora30 VM in Virt-Manager" src="../../img/posts/create-gitlab-runner/fedora-vm-install.png" style="max-width: 100%;"/></a>
-<div class="caption">Installing a new Fedora 30 VM in Virt-Manager for my runner</div>
+<video style="max-width:100%;" controls>
+  <source src="../../img/posts/setting-up-pass/passmenu_demo.mp4" type="video/mp4">
+  <source src="movie.ogg" type="video/ogg">
+Your browser does not support the video tag.
+</video>
+<div id="caption"><code>passmenu</code> lets you easily search and select a pass item.</div>
 </center></p>
 
-<p>This will be a BYOG post (bring your own Gitlab). I already
-&ldquo;<em>had one laying around</em>&rdquo;, so I won&rsquo;t cover setting that up.</p>
+<p>By comparison, <code>pass</code> let me integrate with launchers like <code>dmenu</code> and <code>rofi</code>
+to efficiently grab my passwords which was <em>awesome</em>. As mentioned a few
+sections above, <code>passmenu</code> unfortunately falls apart for me these days now that I am
+mostly on wayland&hellip; but I don&rsquo;t need a full launcher. Honestly, all I
+<em>need</em> is the ability to copy a password (and maybe other fields) using my
+keyboard once I have selected an item. I can already search using <code>ctrl-f</code> +
+<code>tab</code>, and then <code>arrow</code> my way down the list, but once there I cannot copy
+unless I continue to tab through all the options. This is not efficient and
+defeats the purpose of remaining on the keyboard in the first place.</p>
 
-<p>Your runner needs may differ, but in this post I am installing runner on a
-Fedora 30 VM. I will also be using both <a href="https://buildah.io/">buildah</a> and
-<a href="https://podman.io/">podman</a> for this project.</p>
+<p>This is a highly requested feature, and I&rsquo;m sure someone has hacked <em>some
+solution</em> together&hellip; I just have yet to find it&hellip; or implement it myself.</p>
 
-<h4 id="some-things-to-note-consider-during-vm-setup">Some things to note/consider during VM setup:</h4>
+<h3 id="conclusion">Conclusion</h3>
 
-<ul>
-<li>Install packages required for pipeline tasks (ex: <code>podman</code> and <code>buildah</code>)</li>
-<li>If <code>sudo</code> is required, manage the <code>gitlab-runner</code> user/group using <code>visudo</code></li>
-<li>If using docker runners, <code>docker-machine</code> needs to be installed</li>
-</ul>
-
-<h2 id="install-runner">Install runner</h2>
-
-<p>First, install the <code>gitlab-runner</code> package. This can be done using the
-instructions found
-<a href="https://docs.gitlab.com/runner/install/linux-repository.html">here</a>.
-<em>However</em>, I encountered issues installing it on my Fedora VMs, as this install
-method isn&rsquo;t supported for 30 yet.  (Check out <a href="https://gitlab.com/gitlab-org/gitlab-runner/issues/4401">this
-issue</a> for more info).</p>
-
-<h4 id="add-gitlab-s-repo">Add GitLab&rsquo;s Repo</h4>
-
-<pre><code>curl -L https://packages.gitlab.com/install/repositories/runner/gitlab-runner/script.rpm.sh | sudo bash
-</code></pre>
-
-<h4 id="install-gitlab-runner">Install gitlab runner</h4>
-
-<pre><code>sudo dnf install gitlab-runner
-</code></pre>
-
-<h2 id="alternative-copr-install">(Alternative) Copr install</h2>
-
-<p>For now, I have been using the copr install posted in the comments
-of that issue (linked above). I recommend checking if the issue is resolved first, as it
-might change from the time of writing this post. To install:</p>
-
-<p>First enable the copr repo:</p>
-
-<pre><code>sudo dnf copr enable snecker/gitlab-runner -y
-</code></pre>
-
-<p>Next, install:</p>
-
-<pre><code>sudo dnf install gitlab-runner -y
-</code></pre>
-
-<h4 id="register-the-runner">Register the Runner</h4>
-
-<p>Once installed, register the runner. Instructions on how to register a runner
-can be found <a href="https://docs.gitlab.com/runner/register/index.html">here</a>.</p>
-
-<pre><code>sudo gitlab-runner register
-</code></pre>
-
-<p>Enter the coordinator URL (ex: <code>https://gitlab.com</code>)</p>
-
-<p>Next, a <em>gitlab-ci</em> token must be shared with the runner.</p>
-
-<p><a href="../../img/posts/create-gitlab-runner/gitlab-runner-settings.png">
-<img alt="Gitlab Runner Settings" src="../../img/posts/create-gitlab-runner/gitlab-runner-settings.png" style="max-width: 100%;"/></a>
-<div class="caption">Gitlab Runner<strong>s</strong> Settings Page</div></p>
-
-<p>To obtain a gitlab-ci token, got to <strong>Admin Area</strong> -&gt; <strong>Overview</strong> -&gt;
-<strong>Runners</strong>. On the right, there should be a token to use during setup.</p>
-
-<p>When the runner registrations asks for the token, use the &ldquo;registration token&rdquo;
-listed in the &ldquo;Set up a shared Runner manually&rdquo; section.</p>
-
-<p>Next, provide a short description, and add a tag or two (when prompted).</p>
-
-<p>Lastly, enter the executor (the system on the runner that executes commands). For
-now, I&rsquo;ve been using <code>&quot;shell&quot;</code> for my needs, as these VMs are fully
-dedicated to be used as the runners for a single project.</p>
-
-<p>Congrats, the runner should be registered! Now to set it up&hellip;</p>
-
-<h2 id="link-to-ci-cd-builds">Link to CI/CD Builds</h2>
-
-<p>It is time to link up the runner to a CI/CD job. This can be done with
-tagging, but I currently just have one pipeline using my runners, so haven&rsquo;t
-used the tags as much. Edit the runner by clicking its  <code>edit</code> icon.</p>
-
-<p><a href="../../img/posts/create-gitlab-runner/runner-edit.png">
-<img alt="Gitlab Runner Settings" src="../../img/posts/create-gitlab-runner/runner-edit.png" style="max-width: 100%;"/></a>
-<div class="caption">Gitlab Runner Edit Page</div></p>
-
-<p>In the runner edit menu, ensure that the &ldquo;<code>Active</code>&rdquo; checkbox is checked. I&rsquo;ve
-also checked the &ldquo;<code>Run untagged jobs</code>&rdquo; box for this runner, which will allow it
-to pick up any job that does <em>not</em> have a tag. If the runner is to be assigned
-to a <em>specific</em> project, that can be enabled/assigned below in the &ldquo;<code>Restrict
-projects for this Runner</code>&rdquo; section.</p>
-
-<h2 id="test-run">Test Run</h2>
-
-<p>To test out the runner, start a new build in a project! (Note, if there are
-several runners already setup, 1. why are you reading this, and 2. it might be a good idea
-to pause the others to ensure the new one will run with the test).</p>
-
-<p>I won&rsquo;t detail how to write a <code>gitlab-ci.yml</code> now, but for my test I made an empty
-demo repo with the following pipeline:</p>
-
-<pre><code>before_script:
-  - whoami
-  - pwd
-  - sudo dnf update -y
-
-build-base:
-  stage: build
-  script:
-    - echo &quot;Hello world!&quot;
-</code></pre>
-
-<p>After committing it, a build kicked off with the new runner and finished
-successfully!</p>
-
-<p><em>Notice that the job indeed ran on <code>post-runner</code>, the runner I setup
-specifically for this post</em></p>
-
-<p><a href="../../img/posts/create-gitlab-runner/pipeline-run.png">
-<img alt="Gitlab Runner Settings" src="../../img/posts/create-gitlab-runner/pipeline-run.png" style="max-width: 100%;"/></a>
-<div class="caption">Gitlab Demo Job Run Results</div></p>
-
-<p>If the job is more complicated, more runs might have to be manually started
-after tweaking the runner settings again. Pipelines can be started by going to
-the project&rsquo;s <code>CI/CD-&gt;Pipelines</code> page via the side menu, and hitting the <code>Run
-Pipeline</code> button.</p>
-
-<h2 id="conclusion">Conclusion</h2>
-
-<p>That&rsquo;s it. We should now have a connected runner! So far, the runners have been working
-<em>(mostly)</em> fine. When they <em>do</em> break, it is usually because I&rsquo;ve let the disk
-fill up or allowed some other system-related negligence to build up
-<code>¯\_(ツ)_/¯</code>. I might add some &lsquo;runner maintenance&rsquo; steps to my pipeline&hellip; but
-some other time. Enjoy!</p>
+<p>That is it. <strong>TLDR;</strong> I&rsquo;ve switched to Bitwarden and have been using it as my
+main password manager for almost a month and I love it. It works on <em>all</em>
+my devices and doesn&rsquo;t give me too many headaches. My only real complaint is
+that I wish it had better keyboard support, but I&rsquo;m sure I&rsquo;ll be able to figure
+out a work-around eventually.</p>
 
                     
-                    
-                        <div style="float: left; text-decoration: underline; text-align: right;">Next Post:</div>
                     
                     
                          <div style="float: right; text-decoration: underline; text-align: right;">Prev Post:</div>
                     
                     <br>
                     
-                        <a href="http://ryan.himmelwright.net/post/switching-to-bitwarden/" style="text-align: left; float: left; max-width: 40%;">Switching to Bitwarden</a>
                     
-                    
-                        <a href="http://ryan.himmelwright.net/post/back-on-org-mode-for-work/" style="text-align: right; float: right; max-width: 40%">Back On org-mode For Work</a>
+                        <a href="http://ryan.himmelwright.net/post/create-gitlab-runner/" style="text-align: right; float: right; max-width: 40%">Setup a Runner VM for Gitlab</a>
                     
 
 			
