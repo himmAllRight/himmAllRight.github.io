@@ -3,12 +3,6 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>http://ryan.himmelwright.net/tags/dotfiles/</loc>
-    <lastmod>2019-09-13T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
     <loc>http://ryan.himmelwright.net/tags/homelab/</loc>
     <lastmod>2019-09-13T00:00:00+00:00</lastmod>
     <priority>0</priority>
@@ -38,6 +32,12 @@
   </url>
   
   <url>
+    <loc>http://ryan.himmelwright.net/tags/dotfiles/</loc>
+    <lastmod>2019-09-13T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>http://ryan.himmelwright.net/tags/security/</loc>
     <lastmod>2019-09-13T00:00:00+00:00</lastmod>
     <priority>0</priority>
@@ -46,12 +46,6 @@
   <url>
     <loc>http://ryan.himmelwright.net/</loc>
     <lastmod>2019-09-13T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>http://ryan.himmelwright.net/tags/dev/</loc>
-    <lastmod>2019-09-04T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -76,6 +70,12 @@
   <url>
     <loc>http://ryan.himmelwright.net/post/create-gitlab-runner/</loc>
     <lastmod>2019-09-04T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://ryan.himmelwright.net/tags/dev/</loc>
+    <lastmod>2019-09-04T00:00:00+00:00</lastmod>
+    <priority>0</priority>
   </url>
   
   <url>

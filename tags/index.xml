@@ -11,15 +11,6 @@
     
     
     <item>
-      <title>Dotfiles</title>
-      <link>http://ryan.himmelwright.net/tags/dotfiles/</link>
-      <pubDate>Fri, 13 Sep 2019 00:00:00 +0000</pubDate>
-      
-      <guid>http://ryan.himmelwright.net/tags/dotfiles/</guid>
-      <description></description>
-    </item>
-    
-    <item>
       <title>Homelab</title>
       <link>http://ryan.himmelwright.net/tags/homelab/</link>
       <pubDate>Fri, 13 Sep 2019 00:00:00 +0000</pubDate>
@@ -38,20 +29,20 @@
     </item>
     
     <item>
+      <title>dotfiles</title>
+      <link>http://ryan.himmelwright.net/tags/dotfiles/</link>
+      <pubDate>Fri, 13 Sep 2019 00:00:00 +0000</pubDate>
+      
+      <guid>http://ryan.himmelwright.net/tags/dotfiles/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>security</title>
       <link>http://ryan.himmelwright.net/tags/security/</link>
       <pubDate>Fri, 13 Sep 2019 00:00:00 +0000</pubDate>
       
       <guid>http://ryan.himmelwright.net/tags/security/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Dev</title>
-      <link>http://ryan.himmelwright.net/tags/dev/</link>
-      <pubDate>Wed, 04 Sep 2019 00:00:00 +0000</pubDate>
-      
-      <guid>http://ryan.himmelwright.net/tags/dev/</guid>
       <description></description>
     </item>
     
@@ -79,6 +70,15 @@
       <pubDate>Wed, 04 Sep 2019 00:00:00 +0000</pubDate>
       
       <guid>http://ryan.himmelwright.net/tags/kvm/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>dev</title>
+      <link>http://ryan.himmelwright.net/tags/dev/</link>
+      <pubDate>Wed, 04 Sep 2019 00:00:00 +0000</pubDate>
+      
+      <guid>http://ryan.himmelwright.net/tags/dev/</guid>
       <description></description>
     </item>
     
