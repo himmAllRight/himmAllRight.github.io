@@ -1019,14 +1019,13 @@ project and blow it away when I&amp;rsquo;m done. The options are endless!&lt;/p
       <guid>http://ryan.himmelwright.net/pages/homelab/</guid>
       <description>
 
-&lt;p&gt;This is a page where I maintain the status of the computers in my “Homelab”. I
-will list my current systems here.&lt;/p&gt;
+&lt;p&gt;This is a page where I maintain the status of the computers in my “Homelab”. I will list my current systems here (potentially with screenshots of my current desktop setup for my workstations).&lt;/p&gt;
 
 &lt;h2 id=&#34;computers&#34;&gt;Computers&lt;/h2&gt;
 
 &lt;h3 id=&#34;ryan-me&#34;&gt;Ryan (Me)&lt;/h3&gt;
 
-&lt;p&gt;&lt;a href=&#34;../../img/homelab/office-night-bookshelf.jpg&#34;&gt;&lt;img alt=&#34;Home Office&#34; src=&#34;../../img/homelab/office-night-bookshelf.jpg&#34; width=100%&gt;&lt;/a&gt;
+&lt;p&gt;&lt;a href=&#34;../../img/homelab/desk_front_night.jpg&#34;&gt;&lt;img alt=&#34;Home Office&#34; src=&#34;../../img/homelab/desk_front_night.jpg&#34; width=100%&gt;&lt;/a&gt;
 &lt;div class=&#34;caption&#34;&gt;My Home Office&lt;/div&gt;&lt;/p&gt;
 
 &lt;p&gt;&lt;a href=&#34;../../img/homelab/desk_night.jpg&#34;&gt;&lt;img alt=&#34;My Desk&#34; src=&#34;../../img/homelab/desk_night.jpg&#34; width=100%&gt;&lt;/a&gt;
@@ -1042,7 +1041,7 @@ Sapphire 1024 4GB PULSE Radeon RX 560 GPU
 250 GB Samsung 850 EVO SATA SSD
 Fractal Design Meshify C Dark TG ATX Mid Tower Case
 EVGA SuperNOVA G4 650w 80+ Gold, fully modular PSU
-Fedora 30 Silverblue
+Fedora 30 (Multiple Desktops)
 *Connected to Periphery devices
 &lt;/code&gt;&lt;/pre&gt;
 
@@ -1066,7 +1065,7 @@ Fedora 30 SilverBlue
 Happy Hacking Keyboard Pro2
 Audioengine A2+ Speakers &amp;amp; Stands
 Audio Technica M50x Headphones
-Bose AE2 Headphones (with a bluetooth adapter)
+Bose AE2 Headphones
 Blue Yeti Microphone - Backout Edition
 Logitech HD Pro Webcam c920 Widescreen
 Inateck USB 3.0 to SATA Dual-Bay Hard Drive Docking Station
@@ -1103,11 +1102,6 @@ Thinkpad Dock
 Whatever disto I&#39;m playing with right now...
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h4 id=&#34;wip-server&#34;&gt;WIP Server&lt;/h4&gt;
-
-&lt;pre&gt;&lt;code&gt;HP Microserver Gen 10
-&lt;/code&gt;&lt;/pre&gt;
-
 &lt;h4 id=&#34;networking&#34;&gt;- Networking&lt;/h4&gt;
 
 &lt;pre&gt;&lt;code&gt;Netgear Orbi RBK50 Router (In Bedroom)
@@ -1141,12 +1135,10 @@ Ubuntu 16.04 OS
 Centos 7.6 (Core)
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h4 id=&#34;hosted-seafile-server&#34;&gt;Hosted Seafile Server&lt;/h4&gt;
-
 &lt;h3 id=&#34;rebecca-wife&#34;&gt;Rebecca (Wife)&lt;/h3&gt;
 
 &lt;p&gt;&lt;a href=&#34;../../img/homelab/rebecca_desk.jpg&#34;&gt;&lt;img alt=&#34;Rebecca&#39;s Desk&#34; src=&#34;../../img/homelab/rebecca_desk.jpg&#34; width=100%&gt;&lt;/a&gt;
-&lt;div class=&#34;caption&#34;&gt;Rebecca&amp;rsquo;s Desk&lt;/div&gt;&lt;/p&gt;
+&lt;div class=&#34;caption&#34;&gt;Rebecca&amp;rsquo;s Desk (yes, that is my laptop in the dock)&lt;/div&gt;&lt;/p&gt;
 
 &lt;p&gt;Even though this is my wife&amp;rsquo;s gear&amp;hellip; I&amp;rsquo;m in charge of managing it all. So I
 decided to add it here.&lt;/p&gt;
@@ -1167,9 +1159,7 @@ CloudReady (a chromiumos spin)
 
 &lt;pre&gt;&lt;code&gt;Thinkpad Ultra Dock 40A2 (to connect to periphery devices below)
 LG 32QK500W, 32&amp;quot; 2560x1440 IPS Monitor
-Wireless Keyboard &amp;amp; Mouse
 Bose AE2 Headphones
-LED Monitor lights
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;h4 id=&#34;bellsprout&#34;&gt;- Bellsprout&lt;/h4&gt;
