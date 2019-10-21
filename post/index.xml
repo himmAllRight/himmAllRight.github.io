@@ -5,10 +5,220 @@
     <description>Recent content in Posts on λ ryan. himmelwright. net</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 13 Sep 2019 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 21 Oct 2019 00:00:00 +0000</lastBuildDate>
     
         <atom:link href="http://ryan.himmelwright.net/post/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>My Experience with the Large Display Paradox</title>
+      <link>http://ryan.himmelwright.net/post/large-display-paradox/</link>
+      <pubDate>Mon, 21 Oct 2019 00:00:00 +0000</pubDate>
+      
+      <guid>http://ryan.himmelwright.net/post/large-display-paradox/</guid>
+      <description>&lt;p&gt;About a year ago, I &lt;a href=&#34;../post/new-lgud4379b/&#34;&gt;switched to the LG ud4379b&lt;/a&gt;, a 42.5&amp;rdquo;
+4k IPS monitor. My initial motivation for &lt;em&gt;upgrading&lt;/em&gt; was to convert to an IPS
+panel. However, my &lt;em&gt;selection of monitor&lt;/em&gt; was an attempt to simplify my
+hardware, by pairing down my dual 1080p setup. While I wanted a single monitor,
+I didn&amp;rsquo;t want to drop my total resolution because &lt;a href=&#34;https://www.pcmag.com/feature/336710/13-eye-popping-home-office-setups/10&#34;&gt;everyone
+knows&lt;/a&gt;
+&lt;a href=&#34;https://www.techradar.com/news/5-reasons-you-need-dual-monitors-in-2017&#34;&gt;that multiple
+monitors&lt;/a&gt;
+&lt;a href=&#34;https://www.lifewire.com/boost-productivity-with-a-second-monitor-2377817&#34;&gt;are
+required&lt;/a&gt;
+&lt;a href=&#34;https://www.business.com/articles/increasing-productivity-how-dual-monitors-can-save-you-time-and-money/&#34;&gt;to get any real
+work&lt;/a&gt;
+&lt;a href=&#34;https://www.howtogeek.com/174452/beginner-geek-how-to-use-multiple-monitors-to-be-more-productive/&#34;&gt;done,&lt;/a&gt;
+&lt;a href=&#34;https://www.entrepreneur.com/article/322640&#34;&gt;especially programming&lt;/a&gt;.
+Although, after a year of using my massive display, I started to tire from the
+&lt;em&gt;large display paradox&lt;/em&gt;.&lt;/p&gt;
+
+&lt;h3 id=&#34;background&#34;&gt;Background&lt;/h3&gt;
+
+&lt;p&gt;Before I dive into what exactly the &lt;em&gt;large display paradox&lt;/em&gt; is, lets quickly
+refresh on what I have said in the past. In my &lt;a href=&#34;../post/new-lgud4379b/&#34;&gt;post about choosing the 43&amp;rdquo;
+monitor&lt;/a&gt;, I went into depth about my history of using dual
+monitors, and &lt;em&gt;why&lt;/em&gt; I wanted to switch to a single monitor:&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;While I like having the screen real estate of two monitors, I was never able to optimally use them because of the bezels between the monitors. While working, I would naturally shift over and use one monitor as a primary display, and the other as a secondary display.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;I wanted to be able to view my monitor straight on, without any
+bezels getting in the way. I also knew that a single 1080p monitor was just a
+bit too cramped.&lt;/p&gt;
+
+&lt;p&gt;In that same paragraph, I provided an additional reason for the switch. If I
+had been paying closer attention, I might have noticed it
+foreshadowing issues I would face with a large display:&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;This was okay for some tasks, but it usually meant that I just used the primary monitor, and half of the secondary one, &lt;strong&gt;because it was too hard to see the far end of the screen.&lt;/strong&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;&lt;a href=&#34;../img/posts/large-display-paradox/4-monitors.jpg&#34;&gt;
+&lt;img alt=&#34;Wayland logo&#34; src=&#34;../img/posts/large-display-paradox/4-monitors.jpg&#34; style=&#34;max-width: 100%; padding: 5px 15px 10px 10px&#34;/&gt;&lt;/a&gt;
+&lt;div class=&#34;caption&#34;&gt;I was excited to use a single monitor as a 4x 21&amp;rdquo; 1080p bezel-less
+grid.&lt;/div&gt;&lt;/p&gt;
+
+&lt;p&gt;I was aware that a large screen may not be optimal, but the alure of having
+four monitors in one was too strong. This is emphasized in the section where I
+compare the LG 43&amp;rdquo; with a Dell ultrawide:&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;Being so large, I could still have auxiliary windows opened on either side. One advantage the ud4379 had over the ultra-wide however, was that being a massive 16:9 screen, it could easily be divided into 4 1080p screens.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Despite the nagging voice in the back of my head saying the ultrawide might be
+more &lt;em&gt;reasonable&lt;/em&gt;, or reminding me that a &lt;em&gt;single&lt;/em&gt; 27&amp;rdquo; 1440p monitor was also an
+option&amp;hellip; I ignored it and picked up the 43&amp;rdquo; LG (which nonetheless, &lt;em&gt;is&lt;/em&gt; a great
+monitor!).&lt;/p&gt;
+
+&lt;h3 id=&#34;the-large-display-paradox&#34;&gt;The Large Display Paradox&lt;/h3&gt;
+
+&lt;p&gt;So then. What &lt;em&gt;is&lt;/em&gt; the &lt;em&gt;&amp;ldquo;Large Display Paradox&amp;rdquo;&lt;/em&gt;? As far as I can find, the
+term was coined by Jeff Atwood in a &lt;a href=&#34;https://blog.codinghorror.com/the-large-display-paradox/&#34;&gt;blog
+post&lt;/a&gt; titled with the
+same name. In the post, Atwood refers to &lt;a href=&#34;http://www.dansdata.com/3007wfp-hc.htm&#34;&gt;another
+post&lt;/a&gt; in which Dan Rutter states the
+following while reviewing his new Dell UltraSharp 3007WFP-HC monitor:&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;Users of 30-inch monitors face the terrible, terrible problem of how to
+effectively use all of that space. You don&amp;rsquo;t often want to maximise a folder or
+document window on a screen this big; either you&amp;rsquo;ll end up with a lot of white
+space and important program buttons separated by a vast expanse of nothing, or
+you&amp;rsquo;ll get lines of text 300 or more characters long, which are difficult to
+read.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Atwood summarizes that this is a perfect example of what he deems to be the
+&lt;em&gt;Large Display Paradox&lt;/em&gt;:&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;That&amp;rsquo;s the large display paradox. Having all that space can make you less
+productive due to all the window manipulation excise you have to deal with to
+make effective use of it.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;He further explains how once a display grows beyond the point of being able to
+efficiently maximize windows without too much whitespace (above 1600x1200, by
+his estimates), it becomes &lt;em&gt;less productive&lt;/em&gt; due to the user having to
+continuously manage the windows.&lt;/p&gt;
+
+&lt;p&gt;While these posts are on the older side (2007!), I think most people are more
+likely to experience this issue &lt;em&gt;today&lt;/em&gt;, due to cheaper large monitor options.&lt;/p&gt;
+
+&lt;h3 id=&#34;my-experience&#34;&gt;My Experience&lt;/h3&gt;
+
+&lt;p&gt;With the &lt;em&gt;Large Display Paradox&lt;/em&gt; finally defined&amp;hellip; did I experience it using
+my 43&amp;rdquo; monitor? Yes.&lt;/p&gt;
+
+&lt;p&gt;At first, it was great. I loved throwing everything I wanted up on a single
+screen, without any applications overlapping.&lt;/p&gt;
+
+&lt;p&gt;In particular, during the first few months using the monitor, I still worked
+remotely at my previous job and needed to use a Windows machine. I appreciated
+that I could RDP to my work computer using an ultrawide resolution (3440x1440),
+but &lt;em&gt;still&lt;/em&gt; have extra pixels to keep my notes and chat windows below it.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;../img/posts/large-display-paradox/work-widescreen.jpg&#34;&gt;
+&lt;img alt=&#34;Widescreen work RDP session&#34; src=&#34;../img/posts/large-display-paradox/work-widescreen.jpg&#34; style=&#34;max-width: 100%; padding: 5px 15px 10px 10px&#34;/&gt;&lt;/a&gt;
+&lt;div class=&#34;caption&#34;&gt;Remoting into my Windows work computer using an ultrawide
+resolution, and still having space for my notes and chat applications below.&lt;/div&gt;&lt;/p&gt;
+
+&lt;p&gt;Then, I switched jobs and used Linux 100% for home &lt;em&gt;and&lt;/em&gt; work. Instead of
+having to RDP into a second machine&amp;hellip; I could just &lt;code&gt;ssh&lt;/code&gt; using a small
+terminal window. I no longer &lt;em&gt;had&lt;/em&gt; to view multiple machine desktops to get work
+done.&lt;/p&gt;
+
+&lt;h3 id=&#34;issues&#34;&gt;Issues&lt;/h3&gt;
+
+&lt;p&gt;At first, I didn&amp;rsquo;t notice any issues, especially when using it on my personal
+computer which I mostly used for leisure anyway. It didn&amp;rsquo;t matter much if I had
+a video and chat window next to a personal project I was working on.&lt;/p&gt;
+
+&lt;p&gt;Regardless, over time I started to notice that when  I tried to actually &lt;em&gt;focus&lt;/em&gt; on a
+task, the &amp;ldquo;usefulness&amp;rdquo; of the large screen really started to fall apart. Below
+are a few issues I started to run up against when trying to be productive with
+what was seemingly one of &amp;ldquo;the best productivity monitors on the market&amp;rdquo;.&lt;/p&gt;
+
+&lt;h4 id=&#34;always-wanting-to-fill-the-space&#34;&gt;Always wanting to fill the space.&lt;/h4&gt;
+
+&lt;p&gt;The tricky thing about having all that space&amp;hellip; is you want to fill it, even if
+you don&amp;rsquo;t &lt;em&gt;need&lt;/em&gt; to for the task at hand. So for example, if I wanted to work
+on writing a blog post, all I &lt;em&gt;need&lt;/em&gt; is a text editor. In addition, I like to
+have a preview of the post open in a browser so I can see how it renders.  I
+sometimes like to also have a photo editor and picture folders open, but I find
+it best if I can have them in a separate &lt;a href=&#34;https://en.wikipedia.org/wiki/Virtual_workplace&#34;&gt;virtual
+workspace&lt;/a&gt;. With the large
+display, I would open up &lt;em&gt;all&lt;/em&gt; those windows on the same screen. In reality,
+having anything beyond my text editor and post preview in front of me, really
+starts to detract from my ability to focus on &lt;em&gt;writing&lt;/em&gt; the post.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;../img/posts/large-display-paradox/filling-space.jpg&#34;&gt;
+&lt;img alt=&#34;Filling up the monitor&#39;s space&#34; src=&#34;../img/posts/large-display-paradox/filling-space.jpg&#34; style=&#34;max-width: 100%; padding: 5px 15px 10px 10px&#34;/&gt;&lt;/a&gt;
+&lt;div class=&#34;caption&#34;&gt;With so much space, I felt obligated to fill it with
+windows unrelated to the task at hand.&lt;/div&gt;&lt;/p&gt;
+
+&lt;p&gt;People like filling space. How often do you find that a
+surface in the house seems to &lt;em&gt;always&lt;/em&gt; collect random crap? Large
+monitors are the same. Even when I &lt;em&gt;knew&lt;/em&gt; I only needed a one small terminal
+in from of me&amp;hellip; the vast space surrounding it made me feel uneasy. So, I
+would fill the space by either extending the editor window to a comical size,
+or litter the surround space with random applications, unrelated to the work I
+was trying to focus on.&lt;/p&gt;
+
+&lt;h4 id=&#34;i-didn-t-use-the-entire-space-just-focused-on-what-was-in-my-field-of-view-in-front-of-me&#34;&gt;I didn&amp;rsquo;t use the entire space, just focused on what was in my field of view in front of me.&lt;/h4&gt;
+
+&lt;p&gt;Even though I felt obligated to fill all the space, &lt;em&gt;I still didn&amp;rsquo;t use all of
+it&lt;/em&gt;. When I had two monitors, I would center myself on one to prevent looking at
+bezels, and then usually only utilize &lt;em&gt;half&lt;/em&gt; of the secondary monitor, because
+the far end of it was out of my sight. This didn&amp;rsquo;t change with a single large
+monitor. I usually found my self using an &amp;ldquo;appropriately sized&amp;rdquo; window, smack
+in the middle of the screen. If I needed to switch to working in a different
+application, I would move &lt;em&gt;that&lt;/em&gt; application to the center and focus on it. The
+outer spaces of the monitor were never fully used.&lt;/p&gt;
+
+&lt;h4 id=&#34;i-couldn-t-fullscreen-or-even-split-screen-my-windows&#34;&gt;I couldn&amp;rsquo;t fullscreen (or even split-screen) my windows&lt;/h4&gt;
+
+&lt;p&gt;&lt;a href=&#34;../img/posts/large-display-paradox/split-screen.png&#34;&gt;
+&lt;img alt=&#34;Using Split Screen Windows&#34; src=&#34;../img/posts/large-display-paradox/split-screen.png&#34; style=&#34;max-width: 100%; padding: 5px 15px 10px 10px&#34;/&gt;&lt;/a&gt;
+&lt;div class=&#34;caption&#34;&gt;Fullscreen, and even split screen windows were unwieldy.
+Most of the time I just wanted to work from a normal sized window.&lt;/div&gt;&lt;/p&gt;
+
+&lt;p&gt;Speaking of focusing on a single application&amp;hellip; fullscreen&amp;hellip; it isn&amp;rsquo;t really
+an option on such a big monitor. While a maximized window might look awesome at
+first, it wasn&amp;rsquo;t very practical for day-to-day use. This issue was compounded
+by the &amp;ldquo;shadow&amp;rdquo; that prevented me from seeing the first few characters near the
+edge of the screen. The size of the screen combined with how far I sat from it,
+meant that all but the center was out of my field of view. As such, I didn&amp;rsquo;t
+maximize my windows, and usually just wanted a normal-sized one in the center.&lt;/p&gt;
+
+&lt;h4 id=&#34;bad-keyboard-window-management-experience&#34;&gt;Bad Keyboard Window Management Experience&lt;/h4&gt;
+
+&lt;p&gt;Without being able to view windows in full or split screen configurations, all
+of the quick window-snapping key bindings I&amp;rsquo;ve become accustomed to were
+useless.  I was forced to switch over to my mouse more than I would like to.
+While &lt;a href=&#34;https://www.youtube.com/watch?v=DuIK-NuN3aY&#34;&gt;some might point to using window management
+software&lt;/a&gt;, or a &lt;a href=&#34;https://jonblack.me/large-display-paradox-resolved/&#34;&gt;tiling window
+manager&lt;/a&gt;, I don&amp;rsquo;t think
+this would solve &lt;em&gt;my&lt;/em&gt; issues. You &lt;em&gt;might&lt;/em&gt; be able to get away with using a
+window manager like &lt;a href=&#34;https://github.com/Airblader/i3&#34;&gt;i3-gaps&lt;/a&gt; (or
+&lt;a href=&#34;https://github.com/swaywm/sway&#34;&gt;sway&lt;/a&gt;) on a 1440p ultrawide monitor, but a
+full unscaled 4k space is just too much. Unless you &lt;em&gt;always&lt;/em&gt; have 5+ tiled
+windows open at a time, they&amp;rsquo;re just too big.&lt;/p&gt;
+
+&lt;h3 id=&#34;conclusion&#34;&gt;Conclusion&lt;/h3&gt;
+
+&lt;p&gt;I think the large display paradox could be a real modern tech issue. Well, more
+accurately, a major &lt;a href=&#34;https://en.wikipedia.org/wiki/First_World_problem&#34;&gt;first world
+problem&lt;/a&gt;. Given the
+increased affordability of large displays, what might &lt;em&gt;seem&lt;/em&gt; like an great setup,
+might not actually be optimal for one&amp;rsquo;s workload. At it&amp;rsquo;s core, technology
+is a tool. When choosing tech hardware, we should always focus on what
+the best tool &lt;em&gt;for the job&lt;/em&gt; is, and not just what is the best tool.&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>Switching to Bitwarden</title>

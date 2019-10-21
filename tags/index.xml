@@ -5,17 +5,35 @@
     <description>Recent content in Tags on λ ryan. himmelwright. net</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 13 Sep 2019 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 21 Oct 2019 00:00:00 +0000</lastBuildDate>
     
         <atom:link href="http://ryan.himmelwright.net/tags/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
+      <title>Hardware</title>
+      <link>http://ryan.himmelwright.net/tags/hardware/</link>
+      <pubDate>Mon, 21 Oct 2019 00:00:00 +0000</pubDate>
+      
+      <guid>http://ryan.himmelwright.net/tags/hardware/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>Homelab</title>
       <link>http://ryan.himmelwright.net/tags/homelab/</link>
-      <pubDate>Fri, 13 Sep 2019 00:00:00 +0000</pubDate>
+      <pubDate>Mon, 21 Oct 2019 00:00:00 +0000</pubDate>
       
       <guid>http://ryan.himmelwright.net/tags/homelab/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>monitors</title>
+      <link>http://ryan.himmelwright.net/tags/monitors/</link>
+      <pubDate>Mon, 21 Oct 2019 00:00:00 +0000</pubDate>
+      
+      <guid>http://ryan.himmelwright.net/tags/monitors/</guid>
       <description></description>
     </item>
     
@@ -47,7 +65,16 @@
     </item>
     
     <item>
-      <title>DevOps</title>
+      <title>DEV</title>
+      <link>http://ryan.himmelwright.net/tags/dev/</link>
+      <pubDate>Wed, 04 Sep 2019 00:00:00 +0000</pubDate>
+      
+      <guid>http://ryan.himmelwright.net/tags/dev/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Devops</title>
       <link>http://ryan.himmelwright.net/tags/devops/</link>
       <pubDate>Wed, 04 Sep 2019 00:00:00 +0000</pubDate>
       
@@ -65,29 +92,20 @@
     </item>
     
     <item>
+      <title>Git</title>
+      <link>http://ryan.himmelwright.net/tags/git/</link>
+      <pubDate>Wed, 04 Sep 2019 00:00:00 +0000</pubDate>
+      
+      <guid>http://ryan.himmelwright.net/tags/git/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>KVM</title>
       <link>http://ryan.himmelwright.net/tags/kvm/</link>
       <pubDate>Wed, 04 Sep 2019 00:00:00 +0000</pubDate>
       
       <guid>http://ryan.himmelwright.net/tags/kvm/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>dev</title>
-      <link>http://ryan.himmelwright.net/tags/dev/</link>
-      <pubDate>Wed, 04 Sep 2019 00:00:00 +0000</pubDate>
-      
-      <guid>http://ryan.himmelwright.net/tags/dev/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>git</title>
-      <link>http://ryan.himmelwright.net/tags/git/</link>
-      <pubDate>Wed, 04 Sep 2019 00:00:00 +0000</pubDate>
-      
-      <guid>http://ryan.himmelwright.net/tags/git/</guid>
       <description></description>
     </item>
     
@@ -119,24 +137,6 @@
     </item>
     
     <item>
-      <title>Hardware</title>
-      <link>http://ryan.himmelwright.net/tags/hardware/</link>
-      <pubDate>Wed, 24 Jul 2019 00:00:00 +0000</pubDate>
-      
-      <guid>http://ryan.himmelwright.net/tags/hardware/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Monitors</title>
-      <link>http://ryan.himmelwright.net/tags/monitors/</link>
-      <pubDate>Wed, 24 Jul 2019 00:00:00 +0000</pubDate>
-      
-      <guid>http://ryan.himmelwright.net/tags/monitors/</guid>
-      <description></description>
-    </item>
-    
-    <item>
       <title>Community</title>
       <link>http://ryan.himmelwright.net/tags/community/</link>
       <pubDate>Thu, 20 Jun 2019 00:00:00 +0000</pubDate>
@@ -164,20 +164,20 @@
     </item>
     
     <item>
+      <title>Customization</title>
+      <link>http://ryan.himmelwright.net/tags/customization/</link>
+      <pubDate>Thu, 23 May 2019 00:00:00 +0000</pubDate>
+      
+      <guid>http://ryan.himmelwright.net/tags/customization/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>Shell</title>
       <link>http://ryan.himmelwright.net/tags/shell/</link>
       <pubDate>Thu, 23 May 2019 00:00:00 +0000</pubDate>
       
       <guid>http://ryan.himmelwright.net/tags/shell/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>customization</title>
-      <link>http://ryan.himmelwright.net/tags/customization/</link>
-      <pubDate>Thu, 23 May 2019 00:00:00 +0000</pubDate>
-      
-      <guid>http://ryan.himmelwright.net/tags/customization/</guid>
       <description></description>
     </item>
     
