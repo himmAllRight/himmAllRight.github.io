@@ -5,10 +5,168 @@
     <description>Recent content on λ ryan. himmelwright. net</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 21 Oct 2019 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 09 Nov 2019 00:00:00 +0000</lastBuildDate>
     
         <atom:link href="http://ryan.himmelwright.net/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>All Things Open 2019</title>
+      <link>http://ryan.himmelwright.net/post/ato2019/</link>
+      <pubDate>Sat, 09 Nov 2019 00:00:00 +0000</pubDate>
+      
+      <guid>http://ryan.himmelwright.net/post/ato2019/</guid>
+      <description>&lt;p&gt;Two weeks ago, I attended &lt;a href=&#34;https://allthingsopen.org&#34;&gt;All Things Open (2019)&lt;/a&gt;
+for the second year in a row. ATO is an annual conference that explores and
+celebrates&amp;hellip; well, all things &lt;em&gt;open&lt;/em&gt;. Open source, open tech, and open
+government are all main topics at the conference. Best of all, it&amp;rsquo;s right here
+in the triangle (Raleigh NC). Here are some of my overall take-aways from this
+year.&lt;/p&gt;
+
+&lt;p&gt;While the talks are always full of information, the &lt;em&gt;main&lt;/em&gt; benefit I receive
+from attending the conference is leaving with a list of technologies and
+ideas I want to test out. So, rather than go into boring detail about each talk
+I went to, I will elaborate on some common topics/themes I experienced and what
+I am excited to dig into as a result.&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;(Sorry there aren&amp;rsquo;t any visuals in this post. I&amp;rsquo;m still a terrible event
+participant and didn&amp;rsquo;t take any pictures)&lt;/em&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;topics&#34;&gt;Topics&lt;/h2&gt;
+
+&lt;h3 id=&#34;1-tech&#34;&gt;1) Tech&lt;/h3&gt;
+
+&lt;p&gt;Let&amp;rsquo;s get tech out of the way, right up front. Here are some ideas I left the
+various technical talks with:&lt;/p&gt;
+
+&lt;h4 id=&#34;i-am-going-to-keep-using-zfs-for-my-server&#34;&gt;I am going to keep using ZFS for my server&lt;/h4&gt;
+
+&lt;p&gt;It happened again. Over the last few months I&amp;rsquo;ve entertained the idea of moving
+off of ZFS on my home server for something like mergerfs + snapraid. Then I
+went to a &lt;a href=&#34;https://jrs-s.net/&#34;&gt;Jim Salter&lt;/a&gt; ZFS talk, and just like last time&amp;hellip;
+I want to ZFS &lt;em&gt;all the things&lt;/em&gt;. So, it looks like I&amp;rsquo;ll be sticking with it on the
+server. Also&amp;hellip; it might be time for a ZFS tune-up to make sure I have the
+appropriate options configured correctly&amp;hellip;&lt;/p&gt;
+
+&lt;h4 id=&#34;i-want-to-start-building-flatpaks&#34;&gt;I want to start building Flatpaks&lt;/h4&gt;
+
+&lt;p&gt;As a &lt;a href=&#34;https://silverblue.fedoraproject.org/&#34;&gt;Fedora Silverblue&lt;/a&gt; user, I rely
+&lt;em&gt;heavily&lt;/em&gt; on flatpaks for most of my desktop applications these days. While I
+have only built the &amp;ldquo;hello world&amp;rdquo; demo when playing with flatpak in the past, this
+is something I think I want to dig deeper into. Knowing how to build and tweak
+flatpaks would be extremely useful. It would enable me to package up software I
+need to use, but then also contribute my efforts back to the community.&lt;/p&gt;
+
+&lt;h4 id=&#34;sudo-is-awesome&#34;&gt;&lt;code&gt;sudo&lt;/code&gt; is awesome.&lt;/h4&gt;
+
+&lt;p&gt;I already knew this, but I always forget &lt;em&gt;how much&lt;/em&gt; &lt;code&gt;sudo&lt;/code&gt; can do. Like &lt;code&gt;ssh&lt;/code&gt;,
+the possibilities of being well informed about the advanced options of &lt;code&gt;sudo&lt;/code&gt;
+are endless. I think I&amp;rsquo;m going to dig deeper into some of the settings, and see
+what I can find.&lt;/p&gt;
+
+&lt;h4 id=&#34;i-need-to-automate-my-cloud-provisioning&#34;&gt;I need to automate my cloud provisioning&lt;/h4&gt;
+
+&lt;p&gt;This has been on my list for awhile now, but after seeing so many
+demonstrations of people using terraform and chef to spin up their cloud
+environments&amp;hellip; I need to start adding some provisioning roles to my ansible
+playbooks. I think using the Digital Ocean module to spin up/tear down
+temporary project droplets might be a good start&amp;hellip;&lt;/p&gt;
+
+&lt;h3 id=&#34;2-mentoring-teaching&#34;&gt;2) Mentoring/Teaching&lt;/h3&gt;
+
+&lt;h4 id=&#34;large-scale-mentoring&#34;&gt;Large Scale Mentoring&lt;/h4&gt;
+
+&lt;p&gt;One of my favorite talks of the conference was co-done by two kubernetes
+contributers (from Red Hat and Google). They explained how the kubernetes
+project tackles the big problem of mentoring&amp;hellip; specifically how it can even be
+done in a several-thousand contributer project that also has hundreds of fly-by
+contributers.&lt;/p&gt;
+
+&lt;p&gt;What I enjoyed most about their mentoring system was how it was organized.
+First, they went through and defined all the leadership roles, &lt;em&gt;documenting&lt;/em&gt;
+what the role was, and how it is done. Next, they made a mentoring chart for
+all the defined roles, listing the current person for each role in one column,
+and the person(s) next-in-line that are training for that role in the next
+column. I think this is a great system for communities, and I might see if I
+can take some lessons from this structure and help apply it to some volunteer
+organizations I work with.&lt;/p&gt;
+
+&lt;h4 id=&#34;gamifing-education&#34;&gt;Gamifing Education&lt;/h4&gt;
+
+&lt;p&gt;Another interesting education talk I went to was about gamifying education.  In
+the past, whenever I encountered topics trying to &amp;ldquo;gamify&amp;rdquo; education, they
+usually involved how to add gaming aspects to current methods of teaching
+(points for answering questions, leveling up in difficulty, etc). This talk
+however, focused on actually making games (ex: board games) that just happen to
+teach children as they play. It went in depth about what to keep in mind while
+designing such a game, and gave great examples about challenges I wouldn&amp;rsquo;t
+normally think of. For instance, the presenter suggested designing the games so
+that any random items could be used as the game pieces (rocks, beans, spoons).
+This lowers the barrier of entry so that children in all types of living situations
+are able to play, and I think it is great advice.&lt;/p&gt;
+
+&lt;p&gt;Best of all, the talk concluded with the suggestion to host all game
+sources/documentation in a public repo on a website like Github.  This not only
+makes the game accessible to people all over the world, but allows the
+community to improve and expand on it. If there is something confusing in the
+documentation, another person can clarify and fix it. Open sourcing the game
+also enables the community to modify and invent new variations, improving it
+over time. The talk showcased how we can take the best aspects of open source,
+and use them to hopefully make learning a bit more fun and accessible.&lt;/p&gt;
+
+&lt;h4 id=&#34;those-who-can-do-should-also-teach&#34;&gt;Those who can Do, Should Also Teach&lt;/h4&gt;
+
+&lt;p&gt;As someone that struggled to focus in traditional lecture-style classes, but
+thrived in hands-on lab courses, I am always looking for new methods and ways
+to help others learn. One talk I observed, encouraged the audience to start
+teaching others as they continue grow their skills. The talk provided many useful tips
+and approaches for teaching both technical and non-technical &amp;ldquo;students&amp;rdquo;.&lt;/p&gt;
+
+&lt;p&gt;A big motivation behind this website is that it allows me to share my
+experiences so others can (&lt;em&gt;hopefully&lt;/em&gt;) learn from them.  As I sat listening to
+the talk, I started to brain-storm what I could do to better extend my ability
+to teach. I first wondered what changes I could make to the website, but then
+started thinking about even &lt;em&gt;new&lt;/em&gt; avenues I could pursue. I haven&amp;rsquo;t finalized
+any ideas &lt;em&gt;yet&lt;/em&gt;, but it is something I will keep in mind as I start planning my
+goals for the new year.&lt;/p&gt;
+
+&lt;h3 id=&#34;3-communities-diversity-and-inclusion&#34;&gt;3) Communities/Diversity and Inclusion&lt;/h3&gt;
+
+&lt;p&gt;I first listed &amp;ldquo;&lt;em&gt;Communities&lt;/em&gt;&amp;rdquo; and &amp;ldquo;&lt;em&gt;Diversity and Inclusion&lt;/em&gt;&amp;rdquo; as too separate
+topics. However, as I started to sort talks into the categories, I realized
+these two overlapped all the time. So I merged them.&lt;/p&gt;
+
+&lt;p&gt;Honestly, this topic was so prevalent at ATO, that it&amp;rsquo;s hard to summarize even
+a little bit. From learning about the &lt;em&gt;curb cutting effect&lt;/em&gt;, to
+diversifying recruiters and continually switching up who leads meetings, there
+were all sorts of facts and tips about how to build more diverse teams and even
+communities.&lt;/p&gt;
+
+&lt;p&gt;This topic sparked my curiosity, and I ended up walking away with two
+new books added to my reading list: &lt;em&gt;The Culture Map&lt;/em&gt; by Erin Meyer, and Jono
+Bacon&amp;rsquo;s upcoming book, &lt;em&gt;People Powered&lt;/em&gt;.&lt;/p&gt;
+
+&lt;h3 id=&#34;4-burn-out-team-dynamics&#34;&gt;4) Burn-out/Team Dynamics&lt;/h3&gt;
+
+&lt;p&gt;Last but not least, there were talks about another related topic pair: team
+dynamics and burn-out. Every talk I went to that focused on either these topics
+was &lt;em&gt;really well delivered&lt;/em&gt;, which was a relief as both topics are very
+important in the tech industry. To summarize, I&amp;rsquo;ll list 3 items which I already
+subscribe to, but came up &lt;em&gt;again and again&lt;/em&gt; in the presentations:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Multi-tasking isn&amp;rsquo;t real&lt;/li&gt;
+&lt;li&gt;Stop blaming others&lt;/li&gt;
+&lt;li&gt;A balanced life &lt;em&gt;outside&lt;/em&gt; of work is required to be productive &lt;em&gt;at&lt;/em&gt; work (eat healthy, exercise, get more sleep, have a hobby)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;conclusion&#34;&gt;Conclusion&lt;/h2&gt;
+
+&lt;p&gt;With my second year at All Things Open finished&amp;hellip; would I recommend it?
+Absolutely.  No matter why someone is interested in open source (the tech, the
+community aspects, sharing with others), there will be something there for
+them. See you next year!&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>My Experience with the Large Display Paradox</title>

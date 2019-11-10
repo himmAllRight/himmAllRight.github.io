@@ -5,10 +5,37 @@
     <description>Recent content in Tags on λ ryan. himmelwright. net</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 21 Oct 2019 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 09 Nov 2019 00:00:00 +0000</lastBuildDate>
     
         <atom:link href="http://ryan.himmelwright.net/tags/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Community</title>
+      <link>http://ryan.himmelwright.net/tags/community/</link>
+      <pubDate>Sat, 09 Nov 2019 00:00:00 +0000</pubDate>
+      
+      <guid>http://ryan.himmelwright.net/tags/community/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Events</title>
+      <link>http://ryan.himmelwright.net/tags/events/</link>
+      <pubDate>Sat, 09 Nov 2019 00:00:00 +0000</pubDate>
+      
+      <guid>http://ryan.himmelwright.net/tags/events/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Linux</title>
+      <link>http://ryan.himmelwright.net/tags/linux/</link>
+      <pubDate>Sat, 09 Nov 2019 00:00:00 +0000</pubDate>
+      
+      <guid>http://ryan.himmelwright.net/tags/linux/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>Hardware</title>
@@ -38,15 +65,6 @@
     </item>
     
     <item>
-      <title>Linux</title>
-      <link>http://ryan.himmelwright.net/tags/linux/</link>
-      <pubDate>Fri, 13 Sep 2019 00:00:00 +0000</pubDate>
-      
-      <guid>http://ryan.himmelwright.net/tags/linux/</guid>
-      <description></description>
-    </item>
-    
-    <item>
       <title>dotfiles</title>
       <link>http://ryan.himmelwright.net/tags/dotfiles/</link>
       <pubDate>Fri, 13 Sep 2019 00:00:00 +0000</pubDate>
@@ -65,7 +83,7 @@
     </item>
     
     <item>
-      <title>DEV</title>
+      <title>Dev</title>
       <link>http://ryan.himmelwright.net/tags/dev/</link>
       <pubDate>Wed, 04 Sep 2019 00:00:00 +0000</pubDate>
       
@@ -74,7 +92,7 @@
     </item>
     
     <item>
-      <title>Devops</title>
+      <title>DevOps</title>
       <link>http://ryan.himmelwright.net/tags/devops/</link>
       <pubDate>Wed, 04 Sep 2019 00:00:00 +0000</pubDate>
       
@@ -133,24 +151,6 @@
       <pubDate>Wed, 07 Aug 2019 00:00:00 +0000</pubDate>
       
       <guid>http://ryan.himmelwright.net/tags/organization/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Community</title>
-      <link>http://ryan.himmelwright.net/tags/community/</link>
-      <pubDate>Thu, 20 Jun 2019 00:00:00 +0000</pubDate>
-      
-      <guid>http://ryan.himmelwright.net/tags/community/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Events</title>
-      <link>http://ryan.himmelwright.net/tags/events/</link>
-      <pubDate>Thu, 20 Jun 2019 00:00:00 +0000</pubDate>
-      
-      <guid>http://ryan.himmelwright.net/tags/events/</guid>
       <description></description>
     </item>
     
