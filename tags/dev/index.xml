@@ -1,8 +1,8 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Dev on λ ryan. himmelwright. net</title>
+    <title>DEV on λ ryan. himmelwright. net</title>
     <link>http://ryan.himmelwright.net/tags/dev/</link>
-    <description>Recent content in Dev on λ ryan. himmelwright. net</description>
+    <description>Recent content in DEV on λ ryan. himmelwright. net</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Wed, 04 Sep 2019 00:00:00 +0000</lastBuildDate>
@@ -707,12 +707,12 @@ depend on it go ahead and configure themselves too. I&amp;rsquo;m sure this will
 grow over time as I add missing packages, but so far, it seems to
 provide all the core functionality I need.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-lisp&#34; data-lang=&#34;lisp&#34;&gt;&lt;span style=&#34;color:#75715e&#34;&gt;;; Evil Mode&lt;/span&gt;
-(use-package evil
+(&lt;span style=&#34;color:#a6e22e&#34;&gt;use-package&lt;/span&gt; evil
   &lt;span style=&#34;color:#e6db74&#34;&gt;:ensure&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;t&lt;/span&gt;
   &lt;span style=&#34;color:#e6db74&#34;&gt;:config&lt;/span&gt;
 
   (evil-mode &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;)
-  (use-package evil-leader
+  (&lt;span style=&#34;color:#a6e22e&#34;&gt;use-package&lt;/span&gt; evil-leader
     &lt;span style=&#34;color:#e6db74&#34;&gt;:ensure&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;t&lt;/span&gt;
     &lt;span style=&#34;color:#e6db74&#34;&gt;:config&lt;/span&gt;
     (global-evil-leader-mode &lt;span style=&#34;color:#66d9ef&#34;&gt;t&lt;/span&gt;)
@@ -721,21 +721,21 @@ provide all the core functionality I need.&lt;/p&gt;
       &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;s s&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;swiper&lt;/span&gt;
       &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;d x w&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;delete-trailing-whitespace&lt;/span&gt;))
 
-  (use-package evil-surround
+  (&lt;span style=&#34;color:#a6e22e&#34;&gt;use-package&lt;/span&gt; evil-surround
     &lt;span style=&#34;color:#e6db74&#34;&gt;:ensure&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;t&lt;/span&gt;
     &lt;span style=&#34;color:#e6db74&#34;&gt;:config&lt;/span&gt; (global-evil-surround-mode))
 
-  (use-package evil-indent-textobject
+  (&lt;span style=&#34;color:#a6e22e&#34;&gt;use-package&lt;/span&gt; evil-indent-textobject
     &lt;span style=&#34;color:#e6db74&#34;&gt;:ensure&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;t&lt;/span&gt;)
 
-  (use-package evil-org
+  (&lt;span style=&#34;color:#a6e22e&#34;&gt;use-package&lt;/span&gt; evil-org
     &lt;span style=&#34;color:#e6db74&#34;&gt;:ensure&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;t&lt;/span&gt;
     &lt;span style=&#34;color:#e6db74&#34;&gt;:config&lt;/span&gt;
     (evil-org-set-key-theme
 	  &lt;span style=&#34;color:#f92672&#34;&gt;&amp;#39;&lt;/span&gt;(textobjects insert navigation additional shift todo heading))
     (add-hook &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;org-mode-hook&lt;/span&gt; (lambda () (evil-org-mode))))
 
-  (use-package powerline-evil
+  (&lt;span style=&#34;color:#a6e22e&#34;&gt;use-package&lt;/span&gt; powerline-evil
     &lt;span style=&#34;color:#e6db74&#34;&gt;:ensure&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;t&lt;/span&gt;
     &lt;span style=&#34;color:#e6db74&#34;&gt;:config&lt;/span&gt;
     (powerline-evil-vim-color-theme)))&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
@@ -756,7 +756,7 @@ to &lt;code&gt;use-package&lt;/code&gt; forms instead.&lt;/p&gt;
 &lt;p&gt;After ensuring the &lt;a href=&#34;http://melpa.org&#34;&gt;MELPA&lt;/a&gt; repos are added and
 initialized:&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-lisp&#34; data-lang=&#34;lisp&#34;&gt;&lt;span style=&#34;color:#75715e&#34;&gt;;; Add Melpa packages to Repos&lt;/span&gt;
-(require &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;package&lt;/span&gt;)
+(&lt;span style=&#34;color:#a6e22e&#34;&gt;require&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;package&lt;/span&gt;)
 (add-to-list &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;package-archives&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;&amp;#39;&lt;/span&gt;(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;melpa&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;http://melpa.org/packages/&amp;#34;&lt;/span&gt;))
 (package-initialize)&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;The &lt;code&gt;use-package&lt;/code&gt; package can be installed next. I wrapped the
@@ -770,7 +770,7 @@ happen during compile, so I have mine in an &lt;code&gt;(evail-when compile ...)
   (package-install &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;use-package&lt;/span&gt;))
 
 (eval-when-compile
-  (require &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;use-package&lt;/span&gt;))&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+  (&lt;span style=&#34;color:#a6e22e&#34;&gt;require&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;use-package&lt;/span&gt;))&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;I keep all of this at the top of my configuration, which works well
 even when initializing a new computer.&lt;/p&gt;
 

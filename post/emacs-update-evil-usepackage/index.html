@@ -209,12 +209,12 @@ depend on it go ahead and configure themselves too. I&rsquo;m sure this will
 grow over time as I add missing packages, but so far, it seems to
 provide all the core functionality I need.</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-lisp" data-lang="lisp"><span style="color:#75715e">;; Evil Mode</span>
-(use-package evil
+(<span style="color:#a6e22e">use-package</span> evil
   <span style="color:#e6db74">:ensure</span> <span style="color:#66d9ef">t</span>
   <span style="color:#e6db74">:config</span>
 
   (evil-mode <span style="color:#ae81ff">1</span>)
-  (use-package evil-leader
+  (<span style="color:#a6e22e">use-package</span> evil-leader
     <span style="color:#e6db74">:ensure</span> <span style="color:#66d9ef">t</span>
     <span style="color:#e6db74">:config</span>
     (global-evil-leader-mode <span style="color:#66d9ef">t</span>)
@@ -223,21 +223,21 @@ provide all the core functionality I need.</p>
       <span style="color:#e6db74">&#34;s s&#34;</span> <span style="color:#e6db74">&#39;swiper</span>
       <span style="color:#e6db74">&#34;d x w&#34;</span> <span style="color:#e6db74">&#39;delete-trailing-whitespace</span>))
 
-  (use-package evil-surround
+  (<span style="color:#a6e22e">use-package</span> evil-surround
     <span style="color:#e6db74">:ensure</span> <span style="color:#66d9ef">t</span>
     <span style="color:#e6db74">:config</span> (global-evil-surround-mode))
 
-  (use-package evil-indent-textobject
+  (<span style="color:#a6e22e">use-package</span> evil-indent-textobject
     <span style="color:#e6db74">:ensure</span> <span style="color:#66d9ef">t</span>)
 
-  (use-package evil-org
+  (<span style="color:#a6e22e">use-package</span> evil-org
     <span style="color:#e6db74">:ensure</span> <span style="color:#66d9ef">t</span>
     <span style="color:#e6db74">:config</span>
     (evil-org-set-key-theme
 	  <span style="color:#f92672">&#39;</span>(textobjects insert navigation additional shift todo heading))
     (add-hook <span style="color:#e6db74">&#39;org-mode-hook</span> (lambda () (evil-org-mode))))
 
-  (use-package powerline-evil
+  (<span style="color:#a6e22e">use-package</span> powerline-evil
     <span style="color:#e6db74">:ensure</span> <span style="color:#66d9ef">t</span>
     <span style="color:#e6db74">:config</span>
     (powerline-evil-vim-color-theme)))</code></pre></div>
@@ -258,7 +258,7 @@ to <code>use-package</code> forms instead.</p>
 <p>After ensuring the <a href="http://melpa.org">MELPA</a> repos are added and
 initialized:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-lisp" data-lang="lisp"><span style="color:#75715e">;; Add Melpa packages to Repos</span>
-(require <span style="color:#e6db74">&#39;package</span>)
+(<span style="color:#a6e22e">require</span> <span style="color:#e6db74">&#39;package</span>)
 (add-to-list <span style="color:#e6db74">&#39;package-archives</span> <span style="color:#f92672">&#39;</span>(<span style="color:#e6db74">&#34;melpa&#34;</span> <span style="color:#f92672">.</span> <span style="color:#e6db74">&#34;http://melpa.org/packages/&#34;</span>))
 (package-initialize)</code></pre></div>
 <p>The <code>use-package</code> package can be installed next. I wrapped the
@@ -272,7 +272,7 @@ happen during compile, so I have mine in an <code>(evail-when compile ...)</code
   (package-install <span style="color:#e6db74">&#39;use-package</span>))
 
 (eval-when-compile
-  (require <span style="color:#e6db74">&#39;use-package</span>))</code></pre></div>
+  (<span style="color:#a6e22e">require</span> <span style="color:#e6db74">&#39;use-package</span>))</code></pre></div>
 <p>I keep all of this at the top of my configuration, which works well
 even when initializing a new computer.</p>
 

@@ -378,7 +378,7 @@ complex, I may provide an update. Until then, enjoy!&lt;/p&gt;</description>
 &lt;p&gt;With the templates made, I  constructed a new &lt;code&gt;/content/pages/&lt;/code&gt; category, and added  &lt;code&gt;about.md&lt;/code&gt; and &lt;code&gt;homelab.md&lt;/code&gt; files to it. In both files, I defined the &lt;code&gt;type&lt;/code&gt; and &lt;code&gt;layout&lt;/code&gt; parameters, so that the new layouts would be used. Lastly, I used the &lt;code&gt;menu&lt;/code&gt; parameter to declare that each page would be part of the main menu.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;---
 title: About
-date: &lt;span style=&#34;color:#e6db74&#34;&gt;2017-08-28T09:51:18&lt;/span&gt;-&lt;span style=&#34;color:#ae81ff&#34;&gt;04&lt;/span&gt;:&lt;span style=&#34;color:#ae81ff&#34;&gt;00&lt;/span&gt;
+date: &lt;span style=&#34;color:#e6db74&#34;&gt;2017-08-28T09:51:18&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;-04&lt;/span&gt;:&lt;span style=&#34;color:#ae81ff&#34;&gt;00&lt;/span&gt;
 type: about
 menu : 
   main:

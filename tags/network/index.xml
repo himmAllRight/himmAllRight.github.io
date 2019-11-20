@@ -736,7 +736,7 @@ an
 indicated that the POE adaptor could indeed power both.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-scheme&#34; data-lang=&#34;scheme&#34;&gt;Modem  --
         |
-         --&amp;gt; POE Adaptor --&amp;gt; (*eth0*)  edgerouter-x  (*eth4*) --&amp;gt; AP Lite
+         --&amp;gt; POE Adaptor --&amp;gt; (&lt;span style=&#34;color:#a6e22e&#34;&gt;*eth0*&lt;/span&gt;)  edgerouter-x  (&lt;span style=&#34;color:#a6e22e&#34;&gt;*eth4*&lt;/span&gt;) --&amp;gt; AP Lite
         |
 Power  --&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;&lt;em&gt;Digram describing the correct link up&lt;/em&gt;&lt;/p&gt;
