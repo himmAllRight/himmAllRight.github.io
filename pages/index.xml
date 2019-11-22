@@ -5,10 +5,67 @@
     <description>Recent content in Pages on λ ryan. himmelwright. net</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 23 May 2019 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 22 Nov 2019 06:47:00 -0400</lastBuildDate>
     
         <atom:link href="http://ryan.himmelwright.net/pages/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>About</title>
+      <link>http://ryan.himmelwright.net/pages/about/</link>
+      <pubDate>Fri, 22 Nov 2019 06:47:00 -0400</pubDate>
+      
+      <guid>http://ryan.himmelwright.net/pages/about/</guid>
+      <description>
+
+&lt;p&gt;&lt;img src=&#34;../../img/about/east_campus.jpeg&#34; style=&#34;width: 45%; float: left; margin: 10px 10px 10px 10px;&#34;/&gt;&lt;/p&gt;
+
+&lt;p&gt;I am a Quality Engineer at &lt;a href=&#34;https://redhat.com&#34;&gt;Red Hat&lt;/a&gt;,
+living and working in &lt;a href=&#34;https://durhamnc.gov/&#34;&gt;Durham, NC&lt;/a&gt;. Previously,
+I worked at &lt;a href=&#34;http://2is-inc.com/&#34;&gt;2Is-Inc&lt;/a&gt; as a Back-end Software Developer,
+creating applications and build systems (mostly in &lt;a href=&#34;https://franz.com/products/allegro-common-lisp/&#34;&gt;Allegro Common
+Lisp&lt;/a&gt;). Before that, I
+was a student at &lt;a href=&#34;https://www.lafayette.edu/&#34;&gt;Lafayette College&lt;/a&gt;,
+where I majored in Neuroscience and minored in Computer Science.&lt;/p&gt;
+
+&lt;p&gt;Outside of work, I am still an enthusiastic Linux user that loves
+learning about computers, programming languages (especially functional
+ones), and open source technologies. I am an active member of &lt;a href=&#34;http://codefordurham.com/&#34;&gt;Code
+for Durham&lt;/a&gt;, and also frequent &lt;a href=&#34;https://trilug.org/&#34;&gt;several
+other&lt;/a&gt; &lt;a href=&#34;https://www.meetup.com/TriClojure&#34;&gt;local
+meet ups&lt;/a&gt; &lt;a href=&#34;https://www.meetup.com/learn-code-rdu/&#34;&gt;in
+the&lt;/a&gt; &lt;a href=&#34;https://www.meetup.com/Triangle-Kubernetes-Meetup/&#34;&gt;triangle
+area&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;I am a self-taught learner and continue to study computer science and
+IT topics by working on &lt;a href=&#34;https://github.com/himmAllRight?tab=repositories&#34;&gt;personal
+projects&lt;/a&gt;, taking
+courses, and maintaining my
+&lt;a href=&#34;http://ryan.himmelwright.net/pages/homelab/&#34;&gt;homelab&lt;/a&gt;. This website
+exists to help document the personal projects I work on, and what I&amp;rsquo;ve
+learned.&lt;/p&gt;
+
+&lt;p&gt;Beyond technology, I love &lt;a href=&#34;https://bandcamp.com/himmallright&#34;&gt;music&lt;/a&gt;,
+&lt;a href=&#34;http://ryan.himmelwright.net/post/&#34;&gt;writing&lt;/a&gt;, the outdoors, and swimming (I
+competitively swam from the age of 8, through college). I am married to
+Rebecca, a second year &lt;a href=&#34;https://anesthesia.mc.duke.edu/&#34;&gt;Anaesthesia&lt;/a&gt; resident
+at Duke. We have been together for over 13 years and were married on September
+17th, 2016 (the day before our 10th anniversary).&lt;/p&gt;
+
+&lt;p&gt;Feel free to contact me using any of the methods below.&lt;/p&gt;
+
+&lt;h3 id=&#34;contact&#34;&gt;Contact&lt;/h3&gt;
+
+&lt;p&gt;In addition to the contact icons at the bottom of the website, I can
+be reached via these additional methods:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Email: &lt;a href=&#34;mailto:ryan@himmelwright.net&#34;&gt;ryan@himmelwright.net&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;IRC: I&amp;rsquo;m often freenode as &lt;code&gt;himmAllRight&lt;/code&gt; or &lt;code&gt;rhimmelw&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;Telegram: &lt;code&gt;@himmAllRight&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
     
     <item>
       <title>Homelab</title>
@@ -171,65 +228,6 @@ Intel i5 (1.4 GHz (2.7 GHz Turbo), 3M Cache, 2 Cores, 2 Threads) ?
 2.96 Lbs and ~0.7” thick
 Mac OS
 &lt;/code&gt;&lt;/pre&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>About</title>
-      <link>http://ryan.himmelwright.net/pages/about/</link>
-      <pubDate>Sun, 21 Oct 2018 07:14:00 -0400</pubDate>
-      
-      <guid>http://ryan.himmelwright.net/pages/about/</guid>
-      <description>
-
-&lt;p&gt;&lt;img src=&#34;../../img/notch-avatar.jpg&#34; style=&#34;width: 45%; float: left; margin: 10px 10px 10px 10px;&#34;/&gt;&lt;/p&gt;
-
-&lt;p&gt;I am a Quality Engineer at &lt;a href=&#34;https://redhat.com&#34;&gt;Red Hat&lt;/a&gt;,
-living and working in &lt;a href=&#34;https://durhamnc.gov/&#34;&gt;Durham, NC&lt;/a&gt;. Previously,
-I worked at &lt;a href=&#34;http://2is-inc.com/&#34;&gt;2Is-Inc&lt;/a&gt; as a Back-end Software Developer,
-creating applications and build systems (mostly in &lt;a href=&#34;https://franz.com/products/allegro-common-lisp/&#34;&gt;Allegro Common
-Lisp&lt;/a&gt;). Before that, I
-was a student at &lt;a href=&#34;https://www.lafayette.edu/&#34;&gt;Lafayette College&lt;/a&gt;,
-where I majored in Neuroscience and minored in Computer Science.&lt;/p&gt;
-
-&lt;p&gt;Outside of work, I am still an enthusiastic Linux user that loves
-learning about computers, programming languages (especially functional
-ones), and open source technologies. I am an active member of &lt;a href=&#34;http://codefordurham.com/&#34;&gt;Code
-for Durham&lt;/a&gt;, and also frequent &lt;a href=&#34;https://trilug.org/&#34;&gt;several
-other&lt;/a&gt; &lt;a href=&#34;https://www.meetup.com/TriClojure&#34;&gt;local
-meet ups&lt;/a&gt; &lt;a href=&#34;https://www.meetup.com/learn-code-rdu/&#34;&gt;in
-the&lt;/a&gt; &lt;a href=&#34;https://www.meetup.com/Triangle-Kubernetes-Meetup/&#34;&gt;triangle
-area&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p&gt;I am a self-taught learner and continue to study computer science and
-IT topics by working on &lt;a href=&#34;https://github.com/himmAllRight?tab=repositories&#34;&gt;personal
-projects&lt;/a&gt;, taking
-courses, and maintaining my
-&lt;a href=&#34;http://ryan.himmelwright.net/pages/homelab/&#34;&gt;homelab&lt;/a&gt;. This website
-exists to help document the personal projects I work on, and what I&amp;rsquo;ve
-learned.&lt;/p&gt;
-
-&lt;p&gt;Beyond technology, I love &lt;a href=&#34;https://bandcamp.com/himmallright&#34;&gt;music&lt;/a&gt;,
-&lt;a href=&#34;http://ryan.himmelwright.net/post/&#34;&gt;writing&lt;/a&gt;, the outdoors, and
-swimming (I competitively swam from the age of 8, through college). I
-am married to Rebecca, a first year Duke resident intern
-(&lt;a href=&#34;https://anesthesia.mc.duke.edu/&#34;&gt;Anesthesiology&lt;/a&gt;). We have been
-together for over 12 years and were married on September 17th, 2016
-(the day before our 10th anniversary).&lt;/p&gt;
-
-&lt;p&gt;Feel free to contact me using any of the methods below.&lt;/p&gt;
-
-&lt;h3 id=&#34;contact&#34;&gt;Contact&lt;/h3&gt;
-
-&lt;p&gt;In addition to the contact icons at the bottom of the website, I can
-be reached via these additional methods:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Email: &lt;a href=&#34;mailto:ryan@himmelwright.net&#34;&gt;ryan@himmelwright.net&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;IRC: I&amp;rsquo;m often on geekshed and freenode channels as &lt;code&gt;himmAllRight&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;Telegram: &lt;code&gt;@himmAllRight&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;Wire: &lt;code&gt;@himmallright&lt;/code&gt;&lt;/li&gt;
-&lt;/ul&gt;
 </description>
     </item>
     

@@ -3,6 +3,21 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>http://ryan.himmelwright.net/pages/about/</loc>
+    <lastmod>2019-11-22T06:47:00-04:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://ryan.himmelwright.net/pages/</loc>
+    <lastmod>2019-11-22T06:47:00-04:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://ryan.himmelwright.net/</loc>
+    <lastmod>2019-11-22T06:47:00-04:00</lastmod>
+  </url>
+  
+  <url>
     <loc>http://ryan.himmelwright.net/post/ato2019/</loc>
     <lastmod>2019-11-09T00:00:00+00:00</lastmod>
   </url>
@@ -29,11 +44,6 @@
   
   <url>
     <loc>http://ryan.himmelwright.net/tags/</loc>
-    <lastmod>2019-11-09T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://ryan.himmelwright.net/</loc>
     <lastmod>2019-11-09T00:00:00+00:00</lastmod>
   </url>
   
@@ -158,11 +168,6 @@
   </url>
   
   <url>
-    <loc>http://ryan.himmelwright.net/pages/</loc>
-    <lastmod>2019-05-23T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
     <loc>http://ryan.himmelwright.net/post/setting-up-tmuxinator/</loc>
     <lastmod>2019-05-23T00:00:00+00:00</lastmod>
   </url>
@@ -265,11 +270,6 @@
   <url>
     <loc>http://ryan.himmelwright.net/post/new-lgud4379b/</loc>
     <lastmod>2018-11-12T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://ryan.himmelwright.net/pages/about/</loc>
-    <lastmod>2018-10-21T07:14:00-04:00</lastmod>
   </url>
   
   <url>
