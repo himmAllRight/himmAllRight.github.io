@@ -1,14 +1,108 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Shell on λ ryan. himmelwright. net</title>
+    <title>shell on λ ryan. himmelwright. net</title>
     <link>http://ryan.himmelwright.net/tags/shell/</link>
-    <description>Recent content in Shell on λ ryan. himmelwright. net</description>
+    <description>Recent content in shell on λ ryan. himmelwright. net</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 23 May 2019 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 04 Dec 2019 00:00:00 +0000</lastBuildDate>
     
         <atom:link href="http://ryan.himmelwright.net/tags/shell/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Setup Mosh</title>
+      <link>http://ryan.himmelwright.net/post/setup-mosh-shell/</link>
+      <pubDate>Wed, 04 Dec 2019 00:00:00 +0000</pubDate>
+      
+      <guid>http://ryan.himmelwright.net/post/setup-mosh-shell/</guid>
+      <description>
+
+&lt;p&gt;Since &lt;a href=&#34;../../post/charmeleon-desktop-design/&#34;&gt;builing my desktop&lt;/a&gt;, whenever I work
+on another machine, I usually end up ssh&amp;rsquo;ing back to it to work remotely. It
+has my files, more power, and much of my work flow is done from a terminal
+window anyway, so why not?  The only issue I have with &lt;code&gt;ssh&lt;/code&gt; is that if I have
+a spotty internet connection, or if I sleep/suspend my laptop while moving
+around, the &lt;code&gt;ssh&lt;/code&gt; session will occasionally time out.  &lt;a href=&#34;../../post/scripting-tmux-workspaces/&#34;&gt;Tmux&lt;/a&gt;
+and &lt;a href=&#34;../../post/setting-up-tmuxinator/&#34;&gt;tmuxinator&lt;/a&gt; make this less of an issue,
+since I can re-attach my session, but I still wish my remote sessions were a
+bit more seamless. They can be&amp;hellip; using &lt;code&gt;mosh&lt;/code&gt;.&lt;/p&gt;
+
+&lt;h4 id=&#34;mosh&#34;&gt;Mosh&lt;/h4&gt;
+
+&lt;p&gt;&lt;a href=&#34;../../img/posts/setup-mosh/ponyta-mosh.png&#34;&gt;
+&lt;img alt=&#34;Using mosh to conenct to a server&#34; src=&#34;../../img/posts/setup-mosh/ponyta-mosh.png&#34; style=&#34;max-width: 100%; padding: 5px 15px 10px 10px&#34;/&gt;&lt;/a&gt;
+&lt;div class=&#34;caption&#34;&gt;Using &lt;code&gt;mosh&lt;/code&gt; to connect to one of my servers&lt;/div&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://mosh.org&#34;&gt;Mosh&lt;/a&gt; is a more robust replacement for interactive ssh
+terminals. It automatically roams and continues to work even as the computer
+switches networks or is put to sleep. It also responds to typing, even on a bad
+connection, which cuts down on lag. Lastly, it&amp;rsquo;s free and open source software,
+licenced under the GPLv3.&lt;/p&gt;
+
+&lt;h4 id=&#34;mosh-install&#34;&gt;Mosh Install&lt;/h4&gt;
+
+&lt;p&gt;Mosh should be in most Linux repos, and is also available on BSD, Mac, Windows,
+and basically everything else.  For more information on how to install it on
+your platform, head over to the &lt;a href=&#34;https://mosh.org/#getting&#34;&gt;getting mosh&lt;/a&gt;
+page.  For me, it was a simple &lt;code&gt;dnf&lt;/code&gt;/&lt;code&gt;yum&lt;/code&gt; install to get it on both my laptop
+and
+server:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;sudo dnf install mosh
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;*Note: My centos server required me to first enable the epel repos to get
+access to &lt;code&gt;mosh&lt;/code&gt;. Fedora might also, but I already had it enabled on my
+laptop.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;sudo yum install -y epel-release
+sudo yum install -y mosh
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h4 id=&#34;open-firewall-ports&#34;&gt;Open Firewall Ports&lt;/h4&gt;
+
+&lt;p&gt;After installing &lt;code&gt;mosh&lt;/code&gt;&amp;hellip; it might not immediately work. If so, it is likely
+due to not having the required ports open. Mosh uses UDP ports 60000-61000 for
+it&amp;rsquo;s connections. Enable these ports and optionally restart the firewall,
+before trying mosh again.&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;Note: If you want to connect from outside the network, remember to also
+forward these ports on the network.&lt;/em&gt;&lt;/p&gt;
+
+&lt;h4 id=&#34;connect&#34;&gt;Connect&lt;/h4&gt;
+
+&lt;p&gt;We should now be able to connect to the server using mosh. Typical connections
+look very similar to &lt;code&gt;ssh&lt;/code&gt;:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;mosh ryan@centos-server
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;If a specific mosh UDP port needs to be specified (for port-forwarding, for example)
+use the &lt;code&gt;-p&lt;/code&gt; flag:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;mosh -p 1234 ryan@centos-server
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h4 id=&#34;ssh-options&#34;&gt;SSH Options&lt;/h4&gt;
+
+&lt;p&gt;Mosh uses ssh for the initial connection. Occasionally, particular ssh options
+might be required in order for mosh to initialize a connection.  For
+example, I typically &lt;code&gt;ssh&lt;/code&gt; home on a particular port, so that my router knows
+which VM to transfer me to.  Options like this can be passed to &lt;code&gt;mosh&lt;/code&gt; using
+the &lt;code&gt;--ssh&lt;/code&gt; flag:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;mosh --ssh=&amp;quot;ssh -p 1234&amp;quot; ryan@centos-network
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h4 id=&#34;conclusion&#34;&gt;Conclusion&lt;/h4&gt;
+
+&lt;p&gt;That&amp;rsquo;s really it. There is a bunch of cool &lt;a href=&#34;https://mosh.org/#techinfo&#34;&gt;technical
+stuff&lt;/a&gt; going on under the hood of mosh, but on the
+surface&amp;hellip; it is simply useful. For an even &lt;em&gt;better&lt;/em&gt; experience with mosh, be
+sure to check out tmux. Enjoy!&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>Setting up Tmuxinator</title>

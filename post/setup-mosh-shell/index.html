@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Setup Mosh -- λ ryan. himmelwright. net</title>
+
+    
+
+    
+    <link href="http://ryan.himmelwright.net/css/bootstrap.min.css" rel="stylesheet">
+
+    
+    <link href="http://ryan.himmelwright.net/css/clean-blog.min.css" rel="stylesheet">
+
+    
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href='//fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+
+    
+    
+    
+
+
+
+    
+    <script type="text/javascript">
+        var _paq = _paq || [];
+         
+        _paq.push(["setDocumentTitle", document.domain + "/" + document.title]);
+        _paq.push(["setCookieDomain", "*.ryan.himmelwright.net"]);
+        _paq.push(["setDomains", ["*.ryan.himmelwright.net"]]);
+        _paq.push(['trackPageView']);
+        _paq.push(['enableLinkTracking']);
+        (function() {
+        var u="//cloud.himmelwright.net/piwik/";
+        _paq.push(['setTrackerUrl', u+'piwik.php']);
+        _paq.push(['setSiteId', '1']);
+        var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+        g.type='text/javascript'; g.async=true; g.defer=true; g.src=u+'piwik.js'; s.parentNode.insertBefore(g,s);
+        })();
+        </script>
+        <noscript><p><img src="//cloud.himmelwright.net/piwik/piwik.php?idsite=1&rec=1" style="border:0;" alt="" /></p></noscript>
+        
+
+
+
+</head>
+
+<body>
+
+    
+    <nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+        <div class="container-fluid">
+            
+            <div class="navbar-header page-scroll">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="http://ryan.himmelwright.net">λ ryan. himmelwright. net</a>
+            </div>
+
+                       
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    
+                    <li>
+                        <a href="../../">home</a>
+                    </li>
+                    
+                    <li>
+                        <a href="../../pages/about/">About</a>
+                    </li>
+                    
+                    <li>
+                        <a href="../../pages/homelab/">Homelab</a>
+                    </li>
+                    
+                    <li>
+                        <a href="../../tags">tags</a>
+                    </li>
+                    
+                    <li>
+                        <a href="../../post/">Archives</a>
+                    </li>
+                    
+                    <li>
+                        <a href="../../post/index.xml">RSS</a>
+                    </li>
+                    
+                  </ul>
+            </div>
+           
+
+        </div>
+        
+    </nav>
+
+
+
+
+<header class="intro-header" style="background-image: url('http://ryan.himmelwright.net/img/posts/setup-mosh/north-buchanan-boulevard.jpeg')">
+    
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <h1>Setup Mosh</h1>
+                    <h2 class="subheading"></h2>
+                    <span class="meta">
+                        
+Posted by <a href="#">Ryan Himmelwright</a> on Wed, Dec 4, 2019
+
+
+
+
+
+
+
+<br />
+Tags <a href="../../tags/linux">linux</a>, <a href="../../tags/homelab">homelab</a>, <a href="../../tags/ssh">ssh</a>, <a href="../../tags/shell">shell</a>
+
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <span class="header-caption">North Buchanan Boulevard, Durham, NC</span>
+    
+    </header>
+
+    
+    <article>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                    
+                    
+
+<p>Since <a href="../../post/charmeleon-desktop-design/">builing my desktop</a>, whenever I work
+on another machine, I usually end up ssh&rsquo;ing back to it to work remotely. It
+has my files, more power, and much of my work flow is done from a terminal
+window anyway, so why not?  The only issue I have with <code>ssh</code> is that if I have
+a spotty internet connection, or if I sleep/suspend my laptop while moving
+around, the <code>ssh</code> session will occasionally time out.  <a href="../../post/scripting-tmux-workspaces/">Tmux</a>
+and <a href="../../post/setting-up-tmuxinator/">tmuxinator</a> make this less of an issue,
+since I can re-attach my session, but I still wish my remote sessions were a
+bit more seamless. They can be&hellip; using <code>mosh</code>.</p>
+
+<h4 id="mosh">Mosh</h4>
+
+<p><a href="../../img/posts/setup-mosh/ponyta-mosh.png">
+<img alt="Using mosh to conenct to a server" src="../../img/posts/setup-mosh/ponyta-mosh.png" style="max-width: 100%; padding: 5px 15px 10px 10px"/></a>
+<div class="caption">Using <code>mosh</code> to connect to one of my servers</div></p>
+
+<p><a href="https://mosh.org">Mosh</a> is a more robust replacement for interactive ssh
+terminals. It automatically roams and continues to work even as the computer
+switches networks or is put to sleep. It also responds to typing, even on a bad
+connection, which cuts down on lag. Lastly, it&rsquo;s free and open source software,
+licenced under the GPLv3.</p>
+
+<h4 id="mosh-install">Mosh Install</h4>
+
+<p>Mosh should be in most Linux repos, and is also available on BSD, Mac, Windows,
+and basically everything else.  For more information on how to install it on
+your platform, head over to the <a href="https://mosh.org/#getting">getting mosh</a>
+page.  For me, it was a simple <code>dnf</code>/<code>yum</code> install to get it on both my laptop
+and
+server:</p>
+
+<pre><code>sudo dnf install mosh
+</code></pre>
+
+<p>*Note: My centos server required me to first enable the epel repos to get
+access to <code>mosh</code>. Fedora might also, but I already had it enabled on my
+laptop.</p>
+
+<pre><code>sudo yum install -y epel-release
+sudo yum install -y mosh
+</code></pre>
+
+<h4 id="open-firewall-ports">Open Firewall Ports</h4>
+
+<p>After installing <code>mosh</code>&hellip; it might not immediately work. If so, it is likely
+due to not having the required ports open. Mosh uses UDP ports 60000-61000 for
+it&rsquo;s connections. Enable these ports and optionally restart the firewall,
+before trying mosh again.</p>
+
+<p><em>Note: If you want to connect from outside the network, remember to also
+forward these ports on the network.</em></p>
+
+<h4 id="connect">Connect</h4>
+
+<p>We should now be able to connect to the server using mosh. Typical connections
+look very similar to <code>ssh</code>:</p>
+
+<pre><code>mosh ryan@centos-server
+</code></pre>
+
+<p>If a specific mosh UDP port needs to be specified (for port-forwarding, for example)
+use the <code>-p</code> flag:</p>
+
+<pre><code>mosh -p 1234 ryan@centos-server
+</code></pre>
+
+<h4 id="ssh-options">SSH Options</h4>
+
+<p>Mosh uses ssh for the initial connection. Occasionally, particular ssh options
+might be required in order for mosh to initialize a connection.  For
+example, I typically <code>ssh</code> home on a particular port, so that my router knows
+which VM to transfer me to.  Options like this can be passed to <code>mosh</code> using
+the <code>--ssh</code> flag:</p>
+
+<pre><code>mosh --ssh=&quot;ssh -p 1234&quot; ryan@centos-network
+</code></pre>
+
+<h4 id="conclusion">Conclusion</h4>
+
+<p>That&rsquo;s really it. There is a bunch of cool <a href="https://mosh.org/#techinfo">technical
+stuff</a> going on under the hood of mosh, but on the
+surface&hellip; it is simply useful. For an even <em>better</em> experience with mosh, be
+sure to check out tmux. Enjoy!</p>
+
+
+                    
+                    
+                    
+                         <div style="float: right; text-decoration: underline; text-align: right;">Prev Post:</div>
+                    
+                    <br>
+                    
+                    
+                        <a href="http://ryan.himmelwright.net/post/ato2019/" style="text-align: right; float: right; max-width: 40%">All Things Open 2019</a>
+                    
+
+			
+			<div class="comment-section">
+			  
+   <div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "himmallright" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+			</div>
+                </div>
+            </div>
+        </div>
+    </article>
+
+        <hr>
+    
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                  <ul class="list-inline text-center">
+                    
+                      <li>
+                        <a href="mailto:ryan@himmelwright.net">
+                          <span class="fa-stack fa-lg">
+                            <i class="fa fa-circle fa-stack-2x"></i>
+                            <i class="fa fa-envelope-o fa-stack-1x fa-inverse"></i>
+                          </span>
+                        </a>
+                      </li>
+                    
+                    
+                    <li>
+                      <a href="https://github.com/himmAllRight">
+                        <span class="fa-stack fa-lg">
+                          <i class="fa fa-circle fa-stack-2x"></i>
+                          <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                        </span>
+                      </a>
+                    </li>
+                    
+                    <li>
+                      <a href="https://www.linkedin.com/in/ryan-himmelwright-b3891774/">
+                        <span class="fa-stack fa-lg">
+                          <i class="fa fa-circle fa-stack-2x"></i>
+                          <i class="fa fa-linkedin fa-stack-1x fa-inverse"></i>
+                        </span>
+                      </a>
+                    </li>
+                    
+                  </ul>
+<p class="copyright text-muted">
+
+<a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img
+  alt="Creative Commons License" style="border-width:0"
+  src="https://i.creativecommons.org/l/by/4.0/88x31.png" /></a><br />This work
+by <a xmlns:cc="http://creativecommons.org/ns#" href="http://ryan.himmelwright.net" property="cc:attributionName" rel="cc:attributionURL">Ryan Himmelwright</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
+</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    
+    <script src="http://ryan.himmelwright.net/js/jquery.min.js"></script>
+
+    
+    <script src="http://ryan.himmelwright.net/js/bootstrap.min.js"></script>
+
+    
+    <script src="http://ryan.himmelwright.net/js/clean-blog.js"></script>
+
+    
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-123-45', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+
+
+</body>
+
+</html>
+
