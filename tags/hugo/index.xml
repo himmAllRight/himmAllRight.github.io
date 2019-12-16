@@ -1,14 +1,116 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Hugo on λ ryan. himmelwright. net</title>
+    <title>hugo on λ ryan. himmelwright. net</title>
     <link>http://ryan.himmelwright.net/tags/hugo/</link>
-    <description>Recent content in Hugo on λ ryan. himmelwright. net</description>
+    <description>Recent content in hugo on λ ryan. himmelwright. net</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 15 Aug 2018 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 15 Dec 2019 00:00:00 +0000</lastBuildDate>
     
         <atom:link href="http://ryan.himmelwright.net/tags/hugo/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Resolving Issue #26</title>
+      <link>http://ryan.himmelwright.net/post/issue26/</link>
+      <pubDate>Sun, 15 Dec 2019 00:00:00 +0000</pubDate>
+      
+      <guid>http://ryan.himmelwright.net/post/issue26/</guid>
+      <description>&lt;p&gt;While working on a post a couple of weeks ago, I noticed that for some unknown
+reason, my website wasn&amp;rsquo;t rendering correctly. After some back-tracking, I
+remembered that I had updated the container I work in to a Fedora 31 base
+image, which has a newer version of &lt;code&gt;hugo&lt;/code&gt;.  So, I filed the problem as &lt;a href=&#34;https://github.com/himmAllRight/himmAllRight-source/issues/26&#34;&gt;issue
+#26&lt;/a&gt;, and
+finished my post in a Fedora 30 container for the time being.  Here is a quick
+explanation of how I &lt;em&gt;eventually&lt;/em&gt; came back and resolved issue #26.&lt;/p&gt;
+
+&lt;h3 id=&#34;the-problem&#34;&gt;The Problem&lt;/h3&gt;
+
+&lt;p&gt;&lt;a href=&#34;../../img/posts/issue26/correct-website-homepage.png&#34;&gt;
+&lt;img alt=&#34;The correct website homepage index&#34; src=&#34;../../img/posts/issue26/correct-website-homepage.png&#34; style=&#34;max-width: 100%; padding: 5px 15px 10px 10px&#34;/&gt;&lt;/a&gt;
+&lt;div class=&#34;caption&#34;&gt;What the website homepage is &lt;em&gt;supposed&lt;/em&gt; to look like&lt;/div&gt;&lt;/p&gt;
+
+&lt;p&gt;My website has two types of content: &lt;em&gt;posts&lt;/em&gt;, and &lt;em&gt;pages&lt;/em&gt;. &lt;em&gt;Pages&lt;/em&gt; are the
+&amp;lsquo;normal&amp;rsquo; content of the website, like the &lt;a href=&#34;../../pages/about/&#34;&gt;About&lt;/a&gt; and
+&lt;a href=&#34;../../pages/homelab/&#34;&gt;Homelab&lt;/a&gt; pages. &lt;em&gt;Posts&lt;/em&gt; on the other hand, are the dated
+&amp;lsquo;blog&amp;rsquo; posts I write (like the one you are currently reading). When everything
+is working, my hugo template takes the newest &lt;code&gt;x&lt;/code&gt; number of post files from the
+&lt;em&gt;posts&lt;/em&gt; directory, and lists them on the homepage with a small summary. (See
+image above)&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;../../img/posts/issue26/broken-website-homepage.png&#34;&gt;
+&lt;img alt=&#34;What the broken homepage&#34; src=&#34;../../img/posts/issue26/broken-website-homepage.png&#34; style=&#34;max-width: 100%; padding: 5px 15px 10px 10px&#34;/&gt;&lt;/a&gt;
+&lt;div class=&#34;caption&#34;&gt;The broken homepage&lt;/div&gt;&lt;/p&gt;
+
+&lt;p&gt;However, after the &lt;code&gt;hugo&lt;/code&gt; version in my website container updated from
+&lt;code&gt;v0.56.6&lt;/code&gt; to &lt;code&gt;v0.58.3&lt;/code&gt;, the post list on the homepage broke.  Specifically,
+instead of listing the recent posts, the homepage just listed a single &amp;ldquo;post&amp;rdquo;
+named&amp;hellip;  &amp;ldquo;Posts&amp;rdquo; (see image above).&lt;/p&gt;
+
+&lt;p&gt;This indicated that something changed between those two versions that made my
+template out of date. However, I wasn&amp;rsquo;t sure if the problem was in the
+website&amp;rsquo;s page content, or if it was from an issue in the template I used.&lt;/p&gt;
+
+&lt;h3 id=&#34;finding-a-fix&#34;&gt;Finding a Fix&lt;/h3&gt;
+
+&lt;p&gt;To find out, I grabbed some other &lt;a href=&#34;https://themes.gohugo.io&#34;&gt;hugo templates&lt;/a&gt;,
+and temporarily switched my config to render the website with them. This was
+actually a bit more complicated than I thought it would be. Hugo templates
+rely on a all sorts of configuration variables being defined in order to work properly.
+Additionally, not every template had a recent post section like I did, so they
+didn&amp;rsquo;t help to isolate the issue at all. Lastly, if the template was older&amp;hellip;
+it had the same rendering issue mine did. Eventually, I found a newer, but
+rather bare-bones template that had a similar home page layout to my own. When
+I rendered my site with it&amp;hellip; it had a working recent posts list on the home
+page!&lt;/p&gt;
+
+&lt;p&gt;This proved 1) the issue was somewhere in my &lt;em&gt;template code&lt;/em&gt; and 2) a fix was
+possible.&lt;/p&gt;
+
+&lt;h3 id=&#34;coding-a-solution&#34;&gt;Coding a Solution&lt;/h3&gt;
+
+&lt;p&gt;Studying the &lt;code&gt;layouts/index.html&lt;/code&gt; file in each template, I noticed the working
+template used a different method to gather and display the recent posts. My
+template used a basic in-line piece of code that grabbed a range of the latest
+posts to be rendered, right then and there.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-html&#34; data-lang=&#34;html&#34;&gt;&amp;lt;&lt;span style=&#34;color:#f92672&#34;&gt;div&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;class&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;container&amp;#34;&lt;/span&gt;&amp;gt;
+      &amp;lt;&lt;span style=&#34;color:#f92672&#34;&gt;div&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;class&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;row&amp;#34;&lt;/span&gt;&amp;gt;
+        &amp;lt;&lt;span style=&#34;color:#f92672&#34;&gt;div&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;class&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1&amp;#34;&lt;/span&gt;&amp;gt;
+          {{ $posts := or .Site.Params.PostSummariesFrontPage 4 }}
+          {{ range first $posts (where .Data.Pages &amp;#34;Type&amp;#34; &amp;#34;post&amp;#34;) }}
+              {{ .Render &amp;#34;summary&amp;#34;}}
+          {{ end }}&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;By comparison, the the newer template used an improved setup. It first
+defined variables at the top of the layout page to calculate all the recent
+post lists, and then simply referred to &lt;em&gt;that&lt;/em&gt; when rendering the summaries. So,
+I read up a bit on the hugo documentation to better learn how variables and
+some of the basic functions worked.&lt;/p&gt;
+
+&lt;p&gt;Eventually I was able to come up with my own solution, defining the following
+variables at the top of the page:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-go&#34; data-lang=&#34;go&#34;&gt;{{ &lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;$&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;mainSections&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;:=&lt;/span&gt; .&lt;span style=&#34;color:#a6e22e&#34;&gt;Site&lt;/span&gt;.&lt;span style=&#34;color:#a6e22e&#34;&gt;Params&lt;/span&gt;.&lt;span style=&#34;color:#a6e22e&#34;&gt;mainSections&lt;/span&gt; | &lt;span style=&#34;color:#66d9ef&#34;&gt;default&lt;/span&gt; (&lt;span style=&#34;color:#a6e22e&#34;&gt;slice&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;post&amp;#34;&lt;/span&gt;) }}
+{{ &lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;$&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;section&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;:=&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;where&lt;/span&gt; .&lt;span style=&#34;color:#a6e22e&#34;&gt;Site&lt;/span&gt;.&lt;span style=&#34;color:#a6e22e&#34;&gt;RegularPages&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;Section&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;in&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;$&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;mainSections&lt;/span&gt; }}
+{{ &lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;$&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;section_count&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;:=&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;len&lt;/span&gt; &lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;$&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;section&lt;/span&gt; }}&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;I then referred to the variables further down where I render the recent
+post summaries:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-html&#34; data-lang=&#34;html&#34;&gt;&amp;lt;&lt;span style=&#34;color:#f92672&#34;&gt;div&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;class&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;container&amp;#34;&lt;/span&gt;&amp;gt;
+  &amp;lt;&lt;span style=&#34;color:#f92672&#34;&gt;div&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;class&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;row&amp;#34;&lt;/span&gt;&amp;gt;
+    &amp;lt;&lt;span style=&#34;color:#f92672&#34;&gt;div&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;class&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1&amp;#34;&lt;/span&gt;&amp;gt;
+      {{ range (first $n_posts $section) }}
+          {{ .Render &amp;#34;summary&amp;#34;}}
+      {{ end }}&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;and&amp;hellip; it worked! Done!&lt;/p&gt;
+
+&lt;h3 id=&#34;conclusion&#34;&gt;Conclusion&lt;/h3&gt;
+
+&lt;p&gt;For as quick and easy as this post implies, the fix was actually a giant pain.
+It took a long time to figure out where the problem was occurring, but in the
+end I&amp;rsquo;m happy with the solution. In fact, I used a &lt;a href=&#34;https://github.com/himmAllRight/himmAllRight-source/pull/30&#34;&gt;similar
+approach&lt;/a&gt;
+afterwards to fix &lt;a href=&#34;https://github.com/himmAllRight/himmAllRight-source/issues/28&#34;&gt;issue
+#28&lt;/a&gt;! Assuming
+hugo doesn&amp;rsquo;t suddenly break me again, see you in the next post!&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>Creating a CI/CD &#39;Draft&#39; Website with Jenkins (and Hugo)</title>

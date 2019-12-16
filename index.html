@@ -143,6 +143,41 @@
         <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
           
               <div class="post-preview">
+    <a href="http://ryan.himmelwright.net/post/issue26/">
+        <h2 class="post-title">Resolving Issue #26</h2>
+        <h3 class="post-subtitle"></h3>
+    </a>
+    <p class="post-meta">
+        
+Posted by <a href="#">Ryan Himmelwright</a> on Sun, Dec 15, 2019
+
+
+
+
+
+
+
+<br />
+Tags <a href="./tags/website">website</a>, <a href="./tags/hugo">hugo</a>
+
+        <div class="summary">
+            <p>While working on a post a couple of weeks ago, I noticed that for some unknown
+reason, my website wasn&rsquo;t rendering correctly. After some back-tracking, I
+remembered that I had updated the container I work in to a Fedora 31 base
+image, which has a newer version of <code>hugo</code>.  So, I filed the problem as <a href="https://github.com/himmAllRight/himmAllRight-source/issues/26">issue
+#26</a>, and
+finished my post in a Fedora 30 container for the time being.  Here is a quick
+explanation of how I <em>eventually</em> came back and resolved issue #26.</p>
+        </div>
+    </p>
+    <p class="post-meta"> 
+        <a href="http://ryan.himmelwright.net/post/issue26/"> Click to Read More --></a>
+    </p>
+</div>
+<hr>
+
+          
+              <div class="post-preview">
     <a href="http://ryan.himmelwright.net/post/setup-mosh-shell/">
         <h2 class="post-title">Setup Mosh</h2>
         <h3 class="post-subtitle"></h3>
@@ -161,7 +196,15 @@ Posted by <a href="#">Ryan Himmelwright</a> on Wed, Dec 4, 2019
 Tags <a href="./tags/linux">linux</a>, <a href="./tags/homelab">homelab</a>, <a href="./tags/ssh">ssh</a>, <a href="./tags/shell">shell</a>
 
         <div class="summary">
-            Since builing my desktop, whenever I work on another machine, I usually end up ssh&rsquo;ing back to it to work remotely. It has my files, more power, and much of my work flow is done from a terminal window anyway, so why not? The only issue I have with ssh is that if I have a spotty internet connection, or if I sleep/suspend my laptop while moving around, the ssh session will occasionally time out.
+            <p>Since <a href="./post/charmeleon-desktop-design/">builing my desktop</a>, whenever I work
+on another machine, I usually end up ssh&rsquo;ing back to it to work remotely. It
+has my files, more power, and much of my work flow is done from a terminal
+window anyway, so why not?  The only issue I have with <code>ssh</code> is that if I have
+a spotty internet connection, or if I sleep/suspend my laptop while moving
+around, the <code>ssh</code> session will occasionally time out.  <a href="./post/scripting-tmux-workspaces/">Tmux</a>
+and <a href="./post/setting-up-tmuxinator/">tmuxinator</a> make this less of an issue,
+since I can re-attach my session, but I still wish my remote sessions were a
+bit more seamless. They can be&hellip; using <code>mosh</code>.</p>
         </div>
     </p>
     <p class="post-meta"> 
@@ -449,38 +492,6 @@ went. I&rsquo;m glad I did.</p>
     </p>
     <p class="post-meta"> 
         <a href="http://ryan.himmelwright.net/post/self2019/"> Click to Read More --></a>
-    </p>
-</div>
-<hr>
-
-          
-              <div class="post-preview">
-    <a href="http://ryan.himmelwright.net/post/tmpfs-mount-ramdisk/">
-        <h2 class="post-title">Creating a RAM Disk with a tmpfs Mount</h2>
-        <h3 class="post-subtitle"></h3>
-    </a>
-    <p class="post-meta">
-        
-Posted by <a href="#">Ryan Himmelwright</a> on Wed, Jun 5, 2019
-
-
-
-
-
-
-
-<br />
-Tags <a href="./tags/linux">linux</a>, <a href="./tags/hardware">hardware</a>, <a href="./tags/filesystems">filesystems</a>
-
-        <div class="summary">
-            <p>RAM is fun. If a computer has <em>extra</em> memory, it can be used for fun <em>beyond</em>
-opening extra chrome tabs, or firing up Slack. Want to mount a partition that
-is <em>fast</em> and can be entirely wiped out just by rebooting? Or are you just
-bored (guilty)?  Regardless of the reason, lets create and mount a RAM-disk!</p>
-        </div>
-    </p>
-    <p class="post-meta"> 
-        <a href="http://ryan.himmelwright.net/post/tmpfs-mount-ramdisk/"> Click to Read More --></a>
     </p>
 </div>
 <hr>
