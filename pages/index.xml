@@ -18,15 +18,23 @@
       <guid>http://ryan.himmelwright.net/pages/homelab/</guid>
       <description>
 
-&lt;p&gt;This is a page where I maintain the status of the computers in my “Homelab”. I will list my current systems here (potentially with screenshots of my current desktop setup for my workstations).&lt;/p&gt;
+&lt;p&gt;This is a page where I maintain the status of the computers in my “Homelab”
+(basically the tech in our house).&lt;/p&gt;
 
 &lt;h2 id=&#34;ryan-me&#34;&gt;Ryan (Me)&lt;/h2&gt;
 
-&lt;p&gt;&lt;a href=&#34;../../img/homelab/desk_front_night.jpg&#34;&gt;&lt;img alt=&#34;Home Office&#34; src=&#34;../../img/homelab/desk_front_night.jpg&#34; width=100%&gt;&lt;/a&gt;
+&lt;p&gt;Don&amp;rsquo;t mind the mess. Still a work in progress, but I noticed my photos were &lt;em&gt;very&lt;/em&gt; out of
+date. I didn&amp;rsquo;t bother to cleanup before taking these pictures. I will when it&amp;rsquo;s closer to
+being &amp;lsquo;done&amp;rsquo;.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;../../img/homelab/home-office.jpeg&#34;&gt;&lt;img alt=&#34;My Desk&#34; src=&#34;../../img/homelab/home-office.jpeg&#34; width=100%&gt;&lt;/a&gt;
 &lt;div class=&#34;caption&#34;&gt;My Home Office&lt;/div&gt;&lt;/p&gt;
 
-&lt;p&gt;&lt;a href=&#34;../../img/homelab/desk_night.jpg&#34;&gt;&lt;img alt=&#34;My Desk&#34; src=&#34;../../img/homelab/desk_night.jpg&#34; width=100%&gt;&lt;/a&gt;
+&lt;p&gt;&lt;a href=&#34;../../img/homelab/desk.jpeg&#34;&gt;&lt;img alt=&#34;Home Office&#34; src=&#34;../../img/homelab/desk.jpeg&#34; width=100%&gt;&lt;/a&gt;
 &lt;div class=&#34;caption&#34;&gt;My Desk&lt;/div&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;../../img/homelab/home-office-daylight.jpeg&#34;&gt;&lt;img alt=&#34;My Desk&#34; src=&#34;../../img/homelab/home-office-daylight.jpeg&#34; width=100%&gt;&lt;/a&gt;
+&lt;div class=&#34;caption&#34;&gt;Entrance to  Home Office&lt;/div&gt;&lt;/p&gt;
 
 &lt;h3 id=&#34;linux-computers&#34;&gt;Linux Computers&lt;/h3&gt;
 
@@ -138,6 +146,7 @@ Mac OS Catalina
 
 &lt;pre&gt;&lt;code&gt;Thinkpad Ultra Dock 40A2 (to connect to periphery devices below)
 LG 32QK500W, 32&amp;quot; 2560x1440 IPS Monitor
+Apple Air Pod Pros
 Bose AE2 Headphones
 &lt;/code&gt;&lt;/pre&gt;
 
