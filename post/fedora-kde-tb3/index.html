@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Authorizing Thunderbolt 3 on Fedora Plasma -- λ ryan. himmelwright. net</title>
+
+    
+
+    
+    <link href="http://ryan.himmelwright.net/css/bootstrap.min.css" rel="stylesheet">
+
+    
+    <link href="http://ryan.himmelwright.net/css/clean-blog.min.css" rel="stylesheet">
+
+    
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href='//fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+
+    
+    
+    
+
+
+
+    
+    <script type="text/javascript">
+        var _paq = _paq || [];
+         
+        _paq.push(["setDocumentTitle", document.domain + "/" + document.title]);
+        _paq.push(["setCookieDomain", "*.ryan.himmelwright.net"]);
+        _paq.push(["setDomains", ["*.ryan.himmelwright.net"]]);
+        _paq.push(['trackPageView']);
+        _paq.push(['enableLinkTracking']);
+        (function() {
+        var u="//cloud.himmelwright.net/piwik/";
+        _paq.push(['setTrackerUrl', u+'piwik.php']);
+        _paq.push(['setSiteId', '1']);
+        var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+        g.type='text/javascript'; g.async=true; g.defer=true; g.src=u+'piwik.js'; s.parentNode.insertBefore(g,s);
+        })();
+        </script>
+        <noscript><p><img src="//cloud.himmelwright.net/piwik/piwik.php?idsite=1&rec=1" style="border:0;" alt="" /></p></noscript>
+        
+
+
+
+</head>
+
+<body>
+
+    
+    <nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+        <div class="container-fluid">
+            
+            <div class="navbar-header page-scroll">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="http://ryan.himmelwright.net">λ ryan. himmelwright. net</a>
+            </div>
+
+                       
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    
+                    <li>
+                        <a href="../../">home</a>
+                    </li>
+                    
+                    <li>
+                        <a href="../../pages/about/">About</a>
+                    </li>
+                    
+                    <li>
+                        <a href="../../pages/homelab/">Homelab</a>
+                    </li>
+                    
+                    <li>
+                        <a href="../../tags">tags</a>
+                    </li>
+                    
+                    <li>
+                        <a href="../../post/">Archives</a>
+                    </li>
+                    
+                    <li>
+                        <a href="../../post/index.xml">RSS</a>
+                    </li>
+                    
+                  </ul>
+            </div>
+           
+
+        </div>
+        
+    </nav>
+
+
+
+
+<header class="intro-header" style="background-image: url('http://ryan.himmelwright.net/img/posts/fedora-kde-tb3/leaves.jpeg')">
+    
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <h1>Authorizing Thunderbolt 3 on Fedora Plasma</h1>
+                    <h2 class="subheading"></h2>
+                    <span class="meta">
+                        
+Posted by <a href="#">Ryan Himmelwright</a> on Sat, Jan 25, 2020
+
+
+
+
+
+
+
+<br />
+Tags <a href="../../tags/hardware">hardware</a>, <a href="../../tags/linux">linux</a>, <a href="../../tags/laptop">laptop</a>, <a href="../../tags/thinkpad">thinkpad</a>, <a href="../../tags/fedora">fedora</a>, <a href="../../tags/tb3">tb3</a>, <a href="../../tags/kde">kde</a>
+
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <span class="header-caption">Durham, NC</span>
+    
+    </header>
+
+    
+    <article>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                    
+                    <p>After buying a <a href="../../post/new-2019-16inch-mbp/">16&rdquo; MacBook Pro</a> the other month,
+I&rsquo;ve been using a Thunderbolt 3 hub to connect it to my periphery devices.
+Luckily, in addition to the macbook, I am able to use the hub with my my work
+laptop when working from home. Normally, it works fine. However, last week I
+reformatted the work laptop with the <a href="https://spins.fedoraproject.org/kde/"><em>KDE Plasma</em> spin</a> of
+Fedora Workstation 31&hellip; and my TB3 hub stopped playing nicely with it.
+Here&rsquo;s why.</p>
+
+<h2 id="the-issue">The Issue</h2>
+
+<p>Due to a NVIDIA Quadro M1000M in my <a href="https://www.lenovo.com/us/en/laptops/thinkpad/thinkpad-p/ThinkPad-P50/p/22TP2WPWP50">lenovo
+P50</a>
+work laptop, I&rsquo;ve been using Gnome with Wayland, because that combination seems
+to have the least amount of annoying trade-offs. While doing a system refresh,
+I figured I would see if things are any different with a clean Fedora 31 Plasma
+install (they weren&rsquo;t, but that&rsquo;s beyond this post).</p>
+
+<p><center>
+<a href="../../img/posts/fedora-kde-tb3/gnome-tb3-settings.png">
+<img alt="Gnome Thunderbolt Settings" src="../../img/posts/fedora-kde-tb3/gnome-tb3-settings.png" style="max-width: 100%; padding: 5px 15px 10px 10px"/></a>
+<div class="caption">The Gnome desktop environment now has a thunderbolt pane
+in the settings GUI</div>
+</center></p>
+
+<p>Booting into the live cd, and later the installed system, I noticed that my
+Thunderbolt 3 hub did <em>not</em> work while I was in Plasma. That was fine. I
+expected it really, because for security reasons Linux distros tend to disable
+thunderbolt ports by default.  In gnome, there are now settings to authorize
+it (which I guess I had done on my previous install, and forgot about).  In
+Plasma however, I needed to install and configure <code>bolt</code>.</p>
+
+<h2 id="bolt">Bolt</h2>
+
+<p><center>
+<a href="../../img/posts/fedora-kde-tb3/bolt-install.png">
+<img alt="Installing bolt with dnf" src="../../img/posts/fedora-kde-tb3/bolt-install.png" style="max-width: 100%; padding: 5px 15px 10px 10px"/></a>
+<div class="caption"><code>bolt</code> is in the Fedora repos and is easily installed with
+<code>dnf</code></div>
+</center></p>
+
+<p>In Fedora, <code>bolt</code> is in the repos (at least in Fedora 31+), so installing it is
+easy:</p>
+
+<pre><code>sudo dnf install bolt
+</code></pre>
+
+<p>Once <code>bolt</code> is installed, it isn&rsquo;t a bad idea to check to make sure it is
+running: <code>sudo systemctl bolt</code>.</p>
+
+<p><center>
+<a href="../../img/posts/fedora-kde-tb3/bolt-systemctl-status.png">
+<img alt="bolt systemctl status" src="../../img/posts/fedora-kde-tb3/bolt-systemctl-status.png" style="max-width: 100%; padding: 5px 15px 10px 10px"/></a>
+<div class="caption">Checking <code>bolt</code> is running using <code>systemctl status</code></div>
+</center></p>
+
+<p>If the status shows that it isn&rsquo;t running for some reason, it can be started
+using <code>systemctl start bolt</code>. Check the status again, and if it it <em>still</em> is not
+running&hellip; sorry?</p>
+
+<p><center>
+<a href="../../img/posts/fedora-kde-tb3/boltctl.png">
+<img alt="boltctl" src="../../img/posts/fedora-kde-tb3/boltctl.png" style="max-width: 100%; padding: 5px 15px 10px 10px"/></a>
+<div class="caption"></div>
+</center></p>
+
+<p>With bolt installed, the command <code>boltctl</code> is available to use. The base command will
+show information about attached thunderbolt devices. To see more <code>boltctl</code>
+commands, run <code>boltctl --help</code>.</p>
+
+<h2 id="authorizing">Authorizing</h2>
+
+<p><center>
+<a href="../../img/posts/fedora-kde-tb3/boltctl-authorize.png">
+<img alt="boltctl authorize" src="../../img/posts/fedora-kde-tb3/boltctl-authorize.png" style="max-width: 100%; padding: 5px 15px 10px 10px"/></a>
+<div class="caption">Authorizing the device</div>
+</center></p>
+
+<p>In order to <em>use</em> the thunderbolt 3 device, it needs to be authorized. To
+authorize a device, first use a plain <code>boltctl</code> command to get the <code>uuid</code> of
+the device. Next, call <code>boltctl authorize</code> using the <code>uuid</code> to authorize it:</p>
+
+<pre><code>boltctl authorize &lt;UUID HERE&gt;
+</code></pre>
+
+<p>The device should now be authorized. When I authorized mine, some of my devices
+started showing up automatically, while others needed to be disconnected and
+replugged.</p>
+
+<h2 id="enrolling">Enrolling</h2>
+
+<p><center>
+<a href="../../img/posts/fedora-kde-tb3/bresetoltctl-enroll.png">
+<img alt="boltctl enroll" src="../../img/posts/fedora-kde-tb3/boltctl-enroll.png" style="max-width: 100%; padding: 5px 15px 10px 10px"/></a>
+<div class="caption">Enrolling the device for permanent use</div>
+</center></p>
+
+<p>Authorizing a device enables it to be used, but doesn&rsquo;t guarantee persistence.
+While this may be desired to grant <em>temporary</em> authorization to a device, many
+users tend want their device to <em>always</em> work, without having to manually
+authorize it. In this case, the device should be <em>enrolled</em> (like <code>systemctl enable</code>).
+Simply call <code>boltctl enroll</code>, with the device UUID:</p>
+
+<pre><code>boltctl enroll &lt;UUID HERE&gt;
+</code></pre>
+
+<p>Once enrolled, the device&rsquo;s UUID will be recorded and added to a database. By
+default, the device will now automatically be authorized whenever it is
+connected.</p>
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p>That&rsquo;s it. While the solution isn&rsquo;t very difficult, it can be frustrating to
+figure out when it appears that the thunderbolt device simply is not working.
+Regardless, I&rsquo;m glad that I now know about <code>bolt</code> and how to use it!</p>
+
+                    
+                    
+                    
+                         <div style="float: right; text-decoration: underline; text-align: right;">Prev Post:</div>
+                    
+                    <br>
+                    
+                    
+                        <a href="http://ryan.himmelwright.net/post/new-2019-16inch-mbp/" style="text-align: right; float: right; max-width: 40%">My New 16-inch Macbook Pro: Initial Thoughts</a>
+                    
+
+			
+			<div class="comment-section">
+			  
+   <div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "himmallright" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+			</div>
+                </div>
+            </div>
+        </div>
+    </article>
+
+        <hr>
+    
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                  <ul class="list-inline text-center">
+                    
+                      <li>
+                        <a href="mailto:ryan@himmelwright.net">
+                          <span class="fa-stack fa-lg">
+                            <i class="fa fa-circle fa-stack-2x"></i>
+                            <i class="fa fa-envelope-o fa-stack-1x fa-inverse"></i>
+                          </span>
+                        </a>
+                      </li>
+                    
+                    
+                    <li>
+                      <a href="https://github.com/himmAllRight">
+                        <span class="fa-stack fa-lg">
+                          <i class="fa fa-circle fa-stack-2x"></i>
+                          <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                        </span>
+                      </a>
+                    </li>
+                    
+                    <li>
+                      <a href="https://www.linkedin.com/in/ryan-himmelwright-b3891774/">
+                        <span class="fa-stack fa-lg">
+                          <i class="fa fa-circle fa-stack-2x"></i>
+                          <i class="fa fa-linkedin fa-stack-1x fa-inverse"></i>
+                        </span>
+                      </a>
+                    </li>
+                    
+                  </ul>
+<p class="copyright text-muted">
+
+<a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img
+  alt="Creative Commons License" style="border-width:0"
+  src="https://i.creativecommons.org/l/by/4.0/88x31.png" /></a><br />This work
+by <a xmlns:cc="http://creativecommons.org/ns#" href="http://ryan.himmelwright.net" property="cc:attributionName" rel="cc:attributionURL">Ryan Himmelwright</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
+</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    
+    <script src="http://ryan.himmelwright.net/js/jquery.min.js"></script>
+
+    
+    <script src="http://ryan.himmelwright.net/js/bootstrap.min.js"></script>
+
+    
+    <script src="http://ryan.himmelwright.net/js/clean-blog.js"></script>
+
+    
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-123-45', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+
+
+</body>
+
+</html>
+

@@ -5,10 +5,132 @@
     <description>Recent content in Posts on λ ryan. himmelwright. net</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 12 Jan 2020 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 25 Jan 2020 00:00:00 +0000</lastBuildDate>
     
         <atom:link href="http://ryan.himmelwright.net/post/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Authorizing Thunderbolt 3 on Fedora Plasma</title>
+      <link>http://ryan.himmelwright.net/post/fedora-kde-tb3/</link>
+      <pubDate>Sat, 25 Jan 2020 00:00:00 +0000</pubDate>
+      
+      <guid>http://ryan.himmelwright.net/post/fedora-kde-tb3/</guid>
+      <description>&lt;p&gt;After buying a &lt;a href=&#34;../post/new-2019-16inch-mbp/&#34;&gt;16&amp;rdquo; MacBook Pro&lt;/a&gt; the other month,
+I&amp;rsquo;ve been using a Thunderbolt 3 hub to connect it to my periphery devices.
+Luckily, in addition to the macbook, I am able to use the hub with my my work
+laptop when working from home. Normally, it works fine. However, last week I
+reformatted the work laptop with the &lt;a href=&#34;https://spins.fedoraproject.org/kde/&#34;&gt;&lt;em&gt;KDE Plasma&lt;/em&gt; spin&lt;/a&gt; of
+Fedora Workstation 31&amp;hellip; and my TB3 hub stopped playing nicely with it.
+Here&amp;rsquo;s why.&lt;/p&gt;
+
+&lt;h2 id=&#34;the-issue&#34;&gt;The Issue&lt;/h2&gt;
+
+&lt;p&gt;Due to a NVIDIA Quadro M1000M in my &lt;a href=&#34;https://www.lenovo.com/us/en/laptops/thinkpad/thinkpad-p/ThinkPad-P50/p/22TP2WPWP50&#34;&gt;lenovo
+P50&lt;/a&gt;
+work laptop, I&amp;rsquo;ve been using Gnome with Wayland, because that combination seems
+to have the least amount of annoying trade-offs. While doing a system refresh,
+I figured I would see if things are any different with a clean Fedora 31 Plasma
+install (they weren&amp;rsquo;t, but that&amp;rsquo;s beyond this post).&lt;/p&gt;
+
+&lt;p&gt;&lt;center&gt;
+&lt;a href=&#34;../img/posts/fedora-kde-tb3/gnome-tb3-settings.png&#34;&gt;
+&lt;img alt=&#34;Gnome Thunderbolt Settings&#34; src=&#34;../img/posts/fedora-kde-tb3/gnome-tb3-settings.png&#34; style=&#34;max-width: 100%; padding: 5px 15px 10px 10px&#34;/&gt;&lt;/a&gt;
+&lt;div class=&#34;caption&#34;&gt;The Gnome desktop environment now has a thunderbolt pane
+in the settings GUI&lt;/div&gt;
+&lt;/center&gt;&lt;/p&gt;
+
+&lt;p&gt;Booting into the live cd, and later the installed system, I noticed that my
+Thunderbolt 3 hub did &lt;em&gt;not&lt;/em&gt; work while I was in Plasma. That was fine. I
+expected it really, because for security reasons Linux distros tend to disable
+thunderbolt ports by default.  In gnome, there are now settings to authorize
+it (which I guess I had done on my previous install, and forgot about).  In
+Plasma however, I needed to install and configure &lt;code&gt;bolt&lt;/code&gt;.&lt;/p&gt;
+
+&lt;h2 id=&#34;bolt&#34;&gt;Bolt&lt;/h2&gt;
+
+&lt;p&gt;&lt;center&gt;
+&lt;a href=&#34;../img/posts/fedora-kde-tb3/bolt-install.png&#34;&gt;
+&lt;img alt=&#34;Installing bolt with dnf&#34; src=&#34;../img/posts/fedora-kde-tb3/bolt-install.png&#34; style=&#34;max-width: 100%; padding: 5px 15px 10px 10px&#34;/&gt;&lt;/a&gt;
+&lt;div class=&#34;caption&#34;&gt;&lt;code&gt;bolt&lt;/code&gt; is in the Fedora repos and is easily installed with
+&lt;code&gt;dnf&lt;/code&gt;&lt;/div&gt;
+&lt;/center&gt;&lt;/p&gt;
+
+&lt;p&gt;In Fedora, &lt;code&gt;bolt&lt;/code&gt; is in the repos (at least in Fedora 31+), so installing it is
+easy:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;sudo dnf install bolt
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Once &lt;code&gt;bolt&lt;/code&gt; is installed, it isn&amp;rsquo;t a bad idea to check to make sure it is
+running: &lt;code&gt;sudo systemctl bolt&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;&lt;center&gt;
+&lt;a href=&#34;../img/posts/fedora-kde-tb3/bolt-systemctl-status.png&#34;&gt;
+&lt;img alt=&#34;bolt systemctl status&#34; src=&#34;../img/posts/fedora-kde-tb3/bolt-systemctl-status.png&#34; style=&#34;max-width: 100%; padding: 5px 15px 10px 10px&#34;/&gt;&lt;/a&gt;
+&lt;div class=&#34;caption&#34;&gt;Checking &lt;code&gt;bolt&lt;/code&gt; is running using &lt;code&gt;systemctl status&lt;/code&gt;&lt;/div&gt;
+&lt;/center&gt;&lt;/p&gt;
+
+&lt;p&gt;If the status shows that it isn&amp;rsquo;t running for some reason, it can be started
+using &lt;code&gt;systemctl start bolt&lt;/code&gt;. Check the status again, and if it it &lt;em&gt;still&lt;/em&gt; is not
+running&amp;hellip; sorry?&lt;/p&gt;
+
+&lt;p&gt;&lt;center&gt;
+&lt;a href=&#34;../img/posts/fedora-kde-tb3/boltctl.png&#34;&gt;
+&lt;img alt=&#34;boltctl&#34; src=&#34;../img/posts/fedora-kde-tb3/boltctl.png&#34; style=&#34;max-width: 100%; padding: 5px 15px 10px 10px&#34;/&gt;&lt;/a&gt;
+&lt;div class=&#34;caption&#34;&gt;&lt;/div&gt;
+&lt;/center&gt;&lt;/p&gt;
+
+&lt;p&gt;With bolt installed, the command &lt;code&gt;boltctl&lt;/code&gt; is available to use. The base command will
+show information about attached thunderbolt devices. To see more &lt;code&gt;boltctl&lt;/code&gt;
+commands, run &lt;code&gt;boltctl --help&lt;/code&gt;.&lt;/p&gt;
+
+&lt;h2 id=&#34;authorizing&#34;&gt;Authorizing&lt;/h2&gt;
+
+&lt;p&gt;&lt;center&gt;
+&lt;a href=&#34;../img/posts/fedora-kde-tb3/boltctl-authorize.png&#34;&gt;
+&lt;img alt=&#34;boltctl authorize&#34; src=&#34;../img/posts/fedora-kde-tb3/boltctl-authorize.png&#34; style=&#34;max-width: 100%; padding: 5px 15px 10px 10px&#34;/&gt;&lt;/a&gt;
+&lt;div class=&#34;caption&#34;&gt;Authorizing the device&lt;/div&gt;
+&lt;/center&gt;&lt;/p&gt;
+
+&lt;p&gt;In order to &lt;em&gt;use&lt;/em&gt; the thunderbolt 3 device, it needs to be authorized. To
+authorize a device, first use a plain &lt;code&gt;boltctl&lt;/code&gt; command to get the &lt;code&gt;uuid&lt;/code&gt; of
+the device. Next, call &lt;code&gt;boltctl authorize&lt;/code&gt; using the &lt;code&gt;uuid&lt;/code&gt; to authorize it:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;boltctl authorize &amp;lt;UUID HERE&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The device should now be authorized. When I authorized mine, some of my devices
+started showing up automatically, while others needed to be disconnected and
+replugged.&lt;/p&gt;
+
+&lt;h2 id=&#34;enrolling&#34;&gt;Enrolling&lt;/h2&gt;
+
+&lt;p&gt;&lt;center&gt;
+&lt;a href=&#34;../img/posts/fedora-kde-tb3/bresetoltctl-enroll.png&#34;&gt;
+&lt;img alt=&#34;boltctl enroll&#34; src=&#34;../img/posts/fedora-kde-tb3/boltctl-enroll.png&#34; style=&#34;max-width: 100%; padding: 5px 15px 10px 10px&#34;/&gt;&lt;/a&gt;
+&lt;div class=&#34;caption&#34;&gt;Enrolling the device for permanent use&lt;/div&gt;
+&lt;/center&gt;&lt;/p&gt;
+
+&lt;p&gt;Authorizing a device enables it to be used, but doesn&amp;rsquo;t guarantee persistence.
+While this may be desired to grant &lt;em&gt;temporary&lt;/em&gt; authorization to a device, many
+users tend want their device to &lt;em&gt;always&lt;/em&gt; work, without having to manually
+authorize it. In this case, the device should be &lt;em&gt;enrolled&lt;/em&gt; (like &lt;code&gt;systemctl enable&lt;/code&gt;).
+Simply call &lt;code&gt;boltctl enroll&lt;/code&gt;, with the device UUID:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;boltctl enroll &amp;lt;UUID HERE&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Once enrolled, the device&amp;rsquo;s UUID will be recorded and added to a database. By
+default, the device will now automatically be authorized whenever it is
+connected.&lt;/p&gt;
+
+&lt;h2 id=&#34;conclusion&#34;&gt;Conclusion&lt;/h2&gt;
+
+&lt;p&gt;That&amp;rsquo;s it. While the solution isn&amp;rsquo;t very difficult, it can be frustrating to
+figure out when it appears that the thunderbolt device simply is not working.
+Regardless, I&amp;rsquo;m glad that I now know about &lt;code&gt;bolt&lt;/code&gt; and how to use it!&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>My New 16-inch Macbook Pro: Initial Thoughts</title>
