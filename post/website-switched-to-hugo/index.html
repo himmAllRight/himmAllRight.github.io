@@ -146,7 +146,7 @@ Tags <a href="../../tags/website">website</a>, <a href="../../tags/hugo">hugo</a
             <div class="row">
                 <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
                     
-                    <p>In my <a href="../website-transition-to-hugo/">last post</a>, I stated that <em>within a few days</em>, I would officially generate and publish the website using <a href="https://gohugo.io">Hugo</a>. I then proceeded to publish <em>that</em> post using Hugo. Close enough. If I remember correctly, I ended that post listing off a few tasks that I wanted to complete <em>before</em> switching the site (oops). Well&hellip; they&rsquo;re complete <em>now</em>. Here&rsquo;s how.</p>
+                    <p>In my <a href="../../post/website-transition-to-hugo/">last post</a>, I stated that <em>within a few days</em>, I would officially generate and publish the website using <a href="https://gohugo.io">Hugo</a>. I then proceeded to publish <em>that</em> post using Hugo. Close enough. If I remember correctly, I ended that post listing off a few tasks that I wanted to complete <em>before</em> switching the site (oops). Well&hellip; they&rsquo;re complete <em>now</em>. Here&rsquo;s how.</p>
 
 <h3 id="create-single-pages-about-homelab">Create Single Pages (About/Homelab)</h3>
 
@@ -161,7 +161,7 @@ Tags <a href="../../tags/website">website</a>, <a href="../../tags/hugo">hugo</a
 title: About
 date: <span style="color:#e6db74">2017-08-28T09:51:18</span><span style="color:#ae81ff">-04</span>:<span style="color:#ae81ff">00</span>
 type: about
-menu : 
+menu :
   main:
     weight: -<span style="color:#ae81ff">150</span>
 layout: about-page
@@ -169,7 +169,7 @@ image: img/header-images/park-books.jpg
 ---</code></pre></div>
 <h3 id="setting-up-an-rss-feed">Setting up an RSS Feed</h3>
 
-<p>It turns out that <a href="https://gohugo.io/templates/rss/">Hugo ships with its own RSS 2.0 template</a> by default. When I first saw this, I thought that I may still have to dash off a layout or markdown page for the feed, but even that was unnecessary. Each &ldquo;content&rdquo; section (<em>ex: post or pages</em>) has an RSS automatically generated at <code>/section-name/index.rss</code>. I don&rsquo;t need a feed for my static pages, so I just found the <a href="http://ryan.himmelwright.net/post/index.xml">feed for my posts</a>. To make it easily accessible, I added a menu link.  Without a defined markdown file for the rss feed page, I needed another way to add to the navigation menu. I accomplished this by adding the following code to the bottom of my <code>config.toml</code> file:</p>
+<p>It turns out that <a href="https://gohugo.io/templates/rss/">Hugo ships with its own RSS 2.0 template</a> by default. When I first saw this, I thought that I may still have to dash off a layout or markdown page for the feed, but even that was unnecessary. Each &ldquo;content&rdquo; section (<em>ex: post or pages</em>) has an RSS automatically generated at <code>/section-name/index.rss</code>. I don&rsquo;t need a feed for my static pages, so I just found the <a href="../../post/index.xml">feed for my posts</a>. To make it easily accessible, I added a menu link.  Without a defined markdown file for the rss feed page, I needed another way to add to the navigation menu. I accomplished this by adding the following code to the bottom of my <code>config.toml</code> file:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml">[[menu.main]]
   name = <span style="color:#e6db74">&#34;RSS&#34;</span>
   url = <span style="color:#e6db74">&#34;/post/index.xml&#34;</span>
@@ -178,18 +178,16 @@ image: img/header-images/park-books.jpg
 
 <h3 id="check-how-the-posts-display">Check how the posts display</h3>
 
-<p>One task I needed to complete was going through and editing each post. The main issue that requiring a fix, which I <a href="../website-transition-to-hugo/#image-size">explained in the previous post</a>, was that the image tags needed to be switched from markdown to html syntax. While I originally planned to set a <code>width=100%</code> parameter for the image tags, I learned that using a <code>max-width: 100%;</code> worked much better for my use-case. I know this can be handled in the overall css file, but I like explicitly defining how to handle each image when I write a post.</p>
+<p>One task I needed to complete was going through and editing each post. The main issue that requiring a fix, which I <a href="../../post/website-transition-to-hugo/#image-size">explained in the previous post</a>, was that the image tags needed to be switched from markdown to html syntax. While I originally planned to set a <code>width=100%</code> parameter for the image tags, I learned that using a <code>max-width: 100%;</code> worked much better for my use-case. I know this can be handled in the overall css file, but I like explicitly defining how to handle each image when I write a post.</p>
 
-<p>While editing the posts, I noticed that the <a href="../website-transition-to-hugo/#summary-setup">post summaries</a> weren&rsquo;t displaying the content that I intended them to. I have hugo configured so that I manually cut off the summary location using a <code>more</code> tag in the markdown.But it didn&rsquo;t appear to be doing that.</p>
+<p>While editing the posts, I noticed that the <a href="../../post/website-transition-to-hugo/#summary-setup">post summaries</a> weren&rsquo;t displaying the content that I intended them to. I have hugo configured so that I manually cut off the summary location using a <code>more</code> tag in the markdown.But it didn&rsquo;t appear to be doing that.</p>
 
 <p><a href="../../img/posts/website-switched-to-hugo/summary-fix-spread.png"><img alt="Hugo Logo" src="../../img/posts/website-switched-to-hugo/summary-fix-spread.png" style="width: 100%; float: right; margin: 0px 15px 5px 5px;"/></a></p>
 
 <ul>
 <li><em>A: An over-extended post summary</em>.</li>
 <li><em>B: The extra content of the post that was included in the summary</em>.</li>
-<li><em>C: The corrected post summary.</em>
-
-<br /></li>
+<li><em>C: The corrected post summary.</em></li>
 </ul>
 
 <p>Some of the summaries seemed to extend beyond the cutoff point, still including the next section header, and some of the section&rsquo;s content. After further inspection, I noticed that I had a space on either side of the &ldquo;more&rdquo; in the tag. So, I had to go through and delete the extra spaces in each post.</p>

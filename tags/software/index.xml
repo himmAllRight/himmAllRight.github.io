@@ -21,7 +21,7 @@ decades worth of Windows versions, tons of Linux distros, several BSDs, iOS,
 Android, and even chromeOS. While I am familiar with using macOS
 (I often used the school Macs in college, and my wife had a Macbook Air
 throughout medical school), it is the one OS I have never tried as my &lt;em&gt;personal&lt;/em&gt;
-daily driver. After switching to an iPhone and &lt;a href=&#34;http://ryan.himmelwright.net/post/getting-an-ipad/&#34;&gt;getting an
+daily driver. After switching to an iPhone and &lt;a href=&#34;../../post/getting-an-ipad/&#34;&gt;getting an
 iPad&lt;/a&gt; this year&amp;hellip; I
 decided to give macOS a spin.&lt;/p&gt;
 
@@ -164,9 +164,8 @@ my devices and change the password.&lt;/p&gt;&lt;/li&gt;
 &lt;h3 id=&#34;future-plans&#34;&gt;Future Plans&lt;/h3&gt;
 
 &lt;p&gt;Overall, I&amp;rsquo;d say this challenge was a success. In fact, it was so successfull,
-that I&amp;rsquo;m actually writing up this post on a new &lt;a href=&#34;https://everymac.com/systems/apple/macbook_pro/specs/macbook-pro-core-i7-2.6-six-core-16-2019-scissor-specs.html&#34;&gt;base model 16&amp;rdquo; MacBook
-Pro&lt;/a&gt;
-(but more on &lt;em&gt;that&lt;/em&gt; at another time).&lt;/p&gt;
+that I&amp;rsquo;m actually writing up this post on a new &lt;a href=&#34;../../post/new-2019-16inch-mbp/&#34;&gt;base model 16&amp;rdquo; MacBook
+Pro&lt;/a&gt; (but more on &lt;em&gt;that&lt;/em&gt; at another time).&lt;/p&gt;
 
 &lt;p&gt;&lt;em&gt;[ Well, I&amp;rsquo;m really writing it on my desktop, but from the macbook pro ;) ]&lt;/em&gt;&lt;/p&gt;
 
@@ -350,12 +349,11 @@ doesn&amp;rsquo;t have to be the same across computers). I love this. It lets se
 workflow, rather than forcing me to make &lt;em&gt;it be&lt;/em&gt; my workflow.&lt;/p&gt;&lt;/li&gt;
 
 &lt;li&gt;&lt;p&gt;&lt;strong&gt;Encrypted Libraries&lt;/strong&gt; - When creating a new library, it is possible to
-make an &lt;a href=&#34;https://www.seafile.com/en/help/encrypted_libraries/&#34;&gt;encrypted
-one&lt;/a&gt;. These libraries
-use client-side, end-to-end encryption and require a password. The file
-&lt;em&gt;contents&lt;/em&gt; (Note: not directory or file &lt;em&gt;names&lt;/em&gt;) are encrypted on the client
-side, and not on the server. This means that even the server admin cannot access the file
-contents on the server. This is a feature I&amp;rsquo;d like to see in more applications.&lt;/p&gt;&lt;/li&gt;
+make an encrypted one. These libraries use client-side, end-to-end encryption
+and require a password. The file &lt;em&gt;contents&lt;/em&gt; (Note: not directory or file
+&lt;em&gt;names&lt;/em&gt;) are encrypted on the client side, and not on the server. This means
+that even the server admin cannot access the file contents on the server.
+This is a feature I&amp;rsquo;d like to see in more applications.&lt;/p&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;p&gt;&lt;a href=&#34;../../img/posts/trying-out-seafile/encrypt-library.png&#34;&gt;&lt;img
@@ -392,14 +390,11 @@ about it. Hopefully this improves with time.&lt;/p&gt;&lt;/li&gt;
 &lt;h3 id=&#34;future-plans&#34;&gt;Future Plans&lt;/h3&gt;
 
 &lt;p&gt;To summarize, I have been loving seafile, and I think I have only scratched the
-surface. I haven&amp;rsquo;t even tried playing with features like &lt;a href=&#34;https://www.seafile.com/en/help/snapshot/&#34;&gt;History and
-Snapshots&lt;/a&gt;, &lt;a href=&#34;https://www.seafile.com/en/help/search/&#34;&gt;Full Text File
-Search&lt;/a&gt;, &lt;a href=&#34;https://www.seafile.com/en/help/share/&#34;&gt;Sharing
-File&lt;/a&gt;, or &lt;a href=&#34;https://www.seafile.com/en/help/file_lock/&#34;&gt;Locking
-Files&lt;/a&gt; yet. My plan is to continue
-experimenting a bit more, and then switch to it as my main syncing system when I
-redo my main server setup in a couple of weeks. If you haven&amp;rsquo;t given seafile a
-try recently, I recommend it.&lt;/p&gt;</description>
+surface. I haven&amp;rsquo;t even tried playing with features like History and Snapshots,
+Full Text File Search, or yet. My plan is to continue experimenting a bit more,
+and then switch to it as my main syncing system when I redo my main server
+setup in a couple of weeks. If you haven&amp;rsquo;t given seafile a try recently, I
+recommend it.&lt;/p&gt;</description>
     </item>
     
   </channel>

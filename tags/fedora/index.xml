@@ -1,8 +1,8 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Fedora on λ ryan. himmelwright. net</title>
+    <title>fedora on λ ryan. himmelwright. net</title>
     <link>http://ryan.himmelwright.net/tags/fedora/</link>
-    <description>Recent content in Fedora on λ ryan. himmelwright. net</description>
+    <description>Recent content in fedora on λ ryan. himmelwright. net</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Sat, 25 Jan 2020 00:00:00 +0000</lastBuildDate>
@@ -26,12 +26,11 @@ Here&amp;rsquo;s why.&lt;/p&gt;
 
 &lt;h2 id=&#34;the-issue&#34;&gt;The Issue&lt;/h2&gt;
 
-&lt;p&gt;Due to a NVIDIA Quadro M1000M in my &lt;a href=&#34;https://www.lenovo.com/us/en/laptops/thinkpad/thinkpad-p/ThinkPad-P50/p/22TP2WPWP50&#34;&gt;lenovo
-P50&lt;/a&gt;
-work laptop, I&amp;rsquo;ve been using Gnome with Wayland, because that combination seems
-to have the least amount of annoying trade-offs. While doing a system refresh,
-I figured I would see if things are any different with a clean Fedora 31 Plasma
-install (they weren&amp;rsquo;t, but that&amp;rsquo;s beyond this post).&lt;/p&gt;
+&lt;p&gt;Due to a NVIDIA Quadro M1000M in my lenovo P50 work laptop, I&amp;rsquo;ve been using
+Gnome with Wayland, because that combination seems to have the least amount of
+annoying trade-offs. While doing a system refresh, I figured I would see if
+things are any different with a clean Fedora 31 Plasma install (they weren&amp;rsquo;t,
+but that&amp;rsquo;s beyond this post).&lt;/p&gt;
 
 &lt;p&gt;&lt;center&gt;
 &lt;a href=&#34;../../img/posts/fedora-kde-tb3/gnome-tb3-settings.png&#34;&gt;
@@ -299,7 +298,7 @@ some other time. Enjoy!&lt;/p&gt;</description>
       <pubDate>Mon, 31 Jul 2017 00:00:00 +0000</pubDate>
       
       <guid>http://ryan.himmelwright.net/post/back-to-solus/</guid>
-      <description>&lt;p&gt;Well, that was faster than I expected. This past weekend, I wiped the Fedora installation on my main computer, and replaced it with Solus. My Fedora install broke, and I needed to use a Fedora Live CD to fix it. I thought that if I had to use a live CD to fix the issue, I might as well just do a clean install. With the idea of a clean install in my head&amp;hellip; I thought (possibly influenced by my recent &lt;a href=&#34;http://ryan.himmelwright.net/posts/dabbling-with-go/#motivation&#34;&gt;motivation&lt;/a&gt; to play with Go), that I might as well do the clean install with &lt;a href=&#34;solus-project.com/&#34;&gt;Solus&lt;/a&gt;&amp;hellip;&lt;/p&gt;
+      <description>&lt;p&gt;Well, that was faster than I expected. This past weekend, I wiped the Fedora installation on my main computer, and replaced it with Solus. My Fedora install broke, and I needed to use a Fedora Live CD to fix it. I thought that if I had to use a live CD to fix the issue, I might as well just do a clean install. With the idea of a clean install in my head&amp;hellip; I thought (possibly influenced by my recent &lt;a href=&#34;../../post/dabbling-with-go/#motivation&#34;&gt;motivation&lt;/a&gt; to play with Go), that I might as well do the clean install with &lt;a href=&#34;https://getsol.us/&#34;&gt;Solus&lt;/a&gt;&amp;hellip;&lt;/p&gt;
 
 &lt;h2 id=&#34;nvidia-issues&#34;&gt;Nvidia Issues&lt;/h2&gt;
 
@@ -322,7 +321,7 @@ some other time. Enjoy!&lt;/p&gt;</description>
 
 &lt;p&gt;With the Fedora live environment all booted and ready, I started downloading the latest Solus ISO (Budgie) on my other laptop. Once the ISO image was mounted to a drive, I booted it up and started installing Solus. After the install, I immediately updated because I knew there have been a TON of updates since the last ISO snapshot (mid-April). When I rebooted, I absolutely loved what I saw. It is amazing how much Solus and Budgie have improved, even during my short distro-hopping vacation.&lt;/p&gt;
 
-&lt;p&gt;Looking at my post history, it may appear as though I used Fedora for a few days, became fed up with it, and came running back to Solus. That is not entirely true. The reality is that I sat on writing my &lt;a href=&#34;../solus-to-fedora/&#34;&gt;Fedora post&lt;/a&gt; for a long time. I used Fedora for about a month, and it was generally a great experience. If it didn&amp;rsquo;t break, I probably would have stayed for a bit longer. When considering a new install though, I realized that I had missed Solus.&lt;/p&gt;
+&lt;p&gt;Looking at my post history, it may appear as though I used Fedora for a few days, became fed up with it, and came running back to Solus. That is not entirely true. The reality is that I sat on writing my &lt;a href=&#34;../../post/solus-to-fedora/&#34;&gt;Fedora post&lt;/a&gt; for a long time. I used Fedora for about a month, and it was generally a great experience. If it didn&amp;rsquo;t break, I probably would have stayed for a bit longer. When considering a new install though, I realized that I had missed Solus.&lt;/p&gt;
 
 &lt;p&gt;As of now, my plan is to keep using Solus, at least on my main computer. I am also hoping to get more involved with the project, and start packing up some software again. Maybe I can even help with some debugging and development. We shall see&amp;hellip;&lt;/p&gt;</description>
     </item>
@@ -342,7 +341,7 @@ some other time. Enjoy!&lt;/p&gt;</description>
 &lt;/center&gt;
 &lt;em&gt;The Solus (Left) and Fedora (right) Project Logos&lt;/em&gt;&lt;/p&gt;
 
-&lt;p&gt;The first phrase stated on the &lt;a href=&#34;https://solus-project.com&#34;&gt;Solus Project homepage&lt;/a&gt; is &amp;ldquo;Solus is an operating system that is designed for &lt;strong&gt;home computing&lt;/strong&gt;.&amp;rdquo; I find this to be true, and Solus does a great job at it. The Linux community needs a few good, focused, distros. While I have been using Solus for my &amp;ldquo;&lt;em&gt;home&lt;/em&gt;&amp;rdquo; computing, the computing tasks I&amp;rsquo;ve focused on recently do not fall into the category of standard &lt;em&gt;home computing&lt;/em&gt; use. Recently, my main top computing activities and goals are:&lt;/p&gt;
+&lt;p&gt;The first phrase stated on the &lt;a href=&#34;https://getsol.us&#34;&gt;Solus Project homepage&lt;/a&gt; is &amp;ldquo;Solus is an operating system that is designed for &lt;strong&gt;home computing&lt;/strong&gt;.&amp;rdquo; I find this to be true, and Solus does a great job at it. The Linux community needs a few good, focused, distros. While I have been using Solus for my &amp;ldquo;&lt;em&gt;home&lt;/em&gt;&amp;rdquo; computing, the computing tasks I&amp;rsquo;ve focused on recently do not fall into the category of standard &lt;em&gt;home computing&lt;/em&gt; use. Recently, my main top computing activities and goals are:&lt;/p&gt;
 
 &lt;ul&gt;
 &lt;li&gt;Writing (okay&amp;hellip; but still)&lt;/li&gt;
@@ -412,7 +411,7 @@ it.&lt;/p&gt;
 &lt;h3 id=&#34;updates&#34;&gt;Updates&lt;/h3&gt;
 
 &lt;p&gt;I ran some updates that I thought &lt;em&gt;might&lt;/em&gt; be problematic, based
-on &lt;a href=&#34;../back-on-arch/#fedora&#34;&gt;previous issues&lt;/a&gt; I&amp;rsquo;ve encountered with Fedora. I
+on &lt;a href=&#34;../../post/back-on-arch/#fedora&#34;&gt;previous issues&lt;/a&gt; I&amp;rsquo;ve encountered with Fedora. I
 made sure to note the results as well. The first notable update was from the
 first time I updated the kernel, and the second was  upgrading from
 Fedora 25 to 26. Both updates went very smoothly without any issues:&lt;/p&gt;

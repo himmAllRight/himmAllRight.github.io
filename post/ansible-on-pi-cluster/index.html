@@ -144,7 +144,7 @@ Tags <a href="../../tags/homelab">homelab</a>, <a href="../../tags/cluster">clus
             <div class="row">
                 <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
                     
-                    <p>In my <a href="http://ryan.himmelwright.net/posts/Setting-up-the-pi-cluster/">previous post</a>, I pieced together my <a href="http://ryan.himmelwright.net/pages/homelab/#cluster">pi cluster</a>, and installed variations of Ubuntu 16.04 Server on each of its nodes. With the cluster built, I quickly needed an easy way to maintain and interact with the system as a whole. This, is where <a href="https://www.ansible.com/">Ansible</a> comes in. In this post, I will walk through the steps I took to setup Ansible on my Cluster.</p>
+                    <p>In my <a href="../../post/Setting-up-the-pi-cluster/">previous post</a>, I pieced together my <a href="../../pages/homelab/#cluster">pi cluster</a>, and installed variations of Ubuntu 16.04 Server on each of its nodes. With the cluster built, I quickly needed an easy way to maintain and interact with the system as a whole. This, is where <a href="https://www.ansible.com/">Ansible</a> comes in. In this post, I will walk through the steps I took to setup Ansible on my Cluster.</p>
 
 <h2 id="ansible">Ansible</h2>
 
@@ -217,7 +217,7 @@ cat ~/.ssh/id_rsa.pub | ssh bpi &quot;cat &gt;&gt; ~/.ssh/authorized_keys&quot;
 <pre><code>sudo eopkg it ansible
 </code></pre>
 
-<p>I used <code>eopkg</code> because I am currently running <a href="https://solus-project.com">Solus</a>. You might use <code>sudo apt-get install ansible</code>, <code>sudo dnf install ansible</code>, or <code>pacaur -S ansible</code> depending on whatever distro you are using.</p>
+<p>I used <code>eopkg</code> because I am currently running <a href="https://getsol.us">Solus</a>. You might use <code>sudo apt-get install ansible</code>, <code>sudo dnf install ansible</code>, or <code>pacaur -S ansible</code> depending on whatever distro you are using.</p>
 
 <p>That&rsquo;s all for <em>setting up</em> Ansible. I&rsquo;ll cut this post off here, but in the next post, I&rsquo;ll walk through the steps on how to get Ansible to be useful.</p>
 

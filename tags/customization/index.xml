@@ -400,7 +400,7 @@ some bash scripting :P.&lt;/p&gt;</description>
 
 &lt;h3 id=&#34;downloading-from-the-repos&#34;&gt;Downloading from the Repos&lt;/h3&gt;
 
-&lt;p&gt;Just like installing any other package on Linux, I decided to first check to see it it was in the &lt;a href=&#34;https://dev.solus-project.com/&#34;&gt;Solus Repos&lt;/a&gt;:&lt;/p&gt;
+&lt;p&gt;Just like installing any other package on Linux, I decided to first check to see it it was in the Solus Repos:&lt;/p&gt;
 
 &lt;pre&gt;&lt;code&gt;sudo eopkg sr i3block
 &lt;/code&gt;&lt;/pre&gt;
@@ -474,7 +474,7 @@ fi
 &lt;p&gt;&lt;img alt=&#34;New Color Scheme for rofi launcher&#34; src=&#34;../../img/posts/starting-i3/rofi-run.png&#34; style=&#34;max-width: 100%;&#34;/&gt;
 &lt;div id=&#34;caption&#34;&gt;New color scheme for rofi launcher&lt;/div&gt;&lt;/p&gt;
 
-&lt;p&gt;When I started using i3 several years ago, I used &lt;a href=&#34;http://tools.suckless.org/dmenu/&#34;&gt;dmenu&lt;/a&gt; as my launcher (it&amp;rsquo;s the launcher used in &lt;a href=&#34;http://dwm.suckless.org/&#34;&gt;dwm&lt;/a&gt;, another tiling window manager I used to use). I eventually switched to &lt;a href=&#34;https://davedavenport.github.io/rofi/&#34;&gt;rofi&lt;/a&gt; after seeing it used in some very nice window manager setups (sound familiar?). However, I always used the plain default theme and never bothered to improve it. With all the work I did making i3bars look nice, I thought I should at least make rofi match. Making the color theme wasn&amp;rsquo;t nearly as hard as I anticipated it to be. That&amp;rsquo;s mostly because I found and used the &lt;a href=&#34;https://davedavenport.github.io/rofi/p11-Generator.html&#34;&gt;rofi theme generator&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;When I started using i3 several years ago, I used &lt;a href=&#34;http://tools.suckless.org/dmenu/&#34;&gt;dmenu&lt;/a&gt; as my launcher (it&amp;rsquo;s the launcher used in &lt;a href=&#34;http://dwm.suckless.org/&#34;&gt;dwm&lt;/a&gt;, another tiling window manager I used to use). I eventually switched to rofi after seeing it used in some very nice window manager setups (sound familiar?). However, I always used the plain default theme and never bothered to improve it. With all the work I did making i3bars look nice, I thought I should at least make rofi match. Making the color theme wasn&amp;rsquo;t nearly as hard as I anticipated it to be. That&amp;rsquo;s mostly because I found and used the rofi theme generator.&lt;/p&gt;
 
 &lt;p&gt;&lt;center&gt;
 &lt;img alt=&#34;New rofi window switcher&#34; src=&#34;../../img/posts/starting-i3/rofi-window.png&#34; style=&#34;max-width: 100%;&#34;/&gt;

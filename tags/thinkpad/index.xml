@@ -26,12 +26,11 @@ Here&amp;rsquo;s why.&lt;/p&gt;
 
 &lt;h2 id=&#34;the-issue&#34;&gt;The Issue&lt;/h2&gt;
 
-&lt;p&gt;Due to a NVIDIA Quadro M1000M in my &lt;a href=&#34;https://www.lenovo.com/us/en/laptops/thinkpad/thinkpad-p/ThinkPad-P50/p/22TP2WPWP50&#34;&gt;lenovo
-P50&lt;/a&gt;
-work laptop, I&amp;rsquo;ve been using Gnome with Wayland, because that combination seems
-to have the least amount of annoying trade-offs. While doing a system refresh,
-I figured I would see if things are any different with a clean Fedora 31 Plasma
-install (they weren&amp;rsquo;t, but that&amp;rsquo;s beyond this post).&lt;/p&gt;
+&lt;p&gt;Due to a NVIDIA Quadro M1000M in my lenovo P50 work laptop, I&amp;rsquo;ve been using
+Gnome with Wayland, because that combination seems to have the least amount of
+annoying trade-offs. While doing a system refresh, I figured I would see if
+things are any different with a clean Fedora 31 Plasma install (they weren&amp;rsquo;t,
+but that&amp;rsquo;s beyond this post).&lt;/p&gt;
 
 &lt;p&gt;&lt;center&gt;
 &lt;a href=&#34;../../img/posts/fedora-kde-tb3/gnome-tb3-settings.png&#34;&gt;
@@ -176,7 +175,7 @@ post.&lt;/p&gt;
 Turbo) i5-7200u cpu, 8 GBs of DDR4 RAM, a 14&amp;rdquo; 1920x1080 screen, and a 500GB Hard
 Drive with Windows 10 on it. After checking that it booted up fine, I
 immediately swapped the slow HD with the 250GB SSD that was in my x230, and
-installed &lt;a href=&#34;https://solus-project.com&#34;&gt;Solus&lt;/a&gt; on it. In Solus, everything worked
+installed &lt;a href=&#34;https://getsol.us&#34;&gt;Solus&lt;/a&gt; on it. In Solus, everything worked
 &amp;ldquo;out of the box&amp;rdquo;, and I would guess other Linux distributions would as well. For
 Christmas, I got a new 500GB Samsung EVO SSD to upgrade the 250GB one. In total,
 the T470 has less total storage than the Bonobo had, but &lt;em&gt;all&lt;/em&gt; of it is fast SSD
@@ -193,7 +192,7 @@ time of writing this post:&lt;/p&gt;
 Intel i5-7200u [2.5 Ghz (3.1 Ghz Turbo), 2 Cores, 4 Threads]
 8 GB RAM
 500 GB Samsung EVO SSD
-14&amp;quot; 1920x1080 IPS Display 
+14&amp;quot; 1920x1080 IPS Display
 Solus
 &lt;/code&gt;&lt;/pre&gt;
 
@@ -205,7 +204,7 @@ desk.&lt;/p&gt;
 
 &lt;pre&gt;&lt;code&gt;Thinkpad Ultra Dock 40A2
 2 x 23.6&amp;quot; ASUS 1920x1080 Monitors
-Happy Hacking Keyboard Pro2 
+Happy Hacking Keyboard Pro2
 Audioengine A2+ Speakers &amp;amp; Stands
 Bose AE2 Headphones
 Logitech HD Pro Webcam c920 Widescreen

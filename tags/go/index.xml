@@ -16,7 +16,7 @@
       <pubDate>Sat, 02 Sep 2017 00:00:00 +0000</pubDate>
       
       <guid>http://ryan.himmelwright.net/post/website-switched-to-hugo/</guid>
-      <description>&lt;p&gt;In my &lt;a href=&#34;../website-transition-to-hugo/&#34;&gt;last post&lt;/a&gt;, I stated that &lt;em&gt;within a few days&lt;/em&gt;, I would officially generate and publish the website using &lt;a href=&#34;https://gohugo.io&#34;&gt;Hugo&lt;/a&gt;. I then proceeded to publish &lt;em&gt;that&lt;/em&gt; post using Hugo. Close enough. If I remember correctly, I ended that post listing off a few tasks that I wanted to complete &lt;em&gt;before&lt;/em&gt; switching the site (oops). Well&amp;hellip; they&amp;rsquo;re complete &lt;em&gt;now&lt;/em&gt;. Here&amp;rsquo;s how.&lt;/p&gt;
+      <description>&lt;p&gt;In my &lt;a href=&#34;../../post/website-transition-to-hugo/&#34;&gt;last post&lt;/a&gt;, I stated that &lt;em&gt;within a few days&lt;/em&gt;, I would officially generate and publish the website using &lt;a href=&#34;https://gohugo.io&#34;&gt;Hugo&lt;/a&gt;. I then proceeded to publish &lt;em&gt;that&lt;/em&gt; post using Hugo. Close enough. If I remember correctly, I ended that post listing off a few tasks that I wanted to complete &lt;em&gt;before&lt;/em&gt; switching the site (oops). Well&amp;hellip; they&amp;rsquo;re complete &lt;em&gt;now&lt;/em&gt;. Here&amp;rsquo;s how.&lt;/p&gt;
 
 &lt;h3 id=&#34;create-single-pages-about-homelab&#34;&gt;Create Single Pages (About/Homelab)&lt;/h3&gt;
 
@@ -31,7 +31,7 @@
 title: About
 date: &lt;span style=&#34;color:#e6db74&#34;&gt;2017-08-28T09:51:18&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;-04&lt;/span&gt;:&lt;span style=&#34;color:#ae81ff&#34;&gt;00&lt;/span&gt;
 type: about
-menu : 
+menu :
   main:
     weight: -&lt;span style=&#34;color:#ae81ff&#34;&gt;150&lt;/span&gt;
 layout: about-page
@@ -39,7 +39,7 @@ image: img/header-images/park-books.jpg
 ---&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;h3 id=&#34;setting-up-an-rss-feed&#34;&gt;Setting up an RSS Feed&lt;/h3&gt;
 
-&lt;p&gt;It turns out that &lt;a href=&#34;https://gohugo.io/templates/rss/&#34;&gt;Hugo ships with its own RSS 2.0 template&lt;/a&gt; by default. When I first saw this, I thought that I may still have to dash off a layout or markdown page for the feed, but even that was unnecessary. Each &amp;ldquo;content&amp;rdquo; section (&lt;em&gt;ex: post or pages&lt;/em&gt;) has an RSS automatically generated at &lt;code&gt;/section-name/index.rss&lt;/code&gt;. I don&amp;rsquo;t need a feed for my static pages, so I just found the &lt;a href=&#34;http://ryan.himmelwright.net/post/index.xml&#34;&gt;feed for my posts&lt;/a&gt;. To make it easily accessible, I added a menu link.  Without a defined markdown file for the rss feed page, I needed another way to add to the navigation menu. I accomplished this by adding the following code to the bottom of my &lt;code&gt;config.toml&lt;/code&gt; file:&lt;/p&gt;
+&lt;p&gt;It turns out that &lt;a href=&#34;https://gohugo.io/templates/rss/&#34;&gt;Hugo ships with its own RSS 2.0 template&lt;/a&gt; by default. When I first saw this, I thought that I may still have to dash off a layout or markdown page for the feed, but even that was unnecessary. Each &amp;ldquo;content&amp;rdquo; section (&lt;em&gt;ex: post or pages&lt;/em&gt;) has an RSS automatically generated at &lt;code&gt;/section-name/index.rss&lt;/code&gt;. I don&amp;rsquo;t need a feed for my static pages, so I just found the &lt;a href=&#34;../../post/index.xml&#34;&gt;feed for my posts&lt;/a&gt;. To make it easily accessible, I added a menu link.  Without a defined markdown file for the rss feed page, I needed another way to add to the navigation menu. I accomplished this by adding the following code to the bottom of my &lt;code&gt;config.toml&lt;/code&gt; file:&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;[[menu.main]]
   name = &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;RSS&amp;#34;&lt;/span&gt;
   url = &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;/post/index.xml&amp;#34;&lt;/span&gt;
@@ -48,18 +48,16 @@ image: img/header-images/park-books.jpg
 
 &lt;h3 id=&#34;check-how-the-posts-display&#34;&gt;Check how the posts display&lt;/h3&gt;
 
-&lt;p&gt;One task I needed to complete was going through and editing each post. The main issue that requiring a fix, which I &lt;a href=&#34;../website-transition-to-hugo/#image-size&#34;&gt;explained in the previous post&lt;/a&gt;, was that the image tags needed to be switched from markdown to html syntax. While I originally planned to set a &lt;code&gt;width=100%&lt;/code&gt; parameter for the image tags, I learned that using a &lt;code&gt;max-width: 100%;&lt;/code&gt; worked much better for my use-case. I know this can be handled in the overall css file, but I like explicitly defining how to handle each image when I write a post.&lt;/p&gt;
+&lt;p&gt;One task I needed to complete was going through and editing each post. The main issue that requiring a fix, which I &lt;a href=&#34;../../post/website-transition-to-hugo/#image-size&#34;&gt;explained in the previous post&lt;/a&gt;, was that the image tags needed to be switched from markdown to html syntax. While I originally planned to set a &lt;code&gt;width=100%&lt;/code&gt; parameter for the image tags, I learned that using a &lt;code&gt;max-width: 100%;&lt;/code&gt; worked much better for my use-case. I know this can be handled in the overall css file, but I like explicitly defining how to handle each image when I write a post.&lt;/p&gt;
 
-&lt;p&gt;While editing the posts, I noticed that the &lt;a href=&#34;../website-transition-to-hugo/#summary-setup&#34;&gt;post summaries&lt;/a&gt; weren&amp;rsquo;t displaying the content that I intended them to. I have hugo configured so that I manually cut off the summary location using a &lt;code&gt;more&lt;/code&gt; tag in the markdown.But it didn&amp;rsquo;t appear to be doing that.&lt;/p&gt;
+&lt;p&gt;While editing the posts, I noticed that the &lt;a href=&#34;../../post/website-transition-to-hugo/#summary-setup&#34;&gt;post summaries&lt;/a&gt; weren&amp;rsquo;t displaying the content that I intended them to. I have hugo configured so that I manually cut off the summary location using a &lt;code&gt;more&lt;/code&gt; tag in the markdown.But it didn&amp;rsquo;t appear to be doing that.&lt;/p&gt;
 
 &lt;p&gt;&lt;a href=&#34;../../img/posts/website-switched-to-hugo/summary-fix-spread.png&#34;&gt;&lt;img alt=&#34;Hugo Logo&#34; src=&#34;../../img/posts/website-switched-to-hugo/summary-fix-spread.png&#34; style=&#34;width: 100%; float: right; margin: 0px 15px 5px 5px;&#34;/&gt;&lt;/a&gt;&lt;/p&gt;
 
 &lt;ul&gt;
 &lt;li&gt;&lt;em&gt;A: An over-extended post summary&lt;/em&gt;.&lt;/li&gt;
 &lt;li&gt;&lt;em&gt;B: The extra content of the post that was included in the summary&lt;/em&gt;.&lt;/li&gt;
-&lt;li&gt;&lt;em&gt;C: The corrected post summary.&lt;/em&gt;
-
-&lt;br /&gt;&lt;/li&gt;
+&lt;li&gt;&lt;em&gt;C: The corrected post summary.&lt;/em&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;p&gt;Some of the summaries seemed to extend beyond the cutoff point, still including the next section header, and some of the section&amp;rsquo;s content. After further inspection, I noticed that I had a space on either side of the &amp;ldquo;more&amp;rdquo; in the tag. So, I had to go through and delete the extra spaces in each post.&lt;/p&gt;
@@ -98,9 +96,9 @@ image: img/header-images/park-books.jpg
 
 &lt;h3 id=&#34;from-cryogen-to-hugo&#34;&gt;From Cryogen to Hugo&lt;/h3&gt;
 
-&lt;p&gt;My departure from Cryogen really has nothing to do with the project itself. It is a prime example of what &lt;a href=&#34;https://clojure.org/&#34;&gt;clojure&lt;/a&gt; is capable of, and I feel that more people should give it a shot. Recently though, I&amp;rsquo;ve been itching to switch up my website&amp;rsquo;s theme a bit. While I fancy my &lt;a href=&#34;../new-theme-immutable/&#34;&gt;Immutable Theme&lt;/a&gt; I created a couple months ago, it isn&amp;rsquo;t quite doing what I had hoped for. I love dark themes, but the type of posts I&amp;rsquo;ve been creating really don&amp;rsquo;t look good with them. I like to add diagrams, code snippets, and images to all of my posts. Diagram posts look wonderful with a white background, but are garbage in a dark theme. This difference was glaring last week as I switched between my markdown editor&amp;rsquo;s preview window (default white theme), and the website&amp;rsquo;s live preview view, while writing my &lt;a href=&#34;../simple-reverse-ssh-tunnel/&#34;&gt;reverse tunnels&lt;/a&gt; post.&lt;/p&gt;
+&lt;p&gt;My departure from Cryogen really has nothing to do with the project itself. It is a prime example of what &lt;a href=&#34;https://clojure.org/&#34;&gt;clojure&lt;/a&gt; is capable of, and I feel that more people should give it a shot. Recently though, I&amp;rsquo;ve been itching to switch up my website&amp;rsquo;s theme a bit. While I fancy my &lt;a href=&#34;../../post/new-theme-immutable/&#34;&gt;Immutable Theme&lt;/a&gt; I created a couple months ago, it isn&amp;rsquo;t quite doing what I had hoped for. I love dark themes, but the type of posts I&amp;rsquo;ve been creating really don&amp;rsquo;t look good with them. I like to add diagrams, code snippets, and images to all of my posts. Diagram posts look wonderful with a white background, but are garbage in a dark theme. This difference was glaring last week as I switched between my markdown editor&amp;rsquo;s preview window (default white theme), and the website&amp;rsquo;s live preview view, while writing my &lt;a href=&#34;../../post//simple-reverse-ssh-tunnel/&#34;&gt;reverse tunnels&lt;/a&gt; post.&lt;/p&gt;
 
-&lt;p&gt;Similar to the logic I employed earlier this month when &lt;a href=&#34;../back-to-solus/&#34;&gt;switching back to Solus&lt;/a&gt;, I thought that if I was going to scrap my theme and start from scratch, I might as well check out different website generator. I had been keeping an eye on the various site generators, but the one I considered the most (and even dabbled with a bit last month), was &lt;a href=&#34;https://gohugo.io&#34;&gt;Hugo&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Similar to the logic I employed earlier this month when &lt;a href=&#34;../../post/back-to-solus/&#34;&gt;switching back to Solus&lt;/a&gt;, I thought that if I was going to scrap my theme and start from scratch, I might as well check out different website generator. I had been keeping an eye on the various site generators, but the one I considered the most (and even dabbled with a bit last month), was &lt;a href=&#34;https://gohugo.io&#34;&gt;Hugo&lt;/a&gt;.&lt;/p&gt;
 
 &lt;h3 id=&#34;what-i-ve-done-so-far&#34;&gt;What I&amp;rsquo;ve Done So Far&lt;/h3&gt;
 
@@ -123,7 +121,7 @@ image: img/header-images/park-books.jpg
 
 &lt;h4 id=&#34;setup-a-theme-and-started-tweaking-it&#34;&gt;Setup a Theme and started tweaking it&lt;/h4&gt;
 
-&lt;p&gt;With the hugo site generated, I wanted to setup a proper theme. After sampling a handful of demo sites from hugo&amp;rsquo;s &lt;a href=&#34;https://gohugo.io/themes/&#34;&gt;theme page&lt;/a&gt;, I decided on the &lt;a href=&#34;https://themes.gohugo.io/startbootstrap-clean-blog/&#34;&gt;startbootstrap-clean-theme&lt;/a&gt;. I&amp;rsquo;ve seen it used on other sites, and I think it is a commonly used theme with other site generators. However, it is clean and simple, with a white-background base like I wanted. Additionally, I love having header images for posts and pages. It lets me better personalize the website by exclusively using images I&amp;rsquo;ve photographed myself.&lt;/p&gt;
+&lt;p&gt;With the hugo site generated, I wanted to setup a proper theme. After sampling a handful of demo sites from hugo&amp;rsquo;s &lt;a href=&#34;https://gohugo.io/themes/&#34;&gt;theme page&lt;/a&gt;, I decided on the startbootstrap-clean-theme. I&amp;rsquo;ve seen it used on other sites, and I think it is a commonly used theme with other site generators. However, it is clean and simple, with a white-background base like I wanted. Additionally, I love having header images for posts and pages. It lets me better personalize the website by exclusively using images I&amp;rsquo;ve photographed myself.&lt;/p&gt;
 
 &lt;p&gt;To get the theme, I cloned it from git:&lt;/p&gt;
 
@@ -160,7 +158,7 @@ With the theme setup, and the configuration edited, I started making some minor 
             {{ .Summary }}
         &amp;lt;/&lt;span style=&#34;color:#f92672&#34;&gt;div&lt;/span&gt;&amp;gt;
     &amp;lt;/&lt;span style=&#34;color:#f92672&#34;&gt;p&lt;/span&gt;&amp;gt;
-    &amp;lt;&lt;span style=&#34;color:#f92672&#34;&gt;p&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;class&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;post-meta&amp;#34;&lt;/span&gt;&amp;gt; 
+    &amp;lt;&lt;span style=&#34;color:#f92672&#34;&gt;p&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;class&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;post-meta&amp;#34;&lt;/span&gt;&amp;gt;
         &amp;lt;&lt;span style=&#34;color:#f92672&#34;&gt;a&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;href&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;{{ .Permalink }}&amp;#34;&lt;/span&gt;&amp;gt; Click to Read More --&amp;gt;&amp;lt;/&lt;span style=&#34;color:#f92672&#34;&gt;a&lt;/span&gt;&amp;gt;
     &amp;lt;/&lt;span style=&#34;color:#f92672&#34;&gt;p&lt;/span&gt;&amp;gt;
 &amp;lt;/&lt;span style=&#34;color:#f92672&#34;&gt;div&lt;/span&gt;&amp;gt;
@@ -212,7 +210,7 @@ Unfortunately, I immediately noticed that some images in the posts were massive,
       <pubDate>Sun, 30 Jul 2017 00:00:00 +0000</pubDate>
       
       <guid>http://ryan.himmelwright.net/post/dabbling-with-go/</guid>
-      <description>&lt;p&gt;After spending most of this month&amp;rsquo;s dedicated learning time working on &lt;a href=&#34;http://ryan.himmelwright.net/posts/solus-to-fedora/&#34;&gt;system&lt;/a&gt;, &lt;a href=&#34;http://ryan.himmelwright.net/posts/creating-a-git-remote/&#34;&gt;server&lt;/a&gt;, and &lt;a href=&#34;http://ryan.himmelwright.net/posts/issues-setting-up-ubiquiti-network/&#34;&gt;network&lt;/a&gt; activities,  I have been itching to start some home programming again. To motivate myself, I even considered dabbling with a new programming language&amp;hellip; and with very little internal debate, I decided to just &lt;a href=&#34;https://golang.org&#34;&gt;Gopher&lt;/a&gt; it (I&amp;rsquo;m so sorry).&lt;/p&gt;
+      <description>&lt;p&gt;After spending most of this month&amp;rsquo;s dedicated learning time working on &lt;a href=&#34;../../post/solus-to-fedora/&#34;&gt;system&lt;/a&gt;, &lt;a href=&#34;../../post/creating-a-git-remote/&#34;&gt;server&lt;/a&gt;, and &lt;a href=&#34;../../post/issues-setting-up-ubiquiti-network/&#34;&gt;network&lt;/a&gt; activities,  I have been itching to start some home programming again. To motivate myself, I even considered dabbling with a new programming language&amp;hellip; and with very little internal debate, I decided to just &lt;a href=&#34;https://golang.org&#34;&gt;Gopher&lt;/a&gt; it (I&amp;rsquo;m so sorry).&lt;/p&gt;
 
 &lt;h2 id=&#34;what-is-go&#34;&gt;What is GO?&lt;/h2&gt;
 
@@ -235,7 +233,7 @@ Go is expressive, concise, clean, and efficient. Its concurrency mechanisms make
 
 &lt;p&gt;I&amp;rsquo;ve wanted to try &lt;a href=&#34;https://golang.org/&#34;&gt;Go&lt;/a&gt; for a long time now. A couple of months ago, I was trying to decide if I should pursue learning Rust or Go. At the time, I ultimately ended up experimenting with &lt;a href=&#34;https://www.rust-lang.org/en-US/&#34;&gt;Rust&lt;/a&gt;. I was toying with the idea of creating an experimental lisp, and Rust&amp;rsquo;s feature set makes it great language for writing compilers and interpreters. However, while Rust is a great language, it can be quite complicated to learn. Go on the other hand, is apparently simpler and quick to grasp, which is &lt;a href=&#34;https://golang.org/doc/faq#creating_a_new_language&#34;&gt;why it was created&lt;/a&gt; in the first place.&lt;/p&gt;
 
-&lt;p&gt;When the Solus team &lt;a href=&#34;https://solus-project.com/forums/viewtopic.php?f=13&amp;amp;t=2634&#34;&gt;announced&lt;/a&gt; that they were declaring Go a first class citizen language of the project, my interest peaked. &lt;a href=&#34;https://github.com/solus-project/solbuild&#34;&gt;Solbuild&lt;/a&gt;, the Solus package build system was written in Go. In the announcement, the project stated that they intended to use Go for building tools. True to that statement, this past week, Ikey (the creator of Solus) published a patreon post detailing the new repo manager (&lt;a href=&#34;https://github.com/solus-project/ferryd&#34;&gt;ferryd&lt;/a&gt;) he&amp;rsquo;s been working on&amp;hellip; again in Go. After reading that post, I decided it was time for me to give it a Go (again, very sorry).&lt;/p&gt;
+&lt;p&gt;When the Solus team announced that they were declaring Go a first class citizen language of the project, my interest peaked. &lt;a href=&#34;https://github.com/solus-project/solbuild&#34;&gt;Solbuild&lt;/a&gt;, the Solus package build system was written in Go. In the announcement, the project stated that they intended to use Go for building tools. True to that statement, this past week, Ikey (the creator of Solus) published a patreon post detailing the new repo manager (&lt;a href=&#34;https://github.com/solus-project/ferryd&#34;&gt;ferryd&lt;/a&gt;) he&amp;rsquo;s been working on&amp;hellip; again in Go. After reading that post, I decided it was time for me to give it a Go (again, very sorry).&lt;/p&gt;
 
 &lt;h2 id=&#34;installation&#34;&gt;Installation&lt;/h2&gt;
 

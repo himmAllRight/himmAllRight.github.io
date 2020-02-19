@@ -646,13 +646,12 @@ even purposefully picked a 1600x900 resolution screen over a FHD one when
 buying her Thinkpad for the same reason.&lt;/p&gt;
 
 &lt;p&gt;Lastly, while it is scaled up a bit on a physically larger display, these
-monitors still provide a 2560x1440 resolution. Recently, I have decided that this
-particular resolution, may be the best for productivity , at least in the type
-of workflows I use. I even figured out how to &lt;a href=&#34;http://192.168.1.5:1313/post/sub-monitor-workflows-with-xrandr/&#34;&gt;configure a 2560x1440
-&amp;ldquo;sub-monitor&amp;rdquo; on my 43&amp;rdquo; QHD
-monitor&lt;/a&gt; when
-I need to &lt;em&gt;focus&lt;/em&gt;. Having an &lt;em&gt;actual&lt;/em&gt; 2560x1440 monitor in the house would be
-wonderful for both my wife&amp;rsquo;s and my own productivity.&lt;/p&gt;
+monitors still provide a 2560x1440 resolution. Recently, I have decided that
+this particular resolution, may be the best for productivity , at least in the
+type of workflows I use. I even figured out how to &lt;a href=&#34;../../post/sub-monitor-workflows-with-xrandr/&#34;&gt;configure a 2560x1440
+&amp;ldquo;sub-monitor&amp;rdquo; on my 43&amp;rdquo; QHD monitor&lt;/a&gt;
+when I need to &lt;em&gt;focus&lt;/em&gt;. Having an &lt;em&gt;actual&lt;/em&gt; 2560x1440 monitor in the house would
+be wonderful for both my wife&amp;rsquo;s and my own productivity.&lt;/p&gt;
 
 &lt;h3 id=&#34;selection&#34;&gt;Selection&lt;/h3&gt;
 
@@ -790,7 +789,7 @@ desktops&lt;/a&gt;).&lt;/p&gt;
 &lt;div class=&#34;caption&#34;&gt;I actually wrote most of the draft for this post in i3&lt;/div&gt;&lt;/p&gt;
 
 &lt;p&gt;Second, when working (especially programming), I often like to use tiling
-window managers (&lt;a href=&#34;../../post/started-using-i3blocks/&#34;&gt;i3 for example&lt;/a&gt;). This lets me
+window managers ( &lt;a href=&#34;../../post/started-using-i3blocks/&#34;&gt;i3 for example&lt;/a&gt; ). This lets me
 &lt;em&gt;work&lt;/em&gt; without having to manually move around the windows, or even leave my
 keyboard. In tiling window managers, applications tend to open up full screen by
 default, which again&amp;hellip; is just obnoxious on such a large display.
@@ -1004,7 +1003,7 @@ coverage throughout the entire house. The real motivator
 
 &lt;h3 id=&#34;history&#34;&gt;History&lt;/h3&gt;
 
-&lt;p&gt;About two years ago, I &lt;a href=&#34;http://ryan.himmelwright.net/post/upgrading-network-to-ubiquiti/&#34;&gt;replaced my Linksys wifi
+&lt;p&gt;About two years ago, I &lt;a href=&#34;../../post/upgrading-network-to-ubiquiti/&#34;&gt;replaced my Linksys wifi
 router(s)&lt;/a&gt;
 with the tiny-but-mighty &lt;a href=&#34;https://store.ui.com/products/edgerouter-x&#34;&gt;Ubiquity Edge Router
 X&lt;/a&gt;, paired with an &lt;a href=&#34;https://www.ui.com/unifi/unifi-ap-ac-lite/&#34;&gt;Ubiqui AP AC
@@ -1725,7 +1724,7 @@ has already figured out how to do it with pass!&lt;/p&gt;</description>
       <pubDate>Mon, 26 Nov 2018 00:00:00 +0000</pubDate>
       
       <guid>http://ryan.himmelwright.net/post/charmeleon-desktop-design/</guid>
-      <description>&lt;p&gt;Over the past few years (particularly after moving to the &lt;a href=&#34;../my-t470/&#34;&gt;T470&lt;/a&gt;
+      <description>&lt;p&gt;Over the past few years (particularly after moving to the &lt;a href=&#34;../../post/my-t470/&#34;&gt;T470&lt;/a&gt;
 as my main device), I have been anticipating what my next desktop
 workstation build will look like. For a period of time, I was convinced that
 I would build a &lt;a href=&#34;https://www.techspot.com/review/1155-affordable-dual-xeon-pc/&#34;&gt;muti-socket, used xeon
@@ -1738,7 +1737,7 @@ series CPUs&amp;hellip;&lt;/p&gt;
 &lt;p&gt;&lt;a href=&#34;../../img/posts/chameleon-desktop-design/kadabra-cpu-usage.png&#34;&gt;&lt;img alt=&#34;Full system monitor on Laptop&#34; src=&#34;../../img/posts/charmeleon-desktop-design/kadabra-cpu-usage.png&#34; style=&#34;max-width: 100%;&#34;/&gt;&lt;/a&gt;
 &lt;div class=&#34;caption&#34;&gt;My T470 has been a little tight on resources.&lt;/div&gt;&lt;/p&gt;
 
-&lt;p&gt;&lt;a href=&#34;../sold-my-bonobo/&#34;&gt;My&lt;/a&gt; &lt;a href=&#34;../my-t470/&#34;&gt;laptops&lt;/a&gt; &lt;a href=&#34;../my-new-used-x230&#34;&gt;have&lt;/a&gt;
+&lt;p&gt;&lt;a href=&#34;../../post/sold-my-bonobo/&#34;&gt;My&lt;/a&gt; &lt;a href=&#34;../../post/my-t470/&#34;&gt;laptops&lt;/a&gt; &lt;a href=&#34;../../post/my-new-used-x230&#34;&gt;have&lt;/a&gt;
 served the majority of my needs these last few years, but I have been feeling
 a bit restricted when trying to do more demanding workloads.
 While I still side with a &amp;ldquo;&lt;em&gt;use low-powered, portable computers, and remote
@@ -1797,7 +1796,7 @@ but &lt;em&gt;need&lt;/em&gt; a normal 2.5&amp;rdquo; SATA SSD at the very least
 play the &lt;em&gt;occasional&lt;/em&gt; game. I don&amp;rsquo;t mind playing games with lower graphic
 settings on my laptops, but I &lt;em&gt;do mind&lt;/em&gt; that even with the lower settings, the
 CPUs nearly max out, which spikes up the temperature.
-Increased graphics performance would also better support &lt;a href=&#34;../new-lgud4379b/&#34;&gt;my large
+Increased graphics performance would also better support &lt;a href=&#34;../../post/new-lgud4379b/&#34;&gt;my large
 monitor&lt;/a&gt;.  A discrete graphics card would be nice, ideally
 an AMD one due to their recent work on improving their open source drivers.&lt;/p&gt;
 
@@ -1822,7 +1821,7 @@ probably 50 theoretical builds, I eventually settled on &lt;a href=&#34;https://
 fitting. Also, I&amp;rsquo;m then free to rename it to &amp;ldquo;Charzard&amp;rdquo; in the future if I &lt;em&gt;evolve&lt;/em&gt;
 the build to a next-generation Ryzen 7&amp;hellip;&lt;/p&gt;
 
-&lt;h4 id=&#34;cpu-ryzen-5-2600-https-www-amd-com-en-products-cpu-amd-ryzen-5-2600&#34;&gt;CPU: &lt;a href=&#34;https://www.amd.com/en/products/cpu/amd-ryzen-5-2600&#34;&gt;Ryzen 5 2600&lt;/a&gt;&lt;/h4&gt;
+&lt;h4 id=&#34;cpu-ryzen-5-2600-https-en-wikichip-org-wiki-amd-ryzen-5-2600&#34;&gt;CPU: &lt;a href=&#34;https://en.wikichip.org/wiki/amd/ryzen_5/2600&#34;&gt;Ryzen 5 2600&lt;/a&gt;&lt;/h4&gt;
 
 &lt;p&gt;&lt;a href=&#34;../../img/posts/chameleon-desktop-design/ryzen2600.jpg&#34;&gt;&lt;img alt=&#34;ryzen 2600&#34; src=&#34;../../img/posts/charmeleon-desktop-design/ryzen2600.jpg&#34; style=&#34;max-width: 40%; float: left;&#34;/&gt;&lt;/a&gt;&lt;/p&gt;
 
@@ -1849,7 +1848,7 @@ confirmed&lt;/a&gt; that it was a solid board, especially for the price. When I 
 considering the 2400g, I had to switch to the &lt;a href=&#34;https://www.newegg.com/Product/Product.aspx?Item=N82E16813144188&#34;&gt;MSI B450 Gaming Pro Carbon
 AC&lt;/a&gt;, because
 the Tomahawk didn&amp;rsquo;t have a display output that the integrated graphics could
-properly use with &lt;a href=&#34;../new-lgud4379b/&#34;&gt;my UHD monitor&lt;/a&gt;&amp;rsquo;s resolution (I need a
+properly use with &lt;a href=&#34;../../post/new-lgud4379b/&#34;&gt;my UHD monitor&lt;/a&gt;&amp;rsquo;s resolution (I need a
 display port). When I switched to the 2600, I was able to go back to the
 TOMAHAWK, and funnel the cost savings towards getting my GPU.&lt;/p&gt;
 
@@ -2155,8 +2154,8 @@ website. Here is how that idea was Instantiated&amp;hellip;&lt;/p&gt;
 src=&#34;../../img/posts/draft-website-jenkins/jenkins-logo.png&#34; style=&#34;max-width:
 50%; float: left; margin: 0px 12px 0px 0px;&#34; alt=&#34;Jenkins Logo&#34; /&gt;&lt;/a&gt;&lt;/p&gt;
 
-&lt;p&gt;I have previously &lt;a href=&#34;../website-transition-to-hugo/&#34;&gt;described&lt;/a&gt; how my
-website is &lt;a href=&#34;../website-switched-to-hugo/&#34;&gt;currently generated&lt;/a&gt;, using
+&lt;p&gt;I have previously &lt;a href=&#34;../../post/website-transition-to-hugo/&#34;&gt;described&lt;/a&gt; how my
+website is &lt;a href=&#34;../../post/website-switched-to-hugo/&#34;&gt;currently generated&lt;/a&gt;, using
 the &lt;a href=&#34;https://gohugo.io&#34;&gt;Hugo&lt;/a&gt; static website generator. To organize
 this system, I have two git repos: One that consists of all the hugo
 source files (where I write content), and one that contains the
@@ -2179,7 +2178,7 @@ src=&#34;../../img/posts/draft-website-jenkins/mr-mime.png&#34; style=&#34;max-w
 
 &lt;p&gt;I had previously created a dedicated Jenkins server on my home network
 (Mr. Mime), using a CentOS 7 VM hosted on my home server. However, any
-Jenkins setup should work for this project (including a &lt;a href=&#34;on my home network&#34;&gt;docker
+Jenkins setup should work for this project (including a &lt;a href=&#34;https://hub.docker.com/_/jenkins/&#34;&gt;docker
 container&lt;/a&gt;). To get started, checkout the &lt;a href=&#34;https://jenkins.io/download/&#34;&gt;Jenkins
 Website&lt;/a&gt;, and be sure to take advantage
 of the &lt;a href=&#34;https://jenkins.io/doc/&#34;&gt;the documentation&lt;/a&gt; for help.&lt;/p&gt;
@@ -2395,7 +2394,7 @@ my org-babel config.org file&#34; /&gt;&lt;/a&gt;&lt;/p&gt;
 
 &lt;p&gt;To get started, configure a server/container/droplet that will host
 nginx. I&amp;rsquo;m using a CentOS 7 minimal install VM on
-&lt;a href=&#34;http://ryan.himmelwright.net/pages/homelab/#ninetales&#34;&gt;Nintales&lt;/a&gt; (my
+&lt;a href=&#34;../../pages/homelab/#ninetales&#34;&gt;Nintales&lt;/a&gt; (my
 home server). I don&amp;rsquo;t have a bunch of traffic (well, I &lt;em&gt;shouldn&amp;rsquo;t&lt;/em&gt;), so I&amp;rsquo;m
 just giving it 1 core and 512MB RAM.&lt;/p&gt;
 
@@ -2646,12 +2645,11 @@ doesn&amp;rsquo;t have to be the same across computers). I love this. It lets se
 workflow, rather than forcing me to make &lt;em&gt;it be&lt;/em&gt; my workflow.&lt;/p&gt;&lt;/li&gt;
 
 &lt;li&gt;&lt;p&gt;&lt;strong&gt;Encrypted Libraries&lt;/strong&gt; - When creating a new library, it is possible to
-make an &lt;a href=&#34;https://www.seafile.com/en/help/encrypted_libraries/&#34;&gt;encrypted
-one&lt;/a&gt;. These libraries
-use client-side, end-to-end encryption and require a password. The file
-&lt;em&gt;contents&lt;/em&gt; (Note: not directory or file &lt;em&gt;names&lt;/em&gt;) are encrypted on the client
-side, and not on the server. This means that even the server admin cannot access the file
-contents on the server. This is a feature I&amp;rsquo;d like to see in more applications.&lt;/p&gt;&lt;/li&gt;
+make an encrypted one. These libraries use client-side, end-to-end encryption
+and require a password. The file &lt;em&gt;contents&lt;/em&gt; (Note: not directory or file
+&lt;em&gt;names&lt;/em&gt;) are encrypted on the client side, and not on the server. This means
+that even the server admin cannot access the file contents on the server.
+This is a feature I&amp;rsquo;d like to see in more applications.&lt;/p&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;p&gt;&lt;a href=&#34;../../img/posts/trying-out-seafile/encrypt-library.png&#34;&gt;&lt;img
@@ -2688,14 +2686,11 @@ about it. Hopefully this improves with time.&lt;/p&gt;&lt;/li&gt;
 &lt;h3 id=&#34;future-plans&#34;&gt;Future Plans&lt;/h3&gt;
 
 &lt;p&gt;To summarize, I have been loving seafile, and I think I have only scratched the
-surface. I haven&amp;rsquo;t even tried playing with features like &lt;a href=&#34;https://www.seafile.com/en/help/snapshot/&#34;&gt;History and
-Snapshots&lt;/a&gt;, &lt;a href=&#34;https://www.seafile.com/en/help/search/&#34;&gt;Full Text File
-Search&lt;/a&gt;, &lt;a href=&#34;https://www.seafile.com/en/help/share/&#34;&gt;Sharing
-File&lt;/a&gt;, or &lt;a href=&#34;https://www.seafile.com/en/help/file_lock/&#34;&gt;Locking
-Files&lt;/a&gt; yet. My plan is to continue
-experimenting a bit more, and then switch to it as my main syncing system when I
-redo my main server setup in a couple of weeks. If you haven&amp;rsquo;t given seafile a
-try recently, I recommend it.&lt;/p&gt;</description>
+surface. I haven&amp;rsquo;t even tried playing with features like History and Snapshots,
+Full Text File Search, or yet. My plan is to continue experimenting a bit more,
+and then switch to it as my main syncing system when I redo my main server
+setup in a couple of weeks. If you haven&amp;rsquo;t given seafile a try recently, I
+recommend it.&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -2715,7 +2710,7 @@ just a few minutes. Lets get started.&lt;/p&gt;
 
 &lt;p&gt;&lt;img src=&#34;../../img/posts/docker-quickstart/docker-logo.png&#34; style=&#34;max-width: 100%; width: 400px; float: right; margin: 0px 15px 5px 5px;&#34; alt=&#34;Docker Logo&#34; /&gt;&lt;/p&gt;
 
-&lt;p&gt;Installing docker on &lt;a href=&#34;https://solus-project.com&#34;&gt;Solus&lt;/a&gt; was easy enough. I just
+&lt;p&gt;Installing docker on &lt;a href=&#34;https://getsol.us&#34;&gt;Solus&lt;/a&gt; was easy enough. I just
 had to install the package, and then enable the service:&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;sudo eopkg it docker
 sudo systemctl enable docker
@@ -3013,7 +3008,7 @@ post.&lt;/p&gt;
 Turbo) i5-7200u cpu, 8 GBs of DDR4 RAM, a 14&amp;rdquo; 1920x1080 screen, and a 500GB Hard
 Drive with Windows 10 on it. After checking that it booted up fine, I
 immediately swapped the slow HD with the 250GB SSD that was in my x230, and
-installed &lt;a href=&#34;https://solus-project.com&#34;&gt;Solus&lt;/a&gt; on it. In Solus, everything worked
+installed &lt;a href=&#34;https://getsol.us&#34;&gt;Solus&lt;/a&gt; on it. In Solus, everything worked
 &amp;ldquo;out of the box&amp;rdquo;, and I would guess other Linux distributions would as well. For
 Christmas, I got a new 500GB Samsung EVO SSD to upgrade the 250GB one. In total,
 the T470 has less total storage than the Bonobo had, but &lt;em&gt;all&lt;/em&gt; of it is fast SSD
@@ -3030,7 +3025,7 @@ time of writing this post:&lt;/p&gt;
 Intel i5-7200u [2.5 Ghz (3.1 Ghz Turbo), 2 Cores, 4 Threads]
 8 GB RAM
 500 GB Samsung EVO SSD
-14&amp;quot; 1920x1080 IPS Display 
+14&amp;quot; 1920x1080 IPS Display
 Solus
 &lt;/code&gt;&lt;/pre&gt;
 
@@ -3042,7 +3037,7 @@ desk.&lt;/p&gt;
 
 &lt;pre&gt;&lt;code&gt;Thinkpad Ultra Dock 40A2
 2 x 23.6&amp;quot; ASUS 1920x1080 Monitors
-Happy Hacking Keyboard Pro2 
+Happy Hacking Keyboard Pro2
 Audioengine A2+ Speakers &amp;amp; Stands
 Bose AE2 Headphones
 Logitech HD Pro Webcam c920 Widescreen
@@ -3316,7 +3311,7 @@ than a laptop.&lt;/p&gt;
 
 &lt;h2 id=&#34;recent-discoveries-my-new-plan&#34;&gt;Recent Discoveries &amp;amp; My New Plan&lt;/h2&gt;
 
-&lt;p&gt;A while back, I bought a &lt;a href=&#34;../my-new-used-x230/&#34;&gt;used x230 Thinkpad&lt;/a&gt;. Last
+&lt;p&gt;A while back, I bought a &lt;a href=&#34;../../post/my-new-used-x230/&#34;&gt;used x230 Thinkpad&lt;/a&gt;. Last
 summer, I finally purchased a &lt;a href=&#34;https://www.ebay.com/itm/Lenovo-Thinkpad-Mini-Docking-Station-Series-3-USB-3-0-T410-L420-L520-X230-T530/272238176342?epid=562055390&amp;amp;hash=item3f62a8e856:g:PbIAAOSw2x1XMPHU:sc:USPSPriority!02703!US!-1&#34;&gt;used docking
 station&lt;/a&gt;
 for it, so I could try out a docked setup. I loved it. It matched my needs
@@ -3344,7 +3339,9 @@ a nice dock setup that I have grown to appreciate and love.&lt;/p&gt;</descripti
       <guid>http://ryan.himmelwright.net/post/simple-reverse-ssh-tunnel/</guid>
       <description>
 
-&lt;p&gt;Last week, I was on vacation with my family. While I didn&amp;rsquo;t work a &lt;em&gt;ton&lt;/em&gt; on personal projects, I was at least able to spend some time on my &lt;a href=&#34;https://github.com/himmAllRight/TunnelBeacon&#34;&gt;TunelBeacon&lt;/a&gt; project again. I will write a dedicated post about that project down the road when I am further along. Basically, it will be a simple GUI to create reverse ssh tunnels, that family and friends can startup in order grant me temporary access to their computer when they need support. Reverse SSH tunnels are &lt;em&gt;very&lt;/em&gt; useful and simple to setup, but can be a bit tricky to figure out at first. So, here&amp;rsquo;s a brief and simple guide on how to easily create reverse tunnels.&lt;/p&gt;
+&lt;p&gt;Reverse SSH tunnels are &lt;em&gt;very&lt;/em&gt; useful and simple to setup, but can be a bit
+ tricky to figure out at first. So, here&amp;rsquo;s a brief and simple guide on how to
+ easily create reverse tunnels.&lt;/p&gt;
 
 &lt;hr /&gt;
 
@@ -3396,13 +3393,9 @@ a nice dock setup that I have grown to appreciate and love.&lt;/p&gt;</descripti
 
 &lt;p&gt;This should start an ssh session to the initializing computer. In my example, this is the laptop.&lt;/p&gt;
 
-&lt;h3 id=&#34;tunnel-beacon&#34;&gt;Tunnel Beacon&lt;/h3&gt;
+&lt;h3 id=&#34;conclusion&#34;&gt;Conclusion&lt;/h3&gt;
 
-&lt;p&gt;SSH tunnels are a fascinating and useful piece of technology. The ssh protocol makes modern computing much more secure, and easier to manage multiple computers. While ssh tunnels are already widely utilized, I think there are still many applications where it the technology can be applied.&lt;/p&gt;
-
-&lt;p&gt;For example, I mentioned in the intro post about my small project, &lt;a href=&#34;https://github.com/himmAllRight/TunnelBeacon&#34;&gt;TunelBeacon&lt;/a&gt; (&lt;em&gt;Note: this is by no means ready. I&amp;rsquo;ve just started playing with it&lt;/em&gt;). TunnelBeacon will be a very simple GUI application used to initiate a tunnel from a computer, specifically to receive support. For example, if my wife or any of our parents switch to Linux in the future, we could configure TunnelBeacon on their computer. Then, if they need help they can just open it and hit a button, which will initiate a reverse tunnel to a predefined secure server (or spin up an AWS/DO server&amp;hellip; I have ideas). From there, I can remote into their computer no matter what network they are on (as long as ssh isn&amp;rsquo;t blocked). No headache from having them find their public IP, no redirecting router ports, just hitting a button.&lt;/p&gt;
-
-&lt;p&gt;So, that&amp;rsquo;s reverse tunnels in a nutshell. With any luck, I should be posting more about them as I progress with TunnelBeacon. Have fun tunneling!&lt;/p&gt;
+&lt;p&gt;SSH tunnels are a fascinating and useful piece of technology. The ssh protocol makes modern computing much more secure, and easier to manage multiple computers. That&amp;rsquo;s &lt;em&gt;reverse&lt;/em&gt; tunnels in a nutshell. Have fun tunneling!&lt;/p&gt;
 </description>
     </item>
     
@@ -3628,7 +3621,7 @@ ansible bpis -m ping
 ansible cluster -m ping
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;Assuming the steps of &lt;a href=&#34;../Ansible-On-Pi-Cluster&#34;&gt;the last post&lt;/a&gt; were done correctly, this should work. If not, double check that post and make sure everything looks correct.&lt;/p&gt;
+&lt;p&gt;Assuming the steps of &lt;a href=&#34;../../post/Ansible-On-Pi-Cluster&#34;&gt;the last post&lt;/a&gt; were done correctly, this should work. If not, double check that post and make sure everything looks correct.&lt;/p&gt;
 
 &lt;h3 id=&#34;playbooks&#34;&gt;Playbooks&lt;/h3&gt;
 
@@ -3717,7 +3710,7 @@ ansible cluster -m ping
       <pubDate>Sun, 21 May 2017 00:00:00 +0000</pubDate>
       
       <guid>http://ryan.himmelwright.net/post/ansible-on-pi-cluster/</guid>
-      <description>&lt;p&gt;In my &lt;a href=&#34;http://ryan.himmelwright.net/posts/Setting-up-the-pi-cluster/&#34;&gt;previous post&lt;/a&gt;, I pieced together my &lt;a href=&#34;http://ryan.himmelwright.net/pages/homelab/#cluster&#34;&gt;pi cluster&lt;/a&gt;, and installed variations of Ubuntu 16.04 Server on each of its nodes. With the cluster built, I quickly needed an easy way to maintain and interact with the system as a whole. This, is where &lt;a href=&#34;https://www.ansible.com/&#34;&gt;Ansible&lt;/a&gt; comes in. In this post, I will walk through the steps I took to setup Ansible on my Cluster.&lt;/p&gt;
+      <description>&lt;p&gt;In my &lt;a href=&#34;../../post/Setting-up-the-pi-cluster/&#34;&gt;previous post&lt;/a&gt;, I pieced together my &lt;a href=&#34;../../pages/homelab/#cluster&#34;&gt;pi cluster&lt;/a&gt;, and installed variations of Ubuntu 16.04 Server on each of its nodes. With the cluster built, I quickly needed an easy way to maintain and interact with the system as a whole. This, is where &lt;a href=&#34;https://www.ansible.com/&#34;&gt;Ansible&lt;/a&gt; comes in. In this post, I will walk through the steps I took to setup Ansible on my Cluster.&lt;/p&gt;
 
 &lt;h2 id=&#34;ansible&#34;&gt;Ansible&lt;/h2&gt;
 
@@ -3790,7 +3783,7 @@ cat ~/.ssh/id_rsa.pub | ssh bpi &amp;quot;cat &amp;gt;&amp;gt; ~/.ssh/authorized
 &lt;pre&gt;&lt;code&gt;sudo eopkg it ansible
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;I used &lt;code&gt;eopkg&lt;/code&gt; because I am currently running &lt;a href=&#34;https://solus-project.com&#34;&gt;Solus&lt;/a&gt;. You might use &lt;code&gt;sudo apt-get install ansible&lt;/code&gt;, &lt;code&gt;sudo dnf install ansible&lt;/code&gt;, or &lt;code&gt;pacaur -S ansible&lt;/code&gt; depending on whatever distro you are using.&lt;/p&gt;
+&lt;p&gt;I used &lt;code&gt;eopkg&lt;/code&gt; because I am currently running &lt;a href=&#34;https://getsol.us&#34;&gt;Solus&lt;/a&gt;. You might use &lt;code&gt;sudo apt-get install ansible&lt;/code&gt;, &lt;code&gt;sudo dnf install ansible&lt;/code&gt;, or &lt;code&gt;pacaur -S ansible&lt;/code&gt; depending on whatever distro you are using.&lt;/p&gt;
 
 &lt;p&gt;That&amp;rsquo;s all for &lt;em&gt;setting up&lt;/em&gt; Ansible. I&amp;rsquo;ll cut this post off here, but in the next post, I&amp;rsquo;ll walk through the steps on how to get Ansible to be useful.&lt;/p&gt;</description>
     </item>
@@ -3813,7 +3806,7 @@ cat ~/.ssh/id_rsa.pub | ssh bpi &amp;quot;cat &amp;gt;&amp;gt; ~/.ssh/authorized
 
 &lt;p&gt;After mucking around with Rapsbian and Hypriot one Sunday, I decided to just go with a plain Ubuntu image for the Raspberry Pis. I don&amp;rsquo;t have anything against these specific OSes, but I am mostly setting up this cluster to simulate what I would do on a &amp;ldquo;real&amp;rdquo; system. For me, that often means using a straight OS like Ubuntu.&lt;/p&gt;
 
-&lt;p&gt;Luckily, Canonical makes special &lt;a href=&#34;https://wiki.ubuntu.com/ARM/RaspberryPi&#34;&gt;Ubuntu ARM images&lt;/a&gt;, specifically for the Raspberry Pi. I download the 16.04 server version for both the &lt;a href=&#34;http://cdimage.ubuntu.com/ubuntu/releases/16.04/release/ubuntu-16.04.2-preinstalled-server-armhf+raspi2.img.xz&#34;&gt;raspberry pi 2&lt;/a&gt; and &lt;a href=&#34;http://www.finnie.org/software/raspberrypi/ubuntu-rpi3/ubuntu-16.04-preinstalled-server-armhf+raspi3.img.xz&#34;&gt;raspberry pi 3&lt;/a&gt;. The process to write these images to the microSD card differs slightly from ones I&amp;rsquo;ve used in the past. It still uses &lt;code&gt;dd&lt;/code&gt;, but the image is first piped through &lt;code&gt;xzcat&lt;/code&gt;, as such:&lt;/p&gt;
+&lt;p&gt;Luckily, Canonical makes special &lt;a href=&#34;https://wiki.ubuntu.com/ARM/RaspberryPi&#34;&gt;Ubuntu ARM images&lt;/a&gt;, specifically for the Raspberry Pi. I download the 16.04 server version for both the raspberry pi 2 and &lt;a href=&#34;http://www.finnie.org/software/raspberrypi/ubuntu-rpi3/ubuntu-16.04-preinstalled-server-armhf+raspi3.img.xz&#34;&gt;raspberry pi 3&lt;/a&gt;. The process to write these images to the microSD card differs slightly from ones I&amp;rsquo;ve used in the past. It still uses &lt;code&gt;dd&lt;/code&gt;, but the image is first piped through &lt;code&gt;xzcat&lt;/code&gt;, as such:&lt;/p&gt;
 
 &lt;pre&gt;&lt;code&gt;xzcat ubuntu-16.04.2-preinstalled-server-armhf+raspi2.img.xz | sudo dd bs=4M of=/dev/mmcblk0
 xzcat ubuntu-16.04-preinstalled-server-armhf+raspi3.img.xz   | sudo dd bs=4M of=/dev/mmcblk0
@@ -3838,7 +3831,7 @@ xzcat ubuntu-16.04-preinstalled-server-armhf+raspi3.img.xz   | sudo dd bs=4M of=
 
 &lt;p&gt;Lastly, plug in the power connectors. Pi devices can be very finicky when not properly powered, so it is a good idea to use an capable USB charging device. I have had trouble in the past with my devices not working correctly due to insufficient power (especially the bpi). I knew this problem would be an even more pronounced with the cluster because I planned to connect a HD to the bpi with a SATA connector. So, I picked up an &lt;a href=&#34;https://www.amazon.com/Anker-Charger-PowerPort-Multi-Port-Samsung/dp/B00VH8ZW02/ref=sr_1_1?ie=UTF8&amp;amp;qid=1493860165&amp;amp;sr=8-1&amp;amp;keywords=Anker+power+port+5&#34;&gt;Anker Power Port 5&lt;/a&gt; and it has been working great.&lt;/p&gt;
 
-&lt;p&gt;Lastly, two nice features of the banana pi is that it has a 1 GB ethernet port, &lt;em&gt;and&lt;/em&gt; a SATA connector with power. So, to utilize this functionality, and get the most out of the bpi, I ordered &lt;a href=&#34;https://www.amazon.com/JBtek-Connectors-Banana-Supply-Terminals/dp/B00ZP0L0VS/ref=sr_1_1?ie=UTF8&amp;amp;qid=1493860481&amp;amp;sr=8-1&amp;amp;keywords=banana+pi+sata&#34;&gt;the appropriate SATA connector&lt;/a&gt; from amazon for a few bucks. When it arrived, I connected it to the SATA and SATA power ports on the pi, and then to an old 300GB laptop HD I had laying around (it was the drive that came with &lt;a href=&#34;../my-new-used-x230/&#34;&gt;my x230&lt;/a&gt;). After the drive was connected, running &lt;code&gt;lsblk&lt;/code&gt; on the bpi automatically showed a &lt;code&gt;/dev/sda&lt;/code&gt; device, in addition to the typical &lt;code&gt;mmcblk0&lt;/code&gt; microSD device. I  mounted the drive to a folder using the following command to test it out:&lt;/p&gt;
+&lt;p&gt;Lastly, two nice features of the banana pi is that it has a 1 GB ethernet port, &lt;em&gt;and&lt;/em&gt; a SATA connector with power. So, to utilize this functionality, and get the most out of the bpi, I ordered &lt;a href=&#34;https://www.amazon.com/JBtek-Connectors-Banana-Supply-Terminals/dp/B00ZP0L0VS/ref=sr_1_1?ie=UTF8&amp;amp;qid=1493860481&amp;amp;sr=8-1&amp;amp;keywords=banana+pi+sata&#34;&gt;the appropriate SATA connector&lt;/a&gt; from amazon for a few bucks. When it arrived, I connected it to the SATA and SATA power ports on the pi, and then to an old 300GB laptop HD I had laying around (it was the drive that came with &lt;a href=&#34;../../post/my-new-used-x230/&#34;&gt;my x230&lt;/a&gt;). After the drive was connected, running &lt;code&gt;lsblk&lt;/code&gt; on the bpi automatically showed a &lt;code&gt;/dev/sda&lt;/code&gt; device, in addition to the typical &lt;code&gt;mmcblk0&lt;/code&gt; microSD device. I  mounted the drive to a folder using the following command to test it out:&lt;/p&gt;
 
 &lt;pre&gt;&lt;code&gt;sudo mount /dev/sda1 Data
 &lt;/code&gt;&lt;/pre&gt;

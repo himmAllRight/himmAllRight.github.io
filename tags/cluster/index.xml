@@ -79,7 +79,7 @@ ansible bpis -m ping
 ansible cluster -m ping
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;Assuming the steps of &lt;a href=&#34;../Ansible-On-Pi-Cluster&#34;&gt;the last post&lt;/a&gt; were done correctly, this should work. If not, double check that post and make sure everything looks correct.&lt;/p&gt;
+&lt;p&gt;Assuming the steps of &lt;a href=&#34;../../post/Ansible-On-Pi-Cluster&#34;&gt;the last post&lt;/a&gt; were done correctly, this should work. If not, double check that post and make sure everything looks correct.&lt;/p&gt;
 
 &lt;h3 id=&#34;playbooks&#34;&gt;Playbooks&lt;/h3&gt;
 
@@ -168,7 +168,7 @@ ansible cluster -m ping
       <pubDate>Sun, 21 May 2017 00:00:00 +0000</pubDate>
       
       <guid>http://ryan.himmelwright.net/post/ansible-on-pi-cluster/</guid>
-      <description>&lt;p&gt;In my &lt;a href=&#34;http://ryan.himmelwright.net/posts/Setting-up-the-pi-cluster/&#34;&gt;previous post&lt;/a&gt;, I pieced together my &lt;a href=&#34;http://ryan.himmelwright.net/pages/homelab/#cluster&#34;&gt;pi cluster&lt;/a&gt;, and installed variations of Ubuntu 16.04 Server on each of its nodes. With the cluster built, I quickly needed an easy way to maintain and interact with the system as a whole. This, is where &lt;a href=&#34;https://www.ansible.com/&#34;&gt;Ansible&lt;/a&gt; comes in. In this post, I will walk through the steps I took to setup Ansible on my Cluster.&lt;/p&gt;
+      <description>&lt;p&gt;In my &lt;a href=&#34;../../post/Setting-up-the-pi-cluster/&#34;&gt;previous post&lt;/a&gt;, I pieced together my &lt;a href=&#34;../../pages/homelab/#cluster&#34;&gt;pi cluster&lt;/a&gt;, and installed variations of Ubuntu 16.04 Server on each of its nodes. With the cluster built, I quickly needed an easy way to maintain and interact with the system as a whole. This, is where &lt;a href=&#34;https://www.ansible.com/&#34;&gt;Ansible&lt;/a&gt; comes in. In this post, I will walk through the steps I took to setup Ansible on my Cluster.&lt;/p&gt;
 
 &lt;h2 id=&#34;ansible&#34;&gt;Ansible&lt;/h2&gt;
 
@@ -241,7 +241,7 @@ cat ~/.ssh/id_rsa.pub | ssh bpi &amp;quot;cat &amp;gt;&amp;gt; ~/.ssh/authorized
 &lt;pre&gt;&lt;code&gt;sudo eopkg it ansible
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;I used &lt;code&gt;eopkg&lt;/code&gt; because I am currently running &lt;a href=&#34;https://solus-project.com&#34;&gt;Solus&lt;/a&gt;. You might use &lt;code&gt;sudo apt-get install ansible&lt;/code&gt;, &lt;code&gt;sudo dnf install ansible&lt;/code&gt;, or &lt;code&gt;pacaur -S ansible&lt;/code&gt; depending on whatever distro you are using.&lt;/p&gt;
+&lt;p&gt;I used &lt;code&gt;eopkg&lt;/code&gt; because I am currently running &lt;a href=&#34;https://getsol.us&#34;&gt;Solus&lt;/a&gt;. You might use &lt;code&gt;sudo apt-get install ansible&lt;/code&gt;, &lt;code&gt;sudo dnf install ansible&lt;/code&gt;, or &lt;code&gt;pacaur -S ansible&lt;/code&gt; depending on whatever distro you are using.&lt;/p&gt;
 
 &lt;p&gt;That&amp;rsquo;s all for &lt;em&gt;setting up&lt;/em&gt; Ansible. I&amp;rsquo;ll cut this post off here, but in the next post, I&amp;rsquo;ll walk through the steps on how to get Ansible to be useful.&lt;/p&gt;</description>
     </item>
@@ -264,7 +264,7 @@ cat ~/.ssh/id_rsa.pub | ssh bpi &amp;quot;cat &amp;gt;&amp;gt; ~/.ssh/authorized
 
 &lt;p&gt;After mucking around with Rapsbian and Hypriot one Sunday, I decided to just go with a plain Ubuntu image for the Raspberry Pis. I don&amp;rsquo;t have anything against these specific OSes, but I am mostly setting up this cluster to simulate what I would do on a &amp;ldquo;real&amp;rdquo; system. For me, that often means using a straight OS like Ubuntu.&lt;/p&gt;
 
-&lt;p&gt;Luckily, Canonical makes special &lt;a href=&#34;https://wiki.ubuntu.com/ARM/RaspberryPi&#34;&gt;Ubuntu ARM images&lt;/a&gt;, specifically for the Raspberry Pi. I download the 16.04 server version for both the &lt;a href=&#34;http://cdimage.ubuntu.com/ubuntu/releases/16.04/release/ubuntu-16.04.2-preinstalled-server-armhf+raspi2.img.xz&#34;&gt;raspberry pi 2&lt;/a&gt; and &lt;a href=&#34;http://www.finnie.org/software/raspberrypi/ubuntu-rpi3/ubuntu-16.04-preinstalled-server-armhf+raspi3.img.xz&#34;&gt;raspberry pi 3&lt;/a&gt;. The process to write these images to the microSD card differs slightly from ones I&amp;rsquo;ve used in the past. It still uses &lt;code&gt;dd&lt;/code&gt;, but the image is first piped through &lt;code&gt;xzcat&lt;/code&gt;, as such:&lt;/p&gt;
+&lt;p&gt;Luckily, Canonical makes special &lt;a href=&#34;https://wiki.ubuntu.com/ARM/RaspberryPi&#34;&gt;Ubuntu ARM images&lt;/a&gt;, specifically for the Raspberry Pi. I download the 16.04 server version for both the raspberry pi 2 and &lt;a href=&#34;http://www.finnie.org/software/raspberrypi/ubuntu-rpi3/ubuntu-16.04-preinstalled-server-armhf+raspi3.img.xz&#34;&gt;raspberry pi 3&lt;/a&gt;. The process to write these images to the microSD card differs slightly from ones I&amp;rsquo;ve used in the past. It still uses &lt;code&gt;dd&lt;/code&gt;, but the image is first piped through &lt;code&gt;xzcat&lt;/code&gt;, as such:&lt;/p&gt;
 
 &lt;pre&gt;&lt;code&gt;xzcat ubuntu-16.04.2-preinstalled-server-armhf+raspi2.img.xz | sudo dd bs=4M of=/dev/mmcblk0
 xzcat ubuntu-16.04-preinstalled-server-armhf+raspi3.img.xz   | sudo dd bs=4M of=/dev/mmcblk0
@@ -289,7 +289,7 @@ xzcat ubuntu-16.04-preinstalled-server-armhf+raspi3.img.xz   | sudo dd bs=4M of=
 
 &lt;p&gt;Lastly, plug in the power connectors. Pi devices can be very finicky when not properly powered, so it is a good idea to use an capable USB charging device. I have had trouble in the past with my devices not working correctly due to insufficient power (especially the bpi). I knew this problem would be an even more pronounced with the cluster because I planned to connect a HD to the bpi with a SATA connector. So, I picked up an &lt;a href=&#34;https://www.amazon.com/Anker-Charger-PowerPort-Multi-Port-Samsung/dp/B00VH8ZW02/ref=sr_1_1?ie=UTF8&amp;amp;qid=1493860165&amp;amp;sr=8-1&amp;amp;keywords=Anker+power+port+5&#34;&gt;Anker Power Port 5&lt;/a&gt; and it has been working great.&lt;/p&gt;
 
-&lt;p&gt;Lastly, two nice features of the banana pi is that it has a 1 GB ethernet port, &lt;em&gt;and&lt;/em&gt; a SATA connector with power. So, to utilize this functionality, and get the most out of the bpi, I ordered &lt;a href=&#34;https://www.amazon.com/JBtek-Connectors-Banana-Supply-Terminals/dp/B00ZP0L0VS/ref=sr_1_1?ie=UTF8&amp;amp;qid=1493860481&amp;amp;sr=8-1&amp;amp;keywords=banana+pi+sata&#34;&gt;the appropriate SATA connector&lt;/a&gt; from amazon for a few bucks. When it arrived, I connected it to the SATA and SATA power ports on the pi, and then to an old 300GB laptop HD I had laying around (it was the drive that came with &lt;a href=&#34;../my-new-used-x230/&#34;&gt;my x230&lt;/a&gt;). After the drive was connected, running &lt;code&gt;lsblk&lt;/code&gt; on the bpi automatically showed a &lt;code&gt;/dev/sda&lt;/code&gt; device, in addition to the typical &lt;code&gt;mmcblk0&lt;/code&gt; microSD device. I  mounted the drive to a folder using the following command to test it out:&lt;/p&gt;
+&lt;p&gt;Lastly, two nice features of the banana pi is that it has a 1 GB ethernet port, &lt;em&gt;and&lt;/em&gt; a SATA connector with power. So, to utilize this functionality, and get the most out of the bpi, I ordered &lt;a href=&#34;https://www.amazon.com/JBtek-Connectors-Banana-Supply-Terminals/dp/B00ZP0L0VS/ref=sr_1_1?ie=UTF8&amp;amp;qid=1493860481&amp;amp;sr=8-1&amp;amp;keywords=banana+pi+sata&#34;&gt;the appropriate SATA connector&lt;/a&gt; from amazon for a few bucks. When it arrived, I connected it to the SATA and SATA power ports on the pi, and then to an old 300GB laptop HD I had laying around (it was the drive that came with &lt;a href=&#34;../../post/my-new-used-x230/&#34;&gt;my x230&lt;/a&gt;). After the drive was connected, running &lt;code&gt;lsblk&lt;/code&gt; on the bpi automatically showed a &lt;code&gt;/dev/sda&lt;/code&gt; device, in addition to the typical &lt;code&gt;mmcblk0&lt;/code&gt; microSD device. I  mounted the drive to a folder using the following command to test it out:&lt;/p&gt;
 
 &lt;pre&gt;&lt;code&gt;sudo mount /dev/sda1 Data
 &lt;/code&gt;&lt;/pre&gt;

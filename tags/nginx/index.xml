@@ -30,8 +30,8 @@ website. Here is how that idea was Instantiated&amp;hellip;&lt;/p&gt;
 src=&#34;../../img/posts/draft-website-jenkins/jenkins-logo.png&#34; style=&#34;max-width:
 50%; float: left; margin: 0px 12px 0px 0px;&#34; alt=&#34;Jenkins Logo&#34; /&gt;&lt;/a&gt;&lt;/p&gt;
 
-&lt;p&gt;I have previously &lt;a href=&#34;../website-transition-to-hugo/&#34;&gt;described&lt;/a&gt; how my
-website is &lt;a href=&#34;../website-switched-to-hugo/&#34;&gt;currently generated&lt;/a&gt;, using
+&lt;p&gt;I have previously &lt;a href=&#34;../../post/website-transition-to-hugo/&#34;&gt;described&lt;/a&gt; how my
+website is &lt;a href=&#34;../../post/website-switched-to-hugo/&#34;&gt;currently generated&lt;/a&gt;, using
 the &lt;a href=&#34;https://gohugo.io&#34;&gt;Hugo&lt;/a&gt; static website generator. To organize
 this system, I have two git repos: One that consists of all the hugo
 source files (where I write content), and one that contains the
@@ -54,7 +54,7 @@ src=&#34;../../img/posts/draft-website-jenkins/mr-mime.png&#34; style=&#34;max-w
 
 &lt;p&gt;I had previously created a dedicated Jenkins server on my home network
 (Mr. Mime), using a CentOS 7 VM hosted on my home server. However, any
-Jenkins setup should work for this project (including a &lt;a href=&#34;on my home network&#34;&gt;docker
+Jenkins setup should work for this project (including a &lt;a href=&#34;https://hub.docker.com/_/jenkins/&#34;&gt;docker
 container&lt;/a&gt;). To get started, checkout the &lt;a href=&#34;https://jenkins.io/download/&#34;&gt;Jenkins
 Website&lt;/a&gt;, and be sure to take advantage
 of the &lt;a href=&#34;https://jenkins.io/doc/&#34;&gt;the documentation&lt;/a&gt; for help.&lt;/p&gt;
@@ -270,7 +270,7 @@ my org-babel config.org file&#34; /&gt;&lt;/a&gt;&lt;/p&gt;
 
 &lt;p&gt;To get started, configure a server/container/droplet that will host
 nginx. I&amp;rsquo;m using a CentOS 7 minimal install VM on
-&lt;a href=&#34;http://ryan.himmelwright.net/pages/homelab/#ninetales&#34;&gt;Nintales&lt;/a&gt; (my
+&lt;a href=&#34;../../pages/homelab/#ninetales&#34;&gt;Nintales&lt;/a&gt; (my
 home server). I don&amp;rsquo;t have a bunch of traffic (well, I &lt;em&gt;shouldn&amp;rsquo;t&lt;/em&gt;), so I&amp;rsquo;m
 just giving it 1 core and 512MB RAM.&lt;/p&gt;
 

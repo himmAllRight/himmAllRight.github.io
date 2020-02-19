@@ -178,7 +178,7 @@ tar: Child returned status 2
 tar: Error is not recoverable: exiting now
 </code></pre>
 
-<p>I searched around but much of the initial advice didn&rsquo;t help my problem. It often indicated that my /usr/bin/bzip2 might be a symlink and should be altered. That wasn&rsquo;t the case. Then tried something that illuminated the issue: I removed the <code>/tools/bin</code> from the begging of the <code>path</code> variable (defined in the <em>lfs</em> <code>.bashrc</code> file). That temporarily fixed the issues. So I knew the problem was related to the symlink I setup in <a href="../LFS-Final-Preparation-Steps">the previous LFS post</a>, specifically the <code>ln -sv $LFS/tools /</code> command. It must have failed and I wasn&rsquo;t paying attention.</p>
+<p>I searched around but much of the initial advice didn&rsquo;t help my problem. It often indicated that my /usr/bin/bzip2 might be a symlink and should be altered. That wasn&rsquo;t the case. Then tried something that illuminated the issue: I removed the <code>/tools/bin</code> from the begging of the <code>path</code> variable (defined in the <em>lfs</em> <code>.bashrc</code> file). That temporarily fixed the issues. So I knew the problem was related to the symlink I setup in <a href="../../post/LFS-Final-Preparation-Steps">the previous LFS post</a>, specifically the <code>ln -sv $LFS/tools /</code> command. It must have failed and I wasn&rsquo;t paying attention.</p>
 
 <p>Now that I was knew what the problem was, I was able to fix it by running the following commands (some of them might need to be run from a <em>root/sudo</em> account):</p>
 

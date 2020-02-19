@@ -16,7 +16,7 @@
       <pubDate>Mon, 26 Nov 2018 00:00:00 +0000</pubDate>
       
       <guid>http://ryan.himmelwright.net/post/charmeleon-desktop-design/</guid>
-      <description>&lt;p&gt;Over the past few years (particularly after moving to the &lt;a href=&#34;../my-t470/&#34;&gt;T470&lt;/a&gt;
+      <description>&lt;p&gt;Over the past few years (particularly after moving to the &lt;a href=&#34;../../post/my-t470/&#34;&gt;T470&lt;/a&gt;
 as my main device), I have been anticipating what my next desktop
 workstation build will look like. For a period of time, I was convinced that
 I would build a &lt;a href=&#34;https://www.techspot.com/review/1155-affordable-dual-xeon-pc/&#34;&gt;muti-socket, used xeon
@@ -29,7 +29,7 @@ series CPUs&amp;hellip;&lt;/p&gt;
 &lt;p&gt;&lt;a href=&#34;../../img/posts/chameleon-desktop-design/kadabra-cpu-usage.png&#34;&gt;&lt;img alt=&#34;Full system monitor on Laptop&#34; src=&#34;../../img/posts/charmeleon-desktop-design/kadabra-cpu-usage.png&#34; style=&#34;max-width: 100%;&#34;/&gt;&lt;/a&gt;
 &lt;div class=&#34;caption&#34;&gt;My T470 has been a little tight on resources.&lt;/div&gt;&lt;/p&gt;
 
-&lt;p&gt;&lt;a href=&#34;../sold-my-bonobo/&#34;&gt;My&lt;/a&gt; &lt;a href=&#34;../my-t470/&#34;&gt;laptops&lt;/a&gt; &lt;a href=&#34;../my-new-used-x230&#34;&gt;have&lt;/a&gt;
+&lt;p&gt;&lt;a href=&#34;../../post/sold-my-bonobo/&#34;&gt;My&lt;/a&gt; &lt;a href=&#34;../../post/my-t470/&#34;&gt;laptops&lt;/a&gt; &lt;a href=&#34;../../post/my-new-used-x230&#34;&gt;have&lt;/a&gt;
 served the majority of my needs these last few years, but I have been feeling
 a bit restricted when trying to do more demanding workloads.
 While I still side with a &amp;ldquo;&lt;em&gt;use low-powered, portable computers, and remote
@@ -88,7 +88,7 @@ but &lt;em&gt;need&lt;/em&gt; a normal 2.5&amp;rdquo; SATA SSD at the very least
 play the &lt;em&gt;occasional&lt;/em&gt; game. I don&amp;rsquo;t mind playing games with lower graphic
 settings on my laptops, but I &lt;em&gt;do mind&lt;/em&gt; that even with the lower settings, the
 CPUs nearly max out, which spikes up the temperature.
-Increased graphics performance would also better support &lt;a href=&#34;../new-lgud4379b/&#34;&gt;my large
+Increased graphics performance would also better support &lt;a href=&#34;../../post/new-lgud4379b/&#34;&gt;my large
 monitor&lt;/a&gt;.  A discrete graphics card would be nice, ideally
 an AMD one due to their recent work on improving their open source drivers.&lt;/p&gt;
 
@@ -113,7 +113,7 @@ probably 50 theoretical builds, I eventually settled on &lt;a href=&#34;https://
 fitting. Also, I&amp;rsquo;m then free to rename it to &amp;ldquo;Charzard&amp;rdquo; in the future if I &lt;em&gt;evolve&lt;/em&gt;
 the build to a next-generation Ryzen 7&amp;hellip;&lt;/p&gt;
 
-&lt;h4 id=&#34;cpu-ryzen-5-2600-https-www-amd-com-en-products-cpu-amd-ryzen-5-2600&#34;&gt;CPU: &lt;a href=&#34;https://www.amd.com/en/products/cpu/amd-ryzen-5-2600&#34;&gt;Ryzen 5 2600&lt;/a&gt;&lt;/h4&gt;
+&lt;h4 id=&#34;cpu-ryzen-5-2600-https-en-wikichip-org-wiki-amd-ryzen-5-2600&#34;&gt;CPU: &lt;a href=&#34;https://en.wikichip.org/wiki/amd/ryzen_5/2600&#34;&gt;Ryzen 5 2600&lt;/a&gt;&lt;/h4&gt;
 
 &lt;p&gt;&lt;a href=&#34;../../img/posts/chameleon-desktop-design/ryzen2600.jpg&#34;&gt;&lt;img alt=&#34;ryzen 2600&#34; src=&#34;../../img/posts/charmeleon-desktop-design/ryzen2600.jpg&#34; style=&#34;max-width: 40%; float: left;&#34;/&gt;&lt;/a&gt;&lt;/p&gt;
 
@@ -140,7 +140,7 @@ confirmed&lt;/a&gt; that it was a solid board, especially for the price. When I 
 considering the 2400g, I had to switch to the &lt;a href=&#34;https://www.newegg.com/Product/Product.aspx?Item=N82E16813144188&#34;&gt;MSI B450 Gaming Pro Carbon
 AC&lt;/a&gt;, because
 the Tomahawk didn&amp;rsquo;t have a display output that the integrated graphics could
-properly use with &lt;a href=&#34;../new-lgud4379b/&#34;&gt;my UHD monitor&lt;/a&gt;&amp;rsquo;s resolution (I need a
+properly use with &lt;a href=&#34;../../post/new-lgud4379b/&#34;&gt;my UHD monitor&lt;/a&gt;&amp;rsquo;s resolution (I need a
 display port). When I switched to the 2600, I was able to go back to the
 TOMAHAWK, and funnel the cost savings towards getting my GPU.&lt;/p&gt;
 

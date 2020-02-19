@@ -766,7 +766,7 @@ has already figured out how to do it with pass!&lt;/p&gt;</description>
       <pubDate>Wed, 27 Jun 2018 00:00:00 +0000</pubDate>
       
       <guid>http://ryan.himmelwright.net/post/org-babel-setup/</guid>
-      <description>&lt;p&gt;In my &lt;a href=&#34;../emacs-update-evil-usepackage/&#34;&gt;previous post&lt;/a&gt;, I completely
+      <description>&lt;p&gt;In my &lt;a href=&#34;../../post/emacs-update-evil-usepackage/&#34;&gt;previous post&lt;/a&gt;, I completely
 redid my emacs configuration from scratch, building it around the use
 of evil mode and use-package. As I was wrapping up, I learned of yet
 &lt;em&gt;another&lt;/em&gt; emacs package that wil forever change how I maintain my
@@ -802,7 +802,7 @@ a small header section at the top&amp;hellip; because why not?&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-org&#34; data-lang=&#34;org&#34;&gt;&lt;span style=&#34;color:#75715e&#34;&gt;#+TITLE&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;: My Emacs Configuration&lt;/span&gt;
 &lt;span style=&#34;color:#75715e&#34;&gt;#+AUTHOR&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;: Ryan Himmelwright&lt;/span&gt;
 &lt;span style=&#34;color:#75715e&#34;&gt;#+EMAIL&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;: ryan@himmelwright.net&lt;/span&gt;
-&lt;span style=&#34;color:#75715e&#34;&gt;#+OPTIONS&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;: num:nil &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;#+OPTIONS&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;: num:nil&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;After that, I broke down my file by creating org headings for the
 different groups of the configuration. For example, I started with the
 headings &lt;code&gt;Repos &amp;amp; Core Packages&lt;/code&gt;, &lt;code&gt;Core Setup&lt;/code&gt;, &lt;code&gt;Evil Mode&lt;/code&gt;, &lt;code&gt;Ivy&lt;/code&gt;,
@@ -907,7 +907,7 @@ the content, instead of defaulting to the raw org text.&lt;/p&gt;
 
 &lt;p&gt;While I have always maintained my emacs configuration in &lt;a href=&#34;https://github.com/himmAllRight/dotfiles&#34;&gt;my dotfiles
 repo&lt;/a&gt;, org-babel has helped
-me step up my game. My current &lt;a href=&#34;http://ryan.himmelwright.net/post/new-dotfiles/&#34;&gt;dotfile
+me step up my game. My current &lt;a href=&#34;../../post/new-dotfiles/&#34;&gt;dotfile
 system&lt;/a&gt; has all of my
 emacs files in a separate &lt;code&gt;emacs&lt;/code&gt; folder. On Github, each directory in
 a repo can contain a &lt;code&gt;README&lt;/code&gt; file (or&amp;hellip;. a symlink to &lt;em&gt;another&lt;/em&gt;

@@ -1,8 +1,8 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>SSH on λ ryan. himmelwright. net</title>
+    <title>ssh on λ ryan. himmelwright. net</title>
     <link>http://ryan.himmelwright.net/tags/ssh/</link>
-    <description>Recent content in SSH on λ ryan. himmelwright. net</description>
+    <description>Recent content in ssh on λ ryan. himmelwright. net</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Wed, 04 Dec 2019 00:00:00 +0000</lastBuildDate>
@@ -109,7 +109,9 @@ sure to check out tmux. Enjoy!&lt;/p&gt;</description>
       <guid>http://ryan.himmelwright.net/post/simple-reverse-ssh-tunnel/</guid>
       <description>
 
-&lt;p&gt;Last week, I was on vacation with my family. While I didn&amp;rsquo;t work a &lt;em&gt;ton&lt;/em&gt; on personal projects, I was at least able to spend some time on my &lt;a href=&#34;https://github.com/himmAllRight/TunnelBeacon&#34;&gt;TunelBeacon&lt;/a&gt; project again. I will write a dedicated post about that project down the road when I am further along. Basically, it will be a simple GUI to create reverse ssh tunnels, that family and friends can startup in order grant me temporary access to their computer when they need support. Reverse SSH tunnels are &lt;em&gt;very&lt;/em&gt; useful and simple to setup, but can be a bit tricky to figure out at first. So, here&amp;rsquo;s a brief and simple guide on how to easily create reverse tunnels.&lt;/p&gt;
+&lt;p&gt;Reverse SSH tunnels are &lt;em&gt;very&lt;/em&gt; useful and simple to setup, but can be a bit
+ tricky to figure out at first. So, here&amp;rsquo;s a brief and simple guide on how to
+ easily create reverse tunnels.&lt;/p&gt;
 
 &lt;hr /&gt;
 
@@ -161,13 +163,9 @@ sure to check out tmux. Enjoy!&lt;/p&gt;</description>
 
 &lt;p&gt;This should start an ssh session to the initializing computer. In my example, this is the laptop.&lt;/p&gt;
 
-&lt;h3 id=&#34;tunnel-beacon&#34;&gt;Tunnel Beacon&lt;/h3&gt;
+&lt;h3 id=&#34;conclusion&#34;&gt;Conclusion&lt;/h3&gt;
 
-&lt;p&gt;SSH tunnels are a fascinating and useful piece of technology. The ssh protocol makes modern computing much more secure, and easier to manage multiple computers. While ssh tunnels are already widely utilized, I think there are still many applications where it the technology can be applied.&lt;/p&gt;
-
-&lt;p&gt;For example, I mentioned in the intro post about my small project, &lt;a href=&#34;https://github.com/himmAllRight/TunnelBeacon&#34;&gt;TunelBeacon&lt;/a&gt; (&lt;em&gt;Note: this is by no means ready. I&amp;rsquo;ve just started playing with it&lt;/em&gt;). TunnelBeacon will be a very simple GUI application used to initiate a tunnel from a computer, specifically to receive support. For example, if my wife or any of our parents switch to Linux in the future, we could configure TunnelBeacon on their computer. Then, if they need help they can just open it and hit a button, which will initiate a reverse tunnel to a predefined secure server (or spin up an AWS/DO server&amp;hellip; I have ideas). From there, I can remote into their computer no matter what network they are on (as long as ssh isn&amp;rsquo;t blocked). No headache from having them find their public IP, no redirecting router ports, just hitting a button.&lt;/p&gt;
-
-&lt;p&gt;So, that&amp;rsquo;s reverse tunnels in a nutshell. With any luck, I should be posting more about them as I progress with TunnelBeacon. Have fun tunneling!&lt;/p&gt;
+&lt;p&gt;SSH tunnels are a fascinating and useful piece of technology. The ssh protocol makes modern computing much more secure, and easier to manage multiple computers. That&amp;rsquo;s &lt;em&gt;reverse&lt;/em&gt; tunnels in a nutshell. Have fun tunneling!&lt;/p&gt;
 </description>
     </item>
     
@@ -177,7 +175,7 @@ sure to check out tmux. Enjoy!&lt;/p&gt;</description>
       <pubDate>Sun, 21 May 2017 00:00:00 +0000</pubDate>
       
       <guid>http://ryan.himmelwright.net/post/ansible-on-pi-cluster/</guid>
-      <description>&lt;p&gt;In my &lt;a href=&#34;http://ryan.himmelwright.net/posts/Setting-up-the-pi-cluster/&#34;&gt;previous post&lt;/a&gt;, I pieced together my &lt;a href=&#34;http://ryan.himmelwright.net/pages/homelab/#cluster&#34;&gt;pi cluster&lt;/a&gt;, and installed variations of Ubuntu 16.04 Server on each of its nodes. With the cluster built, I quickly needed an easy way to maintain and interact with the system as a whole. This, is where &lt;a href=&#34;https://www.ansible.com/&#34;&gt;Ansible&lt;/a&gt; comes in. In this post, I will walk through the steps I took to setup Ansible on my Cluster.&lt;/p&gt;
+      <description>&lt;p&gt;In my &lt;a href=&#34;../../post/Setting-up-the-pi-cluster/&#34;&gt;previous post&lt;/a&gt;, I pieced together my &lt;a href=&#34;../../pages/homelab/#cluster&#34;&gt;pi cluster&lt;/a&gt;, and installed variations of Ubuntu 16.04 Server on each of its nodes. With the cluster built, I quickly needed an easy way to maintain and interact with the system as a whole. This, is where &lt;a href=&#34;https://www.ansible.com/&#34;&gt;Ansible&lt;/a&gt; comes in. In this post, I will walk through the steps I took to setup Ansible on my Cluster.&lt;/p&gt;
 
 &lt;h2 id=&#34;ansible&#34;&gt;Ansible&lt;/h2&gt;
 
@@ -250,7 +248,7 @@ cat ~/.ssh/id_rsa.pub | ssh bpi &amp;quot;cat &amp;gt;&amp;gt; ~/.ssh/authorized
 &lt;pre&gt;&lt;code&gt;sudo eopkg it ansible
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;I used &lt;code&gt;eopkg&lt;/code&gt; because I am currently running &lt;a href=&#34;https://solus-project.com&#34;&gt;Solus&lt;/a&gt;. You might use &lt;code&gt;sudo apt-get install ansible&lt;/code&gt;, &lt;code&gt;sudo dnf install ansible&lt;/code&gt;, or &lt;code&gt;pacaur -S ansible&lt;/code&gt; depending on whatever distro you are using.&lt;/p&gt;
+&lt;p&gt;I used &lt;code&gt;eopkg&lt;/code&gt; because I am currently running &lt;a href=&#34;https://getsol.us&#34;&gt;Solus&lt;/a&gt;. You might use &lt;code&gt;sudo apt-get install ansible&lt;/code&gt;, &lt;code&gt;sudo dnf install ansible&lt;/code&gt;, or &lt;code&gt;pacaur -S ansible&lt;/code&gt; depending on whatever distro you are using.&lt;/p&gt;
 
 &lt;p&gt;That&amp;rsquo;s all for &lt;em&gt;setting up&lt;/em&gt; Ansible. I&amp;rsquo;ll cut this post off here, but in the next post, I&amp;rsquo;ll walk through the steps on how to get Ansible to be useful.&lt;/p&gt;</description>
     </item>

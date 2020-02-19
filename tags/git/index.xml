@@ -1,8 +1,8 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Git on λ ryan. himmelwright. net</title>
+    <title>git on λ ryan. himmelwright. net</title>
     <link>http://ryan.himmelwright.net/tags/git/</link>
-    <description>Recent content in Git on λ ryan. himmelwright. net</description>
+    <description>Recent content in git on λ ryan. himmelwright. net</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Wed, 04 Sep 2019 00:00:00 +0000</lastBuildDate>
@@ -191,7 +191,7 @@ did to migrate my repos.&lt;/p&gt;
 &lt;h3 id=&#34;ssh-keys&#34;&gt;SSH Keys&lt;/h3&gt;
 
 &lt;p&gt;The &lt;em&gt;pre&lt;/em&gt; (and somewhat optional) step to is to setup ssh key authentication. If ssh keys are not configured, git will prompt for the password of the repo&amp;rsquo;s host user . When using a git service (ex: Github or Gitlab), this is usually unknown, so ssh keys are required. When rolling your own remote git repo, the password will likely be known. Still, setting up ssh authentication makes the process easier and more secure. If you
-do not know how to configure ssh keys, I included a small ssh key how-to &lt;a href=&#34;../Ansible-On-Pi-Cluster#ssh&#34;&gt;here&lt;/a&gt; in &lt;a href=&#34;../Ansible-On-Pi-Cluster&#34;&gt;a previous post&lt;/a&gt;. Many of the git guides out there call for creating a &lt;code&gt;git&lt;/code&gt; user and setting up ssh keys with that user. This is a great idea if multiple people need access to the git repo. However, for my purposes I will use my username, as I will be the only one accessing it (which in my case is a good thing).&lt;/p&gt;
+do not know how to configure ssh keys, I included a small ssh key how-to &lt;a href=&#34;../../post/Ansible-On-Pi-Cluster/#ssh&#34;&gt;here&lt;/a&gt; in &lt;a href=&#34;../../post/Ansible-On-Pi-Cluster&#34;&gt;a previous post&lt;/a&gt;. Many of the git guides out there call for creating a &lt;code&gt;git&lt;/code&gt; user and setting up ssh keys with that user. This is a great idea if multiple people need access to the git repo. However, for my purposes I will use my username, as I will be the only one accessing it (which in my case is a good thing).&lt;/p&gt;
 
 &lt;h3 id=&#34;creating-server-repo&#34;&gt;Creating Server Repo&lt;/h3&gt;
 

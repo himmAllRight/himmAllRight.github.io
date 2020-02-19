@@ -16,7 +16,7 @@
       <pubDate>Wed, 27 Jun 2018 00:00:00 +0000</pubDate>
       
       <guid>http://ryan.himmelwright.net/post/org-babel-setup/</guid>
-      <description>&lt;p&gt;In my &lt;a href=&#34;../emacs-update-evil-usepackage/&#34;&gt;previous post&lt;/a&gt;, I completely
+      <description>&lt;p&gt;In my &lt;a href=&#34;../../post/emacs-update-evil-usepackage/&#34;&gt;previous post&lt;/a&gt;, I completely
 redid my emacs configuration from scratch, building it around the use
 of evil mode and use-package. As I was wrapping up, I learned of yet
 &lt;em&gt;another&lt;/em&gt; emacs package that wil forever change how I maintain my
@@ -52,7 +52,7 @@ a small header section at the top&amp;hellip; because why not?&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-org&#34; data-lang=&#34;org&#34;&gt;&lt;span style=&#34;color:#75715e&#34;&gt;#+TITLE&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;: My Emacs Configuration&lt;/span&gt;
 &lt;span style=&#34;color:#75715e&#34;&gt;#+AUTHOR&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;: Ryan Himmelwright&lt;/span&gt;
 &lt;span style=&#34;color:#75715e&#34;&gt;#+EMAIL&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;: ryan@himmelwright.net&lt;/span&gt;
-&lt;span style=&#34;color:#75715e&#34;&gt;#+OPTIONS&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;: num:nil &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;#+OPTIONS&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;: num:nil&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;After that, I broke down my file by creating org headings for the
 different groups of the configuration. For example, I started with the
 headings &lt;code&gt;Repos &amp;amp; Core Packages&lt;/code&gt;, &lt;code&gt;Core Setup&lt;/code&gt;, &lt;code&gt;Evil Mode&lt;/code&gt;, &lt;code&gt;Ivy&lt;/code&gt;,
@@ -157,7 +157,7 @@ the content, instead of defaulting to the raw org text.&lt;/p&gt;
 
 &lt;p&gt;While I have always maintained my emacs configuration in &lt;a href=&#34;https://github.com/himmAllRight/dotfiles&#34;&gt;my dotfiles
 repo&lt;/a&gt;, org-babel has helped
-me step up my game. My current &lt;a href=&#34;http://ryan.himmelwright.net/post/new-dotfiles/&#34;&gt;dotfile
+me step up my game. My current &lt;a href=&#34;../../post/new-dotfiles/&#34;&gt;dotfile
 system&lt;/a&gt; has all of my
 emacs files in a separate &lt;code&gt;emacs&lt;/code&gt; folder. On Github, each directory in
 a repo can contain a &lt;code&gt;README&lt;/code&gt; file (or&amp;hellip;. a symlink to &lt;em&gt;another&lt;/em&gt;
@@ -1299,7 +1299,7 @@ a good SQL quick-reference down the road :). Enjoy!&lt;/p&gt;</description>
       <pubDate>Sun, 30 Jul 2017 00:00:00 +0000</pubDate>
       
       <guid>http://ryan.himmelwright.net/post/dabbling-with-go/</guid>
-      <description>&lt;p&gt;After spending most of this month&amp;rsquo;s dedicated learning time working on &lt;a href=&#34;http://ryan.himmelwright.net/posts/solus-to-fedora/&#34;&gt;system&lt;/a&gt;, &lt;a href=&#34;http://ryan.himmelwright.net/posts/creating-a-git-remote/&#34;&gt;server&lt;/a&gt;, and &lt;a href=&#34;http://ryan.himmelwright.net/posts/issues-setting-up-ubiquiti-network/&#34;&gt;network&lt;/a&gt; activities,  I have been itching to start some home programming again. To motivate myself, I even considered dabbling with a new programming language&amp;hellip; and with very little internal debate, I decided to just &lt;a href=&#34;https://golang.org&#34;&gt;Gopher&lt;/a&gt; it (I&amp;rsquo;m so sorry).&lt;/p&gt;
+      <description>&lt;p&gt;After spending most of this month&amp;rsquo;s dedicated learning time working on &lt;a href=&#34;../../post/solus-to-fedora/&#34;&gt;system&lt;/a&gt;, &lt;a href=&#34;../../post/creating-a-git-remote/&#34;&gt;server&lt;/a&gt;, and &lt;a href=&#34;../../post/issues-setting-up-ubiquiti-network/&#34;&gt;network&lt;/a&gt; activities,  I have been itching to start some home programming again. To motivate myself, I even considered dabbling with a new programming language&amp;hellip; and with very little internal debate, I decided to just &lt;a href=&#34;https://golang.org&#34;&gt;Gopher&lt;/a&gt; it (I&amp;rsquo;m so sorry).&lt;/p&gt;
 
 &lt;h2 id=&#34;what-is-go&#34;&gt;What is GO?&lt;/h2&gt;
 
@@ -1322,7 +1322,7 @@ Go is expressive, concise, clean, and efficient. Its concurrency mechanisms make
 
 &lt;p&gt;I&amp;rsquo;ve wanted to try &lt;a href=&#34;https://golang.org/&#34;&gt;Go&lt;/a&gt; for a long time now. A couple of months ago, I was trying to decide if I should pursue learning Rust or Go. At the time, I ultimately ended up experimenting with &lt;a href=&#34;https://www.rust-lang.org/en-US/&#34;&gt;Rust&lt;/a&gt;. I was toying with the idea of creating an experimental lisp, and Rust&amp;rsquo;s feature set makes it great language for writing compilers and interpreters. However, while Rust is a great language, it can be quite complicated to learn. Go on the other hand, is apparently simpler and quick to grasp, which is &lt;a href=&#34;https://golang.org/doc/faq#creating_a_new_language&#34;&gt;why it was created&lt;/a&gt; in the first place.&lt;/p&gt;
 
-&lt;p&gt;When the Solus team &lt;a href=&#34;https://solus-project.com/forums/viewtopic.php?f=13&amp;amp;t=2634&#34;&gt;announced&lt;/a&gt; that they were declaring Go a first class citizen language of the project, my interest peaked. &lt;a href=&#34;https://github.com/solus-project/solbuild&#34;&gt;Solbuild&lt;/a&gt;, the Solus package build system was written in Go. In the announcement, the project stated that they intended to use Go for building tools. True to that statement, this past week, Ikey (the creator of Solus) published a patreon post detailing the new repo manager (&lt;a href=&#34;https://github.com/solus-project/ferryd&#34;&gt;ferryd&lt;/a&gt;) he&amp;rsquo;s been working on&amp;hellip; again in Go. After reading that post, I decided it was time for me to give it a Go (again, very sorry).&lt;/p&gt;
+&lt;p&gt;When the Solus team announced that they were declaring Go a first class citizen language of the project, my interest peaked. &lt;a href=&#34;https://github.com/solus-project/solbuild&#34;&gt;Solbuild&lt;/a&gt;, the Solus package build system was written in Go. In the announcement, the project stated that they intended to use Go for building tools. True to that statement, this past week, Ikey (the creator of Solus) published a patreon post detailing the new repo manager (&lt;a href=&#34;https://github.com/solus-project/ferryd&#34;&gt;ferryd&lt;/a&gt;) he&amp;rsquo;s been working on&amp;hellip; again in Go. After reading that post, I decided it was time for me to give it a Go (again, very sorry).&lt;/p&gt;
 
 &lt;h2 id=&#34;installation&#34;&gt;Installation&lt;/h2&gt;
 
@@ -1644,7 +1644,7 @@ ask:  Will you be one of my groomsmen?&lt;/p&gt;
 
 &lt;h2 id=&#34;the-plan&#34;&gt;The Plan&lt;/h2&gt;
 
-&lt;p&gt;In the last few weeks, I have set up and started looking at &lt;a href=&#34;http://c.learncodethehardway.org/book/&#34;&gt;Learn C the Hard Way&lt;/a&gt;. I read the first section or two, but haven&amp;rsquo;t been consistent with working through it.&lt;/p&gt;
+&lt;p&gt;In the last few weeks, I have set up and started looking at Learn C the Hard Way. I read the first section or two, but haven&amp;rsquo;t been consistent with working through it.&lt;/p&gt;
 
 &lt;p&gt;Now that it is December, I thought I should maybe start a new monthly challenge, or even a &amp;ldquo;&lt;sup&gt;12&lt;/sup&gt;&amp;frasl;&lt;sub&gt;25&lt;/sub&gt; days till something&amp;rdquo;. I was thinking about things I&amp;rsquo;ve been trying to constantly work on the last few months, and C popped into my head. Learn C the Hard Way fits particularly well because it is broken down nicely into small segments that I can maybe commit to being able to finish 1 per day.&lt;/p&gt;
 

@@ -150,9 +150,9 @@ Tags <a href="../../tags/website">website</a>, <a href="../../tags/hugo">hugo</a
 
 <h3 id="from-cryogen-to-hugo">From Cryogen to Hugo</h3>
 
-<p>My departure from Cryogen really has nothing to do with the project itself. It is a prime example of what <a href="https://clojure.org/">clojure</a> is capable of, and I feel that more people should give it a shot. Recently though, I&rsquo;ve been itching to switch up my website&rsquo;s theme a bit. While I fancy my <a href="../new-theme-immutable/">Immutable Theme</a> I created a couple months ago, it isn&rsquo;t quite doing what I had hoped for. I love dark themes, but the type of posts I&rsquo;ve been creating really don&rsquo;t look good with them. I like to add diagrams, code snippets, and images to all of my posts. Diagram posts look wonderful with a white background, but are garbage in a dark theme. This difference was glaring last week as I switched between my markdown editor&rsquo;s preview window (default white theme), and the website&rsquo;s live preview view, while writing my <a href="../simple-reverse-ssh-tunnel/">reverse tunnels</a> post.</p>
+<p>My departure from Cryogen really has nothing to do with the project itself. It is a prime example of what <a href="https://clojure.org/">clojure</a> is capable of, and I feel that more people should give it a shot. Recently though, I&rsquo;ve been itching to switch up my website&rsquo;s theme a bit. While I fancy my <a href="../../post/new-theme-immutable/">Immutable Theme</a> I created a couple months ago, it isn&rsquo;t quite doing what I had hoped for. I love dark themes, but the type of posts I&rsquo;ve been creating really don&rsquo;t look good with them. I like to add diagrams, code snippets, and images to all of my posts. Diagram posts look wonderful with a white background, but are garbage in a dark theme. This difference was glaring last week as I switched between my markdown editor&rsquo;s preview window (default white theme), and the website&rsquo;s live preview view, while writing my <a href="../../post//simple-reverse-ssh-tunnel/">reverse tunnels</a> post.</p>
 
-<p>Similar to the logic I employed earlier this month when <a href="../back-to-solus/">switching back to Solus</a>, I thought that if I was going to scrap my theme and start from scratch, I might as well check out different website generator. I had been keeping an eye on the various site generators, but the one I considered the most (and even dabbled with a bit last month), was <a href="https://gohugo.io">Hugo</a>.</p>
+<p>Similar to the logic I employed earlier this month when <a href="../../post/back-to-solus/">switching back to Solus</a>, I thought that if I was going to scrap my theme and start from scratch, I might as well check out different website generator. I had been keeping an eye on the various site generators, but the one I considered the most (and even dabbled with a bit last month), was <a href="https://gohugo.io">Hugo</a>.</p>
 
 <h3 id="what-i-ve-done-so-far">What I&rsquo;ve Done So Far</h3>
 
@@ -175,7 +175,7 @@ Tags <a href="../../tags/website">website</a>, <a href="../../tags/hugo">hugo</a
 
 <h4 id="setup-a-theme-and-started-tweaking-it">Setup a Theme and started tweaking it</h4>
 
-<p>With the hugo site generated, I wanted to setup a proper theme. After sampling a handful of demo sites from hugo&rsquo;s <a href="https://gohugo.io/themes/">theme page</a>, I decided on the <a href="https://themes.gohugo.io/startbootstrap-clean-blog/">startbootstrap-clean-theme</a>. I&rsquo;ve seen it used on other sites, and I think it is a commonly used theme with other site generators. However, it is clean and simple, with a white-background base like I wanted. Additionally, I love having header images for posts and pages. It lets me better personalize the website by exclusively using images I&rsquo;ve photographed myself.</p>
+<p>With the hugo site generated, I wanted to setup a proper theme. After sampling a handful of demo sites from hugo&rsquo;s <a href="https://gohugo.io/themes/">theme page</a>, I decided on the startbootstrap-clean-theme. I&rsquo;ve seen it used on other sites, and I think it is a commonly used theme with other site generators. However, it is clean and simple, with a white-background base like I wanted. Additionally, I love having header images for posts and pages. It lets me better personalize the website by exclusively using images I&rsquo;ve photographed myself.</p>
 
 <p>To get the theme, I cloned it from git:</p>
 
@@ -212,7 +212,7 @@ With the theme setup, and the configuration edited, I started making some minor 
             {{ .Summary }}
         &lt;/<span style="color:#f92672">div</span>&gt;
     &lt;/<span style="color:#f92672">p</span>&gt;
-    &lt;<span style="color:#f92672">p</span> <span style="color:#a6e22e">class</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;post-meta&#34;</span>&gt; 
+    &lt;<span style="color:#f92672">p</span> <span style="color:#a6e22e">class</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;post-meta&#34;</span>&gt;
         &lt;<span style="color:#f92672">a</span> <span style="color:#a6e22e">href</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;{{ .Permalink }}&#34;</span>&gt; Click to Read More --&gt;&lt;/<span style="color:#f92672">a</span>&gt;
     &lt;/<span style="color:#f92672">p</span>&gt;
 &lt;/<span style="color:#f92672">div</span>&gt;

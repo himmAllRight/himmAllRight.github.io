@@ -20,9 +20,9 @@
 
 &lt;h3 id=&#34;from-cryogen-to-hugo&#34;&gt;From Cryogen to Hugo&lt;/h3&gt;
 
-&lt;p&gt;My departure from Cryogen really has nothing to do with the project itself. It is a prime example of what &lt;a href=&#34;https://clojure.org/&#34;&gt;clojure&lt;/a&gt; is capable of, and I feel that more people should give it a shot. Recently though, I&amp;rsquo;ve been itching to switch up my website&amp;rsquo;s theme a bit. While I fancy my &lt;a href=&#34;../new-theme-immutable/&#34;&gt;Immutable Theme&lt;/a&gt; I created a couple months ago, it isn&amp;rsquo;t quite doing what I had hoped for. I love dark themes, but the type of posts I&amp;rsquo;ve been creating really don&amp;rsquo;t look good with them. I like to add diagrams, code snippets, and images to all of my posts. Diagram posts look wonderful with a white background, but are garbage in a dark theme. This difference was glaring last week as I switched between my markdown editor&amp;rsquo;s preview window (default white theme), and the website&amp;rsquo;s live preview view, while writing my &lt;a href=&#34;../simple-reverse-ssh-tunnel/&#34;&gt;reverse tunnels&lt;/a&gt; post.&lt;/p&gt;
+&lt;p&gt;My departure from Cryogen really has nothing to do with the project itself. It is a prime example of what &lt;a href=&#34;https://clojure.org/&#34;&gt;clojure&lt;/a&gt; is capable of, and I feel that more people should give it a shot. Recently though, I&amp;rsquo;ve been itching to switch up my website&amp;rsquo;s theme a bit. While I fancy my &lt;a href=&#34;../../post/new-theme-immutable/&#34;&gt;Immutable Theme&lt;/a&gt; I created a couple months ago, it isn&amp;rsquo;t quite doing what I had hoped for. I love dark themes, but the type of posts I&amp;rsquo;ve been creating really don&amp;rsquo;t look good with them. I like to add diagrams, code snippets, and images to all of my posts. Diagram posts look wonderful with a white background, but are garbage in a dark theme. This difference was glaring last week as I switched between my markdown editor&amp;rsquo;s preview window (default white theme), and the website&amp;rsquo;s live preview view, while writing my &lt;a href=&#34;../../post//simple-reverse-ssh-tunnel/&#34;&gt;reverse tunnels&lt;/a&gt; post.&lt;/p&gt;
 
-&lt;p&gt;Similar to the logic I employed earlier this month when &lt;a href=&#34;../back-to-solus/&#34;&gt;switching back to Solus&lt;/a&gt;, I thought that if I was going to scrap my theme and start from scratch, I might as well check out different website generator. I had been keeping an eye on the various site generators, but the one I considered the most (and even dabbled with a bit last month), was &lt;a href=&#34;https://gohugo.io&#34;&gt;Hugo&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Similar to the logic I employed earlier this month when &lt;a href=&#34;../../post/back-to-solus/&#34;&gt;switching back to Solus&lt;/a&gt;, I thought that if I was going to scrap my theme and start from scratch, I might as well check out different website generator. I had been keeping an eye on the various site generators, but the one I considered the most (and even dabbled with a bit last month), was &lt;a href=&#34;https://gohugo.io&#34;&gt;Hugo&lt;/a&gt;.&lt;/p&gt;
 
 &lt;h3 id=&#34;what-i-ve-done-so-far&#34;&gt;What I&amp;rsquo;ve Done So Far&lt;/h3&gt;
 
@@ -45,7 +45,7 @@
 
 &lt;h4 id=&#34;setup-a-theme-and-started-tweaking-it&#34;&gt;Setup a Theme and started tweaking it&lt;/h4&gt;
 
-&lt;p&gt;With the hugo site generated, I wanted to setup a proper theme. After sampling a handful of demo sites from hugo&amp;rsquo;s &lt;a href=&#34;https://gohugo.io/themes/&#34;&gt;theme page&lt;/a&gt;, I decided on the &lt;a href=&#34;https://themes.gohugo.io/startbootstrap-clean-blog/&#34;&gt;startbootstrap-clean-theme&lt;/a&gt;. I&amp;rsquo;ve seen it used on other sites, and I think it is a commonly used theme with other site generators. However, it is clean and simple, with a white-background base like I wanted. Additionally, I love having header images for posts and pages. It lets me better personalize the website by exclusively using images I&amp;rsquo;ve photographed myself.&lt;/p&gt;
+&lt;p&gt;With the hugo site generated, I wanted to setup a proper theme. After sampling a handful of demo sites from hugo&amp;rsquo;s &lt;a href=&#34;https://gohugo.io/themes/&#34;&gt;theme page&lt;/a&gt;, I decided on the startbootstrap-clean-theme. I&amp;rsquo;ve seen it used on other sites, and I think it is a commonly used theme with other site generators. However, it is clean and simple, with a white-background base like I wanted. Additionally, I love having header images for posts and pages. It lets me better personalize the website by exclusively using images I&amp;rsquo;ve photographed myself.&lt;/p&gt;
 
 &lt;p&gt;To get the theme, I cloned it from git:&lt;/p&gt;
 
@@ -82,7 +82,7 @@ With the theme setup, and the configuration edited, I started making some minor 
             {{ .Summary }}
         &amp;lt;/&lt;span style=&#34;color:#f92672&#34;&gt;div&lt;/span&gt;&amp;gt;
     &amp;lt;/&lt;span style=&#34;color:#f92672&#34;&gt;p&lt;/span&gt;&amp;gt;
-    &amp;lt;&lt;span style=&#34;color:#f92672&#34;&gt;p&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;class&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;post-meta&amp;#34;&lt;/span&gt;&amp;gt; 
+    &amp;lt;&lt;span style=&#34;color:#f92672&#34;&gt;p&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;class&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;post-meta&amp;#34;&lt;/span&gt;&amp;gt;
         &amp;lt;&lt;span style=&#34;color:#f92672&#34;&gt;a&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;href&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;{{ .Permalink }}&amp;#34;&lt;/span&gt;&amp;gt; Click to Read More --&amp;gt;&amp;lt;/&lt;span style=&#34;color:#f92672&#34;&gt;a&lt;/span&gt;&amp;gt;
     &amp;lt;/&lt;span style=&#34;color:#f92672&#34;&gt;p&lt;/span&gt;&amp;gt;
 &amp;lt;/&lt;span style=&#34;color:#f92672&#34;&gt;div&lt;/span&gt;&amp;gt;
@@ -220,8 +220,8 @@ was &lt;em&gt;very&lt;/em&gt; appealing and I wanted to gain a more experience
 writing emacs lisp, so it seemed like a good choice. Overall,
 org-page was a good learning experience, but I found the documentation
 and support to be lacking. It seemed to be more of a
-&lt;a href=&#34;http://kelvinh.github.io/&#34;&gt;personal project&lt;/a&gt;, rather than a fully supported
-framework. while I know &lt;a href=&#34;http://cmacr.ae/&#34;&gt;other people&lt;/a&gt; were able to
+personal project, rather than a fully supported
+framework. while I know other people were able to
 get it working, org-page simply wasn&amp;rsquo;t working for me.&lt;/p&gt;
 
 &lt;p&gt;For over a year now, I have used org-mode at work each week to track

@@ -50,7 +50,7 @@ tar: Child returned status 2
 tar: Error is not recoverable: exiting now
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;I searched around but much of the initial advice didn&amp;rsquo;t help my problem. It often indicated that my /usr/bin/bzip2 might be a symlink and should be altered. That wasn&amp;rsquo;t the case. Then tried something that illuminated the issue: I removed the &lt;code&gt;/tools/bin&lt;/code&gt; from the begging of the &lt;code&gt;path&lt;/code&gt; variable (defined in the &lt;em&gt;lfs&lt;/em&gt; &lt;code&gt;.bashrc&lt;/code&gt; file). That temporarily fixed the issues. So I knew the problem was related to the symlink I setup in &lt;a href=&#34;../LFS-Final-Preparation-Steps&#34;&gt;the previous LFS post&lt;/a&gt;, specifically the &lt;code&gt;ln -sv $LFS/tools /&lt;/code&gt; command. It must have failed and I wasn&amp;rsquo;t paying attention.&lt;/p&gt;
+&lt;p&gt;I searched around but much of the initial advice didn&amp;rsquo;t help my problem. It often indicated that my /usr/bin/bzip2 might be a symlink and should be altered. That wasn&amp;rsquo;t the case. Then tried something that illuminated the issue: I removed the &lt;code&gt;/tools/bin&lt;/code&gt; from the begging of the &lt;code&gt;path&lt;/code&gt; variable (defined in the &lt;em&gt;lfs&lt;/em&gt; &lt;code&gt;.bashrc&lt;/code&gt; file). That temporarily fixed the issues. So I knew the problem was related to the symlink I setup in &lt;a href=&#34;../../post/LFS-Final-Preparation-Steps&#34;&gt;the previous LFS post&lt;/a&gt;, specifically the &lt;code&gt;ln -sv $LFS/tools /&lt;/code&gt; command. It must have failed and I wasn&amp;rsquo;t paying attention.&lt;/p&gt;
 
 &lt;p&gt;Now that I was knew what the problem was, I was able to fix it by running the following commands (some of them might need to be run from a &lt;em&gt;root/sudo&lt;/em&gt; account):&lt;/p&gt;
 
@@ -160,7 +160,7 @@ make install
       <guid>http://ryan.himmelwright.net/post/lfs-final-preparation-steps/</guid>
       <description>
 
-&lt;p&gt;Now that the &lt;em&gt;repeated&lt;/em&gt; setup steps have been defined in &lt;a href=&#34;http://ryan.himmelwright.net/posts/LFS-Repeated-Setup-Steps/&#34;&gt;my previous LFS post&lt;/a&gt;, there are a &lt;em&gt;few&lt;/em&gt; more preparation steps to complete in order to start building the LFS system. I promise&amp;hellip; we will start compiling soon. If all goes well, this should be the last preparation post.&lt;/p&gt;
+&lt;p&gt;Now that the &lt;em&gt;repeated&lt;/em&gt; setup steps have been defined in &lt;a href=&#34;../../post/LFS-Repeated-Setup-Steps/&#34;&gt;my previous LFS post&lt;/a&gt;, there are a &lt;em&gt;few&lt;/em&gt; more preparation steps to complete in order to start building the LFS system. I promise&amp;hellip; we will start compiling soon. If all goes well, this should be the last preparation post.&lt;/p&gt;
 
 &lt;!-- more --&gt;
 
@@ -227,7 +227,7 @@ popd&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;p&gt;This enables the tool-chain to be compiled so that it always refers to &lt;code&gt;/tools&lt;/code&gt;, which ensures that the compiler, assembler, and linker will work in both the first, and second steps of the LFS build.&lt;/p&gt;
 
-&lt;p&gt;&lt;strong&gt;Update:&lt;/strong&gt; &lt;em&gt;I did this step wrong the first time (I think it failed), and encountered errors later when trying to run tar. If you encounter issues as well, jump to &lt;a href=&#34;../LFS-SBUs-and-Binutils/&#34;&gt;my next post&lt;/a&gt; to see how I resolved these issues&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Update:&lt;/strong&gt; &lt;em&gt;I did this step wrong the first time (I think it failed), and encountered errors later when trying to run tar. If you encounter issues as well, jump to &lt;a href=&#34;../../post/LFS-SBUs-and-Binutils/&#34;&gt;my next post&lt;/a&gt; to see how I resolved these issues&lt;/em&gt;&lt;/p&gt;
 
 &lt;h3 id=&#34;adding-the-lfs-user&#34;&gt;Adding the LFS User&lt;/h3&gt;
 

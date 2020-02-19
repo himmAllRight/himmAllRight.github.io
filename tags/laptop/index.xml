@@ -26,12 +26,11 @@ Here&amp;rsquo;s why.&lt;/p&gt;
 
 &lt;h2 id=&#34;the-issue&#34;&gt;The Issue&lt;/h2&gt;
 
-&lt;p&gt;Due to a NVIDIA Quadro M1000M in my &lt;a href=&#34;https://www.lenovo.com/us/en/laptops/thinkpad/thinkpad-p/ThinkPad-P50/p/22TP2WPWP50&#34;&gt;lenovo
-P50&lt;/a&gt;
-work laptop, I&amp;rsquo;ve been using Gnome with Wayland, because that combination seems
-to have the least amount of annoying trade-offs. While doing a system refresh,
-I figured I would see if things are any different with a clean Fedora 31 Plasma
-install (they weren&amp;rsquo;t, but that&amp;rsquo;s beyond this post).&lt;/p&gt;
+&lt;p&gt;Due to a NVIDIA Quadro M1000M in my lenovo P50 work laptop, I&amp;rsquo;ve been using
+Gnome with Wayland, because that combination seems to have the least amount of
+annoying trade-offs. While doing a system refresh, I figured I would see if
+things are any different with a clean Fedora 31 Plasma install (they weren&amp;rsquo;t,
+but that&amp;rsquo;s beyond this post).&lt;/p&gt;
 
 &lt;p&gt;&lt;center&gt;
 &lt;a href=&#34;../../img/posts/fedora-kde-tb3/gnome-tb3-settings.png&#34;&gt;
@@ -209,7 +208,7 @@ Macbook Pro&lt;/div&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;p&gt;&lt;strong&gt;Keyboard&lt;/strong&gt; - Well, I’m surprised. I think I actually &lt;em&gt;really&lt;/em&gt; like it. The
 first few minutes were a little weird, because I was used to the (2014) MacBook
-Air (Also, I had been using &lt;a href=&#34;http://ryan.himmelwright.net/post/new-hhkb-pro2/&#34;&gt;my
+Air (Also, I had been using &lt;a href=&#34;../../post/new-hhkb-pro2/&#34;&gt;my
 HHKB&lt;/a&gt; all day). After using
 it for about an hour now, I think it feels close to the air (which I like),
 with &lt;em&gt;enough&lt;/em&gt; travel. It definitely does not have as much travel as my
@@ -314,7 +313,7 @@ decades worth of Windows versions, tons of Linux distros, several BSDs, iOS,
 Android, and even chromeOS. While I am familiar with using macOS
 (I often used the school Macs in college, and my wife had a Macbook Air
 throughout medical school), it is the one OS I have never tried as my &lt;em&gt;personal&lt;/em&gt;
-daily driver. After switching to an iPhone and &lt;a href=&#34;http://ryan.himmelwright.net/post/getting-an-ipad/&#34;&gt;getting an
+daily driver. After switching to an iPhone and &lt;a href=&#34;../../post/getting-an-ipad/&#34;&gt;getting an
 iPad&lt;/a&gt; this year&amp;hellip; I
 decided to give macOS a spin.&lt;/p&gt;
 
@@ -457,9 +456,8 @@ my devices and change the password.&lt;/p&gt;&lt;/li&gt;
 &lt;h3 id=&#34;future-plans&#34;&gt;Future Plans&lt;/h3&gt;
 
 &lt;p&gt;Overall, I&amp;rsquo;d say this challenge was a success. In fact, it was so successfull,
-that I&amp;rsquo;m actually writing up this post on a new &lt;a href=&#34;https://everymac.com/systems/apple/macbook_pro/specs/macbook-pro-core-i7-2.6-six-core-16-2019-scissor-specs.html&#34;&gt;base model 16&amp;rdquo; MacBook
-Pro&lt;/a&gt;
-(but more on &lt;em&gt;that&lt;/em&gt; at another time).&lt;/p&gt;
+that I&amp;rsquo;m actually writing up this post on a new &lt;a href=&#34;../../post/new-2019-16inch-mbp/&#34;&gt;base model 16&amp;rdquo; MacBook
+Pro&lt;/a&gt; (but more on &lt;em&gt;that&lt;/em&gt; at another time).&lt;/p&gt;
 
 &lt;p&gt;&lt;em&gt;[ Well, I&amp;rsquo;m really writing it on my desktop, but from the macbook pro ;) ]&lt;/em&gt;&lt;/p&gt;
 

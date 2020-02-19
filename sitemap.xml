@@ -403,16 +403,6 @@
   </url>
   
   <url>
-    <loc>http://ryan.himmelwright.net/notes/</loc>
-    <lastmod>2018-03-05T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://ryan.himmelwright.net/notes/server-transition-plan/</loc>
-    <lastmod>2018-03-05T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
     <loc>http://ryan.himmelwright.net/tags/containers/</loc>
     <lastmod>2018-02-25T00:00:00+00:00</lastmod>
   </url>
@@ -685,16 +675,6 @@
   <url>
     <loc>http://ryan.himmelwright.net/tags/c/</loc>
     <lastmod>2015-12-24T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://ryan.himmelwright.net/notes/focus-account/</loc>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>http://ryan.himmelwright.net/notes/postgresql/</loc>
-    <priority>0</priority>
   </url>
   
   <url>

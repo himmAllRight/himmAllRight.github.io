@@ -16,7 +16,7 @@
       <pubDate>Wed, 07 Aug 2019 00:00:00 +0000</pubDate>
       
       <guid>http://ryan.himmelwright.net/post/back-on-org-mode-for-work/</guid>
-      <description>&lt;p&gt;Last month, I wrote about my &lt;a href=&#34;post/switched-to-joplin-notes/&#34;&gt;switch to Joplin&lt;/a&gt;
+      <description>&lt;p&gt;Last month, I wrote about my &lt;a href=&#34;../../post/switched-to-joplin-notes/&#34;&gt;switch to Joplin&lt;/a&gt;
 for both my personal and work notes. While I enjoyed many features in Joplin, I
 also had a few concerns about using the system long-term for all my notes.
 As of last week, I am still using Joplin for all of my personal notes, but have switched
@@ -208,11 +208,10 @@ category, or both. I would also
 
 &lt;p&gt;As I worked on each task, I could quickly add time-stamped notes using the
 built-in &lt;a href=&#34;https://orgmode.org/manual/Drawers.html&#34;&gt;logbook drawer&lt;/a&gt; shortcut. In
-these notes, I would ramble, or paste a &lt;a href=&#34;https://orgmode.org/manual/Working-with-source-code.html&#34;&gt;code
-snippet&lt;/a&gt; to save for
-later. As work on each item progressed, I could set the &lt;code&gt;TODO&lt;/code&gt; status to
-&lt;code&gt;Working On&lt;/code&gt; &lt;code&gt;Finished&lt;/code&gt;, &lt;code&gt;Removed&lt;/code&gt;, or any other state I had pre-defined.
-Eventually, I &lt;a href=&#34;https://github.com/himmAllRight/ry-org-scrum&#34;&gt;wrote an emacs-lisp
+these notes, I would ramble, or paste a code snippet to save for later. As work
+on each item progressed, I could set the &lt;code&gt;TODO&lt;/code&gt; status to &lt;code&gt;Working On&lt;/code&gt;
+&lt;code&gt;Finished&lt;/code&gt;, &lt;code&gt;Removed&lt;/code&gt;, or any other state I had pre-defined.  Eventually, I
+&lt;a href=&#34;https://github.com/himmAllRight/ry-org-scrum&#34;&gt;wrote an emacs-lisp
 script/package&lt;/a&gt; that took the
 &lt;code&gt;todo&lt;/code&gt; items in my &lt;code&gt;org&lt;/code&gt; file, and dumped them into a SCRUM board at the top of
 the file.&lt;/p&gt;

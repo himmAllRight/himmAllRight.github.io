@@ -148,7 +148,9 @@ Tags <a href="../../tags/linux">linux</a>, <a href="../../tags/ssh">ssh</a>, <a 
                     
                     
 
-<p>Last week, I was on vacation with my family. While I didn&rsquo;t work a <em>ton</em> on personal projects, I was at least able to spend some time on my <a href="https://github.com/himmAllRight/TunnelBeacon">TunelBeacon</a> project again. I will write a dedicated post about that project down the road when I am further along. Basically, it will be a simple GUI to create reverse ssh tunnels, that family and friends can startup in order grant me temporary access to their computer when they need support. Reverse SSH tunnels are <em>very</em> useful and simple to setup, but can be a bit tricky to figure out at first. So, here&rsquo;s a brief and simple guide on how to easily create reverse tunnels.</p>
+<p>Reverse SSH tunnels are <em>very</em> useful and simple to setup, but can be a bit
+ tricky to figure out at first. So, here&rsquo;s a brief and simple guide on how to
+ easily create reverse tunnels.</p>
 
 <hr />
 
@@ -200,13 +202,9 @@ Tags <a href="../../tags/linux">linux</a>, <a href="../../tags/ssh">ssh</a>, <a 
 
 <p>This should start an ssh session to the initializing computer. In my example, this is the laptop.</p>
 
-<h3 id="tunnel-beacon">Tunnel Beacon</h3>
+<h3 id="conclusion">Conclusion</h3>
 
-<p>SSH tunnels are a fascinating and useful piece of technology. The ssh protocol makes modern computing much more secure, and easier to manage multiple computers. While ssh tunnels are already widely utilized, I think there are still many applications where it the technology can be applied.</p>
-
-<p>For example, I mentioned in the intro post about my small project, <a href="https://github.com/himmAllRight/TunnelBeacon">TunelBeacon</a> (<em>Note: this is by no means ready. I&rsquo;ve just started playing with it</em>). TunnelBeacon will be a very simple GUI application used to initiate a tunnel from a computer, specifically to receive support. For example, if my wife or any of our parents switch to Linux in the future, we could configure TunnelBeacon on their computer. Then, if they need help they can just open it and hit a button, which will initiate a reverse tunnel to a predefined secure server (or spin up an AWS/DO server&hellip; I have ideas). From there, I can remote into their computer no matter what network they are on (as long as ssh isn&rsquo;t blocked). No headache from having them find their public IP, no redirecting router ports, just hitting a button.</p>
-
-<p>So, that&rsquo;s reverse tunnels in a nutshell. With any luck, I should be posting more about them as I progress with TunnelBeacon. Have fun tunneling!</p>
+<p>SSH tunnels are a fascinating and useful piece of technology. The ssh protocol makes modern computing much more secure, and easier to manage multiple computers. That&rsquo;s <em>reverse</em> tunnels in a nutshell. Have fun tunneling!</p>
 
 
                     

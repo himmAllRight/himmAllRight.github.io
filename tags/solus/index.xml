@@ -27,7 +27,7 @@ just a few minutes. Lets get started.&lt;/p&gt;
 
 &lt;p&gt;&lt;img src=&#34;../../img/posts/docker-quickstart/docker-logo.png&#34; style=&#34;max-width: 100%; width: 400px; float: right; margin: 0px 15px 5px 5px;&#34; alt=&#34;Docker Logo&#34; /&gt;&lt;/p&gt;
 
-&lt;p&gt;Installing docker on &lt;a href=&#34;https://solus-project.com&#34;&gt;Solus&lt;/a&gt; was easy enough. I just
+&lt;p&gt;Installing docker on &lt;a href=&#34;https://getsol.us&#34;&gt;Solus&lt;/a&gt; was easy enough. I just
 had to install the package, and then enable the service:&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;sudo eopkg it docker
 sudo systemctl enable docker
@@ -287,7 +287,7 @@ know the basic to at &lt;em&gt;least&lt;/em&gt; get &lt;em&gt;started&lt;/em&gt;
       <pubDate>Mon, 31 Jul 2017 00:00:00 +0000</pubDate>
       
       <guid>http://ryan.himmelwright.net/post/back-to-solus/</guid>
-      <description>&lt;p&gt;Well, that was faster than I expected. This past weekend, I wiped the Fedora installation on my main computer, and replaced it with Solus. My Fedora install broke, and I needed to use a Fedora Live CD to fix it. I thought that if I had to use a live CD to fix the issue, I might as well just do a clean install. With the idea of a clean install in my head&amp;hellip; I thought (possibly influenced by my recent &lt;a href=&#34;http://ryan.himmelwright.net/posts/dabbling-with-go/#motivation&#34;&gt;motivation&lt;/a&gt; to play with Go), that I might as well do the clean install with &lt;a href=&#34;solus-project.com/&#34;&gt;Solus&lt;/a&gt;&amp;hellip;&lt;/p&gt;
+      <description>&lt;p&gt;Well, that was faster than I expected. This past weekend, I wiped the Fedora installation on my main computer, and replaced it with Solus. My Fedora install broke, and I needed to use a Fedora Live CD to fix it. I thought that if I had to use a live CD to fix the issue, I might as well just do a clean install. With the idea of a clean install in my head&amp;hellip; I thought (possibly influenced by my recent &lt;a href=&#34;../../post/dabbling-with-go/#motivation&#34;&gt;motivation&lt;/a&gt; to play with Go), that I might as well do the clean install with &lt;a href=&#34;https://getsol.us/&#34;&gt;Solus&lt;/a&gt;&amp;hellip;&lt;/p&gt;
 
 &lt;h2 id=&#34;nvidia-issues&#34;&gt;Nvidia Issues&lt;/h2&gt;
 
@@ -310,7 +310,7 @@ know the basic to at &lt;em&gt;least&lt;/em&gt; get &lt;em&gt;started&lt;/em&gt;
 
 &lt;p&gt;With the Fedora live environment all booted and ready, I started downloading the latest Solus ISO (Budgie) on my other laptop. Once the ISO image was mounted to a drive, I booted it up and started installing Solus. After the install, I immediately updated because I knew there have been a TON of updates since the last ISO snapshot (mid-April). When I rebooted, I absolutely loved what I saw. It is amazing how much Solus and Budgie have improved, even during my short distro-hopping vacation.&lt;/p&gt;
 
-&lt;p&gt;Looking at my post history, it may appear as though I used Fedora for a few days, became fed up with it, and came running back to Solus. That is not entirely true. The reality is that I sat on writing my &lt;a href=&#34;../solus-to-fedora/&#34;&gt;Fedora post&lt;/a&gt; for a long time. I used Fedora for about a month, and it was generally a great experience. If it didn&amp;rsquo;t break, I probably would have stayed for a bit longer. When considering a new install though, I realized that I had missed Solus.&lt;/p&gt;
+&lt;p&gt;Looking at my post history, it may appear as though I used Fedora for a few days, became fed up with it, and came running back to Solus. That is not entirely true. The reality is that I sat on writing my &lt;a href=&#34;../../post/solus-to-fedora/&#34;&gt;Fedora post&lt;/a&gt; for a long time. I used Fedora for about a month, and it was generally a great experience. If it didn&amp;rsquo;t break, I probably would have stayed for a bit longer. When considering a new install though, I realized that I had missed Solus.&lt;/p&gt;
 
 &lt;p&gt;As of now, my plan is to keep using Solus, at least on my main computer. I am also hoping to get more involved with the project, and start packing up some software again. Maybe I can even help with some debugging and development. We shall see&amp;hellip;&lt;/p&gt;</description>
     </item>
@@ -330,7 +330,7 @@ know the basic to at &lt;em&gt;least&lt;/em&gt; get &lt;em&gt;started&lt;/em&gt;
 &lt;/center&gt;
 &lt;em&gt;The Solus (Left) and Fedora (right) Project Logos&lt;/em&gt;&lt;/p&gt;
 
-&lt;p&gt;The first phrase stated on the &lt;a href=&#34;https://solus-project.com&#34;&gt;Solus Project homepage&lt;/a&gt; is &amp;ldquo;Solus is an operating system that is designed for &lt;strong&gt;home computing&lt;/strong&gt;.&amp;rdquo; I find this to be true, and Solus does a great job at it. The Linux community needs a few good, focused, distros. While I have been using Solus for my &amp;ldquo;&lt;em&gt;home&lt;/em&gt;&amp;rdquo; computing, the computing tasks I&amp;rsquo;ve focused on recently do not fall into the category of standard &lt;em&gt;home computing&lt;/em&gt; use. Recently, my main top computing activities and goals are:&lt;/p&gt;
+&lt;p&gt;The first phrase stated on the &lt;a href=&#34;https://getsol.us&#34;&gt;Solus Project homepage&lt;/a&gt; is &amp;ldquo;Solus is an operating system that is designed for &lt;strong&gt;home computing&lt;/strong&gt;.&amp;rdquo; I find this to be true, and Solus does a great job at it. The Linux community needs a few good, focused, distros. While I have been using Solus for my &amp;ldquo;&lt;em&gt;home&lt;/em&gt;&amp;rdquo; computing, the computing tasks I&amp;rsquo;ve focused on recently do not fall into the category of standard &lt;em&gt;home computing&lt;/em&gt; use. Recently, my main top computing activities and goals are:&lt;/p&gt;
 
 &lt;ul&gt;
 &lt;li&gt;Writing (okay&amp;hellip; but still)&lt;/li&gt;
@@ -400,7 +400,7 @@ it.&lt;/p&gt;
 &lt;h3 id=&#34;updates&#34;&gt;Updates&lt;/h3&gt;
 
 &lt;p&gt;I ran some updates that I thought &lt;em&gt;might&lt;/em&gt; be problematic, based
-on &lt;a href=&#34;../back-on-arch/#fedora&#34;&gt;previous issues&lt;/a&gt; I&amp;rsquo;ve encountered with Fedora. I
+on &lt;a href=&#34;../../post/back-on-arch/#fedora&#34;&gt;previous issues&lt;/a&gt; I&amp;rsquo;ve encountered with Fedora. I
 made sure to note the results as well. The first notable update was from the
 first time I updated the kernel, and the second was  upgrading from
 Fedora 25 to 26. Both updates went very smoothly without any issues:&lt;/p&gt;
@@ -473,7 +473,7 @@ remain on it until I have a convincing reason to leave.&lt;/p&gt;</description>
 
 &lt;h3 id=&#34;downloading-from-the-repos&#34;&gt;Downloading from the Repos&lt;/h3&gt;
 
-&lt;p&gt;Just like installing any other package on Linux, I decided to first check to see it it was in the &lt;a href=&#34;https://dev.solus-project.com/&#34;&gt;Solus Repos&lt;/a&gt;:&lt;/p&gt;
+&lt;p&gt;Just like installing any other package on Linux, I decided to first check to see it it was in the Solus Repos:&lt;/p&gt;
 
 &lt;pre&gt;&lt;code&gt;sudo eopkg sr i3block
 &lt;/code&gt;&lt;/pre&gt;
@@ -547,7 +547,7 @@ fi
 &lt;p&gt;&lt;img alt=&#34;New Color Scheme for rofi launcher&#34; src=&#34;../../img/posts/starting-i3/rofi-run.png&#34; style=&#34;max-width: 100%;&#34;/&gt;
 &lt;div id=&#34;caption&#34;&gt;New color scheme for rofi launcher&lt;/div&gt;&lt;/p&gt;
 
-&lt;p&gt;When I started using i3 several years ago, I used &lt;a href=&#34;http://tools.suckless.org/dmenu/&#34;&gt;dmenu&lt;/a&gt; as my launcher (it&amp;rsquo;s the launcher used in &lt;a href=&#34;http://dwm.suckless.org/&#34;&gt;dwm&lt;/a&gt;, another tiling window manager I used to use). I eventually switched to &lt;a href=&#34;https://davedavenport.github.io/rofi/&#34;&gt;rofi&lt;/a&gt; after seeing it used in some very nice window manager setups (sound familiar?). However, I always used the plain default theme and never bothered to improve it. With all the work I did making i3bars look nice, I thought I should at least make rofi match. Making the color theme wasn&amp;rsquo;t nearly as hard as I anticipated it to be. That&amp;rsquo;s mostly because I found and used the &lt;a href=&#34;https://davedavenport.github.io/rofi/p11-Generator.html&#34;&gt;rofi theme generator&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;When I started using i3 several years ago, I used &lt;a href=&#34;http://tools.suckless.org/dmenu/&#34;&gt;dmenu&lt;/a&gt; as my launcher (it&amp;rsquo;s the launcher used in &lt;a href=&#34;http://dwm.suckless.org/&#34;&gt;dwm&lt;/a&gt;, another tiling window manager I used to use). I eventually switched to rofi after seeing it used in some very nice window manager setups (sound familiar?). However, I always used the plain default theme and never bothered to improve it. With all the work I did making i3bars look nice, I thought I should at least make rofi match. Making the color theme wasn&amp;rsquo;t nearly as hard as I anticipated it to be. That&amp;rsquo;s mostly because I found and used the rofi theme generator.&lt;/p&gt;
 
 &lt;p&gt;&lt;center&gt;
 &lt;img alt=&#34;New rofi window switcher&#34; src=&#34;../../img/posts/starting-i3/rofi-window.png&#34; style=&#34;max-width: 100%;&#34;/&gt;

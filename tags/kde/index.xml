@@ -26,12 +26,11 @@ Here&amp;rsquo;s why.&lt;/p&gt;
 
 &lt;h2 id=&#34;the-issue&#34;&gt;The Issue&lt;/h2&gt;
 
-&lt;p&gt;Due to a NVIDIA Quadro M1000M in my &lt;a href=&#34;https://www.lenovo.com/us/en/laptops/thinkpad/thinkpad-p/ThinkPad-P50/p/22TP2WPWP50&#34;&gt;lenovo
-P50&lt;/a&gt;
-work laptop, I&amp;rsquo;ve been using Gnome with Wayland, because that combination seems
-to have the least amount of annoying trade-offs. While doing a system refresh,
-I figured I would see if things are any different with a clean Fedora 31 Plasma
-install (they weren&amp;rsquo;t, but that&amp;rsquo;s beyond this post).&lt;/p&gt;
+&lt;p&gt;Due to a NVIDIA Quadro M1000M in my lenovo P50 work laptop, I&amp;rsquo;ve been using
+Gnome with Wayland, because that combination seems to have the least amount of
+annoying trade-offs. While doing a system refresh, I figured I would see if
+things are any different with a clean Fedora 31 Plasma install (they weren&amp;rsquo;t,
+but that&amp;rsquo;s beyond this post).&lt;/p&gt;
 
 &lt;p&gt;&lt;center&gt;
 &lt;a href=&#34;../../img/posts/fedora-kde-tb3/gnome-tb3-settings.png&#34;&gt;
@@ -144,7 +143,7 @@ scratch. With KDE Plasma 5, you can. Here&amp;rsquo;s how.&lt;/p&gt;
 
 &lt;h2 id=&#34;issue&#34;&gt;Issue&lt;/h2&gt;
 
-&lt;p&gt;While I love having a &lt;a href=&#34;../my-t470/&#34;&gt;dock-able laptop&lt;/a&gt; and &lt;a href=&#34;new-lgud4379b&#34;&gt;my 43&amp;rdquo; 4k LG
+&lt;p&gt;While I love having a &lt;a href=&#34;../../post/my-t470/&#34;&gt;dock-able laptop&lt;/a&gt; and &lt;a href=&#34;../../post/new-lgud4379b&#34;&gt;my 43&amp;rdquo; 4k LG
 monitor&lt;/a&gt;, getting them configured and agreeing with each other
 can sometimes be a headache. Luckily, KDE Plasma 5 (the desktop environment
 I&amp;rsquo;ve been using for awhile now) is fantastic and remembers previous display
@@ -213,7 +212,7 @@ wrong with plasmashell during the process.&lt;/p&gt;
 &lt;/center&gt;
 &lt;em&gt;The Solus (Left) and Fedora (right) Project Logos&lt;/em&gt;&lt;/p&gt;
 
-&lt;p&gt;The first phrase stated on the &lt;a href=&#34;https://solus-project.com&#34;&gt;Solus Project homepage&lt;/a&gt; is &amp;ldquo;Solus is an operating system that is designed for &lt;strong&gt;home computing&lt;/strong&gt;.&amp;rdquo; I find this to be true, and Solus does a great job at it. The Linux community needs a few good, focused, distros. While I have been using Solus for my &amp;ldquo;&lt;em&gt;home&lt;/em&gt;&amp;rdquo; computing, the computing tasks I&amp;rsquo;ve focused on recently do not fall into the category of standard &lt;em&gt;home computing&lt;/em&gt; use. Recently, my main top computing activities and goals are:&lt;/p&gt;
+&lt;p&gt;The first phrase stated on the &lt;a href=&#34;https://getsol.us&#34;&gt;Solus Project homepage&lt;/a&gt; is &amp;ldquo;Solus is an operating system that is designed for &lt;strong&gt;home computing&lt;/strong&gt;.&amp;rdquo; I find this to be true, and Solus does a great job at it. The Linux community needs a few good, focused, distros. While I have been using Solus for my &amp;ldquo;&lt;em&gt;home&lt;/em&gt;&amp;rdquo; computing, the computing tasks I&amp;rsquo;ve focused on recently do not fall into the category of standard &lt;em&gt;home computing&lt;/em&gt; use. Recently, my main top computing activities and goals are:&lt;/p&gt;
 
 &lt;ul&gt;
 &lt;li&gt;Writing (okay&amp;hellip; but still)&lt;/li&gt;
@@ -283,7 +282,7 @@ it.&lt;/p&gt;
 &lt;h3 id=&#34;updates&#34;&gt;Updates&lt;/h3&gt;
 
 &lt;p&gt;I ran some updates that I thought &lt;em&gt;might&lt;/em&gt; be problematic, based
-on &lt;a href=&#34;../back-on-arch/#fedora&#34;&gt;previous issues&lt;/a&gt; I&amp;rsquo;ve encountered with Fedora. I
+on &lt;a href=&#34;../../post/back-on-arch/#fedora&#34;&gt;previous issues&lt;/a&gt; I&amp;rsquo;ve encountered with Fedora. I
 made sure to note the results as well. The first notable update was from the
 first time I updated the kernel, and the second was  upgrading from
 Fedora 25 to 26. Both updates went very smoothly without any issues:&lt;/p&gt;

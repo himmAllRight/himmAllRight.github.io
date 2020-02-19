@@ -27,7 +27,7 @@ just a few minutes. Lets get started.&lt;/p&gt;
 
 &lt;p&gt;&lt;img src=&#34;../../img/posts/docker-quickstart/docker-logo.png&#34; style=&#34;max-width: 100%; width: 400px; float: right; margin: 0px 15px 5px 5px;&#34; alt=&#34;Docker Logo&#34; /&gt;&lt;/p&gt;
 
-&lt;p&gt;Installing docker on &lt;a href=&#34;https://solus-project.com&#34;&gt;Solus&lt;/a&gt; was easy enough. I just
+&lt;p&gt;Installing docker on &lt;a href=&#34;https://getsol.us&#34;&gt;Solus&lt;/a&gt; was easy enough. I just
 had to install the package, and then enable the service:&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;sudo eopkg it docker
 sudo systemctl enable docker
