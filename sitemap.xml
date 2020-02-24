@@ -3,6 +3,51 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>http://ryan.himmelwright.net/post/creating-website-tests-pages/</loc>
+    <lastmod>2020-02-23T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://ryan.himmelwright.net/tags/dev/</loc>
+    <lastmod>2020-02-23T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://ryan.himmelwright.net/tags/hugo/</loc>
+    <lastmod>2020-02-23T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://ryan.himmelwright.net/post/</loc>
+    <lastmod>2020-02-23T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://ryan.himmelwright.net/tags/python/</loc>
+    <lastmod>2020-02-23T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://ryan.himmelwright.net/tags/</loc>
+    <lastmod>2020-02-23T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://ryan.himmelwright.net/tags/testing/</loc>
+    <lastmod>2020-02-23T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://ryan.himmelwright.net/tags/website/</loc>
+    <lastmod>2020-02-23T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://ryan.himmelwright.net/</loc>
+    <lastmod>2020-02-23T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>http://ryan.himmelwright.net/post/fedora-kde-tb3/</loc>
     <lastmod>2020-01-25T00:00:00+00:00</lastmod>
   </url>
@@ -33,27 +78,12 @@
   </url>
   
   <url>
-    <loc>http://ryan.himmelwright.net/post/</loc>
-    <lastmod>2020-01-25T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://ryan.himmelwright.net/tags/</loc>
-    <lastmod>2020-01-25T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
     <loc>http://ryan.himmelwright.net/tags/tb3/</loc>
     <lastmod>2020-01-25T00:00:00+00:00</lastmod>
   </url>
   
   <url>
     <loc>http://ryan.himmelwright.net/tags/thinkpad/</loc>
-    <lastmod>2020-01-25T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://ryan.himmelwright.net/</loc>
     <lastmod>2020-01-25T00:00:00+00:00</lastmod>
   </url>
   
@@ -88,17 +118,7 @@
   </url>
   
   <url>
-    <loc>http://ryan.himmelwright.net/tags/hugo/</loc>
-    <lastmod>2019-12-15T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
     <loc>http://ryan.himmelwright.net/post/issue26/</loc>
-    <lastmod>2019-12-15T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://ryan.himmelwright.net/tags/website/</loc>
     <lastmod>2019-12-15T00:00:00+00:00</lastmod>
   </url>
   
@@ -175,11 +195,6 @@
   <url>
     <loc>http://ryan.himmelwright.net/post/switching-to-bitwarden/</loc>
     <lastmod>2019-09-13T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://ryan.himmelwright.net/tags/dev/</loc>
-    <lastmod>2019-09-04T00:00:00+00:00</lastmod>
   </url>
   
   <url>
@@ -569,11 +584,6 @@
   
   <url>
     <loc>http://ryan.himmelwright.net/post/lia-1-0-beta-released/</loc>
-    <lastmod>2017-04-17T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://ryan.himmelwright.net/tags/python/</loc>
     <lastmod>2017-04-17T00:00:00+00:00</lastmod>
   </url>
   
