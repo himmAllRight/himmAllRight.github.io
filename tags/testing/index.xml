@@ -5,10 +5,259 @@
     <description>Recent content in testing on λ ryan. himmelwright. net</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 23 Feb 2020 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 28 Feb 2020 00:00:00 +0000</lastBuildDate>
     
         <atom:link href="http://ryan.himmelwright.net/tags/testing/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Creating Tests For This Website: CI</title>
+      <link>http://ryan.himmelwright.net/post/creating-website-tests-ci/</link>
+      <pubDate>Fri, 28 Feb 2020 00:00:00 +0000</pubDate>
+      
+      <guid>http://ryan.himmelwright.net/post/creating-website-tests-ci/</guid>
+      <description>&lt;p&gt;In the &lt;a href=&#34;../../post/creating-website-tests-pages/&#34;&gt;last post&lt;/a&gt;, I setup some simple
+testing for my website builds to that ensure that pages were being served
+correctly.  However, I can&amp;rsquo;t trust myself to always manually run the tests
+before merging a branch into &lt;code&gt;master&lt;/code&gt;. Luckily, I have
+&lt;a href=&#34;https://jenkins.io&#34;&gt;Jenkins&lt;/a&gt; to take care of all the &amp;ldquo;&lt;em&gt;responsible&lt;/em&gt;&amp;rdquo; tasks. In
+this post, we will take the test framework created in the previous post&amp;hellip;  and
+automate it.&lt;/p&gt;
+
+&lt;h2 id=&#34;what-i-m-using-plan&#34;&gt;What I&amp;rsquo;m Using/Plan&lt;/h2&gt;
+
+&lt;p&gt;&lt;center&gt;
+&lt;a href=&#34;../../img/posts/creating-website-tests-ci/jenkins-logo.png&#34;&gt;
+&lt;img alt=&#34;Jenkins Logo&#34; src=&#34;../../img/posts/creating-website-tests-ci/jenkins-logo.png&#34; style=&#34;float: right; max-width: 100%; padding: 5px 15px 10px 10px&#34;/&gt;&lt;/a&gt;
+&lt;/center&gt;&lt;/p&gt;
+
+&lt;p&gt;I have started using &lt;a href=&#34;https://gitlab.com&#34;&gt;Gitlab&lt;/a&gt; for more of my projects
+recently, but have decided to keep my website source hosted on Github for the time
+being. So, I won&amp;rsquo;t be using Gitlab&amp;rsquo;s CI/CD tools for &lt;em&gt;this&lt;/em&gt;, but I wanted it
+to be known that this automation is &lt;em&gt;very&lt;/em&gt; straight forward and could be easily
+accomplished there as well.&lt;/p&gt;
+
+&lt;p&gt;For this project, because my website is hosted on Github, and I &lt;em&gt;already&lt;/em&gt;
+have &lt;a href=&#34;../../post/extending-vm-hd/&#34;&gt;my own Jenkins server&lt;/a&gt; configured&amp;hellip; I will be
+using a Jenkins pipeline. First, we will create the pipeline file to add
+to the git repo. Then, we will use the pipeline to configure a new
+&lt;em&gt;multi-branch&lt;/em&gt; pipeline in Jenkins.&lt;/p&gt;
+
+&lt;h2 id=&#34;jenkinsfile&#34;&gt;Jenkinsfile&lt;/h2&gt;
+
+&lt;p&gt;Lets start by creating the Jenkinsfile. Create a new file named &lt;code&gt;Jenkinsfile&lt;/code&gt;
+in the project directory. Next, lets create a new pipeline and get ready to add
+stages:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-groovy&#34; data-lang=&#34;groovy&#34;&gt;pipeline &lt;span style=&#34;color:#f92672&#34;&gt;{&lt;/span&gt;
+    agent any
+
+    stages &lt;span style=&#34;color:#f92672&#34;&gt;{&lt;/span&gt;
+
+        &lt;span style=&#34;color:#75715e&#34;&gt;// This is where the stages will be defined //
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;
+    &lt;span style=&#34;color:#f92672&#34;&gt;}&lt;/span&gt;
+&lt;span style=&#34;color:#f92672&#34;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;&lt;em&gt;(Make sure to add the closing &lt;code&gt;}&lt;/code&gt;&amp;rsquo;s!)&lt;/em&gt;&lt;/p&gt;
+
+&lt;h3 id=&#34;stages&#34;&gt;Stages&lt;/h3&gt;
+
+&lt;p&gt;Now, lets add the stages. A stage is a named, functional chunk in our pipeline.
+Breaking the pipeline into stages will help keep all the various steps
+organized, as well as make it easier to follow along as the pipeline runs.&lt;/p&gt;
+
+&lt;p&gt;Each of the following stage definitions will be placed inside the &lt;code&gt;stages { ..
+}&lt;/code&gt; section we defined above (&lt;em&gt;in the same order as they are listed!&lt;/em&gt;).&lt;/p&gt;
+
+&lt;h4 id=&#34;setup-deps&#34;&gt;Setup Deps&lt;/h4&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-groovy&#34; data-lang=&#34;groovy&#34;&gt;stage&lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;Setup Deps&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;{&lt;/span&gt;
+    steps &lt;span style=&#34;color:#f92672&#34;&gt;{&lt;/span&gt;
+        sh &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;sudo yum update -y&amp;#39;&lt;/span&gt;
+        sh &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;sudo yum install -y epel-release&amp;#39;&lt;/span&gt;
+        sh &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;sudo yum install -y hugo python36-pytest&amp;#39;&lt;/span&gt;
+    &lt;span style=&#34;color:#f92672&#34;&gt;}&lt;/span&gt;
+&lt;span style=&#34;color:#f92672&#34;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;The first stage is &amp;lsquo;Setup Deps&amp;rsquo;. This stage handles installing any dependencies
+our Jenkins node will need installed to run the tests. Our tests will require
+&lt;code&gt;hugo&lt;/code&gt;, &lt;code&gt;pytest&lt;/code&gt;, and &lt;code&gt;python3&lt;/code&gt;. It will also require some &lt;code&gt;pip&lt;/code&gt; packages, but
+we will get to that later.&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;Note: My current Jenkins node is running CentOS, so my package manager commands
+are specific to that. As always, adjust accordingly.&lt;/em&gt;&lt;/p&gt;
+
+&lt;h4 id=&#34;start-hugo-server&#34;&gt;Start Hugo Server&lt;/h4&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-groovy&#34; data-lang=&#34;groovy&#34;&gt;stage&lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;Start Hugo Server&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;{&lt;/span&gt;
+    steps &lt;span style=&#34;color:#f92672&#34;&gt;{&lt;/span&gt;
+        sh &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;hugo serve &amp;amp;&amp;#39;&lt;/span&gt;
+    &lt;span style=&#34;color:#f92672&#34;&gt;}&lt;/span&gt;
+&lt;span style=&#34;color:#f92672&#34;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;With &lt;code&gt;hugo&lt;/code&gt; installed (and presumably being inside the website&amp;rsquo;s git repo&amp;hellip;),
+we can start the web server. This is done with &lt;code&gt;hugo serve&lt;/code&gt;. The &lt;code&gt;&amp;amp;&lt;/code&gt; is used to
+have the server run as a background process so that it won&amp;rsquo;t be killed when the
+pipeline to continues on.&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;Note: Make sure the tests are set to point to &lt;code&gt;localhost:1313&lt;/code&gt;, as that is
+where &lt;code&gt;hugo&lt;/code&gt; will try to serve the website by default.&lt;/em&gt;&lt;/p&gt;
+
+&lt;h4 id=&#34;setup-python&#34;&gt;Setup Python&lt;/h4&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-groovy&#34; data-lang=&#34;groovy&#34;&gt;stage&lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;Setup Tests&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;{&lt;/span&gt;
+    steps &lt;span style=&#34;color:#f92672&#34;&gt;{&lt;/span&gt;
+        sh &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;pip3 install pipenv --user&amp;#39;&lt;/span&gt;
+        sh &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;python3 -m pipenv install&amp;#39;&lt;/span&gt;
+    &lt;span style=&#34;color:#f92672&#34;&gt;}&lt;/span&gt;
+&lt;span style=&#34;color:#f92672&#34;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Next, lets configure &lt;code&gt;python&lt;/code&gt; by setting up an environment and installing the
+packages we need in it. First, I use &lt;code&gt;pip3&lt;/code&gt; to install &lt;code&gt;pipenv&lt;/code&gt;. Then, I have
+&lt;code&gt;pipenv&lt;/code&gt; install the tests&amp;rsquo; required python packages, which are defined in the
+repo&amp;rsquo;s &lt;code&gt;Pipfile&lt;/code&gt;.&lt;/p&gt;
+
+&lt;h4 id=&#34;run-tests&#34;&gt;Run Tests&lt;/h4&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-groovy&#34; data-lang=&#34;groovy&#34;&gt;stage&lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;Run Tests&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;{&lt;/span&gt;
+    steps &lt;span style=&#34;color:#f92672&#34;&gt;{&lt;/span&gt;
+        sh &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&amp;#39;&amp;#39;
+&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;            set +e
+&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;            python3 -m pipenv run pytest -v --junit-xml himmallright-source-test-report.xml .
+&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;            set -e
+&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;        &amp;#39;&amp;#39;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;stripIndent&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;()&lt;/span&gt;
+    &lt;span style=&#34;color:#f92672&#34;&gt;}&lt;/span&gt;
+&lt;span style=&#34;color:#f92672&#34;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Test time. I again utilize &lt;code&gt;pipenv&lt;/code&gt; here, by having it call the test command
+(&lt;code&gt;pytest -v --junit-xml himmallright-source-test-report.xml .&lt;/code&gt;) so that it runs
+in the pipenv virtual environment.&lt;/p&gt;
+
+&lt;p&gt;Two things to note here:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;The &lt;code&gt;--junit-xml&lt;/code&gt; flag defines a xml filename to write the junit test report
+to. This will be used by Jenkins to collect the test results.&lt;/li&gt;
+&lt;li&gt;The test command is wrapped between &lt;code&gt;set +e&lt;/code&gt; and &lt;code&gt;set -e&lt;/code&gt; commands, which
+allows tests to fail but without triggering a &lt;em&gt;pipeline&lt;/em&gt; failure in
+Jenkins.  This way even if tests fail, we make it all the way through
+collection so we can see &lt;em&gt;what&lt;/em&gt; tests failed and &lt;em&gt;why&lt;/em&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4 id=&#34;collect-test-results&#34;&gt;Collect Test Results&lt;/h4&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-groovy&#34; data-lang=&#34;groovy&#34;&gt;stage&lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;Collect Test Resuts&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;{&lt;/span&gt;
+    steps &lt;span style=&#34;color:#f92672&#34;&gt;{&lt;/span&gt;
+        archiveArtifacts &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;himmallright-source-test-report.xml&amp;#34;&lt;/span&gt;
+        junit &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;himmallright-source-test-report.xml&amp;#34;&lt;/span&gt;
+    &lt;span style=&#34;color:#f92672&#34;&gt;}&lt;/span&gt;
+&lt;span style=&#34;color:#f92672&#34;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Next, we archive the junit report xml file as a Jenkins artifact (just in
+case). Finally, we have the &lt;a href=&#34;https://plugins.jenkins.io/junit/&#34;&gt;junit&lt;/a&gt; plugin
+collect the report.&lt;/p&gt;
+
+&lt;h3 id=&#34;save-commit&#34;&gt;Save &amp;amp; Commit&lt;/h3&gt;
+
+&lt;p&gt;That should be it for the pipeline file! Commit and push it to the git repo,
+and we can start working with it in Jenkins!&lt;/p&gt;
+
+&lt;h2 id=&#34;multibranch-pipelines&#34;&gt;Multibranch Pipelines&lt;/h2&gt;
+
+&lt;p&gt;With the &lt;code&gt;Jenkinsfile&lt;/code&gt; in the repo, we can create the pipeline! Specifically,
+we will be creating a mult-branch pipeline. A &lt;em&gt;multi-branch&lt;/em&gt; job scans a git
+project, and creates a separate pipeline for each branch or PR in the repo.
+This is beneficial for testing, as it will automatically instantiate a test
+pipeline against a newly created PR, so we can verify that the PR passes the
+tests before merging it into the &lt;code&gt;master&lt;/code&gt; branch. Additionally, it lets us make
+sure we aren&amp;rsquo;t breaking anything &lt;em&gt;while&lt;/em&gt; working in a new branch.&lt;/p&gt;
+
+&lt;h4 id=&#34;creating-the-pipeline&#34;&gt;Creating the Pipeline&lt;/h4&gt;
+
+&lt;p&gt;&lt;center&gt;
+&lt;a href=&#34;../../img/posts/creating-website-tests-ci/new-job.png&#34;&gt;
+&lt;img alt=&#34;Creating a new Jenkins Item&#34; src=&#34;../../img/posts/creating-website-tests-ci/new-job.png&#34; style=&#34;max-width: 100%; padding: 5px 15px 10px 10px&#34;/&gt;&lt;/a&gt;
+&lt;div class=&#34;caption&#34;&gt;Select Multibranch Pipeline from the new item menu in Jenkins.&lt;/div&gt;
+&lt;/center&gt;&lt;/p&gt;
+
+&lt;p&gt;To create a Multi-Branch pipeline, select &lt;em&gt;New Item&lt;/em&gt; in the menu on the left.
+Next, enter a name for the pipeline and select &lt;em&gt;Multibranch Pipeline&lt;/em&gt; at the
+bottom. Click &lt;em&gt;Ok&lt;/em&gt;.&lt;/p&gt;
+
+&lt;h4 id=&#34;configuring-the-pipeline&#34;&gt;Configuring the Pipeline&lt;/h4&gt;
+
+&lt;p&gt;&lt;center&gt;
+&lt;a href=&#34;../../img/posts/creating-website-tests-ci/multipipeline-config-options.png&#34;&gt;
+&lt;img alt=&#34;Multibranch pipeline config options&#34; src=&#34;../../img/posts/creating-website-tests-ci/multipipeline-config-options.png&#34; style=&#34;max-width: 100%; padding: 5px 15px 10px 10px&#34;/&gt;&lt;/a&gt;
+&lt;div class=&#34;caption&#34;&gt;Configuration options when creating the multibranch
+pipeline.&lt;/div&gt;
+&lt;/center&gt;&lt;/p&gt;
+
+&lt;p&gt;On the pipelines configuration page, start by filling out the &lt;em&gt;Display Name&lt;/em&gt;
+and &lt;em&gt;Description&lt;/em&gt; text boxes. Next, go down to &lt;em&gt;Branch Sources&lt;/em&gt; and click on
+&lt;em&gt;Add source&lt;/em&gt;. My website is currently hosted on Github, so I will select that.
+However, select &lt;em&gt;Git&lt;/em&gt; if your project is hosted on another &lt;code&gt;git&lt;/code&gt; service.&lt;/p&gt;
+
+&lt;p&gt;Add the Repository URL and choose the pipeline Behaviors. The Behaviors define
+how the pipeline will split up branches. For example, it can be selected to
+only discover branches that are also PRs.&lt;/p&gt;
+
+&lt;p&gt;Next, in the &lt;em&gt;Build Configuration&lt;/em&gt; section, be sure that the &lt;em&gt;Script Path&lt;/em&gt;
+defines the path where the &lt;code&gt;Jenkinsfile&lt;/code&gt; is located. If it&amp;rsquo;s in the root
+directory (and named &lt;code&gt;Jenkinsfile&lt;/code&gt;), the default should work.&lt;/p&gt;
+
+&lt;p&gt;Lastly, select an interval to automatically check the repo for changes in the
+&lt;em&gt;Scan Repository Triggers&lt;/em&gt; section. This step is optional, but I highly
+recommend it.&lt;/p&gt;
+
+&lt;p&gt;That&amp;rsquo;s all we &lt;em&gt;need&lt;/em&gt; to setup, but feel free to research more options. I mostly
+have defaults selected for the rest. When complete, hit &lt;em&gt;Save&lt;/em&gt;.&lt;/p&gt;
+
+&lt;h2 id=&#34;running-pipelines&#34;&gt;Running Pipelines&lt;/h2&gt;
+
+&lt;p&gt;&lt;center&gt;
+&lt;a href=&#34;../../img/posts/creating-website-tests-ci/multibranch-pipeline-overview.png&#34;&gt;
+&lt;img alt=&#34;The multibranch pipeline overview page&#34; src=&#34;../../img/posts/creating-website-tests-ci/multibranch-pipeline-overview.png&#34; style=&#34;max-width: 100%; padding: 5px 15px 10px 10px&#34;/&gt;&lt;/a&gt;
+&lt;div class=&#34;caption&#34;&gt;The multibranch pipeline overview page.&lt;/div&gt;
+&lt;/center&gt;&lt;/p&gt;
+
+&lt;p&gt;Once the multibranch pipeline is created, it should scan the repo to detect any
+branches or pull requests that have defined &lt;code&gt;Jenkinsfile&lt;/code&gt;s. It will create an
+job item in the list for each branch/PR it detects (and kick off runs for
+each).&lt;/p&gt;
+
+&lt;p&gt;To manually start a scan, select &lt;em&gt;Scan Repository Now&lt;/em&gt; in the menu on the left,
+and it will scan all the branches again, looking for changes, and kicking off
+pipeline runs for any branch or pr that has changed.&lt;/p&gt;
+
+&lt;p&gt;&lt;center&gt;
+&lt;a href=&#34;../../img/posts/creating-website-tests-ci/branch-overview.png&#34;&gt;
+&lt;img alt=&#34;The overview page of a single branch&#34; src=&#34;../../img/posts/creating-website-tests-ci/branch-overview.png&#34; style=&#34;max-width: 100%; padding: 5px 15px 10px 10px&#34;/&gt;&lt;/a&gt;
+&lt;div class=&#34;caption&#34;&gt;The overview page of a single branch.&lt;/div&gt;
+&lt;/center&gt;&lt;/p&gt;
+
+&lt;p&gt;To manually start a specific branch run, click on the branch name to enter the
+branch&amp;rsquo;s job overview page. Then, simply click &lt;em&gt;Build Now&lt;/em&gt; on the left. Once
+the run starts, it runs like a normal jenkins job and can be viewed by clicking
+the job&amp;rsquo;s run number to the bottom left. The job&amp;rsquo;s progress can then be viewed
+on that page, or using &lt;em&gt;Blue Ocean&lt;/em&gt; (Recommended).&lt;/p&gt;
+
+&lt;h2 id=&#34;viewing-results&#34;&gt;Viewing Results&lt;/h2&gt;
+
+&lt;p&gt;&lt;center&gt;
+&lt;a href=&#34;../../img/posts/creating-website-tests-ci/test-results.png&#34;&gt;
+&lt;img alt=&#34;The overview page of a single branch&#34; src=&#34;../../img/posts/creating-website-tests-ci/test-results.png&#34; style=&#34;max-width: 100%; padding: 5px 15px 10px 10px&#34;/&gt;&lt;/a&gt;
+&lt;div class=&#34;caption&#34;&gt;The overview page of a single branch.&lt;/div&gt;
+&lt;/center&gt;&lt;/p&gt;
+
+&lt;p&gt;Personally, I prefer to always view the test results using the Blue Ocean
+viewer. Once a job completes, select the &lt;em&gt;Tests&lt;/em&gt; tab at the top of the viewer
+to see the collected test results (this is what the junit steps in our pipeline
+does). If all the tests passed, the page will be green and list all the
+completed tests. If some failed, it will be yellow. When there are failed
+tests, they can be clicked, and the row will expand to show the failed test&amp;rsquo;s
+error message and stack trace. For my test set, this makes it easy to see which
+page failed, and even know what status code was &lt;em&gt;actually&lt;/em&gt; returned in the
+response (by looking at the stack trace). Very helpful!&lt;/p&gt;
+
+&lt;h2 id=&#34;conclusion&#34;&gt;Conclusion&lt;/h2&gt;
+
+&lt;p&gt;There we go! Not only do we now have the website tests automated as a pipeline,
+but as a &lt;em&gt;multibranch&lt;/em&gt; pipeline. This should help automatically ensure that
+nothing breaks as I edit and add to the website. It will even run the tests
+against all my PRs, so I can be confident that when I merge to master, it won&amp;rsquo;t
+slowly degrade my website over time. I have one more post about these tests
+planned, but in the meantime&amp;hellip; enjoy Jenkins!&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>Creating Tests For This Website: Pages</title>

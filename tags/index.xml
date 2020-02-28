@@ -5,15 +5,15 @@
     <description>Recent content in Tags on λ ryan. himmelwright. net</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 23 Feb 2020 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 28 Feb 2020 00:00:00 +0000</lastBuildDate>
     
         <atom:link href="http://ryan.himmelwright.net/tags/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
-      <title>Dev</title>
+      <title>dev</title>
       <link>http://ryan.himmelwright.net/tags/dev/</link>
-      <pubDate>Sun, 23 Feb 2020 00:00:00 +0000</pubDate>
+      <pubDate>Fri, 28 Feb 2020 00:00:00 +0000</pubDate>
       
       <guid>http://ryan.himmelwright.net/tags/dev/</guid>
       <description></description>
@@ -22,16 +22,25 @@
     <item>
       <title>Hugo</title>
       <link>http://ryan.himmelwright.net/tags/hugo/</link>
-      <pubDate>Sun, 23 Feb 2020 00:00:00 +0000</pubDate>
+      <pubDate>Fri, 28 Feb 2020 00:00:00 +0000</pubDate>
       
       <guid>http://ryan.himmelwright.net/tags/hugo/</guid>
       <description></description>
     </item>
     
     <item>
-      <title>Python</title>
+      <title>Jenkins</title>
+      <link>http://ryan.himmelwright.net/tags/jenkins/</link>
+      <pubDate>Fri, 28 Feb 2020 00:00:00 +0000</pubDate>
+      
+      <guid>http://ryan.himmelwright.net/tags/jenkins/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>python</title>
       <link>http://ryan.himmelwright.net/tags/python/</link>
-      <pubDate>Sun, 23 Feb 2020 00:00:00 +0000</pubDate>
+      <pubDate>Fri, 28 Feb 2020 00:00:00 +0000</pubDate>
       
       <guid>http://ryan.himmelwright.net/tags/python/</guid>
       <description></description>
@@ -40,7 +49,7 @@
     <item>
       <title>testing</title>
       <link>http://ryan.himmelwright.net/tags/testing/</link>
-      <pubDate>Sun, 23 Feb 2020 00:00:00 +0000</pubDate>
+      <pubDate>Fri, 28 Feb 2020 00:00:00 +0000</pubDate>
       
       <guid>http://ryan.himmelwright.net/tags/testing/</guid>
       <description></description>
@@ -49,7 +58,7 @@
     <item>
       <title>Website</title>
       <link>http://ryan.himmelwright.net/tags/website/</link>
-      <pubDate>Sun, 23 Feb 2020 00:00:00 +0000</pubDate>
+      <pubDate>Fri, 28 Feb 2020 00:00:00 +0000</pubDate>
       
       <guid>http://ryan.himmelwright.net/tags/website/</guid>
       <description></description>
@@ -65,7 +74,7 @@
     </item>
     
     <item>
-      <title>hardware</title>
+      <title>Hardware</title>
       <link>http://ryan.himmelwright.net/tags/hardware/</link>
       <pubDate>Sat, 25 Jan 2020 00:00:00 +0000</pubDate>
       
@@ -200,7 +209,7 @@
     </item>
     
     <item>
-      <title>monitors</title>
+      <title>Monitors</title>
       <link>http://ryan.himmelwright.net/tags/monitors/</link>
       <pubDate>Mon, 21 Oct 2019 00:00:00 +0000</pubDate>
       
@@ -209,7 +218,7 @@
     </item>
     
     <item>
-      <title>dotfiles</title>
+      <title>Dotfiles</title>
       <link>http://ryan.himmelwright.net/tags/dotfiles/</link>
       <pubDate>Fri, 13 Sep 2019 00:00:00 +0000</pubDate>
       
@@ -227,7 +236,7 @@
     </item>
     
     <item>
-      <title>DevOps</title>
+      <title>Devops</title>
       <link>http://ryan.himmelwright.net/tags/devops/</link>
       <pubDate>Wed, 04 Sep 2019 00:00:00 +0000</pubDate>
       
@@ -236,7 +245,7 @@
     </item>
     
     <item>
-      <title>git</title>
+      <title>Git</title>
       <link>http://ryan.himmelwright.net/tags/git/</link>
       <pubDate>Wed, 04 Sep 2019 00:00:00 +0000</pubDate>
       
@@ -290,7 +299,7 @@
     </item>
     
     <item>
-      <title>customization</title>
+      <title>Customization</title>
       <link>http://ryan.himmelwright.net/tags/customization/</link>
       <pubDate>Thu, 23 May 2019 00:00:00 +0000</pubDate>
       
@@ -313,15 +322,6 @@
       <pubDate>Thu, 28 Feb 2019 00:00:00 +0000</pubDate>
       
       <guid>http://ryan.himmelwright.net/tags/ipad/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Jenkins</title>
-      <link>http://ryan.himmelwright.net/tags/jenkins/</link>
-      <pubDate>Thu, 07 Feb 2019 00:00:00 +0000</pubDate>
-      
-      <guid>http://ryan.himmelwright.net/tags/jenkins/</guid>
       <description></description>
     </item>
     
@@ -443,7 +443,7 @@
     </item>
     
     <item>
-      <title>Go</title>
+      <title>GO</title>
       <link>http://ryan.himmelwright.net/tags/go/</link>
       <pubDate>Sat, 02 Sep 2017 00:00:00 +0000</pubDate>
       

@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Creating Tests For This Website: CI -- λ ryan. himmelwright. net</title>
+
+    
+
+    
+    <link href="http://ryan.himmelwright.net/css/bootstrap.min.css" rel="stylesheet">
+
+    
+    <link href="http://ryan.himmelwright.net/css/clean-blog.min.css" rel="stylesheet">
+
+    
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href='//fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+
+    
+    
+    
+
+
+
+    
+    <script type="text/javascript">
+        var _paq = _paq || [];
+         
+        _paq.push(["setDocumentTitle", document.domain + "/" + document.title]);
+        _paq.push(["setCookieDomain", "*.ryan.himmelwright.net"]);
+        _paq.push(["setDomains", ["*.ryan.himmelwright.net"]]);
+        _paq.push(['trackPageView']);
+        _paq.push(['enableLinkTracking']);
+        (function() {
+        var u="//cloud.himmelwright.net/piwik/";
+        _paq.push(['setTrackerUrl', u+'piwik.php']);
+        _paq.push(['setSiteId', '1']);
+        var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+        g.type='text/javascript'; g.async=true; g.defer=true; g.src=u+'piwik.js'; s.parentNode.insertBefore(g,s);
+        })();
+        </script>
+        <noscript><p><img src="//cloud.himmelwright.net/piwik/piwik.php?idsite=1&rec=1" style="border:0;" alt="" /></p></noscript>
+        
+
+
+
+</head>
+
+<body>
+
+    
+    <nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+        <div class="container-fluid">
+            
+            <div class="navbar-header page-scroll">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="http://ryan.himmelwright.net">λ ryan. himmelwright. net</a>
+            </div>
+
+                       
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    
+                    <li>
+                        <a href="../../">home</a>
+                    </li>
+                    
+                    <li>
+                        <a href="../../pages/about/">About</a>
+                    </li>
+                    
+                    <li>
+                        <a href="../../pages/homelab/">Homelab</a>
+                    </li>
+                    
+                    <li>
+                        <a href="../../tags">tags</a>
+                    </li>
+                    
+                    <li>
+                        <a href="../../post/">Archives</a>
+                    </li>
+                    
+                    <li>
+                        <a href="../../post/index.xml">RSS</a>
+                    </li>
+                    
+                  </ul>
+            </div>
+           
+
+        </div>
+        
+    </nav>
+
+
+
+
+<header class="intro-header" style="background-image: url('http://ryan.himmelwright.net/img/posts/creating-website-tests-ci/pnc-arena2.jpeg')">
+    
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <h1>Creating Tests For This Website: CI</h1>
+                    <h2 class="subheading"></h2>
+                    <span class="meta">
+                        
+Posted by <a href="#">Ryan Himmelwright</a> on Fri, Feb 28, 2020
+
+
+
+
+
+
+
+<br />
+Tags <a href="../../tags/website">website</a>, <a href="../../tags/hugo">hugo</a>, <a href="../../tags/dev">dev</a>, <a href="../../tags/python">python</a>, <a href="../../tags/testing">testing</a>, <a href="../../tags/jenkins">jenkins</a>
+
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <span class="header-caption">PNC Arena, Raleigh NC</span>
+    
+    </header>
+
+    
+    <article>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                    
+                    <p>In the <a href="../../post/creating-website-tests-pages/">last post</a>, I setup some simple
+testing for my website builds to that ensure that pages were being served
+correctly.  However, I can&rsquo;t trust myself to always manually run the tests
+before merging a branch into <code>master</code>. Luckily, I have
+<a href="https://jenkins.io">Jenkins</a> to take care of all the &ldquo;<em>responsible</em>&rdquo; tasks. In
+this post, we will take the test framework created in the previous post&hellip;  and
+automate it.</p>
+
+<h2 id="what-i-m-using-plan">What I&rsquo;m Using/Plan</h2>
+
+<p><center>
+<a href="../../img/posts/creating-website-tests-ci/jenkins-logo.png">
+<img alt="Jenkins Logo" src="../../img/posts/creating-website-tests-ci/jenkins-logo.png" style="float: right; max-width: 100%; padding: 5px 15px 10px 10px"/></a>
+</center></p>
+
+<p>I have started using <a href="https://gitlab.com">Gitlab</a> for more of my projects
+recently, but have decided to keep my website source hosted on Github for the time
+being. So, I won&rsquo;t be using Gitlab&rsquo;s CI/CD tools for <em>this</em>, but I wanted it
+to be known that this automation is <em>very</em> straight forward and could be easily
+accomplished there as well.</p>
+
+<p>For this project, because my website is hosted on Github, and I <em>already</em>
+have <a href="../../post/extending-vm-hd/">my own Jenkins server</a> configured&hellip; I will be
+using a Jenkins pipeline. First, we will create the pipeline file to add
+to the git repo. Then, we will use the pipeline to configure a new
+<em>multi-branch</em> pipeline in Jenkins.</p>
+
+<h2 id="jenkinsfile">Jenkinsfile</h2>
+
+<p>Lets start by creating the Jenkinsfile. Create a new file named <code>Jenkinsfile</code>
+in the project directory. Next, lets create a new pipeline and get ready to add
+stages:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-groovy" data-lang="groovy">pipeline <span style="color:#f92672">{</span>
+    agent any
+
+    stages <span style="color:#f92672">{</span>
+
+        <span style="color:#75715e">// This is where the stages will be defined //
+</span><span style="color:#75715e"></span>
+    <span style="color:#f92672">}</span>
+<span style="color:#f92672">}</span></code></pre></div>
+<p><em>(Make sure to add the closing <code>}</code>&rsquo;s!)</em></p>
+
+<h3 id="stages">Stages</h3>
+
+<p>Now, lets add the stages. A stage is a named, functional chunk in our pipeline.
+Breaking the pipeline into stages will help keep all the various steps
+organized, as well as make it easier to follow along as the pipeline runs.</p>
+
+<p>Each of the following stage definitions will be placed inside the <code>stages { ..
+}</code> section we defined above (<em>in the same order as they are listed!</em>).</p>
+
+<h4 id="setup-deps">Setup Deps</h4>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-groovy" data-lang="groovy">stage<span style="color:#f92672">(</span><span style="color:#e6db74">&#34;Setup Deps&#34;</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+    steps <span style="color:#f92672">{</span>
+        sh <span style="color:#e6db74">&#39;sudo yum update -y&#39;</span>
+        sh <span style="color:#e6db74">&#39;sudo yum install -y epel-release&#39;</span>
+        sh <span style="color:#e6db74">&#39;sudo yum install -y hugo python36-pytest&#39;</span>
+    <span style="color:#f92672">}</span>
+<span style="color:#f92672">}</span></code></pre></div>
+<p>The first stage is &lsquo;Setup Deps&rsquo;. This stage handles installing any dependencies
+our Jenkins node will need installed to run the tests. Our tests will require
+<code>hugo</code>, <code>pytest</code>, and <code>python3</code>. It will also require some <code>pip</code> packages, but
+we will get to that later.</p>
+
+<p><em>Note: My current Jenkins node is running CentOS, so my package manager commands
+are specific to that. As always, adjust accordingly.</em></p>
+
+<h4 id="start-hugo-server">Start Hugo Server</h4>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-groovy" data-lang="groovy">stage<span style="color:#f92672">(</span><span style="color:#e6db74">&#34;Start Hugo Server&#34;</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+    steps <span style="color:#f92672">{</span>
+        sh <span style="color:#e6db74">&#39;hugo serve &amp;&#39;</span>
+    <span style="color:#f92672">}</span>
+<span style="color:#f92672">}</span></code></pre></div>
+<p>With <code>hugo</code> installed (and presumably being inside the website&rsquo;s git repo&hellip;),
+we can start the web server. This is done with <code>hugo serve</code>. The <code>&amp;</code> is used to
+have the server run as a background process so that it won&rsquo;t be killed when the
+pipeline to continues on.</p>
+
+<p><em>Note: Make sure the tests are set to point to <code>localhost:1313</code>, as that is
+where <code>hugo</code> will try to serve the website by default.</em></p>
+
+<h4 id="setup-python">Setup Python</h4>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-groovy" data-lang="groovy">stage<span style="color:#f92672">(</span><span style="color:#e6db74">&#34;Setup Tests&#34;</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+    steps <span style="color:#f92672">{</span>
+        sh <span style="color:#e6db74">&#39;pip3 install pipenv --user&#39;</span>
+        sh <span style="color:#e6db74">&#39;python3 -m pipenv install&#39;</span>
+    <span style="color:#f92672">}</span>
+<span style="color:#f92672">}</span></code></pre></div>
+<p>Next, lets configure <code>python</code> by setting up an environment and installing the
+packages we need in it. First, I use <code>pip3</code> to install <code>pipenv</code>. Then, I have
+<code>pipenv</code> install the tests&rsquo; required python packages, which are defined in the
+repo&rsquo;s <code>Pipfile</code>.</p>
+
+<h4 id="run-tests">Run Tests</h4>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-groovy" data-lang="groovy">stage<span style="color:#f92672">(</span><span style="color:#e6db74">&#34;Run Tests&#34;</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+    steps <span style="color:#f92672">{</span>
+        sh <span style="color:#e6db74">&#39;&#39;&#39;
+</span><span style="color:#e6db74">            set +e
+</span><span style="color:#e6db74">            python3 -m pipenv run pytest -v --junit-xml himmallright-source-test-report.xml .
+</span><span style="color:#e6db74">            set -e
+</span><span style="color:#e6db74">        &#39;&#39;&#39;</span><span style="color:#f92672">.</span><span style="color:#a6e22e">stripIndent</span><span style="color:#f92672">()</span>
+    <span style="color:#f92672">}</span>
+<span style="color:#f92672">}</span></code></pre></div>
+<p>Test time. I again utilize <code>pipenv</code> here, by having it call the test command
+(<code>pytest -v --junit-xml himmallright-source-test-report.xml .</code>) so that it runs
+in the pipenv virtual environment.</p>
+
+<p>Two things to note here:</p>
+
+<ul>
+<li>The <code>--junit-xml</code> flag defines a xml filename to write the junit test report
+to. This will be used by Jenkins to collect the test results.</li>
+<li>The test command is wrapped between <code>set +e</code> and <code>set -e</code> commands, which
+allows tests to fail but without triggering a <em>pipeline</em> failure in
+Jenkins.  This way even if tests fail, we make it all the way through
+collection so we can see <em>what</em> tests failed and <em>why</em>.</li>
+</ul>
+
+<h4 id="collect-test-results">Collect Test Results</h4>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-groovy" data-lang="groovy">stage<span style="color:#f92672">(</span><span style="color:#e6db74">&#34;Collect Test Resuts&#34;</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+    steps <span style="color:#f92672">{</span>
+        archiveArtifacts <span style="color:#e6db74">&#34;himmallright-source-test-report.xml&#34;</span>
+        junit <span style="color:#e6db74">&#34;himmallright-source-test-report.xml&#34;</span>
+    <span style="color:#f92672">}</span>
+<span style="color:#f92672">}</span></code></pre></div>
+<p>Next, we archive the junit report xml file as a Jenkins artifact (just in
+case). Finally, we have the <a href="https://plugins.jenkins.io/junit/">junit</a> plugin
+collect the report.</p>
+
+<h3 id="save-commit">Save &amp; Commit</h3>
+
+<p>That should be it for the pipeline file! Commit and push it to the git repo,
+and we can start working with it in Jenkins!</p>
+
+<h2 id="multibranch-pipelines">Multibranch Pipelines</h2>
+
+<p>With the <code>Jenkinsfile</code> in the repo, we can create the pipeline! Specifically,
+we will be creating a mult-branch pipeline. A <em>multi-branch</em> job scans a git
+project, and creates a separate pipeline for each branch or PR in the repo.
+This is beneficial for testing, as it will automatically instantiate a test
+pipeline against a newly created PR, so we can verify that the PR passes the
+tests before merging it into the <code>master</code> branch. Additionally, it lets us make
+sure we aren&rsquo;t breaking anything <em>while</em> working in a new branch.</p>
+
+<h4 id="creating-the-pipeline">Creating the Pipeline</h4>
+
+<p><center>
+<a href="../../img/posts/creating-website-tests-ci/new-job.png">
+<img alt="Creating a new Jenkins Item" src="../../img/posts/creating-website-tests-ci/new-job.png" style="max-width: 100%; padding: 5px 15px 10px 10px"/></a>
+<div class="caption">Select Multibranch Pipeline from the new item menu in Jenkins.</div>
+</center></p>
+
+<p>To create a Multi-Branch pipeline, select <em>New Item</em> in the menu on the left.
+Next, enter a name for the pipeline and select <em>Multibranch Pipeline</em> at the
+bottom. Click <em>Ok</em>.</p>
+
+<h4 id="configuring-the-pipeline">Configuring the Pipeline</h4>
+
+<p><center>
+<a href="../../img/posts/creating-website-tests-ci/multipipeline-config-options.png">
+<img alt="Multibranch pipeline config options" src="../../img/posts/creating-website-tests-ci/multipipeline-config-options.png" style="max-width: 100%; padding: 5px 15px 10px 10px"/></a>
+<div class="caption">Configuration options when creating the multibranch
+pipeline.</div>
+</center></p>
+
+<p>On the pipelines configuration page, start by filling out the <em>Display Name</em>
+and <em>Description</em> text boxes. Next, go down to <em>Branch Sources</em> and click on
+<em>Add source</em>. My website is currently hosted on Github, so I will select that.
+However, select <em>Git</em> if your project is hosted on another <code>git</code> service.</p>
+
+<p>Add the Repository URL and choose the pipeline Behaviors. The Behaviors define
+how the pipeline will split up branches. For example, it can be selected to
+only discover branches that are also PRs.</p>
+
+<p>Next, in the <em>Build Configuration</em> section, be sure that the <em>Script Path</em>
+defines the path where the <code>Jenkinsfile</code> is located. If it&rsquo;s in the root
+directory (and named <code>Jenkinsfile</code>), the default should work.</p>
+
+<p>Lastly, select an interval to automatically check the repo for changes in the
+<em>Scan Repository Triggers</em> section. This step is optional, but I highly
+recommend it.</p>
+
+<p>That&rsquo;s all we <em>need</em> to setup, but feel free to research more options. I mostly
+have defaults selected for the rest. When complete, hit <em>Save</em>.</p>
+
+<h2 id="running-pipelines">Running Pipelines</h2>
+
+<p><center>
+<a href="../../img/posts/creating-website-tests-ci/multibranch-pipeline-overview.png">
+<img alt="The multibranch pipeline overview page" src="../../img/posts/creating-website-tests-ci/multibranch-pipeline-overview.png" style="max-width: 100%; padding: 5px 15px 10px 10px"/></a>
+<div class="caption">The multibranch pipeline overview page.</div>
+</center></p>
+
+<p>Once the multibranch pipeline is created, it should scan the repo to detect any
+branches or pull requests that have defined <code>Jenkinsfile</code>s. It will create an
+job item in the list for each branch/PR it detects (and kick off runs for
+each).</p>
+
+<p>To manually start a scan, select <em>Scan Repository Now</em> in the menu on the left,
+and it will scan all the branches again, looking for changes, and kicking off
+pipeline runs for any branch or pr that has changed.</p>
+
+<p><center>
+<a href="../../img/posts/creating-website-tests-ci/branch-overview.png">
+<img alt="The overview page of a single branch" src="../../img/posts/creating-website-tests-ci/branch-overview.png" style="max-width: 100%; padding: 5px 15px 10px 10px"/></a>
+<div class="caption">The overview page of a single branch.</div>
+</center></p>
+
+<p>To manually start a specific branch run, click on the branch name to enter the
+branch&rsquo;s job overview page. Then, simply click <em>Build Now</em> on the left. Once
+the run starts, it runs like a normal jenkins job and can be viewed by clicking
+the job&rsquo;s run number to the bottom left. The job&rsquo;s progress can then be viewed
+on that page, or using <em>Blue Ocean</em> (Recommended).</p>
+
+<h2 id="viewing-results">Viewing Results</h2>
+
+<p><center>
+<a href="../../img/posts/creating-website-tests-ci/test-results.png">
+<img alt="The overview page of a single branch" src="../../img/posts/creating-website-tests-ci/test-results.png" style="max-width: 100%; padding: 5px 15px 10px 10px"/></a>
+<div class="caption">The overview page of a single branch.</div>
+</center></p>
+
+<p>Personally, I prefer to always view the test results using the Blue Ocean
+viewer. Once a job completes, select the <em>Tests</em> tab at the top of the viewer
+to see the collected test results (this is what the junit steps in our pipeline
+does). If all the tests passed, the page will be green and list all the
+completed tests. If some failed, it will be yellow. When there are failed
+tests, they can be clicked, and the row will expand to show the failed test&rsquo;s
+error message and stack trace. For my test set, this makes it easy to see which
+page failed, and even know what status code was <em>actually</em> returned in the
+response (by looking at the stack trace). Very helpful!</p>
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p>There we go! Not only do we now have the website tests automated as a pipeline,
+but as a <em>multibranch</em> pipeline. This should help automatically ensure that
+nothing breaks as I edit and add to the website. It will even run the tests
+against all my PRs, so I can be confident that when I merge to master, it won&rsquo;t
+slowly degrade my website over time. I have one more post about these tests
+planned, but in the meantime&hellip; enjoy Jenkins!</p>
+
+                    
+                    
+                    
+                         <div style="float: right; text-decoration: underline; text-align: right;">Prev Post:</div>
+                    
+                    <br>
+                    
+                    
+                        <a href="http://ryan.himmelwright.net/post/creating-website-tests-pages/" style="text-align: right; float: right; max-width: 40%">Creating Tests For This Website: Pages</a>
+                    
+
+			
+			<div class="comment-section">
+			  
+   <div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "himmallright" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+			</div>
+                </div>
+            </div>
+        </div>
+    </article>
+
+        <hr>
+    
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                  <ul class="list-inline text-center">
+                    
+                      <li>
+                        <a href="mailto:ryan@himmelwright.net">
+                          <span class="fa-stack fa-lg">
+                            <i class="fa fa-circle fa-stack-2x"></i>
+                            <i class="fa fa-envelope-o fa-stack-1x fa-inverse"></i>
+                          </span>
+                        </a>
+                      </li>
+                    
+                    
+                    <li>
+                      <a href="https://github.com/himmAllRight">
+                        <span class="fa-stack fa-lg">
+                          <i class="fa fa-circle fa-stack-2x"></i>
+                          <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                        </span>
+                      </a>
+                    </li>
+                    
+                    <li>
+                      <a href="https://www.linkedin.com/in/ryan-himmelwright-b3891774/">
+                        <span class="fa-stack fa-lg">
+                          <i class="fa fa-circle fa-stack-2x"></i>
+                          <i class="fa fa-linkedin fa-stack-1x fa-inverse"></i>
+                        </span>
+                      </a>
+                    </li>
+                    
+                  </ul>
+<p class="copyright text-muted">
+
+<a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img
+  alt="Creative Commons License" style="border-width:0"
+  src="https://i.creativecommons.org/l/by/4.0/88x31.png" /></a><br />This work
+by <a xmlns:cc="http://creativecommons.org/ns#" href="http://ryan.himmelwright.net" property="cc:attributionName" rel="cc:attributionURL">Ryan Himmelwright</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
+</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    
+    <script src="http://ryan.himmelwright.net/js/jquery.min.js"></script>
+
+    
+    <script src="http://ryan.himmelwright.net/js/bootstrap.min.js"></script>
+
+    
+    <script src="http://ryan.himmelwright.net/js/clean-blog.js"></script>
+
+    
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-123-45', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+
+
+</body>
+
+</html>
+
