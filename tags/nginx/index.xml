@@ -307,7 +307,7 @@ directory will also be loaded and used by nginx. This allows us to add our own c
 the reverse proxy definitions. These are just server block
 entries. For example:&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;server &lt;span style=&#34;color:#f92672&#34;&gt;{&lt;/span&gt;
-        listen &lt;span style=&#34;color:#ae81ff&#34;&gt;80&lt;/span&gt;;
+        listen 80;
         server_name website.himmelwright.net;
         location / &lt;span style=&#34;color:#f92672&#34;&gt;{&lt;/span&gt;
                 proxy_pass      http://192.168.1.198:80;
@@ -315,7 +315,7 @@ entries. For example:&lt;/p&gt;
 &lt;span style=&#34;color:#f92672&#34;&gt;}&lt;/span&gt;
 
 server &lt;span style=&#34;color:#f92672&#34;&gt;{&lt;/span&gt;
-        listen &lt;span style=&#34;color:#ae81ff&#34;&gt;80&lt;/span&gt;;
+        listen 80;
         server_name dashboard.himmelwright.net;
         location / &lt;span style=&#34;color:#f92672&#34;&gt;{&lt;/span&gt;
                 proxy_pass      http://192.168.1.200:8080;
@@ -330,12 +330,12 @@ file, and use that for nginx. I have experienced this in the past with
 &lt;a href=&#34;https://about.gitlab.com/&#34;&gt;Gitlab&lt;/a&gt;. For example:&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;/etc/hosts
 ---
-&lt;span style=&#34;color:#ae81ff&#34;&gt;192&lt;/span&gt;.168.1.201  git.himmelwright.net&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+192.168.1.201  git.himmelwright.net&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;and then in the config file:&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;/etc/nginx/config.d/reverse-proxies.config
 ---
 server &lt;span style=&#34;color:#f92672&#34;&gt;{&lt;/span&gt;
-        listen &lt;span style=&#34;color:#ae81ff&#34;&gt;80&lt;/span&gt;;
+        listen 80;
         server_name git.himmelwright.net;
         location / &lt;span style=&#34;color:#f92672&#34;&gt;{&lt;/span&gt;
                 proxy_pass      http://git.himmelwright.net:80;

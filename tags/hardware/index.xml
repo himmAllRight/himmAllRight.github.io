@@ -858,13 +858,13 @@ Many root sub-directories are actually mounted
 notably &lt;code&gt;/tmp&lt;/code&gt;. To see some &lt;code&gt;tmpfs&lt;/code&gt; mounts on a system, &lt;code&gt;grep&lt;/code&gt; the &lt;code&gt;df&lt;/code&gt;
 command for &lt;code&gt;tmpfs&lt;/code&gt;:&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;➜  ~ df -h | grep tmpfs
-devtmpfs                  16G     &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;   16G   &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;% /dev
-tmpfs                     16G  299M   16G   &lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;% /dev/shm
-tmpfs                     16G  &lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;.0M   16G   &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;% /run
-tmpfs                     16G     &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;   16G   &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;% /sys/fs/cgroup
-tmpfs                     16G  &lt;span style=&#34;color:#ae81ff&#34;&gt;5&lt;/span&gt;.9M   16G   &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;% /tmp
-tmpfs                    &lt;span style=&#34;color:#ae81ff&#34;&gt;3&lt;/span&gt;.2G  184K  &lt;span style=&#34;color:#ae81ff&#34;&gt;3&lt;/span&gt;.2G   &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;% /run/user/1000
-tmpfs                     12G     &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;   12G   &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;% /var/ramdisk&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+devtmpfs                  16G     &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;   16G   0% /dev
+tmpfs                     16G  299M   16G   2% /dev/shm
+tmpfs                     16G  2.0M   16G   1% /run
+tmpfs                     16G     &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;   16G   0% /sys/fs/cgroup
+tmpfs                     16G  5.9M   16G   1% /tmp
+tmpfs                    3.2G  184K  3.2G   1% /run/user/1000
+tmpfs                     12G     &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;   12G   0% /var/ramdisk&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;All the contents of a &lt;code&gt;tmpfs&lt;/code&gt; filesystem reside in system memory, typically
 RAM. This allows file access that is &lt;em&gt;fast&lt;/em&gt;.  However, like RAM,
 &lt;code&gt;tmpfs&lt;/code&gt; is also &lt;em&gt;volatile&lt;/em&gt;, meaning it will all be erased if the computer
@@ -901,7 +901,7 @@ mounts on a system (such as &lt;code&gt;/tmp&lt;/code&gt; and &lt;code&gt;/run&l
 should be empty since it was just allocated&lt;/em&gt;)&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;$ df -h
 ...
-tmpfs                     10G     &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;   10G   &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;% /var/ramdisk
+tmpfs                     10G     &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;   10G   0% /var/ramdisk
 ...&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;h3 id=&#34;testing&#34;&gt;Testing&lt;/h3&gt;
 
@@ -1026,19 +1026,19 @@ new options using &lt;code&gt;xrandr&lt;/code&gt;.&lt;/p&gt;
 &lt;p&gt;To create a new xrandr mode, I first needed to calculate a new modeline. This
 can be done by using the &lt;code&gt;gtf&lt;/code&gt; tool. To calculate a modeline for a
 3440x1440 resolution at 59.9 hertz for example, use the following:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;➜  ~ gtf &lt;span style=&#34;color:#ae81ff&#34;&gt;3440&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1440&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;59&lt;/span&gt;.9
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;➜  ~ gtf &lt;span style=&#34;color:#ae81ff&#34;&gt;3440&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1440&lt;/span&gt; 59.9
 
   &lt;span style=&#34;color:#75715e&#34;&gt;# 3440x1440 @ 59.90 Hz (GTF) hsync: 89.25 kHz; pclk: 418.41 MHz&lt;/span&gt;
-  Modeline &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;3440x1440_59.90&amp;#34;&lt;/span&gt;  &lt;span style=&#34;color:#ae81ff&#34;&gt;418&lt;/span&gt;.41  &lt;span style=&#34;color:#ae81ff&#34;&gt;3440&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;3688&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;4064&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;4688&lt;/span&gt;  &lt;span style=&#34;color:#ae81ff&#34;&gt;1440&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1441&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1444&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1490&lt;/span&gt;  -HSync +Vsync
+  Modeline &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;3440x1440_59.90&amp;#34;&lt;/span&gt;  418.41  &lt;span style=&#34;color:#ae81ff&#34;&gt;3440&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;3688&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;4064&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;4688&lt;/span&gt;  &lt;span style=&#34;color:#ae81ff&#34;&gt;1440&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1441&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1444&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1490&lt;/span&gt;  -HSync +Vsync
 
 ➜  ~&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;The line that starts with &lt;em&gt;Modeline&lt;/em&gt; (but &lt;em&gt;not including&lt;/em&gt; &amp;ldquo;Modeline&amp;rdquo;) is what
 we want. Copy that and give it to &lt;code&gt;xrandr&lt;/code&gt; with the &lt;code&gt;--newmode&lt;/code&gt; flag to create
 a new mode:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;xrandr --newmode &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;3440x1440_59.90&amp;#34;&lt;/span&gt;  &lt;span style=&#34;color:#ae81ff&#34;&gt;418&lt;/span&gt;.41  &lt;span style=&#34;color:#ae81ff&#34;&gt;3440&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;3688&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;4064&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;4688&lt;/span&gt;  &lt;span style=&#34;color:#ae81ff&#34;&gt;1440&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1441&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1444&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1490&lt;/span&gt;  -HSync +Vsync&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;xrandr --newmode &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;3440x1440_59.90&amp;#34;&lt;/span&gt;  418.41  &lt;span style=&#34;color:#ae81ff&#34;&gt;3440&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;3688&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;4064&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;4688&lt;/span&gt;  &lt;span style=&#34;color:#ae81ff&#34;&gt;1440&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1441&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1444&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1490&lt;/span&gt;  -HSync +Vsync&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;Lastly, to add that mode to a display, use that same line but with the
 &lt;code&gt;--addmode&lt;/code&gt; flag, and the monitor to switch (&lt;code&gt;DP-1&lt;/code&gt; in my case):&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;xrandr --addmode DP-1 &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;3440x1440_59.90&amp;#34;&lt;/span&gt;  &lt;span style=&#34;color:#ae81ff&#34;&gt;418&lt;/span&gt;.41  &lt;span style=&#34;color:#ae81ff&#34;&gt;3440&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;3688&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;4064&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;4688&lt;/span&gt;  &lt;span style=&#34;color:#ae81ff&#34;&gt;1440&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1441&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1444&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1490&lt;/span&gt;  -HSync +Vsync&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;xrandr --addmode DP-1 &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;3440x1440_59.90&amp;#34;&lt;/span&gt;  418.41  &lt;span style=&#34;color:#ae81ff&#34;&gt;3440&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;3688&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;4064&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;4688&lt;/span&gt;  &lt;span style=&#34;color:#ae81ff&#34;&gt;1440&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1441&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1444&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1490&lt;/span&gt;  -HSync +Vsync&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;&lt;em&gt;Note: To find the available monitor names, enter a plain &lt;code&gt;xrandr&lt;/code&gt; command, and
 it will spit out all the available outputs.&lt;/em&gt;&lt;/p&gt;
 
@@ -1059,7 +1059,7 @@ NAME&lt;/em&gt; in the menu bar).&lt;/p&gt;
 &lt;p&gt;If you are too &lt;a href=&#34;https://en.wikipedia.org/wiki/Leet&#34;&gt;1337&lt;/a&gt; to use a GUI app,
 never fear! The display can be switched to the new mode using &lt;code&gt;xrandr&lt;/code&gt; with the
 &lt;code&gt;--output&lt;/code&gt; and &lt;code&gt;--mode&lt;/code&gt; flags:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;xrandr --output DP-1 --mode &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;3440x1440_59.90&amp;#34;&lt;/span&gt;  &lt;span style=&#34;color:#ae81ff&#34;&gt;418&lt;/span&gt;.41  &lt;span style=&#34;color:#ae81ff&#34;&gt;3440&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;3688&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;4064&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;4688&lt;/span&gt;  &lt;span style=&#34;color:#ae81ff&#34;&gt;1440&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1441&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1444&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1490&lt;/span&gt;  -HSync +Vsync&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;xrandr --output DP-1 --mode &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;3440x1440_59.90&amp;#34;&lt;/span&gt;  418.41  &lt;span style=&#34;color:#ae81ff&#34;&gt;3440&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;3688&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;4064&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;4688&lt;/span&gt;  &lt;span style=&#34;color:#ae81ff&#34;&gt;1440&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1441&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1444&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1490&lt;/span&gt;  -HSync +Vsync&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;h3 id=&#34;but-wait-there-s-more-scripting-it&#34;&gt;But Wait, There&amp;rsquo;s More! Scripting it:&lt;/h3&gt;
 
 &lt;p&gt;After running these commands twice&amp;hellip; I realized it would be easy enough to
@@ -1101,7 +1101,7 @@ main &lt;span style=&#34;color:#f92672&#34;&gt;()&lt;/span&gt; &lt;span style=&#
 	MONITOR&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;$3
 	ESLEEP&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;3&lt;/span&gt;
 	&lt;span style=&#34;color:#75715e&#34;&gt;# Fancier Vars :P&lt;/span&gt;
-	gtf_output&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;$(&lt;/span&gt;gtf $WIDTH $HEIGHT &lt;span style=&#34;color:#ae81ff&#34;&gt;59&lt;/span&gt;.9 | grep -i &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;modeline&amp;#34;&lt;/span&gt; | sed -e &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;s/\&amp;lt;Modeline\&amp;gt;//g&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;)&lt;/span&gt;
+	gtf_output&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;$(&lt;/span&gt;gtf $WIDTH $HEIGHT 59.9 | grep -i &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;modeline&amp;#34;&lt;/span&gt; | sed -e &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;s/\&amp;lt;Modeline\&amp;gt;//g&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;)&lt;/span&gt;
 	modename&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;$(&lt;/span&gt;echo $gtf_output | grep -o  &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;\(\&amp;#34;.*\&amp;#34;\)&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;)&lt;/span&gt;
 	modeexists&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;$(&lt;/span&gt;xrandr | grep -i $modename&lt;span style=&#34;color:#66d9ef&#34;&gt;)&lt;/span&gt;
 

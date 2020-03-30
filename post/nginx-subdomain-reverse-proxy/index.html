@@ -215,7 +215,7 @@ directory will also be loaded and used by nginx. This allows us to add our own c
 the reverse proxy definitions. These are just server block
 entries. For example:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">server <span style="color:#f92672">{</span>
-        listen <span style="color:#ae81ff">80</span>;
+        listen 80;
         server_name website.himmelwright.net;
         location / <span style="color:#f92672">{</span>
                 proxy_pass      http://192.168.1.198:80;
@@ -223,7 +223,7 @@ entries. For example:</p>
 <span style="color:#f92672">}</span>
 
 server <span style="color:#f92672">{</span>
-        listen <span style="color:#ae81ff">80</span>;
+        listen 80;
         server_name dashboard.himmelwright.net;
         location / <span style="color:#f92672">{</span>
                 proxy_pass      http://192.168.1.200:8080;
@@ -238,12 +238,12 @@ file, and use that for nginx. I have experienced this in the past with
 <a href="https://about.gitlab.com/">Gitlab</a>. For example:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">/etc/hosts
 ---
-<span style="color:#ae81ff">192</span>.168.1.201  git.himmelwright.net</code></pre></div>
+192.168.1.201  git.himmelwright.net</code></pre></div>
 <p>and then in the config file:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">/etc/nginx/config.d/reverse-proxies.config
 ---
 server <span style="color:#f92672">{</span>
-        listen <span style="color:#ae81ff">80</span>;
+        listen 80;
         server_name git.himmelwright.net;
         location / <span style="color:#f92672">{</span>
                 proxy_pass      http://git.himmelwright.net:80;

@@ -192,7 +192,7 @@ virtual size: 20G <span style="color:#f92672">(</span><span style="color:#ae81ff
 disk size: 20G
 cluster_size: <span style="color:#ae81ff">65536</span>
 Format specific information:
-    compat: <span style="color:#ae81ff">1</span>.1
+    compat: 1.1
     lazy refcounts: true
     refcount bits: <span style="color:#ae81ff">16</span>
     corrupt: false
@@ -207,7 +207,7 @@ virtual size: 60G <span style="color:#f92672">(</span><span style="color:#ae81ff
 disk size: 20G
 cluster_size: <span style="color:#ae81ff">65536</span>
 Format specific information:
-    compat: <span style="color:#ae81ff">1</span>.1
+    compat: 1.1
     lazy refcounts: true
     refcount bits: <span style="color:#ae81ff">16</span>
     corrupt: false
@@ -263,13 +263,13 @@ data blocks changed from <span style="color:#ae81ff">4851712</span> to <span sty
 
 <span style="color:#f92672">[</span>ryan@mr-mime ~<span style="color:#f92672">]</span>$ df -h
 Filesystem               Size  Used Avail Use% Mounted on
-/dev/mapper/centos-root   59G   19G   40G  <span style="color:#ae81ff">32</span>% /
-devtmpfs                 <span style="color:#ae81ff">1</span>.9G     <span style="color:#ae81ff">0</span>  <span style="color:#ae81ff">1</span>.9G   <span style="color:#ae81ff">0</span>% /dev
-tmpfs                    <span style="color:#ae81ff">1</span>.9G  <span style="color:#ae81ff">8</span>.0K  <span style="color:#ae81ff">1</span>.9G   <span style="color:#ae81ff">1</span>% /dev/shm
-tmpfs                    <span style="color:#ae81ff">1</span>.9G  <span style="color:#ae81ff">8</span>.7M  <span style="color:#ae81ff">1</span>.9G   <span style="color:#ae81ff">1</span>% /run
-tmpfs                    <span style="color:#ae81ff">1</span>.9G     <span style="color:#ae81ff">0</span>  <span style="color:#ae81ff">1</span>.9G   <span style="color:#ae81ff">0</span>% /sys/fs/cgroup
-/dev/vda1                497M  231M  267M  <span style="color:#ae81ff">47</span>% /boot
-tmpfs                    379M     <span style="color:#ae81ff">0</span>  379M   <span style="color:#ae81ff">0</span>% /run/user/1000</code></pre></div>
+/dev/mapper/centos-root   59G   19G   40G  32% /
+devtmpfs                 1.9G     <span style="color:#ae81ff">0</span>  1.9G   0% /dev
+tmpfs                    1.9G  8.0K  1.9G   1% /dev/shm
+tmpfs                    1.9G  8.7M  1.9G   1% /run
+tmpfs                    1.9G     <span style="color:#ae81ff">0</span>  1.9G   0% /sys/fs/cgroup
+/dev/vda1                497M  231M  267M  47% /boot
+tmpfs                    379M     <span style="color:#ae81ff">0</span>  379M   0% /run/user/1000</code></pre></div>
 <p><em>Note: My VM&rsquo;s disk space was COMPLETELY full. This meant that I couldn&rsquo;t use auto
 tab complete in my shell because it spit out there&rsquo;s no disk space. Typing the
 command out fully by hand, still worked.</em></p>

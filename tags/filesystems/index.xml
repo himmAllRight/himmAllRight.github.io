@@ -31,13 +31,13 @@ Many root sub-directories are actually mounted
 notably &lt;code&gt;/tmp&lt;/code&gt;. To see some &lt;code&gt;tmpfs&lt;/code&gt; mounts on a system, &lt;code&gt;grep&lt;/code&gt; the &lt;code&gt;df&lt;/code&gt;
 command for &lt;code&gt;tmpfs&lt;/code&gt;:&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;➜  ~ df -h | grep tmpfs
-devtmpfs                  16G     &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;   16G   &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;% /dev
-tmpfs                     16G  299M   16G   &lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;% /dev/shm
-tmpfs                     16G  &lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;.0M   16G   &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;% /run
-tmpfs                     16G     &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;   16G   &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;% /sys/fs/cgroup
-tmpfs                     16G  &lt;span style=&#34;color:#ae81ff&#34;&gt;5&lt;/span&gt;.9M   16G   &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;% /tmp
-tmpfs                    &lt;span style=&#34;color:#ae81ff&#34;&gt;3&lt;/span&gt;.2G  184K  &lt;span style=&#34;color:#ae81ff&#34;&gt;3&lt;/span&gt;.2G   &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;% /run/user/1000
-tmpfs                     12G     &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;   12G   &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;% /var/ramdisk&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+devtmpfs                  16G     &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;   16G   0% /dev
+tmpfs                     16G  299M   16G   2% /dev/shm
+tmpfs                     16G  2.0M   16G   1% /run
+tmpfs                     16G     &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;   16G   0% /sys/fs/cgroup
+tmpfs                     16G  5.9M   16G   1% /tmp
+tmpfs                    3.2G  184K  3.2G   1% /run/user/1000
+tmpfs                     12G     &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;   12G   0% /var/ramdisk&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;All the contents of a &lt;code&gt;tmpfs&lt;/code&gt; filesystem reside in system memory, typically
 RAM. This allows file access that is &lt;em&gt;fast&lt;/em&gt;.  However, like RAM,
 &lt;code&gt;tmpfs&lt;/code&gt; is also &lt;em&gt;volatile&lt;/em&gt;, meaning it will all be erased if the computer
@@ -74,7 +74,7 @@ mounts on a system (such as &lt;code&gt;/tmp&lt;/code&gt; and &lt;code&gt;/run&l
 should be empty since it was just allocated&lt;/em&gt;)&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;$ df -h
 ...
-tmpfs                     10G     &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;   10G   &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;% /var/ramdisk
+tmpfs                     10G     &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;   10G   0% /var/ramdisk
 ...&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;h3 id=&#34;testing&#34;&gt;Testing&lt;/h3&gt;
 
@@ -156,7 +156,7 @@ virtual size: 20G &lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;&lt;sp
 disk size: 20G
 cluster_size: &lt;span style=&#34;color:#ae81ff&#34;&gt;65536&lt;/span&gt;
 Format specific information:
-    compat: &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;.1
+    compat: 1.1
     lazy refcounts: true
     refcount bits: &lt;span style=&#34;color:#ae81ff&#34;&gt;16&lt;/span&gt;
     corrupt: false
@@ -171,7 +171,7 @@ virtual size: 60G &lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;&lt;sp
 disk size: 20G
 cluster_size: &lt;span style=&#34;color:#ae81ff&#34;&gt;65536&lt;/span&gt;
 Format specific information:
-    compat: &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;.1
+    compat: 1.1
     lazy refcounts: true
     refcount bits: &lt;span style=&#34;color:#ae81ff&#34;&gt;16&lt;/span&gt;
     corrupt: false
@@ -227,13 +227,13 @@ data blocks changed from &lt;span style=&#34;color:#ae81ff&#34;&gt;4851712&lt;/s
 
 &lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;ryan@mr-mime ~&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt;$ df -h
 Filesystem               Size  Used Avail Use% Mounted on
-/dev/mapper/centos-root   59G   19G   40G  &lt;span style=&#34;color:#ae81ff&#34;&gt;32&lt;/span&gt;% /
-devtmpfs                 &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;.9G     &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;  &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;.9G   &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;% /dev
-tmpfs                    &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;.9G  &lt;span style=&#34;color:#ae81ff&#34;&gt;8&lt;/span&gt;.0K  &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;.9G   &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;% /dev/shm
-tmpfs                    &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;.9G  &lt;span style=&#34;color:#ae81ff&#34;&gt;8&lt;/span&gt;.7M  &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;.9G   &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;% /run
-tmpfs                    &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;.9G     &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;  &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;.9G   &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;% /sys/fs/cgroup
-/dev/vda1                497M  231M  267M  &lt;span style=&#34;color:#ae81ff&#34;&gt;47&lt;/span&gt;% /boot
-tmpfs                    379M     &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;  379M   &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;% /run/user/1000&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+/dev/mapper/centos-root   59G   19G   40G  32% /
+devtmpfs                 1.9G     &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;  1.9G   0% /dev
+tmpfs                    1.9G  8.0K  1.9G   1% /dev/shm
+tmpfs                    1.9G  8.7M  1.9G   1% /run
+tmpfs                    1.9G     &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;  1.9G   0% /sys/fs/cgroup
+/dev/vda1                497M  231M  267M  47% /boot
+tmpfs                    379M     &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;  379M   0% /run/user/1000&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;&lt;em&gt;Note: My VM&amp;rsquo;s disk space was COMPLETELY full. This meant that I couldn&amp;rsquo;t use auto
 tab complete in my shell because it spit out there&amp;rsquo;s no disk space. Typing the
 command out fully by hand, still worked.&lt;/em&gt;&lt;/p&gt;
@@ -272,7 +272,7 @@ status: One or more devices has experienced an unrecoverable error.  An
 action: Determine &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; the device needs to be replaced, and clear the errors
 	using &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;zpool clear&amp;#39;&lt;/span&gt; or replace the device with &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;zpool replace&amp;#39;&lt;/span&gt;.
    see: http://zfsonlinux.org/msg/ZFS-8000-9P
-  scan: resilvered &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;.14M in 0h0m with &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt; errors on Sat Jan &lt;span style=&#34;color:#ae81ff&#34;&gt;12&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;10&lt;/span&gt;:49:31 &lt;span style=&#34;color:#ae81ff&#34;&gt;2019&lt;/span&gt;
+  scan: resilvered 1.14M in 0h0m with &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt; errors on Sat Jan &lt;span style=&#34;color:#ae81ff&#34;&gt;12&lt;/span&gt; 10:49:31 &lt;span style=&#34;color:#ae81ff&#34;&gt;2019&lt;/span&gt;
 config:
 
 	NAME                                  STATE     READ WRITE CKSUM
@@ -330,7 +330,7 @@ Data:
         type: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;root&amp;#39;&lt;/span&gt;
         id: &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;
         guid: &lt;span style=&#34;color:#ae81ff&#34;&gt;2285339125999939520&lt;/span&gt;
-        children&lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt;:
+        children&lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;0&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt;:
             type: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;mirror&amp;#39;&lt;/span&gt;
             id: &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;
             guid: &lt;span style=&#34;color:#ae81ff&#34;&gt;15171243251753521949&lt;/span&gt;
@@ -341,7 +341,7 @@ Data:
             is_log: &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;
             create_txg: &lt;span style=&#34;color:#ae81ff&#34;&gt;4&lt;/span&gt;
             com.delphix:vdev_zap_top: &lt;span style=&#34;color:#ae81ff&#34;&gt;125&lt;/span&gt;
-            children&lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt;:
+            children&lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;0&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt;:
                 type: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;disk&amp;#39;&lt;/span&gt;
                 id: &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;
                 guid: &lt;span style=&#34;color:#ae81ff&#34;&gt;4676737554230074290&lt;/span&gt;
@@ -352,7 +352,7 @@ Data:
                 DTL: &lt;span style=&#34;color:#ae81ff&#34;&gt;123&lt;/span&gt;
                 create_txg: &lt;span style=&#34;color:#ae81ff&#34;&gt;4&lt;/span&gt;
                 com.delphix:vdev_zap_leaf: &lt;span style=&#34;color:#ae81ff&#34;&gt;126&lt;/span&gt;
-            children&lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt;:
+            children&lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;1&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt;:
                 type: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;disk&amp;#39;&lt;/span&gt;
                 id: &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;
                 guid: &lt;span style=&#34;color:#ae81ff&#34;&gt;13442522248687181242&lt;/span&gt;
@@ -393,9 +393,9 @@ the process using &lt;code&gt;zpool status Data&lt;/code&gt;.&lt;/p&gt;
 status: One or more devices is currently being resilvered.  The pool will
 	&lt;span style=&#34;color:#66d9ef&#34;&gt;continue&lt;/span&gt; to &lt;span style=&#34;color:#66d9ef&#34;&gt;function&lt;/span&gt;, possibly in a degraded state.
 action: Wait &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; the resilver to complete.
-  scan: resilver in progress since Sat Jan &lt;span style=&#34;color:#ae81ff&#34;&gt;12&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;11&lt;/span&gt;:29:36 &lt;span style=&#34;color:#ae81ff&#34;&gt;2019&lt;/span&gt;
-	&lt;span style=&#34;color:#ae81ff&#34;&gt;72&lt;/span&gt;.6M scanned out of &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;.03T at &lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;.42M/s, 123h32m to go
-	&lt;span style=&#34;color:#ae81ff&#34;&gt;72&lt;/span&gt;.2M resilvered, &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;.01% &lt;span style=&#34;color:#66d9ef&#34;&gt;done&lt;/span&gt;
+  scan: resilver in progress since Sat Jan &lt;span style=&#34;color:#ae81ff&#34;&gt;12&lt;/span&gt; 11:29:36 &lt;span style=&#34;color:#ae81ff&#34;&gt;2019&lt;/span&gt;
+	72.6M scanned out of 1.03T at 2.42M/s, 123h32m to go
+	72.2M resilvered, 0.01% &lt;span style=&#34;color:#66d9ef&#34;&gt;done&lt;/span&gt;
 config:
 
 	NAME                                  STATE     READ WRITE CKSUM
@@ -419,7 +419,7 @@ So I did.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;λ ninetales ~ → zpool status Data
   pool: Data
  state: ONLINE
-  scan: resilvered &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;.03T in 4h8m with &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt; errors on Sat Jan &lt;span style=&#34;color:#ae81ff&#34;&gt;12&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;15&lt;/span&gt;:38:26 &lt;span style=&#34;color:#ae81ff&#34;&gt;2019&lt;/span&gt;
+  scan: resilvered 1.03T in 4h8m with &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt; errors on Sat Jan &lt;span style=&#34;color:#ae81ff&#34;&gt;12&lt;/span&gt; 15:38:26 &lt;span style=&#34;color:#ae81ff&#34;&gt;2019&lt;/span&gt;
 config:
 
 	NAME                                  STATE     READ WRITE CKSUM

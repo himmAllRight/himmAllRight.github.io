@@ -5,10 +5,220 @@
     <description>Recent content in python on λ ryan. himmelwright. net</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 28 Feb 2020 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 30 Mar 2020 00:00:00 +0000</lastBuildDate>
     
         <atom:link href="http://ryan.himmelwright.net/tags/python/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Creating Tests For This Website: Links</title>
+      <link>http://ryan.himmelwright.net/post/creating-website-tests-links/</link>
+      <pubDate>Mon, 30 Mar 2020 00:00:00 +0000</pubDate>
+      
+      <guid>http://ryan.himmelwright.net/post/creating-website-tests-links/</guid>
+      <description>&lt;p&gt;In my previous two posts, I created a &lt;a href=&#34;../../post/creating-website-tests-pages/&#34;&gt;test framework for my
+website&lt;/a&gt;, and &lt;a href=&#34;../../post/creating-website-tests-ci/&#34;&gt;automated it using
+Jenkins&lt;/a&gt;. But we can do better. One of the
+most annoying things when maintaining (or even reading) something on the
+internet, are broken links. While I cannot control the &lt;em&gt;availability&lt;/em&gt; of
+content outside the website, I &lt;em&gt;can&lt;/em&gt; choose to remove links if they are
+broken. So, in this post, we will add tests to ensure that links in our posts
+are working. Well, at least the
+&lt;a href=&#34;https://guides.github.com/pdfs/markdown-cheatsheet-online.pdf&#34;&gt;markdown&lt;/a&gt; ones.&lt;/p&gt;
+
+&lt;h2 id=&#34;what-to-test&#34;&gt;What to Test&lt;/h2&gt;
+
+&lt;p&gt;&lt;center&gt;
+&lt;a href=&#34;../../img/posts/creating-website-tests-links/google-404-error.png&#34;&gt;
+&lt;img alt=&#34;Google 404 Error Page&#34; src=&#34;../../img/posts/creating-website-tests-links/google-404-error.png&#34; style=&#34;max-width: 100%; padding: 5px 15px 10px 10px&#34;/&gt;&lt;/a&gt;
+&lt;div class=&#34;caption&#34;&gt;Google 404 Error Page&lt;/div&gt;
+&lt;/center&gt;&lt;/p&gt;
+
+&lt;p&gt;For this test set, we will be scanning the content files of all of the posts, and
+grabbing every markdown link defined in them. With the links known, we
+will then make a request to each one to check that it is available. If we
+can connect, the test passes. If not (ex: we get a 404), it fails.&lt;/p&gt;
+
+&lt;h3 id=&#34;adding-utility-functions&#34;&gt;Adding Utility Functions&lt;/h3&gt;
+
+&lt;p&gt;Before we are able to write the test function, we first need to add to the
+utility functions. These will allow us to get the post&amp;rsquo;s file paths, grab their
+content, and extract all the markdown links from that content.&lt;/p&gt;
+
+&lt;h4 id=&#34;get-file-paths&#34;&gt;get_file_paths&lt;/h4&gt;
+
+&lt;p&gt;First, lets define a new helper function, &lt;code&gt;get_file_paths&lt;/code&gt;:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;get_file_paths&lt;/span&gt;(src, extension&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;None):
+    &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&amp;#34;&amp;#34;Collects the paths of all files of a directory&amp;#34;&amp;#34;&amp;#34;&lt;/span&gt;
+    file_list &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; []
+    root_path &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; path&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;expanduser(src)
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; file &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; listdir(root_path):
+        &lt;span style=&#34;color:#75715e&#34;&gt;# If extension provided, check file has that extension&lt;/span&gt;
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; extension:
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; file&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;endswith(extension):
+                file_list&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;append(path&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;join(root_path, file))
+        &lt;span style=&#34;color:#75715e&#34;&gt;# Otherwise, add everything&lt;/span&gt;
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;else&lt;/span&gt;:
+            file_list&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;append(path&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;join(root_path, file))
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; file_list&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;When provided a directory path (&lt;code&gt;src&lt;/code&gt;), this function will return a list of all the
+file paths in that directory. Optionally, the &lt;code&gt;extension&lt;/code&gt; parameter can be
+supplied to only return files of that extension type (in our case, &lt;code&gt;md&lt;/code&gt;). This
+will be used to grab the paths of all of the website post source files.&lt;/p&gt;
+
+&lt;h4 id=&#34;get-file-content&#34;&gt;get_file_content&lt;/h4&gt;
+
+&lt;p&gt;Now lets define &lt;code&gt;get_file_content&lt;/code&gt;. This function will take the file lists
+generated from &lt;code&gt;get_file_paths&lt;/code&gt;, grab the content from those files,
+and return a dictionary of all the data.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;get_file_content&lt;/span&gt;(file_list):
+    &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&amp;#34;&amp;#34;Grabs all the content from a list of file paths.&amp;#34;&amp;#34;&amp;#34;&lt;/span&gt;
+    content_all_files &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; {}
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; file &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; file_list:
+        f &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; open(file, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;r&amp;#34;&lt;/span&gt;)
+        file_content &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; f&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;read()
+        content_all_files[path&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;basename(file)] &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; file_content
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; content_all_files&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;The returned dictionary uses the filename as the key, and the content set to the
+value. For example:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;{
+  &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;post1.md&amp;#39;&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;This is the text of post1.&amp;#39;&lt;/span&gt;,
+  &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;post2.md&amp;#39;&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;This is the text of post2. Basically the same ol&amp;#39; stuff.&amp;#34;&lt;/span&gt;
+}&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h4 id=&#34;get-md-links&#34;&gt;get_md_links&lt;/h4&gt;
+
+&lt;p&gt;Lastly, lets define &lt;code&gt;get_md_links&lt;/code&gt;. This function takes the content dictionary
+returned by &lt;code&gt;get_file_content&lt;/code&gt;, and uses some &lt;a href=&#34;https://en.wikipedia.org/wiki/Regular_expression&#34;&gt;regular
+expression&lt;/a&gt; magic to match
+the markdown links:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;get_md_links&lt;/span&gt;(content_dict, regex&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;\[.*?\]\((.*?)\)&amp;#34;&lt;/span&gt;):
+    &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&amp;#34;&amp;#34;Parses the dictionary of content strings, and pulls out the url of any links.&amp;#34;&amp;#34;&amp;#34;&lt;/span&gt;
+    p &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; re&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;compile(regex)
+    all_links &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; []
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; file &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; content_dict:
+        content &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; content_dict[file]&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;replace(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;\n&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&amp;#34;&lt;/span&gt;)
+        match_iter &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; p&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;finditer(content)
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; match &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; match_iter:
+            &lt;span style=&#34;color:#75715e&#34;&gt;# Regex can&amp;#39;t properly match urls with parens in them, so skip.&lt;/span&gt;
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;(&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;not&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; match&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;group(&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;):
+                all_links&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;append(match&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;group(&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;))
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; all_links&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;First, the function compiles the regular expression defined by the &lt;code&gt;regex&lt;/code&gt;
+parameter. Next, it loops through all the data in the content dictionary,
+strips the newline characters, and then grabs all the regex matches.&lt;/p&gt;
+
+&lt;p&gt;Unfortunately, the regex expression can&amp;rsquo;t properly match markdown formated urls
+with parenthesis in them, so we have to check if each match has a &lt;code&gt;(&lt;/code&gt; in it. If
+it does, the url is thrown away because we cannot be sure we matched the full
+&lt;code&gt;url&lt;/code&gt;. If there are no parenthesis, the url is added to our saved list. After
+parsing all the values of the content dictionary, a list of the matched urls is
+returned.&lt;/p&gt;
+
+&lt;h3 id=&#34;adding-to-conftest-py&#34;&gt;Adding to conftest.py&lt;/h3&gt;
+
+&lt;p&gt;With our new utility functions defined, we can next add a new fixture (and it&amp;rsquo;s
+helper function) to the &lt;code&gt;conftest.py&lt;/code&gt; file. Lets start with the fixture&amp;rsquo;s
+helper function, &lt;code&gt;post_md_link()&lt;/code&gt;:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;post_md_links&lt;/span&gt;():
+    &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&amp;#34;&amp;#34;Returns the md_link object of the md links in all the posts.&amp;#34;&amp;#34;&amp;#34;&lt;/span&gt;
+    all_post_files &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; get_file_paths(POST_DIR)
+    all_post_contents &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; get_file_content(all_post_files)
+    all_post_md_links &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; get_md_links(all_post_contents)
+    &lt;span style=&#34;color:#75715e&#34;&gt;# Return de-dup list&lt;/span&gt;
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; list(set(all_post_md_links))&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;This function uses the utility functions we just wrote above, to extract
+all of the markdown links from the post files found at the
+&lt;code&gt;POST_DIR&lt;/code&gt; constant location. It then returns a de-duplicated list of all
+the links.&lt;/p&gt;
+
+&lt;p&gt;Now, we can define the fixture, &lt;code&gt;post_md_link&lt;/code&gt;:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;@pytest.fixture&lt;/span&gt;(params&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;post_md_links())
+&lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;post_md_link&lt;/span&gt;(request):
+    &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&amp;#34;&amp;#34;Returns the md_link object for a md link found in a post.&amp;#34;&amp;#34;&amp;#34;&lt;/span&gt;
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; request&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;param&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Similar to the fixtures in the &lt;a href=&#34;../../post/creating-website-tests-pages/&#34;&gt;pages
+tests&lt;/a&gt;, this one will allow tests to map
+across all the links found in the markdown pages, so a test will run for each
+link.&lt;/p&gt;
+
+&lt;h3 id=&#34;writing-the-markdown-link-test&#34;&gt;Writing the markdown link test&lt;/h3&gt;
+
+&lt;p&gt;Finally, time to write the &lt;em&gt;one and only test function&lt;/em&gt; in this post:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;test_md_links&lt;/span&gt;(post_md_link):
+    &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&amp;#34;&amp;#34;Checks that the markdown links are not broken.&amp;#34;&amp;#34;&amp;#34;&lt;/span&gt;
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; post_md_link&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;startswith(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;http&amp;#34;&lt;/span&gt;) &lt;span style=&#34;color:#f92672&#34;&gt;or&lt;/span&gt; post_md_link&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;startswith(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;https&amp;#34;&lt;/span&gt;):
+        url &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; post_md_link
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;else&lt;/span&gt;:
+        url &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; BASE_URL &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; post_md_link&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;lower()
+    response &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; requests&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;get(url)
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;assert&lt;/span&gt; response&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;status_code &lt;span style=&#34;color:#f92672&#34;&gt;!=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;404&lt;/span&gt;, f&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;The link {post_md_link} is not found.&amp;#34;&lt;/span&gt;
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;assert&lt;/span&gt; response&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;status_code &lt;span style=&#34;color:#f92672&#34;&gt;!=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;403&lt;/span&gt;, f&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;The link {post_md_link} is forbidden.&amp;#34;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Because I link to both internal and external pages in my posts, I have to prep
+my urls a bit. So, I first check if the link starts with &lt;code&gt;http&lt;/code&gt; (which would
+also match ones starting with &lt;code&gt;https&lt;/code&gt;). If it does, we can leave the link as
+is. If it doesn&amp;rsquo;t, we can assume the link is an internal one (ex:
+&lt;code&gt;/post/creating-website-tests-links/&lt;/code&gt;), and we need to prepend it with the
+&lt;code&gt;BASE_URL&lt;/code&gt; constant.&lt;/p&gt;
+
+&lt;p&gt;With a proper url, we can use &lt;code&gt;requests.get()&lt;/code&gt; to attempt to retrieve a
+response code from the page. If we get a response, I then assert that the
+&lt;code&gt;status_code&lt;/code&gt; is &lt;em&gt;not&lt;/em&gt; &lt;code&gt;404&lt;/code&gt; or &lt;code&gt;403&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;Side Note:&lt;/em&gt; I started by asserting that each link returned a &lt;code&gt;200&lt;/code&gt; status, but
+quickly learned that it was a bad idea, because I was testing mostly external
+links.  I never got all the tests to pass because they would often return
+odd 500-level errors for issues that quite frankly, doesn&amp;rsquo;t matter to me. For
+example, one site kept return a 500-level error I think because their servers
+were &amp;lsquo;under a slightly higher load&amp;rsquo;&amp;hellip; but when I went to the link, the page
+loaded fine.&lt;/p&gt;
+
+&lt;p&gt;In the end, I decided I wasn&amp;rsquo;t trying to test the issues the websites I linked
+to were having, but instead just wanted to make sure that &lt;em&gt;my links&lt;/em&gt; weren&amp;rsquo;t
+&lt;em&gt;broken&lt;/em&gt;.  So, I now just ensure that I&amp;rsquo;m not getting &lt;code&gt;404&lt;/code&gt; or &lt;code&gt;403&lt;/code&gt;&amp;rsquo;s, and I&amp;rsquo;m
+happy with that.&lt;/p&gt;
+
+&lt;h2 id=&#34;limitations&#34;&gt;Limitations&lt;/h2&gt;
+
+&lt;p&gt;While I am very happy with the coverage these tests provide, they do have some
+limitations to keep in mind:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;They cannot match urls with parentheses&lt;/li&gt;
+&lt;li&gt;Currently, they only check that pages do not return &lt;code&gt;403&lt;/code&gt; and &lt;code&gt;404&lt;/code&gt; errors. This means I
+could possibly still have broken links due to permission errors or other
+issues. I plan to expand this assert list in the future to cover more
+cases.&lt;/li&gt;
+&lt;li&gt;I&amp;rsquo;m currently only testing markdown links. This doesn&amp;rsquo;t grab any html links I
+have in my posts.
+
+&lt;ul&gt;
+&lt;li&gt;On a similar note, because I link most of my images with html, it also
+isn&amp;rsquo;t testing if my images are broken.&lt;/li&gt;
+&lt;li&gt;I&amp;rsquo;d like to add tests for both of these issues eventually, but
+decided testing the markdown links was the best place to start.&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;Sometimes tests fail because a site is down. No biggie. I just usually wait
+a bit and then run the tests again before deciding to remove the link.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;conclusion&#34;&gt;Conclusion&lt;/h2&gt;
+
+&lt;p&gt;&lt;center&gt;
+&lt;a href=&#34;../../img/posts/creating-website-tests-links/passing-links-tests.png&#34;&gt;
+&lt;img alt=&#34;Passing tests, including new link tests&#34; src=&#34;../../img/posts/creating-website-tests-links/passing-link-tests.png&#34; style=&#34;max-width: 100%; padding: 5px 15px 10px 10px&#34;/&gt;&lt;/a&gt;
+&lt;div class=&#34;caption&#34;&gt;Passing tests, including the new markdown link tests&lt;/div&gt;
+&lt;/center&gt;&lt;/p&gt;
+
+&lt;p&gt;That&amp;rsquo;s it. By adding a few easy helper functions, a new fixture, and a &lt;em&gt;single&lt;/em&gt;
+test function, We&amp;rsquo;ve expanded my test results from 70 to over 420 tests (and
+growing).&lt;/p&gt;
+
+&lt;p&gt;More important than the number of tests, is &lt;em&gt;what&lt;/em&gt; the results tell us. A
+failing test tells me that one of my markdown links &lt;em&gt;might&lt;/em&gt; be broken. These
+tests have &lt;em&gt;already&lt;/em&gt; been beneficial to me, as I ended updating/removing
+probably about 100 or so bad links from my archived posts while implementing
+this test. So, I&amp;rsquo;d say it was worthwhile!&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>Creating Tests For This Website: CI</title>

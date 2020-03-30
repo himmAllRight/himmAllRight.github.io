@@ -235,19 +235,19 @@ new options using <code>xrandr</code>.</p>
 <p>To create a new xrandr mode, I first needed to calculate a new modeline. This
 can be done by using the <code>gtf</code> tool. To calculate a modeline for a
 3440x1440 resolution at 59.9 hertz for example, use the following:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">➜  ~ gtf <span style="color:#ae81ff">3440</span> <span style="color:#ae81ff">1440</span> <span style="color:#ae81ff">59</span>.9
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">➜  ~ gtf <span style="color:#ae81ff">3440</span> <span style="color:#ae81ff">1440</span> 59.9
 
   <span style="color:#75715e"># 3440x1440 @ 59.90 Hz (GTF) hsync: 89.25 kHz; pclk: 418.41 MHz</span>
-  Modeline <span style="color:#e6db74">&#34;3440x1440_59.90&#34;</span>  <span style="color:#ae81ff">418</span>.41  <span style="color:#ae81ff">3440</span> <span style="color:#ae81ff">3688</span> <span style="color:#ae81ff">4064</span> <span style="color:#ae81ff">4688</span>  <span style="color:#ae81ff">1440</span> <span style="color:#ae81ff">1441</span> <span style="color:#ae81ff">1444</span> <span style="color:#ae81ff">1490</span>  -HSync +Vsync
+  Modeline <span style="color:#e6db74">&#34;3440x1440_59.90&#34;</span>  418.41  <span style="color:#ae81ff">3440</span> <span style="color:#ae81ff">3688</span> <span style="color:#ae81ff">4064</span> <span style="color:#ae81ff">4688</span>  <span style="color:#ae81ff">1440</span> <span style="color:#ae81ff">1441</span> <span style="color:#ae81ff">1444</span> <span style="color:#ae81ff">1490</span>  -HSync +Vsync
 
 ➜  ~</code></pre></div>
 <p>The line that starts with <em>Modeline</em> (but <em>not including</em> &ldquo;Modeline&rdquo;) is what
 we want. Copy that and give it to <code>xrandr</code> with the <code>--newmode</code> flag to create
 a new mode:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">xrandr --newmode <span style="color:#e6db74">&#34;3440x1440_59.90&#34;</span>  <span style="color:#ae81ff">418</span>.41  <span style="color:#ae81ff">3440</span> <span style="color:#ae81ff">3688</span> <span style="color:#ae81ff">4064</span> <span style="color:#ae81ff">4688</span>  <span style="color:#ae81ff">1440</span> <span style="color:#ae81ff">1441</span> <span style="color:#ae81ff">1444</span> <span style="color:#ae81ff">1490</span>  -HSync +Vsync</code></pre></div>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">xrandr --newmode <span style="color:#e6db74">&#34;3440x1440_59.90&#34;</span>  418.41  <span style="color:#ae81ff">3440</span> <span style="color:#ae81ff">3688</span> <span style="color:#ae81ff">4064</span> <span style="color:#ae81ff">4688</span>  <span style="color:#ae81ff">1440</span> <span style="color:#ae81ff">1441</span> <span style="color:#ae81ff">1444</span> <span style="color:#ae81ff">1490</span>  -HSync +Vsync</code></pre></div>
 <p>Lastly, to add that mode to a display, use that same line but with the
 <code>--addmode</code> flag, and the monitor to switch (<code>DP-1</code> in my case):</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">xrandr --addmode DP-1 <span style="color:#e6db74">&#34;3440x1440_59.90&#34;</span>  <span style="color:#ae81ff">418</span>.41  <span style="color:#ae81ff">3440</span> <span style="color:#ae81ff">3688</span> <span style="color:#ae81ff">4064</span> <span style="color:#ae81ff">4688</span>  <span style="color:#ae81ff">1440</span> <span style="color:#ae81ff">1441</span> <span style="color:#ae81ff">1444</span> <span style="color:#ae81ff">1490</span>  -HSync +Vsync</code></pre></div>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">xrandr --addmode DP-1 <span style="color:#e6db74">&#34;3440x1440_59.90&#34;</span>  418.41  <span style="color:#ae81ff">3440</span> <span style="color:#ae81ff">3688</span> <span style="color:#ae81ff">4064</span> <span style="color:#ae81ff">4688</span>  <span style="color:#ae81ff">1440</span> <span style="color:#ae81ff">1441</span> <span style="color:#ae81ff">1444</span> <span style="color:#ae81ff">1490</span>  -HSync +Vsync</code></pre></div>
 <p><em>Note: To find the available monitor names, enter a plain <code>xrandr</code> command, and
 it will spit out all the available outputs.</em></p>
 
@@ -268,7 +268,7 @@ NAME</em> in the menu bar).</p>
 <p>If you are too <a href="https://en.wikipedia.org/wiki/Leet">1337</a> to use a GUI app,
 never fear! The display can be switched to the new mode using <code>xrandr</code> with the
 <code>--output</code> and <code>--mode</code> flags:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">xrandr --output DP-1 --mode <span style="color:#e6db74">&#34;3440x1440_59.90&#34;</span>  <span style="color:#ae81ff">418</span>.41  <span style="color:#ae81ff">3440</span> <span style="color:#ae81ff">3688</span> <span style="color:#ae81ff">4064</span> <span style="color:#ae81ff">4688</span>  <span style="color:#ae81ff">1440</span> <span style="color:#ae81ff">1441</span> <span style="color:#ae81ff">1444</span> <span style="color:#ae81ff">1490</span>  -HSync +Vsync</code></pre></div>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">xrandr --output DP-1 --mode <span style="color:#e6db74">&#34;3440x1440_59.90&#34;</span>  418.41  <span style="color:#ae81ff">3440</span> <span style="color:#ae81ff">3688</span> <span style="color:#ae81ff">4064</span> <span style="color:#ae81ff">4688</span>  <span style="color:#ae81ff">1440</span> <span style="color:#ae81ff">1441</span> <span style="color:#ae81ff">1444</span> <span style="color:#ae81ff">1490</span>  -HSync +Vsync</code></pre></div>
 <h3 id="but-wait-there-s-more-scripting-it">But Wait, There&rsquo;s More! Scripting it:</h3>
 
 <p>After running these commands twice&hellip; I realized it would be easy enough to
@@ -310,7 +310,7 @@ main <span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
 	MONITOR<span style="color:#f92672">=</span>$3
 	ESLEEP<span style="color:#f92672">=</span><span style="color:#ae81ff">3</span>
 	<span style="color:#75715e"># Fancier Vars :P</span>
-	gtf_output<span style="color:#f92672">=</span><span style="color:#66d9ef">$(</span>gtf $WIDTH $HEIGHT <span style="color:#ae81ff">59</span>.9 | grep -i <span style="color:#e6db74">&#34;modeline&#34;</span> | sed -e <span style="color:#e6db74">&#39;s/\&lt;Modeline\&gt;//g&#39;</span><span style="color:#66d9ef">)</span>
+	gtf_output<span style="color:#f92672">=</span><span style="color:#66d9ef">$(</span>gtf $WIDTH $HEIGHT 59.9 | grep -i <span style="color:#e6db74">&#34;modeline&#34;</span> | sed -e <span style="color:#e6db74">&#39;s/\&lt;Modeline\&gt;//g&#39;</span><span style="color:#66d9ef">)</span>
 	modename<span style="color:#f92672">=</span><span style="color:#66d9ef">$(</span>echo $gtf_output | grep -o  <span style="color:#e6db74">&#34;\(\&#34;.*\&#34;\)&#34;</span><span style="color:#66d9ef">)</span>
 	modeexists<span style="color:#f92672">=</span><span style="color:#66d9ef">$(</span>xrandr | grep -i $modename<span style="color:#66d9ef">)</span>
 

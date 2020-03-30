@@ -166,7 +166,7 @@ status: One or more devices has experienced an unrecoverable error.  An
 action: Determine <span style="color:#66d9ef">if</span> the device needs to be replaced, and clear the errors
 	using <span style="color:#e6db74">&#39;zpool clear&#39;</span> or replace the device with <span style="color:#e6db74">&#39;zpool replace&#39;</span>.
    see: http://zfsonlinux.org/msg/ZFS-8000-9P
-  scan: resilvered <span style="color:#ae81ff">1</span>.14M in 0h0m with <span style="color:#ae81ff">0</span> errors on Sat Jan <span style="color:#ae81ff">12</span> <span style="color:#ae81ff">10</span>:49:31 <span style="color:#ae81ff">2019</span>
+  scan: resilvered 1.14M in 0h0m with <span style="color:#ae81ff">0</span> errors on Sat Jan <span style="color:#ae81ff">12</span> 10:49:31 <span style="color:#ae81ff">2019</span>
 config:
 
 	NAME                                  STATE     READ WRITE CKSUM
@@ -224,7 +224,7 @@ Data:
         type: <span style="color:#e6db74">&#39;root&#39;</span>
         id: <span style="color:#ae81ff">0</span>
         guid: <span style="color:#ae81ff">2285339125999939520</span>
-        children<span style="color:#f92672">[</span><span style="color:#ae81ff">0</span><span style="color:#f92672">]</span>:
+        children<span style="color:#f92672">[</span>0<span style="color:#f92672">]</span>:
             type: <span style="color:#e6db74">&#39;mirror&#39;</span>
             id: <span style="color:#ae81ff">0</span>
             guid: <span style="color:#ae81ff">15171243251753521949</span>
@@ -235,7 +235,7 @@ Data:
             is_log: <span style="color:#ae81ff">0</span>
             create_txg: <span style="color:#ae81ff">4</span>
             com.delphix:vdev_zap_top: <span style="color:#ae81ff">125</span>
-            children<span style="color:#f92672">[</span><span style="color:#ae81ff">0</span><span style="color:#f92672">]</span>:
+            children<span style="color:#f92672">[</span>0<span style="color:#f92672">]</span>:
                 type: <span style="color:#e6db74">&#39;disk&#39;</span>
                 id: <span style="color:#ae81ff">0</span>
                 guid: <span style="color:#ae81ff">4676737554230074290</span>
@@ -246,7 +246,7 @@ Data:
                 DTL: <span style="color:#ae81ff">123</span>
                 create_txg: <span style="color:#ae81ff">4</span>
                 com.delphix:vdev_zap_leaf: <span style="color:#ae81ff">126</span>
-            children<span style="color:#f92672">[</span><span style="color:#ae81ff">1</span><span style="color:#f92672">]</span>:
+            children<span style="color:#f92672">[</span>1<span style="color:#f92672">]</span>:
                 type: <span style="color:#e6db74">&#39;disk&#39;</span>
                 id: <span style="color:#ae81ff">1</span>
                 guid: <span style="color:#ae81ff">13442522248687181242</span>
@@ -287,9 +287,9 @@ the process using <code>zpool status Data</code>.</p>
 status: One or more devices is currently being resilvered.  The pool will
 	<span style="color:#66d9ef">continue</span> to <span style="color:#66d9ef">function</span>, possibly in a degraded state.
 action: Wait <span style="color:#66d9ef">for</span> the resilver to complete.
-  scan: resilver in progress since Sat Jan <span style="color:#ae81ff">12</span> <span style="color:#ae81ff">11</span>:29:36 <span style="color:#ae81ff">2019</span>
-	<span style="color:#ae81ff">72</span>.6M scanned out of <span style="color:#ae81ff">1</span>.03T at <span style="color:#ae81ff">2</span>.42M/s, 123h32m to go
-	<span style="color:#ae81ff">72</span>.2M resilvered, <span style="color:#ae81ff">0</span>.01% <span style="color:#66d9ef">done</span>
+  scan: resilver in progress since Sat Jan <span style="color:#ae81ff">12</span> 11:29:36 <span style="color:#ae81ff">2019</span>
+	72.6M scanned out of 1.03T at 2.42M/s, 123h32m to go
+	72.2M resilvered, 0.01% <span style="color:#66d9ef">done</span>
 config:
 
 	NAME                                  STATE     READ WRITE CKSUM
@@ -313,7 +313,7 @@ So I did.</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">λ ninetales ~ → zpool status Data
   pool: Data
  state: ONLINE
-  scan: resilvered <span style="color:#ae81ff">1</span>.03T in 4h8m with <span style="color:#ae81ff">0</span> errors on Sat Jan <span style="color:#ae81ff">12</span> <span style="color:#ae81ff">15</span>:38:26 <span style="color:#ae81ff">2019</span>
+  scan: resilvered 1.03T in 4h8m with <span style="color:#ae81ff">0</span> errors on Sat Jan <span style="color:#ae81ff">12</span> 15:38:26 <span style="color:#ae81ff">2019</span>
 config:
 
 	NAME                                  STATE     READ WRITE CKSUM
