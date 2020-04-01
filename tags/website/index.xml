@@ -5,10 +5,100 @@
     <description>Recent content in Website on λ ryan. himmelwright. net</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 30 Mar 2020 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 31 Mar 2020 00:00:00 +0000</lastBuildDate>
     
         <atom:link href="http://ryan.himmelwright.net/tags/website/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Creating Tests For This Website: Docker Jenkins Nodes</title>
+      <link>http://ryan.himmelwright.net/post/creating-website-tests-docker-nodes/</link>
+      <pubDate>Tue, 31 Mar 2020 00:00:00 +0000</pubDate>
+      
+      <guid>http://ryan.himmelwright.net/post/creating-website-tests-docker-nodes/</guid>
+      <description>&lt;p&gt;Okay, quick post! Previously, I wrote about how I &lt;a href=&#34;../../post/creating-website-tests-ci/&#34;&gt;automated my website
+tests&lt;/a&gt; using Jenkins. When I wrote that post,
+I had the tests run on &lt;code&gt;any&lt;/code&gt; node. I &lt;em&gt;wanted&lt;/em&gt; to have the tests
+run inside a fedora docker container, but ran into issues configuring it.
+With the problem now long fixed, I decided I would write a quick update post about
+switching the pipeline to use container nodes.&lt;/p&gt;
+
+&lt;h3 id=&#34;why-switch&#34;&gt;Why Switch&lt;/h3&gt;
+
+&lt;p&gt;When I first defined the pipeline, I had it use &lt;code&gt;any&lt;/code&gt; node for the agent:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-groovy&#34; data-lang=&#34;groovy&#34;&gt;pipeline &lt;span style=&#34;color:#f92672&#34;&gt;{&lt;/span&gt;
+    agent any
+
+    stages &lt;span style=&#34;color:#f92672&#34;&gt;{&lt;/span&gt;
+
+        &lt;span style=&#34;color:#75715e&#34;&gt;// This is where the stages will be defined //
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;
+    &lt;span style=&#34;color:#f92672&#34;&gt;}&lt;/span&gt;
+&lt;span style=&#34;color:#f92672&#34;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;This just runs the job on any available node, which for me was just the same VM
+server I was running Jenkins on. This was fine, but for testing I want to make
+sure &lt;em&gt;everything&lt;/em&gt; in my automation is configured and up to date. The best
+way to ensure that, is with &lt;em&gt;clean&lt;/em&gt; runs.&lt;/p&gt;
+
+&lt;p&gt;When using docker for the pipeline agent, a new container is created to run the
+pipeline in, and then destroyed when completed. This means all packages and
+dependencies &lt;em&gt;must&lt;/em&gt; be defined correctly, or the run will fail. This is what we
+want.&lt;/p&gt;
+
+&lt;p&gt;&lt;center&gt;
+&lt;a href=&#34;../../img/posts/docker-quickstart/docker-logo.png&#34;&gt;
+&lt;img alt=&#34;Docker Logo&#34; src=&#34;../../img/posts/docker-quickstart/docker-logo.png&#34; style=&#34;float: right; max-width: 100%; width:400px; padding: 5px 15px 10px 10px&#34;/&gt;&lt;/a&gt;
+&lt;/center&gt;&lt;/p&gt;
+
+&lt;h3 id=&#34;using-docker-nodes&#34;&gt;Using Docker Nodes&lt;/h3&gt;
+
+&lt;p&gt;First, the obvious: make sure &lt;code&gt;docker&lt;/code&gt; is installed on the desired
+Jenkins nodes. I won&amp;rsquo;t cover this as it can be different for
+every user (and I already had &lt;code&gt;docker&lt;/code&gt; installed on my Jenkins host).&lt;/p&gt;
+
+&lt;p&gt;With docker installed, next make sure the Jenkins server has the &lt;a href=&#34;https://plugins.jenkins.io/docker-slaves/&#34;&gt;Docker
+Slaves&lt;/a&gt; (and possibly &lt;a href=&#34;https://plugins.jenkins.io/docker-workflow/&#34;&gt;Docker
+Pipeline&lt;/a&gt;) plug-in(s) installed.&lt;/p&gt;
+
+&lt;p&gt;Lastly, with some docker plug-ins enabled, switch the &lt;code&gt;agent&lt;/code&gt; statement to use a
+container image. I choose to use the &lt;code&gt;fedora:31&lt;/code&gt; image:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-groovy&#34; data-lang=&#34;groovy&#34;&gt;pipeline &lt;span style=&#34;color:#f92672&#34;&gt;{&lt;/span&gt;
+    agent &lt;span style=&#34;color:#f92672&#34;&gt;{&lt;/span&gt;
+        docker &lt;span style=&#34;color:#f92672&#34;&gt;{&lt;/span&gt;
+            image &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;fedora:31&amp;#39;&lt;/span&gt;
+        &lt;span style=&#34;color:#f92672&#34;&gt;}&lt;/span&gt;
+    &lt;span style=&#34;color:#f92672&#34;&gt;}&lt;/span&gt;
+    &lt;span style=&#34;color:#f92672&#34;&gt;...&lt;/span&gt; &lt;span style=&#34;color:#75715e&#34;&gt;// rest of the pipeline
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h3 id=&#34;fixing-root-sudo-error&#34;&gt;Fixing root/sudo error&lt;/h3&gt;
+
+&lt;p&gt;When I first set the pipeline to use the fedora image, it kept failing.
+Specifically, the &lt;code&gt;sudo dnf&lt;/code&gt; steps would fail because the &lt;code&gt;sudo&lt;/code&gt; command didn&amp;rsquo;t
+exist in the container. If I removed &lt;code&gt;sudo&lt;/code&gt; from the command&amp;hellip;  it still
+failed because I didn&amp;rsquo;t have permissions to run &lt;code&gt;dnf&lt;/code&gt; inside the container ಠ_ಠ
+(yes, the user was &lt;code&gt;root&lt;/code&gt;).&lt;/p&gt;
+
+&lt;p&gt;After some research, I learned that it wasn&amp;rsquo;t passing the root permissions to
+the container, and I could &amp;ldquo;solve&amp;rdquo; this issue by providing the &lt;code&gt;-u&lt;/code&gt; flag with
+&lt;code&gt;0:0&lt;/code&gt; as an arg to the docker agent:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-groovy&#34; data-lang=&#34;groovy&#34;&gt;pipeline &lt;span style=&#34;color:#f92672&#34;&gt;{&lt;/span&gt;
+    agent &lt;span style=&#34;color:#f92672&#34;&gt;{&lt;/span&gt;
+        docker &lt;span style=&#34;color:#f92672&#34;&gt;{&lt;/span&gt;
+            image &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;fedora:31&amp;#39;&lt;/span&gt;
+            args &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;-u 0:0&amp;#39;&lt;/span&gt;
+        &lt;span style=&#34;color:#f92672&#34;&gt;}&lt;/span&gt;
+    &lt;span style=&#34;color:#f92672&#34;&gt;}&lt;/span&gt;
+    &lt;span style=&#34;color:#f92672&#34;&gt;...&lt;/span&gt; &lt;span style=&#34;color:#75715e&#34;&gt;// rest of the pipeline
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;I don&amp;rsquo;t &lt;em&gt;love&lt;/em&gt; this solution&amp;hellip; but it seems to work.&lt;/p&gt;
+
+&lt;h3 id=&#34;conclusion&#34;&gt;Conclusion&lt;/h3&gt;
+
+&lt;p&gt;Like I said, this was just a quick update about switching my
+test nodes to use docker containers. Honestly, I&amp;rsquo;d much rather try to use
+&lt;a href=&#34;http://podman.io&#34;&gt;podman&lt;/a&gt; containers for my test agents, but I&amp;rsquo;m sure that
+would be much more complicated currently. Maybe in the future&amp;hellip;&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>Creating Tests For This Website: Links</title>
