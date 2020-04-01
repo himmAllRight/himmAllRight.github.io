@@ -5,7 +5,7 @@
     <description>Recent content in Pages on λ ryan. himmelwright. net</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 08 Dec 2019 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 01 Apr 2020 00:00:00 +0000</lastBuildDate>
     
         <atom:link href="http://ryan.himmelwright.net/pages/index.xml" rel="self" type="application/rss+xml" />
     
@@ -13,7 +13,7 @@
     <item>
       <title>Homelab</title>
       <link>http://ryan.himmelwright.net/pages/homelab/</link>
-      <pubDate>Sun, 08 Dec 2019 00:00:00 +0000</pubDate>
+      <pubDate>Wed, 01 Apr 2020 00:00:00 +0000</pubDate>
       
       <guid>http://ryan.himmelwright.net/pages/homelab/</guid>
       <description>
@@ -38,17 +38,17 @@ being &amp;lsquo;done&amp;rsquo;.&lt;/p&gt;
 
 &lt;h3 id=&#34;linux-computers&#34;&gt;Linux Computers&lt;/h3&gt;
 
-&lt;h4 id=&#34;charmeleon-desktop-workstation&#34;&gt;- Charmeleon (Desktop Workstation)&lt;/h4&gt;
+&lt;h4 id=&#34;charmeleon-linux-workstation-vm-host-gaming-computer&#34;&gt;- Charmeleon (Linux Workstation/VM Host/Gaming Computer)&lt;/h4&gt;
 
 &lt;pre&gt;&lt;code&gt;Ryzen 5 2600 [3.4 GHz (3.9GHz Turbo), 6 Cores, 12 Threads)
 MSI B450 Tomahawk Motherboard
 32 GB (2x16GB) DDR4-3200 Mhz RAM
-Sapphire 1024 4GB PULSE Radeon RX 560 GPU
+Sapphire Radeon Pulse RX 580 8GB GPU
 500 GB Samsung 970 EVO NVME SSD
 250 GB Samsung 850 EVO SATA SSD
 Fractal Design Meshify C Dark TG ATX Mid Tower Case
 EVGA SuperNOVA G4 650w 80+ Gold, fully modular PSU
-Fedora 30 (Multiple Desktops)
+Fedora 31
 *Connected to Periphery devices
 &lt;/code&gt;&lt;/pre&gt;
 
@@ -61,7 +61,7 @@ Intel i5-7200u [2.5 GHz (3.1 GHz Turbo), 2 Cores, 4 Threads]
 16 GB RAM
 500 GB Samsung EVO SSD
 14&amp;quot; 1920x1080 IPS Display
-Fedora 30 SilverBlue
+Fedora 31
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;h3 id=&#34;interface-devices&#34;&gt;Interface Devices&lt;/h3&gt;
@@ -91,7 +91,7 @@ macOS Catalina
 
 &lt;p&gt;&lt;a name=&#34;bulbasaur&#34;&gt;&lt;/a&gt;&lt;/p&gt;
 
-&lt;h4 id=&#34;bulbasaur-tablet&#34;&gt;- bulbasaur (Tablet)&lt;/h4&gt;
+&lt;h4 id=&#34;bulbasaur-phone&#34;&gt;- Bulbasaur (Phone)&lt;/h4&gt;
 
 &lt;pre&gt;&lt;code&gt;iPhone 11
 64 GB Storage
@@ -158,27 +158,13 @@ Bose AE2 Headphones
 
 &lt;h4 id=&#34;ninetales-vm-host-home-server&#34;&gt;- Ninetales (VM Host / Home Server)&lt;/h4&gt;
 
-&lt;pre&gt;&lt;code&gt;Lenovo ThinkServer 440
-Intel Xeon E3-1225 v3 [3.2 GHz (3.6 GHz Turbo), 8M Cache, 4 Cores, 4 Threads]
-20 GB ECC RAM
+&lt;pre&gt;&lt;code&gt;HP Micro Server Gen 10
+AMD Opteron X3421 APU (4) @ 2.100GHz
+8 GB ECC RAM
 250 GB Samsung EVO SSD (OS + LVM Virtual Disk Drive)
 2 x 1TB WD 7200 RPM HDD (ZFS Mirror, for Backups) (Hotswap)
 2 x 3TB TOSHIBA 7200 RPM HDD (ZFS Mirror, for Storage) (Hotswap)
 Ubuntu Server 18.04
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;&lt;a name=&#34;x230&#34;&gt;&lt;/a&gt;&lt;/p&gt;
-
-&lt;h4 id=&#34;abra-test-laptop-server&#34;&gt;- Abra (Test Laptop/&amp;ldquo;server&amp;rdquo;)&lt;/h4&gt;
-
-&lt;pre&gt;&lt;code&gt;Lenovo x230
-Intel i5-3320M [2.6 GHz (3.3 GHz Turbo), 3M Cache, 2 Cores, 4 Threads]
-8 GB RAM
-120 GB SSD
-12.5&amp;quot; HD LED 1366x768 Display
-9-Cell Battery
-Thinkpad Dock
-Whatever disto I&#39;m playing with right now...
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;h4 id=&#34;networking&#34;&gt;- Networking&lt;/h4&gt;
