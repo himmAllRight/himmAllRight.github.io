@@ -1,14 +1,192 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Dev on λ ryan. himmelwright. net</title>
+    <title>DEV on λ ryan. himmelwright. net</title>
     <link>http://ryan.himmelwright.net/tags/dev/</link>
-    <description>Recent content in Dev on λ ryan. himmelwright. net</description>
+    <description>Recent content in DEV on λ ryan. himmelwright. net</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 31 Mar 2020 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 22 Apr 2020 00:00:00 +0000</lastBuildDate>
     
         <atom:link href="http://ryan.himmelwright.net/tags/dev/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>TSQA 2020</title>
+      <link>http://ryan.himmelwright.net/post/tsqa-2020/</link>
+      <pubDate>Wed, 22 Apr 2020 00:00:00 +0000</pubDate>
+      
+      <guid>http://ryan.himmelwright.net/post/tsqa-2020/</guid>
+      <description>&lt;p&gt;Several weeks ago I attend TSQA 2020, a conference presented every two years by
+the &lt;a href=&#34;https://tsqa.org&#34;&gt;Triangle Software Quality Association&lt;/a&gt; (TSQA). Despite
+being hosted by my local software testing group, the speakers and
+attendees were from all over the country. While only a single-day conference,
+it was packed full with solid advice and ideas I left with. Here are a few.&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;Just to clarify: TSQA occured in February, right before COVID-19 really started spreading
+in the US. I&amp;rsquo;m just very late in this post.&lt;/em&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;tsqa-2020&#34;&gt;TSQA 2020&lt;/h2&gt;
+
+&lt;h4 id=&#34;getting-there&#34;&gt;Getting There&lt;/h4&gt;
+
+&lt;p&gt;TSQA was held at the &lt;a href=&#34;https://www.durhamconventioncenter.com&#34;&gt;Durham Convention
+Center&lt;/a&gt;, which is located in the middle
+of downtown Durham (NC, USA). Being so close to our office, I managed to help
+convince/remind several of my co-workers to register last minute. On the
+morning of the event, I drove the one mile to the office parking garage, then
+hustled coat-less through the cold morning wind to the conference center.&lt;/p&gt;
+
+&lt;p&gt;As I walked inside, I immediately saw my manager at the entrance handing out
+bandages, and knew I was in the right place (he was a TSQA volunteer).  After
+saying hello and checking in, I made my way to the main ballroom to grab some
+food. After awhile, my co-workers started to trickle in, so we found a table
+near the front and gathered for the opening statements.&lt;/p&gt;
+
+&lt;h4 id=&#34;keynote&#34;&gt;Keynote&lt;/h4&gt;
+
+&lt;p&gt;&lt;center&gt;
+&lt;a href=&#34;../../img/posts/tsqa-2020/the_jetsons.jpg&#34;&gt;
+&lt;img alt=&#34;The Jetsons&#34; src=&#34;../../img/posts/tsqa-2020/the_jetsons.jpg&#34; style=&#34;max-width: 100%; padding: 5px 15px 10px 10px&#34;/&gt;&lt;/a&gt;
+&lt;div class=&#34;caption&#34;&gt;The Jetsons&lt;/div&gt;
+&lt;/center&gt;&lt;/p&gt;
+
+&lt;p&gt;They keynote, presented by &lt;a href=&#34;http://angiejones.tech&#34;&gt;Angie Jones&lt;/a&gt; was an
+entertaining look at the history and future of technology. She took ideas that
+were shown in &lt;a href=&#34;https://en.wikipedia.org/wiki/The_Jetsons&#34;&gt;The Jetsons&lt;/a&gt;, and
+compared them to how close (or far) we have come to many of them. She then used
+this as an example of how we should be planning to test &lt;em&gt;future&lt;/em&gt; technology,
+because like it or not, it&amp;rsquo;s coming. She concluded by providing some examples
+of what testing in the future could look like.&lt;/p&gt;
+
+&lt;h4 id=&#34;talks&#34;&gt;Talks&lt;/h4&gt;
+
+&lt;p&gt;For the rest of the day, I attended several talks interspaced with a lunch and
+snack break. I mainly focused on attending talks around automation, but also
+went to a few about developing test cases or UI testing tools. Similar to my
+&lt;a href=&#34;../../post/ato2019/&#34;&gt;All Things Open 2019 post&lt;/a&gt;, instead of narrating each talk I
+went to, I picked out few lessons I learned and will share them below.&lt;/p&gt;
+
+&lt;p&gt;After the conference ended, my co-workers and I made our way back to the office
+to share experiences and debate our thoughts over a drink.  It&amp;rsquo;s always great
+to hash out ideas with others after a conference, while they are still fresh.
+Also&amp;hellip; it&amp;rsquo;s fun :) .&lt;/p&gt;
+
+&lt;h3 id=&#34;lessons-learned-strengthened&#34;&gt;Lessons Learned/Strengthened&lt;/h3&gt;
+
+&lt;p&gt;Now to summarize a few of the many lessons I picked up while at TSQA 2020. I&amp;rsquo;ve
+heard many of these suggestions before, but the speakers presented them so
+well, I really want to ensure I start implementing the at work.  Lets get
+started.&lt;/p&gt;
+
+&lt;h4 id=&#34;no-failing-tests&#34;&gt;No failing tests&lt;/h4&gt;
+
+&lt;p&gt;It is all too easy to let a backlog of failing tests build up. This may be
+due to the test being out of date, a low priority issue, or worse of
+all&amp;hellip; just a flaky test. Regardless of the reason, failing tests really should
+be mitigated &lt;em&gt;immediately&lt;/em&gt;, for several reasons.&lt;/p&gt;
+
+&lt;p&gt;Leaving failing tests to continuously run causes failure fatigue. This
+normalizes the failing tests and causes a team to ignore &lt;em&gt;other&lt;/em&gt; failing tests in
+the future. Basically, it decreases the competence in the test suite, and thus
+the QE team as a whole.&lt;/p&gt;
+
+&lt;p&gt;&lt;center&gt;
+&lt;a href=&#34;../../img/posts/tsqa-2020/disable-tests-meme.jpg&#34;&gt;
+&lt;img alt=&#34;Failing tests meme&#34; src=&#34;../../img/posts/tsqa-2020/disable-tests-meme.jpg&#34; style=&#34;max-width: 100%; padding: 5px 15px 10px 10px&#34;/&gt;&lt;/a&gt;
+&lt;div class=&#34;caption&#34;&gt;This is supposed to be a joke, but it&amp;rsquo;s actually
+the point I&amp;rsquo;m sharing. If tests are failing, disable or get rid of them, &lt;em&gt;AFTER&lt;/em&gt; filing an
+issue! &lt;/div&gt;
+&lt;/center&gt;&lt;/p&gt;
+
+&lt;p&gt;So, if a project has continuously failing tests, try to fix them as quick
+as possible. If there currently isn&amp;rsquo;t time to fix it (we&amp;rsquo;ve all been there),
+that&amp;rsquo;s fine, but file an issue to &lt;em&gt;remember&lt;/em&gt; to fix it later. Then disable it.
+It will make a test suite more meaningful, because each failure
+&lt;em&gt;means something important&lt;/em&gt;.&lt;/p&gt;
+
+&lt;p&gt;One last statement here: &lt;strong&gt;No&lt;/strong&gt; flaky tests either. If we can&amp;rsquo;t depend on them,
+they aren&amp;rsquo;t worth having.  Either figure out how to fix them so they are
+consistent, or remove them.&lt;/p&gt;
+
+&lt;h4 id=&#34;write-tests-to-pass-for-known-issues&#34;&gt;Write tests to pass for known issues&lt;/h4&gt;
+
+&lt;p&gt;Now, lets expand that suggestion of disabling failing tests, and write tests
+that &lt;em&gt;pass&lt;/em&gt; when a &lt;em&gt;known&lt;/em&gt; defect happens. While sounding counter-intuitive at
+first, this idea makes more sense if you accept the fact that tests don&amp;rsquo;t
+actually &lt;em&gt;find&lt;/em&gt; defects. Rather, automated tests depict the &lt;em&gt;state&lt;/em&gt; of a
+system, and fail when &lt;em&gt;something has changed&lt;/em&gt;. A passed or failed test simply
+acts as a &lt;em&gt;data point&lt;/em&gt;. When a quality engineer goes and investigates the test
+results, &lt;em&gt;they&lt;/em&gt; determine if there is a defect based on the data.&lt;/p&gt;
+
+&lt;p&gt;For example, lets assume I have a test that asserts that an api call returns a
+&lt;code&gt;200&lt;/code&gt; status. However, due to a known issue, it is currently returning &lt;code&gt;404&lt;/code&gt;s.
+I &lt;em&gt;know&lt;/em&gt; that in its current state, the system returns a &lt;code&gt;404&lt;/code&gt; for that api
+call, so I can change/add a test to assert that it is indeed, returning &lt;code&gt;404&lt;/code&gt;s.
+This technique &lt;em&gt;removes a failing test&lt;/em&gt; (as suggest in the previous section),
+while allowing us to maintain that data point. The test will pass while it
+continues to return &lt;code&gt;404&lt;/code&gt;&amp;rsquo;s, but will fail and notify us of any related state
+changes.&lt;/p&gt;
+
+&lt;p&gt;Those changes could be from the developers merging a bug fix&amp;hellip; or a
+&lt;em&gt;new&lt;/em&gt; defect popping up, resulting in the api call now returning &lt;code&gt;500&lt;/code&gt; errors.
+Regardless, we know that something has changed again, and we should investigate. By
+comparison, an always-failing or fully removed test would not have demanded our
+attention so easily.&lt;/p&gt;
+
+&lt;h4 id=&#34;better-documentation&#34;&gt;Better Documentation&lt;/h4&gt;
+
+&lt;p&gt;So&amp;hellip; if we have our tests setup to &lt;em&gt;pass&lt;/em&gt; for known defects, lets make one
+thing clear&amp;hellip; we need to make sure we have &lt;strong&gt;amazing documentation&lt;/strong&gt;. This is
+imperative.&lt;/p&gt;
+
+&lt;p&gt;&lt;center&gt;
+&lt;a href=&#34;../../img/posts/tsqa-2020/documentation-meme.png&#34;&gt;
+&lt;img alt=&#34;Documentation Meme&#34; src=&#34;../../img/posts/tsqa-2020/documentation-meme.png&#34; style=&#34;max-width: 100%; padding: 5px 15px 10px 10px&#34;/&gt;&lt;/a&gt;
+&lt;/center&gt;&lt;/p&gt;
+
+&lt;p&gt;Any test designed to pass on a known defect should contain a few pieces of
+information in its documentation:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;&lt;em&gt;Why the test is there&lt;/em&gt;: If a test is checking for undesired
+behavior, it is a good idea to quickly document something along the lines
+of &amp;lsquo;This test is checking for behavior we don&amp;rsquo;t want. It is just here
+until an issue is fixed&amp;rsquo;.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;&lt;em&gt;The issue number&lt;/em&gt;. If a test exists until a known issue is resolved&amp;hellip;
+please include the issue/bug number in the documentation. This will make it
+much easier for others (or you!) to find more information, or check if the
+issue is already closed once the test starts failing (due to a fix).&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;&lt;em&gt;What we expect from the test&lt;/em&gt;: Try to document why the test is
+currently passing, and what we expect when it starts failing again.&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Continuing with our example from above:&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&amp;ldquo;This test has been altered until issue #23483 is resolved. Currently, this api
+call returns a 404 status. If the issue is resolved, it should return a 200
+status, at which point this test needs to be updated.&amp;rdquo;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Lastly, remember to periodically clean up the documentation.  When filing an
+issue, state &lt;em&gt;were&lt;/em&gt; a failing test can be found if it is being updated to match
+the behavior. This way when the issue is closed, it will be easier to go update
+the test. Temporary test states can also be marked with a tag, such as &lt;code&gt;TODO&lt;/code&gt;
+to make them easier to search through.  Honestly, whatever works for your team.
+The goal is to create enough context so that someone else is able to know what
+is going on and fix it without having to find you.&lt;/p&gt;
+
+&lt;h2 id=&#34;conclusion&#34;&gt;Conclusion&lt;/h2&gt;
+
+&lt;p&gt;Overall, TSQA 2020 turned out to be a wonderful conference and was a desirable
+size. It was not crazy and over-crowded, but also not so small that it felt
+awkward.  It had a diverse mix of people from all over the country, and the
+highest percentage of women I have ever seen at a tech conference. I had a
+great time and definitely plan to attend the next one&amp;hellip;  even if I have to
+travel more than a mile next time.&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>Creating Tests For This Website: Docker Jenkins Nodes</title>
