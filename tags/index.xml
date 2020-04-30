@@ -5,17 +5,44 @@
     <description>Recent content in Tags on λ ryan. himmelwright. net</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 22 Apr 2020 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 30 Apr 2020 00:00:00 +0000</lastBuildDate>
     
         <atom:link href="http://ryan.himmelwright.net/tags/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
-      <title>DEV</title>
+      <title>Ansible</title>
+      <link>http://ryan.himmelwright.net/tags/ansible/</link>
+      <pubDate>Thu, 30 Apr 2020 00:00:00 +0000</pubDate>
+      
+      <guid>http://ryan.himmelwright.net/tags/ansible/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Dev</title>
       <link>http://ryan.himmelwright.net/tags/dev/</link>
-      <pubDate>Wed, 22 Apr 2020 00:00:00 +0000</pubDate>
+      <pubDate>Thu, 30 Apr 2020 00:00:00 +0000</pubDate>
       
       <guid>http://ryan.himmelwright.net/tags/dev/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>DevOps</title>
+      <link>http://ryan.himmelwright.net/tags/devops/</link>
+      <pubDate>Thu, 30 Apr 2020 00:00:00 +0000</pubDate>
+      
+      <guid>http://ryan.himmelwright.net/tags/devops/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Linux</title>
+      <link>http://ryan.himmelwright.net/tags/linux/</link>
+      <pubDate>Thu, 30 Apr 2020 00:00:00 +0000</pubDate>
+      
+      <guid>http://ryan.himmelwright.net/tags/linux/</guid>
       <description></description>
     </item>
     
@@ -56,7 +83,7 @@
     </item>
     
     <item>
-      <title>Jenkins</title>
+      <title>jenkins</title>
       <link>http://ryan.himmelwright.net/tags/jenkins/</link>
       <pubDate>Tue, 31 Mar 2020 00:00:00 +0000</pubDate>
       
@@ -74,7 +101,7 @@
     </item>
     
     <item>
-      <title>Website</title>
+      <title>website</title>
       <link>http://ryan.himmelwright.net/tags/website/</link>
       <pubDate>Tue, 31 Mar 2020 00:00:00 +0000</pubDate>
       
@@ -83,7 +110,7 @@
     </item>
     
     <item>
-      <title>Fedora</title>
+      <title>fedora</title>
       <link>http://ryan.himmelwright.net/tags/fedora/</link>
       <pubDate>Sat, 25 Jan 2020 00:00:00 +0000</pubDate>
       
@@ -92,7 +119,7 @@
     </item>
     
     <item>
-      <title>Hardware</title>
+      <title>hardware</title>
       <link>http://ryan.himmelwright.net/tags/hardware/</link>
       <pubDate>Sat, 25 Jan 2020 00:00:00 +0000</pubDate>
       
@@ -101,7 +128,7 @@
     </item>
     
     <item>
-      <title>KDE</title>
+      <title>kde</title>
       <link>http://ryan.himmelwright.net/tags/kde/</link>
       <pubDate>Sat, 25 Jan 2020 00:00:00 +0000</pubDate>
       
@@ -115,15 +142,6 @@
       <pubDate>Sat, 25 Jan 2020 00:00:00 +0000</pubDate>
       
       <guid>http://ryan.himmelwright.net/tags/laptop/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Linux</title>
-      <link>http://ryan.himmelwright.net/tags/linux/</link>
-      <pubDate>Sat, 25 Jan 2020 00:00:00 +0000</pubDate>
-      
-      <guid>http://ryan.himmelwright.net/tags/linux/</guid>
       <description></description>
     </item>
     
@@ -200,7 +218,7 @@
     </item>
     
     <item>
-      <title>SSH</title>
+      <title>ssh</title>
       <link>http://ryan.himmelwright.net/tags/ssh/</link>
       <pubDate>Wed, 04 Dec 2019 00:00:00 +0000</pubDate>
       
@@ -218,7 +236,7 @@
     </item>
     
     <item>
-      <title>Monitors</title>
+      <title>monitors</title>
       <link>http://ryan.himmelwright.net/tags/monitors/</link>
       <pubDate>Mon, 21 Oct 2019 00:00:00 +0000</pubDate>
       
@@ -245,16 +263,7 @@
     </item>
     
     <item>
-      <title>Devops</title>
-      <link>http://ryan.himmelwright.net/tags/devops/</link>
-      <pubDate>Wed, 04 Sep 2019 00:00:00 +0000</pubDate>
-      
-      <guid>http://ryan.himmelwright.net/tags/devops/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Git</title>
+      <title>git</title>
       <link>http://ryan.himmelwright.net/tags/git/</link>
       <pubDate>Wed, 04 Sep 2019 00:00:00 +0000</pubDate>
       
@@ -299,7 +308,7 @@
     </item>
     
     <item>
-      <title>filesystems</title>
+      <title>Filesystems</title>
       <link>http://ryan.himmelwright.net/tags/filesystems/</link>
       <pubDate>Wed, 05 Jun 2019 00:00:00 +0000</pubDate>
       
@@ -484,15 +493,6 @@
       <pubDate>Fri, 16 Jun 2017 00:00:00 +0000</pubDate>
       
       <guid>http://ryan.himmelwright.net/tags/proxmox/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Ansible</title>
-      <link>http://ryan.himmelwright.net/tags/ansible/</link>
-      <pubDate>Thu, 25 May 2017 00:00:00 +0000</pubDate>
-      
-      <guid>http://ryan.himmelwright.net/tags/ansible/</guid>
       <description></description>
     </item>
     

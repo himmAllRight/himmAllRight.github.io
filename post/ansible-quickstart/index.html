@@ -1,0 +1,660 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Ansible Quickstart -- λ ryan. himmelwright. net</title>
+
+    
+
+    
+    <link href="http://ryan.himmelwright.net/css/bootstrap.min.css" rel="stylesheet">
+
+    
+    <link href="http://ryan.himmelwright.net/css/clean-blog.min.css" rel="stylesheet">
+
+    
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href='//fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+
+    
+    
+    
+
+
+
+    
+    <script type="text/javascript">
+        var _paq = _paq || [];
+         
+        _paq.push(["setDocumentTitle", document.domain + "/" + document.title]);
+        _paq.push(["setCookieDomain", "*.ryan.himmelwright.net"]);
+        _paq.push(["setDomains", ["*.ryan.himmelwright.net"]]);
+        _paq.push(['trackPageView']);
+        _paq.push(['enableLinkTracking']);
+        (function() {
+        var u="//cloud.himmelwright.net/piwik/";
+        _paq.push(['setTrackerUrl', u+'piwik.php']);
+        _paq.push(['setSiteId', '1']);
+        var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+        g.type='text/javascript'; g.async=true; g.defer=true; g.src=u+'piwik.js'; s.parentNode.insertBefore(g,s);
+        })();
+        </script>
+        <noscript><p><img src="//cloud.himmelwright.net/piwik/piwik.php?idsite=1&rec=1" style="border:0;" alt="" /></p></noscript>
+        
+
+
+
+</head>
+
+<body>
+
+    
+    <nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+        <div class="container-fluid">
+            
+            <div class="navbar-header page-scroll">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="http://ryan.himmelwright.net">λ ryan. himmelwright. net</a>
+            </div>
+
+                       
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    
+                    <li>
+                        <a href="../../">home</a>
+                    </li>
+                    
+                    <li>
+                        <a href="../../pages/about/">About</a>
+                    </li>
+                    
+                    <li>
+                        <a href="../../pages/homelab/">Homelab</a>
+                    </li>
+                    
+                    <li>
+                        <a href="../../tags">tags</a>
+                    </li>
+                    
+                    <li>
+                        <a href="../../post/">Archives</a>
+                    </li>
+                    
+                    <li>
+                        <a href="../../post/index.xml">RSS</a>
+                    </li>
+                    
+                  </ul>
+            </div>
+           
+
+        </div>
+        
+    </nav>
+
+
+
+
+<header class="intro-header" style="background-image: url('http://ryan.himmelwright.net/img/posts/ansible-quickstart/ansible-balcony.jpeg')">
+    
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <h1>Ansible Quickstart</h1>
+                    <h2 class="subheading"></h2>
+                    <span class="meta">
+                        
+Posted by <a href="#">Ryan Himmelwright</a> on Thu, Apr 30, 2020
+
+
+
+
+
+
+
+<br />
+Tags <a href="../../tags/dev">dev</a>, <a href="../../tags/linux">linux</a>, <a href="../../tags/devops">devops</a>, <a href="../../tags/ansible">ansible</a>
+
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <span class="header-caption">Ansible Office Balcony, Durham NC</span>
+    
+    </header>
+
+    
+    <article>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                    
+                    <p>A <em>long</em> time ago, I briefly explained how to configure
+<a href="https://www.ansible.com">Ansible</a>, in <a href="../../post/ansible-on-pi-cluster/">a post about building a raspberry pi
+cluster</a>. All in all&hellip; it was by no means a
+great introduction to the basics of ansible.</p>
+
+<p>A month ago, I drafted a progression of examples with notes, to teach a
+co-worker the <em>basics</em> of writing and using ansible roles and playbooks. After
+reading through them, I realized it wouldn&rsquo;t take much to turn
+them into an <em>actual</em> Ansible quickstart post. So here we are.</p>
+
+<p>I am not an Ansible genius, and reading this will not make you one either. However,
+the goal of this post is to provide enough understating to get started with writing
+some ansible playbooks.</p>
+
+<h2 id="installing">Installing</h2>
+
+<p>Lets start by installing ansible. It should be in most distro&rsquo;s main repos these
+days:</p>
+
+<p>Fedora Linux:</p>
+
+<pre><code>sudo dnf install ansible
+</code></pre>
+
+<p>MacOS:</p>
+
+<p>&hellip; I have no idea. I usually always <code>ssh</code> to Linux boxes from my macbook.</p>
+
+<p>I think it can be installed with <code>pip</code> though, so possibly:</p>
+
+<pre><code>pip3 install ansible
+</code></pre>
+
+<h3 id="remote-node-requirements">Remote Node Requirements</h3>
+
+<p>In order for ansible to connect to a remote node, that node usually needs 3
+things:</p>
+
+<ul>
+<li>1) Python installed</li>
+<li>2) password-less sudo permissions</li>
+<li>3) <code>ssh</code> keys configured (if running against remote hosts. Not needed if
+ just running playbooks against <code>localhost</code>)</li>
+</ul>
+
+<h4 id="python">python</h4>
+
+<p>Python should already be installed on most systems. If not, check your package
+manager, or try searching the documentation on <a href="https://python.org">python.org</a>
+to learn the best install method for your system.</p>
+
+<h4 id="passwordless-sudo">Passwordless <code>sudo</code></h4>
+
+<p>This will allow a user to run <code>sudo</code> commands, without having to type in a
+password each time. I shouldn&rsquo;t have to say this, but&hellip; <em>please use with care!</em></p>
+
+<p>Granting password-less sudo permissions are most easily accomplished with
+<code>visudo</code>:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">sudo visudo</code></pre></div>
+<p>This will open up the <code>sudo</code> settings in your <code>$EDITOR</code>. Once opened, find the
+following line and uncomment it (it&rsquo;s usually near the bottom of the file).</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#75715e">## Same thing without a password</span>
+%wheel        ALL<span style="color:#f92672">=(</span>ALL<span style="color:#f92672">)</span>       NOPASSWD: ALL</code></pre></div>
+<h4 id="ssh">ssh</h4>
+
+<p>Lastly, exchange ssh-keys with the remote node. This will allow ansible to ssh
+into the node without having to deal with those pesky passwords. The easiest way
+to exchange keys is using the <code>ssh-copy-id</code> command, as such:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">ssh-copy-id username@hostname</code></pre></div>
+<h2 id="ansible-basics">Ansible Basics</h2>
+
+<h4 id="hosts-file">Hosts File</h4>
+
+<p>A host inventory file is a yaml file that defines hosts ansible can connect to.
+The default file is located at <code>/etc/ansible/hosts</code>. An alternative inventory
+file may be provided using the <code>-i</code> flag.</p>
+
+<p>Example file:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml">[VMs]
+<span style="color:#75715e">## Server VMs</span>
+<span style="color:#ae81ff">192.168.10.50</span>
+<span style="color:#ae81ff">192.168.10.71</span>
+<span style="color:#ae81ff">192.168.10.118</span>
+
+[Hosts]
+<span style="color:#75715e">## Hosts</span>
+<span style="color:#ae81ff">192.168.10.12</span>
+
+[cluster]
+<span style="color:#ae81ff">192.168.112.205</span>
+<span style="color:#ae81ff">192.168.112.206</span>
+<span style="color:#ae81ff">192.168.112.207</span></code></pre></div>
+<h4 id="modules">Modules</h4>
+
+<p>Modules are premade functionality used in ansible that can be imported into a
+playbook. Simply, they <em>do</em> what you want <em>done</em>. Some examples are <code>ping</code>,
+<code>dnf</code>, <code>apt</code>, <code>redhat_subscription</code>.</p>
+
+<p>Feel free to search the <a href="https://docs.ansible.com">ansible documentation</a> to
+learn more.</p>
+
+<h4 id="ad-hoc-ansible-commands">Ad-hoc Ansible Commands</h4>
+
+<p>Simple and straight ansible executions can be called with the <code>ansible</code> command.
+Ad-hoc commands are usually called with a module, using the <code>-m</code> flag. For
+example, <code>ping</code>:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">➜  ansible -m ping localhost
+
+localhost | SUCCESS <span style="color:#f92672">=</span>&gt; <span style="color:#f92672">{</span>
+    <span style="color:#e6db74">&#34;changed&#34;</span>: false,
+    <span style="color:#e6db74">&#34;ping&#34;</span>: <span style="color:#e6db74">&#34;pong&#34;</span>
+<span style="color:#f92672">}</span></code></pre></div>
+<p>For a more complicated example, lets use the <code>dnf</code> module to install <code>htop</code>:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">ansible -m dnf -a <span style="color:#e6db74">&#34;name=htop state=latest&#34;</span> localhost --become</code></pre></div>
+<p>This module requires some parameters to be defined. We are able to supply
+them using the <code>-a</code> flag, followed by a string of the key/values pairs.</p>
+
+<p>Also, because the <code>dnf</code> module requires root permissions to function, we supply
+the <code>--become</code> flag, to become <code>root</code>.</p>
+
+<p>Note, if I want to run this against another machine (beyond <code>localhost</code>), it
+has to be defined in whatever inventory file we are using.</p>
+
+<p>So, if I define an inventory file (<code>./hosts.yaml</code>) containing my desktop
+computer:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml">[charmelon]
+<span style="color:#ae81ff">192.168.1.5</span></code></pre></div>
+<p>I can install <code>htop</code> on <em>my desktop</em>, using:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">ansible -i hosts.yaml -m dnf -a <span style="color:#e6db74">&#34;name=htop state=latest&#34;</span> charmeleon --become</code></pre></div>
+<p>&hellip; and it works!</p>
+
+<pre><code>192.168.1.5 | CHANGED =&gt; {
+    &quot;ansible_facts&quot;: {
+        &quot;discovered_interpreter_python&quot;: &quot;/usr/bin/python&quot;
+    },
+    &quot;changed&quot;: true,
+    &quot;msg&quot;: &quot;&quot;,
+    &quot;rc&quot;: 0,
+    &quot;results&quot;: [
+        &quot;Installed: htop-2.2.0-8.fc32.x86_64&quot;
+    ]
+}
+</code></pre>
+
+<h3 id="playbooks">Playbooks</h3>
+
+<p>As you can imagine, doing everything from the command line isn&rsquo;t always
+helpful, or easily reproducible. That&rsquo;s what playbooks are for. In a nutshell,
+playbooks are ansible scripts. They are a yaml file which ansible runs, instead
+of running a serries of ad-hoc commands.</p>
+
+<p>To demonstrate, lets convert the <code>dnf</code> command from above, into a simple
+playbook named <code>install-htop.yaml</code>.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml">---
+- <span style="color:#66d9ef">hosts</span>: charmeleon
+  <span style="color:#66d9ef">become</span>: <span style="color:#66d9ef">true</span>
+
+  <span style="color:#66d9ef">tasks</span>:
+    - <span style="color:#66d9ef">name</span>: Install Htop
+      <span style="color:#66d9ef">dnf</span>:
+        <span style="color:#66d9ef">name</span>: htop
+        <span style="color:#66d9ef">state</span>: latest</code></pre></div>
+<p>Being a <code>yaml</code> file, the first line starts with <code>---</code>. Next, we define some
+meta information for the entire playbook. For example, this is were we put the
+<code>--become</code> flag, by turning it into <code>become: true</code>. This is also where we
+define what hosts the playbook will run against. If I&rsquo;m providing a hosts file,
+I can alternatively use <code>hosts: all</code> to run against <em>all</em> hosts defined in the
+inventory file.</p>
+
+<h4 id="local-connections">local connections</h4>
+
+<p>If the playbook is to run only locally, the connection type can be set to
+<code>local</code> (by default, it is set to <code>ssh</code>.)</p>
+
+<pre><code>  hosts: 127.0.0.1
+  connection: local
+</code></pre>
+
+<h4 id="tasks">tasks</h4>
+
+<p>Below the header information, we can define a set of tasks to run. In the
+<code>tasks</code> section, a block is defined for each task, usually by calling a module
+with parameters. It is best practice to describe each task using <code>name:</code>. This
+will make it easier to trace the logs.</p>
+
+<p>For example, lets add the<code>ping</code> module to the playbook so we have more than one
+task&hellip;.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml">---
+- <span style="color:#66d9ef">hosts</span>: <span style="color:#ae81ff">127.0.0.1</span>
+  <span style="color:#66d9ef">connection</span>: local
+  <span style="color:#66d9ef">become</span>: <span style="color:#66d9ef">true</span>
+
+  <span style="color:#66d9ef">tasks</span>:
+	- <span style="color:#66d9ef">name</span>: Ping host first...
+	  <span style="color:#66d9ef">ping</span>:
+
+    - <span style="color:#66d9ef">name</span>: Install Htop
+      <span style="color:#66d9ef">dnf</span>:
+        <span style="color:#66d9ef">name</span>: htop
+        <span style="color:#66d9ef">state</span>: latest</code></pre></div>
+<p>Now the playbook will run both tasks, using <code>name</code> as the header for the output
+of each one:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">➜  /tmp ansible-playbook install-htop.yaml
+
+PLAY <span style="color:#f92672">[</span>all<span style="color:#f92672">]</span> ****************************************
+
+TASK <span style="color:#f92672">[</span>Gathering Facts<span style="color:#f92672">]</span> ****************************************
+ok: <span style="color:#f92672">[</span>192.168.1.5<span style="color:#f92672">]</span>
+
+TASK <span style="color:#f92672">[</span>Ping host first...<span style="color:#f92672">]</span> ****************************************
+ok: <span style="color:#f92672">[</span>192.168.1.5<span style="color:#f92672">]</span>
+
+TASK <span style="color:#f92672">[</span>Install Htop<span style="color:#f92672">]</span> ****************************************
+ok: <span style="color:#f92672">[</span>192.168.1.5<span style="color:#f92672">]</span>
+
+PLAY RECAP ****************************************
+192.168.1.5                : ok<span style="color:#f92672">=</span><span style="color:#ae81ff">3</span>    changed<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>    unreachable<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>    failed<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>    skipped<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>    rescued<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>    ignored<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span></code></pre></div>
+<h5 id="variables">Variables</h5>
+
+<p>We can define sections other than <code>tasks</code>.  A useful section to add is <code>vars:</code>,
+which defines variables for use in the playbook. To illustrate, lets replace
+the hard-coded <code>htop</code> in the <code>dnf</code> task, to a variable named <code>package</code>. We can
+even use the <code>package</code> variable in the <code>name</code> string, to dynamically change the
+output in the log:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml">---
+- <span style="color:#66d9ef">hosts</span>: <span style="color:#ae81ff">127.0.0.1</span>
+  <span style="color:#66d9ef">connection</span>: local
+  <span style="color:#66d9ef">become</span>: <span style="color:#66d9ef">true</span>
+
+  <span style="color:#66d9ef">vars</span>:
+    <span style="color:#66d9ef">package</span>: htop
+
+  <span style="color:#66d9ef">tasks</span>:
+    - <span style="color:#66d9ef">name</span>: Ping host first...
+      <span style="color:#66d9ef">ping</span>:
+
+    - <span style="color:#66d9ef">name</span>: Install {{ package }}
+      <span style="color:#66d9ef">dnf</span>:
+        <span style="color:#66d9ef">name</span>: <span style="color:#e6db74">&#34;{{ package }}&#34;</span>
+        <span style="color:#66d9ef">state</span>: latest</code></pre></div>
+<p>And the output:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">➜  ansible-playbook install-htop.yaml
+
+PLAY <span style="color:#f92672">[</span>127.0.0.1<span style="color:#f92672">]</span> ****************************************
+
+TASK <span style="color:#f92672">[</span>Gathering Facts<span style="color:#f92672">]</span> ****************************************
+ok: <span style="color:#f92672">[</span>127.0.0.1<span style="color:#f92672">]</span>
+
+TASK <span style="color:#f92672">[</span>Ping host first...<span style="color:#f92672">]</span> ****************************************
+ok: <span style="color:#f92672">[</span>127.0.0.1<span style="color:#f92672">]</span>
+
+TASK <span style="color:#f92672">[</span>Install htop<span style="color:#f92672">]</span> ****************************************
+changed: <span style="color:#f92672">[</span>127.0.0.1<span style="color:#f92672">]</span>
+
+PLAY RECAP ****************************************
+127.0.0.1                  : ok<span style="color:#f92672">=</span><span style="color:#ae81ff">3</span>    changed<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>    unreachable<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>    failed<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>    skipped<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>    rescued<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>    ignored<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span></code></pre></div>
+<p>One great feature of variables is that they can be swapped out when calling the
+playbook. The <code>-e</code> flag allows you to provide an alternative value for a
+variable.  For example, lets say we want to install <code>nano</code> instead of <code>htop</code>:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">➜  ansible-playbook install-htop.yaml -e package<span style="color:#f92672">=</span>nano
+
+PLAY <span style="color:#f92672">[</span>127.0.0.1<span style="color:#f92672">]</span> ****************************************
+
+TASK <span style="color:#f92672">[</span>Gathering Facts<span style="color:#f92672">]</span> ****************************************
+ok: <span style="color:#f92672">[</span>127.0.0.1<span style="color:#f92672">]</span>
+
+TASK <span style="color:#f92672">[</span>Ping host first...<span style="color:#f92672">]</span> ****************************************
+ok: <span style="color:#f92672">[</span>127.0.0.1<span style="color:#f92672">]</span>
+
+TASK <span style="color:#f92672">[</span>Install nano<span style="color:#f92672">]</span> ****************************************
+changed: <span style="color:#f92672">[</span>127.0.0.1<span style="color:#f92672">]</span>
+
+PLAY RECAP ****************************************
+127.0.0.1                  : ok<span style="color:#f92672">=</span><span style="color:#ae81ff">3</span>    changed<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>    unreachable<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>    failed<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>    skipped<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>    rescued<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>    ignored<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span></code></pre></div>
+<p>Note how the task name has changed accordingly in the output. So Fancy!</p>
+
+<h2 id="creating-some-structure">Creating some structure</h2>
+
+<h3 id="roles">Roles</h3>
+
+<p>As nice as scripts are, they don&rsquo;t scale well. To combat impending chaos, we
+break functionality down into <code>roles</code>. Roles are collections of tasks,
+variables, and other resources that can be mixed and matched in playbooks.</p>
+
+<p>A role is defined by a directory of it&rsquo;s name, and usually contains a <code>tasks</code>
+sub-directory, where all of it&rsquo;s tasks are defined. Each sub-directory requires
+a <code>main.yml</code> to be the root file for that directory. So, at the vary least, a
+tasks directory will have a file named <code>tasks/main.yml</code> which contains the
+role&rsquo;s tasks.</p>
+
+<p>If there are a BUNCH of tasks defined, they can be broken out into seperate
+files, and included in the <code>main.yml</code> task file.</p>
+
+<p>In addition to <code>tasks</code>, a role might include a <code>defaults</code> or <code>vars</code> sub
+directory. These are again structured with a <code>main.yml</code> file that may, or may
+not, import other files, depending on the size and organization of the role.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e">## Example structure of a &#39;subscriptions&#39; role</span>
+roles
+└── subscriptions
+    ├── defaults
+    │   └── main.yml
+    ├── README.md
+    └── tasks
+        └── main.yml</code></pre></div>
+<p>It is important to note that these yaml files contain <em>just</em> their item. For
+example, the task files contain just tasks. This is because when a role is
+imported into a playbook, its items are simply inserted accordingly.</p>
+
+<h3 id="ansible-cfg">ansible.cfg</h3>
+
+<p>Before we start writing some roles, it is important to know that if you are using
+roles, you need to tell <code>ansible</code> where to find them. The easiest way to do
+this is to define an <code>ansible.cfg</code> file in the directory you will run
+<code>ansible-playbook</code> from. For example:</p>
+
+<pre><code>[defaults]
+roles_path = roles/
+</code></pre>
+
+<h4 id="our-role">Our role</h4>
+
+<p>As it stands, our example playbook is a <em>massive 13 lines long</em>! I can hardly
+open the file without crashing my text editor. So, lets try to break up the
+functionality into roles.</p>
+
+<p>First, lets make the directories:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">mkdir -p roles/install-htop/<span style="color:#f92672">{</span>tasks,defaults<span style="color:#f92672">}</span></code></pre></div>
+<p>Next, we can add our variables to a default file,
+<code>roles/install-htop/defaults/main.yml</code>:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml">---
+<span style="color:#66d9ef">package</span>: htop</code></pre></div>
+<p>With the <code>package</code> variable set, lets create the tasks. To demonstrate
+including other files in the <code>main.yml</code>, I&rsquo;m going to be overly-complicated and
+extract our <code>ping</code> task into its own file, and then include it in the <code>main.yaml</code>.</p>
+
+<p>So first, <code>roles/install-htop/tasks/ping.yaml</code></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml">---
+- <span style="color:#66d9ef">name</span>: Ping host first...
+  ping:</code></pre></div>
+<p>And then, <code>roles/install-htop/tasks/main.yaml</code>, which will also include our
+<code>dnf</code> install task&hellip;</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml">---
+- <span style="color:#66d9ef">include_tasks</span>: ping.yaml
+
+- <span style="color:#66d9ef">name</span>: Install {{ package }}
+  <span style="color:#66d9ef">dnf</span>:
+    <span style="color:#66d9ef">name</span>: <span style="color:#e6db74">&#34;{{ package }}&#34;</span>
+    <span style="color:#66d9ef">state</span>: latest</code></pre></div>
+<p>Congrats, we have an <code>install-htop</code> role defined!</p>
+
+<h3 id="including-roles-in-playbooks">Including roles in playbooks</h3>
+
+<p>Just as we included <code>vars</code> and <code>tasks</code> in the playbook, if we already have
+tasks and vars defined in a <em>role</em>, we can instead include that <em>role</em>:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml">---
+- <span style="color:#66d9ef">hosts</span>: <span style="color:#ae81ff">127.0.0.1</span>
+  <span style="color:#66d9ef">connection</span>: local
+  <span style="color:#66d9ef">become</span>: <span style="color:#66d9ef">true</span>
+
+  <span style="color:#66d9ef">roles</span>:
+    - install-htop</code></pre></div>
+<p>Easy. Let&rsquo;s run it:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">➜  ansible-playbook install-htop.yaml
+<span style="color:#f92672">[</span>WARNING<span style="color:#f92672">]</span>: Ansible is being run in a world writable directory <span style="color:#f92672">(</span>/tmp<span style="color:#f92672">)</span>, ignoring it as an ansible.cfg source. For more information see
+https://docs.ansible.com/ansible/devel/reference_appendices/config.html#cfg-in-world-writable-dir
+
+PLAY <span style="color:#f92672">[</span>127.0.0.1<span style="color:#f92672">]</span> ****************************************
+
+TASK <span style="color:#f92672">[</span>Gathering Facts<span style="color:#f92672">]</span> ****************************************
+ok: <span style="color:#f92672">[</span>127.0.0.1<span style="color:#f92672">]</span>
+
+TASK <span style="color:#f92672">[</span>install-htop : include_tasks<span style="color:#f92672">]</span> ****************************************
+included: /tmp/roles/install-htop/tasks/ping.yaml <span style="color:#66d9ef">for</span> 127.0.0.1
+
+TASK <span style="color:#f92672">[</span>install-htop : Ping host first...<span style="color:#f92672">]</span> ****************************************
+ok: <span style="color:#f92672">[</span>127.0.0.1<span style="color:#f92672">]</span>
+
+TASK <span style="color:#f92672">[</span>install-htop : Install htop<span style="color:#f92672">]</span> ****************************************
+ok: <span style="color:#f92672">[</span>127.0.0.1<span style="color:#f92672">]</span>
+
+PLAY RECAP ****************************************
+127.0.0.1                  : ok<span style="color:#f92672">=</span><span style="color:#ae81ff">4</span>    changed<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>    unreachable<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>    failed<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>    skipped<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>    rescued<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>    ignored<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span></code></pre></div>
+<p>and it still works :)</p>
+
+<h1 id="conclusion">Conclusion</h1>
+
+<p>While only the tip of the iceburg, I think we have covered enough basics
+to make <em>something</em> useful. Using this small amount of Ansible
+knowledge, I have been able to create playbooks that configure applications,
+update all my computers, and setup each of my machines when I reformat them.
+However, don&rsquo;t let that stop you from learning even more! Ansible is a powerful
+tool and worth any amount of time invested into it. Enjoy!</p>
+
+                    
+                    
+                    
+                         <div style="float: right; text-decoration: underline; text-align: right;">Prev Post:</div>
+                    
+                    <br>
+                    
+                    
+                        <a href="http://ryan.himmelwright.net/post/tsqa-2020/" style="text-align: right; float: right; max-width: 40%">TSQA 2020</a>
+                    
+
+			
+			<div class="comment-section">
+			  
+   <div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "himmallright" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+			</div>
+                </div>
+            </div>
+        </div>
+    </article>
+
+        <hr>
+    
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                  <ul class="list-inline text-center">
+                    
+                      <li>
+                        <a href="mailto:ryan@himmelwright.net">
+                          <span class="fa-stack fa-lg">
+                            <i class="fa fa-circle fa-stack-2x"></i>
+                            <i class="fa fa-envelope-o fa-stack-1x fa-inverse"></i>
+                          </span>
+                        </a>
+                      </li>
+                    
+                    
+                    <li>
+                      <a href="https://github.com/himmAllRight">
+                        <span class="fa-stack fa-lg">
+                          <i class="fa fa-circle fa-stack-2x"></i>
+                          <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                        </span>
+                      </a>
+                    </li>
+                    
+                    <li>
+                      <a href="https://www.linkedin.com/in/ryan-himmelwright-b3891774/">
+                        <span class="fa-stack fa-lg">
+                          <i class="fa fa-circle fa-stack-2x"></i>
+                          <i class="fa fa-linkedin fa-stack-1x fa-inverse"></i>
+                        </span>
+                      </a>
+                    </li>
+                    
+                  </ul>
+<p class="copyright text-muted">
+
+<a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img
+  alt="Creative Commons License" style="border-width:0"
+  src="https://i.creativecommons.org/l/by/4.0/88x31.png" /></a><br />This work
+by <a xmlns:cc="http://creativecommons.org/ns#" href="http://ryan.himmelwright.net" property="cc:attributionName" rel="cc:attributionURL">Ryan Himmelwright</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
+</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    
+    <script src="http://ryan.himmelwright.net/js/jquery.min.js"></script>
+
+    
+    <script src="http://ryan.himmelwright.net/js/bootstrap.min.js"></script>
+
+    
+    <script src="http://ryan.himmelwright.net/js/clean-blog.js"></script>
+
+    
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-123-45', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+
+
+</body>
+
+</html>
+
