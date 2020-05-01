@@ -165,7 +165,7 @@ computer:&lt;/p&gt;
 &lt;p&gt;As you can imagine, doing everything from the command line isn&amp;rsquo;t always
 helpful, or easily reproducible. That&amp;rsquo;s what playbooks are for. In a nutshell,
 playbooks are ansible scripts. They are a yaml file which ansible runs, instead
-of running a serries of ad-hoc commands.&lt;/p&gt;
+of running a series of ad-hoc commands.&lt;/p&gt;
 
 &lt;p&gt;To demonstrate, lets convert the &lt;code&gt;dnf&lt;/code&gt; command from above, into a simple
 playbook named &lt;code&gt;install-htop.yaml&lt;/code&gt;.&lt;/p&gt;

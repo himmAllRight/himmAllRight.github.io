@@ -1,8 +1,8 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Devops on λ ryan. himmelwright. net</title>
+    <title>DevOps on λ ryan. himmelwright. net</title>
     <link>http://ryan.himmelwright.net/tags/devops/</link>
-    <description>Recent content in Devops on λ ryan. himmelwright. net</description>
+    <description>Recent content in DevOps on λ ryan. himmelwright. net</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Thu, 30 Apr 2020 00:00:00 +0000</lastBuildDate>
@@ -165,7 +165,7 @@ computer:&lt;/p&gt;
 &lt;p&gt;As you can imagine, doing everything from the command line isn&amp;rsquo;t always
 helpful, or easily reproducible. That&amp;rsquo;s what playbooks are for. In a nutshell,
 playbooks are ansible scripts. They are a yaml file which ansible runs, instead
-of running a serries of ad-hoc commands.&lt;/p&gt;
+of running a series of ad-hoc commands.&lt;/p&gt;
 
 &lt;p&gt;To demonstrate, lets convert the &lt;code&gt;dnf&lt;/code&gt; command from above, into a simple
 playbook named &lt;code&gt;install-htop.yaml&lt;/code&gt;.&lt;/p&gt;
