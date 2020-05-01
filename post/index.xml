@@ -144,7 +144,7 @@ computer:&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;[charmelon]
 &lt;span style=&#34;color:#ae81ff&#34;&gt;192.168.1.5&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;I can install &lt;code&gt;htop&lt;/code&gt; on &lt;em&gt;my desktop&lt;/em&gt;, using:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;ansible -i hosts.yaml -m dnf -a &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;name=htop state=latest&amp;#34;&lt;/span&gt; charmeleon --become&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;ansible -i ./hosts -m dnf -a &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;name=htop state=latest&amp;#34;&lt;/span&gt; charmeleon --become&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;&amp;hellip; and it works!&lt;/p&gt;
 
 &lt;pre&gt;&lt;code&gt;192.168.1.5 | CHANGED =&amp;gt; {
@@ -302,24 +302,24 @@ variables, and other resources that can be mixed and matched in playbooks.&lt;/p
 
 &lt;p&gt;A role is defined by a directory of it&amp;rsquo;s name, and usually contains a &lt;code&gt;tasks&lt;/code&gt;
 sub-directory, where all of it&amp;rsquo;s tasks are defined. Each sub-directory requires
-a &lt;code&gt;main.yml&lt;/code&gt; to be the root file for that directory. So, at the vary least, a
-tasks directory will have a file named &lt;code&gt;tasks/main.yml&lt;/code&gt; which contains the
+a &lt;code&gt;main.yaml&lt;/code&gt; to be the root file for that directory. So, at the vary least, a
+tasks directory will have a file named &lt;code&gt;tasks/main.yaml&lt;/code&gt; which contains the
 role&amp;rsquo;s tasks.&lt;/p&gt;
 
 &lt;p&gt;If there are a BUNCH of tasks defined, they can be broken out into seperate
-files, and included in the &lt;code&gt;main.yml&lt;/code&gt; task file.&lt;/p&gt;
+files, and included in the &lt;code&gt;main.yaml&lt;/code&gt; task file.&lt;/p&gt;
 
 &lt;p&gt;In addition to &lt;code&gt;tasks&lt;/code&gt;, a role might include a &lt;code&gt;defaults&lt;/code&gt; or &lt;code&gt;vars&lt;/code&gt; sub
-directory. These are again structured with a &lt;code&gt;main.yml&lt;/code&gt; file that may, or may
+directory. These are again structured with a &lt;code&gt;main.yaml&lt;/code&gt; file that may, or may
 not, import other files, depending on the size and organization of the role.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;color:#75715e&#34;&gt;## Example structure of a &amp;#39;subscriptions&amp;#39; role&lt;/span&gt;
 roles
 └── subscriptions
     ├── defaults
-    │   └── main.yml
+    │   └── main.yaml
     ├── README.md
     └── tasks
-        └── main.yml&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+        └── main.yaml&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;It is important to note that these yaml files contain &lt;em&gt;just&lt;/em&gt; their item. For
 example, the task files contain just tasks. This is because when a role is
 imported into a playbook, its items are simply inserted accordingly.&lt;/p&gt;
@@ -344,11 +344,11 @@ functionality into roles.&lt;/p&gt;
 &lt;p&gt;First, lets make the directories:&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;mkdir -p roles/install-htop/&lt;span style=&#34;color:#f92672&#34;&gt;{&lt;/span&gt;tasks,defaults&lt;span style=&#34;color:#f92672&#34;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;Next, we can add our variables to a default file,
-&lt;code&gt;roles/install-htop/defaults/main.yml&lt;/code&gt;:&lt;/p&gt;
+&lt;code&gt;roles/install-htop/defaults/main.yaml&lt;/code&gt;:&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;---
 &lt;span style=&#34;color:#66d9ef&#34;&gt;package&lt;/span&gt;: htop&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;With the &lt;code&gt;package&lt;/code&gt; variable set, lets create the tasks. To demonstrate
-including other files in the &lt;code&gt;main.yml&lt;/code&gt;, I&amp;rsquo;m going to be overly-complicated and
+including other files in the &lt;code&gt;main.yaml&lt;/code&gt;, I&amp;rsquo;m going to be overly-complicated and
 extract our &lt;code&gt;ping&lt;/code&gt; task into its own file, and then include it in the &lt;code&gt;main.yaml&lt;/code&gt;.&lt;/p&gt;
 
 &lt;p&gt;So first, &lt;code&gt;roles/install-htop/tasks/ping.yaml&lt;/code&gt;&lt;/p&gt;

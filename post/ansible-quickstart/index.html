@@ -274,7 +274,7 @@ computer:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml">[charmelon]
 <span style="color:#ae81ff">192.168.1.5</span></code></pre></div>
 <p>I can install <code>htop</code> on <em>my desktop</em>, using:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">ansible -i hosts.yaml -m dnf -a <span style="color:#e6db74">&#34;name=htop state=latest&#34;</span> charmeleon --become</code></pre></div>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">ansible -i ./hosts -m dnf -a <span style="color:#e6db74">&#34;name=htop state=latest&#34;</span> charmeleon --become</code></pre></div>
 <p>&hellip; and it works!</p>
 
 <pre><code>192.168.1.5 | CHANGED =&gt; {
@@ -432,24 +432,24 @@ variables, and other resources that can be mixed and matched in playbooks.</p>
 
 <p>A role is defined by a directory of it&rsquo;s name, and usually contains a <code>tasks</code>
 sub-directory, where all of it&rsquo;s tasks are defined. Each sub-directory requires
-a <code>main.yml</code> to be the root file for that directory. So, at the vary least, a
-tasks directory will have a file named <code>tasks/main.yml</code> which contains the
+a <code>main.yaml</code> to be the root file for that directory. So, at the vary least, a
+tasks directory will have a file named <code>tasks/main.yaml</code> which contains the
 role&rsquo;s tasks.</p>
 
 <p>If there are a BUNCH of tasks defined, they can be broken out into seperate
-files, and included in the <code>main.yml</code> task file.</p>
+files, and included in the <code>main.yaml</code> task file.</p>
 
 <p>In addition to <code>tasks</code>, a role might include a <code>defaults</code> or <code>vars</code> sub
-directory. These are again structured with a <code>main.yml</code> file that may, or may
+directory. These are again structured with a <code>main.yaml</code> file that may, or may
 not, import other files, depending on the size and organization of the role.</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e">## Example structure of a &#39;subscriptions&#39; role</span>
 roles
 └── subscriptions
     ├── defaults
-    │   └── main.yml
+    │   └── main.yaml
     ├── README.md
     └── tasks
-        └── main.yml</code></pre></div>
+        └── main.yaml</code></pre></div>
 <p>It is important to note that these yaml files contain <em>just</em> their item. For
 example, the task files contain just tasks. This is because when a role is
 imported into a playbook, its items are simply inserted accordingly.</p>
@@ -474,11 +474,11 @@ functionality into roles.</p>
 <p>First, lets make the directories:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">mkdir -p roles/install-htop/<span style="color:#f92672">{</span>tasks,defaults<span style="color:#f92672">}</span></code></pre></div>
 <p>Next, we can add our variables to a default file,
-<code>roles/install-htop/defaults/main.yml</code>:</p>
+<code>roles/install-htop/defaults/main.yaml</code>:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml">---
 <span style="color:#66d9ef">package</span>: htop</code></pre></div>
 <p>With the <code>package</code> variable set, lets create the tasks. To demonstrate
-including other files in the <code>main.yml</code>, I&rsquo;m going to be overly-complicated and
+including other files in the <code>main.yaml</code>, I&rsquo;m going to be overly-complicated and
 extract our <code>ping</code> task into its own file, and then include it in the <code>main.yaml</code>.</p>
 
 <p>So first, <code>roles/install-htop/tasks/ping.yaml</code></p>
