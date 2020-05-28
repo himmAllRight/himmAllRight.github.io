@@ -21,9 +21,7 @@ setup. However, we recently moved into a new house and I switched to a
 mesh wifi network. No, the switch was not &lt;em&gt;just&lt;/em&gt; to increase wifi
 coverage throughout the entire house. The real motivator
 (ironically)&amp;hellip; was that I needed a better ethernet connection&amp;hellip;&lt;/p&gt;
-
 &lt;h3 id=&#34;history&#34;&gt;History&lt;/h3&gt;
-
 &lt;p&gt;About two years ago, I &lt;a href=&#34;../../post/upgrading-network-to-ubiquiti/&#34;&gt;replaced my Linksys wifi
 router(s)&lt;/a&gt;
 with the tiny-but-mighty &lt;a href=&#34;https://store.ui.com/products/edgerouter-x&#34;&gt;Ubiquity Edge Router
@@ -31,10 +29,8 @@ X&lt;/a&gt;, paired with an &lt;a href=&#34;https://www.ui.com/unifi/unifi-ap-ac
 lite&lt;/a&gt; wifi access point. I loved
 it. It handled our web traffic flawlessly, and unlike the previous Linksys
 routers, I never had to randomly restart it. It just worked for months on end.&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&#34;../../img/posts/switching-to-mesh-network/google-fiber-box.png&#34;&gt;&lt;img alt=&#34;The Google Fiber network box&#34; src=&#34;../../img/posts/switching-to-mesh-network/google-fiber-box.png&#34; style=&#34;max-width: 100%;&#34;/&gt;&lt;/a&gt;
-&lt;div class=&#34;caption&#34;&gt;The Google Fiber &amp;ldquo;network box&amp;rdquo;.&lt;/div&gt;&lt;/p&gt;
-
+&lt;p&gt;&lt;!-- raw HTML omitted --&gt;&lt;!-- raw HTML omitted --&gt;&lt;!-- raw HTML omitted --&gt;&lt;/p&gt;
+&lt;!-- raw HTML omitted --&gt;
 &lt;p&gt;I enjoyed the setup &lt;em&gt;so&lt;/em&gt; much in fact, that while I was thrilled to
 have a Google Fiber internet connection when we moved to Durham NC
 last year, I was a little sad that setting up the edgerouter on the
@@ -42,44 +38,32 @@ fiber modem required a little bit of tweaking. I looked into it
 but ultimately decided that figuring it out wasn&amp;rsquo;t worth the hassle
 for the short period of time which we&amp;rsquo;d likely live in the
 apartment. So, I reluctantly used the Google provided box which worked &lt;em&gt;okay&lt;/em&gt;.&lt;/p&gt;
-
 &lt;h3 id=&#34;we-moved&#34;&gt;We Moved&lt;/h3&gt;
-
 &lt;p&gt;The Google fiber was indeed short lived, as my wife and I just moved
 into a house this past month. When working with Spectrum to setup our
 internet (&lt;em&gt;yea&amp;hellip; I know&lt;/em&gt;), we discovered that while there were coax
 plugs in both the living room and master bedroom, we couldn&amp;rsquo;t
 actually find any hook-ups to connect the house to the external cable/internet
 service line.&lt;/p&gt;
-
 &lt;h4 id=&#34;cable-line-in-bedroom&#34;&gt;Cable-line in Bedroom&lt;/h4&gt;
-
 &lt;p&gt;After searching with multiple techs, we decided just to have them
 drill a line into the master bedroom (which is at the back of the
 house and allows the connection box to be with the other utility
 meters). Our house isn&amp;rsquo;t massive, and having the router in the bedroom
 works well enough, except for &lt;em&gt;one&lt;/em&gt; issue.&lt;/p&gt;
-
 &lt;p&gt;I have several servers and desktop computers that &lt;em&gt;require&lt;/em&gt; an
 ethernet connection, either because they don&amp;rsquo;t have wifi cards, and/or
 because I use Wake-On-Lan with them. This means that I need an
 ethernet connection in my office&amp;hellip; at the front of the house. Now
 that the only ethernet router/switch was in the bedroom, and the rest
 of the house relied on wifi&amp;hellip;  I needed to figure something out.&lt;/p&gt;
-
 &lt;h4 id=&#34;power-line-issues&#34;&gt;Power-line Issues&lt;/h4&gt;
-
 &lt;p&gt;In past apartments, I had used power-line ethernet adapters to extend
 ethernet from a router in a different room to my computers. The speeds
 weren&amp;rsquo;t great, but then again, neither was our connection so it wasn&amp;rsquo;t
 a huge problem. This time though, I ran some tests&amp;hellip;&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&#34;../../img/posts/switching-to-mesh-network/internet-speed-comparison.png&#34;&gt;
-&lt;img alt=&#34;Diagram comparing internet speeds: 1) Plugged directly into Router: 27 ms ping, 231.44 Mbps Download, 11.79 Mbps upload 2) Wifi in Office: 17 ms ping, 178.74 Mbps Download, 11.72 Mbps Upload 3) Powerline Ethernet in Office: 15 ms ping, 17.66 MBps Download, 11.86 Mbps Upload.&#34; src=&#34;../../img/posts/switching-to-mesh-network/internet-speed-comparison.png&#34; style=&#34;max-width: 100%;&#34;/&gt;&lt;/a&gt;&lt;/p&gt;
-
-&lt;div class=&#34;caption&#34;&gt;Different internet Speed test results after hooking up
-internet to the house.&lt;/div&gt;
-
+&lt;!-- raw HTML omitted --&gt;
+&lt;!-- raw HTML omitted --&gt;
 &lt;p&gt;So, while it &lt;em&gt;worked&lt;/em&gt;, this setup wasn&amp;rsquo;t ideal. More importantly, I
 found out a few days later there was a massive problem that
 &lt;em&gt;completely prevents&lt;/em&gt; me from being able to use the power-line
@@ -91,9 +75,7 @@ and router was essentially being
 &lt;a href=&#34;https://en.wikipedia.org/wiki/Denial-of-service_attack&#34;&gt;dos&amp;rsquo;d&lt;/a&gt; by the
 washer. When I unplugged the power-line adapters, it worked
 again. Power-line was not an option anymore.&lt;/p&gt;
-
 &lt;h4 id=&#34;mesh-network&#34;&gt;Mesh Network&lt;/h4&gt;
-
 &lt;p&gt;I wondered if there was another way to connect ethernet in my office,
 beyond having to drop cat6 cable across the house. I looked into wifi
 bridges, but most of the devices were designed for large distances,
@@ -101,9 +83,7 @@ and ones for home use were not much better than a power-line adapters
 when it came to performance/reliability. While looking at wifi
 bridges, a thought occurred to me&amp;hellip; would a mesh network system work?
 If the satellite devices had ethernet ports&amp;hellip; maybe.&lt;/p&gt;
-
 &lt;h4 id=&#34;netgear-orbi&#34;&gt;Netgear Orbi&lt;/h4&gt;
-
 &lt;p&gt;When I started researching wifi mesh networks, the orbi systems were consistently
 rated the highest, and people generally reported that they experienced &lt;em&gt;great&lt;/em&gt;
 performance. When I dug further into it, I learned that this high level of performance was
@@ -112,12 +92,8 @@ technology&amp;rdquo;&lt;/a&gt;.
 Basically, in addition to the normal 2.4 and 5 Ghz network bands, the orbi
 system has &lt;em&gt;a second 5 Ghz band&lt;/em&gt; dedicated to connecting the orbi router and
 satilites together. In other words&amp;hellip; a dedicated wifi bridge :D.&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&#34;../../img/posts/switching-to-mesh-network/rbk50.png&#34;&gt;&lt;img alt=&#34;The RBK50 system comes with 1 router, and 1 satilite
-device. Both have 4 etherent ports.&#34; src=&#34;../../img/posts/switching-to-mesh-network/rbk50.png&#34; style=&#34;max-width: 100%;&#34;/&gt;&lt;/a&gt;
-&lt;div class=&#34;caption&#34;&gt;The RBK50 system comes with 1 router, and 1 satilite
-device. Both have 4 etherent ports.&lt;/div&gt;&lt;/p&gt;
-
+&lt;p&gt;&lt;!-- raw HTML omitted --&gt;&lt;!-- raw HTML omitted --&gt;&lt;!-- raw HTML omitted --&gt;&lt;/p&gt;
+&lt;!-- raw HTML omitted --&gt;
 &lt;p&gt;I started looking at the orbi hardware and saw that there were several
 types of
 &lt;a href=&#34;https://www.netgear.com/orbi/products.aspx#filter=.satellites-indoor%2C.satellites%2C.satellites-outdoor%2C.satellites&#34;&gt;satellites&lt;/a&gt;.
@@ -129,13 +105,10 @@ I could set up the router in the master bedroom with our modem, and
 then put the satellite in my office on the other end of the house.
 I could then connect my hardwired devices, or even a network switch, into the
 ethernet ports on the satellite. Problem sovled.&lt;/p&gt;
-
 &lt;h4 id=&#34;conclusion&#34;&gt;Conclusion&lt;/h4&gt;
-
 &lt;p&gt;I have ordered and setup my orbi system, and will write a review post
 about it sometime in the future. This post&amp;rsquo;s intention was mostly to
 just explain &lt;em&gt;why&lt;/em&gt; I ended up getting an orbi system.&lt;/p&gt;
-
 &lt;p&gt;Many people have started to use home wifi &amp;ldquo;mesh&amp;rdquo; systems because they
 provide a simple solution to cover an entire house with a strong wifi
 connection. While this is a great &lt;em&gt;bonus&lt;/em&gt; I get from having the mesh
@@ -157,28 +130,19 @@ configuring this type of setup, and there was a lot of trial and error. The basi
 network is now all configured and has been running great. It was a good day and I
 learned a lot :). In fact, I am confident that if I had to start over from
 scratch, the process would take me about 10-15 minutes. Just to be sure, I&amp;rsquo;m
- going to quickly jot down the major pain points I experienced my first time around.&lt;/p&gt;
-
+going to quickly jot down the major pain points I experienced my first time around.&lt;/p&gt;
 &lt;h2 id=&#34;trouble-connecting-to-the-edgerouter-x-for-initial-setup&#34;&gt;Trouble Connecting to the EdgeRouter-x for Initial Setup&lt;/h2&gt;
-
-&lt;p&gt;&lt;center&gt;
-&lt;img alt=&#34;During initial setup, I was connecting the router wrong&#34; src=&#34;../../img/posts/ubiquiti-setup-issues/wrong-router-connection.png&#34; style=&#34;max-width: 100%;&#34;/&gt;
-&lt;/center&gt;
-&lt;em&gt;During initial setup, I was connecting the router wrong&lt;/em&gt;&lt;/p&gt;
-
+&lt;!-- raw HTML omitted --&gt;
 &lt;p&gt;The edgerouter needed to be directly connected to a computer during its initial
 setup, to make the EdgeOS configuration wizard accessible. The
 instructions clearly stated to connect an ethernet cable from my laptop to the
 &lt;code&gt;eth0/POE&lt;/code&gt; port on the edgerouter, but I guess I didn&amp;rsquo;t believe them.&lt;/p&gt;
-
 &lt;p&gt;Instead, I plugged the ethernet cable from my modem into &lt;code&gt;eth0&lt;/code&gt;, and my computer
 to &lt;code&gt;eth1&lt;/code&gt;. That didn&amp;rsquo;t work. However, once I &lt;em&gt;properly&lt;/em&gt; connected the devices (and
 manually set a static IP on my laptop, &lt;code&gt;192.168.1.2&lt;/code&gt; for example), I was able to access
 the configuration page in my browser via &lt;code&gt;https://192.168.1.1&lt;/code&gt; (don&amp;rsquo;t forget
 the &lt;em&gt;s&lt;/em&gt; in &lt;em&gt;https&lt;/em&gt;). Lesson Learned: manuals are (&lt;em&gt;usually&lt;/em&gt;) not out to get you.&lt;/p&gt;
-
 &lt;h2 id=&#34;setting-up-poe-and-connecting-the-ap&#34;&gt;Setting up POE and Connecting the AP&lt;/h2&gt;
-
 &lt;p&gt;This was not actually an issue I encountered, but rather a confusion. I was unsure what the best setup for
 the &lt;a href=&#34;https://en.wikipedia.org/wiki/Power_over_Ethernet&#34;&gt;POE&lt;/a&gt; hardware was. At
 first, I had the POE adaptor connected between the edgerouter and the AP,
@@ -190,15 +154,12 @@ indicated that the POE adaptor could indeed power both.&lt;/p&gt;
         |
          --&amp;gt; POE Adaptor --&amp;gt; (&lt;span style=&#34;color:#a6e22e&#34;&gt;*eth0*&lt;/span&gt;)  edgerouter-x  (&lt;span style=&#34;color:#a6e22e&#34;&gt;*eth4*&lt;/span&gt;) --&amp;gt; AP Lite
         |
-Power  --&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;&lt;em&gt;Digram describing the correct link up&lt;/em&gt;&lt;/p&gt;
-
+Power  --
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;em&gt;Digram describing the correct link up&lt;/em&gt;&lt;/p&gt;
 &lt;p&gt;Once I swapped the cables all around, I had to go into the router
 configuration and enable the POE for &lt;code&gt;eth4&lt;/code&gt;. Afterwards, the AP lit up,
 indicating that it was connected and powered.&lt;/p&gt;
-
-&lt;h2 id=&#34;issues-linking-configuring-the-ap&#34;&gt;Issues linking/configuring the AP&lt;/h2&gt;
-
+&lt;h2 id=&#34;issues-linkingconfiguring-the-ap&#34;&gt;Issues linking/configuring the AP&lt;/h2&gt;
 &lt;p&gt;This was the problem I spent the most time on. I had to install the
 configuration software for the Ubiquiti access point, but the &amp;ldquo;Linux binary&amp;rdquo; was
 a .deb, and I didn&amp;rsquo;t feel like extracting the contents of the package so that I
@@ -210,13 +171,7 @@ directly to the edgerouter, it would still be able to see the access point.
 Regardless&amp;hellip; the AP couldn&amp;rsquo;t see the VM and vice versa. Finally, I admitted
 that the issues were most likely caused by the 192.168.122.* IP address that the VM was
 assigned.&lt;/p&gt;
-
-&lt;p&gt;&lt;center&gt;
-&lt;img alt=&#34;During initial setup, I was connecting the router wrong&#34; src=&#34;../../img/posts/ubiquiti-setup-issues/ubuntu.png&#34; width=&#34;45%&#34;&gt;
-&lt;img alt=&#34;During initial setup, I was connecting the router wrong&#34; src=&#34;../../img/posts/ubiquiti-setup-issues/venomoth.png&#34; width=&#34;35%&#34;&gt;
-&lt;/center&gt;
-&lt;em&gt;I spun up a new Ubuntu VM (Venomoth) to host the Ubifi controller&lt;/em&gt;&lt;/p&gt;
-
+&lt;!-- raw HTML omitted --&gt;
 &lt;p&gt;By this point, I had also learned that the Linux software is more of a server
 service, and not a GUI desktop application. So, I concluded that spinning up a
 dedicated VM on my server to host the wifi controller was worth it. Virtual
@@ -225,8 +180,7 @@ subnet, so it also resolved my issue. I was able to detect and configure the
 access point immediately. This setup made more sense anyway, as I can always
 connect to the AP controller by going to the VM&amp;rsquo;s IP on my browser,  just like I
 can with my router.&lt;/p&gt;
-
-&lt;p&gt;Well, that was all of my setup &amp;ldquo;&lt;em&gt;issues&lt;/em&gt;&amp;rdquo;. There was nothing I would consider to
+&lt;p&gt;Well, that was all of my setup &amp;ldquo;&lt;em&gt;issues&lt;/em&gt;&amp;quot;. There was nothing I would consider to
 be an actual &lt;em&gt;issue&lt;/em&gt;, just some confusions of an Ubiquiti/POE first-timer. Like
 I stated earlier, I am sure I could redo the setup in about 15 minutes without any
 issues&amp;hellip; 10 now that I recorded everything in the post!&lt;/p&gt;</description>
@@ -244,15 +198,7 @@ wifi-router Rebecca and I were using decided to die (of course). When I returned
 setup our old router as a &lt;em&gt;temporary&lt;/em&gt; fix. It was terrible. So, I began
 researching how I should upgrade our network. This time around, I am doing this
 &lt;em&gt;correctly&lt;/em&gt;.&lt;/p&gt;
-
-&lt;p&gt;&lt;center&gt;
-&lt;img src=&#34;../../img/posts/upgrading-to-ubiquiti-edgerouter/linksys-WRT1900.png&#34;
-width= 45%&gt;
-&lt;img src=&#34;../../img/posts/upgrading-to-ubiquiti-edgerouter/linksys-E1200.png&#34;
-width= 45%&gt;
-&lt;/center&gt;
-&lt;em&gt;The Linksys WRT-1900 that died (left), and the terrible backup Linksys E1200 (right)&lt;/em&gt;&lt;/p&gt;
-
+&lt;!-- raw HTML omitted --&gt;
 &lt;p&gt;The router that died was a Linksys WRT 1900. When I got home, I setup our old
 router as a temporary fix. It&amp;rsquo;s a very basic Linksys E1200. After using it for
 just a few hours, I remembered why I hated it so much. It is slower than a
@@ -260,37 +206,24 @@ snail, and seems to stop working each day or so, requiring me to unplug and
 re-plug it daily (I think it is something with DHCP. It keeps trying to reassign
 IPs to devices, and then doesn&amp;rsquo;t seem to understand how to accept their requests
 afterwards). Thus, the more &lt;em&gt;temporary&lt;/em&gt; this solution was, the better.&lt;/p&gt;
-
 &lt;p&gt;If I am redoing our network setup, I want to do it &lt;em&gt;properly&lt;/em&gt; this time,
 splitting out the router from the wireless access point using &lt;em&gt;good&lt;/em&gt; hardware and
 software. My plan is to get an ubiquity edge-router-x, and pair it with an Ubiquiti
 wireless access point.&lt;/p&gt;
-
-&lt;p&gt;&lt;center&gt;
-&lt;img src=&#34;../../img/posts/upgrading-to-ubiquiti-edgerouter/edgerouter-x.png&#34;
-alt=&#34;Ubiquity Edgerouter-x&#34; width=&#34;45%&#34;&gt;
-&lt;img src=&#34;../../img/posts/upgrading-to-ubiquiti-edgerouter/ap-ac-lite.png&#34; alt=&#34;Ubiquity Access Point Lite&#34; width=&#34;45%&#34;&gt;
-&lt;/center&gt;
-&lt;em&gt;The EdgeRouter-x (right) and an Ubiquity access point lite (right)&lt;/em&gt;&lt;/p&gt;
-
+&lt;!-- raw HTML omitted --&gt;
 &lt;p&gt;Originally I wanted to build a small pfsense box to use as a router, but after
 digging a little deeper and doing some research, I saw that the EdgeRouter would
 more than meet my needs and is a great start to a network upgrade. Additionally,
 at $50 (USD), it truly is a great deal. As for the wireless access point, I was
 always considering an UniFi device, and I thought the EdgeRouter should
 pair rather seamlessly, considering both products are made by Ubiquiti.&lt;/p&gt;
-
 &lt;p&gt;From what I read, the EdgeRouter is a great router with an okay firewall, while
 pfsense is an amazing firewall that can do routing. So, if I want to dig more
 into pfsense in the future, I can still set up a firewall box, and connect it in front of
 the router.&lt;/p&gt;
-
 &lt;pre&gt;&lt;code&gt;Modem --&amp;gt; pfsense --&amp;gt; EdgeRouter-x -&amp;gt; devices
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;So&amp;hellip; I think I&amp;rsquo;ve finalized my decision and will purchase the items soon. I
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;So&amp;hellip; I think I&amp;rsquo;ve finalized my decision and will purchase the items soon. I
 will update when I get them.&lt;/p&gt;
-
 &lt;p&gt;&lt;em&gt;Update (06/24/2017): I have followed through with this
 purchase, and the items arrived from Amazon. Expect a post or two about my
 experience setting them up (and yes, I added this update before actually

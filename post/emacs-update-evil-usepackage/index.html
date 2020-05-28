@@ -152,15 +152,10 @@ configuration again. However, spacemacs has shown me several packages
 that I want to incorporate into my new emacs setup. Rather than
 resurrect and Frankenstein the changes into my old <code>.emacs</code>
 file&hellip; I&rsquo;m starting from scratch.</p>
-
-<p><a href="../../img/posts/emacs-config-evil-usepackage/newemacs1.png"><img src="../../img/posts/emacs-config-evil-usepackage/newemacs1.png" style="max-width: 100%; float: left; margin: 0px 15px 0px 0px;" alt="New Emacs Window" /></a></p>
-
-<div class="caption">A window of my New Emacs configuration</div>
-
+<p><!-- raw HTML omitted --><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+<!-- raw HTML omitted -->
 <h2 id="evil-mode">Evil Mode</h2>
-
 <h4 id="history">History</h4>
-
 <p>The one emacs package that spacemacs <em>really</em> got me addicted to was
 <a href="https://github.com/emacs-evil/evil">Evil</a>, which emulates the main
 features of the <a href="https://www.vim.org">vim</a> text editor. I <em>started</em>
@@ -170,11 +165,8 @@ the first power editor that I <em>really</em> got into (I even bought a
 to learn it better). I stuck with Vim until I became a professional
 LISP developer, and the switch back to Emacs was impossible to ignore,
 and obvious.</p>
-
-<p><a href="../../img/posts/emacs-config-evil-usepackage/vim.png"><img src="../../img/posts/emacs-config-evil-usepackage/vim.png" style="max-width: 100%; float: left; margin: 0px 15px 0px 0px;" alt="A Vim Window" /></a></p>
-
-<div class="caption">The Vim editor</div>
-
+<p><!-- raw HTML omitted --><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+<!-- raw HTML omitted -->
 <p>Even after switching to back Emacs, I have still enjoyed using command
 line applications like <a href="https://cmus.github.io">cmus</a>,
 <a href="https://github.com/ranger/ranger">ranger</a>, and
@@ -184,14 +176,11 @@ and often incorporate similar keyboard commands (at least the <code>j</code>,
 prefer to <em>write</em>, but not necessarily <em>edit</em> code with emacs-syle
 navigation), I never lost my love for the homerow-centric, and
 efficient vim-style movement commands.</p>
-
 <h4 id="best-of-both-worlds">Best of Both Worlds</h4>
-
-<p>For the last two years, <a href="http://spacemacs.org/">Spacemacs</a>&rsquo;s default
+<p>For the last two years, <a href="http://spacemacs.org/">Spacemacs</a>&lsquo;s default
 Vim configuration has provided the best of both worlds. It had all of
 the Evil packages pre-configured and optimized, but I could simply hit
 <code>Ctrl-z</code>, and jump back to Emacs-mode.</p>
-
 <p>Spacemacs was easy to use and I enjoyed it, but it really started to
 have stability issues on my Windows 10 work computer. I thought that
 going back to a stock emacs configuration may tone down the
@@ -200,9 +189,7 @@ configuration based around <code>Evil</code>. During setup, I was happily
 surprised to learn that the <code>Ctrl-z</code> option to switch back to
 Emacs-mode was a default <code>Evil</code> behavior&hellip; so I still have the best of
 both worlds!</p>
-
 <h4 id="starting-config">Starting Config</h4>
-
 <p>Here is my starting <code>Evil</code> setup. I&rsquo;ve nested other <code>use-packages</code>
 inside of it, so that if <code>evil</code> is configured, the packages that
 depend on it go ahead and configure themselves too. I&rsquo;m sure this will
@@ -240,11 +227,9 @@ provide all the core functionality I need.</p>
   (<span style="color:#a6e22e">use-package</span> powerline-evil
     <span style="color:#e6db74">:ensure</span> <span style="color:#66d9ef">t</span>
     <span style="color:#e6db74">:config</span>
-    (powerline-evil-vim-color-theme)))</code></pre></div>
-<p>I think it needs more key bindings over time&hellip;</p>
-
+    (powerline-evil-vim-color-theme)))
+</code></pre></div><p>I think it needs more key bindings over time&hellip;</p>
 <h2 id="use-package">Use Package</h2>
-
 <p>After my setting up an initial install of the Evil mode parts, I
 discovered the amazing
 <a href="https://github.com/jwiegley/use-package">use-package</a>. I have come
@@ -252,19 +237,17 @@ across it before reading blog posts, but never actually tried
 it. After realizing how well it worked, I immediately combed through
 my <code>.emacs</code> file, converting all of my <code>(require 'package-name)</code> calls
 to <code>use-package</code> forms instead.</p>
-
 <h4 id="setup">Setup</h4>
-
 <p>After ensuring the <a href="http://melpa.org">MELPA</a> repos are added and
 initialized:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-lisp" data-lang="lisp"><span style="color:#75715e">;; Add Melpa packages to Repos</span>
 (<span style="color:#a6e22e">require</span> <span style="color:#e6db74">&#39;package</span>)
 (add-to-list <span style="color:#e6db74">&#39;package-archives</span> <span style="color:#f92672">&#39;</span>(<span style="color:#e6db74">&#34;melpa&#34;</span> <span style="color:#f92672">.</span> <span style="color:#e6db74">&#34;http://melpa.org/packages/&#34;</span>))
-(package-initialize)</code></pre></div>
-<p>The <code>use-package</code> package can be installed next. I wrapped the
+(package-initialize)
+
+</code></pre></div><p>The <code>use-package</code> package can be installed next. I wrapped the
 install commands in an <code>unless</code>, so that when my emacs loads, it
 only installs <code>use-package</code> if it is not already installed.</p>
-
 <p>Afterwards, make sure to <code>(require 'use-package)</code>. It only needs to
 happen during compile, so I have mine in an <code>(evail-when compile ...)</code>.</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-lisp" data-lang="lisp">(unless (package-installed-p <span style="color:#e6db74">&#39;use-package</span>)
@@ -272,12 +255,10 @@ happen during compile, so I have mine in an <code>(evail-when compile ...)</code
   (package-install <span style="color:#e6db74">&#39;use-package</span>))
 
 (eval-when-compile
-  (<span style="color:#a6e22e">require</span> <span style="color:#e6db74">&#39;use-package</span>))</code></pre></div>
-<p>I keep all of this at the top of my configuration, which works well
+  (<span style="color:#a6e22e">require</span> <span style="color:#e6db74">&#39;use-package</span>))
+</code></pre></div><p>I keep all of this at the top of my configuration, which works well
 even when initializing a new computer.</p>
-
-<h4 id="bye-bye-emacs-init-el">Bye Bye emacs_init.el</h4>
-
+<h4 id="bye-bye-emacs_initel">Bye Bye emacs_init.el</h4>
 <p>When I last had my own custom emacs config, I had to also maintain an
 <code>emacs_init.el</code> file. This was an emacs-lisp script that used a
 <code>mapcar</code> to apply <code>#'package-install</code> across an ever-growing list of
@@ -285,34 +266,28 @@ emacs packages my configuration required. My goal was to have a
 script, so that when configuring Emacs on a new system, I could just load
 and evaluate the contents of <code>emacs_init.el</code>, and everything required
 for <code>.emacs</code> would automatically install.</p>
-
 <p>The reality was that it never fully worked. There were always a few
 packages that would error, or that I had forgotten to add the last time
 I updated my <code>.emacs</code> file. With <code>use-package</code>, this might be an issue
 of the past, as it allows me to combine my emacs init script <em>with</em>
 my configuration files.</p>
-
 <h4 id="key-bindings">Key Bindings</h4>
-
 <p>After converting all of my <code>(require 'PACKAGE-NAME)</code> calls and related
 expressions to filled <code>use-package</code> wrappers, I learned about the <code>:bind</code>
 parameter. Instead of manually setting key binds with a <code>setq</code>,
 <code>:bind</code> takes a list of dotted pairs and binds the function (defined
 in the second spot of the pair), to the key sequence stated in the
 first spot of the pair.</p>
-
 <p>For example, to setup my preferred <code>ispell</code> key-bindings, I used the
 following <code>:bind</code> parameter in my <code>ispell</code> <code>use-package</code> call:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-emacs-lisp" data-lang="emacs-lisp">(use-package ispell
   :ensure <span style="color:#66d9ef">t</span>
   :bind
   ((<span style="color:#e6db74">&#34;C-c w&#34;</span> <span style="color:#f92672">.</span> <span style="color:#e6db74">&#39;ispell-word</span>)
-   (<span style="color:#e6db74">&#34;C-c r&#34;</span> <span style="color:#f92672">.</span> <span style="color:#e6db74">&#39;ispell-region</span>)))</code></pre></div>
-<p>This helps to keep the configuration a bit cleaner and organized. The
+   (<span style="color:#e6db74">&#34;C-c r&#34;</span> <span style="color:#f92672">.</span> <span style="color:#e6db74">&#39;ispell-region</span>)))
+</code></pre></div><p>This helps to keep the configuration a bit cleaner and organized. The
 syntax is also straight-forward and easy to remember.</p>
-
 <h2 id="system-specific-load-files">System Specific Load Files</h2>
-
 <p>Finally, I moved all my work-specific emacs configuration (setting up
 Allegro Common Lisp, defining some helper functions&hellip; and anything
 Windows specific) into it&rsquo;s own <code>emacs-work.el</code> file. With that in it&rsquo;s
@@ -320,15 +295,15 @@ own separate file, I just needed to <code>load</code> it from my main <code>.ema
 configuration. The only issue with that, is I only want it to load on
 my <em>work computer</em>. So, I wrapped it with a nice little handler:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-emacs-lisp" data-lang="emacs-lisp">(when (<span style="color:#a6e22e">string-equal</span> <span style="color:#a6e22e">system-name</span> <span style="color:#e6db74">&#34;LAFAYETTE&#34;</span>)
-  (<span style="color:#a6e22e">load</span> <span style="color:#e6db74">&#34;~/.emacs-work.el&#34;</span>))</code></pre></div>
-<p>This works because I don&rsquo;t name my home computers with the same name
+  (<span style="color:#a6e22e">load</span> <span style="color:#e6db74">&#34;~/.emacs-work.el&#34;</span>))
+</code></pre></div><p>This works because I don&rsquo;t name my home computers with the same name
 as my work machine. This little tweak worked so well, that I decided
 to make another file, <code>emacs-linux.el</code>, that I could dump my Linux
 and/or home specific configuration into. I only load it when on a
 GNU/Linux machine:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-emacs-lisp" data-lang="emacs-lisp">(when (<span style="color:#a6e22e">string-equal</span> system-type <span style="color:#e6db74">&#34;gnu/linux&#34;</span>)
-  (<span style="color:#a6e22e">load</span> <span style="color:#e6db74">&#34;~/.emacs-linux.el&#34;</span>))</code></pre></div>
-<p>I&rsquo;ve really enjoyed the ability to only load parts of my configuration
+  (<span style="color:#a6e22e">load</span> <span style="color:#e6db74">&#34;~/.emacs-linux.el&#34;</span>))
+</code></pre></div><p>I&rsquo;ve really enjoyed the ability to only load parts of my configuration
 when a certain condition is met. Breaking down my configuration into
 use-specific components seems like a good idea (like abstracting messy
 code to smaller functions). Right now, I try to keep my configuration
@@ -336,15 +311,12 @@ file partitioned into sections, based on use-case (Writing,
 Development, Appearance, etc). However, as I continue to fine-tune my
 emacs setup, I think I might break those sections into actual <em>files</em>,
 and then <code>load</code> them from the main config.</p>
-
 <p>The only issue I can see with that is that it can be confusing with
- overlapping use-cases. However, I already have to deal with that in a
- single configuration (which <em>section</em> to put it in), and my process
- of converting everything to <code>use-package</code> has actually started to
- minimize that issue. So it might work&hellip;</p>
-
+overlapping use-cases. However, I already have to deal with that in a
+single configuration (which <em>section</em> to put it in), and my process
+of converting everything to <code>use-package</code> has actually started to
+minimize that issue. So it might work&hellip;</p>
 <h2 id="next-steps">Next Steps</h2>
-
 <p>Now that I have an &ldquo;<code>Evil</code>&rdquo; Emacs setup configured, things should be
 returning to business as usually. As I work, I sure there&rsquo;ll be a
 forgotten package here or there that needs to added. However, with

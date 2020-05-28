@@ -213,6 +213,11 @@
   </url>
   
   <url>
+    <loc>http://ryan.himmelwright.net/tags/c/</loc>
+    <lastmod>2019-11-09T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>http://ryan.himmelwright.net/tags/community/</loc>
     <lastmod>2019-11-09T00:00:00+00:00</lastmod>
   </url>
@@ -704,11 +709,6 @@
   
   <url>
     <loc>http://ryan.himmelwright.net/post/25-days-of-c/</loc>
-    <lastmod>2015-12-24T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://ryan.himmelwright.net/tags/c/</loc>
     <lastmod>2015-12-24T00:00:00+00:00</lastmod>
   </url>
   

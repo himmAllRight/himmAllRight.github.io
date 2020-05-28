@@ -150,13 +150,11 @@ Tags <a href="../../tags/linux">linux</a>, <a href="../../tags/programming">prog
 somehow haven&rsquo;t <em>had</em> to use it for anything in school or at work. I know, I
 know&hellip; it&rsquo;s quite a feat. Still, the pervasiveness of SQL-like databases argues
 that I really <em>should</em> learn it. So I am.</p>
-
 <p>The main purpose of this website is to document some of the tech stuff I do in
 my free time. This serves three purposes: 1) Organizing my thoughts into a post
 enhances my learning, 2) I can easily refer back to the post to refresh my
 memory in the future, 3) It&rsquo;s a good medium to share what I&rsquo;ve learned with
 others.</p>
-
 <p>This post is a prime example, as it didn&rsquo;t start out as a <em>post</em>, but a file of
 the <em>notes</em> I took as I learned SQL basics. As I progressed, I realized all of
 the accumulating information should be cleaned up and posted. So here we are.
@@ -164,33 +162,24 @@ I&rsquo;ve redone the examples, and turned my shorthand blurbs into sentences, b
 this post still seems a bit different than previous ones (no images, more code
 snippets than words)&hellip; that&rsquo;s because it&rsquo;s my learning notes with makeup
 heavily applied. Enjoy.</p>
-
 <h2 id="install-setup">Install Setup</h2>
-
 <p>I first installed mysql, by going to the <a href="https://dev.mysql.com/downloads">mySQL download
 page</a> and getting the appropriate the version
 for my VM (centos 7). This may differ based on Distro/DB.</p>
-
 <p><em>I&rsquo;m not going to cover any of the installation steps, as this post is more about
 the SQL language, not setting up the DB. Besides, I did this in mysql, but in
 the future I&rsquo;ll likely look at using MariaDB anyway&hellip;</em></p>
-
 <p>I do however want to note this issue I encountered, so I don&rsquo;t stumble over it
 in the future. At first, I couldn&rsquo;t get the <code>/usr/bin/mysql_secure_installation</code>
 command to run due to a permission denied error&hellip;</p>
-
 <p>Eventually, I learned that the first time mysql runs, it creates a temp password
 in the log, located at <code>/var/log/mysqld.log</code>. Using that password, I was able to
 login.</p>
-
 <h2 id="dbs-and-commands">DBs and Commands:</h2>
-
 <p>Conventionally, SQL commands are typed in all CAPS, and statements end with a
 terminating <code>;</code>. The rest of this post contains some SQL functions, with
 examples of how they are used.</p>
-
 <h4 id="show-databases">Show databases</h4>
-
 <p>To display all of the available databases, use the <code>SHOW DATABASES;</code> command.
 Note, some of the DBs displayed are ones generated for the database system. For
 example, in the output below, <em>I</em> only created <code>dbCustomerInfo</code> and <code>dbTest</code>:</p>
@@ -205,9 +194,8 @@ example, in the output below, <em>I</em> only created <code>dbCustomerInfo</code
 <span style="color:#f92672">|</span> performance_schema <span style="color:#f92672">|</span>
 <span style="color:#f92672">|</span> sys                <span style="color:#f92672">|</span>
 <span style="color:#f92672">+</span><span style="color:#75715e">--------------------+
-</span><span style="color:#75715e"></span><span style="color:#ae81ff">6</span> <span style="color:#66d9ef">rows</span> <span style="color:#66d9ef">in</span> <span style="color:#66d9ef">set</span> (<span style="color:#ae81ff">0</span>.<span style="color:#ae81ff">00</span> sec)</code></pre></div>
-<h4 id="create-database">Create database</h4>
-
+</span><span style="color:#75715e"></span><span style="color:#ae81ff">6</span> <span style="color:#66d9ef">rows</span> <span style="color:#66d9ef">in</span> <span style="color:#66d9ef">set</span> (<span style="color:#ae81ff">0</span>.<span style="color:#ae81ff">00</span> sec)
+</code></pre></div><h4 id="create-database">Create database</h4>
 <p>To create a new database, use the <code>CREATE DATABASE</code> command. Simple.</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-SQL" data-lang="SQL">mysql<span style="color:#f92672">&gt;</span> <span style="color:#66d9ef">SHOW</span> DATABASES;
 <span style="color:#f92672">+</span><span style="color:#75715e">--------------------+
@@ -237,9 +225,9 @@ mysql<span style="color:#f92672">&gt;</span> <span style="color:#66d9ef">SHOW</s
 <span style="color:#f92672">|</span> shotLivedDB        <span style="color:#f92672">|</span>
 <span style="color:#f92672">|</span> sys                <span style="color:#f92672">|</span>
 <span style="color:#f92672">+</span><span style="color:#75715e">--------------------+
-</span><span style="color:#75715e"></span><span style="color:#ae81ff">7</span> <span style="color:#66d9ef">rows</span> <span style="color:#66d9ef">in</span> <span style="color:#66d9ef">set</span> (<span style="color:#ae81ff">0</span>.<span style="color:#ae81ff">00</span> sec)</code></pre></div>
-<h4 id="drop-a-database-delete">Drop a database (delete):</h4>
+</span><span style="color:#75715e"></span><span style="color:#ae81ff">7</span> <span style="color:#66d9ef">rows</span> <span style="color:#66d9ef">in</span> <span style="color:#66d9ef">set</span> (<span style="color:#ae81ff">0</span>.<span style="color:#ae81ff">00</span> sec)
 
+</code></pre></div><h4 id="drop-a-database-delete">Drop a database (delete):</h4>
 <p>As easy as it was to <em>create</em> that database, deleting, or <em>dropping</em> it is just
 as effortless with the `DROP DATABASE command, so be careful!</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-SQL" data-lang="SQL">mysql<span style="color:#f92672">&gt;</span> <span style="color:#66d9ef">DROP</span> <span style="color:#66d9ef">DATABASE</span> shotLivedDB;
@@ -256,18 +244,13 @@ mysql<span style="color:#f92672">&gt;</span> <span style="color:#66d9ef">SHOW</s
 <span style="color:#f92672">|</span> performance_schema <span style="color:#f92672">|</span>
 <span style="color:#f92672">|</span> sys                <span style="color:#f92672">|</span>
 <span style="color:#f92672">+</span><span style="color:#75715e">--------------------+
-</span><span style="color:#75715e"></span><span style="color:#ae81ff">6</span> <span style="color:#66d9ef">rows</span> <span style="color:#66d9ef">in</span> <span style="color:#66d9ef">set</span> (<span style="color:#ae81ff">0</span>.<span style="color:#ae81ff">00</span> sec)</code></pre></div>
-<h4 id="select-db">Select DB</h4>
-
+</span><span style="color:#75715e"></span><span style="color:#ae81ff">6</span> <span style="color:#66d9ef">rows</span> <span style="color:#66d9ef">in</span> <span style="color:#66d9ef">set</span> (<span style="color:#ae81ff">0</span>.<span style="color:#ae81ff">00</span> sec)
+</code></pre></div><h4 id="select-db">Select DB</h4>
 <p>To select which db to use inside the mysql shell use&hellip; <code>USE</code>. For this
 tutorial, I created a database named <code>dbTest</code> and selected it with <code>USE dbTest</code>.</p>
-
 <h3 id="tables">Tables</h3>
-
 <p><em>Note: make sure to first select a DB to work with: <code>USE dbTest;</code>&hellip;</em></p>
-
 <h4 id="show-tables">Show Tables</h4>
-
 <p>To show all of the tables in a database, use <code>SHOW TABLES;</code>. For example:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-SQL" data-lang="SQL">mysql<span style="color:#f92672">&gt;</span> <span style="color:#66d9ef">SHOW</span> TABLES;
 <span style="color:#f92672">+</span><span style="color:#75715e">------------------+
@@ -275,23 +258,22 @@ tutorial, I created a database named <code>dbTest</code> and selected it with <c
 <span style="color:#f92672">+</span><span style="color:#75715e">------------------+
 </span><span style="color:#75715e"></span><span style="color:#f92672">|</span> tblUsers         <span style="color:#f92672">|</span>
 <span style="color:#f92672">+</span><span style="color:#75715e">------------------+
-</span><span style="color:#75715e"></span><span style="color:#ae81ff">1</span> <span style="color:#66d9ef">row</span> <span style="color:#66d9ef">in</span> <span style="color:#66d9ef">set</span> (<span style="color:#ae81ff">0</span>.<span style="color:#ae81ff">00</span> sec)</code></pre></div>
-<h4 id="create-table">Create Table</h4>
-
-<p>To create a <em>new</em> table, use <code>CREATE TABLE</code>. The <code>CREATE TABLE</code> function takes
-1) the name of the new table, and 2) a list of the table fields (with their
+</span><span style="color:#75715e"></span><span style="color:#ae81ff">1</span> <span style="color:#66d9ef">row</span> <span style="color:#66d9ef">in</span> <span style="color:#66d9ef">set</span> (<span style="color:#ae81ff">0</span>.<span style="color:#ae81ff">00</span> sec)
+</code></pre></div><h4 id="create-table">Create Table</h4>
+<p>To create a <em>new</em> table, use <code>CREATE TABLE</code>. The <code>CREATE TABLE</code> function takes</p>
+<ol>
+<li>the name of the new table, and 2) a list of the table fields (with their
 data types). For example, to create a user information table that contains a user&rsquo;s
 first name, last name, age, and state, as well as an identification number, the
-following SQL command can be used:</p>
+following SQL command can be used:</li>
+</ol>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-SQL" data-lang="SQL">mysql<span style="color:#f92672">&gt;</span> <span style="color:#66d9ef">CREATE</span> <span style="color:#66d9ef">TABLE</span> tblUsers (id int <span style="color:#66d9ef">PRIMARY</span> <span style="color:#66d9ef">KEY</span> AUTO_INCREMENT, firstname varchar(<span style="color:#ae81ff">50</span>),lastname varchar(<span style="color:#ae81ff">50</span>), age INT,<span style="color:#66d9ef">state</span> varchar(<span style="color:#ae81ff">2</span>));
-Query OK, <span style="color:#ae81ff">0</span> <span style="color:#66d9ef">rows</span> affected (<span style="color:#ae81ff">0</span>.<span style="color:#ae81ff">01</span> sec)</code></pre></div>
-<p>The <code>first name</code>, <code>last name</code>, and <code>state</code> columns have a <code>varchar</code> data type,
+Query OK, <span style="color:#ae81ff">0</span> <span style="color:#66d9ef">rows</span> affected (<span style="color:#ae81ff">0</span>.<span style="color:#ae81ff">01</span> sec)
+</code></pre></div><p>The <code>first name</code>, <code>last name</code>, and <code>state</code> columns have a <code>varchar</code> data type,
 which are strings of various sizes (50 and 2 characters in this case). The <code>id</code>
 and <code>age</code> columns have an <code>int</code> data type. Notice that the <code>id</code> column
 has some other junk defined after the <code>int</code> identifier&hellip;.</p>
-
 <h4 id="constraints-and-fields">Constraints and Fields</h4>
-
 <p>In addition to specifying data <em>type</em>, other <em>constraints</em> can be imposed on
 columns when defining a new table. Constraints are used to limit the type of
 data that goes into the table, and can be implemented at the column or table
@@ -307,15 +289,14 @@ command:</p>
 <span style="color:#f92672">|</span> age       <span style="color:#f92672">|</span> int(<span style="color:#ae81ff">11</span>)     <span style="color:#f92672">|</span> YES  <span style="color:#f92672">|</span>     <span style="color:#f92672">|</span> <span style="color:#66d9ef">NULL</span>    <span style="color:#f92672">|</span>                <span style="color:#f92672">|</span>
 <span style="color:#f92672">|</span> <span style="color:#66d9ef">state</span>     <span style="color:#f92672">|</span> varchar(<span style="color:#ae81ff">2</span>)  <span style="color:#f92672">|</span> YES  <span style="color:#f92672">|</span>     <span style="color:#f92672">|</span> <span style="color:#66d9ef">NULL</span>    <span style="color:#f92672">|</span>                <span style="color:#f92672">|</span>
 <span style="color:#f92672">+</span><span style="color:#75715e">-----------|-------------|------|-----|---------|----------------+
-</span><span style="color:#75715e"></span><span style="color:#ae81ff">5</span> <span style="color:#66d9ef">rows</span> <span style="color:#66d9ef">in</span> <span style="color:#66d9ef">set</span> (<span style="color:#ae81ff">0</span>.<span style="color:#ae81ff">00</span> sec)</code></pre></div>
-<p>The <code>id</code> column uses the <code>PRIMARY KEY</code> and <code>AUTO_INCREMENT</code> constraints.
+</span><span style="color:#75715e"></span><span style="color:#ae81ff">5</span> <span style="color:#66d9ef">rows</span> <span style="color:#66d9ef">in</span> <span style="color:#66d9ef">set</span> (<span style="color:#ae81ff">0</span>.<span style="color:#ae81ff">00</span> sec)
+
+</code></pre></div><p>The <code>id</code> column uses the <code>PRIMARY KEY</code> and <code>AUTO_INCREMENT</code> constraints.
 <code>PRIMARY_KEY</code> is a combination of the <code>NOT NULL</code> and <code>UNIQUE</code> constraints,
 meaning it ensures that all values in the column are unique and not <code>NULL</code>. The
 <code>AUTO_INCREMENT</code> field generates an unique number that is automatically
 incremented during each insert to the table.</p>
-
 <h4 id="insert-into">INSERT INTO</h4>
-
 <p>To actually <em>add</em> data to the table, the <code>INSERT INTO</code> command is used. As an
 example, to add some users to the table created in the previous step:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-SQL" data-lang="SQL">mysql<span style="color:#f92672">&gt;</span> <span style="color:#66d9ef">INSERT</span> <span style="color:#66d9ef">INTO</span> tblUsers (firstname,lastname,age,<span style="color:#66d9ef">state</span>) 
@@ -332,8 +313,8 @@ Query OK, <span style="color:#ae81ff">1</span> <span style="color:#66d9ef">row</
 
 mysql<span style="color:#f92672">&gt;</span> <span style="color:#66d9ef">INSERT</span> <span style="color:#66d9ef">INTO</span> tblUsers (firstname,lastname,age,<span style="color:#66d9ef">state</span>) 
 <span style="color:#66d9ef">VALUES</span> (<span style="color:#e6db74">&#39;Bob&#39;</span>,<span style="color:#e6db74">&#39;Builder&#39;</span>,<span style="color:#ae81ff">51</span>,<span style="color:#e6db74">&#39;MO&#39;</span>);
-Query OK, <span style="color:#ae81ff">1</span> <span style="color:#66d9ef">row</span> affected (<span style="color:#ae81ff">0</span>.<span style="color:#ae81ff">01</span> sec)</code></pre></div>
-<p>The <code>tblUsers</code> table should now contain the information of the 4 users added. To check
+Query OK, <span style="color:#ae81ff">1</span> <span style="color:#66d9ef">row</span> affected (<span style="color:#ae81ff">0</span>.<span style="color:#ae81ff">01</span> sec)
+</code></pre></div><p>The <code>tblUsers</code> table should now contain the information of the 4 users added. To check
 this, use <code>SELECT * FROM tblUsers;</code> to select <em>everything</em> from the <code>tblUsers</code>
 table:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-SQL" data-lang="SQL">mysql<span style="color:#f92672">&gt;</span> <span style="color:#66d9ef">SELECT</span> <span style="color:#f92672">*</span> <span style="color:#66d9ef">FROM</span> tblUsers;
@@ -345,9 +326,9 @@ table:</p>
 <span style="color:#f92672">|</span>  <span style="color:#ae81ff">7</span> <span style="color:#f92672">|</span> Tina      <span style="color:#f92672">|</span> Oak      <span style="color:#f92672">|</span>   <span style="color:#ae81ff">42</span> <span style="color:#f92672">|</span> NC    <span style="color:#f92672">|</span>
 <span style="color:#f92672">|</span>  <span style="color:#ae81ff">8</span> <span style="color:#f92672">|</span> Bob       <span style="color:#f92672">|</span> Builder  <span style="color:#f92672">|</span>   <span style="color:#ae81ff">51</span> <span style="color:#f92672">|</span> MO    <span style="color:#f92672">|</span>
 <span style="color:#f92672">+</span><span style="color:#75715e">----|-----------|----------|------|-------+
-</span><span style="color:#75715e"></span><span style="color:#ae81ff">4</span> <span style="color:#66d9ef">rows</span> <span style="color:#66d9ef">in</span> <span style="color:#66d9ef">set</span> (<span style="color:#ae81ff">0</span>.<span style="color:#ae81ff">00</span> sec)</code></pre></div>
-<h4 id="insert-into-another-table">INSERT INTO Another Table</h4>
+</span><span style="color:#75715e"></span><span style="color:#ae81ff">4</span> <span style="color:#66d9ef">rows</span> <span style="color:#66d9ef">in</span> <span style="color:#66d9ef">set</span> (<span style="color:#ae81ff">0</span>.<span style="color:#ae81ff">00</span> sec)
 
+</code></pre></div><h4 id="insert-into-another-table">INSERT INTO Another Table</h4>
 <p>The <code>INSERT INTO</code> command combined with <code>SELECT FROM</code>, can insert contents of <em>one
 table</em> into <em>another</em>. This technique can be quite useful, providing a simple way to
 create quick backups.</p>
@@ -370,25 +351,21 @@ mysql<span style="color:#f92672">&gt;</span> <span style="color:#66d9ef">SELECT<
 <span style="color:#f92672">|</span>  <span style="color:#ae81ff">7</span> <span style="color:#f92672">|</span> Tina      <span style="color:#f92672">|</span> Oak      <span style="color:#f92672">|</span>   <span style="color:#ae81ff">42</span> <span style="color:#f92672">|</span> NC    <span style="color:#f92672">|</span>
 <span style="color:#f92672">|</span>  <span style="color:#ae81ff">9</span> <span style="color:#f92672">|</span> Bob       <span style="color:#f92672">|</span> Builder  <span style="color:#f92672">|</span>   <span style="color:#ae81ff">51</span> <span style="color:#f92672">|</span> MO    <span style="color:#f92672">|</span>
 <span style="color:#f92672">+</span><span style="color:#75715e">----|-----------|----------|------|-------+
-</span><span style="color:#75715e"></span><span style="color:#ae81ff">4</span> <span style="color:#66d9ef">rows</span> <span style="color:#66d9ef">in</span> <span style="color:#66d9ef">set</span> (<span style="color:#ae81ff">0</span>.<span style="color:#ae81ff">00</span> sec)</code></pre></div>
-<h4 id="drop-delete-table">Drop (delete) Table</h4>
-
+</span><span style="color:#75715e"></span><span style="color:#ae81ff">4</span> <span style="color:#66d9ef">rows</span> <span style="color:#66d9ef">in</span> <span style="color:#66d9ef">set</span> (<span style="color:#ae81ff">0</span>.<span style="color:#ae81ff">00</span> sec)
+</code></pre></div><h4 id="drop-delete-table">Drop (delete) Table</h4>
 <p>To delete a table, the <code>DROP</code> command is used. For example, to delete the backup
 table from above, issue <code>DROP TABLE tblUsersBackup;</code>:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-SQL" data-lang="SQL">mysql<span style="color:#f92672">&gt;</span> <span style="color:#66d9ef">DROP</span> <span style="color:#66d9ef">TABLE</span> tblUsersBackup;
 Query OK, <span style="color:#ae81ff">0</span> <span style="color:#66d9ef">rows</span> affected (<span style="color:#ae81ff">0</span>.<span style="color:#ae81ff">01</span> sec)
 
 mysql<span style="color:#f92672">&gt;</span> <span style="color:#66d9ef">SELECT</span> <span style="color:#f92672">*</span> <span style="color:#66d9ef">FROM</span> tblUsersBackup;
-ERROR <span style="color:#ae81ff">1146</span> (<span style="color:#ae81ff">42</span>S02): <span style="color:#66d9ef">Table</span> <span style="color:#e6db74">&#39;dbTest.tblUsersBackup&#39;</span> doesn<span style="color:#e6db74">&#39;t exist</span></code></pre></div>
-<p><strong>NOTE: Using <code>DROP</code> commands will delete the entire structure (including the
+ERROR <span style="color:#ae81ff">1146</span> (<span style="color:#ae81ff">42</span>S02): <span style="color:#66d9ef">Table</span> <span style="color:#e6db74">&#39;dbTest.tblUsersBackup&#39;</span> doesn<span style="color:#e6db74">&#39;t exist
+</span></code></pre></div><p><strong>NOTE: Using <code>DROP</code> commands will delete the entire structure (including the
 schema), even if there is data in it. Be Careful!</strong></p>
-
 <h4 id="select">SELECT</h4>
-
 <p>In addition to selecting <em>all</em> of the data in a table using <code>SELECT *</code>, The
 <code>SELECT</code> command can be utilized to select all sorts of combinations of the
 data. Here are a few examples:</p>
-
 <p>&ndash; Select specific columns from the table:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-SQL" data-lang="SQL">mysql<span style="color:#f92672">&gt;</span> <span style="color:#66d9ef">SELECT</span> firstname,lastname <span style="color:#66d9ef">FROM</span> tblUsers;
 <span style="color:#f92672">+</span><span style="color:#75715e">-----------|----------+
@@ -399,16 +376,17 @@ data. Here are a few examples:</p>
 <span style="color:#f92672">|</span> Tina      <span style="color:#f92672">|</span> Oak      <span style="color:#f92672">|</span>
 <span style="color:#f92672">|</span> Bob       <span style="color:#f92672">|</span> Builder  <span style="color:#f92672">|</span>
 <span style="color:#f92672">+</span><span style="color:#75715e">-----------|----------+
-</span><span style="color:#75715e"></span><span style="color:#ae81ff">4</span> <span style="color:#66d9ef">rows</span> <span style="color:#66d9ef">in</span> <span style="color:#66d9ef">set</span> (<span style="color:#ae81ff">0</span>.<span style="color:#ae81ff">00</span> sec)</code></pre></div>
-<p>&ndash; Grab column(s), after matching in another:</p>
+</span><span style="color:#75715e"></span><span style="color:#ae81ff">4</span> <span style="color:#66d9ef">rows</span> <span style="color:#66d9ef">in</span> <span style="color:#66d9ef">set</span> (<span style="color:#ae81ff">0</span>.<span style="color:#ae81ff">00</span> sec)
+
+</code></pre></div><p>&ndash; Grab column(s), after matching in another:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-SQL" data-lang="SQL">mysql<span style="color:#f92672">&gt;</span> <span style="color:#66d9ef">SELECT</span> firstname,lastname <span style="color:#66d9ef">FROM</span> tblUsers <span style="color:#66d9ef">WHERE</span> <span style="color:#66d9ef">state</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;RI&#34;</span>;
 <span style="color:#f92672">+</span><span style="color:#75715e">-----------|----------+
 </span><span style="color:#75715e"></span><span style="color:#f92672">|</span> firstname <span style="color:#f92672">|</span> lastname <span style="color:#f92672">|</span>
 <span style="color:#f92672">+</span><span style="color:#75715e">-----------|----------+
 </span><span style="color:#75715e"></span><span style="color:#f92672">|</span> Joe       <span style="color:#f92672">|</span> Fry      <span style="color:#f92672">|</span>
 <span style="color:#f92672">+</span><span style="color:#75715e">-----------|----------+
-</span><span style="color:#75715e"></span><span style="color:#ae81ff">1</span> <span style="color:#66d9ef">row</span> <span style="color:#66d9ef">in</span> <span style="color:#66d9ef">set</span> (<span style="color:#ae81ff">0</span>.<span style="color:#ae81ff">00</span> sec)</code></pre></div>
-<p>In addition to searching using <code>=</code> (which only grabs exact matches), other
+</span><span style="color:#75715e"></span><span style="color:#ae81ff">1</span> <span style="color:#66d9ef">row</span> <span style="color:#66d9ef">in</span> <span style="color:#66d9ef">set</span> (<span style="color:#ae81ff">0</span>.<span style="color:#ae81ff">00</span> sec)
+</code></pre></div><p>In addition to searching using <code>=</code> (which only grabs exact matches), other
 operators, such as <code>&gt;</code>, <code>&lt;</code>, <code>&lt;=</code>, <code>&gt;=</code>, <code>&lt;&gt;</code> (not equal), <code>BETWEEN</code> (between an
 inclusive range), and <code>LIKE</code> (search for pattern) can be used with the <code>WHERE</code>
 clause. For example:</p>
@@ -420,20 +398,21 @@ clause. For example:</p>
 <span style="color:#f92672">|</span> Tina      <span style="color:#f92672">|</span> Oak      <span style="color:#f92672">|</span>
 <span style="color:#f92672">|</span> Bob       <span style="color:#f92672">|</span> Builder  <span style="color:#f92672">|</span>
 <span style="color:#f92672">+</span><span style="color:#75715e">-----------|----------+
-</span><span style="color:#75715e"></span><span style="color:#ae81ff">3</span> <span style="color:#66d9ef">rows</span> <span style="color:#66d9ef">in</span> <span style="color:#66d9ef">set</span> (<span style="color:#ae81ff">0</span>.<span style="color:#ae81ff">00</span> sec)</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-SQL" data-lang="SQL">mysql<span style="color:#f92672">&gt;</span> <span style="color:#66d9ef">SELECT</span> firstname,lastname <span style="color:#66d9ef">FROM</span> tblUsers <span style="color:#66d9ef">WHERE</span> age <span style="color:#66d9ef">BETWEEN</span> <span style="color:#ae81ff">30</span> <span style="color:#66d9ef">AND</span> <span style="color:#ae81ff">50</span>;
+</span><span style="color:#75715e"></span><span style="color:#ae81ff">3</span> <span style="color:#66d9ef">rows</span> <span style="color:#66d9ef">in</span> <span style="color:#66d9ef">set</span> (<span style="color:#ae81ff">0</span>.<span style="color:#ae81ff">00</span> sec)
+
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-SQL" data-lang="SQL">mysql<span style="color:#f92672">&gt;</span> <span style="color:#66d9ef">SELECT</span> firstname,lastname <span style="color:#66d9ef">FROM</span> tblUsers <span style="color:#66d9ef">WHERE</span> age <span style="color:#66d9ef">BETWEEN</span> <span style="color:#ae81ff">30</span> <span style="color:#66d9ef">AND</span> <span style="color:#ae81ff">50</span>;
 <span style="color:#f92672">+</span><span style="color:#75715e">-----------|----------+
 </span><span style="color:#75715e"></span><span style="color:#f92672">|</span> firstname <span style="color:#f92672">|</span> lastname <span style="color:#f92672">|</span>
 <span style="color:#f92672">+</span><span style="color:#75715e">-----------|----------+
 </span><span style="color:#75715e"></span><span style="color:#f92672">|</span> Joe       <span style="color:#f92672">|</span> Fry      <span style="color:#f92672">|</span>
 <span style="color:#f92672">|</span> Tina      <span style="color:#f92672">|</span> Oak      <span style="color:#f92672">|</span>
 <span style="color:#f92672">+</span><span style="color:#75715e">-----------|----------+
-</span><span style="color:#75715e"></span><span style="color:#ae81ff">2</span> <span style="color:#66d9ef">rows</span> <span style="color:#66d9ef">in</span> <span style="color:#66d9ef">set</span> (<span style="color:#ae81ff">0</span>.<span style="color:#ae81ff">00</span> sec)</code></pre></div>
-<h4 id="alter">ALTER</h4>
+</span><span style="color:#75715e"></span><span style="color:#ae81ff">2</span> <span style="color:#66d9ef">rows</span> <span style="color:#66d9ef">in</span> <span style="color:#66d9ef">set</span> (<span style="color:#ae81ff">0</span>.<span style="color:#ae81ff">00</span> sec)
 
+</code></pre></div><h4 id="alter">ALTER</h4>
 <p>To change the table schema (add, drop or modify columns), the <code>ALTER</code> command
 is used along with <code>ADD</code>, <code>DROP COLUMN</code>, or <code>MODIFY COLUMN</code> (respectively)
 after the tablename. For example:</p>
-
 <p>&ndash; Add a <code>born</code> column to the table</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-SQL" data-lang="SQL">mysql<span style="color:#f92672">&gt;</span> <span style="color:#66d9ef">SELECT</span> <span style="color:#f92672">*</span> <span style="color:#66d9ef">FROM</span> tblUsers;
 <span style="color:#f92672">+</span><span style="color:#75715e">----|-----------|----------|------|-------+
@@ -459,12 +438,13 @@ mysql<span style="color:#f92672">&gt;</span> <span style="color:#66d9ef">SELECT<
 <span style="color:#f92672">|</span>  <span style="color:#ae81ff">7</span> <span style="color:#f92672">|</span> Tina      <span style="color:#f92672">|</span> Oak      <span style="color:#f92672">|</span>   <span style="color:#ae81ff">42</span> <span style="color:#f92672">|</span> NC    <span style="color:#f92672">|</span> <span style="color:#66d9ef">NULL</span> <span style="color:#f92672">|</span>
 <span style="color:#f92672">|</span>  <span style="color:#ae81ff">9</span> <span style="color:#f92672">|</span> Bob       <span style="color:#f92672">|</span> Builder  <span style="color:#f92672">|</span>   <span style="color:#ae81ff">51</span> <span style="color:#f92672">|</span> MO    <span style="color:#f92672">|</span> <span style="color:#66d9ef">NULL</span> <span style="color:#f92672">|</span>
 <span style="color:#f92672">+</span><span style="color:#75715e">----|-----------|----------|------|-------|------+
-</span><span style="color:#75715e"></span><span style="color:#ae81ff">4</span> <span style="color:#66d9ef">rows</span> <span style="color:#66d9ef">in</span> <span style="color:#66d9ef">set</span> (<span style="color:#ae81ff">0</span>.<span style="color:#ae81ff">00</span> sec)</code></pre></div>
-<p>&ndash; Change <code>born</code> column from a <code>year</code> data type to a <code>date</code></p>
+</span><span style="color:#75715e"></span><span style="color:#ae81ff">4</span> <span style="color:#66d9ef">rows</span> <span style="color:#66d9ef">in</span> <span style="color:#66d9ef">set</span> (<span style="color:#ae81ff">0</span>.<span style="color:#ae81ff">00</span> sec)
+
+</code></pre></div><p>&ndash; Change <code>born</code> column from a <code>year</code> data type to a <code>date</code></p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-SQL" data-lang="SQL">mysql<span style="color:#f92672">&gt;</span> <span style="color:#66d9ef">ALTER</span> <span style="color:#66d9ef">TABLE</span> tblUsers <span style="color:#66d9ef">MODIFY</span> <span style="color:#66d9ef">COLUMN</span> born date;
 Query OK, <span style="color:#ae81ff">4</span> <span style="color:#66d9ef">rows</span> affected (<span style="color:#ae81ff">0</span>.<span style="color:#ae81ff">03</span> sec)
-Records: <span style="color:#ae81ff">4</span>  Duplicates: <span style="color:#ae81ff">0</span>  Warnings: <span style="color:#ae81ff">0</span></code></pre></div>
-<p>&ndash; Drop the <code>born</code> column from the table</p>
+Records: <span style="color:#ae81ff">4</span>  Duplicates: <span style="color:#ae81ff">0</span>  Warnings: <span style="color:#ae81ff">0</span>
+</code></pre></div><p>&ndash; Drop the <code>born</code> column from the table</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-SQL" data-lang="SQL">mysql<span style="color:#f92672">&gt;</span> <span style="color:#66d9ef">SELECT</span> <span style="color:#f92672">*</span> <span style="color:#66d9ef">FROM</span> tblUsers;
 <span style="color:#f92672">+</span><span style="color:#75715e">----|-----------|----------|------|-------|------+
 </span><span style="color:#75715e"></span><span style="color:#f92672">|</span> id <span style="color:#f92672">|</span> firstname <span style="color:#f92672">|</span> lastname <span style="color:#f92672">|</span> age  <span style="color:#f92672">|</span> <span style="color:#66d9ef">state</span> <span style="color:#f92672">|</span> born <span style="color:#f92672">|</span>
@@ -489,16 +469,13 @@ mysql<span style="color:#f92672">&gt;</span> <span style="color:#66d9ef">SELECT<
 <span style="color:#f92672">|</span>  <span style="color:#ae81ff">7</span> <span style="color:#f92672">|</span> Tina      <span style="color:#f92672">|</span> Oak      <span style="color:#f92672">|</span>   <span style="color:#ae81ff">42</span> <span style="color:#f92672">|</span> NC    <span style="color:#f92672">|</span>
 <span style="color:#f92672">|</span>  <span style="color:#ae81ff">9</span> <span style="color:#f92672">|</span> Bob       <span style="color:#f92672">|</span> Builder  <span style="color:#f92672">|</span>   <span style="color:#ae81ff">51</span> <span style="color:#f92672">|</span> MO    <span style="color:#f92672">|</span>
 <span style="color:#f92672">+</span><span style="color:#75715e">----|-----------|----------|------|-------+
-</span><span style="color:#75715e"></span><span style="color:#ae81ff">4</span> <span style="color:#66d9ef">rows</span> <span style="color:#66d9ef">in</span> <span style="color:#66d9ef">set</span> (<span style="color:#ae81ff">0</span>.<span style="color:#ae81ff">00</span> sec)</code></pre></div>
-<p>NOTE: Depending on the type of SQL database being used, the <code>MODIFY</code> command may
+</span><span style="color:#75715e"></span><span style="color:#ae81ff">4</span> <span style="color:#66d9ef">rows</span> <span style="color:#66d9ef">in</span> <span style="color:#66d9ef">set</span> (<span style="color:#ae81ff">0</span>.<span style="color:#ae81ff">00</span> sec)
+</code></pre></div><p>NOTE: Depending on the type of SQL database being used, the <code>MODIFY</code> command may
 be known as <code>ALTER</code>.</p>
-
 <h4 id="delete">Delete</h4>
-
 <p>All the <em>data</em> in a table can be removed using <code>DELETE * FROM tblName</code>,
 <em>without</em> deleting the table schema. However, this is almost never used because
 there are better commands to do that.</p>
-
 <p><em>Specific</em> items from the table can be removed using <code>DELETE FROM</code>
 commands:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-SQL" data-lang="SQL">mysql<span style="color:#f92672">&gt;</span> <span style="color:#66d9ef">SELECT</span> <span style="color:#f92672">*</span> <span style="color:#66d9ef">FROM</span> tblUsersBackup;                                                                    
@@ -522,8 +499,8 @@ mysql<span style="color:#f92672">&gt;</span> <span style="color:#66d9ef">SELECT<
 </span><span style="color:#75715e"></span><span style="color:#f92672">|</span>  <span style="color:#ae81ff">5</span> <span style="color:#f92672">|</span> Joe       <span style="color:#f92672">|</span> Fry      <span style="color:#f92672">|</span>   <span style="color:#ae81ff">32</span> <span style="color:#f92672">|</span> RI    <span style="color:#f92672">|</span>
 <span style="color:#f92672">|</span>  <span style="color:#ae81ff">6</span> <span style="color:#f92672">|</span> Emily     <span style="color:#f92672">|</span> Flanders <span style="color:#f92672">|</span>   <span style="color:#ae81ff">22</span> <span style="color:#f92672">|</span> CA    <span style="color:#f92672">|</span>
 <span style="color:#f92672">+</span><span style="color:#75715e">----|-----------|----------|------|-------+
-</span><span style="color:#75715e"></span><span style="color:#ae81ff">2</span> <span style="color:#66d9ef">rows</span> <span style="color:#66d9ef">in</span> <span style="color:#66d9ef">set</span> (<span style="color:#ae81ff">0</span>.<span style="color:#ae81ff">00</span> sec)</code></pre></div>
-<p>Multiple criteria can also be used to specify what to delete:</p>
+</span><span style="color:#75715e"></span><span style="color:#ae81ff">2</span> <span style="color:#66d9ef">rows</span> <span style="color:#66d9ef">in</span> <span style="color:#66d9ef">set</span> (<span style="color:#ae81ff">0</span>.<span style="color:#ae81ff">00</span> sec)
+</code></pre></div><p>Multiple criteria can also be used to specify what to delete:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-SQL" data-lang="SQL">mysql<span style="color:#f92672">&gt;</span> <span style="color:#66d9ef">SELECT</span> <span style="color:#f92672">*</span> <span style="color:#66d9ef">FROM</span> tblUsersBackup;                                                                    
 <span style="color:#f92672">+</span><span style="color:#75715e">----|-----------|----------|------|-------+
 </span><span style="color:#75715e"></span><span style="color:#f92672">|</span> id <span style="color:#f92672">|</span> firstname <span style="color:#f92672">|</span> lastname <span style="color:#f92672">|</span> age  <span style="color:#f92672">|</span> <span style="color:#66d9ef">state</span> <span style="color:#f92672">|</span>
@@ -544,13 +521,11 @@ mysql<span style="color:#f92672">&gt;</span> <span style="color:#66d9ef">SELECT<
 </span><span style="color:#75715e"></span><span style="color:#f92672">|</span>  <span style="color:#ae81ff">6</span> <span style="color:#f92672">|</span> Emily     <span style="color:#f92672">|</span> Flanders <span style="color:#f92672">|</span>   <span style="color:#ae81ff">22</span> <span style="color:#f92672">|</span> CA    <span style="color:#f92672">|</span>
 <span style="color:#f92672">|</span>  <span style="color:#ae81ff">7</span> <span style="color:#f92672">|</span> Tina      <span style="color:#f92672">|</span> Oak      <span style="color:#f92672">|</span>   <span style="color:#ae81ff">42</span> <span style="color:#f92672">|</span> NC    <span style="color:#f92672">|</span>
 <span style="color:#f92672">+</span><span style="color:#75715e">----|-----------|----------|------|-------+
-</span><span style="color:#75715e"></span><span style="color:#ae81ff">2</span> <span style="color:#66d9ef">rows</span> <span style="color:#66d9ef">in</span> <span style="color:#66d9ef">set</span> (<span style="color:#ae81ff">0</span>.<span style="color:#ae81ff">00</span> sec)</code></pre></div>
-<h4 id="indexes">Indexes</h4>
-
+</span><span style="color:#75715e"></span><span style="color:#ae81ff">2</span> <span style="color:#66d9ef">rows</span> <span style="color:#66d9ef">in</span> <span style="color:#66d9ef">set</span> (<span style="color:#ae81ff">0</span>.<span style="color:#ae81ff">00</span> sec)
+</code></pre></div><h4 id="indexes">Indexes</h4>
 <p>An index speeds up the data retrieval time of a table. However, this comes at a
 speed cost for <em>updating</em> the table. So, it is usually a good idea to only index
 columns or tables that are frequently searched on.</p>
-
 <p>To add an index, use <code>CREATE INDEX</code>. <em>(Again, may differ depending on database
 technology being used)</em></p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-SQL" data-lang="SQL">mysql<span style="color:#f92672">&gt;</span> <span style="color:#66d9ef">SHOW</span> FIELDS <span style="color:#66d9ef">FROM</span> tblUsers;
@@ -567,16 +542,14 @@ technology being used)</em></p>
 
 mysql<span style="color:#f92672">&gt;</span> <span style="color:#66d9ef">CREATE</span> <span style="color:#66d9ef">INDEX</span> indexTblUsers <span style="color:#66d9ef">ON</span> tblUsers (id);
 Query OK, <span style="color:#ae81ff">0</span> <span style="color:#66d9ef">rows</span> affected (<span style="color:#ae81ff">0</span>.<span style="color:#ae81ff">01</span> sec)
-Records: <span style="color:#ae81ff">0</span>  Duplicates: <span style="color:#ae81ff">0</span>  Warnings: <span style="color:#ae81ff">0</span></code></pre></div>
-<h4 id="drop-table">Drop Table</h4>
-
+Records: <span style="color:#ae81ff">0</span>  Duplicates: <span style="color:#ae81ff">0</span>  Warnings: <span style="color:#ae81ff">0</span>
+</code></pre></div><h4 id="drop-table">Drop Table</h4>
 <p>As we already know, you can drop a whole table with <code>DROP</code>. However, like many
 of the other commands, <code>DROP</code> can be used with other items, like an index:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-SQL" data-lang="SQL">mysql<span style="color:#f92672">&gt;</span> <span style="color:#66d9ef">ALTER</span> <span style="color:#66d9ef">TABLE</span> tblUsers <span style="color:#66d9ef">DROP</span> <span style="color:#66d9ef">INDEX</span> indexTblUsers;
 Query OK, <span style="color:#ae81ff">0</span> <span style="color:#66d9ef">rows</span> affected (<span style="color:#ae81ff">0</span>.<span style="color:#ae81ff">01</span> sec)
-Records: <span style="color:#ae81ff">0</span>  Duplicates: <span style="color:#ae81ff">0</span>  Warnings: <span style="color:#ae81ff">0</span></code></pre></div>
-<h4 id="truncate">Truncate</h4>
-
+Records: <span style="color:#ae81ff">0</span>  Duplicates: <span style="color:#ae81ff">0</span>  Warnings: <span style="color:#ae81ff">0</span>
+</code></pre></div><h4 id="truncate">Truncate</h4>
 <p>The <code>truncate</code> command will delete the data, but leave table schema the same&hellip;
 again, still be careful because it <em>will</em> delete <em>all the data</em> in the table.</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-SQL" data-lang="SQL">mysql<span style="color:#f92672">&gt;</span> <span style="color:#66d9ef">SELECT</span> <span style="color:#f92672">*</span> <span style="color:#66d9ef">FROM</span> tblUsersBackup;
@@ -592,12 +565,10 @@ mysql<span style="color:#f92672">&gt;</span> <span style="color:#66d9ef">TRUNCAT
 Query OK, <span style="color:#ae81ff">0</span> <span style="color:#66d9ef">rows</span> affected (<span style="color:#ae81ff">0</span>.<span style="color:#ae81ff">03</span> sec)
 
 mysql<span style="color:#f92672">&gt;</span> <span style="color:#66d9ef">SELECT</span> <span style="color:#f92672">*</span> <span style="color:#66d9ef">FROM</span> tblUsersBackup;
-Empty <span style="color:#66d9ef">set</span> (<span style="color:#ae81ff">0</span>.<span style="color:#ae81ff">00</span> sec)</code></pre></div>
-<h4 id="auto-increment">Auto Increment</h4>
-
+Empty <span style="color:#66d9ef">set</span> (<span style="color:#ae81ff">0</span>.<span style="color:#ae81ff">00</span> sec)
+</code></pre></div><h4 id="auto-increment">Auto Increment</h4>
 <p>An Integer value, that once assigned, auto increments by 1 everytime the table
 is updated.</p>
-
 <p>You can auto increment a key, which is very useful for IDs in a table (as we saw
 earlier).all the data</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-SQL" data-lang="SQL">mysql<span style="color:#f92672">&gt;</span> <span style="color:#66d9ef">SHOW</span> FIELDS <span style="color:#66d9ef">FROM</span> tblPeople;
@@ -627,8 +598,9 @@ mysql<span style="color:#f92672">&gt;</span> <span style="color:#66d9ef">SELECT<
 </span><span style="color:#75715e"></span><span style="color:#f92672">|</span>  <span style="color:#ae81ff">1</span> <span style="color:#f92672">|</span> Josh      <span style="color:#f92672">|</span> Rivers   <span style="color:#f92672">|</span>   <span style="color:#ae81ff">19</span> <span style="color:#f92672">|</span> PA    <span style="color:#f92672">|</span>
 <span style="color:#f92672">|</span>  <span style="color:#ae81ff">2</span> <span style="color:#f92672">|</span> Kim       <span style="color:#f92672">|</span> Medows   <span style="color:#f92672">|</span>   <span style="color:#ae81ff">32</span> <span style="color:#f92672">|</span> CO    <span style="color:#f92672">|</span>
 <span style="color:#f92672">+</span><span style="color:#75715e">----|-----------|----------|------|-------+
-</span><span style="color:#75715e"></span><span style="color:#ae81ff">2</span> <span style="color:#66d9ef">rows</span> <span style="color:#66d9ef">in</span> <span style="color:#66d9ef">set</span> (<span style="color:#ae81ff">0</span>.<span style="color:#ae81ff">00</span> sec)</code></pre></div>
-<p>Note: The auto increment value can be manually set.</p>
+</span><span style="color:#75715e"></span><span style="color:#ae81ff">2</span> <span style="color:#66d9ef">rows</span> <span style="color:#66d9ef">in</span> <span style="color:#66d9ef">set</span> (<span style="color:#ae81ff">0</span>.<span style="color:#ae81ff">00</span> sec)
+
+</code></pre></div><p>Note: The auto increment value can be manually set.</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-SQL" data-lang="SQL">mysql<span style="color:#f92672">&gt;</span> <span style="color:#66d9ef">INSERT</span> <span style="color:#66d9ef">INTO</span> tblPeople (firstname, lastname, age, <span style="color:#66d9ef">state</span>) 
 <span style="color:#66d9ef">VALUES</span> (<span style="color:#e6db74">&#39;Dan&#39;</span>, <span style="color:#e6db74">&#39;Valley&#39;</span>, <span style="color:#ae81ff">40</span>, <span style="color:#e6db74">&#34;NH&#34;</span>);
 Query OK, <span style="color:#ae81ff">1</span> <span style="color:#66d9ef">row</span> affected (<span style="color:#ae81ff">0</span>.<span style="color:#ae81ff">01</span> sec)
@@ -641,20 +613,16 @@ mysql<span style="color:#f92672">&gt;</span> <span style="color:#66d9ef">SELECT<
 <span style="color:#f92672">|</span>    <span style="color:#ae81ff">2</span> <span style="color:#f92672">|</span> Kim       <span style="color:#f92672">|</span> Medows   <span style="color:#f92672">|</span>   <span style="color:#ae81ff">32</span> <span style="color:#f92672">|</span> CO    <span style="color:#f92672">|</span>
 <span style="color:#f92672">|</span> <span style="color:#ae81ff">1000</span> <span style="color:#f92672">|</span> Dan       <span style="color:#f92672">|</span> Valley   <span style="color:#f92672">|</span>   <span style="color:#ae81ff">40</span> <span style="color:#f92672">|</span> NH    <span style="color:#f92672">|</span>
 <span style="color:#f92672">+</span><span style="color:#75715e">------|-----------|----------|------|-------+
-</span><span style="color:#75715e"></span><span style="color:#ae81ff">3</span> <span style="color:#66d9ef">rows</span> <span style="color:#66d9ef">in</span> <span style="color:#66d9ef">set</span> (<span style="color:#ae81ff">0</span>.<span style="color:#ae81ff">00</span> sec)</code></pre></div>
-<p>When setting the auto increment value manually, just be careful that it isn&rsquo;t
+</span><span style="color:#75715e"></span><span style="color:#ae81ff">3</span> <span style="color:#66d9ef">rows</span> <span style="color:#66d9ef">in</span> <span style="color:#66d9ef">set</span> (<span style="color:#ae81ff">0</span>.<span style="color:#ae81ff">00</span> sec)
+</code></pre></div><p>When setting the auto increment value manually, just be careful that it isn&rsquo;t
 set to one that will eventually overwrite another value in the table that <em>must</em>
 be unique, or it will error.</p>
-
 <h3 id="sql-functions">SQL Functions</h3>
-
 <p>SQL <em>functions</em>, are SQL statements that don&rsquo;t directly manipulate data, but can
 be use to extract other useful information from the database and tables. They
 are often used in conjunction with <code>SELECT</code>. There are a bunch of base SQL
 functions to use. Here is a sampling of a few:</p>
-
 <h4 id="count">COUNT</h4>
-
 <p>Shows the number of matched results returned. In this example, the number of
 rows in <code>tblUsers</code>, and then the number of users over the age of 35:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-SQL" data-lang="SQL">mysql<span style="color:#f92672">&gt;</span> <span style="color:#66d9ef">SELECT</span> <span style="color:#f92672">*</span> <span style="color:#66d9ef">FROM</span> tblUsers;
@@ -682,9 +650,8 @@ mysql<span style="color:#f92672">&gt;</span> <span style="color:#66d9ef">SELECT<
 <span style="color:#f92672">+</span><span style="color:#75715e">----------+
 </span><span style="color:#75715e"></span><span style="color:#f92672">|</span>        <span style="color:#ae81ff">2</span> <span style="color:#f92672">|</span>
 <span style="color:#f92672">+</span><span style="color:#75715e">----------+
-</span><span style="color:#75715e"></span><span style="color:#ae81ff">1</span> <span style="color:#66d9ef">row</span> <span style="color:#66d9ef">in</span> <span style="color:#66d9ef">set</span> (<span style="color:#ae81ff">0</span>.<span style="color:#ae81ff">00</span> sec)</code></pre></div>
-<h4 id="average-and-sum-functions">Average and Sum Functions</h4>
-
+</span><span style="color:#75715e"></span><span style="color:#ae81ff">1</span> <span style="color:#66d9ef">row</span> <span style="color:#66d9ef">in</span> <span style="color:#66d9ef">set</span> (<span style="color:#ae81ff">0</span>.<span style="color:#ae81ff">00</span> sec)
+</code></pre></div><h4 id="average-and-sum-functions">Average and Sum Functions</h4>
 <p>To get an average of the number values in a column, use the <code>AVG</code> function:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-SQL" data-lang="SQL">mysql<span style="color:#f92672">&gt;</span> <span style="color:#66d9ef">SELECT</span> <span style="color:#66d9ef">AVG</span>(age) <span style="color:#66d9ef">from</span> tblUsers;
 <span style="color:#f92672">+</span><span style="color:#75715e">----------+
@@ -692,31 +659,29 @@ mysql<span style="color:#f92672">&gt;</span> <span style="color:#66d9ef">SELECT<
 <span style="color:#f92672">+</span><span style="color:#75715e">----------+
 </span><span style="color:#75715e"></span><span style="color:#f92672">|</span>  <span style="color:#ae81ff">36</span>.<span style="color:#ae81ff">7500</span> <span style="color:#f92672">|</span>
 <span style="color:#f92672">+</span><span style="color:#75715e">----------+
-</span><span style="color:#75715e"></span><span style="color:#ae81ff">1</span> <span style="color:#66d9ef">row</span> <span style="color:#66d9ef">in</span> <span style="color:#66d9ef">set</span> (<span style="color:#ae81ff">0</span>.<span style="color:#ae81ff">00</span> sec)</code></pre></div>
-<p>To get a total of a column&rsquo;s number values, use the <code>SUM</code> function:</p>
+</span><span style="color:#75715e"></span><span style="color:#ae81ff">1</span> <span style="color:#66d9ef">row</span> <span style="color:#66d9ef">in</span> <span style="color:#66d9ef">set</span> (<span style="color:#ae81ff">0</span>.<span style="color:#ae81ff">00</span> sec)
+</code></pre></div><p>To get a total of a column&rsquo;s number values, use the <code>SUM</code> function:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-SQL" data-lang="SQL">mysql<span style="color:#f92672">&gt;</span> <span style="color:#66d9ef">SELECT</span> <span style="color:#66d9ef">SUM</span>(age) <span style="color:#66d9ef">from</span> tblUsers;
 <span style="color:#f92672">+</span><span style="color:#75715e">----------+
 </span><span style="color:#75715e"></span><span style="color:#f92672">|</span> <span style="color:#66d9ef">SUM</span>(age) <span style="color:#f92672">|</span>
 <span style="color:#f92672">+</span><span style="color:#75715e">----------+
 </span><span style="color:#75715e"></span><span style="color:#f92672">|</span>      <span style="color:#ae81ff">147</span> <span style="color:#f92672">|</span>
 <span style="color:#f92672">+</span><span style="color:#75715e">----------+
-</span><span style="color:#75715e"></span><span style="color:#ae81ff">1</span> <span style="color:#66d9ef">row</span> <span style="color:#66d9ef">in</span> <span style="color:#66d9ef">set</span> (<span style="color:#ae81ff">0</span>.<span style="color:#ae81ff">00</span> sec)</code></pre></div>
-<p>Note, that select statements using functions can still be combined:</p>
+</span><span style="color:#75715e"></span><span style="color:#ae81ff">1</span> <span style="color:#66d9ef">row</span> <span style="color:#66d9ef">in</span> <span style="color:#66d9ef">set</span> (<span style="color:#ae81ff">0</span>.<span style="color:#ae81ff">00</span> sec)
+</code></pre></div><p>Note, that select statements using functions can still be combined:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-SQL" data-lang="SQL">mysql<span style="color:#f92672">&gt;</span> <span style="color:#66d9ef">SELECT</span> <span style="color:#66d9ef">COUNT</span>(<span style="color:#f92672">*</span>),<span style="color:#66d9ef">AVG</span>(age) <span style="color:#66d9ef">from</span> tblUsers;
 <span style="color:#f92672">+</span><span style="color:#75715e">----------|----------+
 </span><span style="color:#75715e"></span><span style="color:#f92672">|</span> <span style="color:#66d9ef">COUNT</span>(<span style="color:#f92672">*</span>) <span style="color:#f92672">|</span> <span style="color:#66d9ef">AVG</span>(age) <span style="color:#f92672">|</span>
 <span style="color:#f92672">+</span><span style="color:#75715e">----------|----------+
 </span><span style="color:#75715e"></span><span style="color:#f92672">|</span>        <span style="color:#ae81ff">4</span> <span style="color:#f92672">|</span>  <span style="color:#ae81ff">36</span>.<span style="color:#ae81ff">7500</span> <span style="color:#f92672">|</span>
 <span style="color:#f92672">+</span><span style="color:#75715e">----------|----------+
-</span><span style="color:#75715e"></span><span style="color:#ae81ff">1</span> <span style="color:#66d9ef">row</span> <span style="color:#66d9ef">in</span> <span style="color:#66d9ef">set</span> (<span style="color:#ae81ff">0</span>.<span style="color:#ae81ff">00</span> sec)</code></pre></div>
-<h3 id="the-like-operator">The Like Operator</h3>
-
+</span><span style="color:#75715e"></span><span style="color:#ae81ff">1</span> <span style="color:#66d9ef">row</span> <span style="color:#66d9ef">in</span> <span style="color:#66d9ef">set</span> (<span style="color:#ae81ff">0</span>.<span style="color:#ae81ff">00</span> sec)
+</code></pre></div><h3 id="the-like-operator">The Like Operator</h3>
 <p>The <code>LIKE</code> operator can be used for matching, with wildcards (<code>%</code>). For example
 in the following searches, <code>%S</code> and <code>S%</code> yield different results because the
 first looks for last names which <em>end</em> in an &ldquo;s&rdquo;, and the second grabs last
 names which <em>start</em> with &ldquo;s&rdquo;. The last example returns names which have &ldquo;er&rdquo;
 anywhere in the last name.</p>
-
 <p><em>Note, <code>LIKE</code> uses higher CPU usage. With larger data sets, try to use it on
 columns which are indexed if possible.</em></p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-SQL" data-lang="SQL">mysql<span style="color:#f92672">&gt;</span> <span style="color:#66d9ef">SELECT</span> <span style="color:#f92672">*</span> <span style="color:#66d9ef">FROM</span> tblUsers;
@@ -754,9 +719,8 @@ mysql<span style="color:#f92672">&gt;</span> <span style="color:#66d9ef">SELECT<
 </span><span style="color:#75715e"></span><span style="color:#f92672">|</span>  <span style="color:#ae81ff">6</span> <span style="color:#f92672">|</span> Emily     <span style="color:#f92672">|</span> Flanders <span style="color:#f92672">|</span>   <span style="color:#ae81ff">22</span> <span style="color:#f92672">|</span> CA    <span style="color:#f92672">|</span>
 <span style="color:#f92672">|</span>  <span style="color:#ae81ff">9</span> <span style="color:#f92672">|</span> Bob       <span style="color:#f92672">|</span> Builder  <span style="color:#f92672">|</span>   <span style="color:#ae81ff">51</span> <span style="color:#f92672">|</span> MO    <span style="color:#f92672">|</span>
 <span style="color:#f92672">+</span><span style="color:#75715e">----|-----------|----------|------|-------+
-</span><span style="color:#75715e"></span><span style="color:#ae81ff">2</span> <span style="color:#66d9ef">rows</span> <span style="color:#66d9ef">in</span> <span style="color:#66d9ef">set</span> (<span style="color:#ae81ff">0</span>.<span style="color:#ae81ff">00</span> sec)</code></pre></div>
-<h3 id="views">Views</h3>
-
+</span><span style="color:#75715e"></span><span style="color:#ae81ff">2</span> <span style="color:#66d9ef">rows</span> <span style="color:#66d9ef">in</span> <span style="color:#66d9ef">set</span> (<span style="color:#ae81ff">0</span>.<span style="color:#ae81ff">00</span> sec)
+</code></pre></div><h3 id="views">Views</h3>
 <p>Views create a custom filter to display a set of the data. This can be useful
 when defining several use cases of an application. For example, a view can
 saved, and then just <em>updated</em>, instead of <em>recalculated</em>, when querying for
@@ -793,11 +757,10 @@ mysql<span style="color:#f92672">&gt;</span> <span style="color:#66d9ef">SELECT<
 <span style="color:#f92672">+</span><span style="color:#75715e">----------|----------|----------+
 </span><span style="color:#75715e"></span><span style="color:#f92672">|</span>        <span style="color:#ae81ff">4</span> <span style="color:#f92672">|</span>  <span style="color:#ae81ff">30</span>.<span style="color:#ae81ff">7500</span> <span style="color:#f92672">|</span>      <span style="color:#ae81ff">123</span> <span style="color:#f92672">|</span>
 <span style="color:#f92672">+</span><span style="color:#75715e">----------|----------|----------+
-</span><span style="color:#75715e"></span><span style="color:#ae81ff">1</span> <span style="color:#66d9ef">row</span> <span style="color:#66d9ef">in</span> <span style="color:#66d9ef">set</span> (<span style="color:#ae81ff">0</span>.<span style="color:#ae81ff">00</span> sec)</code></pre></div>
-<h3 id="joins">Joins</h3>
+</span><span style="color:#75715e"></span><span style="color:#ae81ff">1</span> <span style="color:#66d9ef">row</span> <span style="color:#66d9ef">in</span> <span style="color:#66d9ef">set</span> (<span style="color:#ae81ff">0</span>.<span style="color:#ae81ff">00</span> sec)
 
+</code></pre></div><h3 id="joins">Joins</h3>
 <h4 id="inner-join">Inner Join</h4>
-
 <p>An Inner join will return the selected rows from multiple tables, when there is
 at least one match in each table. For example:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-SQL" data-lang="SQL">mysql<span style="color:#f92672">&gt;</span> <span style="color:#66d9ef">SELECT</span> <span style="color:#f92672">*</span> <span style="color:#66d9ef">FROM</span> tblUsers;
@@ -833,9 +796,8 @@ mysql<span style="color:#f92672">&gt;</span> <span style="color:#66d9ef">SELECT<
 <span style="color:#f92672">|</span> Emily     <span style="color:#f92672">|</span> Flanders <span style="color:#f92672">|</span>  <span style="color:#ae81ff">17000</span> <span style="color:#f92672">|</span>
 <span style="color:#f92672">|</span> Tina      <span style="color:#f92672">|</span> Oak      <span style="color:#f92672">|</span>  <span style="color:#ae81ff">32800</span> <span style="color:#f92672">|</span>
 <span style="color:#f92672">+</span><span style="color:#75715e">-----------|----------|--------+
-</span><span style="color:#75715e"></span><span style="color:#ae81ff">3</span> <span style="color:#66d9ef">rows</span> <span style="color:#66d9ef">in</span> <span style="color:#66d9ef">set</span> (<span style="color:#ae81ff">0</span>.<span style="color:#ae81ff">00</span> sec)</code></pre></div>
-<h4 id="right-join">Right Join</h4>
-
+</span><span style="color:#75715e"></span><span style="color:#ae81ff">3</span> <span style="color:#66d9ef">rows</span> <span style="color:#66d9ef">in</span> <span style="color:#66d9ef">set</span> (<span style="color:#ae81ff">0</span>.<span style="color:#ae81ff">00</span> sec)
+</code></pre></div><h4 id="right-join">Right Join</h4>
 <p>A <em>right</em> join will return <em>everything</em> in the right table, and any existing/matched
 items on the left. Any non-matching data will display as null.</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-SQL" data-lang="SQL">mysql<span style="color:#f92672">&gt;</span> <span style="color:#66d9ef">SELECT</span> <span style="color:#f92672">*</span> <span style="color:#66d9ef">FROM</span> tblUsers;
@@ -871,24 +833,17 @@ mysql<span style="color:#f92672">&gt;</span> <span style="color:#66d9ef">SELECT<
 <span style="color:#f92672">|</span> Tina      <span style="color:#f92672">|</span> Oak      <span style="color:#f92672">|</span>  <span style="color:#ae81ff">32800</span> <span style="color:#f92672">|</span>
 <span style="color:#f92672">|</span> <span style="color:#66d9ef">NULL</span>      <span style="color:#f92672">|</span> <span style="color:#66d9ef">NULL</span>     <span style="color:#f92672">|</span>   <span style="color:#66d9ef">NULL</span> <span style="color:#f92672">|</span>
 <span style="color:#f92672">+</span><span style="color:#75715e">-----------|----------|--------+
-</span><span style="color:#75715e"></span><span style="color:#ae81ff">4</span> <span style="color:#66d9ef">rows</span> <span style="color:#66d9ef">in</span> <span style="color:#66d9ef">set</span> (<span style="color:#ae81ff">0</span>.<span style="color:#ae81ff">00</span> sec)</code></pre></div>
-<h4 id="left-join">Left Join</h4>
-
+</span><span style="color:#75715e"></span><span style="color:#ae81ff">4</span> <span style="color:#66d9ef">rows</span> <span style="color:#66d9ef">in</span> <span style="color:#66d9ef">set</span> (<span style="color:#ae81ff">0</span>.<span style="color:#ae81ff">00</span> sec)
+</code></pre></div><h4 id="left-join">Left Join</h4>
 <p>Basically the same as a <code>RIGHT</code> join, but with the left table items all joining.</p>
-
 <h4 id="full-join">Full Join</h4>
-
 <p>A full join shows <em>all</em> records from both the right and left table, regardless
 of matching the relation records of either.</p>
-
 <p>NOTE: Full outer joins do not work on mysql, but would on postresql. It is
 recommended to use Unions to emulate them if needed.</p>
-
 <h3 id="unions">Unions</h3>
-
 <p>Unions are used to combine and concatenate <code>SELECT</code> statements from multiple
 tables.</p>
-
 <p>This example doesn&rsquo;t work well because it doesn&rsquo;t make much sense (<code>age</code> isn&rsquo;t
 the same as a <code>point</code>), but at least it displays what is happening during the <code>UNION</code>.</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-SQL" data-lang="SQL">mysql<span style="color:#f92672">&gt;</span> <span style="color:#66d9ef">SELECT</span> firstname, lastname, points <span style="color:#66d9ef">FROM</span> tblUsersPts 
@@ -905,13 +860,11 @@ the same as a <code>point</code>), but at least it displays what is happening du
 <span style="color:#f92672">|</span> Tina      <span style="color:#f92672">|</span> Oak      <span style="color:#f92672">|</span>     <span style="color:#ae81ff">42</span> <span style="color:#f92672">|</span>
 <span style="color:#f92672">|</span> Zach      <span style="color:#f92672">|</span> Scout    <span style="color:#f92672">|</span>     <span style="color:#ae81ff">27</span> <span style="color:#f92672">|</span>
 <span style="color:#f92672">+</span><span style="color:#75715e">-----------|----------|--------+
-</span><span style="color:#75715e"></span><span style="color:#ae81ff">8</span> <span style="color:#66d9ef">rows</span> <span style="color:#66d9ef">in</span> <span style="color:#66d9ef">set</span> (<span style="color:#ae81ff">0</span>.<span style="color:#ae81ff">00</span> sec)</code></pre></div>
-<h3 id="sorting-records">Sorting Records</h3>
-
+</span><span style="color:#75715e"></span><span style="color:#ae81ff">8</span> <span style="color:#66d9ef">rows</span> <span style="color:#66d9ef">in</span> <span style="color:#66d9ef">set</span> (<span style="color:#ae81ff">0</span>.<span style="color:#ae81ff">00</span> sec)
+</code></pre></div><h3 id="sorting-records">Sorting Records</h3>
 <p>Record rows can be sorted in the ascending or descending order of a column by using
 the <code>ODER</code> command and either <code>ASC</code> for &ldquo;ascending&rdquo; or <code>DESC</code> for &ldquo;descending&rdquo;.
-The results can be limited or trimmed using another statement, like <code>LIMIT
-1</code>.</p>
+The results can be limited or trimmed using another statement, like <code>LIMIT 1</code>.</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-SQL" data-lang="SQL">mysql<span style="color:#f92672">&gt;</span> <span style="color:#66d9ef">SELECT</span> <span style="color:#f92672">*</span> <span style="color:#66d9ef">FROM</span> tblUsersPts;
 <span style="color:#f92672">+</span><span style="color:#75715e">----|-----------|----------|-------|--------+
 </span><span style="color:#75715e"></span><span style="color:#f92672">|</span> id <span style="color:#f92672">|</span> firstname <span style="color:#f92672">|</span> lastname <span style="color:#f92672">|</span> team  <span style="color:#f92672">|</span> points <span style="color:#f92672">|</span>
@@ -942,9 +895,8 @@ mysql<span style="color:#f92672">&gt;</span> <span style="color:#66d9ef">SELECT<
 <span style="color:#f92672">|</span>  <span style="color:#ae81ff">1</span> <span style="color:#f92672">|</span> Joe       <span style="color:#f92672">|</span> Fry      <span style="color:#f92672">|</span> Red   <span style="color:#f92672">|</span>  <span style="color:#ae81ff">20000</span> <span style="color:#f92672">|</span>
 <span style="color:#f92672">|</span>  <span style="color:#ae81ff">3</span> <span style="color:#f92672">|</span> Tina      <span style="color:#f92672">|</span> Oak      <span style="color:#f92672">|</span> Red   <span style="color:#f92672">|</span>  <span style="color:#ae81ff">32800</span> <span style="color:#f92672">|</span>
 <span style="color:#f92672">+</span><span style="color:#75715e">----|-----------|----------|-------|--------+
-</span><span style="color:#75715e"></span><span style="color:#ae81ff">4</span> <span style="color:#66d9ef">rows</span> <span style="color:#66d9ef">in</span> <span style="color:#66d9ef">set</span> (<span style="color:#ae81ff">0</span>.<span style="color:#ae81ff">00</span> sec)</code></pre></div>
-<h3 id="minimum-and-maximum-values">Minimum and Maximum Values</h3>
-
+</span><span style="color:#75715e"></span><span style="color:#ae81ff">4</span> <span style="color:#66d9ef">rows</span> <span style="color:#66d9ef">in</span> <span style="color:#66d9ef">set</span> (<span style="color:#ae81ff">0</span>.<span style="color:#ae81ff">00</span> sec)
+</code></pre></div><h3 id="minimum-and-maximum-values">Minimum and Maximum Values</h3>
 <p>Similar to <code>ORDER</code>, the minimum and maximum values in a particular column of the
 table can be returned using the <code>MIN</code> and <code>MAX</code> commands:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-SQL" data-lang="SQL">mysql<span style="color:#f92672">&gt;</span> <span style="color:#66d9ef">SELECT</span> <span style="color:#f92672">*</span> <span style="color:#66d9ef">FROM</span> tblUsersPts <span style="color:#66d9ef">ORDER</span> <span style="color:#66d9ef">BY</span> team,lastname <span style="color:#66d9ef">ASC</span>;
@@ -964,8 +916,8 @@ mysql<span style="color:#f92672">&gt;</span> <span style="color:#66d9ef">SELECT<
 <span style="color:#f92672">+</span><span style="color:#75715e">-------------|-------------+
 </span><span style="color:#75715e"></span><span style="color:#f92672">|</span>       <span style="color:#ae81ff">17000</span> <span style="color:#f92672">|</span>       <span style="color:#ae81ff">40100</span> <span style="color:#f92672">|</span>
 <span style="color:#f92672">+</span><span style="color:#75715e">-------------|-------------+
-</span><span style="color:#75715e"></span><span style="color:#ae81ff">1</span> <span style="color:#66d9ef">row</span> <span style="color:#66d9ef">in</span> <span style="color:#66d9ef">set</span> (<span style="color:#ae81ff">0</span>.<span style="color:#ae81ff">00</span> sec)</code></pre></div>
-<p>To return other fields with the min/max item, a sub-query (another SQL query
+</span><span style="color:#75715e"></span><span style="color:#ae81ff">1</span> <span style="color:#66d9ef">row</span> <span style="color:#66d9ef">in</span> <span style="color:#66d9ef">set</span> (<span style="color:#ae81ff">0</span>.<span style="color:#ae81ff">00</span> sec)
+</code></pre></div><p>To return other fields with the min/max item, a sub-query (another SQL query
 inside parenthesis) may have to be used:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-SQL" data-lang="SQL">mysql<span style="color:#f92672">&gt;</span> <span style="color:#66d9ef">SELECT</span> firstname,lastname,points <span style="color:#66d9ef">FROM</span> tblUsersPts 
 <span style="color:#f92672">-&gt;</span> <span style="color:#66d9ef">WHERE</span> points<span style="color:#f92672">=</span>(<span style="color:#66d9ef">SELECT</span> <span style="color:#66d9ef">MAX</span>(points) <span style="color:#66d9ef">FROM</span> tblUsersPts);
@@ -974,9 +926,8 @@ inside parenthesis) may have to be used:</p>
 <span style="color:#f92672">+</span><span style="color:#75715e">-----------|----------|--------+
 </span><span style="color:#75715e"></span><span style="color:#f92672">|</span> Bob       <span style="color:#f92672">|</span> Builder  <span style="color:#f92672">|</span>  <span style="color:#ae81ff">40100</span> <span style="color:#f92672">|</span>
 <span style="color:#f92672">+</span><span style="color:#75715e">-----------|----------|--------+
-</span><span style="color:#75715e"></span><span style="color:#ae81ff">1</span> <span style="color:#66d9ef">row</span> <span style="color:#66d9ef">in</span> <span style="color:#66d9ef">set</span> (<span style="color:#ae81ff">0</span>.<span style="color:#ae81ff">00</span> sec)</code></pre></div>
-<h3 id="upper-and-lower-case-conversions">Upper and Lower Case Conversions</h3>
-
+</span><span style="color:#75715e"></span><span style="color:#ae81ff">1</span> <span style="color:#66d9ef">row</span> <span style="color:#66d9ef">in</span> <span style="color:#66d9ef">set</span> (<span style="color:#ae81ff">0</span>.<span style="color:#ae81ff">00</span> sec)
+</code></pre></div><h3 id="upper-and-lower-case-conversions">Upper and Lower Case Conversions</h3>
 <p>Strings (such as names), and be easily altered using functions like <code>UCASE</code> and
 <code>LCASE</code>. These two functions change the <em>displayed</em> text (the data is not
 altered) to be upper or lower case.</p>
@@ -1011,9 +962,8 @@ mysql<span style="color:#f92672">&gt;</span> <span style="color:#66d9ef">SELECT<
 <span style="color:#f92672">|</span>  <span style="color:#ae81ff">3</span> <span style="color:#f92672">|</span> Tina      <span style="color:#f92672">|</span> Oak      <span style="color:#f92672">|</span> Red   <span style="color:#f92672">|</span>  <span style="color:#ae81ff">32800</span> <span style="color:#f92672">|</span>
 <span style="color:#f92672">|</span>  <span style="color:#ae81ff">4</span> <span style="color:#f92672">|</span> Bob       <span style="color:#f92672">|</span> Builder  <span style="color:#f92672">|</span> Green <span style="color:#f92672">|</span>  <span style="color:#ae81ff">40100</span> <span style="color:#f92672">|</span>
 <span style="color:#f92672">+</span><span style="color:#75715e">----|-----------|----------|-------|--------+
-</span><span style="color:#75715e"></span><span style="color:#ae81ff">4</span> <span style="color:#66d9ef">rows</span> <span style="color:#66d9ef">in</span> <span style="color:#66d9ef">set</span> (<span style="color:#ae81ff">0</span>.<span style="color:#ae81ff">00</span> sec)</code></pre></div>
-<h3 id="now">Now()</h3>
-
+</span><span style="color:#75715e"></span><span style="color:#ae81ff">4</span> <span style="color:#66d9ef">rows</span> <span style="color:#66d9ef">in</span> <span style="color:#66d9ef">set</span> (<span style="color:#ae81ff">0</span>.<span style="color:#ae81ff">00</span> sec)
+</code></pre></div><h3 id="now">Now()</h3>
 <p>The <code>Now*()</code> function creates a new value, using the current date and time. This
 can be appended when creating a view, to mark when changes happen over time.</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql">mysql<span style="color:#f92672">&gt;</span> <span style="color:#66d9ef">SELECT</span> id,firstname,lastname,team,points, Now() <span style="color:#66d9ef">AS</span> updated
@@ -1026,9 +976,8 @@ can be appended when creating a view, to mark when changes happen over time.</p>
 <span style="color:#f92672">|</span>  <span style="color:#ae81ff">3</span> <span style="color:#f92672">|</span> Tina      <span style="color:#f92672">|</span> Oak      <span style="color:#f92672">|</span> Red   <span style="color:#f92672">|</span>  <span style="color:#ae81ff">32800</span> <span style="color:#f92672">|</span> <span style="color:#ae81ff">2018</span><span style="color:#f92672">-</span><span style="color:#ae81ff">04</span><span style="color:#f92672">-</span><span style="color:#ae81ff">17</span> <span style="color:#ae81ff">10</span>:<span style="color:#ae81ff">56</span>:<span style="color:#ae81ff">53</span> <span style="color:#f92672">|</span>
 <span style="color:#f92672">|</span>  <span style="color:#ae81ff">4</span> <span style="color:#f92672">|</span> Bob       <span style="color:#f92672">|</span> Builder  <span style="color:#f92672">|</span> Green <span style="color:#f92672">|</span>  <span style="color:#ae81ff">40100</span> <span style="color:#f92672">|</span> <span style="color:#ae81ff">2018</span><span style="color:#f92672">-</span><span style="color:#ae81ff">04</span><span style="color:#f92672">-</span><span style="color:#ae81ff">17</span> <span style="color:#ae81ff">10</span>:<span style="color:#ae81ff">56</span>:<span style="color:#ae81ff">53</span> <span style="color:#f92672">|</span>
 <span style="color:#f92672">+</span><span style="color:#75715e">----|-----------|----------|-------|--------|---------------------+
-</span><span style="color:#75715e"></span><span style="color:#ae81ff">4</span> <span style="color:#66d9ef">rows</span> <span style="color:#66d9ef">in</span> <span style="color:#66d9ef">set</span> (<span style="color:#ae81ff">0</span>.<span style="color:#ae81ff">00</span> sec)</code></pre></div>
-<h2 id="conclusion">Conclusion</h2>
-
+</span><span style="color:#75715e"></span><span style="color:#ae81ff">4</span> <span style="color:#66d9ef">rows</span> <span style="color:#66d9ef">in</span> <span style="color:#66d9ef">set</span> (<span style="color:#ae81ff">0</span>.<span style="color:#ae81ff">00</span> sec)
+</code></pre></div><h2 id="conclusion">Conclusion</h2>
 <p>I think that is enough to at least get started with SQL :) (it was for me
 anyway). There&rsquo;s not much else to say other than hopefully this post server as
 a good SQL quick-reference down the road :). Enjoy!</p>

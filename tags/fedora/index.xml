@@ -23,109 +23,55 @@ laptop when working from home. Normally, it works fine. However, last week I
 reformatted the work laptop with the &lt;a href=&#34;https://spins.fedoraproject.org/kde/&#34;&gt;&lt;em&gt;KDE Plasma&lt;/em&gt; spin&lt;/a&gt; of
 Fedora Workstation 31&amp;hellip; and my TB3 hub stopped playing nicely with it.
 Here&amp;rsquo;s why.&lt;/p&gt;
-
 &lt;h2 id=&#34;the-issue&#34;&gt;The Issue&lt;/h2&gt;
-
 &lt;p&gt;Due to a NVIDIA Quadro M1000M in my lenovo P50 work laptop, I&amp;rsquo;ve been using
 Gnome with Wayland, because that combination seems to have the least amount of
 annoying trade-offs. While doing a system refresh, I figured I would see if
 things are any different with a clean Fedora 31 Plasma install (they weren&amp;rsquo;t,
 but that&amp;rsquo;s beyond this post).&lt;/p&gt;
-
-&lt;p&gt;&lt;center&gt;
-&lt;a href=&#34;../../img/posts/fedora-kde-tb3/gnome-tb3-settings.png&#34;&gt;
-&lt;img alt=&#34;Gnome Thunderbolt Settings&#34; src=&#34;../../img/posts/fedora-kde-tb3/gnome-tb3-settings.png&#34; style=&#34;max-width: 100%; padding: 5px 15px 10px 10px&#34;/&gt;&lt;/a&gt;
-&lt;div class=&#34;caption&#34;&gt;The Gnome desktop environment now has a thunderbolt pane
-in the settings GUI&lt;/div&gt;
-&lt;/center&gt;&lt;/p&gt;
-
+&lt;!-- raw HTML omitted --&gt;
 &lt;p&gt;Booting into the live cd, and later the installed system, I noticed that my
 Thunderbolt 3 hub did &lt;em&gt;not&lt;/em&gt; work while I was in Plasma. That was fine. I
 expected it really, because for security reasons Linux distros tend to disable
 thunderbolt ports by default.  In gnome, there are now settings to authorize
 it (which I guess I had done on my previous install, and forgot about).  In
 Plasma however, I needed to install and configure &lt;code&gt;bolt&lt;/code&gt;.&lt;/p&gt;
-
 &lt;h2 id=&#34;bolt&#34;&gt;Bolt&lt;/h2&gt;
-
-&lt;p&gt;&lt;center&gt;
-&lt;a href=&#34;../../img/posts/fedora-kde-tb3/bolt-install.png&#34;&gt;
-&lt;img alt=&#34;Installing bolt with dnf&#34; src=&#34;../../img/posts/fedora-kde-tb3/bolt-install.png&#34; style=&#34;max-width: 100%; padding: 5px 15px 10px 10px&#34;/&gt;&lt;/a&gt;
-&lt;div class=&#34;caption&#34;&gt;&lt;code&gt;bolt&lt;/code&gt; is in the Fedora repos and is easily installed with
-&lt;code&gt;dnf&lt;/code&gt;&lt;/div&gt;
-&lt;/center&gt;&lt;/p&gt;
-
+&lt;!-- raw HTML omitted --&gt;
 &lt;p&gt;In Fedora, &lt;code&gt;bolt&lt;/code&gt; is in the repos (at least in Fedora 31+), so installing it is
 easy:&lt;/p&gt;
-
 &lt;pre&gt;&lt;code&gt;sudo dnf install bolt
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Once &lt;code&gt;bolt&lt;/code&gt; is installed, it isn&amp;rsquo;t a bad idea to check to make sure it is
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Once &lt;code&gt;bolt&lt;/code&gt; is installed, it isn&amp;rsquo;t a bad idea to check to make sure it is
 running: &lt;code&gt;sudo systemctl bolt&lt;/code&gt;.&lt;/p&gt;
-
-&lt;p&gt;&lt;center&gt;
-&lt;a href=&#34;../../img/posts/fedora-kde-tb3/bolt-systemctl-status.png&#34;&gt;
-&lt;img alt=&#34;bolt systemctl status&#34; src=&#34;../../img/posts/fedora-kde-tb3/bolt-systemctl-status.png&#34; style=&#34;max-width: 100%; padding: 5px 15px 10px 10px&#34;/&gt;&lt;/a&gt;
-&lt;div class=&#34;caption&#34;&gt;Checking &lt;code&gt;bolt&lt;/code&gt; is running using &lt;code&gt;systemctl status&lt;/code&gt;&lt;/div&gt;
-&lt;/center&gt;&lt;/p&gt;
-
+&lt;!-- raw HTML omitted --&gt;
 &lt;p&gt;If the status shows that it isn&amp;rsquo;t running for some reason, it can be started
 using &lt;code&gt;systemctl start bolt&lt;/code&gt;. Check the status again, and if it it &lt;em&gt;still&lt;/em&gt; is not
 running&amp;hellip; sorry?&lt;/p&gt;
-
-&lt;p&gt;&lt;center&gt;
-&lt;a href=&#34;../../img/posts/fedora-kde-tb3/boltctl.png&#34;&gt;
-&lt;img alt=&#34;boltctl&#34; src=&#34;../../img/posts/fedora-kde-tb3/boltctl.png&#34; style=&#34;max-width: 100%; padding: 5px 15px 10px 10px&#34;/&gt;&lt;/a&gt;
-&lt;div class=&#34;caption&#34;&gt;&lt;/div&gt;
-&lt;/center&gt;&lt;/p&gt;
-
+&lt;!-- raw HTML omitted --&gt;
 &lt;p&gt;With bolt installed, the command &lt;code&gt;boltctl&lt;/code&gt; is available to use. The base command will
 show information about attached thunderbolt devices. To see more &lt;code&gt;boltctl&lt;/code&gt;
 commands, run &lt;code&gt;boltctl --help&lt;/code&gt;.&lt;/p&gt;
-
 &lt;h2 id=&#34;authorizing&#34;&gt;Authorizing&lt;/h2&gt;
-
-&lt;p&gt;&lt;center&gt;
-&lt;a href=&#34;../../img/posts/fedora-kde-tb3/boltctl-authorize.png&#34;&gt;
-&lt;img alt=&#34;boltctl authorize&#34; src=&#34;../../img/posts/fedora-kde-tb3/boltctl-authorize.png&#34; style=&#34;max-width: 100%; padding: 5px 15px 10px 10px&#34;/&gt;&lt;/a&gt;
-&lt;div class=&#34;caption&#34;&gt;Authorizing the device&lt;/div&gt;
-&lt;/center&gt;&lt;/p&gt;
-
+&lt;!-- raw HTML omitted --&gt;
 &lt;p&gt;In order to &lt;em&gt;use&lt;/em&gt; the thunderbolt 3 device, it needs to be authorized. To
 authorize a device, first use a plain &lt;code&gt;boltctl&lt;/code&gt; command to get the &lt;code&gt;uuid&lt;/code&gt; of
 the device. Next, call &lt;code&gt;boltctl authorize&lt;/code&gt; using the &lt;code&gt;uuid&lt;/code&gt; to authorize it:&lt;/p&gt;
-
 &lt;pre&gt;&lt;code&gt;boltctl authorize &amp;lt;UUID HERE&amp;gt;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;The device should now be authorized. When I authorized mine, some of my devices
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;The device should now be authorized. When I authorized mine, some of my devices
 started showing up automatically, while others needed to be disconnected and
 replugged.&lt;/p&gt;
-
 &lt;h2 id=&#34;enrolling&#34;&gt;Enrolling&lt;/h2&gt;
-
-&lt;p&gt;&lt;center&gt;
-&lt;a href=&#34;../../img/posts/fedora-kde-tb3/bresetoltctl-enroll.png&#34;&gt;
-&lt;img alt=&#34;boltctl enroll&#34; src=&#34;../../img/posts/fedora-kde-tb3/boltctl-enroll.png&#34; style=&#34;max-width: 100%; padding: 5px 15px 10px 10px&#34;/&gt;&lt;/a&gt;
-&lt;div class=&#34;caption&#34;&gt;Enrolling the device for permanent use&lt;/div&gt;
-&lt;/center&gt;&lt;/p&gt;
-
+&lt;!-- raw HTML omitted --&gt;
 &lt;p&gt;Authorizing a device enables it to be used, but doesn&amp;rsquo;t guarantee persistence.
 While this may be desired to grant &lt;em&gt;temporary&lt;/em&gt; authorization to a device, many
 users tend want their device to &lt;em&gt;always&lt;/em&gt; work, without having to manually
 authorize it. In this case, the device should be &lt;em&gt;enrolled&lt;/em&gt; (like &lt;code&gt;systemctl enable&lt;/code&gt;).
 Simply call &lt;code&gt;boltctl enroll&lt;/code&gt;, with the device UUID:&lt;/p&gt;
-
 &lt;pre&gt;&lt;code&gt;boltctl enroll &amp;lt;UUID HERE&amp;gt;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Once enrolled, the device&amp;rsquo;s UUID will be recorded and added to a database. By
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Once enrolled, the device&amp;rsquo;s UUID will be recorded and added to a database. By
 default, the device will now automatically be authorized whenever it is
 connected.&lt;/p&gt;
-
 &lt;h2 id=&#34;conclusion&#34;&gt;Conclusion&lt;/h2&gt;
-
 &lt;p&gt;That&amp;rsquo;s it. While the solution isn&amp;rsquo;t very difficult, it can be frustrating to
 figure out when it appears that the thunderbolt device simply is not working.
 Regardless, I&amp;rsquo;m glad that I now know about &lt;code&gt;bolt&lt;/code&gt; and how to use it!&lt;/p&gt;</description>
@@ -143,120 +89,69 @@ progressed over the last year. So, I decided to try to use Gitlab to manage the
 automated build and deployments of a personal project I&amp;rsquo;ve been working on.
 The first step of the process was to setup a runner my Gitlab instance could
 use for the builds.&lt;/p&gt;
-
-&lt;h2 id=&#34;setup-a-machine-vm&#34;&gt;Setup a Machine/VM&lt;/h2&gt;
-
-&lt;p&gt;&lt;center&gt;
-&lt;a href=&#34;../../img/posts/create-gitlab-runner/fedora-vm-install.png&#34;&gt;
-&lt;img alt=&#34;Installing a new Fedora30 VM in Virt-Manager&#34; src=&#34;../../img/posts/create-gitlab-runner/fedora-vm-install.png&#34; style=&#34;max-width: 100%;&#34;/&gt;&lt;/a&gt;
-&lt;div class=&#34;caption&#34;&gt;Installing a new Fedora 30 VM in Virt-Manager for my runner&lt;/div&gt;
-&lt;/center&gt;&lt;/p&gt;
-
+&lt;h2 id=&#34;setup-a-machinevm&#34;&gt;Setup a Machine/VM&lt;/h2&gt;
+&lt;!-- raw HTML omitted --&gt;
 &lt;p&gt;This will be a BYOG post (bring your own Gitlab). I already
-&amp;ldquo;&lt;em&gt;had one laying around&lt;/em&gt;&amp;rdquo;, so I won&amp;rsquo;t cover setting that up.&lt;/p&gt;
-
+&amp;ldquo;&lt;em&gt;had one laying around&lt;/em&gt;&amp;quot;, so I won&amp;rsquo;t cover setting that up.&lt;/p&gt;
 &lt;p&gt;Your runner needs may differ, but in this post I am installing runner on a
 Fedora 30 VM. I will also be using both &lt;a href=&#34;https://buildah.io/&#34;&gt;buildah&lt;/a&gt; and
 &lt;a href=&#34;https://podman.io/&#34;&gt;podman&lt;/a&gt; for this project.&lt;/p&gt;
-
-&lt;h4 id=&#34;some-things-to-note-consider-during-vm-setup&#34;&gt;Some things to note/consider during VM setup:&lt;/h4&gt;
-
+&lt;h4 id=&#34;some-things-to-noteconsider-during-vm-setup&#34;&gt;Some things to note/consider during VM setup:&lt;/h4&gt;
 &lt;ul&gt;
 &lt;li&gt;Install packages required for pipeline tasks (ex: &lt;code&gt;podman&lt;/code&gt; and &lt;code&gt;buildah&lt;/code&gt;)&lt;/li&gt;
 &lt;li&gt;If &lt;code&gt;sudo&lt;/code&gt; is required, manage the &lt;code&gt;gitlab-runner&lt;/code&gt; user/group using &lt;code&gt;visudo&lt;/code&gt;&lt;/li&gt;
 &lt;li&gt;If using docker runners, &lt;code&gt;docker-machine&lt;/code&gt; needs to be installed&lt;/li&gt;
 &lt;/ul&gt;
-
 &lt;h2 id=&#34;install-runner&#34;&gt;Install runner&lt;/h2&gt;
-
 &lt;p&gt;First, install the &lt;code&gt;gitlab-runner&lt;/code&gt; package. This can be done using the
 instructions found
 &lt;a href=&#34;https://docs.gitlab.com/runner/install/linux-repository.html&#34;&gt;here&lt;/a&gt;.
 &lt;em&gt;However&lt;/em&gt;, I encountered issues installing it on my Fedora VMs, as this install
 method isn&amp;rsquo;t supported for 30 yet.  (Check out &lt;a href=&#34;https://gitlab.com/gitlab-org/gitlab-runner/issues/4401&#34;&gt;this
 issue&lt;/a&gt; for more info).&lt;/p&gt;
-
-&lt;h4 id=&#34;add-gitlab-s-repo&#34;&gt;Add GitLab&amp;rsquo;s Repo&lt;/h4&gt;
-
+&lt;h4 id=&#34;add-gitlabs-repo&#34;&gt;Add GitLab&amp;rsquo;s Repo&lt;/h4&gt;
 &lt;pre&gt;&lt;code&gt;curl -L https://packages.gitlab.com/install/repositories/runner/gitlab-runner/script.rpm.sh | sudo bash
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h4 id=&#34;install-gitlab-runner&#34;&gt;Install gitlab runner&lt;/h4&gt;
-
+&lt;/code&gt;&lt;/pre&gt;&lt;h4 id=&#34;install-gitlab-runner&#34;&gt;Install gitlab runner&lt;/h4&gt;
 &lt;pre&gt;&lt;code&gt;sudo dnf install gitlab-runner
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h2 id=&#34;alternative-copr-install&#34;&gt;(Alternative) Copr install&lt;/h2&gt;
-
+&lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&#34;alternative-copr-install&#34;&gt;(Alternative) Copr install&lt;/h2&gt;
 &lt;p&gt;For now, I have been using the copr install posted in the comments
 of that issue (linked above). I recommend checking if the issue is resolved first, as it
 might change from the time of writing this post. To install:&lt;/p&gt;
-
 &lt;p&gt;First enable the copr repo:&lt;/p&gt;
-
 &lt;pre&gt;&lt;code&gt;sudo dnf copr enable snecker/gitlab-runner -y
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Next, install:&lt;/p&gt;
-
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Next, install:&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;sudo dnf install gitlab-runner -y
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h4 id=&#34;register-the-runner&#34;&gt;Register the Runner&lt;/h4&gt;
-
+&lt;/code&gt;&lt;/pre&gt;&lt;h4 id=&#34;register-the-runner&#34;&gt;Register the Runner&lt;/h4&gt;
 &lt;p&gt;Once installed, register the runner. Instructions on how to register a runner
 can be found &lt;a href=&#34;https://docs.gitlab.com/runner/register/index.html&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
-
 &lt;pre&gt;&lt;code&gt;sudo gitlab-runner register
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Enter the coordinator URL (ex: &lt;code&gt;https://gitlab.com&lt;/code&gt;)&lt;/p&gt;
-
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Enter the coordinator URL (ex: &lt;code&gt;https://gitlab.com&lt;/code&gt;)&lt;/p&gt;
 &lt;p&gt;Next, a &lt;em&gt;gitlab-ci&lt;/em&gt; token must be shared with the runner.&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&#34;../../img/posts/create-gitlab-runner/gitlab-runner-settings.png&#34;&gt;
-&lt;img alt=&#34;Gitlab Runner Settings&#34; src=&#34;../../img/posts/create-gitlab-runner/gitlab-runner-settings.png&#34; style=&#34;max-width: 100%;&#34;/&gt;&lt;/a&gt;
-&lt;div class=&#34;caption&#34;&gt;Gitlab Runner&lt;strong&gt;s&lt;/strong&gt; Settings Page&lt;/div&gt;&lt;/p&gt;
-
+&lt;!-- raw HTML omitted --&gt;
 &lt;p&gt;To obtain a gitlab-ci token, got to &lt;strong&gt;Admin Area&lt;/strong&gt; -&amp;gt; &lt;strong&gt;Overview&lt;/strong&gt; -&amp;gt;
 &lt;strong&gt;Runners&lt;/strong&gt;. On the right, there should be a token to use during setup.&lt;/p&gt;
-
 &lt;p&gt;When the runner registrations asks for the token, use the &amp;ldquo;registration token&amp;rdquo;
 listed in the &amp;ldquo;Set up a shared Runner manually&amp;rdquo; section.&lt;/p&gt;
-
 &lt;p&gt;Next, provide a short description, and add a tag or two (when prompted).&lt;/p&gt;
-
 &lt;p&gt;Lastly, enter the executor (the system on the runner that executes commands). For
 now, I&amp;rsquo;ve been using &lt;code&gt;&amp;quot;shell&amp;quot;&lt;/code&gt; for my needs, as these VMs are fully
 dedicated to be used as the runners for a single project.&lt;/p&gt;
-
 &lt;p&gt;Congrats, the runner should be registered! Now to set it up&amp;hellip;&lt;/p&gt;
-
-&lt;h2 id=&#34;link-to-ci-cd-builds&#34;&gt;Link to CI/CD Builds&lt;/h2&gt;
-
+&lt;h2 id=&#34;link-to-cicd-builds&#34;&gt;Link to CI/CD Builds&lt;/h2&gt;
 &lt;p&gt;It is time to link up the runner to a CI/CD job. This can be done with
 tagging, but I currently just have one pipeline using my runners, so haven&amp;rsquo;t
 used the tags as much. Edit the runner by clicking its  &lt;code&gt;edit&lt;/code&gt; icon.&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&#34;../../img/posts/create-gitlab-runner/runner-edit.png&#34;&gt;
-&lt;img alt=&#34;Gitlab Runner Settings&#34; src=&#34;../../img/posts/create-gitlab-runner/runner-edit.png&#34; style=&#34;max-width: 100%;&#34;/&gt;&lt;/a&gt;
-&lt;div class=&#34;caption&#34;&gt;Gitlab Runner Edit Page&lt;/div&gt;&lt;/p&gt;
-
+&lt;!-- raw HTML omitted --&gt;
 &lt;p&gt;In the runner edit menu, ensure that the &amp;ldquo;&lt;code&gt;Active&lt;/code&gt;&amp;rdquo; checkbox is checked. I&amp;rsquo;ve
 also checked the &amp;ldquo;&lt;code&gt;Run untagged jobs&lt;/code&gt;&amp;rdquo; box for this runner, which will allow it
 to pick up any job that does &lt;em&gt;not&lt;/em&gt; have a tag. If the runner is to be assigned
-to a &lt;em&gt;specific&lt;/em&gt; project, that can be enabled/assigned below in the &amp;ldquo;&lt;code&gt;Restrict
-projects for this Runner&lt;/code&gt;&amp;rdquo; section.&lt;/p&gt;
-
+to a &lt;em&gt;specific&lt;/em&gt; project, that can be enabled/assigned below in the &amp;ldquo;&lt;code&gt;Restrict projects for this Runner&lt;/code&gt;&amp;rdquo; section.&lt;/p&gt;
 &lt;h2 id=&#34;test-run&#34;&gt;Test Run&lt;/h2&gt;
-
 &lt;p&gt;To test out the runner, start a new build in a project! (Note, if there are
 several runners already setup, 1. why are you reading this, and 2. it might be a good idea
 to pause the others to ensure the new one will run with the test).&lt;/p&gt;
-
 &lt;p&gt;I won&amp;rsquo;t detail how to write a &lt;code&gt;gitlab-ci.yml&lt;/code&gt; now, but for my test I made an empty
 demo repo with the following pipeline:&lt;/p&gt;
-
 &lt;pre&gt;&lt;code&gt;before_script:
   - whoami
   - pwd
@@ -266,25 +161,15 @@ build-base:
   stage: build
   script:
     - echo &amp;quot;Hello world!&amp;quot;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;After committing it, a build kicked off with the new runner and finished
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;After committing it, a build kicked off with the new runner and finished
 successfully!&lt;/p&gt;
-
 &lt;p&gt;&lt;em&gt;Notice that the job indeed ran on &lt;code&gt;post-runner&lt;/code&gt;, the runner I setup
 specifically for this post&lt;/em&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&#34;../../img/posts/create-gitlab-runner/pipeline-run.png&#34;&gt;
-&lt;img alt=&#34;Gitlab Runner Settings&#34; src=&#34;../../img/posts/create-gitlab-runner/pipeline-run.png&#34; style=&#34;max-width: 100%;&#34;/&gt;&lt;/a&gt;
-&lt;div class=&#34;caption&#34;&gt;Gitlab Demo Job Run Results&lt;/div&gt;&lt;/p&gt;
-
+&lt;!-- raw HTML omitted --&gt;
 &lt;p&gt;If the job is more complicated, more runs might have to be manually started
 after tweaking the runner settings again. Pipelines can be started by going to
-the project&amp;rsquo;s &lt;code&gt;CI/CD-&amp;gt;Pipelines&lt;/code&gt; page via the side menu, and hitting the &lt;code&gt;Run
-Pipeline&lt;/code&gt; button.&lt;/p&gt;
-
+the project&amp;rsquo;s &lt;code&gt;CI/CD-&amp;gt;Pipelines&lt;/code&gt; page via the side menu, and hitting the &lt;code&gt;Run Pipeline&lt;/code&gt; button.&lt;/p&gt;
 &lt;h2 id=&#34;conclusion&#34;&gt;Conclusion&lt;/h2&gt;
-
 &lt;p&gt;That&amp;rsquo;s it. We should now have a connected runner! So far, the runners have been working
 &lt;em&gt;(mostly)&lt;/em&gt; fine. When they &lt;em&gt;do&lt;/em&gt; break, it is usually because I&amp;rsquo;ve let the disk
 fill up or allowed some other system-related negligence to build up
@@ -299,30 +184,16 @@ some other time. Enjoy!&lt;/p&gt;</description>
       
       <guid>http://ryan.himmelwright.net/post/back-to-solus/</guid>
       <description>&lt;p&gt;Well, that was faster than I expected. This past weekend, I wiped the Fedora installation on my main computer, and replaced it with Solus. My Fedora install broke, and I needed to use a Fedora Live CD to fix it. I thought that if I had to use a live CD to fix the issue, I might as well just do a clean install. With the idea of a clean install in my head&amp;hellip; I thought (possibly influenced by my recent &lt;a href=&#34;../../post/dabbling-with-go/#motivation&#34;&gt;motivation&lt;/a&gt; to play with Go), that I might as well do the clean install with &lt;a href=&#34;https://getsol.us/&#34;&gt;Solus&lt;/a&gt;&amp;hellip;&lt;/p&gt;
-
 &lt;h2 id=&#34;nvidia-issues&#34;&gt;Nvidia Issues&lt;/h2&gt;
-
-&lt;div class=&#34;video-container&#34;&gt;
-&lt;iframe width=&#34;100%&#34; height=&#34;360&#34; src=&#34;https://www.youtube.com/embed/IVpOyKCNZYw?start=101&#34; frameborder=&#34;0&#34; allowfullscreen&gt;&lt;/iframe&gt;
-&lt;/div&gt;
-
+&lt;!-- raw HTML omitted --&gt;
 &lt;p&gt;&lt;em&gt;Linus Torvalds famously flipped off Nvidia during a Q&amp;amp;A&lt;/em&gt;&lt;/p&gt;
-
 &lt;p&gt;Basically, what I think happened was that my Nvidia drivers got messed up during an update. When I rebooted my computer, my screens were black. This happened no matter which kernel I booted into from Grub. I assumed it was a graphics problem and preceded to switch to another tty to login and fix the problem. I was able to get to a CLI login screen (with the normal &lt;code&gt;user:&lt;/code&gt; prompt) and tried login in. However, after typing in my user name and hitting enter, instead of being promoted for a password, I received an &amp;ldquo;Error Logging In&amp;rdquo; message. So, I tried the same thing with the root user account. Same thing. After typing in a user name, it yelled at me. There was no way to log in.&lt;/p&gt;
-
 &lt;p&gt;I jumped into the IRC chat and started asking around for advice. As always, everyone was very helpful and tried to help me troubleshoot. They shared my bewilderment. We came to the conclusion that it must of been something with the Nvidia drivers. I was told that it is common to have issues when installing the drivers from Nvidia&amp;rsquo;s web site instead of the &lt;a href=&#34;https://rpmfusion.org/&#34;&gt;RPM Fusion Repos&lt;/a&gt; (I intended to install from the RPM fusion repos, but I went to the nvidia site to find out what version to should use&amp;hellip; and then just downloaded it from there. My bad :P).&lt;/p&gt;
-
 &lt;p&gt;Anyway, I quickly realized that at the very least, I would have to boot up and log into a Live CD to fix the problem. As stated in the intro paragraph, while waiting for the ISO image to download I thought that if I have to load up the CD, I might as well just do a clean Fedora 26 install. A couple minutes later as I was booting up the Live CD, I through that as long as I was reinstalling my OS&amp;hellip; l should consider installing&amp;hellip; Solus.&lt;/p&gt;
-
 &lt;h2 id=&#34;installed-solus&#34;&gt;Installed Solus&lt;/h2&gt;
-
-&lt;p&gt;&lt;img alt=&#34;Installing Solus&#34; src=&#34;../../img/posts/back-to-solus/install.png&#34; style=&#34;max-width: 100%;&#34;/&gt;
-&lt;em&gt;Installing Solus&lt;/em&gt;&lt;/p&gt;
-
+&lt;!-- raw HTML omitted --&gt;
 &lt;p&gt;With the Fedora live environment all booted and ready, I started downloading the latest Solus ISO (Budgie) on my other laptop. Once the ISO image was mounted to a drive, I booted it up and started installing Solus. After the install, I immediately updated because I knew there have been a TON of updates since the last ISO snapshot (mid-April). When I rebooted, I absolutely loved what I saw. It is amazing how much Solus and Budgie have improved, even during my short distro-hopping vacation.&lt;/p&gt;
-
 &lt;p&gt;Looking at my post history, it may appear as though I used Fedora for a few days, became fed up with it, and came running back to Solus. That is not entirely true. The reality is that I sat on writing my &lt;a href=&#34;../../post/solus-to-fedora/&#34;&gt;Fedora post&lt;/a&gt; for a long time. I used Fedora for about a month, and it was generally a great experience. If it didn&amp;rsquo;t break, I probably would have stayed for a bit longer. When considering a new install though, I realized that I had missed Solus.&lt;/p&gt;
-
 &lt;p&gt;As of now, my plan is to keep using Solus, at least on my main computer. I am also hoping to get more involved with the project, and start packing up some software again. Maybe I can even help with some debugging and development. We shall see&amp;hellip;&lt;/p&gt;</description>
     </item>
     
@@ -333,66 +204,49 @@ some other time. Enjoy!&lt;/p&gt;</description>
       
       <guid>http://ryan.himmelwright.net/post/solus-to-fedora/</guid>
       <description>&lt;p&gt;For awhile, I have been debating the idea of switching back to Fedora (from Solus). At least on my &lt;a href=&#34;../../pages/homelab/#alakazam&#34;&gt;main computer&lt;/a&gt;. First, let me state this right up front: I am still &lt;em&gt;very&lt;/em&gt; satisfied with Solus. I think it is one of the best current Linux distros, and I want to still contribute to the project. However, there are a few reasons why Solus isn&amp;rsquo;t the best fit for my needs &lt;em&gt;right now&lt;/em&gt;, and I will highlight them below.&lt;/p&gt;
-
 &lt;h3 id=&#34;why-switch&#34;&gt;Why Switch&lt;/h3&gt;
-
-&lt;p&gt;&lt;center&gt;
-&lt;img alt=&#34;Solus and Fedora Logos&#34; src=&#34;../../img/posts/solus-to-fedora/logos.png&#34;  style=&#34;max-width: 85%;&#34;/&gt;
-&lt;/center&gt;
-&lt;em&gt;The Solus (Left) and Fedora (right) Project Logos&lt;/em&gt;&lt;/p&gt;
-
+&lt;!-- raw HTML omitted --&gt;
 &lt;p&gt;The first phrase stated on the &lt;a href=&#34;https://getsol.us&#34;&gt;Solus Project homepage&lt;/a&gt; is &amp;ldquo;Solus is an operating system that is designed for &lt;strong&gt;home computing&lt;/strong&gt;.&amp;rdquo; I find this to be true, and Solus does a great job at it. The Linux community needs a few good, focused, distros. While I have been using Solus for my &amp;ldquo;&lt;em&gt;home&lt;/em&gt;&amp;rdquo; computing, the computing tasks I&amp;rsquo;ve focused on recently do not fall into the category of standard &lt;em&gt;home computing&lt;/em&gt; use. Recently, my main top computing activities and goals are:&lt;/p&gt;
-
 &lt;ul&gt;
 &lt;li&gt;Writing (okay&amp;hellip; but still)&lt;/li&gt;
 &lt;li&gt;Running all sorts of VMs&lt;/li&gt;
 &lt;li&gt;Trying various Server Technologies
-
 &lt;ul&gt;
 &lt;li&gt;ZFS&lt;/li&gt;
 &lt;li&gt;KVM&lt;/li&gt;
 &lt;li&gt;Containerization Technologies (LXC, Docker, &amp;hellip;)&lt;/li&gt;
 &lt;li&gt;Ansible and other automation tools&lt;/li&gt;
 &lt;li&gt;Etc.&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
 &lt;li&gt;Learning about Clustering
-
 &lt;ul&gt;
 &lt;li&gt;OpenMP&lt;/li&gt;
 &lt;li&gt;High Availability&lt;/li&gt;
 &lt;li&gt;Distributed File systems&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
 &lt;li&gt;Trying to get involved with some other Open Source Projects
-
 &lt;ul&gt;
 &lt;li&gt;Fedora (Infrastructure, Dev)&lt;/li&gt;
 &lt;li&gt;NixOS&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
 &lt;/ul&gt;
-
+&lt;/li&gt;
+&lt;/ul&gt;
 &lt;p&gt;As you can see, many of the above items are not desktop based, but really
 &lt;em&gt;server&lt;/em&gt; based operations. Solus is &lt;em&gt;not&lt;/em&gt; a server distribution, as it doesn&amp;rsquo;t
 &lt;em&gt;try&lt;/em&gt; to be one. Which is a good thing. It is focused on its audience. I
 just happen to not be in that audience at the moment.&lt;/p&gt;
-
 &lt;p&gt;Additionally, one of my goals for the near future is to transform my long-time Proxmox server into a &lt;a href=&#34;https://www.centos.org/&#34;&gt;CentOS&lt;/a&gt; box. Using Fedora on my main workstation does help me get accustom to that environment. It also allows me to more accurately test out ideas before I plan the big move.&lt;/p&gt;
-
 &lt;p&gt;Lastly, I had been eyeing up the Plasma desktop, and wanted to try that out again. At the time of writing this post, Solus doesn&amp;rsquo;t fully support the Plasma desktop (yet). However, Fedora &lt;em&gt;does&lt;/em&gt; have a &lt;a href=&#34;https://spins.fedoraproject.org/kde/&#34;&gt;KDE Plasma Desktop Spin&lt;/a&gt;.&lt;/p&gt;
-
 &lt;h3 id=&#34;the-switch&#34;&gt;The Switch&lt;/h3&gt;
-
-&lt;p&gt;&lt;center&gt;
-&lt;img alt=&#34;Solus and Fedora Logos&#34; src=&#34;../../img/posts/solus-to-fedora/fedora25.png&#34;  style=&#34;max-width: 100%;&#34;/&gt;
-&lt;/center&gt;
-&lt;em&gt;Screenfetch on my new Fedora Install&lt;/em&gt;&lt;/p&gt;
-
+&lt;!-- raw HTML omitted --&gt;
 &lt;p&gt;I eventually (and somewhat sporadically), made the switch to Fedora. I switched
 the week before the 26 release, so I decided to start with 25, and then upgrade
 later (although I did test out 26 on my other laptop). This let me ensure that
 the 26 issues were ironed out before upgrading. I also got to test out the &lt;code&gt;dnf&lt;/code&gt;
 system upgrade process. I recorded &lt;em&gt;post-switch&lt;/em&gt; notes during the last few weeks
 to document how everything went.&lt;/p&gt;
-
 &lt;blockquote&gt;
 &lt;p&gt;&amp;ldquo;Well&amp;hellip; I did it. I switched to Fedora on Alakazam yesterday. I went with the
 Fedora 25 KDE spin and did all of the hoops to get that up and going. Not only
@@ -400,57 +254,42 @@ is it taking some time to get used to Fedora again, but I am needing to
 reacquaint myself with the KDE environment&amp;hellip; it does seem different that other
 Plasma setups I&amp;rsquo;ve used in the past&amp;hellip; But I like it.&amp;rdquo;&lt;/p&gt;
 &lt;/blockquote&gt;
-
 &lt;p&gt;I got used to it in no time:&lt;/p&gt;
-
 &lt;blockquote&gt;
 &lt;p&gt;Alakazam is doing well on Fedora. I&amp;rsquo;ve been enjoying it and think I will stay on
 it.&lt;/p&gt;
 &lt;/blockquote&gt;
-
 &lt;h3 id=&#34;updates&#34;&gt;Updates&lt;/h3&gt;
-
 &lt;p&gt;I ran some updates that I thought &lt;em&gt;might&lt;/em&gt; be problematic, based
 on &lt;a href=&#34;../../post/back-on-arch/#fedora&#34;&gt;previous issues&lt;/a&gt; I&amp;rsquo;ve encountered with Fedora. I
 made sure to note the results as well. The first notable update was from the
 first time I updated the kernel, and the second was  upgrading from
 Fedora 25 to 26. Both updates went very smoothly without any issues:&lt;/p&gt;
-
 &lt;h4 id=&#34;kernel-upgrade&#34;&gt;Kernel Upgrade&lt;/h4&gt;
-
 &lt;blockquote&gt;
 &lt;p&gt;So I am about to do my first Kernel update since being on Fedora again (on
 Alakazam). We&amp;rsquo;ll see how the video drivers respond&amp;hellip; To note, I am still on 25
 so it hopefully won&amp;rsquo;t be too bad&amp;hellip;&lt;/p&gt;
 &lt;/blockquote&gt;
-
 &lt;p&gt;&lt;em&gt;&amp;hellip;reboot&amp;hellip;&lt;/em&gt;&lt;/p&gt;
-
 &lt;blockquote&gt;
 &lt;p&gt;No issues whatsoever :)&lt;/p&gt;
 &lt;/blockquote&gt;
-
 &lt;h4 id=&#34;upgrade-to-fedora-26&#34;&gt;Upgrade to Fedora 26&lt;/h4&gt;
-
-&lt;p&gt;&lt;center&gt;
-&lt;a href=&#34;../../img/posts/solus-to-fedora/fedora26-upgrade.png&#34;&gt;&lt;img alt=&#34;Solus and Fedora Logos&#34; src=&#34;../../img/posts/solus-to-fedora/fedora26-upgrade.png&#34; style=&#34;max-width: 100%;&#34;/&gt;&lt;/a&gt;
-&lt;/center&gt;
-&lt;em&gt;I upgraded my Fedora 25 Plasma Install to Fedora 26&lt;/em&gt;&lt;/p&gt;
-
+&lt;!-- raw HTML omitted --&gt;
 &lt;p&gt;Other than some odd issues with the GUI tool, the upgrade from 25 to 26 was
 smooth and uneventful.&lt;/p&gt;
-
 &lt;blockquote&gt;
 &lt;p&gt;I just upgraded Alakazam from Fedora 25 KDE, to Fedora 26 this morning. I couldn&amp;rsquo;t really get the
 graphical installer to start, but that could be because I have several desktop environments setup
 (Plasma &amp;amp; Gnome), so it may have been confused (I was using the Gnome Software App in Plasma&amp;hellip;)&lt;/p&gt;
-
+&lt;/blockquote&gt;
+&lt;blockquote&gt;
 &lt;p&gt;I just did the upgrade using the (command line) dnf upgrade tool, like I normally use, and it worked
 wonderfully. It even looks like my nvidia drivers stayed and my monitors were configured correctly
 after rebooting. The only difference is I don&amp;rsquo;t seem to have the same Plasma animations I had
 before, but that is fine, and likely part of the update.&lt;/p&gt;
 &lt;/blockquote&gt;
-
 &lt;p&gt;So that it. Those are my reasons for switching (for now), and the results of my
 switch. I am still happy with Fedora, at least on Alakazam, and will likely
 remain on it until I have a convincing reason to leave.&lt;/p&gt;</description>

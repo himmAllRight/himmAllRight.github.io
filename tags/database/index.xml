@@ -20,13 +20,11 @@
 somehow haven&amp;rsquo;t &lt;em&gt;had&lt;/em&gt; to use it for anything in school or at work. I know, I
 know&amp;hellip; it&amp;rsquo;s quite a feat. Still, the pervasiveness of SQL-like databases argues
 that I really &lt;em&gt;should&lt;/em&gt; learn it. So I am.&lt;/p&gt;
-
 &lt;p&gt;The main purpose of this website is to document some of the tech stuff I do in
 my free time. This serves three purposes: 1) Organizing my thoughts into a post
 enhances my learning, 2) I can easily refer back to the post to refresh my
 memory in the future, 3) It&amp;rsquo;s a good medium to share what I&amp;rsquo;ve learned with
 others.&lt;/p&gt;
-
 &lt;p&gt;This post is a prime example, as it didn&amp;rsquo;t start out as a &lt;em&gt;post&lt;/em&gt;, but a file of
 the &lt;em&gt;notes&lt;/em&gt; I took as I learned SQL basics. As I progressed, I realized all of
 the accumulating information should be cleaned up and posted. So here we are.
@@ -34,33 +32,24 @@ I&amp;rsquo;ve redone the examples, and turned my shorthand blurbs into sentence
 this post still seems a bit different than previous ones (no images, more code
 snippets than words)&amp;hellip; that&amp;rsquo;s because it&amp;rsquo;s my learning notes with makeup
 heavily applied. Enjoy.&lt;/p&gt;
-
 &lt;h2 id=&#34;install-setup&#34;&gt;Install Setup&lt;/h2&gt;
-
 &lt;p&gt;I first installed mysql, by going to the &lt;a href=&#34;https://dev.mysql.com/downloads&#34;&gt;mySQL download
 page&lt;/a&gt; and getting the appropriate the version
 for my VM (centos 7). This may differ based on Distro/DB.&lt;/p&gt;
-
 &lt;p&gt;&lt;em&gt;I&amp;rsquo;m not going to cover any of the installation steps, as this post is more about
 the SQL language, not setting up the DB. Besides, I did this in mysql, but in
 the future I&amp;rsquo;ll likely look at using MariaDB anyway&amp;hellip;&lt;/em&gt;&lt;/p&gt;
-
 &lt;p&gt;I do however want to note this issue I encountered, so I don&amp;rsquo;t stumble over it
 in the future. At first, I couldn&amp;rsquo;t get the &lt;code&gt;/usr/bin/mysql_secure_installation&lt;/code&gt;
 command to run due to a permission denied error&amp;hellip;&lt;/p&gt;
-
 &lt;p&gt;Eventually, I learned that the first time mysql runs, it creates a temp password
 in the log, located at &lt;code&gt;/var/log/mysqld.log&lt;/code&gt;. Using that password, I was able to
 login.&lt;/p&gt;
-
 &lt;h2 id=&#34;dbs-and-commands&#34;&gt;DBs and Commands:&lt;/h2&gt;
-
 &lt;p&gt;Conventionally, SQL commands are typed in all CAPS, and statements end with a
 terminating &lt;code&gt;;&lt;/code&gt;. The rest of this post contains some SQL functions, with
 examples of how they are used.&lt;/p&gt;
-
 &lt;h4 id=&#34;show-databases&#34;&gt;Show databases&lt;/h4&gt;
-
 &lt;p&gt;To display all of the available databases, use the &lt;code&gt;SHOW DATABASES;&lt;/code&gt; command.
 Note, some of the DBs displayed are ones generated for the database system. For
 example, in the output below, &lt;em&gt;I&lt;/em&gt; only created &lt;code&gt;dbCustomerInfo&lt;/code&gt; and &lt;code&gt;dbTest&lt;/code&gt;:&lt;/p&gt;
@@ -75,9 +64,8 @@ example, in the output below, &lt;em&gt;I&lt;/em&gt; only created &lt;code&gt;db
 &lt;span style=&#34;color:#f92672&#34;&gt;|&lt;/span&gt; performance_schema &lt;span style=&#34;color:#f92672&#34;&gt;|&lt;/span&gt;
 &lt;span style=&#34;color:#f92672&#34;&gt;|&lt;/span&gt; sys                &lt;span style=&#34;color:#f92672&#34;&gt;|&lt;/span&gt;
 &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;--------------------+
-&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;6&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;rows&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;in&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;set&lt;/span&gt; (&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;.&lt;span style=&#34;color:#ae81ff&#34;&gt;00&lt;/span&gt; sec)&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;h4 id=&#34;create-database&#34;&gt;Create database&lt;/h4&gt;
-
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;6&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;rows&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;in&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;set&lt;/span&gt; (&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;.&lt;span style=&#34;color:#ae81ff&#34;&gt;00&lt;/span&gt; sec)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h4 id=&#34;create-database&#34;&gt;Create database&lt;/h4&gt;
 &lt;p&gt;To create a new database, use the &lt;code&gt;CREATE DATABASE&lt;/code&gt; command. Simple.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-SQL&#34; data-lang=&#34;SQL&#34;&gt;mysql&lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;SHOW&lt;/span&gt; DATABASES;
 &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;--------------------+
@@ -107,9 +95,9 @@ mysql&lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&lt;/span&gt; &lt;span st
 &lt;span style=&#34;color:#f92672&#34;&gt;|&lt;/span&gt; shotLivedDB        &lt;span style=&#34;color:#f92672&#34;&gt;|&lt;/span&gt;
 &lt;span style=&#34;color:#f92672&#34;&gt;|&lt;/span&gt; sys                &lt;span style=&#34;color:#f92672&#34;&gt;|&lt;/span&gt;
 &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;--------------------+
-&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;7&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;rows&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;in&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;set&lt;/span&gt; (&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;.&lt;span style=&#34;color:#ae81ff&#34;&gt;00&lt;/span&gt; sec)&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;h4 id=&#34;drop-a-database-delete&#34;&gt;Drop a database (delete):&lt;/h4&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;7&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;rows&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;in&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;set&lt;/span&gt; (&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;.&lt;span style=&#34;color:#ae81ff&#34;&gt;00&lt;/span&gt; sec)
 
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h4 id=&#34;drop-a-database-delete&#34;&gt;Drop a database (delete):&lt;/h4&gt;
 &lt;p&gt;As easy as it was to &lt;em&gt;create&lt;/em&gt; that database, deleting, or &lt;em&gt;dropping&lt;/em&gt; it is just
 as effortless with the `DROP DATABASE command, so be careful!&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-SQL&#34; data-lang=&#34;SQL&#34;&gt;mysql&lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;DROP&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;DATABASE&lt;/span&gt; shotLivedDB;
@@ -126,18 +114,13 @@ mysql&lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&lt;/span&gt; &lt;span st
 &lt;span style=&#34;color:#f92672&#34;&gt;|&lt;/span&gt; performance_schema &lt;span style=&#34;color:#f92672&#34;&gt;|&lt;/span&gt;
 &lt;span style=&#34;color:#f92672&#34;&gt;|&lt;/span&gt; sys                &lt;span style=&#34;color:#f92672&#34;&gt;|&lt;/span&gt;
 &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;--------------------+
-&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;6&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;rows&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;in&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;set&lt;/span&gt; (&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;.&lt;span style=&#34;color:#ae81ff&#34;&gt;00&lt;/span&gt; sec)&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;h4 id=&#34;select-db&#34;&gt;Select DB&lt;/h4&gt;
-
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;6&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;rows&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;in&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;set&lt;/span&gt; (&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;.&lt;span style=&#34;color:#ae81ff&#34;&gt;00&lt;/span&gt; sec)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h4 id=&#34;select-db&#34;&gt;Select DB&lt;/h4&gt;
 &lt;p&gt;To select which db to use inside the mysql shell use&amp;hellip; &lt;code&gt;USE&lt;/code&gt;. For this
 tutorial, I created a database named &lt;code&gt;dbTest&lt;/code&gt; and selected it with &lt;code&gt;USE dbTest&lt;/code&gt;.&lt;/p&gt;
-
 &lt;h3 id=&#34;tables&#34;&gt;Tables&lt;/h3&gt;
-
 &lt;p&gt;&lt;em&gt;Note: make sure to first select a DB to work with: &lt;code&gt;USE dbTest;&lt;/code&gt;&amp;hellip;&lt;/em&gt;&lt;/p&gt;
-
 &lt;h4 id=&#34;show-tables&#34;&gt;Show Tables&lt;/h4&gt;
-
 &lt;p&gt;To show all of the tables in a database, use &lt;code&gt;SHOW TABLES;&lt;/code&gt;. For example:&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-SQL&#34; data-lang=&#34;SQL&#34;&gt;mysql&lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;SHOW&lt;/span&gt; TABLES;
 &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;------------------+
@@ -145,23 +128,22 @@ tutorial, I created a database named &lt;code&gt;dbTest&lt;/code&gt; and selecte
 &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;------------------+
 &lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;|&lt;/span&gt; tblUsers         &lt;span style=&#34;color:#f92672&#34;&gt;|&lt;/span&gt;
 &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;------------------+
-&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;row&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;in&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;set&lt;/span&gt; (&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;.&lt;span style=&#34;color:#ae81ff&#34;&gt;00&lt;/span&gt; sec)&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;h4 id=&#34;create-table&#34;&gt;Create Table&lt;/h4&gt;
-
-&lt;p&gt;To create a &lt;em&gt;new&lt;/em&gt; table, use &lt;code&gt;CREATE TABLE&lt;/code&gt;. The &lt;code&gt;CREATE TABLE&lt;/code&gt; function takes
-1) the name of the new table, and 2) a list of the table fields (with their
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;row&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;in&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;set&lt;/span&gt; (&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;.&lt;span style=&#34;color:#ae81ff&#34;&gt;00&lt;/span&gt; sec)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h4 id=&#34;create-table&#34;&gt;Create Table&lt;/h4&gt;
+&lt;p&gt;To create a &lt;em&gt;new&lt;/em&gt; table, use &lt;code&gt;CREATE TABLE&lt;/code&gt;. The &lt;code&gt;CREATE TABLE&lt;/code&gt; function takes&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;the name of the new table, and 2) a list of the table fields (with their
 data types). For example, to create a user information table that contains a user&amp;rsquo;s
 first name, last name, age, and state, as well as an identification number, the
-following SQL command can be used:&lt;/p&gt;
+following SQL command can be used:&lt;/li&gt;
+&lt;/ol&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-SQL&#34; data-lang=&#34;SQL&#34;&gt;mysql&lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;CREATE&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;TABLE&lt;/span&gt; tblUsers (id int &lt;span style=&#34;color:#66d9ef&#34;&gt;PRIMARY&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;KEY&lt;/span&gt; AUTO_INCREMENT, firstname varchar(&lt;span style=&#34;color:#ae81ff&#34;&gt;50&lt;/span&gt;),lastname varchar(&lt;span style=&#34;color:#ae81ff&#34;&gt;50&lt;/span&gt;), age INT,&lt;span style=&#34;color:#66d9ef&#34;&gt;state&lt;/span&gt; varchar(&lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;));
-Query OK, &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;rows&lt;/span&gt; affected (&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;.&lt;span style=&#34;color:#ae81ff&#34;&gt;01&lt;/span&gt; sec)&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;The &lt;code&gt;first name&lt;/code&gt;, &lt;code&gt;last name&lt;/code&gt;, and &lt;code&gt;state&lt;/code&gt; columns have a &lt;code&gt;varchar&lt;/code&gt; data type,
+Query OK, &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;rows&lt;/span&gt; affected (&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;.&lt;span style=&#34;color:#ae81ff&#34;&gt;01&lt;/span&gt; sec)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;The &lt;code&gt;first name&lt;/code&gt;, &lt;code&gt;last name&lt;/code&gt;, and &lt;code&gt;state&lt;/code&gt; columns have a &lt;code&gt;varchar&lt;/code&gt; data type,
 which are strings of various sizes (50 and 2 characters in this case). The &lt;code&gt;id&lt;/code&gt;
 and &lt;code&gt;age&lt;/code&gt; columns have an &lt;code&gt;int&lt;/code&gt; data type. Notice that the &lt;code&gt;id&lt;/code&gt; column
 has some other junk defined after the &lt;code&gt;int&lt;/code&gt; identifier&amp;hellip;.&lt;/p&gt;
-
 &lt;h4 id=&#34;constraints-and-fields&#34;&gt;Constraints and Fields&lt;/h4&gt;
-
 &lt;p&gt;In addition to specifying data &lt;em&gt;type&lt;/em&gt;, other &lt;em&gt;constraints&lt;/em&gt; can be imposed on
 columns when defining a new table. Constraints are used to limit the type of
 data that goes into the table, and can be implemented at the column or table
@@ -177,15 +159,14 @@ command:&lt;/p&gt;
 &lt;span style=&#34;color:#f92672&#34;&gt;|&lt;/span&gt; age       &lt;span style=&#34;color:#f92672&#34;&gt;|&lt;/span&gt; int(&lt;span style=&#34;color:#ae81ff&#34;&gt;11&lt;/span&gt;)     &lt;span style=&#34;color:#f92672&#34;&gt;|&lt;/span&gt; YES  &lt;span style=&#34;color:#f92672&#34;&gt;|&lt;/span&gt;     &lt;span style=&#34;color:#f92672&#34;&gt;|&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;NULL&lt;/span&gt;    &lt;span style=&#34;color:#f92672&#34;&gt;|&lt;/span&gt;                &lt;span style=&#34;color:#f92672&#34;&gt;|&lt;/span&gt;
 &lt;span style=&#34;color:#f92672&#34;&gt;|&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;state&lt;/span&gt;     &lt;span style=&#34;color:#f92672&#34;&gt;|&lt;/span&gt; varchar(&lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;)  &lt;span style=&#34;color:#f92672&#34;&gt;|&lt;/span&gt; YES  &lt;span style=&#34;color:#f92672&#34;&gt;|&lt;/span&gt;     &lt;span style=&#34;color:#f92672&#34;&gt;|&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;NULL&lt;/span&gt;    &lt;span style=&#34;color:#f92672&#34;&gt;|&lt;/span&gt;                &lt;span style=&#34;color:#f92672&#34;&gt;|&lt;/span&gt;
 &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;-----------|-------------|------|-----|---------|----------------+
-&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;5&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;rows&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;in&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;set&lt;/span&gt; (&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;.&lt;span style=&#34;color:#ae81ff&#34;&gt;00&lt;/span&gt; sec)&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;The &lt;code&gt;id&lt;/code&gt; column uses the &lt;code&gt;PRIMARY KEY&lt;/code&gt; and &lt;code&gt;AUTO_INCREMENT&lt;/code&gt; constraints.
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;5&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;rows&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;in&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;set&lt;/span&gt; (&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;.&lt;span style=&#34;color:#ae81ff&#34;&gt;00&lt;/span&gt; sec)
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;The &lt;code&gt;id&lt;/code&gt; column uses the &lt;code&gt;PRIMARY KEY&lt;/code&gt; and &lt;code&gt;AUTO_INCREMENT&lt;/code&gt; constraints.
 &lt;code&gt;PRIMARY_KEY&lt;/code&gt; is a combination of the &lt;code&gt;NOT NULL&lt;/code&gt; and &lt;code&gt;UNIQUE&lt;/code&gt; constraints,
 meaning it ensures that all values in the column are unique and not &lt;code&gt;NULL&lt;/code&gt;. The
 &lt;code&gt;AUTO_INCREMENT&lt;/code&gt; field generates an unique number that is automatically
 incremented during each insert to the table.&lt;/p&gt;
-
 &lt;h4 id=&#34;insert-into&#34;&gt;INSERT INTO&lt;/h4&gt;
-
 &lt;p&gt;To actually &lt;em&gt;add&lt;/em&gt; data to the table, the &lt;code&gt;INSERT INTO&lt;/code&gt; command is used. As an
 example, to add some users to the table created in the previous step:&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-SQL&#34; data-lang=&#34;SQL&#34;&gt;mysql&lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;INSERT&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;INTO&lt;/span&gt; tblUsers (firstname,lastname,age,&lt;span style=&#34;color:#66d9ef&#34;&gt;state&lt;/span&gt;) 
@@ -202,8 +183,8 @@ Query OK, &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt; &lt;span styl
 
 mysql&lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;INSERT&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;INTO&lt;/span&gt; tblUsers (firstname,lastname,age,&lt;span style=&#34;color:#66d9ef&#34;&gt;state&lt;/span&gt;) 
 &lt;span style=&#34;color:#66d9ef&#34;&gt;VALUES&lt;/span&gt; (&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;Bob&amp;#39;&lt;/span&gt;,&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;Builder&amp;#39;&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;51&lt;/span&gt;,&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;MO&amp;#39;&lt;/span&gt;);
-Query OK, &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;row&lt;/span&gt; affected (&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;.&lt;span style=&#34;color:#ae81ff&#34;&gt;01&lt;/span&gt; sec)&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;The &lt;code&gt;tblUsers&lt;/code&gt; table should now contain the information of the 4 users added. To check
+Query OK, &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;row&lt;/span&gt; affected (&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;.&lt;span style=&#34;color:#ae81ff&#34;&gt;01&lt;/span&gt; sec)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;The &lt;code&gt;tblUsers&lt;/code&gt; table should now contain the information of the 4 users added. To check
 this, use &lt;code&gt;SELECT * FROM tblUsers;&lt;/code&gt; to select &lt;em&gt;everything&lt;/em&gt; from the &lt;code&gt;tblUsers&lt;/code&gt;
 table:&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-SQL&#34; data-lang=&#34;SQL&#34;&gt;mysql&lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;SELECT&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;FROM&lt;/span&gt; tblUsers;
@@ -215,9 +196,9 @@ table:&lt;/p&gt;
 &lt;span style=&#34;color:#f92672&#34;&gt;|&lt;/span&gt;  &lt;span style=&#34;color:#ae81ff&#34;&gt;7&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;|&lt;/span&gt; Tina      &lt;span style=&#34;color:#f92672&#34;&gt;|&lt;/span&gt; Oak      &lt;span style=&#34;color:#f92672&#34;&gt;|&lt;/span&gt;   &lt;span style=&#34;color:#ae81ff&#34;&gt;42&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;|&lt;/span&gt; NC    &lt;span style=&#34;color:#f92672&#34;&gt;|&lt;/span&gt;
 &lt;span style=&#34;color:#f92672&#34;&gt;|&lt;/span&gt;  &lt;span style=&#34;color:#ae81ff&#34;&gt;8&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;|&lt;/span&gt; Bob       &lt;span style=&#34;color:#f92672&#34;&gt;|&lt;/span&gt; Builder  &lt;span style=&#34;color:#f92672&#34;&gt;|&lt;/span&gt;   &lt;span style=&#34;color:#ae81ff&#34;&gt;51&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;|&lt;/span&gt; MO    &lt;span style=&#34;color:#f92672&#34;&gt;|&lt;/span&gt;
 &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;----|-----------|----------|------|-------+
-&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;4&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;rows&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;in&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;set&lt;/span&gt; (&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;.&lt;span style=&#34;color:#ae81ff&#34;&gt;00&lt;/span&gt; sec)&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;h4 id=&#34;insert-into-another-table&#34;&gt;INSERT INTO Another Table&lt;/h4&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;4&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;rows&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;in&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;set&lt;/span&gt; (&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;.&lt;span style=&#34;color:#ae81ff&#34;&gt;00&lt;/span&gt; sec)
 
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h4 id=&#34;insert-into-another-table&#34;&gt;INSERT INTO Another Table&lt;/h4&gt;
 &lt;p&gt;The &lt;code&gt;INSERT INTO&lt;/code&gt; command combined with &lt;code&gt;SELECT FROM&lt;/code&gt;, can insert contents of &lt;em&gt;one
 table&lt;/em&gt; into &lt;em&gt;another&lt;/em&gt;. This technique can be quite useful, providing a simple way to
 create quick backups.&lt;/p&gt;
@@ -240,25 +221,21 @@ mysql&lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&lt;/span&gt; &lt;span st
 &lt;span style=&#34;color:#f92672&#34;&gt;|&lt;/span&gt;  &lt;span style=&#34;color:#ae81ff&#34;&gt;7&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;|&lt;/span&gt; Tina      &lt;span style=&#34;color:#f92672&#34;&gt;|&lt;/span&gt; Oak      &lt;span style=&#34;color:#f92672&#34;&gt;|&lt;/span&gt;   &lt;span style=&#34;color:#ae81ff&#34;&gt;42&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;|&lt;/span&gt; NC    &lt;span style=&#34;color:#f92672&#34;&gt;|&lt;/span&gt;
 &lt;span style=&#34;color:#f92672&#34;&gt;|&lt;/span&gt;  &lt;span style=&#34;color:#ae81ff&#34;&gt;9&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;|&lt;/span&gt; Bob       &lt;span style=&#34;color:#f92672&#34;&gt;|&lt;/span&gt; Builder  &lt;span style=&#34;color:#f92672&#34;&gt;|&lt;/span&gt;   &lt;span style=&#34;color:#ae81ff&#34;&gt;51&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;|&lt;/span&gt; MO    &lt;span style=&#34;color:#f92672&#34;&gt;|&lt;/span&gt;
 &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;----|-----------|----------|------|-------+
-&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;4&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;rows&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;in&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;set&lt;/span&gt; (&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;.&lt;span style=&#34;color:#ae81ff&#34;&gt;00&lt;/span&gt; sec)&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;h4 id=&#34;drop-delete-table&#34;&gt;Drop (delete) Table&lt;/h4&gt;
-
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;4&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;rows&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;in&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;set&lt;/span&gt; (&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;.&lt;span style=&#34;color:#ae81ff&#34;&gt;00&lt;/span&gt; sec)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h4 id=&#34;drop-delete-table&#34;&gt;Drop (delete) Table&lt;/h4&gt;
 &lt;p&gt;To delete a table, the &lt;code&gt;DROP&lt;/code&gt; command is used. For example, to delete the backup
 table from above, issue &lt;code&gt;DROP TABLE tblUsersBackup;&lt;/code&gt;:&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-SQL&#34; data-lang=&#34;SQL&#34;&gt;mysql&lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;DROP&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;TABLE&lt;/span&gt; tblUsersBackup;
 Query OK, &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;rows&lt;/span&gt; affected (&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;.&lt;span style=&#34;color:#ae81ff&#34;&gt;01&lt;/span&gt; sec)
 
 mysql&lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;SELECT&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;FROM&lt;/span&gt; tblUsersBackup;
-ERROR &lt;span style=&#34;color:#ae81ff&#34;&gt;1146&lt;/span&gt; (&lt;span style=&#34;color:#ae81ff&#34;&gt;42&lt;/span&gt;S02): &lt;span style=&#34;color:#66d9ef&#34;&gt;Table&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;dbTest.tblUsersBackup&amp;#39;&lt;/span&gt; doesn&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;t exist&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;&lt;strong&gt;NOTE: Using &lt;code&gt;DROP&lt;/code&gt; commands will delete the entire structure (including the
+ERROR &lt;span style=&#34;color:#ae81ff&#34;&gt;1146&lt;/span&gt; (&lt;span style=&#34;color:#ae81ff&#34;&gt;42&lt;/span&gt;S02): &lt;span style=&#34;color:#66d9ef&#34;&gt;Table&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;dbTest.tblUsersBackup&amp;#39;&lt;/span&gt; doesn&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;t exist
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;strong&gt;NOTE: Using &lt;code&gt;DROP&lt;/code&gt; commands will delete the entire structure (including the
 schema), even if there is data in it. Be Careful!&lt;/strong&gt;&lt;/p&gt;
-
 &lt;h4 id=&#34;select&#34;&gt;SELECT&lt;/h4&gt;
-
 &lt;p&gt;In addition to selecting &lt;em&gt;all&lt;/em&gt; of the data in a table using &lt;code&gt;SELECT *&lt;/code&gt;, The
 &lt;code&gt;SELECT&lt;/code&gt; command can be utilized to select all sorts of combinations of the
 data. Here are a few examples:&lt;/p&gt;
-
 &lt;p&gt;&amp;ndash; Select specific columns from the table:&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-SQL&#34; data-lang=&#34;SQL&#34;&gt;mysql&lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;SELECT&lt;/span&gt; firstname,lastname &lt;span style=&#34;color:#66d9ef&#34;&gt;FROM&lt;/span&gt; tblUsers;
 &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;-----------|----------+
@@ -269,16 +246,17 @@ data. Here are a few examples:&lt;/p&gt;
 &lt;span style=&#34;color:#f92672&#34;&gt;|&lt;/span&gt; Tina      &lt;span style=&#34;color:#f92672&#34;&gt;|&lt;/span&gt; Oak      &lt;span style=&#34;color:#f92672&#34;&gt;|&lt;/span&gt;
 &lt;span style=&#34;color:#f92672&#34;&gt;|&lt;/span&gt; Bob       &lt;span style=&#34;color:#f92672&#34;&gt;|&lt;/span&gt; Builder  &lt;span style=&#34;color:#f92672&#34;&gt;|&lt;/span&gt;
 &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;-----------|----------+
-&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;4&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;rows&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;in&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;set&lt;/span&gt; (&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;.&lt;span style=&#34;color:#ae81ff&#34;&gt;00&lt;/span&gt; sec)&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;&amp;ndash; Grab column(s), after matching in another:&lt;/p&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;4&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;rows&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;in&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;set&lt;/span&gt; (&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;.&lt;span style=&#34;color:#ae81ff&#34;&gt;00&lt;/span&gt; sec)
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&amp;ndash; Grab column(s), after matching in another:&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-SQL&#34; data-lang=&#34;SQL&#34;&gt;mysql&lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;SELECT&lt;/span&gt; firstname,lastname &lt;span style=&#34;color:#66d9ef&#34;&gt;FROM&lt;/span&gt; tblUsers &lt;span style=&#34;color:#66d9ef&#34;&gt;WHERE&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;state&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;RI&amp;#34;&lt;/span&gt;;
 &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;-----------|----------+
 &lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;|&lt;/span&gt; firstname &lt;span style=&#34;color:#f92672&#34;&gt;|&lt;/span&gt; lastname &lt;span style=&#34;color:#f92672&#34;&gt;|&lt;/span&gt;
 &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;-----------|----------+
 &lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;|&lt;/span&gt; Joe       &lt;span style=&#34;color:#f92672&#34;&gt;|&lt;/span&gt; Fry      &lt;span style=&#34;color:#f92672&#34;&gt;|&lt;/span&gt;
 &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;-----------|----------+
-&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;row&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;in&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;set&lt;/span&gt; (&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;.&lt;span style=&#34;color:#ae81ff&#34;&gt;00&lt;/span&gt; sec)&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;In addition to searching using &lt;code&gt;=&lt;/code&gt; (which only grabs exact matches), other
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;row&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;in&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;set&lt;/span&gt; (&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;.&lt;span style=&#34;color:#ae81ff&#34;&gt;00&lt;/span&gt; sec)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;In addition to searching using &lt;code&gt;=&lt;/code&gt; (which only grabs exact matches), other
 operators, such as &lt;code&gt;&amp;gt;&lt;/code&gt;, &lt;code&gt;&amp;lt;&lt;/code&gt;, &lt;code&gt;&amp;lt;=&lt;/code&gt;, &lt;code&gt;&amp;gt;=&lt;/code&gt;, &lt;code&gt;&amp;lt;&amp;gt;&lt;/code&gt; (not equal), &lt;code&gt;BETWEEN&lt;/code&gt; (between an
 inclusive range), and &lt;code&gt;LIKE&lt;/code&gt; (search for pattern) can be used with the &lt;code&gt;WHERE&lt;/code&gt;
 clause. For example:&lt;/p&gt;
@@ -290,20 +268,21 @@ clause. For example:&lt;/p&gt;
 &lt;span style=&#34;color:#f92672&#34;&gt;|&lt;/span&gt; Tina      &lt;span style=&#34;color:#f92672&#34;&gt;|&lt;/span&gt; Oak      &lt;span style=&#34;color:#f92672&#34;&gt;|&lt;/span&gt;
 &lt;span style=&#34;color:#f92672&#34;&gt;|&lt;/span&gt; Bob       &lt;span style=&#34;color:#f92672&#34;&gt;|&lt;/span&gt; Builder  &lt;span style=&#34;color:#f92672&#34;&gt;|&lt;/span&gt;
 &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;-----------|----------+
-&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;3&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;rows&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;in&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;set&lt;/span&gt; (&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;.&lt;span style=&#34;color:#ae81ff&#34;&gt;00&lt;/span&gt; sec)&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-SQL&#34; data-lang=&#34;SQL&#34;&gt;mysql&lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;SELECT&lt;/span&gt; firstname,lastname &lt;span style=&#34;color:#66d9ef&#34;&gt;FROM&lt;/span&gt; tblUsers &lt;span style=&#34;color:#66d9ef&#34;&gt;WHERE&lt;/span&gt; age &lt;span style=&#34;color:#66d9ef&#34;&gt;BETWEEN&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;30&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;AND&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;50&lt;/span&gt;;
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;3&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;rows&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;in&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;set&lt;/span&gt; (&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;.&lt;span style=&#34;color:#ae81ff&#34;&gt;00&lt;/span&gt; sec)
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-SQL&#34; data-lang=&#34;SQL&#34;&gt;mysql&lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;SELECT&lt;/span&gt; firstname,lastname &lt;span style=&#34;color:#66d9ef&#34;&gt;FROM&lt;/span&gt; tblUsers &lt;span style=&#34;color:#66d9ef&#34;&gt;WHERE&lt;/span&gt; age &lt;span style=&#34;color:#66d9ef&#34;&gt;BETWEEN&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;30&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;AND&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;50&lt;/span&gt;;
 &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;-----------|----------+
 &lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;|&lt;/span&gt; firstname &lt;span style=&#34;color:#f92672&#34;&gt;|&lt;/span&gt; lastname &lt;span style=&#34;color:#f92672&#34;&gt;|&lt;/span&gt;
 &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;-----------|----------+
 &lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;|&lt;/span&gt; Joe       &lt;span style=&#34;color:#f92672&#34;&gt;|&lt;/span&gt; Fry      &lt;span style=&#34;color:#f92672&#34;&gt;|&lt;/span&gt;
 &lt;span style=&#34;color:#f92672&#34;&gt;|&lt;/span&gt; Tina      &lt;span style=&#34;color:#f92672&#34;&gt;|&lt;/span&gt; Oak      &lt;span style=&#34;color:#f92672&#34;&gt;|&lt;/span&gt;
 &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;-----------|----------+
-&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;rows&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;in&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;set&lt;/span&gt; (&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;.&lt;span style=&#34;color:#ae81ff&#34;&gt;00&lt;/span&gt; sec)&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;h4 id=&#34;alter&#34;&gt;ALTER&lt;/h4&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;rows&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;in&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;set&lt;/span&gt; (&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;.&lt;span style=&#34;color:#ae81ff&#34;&gt;00&lt;/span&gt; sec)
 
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h4 id=&#34;alter&#34;&gt;ALTER&lt;/h4&gt;
 &lt;p&gt;To change the table schema (add, drop or modify columns), the &lt;code&gt;ALTER&lt;/code&gt; command
 is used along with &lt;code&gt;ADD&lt;/code&gt;, &lt;code&gt;DROP COLUMN&lt;/code&gt;, or &lt;code&gt;MODIFY COLUMN&lt;/code&gt; (respectively)
 after the tablename. For example:&lt;/p&gt;
-
 &lt;p&gt;&amp;ndash; Add a &lt;code&gt;born&lt;/code&gt; column to the table&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-SQL&#34; data-lang=&#34;SQL&#34;&gt;mysql&lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;SELECT&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;FROM&lt;/span&gt; tblUsers;
 &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;----|-----------|----------|------|-------+
@@ -329,12 +308,13 @@ mysql&lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&lt;/span&gt; &lt;span st
 &lt;span style=&#34;color:#f92672&#34;&gt;|&lt;/span&gt;  &lt;span style=&#34;color:#ae81ff&#34;&gt;7&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;|&lt;/span&gt; Tina      &lt;span style=&#34;color:#f92672&#34;&gt;|&lt;/span&gt; Oak      &lt;span style=&#34;color:#f92672&#34;&gt;|&lt;/span&gt;   &lt;span style=&#34;color:#ae81ff&#34;&gt;42&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;|&lt;/span&gt; NC    &lt;span style=&#34;color:#f92672&#34;&gt;|&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;NULL&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;|&lt;/span&gt;
 &lt;span style=&#34;color:#f92672&#34;&gt;|&lt;/span&gt;  &lt;span style=&#34;color:#ae81ff&#34;&gt;9&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;|&lt;/span&gt; Bob       &lt;span style=&#34;color:#f92672&#34;&gt;|&lt;/span&gt; Builder  &lt;span style=&#34;color:#f92672&#34;&gt;|&lt;/span&gt;   &lt;span style=&#34;color:#ae81ff&#34;&gt;51&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;|&lt;/span&gt; MO    &lt;span style=&#34;color:#f92672&#34;&gt;|&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;NULL&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;|&lt;/span&gt;
 &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;----|-----------|----------|------|-------|------+
-&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;4&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;rows&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;in&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;set&lt;/span&gt; (&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;.&lt;span style=&#34;color:#ae81ff&#34;&gt;00&lt;/span&gt; sec)&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;&amp;ndash; Change &lt;code&gt;born&lt;/code&gt; column from a &lt;code&gt;year&lt;/code&gt; data type to a &lt;code&gt;date&lt;/code&gt;&lt;/p&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;4&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;rows&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;in&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;set&lt;/span&gt; (&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;.&lt;span style=&#34;color:#ae81ff&#34;&gt;00&lt;/span&gt; sec)
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&amp;ndash; Change &lt;code&gt;born&lt;/code&gt; column from a &lt;code&gt;year&lt;/code&gt; data type to a &lt;code&gt;date&lt;/code&gt;&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-SQL&#34; data-lang=&#34;SQL&#34;&gt;mysql&lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;ALTER&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;TABLE&lt;/span&gt; tblUsers &lt;span style=&#34;color:#66d9ef&#34;&gt;MODIFY&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;COLUMN&lt;/span&gt; born date;
 Query OK, &lt;span style=&#34;color:#ae81ff&#34;&gt;4&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;rows&lt;/span&gt; affected (&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;.&lt;span style=&#34;color:#ae81ff&#34;&gt;03&lt;/span&gt; sec)
-Records: &lt;span style=&#34;color:#ae81ff&#34;&gt;4&lt;/span&gt;  Duplicates: &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;  Warnings: &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;&amp;ndash; Drop the &lt;code&gt;born&lt;/code&gt; column from the table&lt;/p&gt;
+Records: &lt;span style=&#34;color:#ae81ff&#34;&gt;4&lt;/span&gt;  Duplicates: &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;  Warnings: &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&amp;ndash; Drop the &lt;code&gt;born&lt;/code&gt; column from the table&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-SQL&#34; data-lang=&#34;SQL&#34;&gt;mysql&lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;SELECT&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;FROM&lt;/span&gt; tblUsers;
 &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;----|-----------|----------|------|-------|------+
 &lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;|&lt;/span&gt; id &lt;span style=&#34;color:#f92672&#34;&gt;|&lt;/span&gt; firstname &lt;span style=&#34;color:#f92672&#34;&gt;|&lt;/span&gt; lastname &lt;span style=&#34;color:#f92672&#34;&gt;|&lt;/span&gt; age  &lt;span style=&#34;color:#f92672&#34;&gt;|&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;state&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;|&lt;/span&gt; born &lt;span style=&#34;color:#f92672&#34;&gt;|&lt;/span&gt;
@@ -359,16 +339,13 @@ mysql&lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&lt;/span&gt; &lt;span st
 &lt;span style=&#34;color:#f92672&#34;&gt;|&lt;/span&gt;  &lt;span style=&#34;color:#ae81ff&#34;&gt;7&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;|&lt;/span&gt; Tina      &lt;span style=&#34;color:#f92672&#34;&gt;|&lt;/span&gt; Oak      &lt;span style=&#34;color:#f92672&#34;&gt;|&lt;/span&gt;   &lt;span style=&#34;color:#ae81ff&#34;&gt;42&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;|&lt;/span&gt; NC    &lt;span style=&#34;color:#f92672&#34;&gt;|&lt;/span&gt;
 &lt;span style=&#34;color:#f92672&#34;&gt;|&lt;/span&gt;  &lt;span style=&#34;color:#ae81ff&#34;&gt;9&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;|&lt;/span&gt; Bob       &lt;span style=&#34;color:#f92672&#34;&gt;|&lt;/span&gt; Builder  &lt;span style=&#34;color:#f92672&#34;&gt;|&lt;/span&gt;   &lt;span style=&#34;color:#ae81ff&#34;&gt;51&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;|&lt;/span&gt; MO    &lt;span style=&#34;color:#f92672&#34;&gt;|&lt;/span&gt;
 &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;----|-----------|----------|------|-------+
-&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;4&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;rows&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;in&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;set&lt;/span&gt; (&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;.&lt;span style=&#34;color:#ae81ff&#34;&gt;00&lt;/span&gt; sec)&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;NOTE: Depending on the type of SQL database being used, the &lt;code&gt;MODIFY&lt;/code&gt; command may
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;4&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;rows&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;in&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;set&lt;/span&gt; (&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;.&lt;span style=&#34;color:#ae81ff&#34;&gt;00&lt;/span&gt; sec)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;NOTE: Depending on the type of SQL database being used, the &lt;code&gt;MODIFY&lt;/code&gt; command may
 be known as &lt;code&gt;ALTER&lt;/code&gt;.&lt;/p&gt;
-
 &lt;h4 id=&#34;delete&#34;&gt;Delete&lt;/h4&gt;
-
 &lt;p&gt;All the &lt;em&gt;data&lt;/em&gt; in a table can be removed using &lt;code&gt;DELETE * FROM tblName&lt;/code&gt;,
 &lt;em&gt;without&lt;/em&gt; deleting the table schema. However, this is almost never used because
 there are better commands to do that.&lt;/p&gt;
-
 &lt;p&gt;&lt;em&gt;Specific&lt;/em&gt; items from the table can be removed using &lt;code&gt;DELETE FROM&lt;/code&gt;
 commands:&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-SQL&#34; data-lang=&#34;SQL&#34;&gt;mysql&lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;SELECT&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;FROM&lt;/span&gt; tblUsersBackup;                                                                    
@@ -392,8 +369,8 @@ mysql&lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&lt;/span&gt; &lt;span st
 &lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;|&lt;/span&gt;  &lt;span style=&#34;color:#ae81ff&#34;&gt;5&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;|&lt;/span&gt; Joe       &lt;span style=&#34;color:#f92672&#34;&gt;|&lt;/span&gt; Fry      &lt;span style=&#34;color:#f92672&#34;&gt;|&lt;/span&gt;   &lt;span style=&#34;color:#ae81ff&#34;&gt;32&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;|&lt;/span&gt; RI    &lt;span style=&#34;color:#f92672&#34;&gt;|&lt;/span&gt;
 &lt;span style=&#34;color:#f92672&#34;&gt;|&lt;/span&gt;  &lt;span style=&#34;color:#ae81ff&#34;&gt;6&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;|&lt;/span&gt; Emily     &lt;span style=&#34;color:#f92672&#34;&gt;|&lt;/span&gt; Flanders &lt;span style=&#34;color:#f92672&#34;&gt;|&lt;/span&gt;   &lt;span style=&#34;color:#ae81ff&#34;&gt;22&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;|&lt;/span&gt; CA    &lt;span style=&#34;color:#f92672&#34;&gt;|&lt;/span&gt;
 &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;----|-----------|----------|------|-------+
-&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;rows&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;in&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;set&lt;/span&gt; (&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;.&lt;span style=&#34;color:#ae81ff&#34;&gt;00&lt;/span&gt; sec)&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Multiple criteria can also be used to specify what to delete:&lt;/p&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;rows&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;in&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;set&lt;/span&gt; (&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;.&lt;span style=&#34;color:#ae81ff&#34;&gt;00&lt;/span&gt; sec)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Multiple criteria can also be used to specify what to delete:&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-SQL&#34; data-lang=&#34;SQL&#34;&gt;mysql&lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;SELECT&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;FROM&lt;/span&gt; tblUsersBackup;                                                                    
 &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;----|-----------|----------|------|-------+
 &lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;|&lt;/span&gt; id &lt;span style=&#34;color:#f92672&#34;&gt;|&lt;/span&gt; firstname &lt;span style=&#34;color:#f92672&#34;&gt;|&lt;/span&gt; lastname &lt;span style=&#34;color:#f92672&#34;&gt;|&lt;/span&gt; age  &lt;span style=&#34;color:#f92672&#34;&gt;|&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;state&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;|&lt;/span&gt;
@@ -414,13 +391,11 @@ mysql&lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&lt;/span&gt; &lt;span st
 &lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;|&lt;/span&gt;  &lt;span style=&#34;color:#ae81ff&#34;&gt;6&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;|&lt;/span&gt; Emily     &lt;span style=&#34;color:#f92672&#34;&gt;|&lt;/span&gt; Flanders &lt;span style=&#34;color:#f92672&#34;&gt;|&lt;/span&gt;   &lt;span style=&#34;color:#ae81ff&#34;&gt;22&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;|&lt;/span&gt; CA    &lt;span style=&#34;color:#f92672&#34;&gt;|&lt;/span&gt;
 &lt;span style=&#34;color:#f92672&#34;&gt;|&lt;/span&gt;  &lt;span style=&#34;color:#ae81ff&#34;&gt;7&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;|&lt;/span&gt; Tina      &lt;span style=&#34;color:#f92672&#34;&gt;|&lt;/span&gt; Oak      &lt;span style=&#34;color:#f92672&#34;&gt;|&lt;/span&gt;   &lt;span style=&#34;color:#ae81ff&#34;&gt;42&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;|&lt;/span&gt; NC    &lt;span style=&#34;color:#f92672&#34;&gt;|&lt;/span&gt;
 &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;----|-----------|----------|------|-------+
-&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;rows&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;in&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;set&lt;/span&gt; (&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;.&lt;span style=&#34;color:#ae81ff&#34;&gt;00&lt;/span&gt; sec)&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;h4 id=&#34;indexes&#34;&gt;Indexes&lt;/h4&gt;
-
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;rows&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;in&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;set&lt;/span&gt; (&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;.&lt;span style=&#34;color:#ae81ff&#34;&gt;00&lt;/span&gt; sec)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h4 id=&#34;indexes&#34;&gt;Indexes&lt;/h4&gt;
 &lt;p&gt;An index speeds up the data retrieval time of a table. However, this comes at a
 speed cost for &lt;em&gt;updating&lt;/em&gt; the table. So, it is usually a good idea to only index
 columns or tables that are frequently searched on.&lt;/p&gt;
-
 &lt;p&gt;To add an index, use &lt;code&gt;CREATE INDEX&lt;/code&gt;. &lt;em&gt;(Again, may differ depending on database
 technology being used)&lt;/em&gt;&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-SQL&#34; data-lang=&#34;SQL&#34;&gt;mysql&lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;SHOW&lt;/span&gt; FIELDS &lt;span style=&#34;color:#66d9ef&#34;&gt;FROM&lt;/span&gt; tblUsers;
@@ -437,16 +412,14 @@ technology being used)&lt;/em&gt;&lt;/p&gt;
 
 mysql&lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;CREATE&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;INDEX&lt;/span&gt; indexTblUsers &lt;span style=&#34;color:#66d9ef&#34;&gt;ON&lt;/span&gt; tblUsers (id);
 Query OK, &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;rows&lt;/span&gt; affected (&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;.&lt;span style=&#34;color:#ae81ff&#34;&gt;01&lt;/span&gt; sec)
-Records: &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;  Duplicates: &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;  Warnings: &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;h4 id=&#34;drop-table&#34;&gt;Drop Table&lt;/h4&gt;
-
+Records: &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;  Duplicates: &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;  Warnings: &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h4 id=&#34;drop-table&#34;&gt;Drop Table&lt;/h4&gt;
 &lt;p&gt;As we already know, you can drop a whole table with &lt;code&gt;DROP&lt;/code&gt;. However, like many
 of the other commands, &lt;code&gt;DROP&lt;/code&gt; can be used with other items, like an index:&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-SQL&#34; data-lang=&#34;SQL&#34;&gt;mysql&lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;ALTER&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;TABLE&lt;/span&gt; tblUsers &lt;span style=&#34;color:#66d9ef&#34;&gt;DROP&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;INDEX&lt;/span&gt; indexTblUsers;
 Query OK, &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;rows&lt;/span&gt; affected (&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;.&lt;span style=&#34;color:#ae81ff&#34;&gt;01&lt;/span&gt; sec)
-Records: &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;  Duplicates: &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;  Warnings: &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;h4 id=&#34;truncate&#34;&gt;Truncate&lt;/h4&gt;
-
+Records: &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;  Duplicates: &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;  Warnings: &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h4 id=&#34;truncate&#34;&gt;Truncate&lt;/h4&gt;
 &lt;p&gt;The &lt;code&gt;truncate&lt;/code&gt; command will delete the data, but leave table schema the same&amp;hellip;
 again, still be careful because it &lt;em&gt;will&lt;/em&gt; delete &lt;em&gt;all the data&lt;/em&gt; in the table.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-SQL&#34; data-lang=&#34;SQL&#34;&gt;mysql&lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;SELECT&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;FROM&lt;/span&gt; tblUsersBackup;
@@ -462,12 +435,10 @@ mysql&lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&lt;/span&gt; &lt;span st
 Query OK, &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;rows&lt;/span&gt; affected (&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;.&lt;span style=&#34;color:#ae81ff&#34;&gt;03&lt;/span&gt; sec)
 
 mysql&lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;SELECT&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;FROM&lt;/span&gt; tblUsersBackup;
-Empty &lt;span style=&#34;color:#66d9ef&#34;&gt;set&lt;/span&gt; (&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;.&lt;span style=&#34;color:#ae81ff&#34;&gt;00&lt;/span&gt; sec)&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;h4 id=&#34;auto-increment&#34;&gt;Auto Increment&lt;/h4&gt;
-
+Empty &lt;span style=&#34;color:#66d9ef&#34;&gt;set&lt;/span&gt; (&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;.&lt;span style=&#34;color:#ae81ff&#34;&gt;00&lt;/span&gt; sec)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h4 id=&#34;auto-increment&#34;&gt;Auto Increment&lt;/h4&gt;
 &lt;p&gt;An Integer value, that once assigned, auto increments by 1 everytime the table
 is updated.&lt;/p&gt;
-
 &lt;p&gt;You can auto increment a key, which is very useful for IDs in a table (as we saw
 earlier).all the data&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-SQL&#34; data-lang=&#34;SQL&#34;&gt;mysql&lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;SHOW&lt;/span&gt; FIELDS &lt;span style=&#34;color:#66d9ef&#34;&gt;FROM&lt;/span&gt; tblPeople;
@@ -497,8 +468,9 @@ mysql&lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&lt;/span&gt; &lt;span st
 &lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;|&lt;/span&gt;  &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;|&lt;/span&gt; Josh      &lt;span style=&#34;color:#f92672&#34;&gt;|&lt;/span&gt; Rivers   &lt;span style=&#34;color:#f92672&#34;&gt;|&lt;/span&gt;   &lt;span style=&#34;color:#ae81ff&#34;&gt;19&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;|&lt;/span&gt; PA    &lt;span style=&#34;color:#f92672&#34;&gt;|&lt;/span&gt;
 &lt;span style=&#34;color:#f92672&#34;&gt;|&lt;/span&gt;  &lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;|&lt;/span&gt; Kim       &lt;span style=&#34;color:#f92672&#34;&gt;|&lt;/span&gt; Medows   &lt;span style=&#34;color:#f92672&#34;&gt;|&lt;/span&gt;   &lt;span style=&#34;color:#ae81ff&#34;&gt;32&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;|&lt;/span&gt; CO    &lt;span style=&#34;color:#f92672&#34;&gt;|&lt;/span&gt;
 &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;----|-----------|----------|------|-------+
-&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;rows&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;in&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;set&lt;/span&gt; (&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;.&lt;span style=&#34;color:#ae81ff&#34;&gt;00&lt;/span&gt; sec)&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Note: The auto increment value can be manually set.&lt;/p&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;rows&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;in&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;set&lt;/span&gt; (&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;.&lt;span style=&#34;color:#ae81ff&#34;&gt;00&lt;/span&gt; sec)
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Note: The auto increment value can be manually set.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-SQL&#34; data-lang=&#34;SQL&#34;&gt;mysql&lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;INSERT&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;INTO&lt;/span&gt; tblPeople (firstname, lastname, age, &lt;span style=&#34;color:#66d9ef&#34;&gt;state&lt;/span&gt;) 
 &lt;span style=&#34;color:#66d9ef&#34;&gt;VALUES&lt;/span&gt; (&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;Dan&amp;#39;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;Valley&amp;#39;&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;40&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;NH&amp;#34;&lt;/span&gt;);
 Query OK, &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;row&lt;/span&gt; affected (&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;.&lt;span style=&#34;color:#ae81ff&#34;&gt;01&lt;/span&gt; sec)
@@ -511,20 +483,16 @@ mysql&lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&lt;/span&gt; &lt;span st
 &lt;span style=&#34;color:#f92672&#34;&gt;|&lt;/span&gt;    &lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;|&lt;/span&gt; Kim       &lt;span style=&#34;color:#f92672&#34;&gt;|&lt;/span&gt; Medows   &lt;span style=&#34;color:#f92672&#34;&gt;|&lt;/span&gt;   &lt;span style=&#34;color:#ae81ff&#34;&gt;32&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;|&lt;/span&gt; CO    &lt;span style=&#34;color:#f92672&#34;&gt;|&lt;/span&gt;
 &lt;span style=&#34;color:#f92672&#34;&gt;|&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1000&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;|&lt;/span&gt; Dan       &lt;span style=&#34;color:#f92672&#34;&gt;|&lt;/span&gt; Valley   &lt;span style=&#34;color:#f92672&#34;&gt;|&lt;/span&gt;   &lt;span style=&#34;color:#ae81ff&#34;&gt;40&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;|&lt;/span&gt; NH    &lt;span style=&#34;color:#f92672&#34;&gt;|&lt;/span&gt;
 &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;------|-----------|----------|------|-------+
-&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;3&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;rows&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;in&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;set&lt;/span&gt; (&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;.&lt;span style=&#34;color:#ae81ff&#34;&gt;00&lt;/span&gt; sec)&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;When setting the auto increment value manually, just be careful that it isn&amp;rsquo;t
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;3&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;rows&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;in&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;set&lt;/span&gt; (&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;.&lt;span style=&#34;color:#ae81ff&#34;&gt;00&lt;/span&gt; sec)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;When setting the auto increment value manually, just be careful that it isn&amp;rsquo;t
 set to one that will eventually overwrite another value in the table that &lt;em&gt;must&lt;/em&gt;
 be unique, or it will error.&lt;/p&gt;
-
 &lt;h3 id=&#34;sql-functions&#34;&gt;SQL Functions&lt;/h3&gt;
-
 &lt;p&gt;SQL &lt;em&gt;functions&lt;/em&gt;, are SQL statements that don&amp;rsquo;t directly manipulate data, but can
 be use to extract other useful information from the database and tables. They
 are often used in conjunction with &lt;code&gt;SELECT&lt;/code&gt;. There are a bunch of base SQL
 functions to use. Here is a sampling of a few:&lt;/p&gt;
-
 &lt;h4 id=&#34;count&#34;&gt;COUNT&lt;/h4&gt;
-
 &lt;p&gt;Shows the number of matched results returned. In this example, the number of
 rows in &lt;code&gt;tblUsers&lt;/code&gt;, and then the number of users over the age of 35:&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-SQL&#34; data-lang=&#34;SQL&#34;&gt;mysql&lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;SELECT&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;FROM&lt;/span&gt; tblUsers;
@@ -552,9 +520,8 @@ mysql&lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&lt;/span&gt; &lt;span st
 &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;----------+
 &lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;|&lt;/span&gt;        &lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;|&lt;/span&gt;
 &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;----------+
-&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;row&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;in&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;set&lt;/span&gt; (&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;.&lt;span style=&#34;color:#ae81ff&#34;&gt;00&lt;/span&gt; sec)&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;h4 id=&#34;average-and-sum-functions&#34;&gt;Average and Sum Functions&lt;/h4&gt;
-
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;row&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;in&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;set&lt;/span&gt; (&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;.&lt;span style=&#34;color:#ae81ff&#34;&gt;00&lt;/span&gt; sec)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h4 id=&#34;average-and-sum-functions&#34;&gt;Average and Sum Functions&lt;/h4&gt;
 &lt;p&gt;To get an average of the number values in a column, use the &lt;code&gt;AVG&lt;/code&gt; function:&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-SQL&#34; data-lang=&#34;SQL&#34;&gt;mysql&lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;SELECT&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;AVG&lt;/span&gt;(age) &lt;span style=&#34;color:#66d9ef&#34;&gt;from&lt;/span&gt; tblUsers;
 &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;----------+
@@ -562,31 +529,29 @@ mysql&lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&lt;/span&gt; &lt;span st
 &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;----------+
 &lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;|&lt;/span&gt;  &lt;span style=&#34;color:#ae81ff&#34;&gt;36&lt;/span&gt;.&lt;span style=&#34;color:#ae81ff&#34;&gt;7500&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;|&lt;/span&gt;
 &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;----------+
-&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;row&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;in&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;set&lt;/span&gt; (&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;.&lt;span style=&#34;color:#ae81ff&#34;&gt;00&lt;/span&gt; sec)&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;To get a total of a column&amp;rsquo;s number values, use the &lt;code&gt;SUM&lt;/code&gt; function:&lt;/p&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;row&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;in&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;set&lt;/span&gt; (&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;.&lt;span style=&#34;color:#ae81ff&#34;&gt;00&lt;/span&gt; sec)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;To get a total of a column&amp;rsquo;s number values, use the &lt;code&gt;SUM&lt;/code&gt; function:&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-SQL&#34; data-lang=&#34;SQL&#34;&gt;mysql&lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;SELECT&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;SUM&lt;/span&gt;(age) &lt;span style=&#34;color:#66d9ef&#34;&gt;from&lt;/span&gt; tblUsers;
 &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;----------+
 &lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;|&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;SUM&lt;/span&gt;(age) &lt;span style=&#34;color:#f92672&#34;&gt;|&lt;/span&gt;
 &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;----------+
 &lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;|&lt;/span&gt;      &lt;span style=&#34;color:#ae81ff&#34;&gt;147&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;|&lt;/span&gt;
 &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;----------+
-&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;row&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;in&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;set&lt;/span&gt; (&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;.&lt;span style=&#34;color:#ae81ff&#34;&gt;00&lt;/span&gt; sec)&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Note, that select statements using functions can still be combined:&lt;/p&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;row&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;in&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;set&lt;/span&gt; (&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;.&lt;span style=&#34;color:#ae81ff&#34;&gt;00&lt;/span&gt; sec)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Note, that select statements using functions can still be combined:&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-SQL&#34; data-lang=&#34;SQL&#34;&gt;mysql&lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;SELECT&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;COUNT&lt;/span&gt;(&lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt;),&lt;span style=&#34;color:#66d9ef&#34;&gt;AVG&lt;/span&gt;(age) &lt;span style=&#34;color:#66d9ef&#34;&gt;from&lt;/span&gt; tblUsers;
 &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;----------|----------+
 &lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;|&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;COUNT&lt;/span&gt;(&lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt;) &lt;span style=&#34;color:#f92672&#34;&gt;|&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;AVG&lt;/span&gt;(age) &lt;span style=&#34;color:#f92672&#34;&gt;|&lt;/span&gt;
 &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;----------|----------+
 &lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;|&lt;/span&gt;        &lt;span style=&#34;color:#ae81ff&#34;&gt;4&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;|&lt;/span&gt;  &lt;span style=&#34;color:#ae81ff&#34;&gt;36&lt;/span&gt;.&lt;span style=&#34;color:#ae81ff&#34;&gt;7500&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;|&lt;/span&gt;
 &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;----------|----------+
-&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;row&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;in&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;set&lt;/span&gt; (&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;.&lt;span style=&#34;color:#ae81ff&#34;&gt;00&lt;/span&gt; sec)&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;h3 id=&#34;the-like-operator&#34;&gt;The Like Operator&lt;/h3&gt;
-
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;row&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;in&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;set&lt;/span&gt; (&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;.&lt;span style=&#34;color:#ae81ff&#34;&gt;00&lt;/span&gt; sec)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;the-like-operator&#34;&gt;The Like Operator&lt;/h3&gt;
 &lt;p&gt;The &lt;code&gt;LIKE&lt;/code&gt; operator can be used for matching, with wildcards (&lt;code&gt;%&lt;/code&gt;). For example
 in the following searches, &lt;code&gt;%S&lt;/code&gt; and &lt;code&gt;S%&lt;/code&gt; yield different results because the
 first looks for last names which &lt;em&gt;end&lt;/em&gt; in an &amp;ldquo;s&amp;rdquo;, and the second grabs last
 names which &lt;em&gt;start&lt;/em&gt; with &amp;ldquo;s&amp;rdquo;. The last example returns names which have &amp;ldquo;er&amp;rdquo;
 anywhere in the last name.&lt;/p&gt;
-
 &lt;p&gt;&lt;em&gt;Note, &lt;code&gt;LIKE&lt;/code&gt; uses higher CPU usage. With larger data sets, try to use it on
 columns which are indexed if possible.&lt;/em&gt;&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-SQL&#34; data-lang=&#34;SQL&#34;&gt;mysql&lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;SELECT&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;FROM&lt;/span&gt; tblUsers;
@@ -624,9 +589,8 @@ mysql&lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&lt;/span&gt; &lt;span st
 &lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;|&lt;/span&gt;  &lt;span style=&#34;color:#ae81ff&#34;&gt;6&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;|&lt;/span&gt; Emily     &lt;span style=&#34;color:#f92672&#34;&gt;|&lt;/span&gt; Flanders &lt;span style=&#34;color:#f92672&#34;&gt;|&lt;/span&gt;   &lt;span style=&#34;color:#ae81ff&#34;&gt;22&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;|&lt;/span&gt; CA    &lt;span style=&#34;color:#f92672&#34;&gt;|&lt;/span&gt;
 &lt;span style=&#34;color:#f92672&#34;&gt;|&lt;/span&gt;  &lt;span style=&#34;color:#ae81ff&#34;&gt;9&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;|&lt;/span&gt; Bob       &lt;span style=&#34;color:#f92672&#34;&gt;|&lt;/span&gt; Builder  &lt;span style=&#34;color:#f92672&#34;&gt;|&lt;/span&gt;   &lt;span style=&#34;color:#ae81ff&#34;&gt;51&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;|&lt;/span&gt; MO    &lt;span style=&#34;color:#f92672&#34;&gt;|&lt;/span&gt;
 &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;----|-----------|----------|------|-------+
-&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;rows&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;in&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;set&lt;/span&gt; (&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;.&lt;span style=&#34;color:#ae81ff&#34;&gt;00&lt;/span&gt; sec)&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;h3 id=&#34;views&#34;&gt;Views&lt;/h3&gt;
-
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;rows&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;in&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;set&lt;/span&gt; (&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;.&lt;span style=&#34;color:#ae81ff&#34;&gt;00&lt;/span&gt; sec)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;views&#34;&gt;Views&lt;/h3&gt;
 &lt;p&gt;Views create a custom filter to display a set of the data. This can be useful
 when defining several use cases of an application. For example, a view can
 saved, and then just &lt;em&gt;updated&lt;/em&gt;, instead of &lt;em&gt;recalculated&lt;/em&gt;, when querying for
@@ -663,11 +627,10 @@ mysql&lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&lt;/span&gt; &lt;span st
 &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;----------|----------|----------+
 &lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;|&lt;/span&gt;        &lt;span style=&#34;color:#ae81ff&#34;&gt;4&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;|&lt;/span&gt;  &lt;span style=&#34;color:#ae81ff&#34;&gt;30&lt;/span&gt;.&lt;span style=&#34;color:#ae81ff&#34;&gt;7500&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;|&lt;/span&gt;      &lt;span style=&#34;color:#ae81ff&#34;&gt;123&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;|&lt;/span&gt;
 &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;----------|----------|----------+
-&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;row&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;in&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;set&lt;/span&gt; (&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;.&lt;span style=&#34;color:#ae81ff&#34;&gt;00&lt;/span&gt; sec)&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;h3 id=&#34;joins&#34;&gt;Joins&lt;/h3&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;row&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;in&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;set&lt;/span&gt; (&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;.&lt;span style=&#34;color:#ae81ff&#34;&gt;00&lt;/span&gt; sec)
 
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;joins&#34;&gt;Joins&lt;/h3&gt;
 &lt;h4 id=&#34;inner-join&#34;&gt;Inner Join&lt;/h4&gt;
-
 &lt;p&gt;An Inner join will return the selected rows from multiple tables, when there is
 at least one match in each table. For example:&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-SQL&#34; data-lang=&#34;SQL&#34;&gt;mysql&lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;SELECT&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;FROM&lt;/span&gt; tblUsers;
@@ -703,9 +666,8 @@ mysql&lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&lt;/span&gt; &lt;span st
 &lt;span style=&#34;color:#f92672&#34;&gt;|&lt;/span&gt; Emily     &lt;span style=&#34;color:#f92672&#34;&gt;|&lt;/span&gt; Flanders &lt;span style=&#34;color:#f92672&#34;&gt;|&lt;/span&gt;  &lt;span style=&#34;color:#ae81ff&#34;&gt;17000&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;|&lt;/span&gt;
 &lt;span style=&#34;color:#f92672&#34;&gt;|&lt;/span&gt; Tina      &lt;span style=&#34;color:#f92672&#34;&gt;|&lt;/span&gt; Oak      &lt;span style=&#34;color:#f92672&#34;&gt;|&lt;/span&gt;  &lt;span style=&#34;color:#ae81ff&#34;&gt;32800&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;|&lt;/span&gt;
 &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;-----------|----------|--------+
-&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;3&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;rows&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;in&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;set&lt;/span&gt; (&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;.&lt;span style=&#34;color:#ae81ff&#34;&gt;00&lt;/span&gt; sec)&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;h4 id=&#34;right-join&#34;&gt;Right Join&lt;/h4&gt;
-
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;3&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;rows&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;in&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;set&lt;/span&gt; (&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;.&lt;span style=&#34;color:#ae81ff&#34;&gt;00&lt;/span&gt; sec)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h4 id=&#34;right-join&#34;&gt;Right Join&lt;/h4&gt;
 &lt;p&gt;A &lt;em&gt;right&lt;/em&gt; join will return &lt;em&gt;everything&lt;/em&gt; in the right table, and any existing/matched
 items on the left. Any non-matching data will display as null.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-SQL&#34; data-lang=&#34;SQL&#34;&gt;mysql&lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;SELECT&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;FROM&lt;/span&gt; tblUsers;
@@ -741,24 +703,17 @@ mysql&lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&lt;/span&gt; &lt;span st
 &lt;span style=&#34;color:#f92672&#34;&gt;|&lt;/span&gt; Tina      &lt;span style=&#34;color:#f92672&#34;&gt;|&lt;/span&gt; Oak      &lt;span style=&#34;color:#f92672&#34;&gt;|&lt;/span&gt;  &lt;span style=&#34;color:#ae81ff&#34;&gt;32800&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;|&lt;/span&gt;
 &lt;span style=&#34;color:#f92672&#34;&gt;|&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;NULL&lt;/span&gt;      &lt;span style=&#34;color:#f92672&#34;&gt;|&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;NULL&lt;/span&gt;     &lt;span style=&#34;color:#f92672&#34;&gt;|&lt;/span&gt;   &lt;span style=&#34;color:#66d9ef&#34;&gt;NULL&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;|&lt;/span&gt;
 &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;-----------|----------|--------+
-&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;4&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;rows&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;in&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;set&lt;/span&gt; (&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;.&lt;span style=&#34;color:#ae81ff&#34;&gt;00&lt;/span&gt; sec)&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;h4 id=&#34;left-join&#34;&gt;Left Join&lt;/h4&gt;
-
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;4&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;rows&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;in&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;set&lt;/span&gt; (&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;.&lt;span style=&#34;color:#ae81ff&#34;&gt;00&lt;/span&gt; sec)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h4 id=&#34;left-join&#34;&gt;Left Join&lt;/h4&gt;
 &lt;p&gt;Basically the same as a &lt;code&gt;RIGHT&lt;/code&gt; join, but with the left table items all joining.&lt;/p&gt;
-
 &lt;h4 id=&#34;full-join&#34;&gt;Full Join&lt;/h4&gt;
-
 &lt;p&gt;A full join shows &lt;em&gt;all&lt;/em&gt; records from both the right and left table, regardless
 of matching the relation records of either.&lt;/p&gt;
-
 &lt;p&gt;NOTE: Full outer joins do not work on mysql, but would on postresql. It is
 recommended to use Unions to emulate them if needed.&lt;/p&gt;
-
 &lt;h3 id=&#34;unions&#34;&gt;Unions&lt;/h3&gt;
-
 &lt;p&gt;Unions are used to combine and concatenate &lt;code&gt;SELECT&lt;/code&gt; statements from multiple
 tables.&lt;/p&gt;
-
 &lt;p&gt;This example doesn&amp;rsquo;t work well because it doesn&amp;rsquo;t make much sense (&lt;code&gt;age&lt;/code&gt; isn&amp;rsquo;t
 the same as a &lt;code&gt;point&lt;/code&gt;), but at least it displays what is happening during the &lt;code&gt;UNION&lt;/code&gt;.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-SQL&#34; data-lang=&#34;SQL&#34;&gt;mysql&lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;SELECT&lt;/span&gt; firstname, lastname, points &lt;span style=&#34;color:#66d9ef&#34;&gt;FROM&lt;/span&gt; tblUsersPts 
@@ -775,13 +730,11 @@ the same as a &lt;code&gt;point&lt;/code&gt;), but at least it displays what is 
 &lt;span style=&#34;color:#f92672&#34;&gt;|&lt;/span&gt; Tina      &lt;span style=&#34;color:#f92672&#34;&gt;|&lt;/span&gt; Oak      &lt;span style=&#34;color:#f92672&#34;&gt;|&lt;/span&gt;     &lt;span style=&#34;color:#ae81ff&#34;&gt;42&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;|&lt;/span&gt;
 &lt;span style=&#34;color:#f92672&#34;&gt;|&lt;/span&gt; Zach      &lt;span style=&#34;color:#f92672&#34;&gt;|&lt;/span&gt; Scout    &lt;span style=&#34;color:#f92672&#34;&gt;|&lt;/span&gt;     &lt;span style=&#34;color:#ae81ff&#34;&gt;27&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;|&lt;/span&gt;
 &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;-----------|----------|--------+
-&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;8&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;rows&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;in&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;set&lt;/span&gt; (&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;.&lt;span style=&#34;color:#ae81ff&#34;&gt;00&lt;/span&gt; sec)&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;h3 id=&#34;sorting-records&#34;&gt;Sorting Records&lt;/h3&gt;
-
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;8&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;rows&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;in&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;set&lt;/span&gt; (&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;.&lt;span style=&#34;color:#ae81ff&#34;&gt;00&lt;/span&gt; sec)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;sorting-records&#34;&gt;Sorting Records&lt;/h3&gt;
 &lt;p&gt;Record rows can be sorted in the ascending or descending order of a column by using
 the &lt;code&gt;ODER&lt;/code&gt; command and either &lt;code&gt;ASC&lt;/code&gt; for &amp;ldquo;ascending&amp;rdquo; or &lt;code&gt;DESC&lt;/code&gt; for &amp;ldquo;descending&amp;rdquo;.
-The results can be limited or trimmed using another statement, like &lt;code&gt;LIMIT
-1&lt;/code&gt;.&lt;/p&gt;
+The results can be limited or trimmed using another statement, like &lt;code&gt;LIMIT 1&lt;/code&gt;.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-SQL&#34; data-lang=&#34;SQL&#34;&gt;mysql&lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;SELECT&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;FROM&lt;/span&gt; tblUsersPts;
 &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;----|-----------|----------|-------|--------+
 &lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;|&lt;/span&gt; id &lt;span style=&#34;color:#f92672&#34;&gt;|&lt;/span&gt; firstname &lt;span style=&#34;color:#f92672&#34;&gt;|&lt;/span&gt; lastname &lt;span style=&#34;color:#f92672&#34;&gt;|&lt;/span&gt; team  &lt;span style=&#34;color:#f92672&#34;&gt;|&lt;/span&gt; points &lt;span style=&#34;color:#f92672&#34;&gt;|&lt;/span&gt;
@@ -812,9 +765,8 @@ mysql&lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&lt;/span&gt; &lt;span st
 &lt;span style=&#34;color:#f92672&#34;&gt;|&lt;/span&gt;  &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;|&lt;/span&gt; Joe       &lt;span style=&#34;color:#f92672&#34;&gt;|&lt;/span&gt; Fry      &lt;span style=&#34;color:#f92672&#34;&gt;|&lt;/span&gt; Red   &lt;span style=&#34;color:#f92672&#34;&gt;|&lt;/span&gt;  &lt;span style=&#34;color:#ae81ff&#34;&gt;20000&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;|&lt;/span&gt;
 &lt;span style=&#34;color:#f92672&#34;&gt;|&lt;/span&gt;  &lt;span style=&#34;color:#ae81ff&#34;&gt;3&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;|&lt;/span&gt; Tina      &lt;span style=&#34;color:#f92672&#34;&gt;|&lt;/span&gt; Oak      &lt;span style=&#34;color:#f92672&#34;&gt;|&lt;/span&gt; Red   &lt;span style=&#34;color:#f92672&#34;&gt;|&lt;/span&gt;  &lt;span style=&#34;color:#ae81ff&#34;&gt;32800&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;|&lt;/span&gt;
 &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;----|-----------|----------|-------|--------+
-&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;4&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;rows&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;in&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;set&lt;/span&gt; (&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;.&lt;span style=&#34;color:#ae81ff&#34;&gt;00&lt;/span&gt; sec)&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;h3 id=&#34;minimum-and-maximum-values&#34;&gt;Minimum and Maximum Values&lt;/h3&gt;
-
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;4&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;rows&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;in&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;set&lt;/span&gt; (&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;.&lt;span style=&#34;color:#ae81ff&#34;&gt;00&lt;/span&gt; sec)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;minimum-and-maximum-values&#34;&gt;Minimum and Maximum Values&lt;/h3&gt;
 &lt;p&gt;Similar to &lt;code&gt;ORDER&lt;/code&gt;, the minimum and maximum values in a particular column of the
 table can be returned using the &lt;code&gt;MIN&lt;/code&gt; and &lt;code&gt;MAX&lt;/code&gt; commands:&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-SQL&#34; data-lang=&#34;SQL&#34;&gt;mysql&lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;SELECT&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;FROM&lt;/span&gt; tblUsersPts &lt;span style=&#34;color:#66d9ef&#34;&gt;ORDER&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;BY&lt;/span&gt; team,lastname &lt;span style=&#34;color:#66d9ef&#34;&gt;ASC&lt;/span&gt;;
@@ -834,8 +786,8 @@ mysql&lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&lt;/span&gt; &lt;span st
 &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;-------------|-------------+
 &lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;|&lt;/span&gt;       &lt;span style=&#34;color:#ae81ff&#34;&gt;17000&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;|&lt;/span&gt;       &lt;span style=&#34;color:#ae81ff&#34;&gt;40100&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;|&lt;/span&gt;
 &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;-------------|-------------+
-&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;row&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;in&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;set&lt;/span&gt; (&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;.&lt;span style=&#34;color:#ae81ff&#34;&gt;00&lt;/span&gt; sec)&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;To return other fields with the min/max item, a sub-query (another SQL query
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;row&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;in&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;set&lt;/span&gt; (&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;.&lt;span style=&#34;color:#ae81ff&#34;&gt;00&lt;/span&gt; sec)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;To return other fields with the min/max item, a sub-query (another SQL query
 inside parenthesis) may have to be used:&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-SQL&#34; data-lang=&#34;SQL&#34;&gt;mysql&lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;SELECT&lt;/span&gt; firstname,lastname,points &lt;span style=&#34;color:#66d9ef&#34;&gt;FROM&lt;/span&gt; tblUsersPts 
 &lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;WHERE&lt;/span&gt; points&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;(&lt;span style=&#34;color:#66d9ef&#34;&gt;SELECT&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;MAX&lt;/span&gt;(points) &lt;span style=&#34;color:#66d9ef&#34;&gt;FROM&lt;/span&gt; tblUsersPts);
@@ -844,9 +796,8 @@ inside parenthesis) may have to be used:&lt;/p&gt;
 &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;-----------|----------|--------+
 &lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;|&lt;/span&gt; Bob       &lt;span style=&#34;color:#f92672&#34;&gt;|&lt;/span&gt; Builder  &lt;span style=&#34;color:#f92672&#34;&gt;|&lt;/span&gt;  &lt;span style=&#34;color:#ae81ff&#34;&gt;40100&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;|&lt;/span&gt;
 &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;-----------|----------|--------+
-&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;row&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;in&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;set&lt;/span&gt; (&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;.&lt;span style=&#34;color:#ae81ff&#34;&gt;00&lt;/span&gt; sec)&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;h3 id=&#34;upper-and-lower-case-conversions&#34;&gt;Upper and Lower Case Conversions&lt;/h3&gt;
-
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;row&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;in&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;set&lt;/span&gt; (&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;.&lt;span style=&#34;color:#ae81ff&#34;&gt;00&lt;/span&gt; sec)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;upper-and-lower-case-conversions&#34;&gt;Upper and Lower Case Conversions&lt;/h3&gt;
 &lt;p&gt;Strings (such as names), and be easily altered using functions like &lt;code&gt;UCASE&lt;/code&gt; and
 &lt;code&gt;LCASE&lt;/code&gt;. These two functions change the &lt;em&gt;displayed&lt;/em&gt; text (the data is not
 altered) to be upper or lower case.&lt;/p&gt;
@@ -881,9 +832,8 @@ mysql&lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&lt;/span&gt; &lt;span st
 &lt;span style=&#34;color:#f92672&#34;&gt;|&lt;/span&gt;  &lt;span style=&#34;color:#ae81ff&#34;&gt;3&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;|&lt;/span&gt; Tina      &lt;span style=&#34;color:#f92672&#34;&gt;|&lt;/span&gt; Oak      &lt;span style=&#34;color:#f92672&#34;&gt;|&lt;/span&gt; Red   &lt;span style=&#34;color:#f92672&#34;&gt;|&lt;/span&gt;  &lt;span style=&#34;color:#ae81ff&#34;&gt;32800&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;|&lt;/span&gt;
 &lt;span style=&#34;color:#f92672&#34;&gt;|&lt;/span&gt;  &lt;span style=&#34;color:#ae81ff&#34;&gt;4&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;|&lt;/span&gt; Bob       &lt;span style=&#34;color:#f92672&#34;&gt;|&lt;/span&gt; Builder  &lt;span style=&#34;color:#f92672&#34;&gt;|&lt;/span&gt; Green &lt;span style=&#34;color:#f92672&#34;&gt;|&lt;/span&gt;  &lt;span style=&#34;color:#ae81ff&#34;&gt;40100&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;|&lt;/span&gt;
 &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;----|-----------|----------|-------|--------+
-&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;4&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;rows&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;in&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;set&lt;/span&gt; (&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;.&lt;span style=&#34;color:#ae81ff&#34;&gt;00&lt;/span&gt; sec)&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;h3 id=&#34;now&#34;&gt;Now()&lt;/h3&gt;
-
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;4&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;rows&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;in&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;set&lt;/span&gt; (&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;.&lt;span style=&#34;color:#ae81ff&#34;&gt;00&lt;/span&gt; sec)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;now&#34;&gt;Now()&lt;/h3&gt;
 &lt;p&gt;The &lt;code&gt;Now*()&lt;/code&gt; function creates a new value, using the current date and time. This
 can be appended when creating a view, to mark when changes happen over time.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-sql&#34; data-lang=&#34;sql&#34;&gt;mysql&lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;SELECT&lt;/span&gt; id,firstname,lastname,team,points, Now() &lt;span style=&#34;color:#66d9ef&#34;&gt;AS&lt;/span&gt; updated
@@ -896,9 +846,8 @@ can be appended when creating a view, to mark when changes happen over time.&lt;
 &lt;span style=&#34;color:#f92672&#34;&gt;|&lt;/span&gt;  &lt;span style=&#34;color:#ae81ff&#34;&gt;3&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;|&lt;/span&gt; Tina      &lt;span style=&#34;color:#f92672&#34;&gt;|&lt;/span&gt; Oak      &lt;span style=&#34;color:#f92672&#34;&gt;|&lt;/span&gt; Red   &lt;span style=&#34;color:#f92672&#34;&gt;|&lt;/span&gt;  &lt;span style=&#34;color:#ae81ff&#34;&gt;32800&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;|&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;2018&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;04&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;17&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;10&lt;/span&gt;:&lt;span style=&#34;color:#ae81ff&#34;&gt;56&lt;/span&gt;:&lt;span style=&#34;color:#ae81ff&#34;&gt;53&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;|&lt;/span&gt;
 &lt;span style=&#34;color:#f92672&#34;&gt;|&lt;/span&gt;  &lt;span style=&#34;color:#ae81ff&#34;&gt;4&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;|&lt;/span&gt; Bob       &lt;span style=&#34;color:#f92672&#34;&gt;|&lt;/span&gt; Builder  &lt;span style=&#34;color:#f92672&#34;&gt;|&lt;/span&gt; Green &lt;span style=&#34;color:#f92672&#34;&gt;|&lt;/span&gt;  &lt;span style=&#34;color:#ae81ff&#34;&gt;40100&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;|&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;2018&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;04&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;17&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;10&lt;/span&gt;:&lt;span style=&#34;color:#ae81ff&#34;&gt;56&lt;/span&gt;:&lt;span style=&#34;color:#ae81ff&#34;&gt;53&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;|&lt;/span&gt;
 &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;----|-----------|----------|-------|--------|---------------------+
-&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;4&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;rows&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;in&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;set&lt;/span&gt; (&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;.&lt;span style=&#34;color:#ae81ff&#34;&gt;00&lt;/span&gt; sec)&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;h2 id=&#34;conclusion&#34;&gt;Conclusion&lt;/h2&gt;
-
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;4&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;rows&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;in&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;set&lt;/span&gt; (&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;.&lt;span style=&#34;color:#ae81ff&#34;&gt;00&lt;/span&gt; sec)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;conclusion&#34;&gt;Conclusion&lt;/h2&gt;
 &lt;p&gt;I think that is enough to at least get started with SQL :) (it was for me
 anyway). There&amp;rsquo;s not much else to say other than hopefully this post server as
 a good SQL quick-reference down the road :). Enjoy!&lt;/p&gt;</description>

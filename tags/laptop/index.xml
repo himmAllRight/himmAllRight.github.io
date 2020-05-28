@@ -23,109 +23,55 @@ laptop when working from home. Normally, it works fine. However, last week I
 reformatted the work laptop with the &lt;a href=&#34;https://spins.fedoraproject.org/kde/&#34;&gt;&lt;em&gt;KDE Plasma&lt;/em&gt; spin&lt;/a&gt; of
 Fedora Workstation 31&amp;hellip; and my TB3 hub stopped playing nicely with it.
 Here&amp;rsquo;s why.&lt;/p&gt;
-
 &lt;h2 id=&#34;the-issue&#34;&gt;The Issue&lt;/h2&gt;
-
 &lt;p&gt;Due to a NVIDIA Quadro M1000M in my lenovo P50 work laptop, I&amp;rsquo;ve been using
 Gnome with Wayland, because that combination seems to have the least amount of
 annoying trade-offs. While doing a system refresh, I figured I would see if
 things are any different with a clean Fedora 31 Plasma install (they weren&amp;rsquo;t,
 but that&amp;rsquo;s beyond this post).&lt;/p&gt;
-
-&lt;p&gt;&lt;center&gt;
-&lt;a href=&#34;../../img/posts/fedora-kde-tb3/gnome-tb3-settings.png&#34;&gt;
-&lt;img alt=&#34;Gnome Thunderbolt Settings&#34; src=&#34;../../img/posts/fedora-kde-tb3/gnome-tb3-settings.png&#34; style=&#34;max-width: 100%; padding: 5px 15px 10px 10px&#34;/&gt;&lt;/a&gt;
-&lt;div class=&#34;caption&#34;&gt;The Gnome desktop environment now has a thunderbolt pane
-in the settings GUI&lt;/div&gt;
-&lt;/center&gt;&lt;/p&gt;
-
+&lt;!-- raw HTML omitted --&gt;
 &lt;p&gt;Booting into the live cd, and later the installed system, I noticed that my
 Thunderbolt 3 hub did &lt;em&gt;not&lt;/em&gt; work while I was in Plasma. That was fine. I
 expected it really, because for security reasons Linux distros tend to disable
 thunderbolt ports by default.  In gnome, there are now settings to authorize
 it (which I guess I had done on my previous install, and forgot about).  In
 Plasma however, I needed to install and configure &lt;code&gt;bolt&lt;/code&gt;.&lt;/p&gt;
-
 &lt;h2 id=&#34;bolt&#34;&gt;Bolt&lt;/h2&gt;
-
-&lt;p&gt;&lt;center&gt;
-&lt;a href=&#34;../../img/posts/fedora-kde-tb3/bolt-install.png&#34;&gt;
-&lt;img alt=&#34;Installing bolt with dnf&#34; src=&#34;../../img/posts/fedora-kde-tb3/bolt-install.png&#34; style=&#34;max-width: 100%; padding: 5px 15px 10px 10px&#34;/&gt;&lt;/a&gt;
-&lt;div class=&#34;caption&#34;&gt;&lt;code&gt;bolt&lt;/code&gt; is in the Fedora repos and is easily installed with
-&lt;code&gt;dnf&lt;/code&gt;&lt;/div&gt;
-&lt;/center&gt;&lt;/p&gt;
-
+&lt;!-- raw HTML omitted --&gt;
 &lt;p&gt;In Fedora, &lt;code&gt;bolt&lt;/code&gt; is in the repos (at least in Fedora 31+), so installing it is
 easy:&lt;/p&gt;
-
 &lt;pre&gt;&lt;code&gt;sudo dnf install bolt
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Once &lt;code&gt;bolt&lt;/code&gt; is installed, it isn&amp;rsquo;t a bad idea to check to make sure it is
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Once &lt;code&gt;bolt&lt;/code&gt; is installed, it isn&amp;rsquo;t a bad idea to check to make sure it is
 running: &lt;code&gt;sudo systemctl bolt&lt;/code&gt;.&lt;/p&gt;
-
-&lt;p&gt;&lt;center&gt;
-&lt;a href=&#34;../../img/posts/fedora-kde-tb3/bolt-systemctl-status.png&#34;&gt;
-&lt;img alt=&#34;bolt systemctl status&#34; src=&#34;../../img/posts/fedora-kde-tb3/bolt-systemctl-status.png&#34; style=&#34;max-width: 100%; padding: 5px 15px 10px 10px&#34;/&gt;&lt;/a&gt;
-&lt;div class=&#34;caption&#34;&gt;Checking &lt;code&gt;bolt&lt;/code&gt; is running using &lt;code&gt;systemctl status&lt;/code&gt;&lt;/div&gt;
-&lt;/center&gt;&lt;/p&gt;
-
+&lt;!-- raw HTML omitted --&gt;
 &lt;p&gt;If the status shows that it isn&amp;rsquo;t running for some reason, it can be started
 using &lt;code&gt;systemctl start bolt&lt;/code&gt;. Check the status again, and if it it &lt;em&gt;still&lt;/em&gt; is not
 running&amp;hellip; sorry?&lt;/p&gt;
-
-&lt;p&gt;&lt;center&gt;
-&lt;a href=&#34;../../img/posts/fedora-kde-tb3/boltctl.png&#34;&gt;
-&lt;img alt=&#34;boltctl&#34; src=&#34;../../img/posts/fedora-kde-tb3/boltctl.png&#34; style=&#34;max-width: 100%; padding: 5px 15px 10px 10px&#34;/&gt;&lt;/a&gt;
-&lt;div class=&#34;caption&#34;&gt;&lt;/div&gt;
-&lt;/center&gt;&lt;/p&gt;
-
+&lt;!-- raw HTML omitted --&gt;
 &lt;p&gt;With bolt installed, the command &lt;code&gt;boltctl&lt;/code&gt; is available to use. The base command will
 show information about attached thunderbolt devices. To see more &lt;code&gt;boltctl&lt;/code&gt;
 commands, run &lt;code&gt;boltctl --help&lt;/code&gt;.&lt;/p&gt;
-
 &lt;h2 id=&#34;authorizing&#34;&gt;Authorizing&lt;/h2&gt;
-
-&lt;p&gt;&lt;center&gt;
-&lt;a href=&#34;../../img/posts/fedora-kde-tb3/boltctl-authorize.png&#34;&gt;
-&lt;img alt=&#34;boltctl authorize&#34; src=&#34;../../img/posts/fedora-kde-tb3/boltctl-authorize.png&#34; style=&#34;max-width: 100%; padding: 5px 15px 10px 10px&#34;/&gt;&lt;/a&gt;
-&lt;div class=&#34;caption&#34;&gt;Authorizing the device&lt;/div&gt;
-&lt;/center&gt;&lt;/p&gt;
-
+&lt;!-- raw HTML omitted --&gt;
 &lt;p&gt;In order to &lt;em&gt;use&lt;/em&gt; the thunderbolt 3 device, it needs to be authorized. To
 authorize a device, first use a plain &lt;code&gt;boltctl&lt;/code&gt; command to get the &lt;code&gt;uuid&lt;/code&gt; of
 the device. Next, call &lt;code&gt;boltctl authorize&lt;/code&gt; using the &lt;code&gt;uuid&lt;/code&gt; to authorize it:&lt;/p&gt;
-
 &lt;pre&gt;&lt;code&gt;boltctl authorize &amp;lt;UUID HERE&amp;gt;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;The device should now be authorized. When I authorized mine, some of my devices
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;The device should now be authorized. When I authorized mine, some of my devices
 started showing up automatically, while others needed to be disconnected and
 replugged.&lt;/p&gt;
-
 &lt;h2 id=&#34;enrolling&#34;&gt;Enrolling&lt;/h2&gt;
-
-&lt;p&gt;&lt;center&gt;
-&lt;a href=&#34;../../img/posts/fedora-kde-tb3/bresetoltctl-enroll.png&#34;&gt;
-&lt;img alt=&#34;boltctl enroll&#34; src=&#34;../../img/posts/fedora-kde-tb3/boltctl-enroll.png&#34; style=&#34;max-width: 100%; padding: 5px 15px 10px 10px&#34;/&gt;&lt;/a&gt;
-&lt;div class=&#34;caption&#34;&gt;Enrolling the device for permanent use&lt;/div&gt;
-&lt;/center&gt;&lt;/p&gt;
-
+&lt;!-- raw HTML omitted --&gt;
 &lt;p&gt;Authorizing a device enables it to be used, but doesn&amp;rsquo;t guarantee persistence.
 While this may be desired to grant &lt;em&gt;temporary&lt;/em&gt; authorization to a device, many
 users tend want their device to &lt;em&gt;always&lt;/em&gt; work, without having to manually
 authorize it. In this case, the device should be &lt;em&gt;enrolled&lt;/em&gt; (like &lt;code&gt;systemctl enable&lt;/code&gt;).
 Simply call &lt;code&gt;boltctl enroll&lt;/code&gt;, with the device UUID:&lt;/p&gt;
-
 &lt;pre&gt;&lt;code&gt;boltctl enroll &amp;lt;UUID HERE&amp;gt;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Once enrolled, the device&amp;rsquo;s UUID will be recorded and added to a database. By
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Once enrolled, the device&amp;rsquo;s UUID will be recorded and added to a database. By
 default, the device will now automatically be authorized whenever it is
 connected.&lt;/p&gt;
-
 &lt;h2 id=&#34;conclusion&#34;&gt;Conclusion&lt;/h2&gt;
-
 &lt;p&gt;That&amp;rsquo;s it. While the solution isn&amp;rsquo;t very difficult, it can be frustrating to
 figure out when it appears that the thunderbolt device simply is not working.
 Regardless, I&amp;rsquo;m glad that I now know about &lt;code&gt;bolt&lt;/code&gt; and how to use it!&lt;/p&gt;</description>
@@ -141,18 +87,10 @@ Regardless, I&amp;rsquo;m glad that I now know about &lt;code&gt;bolt&lt;/code&g
 purchased a new 2019 16&amp;rdquo; Macbook Pro by the end of my macOS challenge.  I have
 had the laptop for over a month now, but I made sure to take notes on some of
 my initial thoughts during the first few days. Here are those thoughts.&lt;/p&gt;
-
 &lt;h3 id=&#34;selection&#34;&gt;Selection&lt;/h3&gt;
-
 &lt;p&gt;But first, &lt;em&gt;a word from our sponsor!&amp;hellip;&lt;/em&gt; Just kidding. However, I &lt;em&gt;do&lt;/em&gt; want to
 take a minute to talk about how I selected &lt;em&gt;my first&lt;/em&gt; macbook.&lt;/p&gt;
-
-&lt;p&gt;&lt;center&gt;
-&lt;a href=&#34;../../img/posts/new-2019-16inch-mbp/mbp-desk-website.jpeg&#34;&gt;
-&lt;img alt=&#34;MBP on my desk&#34; src=&#34;../../img/posts/new-2019-16inch-mbp/mbp-desk-website.jpeg&#34; style=&#34;max-width: 100%; padding: 5px 15px 10px 10px&#34;/&gt;&lt;/a&gt;
-&lt;div class=&#34;caption&#34;&gt;New 16&amp;rdquo; MBP on my desk&lt;/div&gt;
-&lt;/center&gt;&lt;/p&gt;
-
+&lt;!-- raw HTML omitted --&gt;
 &lt;p&gt;While completing the macOS challenge, I decided I wanted to buy a
 macbook for personal use. However, I wanted to hold out and wait to hear if the
 rumors of a new scissor-switch macbook pro were true, or if I
@@ -160,23 +98,14 @@ should be considering a used 2015 Macbook Pro on eBay. Fortunately, the rumor
 turned to fact, and Apple released the new 16&amp;rdquo; Macbook Pro. This news coupled
 with a $300-off, Thanksgiving (US) sale, meant that I had a new macbook
 shipping to me the first week of December.&lt;/p&gt;
-
 &lt;h4 id=&#34;the-base-model-specs&#34;&gt;The Base Model Specs&lt;/h4&gt;
-
-&lt;p&gt;&lt;center&gt;
-&lt;a href=&#34;../../img/posts/new-2019-16inch-mbp/mbp-closed.jpeg&#34;&gt;
-&lt;img alt=&#34;Macbook Pro closed on the table&#34; src=&#34;../../img/posts/new-2019-16inch-mbp/mbp-closed.jpeg&#34; style=&#34;max-width: 100%; padding: 5px 15px 10px 10px&#34;/&gt;&lt;/a&gt;
-&lt;div class=&#34;caption&#34;&gt;16&amp;rdquo; Macbook Pro closed on the table&lt;/div&gt;
-&lt;/center&gt;&lt;/p&gt;
-
+&lt;!-- raw HTML omitted --&gt;
 &lt;p&gt;I chose the base-spec MBP (the cheapest one) for several reasons. First, it
 saved me a bunch of money because 1) Apple upgrades tend to be expensive, and 2)
 the base models can be found on sale more easily.&lt;/p&gt;
-
 &lt;p&gt;Additionally, the &amp;ldquo;low-end&amp;rdquo; base model specs of the 16&amp;rdquo; Macbook Pro were
 increased to include 16 GB of RAM, and a 512GB SSD. This meant that it already
 had everything I would normally &lt;em&gt;need&lt;/em&gt; to upgrade. So, the specs:&lt;/p&gt;
-
 &lt;pre&gt;&lt;code&gt;- 2.6 GHz (4.5 GHz Turbo Boost) 6-Core (12 thread) i7 CPU
 - 16 GB 2666MHz DDR4 RAM
 - 512 GB SS
@@ -186,27 +115,17 @@ had everything I would normally &lt;em&gt;need&lt;/em&gt; to upgrade. So, the sp
 - Headphone Jack
 - New speakers and mic
 - Silver
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;In a perfect world, I &lt;em&gt;might&lt;/em&gt; have wanted 32 GB of RAM. But if I think
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;In a perfect world, I &lt;em&gt;might&lt;/em&gt; have wanted 32 GB of RAM. But if I think
 about it, I &lt;em&gt;mostly&lt;/em&gt; need RAM to run clusters of VMs&amp;hellip; which I do on Linux
 workstation/servers&amp;hellip; not my laptop. So 16GB should be plenty for the needs of
 &lt;em&gt;this machine&lt;/em&gt;.&lt;/p&gt;
-
 &lt;h3 id=&#34;initial-thoughts&#34;&gt;Initial Thoughts&lt;/h3&gt;
-
 &lt;p&gt;Okay, now lets get to my initial thoughts. Remember, these are the
 (reformatted) notes I took within about a day or so of receiving the Macbook.&lt;/p&gt;
-
-&lt;p&gt;&lt;center&gt;
-&lt;a href=&#34;../../img/posts/new-2019-16inch-mbp/mbp-keyboard.jpeg&#34;&gt;
-&lt;img alt=&#34;Macbook Pro from above&#34; src=&#34;../../img/posts/new-2019-16inch-mbp/mbp-keyboard.jpeg&#34; style=&#34;max-width: 100%; padding: 5px 15px 10px 10px&#34;/&gt;&lt;/a&gt;
-&lt;div class=&#34;caption&#34;&gt;I love both the new keyboard and speakers on the 16&amp;rdquo;
-Macbook Pro&lt;/div&gt;
-&lt;/center&gt;&lt;/p&gt;
-
+&lt;!-- raw HTML omitted --&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;p&gt;&lt;strong&gt;Keyboard&lt;/strong&gt; - Well, I’m surprised. I think I actually &lt;em&gt;really&lt;/em&gt; like it. The
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Keyboard&lt;/strong&gt; - Well, I’m surprised. I think I actually &lt;em&gt;really&lt;/em&gt; like it. The
 first few minutes were a little weird, because I was used to the (2014) MacBook
 Air (Also, I had been using &lt;a href=&#34;../../post/new-hhkb-pro2/&#34;&gt;my
 HHKB&lt;/a&gt; all day). After using
@@ -215,46 +134,47 @@ with &lt;em&gt;enough&lt;/em&gt; travel. It definitely does not have as much tra
 Thinkpads, but it is acceptable. The keys feel like they “pop” as I type on
 them, with a very satisfying bump. Overall, I very much enjoy the typing
 experience. As long as it proves to be sturdy and reliable, I’d say this is
-a great laptop keyboard. I am very happy with it.&lt;/p&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;&lt;strong&gt;Trackpad&lt;/strong&gt; - Little weird at first (I had trouble sliding my fingers across
+a great laptop keyboard. I am very happy with it.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Trackpad&lt;/strong&gt; - Little weird at first (I had trouble sliding my fingers across
 it.  I guess I needed time to oil it a bit lol), but now it seems to be working
 well. It is massive, but doesn&amp;rsquo;t seem to register accidental touches much.
 Really, there isn&amp;rsquo;t much to say. It does what I need it to, basically &lt;em&gt;all&lt;/em&gt; the
-time.&lt;/p&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;&lt;strong&gt;Screen&lt;/strong&gt; - Wonderful. It’s big, bright and the colors look great. Using
+time.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Screen&lt;/strong&gt; - Wonderful. It’s big, bright and the colors look great. Using
 the default scaling still, but actually think it’s big enough. It&amp;rsquo;s a beautiful
-screen large enough to get work done, on a still small-ish laptop.&lt;/p&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;&lt;strong&gt;Touch Bar&lt;/strong&gt; - Meh. It&amp;rsquo;s whatever. I have already installed better touch tool
+screen large enough to get work done, on a still small-ish laptop.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Touch Bar&lt;/strong&gt; - Meh. It&amp;rsquo;s whatever. I have already installed better touch tool
 😂. I’ll play with that later to figure out how I can switch the
 audio/brightness to buttons instead of slides (the main thing I don’t like so
 far), and maybe add weather. In summary, with better touch tool, I don&amp;rsquo;t &lt;em&gt;mind&lt;/em&gt;
-having the touch bar, but probably wouldn&amp;rsquo;t miss it much if it was gone.&lt;/p&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;&lt;strong&gt;Speakers&lt;/strong&gt; - Amazing. Simple as that. They aren&amp;rsquo;t going to replace a
+having the touch bar, but probably wouldn&amp;rsquo;t miss it much if it was gone.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Speakers&lt;/strong&gt; - Amazing. Simple as that. They aren&amp;rsquo;t going to replace a
 high-end pair of studio monitors, but are probably the best laptop speakers out
-there, and likely better than most cheap desktop ones.&lt;/p&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;&lt;strong&gt;Ports&lt;/strong&gt; - Just charging so far. I like being able to charge on
+there, and likely better than most cheap desktop ones.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Ports&lt;/strong&gt; - Just charging so far. I like being able to charge on
 both sides. Side note: the power brick feels like an &lt;em&gt;actual&lt;/em&gt; brick. It is
-solid and heavy, which is fine, but did surprise me a bit.&lt;/p&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;&lt;strong&gt;Performance&lt;/strong&gt; - As far as I can tell, great. It seems like it can handle
-most of the work loads &lt;em&gt;I&lt;/em&gt; will need it for.&lt;/p&gt;&lt;/li&gt;
+solid and heavy, which is fine, but did surprise me a bit.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Performance&lt;/strong&gt; - As far as I can tell, great. It seems like it can handle
+most of the work loads &lt;em&gt;I&lt;/em&gt; will need it for.&lt;/p&gt;
+&lt;/li&gt;
 &lt;/ul&gt;
-
-&lt;h3 id=&#34;issues-annoyances-concerns&#34;&gt;Issues/Annoyances/Concerns&lt;/h3&gt;
-
-&lt;p&gt;&lt;center&gt;
-&lt;a href=&#34;../../img/posts/new-2019-16inch-mbp/mbp-side.jpeg&#34;&gt;
-&lt;img alt=&#34;Macbook Pro from side&#34; src=&#34;../../img/posts/new-2019-16inch-mbp/mbp-side.jpeg&#34; style=&#34;max-width: 100%; padding: 5px 15px 10px 10px&#34;/&gt;&lt;/a&gt;
-&lt;div class=&#34;caption&#34;&gt;As for ports, the 16&amp;rdquo; Macbook Pro has two USB C/Thunderbolt3 ports and a headphone jack on one side (pictured), and 2 more USB C/Thunderbolt3 ports on the other side.&lt;/div&gt;
-&lt;/center&gt;&lt;/p&gt;
-
+&lt;h3 id=&#34;issuesannoyancesconcerns&#34;&gt;Issues/Annoyances/Concerns&lt;/h3&gt;
+&lt;!-- raw HTML omitted --&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;p&gt;&lt;strong&gt;Heat&lt;/strong&gt; - As I’m typing this, I do notice the metal at the top of the laptop
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Heat&lt;/strong&gt; - As I’m typing this, I do notice the metal at the top of the laptop
 (above the Touch Bar) is getting quite toasty. In fact, the keys on the number
 row are even a bit warm. I understand that this is where the heat is exhausted,
 and that the cooling system probably relies on the aluminum body a bit as a
@@ -263,9 +183,10 @@ while I was installing Xcode&amp;hellip; which seems to be a beast. Once Xcode f
 installing, it did cool down fast. The entire time, the palm rest remained nice
 and cool to the touch. Also, the fans never kicked up for this. So it seems
 that the cooling system is &lt;em&gt;very&lt;/em&gt; good on this laptop. I just wish it would
-kick in a &lt;em&gt;little&lt;/em&gt; bit sooner to prevent it from heating up.&lt;/p&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;&lt;strong&gt;Ports/Adaptor Annoyances&lt;/strong&gt; - Everyone is complaining that there still isn&amp;rsquo;t
+kick in a &lt;em&gt;little&lt;/em&gt; bit sooner to prevent it from heating up.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Ports/Adaptor Annoyances&lt;/strong&gt; - Everyone is complaining that there still isn&amp;rsquo;t
 an SD card reader, but honestly I could care less. I generally think having
 powerful TB3 ports is a good plan, as it allows the user to craft their system
 to have whatever ports &lt;em&gt;they need&lt;/em&gt;. For example, I &lt;em&gt;don&amp;rsquo;t&lt;/em&gt; usually need an SD
@@ -275,24 +196,18 @@ annoying part is buying into the TB3 life. I &lt;em&gt;had&lt;/em&gt; to buy an 
 dongle for my new expensive laptop in order to use &lt;em&gt;anything&lt;/em&gt; with it. Also,
 the functionality of the adaptors seems to be hit or miss. I got one that
 works okay, but only after having to return the first one I bought because it
-just wouldn&amp;rsquo;t connect my devices. Very Annoying.&lt;/p&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;&lt;strong&gt;Wrists Rest&lt;/strong&gt; - While I really enjoy the solid feel of the aluminum my
+just wouldn&amp;rsquo;t connect my devices. Very Annoying.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Wrists Rest&lt;/strong&gt; - While I really enjoy the solid feel of the aluminum my
 hands rest on (and how it tends to stay cool even when the computer is heating
 up), the sharp edge of the laptop cuts into my wrist over time. I will admit
 that this is something I have experience on other laptops too. Maybe I just
-type wrong.&lt;/p&gt;&lt;/li&gt;
+type wrong.&lt;/p&gt;
+&lt;/li&gt;
 &lt;/ul&gt;
-
 &lt;h2 id=&#34;conclusion&#34;&gt;Conclusion&lt;/h2&gt;
-
-&lt;p&gt;&lt;center&gt;
-&lt;a href=&#34;../../img/posts/new-2019-16inch-mbp/mbp-table.jpeg&#34;&gt;
-&lt;img alt=&#34;Macbook Pro on table&#34; src=&#34;../../img/posts/new-2019-16inch-mbp/mbp-table.jpeg&#34; style=&#34;max-width: 100%; padding: 5px 15px 10px 10px&#34;/&gt;&lt;/a&gt;
-&lt;div class=&#34;caption&#34;&gt;The 16&amp;rdquo; Macbook Pro is a great all in one portable
-workstation&lt;/div&gt;
-&lt;/center&gt;&lt;/p&gt;
-
+&lt;!-- raw HTML omitted --&gt;
 &lt;p&gt;In conclusion, I love this laptop. It is powerful enough to do everything I
 need, and I think Apple has done a great job addressing the complaints users
 have had with Macbooks over the last few years. Considering the speaker,
@@ -316,158 +231,141 @@ throughout medical school), it is the one OS I have never tried as my &lt;em&gt;
 daily driver. After switching to an iPhone and &lt;a href=&#34;../../post/getting-an-ipad/&#34;&gt;getting an
 iPad&lt;/a&gt; this year&amp;hellip; I
 decided to give macOS a spin.&lt;/p&gt;
-
 &lt;p&gt;&lt;em&gt;(Fun fact: I first learned about Linux while attempting to Hackintosh my
 laptop in high school.)&lt;/em&gt;&lt;/p&gt;
-
 &lt;h3 id=&#34;the-challenge&#34;&gt;The Challenge&lt;/h3&gt;
-
 &lt;blockquote&gt;
 &lt;p&gt;Using a mac as the interface device during my personal computing, for 30 days.&lt;/p&gt;
 &lt;/blockquote&gt;
-
 &lt;p&gt;Here, &amp;ldquo;interface computer&amp;rdquo; means the device that I sit at and interact with.
 For example, I might be sitting at macOS and using it for my web browsing and
 music, but working on a project on my linux workstation via a mosh/tmux session
 in iTerm. I can use remote Linux computers as much as I please, but should
 connect to them through macOS.&lt;/p&gt;
-
 &lt;p&gt;One thing to note is that I still used Desktop Linux as my &amp;ldquo;interfacing
 computer&amp;rdquo; for work.&lt;/p&gt;
-
 &lt;h3 id=&#34;why&#34;&gt;Why&lt;/h3&gt;
-
 &lt;p&gt;At home, I don&amp;rsquo;t mind iOS and macOS teaming up to make my &amp;ldquo;normal person&amp;rdquo;
 computing (web browsing, video chatting, emails, and online courses)
 easier. I still deeply care about working with Linux at home, but exclusively
 on the backend. So having the front end get out of the way, and not tempt me
 with the ability to fine-tune it, is a good thing (&lt;em&gt;for me&lt;/em&gt;, currently).&lt;/p&gt;
-
 &lt;p&gt;&lt;em&gt;(While I&amp;rsquo;ve slowed down &lt;a href=&#34;https://www.urbandictionary.com/define.php?term=distrohopper&#34;&gt;distro
 hopping&lt;/a&gt; the last
 few years,&amp;hellip; I have still been swapping my desktop environment every other
 month).&lt;/em&gt;&lt;/p&gt;
-
 &lt;p&gt;Right now, I am really only interested in using macOS for my personal
 computing.  At work, I don&amp;rsquo;t need my computer to be in step with my personal
 phone and/or ipad. In fact, I like having that barrier there. Also, Linux works
 REALLY well for the work I do, especially when it comes to running VMs (I love
 &lt;code&gt;libvirt&lt;/code&gt;). So, there currently isn&amp;rsquo;t a reason (or even a desire) to switch
 there.&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;&lt;em&gt;Side Note:&lt;/em&gt;&lt;/strong&gt; I actually wouldn&amp;rsquo;t even consider this challenge if I didn&amp;rsquo;t
+&lt;p&gt;&lt;em&gt;&lt;strong&gt;Side Note:&lt;/strong&gt;&lt;/em&gt; I actually wouldn&amp;rsquo;t even consider this challenge if I didn&amp;rsquo;t
 get to use Linux so much at work every day, or if I didn&amp;rsquo;t have my Linux
 desktop/workstation at home. I already ssh into my desktop to work
 from my other devices. In fact, I technically remote into my desktop even when
 I&amp;rsquo;m working &lt;em&gt;at&lt;/em&gt; it, since I do everything in a &lt;a href=&#34;https://podman.io&#34;&gt;container&lt;/a&gt;.&lt;/p&gt;
-
 &lt;h3 id=&#34;observations&#34;&gt;Observations&lt;/h3&gt;
-
 &lt;p&gt;Now that I&amp;rsquo;ve spent a few weeks in macOS, lets break down some observations I
 had.&lt;/p&gt;
-
-&lt;h4 id=&#34;stuff-i-didn-t-like&#34;&gt;Stuff I didn&amp;rsquo;t like&lt;/h4&gt;
-
+&lt;h4 id=&#34;stuff-i-didnt-like&#34;&gt;Stuff I didn&amp;rsquo;t like&lt;/h4&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;p&gt;The elephant in the room… it&amp;rsquo;s very proprietary. I still love open source and
+&lt;li&gt;The elephant in the room… it&amp;rsquo;s very proprietary. I still love open source and
 using something that&amp;rsquo;s as locked down and secretive as macOS (and Apple
-products in general) feels, well&amp;hellip; &lt;em&gt;dirty&lt;/em&gt;.
-&lt;center&gt;
-&lt;a href=&#34;../../img/posts/macos-challenge/joplin-error.png&#34;&gt;
-&lt;img alt=&#34;joplin error&#34; src=&#34;../../img/posts/macos-challenge/joplin-error.png&#34; style=&#34;max-width: 100%; padding: 5px 15px 10px 10px&#34;/&gt;&lt;/a&gt;
-&lt;div class=&#34;caption&#34;&gt;Error while trying to run Joplin&lt;/div&gt;
-&lt;/center&gt;&lt;/p&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;I had trouble getting some applications like &lt;a href=&#34;../../post/switched-to-joplin-notes/&#34;&gt;Joplin&lt;/a&gt; to work. I later learned that it was likely due to issues with signing the applications in Catalina (I think). Apparently, there is a work-around for this.&lt;/p&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;There surprisingly isn’t a great solution for &lt;a href=&#34;https://virt-manager.org&#34;&gt;virt-manager&lt;/a&gt;. I was able to install it using homebrew, but have to launch it from the terminal. I guess I might be able to setup an application launcher for it? I&amp;rsquo;m just surprised there isn&amp;rsquo;t a better solution on mac, or at least one that&amp;rsquo;s easy to find&amp;hellip;&lt;/p&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;On that note, it is &lt;em&gt;wonderful&lt;/em&gt; that &lt;a href=&#34;https://brew.sh&#34;&gt;brew&lt;/a&gt; exists, but it confuses the hell out of me (What&amp;rsquo;s a &lt;code&gt;cask&lt;/code&gt;? Is it like a &lt;a href=&#34;https://dnf.readthedocs.io/en/latest/command_ref.html#group-command-label&#34;&gt;&lt;code&gt;dnf group&lt;/code&gt;&lt;/a&gt; install?). This is most likely because I am new to it, but in my opinion, I still think it is nowhere near as nice as default Linux package managers. This is one area where using Linux for so long has definitely spoiled me.&lt;/p&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;Working with filesystems is a pain, especially when connecting to network devices. I couldn’t use Finder to do an easy network connection without first setting up samba or nfs on my Linux computers. While I ideally want to setup a proper samba/nfs server on my desktop/server in the long run anyway, it was annoying that it couldn’t just mount the system in the file browser, using something like &lt;code&gt;sftp&lt;/code&gt; under the hood like Linux does..&lt;/p&gt;
-
-&lt;p&gt;&lt;center&gt;
-&lt;video style=&#34;max-width:100%;&#34; controls&gt;
-&lt;source src=&#34;../../img/posts/macos-challenge/network-connect.mp4&#34; type=&#34;video/mp4&#34;&gt;
-&lt;/video&gt;
-&lt;div id=&#34;caption&#34;&gt;Connecting to a remote server&amp;rsquo;s filesystem from the
-file browser in Gnome (Linux)&lt;/div&gt;
-&lt;/center&gt;&lt;/p&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;Window management isn’t great out of the box. I had to buy &lt;a href=&#34;https://apps.apple.com/us/app/magnet/id441258766?mt=12&#34;&gt;magnet&lt;/a&gt; to snap/tile my windows. (Alternatively for touch-bar mac users, note that &lt;a href=&#34;https://folivora.ai&#34;&gt;better touch tool&lt;/a&gt; has window snapping and other features built in). Also, I can’t seem to hold a key and click a window anywhere to resize/move like I can in most linux DEs.&lt;/p&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;My desktop workspaces keep changing their order on me (ಠ_ಠ).&lt;/p&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;Deviating from the stock experience can become painful.  Don&amp;rsquo;t like using a global menubar, and a dock for applications?&amp;hellip; sorry?
-I&amp;rsquo;m sure there are third-party ways to get around it, but they are likely
-hacky and not guaranteed to always work across new versions of macOS.&lt;/p&gt;&lt;/li&gt;
+products in general) feels, well&amp;hellip; &lt;em&gt;dirty&lt;/em&gt;.&lt;/li&gt;
 &lt;/ul&gt;
-
+&lt;!-- raw HTML omitted --&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;I had trouble getting some applications like &lt;a href=&#34;../../post/switched-to-joplin-notes/&#34;&gt;Joplin&lt;/a&gt; to work. I later learned that it was likely due to issues with signing the applications in Catalina (I think). Apparently, there is a work-around for this.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;There surprisingly isn’t a great solution for &lt;a href=&#34;https://virt-manager.org&#34;&gt;virt-manager&lt;/a&gt;. I was able to install it using homebrew, but have to launch it from the terminal. I guess I might be able to setup an application launcher for it? I&amp;rsquo;m just surprised there isn&amp;rsquo;t a better solution on mac, or at least one that&amp;rsquo;s easy to find&amp;hellip;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;On that note, it is &lt;em&gt;wonderful&lt;/em&gt; that &lt;a href=&#34;https://brew.sh&#34;&gt;brew&lt;/a&gt; exists, but it confuses the hell out of me (What&amp;rsquo;s a &lt;code&gt;cask&lt;/code&gt;? Is it like a &lt;a href=&#34;https://dnf.readthedocs.io/en/latest/command_ref.html#group-command-label&#34;&gt;&lt;code&gt;dnf group&lt;/code&gt;&lt;/a&gt; install?). This is most likely because I am new to it, but in my opinion, I still think it is nowhere near as nice as default Linux package managers. This is one area where using Linux for so long has definitely spoiled me.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Working with filesystems is a pain, especially when connecting to network devices. I couldn’t use Finder to do an easy network connection without first setting up samba or nfs on my Linux computers. While I ideally want to setup a proper samba/nfs server on my desktop/server in the long run anyway, it was annoying that it couldn’t just mount the system in the file browser, using something like &lt;code&gt;sftp&lt;/code&gt; under the hood like Linux does..&lt;/p&gt;
+&lt;!-- raw HTML omitted --&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;!-- raw HTML omitted --&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Window management isn’t great out of the box. I had to buy &lt;a href=&#34;https://apps.apple.com/us/app/magnet/id441258766?mt=12&#34;&gt;magnet&lt;/a&gt; to snap/tile my windows. (Alternatively for touch-bar mac users, note that &lt;a href=&#34;https://folivora.ai&#34;&gt;better touch tool&lt;/a&gt; has window snapping and other features built in). Also, I can’t seem to hold a key and click a window anywhere to resize/move like I can in most linux DEs.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;My desktop workspaces keep changing their order on me (ಠ_ಠ).&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Deviating from the stock experience can become painful.  Don&amp;rsquo;t like using a global menubar, and a dock for applications?&amp;hellip; sorry?
+I&amp;rsquo;m sure there are third-party ways to get around it, but they are likely
+hacky and not guaranteed to always work across new versions of macOS.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
 &lt;h4 id=&#34;stuff-i-liked&#34;&gt;Stuff I liked&lt;/h4&gt;
-
 &lt;ul&gt;
 &lt;li&gt;I  am actually starting to like the CMD-centric shortcuts. They work everywhere and are nice when working in a terminal (which I do all the time).&lt;/li&gt;
 &lt;li&gt;Default keybindings, while different from what I’m used to are intuitive, and consistent across the system. There are not many that are crazy. For example, on Windows/Linux systems, the keybinding to close a window usually defaults to &lt;code&gt;Alt+F4&lt;/code&gt;, so I normally change it to &lt;code&gt;Super+Shift+Q&lt;/code&gt;. While not the exact same as what I do, the macOS default of &lt;code&gt;CMD+Q&lt;/code&gt; is close enough that I&amp;rsquo;ve been able to easily adapt to it, without feeling the need to figure out how to change it. It&amp;rsquo;s a similar story across most of the default keybindings. They aren&amp;rsquo;t exactly how I&amp;rsquo;ve been setting mine up, but close enough that I&amp;rsquo;m fine with accepting them as is.&lt;/li&gt;
 &lt;li&gt;iCloud syncing has been nice. Specifically for photos, TODOs, and notes.&lt;/li&gt;
 &lt;/ul&gt;
-
-&lt;p&gt;&lt;a href=&#34;../../img/posts/macos-challenge/phonecall.png&#34;&gt;
-&lt;img alt=&#34;Receiving and answering a phonecall in macOS&#34; src=&#34;../../img/posts/macos-challenge/phonecall.png&#34; style=&#34;float: right; max-width: 100%; padding: 5px 15px 10px 10px&#34;/&gt;&lt;/a&gt;&lt;/p&gt;
-
+&lt;!-- raw HTML omitted --&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;p&gt;I like being able to answer &lt;em&gt;all&lt;/em&gt; phone calls from my computer.
+&lt;li&gt;
+&lt;p&gt;I like being able to answer &lt;em&gt;all&lt;/em&gt; phone calls from my computer.
 I hate talking on the phone. Oddly
 enough, I don&amp;rsquo;t mind voice chat on the computer, so this works out really
 well for me. Synced iMessage and Facetime are also nice, but universal
-&lt;em&gt;normal&lt;/em&gt; phone calls is what I particularly enjoy.&lt;/p&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;Profiles. Specifically, setting up something like my
+&lt;em&gt;normal&lt;/em&gt; phone calls is what I particularly enjoy.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Profiles. Specifically, setting up something like my
 &lt;a href=&#34;https://www.fastmail.com&#34;&gt;Fastmail&lt;/a&gt; account in the mail app
 was SUPER easy because of this. I basically just downloaded the profile
-from fastmail and opened it with mail, and everytihng was setup. That&amp;rsquo;s it.&lt;/p&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;I find the UI to be really space respecting. In addition to a global menu, title bars on windows are thin and minimal. Combined with scaled font sizes, a lot less space is wasted, especially compared to Gnome.&lt;/p&gt;&lt;/li&gt;
+from fastmail and opened it with mail, and everytihng was setup. That&amp;rsquo;s it.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;I find the UI to be really space respecting. In addition to a global menu, title bars on windows are thin and minimal. Combined with scaled font sizes, a lot less space is wasted, especially compared to Gnome.&lt;/p&gt;
+&lt;/li&gt;
 &lt;/ul&gt;
-
-&lt;p&gt;&lt;a href=&#34;../../img/posts/macos-challenge/header-bar-comparison-stacked.png&#34;&gt;
-&lt;img alt=&#34;macOS header bars compared to Gnome&#34; src=&#34;../../img/posts/macos-challenge/header-bar-comparison-stacked.png&#34; style=&#34;max-width: 100%; padding: 5px 15px 10px 10px&#34;/&gt;&lt;/a&gt;
-&lt;div class=&#34;caption&#34;&gt;I find macOS to be much more space efficient than Gnome&lt;/div&gt;&lt;/p&gt;
-
+&lt;!-- raw HTML omitted --&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;p&gt;Videos just work without configuring anything/switching back and forth between Wayland and X sessions. I have faith that wayland will mature to this point eventually, but its nice to already have it in macOS.&lt;/p&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;Gestures are fluid and intuitive. Even on the old MacBook air, the trackpad
-is amazing.&lt;/p&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;Settings like screentime work across all my “front-end devices”. If I set a downtime for 8:30pm, it boots me off all my devices&amp;hellip; and I get to bed earlier.&lt;/p&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;macOS comes with a set of well-made core apps (calendar, mail, notes, music,
+&lt;li&gt;
+&lt;p&gt;Videos just work without configuring anything/switching back and forth between Wayland and X sessions. I have faith that wayland will mature to this point eventually, but its nice to already have it in macOS.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Gestures are fluid and intuitive. Even on the old MacBook air, the trackpad
+is amazing.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Settings like screentime work across all my “front-end devices”. If I set a downtime for 8:30pm, it boots me off all my devices&amp;hellip; and I get to bed earlier.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;macOS comes with a set of well-made core apps (calendar, mail, notes, music,
 photos, keynote, garage band, etc). They work for everything I need. If I
 want something more advanced, I generally have the full selection of open source and
 proprietary apps at my disposal. For example, I&amp;rsquo;ve been using Gimp just
-fine on the macbook.&lt;/p&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;Security does actually seem to be a focus on the system. For example, someone
+fine on the macbook.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Security does actually seem to be a focus on the system. For example, someone
 tried to log into my icloud account from a random location the other week.
 In under a minute, from my phone, I was able to unlink my account from all
-my devices and change the password.&lt;/p&gt;&lt;/li&gt;
+my devices and change the password.&lt;/p&gt;
+&lt;/li&gt;
 &lt;/ul&gt;
-
 &lt;h3 id=&#34;future-plans&#34;&gt;Future Plans&lt;/h3&gt;
-
 &lt;p&gt;Overall, I&amp;rsquo;d say this challenge was a success. In fact, it was so successfull,
 that I&amp;rsquo;m actually writing up this post on a new &lt;a href=&#34;../../post/new-2019-16inch-mbp/&#34;&gt;base model 16&amp;rdquo; MacBook
 Pro&lt;/a&gt; (but more on &lt;em&gt;that&lt;/em&gt; at another time).&lt;/p&gt;
-
 &lt;p&gt;&lt;em&gt;[ Well, I&amp;rsquo;m really writing it on my desktop, but from the macbook pro ;) ]&lt;/em&gt;&lt;/p&gt;
-
 &lt;p&gt;My plan is to use macOS and my iOS
 devices to handle my interactive/client computing. I&amp;rsquo;ve enjoyed having my
 apple devices take care of all my &amp;ldquo;normal&amp;rdquo; person computer needs over the last
 few weeks. It has allowed me to finish up required, but mundane tasks easily
 and efficiently, so I can better focus when diving into iTerm to work on
 complicated Linux server projects.&lt;/p&gt;
-
 &lt;p&gt;While I do have some reservations about this plan (mostly that my desktop Linux
 skills will fade, and that I&amp;rsquo;ll loose respect in the Linux community), I don&amp;rsquo;t
 think it should be too much of an issue. At the end of the day, it is most

@@ -145,80 +145,40 @@ Tags <a href="../../tags/homelab">homelab</a>, <a href="../../tags/cluster">clus
                 <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
                     
                     <p>In my <a href="../../post/Setting-up-the-pi-cluster/">previous post</a>, I pieced together my <a href="../../pages/homelab/#cluster">pi cluster</a>, and installed variations of Ubuntu 16.04 Server on each of its nodes. With the cluster built, I quickly needed an easy way to maintain and interact with the system as a whole. This, is where <a href="https://www.ansible.com/">Ansible</a> comes in. In this post, I will walk through the steps I took to setup Ansible on my Cluster.</p>
-
 <h2 id="ansible">Ansible</h2>
-
-<p><img src="../../img/posts/setting-up-ansible-pi-cluster/ansible-logo.png" style="max-width: 50%; width: 150px; float: left; margin: 0px 15px 5px 5px;"/></p>
-
+<!-- raw HTML omitted -->
 <p>Ansible is an open source, configuration management and automation system. It is written in Python, and financially backed by <a href="http://www.redhat.com">Red Hat</a>. It simplifies the management of groups of computers, through the use of modules (standalone units of work. for example, apt, ping, rpm, etc). Ansible is script-able using simple YAML files, known as playbooks, that define a set of orchestration tasks for one or many computers. These scripts can be edited and version controlled, creating a simple <a href="https://en.wikipedia.org/wiki/Infrastructure_as_Code">infrastructure as code</a> setup.</p>
-
 <h2 id="setting-up-the-user-account">Setting up the User Account</h2>
-
 <p>When Ansible executes commands on the PIs, it will do so from the user-account (ryan) that I setup in the last post. However, many of these commands will require Root privledges. While I previously setup sudo and added the <code>ryan</code> account to the <code>sudo</code> group &hellip; it required that I manually enter my password. Ansible did not like this, so I had to update the sudo configuration to allow the <code>ryan</code> account to run <code>sudo</code> commands with out a password. To do this, I opened the <code>sudoers</code> file:</p>
-
 <pre><code>sudo visudo
-</code></pre>
-
-<p>and added the following line to the end of the file:</p>
-
+</code></pre><p>and added the following line to the end of the file:</p>
 <pre><code>ryan  ALL=(ALL:ALL) NOPASSWD: ALL
-</code></pre>
-
-<p>I repeated this on each of the nodes, and afterwards was no longer promted for a password when running <code>sudo</code> commands. This made Ansible happy.</p>
-
-<p><a name="ssh"></a></p>
-
+</code></pre><p>I repeated this on each of the nodes, and afterwards was no longer promted for a password when running <code>sudo</code> commands. This made Ansible happy.</p>
+<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
 <h2 id="setup-ssh-keys">Setup SSH Keys</h2>
-
 <p>Well&hellip; <em>almost</em> happy.</p>
-
-<p>Ansible&rsquo;s main method of communication is via ssh, which by default, prompts me for a password when connecting. Ansible <em>really</em> hates passwords. So, I had to configure ssh to use keys instead. Honestly, this is proabaly a good step to do regardless, now that the <code>ryan</code> account no longer uses a password when running <code>sudo</code>. To setup key-based logins, I appended the contents of my <a href="../../pages/homelab/#alakazam">main computer</a>&rsquo;s ssh public key*, to each pi&rsquo;s <code>authorized_keys</code> file. This can all be done using a magic one-line pipe command (x3, one for each pi):</p>
-
+<p>Ansible&rsquo;s main method of communication is via ssh, which by default, prompts me for a password when connecting. Ansible <em>really</em> hates passwords. So, I had to configure ssh to use keys instead. Honestly, this is proabaly a good step to do regardless, now that the <code>ryan</code> account no longer uses a password when running <code>sudo</code>. To setup key-based logins, I appended the contents of my <a href="../../pages/homelab/#alakazam">main computer</a>&lsquo;s ssh public key*, to each pi&rsquo;s <code>authorized_keys</code> file. This can all be done using a magic one-line pipe command (x3, one for each pi):</p>
 <pre><code>cat ~/.ssh/id_rsa.pub | ssh pi0 &quot;cat &gt;&gt; ~/.ssh/authorized_keys&quot;
 cat ~/.ssh/id_rsa.pub | ssh pi1 &quot;cat &gt;&gt; ~/.ssh/authorized_keys&quot;
 cat ~/.ssh/id_rsa.pub | ssh bpi &quot;cat &gt;&gt; ~/.ssh/authorized_keys&quot;
-</code></pre>
-
-<p><em>*Note: If keys are not already generated, they can be created using the command:</em></p>
-
+</code></pre><p><em>*Note: If keys are not already generated, they can be created using the command:</em></p>
 <pre><code>ssh-keygen
-</code></pre>
-
-<h4 id="key-only-login">Key Only Login</h4>
-
+</code></pre><h4 id="key-only-login">Key Only Login</h4>
 <p>To help secure access to the PIs (and to get on Ansible&rsquo;s good side), I configured sshd to disable password logins, and only allow connections from clients with approved keys. To disable password authentication, I opened the <code>/etc/ssh/sshd_config</code> file, found the line containing <code># PasswordAuthentication yes</code>, changed the <code>yes</code> to a <code>no</code>, and unncommented it by removing the <code>#</code>.</p>
-
 <p>While I was in the <code>sshd_config</code> file, I also set <code>PermitRootLogin</code> to <code>no</code>, for good measure.</p>
-
 <p>Lastly, I reset the <code>sshd</code> service and repeated the steps for each pi:</p>
-
 <pre><code>sudo systemctl restart sshd
-</code></pre>
-
-<p>Afterwards, I was unable to login to the PIs from a computer with unauthorized ssh keys.</p>
-
-<p><img src="../../img/posts/setting-up-ansible-pi-cluster/terminal-play.png" name="pic" onmouseover="this.src='../../img/posts/setting-up-ansible-pi-cluster/blocked-ssh-attempt.gif'" onmouseout="this.src='../../img/posts/setting-up-ansible-pi-cluster/terminal-play.png'" style="max-width: 100%;"/></p>
-
+</code></pre><p>Afterwards, I was unable to login to the PIs from a computer with unauthorized ssh keys.</p>
+<!-- raw HTML omitted -->
 <p>But, I was still able to loging from the authorized computer.</p>
-
-<p><img src="../../img/posts/setting-up-ansible-pi-cluster/terminal-play.png" name="pic" onmouseover="this.src='../../img/posts/setting-up-ansible-pi-cluster/accepted-ssh-attempt.gif'" onmouseout="this.src='../../img/posts/setting-up-ansible-pi-cluster/terminal-play.png'" style="max-width: 100%;"/></p>
-
+<!-- raw HTML omitted -->
 <h2 id="install-python">Install Python</h2>
-
 <p>The last issue Ansible complained about was that it needed python installed on the Pis. Like everything else, the Bananna Pi already had this setup, but I had to install it on the two Raspberry Pis. It was simple enough:</p>
-
 <pre><code>sudo apt-get install python
-</code></pre>
-
-<h2 id="install-ansible">Install Ansible</h2>
-
+</code></pre><h2 id="install-ansible">Install Ansible</h2>
 <p>I have a confession. So, you know how I have been fun and cheery by anthropomorphisizing Ansible, saying that it was <em>&ldquo;happy&rdquo;</em> or <em>&ldquo;frusterated&rdquo;</em> during the previous steps? That wasn&rsquo;t true. I made it up. Ansible wasn&rsquo;t <em>actually</em> installed yet. <em>So&hellip; to install Ansible&hellip;</em></p>
-
 <pre><code>sudo eopkg it ansible
-</code></pre>
-
-<p>I used <code>eopkg</code> because I am currently running <a href="https://getsol.us">Solus</a>. You might use <code>sudo apt-get install ansible</code>, <code>sudo dnf install ansible</code>, or <code>pacaur -S ansible</code> depending on whatever distro you are using.</p>
-
+</code></pre><p>I used <code>eopkg</code> because I am currently running <a href="https://getsol.us">Solus</a>. You might use <code>sudo apt-get install ansible</code>, <code>sudo dnf install ansible</code>, or <code>pacaur -S ansible</code> depending on whatever distro you are using.</p>
 <p>That&rsquo;s all for <em>setting up</em> Ansible. I&rsquo;ll cut this post off here, but in the next post, I&rsquo;ll walk through the steps on how to get Ansible to be useful.</p>
 
                     

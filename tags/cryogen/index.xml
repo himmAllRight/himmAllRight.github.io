@@ -17,48 +17,28 @@
       
       <guid>http://ryan.himmelwright.net/post/website-transition-to-hugo/</guid>
       <description>&lt;p&gt;While I have loved using &lt;a href=&#34;http://cryogenweb.org&#34;&gt;Cryogen&lt;/a&gt; to create this website for over a year and a half now, I have started the transition to using another static website generator. Specifically, I have been experimenting with &lt;a href=&#34;https://gohugo.io&#34;&gt;Hugo&lt;/a&gt;. This post will detail why I am switching, what I have ported over thus far, and what still needs to be completed before generating the official site with hugo.&lt;/p&gt;
-
 &lt;h3 id=&#34;from-cryogen-to-hugo&#34;&gt;From Cryogen to Hugo&lt;/h3&gt;
-
 &lt;p&gt;My departure from Cryogen really has nothing to do with the project itself. It is a prime example of what &lt;a href=&#34;https://clojure.org/&#34;&gt;clojure&lt;/a&gt; is capable of, and I feel that more people should give it a shot. Recently though, I&amp;rsquo;ve been itching to switch up my website&amp;rsquo;s theme a bit. While I fancy my &lt;a href=&#34;../../post/new-theme-immutable/&#34;&gt;Immutable Theme&lt;/a&gt; I created a couple months ago, it isn&amp;rsquo;t quite doing what I had hoped for. I love dark themes, but the type of posts I&amp;rsquo;ve been creating really don&amp;rsquo;t look good with them. I like to add diagrams, code snippets, and images to all of my posts. Diagram posts look wonderful with a white background, but are garbage in a dark theme. This difference was glaring last week as I switched between my markdown editor&amp;rsquo;s preview window (default white theme), and the website&amp;rsquo;s live preview view, while writing my &lt;a href=&#34;../../post//simple-reverse-ssh-tunnel/&#34;&gt;reverse tunnels&lt;/a&gt; post.&lt;/p&gt;
-
 &lt;p&gt;Similar to the logic I employed earlier this month when &lt;a href=&#34;../../post/back-to-solus/&#34;&gt;switching back to Solus&lt;/a&gt;, I thought that if I was going to scrap my theme and start from scratch, I might as well check out different website generator. I had been keeping an eye on the various site generators, but the one I considered the most (and even dabbled with a bit last month), was &lt;a href=&#34;https://gohugo.io&#34;&gt;Hugo&lt;/a&gt;.&lt;/p&gt;
-
-&lt;h3 id=&#34;what-i-ve-done-so-far&#34;&gt;What I&amp;rsquo;ve Done So Far&lt;/h3&gt;
-
+&lt;h3 id=&#34;what-ive-done-so-far&#34;&gt;What I&amp;rsquo;ve Done So Far&lt;/h3&gt;
 &lt;p&gt;I started the process of transporting my website from cryogen to hugo. So far, my experience with Hugo has been great. Here is what I&amp;rsquo;ve done:&lt;/p&gt;
-
-&lt;h4 id=&#34;installed-setup-a-test-hugo-site&#34;&gt;Installed &amp;amp; Setup a test Hugo site&lt;/h4&gt;
-
+&lt;h4 id=&#34;installed--setup-a-test-hugo-site&#34;&gt;Installed &amp;amp; Setup a test Hugo site&lt;/h4&gt;
 &lt;p&gt;Obtaining and installing Hugo on my computers was very simple, as it was in the reops (Solus). I just had to run the command:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;sudo eopkg it hugo&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;After I had hugo installed, I experimented with creating new website projects for a few minutes before finally creating one to start my transition. To create a new website, I used the command:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;hugo new site ryan-hugo-test&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;This created a new directory with all the project&amp;rsquo;s default core files, and adhering to the required hugo &lt;a href=&#34;https://gohugo.io/content-management/organization/&#34;&gt;directory structure&lt;/a&gt;.&lt;/p&gt;
-
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;sudo eopkg it hugo
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;After I had hugo installed, I experimented with creating new website projects for a few minutes before finally creating one to start my transition. To create a new website, I used the command:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;hugo new site ryan-hugo-test
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;This created a new directory with all the project&amp;rsquo;s default core files, and adhering to the required hugo &lt;a href=&#34;https://gohugo.io/content-management/organization/&#34;&gt;directory structure&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;Like cryogen, hugo can spin up a website in a test server during development. To do this, use the command:&lt;/p&gt;
-
 &lt;pre&gt;&lt;code&gt;hugo serve -D
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;&lt;em&gt;Note: I used the &lt;code&gt;-D&lt;/code&gt; flag to additionally include any files marked as &amp;ldquo;drafts.&amp;rdquo;&lt;/em&gt;&lt;/p&gt;
-
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;em&gt;Note: I used the &lt;code&gt;-D&lt;/code&gt; flag to additionally include any files marked as &amp;ldquo;drafts.&amp;quot;&lt;/em&gt;&lt;/p&gt;
 &lt;h4 id=&#34;setup-a-theme-and-started-tweaking-it&#34;&gt;Setup a Theme and started tweaking it&lt;/h4&gt;
-
 &lt;p&gt;With the hugo site generated, I wanted to setup a proper theme. After sampling a handful of demo sites from hugo&amp;rsquo;s &lt;a href=&#34;https://gohugo.io/themes/&#34;&gt;theme page&lt;/a&gt;, I decided on the startbootstrap-clean-theme. I&amp;rsquo;ve seen it used on other sites, and I think it is a commonly used theme with other site generators. However, it is clean and simple, with a white-background base like I wanted. Additionally, I love having header images for posts and pages. It lets me better personalize the website by exclusively using images I&amp;rsquo;ve photographed myself.&lt;/p&gt;
-
 &lt;p&gt;To get the theme, I cloned it from git:&lt;/p&gt;
-
 &lt;pre&gt;&lt;code&gt;git clone git@github.com:humboldtux/startbootstrap-clean-blog.git
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;&lt;em&gt;Note: this particular theme has an abundant amount of features, so it is a good idea to copy the provided example config.toml and build off of it. This is one reason why I started with configuring the theme right off the bat.&lt;/em&gt;&lt;/p&gt;
-
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;em&gt;Note: this particular theme has an abundant amount of features, so it is a good idea to copy the provided example config.toml and build off of it. This is one reason why I started with configuring the theme right off the bat.&lt;/em&gt;&lt;/p&gt;
 &lt;p&gt;Before I started ripping into the theme too much, I copied the theme directory to make my own version, and set the &lt;code&gt;theme&lt;/code&gt; line in my &lt;code&gt;config.toml&lt;/code&gt; to reflect the change. I also went through all the lines of the example &lt;code&gt;config.toml&lt;/code&gt; and  changed them accordingly.&lt;/p&gt;
-
-&lt;p&gt;&lt;a name=&#34;summary-setup&#34;&gt;&lt;/a&gt;
+&lt;p&gt;&lt;!-- raw HTML omitted --&gt;&lt;!-- raw HTML omitted --&gt;
 With the theme setup, and the configuration edited, I started making some minor tweak to the site. The main tweak I made was to add the &lt;code&gt;Summary&lt;/code&gt; contents to the post list on the home page. I currently use this feature in Cryogen, so all of my posts are written to support it. Summaries are baked into hugo, but I needed to edit the theme to include it on the posts page. To achieve this, I edited the &lt;code&gt;/layouts/post/summary.html&lt;/code&gt; file of the theme slightly:&lt;/p&gt;
-
 &lt;p&gt;original:&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-html&#34; data-lang=&#34;html&#34;&gt;&amp;lt;&lt;span style=&#34;color:#f92672&#34;&gt;div&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;class&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;post-preview&amp;#34;&lt;/span&gt;&amp;gt;
   &amp;lt;&lt;span style=&#34;color:#f92672&#34;&gt;a&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;href&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;{{ .Permalink }}&amp;#34;&lt;/span&gt;&amp;gt;
@@ -69,8 +49,8 @@ With the theme setup, and the configuration edited, I started making some minor 
       {{ partial &amp;#34;meta.html&amp;#34; .}}
  &amp;lt;/&lt;span style=&#34;color:#f92672&#34;&gt;p&lt;/span&gt;&amp;gt;
 &amp;lt;/&lt;span style=&#34;color:#f92672&#34;&gt;div&lt;/span&gt;&amp;gt;
-&amp;lt;&lt;span style=&#34;color:#f92672&#34;&gt;hr&lt;/span&gt;&amp;gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;with post summaries:&lt;/p&gt;
+&amp;lt;&lt;span style=&#34;color:#f92672&#34;&gt;hr&lt;/span&gt;&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;with post summaries:&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-html&#34; data-lang=&#34;html&#34;&gt;&amp;lt;&lt;span style=&#34;color:#f92672&#34;&gt;div&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;class&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;post-preview&amp;#34;&lt;/span&gt;&amp;gt;
     &amp;lt;&lt;span style=&#34;color:#f92672&#34;&gt;a&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;href&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;{{ .Permalink }}&amp;#34;&lt;/span&gt;&amp;gt;
         &amp;lt;&lt;span style=&#34;color:#f92672&#34;&gt;h2&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;class&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;post-title&amp;#34;&lt;/span&gt;&amp;gt;{{ .Title }}&amp;lt;/&lt;span style=&#34;color:#f92672&#34;&gt;h2&lt;/span&gt;&amp;gt;
@@ -86,45 +66,35 @@ With the theme setup, and the configuration edited, I started making some minor 
         &amp;lt;&lt;span style=&#34;color:#f92672&#34;&gt;a&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;href&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;{{ .Permalink }}&amp;#34;&lt;/span&gt;&amp;gt; Click to Read More --&amp;gt;&amp;lt;/&lt;span style=&#34;color:#f92672&#34;&gt;a&lt;/span&gt;&amp;gt;
     &amp;lt;/&lt;span style=&#34;color:#f92672&#34;&gt;p&lt;/span&gt;&amp;gt;
 &amp;lt;/&lt;span style=&#34;color:#f92672&#34;&gt;div&lt;/span&gt;&amp;gt;
-&amp;lt;&lt;span style=&#34;color:#f92672&#34;&gt;hr&lt;/span&gt;&amp;gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;I also setup and fixed the code syntax highlighting. I first installed pygments, which again was &lt;em&gt;very&lt;/em&gt; easy to do on my Solus computers:&lt;/p&gt;
-
+&amp;lt;&lt;span style=&#34;color:#f92672&#34;&gt;hr&lt;/span&gt;&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;I also setup and fixed the code syntax highlighting. I first installed pygments, which again was &lt;em&gt;very&lt;/em&gt; easy to do on my Solus computers:&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;sudo eopkg it pygments
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;After that, I just made sure that the language was specified at the start of each code snippet. I ran into an issue where the colors for the code were poorly selected, resulting in some invisable text. Apparently, this is a common issue, and I found some &lt;em&gt;.css&lt;/em&gt; code to add to the &lt;code&gt;pre&lt;/code&gt; section of my &lt;code&gt;/static/css/clean-blog-min.css&lt;/code&gt; file that resolved the issue.&lt;/p&gt;
-
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;After that, I just made sure that the language was specified at the start of each code snippet. I ran into an issue where the colors for the code were poorly selected, resulting in some invisable text. Apparently, this is a common issue, and I found some &lt;em&gt;.css&lt;/em&gt; code to add to the &lt;code&gt;pre&lt;/code&gt; section of my &lt;code&gt;/static/css/clean-blog-min.css&lt;/code&gt; file that resolved the issue.&lt;/p&gt;
 &lt;p&gt;If all went well, the code above should have proper syntax highlighting.&lt;/p&gt;
-
 &lt;h4 id=&#34;dumped-my-backlog-of-posts-and-altered-the-header-content&#34;&gt;Dumped my Backlog of Posts and altered the header content&lt;/h4&gt;
-
 &lt;p&gt;To test out if the website worked properly, I wanted to import all of my posts. First&amp;hellip; I needed to figure out where to put them. Hugo has a slightly different file structure, but I eventually figured out that I could create a &lt;code&gt;/content/post/&lt;/code&gt; directory, and dump them there.&lt;/p&gt;
-
 &lt;p&gt;Cryogen, written in &lt;a href=&#34;https://clojure.org/&#34;&gt;clojure&lt;/a&gt;, uses a clojure map for the post&amp;rsquo;s meta data. Hugo on the other hand, uses a several &lt;a href=&#34;https://gohugo.io/content-management/front-matter/&#34;&gt;font matter formats&lt;/a&gt; (&lt;code&gt;toml&lt;/code&gt;, &lt;code&gt;yaml&lt;/code&gt;, &lt;code&gt;json&lt;/code&gt;) for meta data. So, I had to convert the post headers. I&amp;rsquo;m sure that there was a simple, programmatic way, or even a tool, created to accomplish this&amp;hellip; but I just did it by hand. It wasn&amp;rsquo;t so bad. I used emacs.&lt;/p&gt;
-
 &lt;p&gt;After importing the markdown files for the posts, I needed to add all the images the posts contain. Again, this took a tiny bit of research to figure out the file structure, but I quickly learned that anything in the &lt;code&gt;/static/&lt;/code&gt; directory gets copied to the site&amp;rsquo;s root directory when the site is compiled. So, I was able to copy my cryogen &lt;code&gt;/img/&lt;/code&gt; folder directly to &lt;code&gt;/static/img/&lt;/code&gt; in hugo, and all my image paths worked out-of-the-box!&lt;/p&gt;
-
-&lt;p&gt;&lt;a name=&#34;image-size&#34;&gt;&lt;/a&gt;
+&lt;p&gt;&lt;!-- raw HTML omitted --&gt;&lt;!-- raw HTML omitted --&gt;
 Unfortunately, I immediately noticed that some images in the posts were massive, and not constrained to the content width. I looked for a solution, and tried editing the &lt;code&gt;css&lt;/code&gt;, but I eventually just started to convert the markdown syntax images, to use normal html &lt;code&gt;&amp;lt;img&amp;gt;&lt;/code&gt; tags, with a &lt;code&gt;width=100%&lt;/code&gt; parameter. Ultimately, this gives me a bit more power with how I set images anyway.&lt;/p&gt;
-
 &lt;h4 id=&#34;made-a-bunch-of-header-images&#34;&gt;Made a bunch of header images&lt;/h4&gt;
-
 &lt;p&gt;After fixing my in-post images, I started to play with post/page header images. I figured out where they were located in the theme, and added two of my own to replace the defaults. I read that a header image can be set with the &lt;code&gt;image == &amp;quot;...&amp;quot;&lt;/code&gt; option in a post/page&amp;rsquo;s font matter&amp;hellip; so I went a little crazy. I stayed up late browsing through some of my photos, and converting them to header images (I did this by shading them a just a tad, so the overlaying text is legible).&lt;/p&gt;
-
 &lt;h3 id=&#34;what-needs-to-be-done&#34;&gt;What Needs to be Done&lt;/h3&gt;
-
 &lt;p&gt;This post has turned out to be a giant monster, so I&amp;rsquo;ll be brief here and turn the sub-sections into a quick list instead.&lt;/p&gt;
-
 &lt;ul&gt;
-&lt;li&gt;&lt;p&gt;&lt;strong&gt;Create Single Pages (About/Homelab)&lt;/strong&gt; - I still need to figure out and create my website&amp;rsquo;s single pages. These include the &lt;em&gt;About Me&lt;/em&gt; and &lt;em&gt;Homelab&lt;/em&gt; pages. The content of those pages has also been slipping out of date&amp;hellip; but I won&amp;rsquo;t let that hold me up from switching the site over first.&lt;/p&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;&lt;strong&gt;Setting up an RSS Feed&lt;/strong&gt; - Similar to the task above, I want to make sure I have an RSS feed for the blog configured, and accessible in the main menu.&lt;/p&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;&lt;strong&gt;Check how the posts display&lt;/strong&gt; - I need to go through the posts and make sure they are displaying content correctly. I&amp;rsquo;ll check that links work, images aren&amp;rsquo;t massive, code syntax languages are set, etc. This actually shouldn&amp;rsquo;t be as bad as it sounds because I&amp;rsquo;ve done much of it already.&lt;/p&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;&lt;strong&gt;Small tweaks&lt;/strong&gt; - There are bound to be a few tweaks here or there that I&amp;rsquo;ll notice and want to changed (&lt;em&gt;example from above: I&amp;rsquo;ve already added the post summaries to the home page post list&lt;/em&gt;). One item that comes to mind is adding &lt;em&gt;next&lt;/em&gt; and &lt;em&gt;previous&lt;/em&gt; post markers at the bottom of each post. Again, I won&amp;rsquo;t let that hold me up though.&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Create Single Pages (About/Homelab)&lt;/strong&gt; - I still need to figure out and create my website&amp;rsquo;s single pages. These include the &lt;em&gt;About Me&lt;/em&gt; and &lt;em&gt;Homelab&lt;/em&gt; pages. The content of those pages has also been slipping out of date&amp;hellip; but I won&amp;rsquo;t let that hold me up from switching the site over first.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Setting up an RSS Feed&lt;/strong&gt; - Similar to the task above, I want to make sure I have an RSS feed for the blog configured, and accessible in the main menu.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Check how the posts display&lt;/strong&gt; - I need to go through the posts and make sure they are displaying content correctly. I&amp;rsquo;ll check that links work, images aren&amp;rsquo;t massive, code syntax languages are set, etc. This actually shouldn&amp;rsquo;t be as bad as it sounds because I&amp;rsquo;ve done much of it already.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Small tweaks&lt;/strong&gt; - There are bound to be a few tweaks here or there that I&amp;rsquo;ll notice and want to changed (&lt;em&gt;example from above: I&amp;rsquo;ve already added the post summaries to the home page post list&lt;/em&gt;). One item that comes to mind is adding &lt;em&gt;next&lt;/em&gt; and &lt;em&gt;previous&lt;/em&gt; post markers at the bottom of each post. Again, I won&amp;rsquo;t let that hold me up though.&lt;/p&gt;
+&lt;/li&gt;
 &lt;/ul&gt;
-
 &lt;p&gt;Well, that&amp;rsquo;s about it. I&amp;rsquo;ll work now on editing and publishing this post, and with any luck, the website should switch over to the Hugo generated one within a few days. I hope you enjoy it!&lt;/p&gt;</description>
     </item>
     
@@ -134,59 +104,35 @@ Unfortunately, I immediately noticed that some images in the posts were massive,
       <pubDate>Tue, 11 Apr 2017 00:00:00 +0000</pubDate>
       
       <guid>http://ryan.himmelwright.net/post/new-theme-immutable/</guid>
-      <description>
-
-&lt;p&gt;When I first started using &lt;a href=&#34;http://cryogenweb.org&#34;&gt;Cryogen&lt;/a&gt; to generate this website, I wanted to create a personalized theme. This desire led me to hack a the default theme into a mutant, which I boringly named &amp;ldquo;&lt;i&gt;ryan1&lt;/i&gt;&amp;rdquo; (I anticipated it to be temporary). It looked like a relic, designed from when I first learned how to make a web page&amp;hellip; the early 2000&amp;rsquo;s. Like &lt;del&gt;many&lt;/del&gt; all websites from that time, it was not mobile friendly. I hope to change all of that, by introducing my new website theme: &lt;b&gt;&lt;i&gt;Immutable&lt;/i&gt;&lt;/b&gt;.&lt;/p&gt;
-
-&lt;!-- more --&gt;
-
-&lt;p&gt;&lt;a href=&#34;../../img/posts/New-Theme-Immutable/ryan1-home.png&#34;&gt;&lt;img alt=&#34;Homepage with old ryan1 Theme&#34; src=&#34;../../img/posts/New-Theme-Immutable/ryan1-home.png&#34; style=&#34;max-width: 100%;&#34;/&gt;&lt;/a&gt;
+      <description>&lt;p&gt;When I first started using &lt;a href=&#34;http://cryogenweb.org&#34;&gt;Cryogen&lt;/a&gt; to generate this website, I wanted to create a personalized theme. This desire led me to hack a the default theme into a mutant, which I boringly named &amp;ldquo;&lt;!-- raw HTML omitted --&gt;ryan1&lt;!-- raw HTML omitted --&gt;&amp;rdquo; (I anticipated it to be temporary). It looked like a relic, designed from when I first learned how to make a web page&amp;hellip; the early 2000&amp;rsquo;s. Like &lt;del&gt;many&lt;/del&gt; all websites from that time, it was not mobile friendly. I hope to change all of that, by introducing my new website theme: &lt;!-- raw HTML omitted --&gt;&lt;!-- raw HTML omitted --&gt;Immutable&lt;!-- raw HTML omitted --&gt;&lt;!-- raw HTML omitted --&gt;.&lt;/p&gt;
+&lt;!-- raw HTML omitted --&gt;
+&lt;p&gt;&lt;!-- raw HTML omitted --&gt;&lt;!-- raw HTML omitted --&gt;&lt;!-- raw HTML omitted --&gt;
 &lt;em&gt;Homepage with the old Theme&lt;/em&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&#34;../../img/posts/New-Theme-Immutable/immutable-home.png&#34;&gt;&lt;img alt=&#34;Homepage with Immutable Theme&#34; src=&#34;../../img/posts/New-Theme-Immutable/immutable-home.png&#34; style=&#34;max-width: 100%;&#34;/&gt;&lt;/a&gt;
+&lt;p&gt;&lt;!-- raw HTML omitted --&gt;&lt;!-- raw HTML omitted --&gt;&lt;!-- raw HTML omitted --&gt;
 &lt;em&gt;Homepage with the new Immutable Theme&lt;/em&gt;&lt;/p&gt;
-
 &lt;p&gt;While it may possibly still look dated (I wouldn&amp;rsquo;t know, I&amp;rsquo;m a backend dev), it addresses several of the issues I had with the &lt;em&gt;ryan1&lt;/em&gt; theme. Here are a few examples of these improvements:&lt;/p&gt;
-
-&lt;h3 id=&#34;removed-the-sidebar-dispersed-its-contents&#34;&gt;Removed the Sidebar &amp;amp; Dispersed Its Contents&lt;/h3&gt;
-
-&lt;p&gt;&lt;a href=&#34;../../img/posts/New-Theme-Immutable/sidebar-changes.png&#34;&gt;&lt;img src=&#34;../../img/posts/New-Theme-Immutable/sidebar-changes.png&#34; style=&#34;max-width: 100%;&#34;/&gt;&lt;/a&gt;
+&lt;h3 id=&#34;removed-the-sidebar--dispersed-its-contents&#34;&gt;Removed the Sidebar &amp;amp; Dispersed Its Contents&lt;/h3&gt;
+&lt;p&gt;&lt;!-- raw HTML omitted --&gt;&lt;!-- raw HTML omitted --&gt;&lt;!-- raw HTML omitted --&gt;
 &lt;em&gt;The sidebar components have been distributed to other parts of the site&lt;/em&gt;&lt;/p&gt;
-
 &lt;p&gt;I have to be honest here&amp;hellip; I originally planned on keeping the side bar when I started to build the theme. I liked how it held all of my links (Github, LinkedIn, etc), recent posts, and tags in one, easy to find, location. I also liked having my avatar picture in the side bar. I felt it made the site more personable (or maybe I&amp;rsquo;m just egotistical). After working on the base of the theme however, I realized the site might be better off without it. I&amp;rsquo;ve relocated the items to other locations of the site. The majority of the links have been relocated to the drop-down menu (more on that  below), and I at least added my picture to the &lt;a href=&#34;../../pages/about/&#34;&gt;About Page&lt;/a&gt;.&lt;/p&gt;
-
 &lt;p&gt;I might reinstate a sidebar in the future, but only if it looks &lt;em&gt;good&lt;/em&gt; and I can add it &lt;em&gt;correctly&lt;/em&gt;. The way I implemented the old sidebar caused many of the issues prompting this new theme, and I do not want to bring back those problems.&lt;/p&gt;
-
 &lt;h3 id=&#34;removed-the-bad-footer&#34;&gt;Removed the Bad Footer&lt;/h3&gt;
-
-&lt;p&gt;&lt;a href=&#34;../../img/posts/New-Theme-Immutable/ryan1-bad-footer.png&#34;&gt;&lt;img src=&#34;../../img/posts/New-Theme-Immutable/ryan1-bad-footer.png&#34; style=&#34;max-width: 100%;&#34;/&gt;&lt;/a&gt;
+&lt;p&gt;&lt;!-- raw HTML omitted --&gt;&lt;!-- raw HTML omitted --&gt;&lt;!-- raw HTML omitted --&gt;
 &lt;em&gt;Bad Footer Placements&lt;/em&gt;&lt;/p&gt;
-
 &lt;p&gt;One of the issues created by the sidebar and my poor css floats, was the footer. On pages with a large enough the main content, it looked fine, consisting of a dark gray bar &lt;em&gt;along the bottom of the page&lt;/em&gt; . However, when viewing a page with a small content section, such as the &lt;em&gt;About&lt;/em&gt; page, the footer would rise up behind the sidebar. It looked terrible.&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&#34;../../img/posts/New-Theme-Immutable/immutable-footer.png&#34;&gt;&lt;img src=&#34;../../img/posts/New-Theme-Immutable/immutable-footer.png&#34; style=&#34;max-width: 100%;&#34;/&gt;&lt;/a&gt;
+&lt;p&gt;&lt;!-- raw HTML omitted --&gt;&lt;!-- raw HTML omitted --&gt;&lt;!-- raw HTML omitted --&gt;
 &lt;em&gt;New Footer&lt;/em&gt;&lt;/p&gt;
-
 &lt;p&gt;In the &lt;em&gt;Immutable&lt;/em&gt; theme, I have fixed the footer and removed the gray bar. The background looks great, and the text is clearly visible over it, making the bar no longer required. I like minimal footers. I only need a small copyright statement, and I enjoy having a &lt;a href=&#34;http://cryogenweb.org&#34;&gt;Cryogen&lt;/a&gt; shout-out here. So that&amp;rsquo;s all I have.&lt;/p&gt;
-
 &lt;h3 id=&#34;mobile-support&#34;&gt;Mobile Support&lt;/h3&gt;
-
-&lt;p&gt;&lt;a href=&#34;../../img/posts/New-Theme-Immutable/mobile-changes.png&#34;&gt;&lt;img src=&#34;../../img/posts/New-Theme-Immutable/mobile-changes.png&#34; style=&#34;max-width: 100%;&#34;/&gt;&lt;/a&gt;
-&lt;div id=&#34;caption&#34;&gt;Mobile viewing the homepage and a post, on both the old theme and Immutable&lt;/div&gt;&lt;/p&gt;
-
+&lt;p&gt;&lt;!-- raw HTML omitted --&gt;&lt;!-- raw HTML omitted --&gt;&lt;!-- raw HTML omitted --&gt;&lt;/p&gt;
+&lt;!-- raw HTML omitted --&gt;
 &lt;p&gt;The biggest reason for making the new theme was that viewing the website on a mobile device was a poor experience&amp;hellip; unusable even. Again, because I implemented the sidebar poorly, it always remained on the side. Even on a narrow mobile screen. There was not enough room for the actual main content section, and pages/posts consisted of a skinny line of text down the side of the phone. Images&amp;hellip; well, don&amp;rsquo;t get me started on how well images were displayed. &lt;em&gt;Immutable&lt;/em&gt; solves these issues. The main content window takes up the majority of the screen, allowing for easy content reading.&lt;/p&gt;
-
 &lt;h3 id=&#34;mobile-navigation&#34;&gt;Mobile Navigation&lt;/h3&gt;
-
-&lt;p&gt;&lt;a href=&#34;../../img/posts/New-Theme-Immutable/mobile-menu.png&#34;&gt;&lt;img src=&#34;../../img/posts/New-Theme-Immutable/mobile-menu.png&#34; style=&#34;max-width: 100%;&#34;/&gt;&lt;/a&gt;
-&lt;div id=&#34;caption&#34;&gt;Main navigation drop-down and the extended drop-down menu on mobile&lt;/div&gt;&lt;/p&gt;
-
+&lt;p&gt;&lt;!-- raw HTML omitted --&gt;&lt;!-- raw HTML omitted --&gt;&lt;!-- raw HTML omitted --&gt;&lt;/p&gt;
+&lt;!-- raw HTML omitted --&gt;
 &lt;p&gt;In addition to better viewing, site navigation has also been improved on mobile. When I say &lt;em&gt;improved&lt;/em&gt;, I of course mean &lt;em&gt;added&lt;/em&gt;, as is was sort-of non-existent before. In &lt;em&gt;ryan1&lt;/em&gt; there was an drop-down menu icon, but when it was tapped&amp;hellip; nothing happened. At all. Now, there is an icon that drops down a site navigation menu when tapped. At the bottom of the navigation items, there is a &lt;em&gt;more&lt;/em&gt; tab. When clicked, it extends the menu to also include my contact links (Github, LinkedIn, etc.), recent posts, and the list of post tag links.&lt;/p&gt;
-
 &lt;h3 id=&#34;continued-work&#34;&gt;Continued Work&lt;/h3&gt;
-
 &lt;p&gt;While its name is &lt;em&gt;immutable&lt;/em&gt;, the actual theme itself is not (bad joke). There are a few things I plan on tweaking over time. For example, I don&amp;rsquo;t love the fonts and spacing and I will continue to improve them. I also want to edit the &lt;code&gt;code&lt;/code&gt; colors. I did a quick edit of the colors so that they worked with the theme, but they not what I ultimately want. I use the code segments a lot on this site, so it is important that they look nice.&lt;/p&gt;
-
 &lt;p&gt;Well, that is it. I finally got around to making a new theme, and plan to make it even better over time. I hope you enjoy, even on a phone ;).&lt;/p&gt;
 </description>
     </item>
@@ -205,12 +151,8 @@ static website generators. Thus far, I have tried
 started using the &lt;a href=&#34;http://clojure.org/&#34;&gt;clojure&lt;/a&gt; programming language, I have come across
 &lt;a href=&#34;http://cryogenweb.org/&#34;&gt;cryogen&lt;/a&gt;. As you may have already guessed, this site is now
 being generated using cryogen.&lt;/p&gt;
-
-&lt;h2 id=&#34;emacs-org-mode-solutions&#34;&gt;Emacs/org-mode Solutions&lt;/h2&gt;
-
-&lt;p&gt;&lt;img alt=&#34;emacs logo&#34; src=&#34;../../img/posts/using-cryogen-for-website/Emacs-icon.png&#34; style=&#34;max-width: 40%;&#34;/&gt;
-&lt;img alt=&#34;org-mode unicorn&#34; src=&#34;../../img/posts/using-cryogen-for-website/org-mode-unicorn.png&#34; style=&#34;max-width: 40%;&#34;/&gt;&lt;/p&gt;
-
+&lt;h2 id=&#34;emacsorg-mode-solutions&#34;&gt;Emacs/org-mode Solutions&lt;/h2&gt;
+&lt;!-- raw HTML omitted --&gt;
 &lt;p&gt;About a year ago, obsession with
 &lt;a href=&#34;https://www.gnu.org/software/emacs/&#34;&gt;emacs&lt;/a&gt; (and more importantly,
 org-mode) eventually led me to try out
@@ -223,7 +165,6 @@ and support to be lacking. It seemed to be more of a
 personal project, rather than a fully supported
 framework. while I know other people were able to
 get it working, org-page simply wasn&amp;rsquo;t working for me.&lt;/p&gt;
-
 &lt;p&gt;For over a year now, I have used org-mode at work each week to track
 my hours and to take notes (including code snippets). I then export
 the org files to html, creating a full index of my work
@@ -235,11 +176,8 @@ it). Creating my own solution helped me learn even more about org-mode
 (which helped with my work notes), but I ultimately abandoned using this method
 for my personal website. Managing my own solution quickly became a pain
 because I had to setup emacs, install the dependencies, and get a &lt;em&gt;.emacs&lt;/em&gt; file working &lt;em&gt;just right&lt;/em&gt; on any compuer I wanted to generate the site from.&lt;/p&gt;
-
 &lt;h2 id=&#34;jekyll&#34;&gt;Jekyll&lt;/h2&gt;
-
-&lt;p&gt;&lt;img alt= &#34;jekyll logo&#34; src=&#34;../../img/posts/using-cryogen-for-website/jekyll.png&#34; style=&#34;max-width: 100%;&#34;/&gt;&lt;/p&gt;
-
+&lt;!-- raw HTML omitted --&gt;
 &lt;p&gt;My first experience with &lt;a href=&#34;http://jekyllrb.com/&#34;&gt;Jekyll&lt;/a&gt; was about two
 years ago, right after I graduated college. It was the first true
 static website generator that I tried and I absolutely loved the
@@ -256,7 +194,6 @@ using iframes and other messiness). I eventually stopped using Jekyll
 because I was unable to get the theming quite right, and &amp;hellip; well
 &amp;hellip; I started &lt;em&gt;really&lt;/em&gt; getting into emacs. But you&amp;rsquo;ve already heard
 that story.&lt;/p&gt;
-
 &lt;p&gt;After taking a breif hiatus from Jekyll to adventure deeper into emacs
 land, I returned. This time, I was able to find and configure a
 &lt;a href=&#34;https://github.com/joshgerdes/jekyll-uno&#34;&gt;enticing theme&lt;/a&gt; that fit my
@@ -269,11 +206,8 @@ gems environment and dependencies on
 the wall. Additionally, I have been learning
 &lt;a href=&#34;http://clojure.org/&#34;&gt;clojure&lt;/a&gt; and while digging through different
 clojure projects, I found &lt;a href=&#34;http://cryogenweb.org/&#34;&gt;cryogen&lt;/a&gt;.&lt;/p&gt;
-
 &lt;h2 id=&#34;cryogen&#34;&gt;Cryogen&lt;/h2&gt;
-
-&lt;p&gt;&lt;img alt=&#34;Cryogen logo&#34; src=&#34;../../img/posts/using-cryogen-for-website/cryogen.png&#34; style=&#34;max-width: 100%;&#34;/&gt;&lt;/p&gt;
-
+&lt;!-- raw HTML omitted --&gt;
 &lt;p&gt;&lt;a href=&#34;http://cryogenweb.org/&#34;&gt;Cryogen&lt;/a&gt; is a static website generator
 written in &lt;a href=&#34;https://clojure.org/&#34;&gt;Clojure&lt;/a&gt;.  If you already have
 &lt;a href=&#34;http://leiningen.org/&#34;&gt;Leiningen&lt;/a&gt; installed (which if using Clojure,
@@ -289,7 +223,6 @@ live. Cryogen has a rather large, but simple
 organize the project. This structure is slightly different from
 Jekyll, and takes a bit of getting to, but I think it does a better
 job at keeping everything organized once you learn it.&lt;/p&gt;
-
 &lt;p&gt;The one thing I &lt;em&gt;really&lt;/em&gt; like about Cryogen is the fact
 that&amp;hellip; well&amp;hellip; it&amp;rsquo;s clojure. This means that things can often feel more
 &amp;ldquo;lisp-y&amp;rdquo;. For example, in Jekyll, the preferences
@@ -299,14 +232,12 @@ are defined in a very specific yaml header at the top of the markdown
 files. Cryogen follows a similar concept, but instead of yaml
 headers, it simply uses a p-list for the
 &lt;a href=&#34;http://cryogenweb.org/docs/configuration.html&#34;&gt;configuration setup&lt;/a&gt;.&lt;/p&gt;
-
 &lt;p&gt;To change a post&amp;rsquo;s information (ex: title, author, date), one just has
 to change the keywords in the list at the top of the post&amp;rsquo;s markdown
 file. This flexability means that figuring out how to setup use my own
 configuration was a breeze. For programmers that have previously used
 Clojure or another LISP, the configuration in Cryogen is very
 intuitive and natural.&lt;/p&gt;
-
 &lt;p&gt;The only &lt;em&gt;downside&lt;/em&gt; (sort of&amp;hellip; it&amp;rsquo;s my fault) I have experienced
 while using Cryogen is that being a smaller community, there isn&amp;rsquo;t
 much out there in terms of templetes and themes (at least that I was
@@ -320,12 +251,10 @@ now. As a bonus, I am starting to re-learn web design. However, I am
 &lt;em&gt;slowly&lt;/em&gt; catching up, so &amp;ldquo;modern&amp;rdquo; design features like mobil support
 might not happen right away. It&amp;rsquo;s not the best looking site, but I
 has personal touch, which I guess is good in a personal website.&lt;/p&gt;
-
 &lt;p&gt;That&amp;rsquo;s about it. That&amp;rsquo;s why my site suddenly looked different one
 weekend. If I look forward to using both Clojure and Cryogen more for not
 only this website, but other personal projects as well.&lt;/p&gt;
-
-&lt;p&gt;&lt;em&gt;* PS: Re-reading this post I realize trying Cryogen after getting excited about Clojure is VERY much like when I started using org-page after getting excited about emacs. Hopefully this setup is a keeper that I stick with. ;)&lt;/em&gt;&lt;/p&gt;</description>
+&lt;p&gt;_* PS: Re-reading this post I realize trying Cryogen after getting excited about Clojure is VERY much like when I started using org-page after getting excited about emacs. Hopefully this setup is a keeper that I stick with. ;)_&lt;/p&gt;</description>
     </item>
     
   </channel>

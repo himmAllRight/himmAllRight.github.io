@@ -155,28 +155,17 @@ content outside the website, I <em>can</em> choose to remove links if they are
 broken. So, in this post, we will add tests to ensure that links in our posts
 are working. Well, at least the
 <a href="https://guides.github.com/pdfs/markdown-cheatsheet-online.pdf">markdown</a> ones.</p>
-
 <h2 id="what-to-test">What to Test</h2>
-
-<p><center>
-<a href="../../img/posts/creating-website-tests-links/google-404-error.png">
-<img alt="Google 404 Error Page" src="../../img/posts/creating-website-tests-links/google-404-error.png" style="max-width: 100%; padding: 5px 15px 10px 10px"/></a>
-<div class="caption">Google 404 Error Page</div>
-</center></p>
-
+<!-- raw HTML omitted -->
 <p>For this test set, we will be scanning the content files of all of the posts, and
 grabbing every markdown link defined in them. With the links known, we
 will then make a request to each one to check that it is available. If we
 can connect, the test passes. If not (ex: we get a 404), it fails.</p>
-
 <h3 id="adding-utility-functions">Adding Utility Functions</h3>
-
 <p>Before we are able to write the test function, we first need to add to the
 utility functions. These will allow us to get the post&rsquo;s file paths, grab their
 content, and extract all the markdown links from that content.</p>
-
-<h4 id="get-file-paths">get_file_paths</h4>
-
+<h4 id="get_file_paths">get_file_paths</h4>
 <p>First, lets define a new helper function, <code>get_file_paths</code>:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">get_file_paths</span>(src, extension<span style="color:#f92672">=</span>None):
     <span style="color:#e6db74">&#34;&#34;&#34;Collects the paths of all files of a directory&#34;&#34;&#34;</span>
@@ -190,14 +179,12 @@ content, and extract all the markdown links from that content.</p>
         <span style="color:#75715e"># Otherwise, add everything</span>
         <span style="color:#66d9ef">else</span>:
             file_list<span style="color:#f92672">.</span>append(path<span style="color:#f92672">.</span>join(root_path, file))
-    <span style="color:#66d9ef">return</span> file_list</code></pre></div>
-<p>When provided a directory path (<code>src</code>), this function will return a list of all the
+    <span style="color:#66d9ef">return</span> file_list
+</code></pre></div><p>When provided a directory path (<code>src</code>), this function will return a list of all the
 file paths in that directory. Optionally, the <code>extension</code> parameter can be
 supplied to only return files of that extension type (in our case, <code>md</code>). This
 will be used to grab the paths of all of the website post source files.</p>
-
-<h4 id="get-file-content">get_file_content</h4>
-
+<h4 id="get_file_content">get_file_content</h4>
 <p>Now lets define <code>get_file_content</code>. This function will take the file lists
 generated from <code>get_file_paths</code>, grab the content from those files,
 and return a dictionary of all the data.</p>
@@ -208,15 +195,15 @@ and return a dictionary of all the data.</p>
         f <span style="color:#f92672">=</span> open(file, <span style="color:#e6db74">&#34;r&#34;</span>)
         file_content <span style="color:#f92672">=</span> f<span style="color:#f92672">.</span>read()
         content_all_files[path<span style="color:#f92672">.</span>basename(file)] <span style="color:#f92672">=</span> file_content
-    <span style="color:#66d9ef">return</span> content_all_files</code></pre></div>
-<p>The returned dictionary uses the filename as the key, and the content set to the
+    <span style="color:#66d9ef">return</span> content_all_files
+</code></pre></div><p>The returned dictionary uses the filename as the key, and the content set to the
 value. For example:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">{
   <span style="color:#e6db74">&#39;post1.md&#39;</span>: <span style="color:#e6db74">&#39;This is the text of post1.&#39;</span>,
   <span style="color:#e6db74">&#39;post2.md&#39;</span>: <span style="color:#e6db74">&#34;This is the text of post2. Basically the same ol&#39; stuff.&#34;</span>
-}</code></pre></div>
-<h4 id="get-md-links">get_md_links</h4>
+}
 
+</code></pre></div><h4 id="get_md_links">get_md_links</h4>
 <p>Lastly, lets define <code>get_md_links</code>. This function takes the content dictionary
 returned by <code>get_file_content</code>, and uses some <a href="https://en.wikipedia.org/wiki/Regular_expression">regular
 expression</a> magic to match
@@ -232,20 +219,17 @@ the markdown links:</p>
             <span style="color:#75715e"># Regex can&#39;t properly match urls with parens in them, so skip.</span>
             <span style="color:#66d9ef">if</span> <span style="color:#e6db74">&#34;(&#34;</span> <span style="color:#f92672">not</span> <span style="color:#f92672">in</span> match<span style="color:#f92672">.</span>group(<span style="color:#ae81ff">1</span>):
                 all_links<span style="color:#f92672">.</span>append(match<span style="color:#f92672">.</span>group(<span style="color:#ae81ff">1</span>))
-    <span style="color:#66d9ef">return</span> all_links</code></pre></div>
-<p>First, the function compiles the regular expression defined by the <code>regex</code>
+    <span style="color:#66d9ef">return</span> all_links
+</code></pre></div><p>First, the function compiles the regular expression defined by the <code>regex</code>
 parameter. Next, it loops through all the data in the content dictionary,
 strips the newline characters, and then grabs all the regex matches.</p>
-
 <p>Unfortunately, the regex expression can&rsquo;t properly match markdown formated urls
 with parenthesis in them, so we have to check if each match has a <code>(</code> in it. If
 it does, the url is thrown away because we cannot be sure we matched the full
 <code>url</code>. If there are no parenthesis, the url is added to our saved list. After
 parsing all the values of the content dictionary, a list of the matched urls is
 returned.</p>
-
-<h3 id="adding-to-conftest-py">Adding to conftest.py</h3>
-
+<h3 id="adding-to-conftestpy">Adding to conftest.py</h3>
 <p>With our new utility functions defined, we can next add a new fixture (and it&rsquo;s
 helper function) to the <code>conftest.py</code> file. Lets start with the fixture&rsquo;s
 helper function, <code>post_md_link()</code>:</p>
@@ -255,24 +239,21 @@ helper function, <code>post_md_link()</code>:</p>
     all_post_contents <span style="color:#f92672">=</span> get_file_content(all_post_files)
     all_post_md_links <span style="color:#f92672">=</span> get_md_links(all_post_contents)
     <span style="color:#75715e"># Return de-dup list</span>
-    <span style="color:#66d9ef">return</span> list(set(all_post_md_links))</code></pre></div>
-<p>This function uses the utility functions we just wrote above, to extract
+    <span style="color:#66d9ef">return</span> list(set(all_post_md_links))
+</code></pre></div><p>This function uses the utility functions we just wrote above, to extract
 all of the markdown links from the post files found at the
 <code>POST_DIR</code> constant location. It then returns a de-duplicated list of all
 the links.</p>
-
 <p>Now, we can define the fixture, <code>post_md_link</code>:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#a6e22e">@pytest.fixture</span>(params<span style="color:#f92672">=</span>post_md_links())
 <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">post_md_link</span>(request):
     <span style="color:#e6db74">&#34;&#34;&#34;Returns the md_link object for a md link found in a post.&#34;&#34;&#34;</span>
-    <span style="color:#66d9ef">return</span> request<span style="color:#f92672">.</span>param</code></pre></div>
-<p>Similar to the fixtures in the <a href="../../post/creating-website-tests-pages/">pages
+    <span style="color:#66d9ef">return</span> request<span style="color:#f92672">.</span>param
+</code></pre></div><p>Similar to the fixtures in the <a href="../../post/creating-website-tests-pages/">pages
 tests</a>, this one will allow tests to map
 across all the links found in the markdown pages, so a test will run for each
 link.</p>
-
 <h3 id="writing-the-markdown-link-test">Writing the markdown link test</h3>
-
 <p>Finally, time to write the <em>one and only test function</em> in this post:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">test_md_links</span>(post_md_link):
     <span style="color:#e6db74">&#34;&#34;&#34;Checks that the markdown links are not broken.&#34;&#34;&#34;</span>
@@ -282,18 +263,16 @@ link.</p>
         url <span style="color:#f92672">=</span> BASE_URL <span style="color:#f92672">+</span> post_md_link<span style="color:#f92672">.</span>lower()
     response <span style="color:#f92672">=</span> requests<span style="color:#f92672">.</span>get(url)
     <span style="color:#66d9ef">assert</span> response<span style="color:#f92672">.</span>status_code <span style="color:#f92672">!=</span> <span style="color:#ae81ff">404</span>, f<span style="color:#e6db74">&#34;The link {post_md_link} is not found.&#34;</span>
-    <span style="color:#66d9ef">assert</span> response<span style="color:#f92672">.</span>status_code <span style="color:#f92672">!=</span> <span style="color:#ae81ff">403</span>, f<span style="color:#e6db74">&#34;The link {post_md_link} is forbidden.&#34;</span></code></pre></div>
-<p>Because I link to both internal and external pages in my posts, I have to prep
+    <span style="color:#66d9ef">assert</span> response<span style="color:#f92672">.</span>status_code <span style="color:#f92672">!=</span> <span style="color:#ae81ff">403</span>, f<span style="color:#e6db74">&#34;The link {post_md_link} is forbidden.&#34;</span>
+</code></pre></div><p>Because I link to both internal and external pages in my posts, I have to prep
 my urls a bit. So, I first check if the link starts with <code>http</code> (which would
 also match ones starting with <code>https</code>). If it does, we can leave the link as
 is. If it doesn&rsquo;t, we can assume the link is an internal one (ex:
 <code>/post/creating-website-tests-links/</code>), and we need to prepend it with the
 <code>BASE_URL</code> constant.</p>
-
 <p>With a proper url, we can use <code>requests.get()</code> to attempt to retrieve a
 response code from the page. If we get a response, I then assert that the
 <code>status_code</code> is <em>not</em> <code>404</code> or <code>403</code>.</p>
-
 <p><em>Side Note:</em> I started by asserting that each link returned a <code>200</code> status, but
 quickly learned that it was a bad idea, because I was testing mostly external
 links.  I never got all the tests to pass because they would often return
@@ -301,17 +280,13 @@ odd 500-level errors for issues that quite frankly, doesn&rsquo;t matter to me. 
 example, one site kept return a 500-level error I think because their servers
 were &lsquo;under a slightly higher load&rsquo;&hellip; but when I went to the link, the page
 loaded fine.</p>
-
 <p>In the end, I decided I wasn&rsquo;t trying to test the issues the websites I linked
 to were having, but instead just wanted to make sure that <em>my links</em> weren&rsquo;t
-<em>broken</em>.  So, I now just ensure that I&rsquo;m not getting <code>404</code> or <code>403</code>&rsquo;s, and I&rsquo;m
+<em>broken</em>.  So, I now just ensure that I&rsquo;m not getting <code>404</code> or <code>403</code>'s, and I&rsquo;m
 happy with that.</p>
-
 <h2 id="limitations">Limitations</h2>
-
 <p>While I am very happy with the coverage these tests provide, they do have some
 limitations to keep in mind:</p>
-
 <ul>
 <li>They cannot match urls with parentheses</li>
 <li>Currently, they only check that pages do not return <code>403</code> and <code>404</code> errors. This means I
@@ -320,29 +295,21 @@ issues. I plan to expand this assert list in the future to cover more
 cases.</li>
 <li>I&rsquo;m currently only testing markdown links. This doesn&rsquo;t grab any html links I
 have in my posts.
-
 <ul>
 <li>On a similar note, because I link most of my images with html, it also
 isn&rsquo;t testing if my images are broken.</li>
 <li>I&rsquo;d like to add tests for both of these issues eventually, but
 decided testing the markdown links was the best place to start.</li>
-</ul></li>
+</ul>
+</li>
 <li>Sometimes tests fail because a site is down. No biggie. I just usually wait
 a bit and then run the tests again before deciding to remove the link.</li>
 </ul>
-
 <h2 id="conclusion">Conclusion</h2>
-
-<p><center>
-<a href="../../img/posts/creating-website-tests-links/passing-links-tests.png">
-<img alt="Passing tests, including new link tests" src="../../img/posts/creating-website-tests-links/passing-link-tests.png" style="max-width: 100%; padding: 5px 15px 10px 10px"/></a>
-<div class="caption">Passing tests, including the new markdown link tests</div>
-</center></p>
-
+<!-- raw HTML omitted -->
 <p>That&rsquo;s it. By adding a few easy helper functions, a new fixture, and a <em>single</em>
 test function, We&rsquo;ve expanded my test results from 70 to over 420 tests (and
 growing).</p>
-
 <p>More important than the number of tests, is <em>what</em> the results tell us. A
 failing test tells me that one of my markdown links <em>might</em> be broken. These
 tests have <em>already</em> been beneficial to me, as I ended updating/removing

@@ -19,77 +19,51 @@
       <description>&lt;p&gt;The past few weeks I have been listening to all of the buzz about
 Ubuntu &amp;ldquo;snaps&amp;rdquo;, but I just recently decided to try this new technology
 out.&lt;/p&gt;
-
 &lt;h3 id=&#34;snapd-install-and-setup&#34;&gt;Snapd Install and Setup&lt;/h3&gt;
-
 &lt;p&gt;I decided to install snapd on my small netbook (Abra), which is running Arch
 Linux. So, installing snapd was as easy as running:&lt;/p&gt;
-
 &lt;p&gt;&lt;code&gt;pacaur -S snapd&lt;/code&gt;&lt;/p&gt;
-
 &lt;p&gt;Now, I use pacaur so that I can install packages from Arch Linux&amp;rsquo;s
 main repos, as well as the AUR. However, because snapd has actually
 been moved to the community repos, you can install it with vanilla
 pacman, without aur support.&lt;/p&gt;
-
 &lt;p&gt;&lt;code&gt;sudo pacman -S snapd&lt;/code&gt;&lt;/p&gt;
-
 &lt;p&gt;After snapd is installed, it needs to be started. To start the snapd
 service, just use systemd:&lt;/p&gt;
-
 &lt;p&gt;&lt;code&gt;sudo systemctl start snapd&lt;/code&gt;&lt;/p&gt;
-
 &lt;p&gt;Additionally, If you want to start the snapd service automatically
 after a reboot run the command:&lt;/p&gt;
-
 &lt;p&gt;&lt;code&gt;sudo systemctl enable snapd&lt;/code&gt;&lt;/p&gt;
-
 &lt;h3 id=&#34;using-snap&#34;&gt;Using snap&lt;/h3&gt;
-
 &lt;p&gt;After snapd was installed and running, I started
 playing with the snap application. The first thing I should note is
 that to the extent of my knowledge, snap has to be run as root (at
 least for now). So my commands all start with &lt;code&gt;sudo&lt;/code&gt;.&lt;/p&gt;
-
 &lt;p&gt;First, I wanted to find a snap package. This can be done using the
 &lt;code&gt;snap find&lt;/code&gt; command as follows:&lt;/p&gt;
-
 &lt;p&gt;&lt;code&gt;sudo snap find package-name&lt;/code&gt;&lt;/p&gt;
-
 &lt;p&gt;&lt;em&gt;(where &lt;strong&gt;package-name&lt;/strong&gt; is the name of the package to search)&lt;/em&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;img alt= &#34;Finding Snaps&#34; src=&#34;../../img/posts/arch-snaps/snap-find.png&#34; style=&#34;max-width: 100%;&#34;/&gt;&lt;/p&gt;
-
+&lt;!-- raw HTML omitted --&gt;
 &lt;p&gt;Just like in any standard package manager search, the potential
 matches were returned, along with a version number, the developer
 name, and a summary.&lt;/p&gt;
-
 &lt;p&gt;Snap has several other commands. To see a full list of available snap
 commands and a description for each one, just type:&lt;/p&gt;
-
 &lt;p&gt;&lt;code&gt;sudo snap help&lt;/code&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;img alt=&#34;Snap Help&#34; src=&#34;../../img/posts/arch-snaps/snap-help.png&#34; style=&#34;max-width: 100%;&#34;/&gt;&lt;/p&gt;
-
+&lt;!-- raw HTML omitted --&gt;
 &lt;h3 id=&#34;testing-a-snap&#34;&gt;Testing a snap&lt;/h3&gt;
-
 &lt;p&gt;After learning about the basic snap commands, I wanted to install a
 snap to see how well it works. I decided to see if there was a
 Telegram snap (I heard there was, so it was a good bet). I ran
 &lt;code&gt;sudo snap find telegram&lt;/code&gt;, and a list of my options appeared.&lt;/p&gt;
-
-&lt;p&gt;&lt;img alt=&#34;Snap telegram&#34; src=&#34;../../img/posts/arch-snaps/snap-telegram-install.png&#34; style=&#34;max-width: 100%;&#34;/&gt;&lt;/p&gt;
-
+&lt;!-- raw HTML omitted --&gt;
 &lt;p&gt;I choose the last one, and installed it using the command
 &lt;code&gt;sudo snap install telegram-serguisens&lt;/code&gt;. A progress bar tracked the download of
 the snap, and then the installation. That was it. To my delight,
 within a few seconds the Ubuntu &lt;code&gt;snap&lt;/code&gt; application had downloaded the
 telegram snap, and installed it on my &lt;em&gt;arch linux&lt;/em&gt; box, without any issue.&lt;/p&gt;
-
 &lt;h3 id=&#34;my-only-issue&#34;&gt;My Only Issue&lt;/h3&gt;
-
-&lt;p&gt;&lt;img alt=&#34;Snap Help&#34; src=&#34;../../img/posts/arch-snaps/snap-telegram-menu.png&#34; style=&#34;max-width: 100%;&#34;/&gt;&lt;/p&gt;
-
+&lt;!-- raw HTML omitted --&gt;
 &lt;p&gt;Well&amp;hellip; &lt;em&gt;almost&lt;/em&gt; without any issues. The one problem I did have was
 after installing the telegram snap, the executable wasn&amp;rsquo;t in my path so
 I couldn&amp;rsquo;t start it from my launcher or even a terminal. I think this
@@ -97,16 +71,12 @@ was actually because snapd wasn&amp;rsquo;t setup fully. I rebooted my computer
 and telegram now launches just fine. The snap is even identified with
 its full name (&lt;em&gt;telegram-serguisens&lt;/em&gt;), so I can be sure it is the
 actual snap, and not another Telegram install.&lt;/p&gt;
-
 &lt;h3 id=&#34;thoughts&#34;&gt;Thoughts&lt;/h3&gt;
-
-&lt;p&gt;&lt;img alt=&#34;Snap Help&#34; src=&#34;../../img/posts/arch-snaps/snap-telegram.png&#34; style=&#34;max-width: 100%;&#34;/&gt;&lt;/p&gt;
-
+&lt;!-- raw HTML omitted --&gt;
 &lt;p&gt;While the fact that snaps are easy to package and install for
 developers and users alike, I think my favorite feature was something
 that I didn&amp;rsquo;t even think about prior to trying it out, and I might not
 of realized had I installed snapd on another computer&amp;hellip;&lt;/p&gt;
-
 &lt;p&gt;This little computer is low power, and tends to heat up and go crazy
 when I install certain packages (particularly ones from the
 AUR). Sometimes it is so bad that I have to kill the installation and
@@ -118,7 +88,6 @@ to of just download and installed itself. It hardly pegged my CPU at
 all. If this is true, snaps might have an additional use-case on weaker
 hardware, like my netbook. (yes, I know snaps might have a bigger disk
 footprint, but honestly that trade-off is fine with me)&lt;/p&gt;
-
 &lt;p&gt;I think the universal application frameworks are a great idea that is
 very much needed on Linux. Snapd is very promising and I look forward
 to seeing what it and other solutions have in store for the future of

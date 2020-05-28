@@ -1,8 +1,8 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Devops on λ ryan. himmelwright. net</title>
+    <title>DevOps on λ ryan. himmelwright. net</title>
     <link>http://ryan.himmelwright.net/tags/devops/</link>
-    <description>Recent content in Devops on λ ryan. himmelwright. net</description>
+    <description>Recent content in DevOps on λ ryan. himmelwright. net</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Thu, 30 Apr 2020 00:00:00 +0000</lastBuildDate>
@@ -20,79 +20,67 @@
 &lt;a href=&#34;https://www.ansible.com&#34;&gt;Ansible&lt;/a&gt;, in &lt;a href=&#34;../../post/ansible-on-pi-cluster/&#34;&gt;a post about building a raspberry pi
 cluster&lt;/a&gt;. All in all&amp;hellip; it was by no means a
 great introduction to the basics of ansible.&lt;/p&gt;
-
 &lt;p&gt;A month ago, I drafted a progression of examples with notes, to teach a
 co-worker the &lt;em&gt;basics&lt;/em&gt; of writing and using ansible roles and playbooks. After
 reading through them, I realized it wouldn&amp;rsquo;t take much to turn
 them into an &lt;em&gt;actual&lt;/em&gt; Ansible quickstart post. So here we are.&lt;/p&gt;
-
 &lt;p&gt;I am not an Ansible genius, and reading this will not make you one either. However,
 the goal of this post is to provide enough understating to get started with writing
 some ansible playbooks.&lt;/p&gt;
-
 &lt;h2 id=&#34;installing&#34;&gt;Installing&lt;/h2&gt;
-
 &lt;p&gt;Lets start by installing ansible. It should be in most distro&amp;rsquo;s main repos these
 days:&lt;/p&gt;
-
 &lt;p&gt;Fedora Linux:&lt;/p&gt;
-
 &lt;pre&gt;&lt;code&gt;sudo dnf install ansible
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;MacOS:&lt;/p&gt;
-
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;MacOS:&lt;/p&gt;
 &lt;p&gt;&amp;hellip; I have no idea. I usually always &lt;code&gt;ssh&lt;/code&gt; to Linux boxes from my macbook.&lt;/p&gt;
-
 &lt;p&gt;I think it can be installed with &lt;code&gt;pip&lt;/code&gt; though, so possibly:&lt;/p&gt;
-
 &lt;pre&gt;&lt;code&gt;pip3 install ansible
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&#34;remote-node-requirements&#34;&gt;Remote Node Requirements&lt;/h3&gt;
-
+&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;remote-node-requirements&#34;&gt;Remote Node Requirements&lt;/h3&gt;
 &lt;p&gt;In order for ansible to connect to a remote node, that node usually needs 3
 things:&lt;/p&gt;
-
 &lt;ul&gt;
-&lt;li&gt;1) Python installed&lt;/li&gt;
-&lt;li&gt;2) password-less sudo permissions&lt;/li&gt;
-&lt;li&gt;3) &lt;code&gt;ssh&lt;/code&gt; keys configured (if running against remote hosts. Not needed if
- just running playbooks against &lt;code&gt;localhost&lt;/code&gt;)&lt;/li&gt;
+&lt;li&gt;
+&lt;ol&gt;
+&lt;li&gt;Python installed&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;ol start=&#34;2&#34;&gt;
+&lt;li&gt;password-less sudo permissions&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;ol start=&#34;3&#34;&gt;
+&lt;li&gt;&lt;code&gt;ssh&lt;/code&gt; keys configured (if running against remote hosts. Not needed if
+just running playbooks against &lt;code&gt;localhost&lt;/code&gt;)&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
 &lt;/ul&gt;
-
 &lt;h4 id=&#34;python&#34;&gt;python&lt;/h4&gt;
-
 &lt;p&gt;Python should already be installed on most systems. If not, check your package
 manager, or try searching the documentation on &lt;a href=&#34;https://python.org&#34;&gt;python.org&lt;/a&gt;
 to learn the best install method for your system.&lt;/p&gt;
-
 &lt;h4 id=&#34;passwordless-sudo&#34;&gt;Passwordless &lt;code&gt;sudo&lt;/code&gt;&lt;/h4&gt;
-
 &lt;p&gt;This will allow a user to run &lt;code&gt;sudo&lt;/code&gt; commands, without having to type in a
 password each time. I shouldn&amp;rsquo;t have to say this, but&amp;hellip; &lt;em&gt;please use with care!&lt;/em&gt;&lt;/p&gt;
-
 &lt;p&gt;Granting password-less sudo permissions are most easily accomplished with
 &lt;code&gt;visudo&lt;/code&gt;:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;sudo visudo&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;This will open up the &lt;code&gt;sudo&lt;/code&gt; settings in your &lt;code&gt;$EDITOR&lt;/code&gt;. Once opened, find the
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;sudo visudo
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;This will open up the &lt;code&gt;sudo&lt;/code&gt; settings in your &lt;code&gt;$EDITOR&lt;/code&gt;. Once opened, find the
 following line and uncomment it (it&amp;rsquo;s usually near the bottom of the file).&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;color:#75715e&#34;&gt;## Same thing without a password&lt;/span&gt;
-%wheel        ALL&lt;span style=&#34;color:#f92672&#34;&gt;=(&lt;/span&gt;ALL&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt;       NOPASSWD: ALL&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;h4 id=&#34;ssh&#34;&gt;ssh&lt;/h4&gt;
-
+%wheel        ALL&lt;span style=&#34;color:#f92672&#34;&gt;=(&lt;/span&gt;ALL&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt;       NOPASSWD: ALL
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h4 id=&#34;ssh&#34;&gt;ssh&lt;/h4&gt;
 &lt;p&gt;Lastly, exchange ssh-keys with the remote node. This will allow ansible to ssh
 into the node without having to deal with those pesky passwords. The easiest way
 to exchange keys is using the &lt;code&gt;ssh-copy-id&lt;/code&gt; command, as such:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;ssh-copy-id username@hostname&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;h2 id=&#34;ansible-basics&#34;&gt;Ansible Basics&lt;/h2&gt;
-
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;ssh-copy-id username@hostname
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;ansible-basics&#34;&gt;Ansible Basics&lt;/h2&gt;
 &lt;h4 id=&#34;hosts-file&#34;&gt;Hosts File&lt;/h4&gt;
-
 &lt;p&gt;A host inventory file is a yaml file that defines hosts ansible can connect to.
 The default file is located at &lt;code&gt;/etc/ansible/hosts&lt;/code&gt;. An alternative inventory
 file may be provided using the &lt;code&gt;-i&lt;/code&gt; flag.&lt;/p&gt;
-
 &lt;p&gt;Example file:&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;[VMs]
 &lt;span style=&#34;color:#75715e&#34;&gt;## Server VMs&lt;/span&gt;
@@ -107,18 +95,14 @@ file may be provided using the &lt;code&gt;-i&lt;/code&gt; flag.&lt;/p&gt;
 [cluster]
 &lt;span style=&#34;color:#ae81ff&#34;&gt;192.168.112.205&lt;/span&gt;
 &lt;span style=&#34;color:#ae81ff&#34;&gt;192.168.112.206&lt;/span&gt;
-&lt;span style=&#34;color:#ae81ff&#34;&gt;192.168.112.207&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;h4 id=&#34;modules&#34;&gt;Modules&lt;/h4&gt;
-
+&lt;span style=&#34;color:#ae81ff&#34;&gt;192.168.112.207&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h4 id=&#34;modules&#34;&gt;Modules&lt;/h4&gt;
 &lt;p&gt;Modules are premade functionality used in ansible that can be imported into a
 playbook. Simply, they &lt;em&gt;do&lt;/em&gt; what you want &lt;em&gt;done&lt;/em&gt;. Some examples are &lt;code&gt;ping&lt;/code&gt;,
 &lt;code&gt;dnf&lt;/code&gt;, &lt;code&gt;apt&lt;/code&gt;, &lt;code&gt;redhat_subscription&lt;/code&gt;.&lt;/p&gt;
-
 &lt;p&gt;Feel free to search the &lt;a href=&#34;https://docs.ansible.com&#34;&gt;ansible documentation&lt;/a&gt; to
 learn more.&lt;/p&gt;
-
 &lt;h4 id=&#34;ad-hoc-ansible-commands&#34;&gt;Ad-hoc Ansible Commands&lt;/h4&gt;
-
 &lt;p&gt;Simple and straight ansible executions can be called with the &lt;code&gt;ansible&lt;/code&gt; command.
 Ad-hoc commands are usually called with a module, using the &lt;code&gt;-m&lt;/code&gt; flag. For
 example, &lt;code&gt;ping&lt;/code&gt;:&lt;/p&gt;
@@ -127,26 +111,22 @@ example, &lt;code&gt;ping&lt;/code&gt;:&lt;/p&gt;
 localhost | SUCCESS &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&amp;gt; &lt;span style=&#34;color:#f92672&#34;&gt;{&lt;/span&gt;
     &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;changed&amp;#34;&lt;/span&gt;: false,
     &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;ping&amp;#34;&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;pong&amp;#34;&lt;/span&gt;
-&lt;span style=&#34;color:#f92672&#34;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;For a more complicated example, lets use the &lt;code&gt;dnf&lt;/code&gt; module to install &lt;code&gt;htop&lt;/code&gt;:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;ansible -m dnf -a &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;name=htop state=latest&amp;#34;&lt;/span&gt; localhost --become&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;This module requires some parameters to be defined. We are able to supply
+&lt;span style=&#34;color:#f92672&#34;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;For a more complicated example, lets use the &lt;code&gt;dnf&lt;/code&gt; module to install &lt;code&gt;htop&lt;/code&gt;:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;ansible -m dnf -a &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;name=htop state=latest&amp;#34;&lt;/span&gt; localhost --become
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;This module requires some parameters to be defined. We are able to supply
 them using the &lt;code&gt;-a&lt;/code&gt; flag, followed by a string of the key/values pairs.&lt;/p&gt;
-
 &lt;p&gt;Also, because the &lt;code&gt;dnf&lt;/code&gt; module requires root permissions to function, we supply
 the &lt;code&gt;--become&lt;/code&gt; flag, to become &lt;code&gt;root&lt;/code&gt;.&lt;/p&gt;
-
 &lt;p&gt;Note, if I want to run this against another machine (beyond &lt;code&gt;localhost&lt;/code&gt;), it
 has to be defined in whatever inventory file we are using.&lt;/p&gt;
-
 &lt;p&gt;So, if I define an inventory file (&lt;code&gt;./hosts.yaml&lt;/code&gt;) containing my desktop
 computer:&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;[charmelon]
-&lt;span style=&#34;color:#ae81ff&#34;&gt;192.168.1.5&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;I can install &lt;code&gt;htop&lt;/code&gt; on &lt;em&gt;my desktop&lt;/em&gt;, using:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;ansible -i ./hosts -m dnf -a &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;name=htop state=latest&amp;#34;&lt;/span&gt; charmeleon --become&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;&amp;hellip; and it works!&lt;/p&gt;
-
+&lt;span style=&#34;color:#ae81ff&#34;&gt;192.168.1.5&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;I can install &lt;code&gt;htop&lt;/code&gt; on &lt;em&gt;my desktop&lt;/em&gt;, using:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;ansible -i ./hosts -m dnf -a &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;name=htop state=latest&amp;#34;&lt;/span&gt; charmeleon --become
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&amp;hellip; and it works!&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;192.168.1.5 | CHANGED =&amp;gt; {
     &amp;quot;ansible_facts&amp;quot;: {
         &amp;quot;discovered_interpreter_python&amp;quot;: &amp;quot;/usr/bin/python&amp;quot;
@@ -158,15 +138,11 @@ computer:&lt;/p&gt;
         &amp;quot;Installed: htop-2.2.0-8.fc32.x86_64&amp;quot;
     ]
 }
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&#34;playbooks&#34;&gt;Playbooks&lt;/h3&gt;
-
+&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;playbooks&#34;&gt;Playbooks&lt;/h3&gt;
 &lt;p&gt;As you can imagine, doing everything from the command line isn&amp;rsquo;t always
 helpful, or easily reproducible. That&amp;rsquo;s what playbooks are for. In a nutshell,
 playbooks are ansible scripts. They are a yaml file which ansible runs, instead
 of running a series of ad-hoc commands.&lt;/p&gt;
-
 &lt;p&gt;To demonstrate, lets convert the &lt;code&gt;dnf&lt;/code&gt; command from above, into a simple
 playbook named &lt;code&gt;install-htop.yaml&lt;/code&gt;.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;---
@@ -177,30 +153,23 @@ playbook named &lt;code&gt;install-htop.yaml&lt;/code&gt;.&lt;/p&gt;
     - &lt;span style=&#34;color:#66d9ef&#34;&gt;name&lt;/span&gt;: Install Htop
       &lt;span style=&#34;color:#66d9ef&#34;&gt;dnf&lt;/span&gt;:
         &lt;span style=&#34;color:#66d9ef&#34;&gt;name&lt;/span&gt;: htop
-        &lt;span style=&#34;color:#66d9ef&#34;&gt;state&lt;/span&gt;: latest&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Being a &lt;code&gt;yaml&lt;/code&gt; file, the first line starts with &lt;code&gt;---&lt;/code&gt;. Next, we define some
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;state&lt;/span&gt;: latest
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Being a &lt;code&gt;yaml&lt;/code&gt; file, the first line starts with &lt;code&gt;---&lt;/code&gt;. Next, we define some
 meta information for the entire playbook. For example, this is were we put the
 &lt;code&gt;--become&lt;/code&gt; flag, by turning it into &lt;code&gt;become: true&lt;/code&gt;. This is also where we
 define what hosts the playbook will run against. If I&amp;rsquo;m providing a hosts file,
 I can alternatively use &lt;code&gt;hosts: all&lt;/code&gt; to run against &lt;em&gt;all&lt;/em&gt; hosts defined in the
 inventory file.&lt;/p&gt;
-
 &lt;h4 id=&#34;local-connections&#34;&gt;local connections&lt;/h4&gt;
-
 &lt;p&gt;If the playbook is to run only locally, the connection type can be set to
 &lt;code&gt;local&lt;/code&gt; (by default, it is set to &lt;code&gt;ssh&lt;/code&gt;.)&lt;/p&gt;
-
 &lt;pre&gt;&lt;code&gt;  hosts: 127.0.0.1
   connection: local
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h4 id=&#34;tasks&#34;&gt;tasks&lt;/h4&gt;
-
+&lt;/code&gt;&lt;/pre&gt;&lt;h4 id=&#34;tasks&#34;&gt;tasks&lt;/h4&gt;
 &lt;p&gt;Below the header information, we can define a set of tasks to run. In the
 &lt;code&gt;tasks&lt;/code&gt; section, a block is defined for each task, usually by calling a module
 with parameters. It is best practice to describe each task using &lt;code&gt;name:&lt;/code&gt;. This
 will make it easier to trace the logs.&lt;/p&gt;
-
 &lt;p&gt;For example, lets add the&lt;code&gt;ping&lt;/code&gt; module to the playbook so we have more than one
 task&amp;hellip;.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;---
@@ -215,8 +184,8 @@ task&amp;hellip;.&lt;/p&gt;
     - &lt;span style=&#34;color:#66d9ef&#34;&gt;name&lt;/span&gt;: Install Htop
       &lt;span style=&#34;color:#66d9ef&#34;&gt;dnf&lt;/span&gt;:
         &lt;span style=&#34;color:#66d9ef&#34;&gt;name&lt;/span&gt;: htop
-        &lt;span style=&#34;color:#66d9ef&#34;&gt;state&lt;/span&gt;: latest&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Now the playbook will run both tasks, using &lt;code&gt;name&lt;/code&gt; as the header for the output
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;state&lt;/span&gt;: latest
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Now the playbook will run both tasks, using &lt;code&gt;name&lt;/code&gt; as the header for the output
 of each one:&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;➜  /tmp ansible-playbook install-htop.yaml
 
@@ -232,9 +201,8 @@ TASK &lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;Install Htop&lt;spa
 ok: &lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;192.168.1.5&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt;
 
 PLAY RECAP ****************************************
-192.168.1.5                : ok&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;3&lt;/span&gt;    changed&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;    unreachable&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;    failed&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;    skipped&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;    rescued&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;    ignored&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;h5 id=&#34;variables&#34;&gt;Variables&lt;/h5&gt;
-
+192.168.1.5                : ok&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;3&lt;/span&gt;    changed&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;    unreachable&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;    failed&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;    skipped&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;    rescued&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;    ignored&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h5 id=&#34;variables&#34;&gt;Variables&lt;/h5&gt;
 &lt;p&gt;We can define sections other than &lt;code&gt;tasks&lt;/code&gt;.  A useful section to add is &lt;code&gt;vars:&lt;/code&gt;,
 which defines variables for use in the playbook. To illustrate, lets replace
 the hard-coded &lt;code&gt;htop&lt;/code&gt; in the &lt;code&gt;dnf&lt;/code&gt; task, to a variable named &lt;code&gt;package&lt;/code&gt;. We can
@@ -255,8 +223,8 @@ output in the log:&lt;/p&gt;
     - &lt;span style=&#34;color:#66d9ef&#34;&gt;name&lt;/span&gt;: Install {{ package }}
       &lt;span style=&#34;color:#66d9ef&#34;&gt;dnf&lt;/span&gt;:
         &lt;span style=&#34;color:#66d9ef&#34;&gt;name&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;{{ package }}&amp;#34;&lt;/span&gt;
-        &lt;span style=&#34;color:#66d9ef&#34;&gt;state&lt;/span&gt;: latest&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;And the output:&lt;/p&gt;
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;state&lt;/span&gt;: latest
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;And the output:&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;➜  ansible-playbook install-htop.yaml
 
 PLAY &lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;127.0.0.1&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt; ****************************************
@@ -271,8 +239,8 @@ TASK &lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;Install htop&lt;spa
 changed: &lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;127.0.0.1&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt;
 
 PLAY RECAP ****************************************
-127.0.0.1                  : ok&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;3&lt;/span&gt;    changed&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;    unreachable&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;    failed&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;    skipped&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;    rescued&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;    ignored&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;One great feature of variables is that they can be swapped out when calling the
+127.0.0.1                  : ok&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;3&lt;/span&gt;    changed&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;    unreachable&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;    failed&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;    skipped&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;    rescued&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;    ignored&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;One great feature of variables is that they can be swapped out when calling the
 playbook. The &lt;code&gt;-e&lt;/code&gt; flag allows you to provide an alternative value for a
 variable.  For example, lets say we want to install &lt;code&gt;nano&lt;/code&gt; instead of &lt;code&gt;htop&lt;/code&gt;:&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;➜  ansible-playbook install-htop.yaml -e package&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;nano
@@ -289,26 +257,20 @@ TASK &lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;Install nano&lt;spa
 changed: &lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;127.0.0.1&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt;
 
 PLAY RECAP ****************************************
-127.0.0.1                  : ok&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;3&lt;/span&gt;    changed&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;    unreachable&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;    failed&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;    skipped&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;    rescued&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;    ignored&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Note how the task name has changed accordingly in the output. So Fancy!&lt;/p&gt;
-
+127.0.0.1                  : ok&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;3&lt;/span&gt;    changed&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;    unreachable&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;    failed&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;    skipped&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;    rescued&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;    ignored&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Note how the task name has changed accordingly in the output. So Fancy!&lt;/p&gt;
 &lt;h2 id=&#34;creating-some-structure&#34;&gt;Creating some structure&lt;/h2&gt;
-
 &lt;h3 id=&#34;roles&#34;&gt;Roles&lt;/h3&gt;
-
 &lt;p&gt;As nice as scripts are, they don&amp;rsquo;t scale well. To combat impending chaos, we
 break functionality down into &lt;code&gt;roles&lt;/code&gt;. Roles are collections of tasks,
 variables, and other resources that can be mixed and matched in playbooks.&lt;/p&gt;
-
 &lt;p&gt;A role is defined by a directory of it&amp;rsquo;s name, and usually contains a &lt;code&gt;tasks&lt;/code&gt;
 sub-directory, where all of it&amp;rsquo;s tasks are defined. Each sub-directory requires
 a &lt;code&gt;main.yaml&lt;/code&gt; to be the root file for that directory. So, at the vary least, a
 tasks directory will have a file named &lt;code&gt;tasks/main.yaml&lt;/code&gt; which contains the
 role&amp;rsquo;s tasks.&lt;/p&gt;
-
 &lt;p&gt;If there are a BUNCH of tasks defined, they can be broken out into seperate
 files, and included in the &lt;code&gt;main.yaml&lt;/code&gt; task file.&lt;/p&gt;
-
 &lt;p&gt;In addition to &lt;code&gt;tasks&lt;/code&gt;, a role might include a &lt;code&gt;defaults&lt;/code&gt; or &lt;code&gt;vars&lt;/code&gt; sub
 directory. These are again structured with a &lt;code&gt;main.yaml&lt;/code&gt; file that may, or may
 not, import other files, depending on the size and organization of the role.&lt;/p&gt;
@@ -319,43 +281,35 @@ roles
     │   └── main.yaml
     ├── README.md
     └── tasks
-        └── main.yaml&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;It is important to note that these yaml files contain &lt;em&gt;just&lt;/em&gt; their item. For
+        └── main.yaml
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;It is important to note that these yaml files contain &lt;em&gt;just&lt;/em&gt; their item. For
 example, the task files contain just tasks. This is because when a role is
 imported into a playbook, its items are simply inserted accordingly.&lt;/p&gt;
-
-&lt;h3 id=&#34;ansible-cfg&#34;&gt;ansible.cfg&lt;/h3&gt;
-
+&lt;h3 id=&#34;ansiblecfg&#34;&gt;ansible.cfg&lt;/h3&gt;
 &lt;p&gt;Before we start writing some roles, it is important to know that if you are using
 roles, you need to tell &lt;code&gt;ansible&lt;/code&gt; where to find them. The easiest way to do
 this is to define an &lt;code&gt;ansible.cfg&lt;/code&gt; file in the directory you will run
 &lt;code&gt;ansible-playbook&lt;/code&gt; from. For example:&lt;/p&gt;
-
 &lt;pre&gt;&lt;code&gt;[defaults]
 roles_path = roles/
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h4 id=&#34;our-role&#34;&gt;Our role&lt;/h4&gt;
-
+&lt;/code&gt;&lt;/pre&gt;&lt;h4 id=&#34;our-role&#34;&gt;Our role&lt;/h4&gt;
 &lt;p&gt;As it stands, our example playbook is a &lt;em&gt;massive 13 lines long&lt;/em&gt;! I can hardly
 open the file without crashing my text editor. So, lets try to break up the
 functionality into roles.&lt;/p&gt;
-
 &lt;p&gt;First, lets make the directories:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;mkdir -p roles/install-htop/&lt;span style=&#34;color:#f92672&#34;&gt;{&lt;/span&gt;tasks,defaults&lt;span style=&#34;color:#f92672&#34;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Next, we can add our variables to a default file,
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;mkdir -p roles/install-htop/&lt;span style=&#34;color:#f92672&#34;&gt;{&lt;/span&gt;tasks,defaults&lt;span style=&#34;color:#f92672&#34;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Next, we can add our variables to a default file,
 &lt;code&gt;roles/install-htop/defaults/main.yaml&lt;/code&gt;:&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;---
-&lt;span style=&#34;color:#66d9ef&#34;&gt;package&lt;/span&gt;: htop&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;With the &lt;code&gt;package&lt;/code&gt; variable set, lets create the tasks. To demonstrate
+&lt;span style=&#34;color:#66d9ef&#34;&gt;package&lt;/span&gt;: htop
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;With the &lt;code&gt;package&lt;/code&gt; variable set, lets create the tasks. To demonstrate
 including other files in the &lt;code&gt;main.yaml&lt;/code&gt;, I&amp;rsquo;m going to be overly-complicated and
 extract our &lt;code&gt;ping&lt;/code&gt; task into its own file, and then include it in the &lt;code&gt;main.yaml&lt;/code&gt;.&lt;/p&gt;
-
 &lt;p&gt;So first, &lt;code&gt;roles/install-htop/tasks/ping.yaml&lt;/code&gt;&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;---
 - &lt;span style=&#34;color:#66d9ef&#34;&gt;name&lt;/span&gt;: Ping host first...
-  ping:&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;And then, &lt;code&gt;roles/install-htop/tasks/main.yaml&lt;/code&gt;, which will also include our
+  &lt;span style=&#34;color:#66d9ef&#34;&gt;ping&lt;/span&gt;:
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;And then, &lt;code&gt;roles/install-htop/tasks/main.yaml&lt;/code&gt;, which will also include our
 &lt;code&gt;dnf&lt;/code&gt; install task&amp;hellip;&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;---
 - &lt;span style=&#34;color:#66d9ef&#34;&gt;include_tasks&lt;/span&gt;: ping.yaml
@@ -363,11 +317,9 @@ extract our &lt;code&gt;ping&lt;/code&gt; task into its own file, and then inclu
 - &lt;span style=&#34;color:#66d9ef&#34;&gt;name&lt;/span&gt;: Install {{ package }}
   &lt;span style=&#34;color:#66d9ef&#34;&gt;dnf&lt;/span&gt;:
     &lt;span style=&#34;color:#66d9ef&#34;&gt;name&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;{{ package }}&amp;#34;&lt;/span&gt;
-    &lt;span style=&#34;color:#66d9ef&#34;&gt;state&lt;/span&gt;: latest&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Congrats, we have an &lt;code&gt;install-htop&lt;/code&gt; role defined!&lt;/p&gt;
-
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;state&lt;/span&gt;: latest
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Congrats, we have an &lt;code&gt;install-htop&lt;/code&gt; role defined!&lt;/p&gt;
 &lt;h3 id=&#34;including-roles-in-playbooks&#34;&gt;Including roles in playbooks&lt;/h3&gt;
-
 &lt;p&gt;Just as we included &lt;code&gt;vars&lt;/code&gt; and &lt;code&gt;tasks&lt;/code&gt; in the playbook, if we already have
 tasks and vars defined in a &lt;em&gt;role&lt;/em&gt;, we can instead include that &lt;em&gt;role&lt;/em&gt;:&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;---
@@ -376,8 +328,8 @@ tasks and vars defined in a &lt;em&gt;role&lt;/em&gt;, we can instead include th
   &lt;span style=&#34;color:#66d9ef&#34;&gt;become&lt;/span&gt;: &lt;span style=&#34;color:#66d9ef&#34;&gt;true&lt;/span&gt;
 
   &lt;span style=&#34;color:#66d9ef&#34;&gt;roles&lt;/span&gt;:
-    - install-htop&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Easy. Let&amp;rsquo;s run it:&lt;/p&gt;
+    - install-htop
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Easy. Let&amp;rsquo;s run it:&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;➜  ansible-playbook install-htop.yaml
 &lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;WARNING&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt;: Ansible is being run in a world writable directory &lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;/tmp&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt;, ignoring it as an ansible.cfg source. For more information see
 https://docs.ansible.com/ansible/devel/reference_appendices/config.html#cfg-in-world-writable-dir
@@ -397,11 +349,9 @@ TASK &lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;install-htop : Inst
 ok: &lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;127.0.0.1&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt;
 
 PLAY RECAP ****************************************
-127.0.0.1                  : ok&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;4&lt;/span&gt;    changed&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;    unreachable&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;    failed&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;    skipped&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;    rescued&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;    ignored&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;and it still works :)&lt;/p&gt;
-
+127.0.0.1                  : ok&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;4&lt;/span&gt;    changed&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;    unreachable&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;    failed&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;    skipped&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;    rescued&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;    ignored&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;and it still works :)&lt;/p&gt;
 &lt;h1 id=&#34;conclusion&#34;&gt;Conclusion&lt;/h1&gt;
-
 &lt;p&gt;While only the tip of the iceburg, I think we have covered enough basics
 to make &lt;em&gt;something&lt;/em&gt; useful. Using this small amount of Ansible
 knowledge, I have been able to create playbooks that configure applications,
@@ -422,120 +372,69 @@ progressed over the last year. So, I decided to try to use Gitlab to manage the
 automated build and deployments of a personal project I&amp;rsquo;ve been working on.
 The first step of the process was to setup a runner my Gitlab instance could
 use for the builds.&lt;/p&gt;
-
-&lt;h2 id=&#34;setup-a-machine-vm&#34;&gt;Setup a Machine/VM&lt;/h2&gt;
-
-&lt;p&gt;&lt;center&gt;
-&lt;a href=&#34;../../img/posts/create-gitlab-runner/fedora-vm-install.png&#34;&gt;
-&lt;img alt=&#34;Installing a new Fedora30 VM in Virt-Manager&#34; src=&#34;../../img/posts/create-gitlab-runner/fedora-vm-install.png&#34; style=&#34;max-width: 100%;&#34;/&gt;&lt;/a&gt;
-&lt;div class=&#34;caption&#34;&gt;Installing a new Fedora 30 VM in Virt-Manager for my runner&lt;/div&gt;
-&lt;/center&gt;&lt;/p&gt;
-
+&lt;h2 id=&#34;setup-a-machinevm&#34;&gt;Setup a Machine/VM&lt;/h2&gt;
+&lt;!-- raw HTML omitted --&gt;
 &lt;p&gt;This will be a BYOG post (bring your own Gitlab). I already
-&amp;ldquo;&lt;em&gt;had one laying around&lt;/em&gt;&amp;rdquo;, so I won&amp;rsquo;t cover setting that up.&lt;/p&gt;
-
+&amp;ldquo;&lt;em&gt;had one laying around&lt;/em&gt;&amp;quot;, so I won&amp;rsquo;t cover setting that up.&lt;/p&gt;
 &lt;p&gt;Your runner needs may differ, but in this post I am installing runner on a
 Fedora 30 VM. I will also be using both &lt;a href=&#34;https://buildah.io/&#34;&gt;buildah&lt;/a&gt; and
 &lt;a href=&#34;https://podman.io/&#34;&gt;podman&lt;/a&gt; for this project.&lt;/p&gt;
-
-&lt;h4 id=&#34;some-things-to-note-consider-during-vm-setup&#34;&gt;Some things to note/consider during VM setup:&lt;/h4&gt;
-
+&lt;h4 id=&#34;some-things-to-noteconsider-during-vm-setup&#34;&gt;Some things to note/consider during VM setup:&lt;/h4&gt;
 &lt;ul&gt;
 &lt;li&gt;Install packages required for pipeline tasks (ex: &lt;code&gt;podman&lt;/code&gt; and &lt;code&gt;buildah&lt;/code&gt;)&lt;/li&gt;
 &lt;li&gt;If &lt;code&gt;sudo&lt;/code&gt; is required, manage the &lt;code&gt;gitlab-runner&lt;/code&gt; user/group using &lt;code&gt;visudo&lt;/code&gt;&lt;/li&gt;
 &lt;li&gt;If using docker runners, &lt;code&gt;docker-machine&lt;/code&gt; needs to be installed&lt;/li&gt;
 &lt;/ul&gt;
-
 &lt;h2 id=&#34;install-runner&#34;&gt;Install runner&lt;/h2&gt;
-
 &lt;p&gt;First, install the &lt;code&gt;gitlab-runner&lt;/code&gt; package. This can be done using the
 instructions found
 &lt;a href=&#34;https://docs.gitlab.com/runner/install/linux-repository.html&#34;&gt;here&lt;/a&gt;.
 &lt;em&gt;However&lt;/em&gt;, I encountered issues installing it on my Fedora VMs, as this install
 method isn&amp;rsquo;t supported for 30 yet.  (Check out &lt;a href=&#34;https://gitlab.com/gitlab-org/gitlab-runner/issues/4401&#34;&gt;this
 issue&lt;/a&gt; for more info).&lt;/p&gt;
-
-&lt;h4 id=&#34;add-gitlab-s-repo&#34;&gt;Add GitLab&amp;rsquo;s Repo&lt;/h4&gt;
-
+&lt;h4 id=&#34;add-gitlabs-repo&#34;&gt;Add GitLab&amp;rsquo;s Repo&lt;/h4&gt;
 &lt;pre&gt;&lt;code&gt;curl -L https://packages.gitlab.com/install/repositories/runner/gitlab-runner/script.rpm.sh | sudo bash
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h4 id=&#34;install-gitlab-runner&#34;&gt;Install gitlab runner&lt;/h4&gt;
-
+&lt;/code&gt;&lt;/pre&gt;&lt;h4 id=&#34;install-gitlab-runner&#34;&gt;Install gitlab runner&lt;/h4&gt;
 &lt;pre&gt;&lt;code&gt;sudo dnf install gitlab-runner
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h2 id=&#34;alternative-copr-install&#34;&gt;(Alternative) Copr install&lt;/h2&gt;
-
+&lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&#34;alternative-copr-install&#34;&gt;(Alternative) Copr install&lt;/h2&gt;
 &lt;p&gt;For now, I have been using the copr install posted in the comments
 of that issue (linked above). I recommend checking if the issue is resolved first, as it
 might change from the time of writing this post. To install:&lt;/p&gt;
-
 &lt;p&gt;First enable the copr repo:&lt;/p&gt;
-
 &lt;pre&gt;&lt;code&gt;sudo dnf copr enable snecker/gitlab-runner -y
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Next, install:&lt;/p&gt;
-
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Next, install:&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;sudo dnf install gitlab-runner -y
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h4 id=&#34;register-the-runner&#34;&gt;Register the Runner&lt;/h4&gt;
-
+&lt;/code&gt;&lt;/pre&gt;&lt;h4 id=&#34;register-the-runner&#34;&gt;Register the Runner&lt;/h4&gt;
 &lt;p&gt;Once installed, register the runner. Instructions on how to register a runner
 can be found &lt;a href=&#34;https://docs.gitlab.com/runner/register/index.html&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
-
 &lt;pre&gt;&lt;code&gt;sudo gitlab-runner register
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Enter the coordinator URL (ex: &lt;code&gt;https://gitlab.com&lt;/code&gt;)&lt;/p&gt;
-
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Enter the coordinator URL (ex: &lt;code&gt;https://gitlab.com&lt;/code&gt;)&lt;/p&gt;
 &lt;p&gt;Next, a &lt;em&gt;gitlab-ci&lt;/em&gt; token must be shared with the runner.&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&#34;../../img/posts/create-gitlab-runner/gitlab-runner-settings.png&#34;&gt;
-&lt;img alt=&#34;Gitlab Runner Settings&#34; src=&#34;../../img/posts/create-gitlab-runner/gitlab-runner-settings.png&#34; style=&#34;max-width: 100%;&#34;/&gt;&lt;/a&gt;
-&lt;div class=&#34;caption&#34;&gt;Gitlab Runner&lt;strong&gt;s&lt;/strong&gt; Settings Page&lt;/div&gt;&lt;/p&gt;
-
+&lt;!-- raw HTML omitted --&gt;
 &lt;p&gt;To obtain a gitlab-ci token, got to &lt;strong&gt;Admin Area&lt;/strong&gt; -&amp;gt; &lt;strong&gt;Overview&lt;/strong&gt; -&amp;gt;
 &lt;strong&gt;Runners&lt;/strong&gt;. On the right, there should be a token to use during setup.&lt;/p&gt;
-
 &lt;p&gt;When the runner registrations asks for the token, use the &amp;ldquo;registration token&amp;rdquo;
 listed in the &amp;ldquo;Set up a shared Runner manually&amp;rdquo; section.&lt;/p&gt;
-
 &lt;p&gt;Next, provide a short description, and add a tag or two (when prompted).&lt;/p&gt;
-
 &lt;p&gt;Lastly, enter the executor (the system on the runner that executes commands). For
 now, I&amp;rsquo;ve been using &lt;code&gt;&amp;quot;shell&amp;quot;&lt;/code&gt; for my needs, as these VMs are fully
 dedicated to be used as the runners for a single project.&lt;/p&gt;
-
 &lt;p&gt;Congrats, the runner should be registered! Now to set it up&amp;hellip;&lt;/p&gt;
-
-&lt;h2 id=&#34;link-to-ci-cd-builds&#34;&gt;Link to CI/CD Builds&lt;/h2&gt;
-
+&lt;h2 id=&#34;link-to-cicd-builds&#34;&gt;Link to CI/CD Builds&lt;/h2&gt;
 &lt;p&gt;It is time to link up the runner to a CI/CD job. This can be done with
 tagging, but I currently just have one pipeline using my runners, so haven&amp;rsquo;t
 used the tags as much. Edit the runner by clicking its  &lt;code&gt;edit&lt;/code&gt; icon.&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&#34;../../img/posts/create-gitlab-runner/runner-edit.png&#34;&gt;
-&lt;img alt=&#34;Gitlab Runner Settings&#34; src=&#34;../../img/posts/create-gitlab-runner/runner-edit.png&#34; style=&#34;max-width: 100%;&#34;/&gt;&lt;/a&gt;
-&lt;div class=&#34;caption&#34;&gt;Gitlab Runner Edit Page&lt;/div&gt;&lt;/p&gt;
-
+&lt;!-- raw HTML omitted --&gt;
 &lt;p&gt;In the runner edit menu, ensure that the &amp;ldquo;&lt;code&gt;Active&lt;/code&gt;&amp;rdquo; checkbox is checked. I&amp;rsquo;ve
 also checked the &amp;ldquo;&lt;code&gt;Run untagged jobs&lt;/code&gt;&amp;rdquo; box for this runner, which will allow it
 to pick up any job that does &lt;em&gt;not&lt;/em&gt; have a tag. If the runner is to be assigned
-to a &lt;em&gt;specific&lt;/em&gt; project, that can be enabled/assigned below in the &amp;ldquo;&lt;code&gt;Restrict
-projects for this Runner&lt;/code&gt;&amp;rdquo; section.&lt;/p&gt;
-
+to a &lt;em&gt;specific&lt;/em&gt; project, that can be enabled/assigned below in the &amp;ldquo;&lt;code&gt;Restrict projects for this Runner&lt;/code&gt;&amp;rdquo; section.&lt;/p&gt;
 &lt;h2 id=&#34;test-run&#34;&gt;Test Run&lt;/h2&gt;
-
 &lt;p&gt;To test out the runner, start a new build in a project! (Note, if there are
 several runners already setup, 1. why are you reading this, and 2. it might be a good idea
 to pause the others to ensure the new one will run with the test).&lt;/p&gt;
-
 &lt;p&gt;I won&amp;rsquo;t detail how to write a &lt;code&gt;gitlab-ci.yml&lt;/code&gt; now, but for my test I made an empty
 demo repo with the following pipeline:&lt;/p&gt;
-
 &lt;pre&gt;&lt;code&gt;before_script:
   - whoami
   - pwd
@@ -545,25 +444,15 @@ build-base:
   stage: build
   script:
     - echo &amp;quot;Hello world!&amp;quot;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;After committing it, a build kicked off with the new runner and finished
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;After committing it, a build kicked off with the new runner and finished
 successfully!&lt;/p&gt;
-
 &lt;p&gt;&lt;em&gt;Notice that the job indeed ran on &lt;code&gt;post-runner&lt;/code&gt;, the runner I setup
 specifically for this post&lt;/em&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&#34;../../img/posts/create-gitlab-runner/pipeline-run.png&#34;&gt;
-&lt;img alt=&#34;Gitlab Runner Settings&#34; src=&#34;../../img/posts/create-gitlab-runner/pipeline-run.png&#34; style=&#34;max-width: 100%;&#34;/&gt;&lt;/a&gt;
-&lt;div class=&#34;caption&#34;&gt;Gitlab Demo Job Run Results&lt;/div&gt;&lt;/p&gt;
-
+&lt;!-- raw HTML omitted --&gt;
 &lt;p&gt;If the job is more complicated, more runs might have to be manually started
 after tweaking the runner settings again. Pipelines can be started by going to
-the project&amp;rsquo;s &lt;code&gt;CI/CD-&amp;gt;Pipelines&lt;/code&gt; page via the side menu, and hitting the &lt;code&gt;Run
-Pipeline&lt;/code&gt; button.&lt;/p&gt;
-
+the project&amp;rsquo;s &lt;code&gt;CI/CD-&amp;gt;Pipelines&lt;/code&gt; page via the side menu, and hitting the &lt;code&gt;Run Pipeline&lt;/code&gt; button.&lt;/p&gt;
 &lt;h2 id=&#34;conclusion&#34;&gt;Conclusion&lt;/h2&gt;
-
 &lt;p&gt;That&amp;rsquo;s it. We should now have a connected runner! So far, the runners have been working
 &lt;em&gt;(mostly)&lt;/em&gt; fine. When they &lt;em&gt;do&lt;/em&gt; break, it is usually because I&amp;rsquo;ve let the disk
 fill up or allowed some other system-related negligence to build up
@@ -584,20 +473,14 @@ environment. One idea, was to utilize Jenkins to automatically build
 and deploy a &amp;ldquo;draft&amp;rdquo; website, so I can stage new posts/website change
 on my home network, before publishing it to the &amp;ldquo;production&amp;rdquo;
 website. Here is how that idea was Instantiated&amp;hellip;&lt;/p&gt;
-
 &lt;h2 id=&#34;my-website&#34;&gt;My Website&lt;/h2&gt;
-
-&lt;p&gt;&lt;a href=&#34;../../img/posts/draft-website-jenkins/jenkins-logo.png&#34;&gt;&lt;img
-src=&#34;../../img/posts/draft-website-jenkins/jenkins-logo.png&#34; style=&#34;max-width:
-50%; float: left; margin: 0px 12px 0px 0px;&#34; alt=&#34;Jenkins Logo&#34; /&gt;&lt;/a&gt;&lt;/p&gt;
-
+&lt;p&gt;&lt;!-- raw HTML omitted --&gt;&lt;!-- raw HTML omitted --&gt;&lt;!-- raw HTML omitted --&gt;&lt;/p&gt;
 &lt;p&gt;I have previously &lt;a href=&#34;../../post/website-transition-to-hugo/&#34;&gt;described&lt;/a&gt; how my
 website is &lt;a href=&#34;../../post/website-switched-to-hugo/&#34;&gt;currently generated&lt;/a&gt;, using
 the &lt;a href=&#34;https://gohugo.io&#34;&gt;Hugo&lt;/a&gt; static website generator. To organize
 this system, I have two git repos: One that consists of all the hugo
 source files (where I write content), and one that contains the
 generated static website (that gets deployed to my web host).&lt;/p&gt;
-
 &lt;p&gt;When writing a post, I use &lt;code&gt;hugo server -D -F&lt;/code&gt; to live view the page
 in my browser. However, I occasionally want to view the state of all
 the &lt;em&gt;committed code&lt;/em&gt; in the &lt;em&gt;repo&lt;/em&gt;, to see what the site would look
@@ -606,27 +489,18 @@ which shows the current state of my website&amp;rsquo;s &lt;em&gt;source&lt;/em&
 draft and future posts). If I want to check how a post looks on my
 phone, or any other device, I can just open up the draft website after
 pushing my changes.&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&#34;../../img/posts/draft-website-jenkins/mr-mime.png&#34;&gt;&lt;img
-src=&#34;../../img/posts/draft-website-jenkins/mr-mime.png&#34; style=&#34;max-width:
-45%; float: right; margin: 20px 0px 0px 10px;&#34; alt=&#34;Jenkins Logo&#34; /&gt;&lt;/a&gt;&lt;/p&gt;
-
+&lt;p&gt;&lt;!-- raw HTML omitted --&gt;&lt;!-- raw HTML omitted --&gt;&lt;!-- raw HTML omitted --&gt;&lt;/p&gt;
 &lt;h2 id=&#34;jenkins&#34;&gt;Jenkins&lt;/h2&gt;
-
 &lt;p&gt;I had previously created a dedicated Jenkins server on my home network
 (Mr. Mime), using a CentOS 7 VM hosted on my home server. However, any
 Jenkins setup should work for this project (including a &lt;a href=&#34;https://hub.docker.com/_/jenkins/&#34;&gt;docker
 container&lt;/a&gt;). To get started, checkout the &lt;a href=&#34;https://jenkins.io/download/&#34;&gt;Jenkins
 Website&lt;/a&gt;, and be sure to take advantage
 of the &lt;a href=&#34;https://jenkins.io/doc/&#34;&gt;the documentation&lt;/a&gt; for help.&lt;/p&gt;
-
 &lt;p&gt;&lt;em&gt;Note: just make sure hugo is installed on the Jenkins server, as we need
 it to generate the website.&lt;/em&gt;&lt;/p&gt;
-
 &lt;h3 id=&#34;github-integration&#34;&gt;GitHub Integration&lt;/h3&gt;
-
 &lt;h4 id=&#34;jenkins-service&#34;&gt;Jenkins Service&lt;/h4&gt;
-
 &lt;p&gt;My website repo is hosted on GitHub, so we need to configure it to
 work with our Jenkins server. To do that, go to the project&amp;rsquo;s GitHub
 page, and navigate through &lt;strong&gt;Settings&lt;/strong&gt; -&amp;gt; &lt;strong&gt;Integrations &amp;amp;
@@ -636,20 +510,13 @@ is accessible from the internet. If not, hosting the Jenkins server on
 something like &lt;a href=&#34;http://digitalocean.com&#34;&gt;Digital Ocean&lt;/a&gt; might be an
 easy solution). Lastly, make sure the &lt;strong&gt;Activate&lt;/strong&gt; box is selected,
 and click the &lt;strong&gt;Add Service&lt;/strong&gt; button.&lt;/p&gt;
-
 &lt;h4 id=&#34;ssh-keys&#34;&gt;SSH Keys&lt;/h4&gt;
-
 &lt;p&gt;While on the project&amp;rsquo;s GitHub page, make sure that the Jenkins
 server&amp;rsquo;s ssh keys are added to the project. To add them, navigate to
 the &lt;strong&gt;Deploy Keys&lt;/strong&gt; page (under the project&amp;rsquo;s &lt;strong&gt;Settings&lt;/strong&gt; tab). Then
 select &lt;strong&gt;Add deploy key&lt;/strong&gt;, and add the public key.&lt;/p&gt;
-
 &lt;h2 id=&#34;a-nginx-server&#34;&gt;A Nginx Server&lt;/h2&gt;
-
-&lt;p&gt;&lt;a href=&#34;../../img/posts/draft-website-jenkins/nginx.png&#34;&gt;&lt;img
-src=&#34;../../img/posts/draft-website-jenkins/nginx.png&#34; style=&#34;max-width:
-100%; float: center; margin: 0px 0px 0px 0px;&#34; alt=&#34;Default Nginx Page&#34; /&gt;&lt;/a&gt;&lt;/p&gt;
-
+&lt;p&gt;&lt;!-- raw HTML omitted --&gt;&lt;!-- raw HTML omitted --&gt;&lt;!-- raw HTML omitted --&gt;&lt;/p&gt;
 &lt;p&gt;With Jenkins ready, let&amp;rsquo;s quickly setup the web server before
 configuring the Jenkins project. Any web server will do (it just needs
 to serve the generated &lt;em&gt;static&lt;/em&gt; website content). I used
@@ -663,92 +530,68 @@ sudo apt install -y nginx
 sudo systemctl status nginx
 
 &lt;span style=&#34;color:#75715e&#34;&gt;## Optional: Ensure it is enabled to start up after reboots&lt;/span&gt;
-sudo systemctl enable nginx&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;With the web server running, we need to know &lt;em&gt;where&lt;/em&gt; the website files
+sudo systemctl enable nginx
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;With the web server running, we need to know &lt;em&gt;where&lt;/em&gt; the website files
 need to go. Nginx will by default serve content at
 &lt;code&gt;/user/share/nginx/html/&lt;/code&gt;, so remember that location for later&amp;hellip;&lt;/p&gt;
-
 &lt;p&gt;&lt;em&gt;Note: Don&amp;rsquo;t forget to add the &lt;code&gt;jenkins&lt;/code&gt; user&amp;rsquo;s ssh key from the
 jenkins server to the &lt;code&gt;authorized_keys&lt;/code&gt; file of the nginx server. This
 will make file transfers easier when setting up the jenkins project.&lt;/em&gt;&lt;/p&gt;
-
 &lt;h2 id=&#34;configuring-a-project&#34;&gt;Configuring a Project&lt;/h2&gt;
-
 &lt;p&gt;Let&amp;rsquo;s configure our Jenkins project! Log in to the Jenkins
 server and click the &lt;strong&gt;New Item&lt;/strong&gt; option on the left side bar. Enter a
 name for the project, select the &lt;strong&gt;Freestyle Project&lt;/strong&gt; option, and hit
 &lt;strong&gt;OK&lt;/strong&gt;.&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&#34;../../img/posts/draft-website-jenkins/general-config.png&#34;&gt;&lt;img
-src=&#34;../../img/posts/draft-website-jenkins/general-config.png&#34; style=&#34;max-width:
-100%; float: center; margin: 0px 0px 0px 0px;&#34; alt=&#34;The Project&#39;s General Configuration Section&#34; /&gt;&lt;/a&gt;
-&lt;div class=&#34;caption&#34;&gt;The Project&amp;rsquo;s General Configuration Section&lt;/div&gt;&lt;/p&gt;
-
+&lt;p&gt;&lt;!-- raw HTML omitted --&gt;&lt;!-- raw HTML omitted --&gt;&lt;!-- raw HTML omitted --&gt;&lt;/p&gt;
+&lt;!-- raw HTML omitted --&gt;
 &lt;p&gt;In the &lt;strong&gt;General&lt;/strong&gt; section of the configuration screen, optionally
 write a description about the project. Next, select the &amp;ldquo;&lt;em&gt;GitHub
 Project&lt;/em&gt;&amp;rdquo; check-box, and add the GitHub repo&amp;rsquo;s url into the &lt;em&gt;Project
 url&lt;/em&gt; text box.&lt;/p&gt;
-
 &lt;h4 id=&#34;source-control&#34;&gt;Source Control&lt;/h4&gt;
-
-&lt;p&gt;&lt;a href=&#34;../../img/posts/draft-website-jenkins/credentials.png&#34;&gt;&lt;img
-src=&#34;../../img/posts/draft-website-jenkins/credentials.png&#34;
-style=&#34;max-width: 100%; float: center; margin: 0px 0px 0px 0px;&#34;
-alt=&#34;Setting Credentials&#34; /&gt;&lt;/a&gt;
-&lt;div class=&#34;caption&#34;&gt;Setting Credentials&lt;/div&gt;&lt;/p&gt;
-
+&lt;p&gt;&lt;!-- raw HTML omitted --&gt;&lt;!-- raw HTML omitted --&gt;&lt;!-- raw HTML omitted --&gt;&lt;/p&gt;
+&lt;!-- raw HTML omitted --&gt;
 &lt;p&gt;In the &lt;strong&gt;Source Code Management&lt;/strong&gt; section of the configuration, select
 the &lt;em&gt;Git&lt;/em&gt; option. Then, enter the repo&amp;rsquo;s url for the &lt;em&gt;Repository URL&lt;/em&gt;
 box (I did the ssh url). For &lt;em&gt;Credentials&lt;/em&gt;, select &lt;em&gt;Add&lt;/em&gt; to configure a
 new credential. Select &lt;em&gt;SSH Username with private key&lt;/em&gt; for &lt;em&gt;Kind&lt;/em&gt;,
 use &lt;code&gt;jenkins&lt;/code&gt; for the &lt;em&gt;Username&lt;/em&gt;.&lt;/p&gt;
-
 &lt;p&gt;More source control options can be configured, but this should be the
 minimum setup required. &lt;em&gt;Again, for this to work public keys for the
 &lt;code&gt;jenkins&lt;/code&gt; user on the jenkins server must be generated, and added as a
 deployment key on GitHub.&lt;/em&gt;&lt;/p&gt;
-
 &lt;h4 id=&#34;build-trigger&#34;&gt;Build Trigger&lt;/h4&gt;
-
 &lt;p&gt;Under the &lt;strong&gt;Build Triggers&lt;/strong&gt; section, select &lt;em&gt;Poll SCM&lt;/em&gt;. Without
 adding any schedule parameters, it will trigger each time a new commit
 is detected. This is what we want.&lt;/p&gt;
-
 &lt;h4 id=&#34;build-step&#34;&gt;Build Step&lt;/h4&gt;
-
 &lt;p&gt;In the &lt;strong&gt;Build&lt;/strong&gt; section, click &lt;strong&gt;Add build step&lt;/strong&gt;, and select
 &lt;strong&gt;Execute shell&lt;/strong&gt;. This is where we can add the shell commands to
 build the website with hugo. Add the following command to the box
 (don&amp;rsquo;t forget to change the url):&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;hugo -D -F -b &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;http://10.1.1.77&amp;#34;&lt;/span&gt; -d public&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;The &lt;code&gt;-D&lt;/code&gt; flag tells hugo to include all draft posts, while the &lt;code&gt;-F&lt;/code&gt; flag
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;hugo -D -F -b &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;http://10.1.1.77&amp;#34;&lt;/span&gt; -d public
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;The &lt;code&gt;-D&lt;/code&gt; flag tells hugo to include all draft posts, while the &lt;code&gt;-F&lt;/code&gt; flag
 has it include all posts with a future date. The &lt;code&gt;-b&lt;/code&gt; flag sets the
 url for the generated website. This should the be url or IP address of
 the nginx server setup previously. Lastly, the &lt;code&gt;-d&lt;/code&gt; flag tells hugo to
 output the generated static website to the &lt;code&gt;public&lt;/code&gt; directory. This
 will be useful to know when deploying the build.&lt;/p&gt;
-
 &lt;h4 id=&#34;deploy-to-webserver&#34;&gt;Deploy to Webserver&lt;/h4&gt;
-
 &lt;p&gt;For deployment, I used rsync to copy the build files to the nginx
 web server. This step will be another shell command, so I&amp;rsquo;ve actually
 added it as another &amp;ldquo;build&amp;rdquo; step. Add another &lt;strong&gt;Execute shell&lt;/strong&gt; and
 paste the following command inside the text box (again, changing the url):&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;rsync -r &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;$WORKSPACE&lt;span style=&#34;color:#e6db74&#34;&gt;/public/&amp;#34;&lt;/span&gt; ryan@10.1.1.77:/usr/share/nginx/html/&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;I used the Jenkins &lt;code&gt;$WORKSPACE&lt;/code&gt; variable to get the location of the
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;rsync -r &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;$WORKSPACE&lt;span style=&#34;color:#e6db74&#34;&gt;/public/&amp;#34;&lt;/span&gt; ryan@10.1.1.77:/usr/share/nginx/html/
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;I used the Jenkins &lt;code&gt;$WORKSPACE&lt;/code&gt; variable to get the location of the
 build, and was able to append the &lt;code&gt;public&lt;/code&gt; directory to that, since we
 defined it with the &lt;code&gt;-d&lt;/code&gt; flag in the hugo build step above. This will
 copy the generated website, to the web server.&lt;/p&gt;
-
 &lt;p&gt;Hit &lt;strong&gt;Save&lt;/strong&gt;, and test it out by clicking the &lt;strong&gt;Build Now&lt;/strong&gt; link on the
 left. If the build is successful, check the nginx website to see if
 the website was deployed!&lt;/p&gt;
-
 &lt;p&gt;&lt;em&gt;Note: If it doesn&amp;rsquo;t work, double check all permissions and
 credentials between accounts and servers.&lt;/em&gt;&lt;/p&gt;
-
 &lt;h2 id=&#34;better-yet-pipelines&#34;&gt;Better Yet&amp;hellip; Pipelines&lt;/h2&gt;
-
 &lt;p&gt;What&amp;rsquo;s better than using Jenkins for automated &amp;ldquo;draft website&amp;rdquo;
 deployments?  Using a &lt;a href=&#34;https://jenkins.io/doc/book/pipeline/&#34;&gt;Jenkins
 Pipeline&lt;/a&gt;. A Pipeline allows
@@ -756,7 +599,6 @@ the jenkins project steps to be defined in a &lt;em&gt;Jenkinsfile&lt;/em&gt; th
 other benefits, can be source controlled. In fact, by default a
 Jenkins pipeline searches for the &lt;code&gt;Jenkinsfile&lt;/code&gt; right in the root
 directory of a project&amp;rsquo;s git repo.&lt;/p&gt;
-
 &lt;p&gt;While a pipeline and
 &lt;a href=&#34;https://jenkins.io/doc/book/pipeline/jenkinsfile/&#34;&gt;Jenkinsfile&lt;/a&gt; might
 be a bit more confusing to &lt;em&gt;learn&lt;/em&gt; how to setup, it is well worth it. For
@@ -779,12 +621,10 @@ we setup in the previous steps:&lt;/p&gt;
 	&lt;span style=&#34;color:#f92672&#34;&gt;}&lt;/span&gt;
 
     &lt;span style=&#34;color:#f92672&#34;&gt;}&lt;/span&gt;
-&lt;span style=&#34;color:#f92672&#34;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;I&amp;rsquo;m not going to cover pipelines in &lt;em&gt;this&lt;/em&gt; post. However, I do
+&lt;span style=&#34;color:#f92672&#34;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;I&amp;rsquo;m not going to cover pipelines in &lt;em&gt;this&lt;/em&gt; post. However, I do
 encourage readers to check them out.&lt;/p&gt;
-
 &lt;h2 id=&#34;conclusion&#34;&gt;Conclusion&lt;/h2&gt;
-
 &lt;p&gt;That&amp;rsquo;s it. While I currently host my website using &lt;a href=&#34;https://pages.github.com/&#34;&gt;GitHub
 pages&lt;/a&gt;, if I ever self-host it again, I
 will definitely automate publishing it using Jenkins as well. This has
@@ -805,114 +645,85 @@ First on the list: &lt;a href=&#34;https://docker.io&#34;&gt;Docker&lt;/a&gt;. T
 ecosystem surrounding it, and can take years to truly master. This post on the
 other hand, will &lt;em&gt;hopefully&lt;/em&gt; help you get up and playing with docker containers in
 just a few minutes. Lets get started.&lt;/p&gt;
-
 &lt;h2 id=&#34;installing-docker&#34;&gt;Installing Docker&lt;/h2&gt;
-
-&lt;p&gt;&lt;img src=&#34;../../img/posts/docker-quickstart/docker-logo.png&#34; style=&#34;max-width: 100%; width: 400px; float: right; margin: 0px 15px 5px 5px;&#34; alt=&#34;Docker Logo&#34; /&gt;&lt;/p&gt;
-
+&lt;p&gt;&lt;!-- raw HTML omitted --&gt;&lt;/p&gt;
 &lt;p&gt;Installing docker on &lt;a href=&#34;https://getsol.us&#34;&gt;Solus&lt;/a&gt; was easy enough. I just
 had to install the package, and then enable the service:&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;sudo eopkg it docker
 sudo systemctl enable docker
-sudo systemctl start docker&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;On other distributions, it may not be in the package manager, or it might be
+sudo systemctl start docker
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;On other distributions, it may not be in the package manager, or it might be
 under a different name. To be sure, check out the community edition
 &lt;a href=&#34;https://docs.docker.com/install/linux/docker-ce/fedora/#set-up-the-repository&#34;&gt;installation
 documentation&lt;/a&gt;
 for your specific distro.&lt;/p&gt;
-
 &lt;h2 id=&#34;adding-user-to-docker-group&#34;&gt;Adding User to Docker Group&lt;/h2&gt;
-
 &lt;p&gt;By default, user accounts will not have permission to run docker commands
 without root access. So, after first installing docker, it might be tempting to
 just run everything using &lt;code&gt;sudo&lt;/code&gt;, but that isn&amp;rsquo;t the best idea. To get around
 this, simply add the user account to the &lt;code&gt;docker&lt;/code&gt; group:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;sudo usermod -a -G docker ryan&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;If the docker group is not created for some reason, it can be added:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;sudo groupadd docker&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Afterwards, that user should be able to run docker commands without requiring
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;sudo usermod -a -G docker ryan
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;If the docker group is not created for some reason, it can be added:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;sudo groupadd docker
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Afterwards, that user should be able to run docker commands without requiring
 &lt;code&gt;sudo&lt;/code&gt;. They &lt;em&gt;might&lt;/em&gt; have to log out and back in first.&lt;/p&gt;
-
 &lt;p&gt;&lt;em&gt;Note: These commands may differ based on distro.&lt;/em&gt;&lt;/p&gt;
-
 &lt;h2 id=&#34;some-useful-commands&#34;&gt;Some Useful Commands&lt;/h2&gt;
-
 &lt;p&gt;Before getting too caught up in creating and using containers, lets first go
 over a few useful commands that make navigating docker a bit easier.&lt;/p&gt;
-
 &lt;h4 id=&#34;docker-ps&#34;&gt;docker ps&lt;/h4&gt;
-
-&lt;p&gt;&lt;a href=&#34;../../img/posts/docker-quickstart/docker-ps.png&#34;&gt;&lt;img src=&#34;../../img/posts/docker-quickstart/docker-ps.png&#34; style=&#34;max-width: 100%; float: left; margin: 0px 15px 0px 0px;&#34; alt=&#34;Docker ps&#34; /&gt;&lt;/a&gt;
-&lt;div class=&#34;caption&#34;&gt;Example of the docker ps and docker ps -a commands&lt;/div&gt;&lt;/p&gt;
-
+&lt;p&gt;&lt;!-- raw HTML omitted --&gt;&lt;!-- raw HTML omitted --&gt;&lt;!-- raw HTML omitted --&gt;&lt;/p&gt;
+&lt;!-- raw HTML omitted --&gt;
 &lt;p&gt;Similar to how Unix-based systems have the &lt;code&gt;ps&lt;/code&gt; command to see running
 processes, docker has &lt;code&gt;docker ps&lt;/code&gt; to see created and running containers. To
 view the currently running containers, use the basic &lt;code&gt;docker ps&lt;/code&gt; command:&lt;/p&gt;
-
 &lt;p&gt;The base command however, doesn&amp;rsquo;t always tell the whole story. A system might
 have containers that &lt;em&gt;exist&lt;/em&gt; but are not running. A container may have been
 stopped, &lt;em&gt;or&lt;/em&gt; exited if it encountered an error. Containers that are stopped or
 exited &lt;em&gt;will not&lt;/em&gt; show up in the default &lt;code&gt;docker ps&lt;/code&gt; command. To see &lt;em&gt;all&lt;/em&gt; of the
 current containers on the system, run &lt;code&gt;ps&lt;/code&gt; with the &lt;code&gt;-a&lt;/code&gt; flag.&lt;/p&gt;
-
 &lt;h4 id=&#34;docker-inspect&#34;&gt;docker inspect&lt;/h4&gt;
-
-&lt;p&gt;&lt;a href=&#34;../../img/posts/docker-quickstart/docker-inspect.png&#34;&gt;&lt;img src=&#34;../../img/posts/docker-quickstart/docker-inspect.png&#34; style=&#34;max-width: 100%; float: left; margin: 0px 15px 0px 0px;&#34; alt=&#34;Docker inspect examples: docker inspect web-test | grep Status and docker inspect web-test | grep IPAddress&#34; /&gt;&lt;/a&gt;
-&lt;div class=&#34;caption&#34;&gt;Using the docker inspect command to get the container&amp;rsquo;s status and IP address&lt;/div&gt;&lt;/p&gt;
-
+&lt;p&gt;&lt;!-- raw HTML omitted --&gt;&lt;!-- raw HTML omitted --&gt;&lt;!-- raw HTML omitted --&gt;&lt;/p&gt;
+&lt;!-- raw HTML omitted --&gt;
 &lt;p&gt;Another useful command when working with docker containers is &lt;code&gt;docker inspect&lt;/code&gt;.
 The &lt;code&gt;inspect&lt;/code&gt; command will dump the xml for all the low level information of the
 container/docker object. The output contains basically &lt;em&gt;everything&lt;/em&gt; about the
 container: Full ID, time created, state, volumes, network information&amp;hellip;
 everything. It can be useful to pipe the output of &lt;code&gt;inspect&lt;/code&gt; to grep, in order
 to get specific information about the container quickly.&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;docker inspect container_name | grep IPAddress&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;For example, the above command will grab and return only the lines which contain
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;docker inspect container_name | grep IPAddress
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;For example, the above command will grab and return only the lines which contain
 &amp;ldquo;IPAddress&amp;rdquo;.&lt;/p&gt;
-
 &lt;h4 id=&#34;help&#34;&gt;help&lt;/h4&gt;
-
-&lt;p&gt;&lt;a href=&#34;../../img/posts/docker-quickstart/docker-help.png&#34;&gt;&lt;img src=&#34;../../img/posts/docker-quickstart/docker-help.png&#34; style=&#34;max-width: 100%; float: left; margin: 0px 15px 0px 0px;&#34; alt=&#34;Using the docker help command flags. For Example: docker inspect --help&#34; /&gt;&lt;/a&gt;
-&lt;div class=&#34;caption&#34;&gt;Using the docker help command flags.&lt;/div&gt;&lt;/p&gt;
-
+&lt;p&gt;&lt;!-- raw HTML omitted --&gt;&lt;!-- raw HTML omitted --&gt;&lt;!-- raw HTML omitted --&gt;&lt;/p&gt;
+&lt;!-- raw HTML omitted --&gt;
 &lt;p&gt;Last but not least, don&amp;rsquo;t forget about the &lt;code&gt;help&lt;/code&gt; command. To see all the
 available docker commands, run &lt;code&gt;docker help&lt;/code&gt;.&lt;/p&gt;
-
 &lt;p&gt;Additionally, when using each of those specific commands, (&lt;code&gt;inspect&lt;/code&gt; for
 example), a description and possible options can be shown using the &lt;code&gt;--help&lt;/code&gt;
 flag (as in &lt;code&gt;docker inspect --help&lt;/code&gt;).&lt;/p&gt;
-
 &lt;p&gt;Just as man pages can be extremely valuable when working on a Linux system,
 &lt;code&gt;help&lt;/code&gt; is just as essential when using docker.&lt;/p&gt;
-
 &lt;h2 id=&#34;images&#34;&gt;Images&lt;/h2&gt;
-
 &lt;p&gt;A docker container is created from a base &lt;em&gt;image&lt;/em&gt;. Images can be pulled down
 from &lt;a href=&#34;https://hub.docker.com/&#34;&gt;Dockerhub&lt;/a&gt;. To search docker hub from command
 line, use the &lt;code&gt;docker search&lt;/code&gt; command. For example, &lt;code&gt;docker search nginx&lt;/code&gt; will
 search for images related to nginx.&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&#34;../../img/posts/docker-quickstart/docker-search.png&#34;&gt;&lt;img src=&#34;../../img/posts/docker-quickstart/docker-search.png&#34; style=&#34;max-width: 100%; float: left; margin: 0px 15px 0px 0px;&#34; alt=&#34;Docker Search output. Ex: docker search nginx&#34; /&gt;&lt;/a&gt;
-&lt;div class=&#34;caption&#34;&gt;The search output for nginx images&lt;/div&gt;&lt;/p&gt;
-
+&lt;p&gt;&lt;!-- raw HTML omitted --&gt;&lt;!-- raw HTML omitted --&gt;&lt;!-- raw HTML omitted --&gt;&lt;/p&gt;
+&lt;!-- raw HTML omitted --&gt;
 &lt;p&gt;The search will list all of the public images in order, from most to least
 stars. When a desired image is found, pull it down using the &lt;code&gt;docker pull&lt;/code&gt;
 command. For example, &lt;code&gt;docker pull nginx&lt;/code&gt; will pull down the &lt;a href=&#34;https://hub.docker.com/_/nginx/&#34;&gt;nginx
 image&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&#34;../../img/posts/docker-quickstart/docker-pull.png&#34;&gt;&lt;img src=&#34;../../img/posts/docker-quickstart/docker-pull.png&#34; style=&#34;max-width: 100%; width:100%; float: left; margin: 0px 15px 0px 0px;&#34; alt=&#34;Docker Pull output. Ex: docker pull nginx&#34; /&gt;&lt;/a&gt;
-&lt;div class=&#34;caption&#34;&gt;Pulling the latest nginx image&lt;/div&gt;&lt;/p&gt;
-
+&lt;p&gt;&lt;!-- raw HTML omitted --&gt;&lt;!-- raw HTML omitted --&gt;&lt;!-- raw HTML omitted --&gt;&lt;/p&gt;
+&lt;!-- raw HTML omitted --&gt;
 &lt;p&gt;Docker will then download all the layers for the image. When the download
 completes, the image will be locally available to create docker containers
 from. To see all of the local images, use the &lt;code&gt;docker images&lt;/code&gt; command:&lt;/p&gt;
-
 &lt;p&gt;To delete an image, use the &lt;code&gt;docker images rm&lt;/code&gt; command, or my preferred, lazier
 command, &lt;code&gt;docker rmi&lt;/code&gt;:&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&#34;../../img/posts/docker-quickstart/docker-images.png&#34;&gt;&lt;img src=&#34;../../img/posts/docker-quickstart/docker-images.png&#34; style=&#34;max-width: 100%; float: left; margin: 0px 15px 0px 0px;&#34; alt=&#34;docker images and docker rmi. Ex: docker images, then docker rmi test-ubuntu&#34; /&gt;&lt;/a&gt;
-&lt;div class=&#34;caption&#34;&gt;Viewing downloaded images with the docker images command, then deleting the &amp;ldquo;test-ubuntu&amp;rdquo; image using the docker rmi command&lt;/div&gt;&lt;/p&gt;
-
+&lt;p&gt;&lt;!-- raw HTML omitted --&gt;&lt;!-- raw HTML omitted --&gt;&lt;!-- raw HTML omitted --&gt;&lt;/p&gt;
+&lt;!-- raw HTML omitted --&gt;
 &lt;p&gt;Lastly, it should be noted that custom images can be created/tailored using a
 &lt;a href=&#34;https://docs.docker.com/engine/reference/builder/#usage&#34;&gt;Dockerfile&lt;/a&gt;. With a
 Dockerfile is defined, an image can be created from it using the &lt;code&gt;docker build&lt;/code&gt;
@@ -925,140 +736,101 @@ MAINTAINER himmallright &amp;lt;ryan.himmelwright@gmail.com&lt;span style=&#34;c
 &lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;
 &lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;RUN apt-get update&lt;/span&gt;
 
-RUN apt-get install -y vim stow git tmux fish htop emacs&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;To build the image, run the following command in the same directory as the
+RUN apt-get install -y vim stow git tmux fish htop emacs
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;To build the image, run the following command in the same directory as the
 Dockerfile (if defining a specific file, the &lt;code&gt;-f&lt;/code&gt; flag can be used):&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;docker build -t ubuntu-base:v1 .&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;I like to use the &lt;code&gt;-t&lt;/code&gt; flag, so that I can specify a &lt;code&gt;name:tag&lt;/code&gt; for the image.
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;docker build -t ubuntu-base:v1 .
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;I like to use the &lt;code&gt;-t&lt;/code&gt; flag, so that I can specify a &lt;code&gt;name:tag&lt;/code&gt; for the image.
 This helps to make it easier to find it in the &lt;code&gt;docker images&lt;/code&gt; list.&lt;/p&gt;
-
 &lt;h2 id=&#34;creating-containers&#34;&gt;Creating Containers&lt;/h2&gt;
-
 &lt;p&gt;Docker containers can be &lt;em&gt;created&lt;/em&gt; (but not run) with the &lt;code&gt;docker create&lt;/code&gt;
 command. When creating containers, it is useful to use flags to tailor the
 details of the container. For example, the &lt;code&gt;-m&lt;/code&gt; flag can be used to create a
 memory limit, &lt;code&gt;--name&lt;/code&gt; to name the container, and so on. To create a simple nginx
 container from the image we previously pulled:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;docker create --name web-test nginx:latest&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;h2 id=&#34;starting-running-containers&#34;&gt;Starting &amp;amp; Running Containers&lt;/h2&gt;
-
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;docker create --name web-test nginx:latest
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;starting--running-containers&#34;&gt;Starting &amp;amp; Running Containers&lt;/h2&gt;
 &lt;p&gt;To &lt;em&gt;start&lt;/em&gt; a container created with &lt;code&gt;docker create&lt;/code&gt;, or one that has been previously
 stopped, use the &lt;code&gt;docker start&lt;/code&gt; command. For example, to start
 the container created in the previous step:&lt;/p&gt;
-
 &lt;pre&gt;&lt;code&gt;docker start web-test
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Similarly, a container can be stopped with &lt;code&gt;docker stop&lt;/code&gt;, or restarted with
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Similarly, a container can be stopped with &lt;code&gt;docker stop&lt;/code&gt;, or restarted with
 &lt;code&gt;docker restart&lt;/code&gt;.&lt;/p&gt;
-
 &lt;p&gt;Instead of using a &lt;code&gt;docker create&lt;/code&gt; and &lt;code&gt;docker start&lt;/code&gt; combination, &lt;code&gt;docker run&lt;/code&gt;
 can be used to both instantiate &lt;em&gt;and&lt;/em&gt; start a container. To create and start the
 &amp;ldquo;web-test&amp;rdquo; container from the previous examples:&lt;/p&gt;
-
 &lt;pre&gt;&lt;code&gt;docker run --name web-test -d nginx:latest
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h4 id=&#34;cleaning-containers&#34;&gt;Cleaning containers&lt;/h4&gt;
-
-&lt;p&gt;&lt;a href=&#34;../../img/posts/docker-quickstart/docker-rm.png&#34;&gt;&lt;img src=&#34;../../img/posts/docker-quickstart/docker-rm.png&#34; style=&#34;max-width: 100%; float: left; width: 95%;&#34; alt=&#34;Docker rm all images. Ex: docker rm `docker ps -aq`&#34; /&gt;&lt;/a&gt;
-&lt;div class=&#34;caption&#34;&gt;Removing all the older container images&lt;/div&gt;&lt;/p&gt;
-
+&lt;/code&gt;&lt;/pre&gt;&lt;h4 id=&#34;cleaning-containers&#34;&gt;Cleaning containers&lt;/h4&gt;
+&lt;p&gt;&lt;!-- raw HTML omitted --&gt;&lt;!-- raw HTML omitted --&gt;&lt;!-- raw HTML omitted --&gt;&lt;/p&gt;
+&lt;!-- raw HTML omitted --&gt;
 &lt;p&gt;Over time, old containers may build up on the system. To remove an old (but not
 running) container, use &lt;code&gt;docker rm&lt;/code&gt; with either the container name, &lt;em&gt;or&lt;/em&gt; the id.
 Note, to easily delete &lt;em&gt;all&lt;/em&gt; of the containers on the system, &lt;code&gt;docker rm&lt;/code&gt; can be
 fed the output of &lt;code&gt;docker ps -aq&lt;/code&gt;, where the &lt;code&gt;-aq&lt;/code&gt; flag returns a list of all
 the container ids.&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;docker rm &lt;span style=&#34;color:#e6db74&#34;&gt;`&lt;/span&gt;docker ps -aq&lt;span style=&#34;color:#e6db74&#34;&gt;`&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;&lt;em&gt;(Note: this doesn&amp;rsquo;t work in my Fish shell, but does in bash)&lt;/em&gt;&lt;/p&gt;
-
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;docker rm &lt;span style=&#34;color:#e6db74&#34;&gt;`&lt;/span&gt;docker ps -aq&lt;span style=&#34;color:#e6db74&#34;&gt;`&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;em&gt;(Note: this doesn&amp;rsquo;t work in my Fish shell, but does in bash)&lt;/em&gt;&lt;/p&gt;
 &lt;h2 id=&#34;attaching-to-containers&#34;&gt;Attaching to Containers&lt;/h2&gt;
-
 &lt;p&gt;After a container is running, it might occasionally be necessary to attach to
 it and poke around with a shell. There is the obvious way to do this,
-&lt;code&gt;docker attach&lt;/code&gt;, and a somewhat work-around way, which I prefer to use: &lt;code&gt;docker
-exec&lt;/code&gt;.&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&#34;../../img/posts/docker-quickstart/docker-attach.png&#34;&gt;&lt;img src=&#34;../../img/posts/docker-quickstart/docker-attach.png&#34; style=&#34;max-width: 100%; float: left;&#34; alt=&#34;Docker attach example&#34; /&gt;&lt;/a&gt;
-&lt;div class=&#34;caption&#34;&gt;An example using the docker attach command&lt;/div&gt;&lt;/p&gt;
-
+&lt;code&gt;docker attach&lt;/code&gt;, and a somewhat work-around way, which I prefer to use: &lt;code&gt;docker exec&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;!-- raw HTML omitted --&gt;&lt;!-- raw HTML omitted --&gt;&lt;!-- raw HTML omitted --&gt;&lt;/p&gt;
+&lt;!-- raw HTML omitted --&gt;
 &lt;p&gt;The attach command works as one would expect. It allows a user to &amp;ldquo;Attach local
 standard input, output, and error streams to a running container&amp;rdquo;. This is all
 well an good, except for one issue: when exiting the attached container, the
 &lt;em&gt;container also&lt;/em&gt; exits.&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&#34;../../img/posts/docker-quickstart/docker-exec-bash.png&#34;&gt;&lt;img src=&#34;../../img/posts/docker-quickstart/docker-exec-bash.png&#34; style=&#34;max-width: 100%; float: left;&#34; alt=&#34;Docker exec bash example&#34; /&gt;&lt;/a&gt;
-&lt;div class=&#34;caption&#34;&gt;An example using docker exec with a bash shell, as an alternative to docker attach&lt;/div&gt;&lt;/p&gt;
-
+&lt;p&gt;&lt;!-- raw HTML omitted --&gt;&lt;!-- raw HTML omitted --&gt;&lt;!-- raw HTML omitted --&gt;&lt;/p&gt;
+&lt;!-- raw HTML omitted --&gt;
 &lt;p&gt;A way around this annoyance is to utilize the &lt;code&gt;docker exec&lt;/code&gt; command, which
 allows a command to be executed inside a container. Executing a shell program
 inside the container, such as &lt;code&gt;bash&lt;/code&gt;, mimics the &lt;code&gt;attach&lt;/code&gt; command, but with the
 added benefit that when exiting, only the shell exits, and &lt;em&gt;not&lt;/em&gt; the entire
 container.&lt;/p&gt;
-
-&lt;h2 id=&#34;ports-volumes&#34;&gt;Ports &amp;amp; Volumes&lt;/h2&gt;
-
+&lt;h2 id=&#34;ports--volumes&#34;&gt;Ports &amp;amp; Volumes&lt;/h2&gt;
 &lt;p&gt;As mentioned earlier, docker containers can be built and run using many specific
 commands to tailor the container and how it interfaces with the host system.
 There are two concepts in particular that I want to briefly touch on in this
 &lt;em&gt;quick start&lt;/em&gt; post. Those two items, are &lt;code&gt;ports&lt;/code&gt; and &lt;code&gt;volumes&lt;/code&gt;.&lt;/p&gt;
-
 &lt;h4 id=&#34;ports&#34;&gt;Ports&lt;/h4&gt;
-
-&lt;p&gt;&lt;a href=&#34;../../img/posts/docker-quickstart/nginx-firefox-port.png&#34;&gt;&lt;img src=&#34;../../img/posts/docker-quickstart/nginx-firefox-port.png&#34; style=&#34;max-width: 100%; float: center;&#34; alt=&#34;Containerized nginx server connected to through localhost&#34; /&gt;&lt;/a&gt;
-&lt;div class=&#34;caption&#34;&gt;Container ports can be forwarded to the host&amp;rsquo;s ports.&lt;/div&gt;&lt;/p&gt;
-
+&lt;p&gt;&lt;!-- raw HTML omitted --&gt;&lt;!-- raw HTML omitted --&gt;&lt;!-- raw HTML omitted --&gt;&lt;/p&gt;
+&lt;!-- raw HTML omitted --&gt;
 &lt;p&gt;While it is nice to spin up a web server inside a docker container, it isn&amp;rsquo;t
 always very useful to only have it available to the host machine. By using the
 &lt;code&gt;-p&lt;/code&gt; flag when running a container, the container&amp;rsquo;s ports can be forwarded to
 ports on the host system.&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&#34;../../img/posts/docker-quickstart/docker-port.png&#34;&gt;&lt;img src=&#34;../../img/posts/docker-quickstart/docker-port.png&#34; style=&#34;max-width: 100%; float: center;&#34; alt=&#34;Creating an nginx container, forwarding port 80 to he host&#39;s 8081&#34; /&gt;&lt;/a&gt;
-&lt;div class=&#34;caption&#34;&gt;Creating an nginx container, forwarding it&amp;rsquo;s port 80 to the host&amp;rsquo;s port 8081&lt;/div&gt;&lt;/p&gt;
-
+&lt;p&gt;&lt;!-- raw HTML omitted --&gt;&lt;!-- raw HTML omitted --&gt;&lt;!-- raw HTML omitted --&gt;&lt;/p&gt;
+&lt;!-- raw HTML omitted --&gt;
 &lt;p&gt;Using &lt;code&gt;-p&lt;/code&gt; with just a single number, as in &lt;code&gt;-p 8080&lt;/code&gt;, will declare that port of
 the container to be exposed. To forward exposed ports to the host, use &lt;em&gt;two&lt;/em&gt;
 port numbers, separated with a &lt;code&gt;:&lt;/code&gt;. The first number is the host port to bind
 to, and the second is the container port to expose and forward.&lt;/p&gt;
-
 &lt;pre&gt;&lt;code&gt;docker run -itd --name webtest -p 8081:80 nginx:latest
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;The above example, a nginx container is started with port 80 forwarded to port
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;The above example, a nginx container is started with port 80 forwarded to port
 8081 on the host. As a result, any computer connecting to port 8081 of the host
 machine will be directed to the nginx web server inside the container.&lt;/p&gt;
-
 &lt;h4 id=&#34;volumes&#34;&gt;Volumes&lt;/h4&gt;
-
-&lt;p&gt;&lt;a href=&#34;../../img/posts/docker-quickstart/nginx-firefox-volume.png&#34;&gt;&lt;img src=&#34;../../img/posts/docker-quickstart/nginx-firefox-volume.png&#34; style=&#34;max-width: 100%; float: center;&#34; alt=&#34;Nginx container with website pages in a volume from the host.&#34; /&gt;&lt;/a&gt;
-&lt;div class=&#34;caption&#34;&gt;Containers can attach volumes from the host system for persistent data.&lt;/div&gt;&lt;/p&gt;
-
+&lt;p&gt;&lt;!-- raw HTML omitted --&gt;&lt;!-- raw HTML omitted --&gt;&lt;!-- raw HTML omitted --&gt;&lt;/p&gt;
+&lt;!-- raw HTML omitted --&gt;
 &lt;p&gt;Lastly, by design docker containers are mean to be expendable. They are run, and then
 disposed. It should not be assumed that &lt;em&gt;any&lt;/em&gt; data inside the container will
 be preserved by default. That is, unless
 &lt;a href=&#34;https://docs.docker.com/storage/volumes/&#34;&gt;volumes&lt;/a&gt; are used.&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&#34;../../img/posts/docker-quickstart/docker-volume.png&#34;&gt;&lt;img src=&#34;../../img/posts/docker-quickstart/docker-volume.png&#34; style=&#34;max-width: 100%; float: center;&#34; alt=&#34;Creating an nginx container, forwarding port 80 to he host&#39;s 8081&#34; /&gt;&lt;/a&gt;
-&lt;div class=&#34;caption&#34;&gt;Creating an nginx container, forwarding it&amp;rsquo;s port 80 to the host&amp;rsquo;s port 8081&lt;/div&gt;&lt;/p&gt;
-
+&lt;p&gt;&lt;!-- raw HTML omitted --&gt;&lt;!-- raw HTML omitted --&gt;&lt;!-- raw HTML omitted --&gt;&lt;/p&gt;
+&lt;!-- raw HTML omitted --&gt;
 &lt;p&gt;Docker volumes are the preferred mechanism for preserving data across container
 runs, and are specified using the &lt;code&gt;-v&lt;/code&gt; flag. Similar to setting ports, volumes
 can be created by providing either a single path, or two separated by a &lt;code&gt;:&lt;/code&gt;.
 When a single path is provided, as in &lt;code&gt;-v /Data&lt;/code&gt;, docker will create a volume
 and bind it to that location within the container. Two locations can be provided
 to bind a directory on the host system, to the volume inside to container.&lt;/p&gt;
-
 &lt;pre&gt;&lt;code&gt;docker run -d --name testsite -v /home/ryan/testsite/:/usr/share/nginx/html nginx:latest
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;In the above command, for example, &lt;code&gt;-v
-/home/ryan/testsite/:/usr/share/nginx/html&lt;/code&gt; will use the &lt;code&gt;/home/ryan/testsite/&lt;/code&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;In the above command, for example, &lt;code&gt;-v /home/ryan/testsite/:/usr/share/nginx/html&lt;/code&gt; will use the &lt;code&gt;/home/ryan/testsite/&lt;/code&gt;
 directory of the host system, as a volume located at &lt;code&gt;/usr/share/nginx/html&lt;/code&gt;
 inside the container. This means that the container will server the website
 files, which are located (and can be easily edited), on the host system.&lt;/p&gt;
-
 &lt;h2 id=&#34;in-conclusion&#34;&gt;In Conclusion&lt;/h2&gt;
-
 &lt;p&gt;So, this has been&amp;hellip; a rather long post. However, when it comes to Docker, this
 &lt;em&gt;really is just the tip of the iceberg&lt;/em&gt;. With any luck though, you should now
 know the basic to at &lt;em&gt;least&lt;/em&gt; get &lt;em&gt;started&lt;/em&gt;. So&amp;hellip; go ahead and have some fun!.&lt;/p&gt;</description>
@@ -1070,18 +842,11 @@ know the basic to at &lt;em&gt;least&lt;/em&gt; get &lt;em&gt;started&lt;/em&gt;
       <pubDate>Thu, 25 May 2017 00:00:00 +0000</pubDate>
       
       <guid>http://ryan.himmelwright.net/post/updating-pi-cluster-with-ansible/</guid>
-      <description>
-
-&lt;p&gt;With Ansible configured on the Pi cluster, it is time to have it do something useful. When working with a clustered system, even the simplest tasks become tedious and time consuming. For example, updating the system. While I could manually update each of the 3 pi nodes, it is not scalable to 10 or 30 nodes, let alone hundreds or thousands. Tools like Ansible, make doing tasks such a supdating clustered systems, trivial again. In this post, I will walk through setting up an Ansible playbook to update my Pi cluster.&lt;/p&gt;
-
-&lt;!-- more --&gt;
-
+      <description>&lt;p&gt;With Ansible configured on the Pi cluster, it is time to have it do something useful. When working with a clustered system, even the simplest tasks become tedious and time consuming. For example, updating the system. While I could manually update each of the 3 pi nodes, it is not scalable to 10 or 30 nodes, let alone hundreds or thousands. Tools like Ansible, make doing tasks such a supdating clustered systems, trivial again. In this post, I will walk through setting up an Ansible playbook to update my Pi cluster.&lt;/p&gt;
+&lt;!-- raw HTML omitted --&gt;
 &lt;h3 id=&#34;hosts-file&#34;&gt;Hosts File&lt;/h3&gt;
-
 &lt;p&gt;The first task when using Ansible is to setup the &lt;code&gt;hosts&lt;/code&gt; file. No, not the normal &lt;code&gt;/etc/hosts&lt;/code&gt; file, but the &lt;em&gt;other&lt;/em&gt; one &lt;em&gt;just&lt;/em&gt; for Ansible, which can be found at &lt;code&gt;/etc/ansible/hosts&lt;/code&gt;. Configuring the Ansible hosts file is fairly straightforward. Groups of computers are defined using &lt;code&gt;[brackets]&lt;/code&gt;, with computer ip/hostnames of the group are listed below. For example:&lt;/p&gt;
-
 &lt;p&gt;A nice feature of group definitions is that hierical structures can be constructed using the &lt;code&gt;:child&lt;/code&gt; suffix in order to create groups of groups. For example, for my &lt;a href=&#34;../../pages/homelab&#34;&gt;homelab&lt;/a&gt;, I like to make an ansible hosts file that splits out my servers based on their distribution, and then group those by their packaging type. This makes it easier for me to do generic updates, which is what I mostly use ansible for (at this point). So, for example:&lt;/p&gt;
-
 &lt;pre&gt;&lt;code&gt;[ubuntu]
 mrmime
 geodude
@@ -1108,10 +873,7 @@ debian
 fedora
 centos
 
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;For use with the cluster, I kept it simple, although I did opt to create rpi/bpi subgroups:&lt;/p&gt;
-
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;For use with the cluster, I kept it simple, although I did opt to create rpi/bpi subgroups:&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;[cluster:children]
 rpis
 bpis
@@ -1122,72 +884,42 @@ pi1
 
 [bpis]
 bpi
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&#34;ping-hosts&#34;&gt;Ping Hosts&lt;/h3&gt;
-
+&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;ping-hosts&#34;&gt;Ping Hosts&lt;/h3&gt;
 &lt;p&gt;Once the hosts file is setup, it can be tested using the &lt;code&gt;ping&lt;/code&gt; module. I tested my &lt;code&gt;cluser&lt;/code&gt; group, as well as the &lt;code&gt;rpis&lt;/code&gt; and &lt;code&gt;bpis&lt;/code&gt; subgroups.&lt;/p&gt;
-
 &lt;pre&gt;&lt;code&gt;ansible rpis -m ping
 ansible bpis -m ping
 ansible cluster -m ping
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Assuming the steps of &lt;a href=&#34;../../post/Ansible-On-Pi-Cluster&#34;&gt;the last post&lt;/a&gt; were done correctly, this should work. If not, double check that post and make sure everything looks correct.&lt;/p&gt;
-
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Assuming the steps of &lt;a href=&#34;../../post/Ansible-On-Pi-Cluster&#34;&gt;the last post&lt;/a&gt; were done correctly, this should work. If not, double check that post and make sure everything looks correct.&lt;/p&gt;
 &lt;h3 id=&#34;playbooks&#34;&gt;Playbooks&lt;/h3&gt;
-
 &lt;p&gt;After confirming that the hosts file is properly configured, I started to dig into playbooks. Playbooks are Ansible&amp;rsquo;s scripting system used to configure, deploy, and orcistrate systems. They can describe ways in which systems should be configured (ex: enable ssh), or outline a set of steps for an IT task (ex: running updates, restarting a server). As stated in the &lt;a href=&#34;https://docs.ansible.com/ansible/playbooks.html&#34;&gt;playbook documentation&lt;/a&gt;:&lt;/p&gt;
-
-&lt;div id=&#34;post-quote&#34;&gt;
-*&#34;If Ansible modules are the tools in your workshop, playbooks are your instruction manuals, and your inventory of hosts are your raw material.&#34;*
-&lt;/div&gt;
-
-&lt;p&gt;Playbook files are expressed using &lt;a href=&#34;https://docs.ansible.com/ansible/YAMLSyntax.html&#34;&gt;YAML syntax&lt;/a&gt;, which is easy to read, but still powerful. The first step when creating a new playbook, being a YAML file, is to set the header and footer. The header consists of three &lt;code&gt;-&lt;/code&gt;&amp;rsquo;s at the top of the file, and the footer ends the file with three periods (&lt;code&gt;.&lt;/code&gt;). This indicates the start and end of the document.&lt;/p&gt;
-
+&lt;!-- raw HTML omitted --&gt;
+&lt;p&gt;Playbook files are expressed using &lt;a href=&#34;https://docs.ansible.com/ansible/YAMLSyntax.html&#34;&gt;YAML syntax&lt;/a&gt;, which is easy to read, but still powerful. The first step when creating a new playbook, being a YAML file, is to set the header and footer. The header consists of three &lt;code&gt;-&lt;/code&gt;&#39;s at the top of the file, and the footer ends the file with three periods (&lt;code&gt;.&lt;/code&gt;). This indicates the start and end of the document.&lt;/p&gt;
 &lt;p&gt;When writing a playbook to update the pi cluster, I first needed to declare what systems the playbook is used with. To do that, I used the &lt;code&gt;hosts&lt;/code&gt; key, and provided it with the &lt;code&gt;cluster&lt;/code&gt; group name, which is defined in my &lt;code&gt;/etc/ansible/hosts&lt;/code&gt; file, as the value.&lt;/p&gt;
-
 &lt;pre&gt;&lt;code&gt;---
 - hosts: cluster
 
 ...
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;After the hosts are defined, modules can be added to update the nodes. To list the tasks, I used the &lt;code&gt;taks:&lt;/code&gt; key, with the same indentation as the &lt;code&gt;hosts:&lt;/code&gt; keyword. Instead of using a single value, I provided the &lt;code&gt;tasks:&lt;/code&gt; keyword with a list of things to do. The first task I want to do when updating the nodes is to check that they running and connected. This can be accomplised with the &lt;a href=&#34;https://docs.ansible.com/ansible/ping_module.html&#34;&gt;ping module&lt;/a&gt; that I used earlier in the post. The ping module will try to connect to each node, verify that a usable python is installed, and return &lt;code&gt;pong&lt;/code&gt; upon success. To add the module, I added &lt;code&gt;- ping: ~&lt;/code&gt;, indented, to the line below &lt;code&gt;tasks:&lt;/code&gt;:&lt;/p&gt;
-
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;After the hosts are defined, modules can be added to update the nodes. To list the tasks, I used the &lt;code&gt;taks:&lt;/code&gt; key, with the same indentation as the &lt;code&gt;hosts:&lt;/code&gt; keyword. Instead of using a single value, I provided the &lt;code&gt;tasks:&lt;/code&gt; keyword with a list of things to do. The first task I want to do when updating the nodes is to check that they running and connected. This can be accomplised with the &lt;a href=&#34;https://docs.ansible.com/ansible/ping_module.html&#34;&gt;ping module&lt;/a&gt; that I used earlier in the post. The ping module will try to connect to each node, verify that a usable python is installed, and return &lt;code&gt;pong&lt;/code&gt; upon success. To add the module, I added &lt;code&gt;- ping: ~&lt;/code&gt;, indented, to the line below &lt;code&gt;tasks:&lt;/code&gt;:&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;---
 - hosts: cluster
 
   tasks:
     - ping: ~
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&#34;apt-module&#34;&gt;Apt Module&lt;/h3&gt;
-
+&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;apt-module&#34;&gt;Apt Module&lt;/h3&gt;
 &lt;p&gt;After defining the ping module, I started to get a bit fancier. Well&amp;hellip; a little bit fancier. Each node in my pi cluster is running some verison of Ubuntu, which uses apt as it&amp;rsquo;s package manager. If I wanted to ssh into each node and update them manually, the steps I would follow would be to 1) run the command &lt;code&gt;sudo apt-get update&lt;/code&gt; to update the repository cache, and 2) run &lt;code&gt;sudo apt-get upgrade&lt;/code&gt; to actually install the updates. To recreate these commands in the playbook, I used the &lt;a href=&#34;https://docs.ansible.com/ansible/apt_module.html&#34;&gt;apt module&lt;/a&gt;. To start with updating the repository cache, I added the following lines to my playbook:&lt;/p&gt;
-
 &lt;pre&gt;&lt;code&gt;- name: Update APT package manager repositories cache
   become: true
   apt:
     update_cache: yes
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;The &lt;code&gt;name:&lt;/code&gt; defines the name of the task, and is the text printed out to the console when executing this step of the playbook. Setting the &lt;a href=&#34;https://docs.ansible.com/ansible/become.html&#34;&gt;&lt;code&gt;become&lt;/code&gt;&lt;/a&gt; key to &lt;code&gt;true&lt;/code&gt; tells Ansible to run the command with privilege escalation (sudo). Lastly, the remaining two lines run the &lt;code&gt;update_cache:&lt;/code&gt; functionality of the apt module.&lt;/p&gt;
-
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;The &lt;code&gt;name:&lt;/code&gt; defines the name of the task, and is the text printed out to the console when executing this step of the playbook. Setting the &lt;a href=&#34;https://docs.ansible.com/ansible/become.html&#34;&gt;&lt;code&gt;become&lt;/code&gt;&lt;/a&gt; key to &lt;code&gt;true&lt;/code&gt; tells Ansible to run the command with privilege escalation (sudo). Lastly, the remaining two lines run the &lt;code&gt;update_cache:&lt;/code&gt; functionality of the apt module.&lt;/p&gt;
 &lt;p&gt;With the repositories updated on each node, I can have ansible run the updates by adding the following lines to the playbook (after the cache update ones):&lt;/p&gt;
-
 &lt;pre&gt;&lt;code&gt;- name: Upgrade installed packages
   become: true
   apt:
     upgrade: dist
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;This set of commands is very similar to the last group. The &lt;code&gt;name:&lt;/code&gt; again provides a description of what the task is doing, and privilege escalation is used again via &lt;code&gt;become: true&lt;/code&gt;. The only difference is that the apt module is using the &lt;code&gt;upgrade: dist&lt;/code&gt; command instead. This will run the updates for any installed packages on the system.&lt;/p&gt;
-
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;This set of commands is very similar to the last group. The &lt;code&gt;name:&lt;/code&gt; again provides a description of what the task is doing, and privilege escalation is used again via &lt;code&gt;become: true&lt;/code&gt;. The only difference is that the apt module is using the &lt;code&gt;upgrade: dist&lt;/code&gt; command instead. This will run the updates for any installed packages on the system.&lt;/p&gt;
 &lt;h3 id=&#34;update-cluster-playbook&#34;&gt;Update Cluster Playbook&lt;/h3&gt;
-
 &lt;p&gt;I then had a completed playbook to update the pi cluster:&lt;/p&gt;
-
 &lt;pre&gt;&lt;code&gt;---
 - hosts: cluster
 
@@ -1205,14 +937,9 @@ ansible cluster -m ping
         upgrade: dist
 ...
 
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;The last step is to test it out! Playbooks can be executed using the &lt;code&gt;ansible-playbook&lt;/code&gt; command:&lt;/p&gt;
-
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;The last step is to test it out! Playbooks can be executed using the &lt;code&gt;ansible-playbook&lt;/code&gt; command:&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;ansible-playbook update-cluster.yml
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;When running the playbook, ansible will first attempt to gather facts about each node, and then begin to run each of the tasks defined in the playbook. At each step, it will print out the &lt;code&gt;name&lt;/code&gt; of each task, followed by the status/result for each node. When it completes, all the nodes in the cluster should be updated. Now you can update three+ computers with a single command! Enjoy!&lt;/p&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;When running the playbook, ansible will first attempt to gather facts about each node, and then begin to run each of the tasks defined in the playbook. At each step, it will print out the &lt;code&gt;name&lt;/code&gt; of each task, followed by the status/result for each node. When it completes, all the nodes in the cluster should be updated. Now you can update three+ computers with a single command! Enjoy!&lt;/p&gt;
 </description>
     </item>
     
@@ -1223,80 +950,40 @@ ansible cluster -m ping
       
       <guid>http://ryan.himmelwright.net/post/ansible-on-pi-cluster/</guid>
       <description>&lt;p&gt;In my &lt;a href=&#34;../../post/Setting-up-the-pi-cluster/&#34;&gt;previous post&lt;/a&gt;, I pieced together my &lt;a href=&#34;../../pages/homelab/#cluster&#34;&gt;pi cluster&lt;/a&gt;, and installed variations of Ubuntu 16.04 Server on each of its nodes. With the cluster built, I quickly needed an easy way to maintain and interact with the system as a whole. This, is where &lt;a href=&#34;https://www.ansible.com/&#34;&gt;Ansible&lt;/a&gt; comes in. In this post, I will walk through the steps I took to setup Ansible on my Cluster.&lt;/p&gt;
-
 &lt;h2 id=&#34;ansible&#34;&gt;Ansible&lt;/h2&gt;
-
-&lt;p&gt;&lt;img src=&#34;../../img/posts/setting-up-ansible-pi-cluster/ansible-logo.png&#34; style=&#34;max-width: 50%; width: 150px; float: left; margin: 0px 15px 5px 5px;&#34;/&gt;&lt;/p&gt;
-
+&lt;!-- raw HTML omitted --&gt;
 &lt;p&gt;Ansible is an open source, configuration management and automation system. It is written in Python, and financially backed by &lt;a href=&#34;http://www.redhat.com&#34;&gt;Red Hat&lt;/a&gt;. It simplifies the management of groups of computers, through the use of modules (standalone units of work. for example, apt, ping, rpm, etc). Ansible is script-able using simple YAML files, known as playbooks, that define a set of orchestration tasks for one or many computers. These scripts can be edited and version controlled, creating a simple &lt;a href=&#34;https://en.wikipedia.org/wiki/Infrastructure_as_Code&#34;&gt;infrastructure as code&lt;/a&gt; setup.&lt;/p&gt;
-
 &lt;h2 id=&#34;setting-up-the-user-account&#34;&gt;Setting up the User Account&lt;/h2&gt;
-
 &lt;p&gt;When Ansible executes commands on the PIs, it will do so from the user-account (ryan) that I setup in the last post. However, many of these commands will require Root privledges. While I previously setup sudo and added the &lt;code&gt;ryan&lt;/code&gt; account to the &lt;code&gt;sudo&lt;/code&gt; group &amp;hellip; it required that I manually enter my password. Ansible did not like this, so I had to update the sudo configuration to allow the &lt;code&gt;ryan&lt;/code&gt; account to run &lt;code&gt;sudo&lt;/code&gt; commands with out a password. To do this, I opened the &lt;code&gt;sudoers&lt;/code&gt; file:&lt;/p&gt;
-
 &lt;pre&gt;&lt;code&gt;sudo visudo
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;and added the following line to the end of the file:&lt;/p&gt;
-
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;and added the following line to the end of the file:&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;ryan  ALL=(ALL:ALL) NOPASSWD: ALL
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;I repeated this on each of the nodes, and afterwards was no longer promted for a password when running &lt;code&gt;sudo&lt;/code&gt; commands. This made Ansible happy.&lt;/p&gt;
-
-&lt;p&gt;&lt;a name=&#34;ssh&#34;&gt;&lt;/a&gt;&lt;/p&gt;
-
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;I repeated this on each of the nodes, and afterwards was no longer promted for a password when running &lt;code&gt;sudo&lt;/code&gt; commands. This made Ansible happy.&lt;/p&gt;
+&lt;p&gt;&lt;!-- raw HTML omitted --&gt;&lt;!-- raw HTML omitted --&gt;&lt;/p&gt;
 &lt;h2 id=&#34;setup-ssh-keys&#34;&gt;Setup SSH Keys&lt;/h2&gt;
-
 &lt;p&gt;Well&amp;hellip; &lt;em&gt;almost&lt;/em&gt; happy.&lt;/p&gt;
-
-&lt;p&gt;Ansible&amp;rsquo;s main method of communication is via ssh, which by default, prompts me for a password when connecting. Ansible &lt;em&gt;really&lt;/em&gt; hates passwords. So, I had to configure ssh to use keys instead. Honestly, this is proabaly a good step to do regardless, now that the &lt;code&gt;ryan&lt;/code&gt; account no longer uses a password when running &lt;code&gt;sudo&lt;/code&gt;. To setup key-based logins, I appended the contents of my &lt;a href=&#34;../../pages/homelab/#alakazam&#34;&gt;main computer&lt;/a&gt;&amp;rsquo;s ssh public key*, to each pi&amp;rsquo;s &lt;code&gt;authorized_keys&lt;/code&gt; file. This can all be done using a magic one-line pipe command (x3, one for each pi):&lt;/p&gt;
-
+&lt;p&gt;Ansible&amp;rsquo;s main method of communication is via ssh, which by default, prompts me for a password when connecting. Ansible &lt;em&gt;really&lt;/em&gt; hates passwords. So, I had to configure ssh to use keys instead. Honestly, this is proabaly a good step to do regardless, now that the &lt;code&gt;ryan&lt;/code&gt; account no longer uses a password when running &lt;code&gt;sudo&lt;/code&gt;. To setup key-based logins, I appended the contents of my &lt;a href=&#34;../../pages/homelab/#alakazam&#34;&gt;main computer&lt;/a&gt;&amp;lsquo;s ssh public key*, to each pi&amp;rsquo;s &lt;code&gt;authorized_keys&lt;/code&gt; file. This can all be done using a magic one-line pipe command (x3, one for each pi):&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;cat ~/.ssh/id_rsa.pub | ssh pi0 &amp;quot;cat &amp;gt;&amp;gt; ~/.ssh/authorized_keys&amp;quot;
 cat ~/.ssh/id_rsa.pub | ssh pi1 &amp;quot;cat &amp;gt;&amp;gt; ~/.ssh/authorized_keys&amp;quot;
 cat ~/.ssh/id_rsa.pub | ssh bpi &amp;quot;cat &amp;gt;&amp;gt; ~/.ssh/authorized_keys&amp;quot;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;&lt;em&gt;*Note: If keys are not already generated, they can be created using the command:&lt;/em&gt;&lt;/p&gt;
-
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;em&gt;*Note: If keys are not already generated, they can be created using the command:&lt;/em&gt;&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;ssh-keygen
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h4 id=&#34;key-only-login&#34;&gt;Key Only Login&lt;/h4&gt;
-
+&lt;/code&gt;&lt;/pre&gt;&lt;h4 id=&#34;key-only-login&#34;&gt;Key Only Login&lt;/h4&gt;
 &lt;p&gt;To help secure access to the PIs (and to get on Ansible&amp;rsquo;s good side), I configured sshd to disable password logins, and only allow connections from clients with approved keys. To disable password authentication, I opened the &lt;code&gt;/etc/ssh/sshd_config&lt;/code&gt; file, found the line containing &lt;code&gt;# PasswordAuthentication yes&lt;/code&gt;, changed the &lt;code&gt;yes&lt;/code&gt; to a &lt;code&gt;no&lt;/code&gt;, and unncommented it by removing the &lt;code&gt;#&lt;/code&gt;.&lt;/p&gt;
-
 &lt;p&gt;While I was in the &lt;code&gt;sshd_config&lt;/code&gt; file, I also set &lt;code&gt;PermitRootLogin&lt;/code&gt; to &lt;code&gt;no&lt;/code&gt;, for good measure.&lt;/p&gt;
-
 &lt;p&gt;Lastly, I reset the &lt;code&gt;sshd&lt;/code&gt; service and repeated the steps for each pi:&lt;/p&gt;
-
 &lt;pre&gt;&lt;code&gt;sudo systemctl restart sshd
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Afterwards, I was unable to login to the PIs from a computer with unauthorized ssh keys.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&#34;../../img/posts/setting-up-ansible-pi-cluster/terminal-play.png&#34; name=&#34;pic&#34; onmouseover=&#34;this.src=&#39;../../img/posts/setting-up-ansible-pi-cluster/blocked-ssh-attempt.gif&#39;&#34; onmouseout=&#34;this.src=&#39;../../img/posts/setting-up-ansible-pi-cluster/terminal-play.png&#39;&#34; style=&#34;max-width: 100%;&#34;/&gt;&lt;/p&gt;
-
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Afterwards, I was unable to login to the PIs from a computer with unauthorized ssh keys.&lt;/p&gt;
+&lt;!-- raw HTML omitted --&gt;
 &lt;p&gt;But, I was still able to loging from the authorized computer.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&#34;../../img/posts/setting-up-ansible-pi-cluster/terminal-play.png&#34; name=&#34;pic&#34; onmouseover=&#34;this.src=&#39;../../img/posts/setting-up-ansible-pi-cluster/accepted-ssh-attempt.gif&#39;&#34; onmouseout=&#34;this.src=&#39;../../img/posts/setting-up-ansible-pi-cluster/terminal-play.png&#39;&#34; style=&#34;max-width: 100%;&#34;/&gt;&lt;/p&gt;
-
+&lt;!-- raw HTML omitted --&gt;
 &lt;h2 id=&#34;install-python&#34;&gt;Install Python&lt;/h2&gt;
-
 &lt;p&gt;The last issue Ansible complained about was that it needed python installed on the Pis. Like everything else, the Bananna Pi already had this setup, but I had to install it on the two Raspberry Pis. It was simple enough:&lt;/p&gt;
-
 &lt;pre&gt;&lt;code&gt;sudo apt-get install python
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h2 id=&#34;install-ansible&#34;&gt;Install Ansible&lt;/h2&gt;
-
+&lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&#34;install-ansible&#34;&gt;Install Ansible&lt;/h2&gt;
 &lt;p&gt;I have a confession. So, you know how I have been fun and cheery by anthropomorphisizing Ansible, saying that it was &lt;em&gt;&amp;ldquo;happy&amp;rdquo;&lt;/em&gt; or &lt;em&gt;&amp;ldquo;frusterated&amp;rdquo;&lt;/em&gt; during the previous steps? That wasn&amp;rsquo;t true. I made it up. Ansible wasn&amp;rsquo;t &lt;em&gt;actually&lt;/em&gt; installed yet. &lt;em&gt;So&amp;hellip; to install Ansible&amp;hellip;&lt;/em&gt;&lt;/p&gt;
-
 &lt;pre&gt;&lt;code&gt;sudo eopkg it ansible
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;I used &lt;code&gt;eopkg&lt;/code&gt; because I am currently running &lt;a href=&#34;https://getsol.us&#34;&gt;Solus&lt;/a&gt;. You might use &lt;code&gt;sudo apt-get install ansible&lt;/code&gt;, &lt;code&gt;sudo dnf install ansible&lt;/code&gt;, or &lt;code&gt;pacaur -S ansible&lt;/code&gt; depending on whatever distro you are using.&lt;/p&gt;
-
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;I used &lt;code&gt;eopkg&lt;/code&gt; because I am currently running &lt;a href=&#34;https://getsol.us&#34;&gt;Solus&lt;/a&gt;. You might use &lt;code&gt;sudo apt-get install ansible&lt;/code&gt;, &lt;code&gt;sudo dnf install ansible&lt;/code&gt;, or &lt;code&gt;pacaur -S ansible&lt;/code&gt; depending on whatever distro you are using.&lt;/p&gt;
 &lt;p&gt;That&amp;rsquo;s all for &lt;em&gt;setting up&lt;/em&gt; Ansible. I&amp;rsquo;ll cut this post off here, but in the next post, I&amp;rsquo;ll walk through the steps on how to get Ansible to be useful.&lt;/p&gt;</description>
     </item>
     
@@ -1307,73 +994,38 @@ cat ~/.ssh/id_rsa.pub | ssh bpi &amp;quot;cat &amp;gt;&amp;gt; ~/.ssh/authorized
       
       <guid>http://ryan.himmelwright.net/post/setting-up-the-pi-cluster/</guid>
       <description>&lt;p&gt;I have a Raspberry Pi 2, a Raspberry Pi 3, and a Banana Pi. A while ago, I constructed a small tower to house my pi devices. Since then, I have additionally acquired a power source, and some CAT6 cable to connect them all up to a switch. I hope to use the Pis as a mini clustered environment, where I can learn (and play) with some of the &amp;ldquo;Devops&amp;rdquo; technologies/techniques out there. This post will briefly explain the initial setup of &lt;a href=&#34;../../pages/homelab/#cluster&#34;&gt;my cluster&lt;/a&gt;.&lt;/p&gt;
-
 &lt;h1 id=&#34;setting-up-the-os-images&#34;&gt;Setting up the OS Images&lt;/h1&gt;
-
 &lt;p&gt;Before doing anything with the hardware, I had to setup the pi &amp;ldquo;hard drives&amp;rdquo; (micro SD cards), so they could boot.&lt;/p&gt;
-
 &lt;h3 id=&#34;ubuntu-for-raspberry-pi&#34;&gt;Ubuntu for Raspberry PI&lt;/h3&gt;
-
-&lt;p&gt;&lt;img src=&#34;../../img/posts/Setting-Up-Pi-Cluster/ubuntu-logo.jpg&#34; style=&#34;max-width: 50%; height: auto; float: right; margin: 0px 2px 2px 2px;&#34;/&gt;&lt;/p&gt;
-
+&lt;!-- raw HTML omitted --&gt;
 &lt;p&gt;After mucking around with Rapsbian and Hypriot one Sunday, I decided to just go with a plain Ubuntu image for the Raspberry Pis. I don&amp;rsquo;t have anything against these specific OSes, but I am mostly setting up this cluster to simulate what I would do on a &amp;ldquo;real&amp;rdquo; system. For me, that often means using a straight OS like Ubuntu.&lt;/p&gt;
-
 &lt;p&gt;Luckily, Canonical makes special &lt;a href=&#34;https://wiki.ubuntu.com/ARM/RaspberryPi&#34;&gt;Ubuntu ARM images&lt;/a&gt;, specifically for the Raspberry Pi. I download the 16.04 server version for both the raspberry pi 2 and &lt;a href=&#34;http://www.finnie.org/software/raspberrypi/ubuntu-rpi3/ubuntu-16.04-preinstalled-server-armhf+raspi3.img.xz&#34;&gt;raspberry pi 3&lt;/a&gt;. The process to write these images to the microSD card differs slightly from ones I&amp;rsquo;ve used in the past. It still uses &lt;code&gt;dd&lt;/code&gt;, but the image is first piped through &lt;code&gt;xzcat&lt;/code&gt;, as such:&lt;/p&gt;
-
 &lt;pre&gt;&lt;code&gt;xzcat ubuntu-16.04.2-preinstalled-server-armhf+raspi2.img.xz | sudo dd bs=4M of=/dev/mmcblk0
 xzcat ubuntu-16.04-preinstalled-server-armhf+raspi3.img.xz   | sudo dd bs=4M of=/dev/mmcblk0
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&#34;armbian&#34;&gt;Armbian&lt;/h3&gt;
-
+&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;armbian&#34;&gt;Armbian&lt;/h3&gt;
 &lt;p&gt;The one issue that I have with the Banana Pi compared to the Raspberry Pi, is that it is commonly not supported. It can be hard to find a bananna pi specific image, and the raspberry pi ones usually do not work. For example, while Canonical linked to Raspberry Pi images, it did not mention the banana pie.  This is where &lt;a href=&#34;https://www.armbian.com/&#34;&gt;Armbian&lt;/a&gt; comes in.&lt;/p&gt;
-
 &lt;p&gt;Armbian is a lightweight Debian and Ubuntu based distribution, that provides builds for various ARM devices. Thus the name, &lt;em&gt;ARM-bian&lt;/em&gt;. One of these many supported devices&amp;hellip; is the &lt;a href=&#34;https://www.armbian.com/banana-pi/&#34;&gt;banana pi&lt;/a&gt;. I downloaded the Ubuntu 16.04 Server flavor of Armbian for the Banana PI, and copied it to my micro SD card with the command:&lt;/p&gt;
-
 &lt;pre&gt;&lt;code&gt;sudo dd if=Armbian_5.25_Bananapi_Ubuntu_xenial_next_4.9.7.img  of=/dev/mmcblk0 bs=1M
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&#34;hardware-setup&#34;&gt;Hardware Setup&lt;/h3&gt;
-
-&lt;p&gt;&lt;img src=&#34;../../img/posts/Setting-Up-Pi-Cluster/pi-cluster.png&#34; style=&#34;max-width: 40%; float: right; margin: 10px 10px 5px 10px;&#34;/&gt;&lt;/p&gt;
-
+&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;hardware-setup&#34;&gt;Hardware Setup&lt;/h3&gt;
+&lt;!-- raw HTML omitted --&gt;
 &lt;p&gt;After the operating system images have been copied the SD cards, the hardware can be setup. I started by inserting the microSD cards into the PIs, being careful to use the correct card with each device. Unlike the Raspberry PIs, the Bananna PI uses a normal SD card instead of a microSD, so I just left it in the converter card I used to connect it to my computer when imaging.&lt;/p&gt;
-
 &lt;p&gt;After adding the &amp;ldquo;hard drives&amp;rdquo;, I connected each PI to my network switch, via Ethernet. In the future, I would like to put the cluster on it&amp;rsquo;s own mini (managed?) switch so that I can have the nodes on their own private network, but connected to my main network. For now, this works.&lt;/p&gt;
-
 &lt;p&gt;Lastly, plug in the power connectors. Pi devices can be very finicky when not properly powered, so it is a good idea to use an capable USB charging device. I have had trouble in the past with my devices not working correctly due to insufficient power (especially the bpi). I knew this problem would be an even more pronounced with the cluster because I planned to connect a HD to the bpi with a SATA connector. So, I picked up an &lt;a href=&#34;https://www.amazon.com/Anker-Charger-PowerPort-Multi-Port-Samsung/dp/B00VH8ZW02/ref=sr_1_1?ie=UTF8&amp;amp;qid=1493860165&amp;amp;sr=8-1&amp;amp;keywords=Anker+power+port+5&#34;&gt;Anker Power Port 5&lt;/a&gt; and it has been working great.&lt;/p&gt;
-
 &lt;p&gt;Lastly, two nice features of the banana pi is that it has a 1 GB ethernet port, &lt;em&gt;and&lt;/em&gt; a SATA connector with power. So, to utilize this functionality, and get the most out of the bpi, I ordered &lt;a href=&#34;https://www.amazon.com/JBtek-Connectors-Banana-Supply-Terminals/dp/B00ZP0L0VS/ref=sr_1_1?ie=UTF8&amp;amp;qid=1493860481&amp;amp;sr=8-1&amp;amp;keywords=banana+pi+sata&#34;&gt;the appropriate SATA connector&lt;/a&gt; from amazon for a few bucks. When it arrived, I connected it to the SATA and SATA power ports on the pi, and then to an old 300GB laptop HD I had laying around (it was the drive that came with &lt;a href=&#34;../../post/my-new-used-x230/&#34;&gt;my x230&lt;/a&gt;). After the drive was connected, running &lt;code&gt;lsblk&lt;/code&gt; on the bpi automatically showed a &lt;code&gt;/dev/sda&lt;/code&gt; device, in addition to the typical &lt;code&gt;mmcblk0&lt;/code&gt; microSD device. I  mounted the drive to a folder using the following command to test it out:&lt;/p&gt;
-
 &lt;pre&gt;&lt;code&gt;sudo mount /dev/sda1 Data
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;With the hard drive mounted, I was able to browse its contents and see of all the crap still on it. The combination of the GB network and large HD makes the bpi a great little storage node, which is how I intend to use it.&lt;/p&gt;
-
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;With the hard drive mounted, I was able to browse its contents and see of all the crap still on it. The combination of the GB network and large HD makes the bpi a great little storage node, which is how I intend to use it.&lt;/p&gt;
 &lt;h3 id=&#34;bootup-and-connecting-via-ssh&#34;&gt;Bootup and Connecting via SSH&lt;/h3&gt;
-
 &lt;p&gt;When the Pis are plugged in, they should automatically boot up. In order to connect to them, I found their IPs from my main computer using &lt;code&gt;nmap&lt;/code&gt;:&lt;/p&gt;
-
 &lt;pre&gt;&lt;code&gt;sudo nmap -sP 192.168.1.0/24
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;div id=&#34;caption&#34;&gt;This command may differ depending on your network setup&lt;/div&gt;
-
+&lt;/code&gt;&lt;/pre&gt;&lt;!-- raw HTML omitted --&gt;
 &lt;p&gt;The Raspberry PIs have &lt;code&gt;(Raspberry Pi Foundation)&lt;/code&gt; in the MAC address lines, and my Banana Pi had &lt;code&gt;bananapi&lt;/code&gt; in the host name. Once I had the IP addresses, I could ssh in using the default usernames and passwords for the images (the user/pass should be listed on the sites). After logging in for the first time, each PI prompted me to change the password (as it should).&lt;/p&gt;
-
 &lt;h3 id=&#34;adding-a-sudo-user&#34;&gt;Adding A Sudo User&lt;/h3&gt;
-
 &lt;p&gt;When connecting to remote devices, I don&amp;rsquo;t like to be logged in as root, so the first thing I did was setup my user account with sudo privileges, on the two Raspberry Pis (Armbian actually prompted me through these steps the first time I logged into the Banana pi. Kudos to them).&lt;/p&gt;
-
 &lt;p&gt;To add the user, set it&amp;rsquo;s password (important), and then add it to the sudo group, I used the following commands:&lt;/p&gt;
-
 &lt;pre&gt;&lt;code&gt;useradd -m -s /bin/bash ryan
 passwd ryan
 usermod -a -G sudo ryan
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;div id=&#34;caption&#34;&gt;Yes, I know I can add the user to the sudo group in the `useradd` command, but I prefer to do it with `usermod`. Personal Preference.&lt;/div&gt;
-
+&lt;/code&gt;&lt;/pre&gt;&lt;!-- raw HTML omitted --&gt;
 &lt;p&gt;That&amp;rsquo;s it. At this point, all of my the PIs are minimally set up accessible. The next steps include updating packages, setting up ssh keys, and configuring &amp;hellip;. &lt;a href=&#34;https://www.ansible.com&#34;&gt;Ansible&lt;/a&gt;. But that will all be in the &lt;em&gt;next post&lt;/em&gt;. See you then!&lt;/p&gt;</description>
     </item>
     

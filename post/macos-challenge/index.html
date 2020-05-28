@@ -154,158 +154,141 @@ throughout medical school), it is the one OS I have never tried as my <em>person
 daily driver. After switching to an iPhone and <a href="../../post/getting-an-ipad/">getting an
 iPad</a> this year&hellip; I
 decided to give macOS a spin.</p>
-
 <p><em>(Fun fact: I first learned about Linux while attempting to Hackintosh my
 laptop in high school.)</em></p>
-
 <h3 id="the-challenge">The Challenge</h3>
-
 <blockquote>
 <p>Using a mac as the interface device during my personal computing, for 30 days.</p>
 </blockquote>
-
 <p>Here, &ldquo;interface computer&rdquo; means the device that I sit at and interact with.
 For example, I might be sitting at macOS and using it for my web browsing and
 music, but working on a project on my linux workstation via a mosh/tmux session
 in iTerm. I can use remote Linux computers as much as I please, but should
 connect to them through macOS.</p>
-
 <p>One thing to note is that I still used Desktop Linux as my &ldquo;interfacing
 computer&rdquo; for work.</p>
-
 <h3 id="why">Why</h3>
-
 <p>At home, I don&rsquo;t mind iOS and macOS teaming up to make my &ldquo;normal person&rdquo;
 computing (web browsing, video chatting, emails, and online courses)
 easier. I still deeply care about working with Linux at home, but exclusively
 on the backend. So having the front end get out of the way, and not tempt me
 with the ability to fine-tune it, is a good thing (<em>for me</em>, currently).</p>
-
 <p><em>(While I&rsquo;ve slowed down <a href="https://www.urbandictionary.com/define.php?term=distrohopper">distro
 hopping</a> the last
 few years,&hellip; I have still been swapping my desktop environment every other
 month).</em></p>
-
 <p>Right now, I am really only interested in using macOS for my personal
 computing.  At work, I don&rsquo;t need my computer to be in step with my personal
 phone and/or ipad. In fact, I like having that barrier there. Also, Linux works
 REALLY well for the work I do, especially when it comes to running VMs (I love
 <code>libvirt</code>). So, there currently isn&rsquo;t a reason (or even a desire) to switch
 there.</p>
-
-<p><strong><em>Side Note:</em></strong> I actually wouldn&rsquo;t even consider this challenge if I didn&rsquo;t
+<p><em><strong>Side Note:</strong></em> I actually wouldn&rsquo;t even consider this challenge if I didn&rsquo;t
 get to use Linux so much at work every day, or if I didn&rsquo;t have my Linux
 desktop/workstation at home. I already ssh into my desktop to work
 from my other devices. In fact, I technically remote into my desktop even when
 I&rsquo;m working <em>at</em> it, since I do everything in a <a href="https://podman.io">container</a>.</p>
-
 <h3 id="observations">Observations</h3>
-
 <p>Now that I&rsquo;ve spent a few weeks in macOS, lets break down some observations I
 had.</p>
-
-<h4 id="stuff-i-didn-t-like">Stuff I didn&rsquo;t like</h4>
-
+<h4 id="stuff-i-didnt-like">Stuff I didn&rsquo;t like</h4>
 <ul>
-<li><p>The elephant in the room… it&rsquo;s very proprietary. I still love open source and
+<li>The elephant in the room… it&rsquo;s very proprietary. I still love open source and
 using something that&rsquo;s as locked down and secretive as macOS (and Apple
-products in general) feels, well&hellip; <em>dirty</em>.
-<center>
-<a href="../../img/posts/macos-challenge/joplin-error.png">
-<img alt="joplin error" src="../../img/posts/macos-challenge/joplin-error.png" style="max-width: 100%; padding: 5px 15px 10px 10px"/></a>
-<div class="caption">Error while trying to run Joplin</div>
-</center></p></li>
-
-<li><p>I had trouble getting some applications like <a href="../../post/switched-to-joplin-notes/">Joplin</a> to work. I later learned that it was likely due to issues with signing the applications in Catalina (I think). Apparently, there is a work-around for this.</p></li>
-
-<li><p>There surprisingly isn’t a great solution for <a href="https://virt-manager.org">virt-manager</a>. I was able to install it using homebrew, but have to launch it from the terminal. I guess I might be able to setup an application launcher for it? I&rsquo;m just surprised there isn&rsquo;t a better solution on mac, or at least one that&rsquo;s easy to find&hellip;</p></li>
-
-<li><p>On that note, it is <em>wonderful</em> that <a href="https://brew.sh">brew</a> exists, but it confuses the hell out of me (What&rsquo;s a <code>cask</code>? Is it like a <a href="https://dnf.readthedocs.io/en/latest/command_ref.html#group-command-label"><code>dnf group</code></a> install?). This is most likely because I am new to it, but in my opinion, I still think it is nowhere near as nice as default Linux package managers. This is one area where using Linux for so long has definitely spoiled me.</p></li>
-
-<li><p>Working with filesystems is a pain, especially when connecting to network devices. I couldn’t use Finder to do an easy network connection without first setting up samba or nfs on my Linux computers. While I ideally want to setup a proper samba/nfs server on my desktop/server in the long run anyway, it was annoying that it couldn’t just mount the system in the file browser, using something like <code>sftp</code> under the hood like Linux does..</p>
-
-<p><center>
-<video style="max-width:100%;" controls>
-<source src="../../img/posts/macos-challenge/network-connect.mp4" type="video/mp4">
-</video>
-<div id="caption">Connecting to a remote server&rsquo;s filesystem from the
-file browser in Gnome (Linux)</div>
-</center></p></li>
-
-<li><p>Window management isn’t great out of the box. I had to buy <a href="https://apps.apple.com/us/app/magnet/id441258766?mt=12">magnet</a> to snap/tile my windows. (Alternatively for touch-bar mac users, note that <a href="https://folivora.ai">better touch tool</a> has window snapping and other features built in). Also, I can’t seem to hold a key and click a window anywhere to resize/move like I can in most linux DEs.</p></li>
-
-<li><p>My desktop workspaces keep changing their order on me (ಠ_ಠ).</p></li>
-
-<li><p>Deviating from the stock experience can become painful.  Don&rsquo;t like using a global menubar, and a dock for applications?&hellip; sorry?
-I&rsquo;m sure there are third-party ways to get around it, but they are likely
-hacky and not guaranteed to always work across new versions of macOS.</p></li>
+products in general) feels, well&hellip; <em>dirty</em>.</li>
 </ul>
-
+<!-- raw HTML omitted -->
+<ul>
+<li>
+<p>I had trouble getting some applications like <a href="../../post/switched-to-joplin-notes/">Joplin</a> to work. I later learned that it was likely due to issues with signing the applications in Catalina (I think). Apparently, there is a work-around for this.</p>
+</li>
+<li>
+<p>There surprisingly isn’t a great solution for <a href="https://virt-manager.org">virt-manager</a>. I was able to install it using homebrew, but have to launch it from the terminal. I guess I might be able to setup an application launcher for it? I&rsquo;m just surprised there isn&rsquo;t a better solution on mac, or at least one that&rsquo;s easy to find&hellip;</p>
+</li>
+<li>
+<p>On that note, it is <em>wonderful</em> that <a href="https://brew.sh">brew</a> exists, but it confuses the hell out of me (What&rsquo;s a <code>cask</code>? Is it like a <a href="https://dnf.readthedocs.io/en/latest/command_ref.html#group-command-label"><code>dnf group</code></a> install?). This is most likely because I am new to it, but in my opinion, I still think it is nowhere near as nice as default Linux package managers. This is one area where using Linux for so long has definitely spoiled me.</p>
+</li>
+<li>
+<p>Working with filesystems is a pain, especially when connecting to network devices. I couldn’t use Finder to do an easy network connection without first setting up samba or nfs on my Linux computers. While I ideally want to setup a proper samba/nfs server on my desktop/server in the long run anyway, it was annoying that it couldn’t just mount the system in the file browser, using something like <code>sftp</code> under the hood like Linux does..</p>
+<!-- raw HTML omitted -->
+</li>
+</ul>
+<!-- raw HTML omitted -->
+<ul>
+<li>
+<p>Window management isn’t great out of the box. I had to buy <a href="https://apps.apple.com/us/app/magnet/id441258766?mt=12">magnet</a> to snap/tile my windows. (Alternatively for touch-bar mac users, note that <a href="https://folivora.ai">better touch tool</a> has window snapping and other features built in). Also, I can’t seem to hold a key and click a window anywhere to resize/move like I can in most linux DEs.</p>
+</li>
+<li>
+<p>My desktop workspaces keep changing their order on me (ಠ_ಠ).</p>
+</li>
+<li>
+<p>Deviating from the stock experience can become painful.  Don&rsquo;t like using a global menubar, and a dock for applications?&hellip; sorry?
+I&rsquo;m sure there are third-party ways to get around it, but they are likely
+hacky and not guaranteed to always work across new versions of macOS.</p>
+</li>
+</ul>
 <h4 id="stuff-i-liked">Stuff I liked</h4>
-
 <ul>
 <li>I  am actually starting to like the CMD-centric shortcuts. They work everywhere and are nice when working in a terminal (which I do all the time).</li>
 <li>Default keybindings, while different from what I’m used to are intuitive, and consistent across the system. There are not many that are crazy. For example, on Windows/Linux systems, the keybinding to close a window usually defaults to <code>Alt+F4</code>, so I normally change it to <code>Super+Shift+Q</code>. While not the exact same as what I do, the macOS default of <code>CMD+Q</code> is close enough that I&rsquo;ve been able to easily adapt to it, without feeling the need to figure out how to change it. It&rsquo;s a similar story across most of the default keybindings. They aren&rsquo;t exactly how I&rsquo;ve been setting mine up, but close enough that I&rsquo;m fine with accepting them as is.</li>
 <li>iCloud syncing has been nice. Specifically for photos, TODOs, and notes.</li>
 </ul>
-
-<p><a href="../../img/posts/macos-challenge/phonecall.png">
-<img alt="Receiving and answering a phonecall in macOS" src="../../img/posts/macos-challenge/phonecall.png" style="float: right; max-width: 100%; padding: 5px 15px 10px 10px"/></a></p>
-
+<!-- raw HTML omitted -->
 <ul>
-<li><p>I like being able to answer <em>all</em> phone calls from my computer.
+<li>
+<p>I like being able to answer <em>all</em> phone calls from my computer.
 I hate talking on the phone. Oddly
 enough, I don&rsquo;t mind voice chat on the computer, so this works out really
 well for me. Synced iMessage and Facetime are also nice, but universal
-<em>normal</em> phone calls is what I particularly enjoy.</p></li>
-
-<li><p>Profiles. Specifically, setting up something like my
+<em>normal</em> phone calls is what I particularly enjoy.</p>
+</li>
+<li>
+<p>Profiles. Specifically, setting up something like my
 <a href="https://www.fastmail.com">Fastmail</a> account in the mail app
 was SUPER easy because of this. I basically just downloaded the profile
-from fastmail and opened it with mail, and everytihng was setup. That&rsquo;s it.</p></li>
-
-<li><p>I find the UI to be really space respecting. In addition to a global menu, title bars on windows are thin and minimal. Combined with scaled font sizes, a lot less space is wasted, especially compared to Gnome.</p></li>
+from fastmail and opened it with mail, and everytihng was setup. That&rsquo;s it.</p>
+</li>
+<li>
+<p>I find the UI to be really space respecting. In addition to a global menu, title bars on windows are thin and minimal. Combined with scaled font sizes, a lot less space is wasted, especially compared to Gnome.</p>
+</li>
 </ul>
-
-<p><a href="../../img/posts/macos-challenge/header-bar-comparison-stacked.png">
-<img alt="macOS header bars compared to Gnome" src="../../img/posts/macos-challenge/header-bar-comparison-stacked.png" style="max-width: 100%; padding: 5px 15px 10px 10px"/></a>
-<div class="caption">I find macOS to be much more space efficient than Gnome</div></p>
-
+<!-- raw HTML omitted -->
 <ul>
-<li><p>Videos just work without configuring anything/switching back and forth between Wayland and X sessions. I have faith that wayland will mature to this point eventually, but its nice to already have it in macOS.</p></li>
-
-<li><p>Gestures are fluid and intuitive. Even on the old MacBook air, the trackpad
-is amazing.</p></li>
-
-<li><p>Settings like screentime work across all my “front-end devices”. If I set a downtime for 8:30pm, it boots me off all my devices&hellip; and I get to bed earlier.</p></li>
-
-<li><p>macOS comes with a set of well-made core apps (calendar, mail, notes, music,
+<li>
+<p>Videos just work without configuring anything/switching back and forth between Wayland and X sessions. I have faith that wayland will mature to this point eventually, but its nice to already have it in macOS.</p>
+</li>
+<li>
+<p>Gestures are fluid and intuitive. Even on the old MacBook air, the trackpad
+is amazing.</p>
+</li>
+<li>
+<p>Settings like screentime work across all my “front-end devices”. If I set a downtime for 8:30pm, it boots me off all my devices&hellip; and I get to bed earlier.</p>
+</li>
+<li>
+<p>macOS comes with a set of well-made core apps (calendar, mail, notes, music,
 photos, keynote, garage band, etc). They work for everything I need. If I
 want something more advanced, I generally have the full selection of open source and
 proprietary apps at my disposal. For example, I&rsquo;ve been using Gimp just
-fine on the macbook.</p></li>
-
-<li><p>Security does actually seem to be a focus on the system. For example, someone
+fine on the macbook.</p>
+</li>
+<li>
+<p>Security does actually seem to be a focus on the system. For example, someone
 tried to log into my icloud account from a random location the other week.
 In under a minute, from my phone, I was able to unlink my account from all
-my devices and change the password.</p></li>
+my devices and change the password.</p>
+</li>
 </ul>
-
 <h3 id="future-plans">Future Plans</h3>
-
 <p>Overall, I&rsquo;d say this challenge was a success. In fact, it was so successfull,
 that I&rsquo;m actually writing up this post on a new <a href="../../post/new-2019-16inch-mbp/">base model 16&rdquo; MacBook
 Pro</a> (but more on <em>that</em> at another time).</p>
-
 <p><em>[ Well, I&rsquo;m really writing it on my desktop, but from the macbook pro ;) ]</em></p>
-
 <p>My plan is to use macOS and my iOS
 devices to handle my interactive/client computing. I&rsquo;ve enjoyed having my
 apple devices take care of all my &ldquo;normal&rdquo; person computer needs over the last
 few weeks. It has allowed me to finish up required, but mundane tasks easily
 and efficiently, so I can better focus when diving into iTerm to work on
 complicated Linux server projects.</p>
-
 <p>While I do have some reservations about this plan (mostly that my desktop Linux
 skills will fade, and that I&rsquo;ll loose respect in the Linux community), I don&rsquo;t
 think it should be too much of an issue. At the end of the day, it is most

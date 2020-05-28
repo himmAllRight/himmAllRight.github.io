@@ -153,28 +153,19 @@ configuring this type of setup, and there was a lot of trial and error. The basi
 network is now all configured and has been running great. It was a good day and I
 learned a lot :). In fact, I am confident that if I had to start over from
 scratch, the process would take me about 10-15 minutes. Just to be sure, I&rsquo;m
- going to quickly jot down the major pain points I experienced my first time around.</p>
-
+going to quickly jot down the major pain points I experienced my first time around.</p>
 <h2 id="trouble-connecting-to-the-edgerouter-x-for-initial-setup">Trouble Connecting to the EdgeRouter-x for Initial Setup</h2>
-
-<p><center>
-<img alt="During initial setup, I was connecting the router wrong" src="../../img/posts/ubiquiti-setup-issues/wrong-router-connection.png" style="max-width: 100%;"/>
-</center>
-<em>During initial setup, I was connecting the router wrong</em></p>
-
+<!-- raw HTML omitted -->
 <p>The edgerouter needed to be directly connected to a computer during its initial
 setup, to make the EdgeOS configuration wizard accessible. The
 instructions clearly stated to connect an ethernet cable from my laptop to the
 <code>eth0/POE</code> port on the edgerouter, but I guess I didn&rsquo;t believe them.</p>
-
 <p>Instead, I plugged the ethernet cable from my modem into <code>eth0</code>, and my computer
 to <code>eth1</code>. That didn&rsquo;t work. However, once I <em>properly</em> connected the devices (and
 manually set a static IP on my laptop, <code>192.168.1.2</code> for example), I was able to access
 the configuration page in my browser via <code>https://192.168.1.1</code> (don&rsquo;t forget
 the <em>s</em> in <em>https</em>). Lesson Learned: manuals are (<em>usually</em>) not out to get you.</p>
-
 <h2 id="setting-up-poe-and-connecting-the-ap">Setting up POE and Connecting the AP</h2>
-
 <p>This was not actually an issue I encountered, but rather a confusion. I was unsure what the best setup for
 the <a href="https://en.wikipedia.org/wiki/Power_over_Ethernet">POE</a> hardware was. At
 first, I had the POE adaptor connected between the edgerouter and the AP,
@@ -186,15 +177,12 @@ indicated that the POE adaptor could indeed power both.</p>
         |
          --&gt; POE Adaptor --&gt; (<span style="color:#a6e22e">*eth0*</span>)  edgerouter-x  (<span style="color:#a6e22e">*eth4*</span>) --&gt; AP Lite
         |
-Power  --</code></pre></div>
-<p><em>Digram describing the correct link up</em></p>
-
+Power  --
+</code></pre></div><p><em>Digram describing the correct link up</em></p>
 <p>Once I swapped the cables all around, I had to go into the router
 configuration and enable the POE for <code>eth4</code>. Afterwards, the AP lit up,
 indicating that it was connected and powered.</p>
-
-<h2 id="issues-linking-configuring-the-ap">Issues linking/configuring the AP</h2>
-
+<h2 id="issues-linkingconfiguring-the-ap">Issues linking/configuring the AP</h2>
 <p>This was the problem I spent the most time on. I had to install the
 configuration software for the Ubiquiti access point, but the &ldquo;Linux binary&rdquo; was
 a .deb, and I didn&rsquo;t feel like extracting the contents of the package so that I
@@ -206,13 +194,7 @@ directly to the edgerouter, it would still be able to see the access point.
 Regardless&hellip; the AP couldn&rsquo;t see the VM and vice versa. Finally, I admitted
 that the issues were most likely caused by the 192.168.122.* IP address that the VM was
 assigned.</p>
-
-<p><center>
-<img alt="During initial setup, I was connecting the router wrong" src="../../img/posts/ubiquiti-setup-issues/ubuntu.png" width="45%">
-<img alt="During initial setup, I was connecting the router wrong" src="../../img/posts/ubiquiti-setup-issues/venomoth.png" width="35%">
-</center>
-<em>I spun up a new Ubuntu VM (Venomoth) to host the Ubifi controller</em></p>
-
+<!-- raw HTML omitted -->
 <p>By this point, I had also learned that the Linux software is more of a server
 service, and not a GUI desktop application. So, I concluded that spinning up a
 dedicated VM on my server to host the wifi controller was worth it. Virtual
@@ -221,8 +203,7 @@ subnet, so it also resolved my issue. I was able to detect and configure the
 access point immediately. This setup made more sense anyway, as I can always
 connect to the AP controller by going to the VM&rsquo;s IP on my browser,  just like I
 can with my router.</p>
-
-<p>Well, that was all of my setup &ldquo;<em>issues</em>&rdquo;. There was nothing I would consider to
+<p>Well, that was all of my setup &ldquo;<em>issues</em>&quot;. There was nothing I would consider to
 be an actual <em>issue</em>, just some confusions of an Ubiquiti/POE first-timer. Like
 I stated earlier, I am sure I could redo the setup in about 15 minutes without any
 issues&hellip; 10 now that I recorded everything in the post!</p>

@@ -25,76 +25,48 @@ around, the &lt;code&gt;ssh&lt;/code&gt; session will occasionally time out.  &l
 and &lt;a href=&#34;../../post/setting-up-tmuxinator/&#34;&gt;tmuxinator&lt;/a&gt; make this less of an issue,
 since I can re-attach my session, but I still wish my remote sessions were a
 bit more seamless. They can be&amp;hellip; using &lt;code&gt;mosh&lt;/code&gt;.&lt;/p&gt;
-
 &lt;h4 id=&#34;mosh&#34;&gt;Mosh&lt;/h4&gt;
-
-&lt;p&gt;&lt;a href=&#34;../../img/posts/setup-mosh/ponyta-mosh.png&#34;&gt;
-&lt;img alt=&#34;Using mosh to conenct to a server&#34; src=&#34;../../img/posts/setup-mosh/ponyta-mosh.png&#34; style=&#34;max-width: 100%; padding: 5px 15px 10px 10px&#34;/&gt;&lt;/a&gt;
-&lt;div class=&#34;caption&#34;&gt;Using &lt;code&gt;mosh&lt;/code&gt; to connect to one of my servers&lt;/div&gt;&lt;/p&gt;
-
+&lt;!-- raw HTML omitted --&gt;
 &lt;p&gt;&lt;a href=&#34;https://mosh.org&#34;&gt;Mosh&lt;/a&gt; is a more robust replacement for interactive ssh
 terminals. It automatically roams and continues to work even as the computer
 switches networks or is put to sleep. It also responds to typing, even on a bad
 connection, which cuts down on lag. Lastly, it&amp;rsquo;s free and open source software,
 licenced under the GPLv3.&lt;/p&gt;
-
 &lt;h4 id=&#34;mosh-install&#34;&gt;Mosh Install&lt;/h4&gt;
-
 &lt;p&gt;Mosh should be in most Linux repos, and is also available on BSD, Mac, Windows,
 and basically everything else.  For more information on how to install it on
 your platform, head over to the &lt;a href=&#34;https://mosh.org/#getting&#34;&gt;getting mosh&lt;/a&gt;
 page.  For me, it was a simple &lt;code&gt;dnf&lt;/code&gt;/&lt;code&gt;yum&lt;/code&gt; install to get it on both my laptop
 and
 server:&lt;/p&gt;
-
 &lt;pre&gt;&lt;code&gt;sudo dnf install mosh
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;*Note: My centos server required me to first enable the epel repos to get
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;*Note: My centos server required me to first enable the epel repos to get
 access to &lt;code&gt;mosh&lt;/code&gt;. Fedora might also, but I already had it enabled on my
 laptop.&lt;/p&gt;
-
 &lt;pre&gt;&lt;code&gt;sudo yum install -y epel-release
 sudo yum install -y mosh
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h4 id=&#34;open-firewall-ports&#34;&gt;Open Firewall Ports&lt;/h4&gt;
-
+&lt;/code&gt;&lt;/pre&gt;&lt;h4 id=&#34;open-firewall-ports&#34;&gt;Open Firewall Ports&lt;/h4&gt;
 &lt;p&gt;After installing &lt;code&gt;mosh&lt;/code&gt;&amp;hellip; it might not immediately work. If so, it is likely
 due to not having the required ports open. Mosh uses UDP ports 60000-61000 for
 it&amp;rsquo;s connections. Enable these ports and optionally restart the firewall,
 before trying mosh again.&lt;/p&gt;
-
 &lt;p&gt;&lt;em&gt;Note: If you want to connect from outside the network, remember to also
 forward these ports on the network.&lt;/em&gt;&lt;/p&gt;
-
 &lt;h4 id=&#34;connect&#34;&gt;Connect&lt;/h4&gt;
-
 &lt;p&gt;We should now be able to connect to the server using mosh. Typical connections
 look very similar to &lt;code&gt;ssh&lt;/code&gt;:&lt;/p&gt;
-
 &lt;pre&gt;&lt;code&gt;mosh ryan@centos-server
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;If a specific mosh UDP port needs to be specified (for port-forwarding, for example)
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;If a specific mosh UDP port needs to be specified (for port-forwarding, for example)
 use the &lt;code&gt;-p&lt;/code&gt; flag:&lt;/p&gt;
-
 &lt;pre&gt;&lt;code&gt;mosh -p 1234 ryan@centos-server
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h4 id=&#34;ssh-options&#34;&gt;SSH Options&lt;/h4&gt;
-
+&lt;/code&gt;&lt;/pre&gt;&lt;h4 id=&#34;ssh-options&#34;&gt;SSH Options&lt;/h4&gt;
 &lt;p&gt;Mosh uses ssh for the initial connection. Occasionally, particular ssh options
 might be required in order for mosh to initialize a connection.  For
 example, I typically &lt;code&gt;ssh&lt;/code&gt; home on a particular port, so that my router knows
 which VM to transfer me to.  Options like this can be passed to &lt;code&gt;mosh&lt;/code&gt; using
 the &lt;code&gt;--ssh&lt;/code&gt; flag:&lt;/p&gt;
-
 &lt;pre&gt;&lt;code&gt;mosh --ssh=&amp;quot;ssh -p 1234&amp;quot; ryan@centos-network
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h4 id=&#34;conclusion&#34;&gt;Conclusion&lt;/h4&gt;
-
+&lt;/code&gt;&lt;/pre&gt;&lt;h4 id=&#34;conclusion&#34;&gt;Conclusion&lt;/h4&gt;
 &lt;p&gt;That&amp;rsquo;s really it. There is a bunch of cool &lt;a href=&#34;https://mosh.org/#techinfo&#34;&gt;technical
 stuff&lt;/a&gt; going on under the hood of mosh, but on the
 surface&amp;hellip; it is simply useful. For an even &lt;em&gt;better&lt;/em&gt; experience with mosh, be
@@ -107,64 +79,35 @@ sure to check out tmux. Enjoy!&lt;/p&gt;</description>
       <pubDate>Sat, 26 Aug 2017 00:00:00 +0000</pubDate>
       
       <guid>http://ryan.himmelwright.net/post/simple-reverse-ssh-tunnel/</guid>
-      <description>
-
-&lt;p&gt;Reverse SSH tunnels are &lt;em&gt;very&lt;/em&gt; useful and simple to setup, but can be a bit
- tricky to figure out at first. So, here&amp;rsquo;s a brief and simple guide on how to
- easily create reverse tunnels.&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;!--more --&gt;
-
+      <description>&lt;p&gt;Reverse SSH tunnels are &lt;em&gt;very&lt;/em&gt; useful and simple to setup, but can be a bit
+tricky to figure out at first. So, here&amp;rsquo;s a brief and simple guide on how to
+easily create reverse tunnels.&lt;/p&gt;
+&lt;hr&gt;
+&lt;!-- raw HTML omitted --&gt;
 &lt;h3 id=&#34;ssh-tunnels&#34;&gt;SSH Tunnels&lt;/h3&gt;
-
 &lt;p&gt;A secured shell (SSH) tunnel is an encrypted tunnel, created with a connection using the ssh protocol. It can be thought of as a pipe between two computers that data travels through. Being encrypted, people outside the pipe can only see that data packages are traveling through it, but cannot read the actual contents of the package. SSH tunnels are used to securely connect between devices, as well as forward ports between devices. For example, if I am working on a website hosted on port 3000 of my internally networked laptop, I can use a ssh tunnel to forward that port to one on a public server so that friends can view the website.&lt;/p&gt;
-
 &lt;h3 id=&#34;reverse-tunnels&#34;&gt;Reverse Tunnels&lt;/h3&gt;
-
 &lt;p&gt;Reverse tunnels are just like normal ssh tunnels except&amp;hellip; well&amp;hellip; in reverse. This means that I can connect to a remote computer, and have &lt;em&gt;its&lt;/em&gt; port tunneled to &lt;em&gt;me&lt;/em&gt;, which can be very handy. This is largely used for one particular usecase: providing easy, temporarily, ssh access to computers behind a network and/or firewall.&lt;/p&gt;
-
 &lt;p&gt;To make all of this (hopefully) easier to understand, I have drafted up a few diagrams. For the example, lets say I am away and my wife wants me to fix something on her laptop. Unless I have her &lt;em&gt;properly&lt;/em&gt; configure the router to forward ssh traffic to her laptop, I normally cannot do this. Additionally, she might be at a friends house, office, or other public place where there is no access to the router controls (well, she &lt;em&gt;shouldn&amp;rsquo;t&lt;/em&gt;). So, her laptop doesn&amp;rsquo;t have a direct public IP address, but our server &lt;em&gt;does&lt;/em&gt;.&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&#34;../../img/posts/simple-reverse-ssh-tunnel/network-diagram.png&#34;&gt;&lt;img alt=&#34;Computer behind firewall&#34; src=&#34;../../img/posts/simple-reverse-ssh-tunnel/network-diagram.png&#34; style=&#34;max-width: 100%;&#34;/&gt;&lt;a&gt;
+&lt;p&gt;&lt;!-- raw HTML omitted --&gt;&lt;!-- raw HTML omitted --&gt;&lt;!-- raw HTML omitted --&gt;
 &lt;em&gt;Two computers (at least one without a direct public IP), both with access to a cloud server with a public IP&lt;/em&gt;&lt;/p&gt;
-
 &lt;p&gt;Because my wife can connect to the public cloud server, she can initiate a reverse tunnel from her laptop, with the server. The tunnel directly connects the server to her laptop.&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&#34;../../img/posts/simple-reverse-ssh-tunnel/ssh-tunnel.png&#34;&gt;&lt;img alt=&#34;Computer behind firewall&#34; src=&#34;../../img/posts/simple-reverse-ssh-tunnel/ssh-tunnel.png&#34; style=&#34;max-width: 100%;&#34;/&gt;&lt;/a&gt;
+&lt;p&gt;&lt;!-- raw HTML omitted --&gt;&lt;!-- raw HTML omitted --&gt;&lt;!-- raw HTML omitted --&gt;
 &lt;em&gt;The laptop computer creates a reverse ssh tunnel to the cloud server.&lt;/em&gt;&lt;/p&gt;
-
 &lt;p&gt;On my end, I first ssh to the server from my computer. Once the tunnel is started, I can then ssh again to a specified local port on the server, and it will tunnel me directly to her laptop. This will give me a command prompt as if I was sitting with an open terminal at her computer.&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&#34;../../img/posts/simple-reverse-ssh-tunnel/connect-through-tunnel.png&#34;&gt;&lt;img alt=&#34;Computer behind firewall&#34; src=&#34;../../img/posts/simple-reverse-ssh-tunnel/connect-through-tunnel.png&#34; style=&#34;max-width: 100%;&#34;/&gt;&lt;/a&gt;
+&lt;p&gt;&lt;!-- raw HTML omitted --&gt;&lt;!-- raw HTML omitted --&gt;&lt;!-- raw HTML omitted --&gt;
 &lt;em&gt;With the reverse tunnel setup, the first computer can ssh to the second via the cloud server and tunnel connection.&lt;/em&gt;&lt;/p&gt;
-
 &lt;p&gt;When I am done working, my wife can close the tunnel, and I will no longer be able to access her computer.&lt;/p&gt;
-
 &lt;h3 id=&#34;creating-the-reverse-tunnel&#34;&gt;Creating The Reverse Tunnel&lt;/h3&gt;
-
 &lt;p&gt;SSH tunnels can be initiated on linux easily from the command line (assuming ssh is setup and properly configured). To create a reverse tunnel, use the &lt;code&gt;-R&lt;/code&gt; flag. After the flag, provide what I call the &amp;ldquo;path&amp;rdquo; of the tunnel. So, the server&amp;rsquo;s port where the tunnel will be found, the host of that port (I almost always use &lt;code&gt;localhost&lt;/code&gt;), and the port to be tunneled. Lastly, make sure to specify the &lt;em&gt;IP&lt;/em&gt; or &lt;em&gt;hostname&lt;/em&gt; of the remote computer just like in a typical plain &lt;code&gt;ssh hostname&lt;/code&gt;.&lt;/p&gt;
-
 &lt;pre&gt;&lt;code&gt;ssh -R remote-port:localhost:local-port host
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Example:&lt;/p&gt;
-
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Example:&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;ssh -R 19999:localhost:22 meowth
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&#34;connecting&#34;&gt;Connecting&lt;/h3&gt;
-
+&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;connecting&#34;&gt;Connecting&lt;/h3&gt;
 &lt;p&gt;After setting up the tunnel, the initializing computer can be accessed &lt;em&gt;from the server&lt;/em&gt; by ssh&amp;rsquo;ing to the &lt;em&gt;remote-port&lt;/em&gt; of &lt;em&gt;localhost&lt;/em&gt; (defined above):&lt;/p&gt;
-
 &lt;pre&gt;&lt;code&gt;ssh -p 19999 localhost
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;This should start an ssh session to the initializing computer. In my example, this is the laptop.&lt;/p&gt;
-
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;This should start an ssh session to the initializing computer. In my example, this is the laptop.&lt;/p&gt;
 &lt;h3 id=&#34;conclusion&#34;&gt;Conclusion&lt;/h3&gt;
-
 &lt;p&gt;SSH tunnels are a fascinating and useful piece of technology. The ssh protocol makes modern computing much more secure, and easier to manage multiple computers. That&amp;rsquo;s &lt;em&gt;reverse&lt;/em&gt; tunnels in a nutshell. Have fun tunneling!&lt;/p&gt;
 </description>
     </item>
@@ -176,80 +119,40 @@ sure to check out tmux. Enjoy!&lt;/p&gt;</description>
       
       <guid>http://ryan.himmelwright.net/post/ansible-on-pi-cluster/</guid>
       <description>&lt;p&gt;In my &lt;a href=&#34;../../post/Setting-up-the-pi-cluster/&#34;&gt;previous post&lt;/a&gt;, I pieced together my &lt;a href=&#34;../../pages/homelab/#cluster&#34;&gt;pi cluster&lt;/a&gt;, and installed variations of Ubuntu 16.04 Server on each of its nodes. With the cluster built, I quickly needed an easy way to maintain and interact with the system as a whole. This, is where &lt;a href=&#34;https://www.ansible.com/&#34;&gt;Ansible&lt;/a&gt; comes in. In this post, I will walk through the steps I took to setup Ansible on my Cluster.&lt;/p&gt;
-
 &lt;h2 id=&#34;ansible&#34;&gt;Ansible&lt;/h2&gt;
-
-&lt;p&gt;&lt;img src=&#34;../../img/posts/setting-up-ansible-pi-cluster/ansible-logo.png&#34; style=&#34;max-width: 50%; width: 150px; float: left; margin: 0px 15px 5px 5px;&#34;/&gt;&lt;/p&gt;
-
+&lt;!-- raw HTML omitted --&gt;
 &lt;p&gt;Ansible is an open source, configuration management and automation system. It is written in Python, and financially backed by &lt;a href=&#34;http://www.redhat.com&#34;&gt;Red Hat&lt;/a&gt;. It simplifies the management of groups of computers, through the use of modules (standalone units of work. for example, apt, ping, rpm, etc). Ansible is script-able using simple YAML files, known as playbooks, that define a set of orchestration tasks for one or many computers. These scripts can be edited and version controlled, creating a simple &lt;a href=&#34;https://en.wikipedia.org/wiki/Infrastructure_as_Code&#34;&gt;infrastructure as code&lt;/a&gt; setup.&lt;/p&gt;
-
 &lt;h2 id=&#34;setting-up-the-user-account&#34;&gt;Setting up the User Account&lt;/h2&gt;
-
 &lt;p&gt;When Ansible executes commands on the PIs, it will do so from the user-account (ryan) that I setup in the last post. However, many of these commands will require Root privledges. While I previously setup sudo and added the &lt;code&gt;ryan&lt;/code&gt; account to the &lt;code&gt;sudo&lt;/code&gt; group &amp;hellip; it required that I manually enter my password. Ansible did not like this, so I had to update the sudo configuration to allow the &lt;code&gt;ryan&lt;/code&gt; account to run &lt;code&gt;sudo&lt;/code&gt; commands with out a password. To do this, I opened the &lt;code&gt;sudoers&lt;/code&gt; file:&lt;/p&gt;
-
 &lt;pre&gt;&lt;code&gt;sudo visudo
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;and added the following line to the end of the file:&lt;/p&gt;
-
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;and added the following line to the end of the file:&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;ryan  ALL=(ALL:ALL) NOPASSWD: ALL
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;I repeated this on each of the nodes, and afterwards was no longer promted for a password when running &lt;code&gt;sudo&lt;/code&gt; commands. This made Ansible happy.&lt;/p&gt;
-
-&lt;p&gt;&lt;a name=&#34;ssh&#34;&gt;&lt;/a&gt;&lt;/p&gt;
-
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;I repeated this on each of the nodes, and afterwards was no longer promted for a password when running &lt;code&gt;sudo&lt;/code&gt; commands. This made Ansible happy.&lt;/p&gt;
+&lt;p&gt;&lt;!-- raw HTML omitted --&gt;&lt;!-- raw HTML omitted --&gt;&lt;/p&gt;
 &lt;h2 id=&#34;setup-ssh-keys&#34;&gt;Setup SSH Keys&lt;/h2&gt;
-
 &lt;p&gt;Well&amp;hellip; &lt;em&gt;almost&lt;/em&gt; happy.&lt;/p&gt;
-
-&lt;p&gt;Ansible&amp;rsquo;s main method of communication is via ssh, which by default, prompts me for a password when connecting. Ansible &lt;em&gt;really&lt;/em&gt; hates passwords. So, I had to configure ssh to use keys instead. Honestly, this is proabaly a good step to do regardless, now that the &lt;code&gt;ryan&lt;/code&gt; account no longer uses a password when running &lt;code&gt;sudo&lt;/code&gt;. To setup key-based logins, I appended the contents of my &lt;a href=&#34;../../pages/homelab/#alakazam&#34;&gt;main computer&lt;/a&gt;&amp;rsquo;s ssh public key*, to each pi&amp;rsquo;s &lt;code&gt;authorized_keys&lt;/code&gt; file. This can all be done using a magic one-line pipe command (x3, one for each pi):&lt;/p&gt;
-
+&lt;p&gt;Ansible&amp;rsquo;s main method of communication is via ssh, which by default, prompts me for a password when connecting. Ansible &lt;em&gt;really&lt;/em&gt; hates passwords. So, I had to configure ssh to use keys instead. Honestly, this is proabaly a good step to do regardless, now that the &lt;code&gt;ryan&lt;/code&gt; account no longer uses a password when running &lt;code&gt;sudo&lt;/code&gt;. To setup key-based logins, I appended the contents of my &lt;a href=&#34;../../pages/homelab/#alakazam&#34;&gt;main computer&lt;/a&gt;&amp;lsquo;s ssh public key*, to each pi&amp;rsquo;s &lt;code&gt;authorized_keys&lt;/code&gt; file. This can all be done using a magic one-line pipe command (x3, one for each pi):&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;cat ~/.ssh/id_rsa.pub | ssh pi0 &amp;quot;cat &amp;gt;&amp;gt; ~/.ssh/authorized_keys&amp;quot;
 cat ~/.ssh/id_rsa.pub | ssh pi1 &amp;quot;cat &amp;gt;&amp;gt; ~/.ssh/authorized_keys&amp;quot;
 cat ~/.ssh/id_rsa.pub | ssh bpi &amp;quot;cat &amp;gt;&amp;gt; ~/.ssh/authorized_keys&amp;quot;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;&lt;em&gt;*Note: If keys are not already generated, they can be created using the command:&lt;/em&gt;&lt;/p&gt;
-
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;em&gt;*Note: If keys are not already generated, they can be created using the command:&lt;/em&gt;&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;ssh-keygen
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h4 id=&#34;key-only-login&#34;&gt;Key Only Login&lt;/h4&gt;
-
+&lt;/code&gt;&lt;/pre&gt;&lt;h4 id=&#34;key-only-login&#34;&gt;Key Only Login&lt;/h4&gt;
 &lt;p&gt;To help secure access to the PIs (and to get on Ansible&amp;rsquo;s good side), I configured sshd to disable password logins, and only allow connections from clients with approved keys. To disable password authentication, I opened the &lt;code&gt;/etc/ssh/sshd_config&lt;/code&gt; file, found the line containing &lt;code&gt;# PasswordAuthentication yes&lt;/code&gt;, changed the &lt;code&gt;yes&lt;/code&gt; to a &lt;code&gt;no&lt;/code&gt;, and unncommented it by removing the &lt;code&gt;#&lt;/code&gt;.&lt;/p&gt;
-
 &lt;p&gt;While I was in the &lt;code&gt;sshd_config&lt;/code&gt; file, I also set &lt;code&gt;PermitRootLogin&lt;/code&gt; to &lt;code&gt;no&lt;/code&gt;, for good measure.&lt;/p&gt;
-
 &lt;p&gt;Lastly, I reset the &lt;code&gt;sshd&lt;/code&gt; service and repeated the steps for each pi:&lt;/p&gt;
-
 &lt;pre&gt;&lt;code&gt;sudo systemctl restart sshd
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Afterwards, I was unable to login to the PIs from a computer with unauthorized ssh keys.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&#34;../../img/posts/setting-up-ansible-pi-cluster/terminal-play.png&#34; name=&#34;pic&#34; onmouseover=&#34;this.src=&#39;../../img/posts/setting-up-ansible-pi-cluster/blocked-ssh-attempt.gif&#39;&#34; onmouseout=&#34;this.src=&#39;../../img/posts/setting-up-ansible-pi-cluster/terminal-play.png&#39;&#34; style=&#34;max-width: 100%;&#34;/&gt;&lt;/p&gt;
-
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Afterwards, I was unable to login to the PIs from a computer with unauthorized ssh keys.&lt;/p&gt;
+&lt;!-- raw HTML omitted --&gt;
 &lt;p&gt;But, I was still able to loging from the authorized computer.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&#34;../../img/posts/setting-up-ansible-pi-cluster/terminal-play.png&#34; name=&#34;pic&#34; onmouseover=&#34;this.src=&#39;../../img/posts/setting-up-ansible-pi-cluster/accepted-ssh-attempt.gif&#39;&#34; onmouseout=&#34;this.src=&#39;../../img/posts/setting-up-ansible-pi-cluster/terminal-play.png&#39;&#34; style=&#34;max-width: 100%;&#34;/&gt;&lt;/p&gt;
-
+&lt;!-- raw HTML omitted --&gt;
 &lt;h2 id=&#34;install-python&#34;&gt;Install Python&lt;/h2&gt;
-
 &lt;p&gt;The last issue Ansible complained about was that it needed python installed on the Pis. Like everything else, the Bananna Pi already had this setup, but I had to install it on the two Raspberry Pis. It was simple enough:&lt;/p&gt;
-
 &lt;pre&gt;&lt;code&gt;sudo apt-get install python
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h2 id=&#34;install-ansible&#34;&gt;Install Ansible&lt;/h2&gt;
-
+&lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&#34;install-ansible&#34;&gt;Install Ansible&lt;/h2&gt;
 &lt;p&gt;I have a confession. So, you know how I have been fun and cheery by anthropomorphisizing Ansible, saying that it was &lt;em&gt;&amp;ldquo;happy&amp;rdquo;&lt;/em&gt; or &lt;em&gt;&amp;ldquo;frusterated&amp;rdquo;&lt;/em&gt; during the previous steps? That wasn&amp;rsquo;t true. I made it up. Ansible wasn&amp;rsquo;t &lt;em&gt;actually&lt;/em&gt; installed yet. &lt;em&gt;So&amp;hellip; to install Ansible&amp;hellip;&lt;/em&gt;&lt;/p&gt;
-
 &lt;pre&gt;&lt;code&gt;sudo eopkg it ansible
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;I used &lt;code&gt;eopkg&lt;/code&gt; because I am currently running &lt;a href=&#34;https://getsol.us&#34;&gt;Solus&lt;/a&gt;. You might use &lt;code&gt;sudo apt-get install ansible&lt;/code&gt;, &lt;code&gt;sudo dnf install ansible&lt;/code&gt;, or &lt;code&gt;pacaur -S ansible&lt;/code&gt; depending on whatever distro you are using.&lt;/p&gt;
-
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;I used &lt;code&gt;eopkg&lt;/code&gt; because I am currently running &lt;a href=&#34;https://getsol.us&#34;&gt;Solus&lt;/a&gt;. You might use &lt;code&gt;sudo apt-get install ansible&lt;/code&gt;, &lt;code&gt;sudo dnf install ansible&lt;/code&gt;, or &lt;code&gt;pacaur -S ansible&lt;/code&gt; depending on whatever distro you are using.&lt;/p&gt;
 &lt;p&gt;That&amp;rsquo;s all for &lt;em&gt;setting up&lt;/em&gt; Ansible. I&amp;rsquo;ll cut this post off here, but in the next post, I&amp;rsquo;ll walk through the steps on how to get Ansible to be useful.&lt;/p&gt;</description>
     </item>
     

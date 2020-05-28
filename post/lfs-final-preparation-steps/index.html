@@ -144,87 +144,41 @@ Tags <a href="../../tags/linux">linux</a>, <a href="../../tags/lfs">lfs</a>
             <div class="row">
                 <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
                     
-                    
-
-<p>Now that the <em>repeated</em> setup steps have been defined in <a href="../../post/LFS-Repeated-Setup-Steps/">my previous LFS post</a>, there are a <em>few</em> more preparation steps to complete in order to start building the LFS system. I promise&hellip; we will start compiling soon. If all goes well, this should be the last preparation post.</p>
-
-<!-- more -->
-
+                    <p>Now that the <em>repeated</em> setup steps have been defined in <a href="../../post/LFS-Repeated-Setup-Steps/">my previous LFS post</a>, there are a <em>few</em> more preparation steps to complete in order to start building the LFS system. I promise&hellip; we will start compiling soon. If all goes well, this should be the last preparation post.</p>
+<!-- raw HTML omitted -->
 <h3 id="downloading-sources">Downloading Sources</h3>
-
-<p>When it comes down to it, Linux from scratch is just a bunch of packages, and the Linux kernel, all compiled from source and linked together. To build all of this, we need to download the source code&hellip; for <em>all</em> of those packages. Luckily, LFS keeps a list of what is needed, and downloading it is trivial. <em>(Note: These commands should be run as <b>root</b>)</em></p>
-
-<p><center>
-<img alt="Making the sources directory" src="../../img/posts/LFS-Final-Preparation-Steps/make-sources-dir.png" style="max-width: 100%;"/>
-</center></p>
-
+<p>When it comes down to it, Linux from scratch is just a bunch of packages, and the Linux kernel, all compiled from source and linked together. To build all of this, we need to download the source code&hellip; for <em>all</em> of those packages. Luckily, LFS keeps a list of what is needed, and downloading it is trivial. <em>(Note: These commands should be run as <!-- raw HTML omitted -->root<!-- raw HTML omitted -->)</em></p>
+<!-- raw HTML omitted -->
 <p>First, lets make a new directory to put all of the source code. To make the directory:</p>
-
 <pre><code>mkdir -v $LFS/sources
-</code></pre>
-
-<p>The LFS book suggests for this directory to be writable and sticky. A &ldquo;Sticky&rdquo; directory allows only the file owner to delete a file in it. To make the directory both writable and sticky, use the command:</p>
-
+</code></pre><p>The LFS book suggests for this directory to be writable and sticky. A &ldquo;Sticky&rdquo; directory allows only the file owner to delete a file in it. To make the directory both writable and sticky, use the command:</p>
 <pre><code>chmod -v a+wt $LFS/sources
-</code></pre>
-
-<p><center>
-<img src="../../img/posts/LFS-Final-Preparation-Steps/wget-sources-play.png" name="pic" onmouseover="this.src='../../img/posts/LFS-Final-Preparation-Steps/wget-sources.gif'" onmouseout="this.src='../../img/posts/LFS-Final-Preparation-Steps/wget-sources-play.png'" style="max-width: 100%;"/>
-</center></p>
-
+</code></pre><!-- raw HTML omitted -->
 <p>To download all of the source packages at once, download <a href="http://www.linuxfromscratch.org/lfs/view/stable-systemd/wget-list">the LFS wget list</a>:</p>
-
 <pre><code>wget http://www.linuxfromscratch.org/lfs/view/stable-systemd/wget-list
-</code></pre>
-
-<p>After downloading the wget list, it can be used as the input-file for wget. This will download all the sources with one command:</p>
-
+</code></pre><p>After downloading the wget list, it can be used as the input-file for wget. This will download all the sources with one command:</p>
 <pre><code>wget --input-file=wget-list --continue --directory-prefix=$LFS/sources
-</code></pre>
-
-<p>It should take a few minutes to download everything (or longer if on a poor connection).</p>
-
-<p><center>
-<img src="../../img/posts/LFS-Final-Preparation-Steps/sources-md5-play.png" name="pic" onmouseover="this.src='../../img/posts/LFS-Final-Preparation-Steps/sources-md5.gif'" onmouseout="this.src='../../img/posts/LFS-Final-Preparation-Steps/sources-md5-play.png'" style="max-width: 100%;"/>
-</center></p>
-
+</code></pre><p>It should take a few minutes to download everything (or longer if on a poor connection).</p>
+<!-- raw HTML omitted -->
 <p>Ever since LFS-7.0, a <a href="http://www.linuxfromscratch.org/lfs/view/stable-systemd/md5sums">md5sums file</a> is provided, which can be downloaded and used to verify the integrity of downloaded packages. Download this file, again with <em>wget</em>:</p>
-
 <pre><code>wget http://www.linuxfromscratch.org/lfs/view/stable-systemd/md5sums
-</code></pre>
-
-<p>Then, compare the hashes in the list to the <a href="https://en.wikipedia.org/wiki/Md5sum">md5sum</a> for each of the source packages. This is done with the commands:</p>
+</code></pre><p>Then, compare the hashes in the list to the <a href="https://en.wikipedia.org/wiki/Md5sum">md5sum</a> for each of the source packages. This is done with the commands:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">pushd $LFS/sources
 md5sum -c md5sums
-popd</code></pre></div>
-<p>The results should all say <em>OK</em>. If not, try re-downloading the sources and verifying again.</p>
-
-<h3 id="creating-the-lfs-tools-directory">Creating the $LFS/tools Directory</h3>
-
+popd
+</code></pre></div><p>The results should all say <em>OK</em>. If not, try re-downloading the sources and verifying again.</p>
+<h3 id="creating-the-lfstools-directory">Creating the $LFS/tools Directory</h3>
 <p>LFS is built in two main steps. The first step builds a set of temporary tools to build the system, but not be included as part of the Final LFS system itself. To help prevent these tools from accidentally being included in the final system, they are kept in a separate directory that can be deleted after they have served their purpose. Make this directory as root:</p>
-
 <pre><code>mkdir -v $LFS/tools
-</code></pre>
-
-<p>Next, we will create a <code>/tools</code> symlink to the host system.</p>
-
+</code></pre><p>Next, we will create a <code>/tools</code> symlink to the host system.</p>
 <pre><code>ln -sv $LFS/tools /
-</code></pre>
-
-<p>This enables the tool-chain to be compiled so that it always refers to <code>/tools</code>, which ensures that the compiler, assembler, and linker will work in both the first, and second steps of the LFS build.</p>
-
+</code></pre><p>This enables the tool-chain to be compiled so that it always refers to <code>/tools</code>, which ensures that the compiler, assembler, and linker will work in both the first, and second steps of the LFS build.</p>
 <p><strong>Update:</strong> <em>I did this step wrong the first time (I think it failed), and encountered errors later when trying to run tar. If you encounter issues as well, jump to <a href="../../post/LFS-SBUs-and-Binutils/">my next post</a> to see how I resolved these issues</em></p>
-
 <h3 id="adding-the-lfs-user">Adding the LFS User</h3>
-
 <p>Running a system as root is a dangerous. Running the wrong command can completely obliterate a system, and having a typo bork the LFS build, or even the host system, would be horrific. To prevent this, the book recommends creating an unprivileged user to build the packages from. To do so, first create an <em>lfs</em> group and then create + add a <em>lfs</em> user to it using the commands (as root, ironic for this section&hellip;):</p>
-
 <pre><code>groupadd lfs
 useradd -s /bin/bash -g lfs -m -k /dev/null lfs
-</code></pre>
-
-<p>If you are not familiar with the <em>useradd</em> command, then <a href="https://en.wikipedia.org/wiki/RTFM"><em>RTFM</em></a> by typing <code>man useradd</code>. I&rsquo;m just kidding (although reading the man pages is never a bad idea). Here is a quick summary of what all of the flags mean.</p>
-
+</code></pre><p>If you are not familiar with the <em>useradd</em> command, then <a href="https://en.wikipedia.org/wiki/RTFM"><em>RTFM</em></a> by typing <code>man useradd</code>. I&rsquo;m just kidding (although reading the man pages is never a bad idea). Here is a quick summary of what all of the flags mean.</p>
 <ul>
 <li><code>-s /bin/bash</code> sets our <em>lfs</em> user&rsquo;s default shell to <em>bash</em></li>
 <li><code>-g lfs</code> adds the user to the <em>lfs</em> group that was created in the previous command</li>
@@ -232,54 +186,25 @@ useradd -s /bin/bash -g lfs -m -k /dev/null lfs
 <li><code>-k /dev/null</code> changes the input direction to the special null device to prevent the copying of files from a skeleton directory</li>
 <li>lastly, <code>lfs</code> is the new user&rsquo;s name.</li>
 </ul>
-
 <p>Before logging into the user, the password must be set.</p>
-
 <pre><code>passwd lfs
-</code></pre>
-
-<p>We also want to grant the <em>lfs</em> user full access to the tools directory we made (<em>$LFS/tools</em>), so lets make <em>lfs</em> the owner of that directory:</p>
-
+</code></pre><p>We also want to grant the <em>lfs</em> user full access to the tools directory we made (<em>$LFS/tools</em>), so lets make <em>lfs</em> the owner of that directory:</p>
 <pre><code>chown -v lfs $LFS/tools
-</code></pre>
-
-<p>Do the same for the sources directory we made:</p>
-
+</code></pre><p>Do the same for the sources directory we made:</p>
 <pre><code>chown -v lfs $LFS/sources
-</code></pre>
-
-<p>Lastly, login as <em>lfs</em>!</p>
-
+</code></pre><p>Lastly, login as <em>lfs</em>!</p>
 <pre><code>su - lfs
-</code></pre>
-
-<p><em>Note: the &ldquo;-&rdquo; tells su to start a login shell, rather than a non-login shell. This mostly ensures that various files are read at login to setup environment variable and other profiles.</em></p>
-
+</code></pre><p><em>Note: the &ldquo;-&rdquo; tells su to start a login shell, rather than a non-login shell. This mostly ensures that various files are read at login to setup environment variable and other profiles.</em></p>
 <h3 id="setting-up-the-build-environment">Setting up the Build Environment</h3>
-
 <p>Now with the <em>lfs</em> user created, we need to setup a proper working environment for that user. To do this, we will create the <code>.bash_profile</code> and <code>.bashrc</code> files.</p>
-
-<h5 id="creating-bash-profile">Creating .bash_profile</h5>
-
-<p><center>
-<img src="../../img/posts/LFS-Final-Preparation-Steps/set-bash-profile.png" name="pic" onmouseover="this.src='../../img/posts/LFS-Final-Preparation-Steps/set-bash-profile.gif'" onmouseout="this.src='../../img/posts/LFS-Final-Preparation-Steps/set-bash-profile.png'" style="max-width: 100%;"/>
-</center></p>
-
+<h5 id="creating-bash_profile">Creating .bash_profile</h5>
+<!-- raw HTML omitted -->
 <p>When logging in as the <em>lfs</em> user, the shell first reads the <code>/etc/profile</code> of the host, followed by the <code>.bash_profile</code>. So, lets start with the <code>.bash_profile</code>. Create/open <code>.bash_profile</code> and add the following line to it:</p>
-
 <pre><code>exec env -i HOME=$HOME TERM=$TERM PS1='\u:\w\$ ' /bin/bash
-</code></pre>
-
-<p>This line replaces the running shell with a new one that contains a completely empty environment, except the <em>HOME</em>, <em>TERM</em>, <em>PS1</em> variables. This ensures that there are no stray environment variables, that may interfere with the build environment.</p>
-
+</code></pre><p>This line replaces the running shell with a new one that contains a completely empty environment, except the <em>HOME</em>, <em>TERM</em>, <em>PS1</em> variables. This ensures that there are no stray environment variables, that may interfere with the build environment.</p>
 <h5 id="creating-bashrc">Creating .bashrc</h5>
-
-<p><center>
-<img src="../../img/posts/LFS-Final-Preparation-Steps/set-bashrc.png" name="pic" onmouseover="this.src='../../img/posts/LFS-Final-Preparation-Steps/set-bashrc.gif'" onmouseout="this.src='../../img/posts/LFS-Final-Preparation-Steps/set-bashrc.png'" style="max-width: 100%;"/>
-</center></p>
-
-<p>The new instance of this the shell is a non-login shell, so it does not read the <code>/etc/profile</code> or <code>.bash_profile</code> files. However, it does read the <code>.bashrc, so lets go ahead and create that. Open</code>~/.bashrc` and add the following lines:</p>
-
+<!-- raw HTML omitted -->
+<p>The new instance of this the shell is a non-login shell, so it does not read the <code>/etc/profile</code> or <code>.bash_profile</code> files. However, it does read the <code>.bashrc, so lets go ahead and create that. Open </code>~/.bashrc` and add the following lines:</p>
 <pre><code>set +h
 umask 022
 LFS=/mnt/lfs
@@ -288,22 +213,13 @@ LFS_TGT=$(uname -m)-lfs-linux-gnu
 PATH=/tools/bin:/bin:/usr/bin
 export LFS LC_ALL LFS_TGT PATH
 
-</code></pre>
-
-<p>The <code>set +h</code> line turns off bash&rsquo;s hash function. This is normally a usefully feature, as it essentially caches the path-names of executables. Removing this will ensure that the newly compiled tools will always be found by the shell once they are available, because the shell will have to re-search the <em>PATH</em> each time. Similarly, placing <code>/tools/bin</code> ahead of the standard <code>/bin:/usr/bin</code> <em>PATH</em> <em>(line 6)</em>, also helps force the shell to immediately locate up all the programs in chapter 5 after installation. These two techniques will hopefully prevent the risk of using old programs from the host instead of the newly compiled ones.</p>
-
+</code></pre><p>The <code>set +h</code> line turns off bash&rsquo;s hash function. This is normally a usefully feature, as it essentially caches the path-names of executables. Removing this will ensure that the newly compiled tools will always be found by the shell once they are available, because the shell will have to re-search the <em>PATH</em> each time. Similarly, placing <code>/tools/bin</code> ahead of the standard <code>/bin:/usr/bin</code> <em>PATH</em> <em>(line 6)</em>, also helps force the shell to immediately locate up all the programs in chapter 5 after installation. These two techniques will hopefully prevent the risk of using old programs from the host instead of the newly compiled ones.</p>
 <p>The <code>umask 022</code> line defines the <a href="https://en.wikipedia.org/wiki/Umask">umask</a> to 022, which sets up the system so that created files and directories are only writable by their owner, but are readable and executable by anyone.</p>
-
 <p>The <code>LFS=/mnt/lfs</code> line should look familiar, as it sets the <code>LFS</code> variable to our LFS mount point.</p>
-
 <p>Lastly, setting the <code>LC_ALL</code> variable to <code>POSIX</code> or <code>C</code> ensures that everything will work as expected in the <em>chroot</em> environments (regarding localization settings).</p>
-
 <p>To enable this new environment we&rsquo;ve setup, source the user-profile:</p>
-
 <pre><code>source ~/.bash_profile
-</code></pre>
-
-<p>Congratulations! We are now ready to start compiling some code in the next post!</p>
+</code></pre><p>Congratulations! We are now ready to start compiling some code in the next post!</p>
 
 
                     

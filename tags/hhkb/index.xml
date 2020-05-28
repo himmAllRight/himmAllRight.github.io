@@ -17,93 +17,50 @@
       
       <guid>http://ryan.himmelwright.net/post/new-hhkb-pro2/</guid>
       <description>&lt;p&gt;After years of using a Happy Hacking Keyboard Lite, I have &lt;em&gt;finally&lt;/em&gt; decided to splurge on a Happy Hacking Professional 2 keyboard. And I love it.&lt;/p&gt;
-
 &lt;p&gt;&lt;em&gt;Note: I have been slowly chipping away at this post for the last few months. I have been very busy, but I should be able to get back into the swing of writing again.&lt;/em&gt;&lt;/p&gt;
-
 &lt;h2 id=&#34;my-history-with-the-hhkb-lite&#34;&gt;My history with the HHKB Lite&lt;/h2&gt;
-
-&lt;p&gt;&lt;a href=&#34;../../img/posts/new-hhkb-pro2/college-computer.jpg&#34;&gt;&lt;img alt=&#34;Getting the HHKB Keyboard&#34; src=&#34;../../img/posts/new-hhkb-pro2/college-computer.jpg&#34; style=&#34;max-width: 100%;&#34;/&gt;&lt;/a&gt;
-&lt;div id=&#34;caption&#34;&gt;My Computer (HHKB lite included) during my senior year of college&lt;/div&gt;&lt;/p&gt;
-
+&lt;p&gt;&lt;!-- raw HTML omitted --&gt;&lt;!-- raw HTML omitted --&gt;&lt;!-- raw HTML omitted --&gt;&lt;/p&gt;
+&lt;!-- raw HTML omitted --&gt;
 &lt;p&gt;I started using Linux during my senior year of high school. In college, I started diving deeper down the rabbit hole, learning more about shells, window managers, and programming. By senior year, I found myself sitting in front of an &lt;a href=&#34;http://www.archlinux.org&#34;&gt;Arch Linux&lt;/a&gt; install, configured with a tiling window manger to organize the scattering of VIM and VIM-like terminal applications I used every day. To be kind to my wrists, I wanted something that was optimized at the hardware level for my heavy &lt;em&gt;CTRL&lt;/em&gt; key use. This is when I first learned about the HHKB. However, as a broke college student, I opted for the much cheaper &lt;em&gt;lite&lt;/em&gt; version to test out. I enjoyed the layout so much, that years later when I needed to replace a keyboard at work, I had them order me a HHKB lite (again, the Pro was very expensive).&lt;/p&gt;
-
 &lt;h2 id=&#34;time-for-a-mechanical-keyboard&#34;&gt;Time for a Mechanical Keyboard&lt;/h2&gt;
-
 &lt;p&gt;After years of using the standard rubber dome HHKB lite, I wanted to finally switch to a true mechanical keyboard. I searched long and hard, looking at different layouts designs, and learning about the various switch types (mostly the commony &lt;a href=&#34;https://en.wikipedia.org/wiki/Cherry_(keyboards)&#34;&gt;cherry MX switches&lt;/a&gt;). After purchasing and playing with a switch tester, I confirmed that I would likely enjoy MX clear switches best. They are quiet enough I could still reasonably use them in an office, but still had the nice tactile bump that I love (more than what I experienced on the Browns). Additionally, I knew that I wanted to stick with a small, minimalist layout, so I exclusively looked at &lt;a href=&#34;https://deskthority.net/wiki/60%25&#34;&gt;60% keyboards&lt;/a&gt;, with the occasional &lt;a href=&#34;https://deskthority.net/wiki/40%25&#34;&gt;40%&lt;/a&gt; board catching my eye.&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&#34;https://i.ytimg.com/vi/8wjW-Or1jg8/maxresdefault.jpg&#34;&gt;&lt;img alt=&#34;The Pok3r Keyboard&#34; src=&#34;../../img/posts/new-hhkb-pro2/pok3r.jpg&#34; style=&#34;max-width: 100%;&#34;/&gt;&lt;/a&gt;
-&lt;div id=&#34;caption&#34;&gt;The Pok3r Keyboard&lt;/div&gt;&lt;/p&gt;
-
+&lt;p&gt;&lt;!-- raw HTML omitted --&gt;&lt;!-- raw HTML omitted --&gt;&lt;!-- raw HTML omitted --&gt;&lt;/p&gt;
+&lt;!-- raw HTML omitted --&gt;
 &lt;p&gt;Like many, I eventually landed at the &lt;a href=&#34;https://deskthority.net/wiki/Vortex_Pok3r&#34;&gt;Vortex Pok3r&lt;/a&gt;. It is beautiful, with a minimal, but sturdy appearance, and has a MX clear variant. I had made my decision, but at the time, new boards weren&amp;rsquo;t available. I decided to sit back and wait to see if it would drop on &lt;a href=&#34;https://www.massdrop.com/&#34;&gt;Massdrop&lt;/a&gt; any time soon. I had waited years to purchase a mechanical keyboard, and I could wait a little longer to get the one I wanted.&lt;/p&gt;
-
 &lt;h2 id=&#34;the-planck-drop&#34;&gt;The Planck Drop&lt;/h2&gt;
-
-&lt;p&gt;&lt;img alt=&#34;The Planck Keyboard&#34; src=&#34;../../img/posts/new-hhkb-pro2/planck.jpg&#34; style=&#34;max-width: 100%;&#34;/&gt;
-&lt;div id=&#34;caption&#34;&gt;The Planck Keyboard&lt;/div&gt;&lt;/p&gt;
-
+&lt;!-- raw HTML omitted --&gt;
 &lt;p&gt;While I was waiting for a Pok3r drop&amp;hellip; something interesting caught my eye on Massdrop&amp;hellip; the &lt;a href=&#34;https://www.massdrop.com/buy/planck-mechanical-keyboard&#34;&gt;Planck keyboard&lt;/a&gt;&amp;hellip; The planck is a keyboard kit that you solder together to create a programmable, &lt;em&gt;ortholinear&lt;/em&gt;, 40% keyboard. When I say &lt;em&gt;programmable&lt;/em&gt;, I don&amp;rsquo;t mean that you can just bind some keys. The Planck is fully open and the firmware C code is available on Github for modification. So, you can actually customize and hack together the firmware, which was very appealing to me. So I joined the drop.&lt;/p&gt;
-
 &lt;p&gt;After joining, I purchased a soldering kit so that I could construct the keyboard once it finally shipped. Unfortunately, the planck drop had &lt;em&gt;several&lt;/em&gt; delays, but as I previously stated, I didn&amp;rsquo;t waiting. The planck got delayed &lt;em&gt;so&lt;/em&gt; much, that they eventually allowed people to cancel their order and receive a refund. I thought the order cancellation was something you &lt;em&gt;opted in&lt;/em&gt; to do, but it was actually an &lt;em&gt;opt out&lt;/em&gt; situation&amp;hellip; so my lack of response had my order canceled, pre-maturely ending my planck experience.&lt;/p&gt;
-
 &lt;h2 id=&#34;deciding-on-the-hhkb-pro&#34;&gt;Deciding on the HHKB Pro&lt;/h2&gt;
-
 &lt;p&gt;With my planck order canceled, and a refund imminent, I started to look at other options again. The main contender was still the Pok3r. I started researching it again and learning about how I could program the layers to have a layout I would like&amp;hellip; and eventually realized I just kept re-creating the infamous HHKB layout.&lt;/p&gt;
-
 &lt;p&gt;So I started to consider the HHKB again. My main reasons for not getting it originally was that it is a good bit more expensive than the majority of mechanical keyboards on the market. However, after waiting months for the planck, and noticing I kept comparing everything to the HHKB, I realized I would eventually end up with an HHKB anyway, and decided to just go for it now. Decision made.&lt;/p&gt;
-
 &lt;h2 id=&#34;getting-the-hhkb&#34;&gt;Getting the HHKB&lt;/h2&gt;
-
-&lt;p&gt;&lt;a href=&#34;../../img/posts/new-hhkb-pro2/got-hhkb.jpg&#34;&gt;&lt;img alt=&#34;Getting the HHKB Keyboard&#34; src=&#34;../../img/posts/new-hhkb-pro2/got-hhkb.jpg&#34; style=&#34;max-width: 100%;&#34;/&gt;&lt;/a&gt;
-&lt;div id=&#34;caption&#34;&gt;My HHKB&lt;/div&gt;&lt;/p&gt;
-
+&lt;p&gt;&lt;!-- raw HTML omitted --&gt;&lt;!-- raw HTML omitted --&gt;&lt;!-- raw HTML omitted --&gt;&lt;/p&gt;
+&lt;!-- raw HTML omitted --&gt;
 &lt;p&gt;Once I decided on the HHKB, (and it was approved by my wife :P ), I purchased it on Amazon. The one thing I did contemplate about was which color to get. I didn&amp;rsquo;t know if I wanted to get the black or white model. I knew I wanted printed key-caps, and that made the white board very appealing. The printed keys on it look &lt;em&gt;so crisp&lt;/em&gt;. Eventually, I decided on the dark gray because it matches everything else I own, whereas the white board would drastically stick out.&lt;/p&gt;
-
 &lt;p&gt;I placed the order and within a few days, it was on my doorstep (well, the neighbor&amp;rsquo;s, but that&amp;rsquo;s an issue with our post&amp;hellip;).&lt;/p&gt;
-
 &lt;h2 id=&#34;what-i-like&#34;&gt;What I like&lt;/h2&gt;
-
 &lt;h4 id=&#34;layout&#34;&gt;Layout&lt;/h4&gt;
-
 &lt;p&gt;As already mentioned, I love they HHKB layout. It was a bit tricky to get accustomed to at first, but that was &lt;em&gt;several years&lt;/em&gt; ago at this point. The HKKB Pro does have a few difference in layout when compared to the lite version (the pro does not have a bottom left &lt;code&gt;fn&lt;/code&gt; key, or any dedicated arrow keys). However, I had prepared myself for this change over the last few years by only using the right &lt;code&gt;fn&lt;/code&gt; key and the &lt;code&gt;fn&lt;/code&gt; arrow keys. The hardest thing to adjust to was the slightly different sized &lt;code&gt;alt&lt;/code&gt; and &lt;code&gt;super&lt;/code&gt; keys on the left (due to the missing &lt;code&gt;fn&lt;/code&gt; key).&lt;/p&gt;
-
 &lt;p&gt;I have learned to appreciate all the little HHKB layout differences. This includes the &amp;ldquo;delete&amp;rdquo; by default backspace key, with the &lt;code&gt;~&lt;/code&gt; key above it, and the &lt;code&gt;ESC&lt;/code&gt; key next to &lt;code&gt;1&lt;/code&gt;. Last but not least, &lt;strong&gt;the CTRL in the CAPS location&lt;/strong&gt; &lt;em&gt;(with CAPs still available as &lt;code&gt;fn&lt;/code&gt; + &lt;code&gt;Tab&lt;/code&gt;)&lt;/em&gt;. I honestly think this should be the standard keyboard layout.&lt;/p&gt;
-
 &lt;h4 id=&#34;pbt-key-caps&#34;&gt;PBT key-caps&lt;/h4&gt;
-
 &lt;p&gt;I didn&amp;rsquo;t expect the PBT key-caps to be such a big deal, but I absolutely love them. I could tell from images that they would &lt;em&gt;look&lt;/em&gt; better (especially the white ones), but I didn&amp;rsquo;t anticipate how great they would feel. They are solid, but with a soft touch, and are a &lt;em&gt;much&lt;/em&gt; better improvement over every keyboard I have previously owned/used.&lt;/p&gt;
-
 &lt;h4 id=&#34;the-switches&#34;&gt;The Switches&lt;/h4&gt;
-
 &lt;p&gt;I wasn&amp;rsquo;t sure how I would like the topre switches after getting excited for Cherry MX clears. However, I seem to really like them&amp;hellip; at least on the HHKB. I have heard that they feel different on the HHKB compared to other Topre keyboards due to the HHKBs plastic back. I&amp;rsquo;m not sure if this is true or not, but I like the result. Key presses are smooth but at the same time very crisp. Being a heavy typist, I often bottom out, but when I do it feels very soft, and not harsh at all. I figure that if I am going to bottom out on my keys regardless of what keyboard I have, it is probably best to handle it how the HHKB does.&lt;/p&gt;
-
-&lt;h4 id=&#34;can-i-say-sound&#34;&gt;&amp;hellip; Can I say sound?&lt;/h4&gt;
-
+&lt;h4 id=&#34;-can-i-say-sound&#34;&gt;&amp;hellip; Can I say sound?&lt;/h4&gt;
 &lt;p&gt;I love the sound of typing on this keyboard. While it is definitely an audible keyboard, it isn&amp;rsquo;t nearly as obnoxious as louder clicky switches, like MX Blues or Greens. It has a soft, muted, lower pitched sound as I type (compared to normal &amp;ldquo;clicky&amp;rdquo; switches). I really do enjoy hearing it, and find myself sometimes taking off my headphones to listen to it if I need motivation to get more characters on the screen.&lt;/p&gt;
-
-&lt;h2 id=&#34;what-i-don-t-like&#34;&gt;What I don&amp;rsquo;t like&lt;/h2&gt;
-
+&lt;h2 id=&#34;what-i-dont-like&#34;&gt;What I don&amp;rsquo;t like&lt;/h2&gt;
 &lt;h4 id=&#34;cost&#34;&gt;Cost&lt;/h4&gt;
-
 &lt;p&gt;As I&amp;rsquo;ve mentioned earlier in the post, probably the &lt;em&gt;biggest&lt;/em&gt; downside to the HHKB is the substantial cost. At &amp;gt;$230 USD, it is expensive, even for mechanical keyboards. The cost is the single problem that kept me from buying it all these years. Eventually, I realized it is what I wanted, and it would likely last me &lt;em&gt;years&lt;/em&gt;, so it all works out. Additionally, if I didn&amp;rsquo;t like the PRO, or didn&amp;rsquo;t want it anymore, they &lt;em&gt;do&lt;/em&gt; have an incredible resale value, so I could likely get a large chunk of my money back fairly easily.&lt;/p&gt;
-
 &lt;h4 id=&#34;transporting-it-related-to-cost&#34;&gt;Transporting it (related to cost)&lt;/h4&gt;
-
-&lt;p&gt;While the cost issue is mitigated after just biting the bullet and hitting the &amp;ldquo;check out&amp;rdquo; button, there is another minor annoyance that is &lt;em&gt;related&lt;/em&gt; to the high price. Ideally, I&amp;rsquo;d like to use my HKKB whenever I am at the computer. Being a software developer&amp;hellip; I use a computer for 8+ hours a day at work. So, I like to use my keyboard at work&amp;hellip; but I also like to bring it home. Ideally, I&amp;rsquo;d get two: one for home and one for at the office. At the high price point though&amp;hellip; I might have to wait to make that purchase. As far as keyboards go, I&amp;rsquo;d say the HHKB is probably one of the best travel boards out there. It&amp;rsquo;s light, but sturdy, and there is even a &lt;a href=&#34;https://www.amazon.com/Carrying-Happy-Hacking-Keyboard-PD-KB01SD/dp/B000FHSNFW/ref=sr_1_1?ie=UTF8&amp;amp;qid=1514499138&amp;amp;sr=8-1&amp;amp;keywords=HHKB+case go&#34;&gt;travel case designed specifically for it&lt;/a&gt;. So far I&amp;rsquo;ve been using the box to transport it, but am going to get the traveling case soon. That should hold me over until it is justifiable to get a second board. One day&amp;hellip;&lt;/p&gt;
-
+&lt;p&gt;While the cost issue is mitigated after just biting the bullet and hitting the &amp;ldquo;check out&amp;rdquo; button, there is another minor annoyance that is &lt;em&gt;related&lt;/em&gt; to the high price. Ideally, I&amp;rsquo;d like to use my HKKB whenever I am at the computer. Being a software developer&amp;hellip; I use a computer for 8+ hours a day at work. So, I like to use my keyboard at work&amp;hellip; but I also like to bring it home. Ideally, I&amp;rsquo;d get two: one for home and one for at the office. At the high price point though&amp;hellip; I might have to wait to make that purchase. As far as keyboards go, I&amp;rsquo;d say the HHKB is probably one of the best travel boards out there. It&amp;rsquo;s light, but sturdy, and there is even a [travel case designed specifically for it](&lt;a href=&#34;https://www.amazon.com/Carrying-Happy-Hacking-Keyboard-PD-KB01SD/dp/B000FHSNFW/ref=sr_1_1?ie=UTF8&amp;amp;qid=1514499138&amp;amp;sr=8-1&amp;amp;keywords=HHKB+case&#34;&gt;https://www.amazon.com/Carrying-Happy-Hacking-Keyboard-PD-KB01SD/dp/B000FHSNFW/ref=sr_1_1?ie=UTF8&amp;amp;qid=1514499138&amp;amp;sr=8-1&amp;amp;keywords=HHKB+case&lt;/a&gt; go). So far I&amp;rsquo;ve been using the box to transport it, but am going to get the traveling case soon. That should hold me over until it is justifiable to get a second board. One day&amp;hellip;&lt;/p&gt;
 &lt;p&gt;&lt;em&gt;I actually was just gifted the carrying case for Christmas. I will check out how it works in the new year. It should at the very least be better than the cardboard box it came in&amp;hellip;&lt;/em&gt;&lt;/p&gt;
-
-&lt;h4 id=&#34;mac-mode-delete-fix&#34;&gt;&amp;ldquo;Mac&amp;rdquo; mode / Delete &amp;ldquo;fix&amp;rdquo;&lt;/h4&gt;
-
+&lt;h4 id=&#34;mac-mode--delete-fix&#34;&gt;&amp;ldquo;Mac&amp;rdquo; mode / Delete &amp;ldquo;fix&amp;rdquo;&lt;/h4&gt;
 &lt;p&gt;One benefit of getting the HHKB &lt;em&gt;Pro&lt;/em&gt; over the &lt;em&gt;lite&lt;/em&gt; version, is that it has some media key functionality (volume, start/stop). However, these keys only work when the dip switches are configured to put the board in &amp;ldquo;Mac mode&amp;rdquo;. In addition to enabling the media keys, it changes a few other things, like changing the iconic HHKB &amp;ldquo;Delete&amp;rdquo; key to a more traditional &amp;ldquo;Backspace&amp;rdquo; default. Now, I understand that 99% of people probably welcome this change with open arms. However&amp;hellip; after using the HHKB lite for so many years, I have &lt;em&gt;really&lt;/em&gt; become accustomed to the &amp;ldquo;delete&amp;rdquo; key there, and actually prefer it now. With how I jump around my editor/terminals with emacs bindings, I have actually developed a workflow where I use &lt;em&gt;delete&lt;/em&gt; more often than &lt;em&gt;backspace&lt;/em&gt;.&lt;/p&gt;
-
 &lt;p&gt;I cannot figure out a way to have &lt;em&gt;both&lt;/em&gt; the &lt;em&gt;mac mode&lt;/em&gt; and &amp;ldquo;delete key default&amp;rdquo; functionality enabled at the same time. So&amp;hellip; I have opted to just forgo the new media keys, which is unfortunate. It&amp;rsquo;s a nice upgrade from the &lt;em&gt;lite&lt;/em&gt; version, and a shame I can&amp;rsquo;t take advantage of it just because I &lt;em&gt;prefer&lt;/em&gt; the default layout of the keyboard.&lt;/p&gt;
-
-&lt;h4 id=&#34;missing-more-modern-features-perks&#34;&gt;Missing more &amp;ldquo;Modern&amp;rdquo; Features/Perks&lt;/h4&gt;
-
-&lt;p&gt;The HHKB being a &amp;ldquo;&lt;em&gt;classic&lt;/em&gt;&amp;rdquo;, seems to be lacking in some of the more &amp;ldquo;modern&amp;rdquo; features of high-end keyboards. There is no backlighting, no custom programming/macro setups, or wireless connectivity. I even believe that the two USB ports on the back are USB 2, not 3 (let alone C). While it would be &lt;em&gt;nice&lt;/em&gt; to have some of these features in the HHKB, I&amp;rsquo;m not hurting &lt;em&gt;too badly&lt;/em&gt; for them&amp;hellip; &lt;em&gt;yet&lt;/em&gt;. A modern refresh would be amazing though.&lt;/p&gt;
-
+&lt;h4 id=&#34;missing-more-modern-featuresperks&#34;&gt;Missing more &amp;ldquo;Modern&amp;rdquo; Features/Perks&lt;/h4&gt;
+&lt;p&gt;The HHKB being a &amp;ldquo;&lt;em&gt;classic&lt;/em&gt;&amp;quot;, seems to be lacking in some of the more &amp;ldquo;modern&amp;rdquo; features of high-end keyboards. There is no backlighting, no custom programming/macro setups, or wireless connectivity. I even believe that the two USB ports on the back are USB 2, not 3 (let alone C). While it would be &lt;em&gt;nice&lt;/em&gt; to have some of these features in the HHKB, I&amp;rsquo;m not hurting &lt;em&gt;too badly&lt;/em&gt; for them&amp;hellip; &lt;em&gt;yet&lt;/em&gt;. A modern refresh would be amazing though.&lt;/p&gt;
 &lt;h2 id=&#34;conclusion&#34;&gt;Conclusion&lt;/h2&gt;
-
 &lt;p&gt;All in all, it is a great keyboard and I plan to use it for a long time. Typing on it feels and sounds so natural, and it has the same layout I have grown to love over the last few years. I am thrilled to finally upgrade to the pro, and wish I did so years ago.&lt;/p&gt;</description>
     </item>
     

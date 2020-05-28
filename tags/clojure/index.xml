@@ -24,12 +24,8 @@ static website generators. Thus far, I have tried
 started using the &lt;a href=&#34;http://clojure.org/&#34;&gt;clojure&lt;/a&gt; programming language, I have come across
 &lt;a href=&#34;http://cryogenweb.org/&#34;&gt;cryogen&lt;/a&gt;. As you may have already guessed, this site is now
 being generated using cryogen.&lt;/p&gt;
-
-&lt;h2 id=&#34;emacs-org-mode-solutions&#34;&gt;Emacs/org-mode Solutions&lt;/h2&gt;
-
-&lt;p&gt;&lt;img alt=&#34;emacs logo&#34; src=&#34;../../img/posts/using-cryogen-for-website/Emacs-icon.png&#34; style=&#34;max-width: 40%;&#34;/&gt;
-&lt;img alt=&#34;org-mode unicorn&#34; src=&#34;../../img/posts/using-cryogen-for-website/org-mode-unicorn.png&#34; style=&#34;max-width: 40%;&#34;/&gt;&lt;/p&gt;
-
+&lt;h2 id=&#34;emacsorg-mode-solutions&#34;&gt;Emacs/org-mode Solutions&lt;/h2&gt;
+&lt;!-- raw HTML omitted --&gt;
 &lt;p&gt;About a year ago, obsession with
 &lt;a href=&#34;https://www.gnu.org/software/emacs/&#34;&gt;emacs&lt;/a&gt; (and more importantly,
 org-mode) eventually led me to try out
@@ -42,7 +38,6 @@ and support to be lacking. It seemed to be more of a
 personal project, rather than a fully supported
 framework. while I know other people were able to
 get it working, org-page simply wasn&amp;rsquo;t working for me.&lt;/p&gt;
-
 &lt;p&gt;For over a year now, I have used org-mode at work each week to track
 my hours and to take notes (including code snippets). I then export
 the org files to html, creating a full index of my work
@@ -54,11 +49,8 @@ it). Creating my own solution helped me learn even more about org-mode
 (which helped with my work notes), but I ultimately abandoned using this method
 for my personal website. Managing my own solution quickly became a pain
 because I had to setup emacs, install the dependencies, and get a &lt;em&gt;.emacs&lt;/em&gt; file working &lt;em&gt;just right&lt;/em&gt; on any compuer I wanted to generate the site from.&lt;/p&gt;
-
 &lt;h2 id=&#34;jekyll&#34;&gt;Jekyll&lt;/h2&gt;
-
-&lt;p&gt;&lt;img alt= &#34;jekyll logo&#34; src=&#34;../../img/posts/using-cryogen-for-website/jekyll.png&#34; style=&#34;max-width: 100%;&#34;/&gt;&lt;/p&gt;
-
+&lt;!-- raw HTML omitted --&gt;
 &lt;p&gt;My first experience with &lt;a href=&#34;http://jekyllrb.com/&#34;&gt;Jekyll&lt;/a&gt; was about two
 years ago, right after I graduated college. It was the first true
 static website generator that I tried and I absolutely loved the
@@ -75,7 +67,6 @@ using iframes and other messiness). I eventually stopped using Jekyll
 because I was unable to get the theming quite right, and &amp;hellip; well
 &amp;hellip; I started &lt;em&gt;really&lt;/em&gt; getting into emacs. But you&amp;rsquo;ve already heard
 that story.&lt;/p&gt;
-
 &lt;p&gt;After taking a breif hiatus from Jekyll to adventure deeper into emacs
 land, I returned. This time, I was able to find and configure a
 &lt;a href=&#34;https://github.com/joshgerdes/jekyll-uno&#34;&gt;enticing theme&lt;/a&gt; that fit my
@@ -88,11 +79,8 @@ gems environment and dependencies on
 the wall. Additionally, I have been learning
 &lt;a href=&#34;http://clojure.org/&#34;&gt;clojure&lt;/a&gt; and while digging through different
 clojure projects, I found &lt;a href=&#34;http://cryogenweb.org/&#34;&gt;cryogen&lt;/a&gt;.&lt;/p&gt;
-
 &lt;h2 id=&#34;cryogen&#34;&gt;Cryogen&lt;/h2&gt;
-
-&lt;p&gt;&lt;img alt=&#34;Cryogen logo&#34; src=&#34;../../img/posts/using-cryogen-for-website/cryogen.png&#34; style=&#34;max-width: 100%;&#34;/&gt;&lt;/p&gt;
-
+&lt;!-- raw HTML omitted --&gt;
 &lt;p&gt;&lt;a href=&#34;http://cryogenweb.org/&#34;&gt;Cryogen&lt;/a&gt; is a static website generator
 written in &lt;a href=&#34;https://clojure.org/&#34;&gt;Clojure&lt;/a&gt;.  If you already have
 &lt;a href=&#34;http://leiningen.org/&#34;&gt;Leiningen&lt;/a&gt; installed (which if using Clojure,
@@ -108,7 +96,6 @@ live. Cryogen has a rather large, but simple
 organize the project. This structure is slightly different from
 Jekyll, and takes a bit of getting to, but I think it does a better
 job at keeping everything organized once you learn it.&lt;/p&gt;
-
 &lt;p&gt;The one thing I &lt;em&gt;really&lt;/em&gt; like about Cryogen is the fact
 that&amp;hellip; well&amp;hellip; it&amp;rsquo;s clojure. This means that things can often feel more
 &amp;ldquo;lisp-y&amp;rdquo;. For example, in Jekyll, the preferences
@@ -118,14 +105,12 @@ are defined in a very specific yaml header at the top of the markdown
 files. Cryogen follows a similar concept, but instead of yaml
 headers, it simply uses a p-list for the
 &lt;a href=&#34;http://cryogenweb.org/docs/configuration.html&#34;&gt;configuration setup&lt;/a&gt;.&lt;/p&gt;
-
 &lt;p&gt;To change a post&amp;rsquo;s information (ex: title, author, date), one just has
 to change the keywords in the list at the top of the post&amp;rsquo;s markdown
 file. This flexability means that figuring out how to setup use my own
 configuration was a breeze. For programmers that have previously used
 Clojure or another LISP, the configuration in Cryogen is very
 intuitive and natural.&lt;/p&gt;
-
 &lt;p&gt;The only &lt;em&gt;downside&lt;/em&gt; (sort of&amp;hellip; it&amp;rsquo;s my fault) I have experienced
 while using Cryogen is that being a smaller community, there isn&amp;rsquo;t
 much out there in terms of templetes and themes (at least that I was
@@ -139,12 +124,10 @@ now. As a bonus, I am starting to re-learn web design. However, I am
 &lt;em&gt;slowly&lt;/em&gt; catching up, so &amp;ldquo;modern&amp;rdquo; design features like mobil support
 might not happen right away. It&amp;rsquo;s not the best looking site, but I
 has personal touch, which I guess is good in a personal website.&lt;/p&gt;
-
 &lt;p&gt;That&amp;rsquo;s about it. That&amp;rsquo;s why my site suddenly looked different one
 weekend. If I look forward to using both Clojure and Cryogen more for not
 only this website, but other personal projects as well.&lt;/p&gt;
-
-&lt;p&gt;&lt;em&gt;* PS: Re-reading this post I realize trying Cryogen after getting excited about Clojure is VERY much like when I started using org-page after getting excited about emacs. Hopefully this setup is a keeper that I stick with. ;)&lt;/em&gt;&lt;/p&gt;</description>
+&lt;p&gt;_* PS: Re-reading this post I realize trying Cryogen after getting excited about Clojure is VERY much like when I started using org-page after getting excited about emacs. Hopefully this setup is a keeper that I stick with. ;)_&lt;/p&gt;</description>
     </item>
     
   </channel>

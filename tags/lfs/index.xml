@@ -16,81 +16,42 @@
       <pubDate>Tue, 04 Apr 2017 00:00:00 +0000</pubDate>
       
       <guid>http://ryan.himmelwright.net/post/lfs-sbus-and-binutils/</guid>
-      <description>
-
-&lt;p&gt;Well, after all of the preparation, we are ready to start compiling packages. This post cover compiling all the packages, but it will detail the first build of &lt;a href=&#34;https://www.gnu.org/software/binutils/&#34;&gt;Binutils&lt;/a&gt;, which is arguably the most important package to compile. Why is Binutils so crucial? It determines the SBU time for your build system. What&amp;rsquo;s an SBU? Read on to find out!&lt;/p&gt;
-
-&lt;!-- more --&gt;
-
+      <description>&lt;p&gt;Well, after all of the preparation, we are ready to start compiling packages. This post cover compiling all the packages, but it will detail the first build of &lt;a href=&#34;https://www.gnu.org/software/binutils/&#34;&gt;Binutils&lt;/a&gt;, which is arguably the most important package to compile. Why is Binutils so crucial? It determines the SBU time for your build system. What&amp;rsquo;s an SBU? Read on to find out!&lt;/p&gt;
+&lt;!-- raw HTML omitted --&gt;
 &lt;h3 id=&#34;sbus&#34;&gt;SBUs&lt;/h3&gt;
-
-&lt;p&gt;&lt;img alt=&#34;SBU Table&#34; src=&#34;../../img/posts/LFS-SBUs-Binutils/SBU-table.png&#34; style=&#34;max-width: 100%;&#34;/&gt;&lt;/p&gt;
-
+&lt;!-- raw HTML omitted --&gt;
 &lt;p&gt;&lt;em&gt;A table of package SBUs and their predicted build time&lt;/em&gt;&lt;/p&gt;
-
 &lt;p&gt;When completing LFS, people commonly want to know how long it will take to compile each package. Unfortunately, build times are very much dependent on the power and configuration of the system the packages are being compiled on. Some packages may take a few minutes on a powerful workstation, but hours on an aged laptop. While it cannot be said how long a specific build will take on any device, we can normalize how long each package build takes comparatively to each other. This normalization is done using Stand Build Units, or SBUs.&lt;/p&gt;
-
 &lt;p&gt;A SBU is the unit of time measurement it takes to make and install a standard package. Each package in the LFS book has a SBU value, so that build times can be gauged. So, if The first package to be constructed in the book (and in this post), is Binutils, so that is the package which SBUs are normalized to. For example, if it took 10 minutes to build Binutils on your machine, then 1 SBU = 10 minutes for that machine. This means a 4.5 SBU package can be expected to take ~45 minutes to build.&lt;/p&gt;
-
 &lt;h4 id=&#34;sbu-accuracy&#34;&gt;SBU Accuracy&lt;/h4&gt;
-
 &lt;p&gt;SBUs are not completely accurate, and should be used as an estimate at best. Due to the many factors that may differ between setups, SBUs can be off by dozens of minutes in worst-case scenarios. Certain make options might also throw the system off.&lt;/p&gt;
-
 &lt;p&gt;For example, systems with multiple cores can run &amp;ldquo;parallel make&amp;rdquo; using the &lt;code&gt;-j&lt;/code&gt; make-flag, as in &lt;code&gt;make -j4&lt;/code&gt;. This tell &lt;em&gt;make&lt;/em&gt; to compiled the package using multiple cores. Parallel compilation has the potential to speed up the build process significantly. However, due to how compilation jobs are divided for parallel builds, SBUs are even harder to predict and may be even more sporadic. Just remember that and don&amp;rsquo;t expect too much SBU accuracy when using &lt;code&gt;make -j&lt;/code&gt;. Also, if you ever run into a problem during a build step, it is a good idea to first retry with a single processor build. If this does not fix the issue itself, the error message can at least be more easily analyzed.&lt;/p&gt;
-
 &lt;h3 id=&#34;my-encountered-issues-with-tar&#34;&gt;My Encountered Issues with tar&amp;hellip;&lt;/h3&gt;
-
-&lt;p&gt;&lt;img alt=&#34;Tar issues&#34; src=&#34;../../img/posts/LFS-SBUs-Binutils/tar-error.png&#34; style=&#34;max-width: 100%;&#34;/&gt;&lt;/p&gt;
-
+&lt;!-- raw HTML omitted --&gt;
 &lt;p&gt;The first time I attempted to make binutils, I encountered a few errors. The gist of it was that I was not able untar the package correctly, at least from the &lt;em&gt;lfs&lt;/em&gt; user. Everything worked fine from the &lt;em&gt;root&lt;/em&gt; or even &lt;em&gt;ryan&lt;/em&gt; user accounts, but running tar on &lt;em&gt;lfs&lt;/em&gt; returned the following error:&lt;/p&gt;
-
 &lt;pre&gt;&lt;code&gt;tar (child): bzip2: Cannot exec: Too many levels of symbolic links
 tar (child): Error is not recoverable: exiting now
 tar: Child returned status 2
 tar: Error is not recoverable: exiting now
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;I searched around but much of the initial advice didn&amp;rsquo;t help my problem. It often indicated that my /usr/bin/bzip2 might be a symlink and should be altered. That wasn&amp;rsquo;t the case. Then tried something that illuminated the issue: I removed the &lt;code&gt;/tools/bin&lt;/code&gt; from the begging of the &lt;code&gt;path&lt;/code&gt; variable (defined in the &lt;em&gt;lfs&lt;/em&gt; &lt;code&gt;.bashrc&lt;/code&gt; file). That temporarily fixed the issues. So I knew the problem was related to the symlink I setup in &lt;a href=&#34;../../post/LFS-Final-Preparation-Steps&#34;&gt;the previous LFS post&lt;/a&gt;, specifically the &lt;code&gt;ln -sv $LFS/tools /&lt;/code&gt; command. It must have failed and I wasn&amp;rsquo;t paying attention.&lt;/p&gt;
-
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;I searched around but much of the initial advice didn&amp;rsquo;t help my problem. It often indicated that my /usr/bin/bzip2 might be a symlink and should be altered. That wasn&amp;rsquo;t the case. Then tried something that illuminated the issue: I removed the &lt;code&gt;/tools/bin&lt;/code&gt; from the begging of the &lt;code&gt;path&lt;/code&gt; variable (defined in the &lt;em&gt;lfs&lt;/em&gt; &lt;code&gt;.bashrc&lt;/code&gt; file). That temporarily fixed the issues. So I knew the problem was related to the symlink I setup in &lt;a href=&#34;../../post/LFS-Final-Preparation-Steps&#34;&gt;the previous LFS post&lt;/a&gt;, specifically the &lt;code&gt;ln -sv $LFS/tools /&lt;/code&gt; command. It must have failed and I wasn&amp;rsquo;t paying attention.&lt;/p&gt;
 &lt;p&gt;Now that I was knew what the problem was, I was able to fix it by running the following commands (some of them might need to be run from a &lt;em&gt;root/sudo&lt;/em&gt; account):&lt;/p&gt;
-
 &lt;pre&gt;&lt;code&gt;rm -rf $LFS/tools
 rm -rf /tools
 mkdir -pv $LFS/tools
 ln -sv $LFS/tools /
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;These commands remove and reset the &lt;code&gt;tools&lt;/code&gt; symlinks. I then made sure to re-add &lt;code&gt;/tools/bin&lt;/code&gt; to the begging of the &lt;code&gt;path&lt;/code&gt; var in the &lt;em&gt;lfs&lt;/em&gt; &lt;code&gt;.bashrc&lt;/code&gt; and test it. Problem fixed!&lt;/p&gt;
-
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;These commands remove and reset the &lt;code&gt;tools&lt;/code&gt; symlinks. I then made sure to re-add &lt;code&gt;/tools/bin&lt;/code&gt; to the begging of the &lt;code&gt;path&lt;/code&gt; var in the &lt;em&gt;lfs&lt;/em&gt; &lt;code&gt;.bashrc&lt;/code&gt; and test it. Problem fixed!&lt;/p&gt;
 &lt;h3 id=&#34;extracting-binutils&#34;&gt;Extracting BinUtils&lt;/h3&gt;
-
-&lt;p&gt;&lt;center&gt;
-&lt;img src=&#34;../../img/posts/LFS-SBUs-Binutils/tar-binutils.png&#34; name=&#34;pic&#34; onmouseover=&#34;this.src=&#39;../../img/posts/LFS-SBUs-Binutils/tar-binutils.gif&#39;&#34; onmouseout=&#34;this.src=&#39;../../img/posts/LFS-SBUs-Binutils/tar-binutils.png&#39;&#34; style=&#34;max-width: 100%;&#34;/&gt;
-&lt;/center&gt;&lt;/p&gt;
-
+&lt;!-- raw HTML omitted --&gt;
 &lt;p&gt;It is important that Binutils is built first in the process. This is mostly because when Glibc and GCC are built, they perform various tests on the linker and assembler to figure out which of their own features to enable.&lt;/p&gt;
-
 &lt;p&gt;To start building BinUtils, move to the sources directory (&lt;code&gt;$LFS/sources&lt;/code&gt;) and extract the package with (If you encounter issues, see section above):&lt;/p&gt;
-
 &lt;pre&gt;&lt;code&gt;tar xfjv binutils-2.27.tar.bz2
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;&lt;em&gt;Note: You&amp;rsquo;re version might be different&lt;/em&gt;&lt;/p&gt;
-
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;em&gt;Note: You&amp;rsquo;re version might be different&lt;/em&gt;&lt;/p&gt;
 &lt;p&gt;The Binutils documentation recommends building it in a dedicated &lt;code&gt;build&lt;/code&gt; directory, so lets go ahead and make, then enter, that directory:&lt;/p&gt;
-
 &lt;pre&gt;&lt;code&gt;mkdir build
 cd build
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&#34;making-executing-a-build-script&#34;&gt;Making &amp;amp; Executing a Build Script&lt;/h3&gt;
-
-&lt;p&gt;&lt;center&gt;
-&lt;img src=&#34;../../img/posts/LFS-SBUs-Binutils/binutils-script-start-play.png&#34; name=&#34;pic&#34; onmouseover=&#34;this.src=&#39;../../img/posts/LFS-SBUs-Binutils/binutils-script-start.gif&#39;&#34; onmouseout=&#34;this.src=&#39;../../img/posts/LFS-SBUs-Binutils/binutils-script-start-play.png&#39;&#34; style=&#34;max-width: 100%;&#34;/&gt;
-&lt;/center&gt;&lt;/p&gt;
-
+&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;making--executing-a-build-script&#34;&gt;Making &amp;amp; Executing a Build Script&lt;/h3&gt;
+&lt;!-- raw HTML omitted --&gt;
 &lt;p&gt;Now it is time to build. Normally, this would best be done by sequentially performing a series of &lt;em&gt;configure&lt;/em&gt;, &lt;em&gt;make&lt;/em&gt;, and &lt;em&gt;make install&lt;/em&gt; commands, but for the first binutils compilation, we want to get an accurate reading on how long it takes (to determine our SBU time). To accomplish this easily, I put all of the commands into a bash script. This way, I could execute the script, and easily time the whole process using the &lt;code&gt;time&lt;/code&gt; utility. To create the script, I wrote the following commands into a file (&lt;code&gt;build-binutils.sh&lt;/code&gt;):&lt;/p&gt;
-
 &lt;pre&gt;&lt;code&gt;#!/bin/bash
 
 ../configure --prefix=/tools            \
@@ -106,10 +67,7 @@ case $(uname -m) in
 esac
 
 make install
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;The various options of the &lt;code&gt;configure&lt;/code&gt; command mean the following:&lt;/p&gt;
-
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;The various options of the &lt;code&gt;configure&lt;/code&gt; command mean the following:&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;code&gt;--prefix=/tools&lt;/code&gt;: Configures the build to install the Binutils programs to the /tools directory&lt;/li&gt;
 &lt;li&gt;&lt;code&gt;--with-sysroot=$LFS&lt;/code&gt;: For cross compilation, tells the build system to look in our $LFS directory for the target system libraries, as needed.&lt;/li&gt;
@@ -118,36 +76,18 @@ make install
 &lt;li&gt;&lt;code&gt;disable-nls&lt;/code&gt;: disables the internationalization, as it is not needed for the temporary tools.&lt;/li&gt;
 &lt;li&gt;&lt;code&gt;disable-werror&lt;/code&gt;: Prevents the build from stopping in the event that there are warnings from the host&amp;rsquo;s compilier.&lt;/li&gt;
 &lt;/ul&gt;
-
 &lt;p&gt;Also, the &lt;code&gt;case&lt;/code&gt; statement creates a symlink to ensure the sanity of the tool chain, if building on a &lt;em&gt;x86_64&lt;/em&gt; architecture.&lt;/p&gt;
-
 &lt;p&gt;To runs the script, first make it executable,&lt;/p&gt;
-
 &lt;pre&gt;&lt;code&gt;chmod +x build-binutils.sh
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Finally, time and execute the script:&lt;/p&gt;
-
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Finally, time and execute the script:&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;time ./build-binutils.sh
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;When the script completes, the time it took to run it will be printed out. Congratulations, this is the SBU for your system!&lt;/p&gt;
-
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;When the script completes, the time it took to run it will be printed out. Congratulations, this is the SBU for your system!&lt;/p&gt;
 &lt;p&gt;Once I had my standard single-thread SBU value, I wanted to do a run with the &lt;code&gt;-j4&lt;/code&gt; make flag for comparison. To &amp;ldquo;reset&amp;rdquo;, I deleted the contents of the &lt;code&gt;binutils/build/&lt;/code&gt; directory, as well as &lt;code&gt;$LFS/tools/&lt;/code&gt;. I then edited my &lt;code&gt;build-binutils.sh&lt;/code&gt; script to do a parallel compile by changing &lt;code&gt;make&lt;/code&gt; line to &lt;code&gt;make -j4&lt;/code&gt;. I then re-ran the script with &lt;code&gt;time&lt;/code&gt;. &lt;em&gt;Note: This is not described anywhere in the official documentation, but is just my best guess at what to do for a re-run of binutils. I very well may be missing steps. However, remember LFS is a learning experience, so we will find out&lt;/em&gt;!&lt;/p&gt;
-
 &lt;h3 id=&#34;checking-the-build&#34;&gt;Checking the Build&lt;/h3&gt;
-
-&lt;p&gt;&lt;center&gt;
-&lt;img src=&#34;../../img/posts/LFS-SBUs-Binutils/binutils-check-play.png&#34; name=&#34;pic&#34; onmouseover=&#34;this.src=&#39;../../img/posts/LFS-SBUs-Binutils/binutils-check.gif&#39;&#34; onmouseout=&#34;this.src=&#39;../../img/posts/LFS-SBUs-Binutils/binutils-check-play.png&#39;&#34; style=&#34;max-width: 100%;&#34;/&gt;
-&lt;/center&gt;&lt;/p&gt;
-
+&lt;!-- raw HTML omitted --&gt;
 &lt;p&gt;After the build is complete, it is a good idea to run the tests, &lt;em&gt;especially&lt;/em&gt; for binutils. In this case, use the make command:&lt;/p&gt;
-
 &lt;pre&gt;&lt;code&gt;make -k check
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&#34;building-the-chapter-5-tools-from-here-on-out&#34;&gt;Building the Chapter 5 Tools From Here on Out&amp;hellip;&lt;/h3&gt;
-
+&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;building-the-chapter-5-tools-from-here-on-out&#34;&gt;Building the Chapter 5 Tools From Here on Out&amp;hellip;&lt;/h3&gt;
 &lt;p&gt;For the sake of time, I will not be writing posts detailing the build process for each of the remaining packages in Chapter 5. I might keep a little log about how each of the builds went and post it, but I am unsure. If I encounter any major snags along the way, I will be sure to write a post detailing them. Otherwise, with any luck, my plan is to keep compiling and see you in Chapter 6!&lt;/p&gt;
 </description>
     </item>
@@ -158,87 +98,41 @@ make install
       <pubDate>Tue, 21 Mar 2017 00:00:00 +0000</pubDate>
       
       <guid>http://ryan.himmelwright.net/post/lfs-final-preparation-steps/</guid>
-      <description>
-
-&lt;p&gt;Now that the &lt;em&gt;repeated&lt;/em&gt; setup steps have been defined in &lt;a href=&#34;../../post/LFS-Repeated-Setup-Steps/&#34;&gt;my previous LFS post&lt;/a&gt;, there are a &lt;em&gt;few&lt;/em&gt; more preparation steps to complete in order to start building the LFS system. I promise&amp;hellip; we will start compiling soon. If all goes well, this should be the last preparation post.&lt;/p&gt;
-
-&lt;!-- more --&gt;
-
+      <description>&lt;p&gt;Now that the &lt;em&gt;repeated&lt;/em&gt; setup steps have been defined in &lt;a href=&#34;../../post/LFS-Repeated-Setup-Steps/&#34;&gt;my previous LFS post&lt;/a&gt;, there are a &lt;em&gt;few&lt;/em&gt; more preparation steps to complete in order to start building the LFS system. I promise&amp;hellip; we will start compiling soon. If all goes well, this should be the last preparation post.&lt;/p&gt;
+&lt;!-- raw HTML omitted --&gt;
 &lt;h3 id=&#34;downloading-sources&#34;&gt;Downloading Sources&lt;/h3&gt;
-
-&lt;p&gt;When it comes down to it, Linux from scratch is just a bunch of packages, and the Linux kernel, all compiled from source and linked together. To build all of this, we need to download the source code&amp;hellip; for &lt;em&gt;all&lt;/em&gt; of those packages. Luckily, LFS keeps a list of what is needed, and downloading it is trivial. &lt;em&gt;(Note: These commands should be run as &lt;b&gt;root&lt;/b&gt;)&lt;/em&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;center&gt;
-&lt;img alt=&#34;Making the sources directory&#34; src=&#34;../../img/posts/LFS-Final-Preparation-Steps/make-sources-dir.png&#34; style=&#34;max-width: 100%;&#34;/&gt;
-&lt;/center&gt;&lt;/p&gt;
-
+&lt;p&gt;When it comes down to it, Linux from scratch is just a bunch of packages, and the Linux kernel, all compiled from source and linked together. To build all of this, we need to download the source code&amp;hellip; for &lt;em&gt;all&lt;/em&gt; of those packages. Luckily, LFS keeps a list of what is needed, and downloading it is trivial. &lt;em&gt;(Note: These commands should be run as &lt;!-- raw HTML omitted --&gt;root&lt;!-- raw HTML omitted --&gt;)&lt;/em&gt;&lt;/p&gt;
+&lt;!-- raw HTML omitted --&gt;
 &lt;p&gt;First, lets make a new directory to put all of the source code. To make the directory:&lt;/p&gt;
-
 &lt;pre&gt;&lt;code&gt;mkdir -v $LFS/sources
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;The LFS book suggests for this directory to be writable and sticky. A &amp;ldquo;Sticky&amp;rdquo; directory allows only the file owner to delete a file in it. To make the directory both writable and sticky, use the command:&lt;/p&gt;
-
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;The LFS book suggests for this directory to be writable and sticky. A &amp;ldquo;Sticky&amp;rdquo; directory allows only the file owner to delete a file in it. To make the directory both writable and sticky, use the command:&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;chmod -v a+wt $LFS/sources
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;&lt;center&gt;
-&lt;img src=&#34;../../img/posts/LFS-Final-Preparation-Steps/wget-sources-play.png&#34; name=&#34;pic&#34; onmouseover=&#34;this.src=&#39;../../img/posts/LFS-Final-Preparation-Steps/wget-sources.gif&#39;&#34; onmouseout=&#34;this.src=&#39;../../img/posts/LFS-Final-Preparation-Steps/wget-sources-play.png&#39;&#34; style=&#34;max-width: 100%;&#34;/&gt;
-&lt;/center&gt;&lt;/p&gt;
-
+&lt;/code&gt;&lt;/pre&gt;&lt;!-- raw HTML omitted --&gt;
 &lt;p&gt;To download all of the source packages at once, download &lt;a href=&#34;http://www.linuxfromscratch.org/lfs/view/stable-systemd/wget-list&#34;&gt;the LFS wget list&lt;/a&gt;:&lt;/p&gt;
-
 &lt;pre&gt;&lt;code&gt;wget http://www.linuxfromscratch.org/lfs/view/stable-systemd/wget-list
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;After downloading the wget list, it can be used as the input-file for wget. This will download all the sources with one command:&lt;/p&gt;
-
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;After downloading the wget list, it can be used as the input-file for wget. This will download all the sources with one command:&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;wget --input-file=wget-list --continue --directory-prefix=$LFS/sources
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;It should take a few minutes to download everything (or longer if on a poor connection).&lt;/p&gt;
-
-&lt;p&gt;&lt;center&gt;
-&lt;img src=&#34;../../img/posts/LFS-Final-Preparation-Steps/sources-md5-play.png&#34; name=&#34;pic&#34; onmouseover=&#34;this.src=&#39;../../img/posts/LFS-Final-Preparation-Steps/sources-md5.gif&#39;&#34; onmouseout=&#34;this.src=&#39;../../img/posts/LFS-Final-Preparation-Steps/sources-md5-play.png&#39;&#34; style=&#34;max-width: 100%;&#34;/&gt;
-&lt;/center&gt;&lt;/p&gt;
-
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;It should take a few minutes to download everything (or longer if on a poor connection).&lt;/p&gt;
+&lt;!-- raw HTML omitted --&gt;
 &lt;p&gt;Ever since LFS-7.0, a &lt;a href=&#34;http://www.linuxfromscratch.org/lfs/view/stable-systemd/md5sums&#34;&gt;md5sums file&lt;/a&gt; is provided, which can be downloaded and used to verify the integrity of downloaded packages. Download this file, again with &lt;em&gt;wget&lt;/em&gt;:&lt;/p&gt;
-
 &lt;pre&gt;&lt;code&gt;wget http://www.linuxfromscratch.org/lfs/view/stable-systemd/md5sums
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Then, compare the hashes in the list to the &lt;a href=&#34;https://en.wikipedia.org/wiki/Md5sum&#34;&gt;md5sum&lt;/a&gt; for each of the source packages. This is done with the commands:&lt;/p&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Then, compare the hashes in the list to the &lt;a href=&#34;https://en.wikipedia.org/wiki/Md5sum&#34;&gt;md5sum&lt;/a&gt; for each of the source packages. This is done with the commands:&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;pushd $LFS/sources
 md5sum -c md5sums
-popd&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;The results should all say &lt;em&gt;OK&lt;/em&gt;. If not, try re-downloading the sources and verifying again.&lt;/p&gt;
-
-&lt;h3 id=&#34;creating-the-lfs-tools-directory&#34;&gt;Creating the $LFS/tools Directory&lt;/h3&gt;
-
+popd
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;The results should all say &lt;em&gt;OK&lt;/em&gt;. If not, try re-downloading the sources and verifying again.&lt;/p&gt;
+&lt;h3 id=&#34;creating-the-lfstools-directory&#34;&gt;Creating the $LFS/tools Directory&lt;/h3&gt;
 &lt;p&gt;LFS is built in two main steps. The first step builds a set of temporary tools to build the system, but not be included as part of the Final LFS system itself. To help prevent these tools from accidentally being included in the final system, they are kept in a separate directory that can be deleted after they have served their purpose. Make this directory as root:&lt;/p&gt;
-
 &lt;pre&gt;&lt;code&gt;mkdir -v $LFS/tools
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Next, we will create a &lt;code&gt;/tools&lt;/code&gt; symlink to the host system.&lt;/p&gt;
-
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Next, we will create a &lt;code&gt;/tools&lt;/code&gt; symlink to the host system.&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;ln -sv $LFS/tools /
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;This enables the tool-chain to be compiled so that it always refers to &lt;code&gt;/tools&lt;/code&gt;, which ensures that the compiler, assembler, and linker will work in both the first, and second steps of the LFS build.&lt;/p&gt;
-
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;This enables the tool-chain to be compiled so that it always refers to &lt;code&gt;/tools&lt;/code&gt;, which ensures that the compiler, assembler, and linker will work in both the first, and second steps of the LFS build.&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;Update:&lt;/strong&gt; &lt;em&gt;I did this step wrong the first time (I think it failed), and encountered errors later when trying to run tar. If you encounter issues as well, jump to &lt;a href=&#34;../../post/LFS-SBUs-and-Binutils/&#34;&gt;my next post&lt;/a&gt; to see how I resolved these issues&lt;/em&gt;&lt;/p&gt;
-
 &lt;h3 id=&#34;adding-the-lfs-user&#34;&gt;Adding the LFS User&lt;/h3&gt;
-
 &lt;p&gt;Running a system as root is a dangerous. Running the wrong command can completely obliterate a system, and having a typo bork the LFS build, or even the host system, would be horrific. To prevent this, the book recommends creating an unprivileged user to build the packages from. To do so, first create an &lt;em&gt;lfs&lt;/em&gt; group and then create + add a &lt;em&gt;lfs&lt;/em&gt; user to it using the commands (as root, ironic for this section&amp;hellip;):&lt;/p&gt;
-
 &lt;pre&gt;&lt;code&gt;groupadd lfs
 useradd -s /bin/bash -g lfs -m -k /dev/null lfs
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;If you are not familiar with the &lt;em&gt;useradd&lt;/em&gt; command, then &lt;a href=&#34;https://en.wikipedia.org/wiki/RTFM&#34;&gt;&lt;em&gt;RTFM&lt;/em&gt;&lt;/a&gt; by typing &lt;code&gt;man useradd&lt;/code&gt;. I&amp;rsquo;m just kidding (although reading the man pages is never a bad idea). Here is a quick summary of what all of the flags mean.&lt;/p&gt;
-
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;If you are not familiar with the &lt;em&gt;useradd&lt;/em&gt; command, then &lt;a href=&#34;https://en.wikipedia.org/wiki/RTFM&#34;&gt;&lt;em&gt;RTFM&lt;/em&gt;&lt;/a&gt; by typing &lt;code&gt;man useradd&lt;/code&gt;. I&amp;rsquo;m just kidding (although reading the man pages is never a bad idea). Here is a quick summary of what all of the flags mean.&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;code&gt;-s /bin/bash&lt;/code&gt; sets our &lt;em&gt;lfs&lt;/em&gt; user&amp;rsquo;s default shell to &lt;em&gt;bash&lt;/em&gt;&lt;/li&gt;
 &lt;li&gt;&lt;code&gt;-g lfs&lt;/code&gt; adds the user to the &lt;em&gt;lfs&lt;/em&gt; group that was created in the previous command&lt;/li&gt;
@@ -246,54 +140,25 @@ useradd -s /bin/bash -g lfs -m -k /dev/null lfs
 &lt;li&gt;&lt;code&gt;-k /dev/null&lt;/code&gt; changes the input direction to the special null device to prevent the copying of files from a skeleton directory&lt;/li&gt;
 &lt;li&gt;lastly, &lt;code&gt;lfs&lt;/code&gt; is the new user&amp;rsquo;s name.&lt;/li&gt;
 &lt;/ul&gt;
-
 &lt;p&gt;Before logging into the user, the password must be set.&lt;/p&gt;
-
 &lt;pre&gt;&lt;code&gt;passwd lfs
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;We also want to grant the &lt;em&gt;lfs&lt;/em&gt; user full access to the tools directory we made (&lt;em&gt;$LFS/tools&lt;/em&gt;), so lets make &lt;em&gt;lfs&lt;/em&gt; the owner of that directory:&lt;/p&gt;
-
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;We also want to grant the &lt;em&gt;lfs&lt;/em&gt; user full access to the tools directory we made (&lt;em&gt;$LFS/tools&lt;/em&gt;), so lets make &lt;em&gt;lfs&lt;/em&gt; the owner of that directory:&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;chown -v lfs $LFS/tools
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Do the same for the sources directory we made:&lt;/p&gt;
-
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Do the same for the sources directory we made:&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;chown -v lfs $LFS/sources
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Lastly, login as &lt;em&gt;lfs&lt;/em&gt;!&lt;/p&gt;
-
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Lastly, login as &lt;em&gt;lfs&lt;/em&gt;!&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;su - lfs
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;&lt;em&gt;Note: the &amp;ldquo;-&amp;rdquo; tells su to start a login shell, rather than a non-login shell. This mostly ensures that various files are read at login to setup environment variable and other profiles.&lt;/em&gt;&lt;/p&gt;
-
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;em&gt;Note: the &amp;ldquo;-&amp;rdquo; tells su to start a login shell, rather than a non-login shell. This mostly ensures that various files are read at login to setup environment variable and other profiles.&lt;/em&gt;&lt;/p&gt;
 &lt;h3 id=&#34;setting-up-the-build-environment&#34;&gt;Setting up the Build Environment&lt;/h3&gt;
-
 &lt;p&gt;Now with the &lt;em&gt;lfs&lt;/em&gt; user created, we need to setup a proper working environment for that user. To do this, we will create the &lt;code&gt;.bash_profile&lt;/code&gt; and &lt;code&gt;.bashrc&lt;/code&gt; files.&lt;/p&gt;
-
-&lt;h5 id=&#34;creating-bash-profile&#34;&gt;Creating .bash_profile&lt;/h5&gt;
-
-&lt;p&gt;&lt;center&gt;
-&lt;img src=&#34;../../img/posts/LFS-Final-Preparation-Steps/set-bash-profile.png&#34; name=&#34;pic&#34; onmouseover=&#34;this.src=&#39;../../img/posts/LFS-Final-Preparation-Steps/set-bash-profile.gif&#39;&#34; onmouseout=&#34;this.src=&#39;../../img/posts/LFS-Final-Preparation-Steps/set-bash-profile.png&#39;&#34; style=&#34;max-width: 100%;&#34;/&gt;
-&lt;/center&gt;&lt;/p&gt;
-
+&lt;h5 id=&#34;creating-bash_profile&#34;&gt;Creating .bash_profile&lt;/h5&gt;
+&lt;!-- raw HTML omitted --&gt;
 &lt;p&gt;When logging in as the &lt;em&gt;lfs&lt;/em&gt; user, the shell first reads the &lt;code&gt;/etc/profile&lt;/code&gt; of the host, followed by the &lt;code&gt;.bash_profile&lt;/code&gt;. So, lets start with the &lt;code&gt;.bash_profile&lt;/code&gt;. Create/open &lt;code&gt;.bash_profile&lt;/code&gt; and add the following line to it:&lt;/p&gt;
-
 &lt;pre&gt;&lt;code&gt;exec env -i HOME=$HOME TERM=$TERM PS1=&#39;\u:\w\$ &#39; /bin/bash
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;This line replaces the running shell with a new one that contains a completely empty environment, except the &lt;em&gt;HOME&lt;/em&gt;, &lt;em&gt;TERM&lt;/em&gt;, &lt;em&gt;PS1&lt;/em&gt; variables. This ensures that there are no stray environment variables, that may interfere with the build environment.&lt;/p&gt;
-
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;This line replaces the running shell with a new one that contains a completely empty environment, except the &lt;em&gt;HOME&lt;/em&gt;, &lt;em&gt;TERM&lt;/em&gt;, &lt;em&gt;PS1&lt;/em&gt; variables. This ensures that there are no stray environment variables, that may interfere with the build environment.&lt;/p&gt;
 &lt;h5 id=&#34;creating-bashrc&#34;&gt;Creating .bashrc&lt;/h5&gt;
-
-&lt;p&gt;&lt;center&gt;
-&lt;img src=&#34;../../img/posts/LFS-Final-Preparation-Steps/set-bashrc.png&#34; name=&#34;pic&#34; onmouseover=&#34;this.src=&#39;../../img/posts/LFS-Final-Preparation-Steps/set-bashrc.gif&#39;&#34; onmouseout=&#34;this.src=&#39;../../img/posts/LFS-Final-Preparation-Steps/set-bashrc.png&#39;&#34; style=&#34;max-width: 100%;&#34;/&gt;
-&lt;/center&gt;&lt;/p&gt;
-
-&lt;p&gt;The new instance of this the shell is a non-login shell, so it does not read the &lt;code&gt;/etc/profile&lt;/code&gt; or &lt;code&gt;.bash_profile&lt;/code&gt; files. However, it does read the &lt;code&gt;.bashrc, so lets go ahead and create that. Open&lt;/code&gt;~/.bashrc` and add the following lines:&lt;/p&gt;
-
+&lt;!-- raw HTML omitted --&gt;
+&lt;p&gt;The new instance of this the shell is a non-login shell, so it does not read the &lt;code&gt;/etc/profile&lt;/code&gt; or &lt;code&gt;.bash_profile&lt;/code&gt; files. However, it does read the &lt;code&gt;.bashrc, so lets go ahead and create that. Open &lt;/code&gt;~/.bashrc` and add the following lines:&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;set +h
 umask 022
 LFS=/mnt/lfs
@@ -302,22 +167,13 @@ LFS_TGT=$(uname -m)-lfs-linux-gnu
 PATH=/tools/bin:/bin:/usr/bin
 export LFS LC_ALL LFS_TGT PATH
 
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;The &lt;code&gt;set +h&lt;/code&gt; line turns off bash&amp;rsquo;s hash function. This is normally a usefully feature, as it essentially caches the path-names of executables. Removing this will ensure that the newly compiled tools will always be found by the shell once they are available, because the shell will have to re-search the &lt;em&gt;PATH&lt;/em&gt; each time. Similarly, placing &lt;code&gt;/tools/bin&lt;/code&gt; ahead of the standard &lt;code&gt;/bin:/usr/bin&lt;/code&gt; &lt;em&gt;PATH&lt;/em&gt; &lt;em&gt;(line 6)&lt;/em&gt;, also helps force the shell to immediately locate up all the programs in chapter 5 after installation. These two techniques will hopefully prevent the risk of using old programs from the host instead of the newly compiled ones.&lt;/p&gt;
-
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;The &lt;code&gt;set +h&lt;/code&gt; line turns off bash&amp;rsquo;s hash function. This is normally a usefully feature, as it essentially caches the path-names of executables. Removing this will ensure that the newly compiled tools will always be found by the shell once they are available, because the shell will have to re-search the &lt;em&gt;PATH&lt;/em&gt; each time. Similarly, placing &lt;code&gt;/tools/bin&lt;/code&gt; ahead of the standard &lt;code&gt;/bin:/usr/bin&lt;/code&gt; &lt;em&gt;PATH&lt;/em&gt; &lt;em&gt;(line 6)&lt;/em&gt;, also helps force the shell to immediately locate up all the programs in chapter 5 after installation. These two techniques will hopefully prevent the risk of using old programs from the host instead of the newly compiled ones.&lt;/p&gt;
 &lt;p&gt;The &lt;code&gt;umask 022&lt;/code&gt; line defines the &lt;a href=&#34;https://en.wikipedia.org/wiki/Umask&#34;&gt;umask&lt;/a&gt; to 022, which sets up the system so that created files and directories are only writable by their owner, but are readable and executable by anyone.&lt;/p&gt;
-
 &lt;p&gt;The &lt;code&gt;LFS=/mnt/lfs&lt;/code&gt; line should look familiar, as it sets the &lt;code&gt;LFS&lt;/code&gt; variable to our LFS mount point.&lt;/p&gt;
-
 &lt;p&gt;Lastly, setting the &lt;code&gt;LC_ALL&lt;/code&gt; variable to &lt;code&gt;POSIX&lt;/code&gt; or &lt;code&gt;C&lt;/code&gt; ensures that everything will work as expected in the &lt;em&gt;chroot&lt;/em&gt; environments (regarding localization settings).&lt;/p&gt;
-
 &lt;p&gt;To enable this new environment we&amp;rsquo;ve setup, source the user-profile:&lt;/p&gt;
-
 &lt;pre&gt;&lt;code&gt;source ~/.bash_profile
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Congratulations! We are now ready to start compiling some code in the next post!&lt;/p&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Congratulations! We are now ready to start compiling some code in the next post!&lt;/p&gt;
 </description>
     </item>
     
@@ -328,51 +184,27 @@ export LFS LC_ALL LFS_TGT PATH
       
       <guid>http://ryan.himmelwright.net/post/lfs-repeated-setup-steps/</guid>
       <description>&lt;p&gt;During the Linux From Scratch process, there may be times when the build environment (computer, VM, chroot, whatever) must be restarted. If so, there are a few steps from the setup phase that have to be re-initialized. This post maps out those steps.&lt;/p&gt;
-
 &lt;h3 id=&#34;setting-the-lfs-variable&#34;&gt;Setting The $LFS Variable&lt;/h3&gt;
-
 &lt;p&gt;After setting up the virtual disk for my LFS build, I needed to define where I wanted to eventually mount it. This location is important, because it is the path that the $LFS variable is set to. The $LFS variable is used throughout the book, to easily point to where the LFS system is being built.&lt;/p&gt;
-
-&lt;p&gt;&lt;center&gt;&lt;img alt=&#34;Setting the LFS variable&#34; src=&#34;../../img/posts/LFS-Repeated-Setup-Steps/Setting-LFS-var.png&#34; style=&#34;max-width: 100%;&#34;/&gt;&lt;/center&gt;&lt;/p&gt;
-
+&lt;!-- raw HTML omitted --&gt;
 &lt;p&gt;To set the #LFS variable, I ran the following command: *&lt;/p&gt;
-
 &lt;p&gt;&lt;code&gt;export LFS=/mnt/lfs&lt;/code&gt;&lt;/p&gt;
-
 &lt;p&gt;To check that the variable set correctly, just print it out using echo (if successful, the path that was specified should print out).&lt;/p&gt;
-
 &lt;p&gt;&lt;code&gt;echo $LFS&lt;/code&gt;&lt;/p&gt;
-
 &lt;h3 id=&#34;ensuring-the-lfs-variable-is-always-set&#34;&gt;Ensuring the $LFS Variable is &lt;em&gt;Always&lt;/em&gt; Set&lt;/h3&gt;
-
 &lt;p&gt;There are several ways to ensure that the &lt;em&gt;$LFS&lt;/em&gt; variable is always loaded during login. One method the book recommends is to edit the &lt;em&gt;.bash-profile&lt;/em&gt; found in both &lt;em&gt;~&lt;/em&gt; and */root, by appending the export command defined above to them. This way every time the build machine resets, simply logging into the system (which loads &lt;em&gt;bash&lt;/em&gt;, assuming it is the default), will export the &lt;em&gt;$LFS&lt;/em&gt; variable.&lt;/p&gt;
-
-&lt;h3 id=&#34;mounting-the-lfs-partition-s&#34;&gt;Mounting the LFS Partition(s)&lt;/h3&gt;
-
+&lt;h3 id=&#34;mounting-the-lfs-partitions&#34;&gt;Mounting the LFS Partition(s)&lt;/h3&gt;
 &lt;p&gt;After setting the &lt;em&gt;$LFS&lt;/em&gt; variable, I could finally mount my LFS drive/partition to that location. First, I ensured that the directory existed by running:&lt;/p&gt;
-
 &lt;p&gt;&lt;code&gt;mkdir -pv $LFS&lt;/code&gt;&lt;/p&gt;
-
 &lt;p&gt;&lt;em&gt;Note: In this command, the -v again means verbose, so a message will be printed for each directory created. The -p flag is for &amp;ndash;parents, and will instruct &amp;ldquo;mkdir&amp;rdquo; to also make parent directories, as needed. So, if &lt;code&gt;/mnt/&lt;/code&gt; does not already exist, will be created along with &lt;code&gt;/mnt/lfs&lt;/code&gt;.&lt;/em&gt;&lt;/p&gt;
-
 &lt;p&gt;After creating the directories, I mounted them with the command:&lt;/p&gt;
-
 &lt;p&gt;&lt;code&gt;sudo mount -v -t ext4 /dev/sdb $LFS&lt;/code&gt;&lt;/p&gt;
-
 &lt;p&gt;If multiple partitions are being used for the LFS build (&lt;em&gt;such as a separate &lt;code&gt;/home&lt;/code&gt; partition&lt;/em&gt;), they should also be mounted at this time.&lt;/p&gt;
-
-&lt;p&gt;&lt;center&gt;
-&lt;img src=&#34;../../img/posts/LFS-Repeated-Setup-Steps/mounting-play.png&#34; name=&#34;pic&#34; onmouseover=&#34;this.src=&#39;../../img/posts/LFS-Repeated-Setup-Steps/mount-check.gif&#39;&#34; onmouseout=&#34;this.src=&#39;../../img/posts/LFS-Repeated-Setup-Steps/mounting-play.png&#39;&#34; style=&#34;max-width: 100%;&#34;/&gt;
-&lt;/center&gt;&lt;/p&gt;
-
+&lt;!-- raw HTML omitted --&gt;
 &lt;p&gt;After mounting my partition, the LFS book recommended that I check that the partition was not mounted with restrictive permissions. To do this, I ran the &lt;code&gt;mount&lt;/code&gt; command again, but this time without any parameters. From the output, I was able to see and confirm that the partition was not mounted with restrictive permissions, such as &lt;code&gt;nosuid&lt;/code&gt; or &lt;code&gt;nodev&lt;/code&gt;. If either of these options are set, the partition should be remounted.&lt;/p&gt;
-
 &lt;p&gt;Lastly, if a &lt;em&gt;swap&lt;/em&gt; partition is being used, do not forget to enable it using &lt;code&gt;swapon&lt;/code&gt;:&lt;/p&gt;
-
 &lt;p&gt;&lt;code&gt;swapon -v /dev/xxx&lt;/code&gt;  (with &lt;em&gt;xxx&lt;/em&gt; the name of the swap partition)&lt;/p&gt;
-
 &lt;h3 id=&#34;conclusion&#34;&gt;Conclusion&lt;/h3&gt;
-
 &lt;p&gt;Remember, if the LFS host system is restarted for any reason, these steps must be completed upon logging into the rebooted system. Even if measures were taking to &lt;em&gt;always&lt;/em&gt; complete these steps (such as adding the &lt;em&gt;$LFS&lt;/em&gt; variable to the bash profile, or mounting the partitions via the &lt;em&gt;fstab&lt;/em&gt; file), it is still a good idea to check and make sure that they &lt;em&gt;actually&lt;/em&gt; initialized as  intended. This can prevent several headaches down the road.&lt;/p&gt;</description>
     </item>
     
@@ -383,67 +215,38 @@ export LFS LC_ALL LFS_TGT PATH
       
       <guid>http://ryan.himmelwright.net/post/lfs-getting-started/</guid>
       <description>&lt;p&gt;When I started using &lt;a href=&#34;https://www.archlinux.org&#34;&gt;Arch Linux&lt;/a&gt; a while back, I learn about some of the internals of Linux quickly. Ever since then, I have considered building a Linux From Scratch by following the guidelines outlined in &lt;a href=&#34;http://www.linuxfromscratch.org&#34;&gt;the book&lt;/a&gt;. Based on my experience with Arch Linux, I&amp;rsquo;m sure that compiling a system from scratch will continue to teach me about Linux at a much deeper level.&lt;/p&gt;
-
 &lt;h3 id=&#34;getting-started&#34;&gt;Getting Started&lt;/h3&gt;
-
-&lt;p&gt;&lt;img alt=&#34;Linux from Scratch Logo&#34; src=&#34;../../img/posts/LFS-intro/book-cover.jpg&#34; style=&#34;width: 30%; float: right; margin: 5px 15px 5px 5px&#34;/&gt;&lt;/p&gt;
-
+&lt;!-- raw HTML omitted --&gt;
 &lt;p&gt;First, it should be known that this process follows a book that is freely available at &lt;a href=&#34;http://www.linuxfromscratch.org&#34;&gt;www.linuxfromscratch.org&lt;/a&gt;. The book is updated from time to time, and there are several versions of it (ex: systemd or not). I am attempting to complete the systemd adaptation. There are also many videos online of people walking through the steps. I find watching such videos can be very helpful to watch.&lt;/p&gt;
-
 &lt;h2 id=&#34;setting-up-the-host-system&#34;&gt;Setting Up the Host System&lt;/h2&gt;
-
-&lt;p&gt;&lt;img alt=&#34;VM installation Complete&#34; src=&#34;../../img/posts/LFS-intro/VM-install.png&#34; style=&#34;max-width: 100%;&#34;/&gt;&lt;/p&gt;
-
+&lt;!-- raw HTML omitted --&gt;
 &lt;p&gt;LFS is constructed from a host environment that has the software required to build and compile all the components of the system. This host system can be a current Linux install, a seperate computer that is dedicated to LFS, or a Linux virtual machine. The LFS system is then assembled in a another partition, or even on a separate hard drive.&lt;/p&gt;
-
 &lt;p&gt;I setup a KVM virtual machine using Virt Manager for my host system, and then attached a virtual hard drive to build LFS on. I decided to use a &lt;a href=&#34;https://www.ubuntu.com/download/desktop&#34;&gt;Ubuntu 16.04 Desktop&lt;/a&gt; install because it should have most of the build tools, and it is easy to install any missing ones. For now, I configured the VM to use 4 cores and 4GB of RAM, but I might decide to increase that when I start compiling packages. I also decided to not worry about any of the fancy partitioning options like setting up LVM or disk encryption, and just let the installer automatically do it for me. Those features are not really needed here and I figured it would just potentially confuse me.&lt;/p&gt;
-
-&lt;p&gt;&lt;center&gt;&lt;img alt=&#34;Adding LFS hd&#34; src=&#34;../../img/posts/LFS-intro/HD-add.png&#34; style=&#34;max-width: 100%;&#34;/&gt;&lt;/center&gt;&lt;/p&gt;
-
+&lt;!-- raw HTML omitted --&gt;
 &lt;p&gt;After the VM finished installing, I shutdown the system and added a virtual drive. This will be the virtual drive that I build the entire LFS system in. Then I started up the VM again, confirmed that everything installed correctly, and installed openssh so that I could just ssh into the system from my desktop if I didn&amp;rsquo;t feel like working inside the VM&amp;rsquo;s GUI.&lt;/p&gt;
-
 &lt;h3 id=&#34;setting-up-the-host-environment&#34;&gt;Setting up the Host Environment&lt;/h3&gt;
-
 &lt;h4 id=&#34;checking-required-packages&#34;&gt;Checking Required Packages&lt;/h4&gt;
-
-&lt;p&gt;&lt;img alt=&#34;Adding LFS hd&#34; src=&#34;../../img/posts/LFS-intro/environment-check-pre.png&#34; style=&#34;max-width: 100%;&#34;/&gt;&lt;/p&gt;
-
+&lt;!-- raw HTML omitted --&gt;
 &lt;p&gt;Now that the host system was setup, the host &lt;em&gt;environment&lt;/em&gt; had to be configured. Luckily, LFS provides a nice script that can be copy and pasted into a terminal. This script prints out what required packages and programs are not yet installed on the system (make sure to run it as either root, or using sudo). When I ran the script, there were a few missing packages that had to be installed:&lt;/p&gt;
-
 &lt;ul&gt;
 &lt;li&gt;bison&lt;/li&gt;
 &lt;li&gt;gawk&lt;/li&gt;
 &lt;li&gt;texinfo (makeinfo)&lt;/li&gt;
 &lt;/ul&gt;
-
 &lt;p&gt;So, I just ran a simple &lt;code&gt;apt-get install bison gawk texinfo&lt;/code&gt; command and was good to go. I also had a symlink issue because &lt;code&gt;/bin/sh&lt;/code&gt; was pointing to &lt;code&gt;/bin/dash&lt;/code&gt;, and LFS wants it to point to &lt;code&gt;/bin/bash/&lt;/code&gt;. This was easily resolved using the command &lt;code&gt;ln -sf bash /bin/sh&lt;/code&gt;.&lt;/p&gt;
-
-&lt;p&gt;&lt;img alt=&#34;Adding LFS hd&#34; src=&#34;../../img/posts/LFS-intro/environment-check-post.png&#34; style=&#34;max-width: 100%;&#34;/&gt;&lt;/p&gt;
-
+&lt;!-- raw HTML omitted --&gt;
 &lt;p&gt;After installing those few packages and fixing the symlink, the check script was happy, and I could move on.&lt;/p&gt;
-
 &lt;h4 id=&#34;checking-libraries&#34;&gt;Checking Libraries&lt;/h4&gt;
-
-&lt;p&gt;&lt;img alt=&#34;Adding LFS hd&#34; src=&#34;../../img/posts/LFS-intro/library-check.png&#34; style=&#34;max-width: 100%;&#34;/&gt;&lt;/p&gt;
-
+&lt;!-- raw HTML omitted --&gt;
 &lt;p&gt;After verifying that my host system had all the required packages, I had to confirm that a few libraries were &amp;ldquo;consistent&amp;rdquo;. Again, LFS provides a simple script for this. When I ran it, the three libraries were not found. Tthe books states that all the files should either be &lt;em&gt;absent&lt;/em&gt; or &lt;em&gt;present&lt;/em&gt;. If one or two are there and the others missing, that is a problem. So my system was okay.&lt;/p&gt;
-
 &lt;h3 id=&#34;formatting-the-lfs-disk&#34;&gt;Formatting the LFS Disk&lt;/h3&gt;
-
 &lt;p&gt;I added my LFS disk through the Virt Manager settings, which doesn&amp;rsquo;t format it, so that had to be done next.&lt;/p&gt;
-
-&lt;p&gt;&lt;img alt=&#34;Adding LFS hd&#34; src=&#34;../../img/posts/LFS-intro/disks.png&#34; style=&#34;max-width: 100%;&#34;/&gt;&lt;/p&gt;
-
+&lt;!-- raw HTML omitted --&gt;
 &lt;p&gt;I first used &lt;code&gt;lsblk&lt;/code&gt; to confirm the disk name. In my case it was the &lt;code&gt;/dev/sdb&lt;/code&gt; disk.&lt;/p&gt;
-
-&lt;p&gt;&lt;img alt=&#34;Adding LFS hd&#34; src=&#34;../../img/posts/LFS-intro/mkfs.png&#34; style=&#34;max-width: 100%;&#34;/&gt;&lt;/p&gt;
-
+&lt;!-- raw HTML omitted --&gt;
 &lt;p&gt;After getting the disk&amp;rsquo;s path, it was time to format. I decided to format the disk with t the basic, but very solid ext4 file system using the following command (again, as root or using &lt;em&gt;sudo&lt;/em&gt;):&lt;/p&gt;
-
 &lt;p&gt;&lt;code&gt;mkfs.ext4 -v /dev/sdb&lt;/code&gt;&lt;/p&gt;
-
 &lt;p&gt;Note that the &lt;code&gt;-v&lt;/code&gt; was not required, but I personally prefer to see the output. Also, if I wanted to specify the drive using the UUID, that could be accomlished using the &lt;code&gt;-U&lt;/code&gt; flag to specify a UUID instead of the file path.&lt;/p&gt;
-
 &lt;p&gt;The next few preparatory steps before starting to build LFS must be done each time the host system boots, so I think I am going to break that into a separate post. That way, it can be more easily referenced. Enjoy!&lt;/p&gt;</description>
     </item>
     

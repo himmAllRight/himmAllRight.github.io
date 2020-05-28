@@ -155,76 +155,48 @@ around, the <code>ssh</code> session will occasionally time out.  <a href="../..
 and <a href="../../post/setting-up-tmuxinator/">tmuxinator</a> make this less of an issue,
 since I can re-attach my session, but I still wish my remote sessions were a
 bit more seamless. They can be&hellip; using <code>mosh</code>.</p>
-
 <h4 id="mosh">Mosh</h4>
-
-<p><a href="../../img/posts/setup-mosh/ponyta-mosh.png">
-<img alt="Using mosh to conenct to a server" src="../../img/posts/setup-mosh/ponyta-mosh.png" style="max-width: 100%; padding: 5px 15px 10px 10px"/></a>
-<div class="caption">Using <code>mosh</code> to connect to one of my servers</div></p>
-
+<!-- raw HTML omitted -->
 <p><a href="https://mosh.org">Mosh</a> is a more robust replacement for interactive ssh
 terminals. It automatically roams and continues to work even as the computer
 switches networks or is put to sleep. It also responds to typing, even on a bad
 connection, which cuts down on lag. Lastly, it&rsquo;s free and open source software,
 licenced under the GPLv3.</p>
-
 <h4 id="mosh-install">Mosh Install</h4>
-
 <p>Mosh should be in most Linux repos, and is also available on BSD, Mac, Windows,
 and basically everything else.  For more information on how to install it on
 your platform, head over to the <a href="https://mosh.org/#getting">getting mosh</a>
 page.  For me, it was a simple <code>dnf</code>/<code>yum</code> install to get it on both my laptop
 and
 server:</p>
-
 <pre><code>sudo dnf install mosh
-</code></pre>
-
-<p>*Note: My centos server required me to first enable the epel repos to get
+</code></pre><p>*Note: My centos server required me to first enable the epel repos to get
 access to <code>mosh</code>. Fedora might also, but I already had it enabled on my
 laptop.</p>
-
 <pre><code>sudo yum install -y epel-release
 sudo yum install -y mosh
-</code></pre>
-
-<h4 id="open-firewall-ports">Open Firewall Ports</h4>
-
+</code></pre><h4 id="open-firewall-ports">Open Firewall Ports</h4>
 <p>After installing <code>mosh</code>&hellip; it might not immediately work. If so, it is likely
 due to not having the required ports open. Mosh uses UDP ports 60000-61000 for
 it&rsquo;s connections. Enable these ports and optionally restart the firewall,
 before trying mosh again.</p>
-
 <p><em>Note: If you want to connect from outside the network, remember to also
 forward these ports on the network.</em></p>
-
 <h4 id="connect">Connect</h4>
-
 <p>We should now be able to connect to the server using mosh. Typical connections
 look very similar to <code>ssh</code>:</p>
-
 <pre><code>mosh ryan@centos-server
-</code></pre>
-
-<p>If a specific mosh UDP port needs to be specified (for port-forwarding, for example)
+</code></pre><p>If a specific mosh UDP port needs to be specified (for port-forwarding, for example)
 use the <code>-p</code> flag:</p>
-
 <pre><code>mosh -p 1234 ryan@centos-server
-</code></pre>
-
-<h4 id="ssh-options">SSH Options</h4>
-
+</code></pre><h4 id="ssh-options">SSH Options</h4>
 <p>Mosh uses ssh for the initial connection. Occasionally, particular ssh options
 might be required in order for mosh to initialize a connection.  For
 example, I typically <code>ssh</code> home on a particular port, so that my router knows
 which VM to transfer me to.  Options like this can be passed to <code>mosh</code> using
 the <code>--ssh</code> flag:</p>
-
 <pre><code>mosh --ssh=&quot;ssh -p 1234&quot; ryan@centos-network
-</code></pre>
-
-<h4 id="conclusion">Conclusion</h4>
-
+</code></pre><h4 id="conclusion">Conclusion</h4>
 <p>That&rsquo;s really it. There is a bunch of cool <a href="https://mosh.org/#techinfo">technical
 stuff</a> going on under the hood of mosh, but on the
 surface&hellip; it is simply useful. For an even <em>better</em> experience with mosh, be

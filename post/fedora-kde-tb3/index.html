@@ -153,109 +153,55 @@ laptop when working from home. Normally, it works fine. However, last week I
 reformatted the work laptop with the <a href="https://spins.fedoraproject.org/kde/"><em>KDE Plasma</em> spin</a> of
 Fedora Workstation 31&hellip; and my TB3 hub stopped playing nicely with it.
 Here&rsquo;s why.</p>
-
 <h2 id="the-issue">The Issue</h2>
-
 <p>Due to a NVIDIA Quadro M1000M in my lenovo P50 work laptop, I&rsquo;ve been using
 Gnome with Wayland, because that combination seems to have the least amount of
 annoying trade-offs. While doing a system refresh, I figured I would see if
 things are any different with a clean Fedora 31 Plasma install (they weren&rsquo;t,
 but that&rsquo;s beyond this post).</p>
-
-<p><center>
-<a href="../../img/posts/fedora-kde-tb3/gnome-tb3-settings.png">
-<img alt="Gnome Thunderbolt Settings" src="../../img/posts/fedora-kde-tb3/gnome-tb3-settings.png" style="max-width: 100%; padding: 5px 15px 10px 10px"/></a>
-<div class="caption">The Gnome desktop environment now has a thunderbolt pane
-in the settings GUI</div>
-</center></p>
-
+<!-- raw HTML omitted -->
 <p>Booting into the live cd, and later the installed system, I noticed that my
 Thunderbolt 3 hub did <em>not</em> work while I was in Plasma. That was fine. I
 expected it really, because for security reasons Linux distros tend to disable
 thunderbolt ports by default.  In gnome, there are now settings to authorize
 it (which I guess I had done on my previous install, and forgot about).  In
 Plasma however, I needed to install and configure <code>bolt</code>.</p>
-
 <h2 id="bolt">Bolt</h2>
-
-<p><center>
-<a href="../../img/posts/fedora-kde-tb3/bolt-install.png">
-<img alt="Installing bolt with dnf" src="../../img/posts/fedora-kde-tb3/bolt-install.png" style="max-width: 100%; padding: 5px 15px 10px 10px"/></a>
-<div class="caption"><code>bolt</code> is in the Fedora repos and is easily installed with
-<code>dnf</code></div>
-</center></p>
-
+<!-- raw HTML omitted -->
 <p>In Fedora, <code>bolt</code> is in the repos (at least in Fedora 31+), so installing it is
 easy:</p>
-
 <pre><code>sudo dnf install bolt
-</code></pre>
-
-<p>Once <code>bolt</code> is installed, it isn&rsquo;t a bad idea to check to make sure it is
+</code></pre><p>Once <code>bolt</code> is installed, it isn&rsquo;t a bad idea to check to make sure it is
 running: <code>sudo systemctl bolt</code>.</p>
-
-<p><center>
-<a href="../../img/posts/fedora-kde-tb3/bolt-systemctl-status.png">
-<img alt="bolt systemctl status" src="../../img/posts/fedora-kde-tb3/bolt-systemctl-status.png" style="max-width: 100%; padding: 5px 15px 10px 10px"/></a>
-<div class="caption">Checking <code>bolt</code> is running using <code>systemctl status</code></div>
-</center></p>
-
+<!-- raw HTML omitted -->
 <p>If the status shows that it isn&rsquo;t running for some reason, it can be started
 using <code>systemctl start bolt</code>. Check the status again, and if it it <em>still</em> is not
 running&hellip; sorry?</p>
-
-<p><center>
-<a href="../../img/posts/fedora-kde-tb3/boltctl.png">
-<img alt="boltctl" src="../../img/posts/fedora-kde-tb3/boltctl.png" style="max-width: 100%; padding: 5px 15px 10px 10px"/></a>
-<div class="caption"></div>
-</center></p>
-
+<!-- raw HTML omitted -->
 <p>With bolt installed, the command <code>boltctl</code> is available to use. The base command will
 show information about attached thunderbolt devices. To see more <code>boltctl</code>
 commands, run <code>boltctl --help</code>.</p>
-
 <h2 id="authorizing">Authorizing</h2>
-
-<p><center>
-<a href="../../img/posts/fedora-kde-tb3/boltctl-authorize.png">
-<img alt="boltctl authorize" src="../../img/posts/fedora-kde-tb3/boltctl-authorize.png" style="max-width: 100%; padding: 5px 15px 10px 10px"/></a>
-<div class="caption">Authorizing the device</div>
-</center></p>
-
+<!-- raw HTML omitted -->
 <p>In order to <em>use</em> the thunderbolt 3 device, it needs to be authorized. To
 authorize a device, first use a plain <code>boltctl</code> command to get the <code>uuid</code> of
 the device. Next, call <code>boltctl authorize</code> using the <code>uuid</code> to authorize it:</p>
-
 <pre><code>boltctl authorize &lt;UUID HERE&gt;
-</code></pre>
-
-<p>The device should now be authorized. When I authorized mine, some of my devices
+</code></pre><p>The device should now be authorized. When I authorized mine, some of my devices
 started showing up automatically, while others needed to be disconnected and
 replugged.</p>
-
 <h2 id="enrolling">Enrolling</h2>
-
-<p><center>
-<a href="../../img/posts/fedora-kde-tb3/bresetoltctl-enroll.png">
-<img alt="boltctl enroll" src="../../img/posts/fedora-kde-tb3/boltctl-enroll.png" style="max-width: 100%; padding: 5px 15px 10px 10px"/></a>
-<div class="caption">Enrolling the device for permanent use</div>
-</center></p>
-
+<!-- raw HTML omitted -->
 <p>Authorizing a device enables it to be used, but doesn&rsquo;t guarantee persistence.
 While this may be desired to grant <em>temporary</em> authorization to a device, many
 users tend want their device to <em>always</em> work, without having to manually
 authorize it. In this case, the device should be <em>enrolled</em> (like <code>systemctl enable</code>).
 Simply call <code>boltctl enroll</code>, with the device UUID:</p>
-
 <pre><code>boltctl enroll &lt;UUID HERE&gt;
-</code></pre>
-
-<p>Once enrolled, the device&rsquo;s UUID will be recorded and added to a database. By
+</code></pre><p>Once enrolled, the device&rsquo;s UUID will be recorded and added to a database. By
 default, the device will now automatically be authorized whenever it is
 connected.</p>
-
 <h2 id="conclusion">Conclusion</h2>
-
 <p>That&rsquo;s it. While the solution isn&rsquo;t very difficult, it can be frustrating to
 figure out when it appears that the thunderbolt device simply is not working.
 Regardless, I&rsquo;m glad that I now know about <code>bolt</code> and how to use it!</p>
