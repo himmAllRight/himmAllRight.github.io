@@ -23,28 +23,35 @@ mentioned that while writing it, I had learned about
 looked so good, I may switch to it eventually. Well&amp;hellip; that didn&amp;rsquo;t take long. I&amp;rsquo;ve
 scrapped my tmux shell scripts, and have converted to using tmuxinator. Here&amp;rsquo;s
 how.&lt;/p&gt;
+
 &lt;h2 id=&#34;what-is-tmuxinator&#34;&gt;What is Tmuxinator?&lt;/h2&gt;
+
 &lt;p&gt;&lt;a href=&#34;https://github.com/tmuxinator/tmuxinator&#34;&gt;Tmuxinator&lt;/a&gt; is a command line
 application that makes it easy to create and manage tmux sessions. It allows a
 user to define how to setup a session, including naming windows, splitting
 panes, and what commands initially run in each pane. The configuration is done
 in yaml, so it is very easy to figure out and get started.&lt;/p&gt;
+
 &lt;h2 id=&#34;install&#34;&gt;Install&lt;/h2&gt;
+
 &lt;p&gt;Most distros probably have &lt;code&gt;tmuxinator&lt;/code&gt; in their offical repos. These days, I
 mostly run Fedora on all of my machines and I was able to find it there:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;sudo dnf install termixinator
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;strong&gt;However&lt;/strong&gt;, I found that this version was quite out of date (&lt;code&gt;0.6.11&lt;/code&gt;) even on my new
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;sudo dnf install termixinator&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;&lt;strong&gt;However&lt;/strong&gt;, I found that this version was quite out of date (&lt;code&gt;0.6.11&lt;/code&gt;) even on my new
 Fedora 30 install, so I recommend using the method stated on
 the project&amp;rsquo;s Github page (requires &lt;code&gt;rubygems&lt;/code&gt;) to install a much more current
 version (&lt;code&gt;1.1.0&lt;/code&gt;):&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;gem install tmuxinator
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;create&#34;&gt;Create&lt;/h2&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;gem install tmuxinator&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h2 id=&#34;create&#34;&gt;Create&lt;/h2&gt;
+
 &lt;p&gt;To create a new tmuxinator profile, pass the desired project name to &lt;code&gt;tmuxinator new&lt;/code&gt;:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-sh&#34; data-lang=&#34;sh&#34;&gt;tmuxinator new Website
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;This will open up a new tmuxinator template inside your default editor. The
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-sh&#34; data-lang=&#34;sh&#34;&gt;tmuxinator new Website&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;This will open up a new tmuxinator template inside your default editor. The
 default template contains a bunch of comments that help guide how to configure
 it.&lt;/p&gt;
+
 &lt;h4 id=&#34;header&#34;&gt;Header&lt;/h4&gt;
+
 &lt;p&gt;The first thing to set at the top of the template is the &lt;code&gt;name&lt;/code&gt; field, followed
 by the &lt;code&gt;root&lt;/code&gt; directory. The tmux session name is defined with &lt;code&gt;name&lt;/code&gt;, and
 &lt;code&gt;root&lt;/code&gt; will be the directory which all of the windows/panes open up in by
@@ -54,8 +61,9 @@ directory, &lt;code&gt;~/Documents/himmAllRight-source&lt;/code&gt;:&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# /home/ryan/.config/tmuxinator/Website.yml&lt;/span&gt;
 
 &lt;span style=&#34;color:#66d9ef&#34;&gt;name&lt;/span&gt;: Website
-&lt;span style=&#34;color:#66d9ef&#34;&gt;root&lt;/span&gt;: ~/Documents/himmAllRight-source
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h4 id=&#34;windows&#34;&gt;Windows&lt;/h4&gt;
+&lt;span style=&#34;color:#66d9ef&#34;&gt;root&lt;/span&gt;: ~/Documents/himmAllRight-source&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h4 id=&#34;windows&#34;&gt;Windows&lt;/h4&gt;
+
 &lt;p&gt;Next, I needed to configure my windows. To convert the script from my previous
 post, I wanted a dedicated &amp;lsquo;Main&amp;rsquo; window, one for the server, one for vim, and
 one for an extra shell. Additionally, since that last post I&amp;rsquo;ve added a window
@@ -68,9 +76,11 @@ that&lt;/em&gt; with tmuxinator:&lt;/p&gt;
   - &lt;span style=&#34;color:#66d9ef&#34;&gt;Server&lt;/span&gt;: hugo serve -D -F
   - &lt;span style=&#34;color:#66d9ef&#34;&gt;Write&lt;/span&gt;: nvim
   - &lt;span style=&#34;color:#66d9ef&#34;&gt;Shell&lt;/span&gt;: zsh; clear
-  - &lt;span style=&#34;color:#66d9ef&#34;&gt;Web&lt;/span&gt;: qutebrowser localhost:&lt;span style=&#34;color:#ae81ff&#34;&gt;1313&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Done. Save the file and that&amp;rsquo;s it! See the benefit of using tmuxinator??&lt;/p&gt;
+  - &lt;span style=&#34;color:#66d9ef&#34;&gt;Web&lt;/span&gt;: qutebrowser localhost:&lt;span style=&#34;color:#ae81ff&#34;&gt;1313&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Done. Save the file and that&amp;rsquo;s it! See the benefit of using tmuxinator??&lt;/p&gt;
+
 &lt;h4 id=&#34;pane-splits&#34;&gt;Pane splits&lt;/h4&gt;
+
 &lt;p&gt;While I don&amp;rsquo;t use them in this example configuration, it should be noted that
 setting up pane splits is also quite easy with tmuxinator. For example, if I
 wanted to split the server window into two panes, one running the hugo server
@@ -79,22 +89,33 @@ and one running htop, I could use:&lt;/p&gt;
     &lt;span style=&#34;color:#66d9ef&#34;&gt;layout&lt;/span&gt;: even-vertical
     &lt;span style=&#34;color:#66d9ef&#34;&gt;panes&lt;/span&gt;:
         - hugo
-        - htop
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;The &lt;code&gt;layout&lt;/code&gt; key defines which
+        - htop&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;The &lt;code&gt;layout&lt;/code&gt; key defines which
 &lt;a href=&#34;http://man7.org/linux/man-pages/man1/tmux.1.html#WINDOWS_AND_PANES&#34;&gt;tmux layout&lt;/a&gt; to
 use when splitting the panes, and &lt;code&gt;panes&lt;/code&gt; is a list that defines what to run in
 each pane.&lt;/p&gt;
+
 &lt;h2 id=&#34;launch&#34;&gt;Launch&lt;/h2&gt;
-&lt;!-- raw HTML omitted --&gt;
-&lt;p&gt;To start up the newly defined tmuxinator project, use &lt;code&gt;tmuxinator start&lt;/code&gt;:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-sh&#34; data-lang=&#34;sh&#34;&gt;tmuxinator start Website
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;manage&#34;&gt;Manage&lt;/h2&gt;
+
+&lt;p&gt;&lt;a href=&#39;../../img/posts/setting-up-tmuxinator/start-website-tmuxinator.gif&#39;&gt;
+&lt;img alt=&#34;Launching Website tmux session with tmuxinator&#34; src=&#34;../../img/posts/setting-up-tmuxinator/starting-website-tmuxinator.png&#34; onmouseover=&#34;this.src=&#39;../../img/posts/setting-up-tmuxinator/start-website-tmuxinator.gif&#39;&#34; onmouseout=&#34;this.src=&#39;../../img/posts/setting-up-tmuxinator/starting-website-tmuxinator.png&#39;&#34; style=&#34;max-width: 100%;&#34;/&gt;
+&lt;/a&gt;
+&lt;div class=&#34;caption&#34;&gt;Launching my website tmux session with tmuxinator&lt;/div&gt;&lt;/p&gt;
+
+&lt;p&gt;To start up the newly defined tmuxinator project, use &lt;code&gt;tmuxinator
+start&lt;/code&gt;:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-sh&#34; data-lang=&#34;sh&#34;&gt;tmuxinator start Website&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h2 id=&#34;manage&#34;&gt;Manage&lt;/h2&gt;
+
 &lt;p&gt;All of the tmuxinator profile templates are stored at &lt;code&gt;~/.config/tmuxinator&lt;/code&gt;,
 which means they can easily be copied to a new machine, or even
 saved/maintained in source control.&lt;/p&gt;
+
 &lt;p&gt;&lt;em&gt;Note: I think older versions stored them at &lt;code&gt;~/.tmuxinator/&lt;/code&gt;, so check there
 if they are missing.&lt;/em&gt;&lt;/p&gt;
+
 &lt;h2 id=&#34;conclusion&#34;&gt;Conclusion&lt;/h2&gt;
+
 &lt;p&gt;That&amp;rsquo;s it. While scripting my own method was a good bash exercise and helped me
 learn the details of &lt;code&gt;tmux&lt;/code&gt; a little bit better, I ultimately think that
 &lt;code&gt;tmuxinator&lt;/code&gt; is the way to go. This is especially true when using tmux to work
@@ -114,17 +135,21 @@ command-line system information tool for a few years now. While browsing
 of the submissions did not have distro logos in their neofetch/screenfetch
 ascii art. I knew that neofetch was customizable, but have never dug
 into it myself. So I decided to change that.&lt;/p&gt;
+
 &lt;h3 id=&#34;custom-neofetch-ascii-art&#34;&gt;Custom Neofetch ASCII Art&lt;/h3&gt;
+
 &lt;p&gt;I started my neofetch investigation the same way one should start researching
 &lt;em&gt;any&lt;/em&gt; Linux command-line tool: &lt;code&gt;man neofetch&lt;/code&gt;. Inside the man pages, I was
 greeted with all sorts of customization options. Eventually, I scrolled down to
 the section I wanted, &lt;code&gt;IMAGE BACKEND&lt;/code&gt;.&lt;/p&gt;
+
 &lt;p&gt;There I learned that a custom image could be specified using the &lt;code&gt;--source&lt;/code&gt; flag.
 For example, to set the art to an ascii charmeleon file I &lt;em&gt;just happen&lt;/em&gt; to have
 on my desktop, I tried:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;neofetch --source /home/ryan/Documents/Pokemon-ascii/5.txt
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;AAAAAND&amp;hellip; It didn&amp;rsquo;t work. It was still the Fedora logo. Clearly, I was still
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;neofetch --source /home/ryan/Documents/Pokemon-ascii/5.txt&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;AAAAAND&amp;hellip; It didn&amp;rsquo;t work. It was still the Fedora logo. Clearly, I was still
 missing something.&lt;/p&gt;
+
 &lt;p&gt;After some browsing, I found the &lt;a href=&#34;https://github.com/dylanaraps/neofetch/wiki/Custom-Ascii-art-file-format&#34;&gt;ASCII art
 page&lt;/a&gt;
 on neofetch&amp;rsquo;s Github wiki. Reading it, I noticed that I was missing the &lt;code&gt;${c1}&lt;/code&gt;
@@ -132,29 +157,35 @@ in my pokemon ascii files. So, I made a copy of the file and added &lt;code&gt;S
 the top:&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;➜  welcome-messages git:(master) ✗ head charmeleon
 ${c1}
-                      ,-&#39;`\
-                  _,&amp;quot;&#39;    j
+                      ,-&amp;#39;`\
+                  _,&amp;#34;&amp;#39;    j
            __....+       /               .
-       ,-&#39;&amp;quot;             /               ; `-._.&#39;.
-      /                (              ,&#39;       .&#39;
+       ,-&amp;#39;&amp;#34;             /               ; `-._.&amp;#39;.
+      /                (              ,&amp;#39;       .&amp;#39;
      |            _.    \             \   ---._ `-.
-     ,|    ,   _.&#39;  Y    \             `- ,&#39;   \   `.`.
-     l&#39;    \ ,&#39;._,\ `.    .              /       ,--. l
-  .,-        `._  |  |    |              \       _   l .
-&lt;/code&gt;&lt;/pre&gt;&lt;!-- raw HTML omitted --&gt;
+     ,|    ,   _.&amp;#39;  Y    \             `- ,&amp;#39;   \   `.`.
+     l&amp;#39;    \ ,&amp;#39;._,\ `.    .              /       ,--. l
+  .,-        `._  |  |    |              \       _   l .&lt;/code&gt;&lt;/pre&gt;
+&lt;div class=&#34;caption&#34;&gt;head output of my modified charmeleon ascii file&lt;/div&gt;
+
 &lt;p&gt;AAAAAND&amp;hellip; It worked!&lt;/p&gt;
+
 &lt;h3 id=&#34;adding-a-shell-alias&#34;&gt;Adding a Shell Alias&lt;/h3&gt;
-&lt;p&gt;&lt;!-- raw HTML omitted --&gt;&lt;!-- raw HTML omitted --&gt;&lt;!-- raw HTML omitted --&gt;&lt;/p&gt;
-&lt;!-- raw HTML omitted --&gt;
+
+&lt;p&gt;&lt;a href=&#34;../../img/posts/custom-neofetch-ascii-art/charmeleon-neofetch.png&#34;&gt;&lt;img alt=&#34;Custom Charmeleon ASCII art for my desktop&#39;s neofetch output&#34; src=&#34;../../img/posts/custom-neofetch-ascii-art/charmeleon-neofetch.png&#34; style=&#34;max-width: 100%;&#34;/&gt;&lt;/a&gt;
+&lt;div class=&#34;caption&#34;&gt;Custom Charmeleon ASCII art for my desktop&amp;rsquo;s neofetch output&lt;/div&gt;&lt;/p&gt;
+
 &lt;p&gt;Lastly, I wanted the charmeleon ascii art to be the &lt;em&gt;default&lt;/em&gt; neofetch output on my
 desktop. While I&amp;rsquo;m sure that I could have accomplished this &lt;em&gt;properly&lt;/em&gt; by
 editing the &lt;code&gt;~/.config/neofetch/config.conf&lt;/code&gt; file I learned about, for now&amp;hellip;
 creating an alias seemed easier XD. So I added the following line to my
 &lt;code&gt;~/.zshrc&lt;/code&gt;:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;alias neofetch&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;neofetch --source /home/ryan/Documents/ascii/pokemon/charmeleon&amp;#39;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Now whenever I call plain &lt;code&gt;neofetch&lt;/code&gt; on my desktop, it runs with the charmeleon
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;alias neofetch&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;neofetch --source /home/ryan/Documents/ascii/pokemon/charmeleon&amp;#39;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Now whenever I call plain &lt;code&gt;neofetch&lt;/code&gt; on my desktop, it runs with the charmeleon
 art.&lt;/p&gt;
+
 &lt;h3 id=&#34;conclusion&#34;&gt;Conclusion&lt;/h3&gt;
+
 &lt;p&gt;So that&amp;rsquo;s it. A nice &lt;em&gt;short&lt;/em&gt; post for once! Despite the size, I hope if was
 useful. If you haven&amp;rsquo;t heard of neofetch before, go check it out. If you have,
 I encourage you to go digging through the man pages. I promise you won&amp;rsquo;t regret
@@ -174,25 +205,34 @@ combined with &lt;code&gt;ssh&lt;/code&gt;). I have been utilizing tmux even mor
 started to script the start up/configuration a tmux session for each project.
 The other day, I decided to write a script to spin up a session for working on my
 website&amp;hellip; and thought it would be a great tutorial!&lt;/p&gt;
+
 &lt;h3 id=&#34;tmux&#34;&gt;Tmux&lt;/h3&gt;
-&lt;!-- raw HTML omitted --&gt;
+
+&lt;p&gt;&lt;img alt=&#34;tmux demo animation&#34; src=&#34;../../img/posts/scripting-tmux-workspaces/animation-hover.png&#34; onmouseover=&#34;this.src=&#39;../../img/posts/scripting-tmux-workspaces/tmux-demo.gif&#39;&#34; onmouseout=&#34;this.src=&#39;../../img/posts/scripting-tmux-workspaces/animation-hover.png&#39;&#34; style=&#34;max-width: 100%;&#34;/&gt;
+&lt;div class=&#34;caption&#34;&gt;Small tmux demonstration&lt;/div&gt;&lt;/p&gt;
+
 &lt;p&gt;When working on a project, I like to use tmux to maintain all of the terminal
 windows related to it. This keeps everything together, and even allows me to
 detach the session, switch to another computer, ssh into the previous computer,
 and re-attach my working tmux session. Paired with the fact that I&amp;rsquo;ve started
 using VIM again, it works seamlessly. Scripting the initialization makes
 getting started even smoother.&lt;/p&gt;
+
 &lt;h3 id=&#34;automating-tmux-initialization-for-working-on-my-website&#34;&gt;Automating tmux initialization for working on my website&lt;/h3&gt;
+
 &lt;h4 id=&#34;new-script&#34;&gt;New Script&lt;/h4&gt;
+
 &lt;p&gt;First, lets create a new script. Start by opening a new file, and adding a bash
 &lt;a href=&#34;https://en.wikipedia.org/wiki/Shebang_(Unix)&#34;&gt;shebang&lt;/a&gt; line to the top:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;color:#75715e&#34;&gt;#!/bin/bash
-&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;This line tells the system that the following text will be a
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;color:#75715e&#34;&gt;#!/bin/bash&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;This line tells the system that the following text will be a
 &lt;a href=&#34;https://en.wikipedia.org/wiki/Bash_(Unix_shell)&#34;&gt;bash&lt;/a&gt; script.&lt;/p&gt;
+
 &lt;p&gt;&lt;em&gt;Optional: Save and close the file, then re-open it to take advantage the text
 editor&amp;rsquo;s bash syntax highlighting if it didn&amp;rsquo;t automatically switch it on.&lt;/em&gt;&lt;/p&gt;
+
 &lt;h4 id=&#34;create-a-new-tmux-session-with-var-name&#34;&gt;Create a new tmux session (with var name)&lt;/h4&gt;
+
 &lt;p&gt;Next, lets define a variable to store the tmux session name. This will make it
 easier to change the session name later on. Using the session variable, a new
 tmux-session with our desired name can be created.&lt;/p&gt;
@@ -200,19 +240,22 @@ tmux-session with our desired name can be created.&lt;/p&gt;
 session&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;Website&amp;#34;&lt;/span&gt;
 
 &lt;span style=&#34;color:#75715e&#34;&gt;# Start New Session with our name&lt;/span&gt;
-tmux new-session -d -s $session
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h4 id=&#34;name-initial-default-window-and-switch-to-zsh&#34;&gt;Name initial default Window (and switch to &lt;code&gt;zsh&lt;/code&gt;)&lt;/h4&gt;
+tmux new-session -d -s $session&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h4 id=&#34;name-initial-default-window-and-switch-to-zsh&#34;&gt;Name initial default Window (and switch to &lt;code&gt;zsh&lt;/code&gt;)&lt;/h4&gt;
+
 &lt;p&gt;Let&amp;rsquo;s customize the default window and give it a new name. Lets call this first tmux
 window &lt;code&gt;&amp;quot;Main&amp;quot;&lt;/code&gt;, and have it simply run a &lt;a href=&#34;https://ohmyz.sh/&#34;&gt;zsh&lt;/a&gt; shell. After
 creating a new session, there is only one window, so I know it will be
 identified with the number &lt;code&gt;0&lt;/code&gt;. I can use this with &lt;code&gt;-t&lt;/code&gt; to rename the window.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# Name first Window and start zsh&lt;/span&gt;
 tmux rename-window -t &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;Main&amp;#39;&lt;/span&gt;
-tmux send-keys -t &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;Main&amp;#39;&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;zsh&amp;#39;&lt;/span&gt; C-m &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;clear&amp;#39;&lt;/span&gt; C-m
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;I can then use the &lt;code&gt;send-keys&lt;/code&gt; command with the new window name to start zsh.
+tmux send-keys -t &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;Main&amp;#39;&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;zsh&amp;#39;&lt;/span&gt; C-m &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;clear&amp;#39;&lt;/span&gt; C-m&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;I can then use the &lt;code&gt;send-keys&lt;/code&gt; command with the new window name to start zsh.
 This is the equivalent of typing &lt;code&gt;zsh&lt;/code&gt;, &lt;code&gt;[Enter]&lt;/code&gt;, &lt;code&gt;clear&lt;/code&gt;, &lt;code&gt;[Enter]&lt;/code&gt; into the
 command line.&lt;/p&gt;
+
 &lt;h4 id=&#34;add-a-new-named-window-for-hugo-server&#34;&gt;Add a new (named) window for hugo server&lt;/h4&gt;
+
 &lt;p&gt;With the main tmux window setup, I want to add a few more for
 different tasks. First, I want a window that can run the hugo server
 as I&amp;rsquo;m writing a post. With a session already created, I can name the
@@ -220,57 +263,73 @@ window as I create it, using just the &lt;code&gt;new-window&lt;/code&gt; comamn
 &lt;code&gt;-n&lt;/code&gt; flag.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# Create and setup pane for hugo server&lt;/span&gt;
 tmux new-window -t $session:1 -n &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;Hugo Server&amp;#39;&lt;/span&gt;
-tmux send-keys -t &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;Hugo Server&amp;#39;&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;hugo serve -D -F&amp;#39;&lt;/span&gt; C-m
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Again, I used tmux &lt;code&gt;send-keys&lt;/code&gt;, this time to send the &lt;code&gt;hugo serve -D -F&lt;/code&gt; command to start up a hugo server for local draft editing.&lt;/p&gt;
+tmux send-keys -t &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;Hugo Server&amp;#39;&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;hugo serve -D -F&amp;#39;&lt;/span&gt; C-m&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Again, I used tmux &lt;code&gt;send-keys&lt;/code&gt;, this time to send the &lt;code&gt;hugo serve -D
+-F&lt;/code&gt; command to start up a hugo server for local draft editing.&lt;/p&gt;
+
 &lt;h4 id=&#34;add-a-new-name-pane-for-vim&#34;&gt;Add a new (name) pane for vim&lt;/h4&gt;
+
 &lt;p&gt;Now, I need a place to write website posts&amp;hellip; so lets fire up a new tmux
 window, and open up neovim inside of it.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# setup Writing window&lt;/span&gt;
 tmux new-window -t $SESSION:2 -n &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;Writing&amp;#39;&lt;/span&gt;
-tmux send-keys -t &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;Writing&amp;#39;&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;nvim&amp;#34;&lt;/span&gt; C-m
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h4 id=&#34;another-shell&#34;&gt;Another shell&lt;/h4&gt;
+tmux send-keys -t &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;Writing&amp;#39;&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;nvim&amp;#34;&lt;/span&gt; C-m&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h4 id=&#34;another-shell&#34;&gt;Another shell&lt;/h4&gt;
+
 &lt;p&gt;Lastly, lets create one more shell window, just in case it&amp;rsquo;s needed. Why not?&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# Setup an additional shell&lt;/span&gt;
 tmux new-window -t $SESSION:3 -n &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;Shell&amp;#39;&lt;/span&gt;
-tmux send-keys -t &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;Shell&amp;#39;&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;zsh&amp;#34;&lt;/span&gt; C-m &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;clear&amp;#39;&lt;/span&gt; C-m
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h4 id=&#34;attach-session&#34;&gt;Attach Session&lt;/h4&gt;
+tmux send-keys -t &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;Shell&amp;#39;&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;zsh&amp;#34;&lt;/span&gt; C-m &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;clear&amp;#39;&lt;/span&gt; C-m&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h4 id=&#34;attach-session&#34;&gt;Attach Session&lt;/h4&gt;
+
 &lt;p&gt;With the tmux session all configured and customized, we can tell the script to
 go ahead and attach it, using the &lt;code&gt;attach-session&lt;/code&gt; command with the session
 name variable.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# Attach Session, on the Main window&lt;/span&gt;
-tmux attach-session -t $SESSION:0
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;em&gt;Note: the &lt;code&gt;0&lt;/code&gt; tells tmux to attach the first window (&lt;code&gt;Main&lt;/code&gt;). Using
+tmux attach-session -t $SESSION:0&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;&lt;em&gt;Note: the &lt;code&gt;0&lt;/code&gt; tells tmux to attach the first window (&lt;code&gt;Main&lt;/code&gt;). Using
 another index value will attach a different window. For example, &lt;code&gt;1&lt;/code&gt;
 would open the &lt;code&gt;Hugo Server&lt;/code&gt; window when attaching&lt;/em&gt;&lt;/p&gt;
+
 &lt;h4 id=&#34;bonus-minor-improvement&#34;&gt;Bonus: Minor improvement&lt;/h4&gt;
-&lt;!-- raw HTML omitted --&gt;
+
+&lt;p&gt;&lt;img alt=&#34;tmux demo animation&#34; src=&#34;../../img/posts/scripting-tmux-workspaces/animation-hover.png&#34; onmouseover=&#34;this.src=&#39;../../img/posts/scripting-tmux-workspaces/tmux-duplicate-windows.gif&#39;&#34; onmouseout=&#34;this.src=&#39;../../img/posts/scripting-tmux-workspaces/animation-hover.png&#39;&#34; style=&#34;max-width: 100%;&#34;/&gt;
+&lt;div class=&#34;caption&#34;&gt;The script would create duplicate windows if the tmux
+session already existed.&lt;/div&gt;&lt;/p&gt;
+
 &lt;p&gt;At this point, I was done with the tmux script. It worked well for creating my
 session and attaching it. However, there was &lt;em&gt;one&lt;/em&gt; issue I still had. If I ran
 the script when there was a tmux session with the same name &lt;em&gt;already&lt;/em&gt;, it would
 just double up the windows in that session. If I accidentally did this, I would
 have to go through each window, close out whatever and was running, and then
 close the window.&lt;/p&gt;
+
 &lt;p&gt;To fix this issue, I decided to wrap the initialization commands inside of an
 &lt;code&gt;if&lt;/code&gt; statement, and only run them if the tmux session &lt;em&gt;didn&amp;rsquo;t&lt;/em&gt; already exist.&lt;/p&gt;
+
 &lt;h5 id=&#34;checking-if-the-session-already-exists&#34;&gt;Checking if the Session Already Exists&lt;/h5&gt;
+
 &lt;p&gt;First, I needed a way to &lt;em&gt;check&lt;/em&gt; whether the desired tmux session already existed
 or not. This can be done by &amp;ldquo;grep&amp;rsquo;ing&amp;rdquo; the output of &lt;code&gt;tmux list-sessions&lt;/code&gt; for
 the session name, which we&amp;rsquo;ve already conveniently stored in our &lt;code&gt;$SESSION&lt;/code&gt;
 variable. For Cleanliness, I took the output of that process and saved it in a
 &lt;code&gt;SESSIONEXISTS&lt;/code&gt; variable, defined directly under &lt;code&gt;SESSION&lt;/code&gt; in the script.&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;SESSIONEXISTS&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;$(&lt;/span&gt;tmux list-sessions | grep $SESSION&lt;span style=&#34;color:#66d9ef&#34;&gt;)&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;If the session exists, &lt;code&gt;SESSIONEXISTS&lt;/code&gt; will be a string of the line which &lt;code&gt;grep&lt;/code&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;SESSIONEXISTS&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;$(&lt;/span&gt;tmux list-sessions | grep $SESSION&lt;span style=&#34;color:#66d9ef&#34;&gt;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;If the session exists, &lt;code&gt;SESSIONEXISTS&lt;/code&gt; will be a string of the line which &lt;code&gt;grep&lt;/code&gt;
 matched. Otherwise, it will just be an empty string (&lt;code&gt;&amp;quot;&amp;quot;&lt;/code&gt;).&lt;/p&gt;
+
 &lt;p&gt;Now, I can use the &lt;code&gt;SESSIONEXISTS&lt;/code&gt; variable with an &lt;code&gt;if&lt;/code&gt; condition to wrap the tmux
 setup code so that it only runs if &lt;code&gt;SESSIONEXISTS&lt;/code&gt; is &lt;code&gt;&amp;quot;&amp;quot;&lt;/code&gt;.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;$SESSIONEXISTS&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt;
 &lt;span style=&#34;color:#66d9ef&#34;&gt;then&lt;/span&gt;
 ...
-&lt;span style=&#34;color:#66d9ef&#34;&gt;fi&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;The &lt;code&gt;attach-session&lt;/code&gt; command should be &lt;em&gt;outside&lt;/em&gt; of the &lt;code&gt;if&lt;/code&gt; body,
+&lt;span style=&#34;color:#66d9ef&#34;&gt;fi&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;The &lt;code&gt;attach-session&lt;/code&gt; command should be &lt;em&gt;outside&lt;/em&gt; of the &lt;code&gt;if&lt;/code&gt; body,
 because it will be run in both cases (even if the session doesn&amp;rsquo;t have
 to be created, we still want to attach the one that already exists).&lt;/p&gt;
+
 &lt;h3 id=&#34;conclusion&#34;&gt;Conclusion&lt;/h3&gt;
+
 &lt;p&gt;That is it. Here is the script with everything all put together:&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;color:#75715e&#34;&gt;#!/bin/sh
 &lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;
@@ -302,8 +361,8 @@ SESSIONEXISTS&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span st
 &lt;span style=&#34;color:#66d9ef&#34;&gt;fi&lt;/span&gt;
 
 &lt;span style=&#34;color:#75715e&#34;&gt;# Attach Session, on the Main window&lt;/span&gt;
-tmux attach-session -t $SESSION:0
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;I hope this post has been helpful! Although, I have to admit that this post
+tmux attach-session -t $SESSION:0&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;I hope this post has been helpful! Although, I have to admit that this post
 &lt;em&gt;may&lt;/em&gt; be moot if I decide check out
 &lt;a href=&#34;https://github.com/tmuxinator/tmuxinator&#34;&gt;tmuxinator&lt;/a&gt; (which a co-worker
 recommended) &amp;hellip; oh well. I guess this endeavor was still a good exercise in
@@ -317,73 +376,114 @@ some bash scripting :P.&lt;/p&gt;</description>
       
       <guid>http://ryan.himmelwright.net/post/started-using-i3blocks/</guid>
       <description>&lt;p&gt;The last couple of weeks I have shifted back to using the i3 window mangers. When I fired it up, my fingers danced across the keyboard, remembering all of the personalized keybindings I have cultivated in my i3 configuration over the years. It is a simple, beautiful setup&amp;hellip; well, beautiful minus one of the components. My i3status bar was looking rather bland and dated, especially compared some of the i3 setups posted by all the cool kids over at &lt;a href=&#34;https://www.reddit.com/r/unixporn/&#34;&gt;/r/unixporn&lt;/a&gt;. I decided it was time for a refresh.&lt;/p&gt;
+
 &lt;h2 id=&#34;i3status&#34;&gt;i3status&lt;/h2&gt;
-&lt;!-- raw HTML omitted --&gt;
+
+&lt;p&gt;&lt;img alt=&#34;One of my simple i3status setups&#34; src=&#34;../../img/posts/starting-i3/i3status.png&#34; style=&#34;max-width: 100%;&#34;/&gt;
+&lt;div id=&#34;caption&#34;&gt;One of my simple i3status setups&lt;/div&gt;&lt;/p&gt;
+
 &lt;p&gt;When I first configured i3 several years ago, I used i3status because it was easy to use with i3 and did everything by default. Over time, I learned how to create and modify &lt;a href=&#34;https://github.com/himmAllRight/dotfiles/blob/master/i3/.config/i3/i3status.conf&#34;&gt;my own .i3status.conf&lt;/a&gt; so that I could get it to play nice with un-standerd configurations (ex: &lt;code&gt;/Data&lt;/code&gt; partitions and such). While i3status served me well for many years, using the same-old setup has become boring. I started noticing several other nice looking status bar tools being used in i3 setups, and wanted to try them out.&lt;/p&gt;
+
 &lt;h2 id=&#34;polybar&#34;&gt;Polybar&lt;/h2&gt;
-&lt;!-- raw HTML omitted --&gt;
+
+&lt;p&gt;&lt;img alt=&#34;The example polybar&#34; src=&#34;../../img/posts/starting-i3/polybar.png&#34; style=&#34;max-width: 100%;&#34;/&gt;
+&lt;div id=&#34;caption&#34;&gt;The example polybar&lt;/div&gt;&lt;/p&gt;
+
 &lt;p&gt;The first bar I saw and tried was &lt;a href=&#34;https://github.com/jaagr/polybar&#34;&gt;polybar&lt;/a&gt;. I started with it because some of the examples look awesome. It looks very modern and has an infinite number of features. I set it up and was able to use the example bar just fine. However, when I started to customize my own, I started to run into a few issues. The biggest issue was polybar not detecting my work-space names, along with other elements. Additionally, due to the support for several window managers, the example configuration file seemed cluttered, and I was never sure what I could edit, and what I should delete. After some frustration, I decided put it aside for now. I might come back to it one day when I&amp;rsquo;m bored.&lt;/p&gt;
+
 &lt;h2 id=&#34;i3blocks&#34;&gt;i3blocks&lt;/h2&gt;
+
 &lt;p&gt;Next, I learned of &lt;a href=&#34;https://github.com/vivien/i3blocks&#34;&gt;i3blocks&lt;/a&gt;. It appeared to have everything I wanted in a status bar, yet remained simple, respecting the &lt;a href=&#34;https://i3wm.org/docs/i3bar-protocol.html&#34;&gt;i3bar protocol&lt;/a&gt;. So I gave it a whirl.&lt;/p&gt;
+
 &lt;h3 id=&#34;downloading-from-the-repos&#34;&gt;Downloading from the Repos&lt;/h3&gt;
+
 &lt;p&gt;Just like installing any other package on Linux, I decided to first check to see it it was in the Solus Repos:&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;sudo eopkg sr i3block
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;It was. So, I installed it (&lt;code&gt;sudo eopkg it i3blocks&lt;/code&gt;) and started learning how to setup my configuration.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;sudo eopkg sr i3block&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;It was. So, I installed it (&lt;code&gt;sudo eopkg it i3blocks&lt;/code&gt;) and started learning how to setup my configuration.&lt;/p&gt;
+
 &lt;h3 id=&#34;fonts&#34;&gt;Fonts&lt;/h3&gt;
-&lt;!-- raw HTML omitted --&gt;
+
+&lt;p&gt;&lt;img alt=&#34;A Very Small Sampling of the Awesome Fonts&#34; src=&#34;../../img/posts/starting-i3/awesome-font.png&#34; style=&#34;max-width: 100%;&#34;/&gt;
+&lt;div id=&#34;caption&#34;&gt;A &lt;em&gt;Very Small&lt;/em&gt; Sampling of the Awesome Fonts&lt;/div&gt;&lt;/p&gt;
+
 &lt;p&gt;The first hurdle I came across when first launching i3blocks was that I did not have all the fonts used in the default configuration installed. I temporarily removed the special fonts from the config, just so I could check that everything was working. But what&amp;rsquo;s the fun in that? One of the biggest reasons I wanted to redo my bar was to have cool modern icon fonts! So, I found the &lt;a href=&#34;http://fontawesome.io/&#34;&gt;font awesome&lt;/a&gt; package in the Solus repos and installed it.&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;sudo eopkg it font-awesome-ttf
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;With the awesome fonts at my disposal, I had a plethora of icons to use. So I went through and picked out icons for each of the work-space tabs and status markers.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;sudo eopkg it font-awesome-ttf&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;With the awesome fonts at my disposal, I had a plethora of icons to use. So I went through and picked out icons for each of the work-space tabs and status markers.&lt;/p&gt;
+
 &lt;h3 id=&#34;finding-git-repos&#34;&gt;Finding Git Repos&lt;/h3&gt;
-&lt;!-- raw HTML omitted --&gt;
+
+&lt;p&gt;&lt;img alt=&#34;Example of Modules in new i3-block repo&#34; src=&#34;../../img/posts/starting-i3/i3block-new-repo-examples.png&#34; style=&#34;max-width: 100%;&#34;/&gt;
+&lt;div id=&#34;caption&#34;&gt;Example of Modules in new i3-block repo&lt;/div&gt;&lt;/p&gt;
+
 &lt;p&gt;While researching how to configure i3blocks, I started encountering several different GitHub repos and forks of the project. Some forks seemed to have additional modules that my repo version didn&amp;rsquo;t. I downloaded and built &lt;a href=&#34;https://github.com/Anachron/i3blocks&#34;&gt;this one&lt;/a&gt; to try out. I then configured i3 to point to the new build instead, and got started setting up my own blocks.&lt;/p&gt;
+
 &lt;h3 id=&#34;forking-my-own-for-solus-tweaks&#34;&gt;Forking my own for Solus Tweaks&lt;/h3&gt;
+
 &lt;p&gt;As I was configuring the individual blocks, I noticed that many of them didn&amp;rsquo;t work by default on my computers. I dug deeper by opening up and peeking at the actual bash scripts blocks refer to. I noticed that many of them were trying to query data from applications that are &lt;em&gt;not&lt;/em&gt; used in Solus. For example, the &lt;code&gt;battery&lt;/code&gt; block didn&amp;rsquo;t work for me because it relied on &lt;code&gt;acpi&lt;/code&gt;, which, while often used in Arch Linux for battery information (I use it myself when on arch) is not packaged in Solus. Instead, Solus relies on &lt;code&gt;upower&lt;/code&gt;. To fix my issues, I cobbled together my own &lt;code&gt;battery&lt;/code&gt; bash script, that queried battery information using &lt;code&gt;upower&lt;/code&gt; instead. Note, the &lt;code&gt;BATTERY_ICON&lt;/code&gt; uses the battery fonts (which likely won&amp;rsquo;t show in the browser). Unless it is charging&amp;hellip; then it uses a lightning bolt :) .&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;#!/bin/bash
 
 BATTERY=0
-BATTERY_STATE=$(echo &amp;quot;${BATTERY_INFO}&amp;quot; | upower -i $(upower -e | grep &#39;BAT&#39;) | grep -E &amp;quot;state|to\ full&amp;quot; | awk &#39;{print $2}&#39;)
-BATTERY_POWER=$(echo &amp;quot;${BATTERY_INFO}&amp;quot; | upower -i $(upower -e | grep &#39;BAT&#39;) | grep -E &amp;quot;percentage&amp;quot; | awk &#39;{print $2}&#39; | tr -d &#39;%&#39;)
+BATTERY_STATE=$(echo &amp;#34;${BATTERY_INFO}&amp;#34; | upower -i $(upower -e | grep &amp;#39;BAT&amp;#39;) | grep -E &amp;#34;state|to\ full&amp;#34; | awk &amp;#39;{print $2}&amp;#39;)
+BATTERY_POWER=$(echo &amp;#34;${BATTERY_INFO}&amp;#34; | upower -i $(upower -e | grep &amp;#39;BAT&amp;#39;) | grep -E &amp;#34;percentage&amp;#34; | awk &amp;#39;{print $2}&amp;#39; | tr -d &amp;#39;%&amp;#39;)
 URGENT_VALUE=10
 
-if [[ &amp;quot;${BATTERY_POWER}&amp;quot; -gt 87 ]]; then
-    BATTERY_ICON=&amp;quot;&amp;quot;
-elif [[ &amp;quot;${BATTERY_POWER}&amp;quot; -gt 63 ]]; then
-     BATTERY_ICON=&amp;quot;&amp;quot;
-elif [[ &amp;quot;${BATTERY_POWER}&amp;quot; -gt 38 ]]; then
-     BATTERY_ICON=&amp;quot;&amp;quot;
-elif [[ &amp;quot;${BATTERY_POWER}&amp;quot; -gt 13 ]]; then
-     BATTERY_ICON=&amp;quot;&amp;quot;
-elif [[ &amp;quot;${BATTERY_POWER}&amp;quot; -le 13 ]]; then
-     BATTERY_ICON=&amp;quot;&amp;quot;
+if [[ &amp;#34;${BATTERY_POWER}&amp;#34; -gt 87 ]]; then
+    BATTERY_ICON=&amp;#34;&amp;#34;
+elif [[ &amp;#34;${BATTERY_POWER}&amp;#34; -gt 63 ]]; then
+     BATTERY_ICON=&amp;#34;&amp;#34;
+elif [[ &amp;#34;${BATTERY_POWER}&amp;#34; -gt 38 ]]; then
+     BATTERY_ICON=&amp;#34;&amp;#34;
+elif [[ &amp;#34;${BATTERY_POWER}&amp;#34; -gt 13 ]]; then
+     BATTERY_ICON=&amp;#34;&amp;#34;
+elif [[ &amp;#34;${BATTERY_POWER}&amp;#34; -le 13 ]]; then
+     BATTERY_ICON=&amp;#34;&amp;#34;
 else
-    BATTERY_ICON=&amp;quot;&amp;quot;
+    BATTERY_ICON=&amp;#34;&amp;#34;
 fi
 
 
-if [[ &amp;quot;${BATTERY_STATE}&amp;quot; = &amp;quot;discharging&amp;quot; ]]; then
-    echo &amp;quot;${BATTERY_ICON} ${BATTERY_POWER}%&amp;quot;
-    echo &amp;quot;${BATTERY_ICON} ${BATTERY_POWER}%&amp;quot;
-    echo &amp;quot;&amp;quot;
+if [[ &amp;#34;${BATTERY_STATE}&amp;#34; = &amp;#34;discharging&amp;#34; ]]; then
+    echo &amp;#34;${BATTERY_ICON} ${BATTERY_POWER}%&amp;#34;
+    echo &amp;#34;${BATTERY_ICON} ${BATTERY_POWER}%&amp;#34;
+    echo &amp;#34;&amp;#34;
 else
-    echo &amp;quot; ${BATTERY_POWER}%&amp;quot;
-    echo &amp;quot; ${BATTERY_POWER}%&amp;quot;
-    echo &amp;quot;&amp;quot;
+    echo &amp;#34; ${BATTERY_POWER}%&amp;#34;
+    echo &amp;#34; ${BATTERY_POWER}%&amp;#34;
+    echo &amp;#34;&amp;#34;
 fi
 
-if [[ &amp;quot;${BATTERY_POWER}&amp;quot; -le &amp;quot;${URGENT_VALUE}&amp;quot; ]]; then
+if [[ &amp;#34;${BATTERY_POWER}&amp;#34; -le &amp;#34;${URGENT_VALUE}&amp;#34; ]]; then
   exit 33
-fi
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Over the past few weeks, it seems to work well enough. As I continued to &lt;em&gt;tweak&lt;/em&gt;, or downright &lt;em&gt;create&lt;/em&gt; blocks to work well in Solus, I eventually decided that it might be a good idea to just &lt;a href=&#34;https://github.com/himmAllRight/i3blocks&#34;&gt;create my own fork&lt;/a&gt; of the repo. This way, I can have my own i3blocks repo that works well with Solus. I noticed that the implementation of &lt;code&gt;i3blocks&lt;/code&gt; found in the Solus repos is also using non-Solus items for it&amp;rsquo;s scripts (ex: acpi for the battery). Maybe one of these days I&amp;rsquo;ll jump into irc and see how people feel about swapping in mine instead (or at least one that works better in Solus)&amp;hellip;&lt;/p&gt;
-&lt;h3 id=&#34;color-update-for-i3--rofi&#34;&gt;Color Update for i3 &amp;amp; rofi&lt;/h3&gt;
-&lt;!-- raw HTML omitted --&gt;
+fi&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Over the past few weeks, it seems to work well enough. As I continued to &lt;em&gt;tweak&lt;/em&gt;, or downright &lt;em&gt;create&lt;/em&gt; blocks to work well in Solus, I eventually decided that it might be a good idea to just &lt;a href=&#34;https://github.com/himmAllRight/i3blocks&#34;&gt;create my own fork&lt;/a&gt; of the repo. This way, I can have my own i3blocks repo that works well with Solus. I noticed that the implementation of &lt;code&gt;i3blocks&lt;/code&gt; found in the Solus repos is also using non-Solus items for it&amp;rsquo;s scripts (ex: acpi for the battery). Maybe one of these days I&amp;rsquo;ll jump into irc and see how people feel about swapping in mine instead (or at least one that works better in Solus)&amp;hellip;&lt;/p&gt;
+
+&lt;h3 id=&#34;color-update-for-i3-rofi&#34;&gt;Color Update for i3 &amp;amp; rofi&lt;/h3&gt;
+
+&lt;p&gt;&lt;img alt=&#34;New Color Scheme for rofi launcher&#34; src=&#34;../../img/posts/starting-i3/rofi-run.png&#34; style=&#34;max-width: 100%;&#34;/&gt;
+&lt;div id=&#34;caption&#34;&gt;New color scheme for rofi launcher&lt;/div&gt;&lt;/p&gt;
+
 &lt;p&gt;When I started using i3 several years ago, I used &lt;a href=&#34;http://tools.suckless.org/dmenu/&#34;&gt;dmenu&lt;/a&gt; as my launcher (it&amp;rsquo;s the launcher used in &lt;a href=&#34;http://dwm.suckless.org/&#34;&gt;dwm&lt;/a&gt;, another tiling window manager I used to use). I eventually switched to rofi after seeing it used in some very nice window manager setups (sound familiar?). However, I always used the plain default theme and never bothered to improve it. With all the work I did making i3bars look nice, I thought I should at least make rofi match. Making the color theme wasn&amp;rsquo;t nearly as hard as I anticipated it to be. That&amp;rsquo;s mostly because I found and used the rofi theme generator.&lt;/p&gt;
-&lt;!-- raw HTML omitted --&gt;
+
+&lt;p&gt;&lt;center&gt;
+&lt;img alt=&#34;New rofi window switcher&#34; src=&#34;../../img/posts/starting-i3/rofi-window.png&#34; style=&#34;max-width: 100%;&#34;/&gt;
+&lt;/center&gt;
+&lt;div id=&#34;caption&#34;&gt;Newly configured rofi window switcher&lt;/div&gt;&lt;/p&gt;
+
 &lt;p&gt;While touching up rofi, I learned it can also switch through already opened windows (Previously, I  only used it to launch new programs). I really liked that in my new i3 setup, it also displayed the work-spaces, icon font and all. I immediately bound it to my Super+Tab key for easy use.&lt;/p&gt;
+
 &lt;h2 id=&#34;conclusion&#34;&gt;Conclusion&lt;/h2&gt;
-&lt;!-- raw HTML omitted --&gt;
+
+&lt;p&gt;&lt;video style=&#34;max-width:100%;&#34; controls&gt;
+  &lt;source src=&#34;../../img/posts/starting-i3/i3-gaps-demo.mp4&#34; type=&#34;video/mp4&#34;&gt;
+  &lt;source src=&#34;movie.ogg&#34; type=&#34;video/ogg&#34;&gt;
+Your browser does not support the video tag.
+&lt;/video&gt;
+&lt;div id=&#34;caption&#34;&gt;Little video demoing my new i3gaps setup with i3blocks&lt;/div&gt;&lt;/p&gt;
+
 &lt;p&gt;Thus far, I have been very satisfied with my current i3 setup. Replacing i3status with i3blocks, combined with adding small improvements, for example, the awesome fonts, really helped to enhance the look and feel of my i3 configuration. Additionally, ROFI much better now that it matches everything.&lt;/p&gt;
+
 &lt;p&gt;I am glad to be using i3 again. It is so efficient to use and I love flying around the work-spaces and windows. It is particularly useful on my x230&amp;rsquo;s 12&amp;rdquo; screen, as it utilizes all of the limited resolution. If you have never used a tiling window manager in Linux, I strongly suggest you give it a shot. It can take some time to get up and going the first time, but once a custom configuration is built, it always feels like home.&lt;/p&gt;
+
 &lt;p&gt;To show off my new i3 setup with i3bars, I&amp;rsquo;ve posted a small video at the top of this section. Enjoy!&lt;/p&gt;</description>
     </item>
     

@@ -147,19 +147,33 @@ Tags <a href="../../tags/linux">linux</a>, <a href="../../tags/dotfiles">dotfile
                 <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
                     
                     <p>I have maintained a &ldquo;dotfiles&rdquo; repository since I made my github account in 2013. However, overtime it became more of a post-apocalyptic wasteland, cluttered with remnants of obsolete configurations and scraps of scripts. It was no longer the pristine, culled, collection that I desired. I also did not have an efficient method of easily linking the files on a new system. I had to manually make symlinks for each dotfile. I knew there were <em>much</em> better dotfiles setups out there, but I never got around to it. Until now.</p>
+
 <p>One day, after reading <a href="http://brandon.invergo.net/news/2012-05-26-using-gnu-stow-to-manage-your-dotfiles.html">this post</a>, I finally decided to sit down and clean up my dotfiles directory. I wanted to re-organize it so that I could use <a href="http://freecode.com/projects/gnustow">GNU Stow</a> to initialize my dotfiles.</p>
+
 <p>After setting it all up, I decided to just start from scratch with a <a href="https://github.com/himmAllRight/dotfiles">new repository</a>.</p>
+
 <h2 id="using-stow-and-dotfiles">Using Stow and dotfiles</h2>
+
 <p>If you haven&rsquo;t seen it before, I highly suggest reading the post I have linked above. But in the meantime, I can provide a quick summary of how my dotfiles are setup.</p>
-<!-- raw HTML omitted -->
+
+<p><center><img alt="My Dotfiles Dir" src="../../img/posts/new-dotfiles/dotfiles.png" style="max-width: 100%;"/></center></p>
+
 <p>Each application has an associated sub-directory (ex: <code>dotfiles/emacs</code>), which contains all of the dotfiles/folders associated with that application. Structurally, I treat the items in each application directory as if they were in my <code>~</code>. For example, the <code>vim</code> sub-directory has my <code>.vimrc</code>, as well as the <code>.vim/colors/</code> directory. This is so that when I use stow, it will properly link them in <code>~</code>.</p>
-<!-- raw HTML omitted -->
+
+<p><center><img alt="Vim dotfiles directory" src="../../img/posts/new-dotfiles/vim-dots.png" style="max-width: 100%;"/></center></p>
+
 <p>When I setup my dotfiles on a new system, or install an application for which I already have dotfiles saved for, setting them up is as easy as typing:</p>
+
 <p><code>stow application-dir</code> (ex: <code>stow vim</code>).</p>
+
 <p>GNU Stow then links the files under my home directory. In my vim example, this means symlinks are created for <code>~/.vimrc</code> and <code>~/.vim/colors/*</code>, pointing to their respective locations in <code>~/dotfiles/vim/</code>.</p>
-<!-- raw HTML omitted -->
+
+<p><center><img alt="Vim dotfiles in Home" src="../../img/posts/new-dotfiles/vim-home.png" style="max-width: 100%;"/></center></p>
+
 <p>I think this setup is brilliant. Initializing an application&rsquo;s directory is so simple, and I can choose to only initialize specific sub-directories.</p>
+
 <p>In the future, I might make multiple branches of the repository, one for each of my computers, so I can maintain specific configurations. In theory, I could also just make different folders (ex <code>vim-laptop</code> and <code>vim-server</code>), but I like the branch idea better because it&rsquo;s a little easier for me to merge changes. We shall see.</p>
+
 <p>Anyway, that&rsquo;s the new setup. Enjoy :-D</p>
 
                     

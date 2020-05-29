@@ -153,14 +153,20 @@ environment. One idea, was to utilize Jenkins to automatically build
 and deploy a &ldquo;draft&rdquo; website, so I can stage new posts/website change
 on my home network, before publishing it to the &ldquo;production&rdquo;
 website. Here is how that idea was Instantiated&hellip;</p>
+
 <h2 id="my-website">My Website</h2>
-<p><!-- raw HTML omitted --><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+
+<p><a href="../../img/posts/draft-website-jenkins/jenkins-logo.png"><img
+src="../../img/posts/draft-website-jenkins/jenkins-logo.png" style="max-width:
+50%; float: left; margin: 0px 12px 0px 0px;" alt="Jenkins Logo" /></a></p>
+
 <p>I have previously <a href="../../post/website-transition-to-hugo/">described</a> how my
 website is <a href="../../post/website-switched-to-hugo/">currently generated</a>, using
 the <a href="https://gohugo.io">Hugo</a> static website generator. To organize
 this system, I have two git repos: One that consists of all the hugo
 source files (where I write content), and one that contains the
 generated static website (that gets deployed to my web host).</p>
+
 <p>When writing a post, I use <code>hugo server -D -F</code> to live view the page
 in my browser. However, I occasionally want to view the state of all
 the <em>committed code</em> in the <em>repo</em>, to see what the site would look
@@ -169,18 +175,27 @@ which shows the current state of my website&rsquo;s <em>source</em> repo (includ
 draft and future posts). If I want to check how a post looks on my
 phone, or any other device, I can just open up the draft website after
 pushing my changes.</p>
-<p><!-- raw HTML omitted --><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+
+<p><a href="../../img/posts/draft-website-jenkins/mr-mime.png"><img
+src="../../img/posts/draft-website-jenkins/mr-mime.png" style="max-width:
+45%; float: right; margin: 20px 0px 0px 10px;" alt="Jenkins Logo" /></a></p>
+
 <h2 id="jenkins">Jenkins</h2>
+
 <p>I had previously created a dedicated Jenkins server on my home network
 (Mr. Mime), using a CentOS 7 VM hosted on my home server. However, any
 Jenkins setup should work for this project (including a <a href="https://hub.docker.com/_/jenkins/">docker
 container</a>). To get started, checkout the <a href="https://jenkins.io/download/">Jenkins
 Website</a>, and be sure to take advantage
 of the <a href="https://jenkins.io/doc/">the documentation</a> for help.</p>
+
 <p><em>Note: just make sure hugo is installed on the Jenkins server, as we need
 it to generate the website.</em></p>
+
 <h3 id="github-integration">GitHub Integration</h3>
+
 <h4 id="jenkins-service">Jenkins Service</h4>
+
 <p>My website repo is hosted on GitHub, so we need to configure it to
 work with our Jenkins server. To do that, go to the project&rsquo;s GitHub
 page, and navigate through <strong>Settings</strong> -&gt; <strong>Integrations &amp;
@@ -190,13 +205,20 @@ is accessible from the internet. If not, hosting the Jenkins server on
 something like <a href="http://digitalocean.com">Digital Ocean</a> might be an
 easy solution). Lastly, make sure the <strong>Activate</strong> box is selected,
 and click the <strong>Add Service</strong> button.</p>
+
 <h4 id="ssh-keys">SSH Keys</h4>
+
 <p>While on the project&rsquo;s GitHub page, make sure that the Jenkins
 server&rsquo;s ssh keys are added to the project. To add them, navigate to
 the <strong>Deploy Keys</strong> page (under the project&rsquo;s <strong>Settings</strong> tab). Then
 select <strong>Add deploy key</strong>, and add the public key.</p>
+
 <h2 id="a-nginx-server">A Nginx Server</h2>
-<p><!-- raw HTML omitted --><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+
+<p><a href="../../img/posts/draft-website-jenkins/nginx.png"><img
+src="../../img/posts/draft-website-jenkins/nginx.png" style="max-width:
+100%; float: center; margin: 0px 0px 0px 0px;" alt="Default Nginx Page" /></a></p>
+
 <p>With Jenkins ready, let&rsquo;s quickly setup the web server before
 configuring the Jenkins project. Any web server will do (it just needs
 to serve the generated <em>static</em> website content). I used
@@ -210,68 +232,92 @@ sudo apt install -y nginx
 sudo systemctl status nginx
 
 <span style="color:#75715e">## Optional: Ensure it is enabled to start up after reboots</span>
-sudo systemctl enable nginx
-</code></pre></div><p>With the web server running, we need to know <em>where</em> the website files
+sudo systemctl enable nginx</code></pre></div>
+<p>With the web server running, we need to know <em>where</em> the website files
 need to go. Nginx will by default serve content at
 <code>/user/share/nginx/html/</code>, so remember that location for later&hellip;</p>
+
 <p><em>Note: Don&rsquo;t forget to add the <code>jenkins</code> user&rsquo;s ssh key from the
 jenkins server to the <code>authorized_keys</code> file of the nginx server. This
 will make file transfers easier when setting up the jenkins project.</em></p>
+
 <h2 id="configuring-a-project">Configuring a Project</h2>
+
 <p>Let&rsquo;s configure our Jenkins project! Log in to the Jenkins
 server and click the <strong>New Item</strong> option on the left side bar. Enter a
 name for the project, select the <strong>Freestyle Project</strong> option, and hit
 <strong>OK</strong>.</p>
-<p><!-- raw HTML omitted --><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
-<!-- raw HTML omitted -->
+
+<p><a href="../../img/posts/draft-website-jenkins/general-config.png"><img
+src="../../img/posts/draft-website-jenkins/general-config.png" style="max-width:
+100%; float: center; margin: 0px 0px 0px 0px;" alt="The Project's General Configuration Section" /></a>
+<div class="caption">The Project&rsquo;s General Configuration Section</div></p>
+
 <p>In the <strong>General</strong> section of the configuration screen, optionally
 write a description about the project. Next, select the &ldquo;<em>GitHub
 Project</em>&rdquo; check-box, and add the GitHub repo&rsquo;s url into the <em>Project
 url</em> text box.</p>
+
 <h4 id="source-control">Source Control</h4>
-<p><!-- raw HTML omitted --><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
-<!-- raw HTML omitted -->
+
+<p><a href="../../img/posts/draft-website-jenkins/credentials.png"><img
+src="../../img/posts/draft-website-jenkins/credentials.png"
+style="max-width: 100%; float: center; margin: 0px 0px 0px 0px;"
+alt="Setting Credentials" /></a>
+<div class="caption">Setting Credentials</div></p>
+
 <p>In the <strong>Source Code Management</strong> section of the configuration, select
 the <em>Git</em> option. Then, enter the repo&rsquo;s url for the <em>Repository URL</em>
 box (I did the ssh url). For <em>Credentials</em>, select <em>Add</em> to configure a
 new credential. Select <em>SSH Username with private key</em> for <em>Kind</em>,
 use <code>jenkins</code> for the <em>Username</em>.</p>
+
 <p>More source control options can be configured, but this should be the
 minimum setup required. <em>Again, for this to work public keys for the
 <code>jenkins</code> user on the jenkins server must be generated, and added as a
 deployment key on GitHub.</em></p>
+
 <h4 id="build-trigger">Build Trigger</h4>
+
 <p>Under the <strong>Build Triggers</strong> section, select <em>Poll SCM</em>. Without
 adding any schedule parameters, it will trigger each time a new commit
 is detected. This is what we want.</p>
+
 <h4 id="build-step">Build Step</h4>
+
 <p>In the <strong>Build</strong> section, click <strong>Add build step</strong>, and select
 <strong>Execute shell</strong>. This is where we can add the shell commands to
 build the website with hugo. Add the following command to the box
 (don&rsquo;t forget to change the url):</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">hugo -D -F -b <span style="color:#e6db74">&#34;http://10.1.1.77&#34;</span> -d public
-</code></pre></div><p>The <code>-D</code> flag tells hugo to include all draft posts, while the <code>-F</code> flag
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">hugo -D -F -b <span style="color:#e6db74">&#34;http://10.1.1.77&#34;</span> -d public</code></pre></div>
+<p>The <code>-D</code> flag tells hugo to include all draft posts, while the <code>-F</code> flag
 has it include all posts with a future date. The <code>-b</code> flag sets the
 url for the generated website. This should the be url or IP address of
 the nginx server setup previously. Lastly, the <code>-d</code> flag tells hugo to
 output the generated static website to the <code>public</code> directory. This
 will be useful to know when deploying the build.</p>
+
 <h4 id="deploy-to-webserver">Deploy to Webserver</h4>
+
 <p>For deployment, I used rsync to copy the build files to the nginx
 web server. This step will be another shell command, so I&rsquo;ve actually
 added it as another &ldquo;build&rdquo; step. Add another <strong>Execute shell</strong> and
 paste the following command inside the text box (again, changing the url):</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">rsync -r <span style="color:#e6db74">&#34;</span>$WORKSPACE<span style="color:#e6db74">/public/&#34;</span> ryan@10.1.1.77:/usr/share/nginx/html/
-</code></pre></div><p>I used the Jenkins <code>$WORKSPACE</code> variable to get the location of the
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">rsync -r <span style="color:#e6db74">&#34;</span>$WORKSPACE<span style="color:#e6db74">/public/&#34;</span> ryan@10.1.1.77:/usr/share/nginx/html/</code></pre></div>
+<p>I used the Jenkins <code>$WORKSPACE</code> variable to get the location of the
 build, and was able to append the <code>public</code> directory to that, since we
 defined it with the <code>-d</code> flag in the hugo build step above. This will
 copy the generated website, to the web server.</p>
+
 <p>Hit <strong>Save</strong>, and test it out by clicking the <strong>Build Now</strong> link on the
 left. If the build is successful, check the nginx website to see if
 the website was deployed!</p>
+
 <p><em>Note: If it doesn&rsquo;t work, double check all permissions and
 credentials between accounts and servers.</em></p>
+
 <h2 id="better-yet-pipelines">Better Yet&hellip; Pipelines</h2>
+
 <p>What&rsquo;s better than using Jenkins for automated &ldquo;draft website&rdquo;
 deployments?  Using a <a href="https://jenkins.io/doc/book/pipeline/">Jenkins
 Pipeline</a>. A Pipeline allows
@@ -279,6 +325,7 @@ the jenkins project steps to be defined in a <em>Jenkinsfile</em> that, among
 other benefits, can be source controlled. In fact, by default a
 Jenkins pipeline searches for the <code>Jenkinsfile</code> right in the root
 directory of a project&rsquo;s git repo.</p>
+
 <p>While a pipeline and
 <a href="https://jenkins.io/doc/book/pipeline/jenkinsfile/">Jenkinsfile</a> might
 be a bit more confusing to <em>learn</em> how to setup, it is well worth it. For
@@ -301,10 +348,12 @@ we setup in the previous steps:</p>
 	<span style="color:#f92672">}</span>
 
     <span style="color:#f92672">}</span>
-<span style="color:#f92672">}</span>
-</code></pre></div><p>I&rsquo;m not going to cover pipelines in <em>this</em> post. However, I do
+<span style="color:#f92672">}</span></code></pre></div>
+<p>I&rsquo;m not going to cover pipelines in <em>this</em> post. However, I do
 encourage readers to check them out.</p>
+
 <h2 id="conclusion">Conclusion</h2>
+
 <p>That&rsquo;s it. While I currently host my website using <a href="https://pages.github.com/">GitHub
 pages</a>, if I ever self-host it again, I
 will definitely automate publishing it using Jenkins as well. This has

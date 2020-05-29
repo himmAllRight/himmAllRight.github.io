@@ -16,17 +16,25 @@
       <pubDate>Sat, 11 Apr 2020 00:00:00 +0000</pubDate>
       
       <guid>http://ryan.himmelwright.net/pages/homelab/</guid>
-      <description>&lt;p&gt;This is a page where I maintain the status of the computers in my “Homelab”
+      <description>
+
+&lt;p&gt;This is a page where I maintain the status of the computers in my “Homelab”
 (basically the tech in our house).&lt;/p&gt;
+
 &lt;h2 id=&#34;ryan-me&#34;&gt;Ryan (Me)&lt;/h2&gt;
-&lt;p&gt;&lt;!-- raw HTML omitted --&gt;&lt;!-- raw HTML omitted --&gt;&lt;!-- raw HTML omitted --&gt;&lt;/p&gt;
-&lt;!-- raw HTML omitted --&gt;
-&lt;p&gt;&lt;!-- raw HTML omitted --&gt;&lt;!-- raw HTML omitted --&gt;&lt;!-- raw HTML omitted --&gt;&lt;/p&gt;
-&lt;!-- raw HTML omitted --&gt;
-&lt;p&gt;&lt;!-- raw HTML omitted --&gt;&lt;!-- raw HTML omitted --&gt;&lt;!-- raw HTML omitted --&gt;&lt;/p&gt;
-&lt;!-- raw HTML omitted --&gt;
+
+&lt;p&gt;&lt;a href=&#34;../../img/homelab/home-office.jpeg&#34;&gt;&lt;img alt=&#34;My Desk&#34; src=&#34;../../img/homelab/home-office.jpeg&#34; width=100%&gt;&lt;/a&gt;
+&lt;div class=&#34;caption&#34;&gt;My Home Office&lt;/div&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;../../img/homelab/desk.jpeg&#34;&gt;&lt;img alt=&#34;Home Office&#34; src=&#34;../../img/homelab/desk.jpeg&#34; width=100%&gt;&lt;/a&gt;
+&lt;div class=&#34;caption&#34;&gt;My Desk&lt;/div&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;../../img/homelab/office-entrance.jpeg&#34;&gt;&lt;img alt=&#34;My Desk&#34; src=&#34;../../img/homelab/office-entrance.jpeg&#34; width=100%&gt;&lt;/a&gt;
+&lt;div class=&#34;caption&#34;&gt;Entrance to  Home Office&lt;/div&gt;&lt;/p&gt;
+
 &lt;h3 id=&#34;linux-computers&#34;&gt;Linux Computers&lt;/h3&gt;
-&lt;h4 id=&#34;--charmeleon-linux-workstationvm-hostgaming-computer&#34;&gt;- Charmeleon (Linux Workstation/VM Host/Gaming Computer)&lt;/h4&gt;
+
+&lt;h4 id=&#34;charmeleon-linux-workstation-vm-host-gaming-computer&#34;&gt;- Charmeleon (Linux Workstation/VM Host/Gaming Computer)&lt;/h4&gt;
 &lt;pre&gt;&lt;code&gt;Ryzen 5 2600 [3.4 GHz (3.9GHz Turbo), 6 Cores, 12 Threads)
 MSI B450 Tomahawk Motherboard
 32 GB (2x16GB) DDR4-3200 Mhz RAM
@@ -36,100 +44,110 @@ Sapphire Radeon Pulse RX 580 8GB GPU
 Fractal Design Meshify C Dark TG ATX Mid Tower Case
 EVGA SuperNOVA G4 650w 80+ Gold, fully modular PSU
 Fedora 32
-*Connected to Periphery devices
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;!-- raw HTML omitted --&gt;&lt;!-- raw HTML omitted --&gt;&lt;/p&gt;
-&lt;h4 id=&#34;--kadabra-linux-laptop&#34;&gt;- Kadabra (Linux Laptop)&lt;/h4&gt;
+*Connected to Periphery devices&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;a name=&#34;kadabra&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;h4 id=&#34;kadabra-linux-laptop&#34;&gt;- Kadabra (Linux Laptop)&lt;/h4&gt;
 &lt;pre&gt;&lt;code&gt;T470 Thinkpad
 Intel i5-7200u [2.5 GHz (3.1 GHz Turbo), 2 Cores, 4 Threads]
 16 GB RAM
 500 GB Samsung EVO SSD
-14&amp;quot; 1920x1080 IPS Display
+14&amp;#34; 1920x1080 IPS Display
 Fedora 32
-*Can Connect to Periphery devices via Thunderbolt 3 Dongle
-&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;interface-devices&#34;&gt;Interface Devices&lt;/h3&gt;
-&lt;p&gt;&lt;!-- raw HTML omitted --&gt;&lt;!-- raw HTML omitted --&gt;&lt;/p&gt;
-&lt;h4 id=&#34;--venusaur-mac&#34;&gt;- Venusaur (Mac)&lt;/h4&gt;
-&lt;pre&gt;&lt;code&gt;2019 16&amp;quot; Macbook Pro
+*Can Connect to Periphery devices via Thunderbolt 3 Dongle&lt;/code&gt;&lt;/pre&gt;
+&lt;h3 id=&#34;interface-devices&#34;&gt;Interface Devices&lt;/h3&gt;
+
+&lt;p&gt;&lt;a name=&#34;Venusaur&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;h4 id=&#34;venusaur-mac&#34;&gt;- Venusaur (Mac)&lt;/h4&gt;
+&lt;pre&gt;&lt;code&gt;2019 16&amp;#34; Macbook Pro
 Intel i7-9750H (2.6 GHz (4.5 GHz Turbo), 6 Cores, 12 Threads)
 16 GB DDR4 2666 MHz RAM
 512 GB SSD
 Radeon Pro 5300M GPU
-16&amp;quot; 3072x1920 500 nit IPS &amp;quot;Retina&amp;quot; Display
+16&amp;#34; 3072x1920 500 nit IPS &amp;#34;Retina&amp;#34; Display
 macOS Catalina
-*Can Connect to Periphery devices via Thunderbolt 3 Dongle
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;!-- raw HTML omitted --&gt;&lt;!-- raw HTML omitted --&gt;&lt;/p&gt;
-&lt;h4 id=&#34;--ivysaur-tablet&#34;&gt;- Ivysaur (Tablet)&lt;/h4&gt;
-&lt;pre&gt;&lt;code&gt;10.5&amp;quot; iPad Pro
+*Can Connect to Periphery devices via Thunderbolt 3 Dongle&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;a name=&#34;Ivysaur&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;h4 id=&#34;ivysaur-tablet&#34;&gt;- Ivysaur (Tablet)&lt;/h4&gt;
+&lt;pre&gt;&lt;code&gt;10.5&amp;#34; iPad Pro
 64 GB Storage
-* Can be used as a secondary display for Venusaur
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;!-- raw HTML omitted --&gt;&lt;!-- raw HTML omitted --&gt;&lt;/p&gt;
-&lt;h4 id=&#34;--bulbasaur-phone&#34;&gt;- Bulbasaur (Phone)&lt;/h4&gt;
+* Can be used as a secondary display for Venusaur&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;a name=&#34;bulbasaur&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;h4 id=&#34;bulbasaur-phone&#34;&gt;- Bulbasaur (Phone)&lt;/h4&gt;
 &lt;pre&gt;&lt;code&gt;iPhone 11
-64 GB Storage
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;!-- raw HTML omitted --&gt;&lt;!-- raw HTML omitted --&gt;&lt;/p&gt;
+64 GB Storage&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;a name=&#34;periphery&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+
 &lt;h3 id=&#34;periphery-devices&#34;&gt;Periphery Devices&lt;/h3&gt;
-&lt;pre&gt;&lt;code&gt;Dell 27&amp;quot; 2560x1440 IPS Monitor (Dell u2717d)
+&lt;pre&gt;&lt;code&gt;Dell 27&amp;#34; 2560x1440 IPS Monitor (Dell u2717d)
 Happy Hacking Keyboard Pro2
 Audioengine A2+ Speakers &amp;amp; Stands
 Audio Technica M50x Headphones
 Blue Yeti Microphone - Backout Edition
-Logitech HD Pro Webcam c920 Widescreen
-&lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&#34;rebecca-wife&#34;&gt;Rebecca (Wife)&lt;/h2&gt;
-&lt;p&gt;&lt;!-- raw HTML omitted --&gt;&lt;!-- raw HTML omitted --&gt;&lt;!-- raw HTML omitted --&gt;&lt;/p&gt;
-&lt;!-- raw HTML omitted --&gt;
+Logitech HD Pro Webcam c920 Widescreen&lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id=&#34;rebecca-wife&#34;&gt;Rebecca (Wife)&lt;/h2&gt;
+
+&lt;p&gt;&lt;a href=&#34;../../img/homelab/rebecca_desk.jpg&#34;&gt;&lt;img alt=&#34;Rebecca&#39;s Desk&#34; src=&#34;../../img/homelab/rebecca_desk.jpg&#34; width=100%&gt;&lt;/a&gt;
+&lt;div class=&#34;caption&#34;&gt;Rebecca&amp;rsquo;s Desk (yes, that is my laptop in the dock)&lt;/div&gt;&lt;/p&gt;
+
 &lt;p&gt;Even though this is my wife&amp;rsquo;s gear&amp;hellip; I&amp;rsquo;m in charge of managing it all. So I
 decided to add it here.&lt;/p&gt;
-&lt;h4 id=&#34;--weepinbell&#34;&gt;- Weepinbell&lt;/h4&gt;
+
+&lt;h4 id=&#34;weepinbell&#34;&gt;- Weepinbell&lt;/h4&gt;
 &lt;pre&gt;&lt;code&gt;Thinkpad T450s
 Intel i5-5300u [2.3 GHz (2.90 GHz Turbo), 2 Cores, 4 Threads]
 12 GB RAM
 256 GB SSD
-14&amp;quot; 1600x900 LED Display
+14&amp;#34; 1600x900 LED Display
 6-Cell Battery
-CloudReady (a chromiumos spin)
-
-&lt;/code&gt;&lt;/pre&gt;&lt;h4 id=&#34;--bellsprout&#34;&gt;- Bellsprout&lt;/h4&gt;
+CloudReady (a chromiumos spin)&lt;/code&gt;&lt;/pre&gt;
+&lt;h4 id=&#34;bellsprout&#34;&gt;- Bellsprout&lt;/h4&gt;
 &lt;pre&gt;&lt;code&gt;Macbook Air (2014)
 Intel i5 (1.4 GHz (2.7 GHz Turbo), 3M Cache, 2 Cores, 2 Threads) ?
 4 GB RAM
 128 GB PCIe Flash HD
 13.3” 1440x900 LED Display
 2.96 Lbs and ~0.7” thick
-Mac OS Catalina
-&lt;/code&gt;&lt;/pre&gt;&lt;h4 id=&#34;--periphery&#34;&gt;- Periphery&lt;/h4&gt;
+Mac OS Catalina&lt;/code&gt;&lt;/pre&gt;
+&lt;h4 id=&#34;periphery&#34;&gt;- Periphery&lt;/h4&gt;
 &lt;pre&gt;&lt;code&gt;Thinkpad Ultra Dock 40A2 (to connect to periphery devices below)
-LG 32QK500W, 32&amp;quot; 2560x1440 IPS Monitor
+LG 32QK500W, 32&amp;#34; 2560x1440 IPS Monitor
 Apple Air Pod Pros
-Bose AE2 Headphones
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;!-- raw HTML omitted --&gt;&lt;!-- raw HTML omitted --&gt;&lt;/p&gt;
-&lt;h2 id=&#34;servers--networking&#34;&gt;Servers &amp;amp; Networking&lt;/h2&gt;
-&lt;p&gt;&lt;!-- raw HTML omitted --&gt;&lt;!-- raw HTML omitted --&gt;&lt;/p&gt;
-&lt;h4 id=&#34;--ninetales-vm-host--home-server&#34;&gt;- Ninetales (VM Host / Home Server)&lt;/h4&gt;
+Bose AE2 Headphones&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;a name=&#34;servers&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;servers-networking&#34;&gt;Servers &amp;amp; Networking&lt;/h2&gt;
+
+&lt;p&gt;&lt;a name=&#34;ninetales&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;h4 id=&#34;ninetales-vm-host-home-server&#34;&gt;- Ninetales (VM Host / Home Server)&lt;/h4&gt;
 &lt;pre&gt;&lt;code&gt;HP Micro Server Gen 10
 AMD Opteron X3421 APU (4) @ 2.100GHz
 8 GB ECC RAM
 250 GB Samsung EVO SSD (OS + LVM Virtual Disk Drive)
 2 x 1TB WD 7200 RPM HDD (ZFS Mirror, for Backups) (Hotswap)
 2 x 3TB TOSHIBA 7200 RPM HDD (ZFS Mirror, for Storage) (Hotswap)
-Ubuntu Server 18.04
-&lt;/code&gt;&lt;/pre&gt;&lt;h4 id=&#34;--networking&#34;&gt;- Networking&lt;/h4&gt;
+Ubuntu Server 18.04&lt;/code&gt;&lt;/pre&gt;
+&lt;h4 id=&#34;networking&#34;&gt;- Networking&lt;/h4&gt;
 &lt;pre&gt;&lt;code&gt;Netgear Orbi RBK50 Router (In Bedroom)
-Netgear Orbi RBK50 Satellite (In Office)
-&lt;/code&gt;&lt;/pre&gt;&lt;h4 id=&#34;--ups&#34;&gt;- UPS&lt;/h4&gt;
-&lt;pre&gt;&lt;code&gt;CyberPower 1500VA/900W UPS
-&lt;/code&gt;&lt;/pre&gt;&lt;h4 id=&#34;--living-room-tv&#34;&gt;- Living Room &amp;ldquo;TV&amp;rdquo;&lt;/h4&gt;
-&lt;pre&gt;&lt;code&gt;LG UD4379-b, 43&amp;quot; IPS UHD (3840x2160px) Monitor
+Netgear Orbi RBK50 Satellite (In Office)&lt;/code&gt;&lt;/pre&gt;
+&lt;h4 id=&#34;ups&#34;&gt;- UPS&lt;/h4&gt;
+&lt;pre&gt;&lt;code&gt;CyberPower 1500VA/900W UPS&lt;/code&gt;&lt;/pre&gt;
+&lt;h4 id=&#34;living-room-tv&#34;&gt;- Living Room &amp;ldquo;TV&amp;rdquo;&lt;/h4&gt;
+&lt;pre&gt;&lt;code&gt;LG UD4379-b, 43&amp;#34; IPS UHD (3840x2160px) Monitor
 4k Fire TV Stick
-Nintendo Switch
-&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;digital-ocean-droplets&#34;&gt;Digital Ocean Droplets&lt;/h3&gt;
-&lt;h4 id=&#34;pidgey-nextcloudtest-cloud-server&#34;&gt;Pidgey (Nextcloud/Test Cloud Server)&lt;/h4&gt;
+Nintendo Switch&lt;/code&gt;&lt;/pre&gt;
+&lt;h3 id=&#34;digital-ocean-droplets&#34;&gt;Digital Ocean Droplets&lt;/h3&gt;
+
+&lt;h4 id=&#34;pidgey-nextcloud-test-cloud-server&#34;&gt;Pidgey (Nextcloud/Test Cloud Server)&lt;/h4&gt;
 &lt;pre&gt;&lt;code&gt;Digital Ocean KVM Droplet
 1 Core
 1 GB RAM
 20 GB SSD
-Ubuntu 16.04 OS
-&lt;/code&gt;&lt;/pre&gt;
-</description>
+Ubuntu 16.04 OS&lt;/code&gt;&lt;/pre&gt;</description>
     </item>
     
     <item>
@@ -138,7 +156,10 @@ Ubuntu 16.04 OS
       <pubDate>Fri, 22 Nov 2019 06:47:00 -0400</pubDate>
       
       <guid>http://ryan.himmelwright.net/pages/about/</guid>
-      <description>&lt;!-- raw HTML omitted --&gt;
+      <description>
+
+&lt;p&gt;&lt;img src=&#34;../../img/about/east_campus.jpeg&#34; style=&#34;width: 45%; float: left; margin: 10px 10px 10px 10px;&#34;/&gt;&lt;/p&gt;
+
 &lt;p&gt;I am a Quality Engineer at &lt;a href=&#34;https://redhat.com&#34;&gt;Red Hat&lt;/a&gt;,
 living and working in &lt;a href=&#34;https://durhamnc.gov/&#34;&gt;Durham, NC&lt;/a&gt;. Previously,
 I worked at &lt;a href=&#34;http://2is-inc.com/&#34;&gt;2Is-Inc&lt;/a&gt; as a Back-end Software Developer,
@@ -146,6 +167,7 @@ creating applications and build systems (mostly in &lt;a href=&#34;https://franz
 Lisp&lt;/a&gt;). Before that, I
 was a student at &lt;a href=&#34;https://www.lafayette.edu/&#34;&gt;Lafayette College&lt;/a&gt;,
 where I majored in Neuroscience and minored in Computer Science.&lt;/p&gt;
+
 &lt;p&gt;Outside of work, I am still an enthusiastic Linux user that loves
 learning about computers, programming languages (especially functional
 ones), and open source technologies. I am an active member of &lt;a href=&#34;http://codefordurham.com/&#34;&gt;Code
@@ -154,6 +176,7 @@ other&lt;/a&gt; &lt;a href=&#34;https://www.meetup.com/TriClojure&#34;&gt;local
 meet ups&lt;/a&gt; &lt;a href=&#34;https://www.meetup.com/learn-code-rdu/&#34;&gt;in
 the&lt;/a&gt; &lt;a href=&#34;https://www.meetup.com/Triangle-Kubernetes-Meetup/&#34;&gt;triangle
 area&lt;/a&gt;.&lt;/p&gt;
+
 &lt;p&gt;I am a self-taught learner and continue to study computer science and
 IT topics by working on &lt;a href=&#34;https://github.com/himmAllRight?tab=repositories&#34;&gt;personal
 projects&lt;/a&gt;, taking
@@ -161,16 +184,21 @@ courses, and maintaining my
 &lt;a href=&#34;../pages/homelab/&#34;&gt;homelab&lt;/a&gt;. This website
 exists to help document the personal projects I work on, and what I&amp;rsquo;ve
 learned.&lt;/p&gt;
+
 &lt;p&gt;Beyond technology, I love &lt;a href=&#34;https://bandcamp.com/himmallright&#34;&gt;music&lt;/a&gt;,
 &lt;a href=&#34;../post/&#34;&gt;writing&lt;/a&gt;, the outdoors, and swimming (I
 competitively swam from the age of 8, through college). I am married to
 Rebecca, a second year &lt;a href=&#34;https://anesthesia.mc.duke.edu/&#34;&gt;Anaesthesia&lt;/a&gt; resident
 at Duke. We have been together for over 13 years and were married on September
 17th, 2016 (the day before our 10th anniversary).&lt;/p&gt;
+
 &lt;p&gt;Feel free to contact me using any of the methods below.&lt;/p&gt;
+
 &lt;h3 id=&#34;contact&#34;&gt;Contact&lt;/h3&gt;
+
 &lt;p&gt;In addition to the contact icons at the bottom of the website, I can
 be reached via these additional methods:&lt;/p&gt;
+
 &lt;ul&gt;
 &lt;li&gt;Email: &lt;a href=&#34;mailto:ryan@himmelwright.net&#34;&gt;ryan@himmelwright.net&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;IRC: I&amp;rsquo;m often freenode as &lt;code&gt;himmAllRight&lt;/code&gt; or &lt;code&gt;rhimmelw&lt;/code&gt;&lt;/li&gt;

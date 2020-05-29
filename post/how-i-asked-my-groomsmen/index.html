@@ -145,27 +145,46 @@ Tags <a href="../../tags/programming">programming</a>, <a href="../../tags/weddi
                 <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
                     
                     <p>Over the last few months Rebecca (my Fiancee) and I have continued making progress on all the little tasks that we have to complete before our wedding. One of these tasks is asking our intended bridesmaids/groomsmen to be in the wedding.</p>
+
 <p>Rebecca approached this by asking each of the girls in a way that was somewhat unique to each person, over time. Even though each person was asked differently, all the methods were executed in a very &ldquo;Rebecca-like&rdquo; manner.</p>
+
 <p>So, I was told that I couldn&rsquo;t simply ask the guys. I had to figure out a &ldquo;fun&rdquo; way to ask them, and if possible, to do it in a way that was very &ldquo;Ryan-like&rdquo;.</p>
+
 <h2 id="asking-the-groomsmen">Asking the Groomsmen</h2>
+
 <p>While Rebecca was slowly chipping away at asking her bridesmaids, we kept failing at finding a way to ask the guys. Finally, one night while driving back north to Massachusetts, I said out of frustration:</p>
+
 <blockquote>
 <p>&ldquo;I wish I could just write a stupid piece of code that asks them,
 compile it, and give it to them&hellip; wait a minute&hellip;.&rdquo;</p>
 </blockquote>
+
 <p>At that moment, I started to figure out how I could make it work. The results of that brainstorming session are described below:</p>
+
 <h2 id="snail-mail-part">Snail Mail Part</h2>
+
 <p>I first had to find a way to give the intended groomsmen a link to get any code that I wrote. So, Rebecca and I designed the tri-fold letter pictured below (Sorry for the photo quality).</p>
-<!-- raw HTML omitted -->
+
+<p><img alt="The front of the letter" src="../../img/posts/how-i-asked-my-groomsmen/ask-message1.jpg" style="max-width: 100%;"/></p>
+
 <p><em>Figure 1: The Front of Letter</em></p>
+
 <p>The front of the envelope had a simple black boarder and said &ldquo;She said that I had to make it official.&rdquo;</p>
-<!-- raw HTML omitted -->
+
+<p><img alt="The first flap of the letter" src="../../img/posts/how-i-asked-my-groomsmen/ask-message2.jpg" style="max-width: 100%;"/></p>
+
 <p><em>Figure 2: The First Flap of the Letter</em></p>
+
 <p>When the reader flipped up that flap, another message read &ldquo;So we&rsquo;re doing this my way&rdquo;.</p>
-<!-- raw HTML omitted -->
+
+<p><img alt="The QR code posted inside the letter" src="../../img/posts/how-i-asked-my-groomsmen/ask-message-qr.jpg" style="max-width: 100%;"/></p>
+
 <p><em>Figure 3: The QR Code posted on the Inside of the Letter</em></p>
+
 <p>Lastly, when the reader folded that flap down, they got a taste of what &ldquo;my way&rdquo; might entail when the only thing that was printed on the page was a single QR code.</p>
+
 <p>When the reader scanned the QR code, it opened up a list of instructions on their phone that said:</p>
+
 <blockquote>
 <ol>
 <li>Find your computer.</li>
@@ -173,16 +192,22 @@ compile it, and give it to them&hellip; wait a minute&hellip;.&rdquo;</p>
 <li>Text Me</li>
 </ol>
 </blockquote>
+
 <p>*Note: Link no longer active.</p>
+
 <h2 id="website">Website</h2>
+
 <p>When the intended groomsmen went to the link provided, they saw a webpage that I made, containing our wedding logo on the bottom right, and a welcome message. The welcome message basically stated that the webpage was not the end of the scavenger hunt, and that they would have to download some code that I compiled, that contained the message.</p>
+
 <p>Below the welcome message, I had separate instructions that guided Window, Mac, and Linux users, as well as users that wished to compile from source (sort of).</p>
+
 <p>Below that I had links to the executable downloads for each operating system mentioned. Lastly, I posted the source code for the code they were downloading, because … you know… open source.
 Executable(s)</p>
+
 <p>When the intended groomsmen ran the compiled code (source code posted below), it showed them that it was &ldquo;decrypting&rdquo; their message, and printed the percent complete. After about 20% or so, I confessed that there was no &ldquo;decrypting&rdquo; and that each message is decoded when printed. I then proceeded to rant in these &ldquo;decrypting&rdquo; messages about how I originally wrote a nice GUI python app, but it was a pain to cross compile, and how I eventually just scrapped it and wrote it in LISP. I also mentioned that if they all ran Linux, it wouldn&rsquo;t of been an issue. When it finally reached 100%, I decided to finally give them the message.</p>
+
 <p>Source Code for the executable I wrote containing the message. Nothing fancy, but everything hidden.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scheme" data-lang="scheme">
-<span style="color:#75715e">;; Used to build the executable</span>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scheme" data-lang="scheme"><span style="color:#75715e">;; Used to build the executable</span>
 (<span style="color:#a6e22e">defun</span> build-exe (<span style="color:#a6e22e">exe-src</span>)
   (<span style="color:#a6e22e">sb-ext:save-lisp-and-die</span> exe-src :toplevel <span style="color:#f92672">#</span><span style="color:#e6db74">&#39;main</span> :executable t))
 
@@ -329,19 +354,25 @@ Executable(s)</p>
 <span style="color:#75715e">;;(load &#34;decryptMessage.cl&#34;)</span>
 
 (<span style="color:#a6e22e">defun</span> decode-pair-list (<span style="color:#a6e22e">pair-list</span>)
- (<span style="color:#a6e22e">mapcar</span> (<span style="color:#66d9ef">lambda </span>(<span style="color:#a6e22e">pair</span>) (cons (<span style="color:#a6e22e">char-code</span> (car pair)) (<span style="color:#a6e22e">decode-message</span> (cdr pair)))) pair-list))
-</code></pre></div><h2 id="message">Message</h2>
+ (<span style="color:#a6e22e">mapcar</span> (<span style="color:#66d9ef">lambda </span>(<span style="color:#a6e22e">pair</span>) (cons (<span style="color:#a6e22e">char-code</span> (car pair)) (<span style="color:#a6e22e">decode-message</span> (cdr pair)))) pair-list))</code></pre></div>
+<h2 id="message">Message</h2>
+
 <p>After putting up with my ranting, I finally posted the message asking the guys to be my groomsmen. It read:</p>
+
 <blockquote>
 <p>So, putting all jokes and nerdy-ness aside, I do have an important
 question to ask. As you are probably aware, Rebecca and I are finally
 getting married in September. This is will be a very special <em>DAY</em> in
 my life, and as a very special <em>PERSON</em> in my life, I would like to
 ask:  Will you be one of my groomsmen?</p>
+
 <p>Ryan</p>
 </blockquote>
+
 <p>About 2 days after we mailed out the letters, all of then intended groomsmen had messaged me back, confirming that they would be my groomsmen. I also think they enjoyed my methods of asking.</p>
+
 <p>I guess I was successful in asking everyone in a very &ldquo;Ryan-like&rdquo; fashion.</p>
+
 <p><strong>UPDATE</strong>: The <a href="https://github.com/himmAllRight/groomsmen-ask">source code repo</a> for this little project is now publically available on my <a href="https://github.com/himmAllRight">Github Page</a>.</p>
 
                     

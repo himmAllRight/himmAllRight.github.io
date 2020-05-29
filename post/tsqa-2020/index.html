@@ -151,23 +151,35 @@ the <a href="https://tsqa.org">Triangle Software Quality Association</a> (TSQA).
 being hosted by my local software testing group, the speakers and
 attendees were from all over the country. While only a single-day conference,
 it was packed full with solid advice and ideas I left with. Here are a few.</p>
+
 <p><em>Just to clarify: TSQA occured in February, right before COVID-19 really started spreading
 in the US. I&rsquo;m just very late in this post.</em></p>
+
 <h2 id="tsqa-2020">TSQA 2020</h2>
+
 <h4 id="getting-there">Getting There</h4>
+
 <p>TSQA was held at the <a href="https://www.durhamconventioncenter.com">Durham Convention
 Center</a>, which is located in the middle
 of downtown Durham (NC, USA). Being so close to our office, I managed to help
 convince/remind several of my co-workers to register last minute. On the
 morning of the event, I drove the one mile to the office parking garage, then
 hustled coat-less through the cold morning wind to the conference center.</p>
+
 <p>As I walked inside, I immediately saw my manager at the entrance handing out
 bandages, and knew I was in the right place (he was a TSQA volunteer).  After
 saying hello and checking in, I made my way to the main ballroom to grab some
 food. After awhile, my co-workers started to trickle in, so we found a table
 near the front and gathered for the opening statements.</p>
+
 <h4 id="keynote">Keynote</h4>
-<!-- raw HTML omitted -->
+
+<p><center>
+<a href="../../img/posts/tsqa-2020/the_jetsons.jpg">
+<img alt="The Jetsons" src="../../img/posts/tsqa-2020/the_jetsons.jpg" style="max-width: 100%; padding: 5px 15px 10px 10px"/></a>
+<div class="caption">The Jetsons</div>
+</center></p>
+
 <p>They keynote, presented by <a href="http://angiejones.tech">Angie Jones</a> was an
 entertaining look at the history and future of technology. She took ideas that
 were shown in <a href="https://en.wikipedia.org/wiki/The_Jetsons">The Jetsons</a>, and
@@ -175,40 +187,59 @@ compared them to how close (or far) we have come to many of them. She then used
 this as an example of how we should be planning to test <em>future</em> technology,
 because like it or not, it&rsquo;s coming. She concluded by providing some examples
 of what testing in the future could look like.</p>
+
 <h4 id="talks">Talks</h4>
+
 <p>For the rest of the day, I attended several talks interspaced with a lunch and
 snack break. I mainly focused on attending talks around automation, but also
 went to a few about developing test cases or UI testing tools. Similar to my
 <a href="../../post/ato2019/">All Things Open 2019 post</a>, instead of narrating each talk I
 went to, I picked out few lessons I learned and will share them below.</p>
+
 <p>After the conference ended, my co-workers and I made our way back to the office
 to share experiences and debate our thoughts over a drink.  It&rsquo;s always great
 to hash out ideas with others after a conference, while they are still fresh.
 Also&hellip; it&rsquo;s fun :) .</p>
-<h3 id="lessons-learnedstrengthened">Lessons Learned/Strengthened</h3>
+
+<h3 id="lessons-learned-strengthened">Lessons Learned/Strengthened</h3>
+
 <p>Now to summarize a few of the many lessons I picked up while at TSQA 2020. I&rsquo;ve
 heard many of these suggestions before, but the speakers presented them so
 well, I really want to ensure I start implementing the at work.  Lets get
 started.</p>
+
 <h4 id="no-failing-tests">No failing tests</h4>
+
 <p>It is all too easy to let a backlog of failing tests build up. This may be
 due to the test being out of date, a low priority issue, or worse of
 all&hellip; just a flaky test. Regardless of the reason, failing tests really should
 be mitigated <em>immediately</em>, for several reasons.</p>
+
 <p>Leaving failing tests to continuously run causes failure fatigue. This
 normalizes the failing tests and causes a team to ignore <em>other</em> failing tests in
 the future. Basically, it decreases the competence in the test suite, and thus
 the QE team as a whole.</p>
-<!-- raw HTML omitted -->
+
+<p><center>
+<a href="../../img/posts/tsqa-2020/disable-tests-meme.jpg">
+<img alt="Failing tests meme" src="../../img/posts/tsqa-2020/disable-tests-meme.jpg" style="max-width: 100%; padding: 5px 15px 10px 10px"/></a>
+<div class="caption">This is supposed to be a joke, but it&rsquo;s actually
+the point I&rsquo;m sharing. If tests are failing, disable or get rid of them, <em>AFTER</em> filing an
+issue! </div>
+</center></p>
+
 <p>So, if a project has continuously failing tests, try to fix them as quick
 as possible. If there currently isn&rsquo;t time to fix it (we&rsquo;ve all been there),
 that&rsquo;s fine, but file an issue to <em>remember</em> to fix it later. Then disable it.
 It will make a test suite more meaningful, because each failure
 <em>means something important</em>.</p>
+
 <p>One last statement here: <strong>No</strong> flaky tests either. If we can&rsquo;t depend on them,
 they aren&rsquo;t worth having.  Either figure out how to fix them so they are
 consistent, or remove them.</p>
+
 <h4 id="write-tests-to-pass-for-known-issues">Write tests to pass for known issues</h4>
+
 <p>Now, lets expand that suggestion of disabling failing tests, and write tests
 that <em>pass</em> when a <em>known</em> defect happens. While sounding counter-intuitive at
 first, this idea makes more sense if you accept the fact that tests don&rsquo;t
@@ -216,50 +247,59 @@ actually <em>find</em> defects. Rather, automated tests depict the <em>state</em
 system, and fail when <em>something has changed</em>. A passed or failed test simply
 acts as a <em>data point</em>. When a quality engineer goes and investigates the test
 results, <em>they</em> determine if there is a defect based on the data.</p>
+
 <p>For example, lets assume I have a test that asserts that an api call returns a
 <code>200</code> status. However, due to a known issue, it is currently returning <code>404</code>s.
 I <em>know</em> that in its current state, the system returns a <code>404</code> for that api
 call, so I can change/add a test to assert that it is indeed, returning <code>404</code>s.
 This technique <em>removes a failing test</em> (as suggest in the previous section),
 while allowing us to maintain that data point. The test will pass while it
-continues to return <code>404</code>'s, but will fail and notify us of any related state
+continues to return <code>404</code>&rsquo;s, but will fail and notify us of any related state
 changes.</p>
+
 <p>Those changes could be from the developers merging a bug fix&hellip; or a
 <em>new</em> defect popping up, resulting in the api call now returning <code>500</code> errors.
 Regardless, we know that something has changed again, and we should investigate. By
 comparison, an always-failing or fully removed test would not have demanded our
 attention so easily.</p>
+
 <h4 id="better-documentation">Better Documentation</h4>
+
 <p>So&hellip; if we have our tests setup to <em>pass</em> for known defects, lets make one
 thing clear&hellip; we need to make sure we have <strong>amazing documentation</strong>. This is
 imperative.</p>
-<!-- raw HTML omitted -->
+
+<p><center>
+<a href="../../img/posts/tsqa-2020/documentation-meme.png">
+<img alt="Documentation Meme" src="../../img/posts/tsqa-2020/documentation-meme.png" style="max-width: 100%; padding: 5px 15px 10px 10px"/></a>
+</center></p>
+
 <p>Any test designed to pass on a known defect should contain a few pieces of
 information in its documentation:</p>
+
 <ul>
-<li>
-<p><em>Why the test is there</em>: If a test is checking for undesired
+<li><p><em>Why the test is there</em>: If a test is checking for undesired
 behavior, it is a good idea to quickly document something along the lines
 of &lsquo;This test is checking for behavior we don&rsquo;t want. It is just here
-until an issue is fixed&rsquo;.</p>
-</li>
-<li>
-<p><em>The issue number</em>. If a test exists until a known issue is resolved&hellip;
+until an issue is fixed&rsquo;.</p></li>
+
+<li><p><em>The issue number</em>. If a test exists until a known issue is resolved&hellip;
 please include the issue/bug number in the documentation. This will make it
 much easier for others (or you!) to find more information, or check if the
-issue is already closed once the test starts failing (due to a fix).</p>
-</li>
-<li>
-<p><em>What we expect from the test</em>: Try to document why the test is
-currently passing, and what we expect when it starts failing again.</p>
-</li>
+issue is already closed once the test starts failing (due to a fix).</p></li>
+
+<li><p><em>What we expect from the test</em>: Try to document why the test is
+currently passing, and what we expect when it starts failing again.</p></li>
 </ul>
+
 <p>Continuing with our example from above:</p>
+
 <blockquote>
 <p>&ldquo;This test has been altered until issue #23483 is resolved. Currently, this api
 call returns a 404 status. If the issue is resolved, it should return a 200
 status, at which point this test needs to be updated.&rdquo;</p>
 </blockquote>
+
 <p>Lastly, remember to periodically clean up the documentation.  When filing an
 issue, state <em>were</em> a failing test can be found if it is being updated to match
 the behavior. This way when the issue is closed, it will be easier to go update
@@ -267,7 +307,9 @@ the test. Temporary test states can also be marked with a tag, such as <code>TOD
 to make them easier to search through.  Honestly, whatever works for your team.
 The goal is to create enough context so that someone else is able to know what
 is going on and fix it without having to find you.</p>
+
 <h2 id="conclusion">Conclusion</h2>
+
 <p>Overall, TSQA 2020 turned out to be a wonderful conference and was a desirable
 size. It was not crazy and over-crowded, but also not so small that it felt
 awkward.  It had a diverse mix of people from all over the country, and the

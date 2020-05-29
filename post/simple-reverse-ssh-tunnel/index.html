@@ -146,35 +146,55 @@ Tags <a href="../../tags/linux">linux</a>, <a href="../../tags/ssh">ssh</a>, <a 
             <div class="row">
                 <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
                     
-                    <p>Reverse SSH tunnels are <em>very</em> useful and simple to setup, but can be a bit
-tricky to figure out at first. So, here&rsquo;s a brief and simple guide on how to
-easily create reverse tunnels.</p>
-<hr>
-<!-- raw HTML omitted -->
+                    
+
+<p>Reverse SSH tunnels are <em>very</em> useful and simple to setup, but can be a bit
+ tricky to figure out at first. So, here&rsquo;s a brief and simple guide on how to
+ easily create reverse tunnels.</p>
+
+<hr />
+
+<!--more -->
+
 <h3 id="ssh-tunnels">SSH Tunnels</h3>
+
 <p>A secured shell (SSH) tunnel is an encrypted tunnel, created with a connection using the ssh protocol. It can be thought of as a pipe between two computers that data travels through. Being encrypted, people outside the pipe can only see that data packages are traveling through it, but cannot read the actual contents of the package. SSH tunnels are used to securely connect between devices, as well as forward ports between devices. For example, if I am working on a website hosted on port 3000 of my internally networked laptop, I can use a ssh tunnel to forward that port to one on a public server so that friends can view the website.</p>
+
 <h3 id="reverse-tunnels">Reverse Tunnels</h3>
+
 <p>Reverse tunnels are just like normal ssh tunnels except&hellip; well&hellip; in reverse. This means that I can connect to a remote computer, and have <em>its</em> port tunneled to <em>me</em>, which can be very handy. This is largely used for one particular usecase: providing easy, temporarily, ssh access to computers behind a network and/or firewall.</p>
+
 <p>To make all of this (hopefully) easier to understand, I have drafted up a few diagrams. For the example, lets say I am away and my wife wants me to fix something on her laptop. Unless I have her <em>properly</em> configure the router to forward ssh traffic to her laptop, I normally cannot do this. Additionally, she might be at a friends house, office, or other public place where there is no access to the router controls (well, she <em>shouldn&rsquo;t</em>). So, her laptop doesn&rsquo;t have a direct public IP address, but our server <em>does</em>.</p>
-<p><!-- raw HTML omitted --><!-- raw HTML omitted --><!-- raw HTML omitted -->
+
+<p><a href="../../img/posts/simple-reverse-ssh-tunnel/network-diagram.png"><img alt="Computer behind firewall" src="../../img/posts/simple-reverse-ssh-tunnel/network-diagram.png" style="max-width: 100%;"/><a>
 <em>Two computers (at least one without a direct public IP), both with access to a cloud server with a public IP</em></p>
+
 <p>Because my wife can connect to the public cloud server, she can initiate a reverse tunnel from her laptop, with the server. The tunnel directly connects the server to her laptop.</p>
-<p><!-- raw HTML omitted --><!-- raw HTML omitted --><!-- raw HTML omitted -->
+
+<p><a href="../../img/posts/simple-reverse-ssh-tunnel/ssh-tunnel.png"><img alt="Computer behind firewall" src="../../img/posts/simple-reverse-ssh-tunnel/ssh-tunnel.png" style="max-width: 100%;"/></a>
 <em>The laptop computer creates a reverse ssh tunnel to the cloud server.</em></p>
+
 <p>On my end, I first ssh to the server from my computer. Once the tunnel is started, I can then ssh again to a specified local port on the server, and it will tunnel me directly to her laptop. This will give me a command prompt as if I was sitting with an open terminal at her computer.</p>
-<p><!-- raw HTML omitted --><!-- raw HTML omitted --><!-- raw HTML omitted -->
+
+<p><a href="../../img/posts/simple-reverse-ssh-tunnel/connect-through-tunnel.png"><img alt="Computer behind firewall" src="../../img/posts/simple-reverse-ssh-tunnel/connect-through-tunnel.png" style="max-width: 100%;"/></a>
 <em>With the reverse tunnel setup, the first computer can ssh to the second via the cloud server and tunnel connection.</em></p>
+
 <p>When I am done working, my wife can close the tunnel, and I will no longer be able to access her computer.</p>
+
 <h3 id="creating-the-reverse-tunnel">Creating The Reverse Tunnel</h3>
+
 <p>SSH tunnels can be initiated on linux easily from the command line (assuming ssh is setup and properly configured). To create a reverse tunnel, use the <code>-R</code> flag. After the flag, provide what I call the &ldquo;path&rdquo; of the tunnel. So, the server&rsquo;s port where the tunnel will be found, the host of that port (I almost always use <code>localhost</code>), and the port to be tunneled. Lastly, make sure to specify the <em>IP</em> or <em>hostname</em> of the remote computer just like in a typical plain <code>ssh hostname</code>.</p>
-<pre><code>ssh -R remote-port:localhost:local-port host
-</code></pre><p>Example:</p>
-<pre><code>ssh -R 19999:localhost:22 meowth
-</code></pre><h3 id="connecting">Connecting</h3>
+<pre><code>ssh -R remote-port:localhost:local-port host</code></pre>
+<p>Example:</p>
+<pre><code>ssh -R 19999:localhost:22 meowth</code></pre>
+<h3 id="connecting">Connecting</h3>
+
 <p>After setting up the tunnel, the initializing computer can be accessed <em>from the server</em> by ssh&rsquo;ing to the <em>remote-port</em> of <em>localhost</em> (defined above):</p>
-<pre><code>ssh -p 19999 localhost
-</code></pre><p>This should start an ssh session to the initializing computer. In my example, this is the laptop.</p>
+<pre><code>ssh -p 19999 localhost</code></pre>
+<p>This should start an ssh session to the initializing computer. In my example, this is the laptop.</p>
+
 <h3 id="conclusion">Conclusion</h3>
+
 <p>SSH tunnels are a fascinating and useful piece of technology. The ssh protocol makes modern computing much more secure, and easier to manage multiple computers. That&rsquo;s <em>reverse</em> tunnels in a nutshell. Have fun tunneling!</p>
 
 

@@ -23,55 +23,100 @@ laptop when working from home. Normally, it works fine. However, last week I
 reformatted the work laptop with the &lt;a href=&#34;https://spins.fedoraproject.org/kde/&#34;&gt;&lt;em&gt;KDE Plasma&lt;/em&gt; spin&lt;/a&gt; of
 Fedora Workstation 31&amp;hellip; and my TB3 hub stopped playing nicely with it.
 Here&amp;rsquo;s why.&lt;/p&gt;
+
 &lt;h2 id=&#34;the-issue&#34;&gt;The Issue&lt;/h2&gt;
+
 &lt;p&gt;Due to a NVIDIA Quadro M1000M in my lenovo P50 work laptop, I&amp;rsquo;ve been using
 Gnome with Wayland, because that combination seems to have the least amount of
 annoying trade-offs. While doing a system refresh, I figured I would see if
 things are any different with a clean Fedora 31 Plasma install (they weren&amp;rsquo;t,
 but that&amp;rsquo;s beyond this post).&lt;/p&gt;
-&lt;!-- raw HTML omitted --&gt;
+
+&lt;p&gt;&lt;center&gt;
+&lt;a href=&#34;../../img/posts/fedora-kde-tb3/gnome-tb3-settings.png&#34;&gt;
+&lt;img alt=&#34;Gnome Thunderbolt Settings&#34; src=&#34;../../img/posts/fedora-kde-tb3/gnome-tb3-settings.png&#34; style=&#34;max-width: 100%; padding: 5px 15px 10px 10px&#34;/&gt;&lt;/a&gt;
+&lt;div class=&#34;caption&#34;&gt;The Gnome desktop environment now has a thunderbolt pane
+in the settings GUI&lt;/div&gt;
+&lt;/center&gt;&lt;/p&gt;
+
 &lt;p&gt;Booting into the live cd, and later the installed system, I noticed that my
 Thunderbolt 3 hub did &lt;em&gt;not&lt;/em&gt; work while I was in Plasma. That was fine. I
 expected it really, because for security reasons Linux distros tend to disable
 thunderbolt ports by default.  In gnome, there are now settings to authorize
 it (which I guess I had done on my previous install, and forgot about).  In
 Plasma however, I needed to install and configure &lt;code&gt;bolt&lt;/code&gt;.&lt;/p&gt;
+
 &lt;h2 id=&#34;bolt&#34;&gt;Bolt&lt;/h2&gt;
-&lt;!-- raw HTML omitted --&gt;
+
+&lt;p&gt;&lt;center&gt;
+&lt;a href=&#34;../../img/posts/fedora-kde-tb3/bolt-install.png&#34;&gt;
+&lt;img alt=&#34;Installing bolt with dnf&#34; src=&#34;../../img/posts/fedora-kde-tb3/bolt-install.png&#34; style=&#34;max-width: 100%; padding: 5px 15px 10px 10px&#34;/&gt;&lt;/a&gt;
+&lt;div class=&#34;caption&#34;&gt;&lt;code&gt;bolt&lt;/code&gt; is in the Fedora repos and is easily installed with
+&lt;code&gt;dnf&lt;/code&gt;&lt;/div&gt;
+&lt;/center&gt;&lt;/p&gt;
+
 &lt;p&gt;In Fedora, &lt;code&gt;bolt&lt;/code&gt; is in the repos (at least in Fedora 31+), so installing it is
 easy:&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;sudo dnf install bolt
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Once &lt;code&gt;bolt&lt;/code&gt; is installed, it isn&amp;rsquo;t a bad idea to check to make sure it is
+&lt;pre&gt;&lt;code&gt;sudo dnf install bolt&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Once &lt;code&gt;bolt&lt;/code&gt; is installed, it isn&amp;rsquo;t a bad idea to check to make sure it is
 running: &lt;code&gt;sudo systemctl bolt&lt;/code&gt;.&lt;/p&gt;
-&lt;!-- raw HTML omitted --&gt;
+
+&lt;p&gt;&lt;center&gt;
+&lt;a href=&#34;../../img/posts/fedora-kde-tb3/bolt-systemctl-status.png&#34;&gt;
+&lt;img alt=&#34;bolt systemctl status&#34; src=&#34;../../img/posts/fedora-kde-tb3/bolt-systemctl-status.png&#34; style=&#34;max-width: 100%; padding: 5px 15px 10px 10px&#34;/&gt;&lt;/a&gt;
+&lt;div class=&#34;caption&#34;&gt;Checking &lt;code&gt;bolt&lt;/code&gt; is running using &lt;code&gt;systemctl status&lt;/code&gt;&lt;/div&gt;
+&lt;/center&gt;&lt;/p&gt;
+
 &lt;p&gt;If the status shows that it isn&amp;rsquo;t running for some reason, it can be started
 using &lt;code&gt;systemctl start bolt&lt;/code&gt;. Check the status again, and if it it &lt;em&gt;still&lt;/em&gt; is not
 running&amp;hellip; sorry?&lt;/p&gt;
-&lt;!-- raw HTML omitted --&gt;
+
+&lt;p&gt;&lt;center&gt;
+&lt;a href=&#34;../../img/posts/fedora-kde-tb3/boltctl.png&#34;&gt;
+&lt;img alt=&#34;boltctl&#34; src=&#34;../../img/posts/fedora-kde-tb3/boltctl.png&#34; style=&#34;max-width: 100%; padding: 5px 15px 10px 10px&#34;/&gt;&lt;/a&gt;
+&lt;div class=&#34;caption&#34;&gt;&lt;/div&gt;
+&lt;/center&gt;&lt;/p&gt;
+
 &lt;p&gt;With bolt installed, the command &lt;code&gt;boltctl&lt;/code&gt; is available to use. The base command will
 show information about attached thunderbolt devices. To see more &lt;code&gt;boltctl&lt;/code&gt;
 commands, run &lt;code&gt;boltctl --help&lt;/code&gt;.&lt;/p&gt;
+
 &lt;h2 id=&#34;authorizing&#34;&gt;Authorizing&lt;/h2&gt;
-&lt;!-- raw HTML omitted --&gt;
+
+&lt;p&gt;&lt;center&gt;
+&lt;a href=&#34;../../img/posts/fedora-kde-tb3/boltctl-authorize.png&#34;&gt;
+&lt;img alt=&#34;boltctl authorize&#34; src=&#34;../../img/posts/fedora-kde-tb3/boltctl-authorize.png&#34; style=&#34;max-width: 100%; padding: 5px 15px 10px 10px&#34;/&gt;&lt;/a&gt;
+&lt;div class=&#34;caption&#34;&gt;Authorizing the device&lt;/div&gt;
+&lt;/center&gt;&lt;/p&gt;
+
 &lt;p&gt;In order to &lt;em&gt;use&lt;/em&gt; the thunderbolt 3 device, it needs to be authorized. To
 authorize a device, first use a plain &lt;code&gt;boltctl&lt;/code&gt; command to get the &lt;code&gt;uuid&lt;/code&gt; of
 the device. Next, call &lt;code&gt;boltctl authorize&lt;/code&gt; using the &lt;code&gt;uuid&lt;/code&gt; to authorize it:&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;boltctl authorize &amp;lt;UUID HERE&amp;gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;The device should now be authorized. When I authorized mine, some of my devices
+&lt;pre&gt;&lt;code&gt;boltctl authorize &amp;lt;UUID HERE&amp;gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;The device should now be authorized. When I authorized mine, some of my devices
 started showing up automatically, while others needed to be disconnected and
 replugged.&lt;/p&gt;
+
 &lt;h2 id=&#34;enrolling&#34;&gt;Enrolling&lt;/h2&gt;
-&lt;!-- raw HTML omitted --&gt;
+
+&lt;p&gt;&lt;center&gt;
+&lt;a href=&#34;../../img/posts/fedora-kde-tb3/bresetoltctl-enroll.png&#34;&gt;
+&lt;img alt=&#34;boltctl enroll&#34; src=&#34;../../img/posts/fedora-kde-tb3/boltctl-enroll.png&#34; style=&#34;max-width: 100%; padding: 5px 15px 10px 10px&#34;/&gt;&lt;/a&gt;
+&lt;div class=&#34;caption&#34;&gt;Enrolling the device for permanent use&lt;/div&gt;
+&lt;/center&gt;&lt;/p&gt;
+
 &lt;p&gt;Authorizing a device enables it to be used, but doesn&amp;rsquo;t guarantee persistence.
 While this may be desired to grant &lt;em&gt;temporary&lt;/em&gt; authorization to a device, many
 users tend want their device to &lt;em&gt;always&lt;/em&gt; work, without having to manually
 authorize it. In this case, the device should be &lt;em&gt;enrolled&lt;/em&gt; (like &lt;code&gt;systemctl enable&lt;/code&gt;).
 Simply call &lt;code&gt;boltctl enroll&lt;/code&gt;, with the device UUID:&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;boltctl enroll &amp;lt;UUID HERE&amp;gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Once enrolled, the device&amp;rsquo;s UUID will be recorded and added to a database. By
+&lt;pre&gt;&lt;code&gt;boltctl enroll &amp;lt;UUID HERE&amp;gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Once enrolled, the device&amp;rsquo;s UUID will be recorded and added to a database. By
 default, the device will now automatically be authorized whenever it is
 connected.&lt;/p&gt;
+
 &lt;h2 id=&#34;conclusion&#34;&gt;Conclusion&lt;/h2&gt;
+
 &lt;p&gt;That&amp;rsquo;s it. While the solution isn&amp;rsquo;t very difficult, it can be frustrating to
 figure out when it appears that the thunderbolt device simply is not working.
 Regardless, I&amp;rsquo;m glad that I now know about &lt;code&gt;bolt&lt;/code&gt; and how to use it!&lt;/p&gt;</description>
@@ -86,45 +131,60 @@ Regardless, I&amp;rsquo;m glad that I now know about &lt;code&gt;bolt&lt;/code&g
       <description>&lt;p&gt;Extending a laptop&amp;rsquo;s screen to an external display can often be a nightmare.
 Sometimes, it might be best to just hit the reset button and configure from
 scratch. With KDE Plasma 5, you can. Here&amp;rsquo;s how.&lt;/p&gt;
+
 &lt;h2 id=&#34;issue&#34;&gt;Issue&lt;/h2&gt;
+
 &lt;p&gt;While I love having a &lt;a href=&#34;../../post/my-t470/&#34;&gt;dock-able laptop&lt;/a&gt; and &lt;a href=&#34;../../post/new-lgud4379b&#34;&gt;my 43&amp;rdquo; 4k LG
 monitor&lt;/a&gt;, getting them configured and agreeing with each other
 can sometimes be a headache. Luckily, KDE Plasma 5 (the desktop environment
 I&amp;rsquo;ve been using for awhile now) is fantastic and remembers previous display
 configurations.&lt;/p&gt;
+
 &lt;p&gt;However, when I am playing around with resolutions or multiple inputs,
 sometimes I set something that doesn&amp;rsquo;t work&amp;hellip; and it is remembered, causing
 more problems.&lt;/p&gt;
+
 &lt;h2 id=&#34;the-fix&#34;&gt;The Fix&lt;/h2&gt;
+
 &lt;p&gt;Luckily, there is an easy fix: just delete the saved profile, and
 re-setup the display again. However, I often forget these very simple steps&amp;hellip;
 hence, this post (and to help anyone else that needs it, of course :P).&lt;/p&gt;
+
 &lt;h4 id=&#34;delete-old-profile&#34;&gt;Delete old profile&lt;/h4&gt;
+
 &lt;p&gt;The first step is to delete the plasma profile that saves the screen settings.
 Note, this may remove the profiles for &lt;em&gt;all&lt;/em&gt; previously configured displays,
 but I am okay with it for &lt;em&gt;my&lt;/em&gt; use case.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;cd ~/.local.share
-rm -rf kscreen
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h4 id=&#34;extend-monitors-when-docked&#34;&gt;Extend monitors when docked&lt;/h4&gt;
-&lt;p&gt;&lt;!-- raw HTML omitted --&gt;&lt;!-- raw HTML omitted --&gt;&lt;!-- raw HTML omitted --&gt;&lt;/p&gt;
-&lt;!-- raw HTML omitted --&gt;
+rm -rf kscreen&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h4 id=&#34;extend-monitors-when-docked&#34;&gt;Extend monitors when docked&lt;/h4&gt;
+
+&lt;p&gt;&lt;a href=&#34;../../img/posts/reset-plasma5-monitor-config/extended-monitor.png&#34;&gt;&lt;img alt=&#34;The KDE Plasma 5 extend display GUI&#34; src=&#34;../../img/posts/reset-plasma5-monitor-config/extend-monitor.png&#34; style=&#34;max-width: 100%;&#34;/&gt;&lt;/a&gt;
+&lt;div class=&#34;caption&#34;&gt;The KDE Plasma 5 extend display GUI.&lt;/div&gt;&lt;/p&gt;
+
 &lt;p&gt;After deleting the config, dock or reconnect the laptop to the display. A GUI
 with extension layout options should pop up. If it does, select the preferred
 layout option.&lt;/p&gt;
-&lt;h4 id=&#34;close-laptop-lid-dont-disable&#34;&gt;Close laptop lid (don&amp;rsquo;t disable)&lt;/h4&gt;
+
+&lt;h4 id=&#34;close-laptop-lid-don-t-disable&#34;&gt;Close laptop lid (don&amp;rsquo;t disable)&lt;/h4&gt;
+
 &lt;p&gt;After extending the display, I usually try to make the monitor the primary
 display and disable the laptop screen. This doesn&amp;rsquo;t seem to work (It causes my
 monitor to blank). However, I have learned that if I simply &lt;em&gt;close my laptop
 lid&lt;/em&gt; once it is connected&amp;hellip; it does both of those things for me. I always
 forget this&amp;hellip; but now it&amp;rsquo;s documented!&lt;/p&gt;
+
 &lt;h4 id=&#34;optional-reset-kscreen&#34;&gt;(Optional) Reset kscreen&lt;/h4&gt;
+
 &lt;p&gt;After flipping around the displays so much, plasma shell may have gotten a bit
 frazzled. If so, just reset it using the following command:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;kquitapp5 plasmashell &lt;span style=&#34;color:#f92672&#34;&gt;&amp;amp;&amp;amp;&lt;/span&gt; kstart plasmashell
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;I like to execute this in krunner (alt-F2) so that it runs in the background,
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;kquitapp5 plasmashell &lt;span style=&#34;color:#f92672&#34;&gt;&amp;amp;&amp;amp;&lt;/span&gt; kstart plasmashell&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;I like to execute this in krunner (alt-F2) so that it runs in the background,
 and because I can usually still get to krunner, even if something goes terribly
 wrong with plasmashell during the process.&lt;/p&gt;
+
 &lt;h2 id=&#34;conclusion&#34;&gt;Conclusion&lt;/h2&gt;
+
 &lt;p&gt;That&amp;rsquo;s it. While this post is rather short (for once), hopefully it will be useful. Enjoy!&lt;/p&gt;</description>
     </item>
     
@@ -135,49 +195,66 @@ wrong with plasmashell during the process.&lt;/p&gt;
       
       <guid>http://ryan.himmelwright.net/post/solus-to-fedora/</guid>
       <description>&lt;p&gt;For awhile, I have been debating the idea of switching back to Fedora (from Solus). At least on my &lt;a href=&#34;../../pages/homelab/#alakazam&#34;&gt;main computer&lt;/a&gt;. First, let me state this right up front: I am still &lt;em&gt;very&lt;/em&gt; satisfied with Solus. I think it is one of the best current Linux distros, and I want to still contribute to the project. However, there are a few reasons why Solus isn&amp;rsquo;t the best fit for my needs &lt;em&gt;right now&lt;/em&gt;, and I will highlight them below.&lt;/p&gt;
+
 &lt;h3 id=&#34;why-switch&#34;&gt;Why Switch&lt;/h3&gt;
-&lt;!-- raw HTML omitted --&gt;
+
+&lt;p&gt;&lt;center&gt;
+&lt;img alt=&#34;Solus and Fedora Logos&#34; src=&#34;../../img/posts/solus-to-fedora/logos.png&#34;  style=&#34;max-width: 85%;&#34;/&gt;
+&lt;/center&gt;
+&lt;em&gt;The Solus (Left) and Fedora (right) Project Logos&lt;/em&gt;&lt;/p&gt;
+
 &lt;p&gt;The first phrase stated on the &lt;a href=&#34;https://getsol.us&#34;&gt;Solus Project homepage&lt;/a&gt; is &amp;ldquo;Solus is an operating system that is designed for &lt;strong&gt;home computing&lt;/strong&gt;.&amp;rdquo; I find this to be true, and Solus does a great job at it. The Linux community needs a few good, focused, distros. While I have been using Solus for my &amp;ldquo;&lt;em&gt;home&lt;/em&gt;&amp;rdquo; computing, the computing tasks I&amp;rsquo;ve focused on recently do not fall into the category of standard &lt;em&gt;home computing&lt;/em&gt; use. Recently, my main top computing activities and goals are:&lt;/p&gt;
+
 &lt;ul&gt;
 &lt;li&gt;Writing (okay&amp;hellip; but still)&lt;/li&gt;
 &lt;li&gt;Running all sorts of VMs&lt;/li&gt;
 &lt;li&gt;Trying various Server Technologies
+
 &lt;ul&gt;
 &lt;li&gt;ZFS&lt;/li&gt;
 &lt;li&gt;KVM&lt;/li&gt;
 &lt;li&gt;Containerization Technologies (LXC, Docker, &amp;hellip;)&lt;/li&gt;
 &lt;li&gt;Ansible and other automation tools&lt;/li&gt;
 &lt;li&gt;Etc.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
 &lt;li&gt;Learning about Clustering
+
 &lt;ul&gt;
 &lt;li&gt;OpenMP&lt;/li&gt;
 &lt;li&gt;High Availability&lt;/li&gt;
 &lt;li&gt;Distributed File systems&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
 &lt;li&gt;Trying to get involved with some other Open Source Projects
+
 &lt;ul&gt;
 &lt;li&gt;Fedora (Infrastructure, Dev)&lt;/li&gt;
 &lt;li&gt;NixOS&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
 &lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
+
 &lt;p&gt;As you can see, many of the above items are not desktop based, but really
 &lt;em&gt;server&lt;/em&gt; based operations. Solus is &lt;em&gt;not&lt;/em&gt; a server distribution, as it doesn&amp;rsquo;t
 &lt;em&gt;try&lt;/em&gt; to be one. Which is a good thing. It is focused on its audience. I
 just happen to not be in that audience at the moment.&lt;/p&gt;
+
 &lt;p&gt;Additionally, one of my goals for the near future is to transform my long-time Proxmox server into a &lt;a href=&#34;https://www.centos.org/&#34;&gt;CentOS&lt;/a&gt; box. Using Fedora on my main workstation does help me get accustom to that environment. It also allows me to more accurately test out ideas before I plan the big move.&lt;/p&gt;
+
 &lt;p&gt;Lastly, I had been eyeing up the Plasma desktop, and wanted to try that out again. At the time of writing this post, Solus doesn&amp;rsquo;t fully support the Plasma desktop (yet). However, Fedora &lt;em&gt;does&lt;/em&gt; have a &lt;a href=&#34;https://spins.fedoraproject.org/kde/&#34;&gt;KDE Plasma Desktop Spin&lt;/a&gt;.&lt;/p&gt;
+
 &lt;h3 id=&#34;the-switch&#34;&gt;The Switch&lt;/h3&gt;
-&lt;!-- raw HTML omitted --&gt;
+
+&lt;p&gt;&lt;center&gt;
+&lt;img alt=&#34;Solus and Fedora Logos&#34; src=&#34;../../img/posts/solus-to-fedora/fedora25.png&#34;  style=&#34;max-width: 100%;&#34;/&gt;
+&lt;/center&gt;
+&lt;em&gt;Screenfetch on my new Fedora Install&lt;/em&gt;&lt;/p&gt;
+
 &lt;p&gt;I eventually (and somewhat sporadically), made the switch to Fedora. I switched
 the week before the 26 release, so I decided to start with 25, and then upgrade
 later (although I did test out 26 on my other laptop). This let me ensure that
 the 26 issues were ironed out before upgrading. I also got to test out the &lt;code&gt;dnf&lt;/code&gt;
 system upgrade process. I recorded &lt;em&gt;post-switch&lt;/em&gt; notes during the last few weeks
 to document how everything went.&lt;/p&gt;
+
 &lt;blockquote&gt;
 &lt;p&gt;&amp;ldquo;Well&amp;hellip; I did it. I switched to Fedora on Alakazam yesterday. I went with the
 Fedora 25 KDE spin and did all of the hoops to get that up and going. Not only
@@ -185,42 +262,57 @@ is it taking some time to get used to Fedora again, but I am needing to
 reacquaint myself with the KDE environment&amp;hellip; it does seem different that other
 Plasma setups I&amp;rsquo;ve used in the past&amp;hellip; But I like it.&amp;rdquo;&lt;/p&gt;
 &lt;/blockquote&gt;
+
 &lt;p&gt;I got used to it in no time:&lt;/p&gt;
+
 &lt;blockquote&gt;
 &lt;p&gt;Alakazam is doing well on Fedora. I&amp;rsquo;ve been enjoying it and think I will stay on
 it.&lt;/p&gt;
 &lt;/blockquote&gt;
+
 &lt;h3 id=&#34;updates&#34;&gt;Updates&lt;/h3&gt;
+
 &lt;p&gt;I ran some updates that I thought &lt;em&gt;might&lt;/em&gt; be problematic, based
 on &lt;a href=&#34;../../post/back-on-arch/#fedora&#34;&gt;previous issues&lt;/a&gt; I&amp;rsquo;ve encountered with Fedora. I
 made sure to note the results as well. The first notable update was from the
 first time I updated the kernel, and the second was  upgrading from
 Fedora 25 to 26. Both updates went very smoothly without any issues:&lt;/p&gt;
+
 &lt;h4 id=&#34;kernel-upgrade&#34;&gt;Kernel Upgrade&lt;/h4&gt;
+
 &lt;blockquote&gt;
 &lt;p&gt;So I am about to do my first Kernel update since being on Fedora again (on
 Alakazam). We&amp;rsquo;ll see how the video drivers respond&amp;hellip; To note, I am still on 25
 so it hopefully won&amp;rsquo;t be too bad&amp;hellip;&lt;/p&gt;
 &lt;/blockquote&gt;
+
 &lt;p&gt;&lt;em&gt;&amp;hellip;reboot&amp;hellip;&lt;/em&gt;&lt;/p&gt;
+
 &lt;blockquote&gt;
 &lt;p&gt;No issues whatsoever :)&lt;/p&gt;
 &lt;/blockquote&gt;
+
 &lt;h4 id=&#34;upgrade-to-fedora-26&#34;&gt;Upgrade to Fedora 26&lt;/h4&gt;
-&lt;!-- raw HTML omitted --&gt;
+
+&lt;p&gt;&lt;center&gt;
+&lt;a href=&#34;../../img/posts/solus-to-fedora/fedora26-upgrade.png&#34;&gt;&lt;img alt=&#34;Solus and Fedora Logos&#34; src=&#34;../../img/posts/solus-to-fedora/fedora26-upgrade.png&#34; style=&#34;max-width: 100%;&#34;/&gt;&lt;/a&gt;
+&lt;/center&gt;
+&lt;em&gt;I upgraded my Fedora 25 Plasma Install to Fedora 26&lt;/em&gt;&lt;/p&gt;
+
 &lt;p&gt;Other than some odd issues with the GUI tool, the upgrade from 25 to 26 was
 smooth and uneventful.&lt;/p&gt;
+
 &lt;blockquote&gt;
 &lt;p&gt;I just upgraded Alakazam from Fedora 25 KDE, to Fedora 26 this morning. I couldn&amp;rsquo;t really get the
 graphical installer to start, but that could be because I have several desktop environments setup
 (Plasma &amp;amp; Gnome), so it may have been confused (I was using the Gnome Software App in Plasma&amp;hellip;)&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;blockquote&gt;
+
 &lt;p&gt;I just did the upgrade using the (command line) dnf upgrade tool, like I normally use, and it worked
 wonderfully. It even looks like my nvidia drivers stayed and my monitors were configured correctly
 after rebooting. The only difference is I don&amp;rsquo;t seem to have the same Plasma animations I had
 before, but that is fine, and likely part of the update.&lt;/p&gt;
 &lt;/blockquote&gt;
+
 &lt;p&gt;So that it. Those are my reasons for switching (for now), and the results of my
 switch. I am still happy with Fedora, at least on Alakazam, and will likely
 remain on it until I have a convincing reason to leave.&lt;/p&gt;</description>
@@ -240,7 +332,9 @@ clean and admit that I have never really liked the KDE/Plasma desktop
 environment (more on that below). However, with that said&amp;hellip; I am still
 using the plasma desktop on my main computer (months later, and
 haven&amp;rsquo;t aborted yet**&amp;hellip;). Here are my thoughts.&lt;/p&gt;
-&lt;h3 id=&#34;my-history-with-kdeplasma&#34;&gt;My History with KDE/Plasma&lt;/h3&gt;
+
+&lt;h3 id=&#34;my-history-with-kde-plasma&#34;&gt;My History with KDE/Plasma&lt;/h3&gt;
+
 &lt;p&gt;Now, as I said above, &lt;em&gt;I have never really liked KDE (now Plasma)&lt;/em&gt;. In
 fact, sometimes I down right &lt;em&gt;hated&lt;/em&gt; it. It is a great project, and I
 &lt;em&gt;wanted&lt;/em&gt; to like it. It has so many features and is amazing
@@ -252,57 +346,66 @@ desktop is probably one of the best power user environments out
 there). The bulky features always made it feel childish. So, with that
 said&amp;hellip; I have been using using the Plasma desktop on all of my
 personal computers for several months. Here are my thoughts.&lt;/p&gt;
+
 &lt;h3 id=&#34;pros&#34;&gt;Pros&lt;/h3&gt;
+
 &lt;ul&gt;
 &lt;li&gt;&lt;strong&gt;The theming has come a long way&lt;/strong&gt;. It no longer looks like a
 child&amp;rsquo;s toy. Even the default theme is &lt;em&gt;very&lt;/em&gt; appealing. Also, it
 has &lt;em&gt;dark themes&lt;/em&gt;, which I am always a fan of.&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;&lt;!-- raw HTML omitted --&gt;&lt;!-- raw HTML omitted --&gt;&lt;!-- raw HTML omitted --&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;../../img/posts/plasma-desktop/default-plasma.jpg&#34;&gt;&lt;img alt=&#34;Default KDE Plasma 5.6 Desktop&#34; src=&#34;../../img/posts/plasma-desktop/default-plasma.jpg&#34; style=&#34;max-width: 100%;&#34;/&gt;&lt;/a&gt;&lt;/p&gt;
+
 &lt;ul&gt;
 &lt;li&gt;&lt;strong&gt;I Love the customization.&lt;/strong&gt; I love the level of customization
 the plasma desktop allows. I can set transparency, add/remove
 panels or widgets, set custom keybindings (very important to me),
 and a bunch of other operations very easily.&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;&lt;!-- raw HTML omitted --&gt;&lt;!-- raw HTML omitted --&gt;&lt;!-- raw HTML omitted --&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;../../img/posts/plasma-desktop/settings.jpg&#34;&gt;&lt;img alt=&#34;Plasma Settings&#34; src=&#34;../../img/posts/plasma-desktop/settings.jpg&#34; style=&#34;max-width: 100%;&#34;/&gt;&lt;/a&gt;&lt;/p&gt;
+
 &lt;ul&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;strong&gt;Lets me hide window bars&lt;/strong&gt; One customization I love is the ability
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;Lets me hide window bars&lt;/strong&gt; One customization I love is the ability
 to hide the window bars. I am not a fan of window bars, because I
 think they look clunky and just take up space. One feature I like
 about many tiling window managers is it is usually very easy to hide
 the window bars. However, that isn&amp;rsquo;t always the case in Desktop
 Environments, but I was pleased with how easy it was to do it in
-Plasma.&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;strong&gt;It Lets me create an awesome-wm environment, but as a full DE&lt;/strong&gt;
+Plasma.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;It Lets me create an awesome-wm environment, but as a full DE&lt;/strong&gt;
 Similar to above, I am able to implement some of the features I love
 about tiling window managers like awesome and i3, but with the full
 desktop environment. In addition to removing window bars, I like to
 easily move and resize windows by hitting the meta or alt key and
-left/right clicking the windows. Again, in Plasma this was simple.&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;strong&gt;I love krunner. A lot.&lt;/strong&gt; I like using application launchers, and
+left/right clicking the windows. Again, in Plasma this was simple.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;I love krunner. A lot.&lt;/strong&gt; I like using application launchers, and
 krunner looks nice, is lightning fast, and gets the job done. I
 didn&amp;rsquo;t really know much about krunner during previous attempts at
 using KDE. This was definitely contributor to why I liked it much
-more this time around.&lt;/p&gt;
-&lt;/li&gt;
+more this time around.&lt;/p&gt;&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;&lt;!-- raw HTML omitted --&gt;&lt;!-- raw HTML omitted --&gt;&lt;!-- raw HTML omitted --&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;../../img/posts/plasma-desktop/krunner.png&#34;&gt;&lt;img alt=&#34;Plasma Settings&#34; src=&#34;../../img/posts/plasma-desktop/krunner.png&#34; style=&#34;max-width: 100%;&#34;/&gt;&lt;/a&gt;&lt;/p&gt;
+
 &lt;ul&gt;
 &lt;li&gt;&lt;strong&gt;The ability to use old-school animations is fun&lt;/strong&gt; There is not much to say
 here. While not very practical, sometimes spinning a desktop cube is
-just straight up &lt;em&gt;fun&lt;/em&gt;.&lt;/li&gt;
+just straight up &lt;em&gt;fun&lt;/em&gt;.
+&lt;br /&gt;&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;&lt;!-- raw HTML omitted --&gt;&lt;!-- raw HTML omitted --&gt;&lt;!-- raw HTML omitted --&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;../../img/posts/plasma-desktop/cube.png&#34;&gt;&lt;img alt=&#34;Desktop Cube&#34; src=&#34;../../img/posts/plasma-desktop/cube.png&#34; style=&#34;max-width: 100%;&#34;/&gt;&lt;/a&gt;&lt;/p&gt;
+
 &lt;ul&gt;
 &lt;li&gt;&lt;strong&gt;Fast. Even for a full DE&lt;/strong&gt;&lt;/li&gt;
 &lt;/ul&gt;
+
 &lt;h3 id=&#34;cons&#34;&gt;Cons&lt;/h3&gt;
+
 &lt;ul&gt;
 &lt;li&gt;&lt;strong&gt;Multi-monitor support. WTF.&lt;/strong&gt; This was by far the biggest issue I
 had. My main computer is a 17&amp;rdquo; laptop that I connect to two 24&amp;rdquo;
@@ -321,9 +424,12 @@ right-click menu is disabled on some screens but not
 others. Basically, it&amp;rsquo;s just a hot mess and the most infuriating
 problem I faced when using Plasma. If I used a laptop without
 monitors, or even a permanent desktop setup, I would be
-fine. However, that is not my use case.&lt;/li&gt;
+fine. However, that is not my use case.
+&lt;br /&gt;&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;&lt;!-- raw HTML omitted --&gt;&lt;!-- raw HTML omitted --&gt;&lt;!-- raw HTML omitted --&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;../../img/posts/plasma-desktop/wtf-multi-monitor.png&#34;&gt;&lt;img alt=&#34;Plasma Settings&#34; src=&#34;../../img/posts/plasma-desktop/wtf-multi-monitor.png&#34; style=&#34;max-width: 100%;&#34;/&gt;&lt;/a&gt;&lt;/p&gt;
+
 &lt;ul&gt;
 &lt;li&gt;&lt;strong&gt;Randomly just stops working&lt;/strong&gt; Sometimes, KDE applications just
 crash and I can&amp;rsquo;t seem to get them back. Widgets seemed to beak
@@ -341,17 +447,20 @@ these options is great, but sometimes it was
 overwhelming. Additionally, the settings felt disjointed and I
 didn&amp;rsquo;t know where the settings for some things where.&lt;/li&gt;
 &lt;/ul&gt;
+
 &lt;h3 id=&#34;final-thoughts&#34;&gt;Final Thoughts&lt;/h3&gt;
+
 &lt;ul&gt;
 &lt;li&gt;I can finally use Plasma&lt;/li&gt;
 &lt;li&gt;Very fast and lightweight for all that it is&lt;/li&gt;
 &lt;li&gt;Still has a bit of stability/polish work to go&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;** &lt;!-- raw HTML omitted --&gt;Update: I took forever to get this post out and I have actually
+
+&lt;p&gt;** &lt;i&gt;Update: I took forever to get this post out and I have actually
 moved off of Plasma. I just couldn&amp;rsquo;t handle the multi-monitor issues I
 had. However, I will definitely be trying out the Desktop Environment
 again in the future (I moved to i3-gaps for now. I love my tiling
-window managers :) )&lt;!-- raw HTML omitted --&gt;&lt;/p&gt;</description>
+window managers :) )&lt;/i&gt;&lt;/p&gt;</description>
     </item>
     
   </channel>

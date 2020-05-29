@@ -152,17 +152,21 @@ command-line system information tool for a few years now. While browsing
 of the submissions did not have distro logos in their neofetch/screenfetch
 ascii art. I knew that neofetch was customizable, but have never dug
 into it myself. So I decided to change that.</p>
+
 <h3 id="custom-neofetch-ascii-art">Custom Neofetch ASCII Art</h3>
+
 <p>I started my neofetch investigation the same way one should start researching
 <em>any</em> Linux command-line tool: <code>man neofetch</code>. Inside the man pages, I was
 greeted with all sorts of customization options. Eventually, I scrolled down to
 the section I wanted, <code>IMAGE BACKEND</code>.</p>
+
 <p>There I learned that a custom image could be specified using the <code>--source</code> flag.
 For example, to set the art to an ascii charmeleon file I <em>just happen</em> to have
 on my desktop, I tried:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">neofetch --source /home/ryan/Documents/Pokemon-ascii/5.txt
-</code></pre></div><p>AAAAAND&hellip; It didn&rsquo;t work. It was still the Fedora logo. Clearly, I was still
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">neofetch --source /home/ryan/Documents/Pokemon-ascii/5.txt</code></pre></div>
+<p>AAAAAND&hellip; It didn&rsquo;t work. It was still the Fedora logo. Clearly, I was still
 missing something.</p>
+
 <p>After some browsing, I found the <a href="https://github.com/dylanaraps/neofetch/wiki/Custom-Ascii-art-file-format">ASCII art
 page</a>
 on neofetch&rsquo;s Github wiki. Reading it, I noticed that I was missing the <code>${c1}</code>
@@ -170,29 +174,35 @@ in my pokemon ascii files. So, I made a copy of the file and added <code>S{c1}</
 the top:</p>
 <pre><code>➜  welcome-messages git:(master) ✗ head charmeleon
 ${c1}
-                      ,-'`\
-                  _,&quot;'    j
+                      ,-&#39;`\
+                  _,&#34;&#39;    j
            __....+       /               .
-       ,-'&quot;             /               ; `-._.'.
-      /                (              ,'       .'
+       ,-&#39;&#34;             /               ; `-._.&#39;.
+      /                (              ,&#39;       .&#39;
      |            _.    \             \   ---._ `-.
-     ,|    ,   _.'  Y    \             `- ,'   \   `.`.
-     l'    \ ,'._,\ `.    .              /       ,--. l
-  .,-        `._  |  |    |              \       _   l .
-</code></pre><!-- raw HTML omitted -->
+     ,|    ,   _.&#39;  Y    \             `- ,&#39;   \   `.`.
+     l&#39;    \ ,&#39;._,\ `.    .              /       ,--. l
+  .,-        `._  |  |    |              \       _   l .</code></pre>
+<div class="caption">head output of my modified charmeleon ascii file</div>
+
 <p>AAAAAND&hellip; It worked!</p>
+
 <h3 id="adding-a-shell-alias">Adding a Shell Alias</h3>
-<p><!-- raw HTML omitted --><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
-<!-- raw HTML omitted -->
+
+<p><a href="../../img/posts/custom-neofetch-ascii-art/charmeleon-neofetch.png"><img alt="Custom Charmeleon ASCII art for my desktop's neofetch output" src="../../img/posts/custom-neofetch-ascii-art/charmeleon-neofetch.png" style="max-width: 100%;"/></a>
+<div class="caption">Custom Charmeleon ASCII art for my desktop&rsquo;s neofetch output</div></p>
+
 <p>Lastly, I wanted the charmeleon ascii art to be the <em>default</em> neofetch output on my
 desktop. While I&rsquo;m sure that I could have accomplished this <em>properly</em> by
 editing the <code>~/.config/neofetch/config.conf</code> file I learned about, for now&hellip;
 creating an alias seemed easier XD. So I added the following line to my
 <code>~/.zshrc</code>:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">alias neofetch<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;neofetch --source /home/ryan/Documents/ascii/pokemon/charmeleon&#39;</span>
-</code></pre></div><p>Now whenever I call plain <code>neofetch</code> on my desktop, it runs with the charmeleon
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">alias neofetch<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;neofetch --source /home/ryan/Documents/ascii/pokemon/charmeleon&#39;</span></code></pre></div>
+<p>Now whenever I call plain <code>neofetch</code> on my desktop, it runs with the charmeleon
 art.</p>
+
 <h3 id="conclusion">Conclusion</h3>
+
 <p>So that&rsquo;s it. A nice <em>short</em> post for once! Despite the size, I hope if was
 useful. If you haven&rsquo;t heard of neofetch before, go check it out. If you have,
 I encourage you to go digging through the man pages. I promise you won&rsquo;t regret

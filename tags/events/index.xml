@@ -21,23 +21,35 @@ the &lt;a href=&#34;https://tsqa.org&#34;&gt;Triangle Software Quality Associati
 being hosted by my local software testing group, the speakers and
 attendees were from all over the country. While only a single-day conference,
 it was packed full with solid advice and ideas I left with. Here are a few.&lt;/p&gt;
+
 &lt;p&gt;&lt;em&gt;Just to clarify: TSQA occured in February, right before COVID-19 really started spreading
 in the US. I&amp;rsquo;m just very late in this post.&lt;/em&gt;&lt;/p&gt;
+
 &lt;h2 id=&#34;tsqa-2020&#34;&gt;TSQA 2020&lt;/h2&gt;
+
 &lt;h4 id=&#34;getting-there&#34;&gt;Getting There&lt;/h4&gt;
+
 &lt;p&gt;TSQA was held at the &lt;a href=&#34;https://www.durhamconventioncenter.com&#34;&gt;Durham Convention
 Center&lt;/a&gt;, which is located in the middle
 of downtown Durham (NC, USA). Being so close to our office, I managed to help
 convince/remind several of my co-workers to register last minute. On the
 morning of the event, I drove the one mile to the office parking garage, then
 hustled coat-less through the cold morning wind to the conference center.&lt;/p&gt;
+
 &lt;p&gt;As I walked inside, I immediately saw my manager at the entrance handing out
 bandages, and knew I was in the right place (he was a TSQA volunteer).  After
 saying hello and checking in, I made my way to the main ballroom to grab some
 food. After awhile, my co-workers started to trickle in, so we found a table
 near the front and gathered for the opening statements.&lt;/p&gt;
+
 &lt;h4 id=&#34;keynote&#34;&gt;Keynote&lt;/h4&gt;
-&lt;!-- raw HTML omitted --&gt;
+
+&lt;p&gt;&lt;center&gt;
+&lt;a href=&#34;../../img/posts/tsqa-2020/the_jetsons.jpg&#34;&gt;
+&lt;img alt=&#34;The Jetsons&#34; src=&#34;../../img/posts/tsqa-2020/the_jetsons.jpg&#34; style=&#34;max-width: 100%; padding: 5px 15px 10px 10px&#34;/&gt;&lt;/a&gt;
+&lt;div class=&#34;caption&#34;&gt;The Jetsons&lt;/div&gt;
+&lt;/center&gt;&lt;/p&gt;
+
 &lt;p&gt;They keynote, presented by &lt;a href=&#34;http://angiejones.tech&#34;&gt;Angie Jones&lt;/a&gt; was an
 entertaining look at the history and future of technology. She took ideas that
 were shown in &lt;a href=&#34;https://en.wikipedia.org/wiki/The_Jetsons&#34;&gt;The Jetsons&lt;/a&gt;, and
@@ -45,40 +57,59 @@ compared them to how close (or far) we have come to many of them. She then used
 this as an example of how we should be planning to test &lt;em&gt;future&lt;/em&gt; technology,
 because like it or not, it&amp;rsquo;s coming. She concluded by providing some examples
 of what testing in the future could look like.&lt;/p&gt;
+
 &lt;h4 id=&#34;talks&#34;&gt;Talks&lt;/h4&gt;
+
 &lt;p&gt;For the rest of the day, I attended several talks interspaced with a lunch and
 snack break. I mainly focused on attending talks around automation, but also
 went to a few about developing test cases or UI testing tools. Similar to my
 &lt;a href=&#34;../../post/ato2019/&#34;&gt;All Things Open 2019 post&lt;/a&gt;, instead of narrating each talk I
 went to, I picked out few lessons I learned and will share them below.&lt;/p&gt;
+
 &lt;p&gt;After the conference ended, my co-workers and I made our way back to the office
 to share experiences and debate our thoughts over a drink.  It&amp;rsquo;s always great
 to hash out ideas with others after a conference, while they are still fresh.
 Also&amp;hellip; it&amp;rsquo;s fun :) .&lt;/p&gt;
-&lt;h3 id=&#34;lessons-learnedstrengthened&#34;&gt;Lessons Learned/Strengthened&lt;/h3&gt;
+
+&lt;h3 id=&#34;lessons-learned-strengthened&#34;&gt;Lessons Learned/Strengthened&lt;/h3&gt;
+
 &lt;p&gt;Now to summarize a few of the many lessons I picked up while at TSQA 2020. I&amp;rsquo;ve
 heard many of these suggestions before, but the speakers presented them so
 well, I really want to ensure I start implementing the at work.  Lets get
 started.&lt;/p&gt;
+
 &lt;h4 id=&#34;no-failing-tests&#34;&gt;No failing tests&lt;/h4&gt;
+
 &lt;p&gt;It is all too easy to let a backlog of failing tests build up. This may be
 due to the test being out of date, a low priority issue, or worse of
 all&amp;hellip; just a flaky test. Regardless of the reason, failing tests really should
 be mitigated &lt;em&gt;immediately&lt;/em&gt;, for several reasons.&lt;/p&gt;
+
 &lt;p&gt;Leaving failing tests to continuously run causes failure fatigue. This
 normalizes the failing tests and causes a team to ignore &lt;em&gt;other&lt;/em&gt; failing tests in
 the future. Basically, it decreases the competence in the test suite, and thus
 the QE team as a whole.&lt;/p&gt;
-&lt;!-- raw HTML omitted --&gt;
+
+&lt;p&gt;&lt;center&gt;
+&lt;a href=&#34;../../img/posts/tsqa-2020/disable-tests-meme.jpg&#34;&gt;
+&lt;img alt=&#34;Failing tests meme&#34; src=&#34;../../img/posts/tsqa-2020/disable-tests-meme.jpg&#34; style=&#34;max-width: 100%; padding: 5px 15px 10px 10px&#34;/&gt;&lt;/a&gt;
+&lt;div class=&#34;caption&#34;&gt;This is supposed to be a joke, but it&amp;rsquo;s actually
+the point I&amp;rsquo;m sharing. If tests are failing, disable or get rid of them, &lt;em&gt;AFTER&lt;/em&gt; filing an
+issue! &lt;/div&gt;
+&lt;/center&gt;&lt;/p&gt;
+
 &lt;p&gt;So, if a project has continuously failing tests, try to fix them as quick
 as possible. If there currently isn&amp;rsquo;t time to fix it (we&amp;rsquo;ve all been there),
 that&amp;rsquo;s fine, but file an issue to &lt;em&gt;remember&lt;/em&gt; to fix it later. Then disable it.
 It will make a test suite more meaningful, because each failure
 &lt;em&gt;means something important&lt;/em&gt;.&lt;/p&gt;
+
 &lt;p&gt;One last statement here: &lt;strong&gt;No&lt;/strong&gt; flaky tests either. If we can&amp;rsquo;t depend on them,
 they aren&amp;rsquo;t worth having.  Either figure out how to fix them so they are
 consistent, or remove them.&lt;/p&gt;
+
 &lt;h4 id=&#34;write-tests-to-pass-for-known-issues&#34;&gt;Write tests to pass for known issues&lt;/h4&gt;
+
 &lt;p&gt;Now, lets expand that suggestion of disabling failing tests, and write tests
 that &lt;em&gt;pass&lt;/em&gt; when a &lt;em&gt;known&lt;/em&gt; defect happens. While sounding counter-intuitive at
 first, this idea makes more sense if you accept the fact that tests don&amp;rsquo;t
@@ -86,50 +117,59 @@ actually &lt;em&gt;find&lt;/em&gt; defects. Rather, automated tests depict the &
 system, and fail when &lt;em&gt;something has changed&lt;/em&gt;. A passed or failed test simply
 acts as a &lt;em&gt;data point&lt;/em&gt;. When a quality engineer goes and investigates the test
 results, &lt;em&gt;they&lt;/em&gt; determine if there is a defect based on the data.&lt;/p&gt;
+
 &lt;p&gt;For example, lets assume I have a test that asserts that an api call returns a
 &lt;code&gt;200&lt;/code&gt; status. However, due to a known issue, it is currently returning &lt;code&gt;404&lt;/code&gt;s.
 I &lt;em&gt;know&lt;/em&gt; that in its current state, the system returns a &lt;code&gt;404&lt;/code&gt; for that api
 call, so I can change/add a test to assert that it is indeed, returning &lt;code&gt;404&lt;/code&gt;s.
 This technique &lt;em&gt;removes a failing test&lt;/em&gt; (as suggest in the previous section),
 while allowing us to maintain that data point. The test will pass while it
-continues to return &lt;code&gt;404&lt;/code&gt;&#39;s, but will fail and notify us of any related state
+continues to return &lt;code&gt;404&lt;/code&gt;&amp;rsquo;s, but will fail and notify us of any related state
 changes.&lt;/p&gt;
+
 &lt;p&gt;Those changes could be from the developers merging a bug fix&amp;hellip; or a
 &lt;em&gt;new&lt;/em&gt; defect popping up, resulting in the api call now returning &lt;code&gt;500&lt;/code&gt; errors.
 Regardless, we know that something has changed again, and we should investigate. By
 comparison, an always-failing or fully removed test would not have demanded our
 attention so easily.&lt;/p&gt;
+
 &lt;h4 id=&#34;better-documentation&#34;&gt;Better Documentation&lt;/h4&gt;
+
 &lt;p&gt;So&amp;hellip; if we have our tests setup to &lt;em&gt;pass&lt;/em&gt; for known defects, lets make one
 thing clear&amp;hellip; we need to make sure we have &lt;strong&gt;amazing documentation&lt;/strong&gt;. This is
 imperative.&lt;/p&gt;
-&lt;!-- raw HTML omitted --&gt;
+
+&lt;p&gt;&lt;center&gt;
+&lt;a href=&#34;../../img/posts/tsqa-2020/documentation-meme.png&#34;&gt;
+&lt;img alt=&#34;Documentation Meme&#34; src=&#34;../../img/posts/tsqa-2020/documentation-meme.png&#34; style=&#34;max-width: 100%; padding: 5px 15px 10px 10px&#34;/&gt;&lt;/a&gt;
+&lt;/center&gt;&lt;/p&gt;
+
 &lt;p&gt;Any test designed to pass on a known defect should contain a few pieces of
 information in its documentation:&lt;/p&gt;
+
 &lt;ul&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;em&gt;Why the test is there&lt;/em&gt;: If a test is checking for undesired
+&lt;li&gt;&lt;p&gt;&lt;em&gt;Why the test is there&lt;/em&gt;: If a test is checking for undesired
 behavior, it is a good idea to quickly document something along the lines
 of &amp;lsquo;This test is checking for behavior we don&amp;rsquo;t want. It is just here
-until an issue is fixed&amp;rsquo;.&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;em&gt;The issue number&lt;/em&gt;. If a test exists until a known issue is resolved&amp;hellip;
+until an issue is fixed&amp;rsquo;.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;&lt;em&gt;The issue number&lt;/em&gt;. If a test exists until a known issue is resolved&amp;hellip;
 please include the issue/bug number in the documentation. This will make it
 much easier for others (or you!) to find more information, or check if the
-issue is already closed once the test starts failing (due to a fix).&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;em&gt;What we expect from the test&lt;/em&gt;: Try to document why the test is
-currently passing, and what we expect when it starts failing again.&lt;/p&gt;
-&lt;/li&gt;
+issue is already closed once the test starts failing (due to a fix).&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;&lt;em&gt;What we expect from the test&lt;/em&gt;: Try to document why the test is
+currently passing, and what we expect when it starts failing again.&lt;/p&gt;&lt;/li&gt;
 &lt;/ul&gt;
+
 &lt;p&gt;Continuing with our example from above:&lt;/p&gt;
+
 &lt;blockquote&gt;
 &lt;p&gt;&amp;ldquo;This test has been altered until issue #23483 is resolved. Currently, this api
 call returns a 404 status. If the issue is resolved, it should return a 200
 status, at which point this test needs to be updated.&amp;rdquo;&lt;/p&gt;
 &lt;/blockquote&gt;
+
 &lt;p&gt;Lastly, remember to periodically clean up the documentation.  When filing an
 issue, state &lt;em&gt;were&lt;/em&gt; a failing test can be found if it is being updated to match
 the behavior. This way when the issue is closed, it will be easier to go update
@@ -137,7 +177,9 @@ the test. Temporary test states can also be marked with a tag, such as &lt;code&
 to make them easier to search through.  Honestly, whatever works for your team.
 The goal is to create enough context so that someone else is able to know what
 is going on and fix it without having to find you.&lt;/p&gt;
+
 &lt;h2 id=&#34;conclusion&#34;&gt;Conclusion&lt;/h2&gt;
+
 &lt;p&gt;Overall, TSQA 2020 turned out to be a wonderful conference and was a desirable
 size. It was not crazy and over-crowded, but also not so small that it felt
 awkward.  It had a diverse mix of people from all over the country, and the
@@ -158,49 +200,66 @@ celebrates&amp;hellip; well, all things &lt;em&gt;open&lt;/em&gt;. Open source, 
 government are all main topics at the conference. Best of all, it&amp;rsquo;s right here
 in the triangle (Raleigh NC). Here are some of my overall take-aways from this
 year.&lt;/p&gt;
+
 &lt;p&gt;While the talks are always full of information, the &lt;em&gt;main&lt;/em&gt; benefit I receive
 from attending the conference is leaving with a list of technologies and
 ideas I want to test out. So, rather than go into boring detail about each talk
 I went to, I will elaborate on some common topics/themes I experienced and what
 I am excited to dig into as a result.&lt;/p&gt;
+
 &lt;p&gt;&lt;em&gt;(Sorry there aren&amp;rsquo;t any visuals in this post. I&amp;rsquo;m still a terrible event
 participant and didn&amp;rsquo;t take any pictures)&lt;/em&gt;&lt;/p&gt;
+
 &lt;h2 id=&#34;topics&#34;&gt;Topics&lt;/h2&gt;
+
 &lt;h3 id=&#34;1-tech&#34;&gt;1) Tech&lt;/h3&gt;
+
 &lt;p&gt;Let&amp;rsquo;s get tech out of the way, right up front. Here are some ideas I left the
 various technical talks with:&lt;/p&gt;
+
 &lt;h4 id=&#34;i-am-going-to-keep-using-zfs-for-my-server&#34;&gt;I am going to keep using ZFS for my server&lt;/h4&gt;
+
 &lt;p&gt;It happened again. Over the last few months I&amp;rsquo;ve entertained the idea of moving
 off of ZFS on my home server for something like mergerfs + snapraid. Then I
 went to a &lt;a href=&#34;https://jrs-s.net/&#34;&gt;Jim Salter&lt;/a&gt; ZFS talk, and just like last time&amp;hellip;
 I want to ZFS &lt;em&gt;all the things&lt;/em&gt;. So, it looks like I&amp;rsquo;ll be sticking with it on the
 server. Also&amp;hellip; it might be time for a ZFS tune-up to make sure I have the
 appropriate options configured correctly&amp;hellip;&lt;/p&gt;
+
 &lt;h4 id=&#34;i-want-to-start-building-flatpaks&#34;&gt;I want to start building Flatpaks&lt;/h4&gt;
+
 &lt;p&gt;As a &lt;a href=&#34;https://silverblue.fedoraproject.org/&#34;&gt;Fedora Silverblue&lt;/a&gt; user, I rely
 &lt;em&gt;heavily&lt;/em&gt; on flatpaks for most of my desktop applications these days. While I
 have only built the &amp;ldquo;hello world&amp;rdquo; demo when playing with flatpak in the past, this
 is something I think I want to dig deeper into. Knowing how to build and tweak
 flatpaks would be extremely useful. It would enable me to package up software I
 need to use, but then also contribute my efforts back to the community.&lt;/p&gt;
+
 &lt;h4 id=&#34;sudo-is-awesome&#34;&gt;&lt;code&gt;sudo&lt;/code&gt; is awesome.&lt;/h4&gt;
+
 &lt;p&gt;I already knew this, but I always forget &lt;em&gt;how much&lt;/em&gt; &lt;code&gt;sudo&lt;/code&gt; can do. Like &lt;code&gt;ssh&lt;/code&gt;,
 the possibilities of being well informed about the advanced options of &lt;code&gt;sudo&lt;/code&gt;
 are endless. I think I&amp;rsquo;m going to dig deeper into some of the settings, and see
 what I can find.&lt;/p&gt;
+
 &lt;h4 id=&#34;i-need-to-automate-my-cloud-provisioning&#34;&gt;I need to automate my cloud provisioning&lt;/h4&gt;
+
 &lt;p&gt;This has been on my list for awhile now, but after seeing so many
 demonstrations of people using terraform and chef to spin up their cloud
 environments&amp;hellip; I need to start adding some provisioning roles to my ansible
 playbooks. I think using the Digital Ocean module to spin up/tear down
 temporary project droplets might be a good start&amp;hellip;&lt;/p&gt;
-&lt;h3 id=&#34;2-mentoringteaching&#34;&gt;2) Mentoring/Teaching&lt;/h3&gt;
+
+&lt;h3 id=&#34;2-mentoring-teaching&#34;&gt;2) Mentoring/Teaching&lt;/h3&gt;
+
 &lt;h4 id=&#34;large-scale-mentoring&#34;&gt;Large Scale Mentoring&lt;/h4&gt;
+
 &lt;p&gt;One of my favorite talks of the conference was co-done by two kubernetes
 contributers (from Red Hat and Google). They explained how the kubernetes
 project tackles the big problem of mentoring&amp;hellip; specifically how it can even be
 done in a several-thousand contributer project that also has hundreds of fly-by
 contributers.&lt;/p&gt;
+
 &lt;p&gt;What I enjoyed most about their mentoring system was how it was organized.
 First, they went through and defined all the leadership roles, &lt;em&gt;documenting&lt;/em&gt;
 what the role was, and how it is done. Next, they made a mentoring chart for
@@ -209,7 +268,9 @@ and the person(s) next-in-line that are training for that role in the next
 column. I think this is a great system for communities, and I might see if I
 can take some lessons from this structure and help apply it to some volunteer
 organizations I work with.&lt;/p&gt;
+
 &lt;h4 id=&#34;gamifing-education&#34;&gt;Gamifing Education&lt;/h4&gt;
+
 &lt;p&gt;Another interesting education talk I went to was about gamifying education.  In
 the past, whenever I encountered topics trying to &amp;ldquo;gamify&amp;rdquo; education, they
 usually involved how to add gaming aspects to current methods of teaching
@@ -221,6 +282,7 @@ normally think of. For instance, the presenter suggested designing the games so
 that any random items could be used as the game pieces (rocks, beans, spoons).
 This lowers the barrier of entry so that children in all types of living situations
 are able to play, and I think it is great advice.&lt;/p&gt;
+
 &lt;p&gt;Best of all, the talk concluded with the suggestion to host all game
 sources/documentation in a public repo on a website like Github.  This not only
 makes the game accessible to people all over the world, but allows the
@@ -229,12 +291,15 @@ documentation, another person can clarify and fix it. Open sourcing the game
 also enables the community to modify and invent new variations, improving it
 over time. The talk showcased how we can take the best aspects of open source,
 and use them to hopefully make learning a bit more fun and accessible.&lt;/p&gt;
+
 &lt;h4 id=&#34;those-who-can-do-should-also-teach&#34;&gt;Those who can Do, Should Also Teach&lt;/h4&gt;
+
 &lt;p&gt;As someone that struggled to focus in traditional lecture-style classes, but
 thrived in hands-on lab courses, I am always looking for new methods and ways
 to help others learn. One talk I observed, encouraged the audience to start
 teaching others as they continue grow their skills. The talk provided many useful tips
 and approaches for teaching both technical and non-technical &amp;ldquo;students&amp;rdquo;.&lt;/p&gt;
+
 &lt;p&gt;A big motivation behind this website is that it allows me to share my
 experiences so others can (&lt;em&gt;hopefully&lt;/em&gt;) learn from them.  As I sat listening to
 the talk, I started to brain-storm what I could do to better extend my ability
@@ -242,30 +307,39 @@ to teach. I first wondered what changes I could make to the website, but then
 started thinking about even &lt;em&gt;new&lt;/em&gt; avenues I could pursue. I haven&amp;rsquo;t finalized
 any ideas &lt;em&gt;yet&lt;/em&gt;, but it is something I will keep in mind as I start planning my
 goals for the new year.&lt;/p&gt;
-&lt;h3 id=&#34;3-communitiesdiversity-and-inclusion&#34;&gt;3) Communities/Diversity and Inclusion&lt;/h3&gt;
+
+&lt;h3 id=&#34;3-communities-diversity-and-inclusion&#34;&gt;3) Communities/Diversity and Inclusion&lt;/h3&gt;
+
 &lt;p&gt;I first listed &amp;ldquo;&lt;em&gt;Communities&lt;/em&gt;&amp;rdquo; and &amp;ldquo;&lt;em&gt;Diversity and Inclusion&lt;/em&gt;&amp;rdquo; as too separate
 topics. However, as I started to sort talks into the categories, I realized
 these two overlapped all the time. So I merged them.&lt;/p&gt;
+
 &lt;p&gt;Honestly, this topic was so prevalent at ATO, that it&amp;rsquo;s hard to summarize even
 a little bit. From learning about the &lt;em&gt;curb cutting effect&lt;/em&gt;, to
 diversifying recruiters and continually switching up who leads meetings, there
 were all sorts of facts and tips about how to build more diverse teams and even
 communities.&lt;/p&gt;
+
 &lt;p&gt;This topic sparked my curiosity, and I ended up walking away with two
 new books added to my reading list: &lt;em&gt;The Culture Map&lt;/em&gt; by Erin Meyer, and Jono
 Bacon&amp;rsquo;s upcoming book, &lt;em&gt;People Powered&lt;/em&gt;.&lt;/p&gt;
-&lt;h3 id=&#34;4-burn-outteam-dynamics&#34;&gt;4) Burn-out/Team Dynamics&lt;/h3&gt;
+
+&lt;h3 id=&#34;4-burn-out-team-dynamics&#34;&gt;4) Burn-out/Team Dynamics&lt;/h3&gt;
+
 &lt;p&gt;Last but not least, there were talks about another related topic pair: team
 dynamics and burn-out. Every talk I went to that focused on either these topics
 was &lt;em&gt;really well delivered&lt;/em&gt;, which was a relief as both topics are very
 important in the tech industry. To summarize, I&amp;rsquo;ll list 3 items which I already
 subscribe to, but came up &lt;em&gt;again and again&lt;/em&gt; in the presentations:&lt;/p&gt;
+
 &lt;ul&gt;
 &lt;li&gt;Multi-tasking isn&amp;rsquo;t real&lt;/li&gt;
 &lt;li&gt;Stop blaming others&lt;/li&gt;
 &lt;li&gt;A balanced life &lt;em&gt;outside&lt;/em&gt; of work is required to be productive &lt;em&gt;at&lt;/em&gt; work (eat healthy, exercise, get more sleep, have a hobby)&lt;/li&gt;
 &lt;/ul&gt;
+
 &lt;h2 id=&#34;conclusion&#34;&gt;Conclusion&lt;/h2&gt;
+
 &lt;p&gt;With my second year at All Things Open finished&amp;hellip; would I recommend it?
 Absolutely.  No matter why someone is interested in open source (the tech, the
 community aspects, sharing with others), there will be something there for
@@ -286,12 +360,22 @@ Charlotte for SELF 2018. While my wife and I &lt;em&gt;did&lt;/em&gt; drive down
 that weekend, it was instead to Durham&amp;hellip; with a moving truck. This year, being
 only two hours away, I decided there was no excuse. I did a day-trip&amp;hellip;.  but I
 went. I&amp;rsquo;m glad I did.&lt;/p&gt;
+
 &lt;h2 id=&#34;self&#34;&gt;SELF&lt;/h2&gt;
+
 &lt;p&gt;I finalized my plans to attend SELF last minute, about two weeks ago. I
 convinced a friend from work to attend with me one day over lunch, and we
 registered right after. So, this past Saturday morning we left Durham around
 6:30 am for the 2-ish hour drive to Charlotte.&lt;/p&gt;
-&lt;!-- raw HTML omitted --&gt;
+
+&lt;p&gt;&lt;center&gt;
+&lt;a href=&#39;../../img/posts/self2019/rungcc.png&#39;&gt;
+&lt;img alt=&#34;Run GCC tshirt I saw&#34; src=&#34;../../img/posts/self2019/rungcc.png&#34; style=&#34;max-width: 100%;&#34;/&gt;
+&lt;/a&gt;
+&lt;div class=&#34;caption&#34;&gt;The first thing I saw when I passed through the hotel
+doors.&lt;/div&gt;
+&lt;/center&gt;&lt;/p&gt;
+
 &lt;p&gt;When we got to the hotel parkng lot, we weren&amp;rsquo;t entirely sure where to go.
 Then, we noticed a person walking towards a door carrying a old mechanical
 keyboard under their arm&amp;hellip; a clue. Sure enough, after following that person
@@ -299,14 +383,23 @@ through the same door, we found ourselves in the middle of a hallway filled
 with Linux booths and face-to-face with a &lt;a href=&#34;https://shop.fsf.org/tshirts-hoodies/run-gcc-shirt&#34;&gt;&amp;ldquo;RUN GCC&amp;rdquo;
 T-shirt&lt;/a&gt; on display. We
 found SELF.&lt;/p&gt;
-&lt;!-- raw HTML omitted --&gt;
+
+&lt;p&gt;&lt;center&gt;
+&lt;a href=&#39;../../img/posts/self2019/self2019_badge.jpg&#39;&gt;
+&lt;img alt=&#34;My SELF 2019 Badge&#34; src=&#34;../../img/posts/self2019/self2019_badge.jpg&#34; style=&#34;max-width: 100%;&#34;/&gt;
+&lt;/a&gt;
+&lt;div class=&#34;caption&#34;&gt;My SELF 2019 Badge&lt;/div&gt;
+&lt;/center&gt;&lt;/p&gt;
+
 &lt;p&gt;After walking around a bit, we worked our way to registration and received our
 badges. They were little booklets on a lanyard that contained event information and the
 schedule. However, it &lt;em&gt;did&lt;/em&gt; confuse me at first because the one side was
 upside-down compared to the other side&amp;hellip; but then I realized it was so it
 could function as a name-tag, but still be &lt;em&gt;easily&lt;/em&gt; read while still around
 one&amp;rsquo;s neck. Very practical.&lt;/p&gt;
+
 &lt;h2 id=&#34;talks&#34;&gt;Talks&lt;/h2&gt;
+
 &lt;p&gt;Throughout the day, I went to several talks with an array of topics, including building
 personal clouds, 3D printers, security compliance testing, network backups, and
 even building a tiny house. The talks were generally interesting, and I left with a
@@ -314,23 +407,31 @@ bunch of notes on topics and software I might want to dig into at some point.
 For example, I think it might be useful to look into &lt;a href=&#34;https://www.chef.io/products/chef-inspec/&#34;&gt;chef
 inspec&lt;/a&gt; (or at least similar
 alternatives to it), for verifying build/test environments at work.&lt;/p&gt;
+
 &lt;p&gt;The biggest lesson I learned from the talks at SELF wasn&amp;rsquo;t from their
 &lt;em&gt;content&lt;/em&gt;, but rather the &lt;em&gt;environment&lt;/em&gt; they were presented in. Overall, it
 seemed like a very knowledgeable, but supportive audience.&lt;/p&gt;
+
 &lt;p&gt;For example, one of the speakers was a little flustered as it was his first time
 giving a talk. When the speaker stated he was a bit nervous, the room responded
 with &lt;em&gt;&amp;ldquo;don&amp;rsquo;t worry, you&amp;rsquo;re doing great so far! This is how you learn&amp;rdquo;&lt;/em&gt;. Then&amp;hellip;
 the live demo experienced some issues (as they tend to do). The audience
 responded by laughing &lt;em&gt;with&lt;/em&gt; the speaker and shouting out statements like &amp;ldquo;That
-always happens to me! See, you &lt;em&gt;are&lt;/em&gt; one of us!&amp;quot;. People then started
+always happens to me! See, you &lt;em&gt;are&lt;/em&gt; one of us!&amp;ldquo;. People then started
 discussing related tips and tricks they&amp;rsquo;ve learned over the years, while we
 &lt;em&gt;all&lt;/em&gt; worked to troubleshoot the demo.&lt;/p&gt;
+
 &lt;p&gt;The room was able to take what &lt;em&gt;could&lt;/em&gt; have been a disaster for the speaker,
 and turn it into an engaging experience where &lt;em&gt;everyone&lt;/em&gt; in the room connected
 and learned from one another.  As a result, a &amp;ldquo;&lt;em&gt;failed&lt;/em&gt;&amp;rdquo; talk ended up being a
 &lt;em&gt;better&lt;/em&gt; experience than originally planned.&lt;/p&gt;
+
 &lt;h2 id=&#34;thoughts&#34;&gt;Thoughts&lt;/h2&gt;
-&lt;!-- raw HTML omitted --&gt;
+
+&lt;p&gt;&lt;a href=&#39;../../img/posts/self2019/self_logo.png&#39;&gt;
+&lt;img alt=&#34;The SELF logo&#34; src=&#34;../../img/posts/self2019/self_logo.png&#34; style=&#34;max-width: 100%; width: 300px; float: right;&#34;/&gt;
+&lt;/a&gt;&lt;/p&gt;
+
 &lt;p&gt;I think SELF displayed glimmers of what the Linux and Open Source
 community &lt;em&gt;can be&lt;/em&gt; when at their best. Did I encounter people I disagreed with,
 or thought were a bit too abrasive? You bet. Did it ultimately matter? Not
@@ -338,10 +439,11 @@ really. When we disagree, if we can muster up the maturity to &lt;em&gt;work
 together&lt;/em&gt;, we will learn and grow as a community, even when everything is going wrong.
 Just like in the talk I described above.
 &lt;code&gt;&amp;lt;/soapbox&amp;gt;&lt;/code&gt;&lt;/p&gt;
+
 &lt;p&gt;I am fully aware that I &amp;ldquo;did SELF wrong&amp;rdquo; by only going for
 a single day and mostly watching talks. I didn&amp;rsquo;t spend too much
 time in the &amp;ldquo;&lt;a href=&#34;https://blogs.vmware.com/opensource/2018/05/15/hallway-track-open-source-conferences/&#34;&gt;hallway
-track&lt;/a&gt;&amp;quot;,
+track&lt;/a&gt;&amp;rdquo;,
 and missed out on the late-night antics and philosophical discussions I heard
 about. Regardless, I still learned a bunch and had a great time. Now that I&amp;rsquo;ve scoped out
 SELF, in the future I think I plan to stay for the whole event&amp;hellip; and maybe

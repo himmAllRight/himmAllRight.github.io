@@ -153,28 +153,35 @@ mentioned that while writing it, I had learned about
 looked so good, I may switch to it eventually. Well&hellip; that didn&rsquo;t take long. I&rsquo;ve
 scrapped my tmux shell scripts, and have converted to using tmuxinator. Here&rsquo;s
 how.</p>
+
 <h2 id="what-is-tmuxinator">What is Tmuxinator?</h2>
+
 <p><a href="https://github.com/tmuxinator/tmuxinator">Tmuxinator</a> is a command line
 application that makes it easy to create and manage tmux sessions. It allows a
 user to define how to setup a session, including naming windows, splitting
 panes, and what commands initially run in each pane. The configuration is done
 in yaml, so it is very easy to figure out and get started.</p>
+
 <h2 id="install">Install</h2>
+
 <p>Most distros probably have <code>tmuxinator</code> in their offical repos. These days, I
 mostly run Fedora on all of my machines and I was able to find it there:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">sudo dnf install termixinator
-</code></pre></div><p><strong>However</strong>, I found that this version was quite out of date (<code>0.6.11</code>) even on my new
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">sudo dnf install termixinator</code></pre></div>
+<p><strong>However</strong>, I found that this version was quite out of date (<code>0.6.11</code>) even on my new
 Fedora 30 install, so I recommend using the method stated on
 the project&rsquo;s Github page (requires <code>rubygems</code>) to install a much more current
 version (<code>1.1.0</code>):</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">gem install tmuxinator
-</code></pre></div><h2 id="create">Create</h2>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">gem install tmuxinator</code></pre></div>
+<h2 id="create">Create</h2>
+
 <p>To create a new tmuxinator profile, pass the desired project name to <code>tmuxinator new</code>:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">tmuxinator new Website
-</code></pre></div><p>This will open up a new tmuxinator template inside your default editor. The
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">tmuxinator new Website</code></pre></div>
+<p>This will open up a new tmuxinator template inside your default editor. The
 default template contains a bunch of comments that help guide how to configure
 it.</p>
+
 <h4 id="header">Header</h4>
+
 <p>The first thing to set at the top of the template is the <code>name</code> field, followed
 by the <code>root</code> directory. The tmux session name is defined with <code>name</code>, and
 <code>root</code> will be the directory which all of the windows/panes open up in by
@@ -184,8 +191,9 @@ directory, <code>~/Documents/himmAllRight-source</code>:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#75715e"># /home/ryan/.config/tmuxinator/Website.yml</span>
 
 <span style="color:#66d9ef">name</span>: Website
-<span style="color:#66d9ef">root</span>: ~/Documents/himmAllRight-source
-</code></pre></div><h4 id="windows">Windows</h4>
+<span style="color:#66d9ef">root</span>: ~/Documents/himmAllRight-source</code></pre></div>
+<h4 id="windows">Windows</h4>
+
 <p>Next, I needed to configure my windows. To convert the script from my previous
 post, I wanted a dedicated &lsquo;Main&rsquo; window, one for the server, one for vim, and
 one for an extra shell. Additionally, since that last post I&rsquo;ve added a window
@@ -198,9 +206,11 @@ that</em> with tmuxinator:</p>
   - <span style="color:#66d9ef">Server</span>: hugo serve -D -F
   - <span style="color:#66d9ef">Write</span>: nvim
   - <span style="color:#66d9ef">Shell</span>: zsh; clear
-  - <span style="color:#66d9ef">Web</span>: qutebrowser localhost:<span style="color:#ae81ff">1313</span>
-</code></pre></div><p>Done. Save the file and that&rsquo;s it! See the benefit of using tmuxinator??</p>
+  - <span style="color:#66d9ef">Web</span>: qutebrowser localhost:<span style="color:#ae81ff">1313</span></code></pre></div>
+<p>Done. Save the file and that&rsquo;s it! See the benefit of using tmuxinator??</p>
+
 <h4 id="pane-splits">Pane splits</h4>
+
 <p>While I don&rsquo;t use them in this example configuration, it should be noted that
 setting up pane splits is also quite easy with tmuxinator. For example, if I
 wanted to split the server window into two panes, one running the hugo server
@@ -209,22 +219,33 @@ and one running htop, I could use:</p>
     <span style="color:#66d9ef">layout</span>: even-vertical
     <span style="color:#66d9ef">panes</span>:
         - hugo
-        - htop
-</code></pre></div><p>The <code>layout</code> key defines which
+        - htop</code></pre></div>
+<p>The <code>layout</code> key defines which
 <a href="http://man7.org/linux/man-pages/man1/tmux.1.html#WINDOWS_AND_PANES">tmux layout</a> to
 use when splitting the panes, and <code>panes</code> is a list that defines what to run in
 each pane.</p>
+
 <h2 id="launch">Launch</h2>
-<!-- raw HTML omitted -->
-<p>To start up the newly defined tmuxinator project, use <code>tmuxinator start</code>:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">tmuxinator start Website
-</code></pre></div><h2 id="manage">Manage</h2>
+
+<p><a href='../../img/posts/setting-up-tmuxinator/start-website-tmuxinator.gif'>
+<img alt="Launching Website tmux session with tmuxinator" src="../../img/posts/setting-up-tmuxinator/starting-website-tmuxinator.png" onmouseover="this.src='../../img/posts/setting-up-tmuxinator/start-website-tmuxinator.gif'" onmouseout="this.src='../../img/posts/setting-up-tmuxinator/starting-website-tmuxinator.png'" style="max-width: 100%;"/>
+</a>
+<div class="caption">Launching my website tmux session with tmuxinator</div></p>
+
+<p>To start up the newly defined tmuxinator project, use <code>tmuxinator
+start</code>:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">tmuxinator start Website</code></pre></div>
+<h2 id="manage">Manage</h2>
+
 <p>All of the tmuxinator profile templates are stored at <code>~/.config/tmuxinator</code>,
 which means they can easily be copied to a new machine, or even
 saved/maintained in source control.</p>
+
 <p><em>Note: I think older versions stored them at <code>~/.tmuxinator/</code>, so check there
 if they are missing.</em></p>
+
 <h2 id="conclusion">Conclusion</h2>
+
 <p>That&rsquo;s it. While scripting my own method was a good bash exercise and helped me
 learn the details of <code>tmux</code> a little bit better, I ultimately think that
 <code>tmuxinator</code> is the way to go. This is especially true when using tmux to work

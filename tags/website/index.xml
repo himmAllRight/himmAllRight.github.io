@@ -22,7 +22,9 @@ I had the tests run on &lt;code&gt;any&lt;/code&gt; node. I &lt;em&gt;wanted&lt;
 run inside a fedora docker container, but ran into issues configuring it.
 With the problem now long fixed, I decided I would write a quick update post about
 switching the pipeline to use container nodes.&lt;/p&gt;
+
 &lt;h3 id=&#34;why-switch&#34;&gt;Why Switch&lt;/h3&gt;
+
 &lt;p&gt;When I first defined the pipeline, I had it use &lt;code&gt;any&lt;/code&gt; node for the agent:&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-groovy&#34; data-lang=&#34;groovy&#34;&gt;pipeline &lt;span style=&#34;color:#f92672&#34;&gt;{&lt;/span&gt;
     agent any
@@ -32,23 +34,32 @@ switching the pipeline to use container nodes.&lt;/p&gt;
         &lt;span style=&#34;color:#75715e&#34;&gt;// This is where the stages will be defined //
 &lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;
     &lt;span style=&#34;color:#f92672&#34;&gt;}&lt;/span&gt;
-&lt;span style=&#34;color:#f92672&#34;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;This just runs the job on any available node, which for me was just the same VM
+&lt;span style=&#34;color:#f92672&#34;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;This just runs the job on any available node, which for me was just the same VM
 server I was running Jenkins on. This was fine, but for testing I want to make
 sure &lt;em&gt;everything&lt;/em&gt; in my automation is configured and up to date. The best
 way to ensure that, is with &lt;em&gt;clean&lt;/em&gt; runs.&lt;/p&gt;
+
 &lt;p&gt;When using docker for the pipeline agent, a new container is created to run the
 pipeline in, and then destroyed when completed. This means all packages and
 dependencies &lt;em&gt;must&lt;/em&gt; be defined correctly, or the run will fail. This is what we
 want.&lt;/p&gt;
-&lt;!-- raw HTML omitted --&gt;
+
+&lt;p&gt;&lt;center&gt;
+&lt;a href=&#34;../../img/posts/docker-quickstart/docker-logo.png&#34;&gt;
+&lt;img alt=&#34;Docker Logo&#34; src=&#34;../../img/posts/docker-quickstart/docker-logo.png&#34; style=&#34;float: right; max-width: 100%; width:400px; padding: 5px 15px 10px 10px&#34;/&gt;&lt;/a&gt;
+&lt;/center&gt;&lt;/p&gt;
+
 &lt;h3 id=&#34;using-docker-nodes&#34;&gt;Using Docker Nodes&lt;/h3&gt;
+
 &lt;p&gt;First, the obvious: make sure &lt;code&gt;docker&lt;/code&gt; is installed on the desired
 Jenkins nodes. I won&amp;rsquo;t cover this as it can be different for
 every user (and I already had &lt;code&gt;docker&lt;/code&gt; installed on my Jenkins host).&lt;/p&gt;
+
 &lt;p&gt;With docker installed, next make sure the Jenkins server has the &lt;a href=&#34;https://plugins.jenkins.io/docker-slaves/&#34;&gt;Docker
 Slaves&lt;/a&gt; (and possibly &lt;a href=&#34;https://plugins.jenkins.io/docker-workflow/&#34;&gt;Docker
 Pipeline&lt;/a&gt;) plug-in(s) installed.&lt;/p&gt;
+
 &lt;p&gt;Lastly, with some docker plug-ins enabled, switch the &lt;code&gt;agent&lt;/code&gt; statement to use a
 container image. I choose to use the &lt;code&gt;fedora:31&lt;/code&gt; image:&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-groovy&#34; data-lang=&#34;groovy&#34;&gt;pipeline &lt;span style=&#34;color:#f92672&#34;&gt;{&lt;/span&gt;
@@ -58,13 +69,15 @@ container image. I choose to use the &lt;code&gt;fedora:31&lt;/code&gt; image:&l
         &lt;span style=&#34;color:#f92672&#34;&gt;}&lt;/span&gt;
     &lt;span style=&#34;color:#f92672&#34;&gt;}&lt;/span&gt;
     &lt;span style=&#34;color:#f92672&#34;&gt;...&lt;/span&gt; &lt;span style=&#34;color:#75715e&#34;&gt;// rest of the pipeline
-&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;fixing-rootsudo-error&#34;&gt;Fixing root/sudo error&lt;/h3&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h3 id=&#34;fixing-root-sudo-error&#34;&gt;Fixing root/sudo error&lt;/h3&gt;
+
 &lt;p&gt;When I first set the pipeline to use the fedora image, it kept failing.
 Specifically, the &lt;code&gt;sudo dnf&lt;/code&gt; steps would fail because the &lt;code&gt;sudo&lt;/code&gt; command didn&amp;rsquo;t
 exist in the container. If I removed &lt;code&gt;sudo&lt;/code&gt; from the command&amp;hellip;  it still
 failed because I didn&amp;rsquo;t have permissions to run &lt;code&gt;dnf&lt;/code&gt; inside the container ಠ_ಠ
 (yes, the user was &lt;code&gt;root&lt;/code&gt;).&lt;/p&gt;
+
 &lt;p&gt;After some research, I learned that it wasn&amp;rsquo;t passing the root permissions to
 the container, and I could &amp;ldquo;solve&amp;rdquo; this issue by providing the &lt;code&gt;-u&lt;/code&gt; flag with
 &lt;code&gt;0:0&lt;/code&gt; as an arg to the docker agent:&lt;/p&gt;
@@ -76,9 +89,11 @@ the container, and I could &amp;ldquo;solve&amp;rdquo; this issue by providing t
         &lt;span style=&#34;color:#f92672&#34;&gt;}&lt;/span&gt;
     &lt;span style=&#34;color:#f92672&#34;&gt;}&lt;/span&gt;
     &lt;span style=&#34;color:#f92672&#34;&gt;...&lt;/span&gt; &lt;span style=&#34;color:#75715e&#34;&gt;// rest of the pipeline
-&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;I don&amp;rsquo;t &lt;em&gt;love&lt;/em&gt; this solution&amp;hellip; but it seems to work.&lt;/p&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;I don&amp;rsquo;t &lt;em&gt;love&lt;/em&gt; this solution&amp;hellip; but it seems to work.&lt;/p&gt;
+
 &lt;h3 id=&#34;conclusion&#34;&gt;Conclusion&lt;/h3&gt;
+
 &lt;p&gt;Like I said, this was just a quick update about switching my
 test nodes to use docker containers. Honestly, I&amp;rsquo;d much rather try to use
 &lt;a href=&#34;http://podman.io&#34;&gt;podman&lt;/a&gt; containers for my test agents, but I&amp;rsquo;m sure that
@@ -100,17 +115,28 @@ content outside the website, I &lt;em&gt;can&lt;/em&gt; choose to remove links i
 broken. So, in this post, we will add tests to ensure that links in our posts
 are working. Well, at least the
 &lt;a href=&#34;https://guides.github.com/pdfs/markdown-cheatsheet-online.pdf&#34;&gt;markdown&lt;/a&gt; ones.&lt;/p&gt;
+
 &lt;h2 id=&#34;what-to-test&#34;&gt;What to Test&lt;/h2&gt;
-&lt;!-- raw HTML omitted --&gt;
+
+&lt;p&gt;&lt;center&gt;
+&lt;a href=&#34;../../img/posts/creating-website-tests-links/google-404-error.png&#34;&gt;
+&lt;img alt=&#34;Google 404 Error Page&#34; src=&#34;../../img/posts/creating-website-tests-links/google-404-error.png&#34; style=&#34;max-width: 100%; padding: 5px 15px 10px 10px&#34;/&gt;&lt;/a&gt;
+&lt;div class=&#34;caption&#34;&gt;Google 404 Error Page&lt;/div&gt;
+&lt;/center&gt;&lt;/p&gt;
+
 &lt;p&gt;For this test set, we will be scanning the content files of all of the posts, and
 grabbing every markdown link defined in them. With the links known, we
 will then make a request to each one to check that it is available. If we
 can connect, the test passes. If not (ex: we get a 404), it fails.&lt;/p&gt;
+
 &lt;h3 id=&#34;adding-utility-functions&#34;&gt;Adding Utility Functions&lt;/h3&gt;
+
 &lt;p&gt;Before we are able to write the test function, we first need to add to the
 utility functions. These will allow us to get the post&amp;rsquo;s file paths, grab their
 content, and extract all the markdown links from that content.&lt;/p&gt;
-&lt;h4 id=&#34;get_file_paths&#34;&gt;get_file_paths&lt;/h4&gt;
+
+&lt;h4 id=&#34;get-file-paths&#34;&gt;get_file_paths&lt;/h4&gt;
+
 &lt;p&gt;First, lets define a new helper function, &lt;code&gt;get_file_paths&lt;/code&gt;:&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;get_file_paths&lt;/span&gt;(src, extension&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;None):
     &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&amp;#34;&amp;#34;Collects the paths of all files of a directory&amp;#34;&amp;#34;&amp;#34;&lt;/span&gt;
@@ -124,12 +150,14 @@ content, and extract all the markdown links from that content.&lt;/p&gt;
         &lt;span style=&#34;color:#75715e&#34;&gt;# Otherwise, add everything&lt;/span&gt;
         &lt;span style=&#34;color:#66d9ef&#34;&gt;else&lt;/span&gt;:
             file_list&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;append(path&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;join(root_path, file))
-    &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; file_list
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;When provided a directory path (&lt;code&gt;src&lt;/code&gt;), this function will return a list of all the
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; file_list&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;When provided a directory path (&lt;code&gt;src&lt;/code&gt;), this function will return a list of all the
 file paths in that directory. Optionally, the &lt;code&gt;extension&lt;/code&gt; parameter can be
 supplied to only return files of that extension type (in our case, &lt;code&gt;md&lt;/code&gt;). This
 will be used to grab the paths of all of the website post source files.&lt;/p&gt;
-&lt;h4 id=&#34;get_file_content&#34;&gt;get_file_content&lt;/h4&gt;
+
+&lt;h4 id=&#34;get-file-content&#34;&gt;get_file_content&lt;/h4&gt;
+
 &lt;p&gt;Now lets define &lt;code&gt;get_file_content&lt;/code&gt;. This function will take the file lists
 generated from &lt;code&gt;get_file_paths&lt;/code&gt;, grab the content from those files,
 and return a dictionary of all the data.&lt;/p&gt;
@@ -140,15 +168,15 @@ and return a dictionary of all the data.&lt;/p&gt;
         f &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; open(file, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;r&amp;#34;&lt;/span&gt;)
         file_content &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; f&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;read()
         content_all_files[path&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;basename(file)] &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; file_content
-    &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; content_all_files
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;The returned dictionary uses the filename as the key, and the content set to the
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; content_all_files&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;The returned dictionary uses the filename as the key, and the content set to the
 value. For example:&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;{
   &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;post1.md&amp;#39;&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;This is the text of post1.&amp;#39;&lt;/span&gt;,
   &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;post2.md&amp;#39;&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;This is the text of post2. Basically the same ol&amp;#39; stuff.&amp;#34;&lt;/span&gt;
-}
+}&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h4 id=&#34;get-md-links&#34;&gt;get_md_links&lt;/h4&gt;
 
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h4 id=&#34;get_md_links&#34;&gt;get_md_links&lt;/h4&gt;
 &lt;p&gt;Lastly, lets define &lt;code&gt;get_md_links&lt;/code&gt;. This function takes the content dictionary
 returned by &lt;code&gt;get_file_content&lt;/code&gt;, and uses some &lt;a href=&#34;https://en.wikipedia.org/wiki/Regular_expression&#34;&gt;regular
 expression&lt;/a&gt; magic to match
@@ -164,17 +192,20 @@ the markdown links:&lt;/p&gt;
             &lt;span style=&#34;color:#75715e&#34;&gt;# Regex can&amp;#39;t properly match urls with parens in them, so skip.&lt;/span&gt;
             &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;(&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;not&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; match&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;group(&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;):
                 all_links&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;append(match&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;group(&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;))
-    &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; all_links
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;First, the function compiles the regular expression defined by the &lt;code&gt;regex&lt;/code&gt;
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; all_links&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;First, the function compiles the regular expression defined by the &lt;code&gt;regex&lt;/code&gt;
 parameter. Next, it loops through all the data in the content dictionary,
 strips the newline characters, and then grabs all the regex matches.&lt;/p&gt;
+
 &lt;p&gt;Unfortunately, the regex expression can&amp;rsquo;t properly match markdown formated urls
 with parenthesis in them, so we have to check if each match has a &lt;code&gt;(&lt;/code&gt; in it. If
 it does, the url is thrown away because we cannot be sure we matched the full
 &lt;code&gt;url&lt;/code&gt;. If there are no parenthesis, the url is added to our saved list. After
 parsing all the values of the content dictionary, a list of the matched urls is
 returned.&lt;/p&gt;
-&lt;h3 id=&#34;adding-to-conftestpy&#34;&gt;Adding to conftest.py&lt;/h3&gt;
+
+&lt;h3 id=&#34;adding-to-conftest-py&#34;&gt;Adding to conftest.py&lt;/h3&gt;
+
 &lt;p&gt;With our new utility functions defined, we can next add a new fixture (and it&amp;rsquo;s
 helper function) to the &lt;code&gt;conftest.py&lt;/code&gt; file. Lets start with the fixture&amp;rsquo;s
 helper function, &lt;code&gt;post_md_link()&lt;/code&gt;:&lt;/p&gt;
@@ -184,21 +215,24 @@ helper function, &lt;code&gt;post_md_link()&lt;/code&gt;:&lt;/p&gt;
     all_post_contents &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; get_file_content(all_post_files)
     all_post_md_links &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; get_md_links(all_post_contents)
     &lt;span style=&#34;color:#75715e&#34;&gt;# Return de-dup list&lt;/span&gt;
-    &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; list(set(all_post_md_links))
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;This function uses the utility functions we just wrote above, to extract
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; list(set(all_post_md_links))&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;This function uses the utility functions we just wrote above, to extract
 all of the markdown links from the post files found at the
 &lt;code&gt;POST_DIR&lt;/code&gt; constant location. It then returns a de-duplicated list of all
 the links.&lt;/p&gt;
+
 &lt;p&gt;Now, we can define the fixture, &lt;code&gt;post_md_link&lt;/code&gt;:&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;@pytest.fixture&lt;/span&gt;(params&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;post_md_links())
 &lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;post_md_link&lt;/span&gt;(request):
     &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&amp;#34;&amp;#34;Returns the md_link object for a md link found in a post.&amp;#34;&amp;#34;&amp;#34;&lt;/span&gt;
-    &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; request&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;param
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Similar to the fixtures in the &lt;a href=&#34;../../post/creating-website-tests-pages/&#34;&gt;pages
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; request&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;param&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Similar to the fixtures in the &lt;a href=&#34;../../post/creating-website-tests-pages/&#34;&gt;pages
 tests&lt;/a&gt;, this one will allow tests to map
 across all the links found in the markdown pages, so a test will run for each
 link.&lt;/p&gt;
+
 &lt;h3 id=&#34;writing-the-markdown-link-test&#34;&gt;Writing the markdown link test&lt;/h3&gt;
+
 &lt;p&gt;Finally, time to write the &lt;em&gt;one and only test function&lt;/em&gt; in this post:&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;test_md_links&lt;/span&gt;(post_md_link):
     &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&amp;#34;&amp;#34;Checks that the markdown links are not broken.&amp;#34;&amp;#34;&amp;#34;&lt;/span&gt;
@@ -208,16 +242,18 @@ link.&lt;/p&gt;
         url &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; BASE_URL &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; post_md_link&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;lower()
     response &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; requests&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;get(url)
     &lt;span style=&#34;color:#66d9ef&#34;&gt;assert&lt;/span&gt; response&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;status_code &lt;span style=&#34;color:#f92672&#34;&gt;!=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;404&lt;/span&gt;, f&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;The link {post_md_link} is not found.&amp;#34;&lt;/span&gt;
-    &lt;span style=&#34;color:#66d9ef&#34;&gt;assert&lt;/span&gt; response&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;status_code &lt;span style=&#34;color:#f92672&#34;&gt;!=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;403&lt;/span&gt;, f&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;The link {post_md_link} is forbidden.&amp;#34;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Because I link to both internal and external pages in my posts, I have to prep
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;assert&lt;/span&gt; response&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;status_code &lt;span style=&#34;color:#f92672&#34;&gt;!=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;403&lt;/span&gt;, f&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;The link {post_md_link} is forbidden.&amp;#34;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Because I link to both internal and external pages in my posts, I have to prep
 my urls a bit. So, I first check if the link starts with &lt;code&gt;http&lt;/code&gt; (which would
 also match ones starting with &lt;code&gt;https&lt;/code&gt;). If it does, we can leave the link as
 is. If it doesn&amp;rsquo;t, we can assume the link is an internal one (ex:
 &lt;code&gt;/post/creating-website-tests-links/&lt;/code&gt;), and we need to prepend it with the
 &lt;code&gt;BASE_URL&lt;/code&gt; constant.&lt;/p&gt;
+
 &lt;p&gt;With a proper url, we can use &lt;code&gt;requests.get()&lt;/code&gt; to attempt to retrieve a
 response code from the page. If we get a response, I then assert that the
 &lt;code&gt;status_code&lt;/code&gt; is &lt;em&gt;not&lt;/em&gt; &lt;code&gt;404&lt;/code&gt; or &lt;code&gt;403&lt;/code&gt;.&lt;/p&gt;
+
 &lt;p&gt;&lt;em&gt;Side Note:&lt;/em&gt; I started by asserting that each link returned a &lt;code&gt;200&lt;/code&gt; status, but
 quickly learned that it was a bad idea, because I was testing mostly external
 links.  I never got all the tests to pass because they would often return
@@ -225,13 +261,17 @@ odd 500-level errors for issues that quite frankly, doesn&amp;rsquo;t matter to 
 example, one site kept return a 500-level error I think because their servers
 were &amp;lsquo;under a slightly higher load&amp;rsquo;&amp;hellip; but when I went to the link, the page
 loaded fine.&lt;/p&gt;
+
 &lt;p&gt;In the end, I decided I wasn&amp;rsquo;t trying to test the issues the websites I linked
 to were having, but instead just wanted to make sure that &lt;em&gt;my links&lt;/em&gt; weren&amp;rsquo;t
-&lt;em&gt;broken&lt;/em&gt;.  So, I now just ensure that I&amp;rsquo;m not getting &lt;code&gt;404&lt;/code&gt; or &lt;code&gt;403&lt;/code&gt;&#39;s, and I&amp;rsquo;m
+&lt;em&gt;broken&lt;/em&gt;.  So, I now just ensure that I&amp;rsquo;m not getting &lt;code&gt;404&lt;/code&gt; or &lt;code&gt;403&lt;/code&gt;&amp;rsquo;s, and I&amp;rsquo;m
 happy with that.&lt;/p&gt;
+
 &lt;h2 id=&#34;limitations&#34;&gt;Limitations&lt;/h2&gt;
+
 &lt;p&gt;While I am very happy with the coverage these tests provide, they do have some
 limitations to keep in mind:&lt;/p&gt;
+
 &lt;ul&gt;
 &lt;li&gt;They cannot match urls with parentheses&lt;/li&gt;
 &lt;li&gt;Currently, they only check that pages do not return &lt;code&gt;403&lt;/code&gt; and &lt;code&gt;404&lt;/code&gt; errors. This means I
@@ -240,21 +280,29 @@ issues. I plan to expand this assert list in the future to cover more
 cases.&lt;/li&gt;
 &lt;li&gt;I&amp;rsquo;m currently only testing markdown links. This doesn&amp;rsquo;t grab any html links I
 have in my posts.
+
 &lt;ul&gt;
 &lt;li&gt;On a similar note, because I link most of my images with html, it also
 isn&amp;rsquo;t testing if my images are broken.&lt;/li&gt;
 &lt;li&gt;I&amp;rsquo;d like to add tests for both of these issues eventually, but
 decided testing the markdown links was the best place to start.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
 &lt;li&gt;Sometimes tests fail because a site is down. No biggie. I just usually wait
 a bit and then run the tests again before deciding to remove the link.&lt;/li&gt;
 &lt;/ul&gt;
+
 &lt;h2 id=&#34;conclusion&#34;&gt;Conclusion&lt;/h2&gt;
-&lt;!-- raw HTML omitted --&gt;
+
+&lt;p&gt;&lt;center&gt;
+&lt;a href=&#34;../../img/posts/creating-website-tests-links/passing-links-tests.png&#34;&gt;
+&lt;img alt=&#34;Passing tests, including new link tests&#34; src=&#34;../../img/posts/creating-website-tests-links/passing-link-tests.png&#34; style=&#34;max-width: 100%; padding: 5px 15px 10px 10px&#34;/&gt;&lt;/a&gt;
+&lt;div class=&#34;caption&#34;&gt;Passing tests, including the new markdown link tests&lt;/div&gt;
+&lt;/center&gt;&lt;/p&gt;
+
 &lt;p&gt;That&amp;rsquo;s it. By adding a few easy helper functions, a new fixture, and a &lt;em&gt;single&lt;/em&gt;
 test function, We&amp;rsquo;ve expanded my test results from 70 to over 420 tests (and
 growing).&lt;/p&gt;
+
 &lt;p&gt;More important than the number of tests, is &lt;em&gt;what&lt;/em&gt; the results tell us. A
 failing test tells me that one of my markdown links &lt;em&gt;might&lt;/em&gt; be broken. These
 tests have &lt;em&gt;already&lt;/em&gt; been beneficial to me, as I ended updating/removing
@@ -275,19 +323,28 @@ before merging a branch into &lt;code&gt;master&lt;/code&gt;. Luckily, I have
 &lt;a href=&#34;https://jenkins.io&#34;&gt;Jenkins&lt;/a&gt; to take care of all the &amp;ldquo;&lt;em&gt;responsible&lt;/em&gt;&amp;rdquo; tasks. In
 this post, we will take the test framework created in the previous post&amp;hellip;  and
 automate it.&lt;/p&gt;
-&lt;h2 id=&#34;what-im-usingplan&#34;&gt;What I&amp;rsquo;m Using/Plan&lt;/h2&gt;
-&lt;!-- raw HTML omitted --&gt;
+
+&lt;h2 id=&#34;what-i-m-using-plan&#34;&gt;What I&amp;rsquo;m Using/Plan&lt;/h2&gt;
+
+&lt;p&gt;&lt;center&gt;
+&lt;a href=&#34;../../img/posts/creating-website-tests-ci/jenkins-logo.png&#34;&gt;
+&lt;img alt=&#34;Jenkins Logo&#34; src=&#34;../../img/posts/creating-website-tests-ci/jenkins-logo.png&#34; style=&#34;float: right; max-width: 100%; padding: 5px 15px 10px 10px&#34;/&gt;&lt;/a&gt;
+&lt;/center&gt;&lt;/p&gt;
+
 &lt;p&gt;I have started using &lt;a href=&#34;https://gitlab.com&#34;&gt;Gitlab&lt;/a&gt; for more of my projects
 recently, but have decided to keep my website source hosted on Github for the time
 being. So, I won&amp;rsquo;t be using Gitlab&amp;rsquo;s CI/CD tools for &lt;em&gt;this&lt;/em&gt;, but I wanted it
 to be known that this automation is &lt;em&gt;very&lt;/em&gt; straight forward and could be easily
 accomplished there as well.&lt;/p&gt;
+
 &lt;p&gt;For this project, because my website is hosted on Github, and I &lt;em&gt;already&lt;/em&gt;
 have &lt;a href=&#34;../../post/extending-vm-hd/&#34;&gt;my own Jenkins server&lt;/a&gt; configured&amp;hellip; I will be
 using a Jenkins pipeline. First, we will create the pipeline file to add
 to the git repo. Then, we will use the pipeline to configure a new
 &lt;em&gt;multi-branch&lt;/em&gt; pipeline in Jenkins.&lt;/p&gt;
+
 &lt;h2 id=&#34;jenkinsfile&#34;&gt;Jenkinsfile&lt;/h2&gt;
+
 &lt;p&gt;Lets start by creating the Jenkinsfile. Create a new file named &lt;code&gt;Jenkinsfile&lt;/code&gt;
 in the project directory. Next, lets create a new pipeline and get ready to add
 stages:&lt;/p&gt;
@@ -299,13 +356,18 @@ stages:&lt;/p&gt;
         &lt;span style=&#34;color:#75715e&#34;&gt;// This is where the stages will be defined //
 &lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;
     &lt;span style=&#34;color:#f92672&#34;&gt;}&lt;/span&gt;
-&lt;span style=&#34;color:#f92672&#34;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;em&gt;(Make sure to add the closing &lt;code&gt;}&lt;/code&gt;&#39;s!)&lt;/em&gt;&lt;/p&gt;
+&lt;span style=&#34;color:#f92672&#34;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;&lt;em&gt;(Make sure to add the closing &lt;code&gt;}&lt;/code&gt;&amp;rsquo;s!)&lt;/em&gt;&lt;/p&gt;
+
 &lt;h3 id=&#34;stages&#34;&gt;Stages&lt;/h3&gt;
+
 &lt;p&gt;Now, lets add the stages. A stage is a named, functional chunk in our pipeline.
 Breaking the pipeline into stages will help keep all the various steps
 organized, as well as make it easier to follow along as the pipeline runs.&lt;/p&gt;
-&lt;p&gt;Each of the following stage definitions will be placed inside the &lt;code&gt;stages { .. }&lt;/code&gt; section we defined above (&lt;em&gt;in the same order as they are listed!&lt;/em&gt;).&lt;/p&gt;
+
+&lt;p&gt;Each of the following stage definitions will be placed inside the &lt;code&gt;stages { ..
+}&lt;/code&gt; section we defined above (&lt;em&gt;in the same order as they are listed!&lt;/em&gt;).&lt;/p&gt;
+
 &lt;h4 id=&#34;setup-deps&#34;&gt;Setup Deps&lt;/h4&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-groovy&#34; data-lang=&#34;groovy&#34;&gt;stage&lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;Setup Deps&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;{&lt;/span&gt;
     steps &lt;span style=&#34;color:#f92672&#34;&gt;{&lt;/span&gt;
@@ -313,36 +375,41 @@ organized, as well as make it easier to follow along as the pipeline runs.&lt;/p
         sh &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;sudo yum install -y epel-release&amp;#39;&lt;/span&gt;
         sh &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;sudo yum install -y hugo python36-pytest&amp;#39;&lt;/span&gt;
     &lt;span style=&#34;color:#f92672&#34;&gt;}&lt;/span&gt;
-&lt;span style=&#34;color:#f92672&#34;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;The first stage is &amp;lsquo;Setup Deps&amp;rsquo;. This stage handles installing any dependencies
+&lt;span style=&#34;color:#f92672&#34;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;The first stage is &amp;lsquo;Setup Deps&amp;rsquo;. This stage handles installing any dependencies
 our Jenkins node will need installed to run the tests. Our tests will require
 &lt;code&gt;hugo&lt;/code&gt;, &lt;code&gt;pytest&lt;/code&gt;, and &lt;code&gt;python3&lt;/code&gt;. It will also require some &lt;code&gt;pip&lt;/code&gt; packages, but
 we will get to that later.&lt;/p&gt;
+
 &lt;p&gt;&lt;em&gt;Note: My current Jenkins node is running CentOS, so my package manager commands
 are specific to that. As always, adjust accordingly.&lt;/em&gt;&lt;/p&gt;
+
 &lt;h4 id=&#34;start-hugo-server&#34;&gt;Start Hugo Server&lt;/h4&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-groovy&#34; data-lang=&#34;groovy&#34;&gt;stage&lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;Start Hugo Server&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;{&lt;/span&gt;
     steps &lt;span style=&#34;color:#f92672&#34;&gt;{&lt;/span&gt;
         sh &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;hugo serve &amp;amp;&amp;#39;&lt;/span&gt;
     &lt;span style=&#34;color:#f92672&#34;&gt;}&lt;/span&gt;
-&lt;span style=&#34;color:#f92672&#34;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;With &lt;code&gt;hugo&lt;/code&gt; installed (and presumably being inside the website&amp;rsquo;s git repo&amp;hellip;),
+&lt;span style=&#34;color:#f92672&#34;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;With &lt;code&gt;hugo&lt;/code&gt; installed (and presumably being inside the website&amp;rsquo;s git repo&amp;hellip;),
 we can start the web server. This is done with &lt;code&gt;hugo serve&lt;/code&gt;. The &lt;code&gt;&amp;amp;&lt;/code&gt; is used to
 have the server run as a background process so that it won&amp;rsquo;t be killed when the
 pipeline to continues on.&lt;/p&gt;
+
 &lt;p&gt;&lt;em&gt;Note: Make sure the tests are set to point to &lt;code&gt;localhost:1313&lt;/code&gt;, as that is
 where &lt;code&gt;hugo&lt;/code&gt; will try to serve the website by default.&lt;/em&gt;&lt;/p&gt;
+
 &lt;h4 id=&#34;setup-python&#34;&gt;Setup Python&lt;/h4&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-groovy&#34; data-lang=&#34;groovy&#34;&gt;stage&lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;Setup Tests&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;{&lt;/span&gt;
     steps &lt;span style=&#34;color:#f92672&#34;&gt;{&lt;/span&gt;
         sh &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;pip3 install pipenv --user&amp;#39;&lt;/span&gt;
         sh &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;python3 -m pipenv install&amp;#39;&lt;/span&gt;
     &lt;span style=&#34;color:#f92672&#34;&gt;}&lt;/span&gt;
-&lt;span style=&#34;color:#f92672&#34;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Next, lets configure &lt;code&gt;python&lt;/code&gt; by setting up an environment and installing the
+&lt;span style=&#34;color:#f92672&#34;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Next, lets configure &lt;code&gt;python&lt;/code&gt; by setting up an environment and installing the
 packages we need in it. First, I use &lt;code&gt;pip3&lt;/code&gt; to install &lt;code&gt;pipenv&lt;/code&gt;. Then, I have
 &lt;code&gt;pipenv&lt;/code&gt; install the tests&amp;rsquo; required python packages, which are defined in the
 repo&amp;rsquo;s &lt;code&gt;Pipfile&lt;/code&gt;.&lt;/p&gt;
+
 &lt;h4 id=&#34;run-tests&#34;&gt;Run Tests&lt;/h4&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-groovy&#34; data-lang=&#34;groovy&#34;&gt;stage&lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;Run Tests&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;{&lt;/span&gt;
     steps &lt;span style=&#34;color:#f92672&#34;&gt;{&lt;/span&gt;
@@ -352,11 +419,13 @@ repo&amp;rsquo;s &lt;code&gt;Pipfile&lt;/code&gt;.&lt;/p&gt;
 &lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;            set -e
 &lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;        &amp;#39;&amp;#39;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;stripIndent&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;()&lt;/span&gt;
     &lt;span style=&#34;color:#f92672&#34;&gt;}&lt;/span&gt;
-&lt;span style=&#34;color:#f92672&#34;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Test time. I again utilize &lt;code&gt;pipenv&lt;/code&gt; here, by having it call the test command
+&lt;span style=&#34;color:#f92672&#34;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Test time. I again utilize &lt;code&gt;pipenv&lt;/code&gt; here, by having it call the test command
 (&lt;code&gt;pytest -v --junit-xml himmallright-source-test-report.xml .&lt;/code&gt;) so that it runs
 in the pipenv virtual environment.&lt;/p&gt;
+
 &lt;p&gt;Two things to note here:&lt;/p&gt;
+
 &lt;ul&gt;
 &lt;li&gt;The &lt;code&gt;--junit-xml&lt;/code&gt; flag defines a xml filename to write the junit test report
 to. This will be used by Jenkins to collect the test results.&lt;/li&gt;
@@ -365,20 +434,25 @@ allows tests to fail but without triggering a &lt;em&gt;pipeline&lt;/em&gt; fail
 Jenkins.  This way even if tests fail, we make it all the way through
 collection so we can see &lt;em&gt;what&lt;/em&gt; tests failed and &lt;em&gt;why&lt;/em&gt;.&lt;/li&gt;
 &lt;/ul&gt;
+
 &lt;h4 id=&#34;collect-test-results&#34;&gt;Collect Test Results&lt;/h4&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-groovy&#34; data-lang=&#34;groovy&#34;&gt;stage&lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;Collect Test Resuts&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;{&lt;/span&gt;
     steps &lt;span style=&#34;color:#f92672&#34;&gt;{&lt;/span&gt;
         archiveArtifacts &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;himmallright-source-test-report.xml&amp;#34;&lt;/span&gt;
         junit &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;himmallright-source-test-report.xml&amp;#34;&lt;/span&gt;
     &lt;span style=&#34;color:#f92672&#34;&gt;}&lt;/span&gt;
-&lt;span style=&#34;color:#f92672&#34;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Next, we archive the junit report xml file as a Jenkins artifact (just in
+&lt;span style=&#34;color:#f92672&#34;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Next, we archive the junit report xml file as a Jenkins artifact (just in
 case). Finally, we have the &lt;a href=&#34;https://plugins.jenkins.io/junit/&#34;&gt;junit&lt;/a&gt; plugin
 collect the report.&lt;/p&gt;
-&lt;h3 id=&#34;save--commit&#34;&gt;Save &amp;amp; Commit&lt;/h3&gt;
+
+&lt;h3 id=&#34;save-commit&#34;&gt;Save &amp;amp; Commit&lt;/h3&gt;
+
 &lt;p&gt;That should be it for the pipeline file! Commit and push it to the git repo,
 and we can start working with it in Jenkins!&lt;/p&gt;
+
 &lt;h2 id=&#34;multibranch-pipelines&#34;&gt;Multibranch Pipelines&lt;/h2&gt;
+
 &lt;p&gt;With the &lt;code&gt;Jenkinsfile&lt;/code&gt; in the repo, we can create the pipeline! Specifically,
 we will be creating a mult-branch pipeline. A &lt;em&gt;multi-branch&lt;/em&gt; job scans a git
 project, and creates a separate pipeline for each branch or PR in the repo.
@@ -386,45 +460,85 @@ This is beneficial for testing, as it will automatically instantiate a test
 pipeline against a newly created PR, so we can verify that the PR passes the
 tests before merging it into the &lt;code&gt;master&lt;/code&gt; branch. Additionally, it lets us make
 sure we aren&amp;rsquo;t breaking anything &lt;em&gt;while&lt;/em&gt; working in a new branch.&lt;/p&gt;
+
 &lt;h4 id=&#34;creating-the-pipeline&#34;&gt;Creating the Pipeline&lt;/h4&gt;
-&lt;!-- raw HTML omitted --&gt;
+
+&lt;p&gt;&lt;center&gt;
+&lt;a href=&#34;../../img/posts/creating-website-tests-ci/new-job.png&#34;&gt;
+&lt;img alt=&#34;Creating a new Jenkins Item&#34; src=&#34;../../img/posts/creating-website-tests-ci/new-job.png&#34; style=&#34;max-width: 100%; padding: 5px 15px 10px 10px&#34;/&gt;&lt;/a&gt;
+&lt;div class=&#34;caption&#34;&gt;Select Multibranch Pipeline from the new item menu in Jenkins.&lt;/div&gt;
+&lt;/center&gt;&lt;/p&gt;
+
 &lt;p&gt;To create a Multi-Branch pipeline, select &lt;em&gt;New Item&lt;/em&gt; in the menu on the left.
 Next, enter a name for the pipeline and select &lt;em&gt;Multibranch Pipeline&lt;/em&gt; at the
 bottom. Click &lt;em&gt;Ok&lt;/em&gt;.&lt;/p&gt;
+
 &lt;h4 id=&#34;configuring-the-pipeline&#34;&gt;Configuring the Pipeline&lt;/h4&gt;
-&lt;!-- raw HTML omitted --&gt;
+
+&lt;p&gt;&lt;center&gt;
+&lt;a href=&#34;../../img/posts/creating-website-tests-ci/multipipeline-config-options.png&#34;&gt;
+&lt;img alt=&#34;Multibranch pipeline config options&#34; src=&#34;../../img/posts/creating-website-tests-ci/multipipeline-config-options.png&#34; style=&#34;max-width: 100%; padding: 5px 15px 10px 10px&#34;/&gt;&lt;/a&gt;
+&lt;div class=&#34;caption&#34;&gt;Configuration options when creating the multibranch
+pipeline.&lt;/div&gt;
+&lt;/center&gt;&lt;/p&gt;
+
 &lt;p&gt;On the pipelines configuration page, start by filling out the &lt;em&gt;Display Name&lt;/em&gt;
 and &lt;em&gt;Description&lt;/em&gt; text boxes. Next, go down to &lt;em&gt;Branch Sources&lt;/em&gt; and click on
 &lt;em&gt;Add source&lt;/em&gt;. My website is currently hosted on Github, so I will select that.
 However, select &lt;em&gt;Git&lt;/em&gt; if your project is hosted on another &lt;code&gt;git&lt;/code&gt; service.&lt;/p&gt;
+
 &lt;p&gt;Add the Repository URL and choose the pipeline Behaviors. The Behaviors define
 how the pipeline will split up branches. For example, it can be selected to
 only discover branches that are also PRs.&lt;/p&gt;
+
 &lt;p&gt;Next, in the &lt;em&gt;Build Configuration&lt;/em&gt; section, be sure that the &lt;em&gt;Script Path&lt;/em&gt;
 defines the path where the &lt;code&gt;Jenkinsfile&lt;/code&gt; is located. If it&amp;rsquo;s in the root
 directory (and named &lt;code&gt;Jenkinsfile&lt;/code&gt;), the default should work.&lt;/p&gt;
+
 &lt;p&gt;Lastly, select an interval to automatically check the repo for changes in the
 &lt;em&gt;Scan Repository Triggers&lt;/em&gt; section. This step is optional, but I highly
 recommend it.&lt;/p&gt;
+
 &lt;p&gt;That&amp;rsquo;s all we &lt;em&gt;need&lt;/em&gt; to setup, but feel free to research more options. I mostly
 have defaults selected for the rest. When complete, hit &lt;em&gt;Save&lt;/em&gt;.&lt;/p&gt;
+
 &lt;h2 id=&#34;running-pipelines&#34;&gt;Running Pipelines&lt;/h2&gt;
-&lt;!-- raw HTML omitted --&gt;
+
+&lt;p&gt;&lt;center&gt;
+&lt;a href=&#34;../../img/posts/creating-website-tests-ci/multibranch-pipeline-overview.png&#34;&gt;
+&lt;img alt=&#34;The multibranch pipeline overview page&#34; src=&#34;../../img/posts/creating-website-tests-ci/multibranch-pipeline-overview.png&#34; style=&#34;max-width: 100%; padding: 5px 15px 10px 10px&#34;/&gt;&lt;/a&gt;
+&lt;div class=&#34;caption&#34;&gt;The multibranch pipeline overview page.&lt;/div&gt;
+&lt;/center&gt;&lt;/p&gt;
+
 &lt;p&gt;Once the multibranch pipeline is created, it should scan the repo to detect any
 branches or pull requests that have defined &lt;code&gt;Jenkinsfile&lt;/code&gt;s. It will create an
 job item in the list for each branch/PR it detects (and kick off runs for
 each).&lt;/p&gt;
+
 &lt;p&gt;To manually start a scan, select &lt;em&gt;Scan Repository Now&lt;/em&gt; in the menu on the left,
 and it will scan all the branches again, looking for changes, and kicking off
 pipeline runs for any branch or pr that has changed.&lt;/p&gt;
-&lt;!-- raw HTML omitted --&gt;
+
+&lt;p&gt;&lt;center&gt;
+&lt;a href=&#34;../../img/posts/creating-website-tests-ci/branch-overview.png&#34;&gt;
+&lt;img alt=&#34;The overview page of a single branch&#34; src=&#34;../../img/posts/creating-website-tests-ci/branch-overview.png&#34; style=&#34;max-width: 100%; padding: 5px 15px 10px 10px&#34;/&gt;&lt;/a&gt;
+&lt;div class=&#34;caption&#34;&gt;The overview page of a single branch.&lt;/div&gt;
+&lt;/center&gt;&lt;/p&gt;
+
 &lt;p&gt;To manually start a specific branch run, click on the branch name to enter the
 branch&amp;rsquo;s job overview page. Then, simply click &lt;em&gt;Build Now&lt;/em&gt; on the left. Once
 the run starts, it runs like a normal jenkins job and can be viewed by clicking
 the job&amp;rsquo;s run number to the bottom left. The job&amp;rsquo;s progress can then be viewed
 on that page, or using &lt;em&gt;Blue Ocean&lt;/em&gt; (Recommended).&lt;/p&gt;
+
 &lt;h2 id=&#34;viewing-results&#34;&gt;Viewing Results&lt;/h2&gt;
-&lt;!-- raw HTML omitted --&gt;
+
+&lt;p&gt;&lt;center&gt;
+&lt;a href=&#34;../../img/posts/creating-website-tests-ci/test-results.png&#34;&gt;
+&lt;img alt=&#34;The overview page of a single branch&#34; src=&#34;../../img/posts/creating-website-tests-ci/test-results.png&#34; style=&#34;max-width: 100%; padding: 5px 15px 10px 10px&#34;/&gt;&lt;/a&gt;
+&lt;div class=&#34;caption&#34;&gt;The overview page of a single branch.&lt;/div&gt;
+&lt;/center&gt;&lt;/p&gt;
+
 &lt;p&gt;Personally, I prefer to always view the test results using the Blue Ocean
 viewer. Once a job completes, select the &lt;em&gt;Tests&lt;/em&gt; tab at the top of the viewer
 to see the collected test results (this is what the junit steps in our pipeline
@@ -434,7 +548,9 @@ tests, they can be clicked, and the row will expand to show the failed test&amp;
 error message and stack trace. For my test set, this makes it easy to see which
 page failed, and even know what status code was &lt;em&gt;actually&lt;/em&gt; returned in the
 response (by looking at the stack trace). Very helpful!&lt;/p&gt;
+
 &lt;h2 id=&#34;conclusion&#34;&gt;Conclusion&lt;/h2&gt;
+
 &lt;p&gt;There we go! Not only do we now have the website tests automated as a pipeline,
 but as a &lt;em&gt;multibranch&lt;/em&gt; pipeline. This should help automatically ensure that
 nothing breaks as I edit and add to the website. It will even run the tests
@@ -455,31 +571,39 @@ separate branches (instead of pushing everything straight to &lt;code&gt;master&
 even that isn&amp;rsquo;t enough to ensure everything works as expected when publishing
 something new. Then, I thought of something obvious&amp;hellip; I could setup some
 simple testing&amp;hellip; for my website.&lt;/p&gt;
+
 &lt;h2 id=&#34;what-to-test&#34;&gt;What to Test&lt;/h2&gt;
+
 &lt;p&gt;After editing a page or drafting a new post, I often wonder &amp;ldquo;how can I be
 &lt;em&gt;sure&lt;/em&gt; everything will still work when I publish this change&amp;rdquo;? I question if
 every post file is &lt;em&gt;actually&lt;/em&gt; being served as a web page. Or worse&amp;hellip; I fear
 that a post that isn&amp;rsquo;t &lt;em&gt;ready&lt;/em&gt; to be published might &lt;em&gt;accidentally&lt;/em&gt; get pushed
 with an unrelated website fix.&lt;/p&gt;
+
 &lt;p&gt;&lt;em&gt;(Yes, this is a completely unreasonable fear given that ALL of my
 website source files, drafts included, are publicly hosted on Github.
 Nonetheless, the fear exists)&lt;/em&gt;&lt;/p&gt;
+
 &lt;p&gt;This will be a multi-post serries, so in this first one we will focus on:&lt;/p&gt;
+
 &lt;ul&gt;
 &lt;li&gt;Configuring the test environment&lt;/li&gt;
 &lt;li&gt;Building up the testing framework&lt;/li&gt;
 &lt;li&gt;Writing some basic tests to ensure:
+
 &lt;ul&gt;
 &lt;li&gt;The pages I &lt;em&gt;want&lt;/em&gt; to be served are&lt;/li&gt;
 &lt;li&gt;Pages and posts that are not ready, are &lt;em&gt;not&lt;/em&gt; being served&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
 &lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
+
 &lt;p&gt;As my website is currently compiled using &lt;a href=&#34;https://gohugo.io&#34;&gt;hugo&lt;/a&gt;, the tests
 will be centered around that framework. However, most of the information can be
 applied to testing websites using other static website generators, are they are
 all quite similar.&lt;/p&gt;
+
 &lt;h2 id=&#34;setting-up-the-env&#34;&gt;Setting up the env&lt;/h2&gt;
+
 &lt;p&gt;I will be using
 &lt;a href=&#34;https://docs.pytest.org/en/latest/contents.html&#34;&gt;pytest&lt;/a&gt; for the testing
 framework, and to make all the
@@ -488,23 +612,30 @@ python dependencies a bit easier to manage, I will also use
 &lt;a href=&#34;https://getfedora.org&#34;&gt;Fedora&lt;/a&gt; computer, VM, or at the very least in a Fedora
 &lt;a href=&#34;https://podman.io&#34;&gt;podman&lt;/a&gt; container. So, some of my instructions use &lt;code&gt;dnf&lt;/code&gt;,
 but feel free to adjust to your package manager accordingly.&lt;/p&gt;
+
 &lt;h4 id=&#34;install-pipenv&#34;&gt;Install &lt;code&gt;pipenv&lt;/code&gt;&lt;/h4&gt;
+
 &lt;p&gt;First, lets install &lt;code&gt;pipenv&lt;/code&gt;, which is easy enough in Fedora:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;sudo dnf install pipenv
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h4 id=&#34;install-needed-packages-inside-pipenv-shell&#34;&gt;Install needed packages inside &lt;code&gt;pipenv shell&lt;/code&gt;&lt;/h4&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;sudo dnf install pipenv&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h4 id=&#34;install-needed-packages-inside-pipenv-shell&#34;&gt;Install needed packages inside &lt;code&gt;pipenv shell&lt;/code&gt;&lt;/h4&gt;
+
 &lt;p&gt;After installing, create a pipenv shell and enter it:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;pipenv shell
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Install &lt;code&gt;pytest&lt;/code&gt; and &lt;code&gt;requests&lt;/code&gt; in the pip environment:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;pip install pytest requests
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;creating-the-test-framework&#34;&gt;Creating the Test Framework&lt;/h2&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;pipenv shell&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Install &lt;code&gt;pytest&lt;/code&gt; and &lt;code&gt;requests&lt;/code&gt; in the pip environment:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;pip install pytest requests&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h2 id=&#34;creating-the-test-framework&#34;&gt;Creating the Test Framework&lt;/h2&gt;
+
 &lt;p&gt;With the environment setup, we can start building up the test framework. We
 will start by defining come constants, then use those when building helper
 functions. Lastly, we will use the helper functions to piece together the
 &lt;code&gt;conftest.py&lt;/code&gt; and &lt;code&gt;test_pages.py&lt;/code&gt; files.&lt;/p&gt;
+
 &lt;h3 id=&#34;defining-constants&#34;&gt;Defining Constants&lt;/h3&gt;
+
 &lt;p&gt;First, lets define some constants we can use throughout the test framework. In
 the future, I might switch these to be set optionally with  CLI arguments, but
 for now&amp;hellip; they&amp;rsquo;re just static constant variables defined in a file.&lt;/p&gt;
+
 &lt;p&gt;So first, create a new file in the &lt;code&gt;tests&lt;/code&gt; directory named &lt;code&gt;constants.py&lt;/code&gt;. In
 that file, lets dump our contants:&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;BASE_URL &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;http://localhost:1313&amp;#34;&lt;/span&gt;
@@ -518,8 +649,9 @@ POST_NAMES &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; [
     &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt;Removed middle of list because it&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;s long&amp;gt;&lt;/span&gt;
     &lt;span style=&#34;color:#f92672&#34;&gt;...&lt;/span&gt;
     &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;ZFS-Backups-To-LUKS-External&amp;#34;&lt;/span&gt;,
-]
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;As you can see, in my &lt;code&gt;constants.py&lt;/code&gt; file I have 4 variables defined:&lt;/p&gt;
+]&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;As you can see, in my &lt;code&gt;constants.py&lt;/code&gt; file I have 4 variables defined:&lt;/p&gt;
+
 &lt;ul&gt;
 &lt;li&gt;&lt;code&gt;BASE_URL&lt;/code&gt;: this is the base url for the website when running &lt;code&gt;hugo serve&lt;/code&gt;.
 For most, it will default to &lt;code&gt;http://localhost:1313&lt;/code&gt;, but I have this as
@@ -533,17 +665,22 @@ page is being served, which is at &lt;code&gt;baseurl/pages/about/&lt;/code&gt;,
 &lt;li&gt;&lt;code&gt;POST_NAMES&lt;/code&gt;: This is a list of the names of the post &lt;em&gt;files&lt;/em&gt; (without the
 &lt;code&gt;.md&lt;/code&gt;)&lt;/li&gt;
 &lt;/ul&gt;
+
 &lt;p&gt;Add in your values for the variables, and remember to save the file.&lt;/p&gt;
+
 &lt;h3 id=&#34;writing-some-helper-utility-functions&#34;&gt;Writing Some Helper Utility Functions&lt;/h3&gt;
+
 &lt;p&gt;With those constants defined, we should be ready to write some helper
 functions. These are normal python functions that will be called from tests or
 even test fixture functions.&lt;/p&gt;
+
 &lt;p&gt;First, lets create &lt;code&gt;utils.py&lt;/code&gt;. The helper functions will need to use
 &lt;code&gt;listdir&lt;/code&gt;, as well as the &lt;code&gt;path&lt;/code&gt; function from the &lt;code&gt;os&lt;/code&gt; module. They will also
 need the regex functions. So, lets make those imports at the top of the file:&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#f92672&#34;&gt;from&lt;/span&gt; os &lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; listdir, path
-&lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; re
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h4 id=&#34;get_file_names&#34;&gt;get_file_names&lt;/h4&gt;
+&lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; re&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h4 id=&#34;get-file-names&#34;&gt;get_file_names&lt;/h4&gt;
+
 &lt;p&gt;Lets define a helper function named &lt;code&gt;get_file_names&lt;/code&gt;:&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;get_file_names&lt;/span&gt;(src, extension&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;None):
     &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&amp;#34;&amp;#34;Collects the names of all files of a directory&amp;#34;&amp;#34;&amp;#34;&lt;/span&gt;
@@ -557,49 +694,56 @@ need the regex functions. So, lets make those imports at the top of the file:&lt
         &lt;span style=&#34;color:#75715e&#34;&gt;# Otherwise, add everything&lt;/span&gt;
         &lt;span style=&#34;color:#66d9ef&#34;&gt;else&lt;/span&gt;:
             file_list&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;append(file)
-    &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; file_list
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;When provided a file path (&lt;code&gt;src&lt;/code&gt;), this function will return a list of all the
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; file_list&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;When provided a file path (&lt;code&gt;src&lt;/code&gt;), this function will return a list of all the
 file names in the directory. Optionally, the &lt;code&gt;extension&lt;/code&gt; parameter can be
 supplied to only return files of that extension type (for exapmple, &lt;code&gt;md&lt;/code&gt;). This
 function will be used to grab the names of all the post source files.&lt;/p&gt;
+
 &lt;p&gt;&amp;hellip; and that&amp;rsquo;s all we need in &lt;code&gt;utils.py&lt;/code&gt;&amp;hellip; for now!&lt;/p&gt;
+
 &lt;h3 id=&#34;conftest&#34;&gt;Conftest&lt;/h3&gt;
+
 &lt;p&gt;Now lets start digging into test-related stuff, by first creating a
 &lt;code&gt;conftest.py&lt;/code&gt; file. This file will mostly hold the fixtures we will use for the
 tests. In our particular setup, they will gather lists of pages to run multiple
 calls of each test against by using &lt;code&gt;@pytest.fixture(params)&lt;/code&gt;.&lt;/p&gt;
+
 &lt;p&gt;But first, lets import a few things at the top of &lt;code&gt;conftest.py&lt;/code&gt;:&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; pytest
 &lt;span style=&#34;color:#f92672&#34;&gt;from&lt;/span&gt; os &lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; path
 
 &lt;span style=&#34;color:#f92672&#34;&gt;from&lt;/span&gt; constants &lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; BASE_URL, SITE_PAGES, POST_DIR, POST_NAMES
-&lt;span style=&#34;color:#f92672&#34;&gt;from&lt;/span&gt; utils &lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; get_file_names
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;The imports include the &lt;code&gt;os.path()&lt;/code&gt; function, some of the constants we
+&lt;span style=&#34;color:#f92672&#34;&gt;from&lt;/span&gt; utils &lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; get_file_names&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;The imports include the &lt;code&gt;os.path()&lt;/code&gt; function, some of the constants we
 defined, and the &lt;code&gt;get_file_names()&lt;/code&gt; helper function. Oh, And of course
 &lt;code&gt;pytest&lt;/code&gt; ;) .&lt;/p&gt;
-&lt;h4 id=&#34;page_url&#34;&gt;page_url&lt;/h4&gt;
+
+&lt;h4 id=&#34;page-url&#34;&gt;page_url&lt;/h4&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;@pytest.fixture&lt;/span&gt;(params&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;SITE_PAGES)
 &lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;page_url&lt;/span&gt;(request):
     &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&amp;#34;&amp;#34;Returns the page urls for testing.&amp;#34;&amp;#34;&amp;#34;&lt;/span&gt;
-    &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; BASE_URL &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; request&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;param
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;The first fixture, &lt;code&gt;page_url&lt;/code&gt;, is very basic. It creates a list of all of the
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; BASE_URL &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; request&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;param&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;The first fixture, &lt;code&gt;page_url&lt;/code&gt;, is very basic. It creates a list of all of the
 website pages (not posts), by combining the &lt;code&gt;BASE_URL&lt;/code&gt; with each of the values
 defined in the &lt;code&gt;SITE_PAGES&lt;/code&gt; constant. This list will later be used to
 paramaterize a single test across all of the page links.&lt;/p&gt;
-&lt;h4 id=&#34;post_url&#34;&gt;post_url&lt;/h4&gt;
+
+&lt;h4 id=&#34;post-url&#34;&gt;post_url&lt;/h4&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;@pytest.fixture&lt;/span&gt;(params&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;POST_NAMES)
 &lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;post_url&lt;/span&gt;(request):
     &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&amp;#34;&amp;#34;Returns the post urls for testing.&amp;#34;&amp;#34;&amp;#34;&lt;/span&gt;
-    &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; BASE_URL &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;/post/&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; request&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;param&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;lower()
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;The next fixture, &lt;code&gt;post_url&lt;/code&gt; is basically the same as &lt;code&gt;page_url&lt;/code&gt;, except it
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; BASE_URL &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;/post/&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; request&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;param&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;lower()&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;The next fixture, &lt;code&gt;post_url&lt;/code&gt; is basically the same as &lt;code&gt;page_url&lt;/code&gt;, except it
 creates a list of all the &lt;em&gt;posts&lt;/em&gt; using the &lt;code&gt;POST_NAMES&lt;/code&gt; constant. Again, this
 will be used to expand a single test into many, one for each post.&lt;/p&gt;
-&lt;h4 id=&#34;non_live_post_url&#34;&gt;non_live_post_url&lt;/h4&gt;
+
+&lt;h4 id=&#34;non-live-post-url&#34;&gt;non_live_post_url&lt;/h4&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;@pytest.fixture&lt;/span&gt;(params&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;non_live_post_urls())
 &lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;non_live_post_url&lt;/span&gt;(request):
     &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&amp;#34;&amp;#34;Returns the url of a non-defined post file&amp;#34;&amp;#34;&amp;#34;&lt;/span&gt;
-    &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; BASE_URL &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;/post/&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; request&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;param&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;lower()
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Lastly, we have &lt;code&gt;non_live_post_url&lt;/code&gt; with its accompanying helper function,
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; BASE_URL &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;/post/&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; request&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;param&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;lower()&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Lastly, we have &lt;code&gt;non_live_post_url&lt;/code&gt; with its accompanying helper function,
 &lt;code&gt;non_live_post_urls&lt;/code&gt;. This pair creates a list of posts that have a markdown
 file in the &lt;code&gt;/post/&lt;/code&gt; directory, but are &lt;em&gt;not&lt;/em&gt; listed in the &lt;code&gt;POST_NAMES&lt;/code&gt;
 constant (so in practice, not really to be published).&lt;/p&gt;
@@ -610,13 +754,15 @@ constant (so in practice, not really to be published).&lt;/p&gt;
     )
     live_post_names &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; list(map(&lt;span style=&#34;color:#66d9ef&#34;&gt;lambda&lt;/span&gt; name: name&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;lower(), POST_NAMES))
     non_live_post_names &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; set(all_post_md_names)&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;difference(set(live_post_names))
-    &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; list(non_live_post_names)
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;First, the &lt;code&gt;non_live_post_urls&lt;/code&gt; helper function returns a list of non-listed
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; list(non_live_post_names)&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;First, the &lt;code&gt;non_live_post_urls&lt;/code&gt; helper function returns a list of non-listed
 post files. That  list is then used in &lt;code&gt;non_live_post_url&lt;/code&gt; as the
 &lt;code&gt;pytest.fixture(params)&lt;/code&gt; object, much like &lt;code&gt;SITE_PAGES&lt;/code&gt; and &lt;code&gt;POST_NAMES&lt;/code&gt; were
 for the previous
 fixtures.&lt;/p&gt;
+
 &lt;h3 id=&#34;finally-some-tests&#34;&gt;Finally&amp;hellip; Some Tests!&lt;/h3&gt;
+
 &lt;p&gt;Phew. Okay. With &lt;em&gt;all of that&lt;/em&gt; defined&amp;hellip; lets create the first test file. When
 &lt;code&gt;pytest&lt;/code&gt; runs, it will try to grab tests recursively from all the files down
 the current directory, starting with &lt;code&gt;test&lt;/code&gt;. This first set of tests will be
@@ -624,8 +770,9 @@ checking whether a web page is being served (or not), so lets name the file
 &lt;code&gt;test_pages.py&lt;/code&gt;. Again, start with the required imports. This time we only need
 &lt;code&gt;pytest&lt;/code&gt; and &lt;code&gt;requests&lt;/code&gt;.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; pytest
-&lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; requests
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h5 id=&#34;testing-pages&#34;&gt;Testing Pages&lt;/h5&gt;
+&lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; requests&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h5 id=&#34;testing-pages&#34;&gt;Testing Pages&lt;/h5&gt;
+
 &lt;p&gt;The first test will check that each page defined in the &lt;code&gt;SITE_PAGES&lt;/code&gt; constant
 is being served. More specifically, we will use the &lt;code&gt;requests&lt;/code&gt; module to ensure
 not only that the page is served, but returns a &lt;a href=&#34;https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/200&#34;&gt;200
@@ -634,25 +781,29 @@ actually requires very little code to accomplish (Gotta love python) :&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;test_page_served&lt;/span&gt;(page_url):
     &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&amp;#34;&amp;#34;Checks that the website pages are available&amp;#34;&amp;#34;&amp;#34;&lt;/span&gt;
     response &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; requests&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;get(page_url)
-    &lt;span style=&#34;color:#66d9ef&#34;&gt;assert&lt;/span&gt; response&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;status_code &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;200&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;We simply define a function, &lt;code&gt;test_page_served()&lt;/code&gt;, and because it is in
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;assert&lt;/span&gt; response&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;status_code &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;200&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;We simply define a function, &lt;code&gt;test_page_served()&lt;/code&gt;, and because it is in
 &lt;code&gt;test_pages.py&lt;/code&gt;, it will be assumed to be a test by &lt;code&gt;pytest&lt;/code&gt;. We provide the
 &lt;code&gt;page_url&lt;/code&gt; fixture we previously defined in &lt;code&gt;conftest.py&lt;/code&gt; as the only
 parameter. This will call the &lt;code&gt;test_page_served&lt;/code&gt; test for each url
 in the list generated by &lt;code&gt;page_url&lt;/code&gt;. Next, we use &lt;code&gt;requests.get()&lt;/code&gt; to make a
 page request. Lastly, we &lt;code&gt;assert&lt;/code&gt; that the &lt;code&gt;status_code&lt;/code&gt; from our response is
 &lt;code&gt;200&lt;/code&gt;. If it is, the test passes, if not, it fails.&lt;/p&gt;
+
 &lt;h5 id=&#34;testing-posts&#34;&gt;Testing Posts&lt;/h5&gt;
+
 &lt;p&gt;Next, lets test that all of the &lt;em&gt;posts&lt;/em&gt; are being served. This test works
 &lt;em&gt;exactly&lt;/em&gt; the same as &lt;em&gt;test_page_served&lt;/em&gt;, except we are using the &lt;code&gt;post_url&lt;/code&gt;
 fixture instead of &lt;code&gt;page_url&lt;/code&gt; to supply the links to test:&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;test_post_served&lt;/span&gt;(post_url):
     &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&amp;#34;&amp;#34;Checks that the desired posts are available&amp;#34;&amp;#34;&amp;#34;&lt;/span&gt;
     response &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; requests&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;get(post_url)
-    &lt;span style=&#34;color:#66d9ef&#34;&gt;assert&lt;/span&gt; response&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;status_code &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;200&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;em&gt;(While I could combine these cases into a single test function, I decided to
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;assert&lt;/span&gt; response&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;status_code &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;200&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;&lt;em&gt;(While I could combine these cases into a single test function, I decided to
 keep them separate for flexibility in the future)&lt;/em&gt;&lt;/p&gt;
+
 &lt;h5 id=&#34;lets-get-fancy-testing-unapproved-posts-are-not-served&#34;&gt;Lets Get Fancy: Testing Unapproved Posts Are &lt;em&gt;NOT&lt;/em&gt; Served&lt;/h5&gt;
+
 &lt;p&gt;For the last test, lets get a little bit more complicated and ensure that post files
 &lt;em&gt;not&lt;/em&gt; listed in the approved list are &lt;em&gt;not&lt;/em&gt; being served. Well&amp;hellip; it
 turns out all the &amp;ldquo;fancy&amp;rdquo; code required for this test case already occured in
@@ -662,23 +813,38 @@ now checking for a &lt;code&gt;404&lt;/code&gt; return status instead of &lt;cod
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;test_non_defined_posts_not_served&lt;/span&gt;(non_live_post_url):
     &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&amp;#34;&amp;#34;Checks that a non-defined post is NOT available&amp;#34;&amp;#34;&amp;#34;&lt;/span&gt;
     response &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; requests&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;get(non_live_post_url)
-    &lt;span style=&#34;color:#66d9ef&#34;&gt;assert&lt;/span&gt; response&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;status_code &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;404&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;That defines all of the tests for this first set! Don&amp;rsquo;t let only having three
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;assert&lt;/span&gt; response&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;status_code &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;404&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;That defines all of the tests for this first set! Don&amp;rsquo;t let only having three
 test functions fool you, they should generate over 70 test results when run!
 (For my website, at the time of writing this post)&lt;/p&gt;
+
 &lt;h3 id=&#34;lets-run-some-tests&#34;&gt;Lets Run Some Tests!&lt;/h3&gt;
+
 &lt;p&gt;Finally, we should be able to run the tests. To do so, first ensure that you
 are in the pipenv by running &lt;code&gt;pipenv shell&lt;/code&gt;, &lt;em&gt;or&lt;/em&gt; you can run the tests from
 outside the pipenv using &lt;code&gt;pipenv run COMMAND&lt;/code&gt;. Next, call:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;pytest -v .
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;The &lt;code&gt;-v&lt;/code&gt; flag runs pytest in &lt;em&gt;&amp;lsquo;verbose&amp;rsquo;&lt;/em&gt; mode, which I like to do as it shows
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;pytest -v .&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;The &lt;code&gt;-v&lt;/code&gt; flag runs pytest in &lt;em&gt;&amp;lsquo;verbose&amp;rsquo;&lt;/em&gt; mode, which I like to do as it shows
 the results for each test run, rather than each &lt;em&gt;file&lt;/em&gt;.&lt;/p&gt;
-&lt;!-- raw HTML omitted --&gt;
+
+&lt;p&gt;&lt;center&gt;
+&lt;video style=&#34;max-width:100%;&#34; controls&gt;
+  &lt;source src=&#34;../../img/posts/creating-website-tests-pages/passing-tests.mp4&#34; type=&#34;video/mp4&#34;&gt;
+&lt;/video&gt;
+&lt;div id=&#34;caption&#34;&gt;Running the pages tests. All 72 passed.&lt;/div&gt;
+&lt;/center&gt;&lt;/p&gt;
+
 &lt;p&gt;So it looks like all the tests are passing! To be sure, Lets do a quick check to
 make sure they work as expected&amp;hellip; I&amp;rsquo;ll mark this post with &lt;code&gt;draft = &amp;quot;False&amp;quot;&lt;/code&gt;,
 but &lt;em&gt;not&lt;/em&gt; add it to the approved lists, and the test for this page &lt;em&gt;should&lt;/em&gt;
 fail&amp;hellip;&lt;/p&gt;
-&lt;!-- raw HTML omitted --&gt;
+
+&lt;p&gt;&lt;center&gt;
+&lt;a href=&#34;../../img/posts/creating-website-tests-pages/failed-test.png&#34;&gt;
+&lt;img alt=&#34;Checking a test fails when we want it to&#34; src=&#34;../../img/posts/creating-website-tests-pages/failed-test.png&#34; style=&#34;max-width: 100%; padding: 5px 15px 10px 10px&#34;/&gt;&lt;/a&gt;
+&lt;div class=&#34;caption&#34;&gt;Checking that a test fails when we want it to.&lt;/div&gt;
+&lt;/center&gt;&lt;/p&gt;
+
 &lt;p&gt;Awesome, it failed! I guess all there is left to do is to finish up this post, so I
 can add it to the approved posts lists and publish it! Stay tuned!&lt;/p&gt;</description>
     </item>
@@ -696,8 +862,13 @@ image, which has a newer version of &lt;code&gt;hugo&lt;/code&gt;.  So, I filed 
 #26&lt;/a&gt;, and
 finished my post in a Fedora 30 container for the time being.  Here is a quick
 explanation of how I &lt;em&gt;eventually&lt;/em&gt; came back and resolved issue #26.&lt;/p&gt;
+
 &lt;h3 id=&#34;the-problem&#34;&gt;The Problem&lt;/h3&gt;
-&lt;!-- raw HTML omitted --&gt;
+
+&lt;p&gt;&lt;a href=&#34;../../img/posts/issue26/correct-website-homepage.png&#34;&gt;
+&lt;img alt=&#34;The correct website homepage index&#34; src=&#34;../../img/posts/issue26/correct-website-homepage.png&#34; style=&#34;max-width: 100%; padding: 5px 15px 10px 10px&#34;/&gt;&lt;/a&gt;
+&lt;div class=&#34;caption&#34;&gt;What the website homepage is &lt;em&gt;supposed&lt;/em&gt; to look like&lt;/div&gt;&lt;/p&gt;
+
 &lt;p&gt;My website has two types of content: &lt;em&gt;posts&lt;/em&gt;, and &lt;em&gt;pages&lt;/em&gt;. &lt;em&gt;Pages&lt;/em&gt; are the
 &amp;lsquo;normal&amp;rsquo; content of the website, like the &lt;a href=&#34;../../pages/about/&#34;&gt;About&lt;/a&gt; and
 &lt;a href=&#34;../../pages/homelab/&#34;&gt;Homelab&lt;/a&gt; pages. &lt;em&gt;Posts&lt;/em&gt; on the other hand, are the dated
@@ -705,15 +876,22 @@ explanation of how I &lt;em&gt;eventually&lt;/em&gt; came back and resolved issu
 is working, my hugo template takes the newest &lt;code&gt;x&lt;/code&gt; number of post files from the
 &lt;em&gt;posts&lt;/em&gt; directory, and lists them on the homepage with a small summary. (See
 image above)&lt;/p&gt;
-&lt;!-- raw HTML omitted --&gt;
+
+&lt;p&gt;&lt;a href=&#34;../../img/posts/issue26/broken-website-homepage.png&#34;&gt;
+&lt;img alt=&#34;What the broken homepage&#34; src=&#34;../../img/posts/issue26/broken-website-homepage.png&#34; style=&#34;max-width: 100%; padding: 5px 15px 10px 10px&#34;/&gt;&lt;/a&gt;
+&lt;div class=&#34;caption&#34;&gt;The broken homepage&lt;/div&gt;&lt;/p&gt;
+
 &lt;p&gt;However, after the &lt;code&gt;hugo&lt;/code&gt; version in my website container updated from
 &lt;code&gt;v0.56.6&lt;/code&gt; to &lt;code&gt;v0.58.3&lt;/code&gt;, the post list on the homepage broke.  Specifically,
 instead of listing the recent posts, the homepage just listed a single &amp;ldquo;post&amp;rdquo;
 named&amp;hellip;  &amp;ldquo;Posts&amp;rdquo; (see image above).&lt;/p&gt;
+
 &lt;p&gt;This indicated that something changed between those two versions that made my
 template out of date. However, I wasn&amp;rsquo;t sure if the problem was in the
 website&amp;rsquo;s page content, or if it was from an issue in the template I used.&lt;/p&gt;
+
 &lt;h3 id=&#34;finding-a-fix&#34;&gt;Finding a Fix&lt;/h3&gt;
+
 &lt;p&gt;To find out, I grabbed some other &lt;a href=&#34;https://themes.gohugo.io&#34;&gt;hugo templates&lt;/a&gt;,
 and temporarily switched my config to render the website with them. This was
 actually a bit more complicated than I thought it would be. Hugo templates
@@ -724,9 +902,12 @@ it had the same rendering issue mine did. Eventually, I found a newer, but
 rather bare-bones template that had a similar home page layout to my own. When
 I rendered my site with it&amp;hellip; it had a working recent posts list on the home
 page!&lt;/p&gt;
+
 &lt;p&gt;This proved 1) the issue was somewhere in my &lt;em&gt;template code&lt;/em&gt; and 2) a fix was
 possible.&lt;/p&gt;
+
 &lt;h3 id=&#34;coding-a-solution&#34;&gt;Coding a Solution&lt;/h3&gt;
+
 &lt;p&gt;Studying the &lt;code&gt;layouts/index.html&lt;/code&gt; file in each template, I noticed the working
 template used a different method to gather and display the recent posts. My
 template used a basic in-line piece of code that grabbed a range of the latest
@@ -737,27 +918,30 @@ posts to be rendered, right then and there.&lt;/p&gt;
           {{ $posts := or .Site.Params.PostSummariesFrontPage 4 }}
           {{ range first $posts (where .Data.Pages &amp;#34;Type&amp;#34; &amp;#34;post&amp;#34;) }}
               {{ .Render &amp;#34;summary&amp;#34;}}
-          {{ end }}
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;By comparison, the the newer template used an improved setup. It first
+          {{ end }}&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;By comparison, the the newer template used an improved setup. It first
 defined variables at the top of the layout page to calculate all the recent
 post lists, and then simply referred to &lt;em&gt;that&lt;/em&gt; when rendering the summaries. So,
 I read up a bit on the hugo documentation to better learn how variables and
 some of the basic functions worked.&lt;/p&gt;
+
 &lt;p&gt;Eventually I was able to come up with my own solution, defining the following
 variables at the top of the page:&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-go&#34; data-lang=&#34;go&#34;&gt;{{ &lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;$&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;mainSections&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;:=&lt;/span&gt; .&lt;span style=&#34;color:#a6e22e&#34;&gt;Site&lt;/span&gt;.&lt;span style=&#34;color:#a6e22e&#34;&gt;Params&lt;/span&gt;.&lt;span style=&#34;color:#a6e22e&#34;&gt;mainSections&lt;/span&gt; | &lt;span style=&#34;color:#66d9ef&#34;&gt;default&lt;/span&gt; (&lt;span style=&#34;color:#a6e22e&#34;&gt;slice&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;post&amp;#34;&lt;/span&gt;) }}
 {{ &lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;$&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;section&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;:=&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;where&lt;/span&gt; .&lt;span style=&#34;color:#a6e22e&#34;&gt;Site&lt;/span&gt;.&lt;span style=&#34;color:#a6e22e&#34;&gt;RegularPages&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;Section&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;in&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;$&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;mainSections&lt;/span&gt; }}
-{{ &lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;$&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;section_count&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;:=&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;len&lt;/span&gt; &lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;$&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;section&lt;/span&gt; }}
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;I then referred to the variables further down where I render the recent
+{{ &lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;$&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;section_count&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;:=&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;len&lt;/span&gt; &lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;$&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;section&lt;/span&gt; }}&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;I then referred to the variables further down where I render the recent
 post summaries:&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-html&#34; data-lang=&#34;html&#34;&gt;&amp;lt;&lt;span style=&#34;color:#f92672&#34;&gt;div&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;class&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;container&amp;#34;&lt;/span&gt;&amp;gt;
   &amp;lt;&lt;span style=&#34;color:#f92672&#34;&gt;div&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;class&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;row&amp;#34;&lt;/span&gt;&amp;gt;
     &amp;lt;&lt;span style=&#34;color:#f92672&#34;&gt;div&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;class&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1&amp;#34;&lt;/span&gt;&amp;gt;
       {{ range (first $n_posts $section) }}
           {{ .Render &amp;#34;summary&amp;#34;}}
-      {{ end }}
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;and&amp;hellip; it worked! Done!&lt;/p&gt;
+      {{ end }}&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;and&amp;hellip; it worked! Done!&lt;/p&gt;
+
 &lt;h3 id=&#34;conclusion&#34;&gt;Conclusion&lt;/h3&gt;
+
 &lt;p&gt;For as quick and easy as this post implies, the fix was actually a giant pain.
 It took a long time to figure out where the problem was occurring, but in the
 end I&amp;rsquo;m happy with the solution. In fact, I used a &lt;a href=&#34;https://github.com/himmAllRight/himmAllRight-source/pull/30&#34;&gt;similar
@@ -780,14 +964,20 @@ environment. One idea, was to utilize Jenkins to automatically build
 and deploy a &amp;ldquo;draft&amp;rdquo; website, so I can stage new posts/website change
 on my home network, before publishing it to the &amp;ldquo;production&amp;rdquo;
 website. Here is how that idea was Instantiated&amp;hellip;&lt;/p&gt;
+
 &lt;h2 id=&#34;my-website&#34;&gt;My Website&lt;/h2&gt;
-&lt;p&gt;&lt;!-- raw HTML omitted --&gt;&lt;!-- raw HTML omitted --&gt;&lt;!-- raw HTML omitted --&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;../../img/posts/draft-website-jenkins/jenkins-logo.png&#34;&gt;&lt;img
+src=&#34;../../img/posts/draft-website-jenkins/jenkins-logo.png&#34; style=&#34;max-width:
+50%; float: left; margin: 0px 12px 0px 0px;&#34; alt=&#34;Jenkins Logo&#34; /&gt;&lt;/a&gt;&lt;/p&gt;
+
 &lt;p&gt;I have previously &lt;a href=&#34;../../post/website-transition-to-hugo/&#34;&gt;described&lt;/a&gt; how my
 website is &lt;a href=&#34;../../post/website-switched-to-hugo/&#34;&gt;currently generated&lt;/a&gt;, using
 the &lt;a href=&#34;https://gohugo.io&#34;&gt;Hugo&lt;/a&gt; static website generator. To organize
 this system, I have two git repos: One that consists of all the hugo
 source files (where I write content), and one that contains the
 generated static website (that gets deployed to my web host).&lt;/p&gt;
+
 &lt;p&gt;When writing a post, I use &lt;code&gt;hugo server -D -F&lt;/code&gt; to live view the page
 in my browser. However, I occasionally want to view the state of all
 the &lt;em&gt;committed code&lt;/em&gt; in the &lt;em&gt;repo&lt;/em&gt;, to see what the site would look
@@ -796,18 +986,27 @@ which shows the current state of my website&amp;rsquo;s &lt;em&gt;source&lt;/em&
 draft and future posts). If I want to check how a post looks on my
 phone, or any other device, I can just open up the draft website after
 pushing my changes.&lt;/p&gt;
-&lt;p&gt;&lt;!-- raw HTML omitted --&gt;&lt;!-- raw HTML omitted --&gt;&lt;!-- raw HTML omitted --&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;../../img/posts/draft-website-jenkins/mr-mime.png&#34;&gt;&lt;img
+src=&#34;../../img/posts/draft-website-jenkins/mr-mime.png&#34; style=&#34;max-width:
+45%; float: right; margin: 20px 0px 0px 10px;&#34; alt=&#34;Jenkins Logo&#34; /&gt;&lt;/a&gt;&lt;/p&gt;
+
 &lt;h2 id=&#34;jenkins&#34;&gt;Jenkins&lt;/h2&gt;
+
 &lt;p&gt;I had previously created a dedicated Jenkins server on my home network
 (Mr. Mime), using a CentOS 7 VM hosted on my home server. However, any
 Jenkins setup should work for this project (including a &lt;a href=&#34;https://hub.docker.com/_/jenkins/&#34;&gt;docker
 container&lt;/a&gt;). To get started, checkout the &lt;a href=&#34;https://jenkins.io/download/&#34;&gt;Jenkins
 Website&lt;/a&gt;, and be sure to take advantage
 of the &lt;a href=&#34;https://jenkins.io/doc/&#34;&gt;the documentation&lt;/a&gt; for help.&lt;/p&gt;
+
 &lt;p&gt;&lt;em&gt;Note: just make sure hugo is installed on the Jenkins server, as we need
 it to generate the website.&lt;/em&gt;&lt;/p&gt;
+
 &lt;h3 id=&#34;github-integration&#34;&gt;GitHub Integration&lt;/h3&gt;
+
 &lt;h4 id=&#34;jenkins-service&#34;&gt;Jenkins Service&lt;/h4&gt;
+
 &lt;p&gt;My website repo is hosted on GitHub, so we need to configure it to
 work with our Jenkins server. To do that, go to the project&amp;rsquo;s GitHub
 page, and navigate through &lt;strong&gt;Settings&lt;/strong&gt; -&amp;gt; &lt;strong&gt;Integrations &amp;amp;
@@ -817,13 +1016,20 @@ is accessible from the internet. If not, hosting the Jenkins server on
 something like &lt;a href=&#34;http://digitalocean.com&#34;&gt;Digital Ocean&lt;/a&gt; might be an
 easy solution). Lastly, make sure the &lt;strong&gt;Activate&lt;/strong&gt; box is selected,
 and click the &lt;strong&gt;Add Service&lt;/strong&gt; button.&lt;/p&gt;
+
 &lt;h4 id=&#34;ssh-keys&#34;&gt;SSH Keys&lt;/h4&gt;
+
 &lt;p&gt;While on the project&amp;rsquo;s GitHub page, make sure that the Jenkins
 server&amp;rsquo;s ssh keys are added to the project. To add them, navigate to
 the &lt;strong&gt;Deploy Keys&lt;/strong&gt; page (under the project&amp;rsquo;s &lt;strong&gt;Settings&lt;/strong&gt; tab). Then
 select &lt;strong&gt;Add deploy key&lt;/strong&gt;, and add the public key.&lt;/p&gt;
+
 &lt;h2 id=&#34;a-nginx-server&#34;&gt;A Nginx Server&lt;/h2&gt;
-&lt;p&gt;&lt;!-- raw HTML omitted --&gt;&lt;!-- raw HTML omitted --&gt;&lt;!-- raw HTML omitted --&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;../../img/posts/draft-website-jenkins/nginx.png&#34;&gt;&lt;img
+src=&#34;../../img/posts/draft-website-jenkins/nginx.png&#34; style=&#34;max-width:
+100%; float: center; margin: 0px 0px 0px 0px;&#34; alt=&#34;Default Nginx Page&#34; /&gt;&lt;/a&gt;&lt;/p&gt;
+
 &lt;p&gt;With Jenkins ready, let&amp;rsquo;s quickly setup the web server before
 configuring the Jenkins project. Any web server will do (it just needs
 to serve the generated &lt;em&gt;static&lt;/em&gt; website content). I used
@@ -837,68 +1043,92 @@ sudo apt install -y nginx
 sudo systemctl status nginx
 
 &lt;span style=&#34;color:#75715e&#34;&gt;## Optional: Ensure it is enabled to start up after reboots&lt;/span&gt;
-sudo systemctl enable nginx
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;With the web server running, we need to know &lt;em&gt;where&lt;/em&gt; the website files
+sudo systemctl enable nginx&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;With the web server running, we need to know &lt;em&gt;where&lt;/em&gt; the website files
 need to go. Nginx will by default serve content at
 &lt;code&gt;/user/share/nginx/html/&lt;/code&gt;, so remember that location for later&amp;hellip;&lt;/p&gt;
+
 &lt;p&gt;&lt;em&gt;Note: Don&amp;rsquo;t forget to add the &lt;code&gt;jenkins&lt;/code&gt; user&amp;rsquo;s ssh key from the
 jenkins server to the &lt;code&gt;authorized_keys&lt;/code&gt; file of the nginx server. This
 will make file transfers easier when setting up the jenkins project.&lt;/em&gt;&lt;/p&gt;
+
 &lt;h2 id=&#34;configuring-a-project&#34;&gt;Configuring a Project&lt;/h2&gt;
+
 &lt;p&gt;Let&amp;rsquo;s configure our Jenkins project! Log in to the Jenkins
 server and click the &lt;strong&gt;New Item&lt;/strong&gt; option on the left side bar. Enter a
 name for the project, select the &lt;strong&gt;Freestyle Project&lt;/strong&gt; option, and hit
 &lt;strong&gt;OK&lt;/strong&gt;.&lt;/p&gt;
-&lt;p&gt;&lt;!-- raw HTML omitted --&gt;&lt;!-- raw HTML omitted --&gt;&lt;!-- raw HTML omitted --&gt;&lt;/p&gt;
-&lt;!-- raw HTML omitted --&gt;
+
+&lt;p&gt;&lt;a href=&#34;../../img/posts/draft-website-jenkins/general-config.png&#34;&gt;&lt;img
+src=&#34;../../img/posts/draft-website-jenkins/general-config.png&#34; style=&#34;max-width:
+100%; float: center; margin: 0px 0px 0px 0px;&#34; alt=&#34;The Project&#39;s General Configuration Section&#34; /&gt;&lt;/a&gt;
+&lt;div class=&#34;caption&#34;&gt;The Project&amp;rsquo;s General Configuration Section&lt;/div&gt;&lt;/p&gt;
+
 &lt;p&gt;In the &lt;strong&gt;General&lt;/strong&gt; section of the configuration screen, optionally
 write a description about the project. Next, select the &amp;ldquo;&lt;em&gt;GitHub
 Project&lt;/em&gt;&amp;rdquo; check-box, and add the GitHub repo&amp;rsquo;s url into the &lt;em&gt;Project
 url&lt;/em&gt; text box.&lt;/p&gt;
+
 &lt;h4 id=&#34;source-control&#34;&gt;Source Control&lt;/h4&gt;
-&lt;p&gt;&lt;!-- raw HTML omitted --&gt;&lt;!-- raw HTML omitted --&gt;&lt;!-- raw HTML omitted --&gt;&lt;/p&gt;
-&lt;!-- raw HTML omitted --&gt;
+
+&lt;p&gt;&lt;a href=&#34;../../img/posts/draft-website-jenkins/credentials.png&#34;&gt;&lt;img
+src=&#34;../../img/posts/draft-website-jenkins/credentials.png&#34;
+style=&#34;max-width: 100%; float: center; margin: 0px 0px 0px 0px;&#34;
+alt=&#34;Setting Credentials&#34; /&gt;&lt;/a&gt;
+&lt;div class=&#34;caption&#34;&gt;Setting Credentials&lt;/div&gt;&lt;/p&gt;
+
 &lt;p&gt;In the &lt;strong&gt;Source Code Management&lt;/strong&gt; section of the configuration, select
 the &lt;em&gt;Git&lt;/em&gt; option. Then, enter the repo&amp;rsquo;s url for the &lt;em&gt;Repository URL&lt;/em&gt;
 box (I did the ssh url). For &lt;em&gt;Credentials&lt;/em&gt;, select &lt;em&gt;Add&lt;/em&gt; to configure a
 new credential. Select &lt;em&gt;SSH Username with private key&lt;/em&gt; for &lt;em&gt;Kind&lt;/em&gt;,
 use &lt;code&gt;jenkins&lt;/code&gt; for the &lt;em&gt;Username&lt;/em&gt;.&lt;/p&gt;
+
 &lt;p&gt;More source control options can be configured, but this should be the
 minimum setup required. &lt;em&gt;Again, for this to work public keys for the
 &lt;code&gt;jenkins&lt;/code&gt; user on the jenkins server must be generated, and added as a
 deployment key on GitHub.&lt;/em&gt;&lt;/p&gt;
+
 &lt;h4 id=&#34;build-trigger&#34;&gt;Build Trigger&lt;/h4&gt;
+
 &lt;p&gt;Under the &lt;strong&gt;Build Triggers&lt;/strong&gt; section, select &lt;em&gt;Poll SCM&lt;/em&gt;. Without
 adding any schedule parameters, it will trigger each time a new commit
 is detected. This is what we want.&lt;/p&gt;
+
 &lt;h4 id=&#34;build-step&#34;&gt;Build Step&lt;/h4&gt;
+
 &lt;p&gt;In the &lt;strong&gt;Build&lt;/strong&gt; section, click &lt;strong&gt;Add build step&lt;/strong&gt;, and select
 &lt;strong&gt;Execute shell&lt;/strong&gt;. This is where we can add the shell commands to
 build the website with hugo. Add the following command to the box
 (don&amp;rsquo;t forget to change the url):&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;hugo -D -F -b &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;http://10.1.1.77&amp;#34;&lt;/span&gt; -d public
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;The &lt;code&gt;-D&lt;/code&gt; flag tells hugo to include all draft posts, while the &lt;code&gt;-F&lt;/code&gt; flag
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;hugo -D -F -b &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;http://10.1.1.77&amp;#34;&lt;/span&gt; -d public&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;The &lt;code&gt;-D&lt;/code&gt; flag tells hugo to include all draft posts, while the &lt;code&gt;-F&lt;/code&gt; flag
 has it include all posts with a future date. The &lt;code&gt;-b&lt;/code&gt; flag sets the
 url for the generated website. This should the be url or IP address of
 the nginx server setup previously. Lastly, the &lt;code&gt;-d&lt;/code&gt; flag tells hugo to
 output the generated static website to the &lt;code&gt;public&lt;/code&gt; directory. This
 will be useful to know when deploying the build.&lt;/p&gt;
+
 &lt;h4 id=&#34;deploy-to-webserver&#34;&gt;Deploy to Webserver&lt;/h4&gt;
+
 &lt;p&gt;For deployment, I used rsync to copy the build files to the nginx
 web server. This step will be another shell command, so I&amp;rsquo;ve actually
 added it as another &amp;ldquo;build&amp;rdquo; step. Add another &lt;strong&gt;Execute shell&lt;/strong&gt; and
 paste the following command inside the text box (again, changing the url):&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;rsync -r &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;$WORKSPACE&lt;span style=&#34;color:#e6db74&#34;&gt;/public/&amp;#34;&lt;/span&gt; ryan@10.1.1.77:/usr/share/nginx/html/
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;I used the Jenkins &lt;code&gt;$WORKSPACE&lt;/code&gt; variable to get the location of the
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;rsync -r &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;$WORKSPACE&lt;span style=&#34;color:#e6db74&#34;&gt;/public/&amp;#34;&lt;/span&gt; ryan@10.1.1.77:/usr/share/nginx/html/&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;I used the Jenkins &lt;code&gt;$WORKSPACE&lt;/code&gt; variable to get the location of the
 build, and was able to append the &lt;code&gt;public&lt;/code&gt; directory to that, since we
 defined it with the &lt;code&gt;-d&lt;/code&gt; flag in the hugo build step above. This will
 copy the generated website, to the web server.&lt;/p&gt;
+
 &lt;p&gt;Hit &lt;strong&gt;Save&lt;/strong&gt;, and test it out by clicking the &lt;strong&gt;Build Now&lt;/strong&gt; link on the
 left. If the build is successful, check the nginx website to see if
 the website was deployed!&lt;/p&gt;
+
 &lt;p&gt;&lt;em&gt;Note: If it doesn&amp;rsquo;t work, double check all permissions and
 credentials between accounts and servers.&lt;/em&gt;&lt;/p&gt;
+
 &lt;h2 id=&#34;better-yet-pipelines&#34;&gt;Better Yet&amp;hellip; Pipelines&lt;/h2&gt;
+
 &lt;p&gt;What&amp;rsquo;s better than using Jenkins for automated &amp;ldquo;draft website&amp;rdquo;
 deployments?  Using a &lt;a href=&#34;https://jenkins.io/doc/book/pipeline/&#34;&gt;Jenkins
 Pipeline&lt;/a&gt;. A Pipeline allows
@@ -906,6 +1136,7 @@ the jenkins project steps to be defined in a &lt;em&gt;Jenkinsfile&lt;/em&gt; th
 other benefits, can be source controlled. In fact, by default a
 Jenkins pipeline searches for the &lt;code&gt;Jenkinsfile&lt;/code&gt; right in the root
 directory of a project&amp;rsquo;s git repo.&lt;/p&gt;
+
 &lt;p&gt;While a pipeline and
 &lt;a href=&#34;https://jenkins.io/doc/book/pipeline/jenkinsfile/&#34;&gt;Jenkinsfile&lt;/a&gt; might
 be a bit more confusing to &lt;em&gt;learn&lt;/em&gt; how to setup, it is well worth it. For
@@ -928,10 +1159,12 @@ we setup in the previous steps:&lt;/p&gt;
 	&lt;span style=&#34;color:#f92672&#34;&gt;}&lt;/span&gt;
 
     &lt;span style=&#34;color:#f92672&#34;&gt;}&lt;/span&gt;
-&lt;span style=&#34;color:#f92672&#34;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;I&amp;rsquo;m not going to cover pipelines in &lt;em&gt;this&lt;/em&gt; post. However, I do
+&lt;span style=&#34;color:#f92672&#34;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;I&amp;rsquo;m not going to cover pipelines in &lt;em&gt;this&lt;/em&gt; post. However, I do
 encourage readers to check them out.&lt;/p&gt;
+
 &lt;h2 id=&#34;conclusion&#34;&gt;Conclusion&lt;/h2&gt;
+
 &lt;p&gt;That&amp;rsquo;s it. While I currently host my website using &lt;a href=&#34;https://pages.github.com/&#34;&gt;GitHub
 pages&lt;/a&gt;, if I ever self-host it again, I
 will definitely automate publishing it using Jenkins as well. This has
@@ -952,7 +1185,9 @@ a virtual machine running &lt;a href=&#34;https://www.nginx.com/&#34;&gt;Nginx&l
 reverse-proxy (Tangela), and I decided to do that again on the new
 network. While it is a simple process, it is one that other people often
 ask me about. So, this time&amp;hellip; I&amp;rsquo;m taking notes!&lt;/p&gt;
+
 &lt;h2 id=&#34;why&#34;&gt;Why?&lt;/h2&gt;
+
 &lt;p&gt;The purpose of this reverse proxy is to direct outside traffic to the
 appropriate host internally, by looking at the sub-domain of the URL
 request. For example, I may have servers for both
@@ -966,35 +1201,48 @@ website server. On the other hand, if the request is for
 server. A reverse-proxy expands what can be accomplished on a single network,
 and is a cleaner (and possibly safer) method than doing everything through
 port-forwarding.&lt;/p&gt;
-&lt;p&gt;&lt;!-- raw HTML omitted --&gt;&lt;!-- raw HTML omitted --&gt;&lt;!-- raw HTML omitted --&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;../../img/posts/nginx-reverse-proxy/tangela.png&#34;&gt;&lt;img
+src=&#34;../../img/posts/nginx-reverse-proxy/tangela.png&#34; style=&#34;max-width:
+50%; float: right; margin: 0px 0px 0px 0px;&#34; alt=&#34;Example snippet of
+my org-babel config.org file&#34; /&gt;&lt;/a&gt;&lt;/p&gt;
+
 &lt;h2 id=&#34;setup-server&#34;&gt;Setup Server&lt;/h2&gt;
+
 &lt;p&gt;To get started, configure a server/container/droplet that will host
 nginx. I&amp;rsquo;m using a CentOS 7 minimal install VM on
 &lt;a href=&#34;../../pages/homelab/#ninetales&#34;&gt;Nintales&lt;/a&gt; (my
 home server). I don&amp;rsquo;t have a bunch of traffic (well, I &lt;em&gt;shouldn&amp;rsquo;t&lt;/em&gt;), so I&amp;rsquo;m
 just giving it 1 core and 512MB RAM.&lt;/p&gt;
+
 &lt;h3 id=&#34;setup-nginx&#34;&gt;Setup Nginx&lt;/h3&gt;
+
 &lt;p&gt;Next, it&amp;rsquo;s time to setup and install Nginx.&lt;/p&gt;
+
 &lt;p&gt;&lt;em&gt;Note&lt;/em&gt;: the rest of the post will be focused on using a CentOS 7 base,
 since that is what I am using. Adjust for your distro accordingly.&lt;/p&gt;
+
 &lt;p&gt;Add the nginx repo, and install it:&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;sudo rpm -Uvh http://nginx.org/packages/centos/7/noarch/RPMS/nginx-release-centos-7-0.el7.ngx.noarch.rpm
-sudo yum -y install nginx
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Tell the firewall to allow http traffic:&lt;/p&gt;
+sudo yum -y install nginx&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Tell the firewall to allow http traffic:&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;sudo firewall-cmd --permanent --add-service&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;http
-sudo systemctl reload firewalld
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Start and enable nginx:&lt;/p&gt;
+sudo systemctl reload firewalld&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Start and enable nginx:&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;sudo systemctl start nginx
-sudo systemctl enable nginx
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;configure-nginx&#34;&gt;Configure Nginx&lt;/h2&gt;
+sudo systemctl enable nginx&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h2 id=&#34;configure-nginx&#34;&gt;Configure Nginx&lt;/h2&gt;
+
 &lt;p&gt;Examine the config file, just to check that everything looks alright.&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;vim /etc/nginx/nginx.conf
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Specifically, we want to ensure that the following line exists before
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;vim /etc/nginx/nginx.conf&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Specifically, we want to ensure that the following line exists before
 proceeding:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;include /etc/nginx/conf.d/*.conf;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;That line basically states that any *.conf file inside the &lt;code&gt;/etc/nginx/conf.d/&lt;/code&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;include /etc/nginx/conf.d/*.conf;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;That line basically states that any *.conf file inside the &lt;code&gt;/etc/nginx/conf.d/&lt;/code&gt;
 directory will also be loaded and used by nginx. This allows us to add our own configuration file in the next step.&lt;/p&gt;
+
 &lt;h2 id=&#34;configure-proxy&#34;&gt;Configure Proxy&lt;/h2&gt;
+
 &lt;p&gt;I created a &lt;code&gt;reverse-proxies.config&lt;/code&gt; (it can be named anything with a
 &lt;code&gt;.config&lt;/code&gt; extension) file in &lt;code&gt;/etc/nginx/conf.d/&lt;/code&gt; to contain all of
 the reverse proxy definitions. These are just server block
@@ -1013,17 +1261,18 @@ server &lt;span style=&#34;color:#f92672&#34;&gt;{&lt;/span&gt;
         location / &lt;span style=&#34;color:#f92672&#34;&gt;{&lt;/span&gt;
                 proxy_pass      http://192.168.1.200:8080;
         &lt;span style=&#34;color:#f92672&#34;&gt;}&lt;/span&gt;
-&lt;span style=&#34;color:#f92672&#34;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Restart nginx for the changes to take effect:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;sudo systemctl restart nginx
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h4 id=&#34;side-note&#34;&gt;Side Note:&lt;/h4&gt;
+&lt;span style=&#34;color:#f92672&#34;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Restart nginx for the changes to take effect:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;sudo systemctl restart nginx&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h4 id=&#34;side-note&#34;&gt;Side Note:&lt;/h4&gt;
+
 &lt;p&gt;For some applications, you may need to add the URL to the &lt;code&gt;/etc/hosts&lt;/code&gt;
 file, and use that for nginx. I have experienced this in the past with
 &lt;a href=&#34;https://about.gitlab.com/&#34;&gt;Gitlab&lt;/a&gt;. For example:&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;/etc/hosts
 ---
-192.168.1.201  git.himmelwright.net
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;and then in the config file:&lt;/p&gt;
+192.168.1.201  git.himmelwright.net&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;and then in the config file:&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;/etc/nginx/config.d/reverse-proxies.config
 ---
 server &lt;span style=&#34;color:#f92672&#34;&gt;{&lt;/span&gt;
@@ -1032,16 +1281,19 @@ server &lt;span style=&#34;color:#f92672&#34;&gt;{&lt;/span&gt;
         location / &lt;span style=&#34;color:#f92672&#34;&gt;{&lt;/span&gt;
                 proxy_pass      http://git.himmelwright.net:80;
         &lt;span style=&#34;color:#f92672&#34;&gt;}&lt;/span&gt;
-&lt;span style=&#34;color:#f92672&#34;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;selinux-fixes&#34;&gt;SELinux Fixes&lt;/h2&gt;
+&lt;span style=&#34;color:#f92672&#34;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h2 id=&#34;selinux-fixes&#34;&gt;SELinux Fixes&lt;/h2&gt;
+
 &lt;p&gt;At this point, you may be done. However, I was having issues getting
 nginx to forward some of my ports&amp;hellip; until I remembered that I was on
 CentOS and it may be an issue with SELinux. It was.&lt;/p&gt;
+
 &lt;p&gt;One &amp;ldquo;&lt;em&gt;fix&lt;/em&gt;&amp;rdquo; is to just disable SELinux. A &lt;em&gt;better&lt;/em&gt; solution is to use
 setools to allow the http connections:&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;sudo yum install -y setools
-setsebool -P httpd_can_network_connect true
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;conclusion&#34;&gt;Conclusion&lt;/h2&gt;
+setsebool -P httpd_can_network_connect true&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h2 id=&#34;conclusion&#34;&gt;Conclusion&lt;/h2&gt;
+
 &lt;p&gt;Besides having to configure your router to forward http traffic to the
 server, that is really it. This is a real basic configuration, but it
 has worked well for me over the years. If I start doing something more
@@ -1055,10 +1307,15 @@ complex, I may provide an update. Until then, enjoy!&lt;/p&gt;</description>
       
       <guid>http://ryan.himmelwright.net/post/website-switched-to-hugo/</guid>
       <description>&lt;p&gt;In my &lt;a href=&#34;../../post/website-transition-to-hugo/&#34;&gt;last post&lt;/a&gt;, I stated that &lt;em&gt;within a few days&lt;/em&gt;, I would officially generate and publish the website using &lt;a href=&#34;https://gohugo.io&#34;&gt;Hugo&lt;/a&gt;. I then proceeded to publish &lt;em&gt;that&lt;/em&gt; post using Hugo. Close enough. If I remember correctly, I ended that post listing off a few tasks that I wanted to complete &lt;em&gt;before&lt;/em&gt; switching the site (oops). Well&amp;hellip; they&amp;rsquo;re complete &lt;em&gt;now&lt;/em&gt;. Here&amp;rsquo;s how.&lt;/p&gt;
-&lt;h3 id=&#34;create-single-pages-abouthomelab&#34;&gt;Create Single Pages (About/Homelab)&lt;/h3&gt;
-&lt;!-- raw HTML omitted --&gt;
+
+&lt;h3 id=&#34;create-single-pages-about-homelab&#34;&gt;Create Single Pages (About/Homelab)&lt;/h3&gt;
+
+&lt;p&gt;&lt;img alt=&#34;Hugo Logo&#34; src=&#34;../../img/posts/website-switched-to-hugo/hugo-logo.png&#34; style=&#34;width: 40%; float: right; margin: 0px 15px 5px 10px;&#34;/&gt;&lt;/p&gt;
+
 &lt;p&gt;This wasn&amp;rsquo;t so hard to do once setup, but it took a little while for me to get to that point. I was unaware that I needed to configure a layout for the pages, which was the source of most of my confusion.&lt;/p&gt;
+
 &lt;p&gt;After that realization, I created a new layout directory (in my theme directory) for each of the pages to add: &lt;code&gt;/layouts/about/&lt;/code&gt; and &lt;code&gt;/layouts/homelab/&lt;/code&gt;. I then copied the &lt;code&gt;/layouts/post/single.html&lt;/code&gt; file into the two directories  to use as a template for the two new layouts (&lt;code&gt;/layouts/about/about-page.html&lt;/code&gt; and &lt;code&gt;/layouts/homelab/homelab-page.html&lt;/code&gt;). The pages only required a basic layout that would inject the &lt;code&gt;.Content&lt;/code&gt; from the markdown files. Additionally, I tweaked the header slightly to display an &amp;ldquo;&lt;em&gt;updated on&lt;/em&gt;&amp;rdquo; date, rather than a &amp;ldquo;&lt;em&gt;posted on&lt;/em&gt;&amp;rdquo; date.&lt;/p&gt;
+
 &lt;p&gt;With the templates made, I  constructed a new &lt;code&gt;/content/pages/&lt;/code&gt; category, and added  &lt;code&gt;about.md&lt;/code&gt; and &lt;code&gt;homelab.md&lt;/code&gt; files to it. In both files, I defined the &lt;code&gt;type&lt;/code&gt; and &lt;code&gt;layout&lt;/code&gt; parameters, so that the new layouts would be used. Lastly, I used the &lt;code&gt;menu&lt;/code&gt; parameter to declare that each page would be part of the main menu.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;---
 &lt;span style=&#34;color:#66d9ef&#34;&gt;title&lt;/span&gt;: About
@@ -1069,27 +1326,34 @@ complex, I may provide an update. Until then, enjoy!&lt;/p&gt;</description>
     &lt;span style=&#34;color:#66d9ef&#34;&gt;weight&lt;/span&gt;: -&lt;span style=&#34;color:#ae81ff&#34;&gt;150&lt;/span&gt;
 &lt;span style=&#34;color:#66d9ef&#34;&gt;layout&lt;/span&gt;: about-page
 &lt;span style=&#34;color:#66d9ef&#34;&gt;image&lt;/span&gt;: img/header-images/park-books.jpg
----
+---&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h3 id=&#34;setting-up-an-rss-feed&#34;&gt;Setting up an RSS Feed&lt;/h3&gt;
 
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;setting-up-an-rss-feed&#34;&gt;Setting up an RSS Feed&lt;/h3&gt;
 &lt;p&gt;It turns out that &lt;a href=&#34;https://gohugo.io/templates/rss/&#34;&gt;Hugo ships with its own RSS 2.0 template&lt;/a&gt; by default. When I first saw this, I thought that I may still have to dash off a layout or markdown page for the feed, but even that was unnecessary. Each &amp;ldquo;content&amp;rdquo; section (&lt;em&gt;ex: post or pages&lt;/em&gt;) has an RSS automatically generated at &lt;code&gt;/section-name/index.rss&lt;/code&gt;. I don&amp;rsquo;t need a feed for my static pages, so I just found the &lt;a href=&#34;../../post/index.xml&#34;&gt;feed for my posts&lt;/a&gt;. To make it easily accessible, I added a menu link.  Without a defined markdown file for the rss feed page, I needed another way to add to the navigation menu. I accomplished this by adding the following code to the bottom of my &lt;code&gt;config.toml&lt;/code&gt; file:&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;[[menu.main]]
   name = &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;RSS&amp;#34;&lt;/span&gt;
   url = &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;/post/index.xml&amp;#34;&lt;/span&gt;
-  weight = &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;
+  weight = &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;This is how both the &lt;code&gt;Home&lt;/code&gt; and &lt;code&gt;Archives&lt;/code&gt; links were already been added to the navigation bar by default in the theme. I just added another item for the RSS link, and adjusted the weight to have it to show up at the end of the menu. That was it.&lt;/p&gt;
 
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;This is how both the &lt;code&gt;Home&lt;/code&gt; and &lt;code&gt;Archives&lt;/code&gt; links were already been added to the navigation bar by default in the theme. I just added another item for the RSS link, and adjusted the weight to have it to show up at the end of the menu. That was it.&lt;/p&gt;
 &lt;h3 id=&#34;check-how-the-posts-display&#34;&gt;Check how the posts display&lt;/h3&gt;
+
 &lt;p&gt;One task I needed to complete was going through and editing each post. The main issue that requiring a fix, which I &lt;a href=&#34;../../post/website-transition-to-hugo/#image-size&#34;&gt;explained in the previous post&lt;/a&gt;, was that the image tags needed to be switched from markdown to html syntax. While I originally planned to set a &lt;code&gt;width=100%&lt;/code&gt; parameter for the image tags, I learned that using a &lt;code&gt;max-width: 100%;&lt;/code&gt; worked much better for my use-case. I know this can be handled in the overall css file, but I like explicitly defining how to handle each image when I write a post.&lt;/p&gt;
+
 &lt;p&gt;While editing the posts, I noticed that the &lt;a href=&#34;../../post/website-transition-to-hugo/#summary-setup&#34;&gt;post summaries&lt;/a&gt; weren&amp;rsquo;t displaying the content that I intended them to. I have hugo configured so that I manually cut off the summary location using a &lt;code&gt;more&lt;/code&gt; tag in the markdown.But it didn&amp;rsquo;t appear to be doing that.&lt;/p&gt;
-&lt;p&gt;&lt;!-- raw HTML omitted --&gt;&lt;!-- raw HTML omitted --&gt;&lt;!-- raw HTML omitted --&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;../../img/posts/website-switched-to-hugo/summary-fix-spread.png&#34;&gt;&lt;img alt=&#34;Hugo Logo&#34; src=&#34;../../img/posts/website-switched-to-hugo/summary-fix-spread.png&#34; style=&#34;width: 100%; float: right; margin: 0px 15px 5px 5px;&#34;/&gt;&lt;/a&gt;&lt;/p&gt;
+
 &lt;ul&gt;
 &lt;li&gt;&lt;em&gt;A: An over-extended post summary&lt;/em&gt;.&lt;/li&gt;
 &lt;li&gt;&lt;em&gt;B: The extra content of the post that was included in the summary&lt;/em&gt;.&lt;/li&gt;
 &lt;li&gt;&lt;em&gt;C: The corrected post summary.&lt;/em&gt;&lt;/li&gt;
 &lt;/ul&gt;
+
 &lt;p&gt;Some of the summaries seemed to extend beyond the cutoff point, still including the next section header, and some of the section&amp;rsquo;s content. After further inspection, I noticed that I had a space on either side of the &amp;ldquo;more&amp;rdquo; in the tag. So, I had to go through and delete the extra spaces in each post.&lt;/p&gt;
-&lt;h3 id=&#34;nextprev-posts&#34;&gt;Next/Prev Posts&lt;/h3&gt;
+
+&lt;h3 id=&#34;next-prev-posts&#34;&gt;Next/Prev Posts&lt;/h3&gt;
+
 &lt;p&gt;The main &amp;ldquo;&lt;em&gt;Small Tweak&lt;/em&gt;&amp;rdquo; that I wanted to figure out was setting up navigation links at the bottom of each post page. I added some code between the  &lt;code&gt;{{ .Content }}&lt;/code&gt; and &lt;code&gt;{{ partial &amp;quot;coments,html&amp;quot; .}}&lt;/code&gt; tags of my theme&amp;rsquo;s &lt;code&gt;/layout/post/single.html&lt;/code&gt; file. I first made a section using &lt;code&gt;if&lt;/code&gt; statements to establish the &amp;ldquo;Next Post&amp;rdquo; and &amp;ldquo;Prev Post&amp;rdquo; header line. Then in a second block, I placed the actual links using on the next line using  &lt;code&gt;with&lt;/code&gt; statements. The &lt;code&gt;if&lt;/code&gt; and &lt;code&gt;when&lt;/code&gt; statements are required so that previous and next posts are  only linked &lt;em&gt;if they exist&lt;/em&gt;. So, the first and last post will only display one of the two links.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-html&#34; data-lang=&#34;html&#34;&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&amp;lt;!-- Next Post/ Previous Post Links --&amp;gt;&lt;/span&gt;
 {{ if .NextInSection }}
@@ -1106,8 +1370,9 @@ complex, I may provide an update. Until then, enjoy!&lt;/p&gt;</description>
 {{ end }}
 {{ with .PrevInSection }}
     &amp;lt;&lt;span style=&#34;color:#f92672&#34;&gt;a&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;href&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;{{ .Permalink }}&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;style&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;text-align: right; float: right; max-width: 40%&amp;#34;&lt;/span&gt;&amp;gt;{{ .Title }}&amp;lt;/&lt;span style=&#34;color:#f92672&#34;&gt;a&lt;/span&gt;&amp;gt;
-{{ end }}
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;conclusion&#34;&gt;Conclusion&lt;/h3&gt;
+{{ end }}&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h3 id=&#34;conclusion&#34;&gt;Conclusion&lt;/h3&gt;
+
 &lt;p&gt;I have continued to enjoy using Hugo. The few issues I had with it, keep being quickly dismissed as I learn more about the system. It is simple to use, but at the same time provides an immense level power and control. I will continue tweak the site here and there, but I think for the most part, I can consider the transition complete. Which I am very happy about :).&lt;/p&gt;</description>
     </item>
     
@@ -1118,28 +1383,42 @@ complex, I may provide an update. Until then, enjoy!&lt;/p&gt;</description>
       
       <guid>http://ryan.himmelwright.net/post/website-transition-to-hugo/</guid>
       <description>&lt;p&gt;While I have loved using &lt;a href=&#34;http://cryogenweb.org&#34;&gt;Cryogen&lt;/a&gt; to create this website for over a year and a half now, I have started the transition to using another static website generator. Specifically, I have been experimenting with &lt;a href=&#34;https://gohugo.io&#34;&gt;Hugo&lt;/a&gt;. This post will detail why I am switching, what I have ported over thus far, and what still needs to be completed before generating the official site with hugo.&lt;/p&gt;
+
 &lt;h3 id=&#34;from-cryogen-to-hugo&#34;&gt;From Cryogen to Hugo&lt;/h3&gt;
+
 &lt;p&gt;My departure from Cryogen really has nothing to do with the project itself. It is a prime example of what &lt;a href=&#34;https://clojure.org/&#34;&gt;clojure&lt;/a&gt; is capable of, and I feel that more people should give it a shot. Recently though, I&amp;rsquo;ve been itching to switch up my website&amp;rsquo;s theme a bit. While I fancy my &lt;a href=&#34;../../post/new-theme-immutable/&#34;&gt;Immutable Theme&lt;/a&gt; I created a couple months ago, it isn&amp;rsquo;t quite doing what I had hoped for. I love dark themes, but the type of posts I&amp;rsquo;ve been creating really don&amp;rsquo;t look good with them. I like to add diagrams, code snippets, and images to all of my posts. Diagram posts look wonderful with a white background, but are garbage in a dark theme. This difference was glaring last week as I switched between my markdown editor&amp;rsquo;s preview window (default white theme), and the website&amp;rsquo;s live preview view, while writing my &lt;a href=&#34;../../post//simple-reverse-ssh-tunnel/&#34;&gt;reverse tunnels&lt;/a&gt; post.&lt;/p&gt;
+
 &lt;p&gt;Similar to the logic I employed earlier this month when &lt;a href=&#34;../../post/back-to-solus/&#34;&gt;switching back to Solus&lt;/a&gt;, I thought that if I was going to scrap my theme and start from scratch, I might as well check out different website generator. I had been keeping an eye on the various site generators, but the one I considered the most (and even dabbled with a bit last month), was &lt;a href=&#34;https://gohugo.io&#34;&gt;Hugo&lt;/a&gt;.&lt;/p&gt;
-&lt;h3 id=&#34;what-ive-done-so-far&#34;&gt;What I&amp;rsquo;ve Done So Far&lt;/h3&gt;
+
+&lt;h3 id=&#34;what-i-ve-done-so-far&#34;&gt;What I&amp;rsquo;ve Done So Far&lt;/h3&gt;
+
 &lt;p&gt;I started the process of transporting my website from cryogen to hugo. So far, my experience with Hugo has been great. Here is what I&amp;rsquo;ve done:&lt;/p&gt;
-&lt;h4 id=&#34;installed--setup-a-test-hugo-site&#34;&gt;Installed &amp;amp; Setup a test Hugo site&lt;/h4&gt;
+
+&lt;h4 id=&#34;installed-setup-a-test-hugo-site&#34;&gt;Installed &amp;amp; Setup a test Hugo site&lt;/h4&gt;
+
 &lt;p&gt;Obtaining and installing Hugo on my computers was very simple, as it was in the reops (Solus). I just had to run the command:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;sudo eopkg it hugo
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;After I had hugo installed, I experimented with creating new website projects for a few minutes before finally creating one to start my transition. To create a new website, I used the command:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;hugo new site ryan-hugo-test
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;This created a new directory with all the project&amp;rsquo;s default core files, and adhering to the required hugo &lt;a href=&#34;https://gohugo.io/content-management/organization/&#34;&gt;directory structure&lt;/a&gt;.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;sudo eopkg it hugo&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;After I had hugo installed, I experimented with creating new website projects for a few minutes before finally creating one to start my transition. To create a new website, I used the command:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;hugo new site ryan-hugo-test&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;This created a new directory with all the project&amp;rsquo;s default core files, and adhering to the required hugo &lt;a href=&#34;https://gohugo.io/content-management/organization/&#34;&gt;directory structure&lt;/a&gt;.&lt;/p&gt;
+
 &lt;p&gt;Like cryogen, hugo can spin up a website in a test server during development. To do this, use the command:&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;hugo serve -D
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;em&gt;Note: I used the &lt;code&gt;-D&lt;/code&gt; flag to additionally include any files marked as &amp;ldquo;drafts.&amp;quot;&lt;/em&gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;hugo serve -D&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;em&gt;Note: I used the &lt;code&gt;-D&lt;/code&gt; flag to additionally include any files marked as &amp;ldquo;drafts.&amp;rdquo;&lt;/em&gt;&lt;/p&gt;
+
 &lt;h4 id=&#34;setup-a-theme-and-started-tweaking-it&#34;&gt;Setup a Theme and started tweaking it&lt;/h4&gt;
+
 &lt;p&gt;With the hugo site generated, I wanted to setup a proper theme. After sampling a handful of demo sites from hugo&amp;rsquo;s &lt;a href=&#34;https://gohugo.io/themes/&#34;&gt;theme page&lt;/a&gt;, I decided on the startbootstrap-clean-theme. I&amp;rsquo;ve seen it used on other sites, and I think it is a commonly used theme with other site generators. However, it is clean and simple, with a white-background base like I wanted. Additionally, I love having header images for posts and pages. It lets me better personalize the website by exclusively using images I&amp;rsquo;ve photographed myself.&lt;/p&gt;
+
 &lt;p&gt;To get the theme, I cloned it from git:&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;git clone git@github.com:humboldtux/startbootstrap-clean-blog.git
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;em&gt;Note: this particular theme has an abundant amount of features, so it is a good idea to copy the provided example config.toml and build off of it. This is one reason why I started with configuring the theme right off the bat.&lt;/em&gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;git clone git@github.com:humboldtux/startbootstrap-clean-blog.git&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;em&gt;Note: this particular theme has an abundant amount of features, so it is a good idea to copy the provided example config.toml and build off of it. This is one reason why I started with configuring the theme right off the bat.&lt;/em&gt;&lt;/p&gt;
+
 &lt;p&gt;Before I started ripping into the theme too much, I copied the theme directory to make my own version, and set the &lt;code&gt;theme&lt;/code&gt; line in my &lt;code&gt;config.toml&lt;/code&gt; to reflect the change. I also went through all the lines of the example &lt;code&gt;config.toml&lt;/code&gt; and  changed them accordingly.&lt;/p&gt;
-&lt;p&gt;&lt;!-- raw HTML omitted --&gt;&lt;!-- raw HTML omitted --&gt;
+
+&lt;p&gt;&lt;a name=&#34;summary-setup&#34;&gt;&lt;/a&gt;
 With the theme setup, and the configuration edited, I started making some minor tweak to the site. The main tweak I made was to add the &lt;code&gt;Summary&lt;/code&gt; contents to the post list on the home page. I currently use this feature in Cryogen, so all of my posts are written to support it. Summaries are baked into hugo, but I needed to edit the theme to include it on the posts page. To achieve this, I edited the &lt;code&gt;/layouts/post/summary.html&lt;/code&gt; file of the theme slightly:&lt;/p&gt;
+
 &lt;p&gt;original:&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-html&#34; data-lang=&#34;html&#34;&gt;&amp;lt;&lt;span style=&#34;color:#f92672&#34;&gt;div&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;class&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;post-preview&amp;#34;&lt;/span&gt;&amp;gt;
   &amp;lt;&lt;span style=&#34;color:#f92672&#34;&gt;a&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;href&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;{{ .Permalink }}&amp;#34;&lt;/span&gt;&amp;gt;
@@ -1150,8 +1429,8 @@ With the theme setup, and the configuration edited, I started making some minor 
       {{ partial &amp;#34;meta.html&amp;#34; .}}
  &amp;lt;/&lt;span style=&#34;color:#f92672&#34;&gt;p&lt;/span&gt;&amp;gt;
 &amp;lt;/&lt;span style=&#34;color:#f92672&#34;&gt;div&lt;/span&gt;&amp;gt;
-&amp;lt;&lt;span style=&#34;color:#f92672&#34;&gt;hr&lt;/span&gt;&amp;gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;with post summaries:&lt;/p&gt;
+&amp;lt;&lt;span style=&#34;color:#f92672&#34;&gt;hr&lt;/span&gt;&amp;gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;with post summaries:&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-html&#34; data-lang=&#34;html&#34;&gt;&amp;lt;&lt;span style=&#34;color:#f92672&#34;&gt;div&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;class&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;post-preview&amp;#34;&lt;/span&gt;&amp;gt;
     &amp;lt;&lt;span style=&#34;color:#f92672&#34;&gt;a&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;href&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;{{ .Permalink }}&amp;#34;&lt;/span&gt;&amp;gt;
         &amp;lt;&lt;span style=&#34;color:#f92672&#34;&gt;h2&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;class&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;post-title&amp;#34;&lt;/span&gt;&amp;gt;{{ .Title }}&amp;lt;/&lt;span style=&#34;color:#f92672&#34;&gt;h2&lt;/span&gt;&amp;gt;
@@ -1167,35 +1446,42 @@ With the theme setup, and the configuration edited, I started making some minor 
         &amp;lt;&lt;span style=&#34;color:#f92672&#34;&gt;a&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;href&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;{{ .Permalink }}&amp;#34;&lt;/span&gt;&amp;gt; Click to Read More --&amp;gt;&amp;lt;/&lt;span style=&#34;color:#f92672&#34;&gt;a&lt;/span&gt;&amp;gt;
     &amp;lt;/&lt;span style=&#34;color:#f92672&#34;&gt;p&lt;/span&gt;&amp;gt;
 &amp;lt;/&lt;span style=&#34;color:#f92672&#34;&gt;div&lt;/span&gt;&amp;gt;
-&amp;lt;&lt;span style=&#34;color:#f92672&#34;&gt;hr&lt;/span&gt;&amp;gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;I also setup and fixed the code syntax highlighting. I first installed pygments, which again was &lt;em&gt;very&lt;/em&gt; easy to do on my Solus computers:&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;sudo eopkg it pygments
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;After that, I just made sure that the language was specified at the start of each code snippet. I ran into an issue where the colors for the code were poorly selected, resulting in some invisable text. Apparently, this is a common issue, and I found some &lt;em&gt;.css&lt;/em&gt; code to add to the &lt;code&gt;pre&lt;/code&gt; section of my &lt;code&gt;/static/css/clean-blog-min.css&lt;/code&gt; file that resolved the issue.&lt;/p&gt;
+&amp;lt;&lt;span style=&#34;color:#f92672&#34;&gt;hr&lt;/span&gt;&amp;gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;I also setup and fixed the code syntax highlighting. I first installed pygments, which again was &lt;em&gt;very&lt;/em&gt; easy to do on my Solus computers:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;sudo eopkg it pygments&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;After that, I just made sure that the language was specified at the start of each code snippet. I ran into an issue where the colors for the code were poorly selected, resulting in some invisable text. Apparently, this is a common issue, and I found some &lt;em&gt;.css&lt;/em&gt; code to add to the &lt;code&gt;pre&lt;/code&gt; section of my &lt;code&gt;/static/css/clean-blog-min.css&lt;/code&gt; file that resolved the issue.&lt;/p&gt;
+
 &lt;p&gt;If all went well, the code above should have proper syntax highlighting.&lt;/p&gt;
+
 &lt;h4 id=&#34;dumped-my-backlog-of-posts-and-altered-the-header-content&#34;&gt;Dumped my Backlog of Posts and altered the header content&lt;/h4&gt;
+
 &lt;p&gt;To test out if the website worked properly, I wanted to import all of my posts. First&amp;hellip; I needed to figure out where to put them. Hugo has a slightly different file structure, but I eventually figured out that I could create a &lt;code&gt;/content/post/&lt;/code&gt; directory, and dump them there.&lt;/p&gt;
+
 &lt;p&gt;Cryogen, written in &lt;a href=&#34;https://clojure.org/&#34;&gt;clojure&lt;/a&gt;, uses a clojure map for the post&amp;rsquo;s meta data. Hugo on the other hand, uses a several &lt;a href=&#34;https://gohugo.io/content-management/front-matter/&#34;&gt;font matter formats&lt;/a&gt; (&lt;code&gt;toml&lt;/code&gt;, &lt;code&gt;yaml&lt;/code&gt;, &lt;code&gt;json&lt;/code&gt;) for meta data. So, I had to convert the post headers. I&amp;rsquo;m sure that there was a simple, programmatic way, or even a tool, created to accomplish this&amp;hellip; but I just did it by hand. It wasn&amp;rsquo;t so bad. I used emacs.&lt;/p&gt;
+
 &lt;p&gt;After importing the markdown files for the posts, I needed to add all the images the posts contain. Again, this took a tiny bit of research to figure out the file structure, but I quickly learned that anything in the &lt;code&gt;/static/&lt;/code&gt; directory gets copied to the site&amp;rsquo;s root directory when the site is compiled. So, I was able to copy my cryogen &lt;code&gt;/img/&lt;/code&gt; folder directly to &lt;code&gt;/static/img/&lt;/code&gt; in hugo, and all my image paths worked out-of-the-box!&lt;/p&gt;
-&lt;p&gt;&lt;!-- raw HTML omitted --&gt;&lt;!-- raw HTML omitted --&gt;
+
+&lt;p&gt;&lt;a name=&#34;image-size&#34;&gt;&lt;/a&gt;
 Unfortunately, I immediately noticed that some images in the posts were massive, and not constrained to the content width. I looked for a solution, and tried editing the &lt;code&gt;css&lt;/code&gt;, but I eventually just started to convert the markdown syntax images, to use normal html &lt;code&gt;&amp;lt;img&amp;gt;&lt;/code&gt; tags, with a &lt;code&gt;width=100%&lt;/code&gt; parameter. Ultimately, this gives me a bit more power with how I set images anyway.&lt;/p&gt;
+
 &lt;h4 id=&#34;made-a-bunch-of-header-images&#34;&gt;Made a bunch of header images&lt;/h4&gt;
+
 &lt;p&gt;After fixing my in-post images, I started to play with post/page header images. I figured out where they were located in the theme, and added two of my own to replace the defaults. I read that a header image can be set with the &lt;code&gt;image == &amp;quot;...&amp;quot;&lt;/code&gt; option in a post/page&amp;rsquo;s font matter&amp;hellip; so I went a little crazy. I stayed up late browsing through some of my photos, and converting them to header images (I did this by shading them a just a tad, so the overlaying text is legible).&lt;/p&gt;
+
 &lt;h3 id=&#34;what-needs-to-be-done&#34;&gt;What Needs to be Done&lt;/h3&gt;
+
 &lt;p&gt;This post has turned out to be a giant monster, so I&amp;rsquo;ll be brief here and turn the sub-sections into a quick list instead.&lt;/p&gt;
+
 &lt;ul&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;strong&gt;Create Single Pages (About/Homelab)&lt;/strong&gt; - I still need to figure out and create my website&amp;rsquo;s single pages. These include the &lt;em&gt;About Me&lt;/em&gt; and &lt;em&gt;Homelab&lt;/em&gt; pages. The content of those pages has also been slipping out of date&amp;hellip; but I won&amp;rsquo;t let that hold me up from switching the site over first.&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;strong&gt;Setting up an RSS Feed&lt;/strong&gt; - Similar to the task above, I want to make sure I have an RSS feed for the blog configured, and accessible in the main menu.&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;strong&gt;Check how the posts display&lt;/strong&gt; - I need to go through the posts and make sure they are displaying content correctly. I&amp;rsquo;ll check that links work, images aren&amp;rsquo;t massive, code syntax languages are set, etc. This actually shouldn&amp;rsquo;t be as bad as it sounds because I&amp;rsquo;ve done much of it already.&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;strong&gt;Small tweaks&lt;/strong&gt; - There are bound to be a few tweaks here or there that I&amp;rsquo;ll notice and want to changed (&lt;em&gt;example from above: I&amp;rsquo;ve already added the post summaries to the home page post list&lt;/em&gt;). One item that comes to mind is adding &lt;em&gt;next&lt;/em&gt; and &lt;em&gt;previous&lt;/em&gt; post markers at the bottom of each post. Again, I won&amp;rsquo;t let that hold me up though.&lt;/p&gt;
-&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;Create Single Pages (About/Homelab)&lt;/strong&gt; - I still need to figure out and create my website&amp;rsquo;s single pages. These include the &lt;em&gt;About Me&lt;/em&gt; and &lt;em&gt;Homelab&lt;/em&gt; pages. The content of those pages has also been slipping out of date&amp;hellip; but I won&amp;rsquo;t let that hold me up from switching the site over first.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;Setting up an RSS Feed&lt;/strong&gt; - Similar to the task above, I want to make sure I have an RSS feed for the blog configured, and accessible in the main menu.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;Check how the posts display&lt;/strong&gt; - I need to go through the posts and make sure they are displaying content correctly. I&amp;rsquo;ll check that links work, images aren&amp;rsquo;t massive, code syntax languages are set, etc. This actually shouldn&amp;rsquo;t be as bad as it sounds because I&amp;rsquo;ve done much of it already.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;Small tweaks&lt;/strong&gt; - There are bound to be a few tweaks here or there that I&amp;rsquo;ll notice and want to changed (&lt;em&gt;example from above: I&amp;rsquo;ve already added the post summaries to the home page post list&lt;/em&gt;). One item that comes to mind is adding &lt;em&gt;next&lt;/em&gt; and &lt;em&gt;previous&lt;/em&gt; post markers at the bottom of each post. Again, I won&amp;rsquo;t let that hold me up though.&lt;/p&gt;&lt;/li&gt;
 &lt;/ul&gt;
+
 &lt;p&gt;Well, that&amp;rsquo;s about it. I&amp;rsquo;ll work now on editing and publishing this post, and with any luck, the website should switch over to the Hugo generated one within a few days. I hope you enjoy it!&lt;/p&gt;</description>
     </item>
     
@@ -1205,35 +1491,59 @@ Unfortunately, I immediately noticed that some images in the posts were massive,
       <pubDate>Tue, 11 Apr 2017 00:00:00 +0000</pubDate>
       
       <guid>http://ryan.himmelwright.net/post/new-theme-immutable/</guid>
-      <description>&lt;p&gt;When I first started using &lt;a href=&#34;http://cryogenweb.org&#34;&gt;Cryogen&lt;/a&gt; to generate this website, I wanted to create a personalized theme. This desire led me to hack a the default theme into a mutant, which I boringly named &amp;ldquo;&lt;!-- raw HTML omitted --&gt;ryan1&lt;!-- raw HTML omitted --&gt;&amp;rdquo; (I anticipated it to be temporary). It looked like a relic, designed from when I first learned how to make a web page&amp;hellip; the early 2000&amp;rsquo;s. Like &lt;del&gt;many&lt;/del&gt; all websites from that time, it was not mobile friendly. I hope to change all of that, by introducing my new website theme: &lt;!-- raw HTML omitted --&gt;&lt;!-- raw HTML omitted --&gt;Immutable&lt;!-- raw HTML omitted --&gt;&lt;!-- raw HTML omitted --&gt;.&lt;/p&gt;
-&lt;!-- raw HTML omitted --&gt;
-&lt;p&gt;&lt;!-- raw HTML omitted --&gt;&lt;!-- raw HTML omitted --&gt;&lt;!-- raw HTML omitted --&gt;
+      <description>
+
+&lt;p&gt;When I first started using &lt;a href=&#34;http://cryogenweb.org&#34;&gt;Cryogen&lt;/a&gt; to generate this website, I wanted to create a personalized theme. This desire led me to hack a the default theme into a mutant, which I boringly named &amp;ldquo;&lt;i&gt;ryan1&lt;/i&gt;&amp;rdquo; (I anticipated it to be temporary). It looked like a relic, designed from when I first learned how to make a web page&amp;hellip; the early 2000&amp;rsquo;s. Like &lt;del&gt;many&lt;/del&gt; all websites from that time, it was not mobile friendly. I hope to change all of that, by introducing my new website theme: &lt;b&gt;&lt;i&gt;Immutable&lt;/i&gt;&lt;/b&gt;.&lt;/p&gt;
+
+&lt;!-- more --&gt;
+
+&lt;p&gt;&lt;a href=&#34;../../img/posts/New-Theme-Immutable/ryan1-home.png&#34;&gt;&lt;img alt=&#34;Homepage with old ryan1 Theme&#34; src=&#34;../../img/posts/New-Theme-Immutable/ryan1-home.png&#34; style=&#34;max-width: 100%;&#34;/&gt;&lt;/a&gt;
 &lt;em&gt;Homepage with the old Theme&lt;/em&gt;&lt;/p&gt;
-&lt;p&gt;&lt;!-- raw HTML omitted --&gt;&lt;!-- raw HTML omitted --&gt;&lt;!-- raw HTML omitted --&gt;
+
+&lt;p&gt;&lt;a href=&#34;../../img/posts/New-Theme-Immutable/immutable-home.png&#34;&gt;&lt;img alt=&#34;Homepage with Immutable Theme&#34; src=&#34;../../img/posts/New-Theme-Immutable/immutable-home.png&#34; style=&#34;max-width: 100%;&#34;/&gt;&lt;/a&gt;
 &lt;em&gt;Homepage with the new Immutable Theme&lt;/em&gt;&lt;/p&gt;
+
 &lt;p&gt;While it may possibly still look dated (I wouldn&amp;rsquo;t know, I&amp;rsquo;m a backend dev), it addresses several of the issues I had with the &lt;em&gt;ryan1&lt;/em&gt; theme. Here are a few examples of these improvements:&lt;/p&gt;
-&lt;h3 id=&#34;removed-the-sidebar--dispersed-its-contents&#34;&gt;Removed the Sidebar &amp;amp; Dispersed Its Contents&lt;/h3&gt;
-&lt;p&gt;&lt;!-- raw HTML omitted --&gt;&lt;!-- raw HTML omitted --&gt;&lt;!-- raw HTML omitted --&gt;
+
+&lt;h3 id=&#34;removed-the-sidebar-dispersed-its-contents&#34;&gt;Removed the Sidebar &amp;amp; Dispersed Its Contents&lt;/h3&gt;
+
+&lt;p&gt;&lt;a href=&#34;../../img/posts/New-Theme-Immutable/sidebar-changes.png&#34;&gt;&lt;img src=&#34;../../img/posts/New-Theme-Immutable/sidebar-changes.png&#34; style=&#34;max-width: 100%;&#34;/&gt;&lt;/a&gt;
 &lt;em&gt;The sidebar components have been distributed to other parts of the site&lt;/em&gt;&lt;/p&gt;
+
 &lt;p&gt;I have to be honest here&amp;hellip; I originally planned on keeping the side bar when I started to build the theme. I liked how it held all of my links (Github, LinkedIn, etc), recent posts, and tags in one, easy to find, location. I also liked having my avatar picture in the side bar. I felt it made the site more personable (or maybe I&amp;rsquo;m just egotistical). After working on the base of the theme however, I realized the site might be better off without it. I&amp;rsquo;ve relocated the items to other locations of the site. The majority of the links have been relocated to the drop-down menu (more on that  below), and I at least added my picture to the &lt;a href=&#34;../../pages/about/&#34;&gt;About Page&lt;/a&gt;.&lt;/p&gt;
+
 &lt;p&gt;I might reinstate a sidebar in the future, but only if it looks &lt;em&gt;good&lt;/em&gt; and I can add it &lt;em&gt;correctly&lt;/em&gt;. The way I implemented the old sidebar caused many of the issues prompting this new theme, and I do not want to bring back those problems.&lt;/p&gt;
+
 &lt;h3 id=&#34;removed-the-bad-footer&#34;&gt;Removed the Bad Footer&lt;/h3&gt;
-&lt;p&gt;&lt;!-- raw HTML omitted --&gt;&lt;!-- raw HTML omitted --&gt;&lt;!-- raw HTML omitted --&gt;
+
+&lt;p&gt;&lt;a href=&#34;../../img/posts/New-Theme-Immutable/ryan1-bad-footer.png&#34;&gt;&lt;img src=&#34;../../img/posts/New-Theme-Immutable/ryan1-bad-footer.png&#34; style=&#34;max-width: 100%;&#34;/&gt;&lt;/a&gt;
 &lt;em&gt;Bad Footer Placements&lt;/em&gt;&lt;/p&gt;
+
 &lt;p&gt;One of the issues created by the sidebar and my poor css floats, was the footer. On pages with a large enough the main content, it looked fine, consisting of a dark gray bar &lt;em&gt;along the bottom of the page&lt;/em&gt; . However, when viewing a page with a small content section, such as the &lt;em&gt;About&lt;/em&gt; page, the footer would rise up behind the sidebar. It looked terrible.&lt;/p&gt;
-&lt;p&gt;&lt;!-- raw HTML omitted --&gt;&lt;!-- raw HTML omitted --&gt;&lt;!-- raw HTML omitted --&gt;
+
+&lt;p&gt;&lt;a href=&#34;../../img/posts/New-Theme-Immutable/immutable-footer.png&#34;&gt;&lt;img src=&#34;../../img/posts/New-Theme-Immutable/immutable-footer.png&#34; style=&#34;max-width: 100%;&#34;/&gt;&lt;/a&gt;
 &lt;em&gt;New Footer&lt;/em&gt;&lt;/p&gt;
+
 &lt;p&gt;In the &lt;em&gt;Immutable&lt;/em&gt; theme, I have fixed the footer and removed the gray bar. The background looks great, and the text is clearly visible over it, making the bar no longer required. I like minimal footers. I only need a small copyright statement, and I enjoy having a &lt;a href=&#34;http://cryogenweb.org&#34;&gt;Cryogen&lt;/a&gt; shout-out here. So that&amp;rsquo;s all I have.&lt;/p&gt;
+
 &lt;h3 id=&#34;mobile-support&#34;&gt;Mobile Support&lt;/h3&gt;
-&lt;p&gt;&lt;!-- raw HTML omitted --&gt;&lt;!-- raw HTML omitted --&gt;&lt;!-- raw HTML omitted --&gt;&lt;/p&gt;
-&lt;!-- raw HTML omitted --&gt;
+
+&lt;p&gt;&lt;a href=&#34;../../img/posts/New-Theme-Immutable/mobile-changes.png&#34;&gt;&lt;img src=&#34;../../img/posts/New-Theme-Immutable/mobile-changes.png&#34; style=&#34;max-width: 100%;&#34;/&gt;&lt;/a&gt;
+&lt;div id=&#34;caption&#34;&gt;Mobile viewing the homepage and a post, on both the old theme and Immutable&lt;/div&gt;&lt;/p&gt;
+
 &lt;p&gt;The biggest reason for making the new theme was that viewing the website on a mobile device was a poor experience&amp;hellip; unusable even. Again, because I implemented the sidebar poorly, it always remained on the side. Even on a narrow mobile screen. There was not enough room for the actual main content section, and pages/posts consisted of a skinny line of text down the side of the phone. Images&amp;hellip; well, don&amp;rsquo;t get me started on how well images were displayed. &lt;em&gt;Immutable&lt;/em&gt; solves these issues. The main content window takes up the majority of the screen, allowing for easy content reading.&lt;/p&gt;
+
 &lt;h3 id=&#34;mobile-navigation&#34;&gt;Mobile Navigation&lt;/h3&gt;
-&lt;p&gt;&lt;!-- raw HTML omitted --&gt;&lt;!-- raw HTML omitted --&gt;&lt;!-- raw HTML omitted --&gt;&lt;/p&gt;
-&lt;!-- raw HTML omitted --&gt;
+
+&lt;p&gt;&lt;a href=&#34;../../img/posts/New-Theme-Immutable/mobile-menu.png&#34;&gt;&lt;img src=&#34;../../img/posts/New-Theme-Immutable/mobile-menu.png&#34; style=&#34;max-width: 100%;&#34;/&gt;&lt;/a&gt;
+&lt;div id=&#34;caption&#34;&gt;Main navigation drop-down and the extended drop-down menu on mobile&lt;/div&gt;&lt;/p&gt;
+
 &lt;p&gt;In addition to better viewing, site navigation has also been improved on mobile. When I say &lt;em&gt;improved&lt;/em&gt;, I of course mean &lt;em&gt;added&lt;/em&gt;, as is was sort-of non-existent before. In &lt;em&gt;ryan1&lt;/em&gt; there was an drop-down menu icon, but when it was tapped&amp;hellip; nothing happened. At all. Now, there is an icon that drops down a site navigation menu when tapped. At the bottom of the navigation items, there is a &lt;em&gt;more&lt;/em&gt; tab. When clicked, it extends the menu to also include my contact links (Github, LinkedIn, etc.), recent posts, and the list of post tag links.&lt;/p&gt;
+
 &lt;h3 id=&#34;continued-work&#34;&gt;Continued Work&lt;/h3&gt;
+
 &lt;p&gt;While its name is &lt;em&gt;immutable&lt;/em&gt;, the actual theme itself is not (bad joke). There are a few things I plan on tweaking over time. For example, I don&amp;rsquo;t love the fonts and spacing and I will continue to improve them. I also want to edit the &lt;code&gt;code&lt;/code&gt; colors. I did a quick edit of the colors so that they worked with the theme, but they not what I ultimately want. I use the code segments a lot on this site, so it is important that they look nice.&lt;/p&gt;
+
 &lt;p&gt;Well, that is it. I finally got around to making a new theme, and plan to make it even better over time. I hope you enjoy, even on a phone ;).&lt;/p&gt;
 </description>
     </item>
@@ -1252,8 +1562,12 @@ static website generators. Thus far, I have tried
 started using the &lt;a href=&#34;http://clojure.org/&#34;&gt;clojure&lt;/a&gt; programming language, I have come across
 &lt;a href=&#34;http://cryogenweb.org/&#34;&gt;cryogen&lt;/a&gt;. As you may have already guessed, this site is now
 being generated using cryogen.&lt;/p&gt;
-&lt;h2 id=&#34;emacsorg-mode-solutions&#34;&gt;Emacs/org-mode Solutions&lt;/h2&gt;
-&lt;!-- raw HTML omitted --&gt;
+
+&lt;h2 id=&#34;emacs-org-mode-solutions&#34;&gt;Emacs/org-mode Solutions&lt;/h2&gt;
+
+&lt;p&gt;&lt;img alt=&#34;emacs logo&#34; src=&#34;../../img/posts/using-cryogen-for-website/Emacs-icon.png&#34; style=&#34;max-width: 40%;&#34;/&gt;
+&lt;img alt=&#34;org-mode unicorn&#34; src=&#34;../../img/posts/using-cryogen-for-website/org-mode-unicorn.png&#34; style=&#34;max-width: 40%;&#34;/&gt;&lt;/p&gt;
+
 &lt;p&gt;About a year ago, obsession with
 &lt;a href=&#34;https://www.gnu.org/software/emacs/&#34;&gt;emacs&lt;/a&gt; (and more importantly,
 org-mode) eventually led me to try out
@@ -1266,6 +1580,7 @@ and support to be lacking. It seemed to be more of a
 personal project, rather than a fully supported
 framework. while I know other people were able to
 get it working, org-page simply wasn&amp;rsquo;t working for me.&lt;/p&gt;
+
 &lt;p&gt;For over a year now, I have used org-mode at work each week to track
 my hours and to take notes (including code snippets). I then export
 the org files to html, creating a full index of my work
@@ -1277,8 +1592,11 @@ it). Creating my own solution helped me learn even more about org-mode
 (which helped with my work notes), but I ultimately abandoned using this method
 for my personal website. Managing my own solution quickly became a pain
 because I had to setup emacs, install the dependencies, and get a &lt;em&gt;.emacs&lt;/em&gt; file working &lt;em&gt;just right&lt;/em&gt; on any compuer I wanted to generate the site from.&lt;/p&gt;
+
 &lt;h2 id=&#34;jekyll&#34;&gt;Jekyll&lt;/h2&gt;
-&lt;!-- raw HTML omitted --&gt;
+
+&lt;p&gt;&lt;img alt= &#34;jekyll logo&#34; src=&#34;../../img/posts/using-cryogen-for-website/jekyll.png&#34; style=&#34;max-width: 100%;&#34;/&gt;&lt;/p&gt;
+
 &lt;p&gt;My first experience with &lt;a href=&#34;http://jekyllrb.com/&#34;&gt;Jekyll&lt;/a&gt; was about two
 years ago, right after I graduated college. It was the first true
 static website generator that I tried and I absolutely loved the
@@ -1295,6 +1613,7 @@ using iframes and other messiness). I eventually stopped using Jekyll
 because I was unable to get the theming quite right, and &amp;hellip; well
 &amp;hellip; I started &lt;em&gt;really&lt;/em&gt; getting into emacs. But you&amp;rsquo;ve already heard
 that story.&lt;/p&gt;
+
 &lt;p&gt;After taking a breif hiatus from Jekyll to adventure deeper into emacs
 land, I returned. This time, I was able to find and configure a
 &lt;a href=&#34;https://github.com/joshgerdes/jekyll-uno&#34;&gt;enticing theme&lt;/a&gt; that fit my
@@ -1307,8 +1626,11 @@ gems environment and dependencies on
 the wall. Additionally, I have been learning
 &lt;a href=&#34;http://clojure.org/&#34;&gt;clojure&lt;/a&gt; and while digging through different
 clojure projects, I found &lt;a href=&#34;http://cryogenweb.org/&#34;&gt;cryogen&lt;/a&gt;.&lt;/p&gt;
+
 &lt;h2 id=&#34;cryogen&#34;&gt;Cryogen&lt;/h2&gt;
-&lt;!-- raw HTML omitted --&gt;
+
+&lt;p&gt;&lt;img alt=&#34;Cryogen logo&#34; src=&#34;../../img/posts/using-cryogen-for-website/cryogen.png&#34; style=&#34;max-width: 100%;&#34;/&gt;&lt;/p&gt;
+
 &lt;p&gt;&lt;a href=&#34;http://cryogenweb.org/&#34;&gt;Cryogen&lt;/a&gt; is a static website generator
 written in &lt;a href=&#34;https://clojure.org/&#34;&gt;Clojure&lt;/a&gt;.  If you already have
 &lt;a href=&#34;http://leiningen.org/&#34;&gt;Leiningen&lt;/a&gt; installed (which if using Clojure,
@@ -1324,6 +1646,7 @@ live. Cryogen has a rather large, but simple
 organize the project. This structure is slightly different from
 Jekyll, and takes a bit of getting to, but I think it does a better
 job at keeping everything organized once you learn it.&lt;/p&gt;
+
 &lt;p&gt;The one thing I &lt;em&gt;really&lt;/em&gt; like about Cryogen is the fact
 that&amp;hellip; well&amp;hellip; it&amp;rsquo;s clojure. This means that things can often feel more
 &amp;ldquo;lisp-y&amp;rdquo;. For example, in Jekyll, the preferences
@@ -1333,12 +1656,14 @@ are defined in a very specific yaml header at the top of the markdown
 files. Cryogen follows a similar concept, but instead of yaml
 headers, it simply uses a p-list for the
 &lt;a href=&#34;http://cryogenweb.org/docs/configuration.html&#34;&gt;configuration setup&lt;/a&gt;.&lt;/p&gt;
+
 &lt;p&gt;To change a post&amp;rsquo;s information (ex: title, author, date), one just has
 to change the keywords in the list at the top of the post&amp;rsquo;s markdown
 file. This flexability means that figuring out how to setup use my own
 configuration was a breeze. For programmers that have previously used
 Clojure or another LISP, the configuration in Cryogen is very
 intuitive and natural.&lt;/p&gt;
+
 &lt;p&gt;The only &lt;em&gt;downside&lt;/em&gt; (sort of&amp;hellip; it&amp;rsquo;s my fault) I have experienced
 while using Cryogen is that being a smaller community, there isn&amp;rsquo;t
 much out there in terms of templetes and themes (at least that I was
@@ -1352,10 +1677,12 @@ now. As a bonus, I am starting to re-learn web design. However, I am
 &lt;em&gt;slowly&lt;/em&gt; catching up, so &amp;ldquo;modern&amp;rdquo; design features like mobil support
 might not happen right away. It&amp;rsquo;s not the best looking site, but I
 has personal touch, which I guess is good in a personal website.&lt;/p&gt;
+
 &lt;p&gt;That&amp;rsquo;s about it. That&amp;rsquo;s why my site suddenly looked different one
 weekend. If I look forward to using both Clojure and Cryogen more for not
 only this website, but other personal projects as well.&lt;/p&gt;
-&lt;p&gt;_* PS: Re-reading this post I realize trying Cryogen after getting excited about Clojure is VERY much like when I started using org-page after getting excited about emacs. Hopefully this setup is a keeper that I stick with. ;)_&lt;/p&gt;</description>
+
+&lt;p&gt;&lt;em&gt;* PS: Re-reading this post I realize trying Cryogen after getting excited about Clojure is VERY much like when I started using org-page after getting excited about emacs. Hopefully this setup is a keeper that I stick with. ;)&lt;/em&gt;&lt;/p&gt;</description>
     </item>
     
   </channel>

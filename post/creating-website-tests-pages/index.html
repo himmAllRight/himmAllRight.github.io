@@ -152,31 +152,39 @@ separate branches (instead of pushing everything straight to <code>master</code>
 even that isn&rsquo;t enough to ensure everything works as expected when publishing
 something new. Then, I thought of something obvious&hellip; I could setup some
 simple testing&hellip; for my website.</p>
+
 <h2 id="what-to-test">What to Test</h2>
+
 <p>After editing a page or drafting a new post, I often wonder &ldquo;how can I be
 <em>sure</em> everything will still work when I publish this change&rdquo;? I question if
 every post file is <em>actually</em> being served as a web page. Or worse&hellip; I fear
 that a post that isn&rsquo;t <em>ready</em> to be published might <em>accidentally</em> get pushed
 with an unrelated website fix.</p>
+
 <p><em>(Yes, this is a completely unreasonable fear given that ALL of my
 website source files, drafts included, are publicly hosted on Github.
 Nonetheless, the fear exists)</em></p>
+
 <p>This will be a multi-post serries, so in this first one we will focus on:</p>
+
 <ul>
 <li>Configuring the test environment</li>
 <li>Building up the testing framework</li>
 <li>Writing some basic tests to ensure:
+
 <ul>
 <li>The pages I <em>want</em> to be served are</li>
 <li>Pages and posts that are not ready, are <em>not</em> being served</li>
+</ul></li>
 </ul>
-</li>
-</ul>
+
 <p>As my website is currently compiled using <a href="https://gohugo.io">hugo</a>, the tests
 will be centered around that framework. However, most of the information can be
 applied to testing websites using other static website generators, are they are
 all quite similar.</p>
+
 <h2 id="setting-up-the-env">Setting up the env</h2>
+
 <p>I will be using
 <a href="https://docs.pytest.org/en/latest/contents.html">pytest</a> for the testing
 framework, and to make all the
@@ -185,23 +193,30 @@ python dependencies a bit easier to manage, I will also use
 <a href="https://getfedora.org">Fedora</a> computer, VM, or at the very least in a Fedora
 <a href="https://podman.io">podman</a> container. So, some of my instructions use <code>dnf</code>,
 but feel free to adjust to your package manager accordingly.</p>
+
 <h4 id="install-pipenv">Install <code>pipenv</code></h4>
+
 <p>First, lets install <code>pipenv</code>, which is easy enough in Fedora:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">sudo dnf install pipenv
-</code></pre></div><h4 id="install-needed-packages-inside-pipenv-shell">Install needed packages inside <code>pipenv shell</code></h4>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">sudo dnf install pipenv</code></pre></div>
+<h4 id="install-needed-packages-inside-pipenv-shell">Install needed packages inside <code>pipenv shell</code></h4>
+
 <p>After installing, create a pipenv shell and enter it:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">pipenv shell
-</code></pre></div><p>Install <code>pytest</code> and <code>requests</code> in the pip environment:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">pip install pytest requests
-</code></pre></div><h2 id="creating-the-test-framework">Creating the Test Framework</h2>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">pipenv shell</code></pre></div>
+<p>Install <code>pytest</code> and <code>requests</code> in the pip environment:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">pip install pytest requests</code></pre></div>
+<h2 id="creating-the-test-framework">Creating the Test Framework</h2>
+
 <p>With the environment setup, we can start building up the test framework. We
 will start by defining come constants, then use those when building helper
 functions. Lastly, we will use the helper functions to piece together the
 <code>conftest.py</code> and <code>test_pages.py</code> files.</p>
+
 <h3 id="defining-constants">Defining Constants</h3>
+
 <p>First, lets define some constants we can use throughout the test framework. In
 the future, I might switch these to be set optionally with  CLI arguments, but
 for now&hellip; they&rsquo;re just static constant variables defined in a file.</p>
+
 <p>So first, create a new file in the <code>tests</code> directory named <code>constants.py</code>. In
 that file, lets dump our contants:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">BASE_URL <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;http://localhost:1313&#34;</span>
@@ -215,8 +230,9 @@ POST_NAMES <span style="color:#f92672">=</span> [
     <span style="color:#f92672">&lt;</span>Removed middle of list because it<span style="color:#e6db74">&#39;s long&gt;</span>
     <span style="color:#f92672">...</span>
     <span style="color:#e6db74">&#34;ZFS-Backups-To-LUKS-External&#34;</span>,
-]
-</code></pre></div><p>As you can see, in my <code>constants.py</code> file I have 4 variables defined:</p>
+]</code></pre></div>
+<p>As you can see, in my <code>constants.py</code> file I have 4 variables defined:</p>
+
 <ul>
 <li><code>BASE_URL</code>: this is the base url for the website when running <code>hugo serve</code>.
 For most, it will default to <code>http://localhost:1313</code>, but I have this as
@@ -230,17 +246,22 @@ page is being served, which is at <code>baseurl/pages/about/</code>, so
 <li><code>POST_NAMES</code>: This is a list of the names of the post <em>files</em> (without the
 <code>.md</code>)</li>
 </ul>
+
 <p>Add in your values for the variables, and remember to save the file.</p>
+
 <h3 id="writing-some-helper-utility-functions">Writing Some Helper Utility Functions</h3>
+
 <p>With those constants defined, we should be ready to write some helper
 functions. These are normal python functions that will be called from tests or
 even test fixture functions.</p>
+
 <p>First, lets create <code>utils.py</code>. The helper functions will need to use
 <code>listdir</code>, as well as the <code>path</code> function from the <code>os</code> module. They will also
 need the regex functions. So, lets make those imports at the top of the file:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">from</span> os <span style="color:#f92672">import</span> listdir, path
-<span style="color:#f92672">import</span> re
-</code></pre></div><h4 id="get_file_names">get_file_names</h4>
+<span style="color:#f92672">import</span> re</code></pre></div>
+<h4 id="get-file-names">get_file_names</h4>
+
 <p>Lets define a helper function named <code>get_file_names</code>:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">get_file_names</span>(src, extension<span style="color:#f92672">=</span>None):
     <span style="color:#e6db74">&#34;&#34;&#34;Collects the names of all files of a directory&#34;&#34;&#34;</span>
@@ -254,49 +275,56 @@ need the regex functions. So, lets make those imports at the top of the file:</p
         <span style="color:#75715e"># Otherwise, add everything</span>
         <span style="color:#66d9ef">else</span>:
             file_list<span style="color:#f92672">.</span>append(file)
-    <span style="color:#66d9ef">return</span> file_list
-</code></pre></div><p>When provided a file path (<code>src</code>), this function will return a list of all the
+    <span style="color:#66d9ef">return</span> file_list</code></pre></div>
+<p>When provided a file path (<code>src</code>), this function will return a list of all the
 file names in the directory. Optionally, the <code>extension</code> parameter can be
 supplied to only return files of that extension type (for exapmple, <code>md</code>). This
 function will be used to grab the names of all the post source files.</p>
+
 <p>&hellip; and that&rsquo;s all we need in <code>utils.py</code>&hellip; for now!</p>
+
 <h3 id="conftest">Conftest</h3>
+
 <p>Now lets start digging into test-related stuff, by first creating a
 <code>conftest.py</code> file. This file will mostly hold the fixtures we will use for the
 tests. In our particular setup, they will gather lists of pages to run multiple
 calls of each test against by using <code>@pytest.fixture(params)</code>.</p>
+
 <p>But first, lets import a few things at the top of <code>conftest.py</code>:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> pytest
 <span style="color:#f92672">from</span> os <span style="color:#f92672">import</span> path
 
 <span style="color:#f92672">from</span> constants <span style="color:#f92672">import</span> BASE_URL, SITE_PAGES, POST_DIR, POST_NAMES
-<span style="color:#f92672">from</span> utils <span style="color:#f92672">import</span> get_file_names
-</code></pre></div><p>The imports include the <code>os.path()</code> function, some of the constants we
+<span style="color:#f92672">from</span> utils <span style="color:#f92672">import</span> get_file_names</code></pre></div>
+<p>The imports include the <code>os.path()</code> function, some of the constants we
 defined, and the <code>get_file_names()</code> helper function. Oh, And of course
 <code>pytest</code> ;) .</p>
-<h4 id="page_url">page_url</h4>
+
+<h4 id="page-url">page_url</h4>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#a6e22e">@pytest.fixture</span>(params<span style="color:#f92672">=</span>SITE_PAGES)
 <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">page_url</span>(request):
     <span style="color:#e6db74">&#34;&#34;&#34;Returns the page urls for testing.&#34;&#34;&#34;</span>
-    <span style="color:#66d9ef">return</span> BASE_URL <span style="color:#f92672">+</span> request<span style="color:#f92672">.</span>param
-</code></pre></div><p>The first fixture, <code>page_url</code>, is very basic. It creates a list of all of the
+    <span style="color:#66d9ef">return</span> BASE_URL <span style="color:#f92672">+</span> request<span style="color:#f92672">.</span>param</code></pre></div>
+<p>The first fixture, <code>page_url</code>, is very basic. It creates a list of all of the
 website pages (not posts), by combining the <code>BASE_URL</code> with each of the values
 defined in the <code>SITE_PAGES</code> constant. This list will later be used to
 paramaterize a single test across all of the page links.</p>
-<h4 id="post_url">post_url</h4>
+
+<h4 id="post-url">post_url</h4>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#a6e22e">@pytest.fixture</span>(params<span style="color:#f92672">=</span>POST_NAMES)
 <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">post_url</span>(request):
     <span style="color:#e6db74">&#34;&#34;&#34;Returns the post urls for testing.&#34;&#34;&#34;</span>
-    <span style="color:#66d9ef">return</span> BASE_URL <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34;/post/&#34;</span> <span style="color:#f92672">+</span> request<span style="color:#f92672">.</span>param<span style="color:#f92672">.</span>lower()
-</code></pre></div><p>The next fixture, <code>post_url</code> is basically the same as <code>page_url</code>, except it
+    <span style="color:#66d9ef">return</span> BASE_URL <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34;/post/&#34;</span> <span style="color:#f92672">+</span> request<span style="color:#f92672">.</span>param<span style="color:#f92672">.</span>lower()</code></pre></div>
+<p>The next fixture, <code>post_url</code> is basically the same as <code>page_url</code>, except it
 creates a list of all the <em>posts</em> using the <code>POST_NAMES</code> constant. Again, this
 will be used to expand a single test into many, one for each post.</p>
-<h4 id="non_live_post_url">non_live_post_url</h4>
+
+<h4 id="non-live-post-url">non_live_post_url</h4>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#a6e22e">@pytest.fixture</span>(params<span style="color:#f92672">=</span>non_live_post_urls())
 <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">non_live_post_url</span>(request):
     <span style="color:#e6db74">&#34;&#34;&#34;Returns the url of a non-defined post file&#34;&#34;&#34;</span>
-    <span style="color:#66d9ef">return</span> BASE_URL <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34;/post/&#34;</span> <span style="color:#f92672">+</span> request<span style="color:#f92672">.</span>param<span style="color:#f92672">.</span>lower()
-</code></pre></div><p>Lastly, we have <code>non_live_post_url</code> with its accompanying helper function,
+    <span style="color:#66d9ef">return</span> BASE_URL <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34;/post/&#34;</span> <span style="color:#f92672">+</span> request<span style="color:#f92672">.</span>param<span style="color:#f92672">.</span>lower()</code></pre></div>
+<p>Lastly, we have <code>non_live_post_url</code> with its accompanying helper function,
 <code>non_live_post_urls</code>. This pair creates a list of posts that have a markdown
 file in the <code>/post/</code> directory, but are <em>not</em> listed in the <code>POST_NAMES</code>
 constant (so in practice, not really to be published).</p>
@@ -307,13 +335,15 @@ constant (so in practice, not really to be published).</p>
     )
     live_post_names <span style="color:#f92672">=</span> list(map(<span style="color:#66d9ef">lambda</span> name: name<span style="color:#f92672">.</span>lower(), POST_NAMES))
     non_live_post_names <span style="color:#f92672">=</span> set(all_post_md_names)<span style="color:#f92672">.</span>difference(set(live_post_names))
-    <span style="color:#66d9ef">return</span> list(non_live_post_names)
-</code></pre></div><p>First, the <code>non_live_post_urls</code> helper function returns a list of non-listed
+    <span style="color:#66d9ef">return</span> list(non_live_post_names)</code></pre></div>
+<p>First, the <code>non_live_post_urls</code> helper function returns a list of non-listed
 post files. That  list is then used in <code>non_live_post_url</code> as the
 <code>pytest.fixture(params)</code> object, much like <code>SITE_PAGES</code> and <code>POST_NAMES</code> were
 for the previous
 fixtures.</p>
+
 <h3 id="finally-some-tests">Finally&hellip; Some Tests!</h3>
+
 <p>Phew. Okay. With <em>all of that</em> defined&hellip; lets create the first test file. When
 <code>pytest</code> runs, it will try to grab tests recursively from all the files down
 the current directory, starting with <code>test</code>. This first set of tests will be
@@ -321,8 +351,9 @@ checking whether a web page is being served (or not), so lets name the file
 <code>test_pages.py</code>. Again, start with the required imports. This time we only need
 <code>pytest</code> and <code>requests</code>.</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> pytest
-<span style="color:#f92672">import</span> requests
-</code></pre></div><h5 id="testing-pages">Testing Pages</h5>
+<span style="color:#f92672">import</span> requests</code></pre></div>
+<h5 id="testing-pages">Testing Pages</h5>
+
 <p>The first test will check that each page defined in the <code>SITE_PAGES</code> constant
 is being served. More specifically, we will use the <code>requests</code> module to ensure
 not only that the page is served, but returns a <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/200">200
@@ -331,25 +362,29 @@ actually requires very little code to accomplish (Gotta love python) :</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">test_page_served</span>(page_url):
     <span style="color:#e6db74">&#34;&#34;&#34;Checks that the website pages are available&#34;&#34;&#34;</span>
     response <span style="color:#f92672">=</span> requests<span style="color:#f92672">.</span>get(page_url)
-    <span style="color:#66d9ef">assert</span> response<span style="color:#f92672">.</span>status_code <span style="color:#f92672">==</span> <span style="color:#ae81ff">200</span>
-</code></pre></div><p>We simply define a function, <code>test_page_served()</code>, and because it is in
+    <span style="color:#66d9ef">assert</span> response<span style="color:#f92672">.</span>status_code <span style="color:#f92672">==</span> <span style="color:#ae81ff">200</span></code></pre></div>
+<p>We simply define a function, <code>test_page_served()</code>, and because it is in
 <code>test_pages.py</code>, it will be assumed to be a test by <code>pytest</code>. We provide the
 <code>page_url</code> fixture we previously defined in <code>conftest.py</code> as the only
 parameter. This will call the <code>test_page_served</code> test for each url
 in the list generated by <code>page_url</code>. Next, we use <code>requests.get()</code> to make a
 page request. Lastly, we <code>assert</code> that the <code>status_code</code> from our response is
 <code>200</code>. If it is, the test passes, if not, it fails.</p>
+
 <h5 id="testing-posts">Testing Posts</h5>
+
 <p>Next, lets test that all of the <em>posts</em> are being served. This test works
 <em>exactly</em> the same as <em>test_page_served</em>, except we are using the <code>post_url</code>
 fixture instead of <code>page_url</code> to supply the links to test:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">test_post_served</span>(post_url):
     <span style="color:#e6db74">&#34;&#34;&#34;Checks that the desired posts are available&#34;&#34;&#34;</span>
     response <span style="color:#f92672">=</span> requests<span style="color:#f92672">.</span>get(post_url)
-    <span style="color:#66d9ef">assert</span> response<span style="color:#f92672">.</span>status_code <span style="color:#f92672">==</span> <span style="color:#ae81ff">200</span>
-</code></pre></div><p><em>(While I could combine these cases into a single test function, I decided to
+    <span style="color:#66d9ef">assert</span> response<span style="color:#f92672">.</span>status_code <span style="color:#f92672">==</span> <span style="color:#ae81ff">200</span></code></pre></div>
+<p><em>(While I could combine these cases into a single test function, I decided to
 keep them separate for flexibility in the future)</em></p>
+
 <h5 id="lets-get-fancy-testing-unapproved-posts-are-not-served">Lets Get Fancy: Testing Unapproved Posts Are <em>NOT</em> Served</h5>
+
 <p>For the last test, lets get a little bit more complicated and ensure that post files
 <em>not</em> listed in the approved list are <em>not</em> being served. Well&hellip; it
 turns out all the &ldquo;fancy&rdquo; code required for this test case already occured in
@@ -359,23 +394,38 @@ now checking for a <code>404</code> return status instead of <code>200</code>:</
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">test_non_defined_posts_not_served</span>(non_live_post_url):
     <span style="color:#e6db74">&#34;&#34;&#34;Checks that a non-defined post is NOT available&#34;&#34;&#34;</span>
     response <span style="color:#f92672">=</span> requests<span style="color:#f92672">.</span>get(non_live_post_url)
-    <span style="color:#66d9ef">assert</span> response<span style="color:#f92672">.</span>status_code <span style="color:#f92672">==</span> <span style="color:#ae81ff">404</span>
-</code></pre></div><p>That defines all of the tests for this first set! Don&rsquo;t let only having three
+    <span style="color:#66d9ef">assert</span> response<span style="color:#f92672">.</span>status_code <span style="color:#f92672">==</span> <span style="color:#ae81ff">404</span></code></pre></div>
+<p>That defines all of the tests for this first set! Don&rsquo;t let only having three
 test functions fool you, they should generate over 70 test results when run!
 (For my website, at the time of writing this post)</p>
+
 <h3 id="lets-run-some-tests">Lets Run Some Tests!</h3>
+
 <p>Finally, we should be able to run the tests. To do so, first ensure that you
 are in the pipenv by running <code>pipenv shell</code>, <em>or</em> you can run the tests from
 outside the pipenv using <code>pipenv run COMMAND</code>. Next, call:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">pytest -v .
-</code></pre></div><p>The <code>-v</code> flag runs pytest in <em>&lsquo;verbose&rsquo;</em> mode, which I like to do as it shows
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">pytest -v .</code></pre></div>
+<p>The <code>-v</code> flag runs pytest in <em>&lsquo;verbose&rsquo;</em> mode, which I like to do as it shows
 the results for each test run, rather than each <em>file</em>.</p>
-<!-- raw HTML omitted -->
+
+<p><center>
+<video style="max-width:100%;" controls>
+  <source src="../../img/posts/creating-website-tests-pages/passing-tests.mp4" type="video/mp4">
+</video>
+<div id="caption">Running the pages tests. All 72 passed.</div>
+</center></p>
+
 <p>So it looks like all the tests are passing! To be sure, Lets do a quick check to
 make sure they work as expected&hellip; I&rsquo;ll mark this post with <code>draft = &quot;False&quot;</code>,
 but <em>not</em> add it to the approved lists, and the test for this page <em>should</em>
 fail&hellip;</p>
-<!-- raw HTML omitted -->
+
+<p><center>
+<a href="../../img/posts/creating-website-tests-pages/failed-test.png">
+<img alt="Checking a test fails when we want it to" src="../../img/posts/creating-website-tests-pages/failed-test.png" style="max-width: 100%; padding: 5px 15px 10px 10px"/></a>
+<div class="caption">Checking that a test fails when we want it to.</div>
+</center></p>
+
 <p>Awesome, it failed! I guess all there is left to do is to finish up this post, so I
 can add it to the approved posts lists and publish it! Stay tuned!</p>
 

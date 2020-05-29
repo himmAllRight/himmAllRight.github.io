@@ -22,8 +22,11 @@ use, but couldn&amp;rsquo;t run VMs, over-heated, and didn&amp;rsquo;t have grea
 battery life. Now that I am going to libraries and other locations to
 work on personal and open source projects, I really needed a better
 mobile pc setup.&lt;/p&gt;
+
 &lt;h3 id=&#34;other-considerations&#34;&gt;Other Considerations&lt;/h3&gt;
-&lt;!-- raw HTML omitted --&gt;
+
+&lt;p&gt;&lt;img alt=&#34;Asus x201e&#34; src=&#34;../../img/posts/my-new-used-x230/asus_x201e.png&#34; width=55% style=&#34;float: right; margin: 0px 15px 5px 5px;&#34;/&gt;&lt;/p&gt;
+
 &lt;p&gt;I had been keeping an eye open for a new mobile computer for well over a
 year to find out what is out there. I mostly looked sub $300 ubuntu laptops like the Asus 11&amp;rdquo;
 celeron (x201e) I got in college. I don&amp;rsquo;t need much HD
@@ -35,7 +38,9 @@ usually had Celeron processors and little ram. Even worse, they
 were not easily expandable. I also briefly entertained the idea of
 putting Linux on a chrome book, but they had the same issues that all
 the other sub $300 options had.&lt;/p&gt;
+
 &lt;h3 id=&#34;used-thinkpads&#34;&gt;Used Thinkpads&lt;/h3&gt;
+
 &lt;p&gt;When I intensified my search, I started to consider other
 options. There is one alternative that is very popular among Linux users,
 but I always seem to forget about it when looking for a new
@@ -49,14 +54,24 @@ acceptable bit of ram and &amp;ldquo;okay&amp;rdquo; hard drives for under my $3
 point. Better yet, the Thinkpads seemed easy to upgrade .
 So, even if the device had a bad battery, or needed a
 RAM/HD upgrade, &lt;em&gt;I could could do it&lt;/em&gt;.&lt;/p&gt;
+
 &lt;p&gt;I eventually narrowed my search down to the X230 or T430s. That year&amp;rsquo;s
 model seemed like the perfect mix of still being relatively new, while
 also being old enough that many business had started to replace
 them, flooding the market and driving the cost down. They also
 didn&amp;rsquo;t have the terrible track pad that the x240 and T440s had (without buttons). I
 eventually decided on the x230 because the main use of this laptop would be portability.&lt;/p&gt;
-&lt;h3 id=&#34;this-particular-thinkpad-x230-&#34;&gt;This Particular Thinkpad x230 &amp;hellip;&lt;/h3&gt;
-&lt;!-- raw HTML omitted --&gt;
+
+&lt;h3 id=&#34;this-particular-thinkpad-x230&#34;&gt;This Particular Thinkpad x230 &amp;hellip;&lt;/h3&gt;
+
+&lt;p&gt;&lt;img alt=&#34;x230&#34; src=&#34;../../img/posts/my-new-used-x230/kadabra2.jpg&#34; width= 100%&gt;
+I found my used x230 on Amazon, for about $185. The vendor an acceptable
+rating, and the specs were good for the price:
+- Intel i5-3320M
+- 4 GB RAM
+- 12.5&amp;rdquo; 1366x768 HD LED Display
+- 320 GB HHD&lt;/p&gt;
+
 &lt;p&gt;The listing also said that it came with a &amp;ldquo;used 6-cell battery&amp;rdquo;. So I planned
 from the beginning to have it replaced. Sure enough, when the laptop arrived,
 the battery was completely dead. If I unplugged the laptop, it would shutdown.
@@ -67,7 +82,9 @@ around. After installing Korora 24 on the new SSD, I had a
 nice, portable computer that only cost me about $200 (plus some spare
 parts). As advertised, swapping the battery, adding RAM, and replacing
 the HD were &lt;em&gt;super simple&lt;/em&gt; and &lt;em&gt;accessible&lt;/em&gt;.&lt;/p&gt;
+
 &lt;h3 id=&#34;what-i-like-about-it&#34;&gt;What I like about it&lt;/h3&gt;
+
 &lt;ul&gt;
 &lt;li&gt;&lt;strong&gt;Track point&lt;/strong&gt; - I love track points. Using other laptops with
 just track-pads is really frustrating now. I completely understand why
@@ -101,7 +118,9 @@ as I find it to be the perfect size to hold and carry around. It is
 a similar size to a few of my programming books and slides into my
 backpack very easily.&lt;/li&gt;
 &lt;/ul&gt;
-&lt;h3 id=&#34;what-i-dont-like&#34;&gt;What I don&amp;rsquo;t like&lt;/h3&gt;
+
+&lt;h3 id=&#34;what-i-don-t-like&#34;&gt;What I don&amp;rsquo;t like&lt;/h3&gt;
+
 &lt;ul&gt;
 &lt;li&gt;&lt;strong&gt;Has a little bit of flex&lt;/strong&gt; - While the laptop overall feels pretty
 solid, the screen does have a bit of flex when pressed.&lt;/li&gt;
@@ -111,9 +130,15 @@ solid, the screen does have a bit of flex when pressed.&lt;/li&gt;
 sound very good. This isn&amp;rsquo;t a huge deal for me because being my mobile computer, I am using
 headphones 99% of the time. Still, it would be nice if when I occasionally share a video with someone they could actually hear it.&lt;/li&gt;
 &lt;/ul&gt;
+
 &lt;h3 id=&#34;conclusions&#34;&gt;Conclusions&lt;/h3&gt;
-&lt;!-- raw HTML omitted --&gt;
+
+&lt;p&gt;&lt;img alt=&#34;x230&#34; src=&#34;../../img/posts/my-new-used-x230/kadabra.jpg&#34; style=&#34;max-width: 100%;&#34;/&gt;
+I have had my x230 for several months now and still love it. I use it at work daily (to listen to
+music, podcasts, and to have a &lt;em&gt;linux&lt;/em&gt; computer available to me at all times in a Windows office). It is a perfect mix of being portable while still having enough power to accomplish whatever I want to work on. I still prefer to vote with my wallet by purchasing from a vendors like &lt;a href=&#34;http://www.system76.com&#34;&gt;System76&lt;/a&gt; when possible, but buying used business hardware, such as thinkpads, is a very affordable alternative. I have no regrets buying my used x230. It is infinitely better than my other options at that price point.&lt;/p&gt;
+
 &lt;h3 id=&#34;update&#34;&gt;Update&lt;/h3&gt;
+
 &lt;p&gt;&lt;em&gt;I have taken so long to publish this post, I am actually now using Arch Linux on the x230. It also runs great :)&lt;/em&gt;&lt;/p&gt;</description>
     </item>
     

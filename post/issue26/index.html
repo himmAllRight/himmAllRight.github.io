@@ -153,8 +153,13 @@ image, which has a newer version of <code>hugo</code>.  So, I filed the problem 
 #26</a>, and
 finished my post in a Fedora 30 container for the time being.  Here is a quick
 explanation of how I <em>eventually</em> came back and resolved issue #26.</p>
+
 <h3 id="the-problem">The Problem</h3>
-<!-- raw HTML omitted -->
+
+<p><a href="../../img/posts/issue26/correct-website-homepage.png">
+<img alt="The correct website homepage index" src="../../img/posts/issue26/correct-website-homepage.png" style="max-width: 100%; padding: 5px 15px 10px 10px"/></a>
+<div class="caption">What the website homepage is <em>supposed</em> to look like</div></p>
+
 <p>My website has two types of content: <em>posts</em>, and <em>pages</em>. <em>Pages</em> are the
 &lsquo;normal&rsquo; content of the website, like the <a href="../../pages/about/">About</a> and
 <a href="../../pages/homelab/">Homelab</a> pages. <em>Posts</em> on the other hand, are the dated
@@ -162,15 +167,22 @@ explanation of how I <em>eventually</em> came back and resolved issue #26.</p>
 is working, my hugo template takes the newest <code>x</code> number of post files from the
 <em>posts</em> directory, and lists them on the homepage with a small summary. (See
 image above)</p>
-<!-- raw HTML omitted -->
+
+<p><a href="../../img/posts/issue26/broken-website-homepage.png">
+<img alt="What the broken homepage" src="../../img/posts/issue26/broken-website-homepage.png" style="max-width: 100%; padding: 5px 15px 10px 10px"/></a>
+<div class="caption">The broken homepage</div></p>
+
 <p>However, after the <code>hugo</code> version in my website container updated from
 <code>v0.56.6</code> to <code>v0.58.3</code>, the post list on the homepage broke.  Specifically,
 instead of listing the recent posts, the homepage just listed a single &ldquo;post&rdquo;
 named&hellip;  &ldquo;Posts&rdquo; (see image above).</p>
+
 <p>This indicated that something changed between those two versions that made my
 template out of date. However, I wasn&rsquo;t sure if the problem was in the
 website&rsquo;s page content, or if it was from an issue in the template I used.</p>
+
 <h3 id="finding-a-fix">Finding a Fix</h3>
+
 <p>To find out, I grabbed some other <a href="https://themes.gohugo.io">hugo templates</a>,
 and temporarily switched my config to render the website with them. This was
 actually a bit more complicated than I thought it would be. Hugo templates
@@ -181,9 +193,12 @@ it had the same rendering issue mine did. Eventually, I found a newer, but
 rather bare-bones template that had a similar home page layout to my own. When
 I rendered my site with it&hellip; it had a working recent posts list on the home
 page!</p>
+
 <p>This proved 1) the issue was somewhere in my <em>template code</em> and 2) a fix was
 possible.</p>
+
 <h3 id="coding-a-solution">Coding a Solution</h3>
+
 <p>Studying the <code>layouts/index.html</code> file in each template, I noticed the working
 template used a different method to gather and display the recent posts. My
 template used a basic in-line piece of code that grabbed a range of the latest
@@ -194,27 +209,30 @@ posts to be rendered, right then and there.</p>
           {{ $posts := or .Site.Params.PostSummariesFrontPage 4 }}
           {{ range first $posts (where .Data.Pages &#34;Type&#34; &#34;post&#34;) }}
               {{ .Render &#34;summary&#34;}}
-          {{ end }}
-</code></pre></div><p>By comparison, the the newer template used an improved setup. It first
+          {{ end }}</code></pre></div>
+<p>By comparison, the the newer template used an improved setup. It first
 defined variables at the top of the layout page to calculate all the recent
 post lists, and then simply referred to <em>that</em> when rendering the summaries. So,
 I read up a bit on the hugo documentation to better learn how variables and
 some of the basic functions worked.</p>
+
 <p>Eventually I was able to come up with my own solution, defining the following
 variables at the top of the page:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go">{{ <span style="color:#960050;background-color:#1e0010">$</span><span style="color:#a6e22e">mainSections</span> <span style="color:#f92672">:=</span> .<span style="color:#a6e22e">Site</span>.<span style="color:#a6e22e">Params</span>.<span style="color:#a6e22e">mainSections</span> | <span style="color:#66d9ef">default</span> (<span style="color:#a6e22e">slice</span> <span style="color:#e6db74">&#34;post&#34;</span>) }}
 {{ <span style="color:#960050;background-color:#1e0010">$</span><span style="color:#a6e22e">section</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">where</span> .<span style="color:#a6e22e">Site</span>.<span style="color:#a6e22e">RegularPages</span> <span style="color:#e6db74">&#34;Section&#34;</span> <span style="color:#e6db74">&#34;in&#34;</span> <span style="color:#960050;background-color:#1e0010">$</span><span style="color:#a6e22e">mainSections</span> }}
-{{ <span style="color:#960050;background-color:#1e0010">$</span><span style="color:#a6e22e">section_count</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">len</span> <span style="color:#960050;background-color:#1e0010">$</span><span style="color:#a6e22e">section</span> }}
-</code></pre></div><p>I then referred to the variables further down where I render the recent
+{{ <span style="color:#960050;background-color:#1e0010">$</span><span style="color:#a6e22e">section_count</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">len</span> <span style="color:#960050;background-color:#1e0010">$</span><span style="color:#a6e22e">section</span> }}</code></pre></div>
+<p>I then referred to the variables further down where I render the recent
 post summaries:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-html" data-lang="html">&lt;<span style="color:#f92672">div</span> <span style="color:#a6e22e">class</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;container&#34;</span>&gt;
   &lt;<span style="color:#f92672">div</span> <span style="color:#a6e22e">class</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;row&#34;</span>&gt;
     &lt;<span style="color:#f92672">div</span> <span style="color:#a6e22e">class</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1&#34;</span>&gt;
       {{ range (first $n_posts $section) }}
           {{ .Render &#34;summary&#34;}}
-      {{ end }}
-</code></pre></div><p>and&hellip; it worked! Done!</p>
+      {{ end }}</code></pre></div>
+<p>and&hellip; it worked! Done!</p>
+
 <h3 id="conclusion">Conclusion</h3>
+
 <p>For as quick and easy as this post implies, the fix was actually a giant pain.
 It took a long time to figure out where the problem was occurring, but in the
 end I&rsquo;m happy with the solution. In fact, I used a <a href="https://github.com/himmAllRight/himmAllRight-source/pull/30">similar

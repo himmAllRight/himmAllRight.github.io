@@ -152,7 +152,9 @@ I had the tests run on <code>any</code> node. I <em>wanted</em> to have the test
 run inside a fedora docker container, but ran into issues configuring it.
 With the problem now long fixed, I decided I would write a quick update post about
 switching the pipeline to use container nodes.</p>
+
 <h3 id="why-switch">Why Switch</h3>
+
 <p>When I first defined the pipeline, I had it use <code>any</code> node for the agent:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-groovy" data-lang="groovy">pipeline <span style="color:#f92672">{</span>
     agent any
@@ -162,23 +164,32 @@ switching the pipeline to use container nodes.</p>
         <span style="color:#75715e">// This is where the stages will be defined //
 </span><span style="color:#75715e"></span>
     <span style="color:#f92672">}</span>
-<span style="color:#f92672">}</span>
-</code></pre></div><p>This just runs the job on any available node, which for me was just the same VM
+<span style="color:#f92672">}</span></code></pre></div>
+<p>This just runs the job on any available node, which for me was just the same VM
 server I was running Jenkins on. This was fine, but for testing I want to make
 sure <em>everything</em> in my automation is configured and up to date. The best
 way to ensure that, is with <em>clean</em> runs.</p>
+
 <p>When using docker for the pipeline agent, a new container is created to run the
 pipeline in, and then destroyed when completed. This means all packages and
 dependencies <em>must</em> be defined correctly, or the run will fail. This is what we
 want.</p>
-<!-- raw HTML omitted -->
+
+<p><center>
+<a href="../../img/posts/docker-quickstart/docker-logo.png">
+<img alt="Docker Logo" src="../../img/posts/docker-quickstart/docker-logo.png" style="float: right; max-width: 100%; width:400px; padding: 5px 15px 10px 10px"/></a>
+</center></p>
+
 <h3 id="using-docker-nodes">Using Docker Nodes</h3>
+
 <p>First, the obvious: make sure <code>docker</code> is installed on the desired
 Jenkins nodes. I won&rsquo;t cover this as it can be different for
 every user (and I already had <code>docker</code> installed on my Jenkins host).</p>
+
 <p>With docker installed, next make sure the Jenkins server has the <a href="https://plugins.jenkins.io/docker-slaves/">Docker
 Slaves</a> (and possibly <a href="https://plugins.jenkins.io/docker-workflow/">Docker
 Pipeline</a>) plug-in(s) installed.</p>
+
 <p>Lastly, with some docker plug-ins enabled, switch the <code>agent</code> statement to use a
 container image. I choose to use the <code>fedora:31</code> image:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-groovy" data-lang="groovy">pipeline <span style="color:#f92672">{</span>
@@ -188,13 +199,15 @@ container image. I choose to use the <code>fedora:31</code> image:</p>
         <span style="color:#f92672">}</span>
     <span style="color:#f92672">}</span>
     <span style="color:#f92672">...</span> <span style="color:#75715e">// rest of the pipeline
-</span><span style="color:#75715e"></span><span style="color:#f92672">}</span>
-</code></pre></div><h3 id="fixing-rootsudo-error">Fixing root/sudo error</h3>
+</span><span style="color:#75715e"></span><span style="color:#f92672">}</span></code></pre></div>
+<h3 id="fixing-root-sudo-error">Fixing root/sudo error</h3>
+
 <p>When I first set the pipeline to use the fedora image, it kept failing.
 Specifically, the <code>sudo dnf</code> steps would fail because the <code>sudo</code> command didn&rsquo;t
 exist in the container. If I removed <code>sudo</code> from the command&hellip;  it still
 failed because I didn&rsquo;t have permissions to run <code>dnf</code> inside the container ಠ_ಠ
 (yes, the user was <code>root</code>).</p>
+
 <p>After some research, I learned that it wasn&rsquo;t passing the root permissions to
 the container, and I could &ldquo;solve&rdquo; this issue by providing the <code>-u</code> flag with
 <code>0:0</code> as an arg to the docker agent:</p>
@@ -206,9 +219,11 @@ the container, and I could &ldquo;solve&rdquo; this issue by providing the <code
         <span style="color:#f92672">}</span>
     <span style="color:#f92672">}</span>
     <span style="color:#f92672">...</span> <span style="color:#75715e">// rest of the pipeline
-</span><span style="color:#75715e"></span><span style="color:#f92672">}</span>
-</code></pre></div><p>I don&rsquo;t <em>love</em> this solution&hellip; but it seems to work.</p>
+</span><span style="color:#75715e"></span><span style="color:#f92672">}</span></code></pre></div>
+<p>I don&rsquo;t <em>love</em> this solution&hellip; but it seems to work.</p>
+
 <h3 id="conclusion">Conclusion</h3>
+
 <p>Like I said, this was just a quick update about switching my
 test nodes to use docker containers. Honestly, I&rsquo;d much rather try to use
 <a href="http://podman.io">podman</a> containers for my test agents, but I&rsquo;m sure that

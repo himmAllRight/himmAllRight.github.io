@@ -22,85 +22,114 @@ First on the list: &lt;a href=&#34;https://docker.io&#34;&gt;Docker&lt;/a&gt;. T
 ecosystem surrounding it, and can take years to truly master. This post on the
 other hand, will &lt;em&gt;hopefully&lt;/em&gt; help you get up and playing with docker containers in
 just a few minutes. Lets get started.&lt;/p&gt;
+
 &lt;h2 id=&#34;installing-docker&#34;&gt;Installing Docker&lt;/h2&gt;
-&lt;p&gt;&lt;!-- raw HTML omitted --&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;../../img/posts/docker-quickstart/docker-logo.png&#34; style=&#34;max-width: 100%; width: 400px; float: right; margin: 0px 15px 5px 5px;&#34; alt=&#34;Docker Logo&#34; /&gt;&lt;/p&gt;
+
 &lt;p&gt;Installing docker on &lt;a href=&#34;https://getsol.us&#34;&gt;Solus&lt;/a&gt; was easy enough. I just
 had to install the package, and then enable the service:&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;sudo eopkg it docker
 sudo systemctl enable docker
-sudo systemctl start docker
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;On other distributions, it may not be in the package manager, or it might be
+sudo systemctl start docker&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;On other distributions, it may not be in the package manager, or it might be
 under a different name. To be sure, check out the community edition
 &lt;a href=&#34;https://docs.docker.com/install/linux/docker-ce/fedora/#set-up-the-repository&#34;&gt;installation
 documentation&lt;/a&gt;
 for your specific distro.&lt;/p&gt;
+
 &lt;h2 id=&#34;adding-user-to-docker-group&#34;&gt;Adding User to Docker Group&lt;/h2&gt;
+
 &lt;p&gt;By default, user accounts will not have permission to run docker commands
 without root access. So, after first installing docker, it might be tempting to
 just run everything using &lt;code&gt;sudo&lt;/code&gt;, but that isn&amp;rsquo;t the best idea. To get around
 this, simply add the user account to the &lt;code&gt;docker&lt;/code&gt; group:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;sudo usermod -a -G docker ryan
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;If the docker group is not created for some reason, it can be added:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;sudo groupadd docker
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Afterwards, that user should be able to run docker commands without requiring
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;sudo usermod -a -G docker ryan&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;If the docker group is not created for some reason, it can be added:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;sudo groupadd docker&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Afterwards, that user should be able to run docker commands without requiring
 &lt;code&gt;sudo&lt;/code&gt;. They &lt;em&gt;might&lt;/em&gt; have to log out and back in first.&lt;/p&gt;
+
 &lt;p&gt;&lt;em&gt;Note: These commands may differ based on distro.&lt;/em&gt;&lt;/p&gt;
+
 &lt;h2 id=&#34;some-useful-commands&#34;&gt;Some Useful Commands&lt;/h2&gt;
+
 &lt;p&gt;Before getting too caught up in creating and using containers, lets first go
 over a few useful commands that make navigating docker a bit easier.&lt;/p&gt;
+
 &lt;h4 id=&#34;docker-ps&#34;&gt;docker ps&lt;/h4&gt;
-&lt;p&gt;&lt;!-- raw HTML omitted --&gt;&lt;!-- raw HTML omitted --&gt;&lt;!-- raw HTML omitted --&gt;&lt;/p&gt;
-&lt;!-- raw HTML omitted --&gt;
+
+&lt;p&gt;&lt;a href=&#34;../../img/posts/docker-quickstart/docker-ps.png&#34;&gt;&lt;img src=&#34;../../img/posts/docker-quickstart/docker-ps.png&#34; style=&#34;max-width: 100%; float: left; margin: 0px 15px 0px 0px;&#34; alt=&#34;Docker ps&#34; /&gt;&lt;/a&gt;
+&lt;div class=&#34;caption&#34;&gt;Example of the docker ps and docker ps -a commands&lt;/div&gt;&lt;/p&gt;
+
 &lt;p&gt;Similar to how Unix-based systems have the &lt;code&gt;ps&lt;/code&gt; command to see running
 processes, docker has &lt;code&gt;docker ps&lt;/code&gt; to see created and running containers. To
 view the currently running containers, use the basic &lt;code&gt;docker ps&lt;/code&gt; command:&lt;/p&gt;
+
 &lt;p&gt;The base command however, doesn&amp;rsquo;t always tell the whole story. A system might
 have containers that &lt;em&gt;exist&lt;/em&gt; but are not running. A container may have been
 stopped, &lt;em&gt;or&lt;/em&gt; exited if it encountered an error. Containers that are stopped or
 exited &lt;em&gt;will not&lt;/em&gt; show up in the default &lt;code&gt;docker ps&lt;/code&gt; command. To see &lt;em&gt;all&lt;/em&gt; of the
 current containers on the system, run &lt;code&gt;ps&lt;/code&gt; with the &lt;code&gt;-a&lt;/code&gt; flag.&lt;/p&gt;
+
 &lt;h4 id=&#34;docker-inspect&#34;&gt;docker inspect&lt;/h4&gt;
-&lt;p&gt;&lt;!-- raw HTML omitted --&gt;&lt;!-- raw HTML omitted --&gt;&lt;!-- raw HTML omitted --&gt;&lt;/p&gt;
-&lt;!-- raw HTML omitted --&gt;
+
+&lt;p&gt;&lt;a href=&#34;../../img/posts/docker-quickstart/docker-inspect.png&#34;&gt;&lt;img src=&#34;../../img/posts/docker-quickstart/docker-inspect.png&#34; style=&#34;max-width: 100%; float: left; margin: 0px 15px 0px 0px;&#34; alt=&#34;Docker inspect examples: docker inspect web-test | grep Status and docker inspect web-test | grep IPAddress&#34; /&gt;&lt;/a&gt;
+&lt;div class=&#34;caption&#34;&gt;Using the docker inspect command to get the container&amp;rsquo;s status and IP address&lt;/div&gt;&lt;/p&gt;
+
 &lt;p&gt;Another useful command when working with docker containers is &lt;code&gt;docker inspect&lt;/code&gt;.
 The &lt;code&gt;inspect&lt;/code&gt; command will dump the xml for all the low level information of the
 container/docker object. The output contains basically &lt;em&gt;everything&lt;/em&gt; about the
 container: Full ID, time created, state, volumes, network information&amp;hellip;
 everything. It can be useful to pipe the output of &lt;code&gt;inspect&lt;/code&gt; to grep, in order
 to get specific information about the container quickly.&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;docker inspect container_name | grep IPAddress
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;For example, the above command will grab and return only the lines which contain
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;docker inspect container_name | grep IPAddress&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;For example, the above command will grab and return only the lines which contain
 &amp;ldquo;IPAddress&amp;rdquo;.&lt;/p&gt;
+
 &lt;h4 id=&#34;help&#34;&gt;help&lt;/h4&gt;
-&lt;p&gt;&lt;!-- raw HTML omitted --&gt;&lt;!-- raw HTML omitted --&gt;&lt;!-- raw HTML omitted --&gt;&lt;/p&gt;
-&lt;!-- raw HTML omitted --&gt;
+
+&lt;p&gt;&lt;a href=&#34;../../img/posts/docker-quickstart/docker-help.png&#34;&gt;&lt;img src=&#34;../../img/posts/docker-quickstart/docker-help.png&#34; style=&#34;max-width: 100%; float: left; margin: 0px 15px 0px 0px;&#34; alt=&#34;Using the docker help command flags. For Example: docker inspect --help&#34; /&gt;&lt;/a&gt;
+&lt;div class=&#34;caption&#34;&gt;Using the docker help command flags.&lt;/div&gt;&lt;/p&gt;
+
 &lt;p&gt;Last but not least, don&amp;rsquo;t forget about the &lt;code&gt;help&lt;/code&gt; command. To see all the
 available docker commands, run &lt;code&gt;docker help&lt;/code&gt;.&lt;/p&gt;
+
 &lt;p&gt;Additionally, when using each of those specific commands, (&lt;code&gt;inspect&lt;/code&gt; for
 example), a description and possible options can be shown using the &lt;code&gt;--help&lt;/code&gt;
 flag (as in &lt;code&gt;docker inspect --help&lt;/code&gt;).&lt;/p&gt;
+
 &lt;p&gt;Just as man pages can be extremely valuable when working on a Linux system,
 &lt;code&gt;help&lt;/code&gt; is just as essential when using docker.&lt;/p&gt;
+
 &lt;h2 id=&#34;images&#34;&gt;Images&lt;/h2&gt;
+
 &lt;p&gt;A docker container is created from a base &lt;em&gt;image&lt;/em&gt;. Images can be pulled down
 from &lt;a href=&#34;https://hub.docker.com/&#34;&gt;Dockerhub&lt;/a&gt;. To search docker hub from command
 line, use the &lt;code&gt;docker search&lt;/code&gt; command. For example, &lt;code&gt;docker search nginx&lt;/code&gt; will
 search for images related to nginx.&lt;/p&gt;
-&lt;p&gt;&lt;!-- raw HTML omitted --&gt;&lt;!-- raw HTML omitted --&gt;&lt;!-- raw HTML omitted --&gt;&lt;/p&gt;
-&lt;!-- raw HTML omitted --&gt;
+
+&lt;p&gt;&lt;a href=&#34;../../img/posts/docker-quickstart/docker-search.png&#34;&gt;&lt;img src=&#34;../../img/posts/docker-quickstart/docker-search.png&#34; style=&#34;max-width: 100%; float: left; margin: 0px 15px 0px 0px;&#34; alt=&#34;Docker Search output. Ex: docker search nginx&#34; /&gt;&lt;/a&gt;
+&lt;div class=&#34;caption&#34;&gt;The search output for nginx images&lt;/div&gt;&lt;/p&gt;
+
 &lt;p&gt;The search will list all of the public images in order, from most to least
 stars. When a desired image is found, pull it down using the &lt;code&gt;docker pull&lt;/code&gt;
 command. For example, &lt;code&gt;docker pull nginx&lt;/code&gt; will pull down the &lt;a href=&#34;https://hub.docker.com/_/nginx/&#34;&gt;nginx
 image&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;&lt;!-- raw HTML omitted --&gt;&lt;!-- raw HTML omitted --&gt;&lt;!-- raw HTML omitted --&gt;&lt;/p&gt;
-&lt;!-- raw HTML omitted --&gt;
+
+&lt;p&gt;&lt;a href=&#34;../../img/posts/docker-quickstart/docker-pull.png&#34;&gt;&lt;img src=&#34;../../img/posts/docker-quickstart/docker-pull.png&#34; style=&#34;max-width: 100%; width:100%; float: left; margin: 0px 15px 0px 0px;&#34; alt=&#34;Docker Pull output. Ex: docker pull nginx&#34; /&gt;&lt;/a&gt;
+&lt;div class=&#34;caption&#34;&gt;Pulling the latest nginx image&lt;/div&gt;&lt;/p&gt;
+
 &lt;p&gt;Docker will then download all the layers for the image. When the download
 completes, the image will be locally available to create docker containers
 from. To see all of the local images, use the &lt;code&gt;docker images&lt;/code&gt; command:&lt;/p&gt;
+
 &lt;p&gt;To delete an image, use the &lt;code&gt;docker images rm&lt;/code&gt; command, or my preferred, lazier
 command, &lt;code&gt;docker rmi&lt;/code&gt;:&lt;/p&gt;
-&lt;p&gt;&lt;!-- raw HTML omitted --&gt;&lt;!-- raw HTML omitted --&gt;&lt;!-- raw HTML omitted --&gt;&lt;/p&gt;
-&lt;!-- raw HTML omitted --&gt;
+
+&lt;p&gt;&lt;a href=&#34;../../img/posts/docker-quickstart/docker-images.png&#34;&gt;&lt;img src=&#34;../../img/posts/docker-quickstart/docker-images.png&#34; style=&#34;max-width: 100%; float: left; margin: 0px 15px 0px 0px;&#34; alt=&#34;docker images and docker rmi. Ex: docker images, then docker rmi test-ubuntu&#34; /&gt;&lt;/a&gt;
+&lt;div class=&#34;caption&#34;&gt;Viewing downloaded images with the docker images command, then deleting the &amp;ldquo;test-ubuntu&amp;rdquo; image using the docker rmi command&lt;/div&gt;&lt;/p&gt;
+
 &lt;p&gt;Lastly, it should be noted that custom images can be created/tailored using a
 &lt;a href=&#34;https://docs.docker.com/engine/reference/builder/#usage&#34;&gt;Dockerfile&lt;/a&gt;. With a
 Dockerfile is defined, an image can be created from it using the &lt;code&gt;docker build&lt;/code&gt;
@@ -113,101 +142,128 @@ MAINTAINER himmallright &amp;lt;ryan.himmelwright@gmail.com&lt;span style=&#34;c
 &lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;
 &lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;RUN apt-get update&lt;/span&gt;
 
-RUN apt-get install -y vim stow git tmux fish htop emacs
-
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;To build the image, run the following command in the same directory as the
+RUN apt-get install -y vim stow git tmux fish htop emacs&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;To build the image, run the following command in the same directory as the
 Dockerfile (if defining a specific file, the &lt;code&gt;-f&lt;/code&gt; flag can be used):&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;docker build -t ubuntu-base:v1 .
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;I like to use the &lt;code&gt;-t&lt;/code&gt; flag, so that I can specify a &lt;code&gt;name:tag&lt;/code&gt; for the image.
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;docker build -t ubuntu-base:v1 .&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;I like to use the &lt;code&gt;-t&lt;/code&gt; flag, so that I can specify a &lt;code&gt;name:tag&lt;/code&gt; for the image.
 This helps to make it easier to find it in the &lt;code&gt;docker images&lt;/code&gt; list.&lt;/p&gt;
+
 &lt;h2 id=&#34;creating-containers&#34;&gt;Creating Containers&lt;/h2&gt;
+
 &lt;p&gt;Docker containers can be &lt;em&gt;created&lt;/em&gt; (but not run) with the &lt;code&gt;docker create&lt;/code&gt;
 command. When creating containers, it is useful to use flags to tailor the
 details of the container. For example, the &lt;code&gt;-m&lt;/code&gt; flag can be used to create a
 memory limit, &lt;code&gt;--name&lt;/code&gt; to name the container, and so on. To create a simple nginx
 container from the image we previously pulled:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;docker create --name web-test nginx:latest
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;starting--running-containers&#34;&gt;Starting &amp;amp; Running Containers&lt;/h2&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;docker create --name web-test nginx:latest&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h2 id=&#34;starting-running-containers&#34;&gt;Starting &amp;amp; Running Containers&lt;/h2&gt;
+
 &lt;p&gt;To &lt;em&gt;start&lt;/em&gt; a container created with &lt;code&gt;docker create&lt;/code&gt;, or one that has been previously
 stopped, use the &lt;code&gt;docker start&lt;/code&gt; command. For example, to start
 the container created in the previous step:&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;docker start web-test
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Similarly, a container can be stopped with &lt;code&gt;docker stop&lt;/code&gt;, or restarted with
+&lt;pre&gt;&lt;code&gt;docker start web-test&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Similarly, a container can be stopped with &lt;code&gt;docker stop&lt;/code&gt;, or restarted with
 &lt;code&gt;docker restart&lt;/code&gt;.&lt;/p&gt;
+
 &lt;p&gt;Instead of using a &lt;code&gt;docker create&lt;/code&gt; and &lt;code&gt;docker start&lt;/code&gt; combination, &lt;code&gt;docker run&lt;/code&gt;
 can be used to both instantiate &lt;em&gt;and&lt;/em&gt; start a container. To create and start the
 &amp;ldquo;web-test&amp;rdquo; container from the previous examples:&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;docker run --name web-test -d nginx:latest
-&lt;/code&gt;&lt;/pre&gt;&lt;h4 id=&#34;cleaning-containers&#34;&gt;Cleaning containers&lt;/h4&gt;
-&lt;p&gt;&lt;!-- raw HTML omitted --&gt;&lt;!-- raw HTML omitted --&gt;&lt;!-- raw HTML omitted --&gt;&lt;/p&gt;
-&lt;!-- raw HTML omitted --&gt;
+&lt;pre&gt;&lt;code&gt;docker run --name web-test -d nginx:latest&lt;/code&gt;&lt;/pre&gt;
+&lt;h4 id=&#34;cleaning-containers&#34;&gt;Cleaning containers&lt;/h4&gt;
+
+&lt;p&gt;&lt;a href=&#34;../../img/posts/docker-quickstart/docker-rm.png&#34;&gt;&lt;img src=&#34;../../img/posts/docker-quickstart/docker-rm.png&#34; style=&#34;max-width: 100%; float: left; width: 95%;&#34; alt=&#34;Docker rm all images. Ex: docker rm `docker ps -aq`&#34; /&gt;&lt;/a&gt;
+&lt;div class=&#34;caption&#34;&gt;Removing all the older container images&lt;/div&gt;&lt;/p&gt;
+
 &lt;p&gt;Over time, old containers may build up on the system. To remove an old (but not
 running) container, use &lt;code&gt;docker rm&lt;/code&gt; with either the container name, &lt;em&gt;or&lt;/em&gt; the id.
 Note, to easily delete &lt;em&gt;all&lt;/em&gt; of the containers on the system, &lt;code&gt;docker rm&lt;/code&gt; can be
 fed the output of &lt;code&gt;docker ps -aq&lt;/code&gt;, where the &lt;code&gt;-aq&lt;/code&gt; flag returns a list of all
 the container ids.&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;docker rm &lt;span style=&#34;color:#e6db74&#34;&gt;`&lt;/span&gt;docker ps -aq&lt;span style=&#34;color:#e6db74&#34;&gt;`&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;em&gt;(Note: this doesn&amp;rsquo;t work in my Fish shell, but does in bash)&lt;/em&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;docker rm &lt;span style=&#34;color:#e6db74&#34;&gt;`&lt;/span&gt;docker ps -aq&lt;span style=&#34;color:#e6db74&#34;&gt;`&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;&lt;em&gt;(Note: this doesn&amp;rsquo;t work in my Fish shell, but does in bash)&lt;/em&gt;&lt;/p&gt;
+
 &lt;h2 id=&#34;attaching-to-containers&#34;&gt;Attaching to Containers&lt;/h2&gt;
+
 &lt;p&gt;After a container is running, it might occasionally be necessary to attach to
 it and poke around with a shell. There is the obvious way to do this,
-&lt;code&gt;docker attach&lt;/code&gt;, and a somewhat work-around way, which I prefer to use: &lt;code&gt;docker exec&lt;/code&gt;.&lt;/p&gt;
-&lt;p&gt;&lt;!-- raw HTML omitted --&gt;&lt;!-- raw HTML omitted --&gt;&lt;!-- raw HTML omitted --&gt;&lt;/p&gt;
-&lt;!-- raw HTML omitted --&gt;
+&lt;code&gt;docker attach&lt;/code&gt;, and a somewhat work-around way, which I prefer to use: &lt;code&gt;docker
+exec&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;../../img/posts/docker-quickstart/docker-attach.png&#34;&gt;&lt;img src=&#34;../../img/posts/docker-quickstart/docker-attach.png&#34; style=&#34;max-width: 100%; float: left;&#34; alt=&#34;Docker attach example&#34; /&gt;&lt;/a&gt;
+&lt;div class=&#34;caption&#34;&gt;An example using the docker attach command&lt;/div&gt;&lt;/p&gt;
+
 &lt;p&gt;The attach command works as one would expect. It allows a user to &amp;ldquo;Attach local
 standard input, output, and error streams to a running container&amp;rdquo;. This is all
 well an good, except for one issue: when exiting the attached container, the
 &lt;em&gt;container also&lt;/em&gt; exits.&lt;/p&gt;
-&lt;p&gt;&lt;!-- raw HTML omitted --&gt;&lt;!-- raw HTML omitted --&gt;&lt;!-- raw HTML omitted --&gt;&lt;/p&gt;
-&lt;!-- raw HTML omitted --&gt;
+
+&lt;p&gt;&lt;a href=&#34;../../img/posts/docker-quickstart/docker-exec-bash.png&#34;&gt;&lt;img src=&#34;../../img/posts/docker-quickstart/docker-exec-bash.png&#34; style=&#34;max-width: 100%; float: left;&#34; alt=&#34;Docker exec bash example&#34; /&gt;&lt;/a&gt;
+&lt;div class=&#34;caption&#34;&gt;An example using docker exec with a bash shell, as an alternative to docker attach&lt;/div&gt;&lt;/p&gt;
+
 &lt;p&gt;A way around this annoyance is to utilize the &lt;code&gt;docker exec&lt;/code&gt; command, which
 allows a command to be executed inside a container. Executing a shell program
 inside the container, such as &lt;code&gt;bash&lt;/code&gt;, mimics the &lt;code&gt;attach&lt;/code&gt; command, but with the
 added benefit that when exiting, only the shell exits, and &lt;em&gt;not&lt;/em&gt; the entire
 container.&lt;/p&gt;
-&lt;h2 id=&#34;ports--volumes&#34;&gt;Ports &amp;amp; Volumes&lt;/h2&gt;
+
+&lt;h2 id=&#34;ports-volumes&#34;&gt;Ports &amp;amp; Volumes&lt;/h2&gt;
+
 &lt;p&gt;As mentioned earlier, docker containers can be built and run using many specific
 commands to tailor the container and how it interfaces with the host system.
 There are two concepts in particular that I want to briefly touch on in this
 &lt;em&gt;quick start&lt;/em&gt; post. Those two items, are &lt;code&gt;ports&lt;/code&gt; and &lt;code&gt;volumes&lt;/code&gt;.&lt;/p&gt;
+
 &lt;h4 id=&#34;ports&#34;&gt;Ports&lt;/h4&gt;
-&lt;p&gt;&lt;!-- raw HTML omitted --&gt;&lt;!-- raw HTML omitted --&gt;&lt;!-- raw HTML omitted --&gt;&lt;/p&gt;
-&lt;!-- raw HTML omitted --&gt;
+
+&lt;p&gt;&lt;a href=&#34;../../img/posts/docker-quickstart/nginx-firefox-port.png&#34;&gt;&lt;img src=&#34;../../img/posts/docker-quickstart/nginx-firefox-port.png&#34; style=&#34;max-width: 100%; float: center;&#34; alt=&#34;Containerized nginx server connected to through localhost&#34; /&gt;&lt;/a&gt;
+&lt;div class=&#34;caption&#34;&gt;Container ports can be forwarded to the host&amp;rsquo;s ports.&lt;/div&gt;&lt;/p&gt;
+
 &lt;p&gt;While it is nice to spin up a web server inside a docker container, it isn&amp;rsquo;t
 always very useful to only have it available to the host machine. By using the
 &lt;code&gt;-p&lt;/code&gt; flag when running a container, the container&amp;rsquo;s ports can be forwarded to
 ports on the host system.&lt;/p&gt;
-&lt;p&gt;&lt;!-- raw HTML omitted --&gt;&lt;!-- raw HTML omitted --&gt;&lt;!-- raw HTML omitted --&gt;&lt;/p&gt;
-&lt;!-- raw HTML omitted --&gt;
+
+&lt;p&gt;&lt;a href=&#34;../../img/posts/docker-quickstart/docker-port.png&#34;&gt;&lt;img src=&#34;../../img/posts/docker-quickstart/docker-port.png&#34; style=&#34;max-width: 100%; float: center;&#34; alt=&#34;Creating an nginx container, forwarding port 80 to he host&#39;s 8081&#34; /&gt;&lt;/a&gt;
+&lt;div class=&#34;caption&#34;&gt;Creating an nginx container, forwarding it&amp;rsquo;s port 80 to the host&amp;rsquo;s port 8081&lt;/div&gt;&lt;/p&gt;
+
 &lt;p&gt;Using &lt;code&gt;-p&lt;/code&gt; with just a single number, as in &lt;code&gt;-p 8080&lt;/code&gt;, will declare that port of
 the container to be exposed. To forward exposed ports to the host, use &lt;em&gt;two&lt;/em&gt;
 port numbers, separated with a &lt;code&gt;:&lt;/code&gt;. The first number is the host port to bind
 to, and the second is the container port to expose and forward.&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;docker run -itd --name webtest -p 8081:80 nginx:latest
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;The above example, a nginx container is started with port 80 forwarded to port
+&lt;pre&gt;&lt;code&gt;docker run -itd --name webtest -p 8081:80 nginx:latest&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;The above example, a nginx container is started with port 80 forwarded to port
 8081 on the host. As a result, any computer connecting to port 8081 of the host
 machine will be directed to the nginx web server inside the container.&lt;/p&gt;
+
 &lt;h4 id=&#34;volumes&#34;&gt;Volumes&lt;/h4&gt;
-&lt;p&gt;&lt;!-- raw HTML omitted --&gt;&lt;!-- raw HTML omitted --&gt;&lt;!-- raw HTML omitted --&gt;&lt;/p&gt;
-&lt;!-- raw HTML omitted --&gt;
+
+&lt;p&gt;&lt;a href=&#34;../../img/posts/docker-quickstart/nginx-firefox-volume.png&#34;&gt;&lt;img src=&#34;../../img/posts/docker-quickstart/nginx-firefox-volume.png&#34; style=&#34;max-width: 100%; float: center;&#34; alt=&#34;Nginx container with website pages in a volume from the host.&#34; /&gt;&lt;/a&gt;
+&lt;div class=&#34;caption&#34;&gt;Containers can attach volumes from the host system for persistent data.&lt;/div&gt;&lt;/p&gt;
+
 &lt;p&gt;Lastly, by design docker containers are mean to be expendable. They are run, and then
 disposed. It should not be assumed that &lt;em&gt;any&lt;/em&gt; data inside the container will
 be preserved by default. That is, unless
 &lt;a href=&#34;https://docs.docker.com/storage/volumes/&#34;&gt;volumes&lt;/a&gt; are used.&lt;/p&gt;
-&lt;p&gt;&lt;!-- raw HTML omitted --&gt;&lt;!-- raw HTML omitted --&gt;&lt;!-- raw HTML omitted --&gt;&lt;/p&gt;
-&lt;!-- raw HTML omitted --&gt;
+
+&lt;p&gt;&lt;a href=&#34;../../img/posts/docker-quickstart/docker-volume.png&#34;&gt;&lt;img src=&#34;../../img/posts/docker-quickstart/docker-volume.png&#34; style=&#34;max-width: 100%; float: center;&#34; alt=&#34;Creating an nginx container, forwarding port 80 to he host&#39;s 8081&#34; /&gt;&lt;/a&gt;
+&lt;div class=&#34;caption&#34;&gt;Creating an nginx container, forwarding it&amp;rsquo;s port 80 to the host&amp;rsquo;s port 8081&lt;/div&gt;&lt;/p&gt;
+
 &lt;p&gt;Docker volumes are the preferred mechanism for preserving data across container
 runs, and are specified using the &lt;code&gt;-v&lt;/code&gt; flag. Similar to setting ports, volumes
 can be created by providing either a single path, or two separated by a &lt;code&gt;:&lt;/code&gt;.
 When a single path is provided, as in &lt;code&gt;-v /Data&lt;/code&gt;, docker will create a volume
 and bind it to that location within the container. Two locations can be provided
 to bind a directory on the host system, to the volume inside to container.&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;docker run -d --name testsite -v /home/ryan/testsite/:/usr/share/nginx/html nginx:latest
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;In the above command, for example, &lt;code&gt;-v /home/ryan/testsite/:/usr/share/nginx/html&lt;/code&gt; will use the &lt;code&gt;/home/ryan/testsite/&lt;/code&gt;
+&lt;pre&gt;&lt;code&gt;docker run -d --name testsite -v /home/ryan/testsite/:/usr/share/nginx/html nginx:latest&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;In the above command, for example, &lt;code&gt;-v
+/home/ryan/testsite/:/usr/share/nginx/html&lt;/code&gt; will use the &lt;code&gt;/home/ryan/testsite/&lt;/code&gt;
 directory of the host system, as a volume located at &lt;code&gt;/usr/share/nginx/html&lt;/code&gt;
 inside the container. This means that the container will server the website
 files, which are located (and can be easily edited), on the host system.&lt;/p&gt;
+
 &lt;h2 id=&#34;in-conclusion&#34;&gt;In Conclusion&lt;/h2&gt;
+
 &lt;p&gt;So, this has been&amp;hellip; a rather long post. However, when it comes to Docker, this
 &lt;em&gt;really is just the tip of the iceberg&lt;/em&gt;. With any luck though, you should now
 know the basic to at &lt;em&gt;least&lt;/em&gt; get &lt;em&gt;started&lt;/em&gt;. So&amp;hellip; go ahead and have some fun!.&lt;/p&gt;</description>
@@ -220,16 +276,30 @@ know the basic to at &lt;em&gt;least&lt;/em&gt; get &lt;em&gt;started&lt;/em&gt;
       
       <guid>http://ryan.himmelwright.net/post/back-to-solus/</guid>
       <description>&lt;p&gt;Well, that was faster than I expected. This past weekend, I wiped the Fedora installation on my main computer, and replaced it with Solus. My Fedora install broke, and I needed to use a Fedora Live CD to fix it. I thought that if I had to use a live CD to fix the issue, I might as well just do a clean install. With the idea of a clean install in my head&amp;hellip; I thought (possibly influenced by my recent &lt;a href=&#34;../../post/dabbling-with-go/#motivation&#34;&gt;motivation&lt;/a&gt; to play with Go), that I might as well do the clean install with &lt;a href=&#34;https://getsol.us/&#34;&gt;Solus&lt;/a&gt;&amp;hellip;&lt;/p&gt;
+
 &lt;h2 id=&#34;nvidia-issues&#34;&gt;Nvidia Issues&lt;/h2&gt;
-&lt;!-- raw HTML omitted --&gt;
+
+&lt;div class=&#34;video-container&#34;&gt;
+&lt;iframe width=&#34;100%&#34; height=&#34;360&#34; src=&#34;https://www.youtube.com/embed/IVpOyKCNZYw?start=101&#34; frameborder=&#34;0&#34; allowfullscreen&gt;&lt;/iframe&gt;
+&lt;/div&gt;
+
 &lt;p&gt;&lt;em&gt;Linus Torvalds famously flipped off Nvidia during a Q&amp;amp;A&lt;/em&gt;&lt;/p&gt;
+
 &lt;p&gt;Basically, what I think happened was that my Nvidia drivers got messed up during an update. When I rebooted my computer, my screens were black. This happened no matter which kernel I booted into from Grub. I assumed it was a graphics problem and preceded to switch to another tty to login and fix the problem. I was able to get to a CLI login screen (with the normal &lt;code&gt;user:&lt;/code&gt; prompt) and tried login in. However, after typing in my user name and hitting enter, instead of being promoted for a password, I received an &amp;ldquo;Error Logging In&amp;rdquo; message. So, I tried the same thing with the root user account. Same thing. After typing in a user name, it yelled at me. There was no way to log in.&lt;/p&gt;
+
 &lt;p&gt;I jumped into the IRC chat and started asking around for advice. As always, everyone was very helpful and tried to help me troubleshoot. They shared my bewilderment. We came to the conclusion that it must of been something with the Nvidia drivers. I was told that it is common to have issues when installing the drivers from Nvidia&amp;rsquo;s web site instead of the &lt;a href=&#34;https://rpmfusion.org/&#34;&gt;RPM Fusion Repos&lt;/a&gt; (I intended to install from the RPM fusion repos, but I went to the nvidia site to find out what version to should use&amp;hellip; and then just downloaded it from there. My bad :P).&lt;/p&gt;
+
 &lt;p&gt;Anyway, I quickly realized that at the very least, I would have to boot up and log into a Live CD to fix the problem. As stated in the intro paragraph, while waiting for the ISO image to download I thought that if I have to load up the CD, I might as well just do a clean Fedora 26 install. A couple minutes later as I was booting up the Live CD, I through that as long as I was reinstalling my OS&amp;hellip; l should consider installing&amp;hellip; Solus.&lt;/p&gt;
+
 &lt;h2 id=&#34;installed-solus&#34;&gt;Installed Solus&lt;/h2&gt;
-&lt;!-- raw HTML omitted --&gt;
+
+&lt;p&gt;&lt;img alt=&#34;Installing Solus&#34; src=&#34;../../img/posts/back-to-solus/install.png&#34; style=&#34;max-width: 100%;&#34;/&gt;
+&lt;em&gt;Installing Solus&lt;/em&gt;&lt;/p&gt;
+
 &lt;p&gt;With the Fedora live environment all booted and ready, I started downloading the latest Solus ISO (Budgie) on my other laptop. Once the ISO image was mounted to a drive, I booted it up and started installing Solus. After the install, I immediately updated because I knew there have been a TON of updates since the last ISO snapshot (mid-April). When I rebooted, I absolutely loved what I saw. It is amazing how much Solus and Budgie have improved, even during my short distro-hopping vacation.&lt;/p&gt;
+
 &lt;p&gt;Looking at my post history, it may appear as though I used Fedora for a few days, became fed up with it, and came running back to Solus. That is not entirely true. The reality is that I sat on writing my &lt;a href=&#34;../../post/solus-to-fedora/&#34;&gt;Fedora post&lt;/a&gt; for a long time. I used Fedora for about a month, and it was generally a great experience. If it didn&amp;rsquo;t break, I probably would have stayed for a bit longer. When considering a new install though, I realized that I had missed Solus.&lt;/p&gt;
+
 &lt;p&gt;As of now, my plan is to keep using Solus, at least on my main computer. I am also hoping to get more involved with the project, and start packing up some software again. Maybe I can even help with some debugging and development. We shall see&amp;hellip;&lt;/p&gt;</description>
     </item>
     
@@ -240,49 +310,66 @@ know the basic to at &lt;em&gt;least&lt;/em&gt; get &lt;em&gt;started&lt;/em&gt;
       
       <guid>http://ryan.himmelwright.net/post/solus-to-fedora/</guid>
       <description>&lt;p&gt;For awhile, I have been debating the idea of switching back to Fedora (from Solus). At least on my &lt;a href=&#34;../../pages/homelab/#alakazam&#34;&gt;main computer&lt;/a&gt;. First, let me state this right up front: I am still &lt;em&gt;very&lt;/em&gt; satisfied with Solus. I think it is one of the best current Linux distros, and I want to still contribute to the project. However, there are a few reasons why Solus isn&amp;rsquo;t the best fit for my needs &lt;em&gt;right now&lt;/em&gt;, and I will highlight them below.&lt;/p&gt;
+
 &lt;h3 id=&#34;why-switch&#34;&gt;Why Switch&lt;/h3&gt;
-&lt;!-- raw HTML omitted --&gt;
+
+&lt;p&gt;&lt;center&gt;
+&lt;img alt=&#34;Solus and Fedora Logos&#34; src=&#34;../../img/posts/solus-to-fedora/logos.png&#34;  style=&#34;max-width: 85%;&#34;/&gt;
+&lt;/center&gt;
+&lt;em&gt;The Solus (Left) and Fedora (right) Project Logos&lt;/em&gt;&lt;/p&gt;
+
 &lt;p&gt;The first phrase stated on the &lt;a href=&#34;https://getsol.us&#34;&gt;Solus Project homepage&lt;/a&gt; is &amp;ldquo;Solus is an operating system that is designed for &lt;strong&gt;home computing&lt;/strong&gt;.&amp;rdquo; I find this to be true, and Solus does a great job at it. The Linux community needs a few good, focused, distros. While I have been using Solus for my &amp;ldquo;&lt;em&gt;home&lt;/em&gt;&amp;rdquo; computing, the computing tasks I&amp;rsquo;ve focused on recently do not fall into the category of standard &lt;em&gt;home computing&lt;/em&gt; use. Recently, my main top computing activities and goals are:&lt;/p&gt;
+
 &lt;ul&gt;
 &lt;li&gt;Writing (okay&amp;hellip; but still)&lt;/li&gt;
 &lt;li&gt;Running all sorts of VMs&lt;/li&gt;
 &lt;li&gt;Trying various Server Technologies
+
 &lt;ul&gt;
 &lt;li&gt;ZFS&lt;/li&gt;
 &lt;li&gt;KVM&lt;/li&gt;
 &lt;li&gt;Containerization Technologies (LXC, Docker, &amp;hellip;)&lt;/li&gt;
 &lt;li&gt;Ansible and other automation tools&lt;/li&gt;
 &lt;li&gt;Etc.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
 &lt;li&gt;Learning about Clustering
+
 &lt;ul&gt;
 &lt;li&gt;OpenMP&lt;/li&gt;
 &lt;li&gt;High Availability&lt;/li&gt;
 &lt;li&gt;Distributed File systems&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
 &lt;li&gt;Trying to get involved with some other Open Source Projects
+
 &lt;ul&gt;
 &lt;li&gt;Fedora (Infrastructure, Dev)&lt;/li&gt;
 &lt;li&gt;NixOS&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
 &lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
+
 &lt;p&gt;As you can see, many of the above items are not desktop based, but really
 &lt;em&gt;server&lt;/em&gt; based operations. Solus is &lt;em&gt;not&lt;/em&gt; a server distribution, as it doesn&amp;rsquo;t
 &lt;em&gt;try&lt;/em&gt; to be one. Which is a good thing. It is focused on its audience. I
 just happen to not be in that audience at the moment.&lt;/p&gt;
+
 &lt;p&gt;Additionally, one of my goals for the near future is to transform my long-time Proxmox server into a &lt;a href=&#34;https://www.centos.org/&#34;&gt;CentOS&lt;/a&gt; box. Using Fedora on my main workstation does help me get accustom to that environment. It also allows me to more accurately test out ideas before I plan the big move.&lt;/p&gt;
+
 &lt;p&gt;Lastly, I had been eyeing up the Plasma desktop, and wanted to try that out again. At the time of writing this post, Solus doesn&amp;rsquo;t fully support the Plasma desktop (yet). However, Fedora &lt;em&gt;does&lt;/em&gt; have a &lt;a href=&#34;https://spins.fedoraproject.org/kde/&#34;&gt;KDE Plasma Desktop Spin&lt;/a&gt;.&lt;/p&gt;
+
 &lt;h3 id=&#34;the-switch&#34;&gt;The Switch&lt;/h3&gt;
-&lt;!-- raw HTML omitted --&gt;
+
+&lt;p&gt;&lt;center&gt;
+&lt;img alt=&#34;Solus and Fedora Logos&#34; src=&#34;../../img/posts/solus-to-fedora/fedora25.png&#34;  style=&#34;max-width: 100%;&#34;/&gt;
+&lt;/center&gt;
+&lt;em&gt;Screenfetch on my new Fedora Install&lt;/em&gt;&lt;/p&gt;
+
 &lt;p&gt;I eventually (and somewhat sporadically), made the switch to Fedora. I switched
 the week before the 26 release, so I decided to start with 25, and then upgrade
 later (although I did test out 26 on my other laptop). This let me ensure that
 the 26 issues were ironed out before upgrading. I also got to test out the &lt;code&gt;dnf&lt;/code&gt;
 system upgrade process. I recorded &lt;em&gt;post-switch&lt;/em&gt; notes during the last few weeks
 to document how everything went.&lt;/p&gt;
+
 &lt;blockquote&gt;
 &lt;p&gt;&amp;ldquo;Well&amp;hellip; I did it. I switched to Fedora on Alakazam yesterday. I went with the
 Fedora 25 KDE spin and did all of the hoops to get that up and going. Not only
@@ -290,42 +377,57 @@ is it taking some time to get used to Fedora again, but I am needing to
 reacquaint myself with the KDE environment&amp;hellip; it does seem different that other
 Plasma setups I&amp;rsquo;ve used in the past&amp;hellip; But I like it.&amp;rdquo;&lt;/p&gt;
 &lt;/blockquote&gt;
+
 &lt;p&gt;I got used to it in no time:&lt;/p&gt;
+
 &lt;blockquote&gt;
 &lt;p&gt;Alakazam is doing well on Fedora. I&amp;rsquo;ve been enjoying it and think I will stay on
 it.&lt;/p&gt;
 &lt;/blockquote&gt;
+
 &lt;h3 id=&#34;updates&#34;&gt;Updates&lt;/h3&gt;
+
 &lt;p&gt;I ran some updates that I thought &lt;em&gt;might&lt;/em&gt; be problematic, based
 on &lt;a href=&#34;../../post/back-on-arch/#fedora&#34;&gt;previous issues&lt;/a&gt; I&amp;rsquo;ve encountered with Fedora. I
 made sure to note the results as well. The first notable update was from the
 first time I updated the kernel, and the second was  upgrading from
 Fedora 25 to 26. Both updates went very smoothly without any issues:&lt;/p&gt;
+
 &lt;h4 id=&#34;kernel-upgrade&#34;&gt;Kernel Upgrade&lt;/h4&gt;
+
 &lt;blockquote&gt;
 &lt;p&gt;So I am about to do my first Kernel update since being on Fedora again (on
 Alakazam). We&amp;rsquo;ll see how the video drivers respond&amp;hellip; To note, I am still on 25
 so it hopefully won&amp;rsquo;t be too bad&amp;hellip;&lt;/p&gt;
 &lt;/blockquote&gt;
+
 &lt;p&gt;&lt;em&gt;&amp;hellip;reboot&amp;hellip;&lt;/em&gt;&lt;/p&gt;
+
 &lt;blockquote&gt;
 &lt;p&gt;No issues whatsoever :)&lt;/p&gt;
 &lt;/blockquote&gt;
+
 &lt;h4 id=&#34;upgrade-to-fedora-26&#34;&gt;Upgrade to Fedora 26&lt;/h4&gt;
-&lt;!-- raw HTML omitted --&gt;
+
+&lt;p&gt;&lt;center&gt;
+&lt;a href=&#34;../../img/posts/solus-to-fedora/fedora26-upgrade.png&#34;&gt;&lt;img alt=&#34;Solus and Fedora Logos&#34; src=&#34;../../img/posts/solus-to-fedora/fedora26-upgrade.png&#34; style=&#34;max-width: 100%;&#34;/&gt;&lt;/a&gt;
+&lt;/center&gt;
+&lt;em&gt;I upgraded my Fedora 25 Plasma Install to Fedora 26&lt;/em&gt;&lt;/p&gt;
+
 &lt;p&gt;Other than some odd issues with the GUI tool, the upgrade from 25 to 26 was
 smooth and uneventful.&lt;/p&gt;
+
 &lt;blockquote&gt;
 &lt;p&gt;I just upgraded Alakazam from Fedora 25 KDE, to Fedora 26 this morning. I couldn&amp;rsquo;t really get the
 graphical installer to start, but that could be because I have several desktop environments setup
 (Plasma &amp;amp; Gnome), so it may have been confused (I was using the Gnome Software App in Plasma&amp;hellip;)&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;blockquote&gt;
+
 &lt;p&gt;I just did the upgrade using the (command line) dnf upgrade tool, like I normally use, and it worked
 wonderfully. It even looks like my nvidia drivers stayed and my monitors were configured correctly
 after rebooting. The only difference is I don&amp;rsquo;t seem to have the same Plasma animations I had
 before, but that is fine, and likely part of the update.&lt;/p&gt;
 &lt;/blockquote&gt;
+
 &lt;p&gt;So that it. Those are my reasons for switching (for now), and the results of my
 switch. I am still happy with Fedora, at least on Alakazam, and will likely
 remain on it until I have a convincing reason to leave.&lt;/p&gt;</description>
@@ -338,73 +440,114 @@ remain on it until I have a convincing reason to leave.&lt;/p&gt;</description>
       
       <guid>http://ryan.himmelwright.net/post/started-using-i3blocks/</guid>
       <description>&lt;p&gt;The last couple of weeks I have shifted back to using the i3 window mangers. When I fired it up, my fingers danced across the keyboard, remembering all of the personalized keybindings I have cultivated in my i3 configuration over the years. It is a simple, beautiful setup&amp;hellip; well, beautiful minus one of the components. My i3status bar was looking rather bland and dated, especially compared some of the i3 setups posted by all the cool kids over at &lt;a href=&#34;https://www.reddit.com/r/unixporn/&#34;&gt;/r/unixporn&lt;/a&gt;. I decided it was time for a refresh.&lt;/p&gt;
+
 &lt;h2 id=&#34;i3status&#34;&gt;i3status&lt;/h2&gt;
-&lt;!-- raw HTML omitted --&gt;
+
+&lt;p&gt;&lt;img alt=&#34;One of my simple i3status setups&#34; src=&#34;../../img/posts/starting-i3/i3status.png&#34; style=&#34;max-width: 100%;&#34;/&gt;
+&lt;div id=&#34;caption&#34;&gt;One of my simple i3status setups&lt;/div&gt;&lt;/p&gt;
+
 &lt;p&gt;When I first configured i3 several years ago, I used i3status because it was easy to use with i3 and did everything by default. Over time, I learned how to create and modify &lt;a href=&#34;https://github.com/himmAllRight/dotfiles/blob/master/i3/.config/i3/i3status.conf&#34;&gt;my own .i3status.conf&lt;/a&gt; so that I could get it to play nice with un-standerd configurations (ex: &lt;code&gt;/Data&lt;/code&gt; partitions and such). While i3status served me well for many years, using the same-old setup has become boring. I started noticing several other nice looking status bar tools being used in i3 setups, and wanted to try them out.&lt;/p&gt;
+
 &lt;h2 id=&#34;polybar&#34;&gt;Polybar&lt;/h2&gt;
-&lt;!-- raw HTML omitted --&gt;
+
+&lt;p&gt;&lt;img alt=&#34;The example polybar&#34; src=&#34;../../img/posts/starting-i3/polybar.png&#34; style=&#34;max-width: 100%;&#34;/&gt;
+&lt;div id=&#34;caption&#34;&gt;The example polybar&lt;/div&gt;&lt;/p&gt;
+
 &lt;p&gt;The first bar I saw and tried was &lt;a href=&#34;https://github.com/jaagr/polybar&#34;&gt;polybar&lt;/a&gt;. I started with it because some of the examples look awesome. It looks very modern and has an infinite number of features. I set it up and was able to use the example bar just fine. However, when I started to customize my own, I started to run into a few issues. The biggest issue was polybar not detecting my work-space names, along with other elements. Additionally, due to the support for several window managers, the example configuration file seemed cluttered, and I was never sure what I could edit, and what I should delete. After some frustration, I decided put it aside for now. I might come back to it one day when I&amp;rsquo;m bored.&lt;/p&gt;
+
 &lt;h2 id=&#34;i3blocks&#34;&gt;i3blocks&lt;/h2&gt;
+
 &lt;p&gt;Next, I learned of &lt;a href=&#34;https://github.com/vivien/i3blocks&#34;&gt;i3blocks&lt;/a&gt;. It appeared to have everything I wanted in a status bar, yet remained simple, respecting the &lt;a href=&#34;https://i3wm.org/docs/i3bar-protocol.html&#34;&gt;i3bar protocol&lt;/a&gt;. So I gave it a whirl.&lt;/p&gt;
+
 &lt;h3 id=&#34;downloading-from-the-repos&#34;&gt;Downloading from the Repos&lt;/h3&gt;
+
 &lt;p&gt;Just like installing any other package on Linux, I decided to first check to see it it was in the Solus Repos:&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;sudo eopkg sr i3block
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;It was. So, I installed it (&lt;code&gt;sudo eopkg it i3blocks&lt;/code&gt;) and started learning how to setup my configuration.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;sudo eopkg sr i3block&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;It was. So, I installed it (&lt;code&gt;sudo eopkg it i3blocks&lt;/code&gt;) and started learning how to setup my configuration.&lt;/p&gt;
+
 &lt;h3 id=&#34;fonts&#34;&gt;Fonts&lt;/h3&gt;
-&lt;!-- raw HTML omitted --&gt;
+
+&lt;p&gt;&lt;img alt=&#34;A Very Small Sampling of the Awesome Fonts&#34; src=&#34;../../img/posts/starting-i3/awesome-font.png&#34; style=&#34;max-width: 100%;&#34;/&gt;
+&lt;div id=&#34;caption&#34;&gt;A &lt;em&gt;Very Small&lt;/em&gt; Sampling of the Awesome Fonts&lt;/div&gt;&lt;/p&gt;
+
 &lt;p&gt;The first hurdle I came across when first launching i3blocks was that I did not have all the fonts used in the default configuration installed. I temporarily removed the special fonts from the config, just so I could check that everything was working. But what&amp;rsquo;s the fun in that? One of the biggest reasons I wanted to redo my bar was to have cool modern icon fonts! So, I found the &lt;a href=&#34;http://fontawesome.io/&#34;&gt;font awesome&lt;/a&gt; package in the Solus repos and installed it.&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;sudo eopkg it font-awesome-ttf
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;With the awesome fonts at my disposal, I had a plethora of icons to use. So I went through and picked out icons for each of the work-space tabs and status markers.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;sudo eopkg it font-awesome-ttf&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;With the awesome fonts at my disposal, I had a plethora of icons to use. So I went through and picked out icons for each of the work-space tabs and status markers.&lt;/p&gt;
+
 &lt;h3 id=&#34;finding-git-repos&#34;&gt;Finding Git Repos&lt;/h3&gt;
-&lt;!-- raw HTML omitted --&gt;
+
+&lt;p&gt;&lt;img alt=&#34;Example of Modules in new i3-block repo&#34; src=&#34;../../img/posts/starting-i3/i3block-new-repo-examples.png&#34; style=&#34;max-width: 100%;&#34;/&gt;
+&lt;div id=&#34;caption&#34;&gt;Example of Modules in new i3-block repo&lt;/div&gt;&lt;/p&gt;
+
 &lt;p&gt;While researching how to configure i3blocks, I started encountering several different GitHub repos and forks of the project. Some forks seemed to have additional modules that my repo version didn&amp;rsquo;t. I downloaded and built &lt;a href=&#34;https://github.com/Anachron/i3blocks&#34;&gt;this one&lt;/a&gt; to try out. I then configured i3 to point to the new build instead, and got started setting up my own blocks.&lt;/p&gt;
+
 &lt;h3 id=&#34;forking-my-own-for-solus-tweaks&#34;&gt;Forking my own for Solus Tweaks&lt;/h3&gt;
+
 &lt;p&gt;As I was configuring the individual blocks, I noticed that many of them didn&amp;rsquo;t work by default on my computers. I dug deeper by opening up and peeking at the actual bash scripts blocks refer to. I noticed that many of them were trying to query data from applications that are &lt;em&gt;not&lt;/em&gt; used in Solus. For example, the &lt;code&gt;battery&lt;/code&gt; block didn&amp;rsquo;t work for me because it relied on &lt;code&gt;acpi&lt;/code&gt;, which, while often used in Arch Linux for battery information (I use it myself when on arch) is not packaged in Solus. Instead, Solus relies on &lt;code&gt;upower&lt;/code&gt;. To fix my issues, I cobbled together my own &lt;code&gt;battery&lt;/code&gt; bash script, that queried battery information using &lt;code&gt;upower&lt;/code&gt; instead. Note, the &lt;code&gt;BATTERY_ICON&lt;/code&gt; uses the battery fonts (which likely won&amp;rsquo;t show in the browser). Unless it is charging&amp;hellip; then it uses a lightning bolt :) .&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;#!/bin/bash
 
 BATTERY=0
-BATTERY_STATE=$(echo &amp;quot;${BATTERY_INFO}&amp;quot; | upower -i $(upower -e | grep &#39;BAT&#39;) | grep -E &amp;quot;state|to\ full&amp;quot; | awk &#39;{print $2}&#39;)
-BATTERY_POWER=$(echo &amp;quot;${BATTERY_INFO}&amp;quot; | upower -i $(upower -e | grep &#39;BAT&#39;) | grep -E &amp;quot;percentage&amp;quot; | awk &#39;{print $2}&#39; | tr -d &#39;%&#39;)
+BATTERY_STATE=$(echo &amp;#34;${BATTERY_INFO}&amp;#34; | upower -i $(upower -e | grep &amp;#39;BAT&amp;#39;) | grep -E &amp;#34;state|to\ full&amp;#34; | awk &amp;#39;{print $2}&amp;#39;)
+BATTERY_POWER=$(echo &amp;#34;${BATTERY_INFO}&amp;#34; | upower -i $(upower -e | grep &amp;#39;BAT&amp;#39;) | grep -E &amp;#34;percentage&amp;#34; | awk &amp;#39;{print $2}&amp;#39; | tr -d &amp;#39;%&amp;#39;)
 URGENT_VALUE=10
 
-if [[ &amp;quot;${BATTERY_POWER}&amp;quot; -gt 87 ]]; then
-    BATTERY_ICON=&amp;quot;&amp;quot;
-elif [[ &amp;quot;${BATTERY_POWER}&amp;quot; -gt 63 ]]; then
-     BATTERY_ICON=&amp;quot;&amp;quot;
-elif [[ &amp;quot;${BATTERY_POWER}&amp;quot; -gt 38 ]]; then
-     BATTERY_ICON=&amp;quot;&amp;quot;
-elif [[ &amp;quot;${BATTERY_POWER}&amp;quot; -gt 13 ]]; then
-     BATTERY_ICON=&amp;quot;&amp;quot;
-elif [[ &amp;quot;${BATTERY_POWER}&amp;quot; -le 13 ]]; then
-     BATTERY_ICON=&amp;quot;&amp;quot;
+if [[ &amp;#34;${BATTERY_POWER}&amp;#34; -gt 87 ]]; then
+    BATTERY_ICON=&amp;#34;&amp;#34;
+elif [[ &amp;#34;${BATTERY_POWER}&amp;#34; -gt 63 ]]; then
+     BATTERY_ICON=&amp;#34;&amp;#34;
+elif [[ &amp;#34;${BATTERY_POWER}&amp;#34; -gt 38 ]]; then
+     BATTERY_ICON=&amp;#34;&amp;#34;
+elif [[ &amp;#34;${BATTERY_POWER}&amp;#34; -gt 13 ]]; then
+     BATTERY_ICON=&amp;#34;&amp;#34;
+elif [[ &amp;#34;${BATTERY_POWER}&amp;#34; -le 13 ]]; then
+     BATTERY_ICON=&amp;#34;&amp;#34;
 else
-    BATTERY_ICON=&amp;quot;&amp;quot;
+    BATTERY_ICON=&amp;#34;&amp;#34;
 fi
 
 
-if [[ &amp;quot;${BATTERY_STATE}&amp;quot; = &amp;quot;discharging&amp;quot; ]]; then
-    echo &amp;quot;${BATTERY_ICON} ${BATTERY_POWER}%&amp;quot;
-    echo &amp;quot;${BATTERY_ICON} ${BATTERY_POWER}%&amp;quot;
-    echo &amp;quot;&amp;quot;
+if [[ &amp;#34;${BATTERY_STATE}&amp;#34; = &amp;#34;discharging&amp;#34; ]]; then
+    echo &amp;#34;${BATTERY_ICON} ${BATTERY_POWER}%&amp;#34;
+    echo &amp;#34;${BATTERY_ICON} ${BATTERY_POWER}%&amp;#34;
+    echo &amp;#34;&amp;#34;
 else
-    echo &amp;quot; ${BATTERY_POWER}%&amp;quot;
-    echo &amp;quot; ${BATTERY_POWER}%&amp;quot;
-    echo &amp;quot;&amp;quot;
+    echo &amp;#34; ${BATTERY_POWER}%&amp;#34;
+    echo &amp;#34; ${BATTERY_POWER}%&amp;#34;
+    echo &amp;#34;&amp;#34;
 fi
 
-if [[ &amp;quot;${BATTERY_POWER}&amp;quot; -le &amp;quot;${URGENT_VALUE}&amp;quot; ]]; then
+if [[ &amp;#34;${BATTERY_POWER}&amp;#34; -le &amp;#34;${URGENT_VALUE}&amp;#34; ]]; then
   exit 33
-fi
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Over the past few weeks, it seems to work well enough. As I continued to &lt;em&gt;tweak&lt;/em&gt;, or downright &lt;em&gt;create&lt;/em&gt; blocks to work well in Solus, I eventually decided that it might be a good idea to just &lt;a href=&#34;https://github.com/himmAllRight/i3blocks&#34;&gt;create my own fork&lt;/a&gt; of the repo. This way, I can have my own i3blocks repo that works well with Solus. I noticed that the implementation of &lt;code&gt;i3blocks&lt;/code&gt; found in the Solus repos is also using non-Solus items for it&amp;rsquo;s scripts (ex: acpi for the battery). Maybe one of these days I&amp;rsquo;ll jump into irc and see how people feel about swapping in mine instead (or at least one that works better in Solus)&amp;hellip;&lt;/p&gt;
-&lt;h3 id=&#34;color-update-for-i3--rofi&#34;&gt;Color Update for i3 &amp;amp; rofi&lt;/h3&gt;
-&lt;!-- raw HTML omitted --&gt;
+fi&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Over the past few weeks, it seems to work well enough. As I continued to &lt;em&gt;tweak&lt;/em&gt;, or downright &lt;em&gt;create&lt;/em&gt; blocks to work well in Solus, I eventually decided that it might be a good idea to just &lt;a href=&#34;https://github.com/himmAllRight/i3blocks&#34;&gt;create my own fork&lt;/a&gt; of the repo. This way, I can have my own i3blocks repo that works well with Solus. I noticed that the implementation of &lt;code&gt;i3blocks&lt;/code&gt; found in the Solus repos is also using non-Solus items for it&amp;rsquo;s scripts (ex: acpi for the battery). Maybe one of these days I&amp;rsquo;ll jump into irc and see how people feel about swapping in mine instead (or at least one that works better in Solus)&amp;hellip;&lt;/p&gt;
+
+&lt;h3 id=&#34;color-update-for-i3-rofi&#34;&gt;Color Update for i3 &amp;amp; rofi&lt;/h3&gt;
+
+&lt;p&gt;&lt;img alt=&#34;New Color Scheme for rofi launcher&#34; src=&#34;../../img/posts/starting-i3/rofi-run.png&#34; style=&#34;max-width: 100%;&#34;/&gt;
+&lt;div id=&#34;caption&#34;&gt;New color scheme for rofi launcher&lt;/div&gt;&lt;/p&gt;
+
 &lt;p&gt;When I started using i3 several years ago, I used &lt;a href=&#34;http://tools.suckless.org/dmenu/&#34;&gt;dmenu&lt;/a&gt; as my launcher (it&amp;rsquo;s the launcher used in &lt;a href=&#34;http://dwm.suckless.org/&#34;&gt;dwm&lt;/a&gt;, another tiling window manager I used to use). I eventually switched to rofi after seeing it used in some very nice window manager setups (sound familiar?). However, I always used the plain default theme and never bothered to improve it. With all the work I did making i3bars look nice, I thought I should at least make rofi match. Making the color theme wasn&amp;rsquo;t nearly as hard as I anticipated it to be. That&amp;rsquo;s mostly because I found and used the rofi theme generator.&lt;/p&gt;
-&lt;!-- raw HTML omitted --&gt;
+
+&lt;p&gt;&lt;center&gt;
+&lt;img alt=&#34;New rofi window switcher&#34; src=&#34;../../img/posts/starting-i3/rofi-window.png&#34; style=&#34;max-width: 100%;&#34;/&gt;
+&lt;/center&gt;
+&lt;div id=&#34;caption&#34;&gt;Newly configured rofi window switcher&lt;/div&gt;&lt;/p&gt;
+
 &lt;p&gt;While touching up rofi, I learned it can also switch through already opened windows (Previously, I  only used it to launch new programs). I really liked that in my new i3 setup, it also displayed the work-spaces, icon font and all. I immediately bound it to my Super+Tab key for easy use.&lt;/p&gt;
+
 &lt;h2 id=&#34;conclusion&#34;&gt;Conclusion&lt;/h2&gt;
-&lt;!-- raw HTML omitted --&gt;
+
+&lt;p&gt;&lt;video style=&#34;max-width:100%;&#34; controls&gt;
+  &lt;source src=&#34;../../img/posts/starting-i3/i3-gaps-demo.mp4&#34; type=&#34;video/mp4&#34;&gt;
+  &lt;source src=&#34;movie.ogg&#34; type=&#34;video/ogg&#34;&gt;
+Your browser does not support the video tag.
+&lt;/video&gt;
+&lt;div id=&#34;caption&#34;&gt;Little video demoing my new i3gaps setup with i3blocks&lt;/div&gt;&lt;/p&gt;
+
 &lt;p&gt;Thus far, I have been very satisfied with my current i3 setup. Replacing i3status with i3blocks, combined with adding small improvements, for example, the awesome fonts, really helped to enhance the look and feel of my i3 configuration. Additionally, ROFI much better now that it matches everything.&lt;/p&gt;
+
 &lt;p&gt;I am glad to be using i3 again. It is so efficient to use and I love flying around the work-spaces and windows. It is particularly useful on my x230&amp;rsquo;s 12&amp;rdquo; screen, as it utilizes all of the limited resolution. If you have never used a tiling window manager in Linux, I strongly suggest you give it a shot. It can take some time to get up and going the first time, but once a custom configuration is built, it always feels like home.&lt;/p&gt;
+
 &lt;p&gt;To show off my new i3 setup with i3bars, I&amp;rsquo;ve posted a small video at the top of this section. Enjoy!&lt;/p&gt;</description>
     </item>
     

@@ -21,14 +21,22 @@ manager, I am mixing things up. Over vacation, I started importing all of my
 passwords into &lt;a href=&#34;https://bitwarden.com/&#34;&gt;Bitwarden&lt;/a&gt;. With all my passwords
 finally transferred, I have now switched to using Bitwarden full-time. Here
 are my thoughts so far.&lt;/p&gt;
+
 &lt;h3 id=&#34;why-switch&#34;&gt;Why Switch?&lt;/h3&gt;
+
 &lt;p&gt;Before I start, I want to point out that I had already started my switch &lt;em&gt;before&lt;/em&gt;
 the large Bitwarden segment on the &lt;a href=&#34;https://linuxunplugged.com/316&#34;&gt;recent episode of Linux
 Unplugged&lt;/a&gt;. That was just a re-assuring
 coincidence &lt;code&gt;:)&lt;/code&gt; .&lt;/p&gt;
+
 &lt;p&gt;So, why did I decide to switch?&lt;/p&gt;
+
 &lt;h4 id=&#34;easier-setup&#34;&gt;Easier Setup&lt;/h4&gt;
-&lt;!-- raw HTML omitted --&gt;
+
+&lt;p&gt;&lt;a href=&#34;../../img/posts/switching-to-bitwarden/bigtwarden-flathub.png&#34;&gt;
+&lt;img alt=&#34;Bitwarden on Flathub Page&#34; src=&#34;../../img/posts/switching-to-bitwarden/bitwarden-flathub.png&#34; style=&#34;max-width: 100%;&#34;/&gt;&lt;/a&gt;
+&lt;div class=&#34;caption&#34;&gt;Bitwarden on Flathub&lt;/div&gt;&lt;/p&gt;
+
 &lt;p&gt;The main reason is that when configuring a new system, Bitwarden is simply
 easier to setup. All I need to do is install a Bitwarden client and login. In
 fact, using the hosted service I don&amp;rsquo;t even need to do that. I can just login
@@ -38,22 +46,32 @@ flathub&lt;/a&gt;. So on my
 &lt;a href=&#34;https://silverblue.fedoraproject.org/&#34;&gt;Fedora Silverblue&lt;/a&gt; computers, it works
 out of the box and already fits in with the design philosophy behind Silverblue
 (running all user apps in containers). Perfect.&lt;/p&gt;
+
 &lt;h4 id=&#34;mobile-support&#34;&gt;Mobile Support&lt;/h4&gt;
-&lt;!-- raw HTML omitted --&gt;
+
+&lt;p&gt;&lt;a href=&#34;../../img/posts/switching-to-bitwarden/bitwarden-ipad.jpg&#34;&gt;
+&lt;img alt=&#34;Bitwarden on Flathub Page&#34; src=&#34;../../img/posts/switching-to-bitwarden/bitwarden-ipad.jpg&#34; style=&#34;float: right;width: 250px; max-width: 100%; padding: 5px 5px 10px 10px&#34;/&gt;&lt;/a&gt;&lt;/p&gt;
+
 &lt;p&gt;Over the past few months I have been &lt;a href=&#34;../../post/switched-to-joplin-notes/&#34;&gt;switching up the tools I
 use&lt;/a&gt;, at least the ones I use &lt;a href=&#34;../../post/back-on-org-mode-for-work/&#34;&gt;outside of
 work&lt;/a&gt;. The big driving force behind many of
 these switches is better mobile support. While I still prefer to keep as much
 data off of my phone as possible, there are some things I need to have on the
 go. My password manager is unfortunately one of them.&lt;/p&gt;
+
 &lt;p&gt;Additionally, as I start to test out different workloads on alternative devices
 like my ipad, having a mobil-friendly work flow is a godsend. In fact, trying to
 &lt;a href=&#34;../../post/setting-up-pass/&#34;&gt;setup pass&lt;/a&gt; on my iPad is what eventually frustrated
 me enough to give Bitwarden a chance.&lt;/p&gt;
+
 &lt;p&gt;Setup on both my phone and ipad was dead-simple. Install the app, and login.
 Done.&lt;/p&gt;
+
 &lt;h4 id=&#34;wayland-friendly&#34;&gt;Wayland Friendly&lt;/h4&gt;
-&lt;!-- raw HTML omitted --&gt;
+
+&lt;p&gt;&lt;a href=&#34;../../img/posts/switching-to-bitwarden/wayland-logo.png&#34;&gt;
+&lt;img alt=&#34;Wayland logo&#34; src=&#34;../../img/posts/switching-to-bitwarden/wayland-logo.png&#34; style=&#34;float: left; width: 250px; max-width: 100%; padding: 5px 15px 10px 10px&#34;/&gt;&lt;/a&gt;&lt;/p&gt;
+
 &lt;p&gt;One of the best features of my pass system was how well it was integrated with
 my desktop environment. &lt;em&gt;However&lt;/em&gt;, I want to switch to wayland now more than
 ever, but my pass desktop integration is the biggest blocker preventing me from
@@ -62,24 +80,39 @@ and &lt;code&gt;rofi&lt;/code&gt;&amp;hellip; but they do not function correctly
 use &lt;code&gt;pass&lt;/code&gt; from a terminal window while in a wayland session. Bitwarden, at
 least the limited GUI interactions I&amp;rsquo;ve used thus far, appears to work just
 fine in wayland.&lt;/p&gt;
-&lt;h4 id=&#34;easier-to-shareexpand&#34;&gt;Easier to share/expand&lt;/h4&gt;
+
+&lt;h4 id=&#34;easier-to-share-expand&#34;&gt;Easier to share/expand&lt;/h4&gt;
+
 &lt;p&gt;Lastly, if my wife eventually wants to switch to Bitwarden, I &lt;em&gt;think&lt;/em&gt; we can
 share our joint passwords with each other, even being on just the free personal
 plan. If not, we can upgrade to the &amp;ldquo;family plan&amp;rdquo; which is currently $1/mo and
 allows unlimited collections across 5 accounts &lt;em&gt;and&lt;/em&gt; optional self hosting. For
 shared family password management&amp;hellip; that&amp;rsquo;s a great deal.&lt;/p&gt;
+
 &lt;h3 id=&#34;what-i-am-still-learning&#34;&gt;What I am still learning&lt;/h3&gt;
+
 &lt;p&gt;Normally, this is where I list the few things that I &amp;ldquo;don&amp;rsquo;t like&amp;rdquo;. However,
 this still is all new and I &lt;em&gt;think&lt;/em&gt; the majority of my current issues are
 solvable, but I just haven&amp;rsquo;t figured it out yet. So it&amp;rsquo;s a &amp;ldquo;What I&amp;rsquo;m still
 learning&amp;rdquo; section this time (•‿•) .&lt;/p&gt;
-&lt;h4 id=&#34;better-keyboardde-integration&#34;&gt;Better keyboard/DE integration&lt;/h4&gt;
+
+&lt;h4 id=&#34;better-keyboard-de-integration&#34;&gt;Better keyboard/DE integration&lt;/h4&gt;
+
 &lt;p&gt;The &lt;em&gt;main feature&lt;/em&gt; I still seem to be missing is better keyboard
 support/integration with the desktop environment. The GUI app is nice, and
 Bitwarden has &lt;em&gt;much&lt;/em&gt; better support for browser extensions and tools. Yet, I
 haven&amp;rsquo;t found a good way to open up Bitwarden (give my master password),
 search for an item, and copy the password&amp;hellip; all from the keyboard.&lt;/p&gt;
-&lt;!-- raw HTML omitted --&gt;
+
+&lt;p&gt;&lt;center&gt;
+&lt;video style=&#34;max-width:100%;&#34; controls&gt;
+  &lt;source src=&#34;../../img/posts/setting-up-pass/passmenu_demo.mp4&#34; type=&#34;video/mp4&#34;&gt;
+  &lt;source src=&#34;movie.ogg&#34; type=&#34;video/ogg&#34;&gt;
+Your browser does not support the video tag.
+&lt;/video&gt;
+&lt;div id=&#34;caption&#34;&gt;&lt;code&gt;passmenu&lt;/code&gt; lets you easily search and select a pass item.&lt;/div&gt;
+&lt;/center&gt;&lt;/p&gt;
+
 &lt;p&gt;By comparison, &lt;code&gt;pass&lt;/code&gt; let me integrate with launchers like &lt;code&gt;dmenu&lt;/code&gt; and &lt;code&gt;rofi&lt;/code&gt;
 to efficiently grab my passwords which was &lt;em&gt;awesome&lt;/em&gt;. As mentioned a few
 sections above, &lt;code&gt;passmenu&lt;/code&gt; unfortunately falls apart for me these days now that I am
@@ -89,9 +122,12 @@ keyboard once I have selected an item. I can already search using &lt;code&gt;ct
 &lt;code&gt;tab&lt;/code&gt;, and then &lt;code&gt;arrow&lt;/code&gt; my way down the list, but once there I cannot copy
 unless I continue to tab through all the options. This is not efficient and
 defeats the purpose of remaining on the keyboard in the first place.&lt;/p&gt;
+
 &lt;p&gt;This is a highly requested feature, and I&amp;rsquo;m sure someone has hacked &lt;em&gt;some
 solution&lt;/em&gt; together&amp;hellip; I just have yet to find it&amp;hellip; or implement it myself.&lt;/p&gt;
+
 &lt;h3 id=&#34;conclusion&#34;&gt;Conclusion&lt;/h3&gt;
+
 &lt;p&gt;That is it. &lt;strong&gt;TLDR;&lt;/strong&gt; I&amp;rsquo;ve switched to Bitwarden and have been using it as my
 main password manager for almost a month and I love it. It works on &lt;em&gt;all&lt;/em&gt;
 my devices and doesn&amp;rsquo;t give me too many headaches. My only real complaint is
@@ -112,28 +148,35 @@ mentioned that while writing it, I had learned about
 looked so good, I may switch to it eventually. Well&amp;hellip; that didn&amp;rsquo;t take long. I&amp;rsquo;ve
 scrapped my tmux shell scripts, and have converted to using tmuxinator. Here&amp;rsquo;s
 how.&lt;/p&gt;
+
 &lt;h2 id=&#34;what-is-tmuxinator&#34;&gt;What is Tmuxinator?&lt;/h2&gt;
+
 &lt;p&gt;&lt;a href=&#34;https://github.com/tmuxinator/tmuxinator&#34;&gt;Tmuxinator&lt;/a&gt; is a command line
 application that makes it easy to create and manage tmux sessions. It allows a
 user to define how to setup a session, including naming windows, splitting
 panes, and what commands initially run in each pane. The configuration is done
 in yaml, so it is very easy to figure out and get started.&lt;/p&gt;
+
 &lt;h2 id=&#34;install&#34;&gt;Install&lt;/h2&gt;
+
 &lt;p&gt;Most distros probably have &lt;code&gt;tmuxinator&lt;/code&gt; in their offical repos. These days, I
 mostly run Fedora on all of my machines and I was able to find it there:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;sudo dnf install termixinator
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;strong&gt;However&lt;/strong&gt;, I found that this version was quite out of date (&lt;code&gt;0.6.11&lt;/code&gt;) even on my new
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;sudo dnf install termixinator&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;&lt;strong&gt;However&lt;/strong&gt;, I found that this version was quite out of date (&lt;code&gt;0.6.11&lt;/code&gt;) even on my new
 Fedora 30 install, so I recommend using the method stated on
 the project&amp;rsquo;s Github page (requires &lt;code&gt;rubygems&lt;/code&gt;) to install a much more current
 version (&lt;code&gt;1.1.0&lt;/code&gt;):&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;gem install tmuxinator
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;create&#34;&gt;Create&lt;/h2&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;gem install tmuxinator&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h2 id=&#34;create&#34;&gt;Create&lt;/h2&gt;
+
 &lt;p&gt;To create a new tmuxinator profile, pass the desired project name to &lt;code&gt;tmuxinator new&lt;/code&gt;:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-sh&#34; data-lang=&#34;sh&#34;&gt;tmuxinator new Website
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;This will open up a new tmuxinator template inside your default editor. The
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-sh&#34; data-lang=&#34;sh&#34;&gt;tmuxinator new Website&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;This will open up a new tmuxinator template inside your default editor. The
 default template contains a bunch of comments that help guide how to configure
 it.&lt;/p&gt;
+
 &lt;h4 id=&#34;header&#34;&gt;Header&lt;/h4&gt;
+
 &lt;p&gt;The first thing to set at the top of the template is the &lt;code&gt;name&lt;/code&gt; field, followed
 by the &lt;code&gt;root&lt;/code&gt; directory. The tmux session name is defined with &lt;code&gt;name&lt;/code&gt;, and
 &lt;code&gt;root&lt;/code&gt; will be the directory which all of the windows/panes open up in by
@@ -143,8 +186,9 @@ directory, &lt;code&gt;~/Documents/himmAllRight-source&lt;/code&gt;:&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# /home/ryan/.config/tmuxinator/Website.yml&lt;/span&gt;
 
 &lt;span style=&#34;color:#66d9ef&#34;&gt;name&lt;/span&gt;: Website
-&lt;span style=&#34;color:#66d9ef&#34;&gt;root&lt;/span&gt;: ~/Documents/himmAllRight-source
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h4 id=&#34;windows&#34;&gt;Windows&lt;/h4&gt;
+&lt;span style=&#34;color:#66d9ef&#34;&gt;root&lt;/span&gt;: ~/Documents/himmAllRight-source&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h4 id=&#34;windows&#34;&gt;Windows&lt;/h4&gt;
+
 &lt;p&gt;Next, I needed to configure my windows. To convert the script from my previous
 post, I wanted a dedicated &amp;lsquo;Main&amp;rsquo; window, one for the server, one for vim, and
 one for an extra shell. Additionally, since that last post I&amp;rsquo;ve added a window
@@ -157,9 +201,11 @@ that&lt;/em&gt; with tmuxinator:&lt;/p&gt;
   - &lt;span style=&#34;color:#66d9ef&#34;&gt;Server&lt;/span&gt;: hugo serve -D -F
   - &lt;span style=&#34;color:#66d9ef&#34;&gt;Write&lt;/span&gt;: nvim
   - &lt;span style=&#34;color:#66d9ef&#34;&gt;Shell&lt;/span&gt;: zsh; clear
-  - &lt;span style=&#34;color:#66d9ef&#34;&gt;Web&lt;/span&gt;: qutebrowser localhost:&lt;span style=&#34;color:#ae81ff&#34;&gt;1313&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Done. Save the file and that&amp;rsquo;s it! See the benefit of using tmuxinator??&lt;/p&gt;
+  - &lt;span style=&#34;color:#66d9ef&#34;&gt;Web&lt;/span&gt;: qutebrowser localhost:&lt;span style=&#34;color:#ae81ff&#34;&gt;1313&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Done. Save the file and that&amp;rsquo;s it! See the benefit of using tmuxinator??&lt;/p&gt;
+
 &lt;h4 id=&#34;pane-splits&#34;&gt;Pane splits&lt;/h4&gt;
+
 &lt;p&gt;While I don&amp;rsquo;t use them in this example configuration, it should be noted that
 setting up pane splits is also quite easy with tmuxinator. For example, if I
 wanted to split the server window into two panes, one running the hugo server
@@ -168,22 +214,33 @@ and one running htop, I could use:&lt;/p&gt;
     &lt;span style=&#34;color:#66d9ef&#34;&gt;layout&lt;/span&gt;: even-vertical
     &lt;span style=&#34;color:#66d9ef&#34;&gt;panes&lt;/span&gt;:
         - hugo
-        - htop
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;The &lt;code&gt;layout&lt;/code&gt; key defines which
+        - htop&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;The &lt;code&gt;layout&lt;/code&gt; key defines which
 &lt;a href=&#34;http://man7.org/linux/man-pages/man1/tmux.1.html#WINDOWS_AND_PANES&#34;&gt;tmux layout&lt;/a&gt; to
 use when splitting the panes, and &lt;code&gt;panes&lt;/code&gt; is a list that defines what to run in
 each pane.&lt;/p&gt;
+
 &lt;h2 id=&#34;launch&#34;&gt;Launch&lt;/h2&gt;
-&lt;!-- raw HTML omitted --&gt;
-&lt;p&gt;To start up the newly defined tmuxinator project, use &lt;code&gt;tmuxinator start&lt;/code&gt;:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-sh&#34; data-lang=&#34;sh&#34;&gt;tmuxinator start Website
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;manage&#34;&gt;Manage&lt;/h2&gt;
+
+&lt;p&gt;&lt;a href=&#39;../../img/posts/setting-up-tmuxinator/start-website-tmuxinator.gif&#39;&gt;
+&lt;img alt=&#34;Launching Website tmux session with tmuxinator&#34; src=&#34;../../img/posts/setting-up-tmuxinator/starting-website-tmuxinator.png&#34; onmouseover=&#34;this.src=&#39;../../img/posts/setting-up-tmuxinator/start-website-tmuxinator.gif&#39;&#34; onmouseout=&#34;this.src=&#39;../../img/posts/setting-up-tmuxinator/starting-website-tmuxinator.png&#39;&#34; style=&#34;max-width: 100%;&#34;/&gt;
+&lt;/a&gt;
+&lt;div class=&#34;caption&#34;&gt;Launching my website tmux session with tmuxinator&lt;/div&gt;&lt;/p&gt;
+
+&lt;p&gt;To start up the newly defined tmuxinator project, use &lt;code&gt;tmuxinator
+start&lt;/code&gt;:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-sh&#34; data-lang=&#34;sh&#34;&gt;tmuxinator start Website&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h2 id=&#34;manage&#34;&gt;Manage&lt;/h2&gt;
+
 &lt;p&gt;All of the tmuxinator profile templates are stored at &lt;code&gt;~/.config/tmuxinator&lt;/code&gt;,
 which means they can easily be copied to a new machine, or even
 saved/maintained in source control.&lt;/p&gt;
+
 &lt;p&gt;&lt;em&gt;Note: I think older versions stored them at &lt;code&gt;~/.tmuxinator/&lt;/code&gt;, so check there
 if they are missing.&lt;/em&gt;&lt;/p&gt;
+
 &lt;h2 id=&#34;conclusion&#34;&gt;Conclusion&lt;/h2&gt;
+
 &lt;p&gt;That&amp;rsquo;s it. While scripting my own method was a good bash exercise and helped me
 learn the details of &lt;code&gt;tmux&lt;/code&gt; a little bit better, I ultimately think that
 &lt;code&gt;tmuxinator&lt;/code&gt; is the way to go. This is especially true when using tmux to work
@@ -203,17 +260,21 @@ command-line system information tool for a few years now. While browsing
 of the submissions did not have distro logos in their neofetch/screenfetch
 ascii art. I knew that neofetch was customizable, but have never dug
 into it myself. So I decided to change that.&lt;/p&gt;
+
 &lt;h3 id=&#34;custom-neofetch-ascii-art&#34;&gt;Custom Neofetch ASCII Art&lt;/h3&gt;
+
 &lt;p&gt;I started my neofetch investigation the same way one should start researching
 &lt;em&gt;any&lt;/em&gt; Linux command-line tool: &lt;code&gt;man neofetch&lt;/code&gt;. Inside the man pages, I was
 greeted with all sorts of customization options. Eventually, I scrolled down to
 the section I wanted, &lt;code&gt;IMAGE BACKEND&lt;/code&gt;.&lt;/p&gt;
+
 &lt;p&gt;There I learned that a custom image could be specified using the &lt;code&gt;--source&lt;/code&gt; flag.
 For example, to set the art to an ascii charmeleon file I &lt;em&gt;just happen&lt;/em&gt; to have
 on my desktop, I tried:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;neofetch --source /home/ryan/Documents/Pokemon-ascii/5.txt
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;AAAAAND&amp;hellip; It didn&amp;rsquo;t work. It was still the Fedora logo. Clearly, I was still
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;neofetch --source /home/ryan/Documents/Pokemon-ascii/5.txt&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;AAAAAND&amp;hellip; It didn&amp;rsquo;t work. It was still the Fedora logo. Clearly, I was still
 missing something.&lt;/p&gt;
+
 &lt;p&gt;After some browsing, I found the &lt;a href=&#34;https://github.com/dylanaraps/neofetch/wiki/Custom-Ascii-art-file-format&#34;&gt;ASCII art
 page&lt;/a&gt;
 on neofetch&amp;rsquo;s Github wiki. Reading it, I noticed that I was missing the &lt;code&gt;${c1}&lt;/code&gt;
@@ -221,29 +282,35 @@ in my pokemon ascii files. So, I made a copy of the file and added &lt;code&gt;S
 the top:&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;➜  welcome-messages git:(master) ✗ head charmeleon
 ${c1}
-                      ,-&#39;`\
-                  _,&amp;quot;&#39;    j
+                      ,-&amp;#39;`\
+                  _,&amp;#34;&amp;#39;    j
            __....+       /               .
-       ,-&#39;&amp;quot;             /               ; `-._.&#39;.
-      /                (              ,&#39;       .&#39;
+       ,-&amp;#39;&amp;#34;             /               ; `-._.&amp;#39;.
+      /                (              ,&amp;#39;       .&amp;#39;
      |            _.    \             \   ---._ `-.
-     ,|    ,   _.&#39;  Y    \             `- ,&#39;   \   `.`.
-     l&#39;    \ ,&#39;._,\ `.    .              /       ,--. l
-  .,-        `._  |  |    |              \       _   l .
-&lt;/code&gt;&lt;/pre&gt;&lt;!-- raw HTML omitted --&gt;
+     ,|    ,   _.&amp;#39;  Y    \             `- ,&amp;#39;   \   `.`.
+     l&amp;#39;    \ ,&amp;#39;._,\ `.    .              /       ,--. l
+  .,-        `._  |  |    |              \       _   l .&lt;/code&gt;&lt;/pre&gt;
+&lt;div class=&#34;caption&#34;&gt;head output of my modified charmeleon ascii file&lt;/div&gt;
+
 &lt;p&gt;AAAAAND&amp;hellip; It worked!&lt;/p&gt;
+
 &lt;h3 id=&#34;adding-a-shell-alias&#34;&gt;Adding a Shell Alias&lt;/h3&gt;
-&lt;p&gt;&lt;!-- raw HTML omitted --&gt;&lt;!-- raw HTML omitted --&gt;&lt;!-- raw HTML omitted --&gt;&lt;/p&gt;
-&lt;!-- raw HTML omitted --&gt;
+
+&lt;p&gt;&lt;a href=&#34;../../img/posts/custom-neofetch-ascii-art/charmeleon-neofetch.png&#34;&gt;&lt;img alt=&#34;Custom Charmeleon ASCII art for my desktop&#39;s neofetch output&#34; src=&#34;../../img/posts/custom-neofetch-ascii-art/charmeleon-neofetch.png&#34; style=&#34;max-width: 100%;&#34;/&gt;&lt;/a&gt;
+&lt;div class=&#34;caption&#34;&gt;Custom Charmeleon ASCII art for my desktop&amp;rsquo;s neofetch output&lt;/div&gt;&lt;/p&gt;
+
 &lt;p&gt;Lastly, I wanted the charmeleon ascii art to be the &lt;em&gt;default&lt;/em&gt; neofetch output on my
 desktop. While I&amp;rsquo;m sure that I could have accomplished this &lt;em&gt;properly&lt;/em&gt; by
 editing the &lt;code&gt;~/.config/neofetch/config.conf&lt;/code&gt; file I learned about, for now&amp;hellip;
 creating an alias seemed easier XD. So I added the following line to my
 &lt;code&gt;~/.zshrc&lt;/code&gt;:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;alias neofetch&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;neofetch --source /home/ryan/Documents/ascii/pokemon/charmeleon&amp;#39;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Now whenever I call plain &lt;code&gt;neofetch&lt;/code&gt; on my desktop, it runs with the charmeleon
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;alias neofetch&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;neofetch --source /home/ryan/Documents/ascii/pokemon/charmeleon&amp;#39;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Now whenever I call plain &lt;code&gt;neofetch&lt;/code&gt; on my desktop, it runs with the charmeleon
 art.&lt;/p&gt;
+
 &lt;h3 id=&#34;conclusion&#34;&gt;Conclusion&lt;/h3&gt;
+
 &lt;p&gt;So that&amp;rsquo;s it. A nice &lt;em&gt;short&lt;/em&gt; post for once! Despite the size, I hope if was
 useful. If you haven&amp;rsquo;t heard of neofetch before, go check it out. If you have,
 I encourage you to go digging through the man pages. I promise you won&amp;rsquo;t regret
@@ -263,25 +330,34 @@ combined with &lt;code&gt;ssh&lt;/code&gt;). I have been utilizing tmux even mor
 started to script the start up/configuration a tmux session for each project.
 The other day, I decided to write a script to spin up a session for working on my
 website&amp;hellip; and thought it would be a great tutorial!&lt;/p&gt;
+
 &lt;h3 id=&#34;tmux&#34;&gt;Tmux&lt;/h3&gt;
-&lt;!-- raw HTML omitted --&gt;
+
+&lt;p&gt;&lt;img alt=&#34;tmux demo animation&#34; src=&#34;../../img/posts/scripting-tmux-workspaces/animation-hover.png&#34; onmouseover=&#34;this.src=&#39;../../img/posts/scripting-tmux-workspaces/tmux-demo.gif&#39;&#34; onmouseout=&#34;this.src=&#39;../../img/posts/scripting-tmux-workspaces/animation-hover.png&#39;&#34; style=&#34;max-width: 100%;&#34;/&gt;
+&lt;div class=&#34;caption&#34;&gt;Small tmux demonstration&lt;/div&gt;&lt;/p&gt;
+
 &lt;p&gt;When working on a project, I like to use tmux to maintain all of the terminal
 windows related to it. This keeps everything together, and even allows me to
 detach the session, switch to another computer, ssh into the previous computer,
 and re-attach my working tmux session. Paired with the fact that I&amp;rsquo;ve started
 using VIM again, it works seamlessly. Scripting the initialization makes
 getting started even smoother.&lt;/p&gt;
+
 &lt;h3 id=&#34;automating-tmux-initialization-for-working-on-my-website&#34;&gt;Automating tmux initialization for working on my website&lt;/h3&gt;
+
 &lt;h4 id=&#34;new-script&#34;&gt;New Script&lt;/h4&gt;
+
 &lt;p&gt;First, lets create a new script. Start by opening a new file, and adding a bash
 &lt;a href=&#34;https://en.wikipedia.org/wiki/Shebang_(Unix)&#34;&gt;shebang&lt;/a&gt; line to the top:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;color:#75715e&#34;&gt;#!/bin/bash
-&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;This line tells the system that the following text will be a
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;color:#75715e&#34;&gt;#!/bin/bash&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;This line tells the system that the following text will be a
 &lt;a href=&#34;https://en.wikipedia.org/wiki/Bash_(Unix_shell)&#34;&gt;bash&lt;/a&gt; script.&lt;/p&gt;
+
 &lt;p&gt;&lt;em&gt;Optional: Save and close the file, then re-open it to take advantage the text
 editor&amp;rsquo;s bash syntax highlighting if it didn&amp;rsquo;t automatically switch it on.&lt;/em&gt;&lt;/p&gt;
+
 &lt;h4 id=&#34;create-a-new-tmux-session-with-var-name&#34;&gt;Create a new tmux session (with var name)&lt;/h4&gt;
+
 &lt;p&gt;Next, lets define a variable to store the tmux session name. This will make it
 easier to change the session name later on. Using the session variable, a new
 tmux-session with our desired name can be created.&lt;/p&gt;
@@ -289,19 +365,22 @@ tmux-session with our desired name can be created.&lt;/p&gt;
 session&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;Website&amp;#34;&lt;/span&gt;
 
 &lt;span style=&#34;color:#75715e&#34;&gt;# Start New Session with our name&lt;/span&gt;
-tmux new-session -d -s $session
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h4 id=&#34;name-initial-default-window-and-switch-to-zsh&#34;&gt;Name initial default Window (and switch to &lt;code&gt;zsh&lt;/code&gt;)&lt;/h4&gt;
+tmux new-session -d -s $session&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h4 id=&#34;name-initial-default-window-and-switch-to-zsh&#34;&gt;Name initial default Window (and switch to &lt;code&gt;zsh&lt;/code&gt;)&lt;/h4&gt;
+
 &lt;p&gt;Let&amp;rsquo;s customize the default window and give it a new name. Lets call this first tmux
 window &lt;code&gt;&amp;quot;Main&amp;quot;&lt;/code&gt;, and have it simply run a &lt;a href=&#34;https://ohmyz.sh/&#34;&gt;zsh&lt;/a&gt; shell. After
 creating a new session, there is only one window, so I know it will be
 identified with the number &lt;code&gt;0&lt;/code&gt;. I can use this with &lt;code&gt;-t&lt;/code&gt; to rename the window.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# Name first Window and start zsh&lt;/span&gt;
 tmux rename-window -t &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;Main&amp;#39;&lt;/span&gt;
-tmux send-keys -t &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;Main&amp;#39;&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;zsh&amp;#39;&lt;/span&gt; C-m &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;clear&amp;#39;&lt;/span&gt; C-m
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;I can then use the &lt;code&gt;send-keys&lt;/code&gt; command with the new window name to start zsh.
+tmux send-keys -t &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;Main&amp;#39;&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;zsh&amp;#39;&lt;/span&gt; C-m &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;clear&amp;#39;&lt;/span&gt; C-m&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;I can then use the &lt;code&gt;send-keys&lt;/code&gt; command with the new window name to start zsh.
 This is the equivalent of typing &lt;code&gt;zsh&lt;/code&gt;, &lt;code&gt;[Enter]&lt;/code&gt;, &lt;code&gt;clear&lt;/code&gt;, &lt;code&gt;[Enter]&lt;/code&gt; into the
 command line.&lt;/p&gt;
+
 &lt;h4 id=&#34;add-a-new-named-window-for-hugo-server&#34;&gt;Add a new (named) window for hugo server&lt;/h4&gt;
+
 &lt;p&gt;With the main tmux window setup, I want to add a few more for
 different tasks. First, I want a window that can run the hugo server
 as I&amp;rsquo;m writing a post. With a session already created, I can name the
@@ -309,57 +388,73 @@ window as I create it, using just the &lt;code&gt;new-window&lt;/code&gt; comamn
 &lt;code&gt;-n&lt;/code&gt; flag.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# Create and setup pane for hugo server&lt;/span&gt;
 tmux new-window -t $session:1 -n &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;Hugo Server&amp;#39;&lt;/span&gt;
-tmux send-keys -t &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;Hugo Server&amp;#39;&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;hugo serve -D -F&amp;#39;&lt;/span&gt; C-m
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Again, I used tmux &lt;code&gt;send-keys&lt;/code&gt;, this time to send the &lt;code&gt;hugo serve -D -F&lt;/code&gt; command to start up a hugo server for local draft editing.&lt;/p&gt;
+tmux send-keys -t &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;Hugo Server&amp;#39;&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;hugo serve -D -F&amp;#39;&lt;/span&gt; C-m&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Again, I used tmux &lt;code&gt;send-keys&lt;/code&gt;, this time to send the &lt;code&gt;hugo serve -D
+-F&lt;/code&gt; command to start up a hugo server for local draft editing.&lt;/p&gt;
+
 &lt;h4 id=&#34;add-a-new-name-pane-for-vim&#34;&gt;Add a new (name) pane for vim&lt;/h4&gt;
+
 &lt;p&gt;Now, I need a place to write website posts&amp;hellip; so lets fire up a new tmux
 window, and open up neovim inside of it.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# setup Writing window&lt;/span&gt;
 tmux new-window -t $SESSION:2 -n &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;Writing&amp;#39;&lt;/span&gt;
-tmux send-keys -t &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;Writing&amp;#39;&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;nvim&amp;#34;&lt;/span&gt; C-m
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h4 id=&#34;another-shell&#34;&gt;Another shell&lt;/h4&gt;
+tmux send-keys -t &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;Writing&amp;#39;&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;nvim&amp;#34;&lt;/span&gt; C-m&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h4 id=&#34;another-shell&#34;&gt;Another shell&lt;/h4&gt;
+
 &lt;p&gt;Lastly, lets create one more shell window, just in case it&amp;rsquo;s needed. Why not?&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# Setup an additional shell&lt;/span&gt;
 tmux new-window -t $SESSION:3 -n &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;Shell&amp;#39;&lt;/span&gt;
-tmux send-keys -t &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;Shell&amp;#39;&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;zsh&amp;#34;&lt;/span&gt; C-m &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;clear&amp;#39;&lt;/span&gt; C-m
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h4 id=&#34;attach-session&#34;&gt;Attach Session&lt;/h4&gt;
+tmux send-keys -t &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;Shell&amp;#39;&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;zsh&amp;#34;&lt;/span&gt; C-m &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;clear&amp;#39;&lt;/span&gt; C-m&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h4 id=&#34;attach-session&#34;&gt;Attach Session&lt;/h4&gt;
+
 &lt;p&gt;With the tmux session all configured and customized, we can tell the script to
 go ahead and attach it, using the &lt;code&gt;attach-session&lt;/code&gt; command with the session
 name variable.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# Attach Session, on the Main window&lt;/span&gt;
-tmux attach-session -t $SESSION:0
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;em&gt;Note: the &lt;code&gt;0&lt;/code&gt; tells tmux to attach the first window (&lt;code&gt;Main&lt;/code&gt;). Using
+tmux attach-session -t $SESSION:0&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;&lt;em&gt;Note: the &lt;code&gt;0&lt;/code&gt; tells tmux to attach the first window (&lt;code&gt;Main&lt;/code&gt;). Using
 another index value will attach a different window. For example, &lt;code&gt;1&lt;/code&gt;
 would open the &lt;code&gt;Hugo Server&lt;/code&gt; window when attaching&lt;/em&gt;&lt;/p&gt;
+
 &lt;h4 id=&#34;bonus-minor-improvement&#34;&gt;Bonus: Minor improvement&lt;/h4&gt;
-&lt;!-- raw HTML omitted --&gt;
+
+&lt;p&gt;&lt;img alt=&#34;tmux demo animation&#34; src=&#34;../../img/posts/scripting-tmux-workspaces/animation-hover.png&#34; onmouseover=&#34;this.src=&#39;../../img/posts/scripting-tmux-workspaces/tmux-duplicate-windows.gif&#39;&#34; onmouseout=&#34;this.src=&#39;../../img/posts/scripting-tmux-workspaces/animation-hover.png&#39;&#34; style=&#34;max-width: 100%;&#34;/&gt;
+&lt;div class=&#34;caption&#34;&gt;The script would create duplicate windows if the tmux
+session already existed.&lt;/div&gt;&lt;/p&gt;
+
 &lt;p&gt;At this point, I was done with the tmux script. It worked well for creating my
 session and attaching it. However, there was &lt;em&gt;one&lt;/em&gt; issue I still had. If I ran
 the script when there was a tmux session with the same name &lt;em&gt;already&lt;/em&gt;, it would
 just double up the windows in that session. If I accidentally did this, I would
 have to go through each window, close out whatever and was running, and then
 close the window.&lt;/p&gt;
+
 &lt;p&gt;To fix this issue, I decided to wrap the initialization commands inside of an
 &lt;code&gt;if&lt;/code&gt; statement, and only run them if the tmux session &lt;em&gt;didn&amp;rsquo;t&lt;/em&gt; already exist.&lt;/p&gt;
+
 &lt;h5 id=&#34;checking-if-the-session-already-exists&#34;&gt;Checking if the Session Already Exists&lt;/h5&gt;
+
 &lt;p&gt;First, I needed a way to &lt;em&gt;check&lt;/em&gt; whether the desired tmux session already existed
 or not. This can be done by &amp;ldquo;grep&amp;rsquo;ing&amp;rdquo; the output of &lt;code&gt;tmux list-sessions&lt;/code&gt; for
 the session name, which we&amp;rsquo;ve already conveniently stored in our &lt;code&gt;$SESSION&lt;/code&gt;
 variable. For Cleanliness, I took the output of that process and saved it in a
 &lt;code&gt;SESSIONEXISTS&lt;/code&gt; variable, defined directly under &lt;code&gt;SESSION&lt;/code&gt; in the script.&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;SESSIONEXISTS&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;$(&lt;/span&gt;tmux list-sessions | grep $SESSION&lt;span style=&#34;color:#66d9ef&#34;&gt;)&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;If the session exists, &lt;code&gt;SESSIONEXISTS&lt;/code&gt; will be a string of the line which &lt;code&gt;grep&lt;/code&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;SESSIONEXISTS&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;$(&lt;/span&gt;tmux list-sessions | grep $SESSION&lt;span style=&#34;color:#66d9ef&#34;&gt;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;If the session exists, &lt;code&gt;SESSIONEXISTS&lt;/code&gt; will be a string of the line which &lt;code&gt;grep&lt;/code&gt;
 matched. Otherwise, it will just be an empty string (&lt;code&gt;&amp;quot;&amp;quot;&lt;/code&gt;).&lt;/p&gt;
+
 &lt;p&gt;Now, I can use the &lt;code&gt;SESSIONEXISTS&lt;/code&gt; variable with an &lt;code&gt;if&lt;/code&gt; condition to wrap the tmux
 setup code so that it only runs if &lt;code&gt;SESSIONEXISTS&lt;/code&gt; is &lt;code&gt;&amp;quot;&amp;quot;&lt;/code&gt;.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;$SESSIONEXISTS&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt;
 &lt;span style=&#34;color:#66d9ef&#34;&gt;then&lt;/span&gt;
 ...
-&lt;span style=&#34;color:#66d9ef&#34;&gt;fi&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;The &lt;code&gt;attach-session&lt;/code&gt; command should be &lt;em&gt;outside&lt;/em&gt; of the &lt;code&gt;if&lt;/code&gt; body,
+&lt;span style=&#34;color:#66d9ef&#34;&gt;fi&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;The &lt;code&gt;attach-session&lt;/code&gt; command should be &lt;em&gt;outside&lt;/em&gt; of the &lt;code&gt;if&lt;/code&gt; body,
 because it will be run in both cases (even if the session doesn&amp;rsquo;t have
 to be created, we still want to attach the one that already exists).&lt;/p&gt;
+
 &lt;h3 id=&#34;conclusion&#34;&gt;Conclusion&lt;/h3&gt;
+
 &lt;p&gt;That is it. Here is the script with everything all put together:&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;color:#75715e&#34;&gt;#!/bin/sh
 &lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;
@@ -391,8 +486,8 @@ SESSIONEXISTS&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span st
 &lt;span style=&#34;color:#66d9ef&#34;&gt;fi&lt;/span&gt;
 
 &lt;span style=&#34;color:#75715e&#34;&gt;# Attach Session, on the Main window&lt;/span&gt;
-tmux attach-session -t $SESSION:0
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;I hope this post has been helpful! Although, I have to admit that this post
+tmux attach-session -t $SESSION:0&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;I hope this post has been helpful! Although, I have to admit that this post
 &lt;em&gt;may&lt;/em&gt; be moot if I decide check out
 &lt;a href=&#34;https://github.com/tmuxinator/tmuxinator&#34;&gt;tmuxinator&lt;/a&gt; (which a co-worker
 recommended) &amp;hellip; oh well. I guess this endeavor was still a good exercise in
@@ -409,18 +504,26 @@ some bash scripting :P.&lt;/p&gt;</description>
 During the early days of use, I occasionally had difficulty configuring it on
 new machines, but those days appear to be long gone. It is a simple, generic,
 yet flexible system.  Here&amp;rsquo;s how to get started.&lt;/p&gt;
+
 &lt;p&gt;&lt;em&gt;(but first, some background&amp;hellip; feel free to skip ahead)&lt;/em&gt;&lt;/p&gt;
+
 &lt;h2 id=&#34;my-password-manager-history&#34;&gt;My Password Manager History&lt;/h2&gt;
+
 &lt;p&gt;For the longest time, I didn&amp;rsquo;t use a password manager (in my defence, not many
 people did). Then in college, I started using
 &lt;a href=&#34;https://www.lastpass.com/&#34;&gt;LastPass&lt;/a&gt;. It was simple and made it easy to switch
 all of my passwords to randomly generated ones. I had a good system that
 worked for a few years, and  was even able to integrate my
 &lt;a href=&#34;https://www.yubico.com&#34;&gt;yubikey&lt;/a&gt; with it.&lt;/p&gt;
-&lt;!-- raw HTML omitted --&gt;
+
+&lt;p&gt;&lt;center&gt;
+&lt;a href=&#34;../../img/posts/setting-up-pass/LastPass-Logo.png&#34;&gt;&lt;img alt=&#34;LastPass logo&#34; src=&#34;../../img/posts/setting-up-pass/LastPass-Logo.png&#34; style=&#34;max-width: 100%;&#34;/&gt;&lt;/a&gt;
+&lt;/center&gt;&lt;/p&gt;
+
 &lt;p&gt;Then in 2015, Lastpass was acquired by &lt;a href=&#34;https://www.logmeininc.com&#34;&gt;LogMeIn&lt;/a&gt;,
 which had a questionable past of Linux support. Like many others in the open
 source community&amp;hellip; I started looking for alternatives.&lt;/p&gt;
+
 &lt;p&gt;I had already been searching for a LastPass replacement even before the
 acquisition. My search was mainly fueled by one big issue I had with
 LastPass&amp;hellip; it required a web browser to use.  Additionally, to utilize it&amp;rsquo;s full
@@ -429,14 +532,18 @@ often uses alternative web browsers (like &lt;a href=&#34;https://qutebrowser.or
 or works on headless machines, I try not to use applications that exist solely
 as a FireFox/Chome app.  I am also not a fan of pure website-apps in
 general.&lt;/p&gt;
+
 &lt;p&gt;So, as the I watched others switch password managers amongst the acquisition
 hype, one switch I remember seeing was Chris Fischer of the Linux Action Show.
 In episode 387 of LAS, Chris and Noah (his co-host) discussed LastPass alternatives, and
 Chris highlighted his switch to
 &lt;a href=&#34;https://www.youtube.com/watch?v=OfgZ5Fh-NfE&amp;amp;feature=youtu.be&amp;amp;t=4935&#34;&gt;pass&lt;/a&gt;.
 While I don&amp;rsquo;t think he kept with the system long-term&amp;hellip; I have.&lt;/p&gt;
-&lt;h2 id=&#34;what-i-like-about-passhttpswwwpasswordstoreorg&#34;&gt;What I like about &lt;a href=&#34;https://www.passwordstore.org&#34;&gt;pass&lt;/a&gt;&lt;/h2&gt;
+
+&lt;h2 id=&#34;what-i-like-about-pass-https-www-passwordstore-org&#34;&gt;What I like about &lt;a href=&#34;https://www.passwordstore.org&#34;&gt;pass&lt;/a&gt;&lt;/h2&gt;
+
 &lt;h4 id=&#34;unix-philosophy-simplicity&#34;&gt;Unix Philosophy &amp;ldquo;Simplicity&amp;rdquo;&lt;/h4&gt;
+
 &lt;p&gt;Okay. The average computer user will not think &lt;code&gt;pass&lt;/code&gt; is &amp;ldquo;simple&amp;rdquo;. I agree.
 However, being designed to follow the &lt;a href=&#34;https://en.wikipedia.org/wiki/Unix_philosophy&#34;&gt;Unix
 philosophy&lt;/a&gt;, pass&amp;rsquo;s &lt;em&gt;architecture
@@ -447,126 +554,188 @@ with many other great tools, such as bash, git,
 &lt;a href=&#34;https://git.zx2c4.com/password-store/tree/contrib/dmenu&#34;&gt;dmenu&lt;/a&gt;,
 &lt;a href=&#34;https://hackage.haskell.org/package/xmonad-contrib-0.13/docs/XMonad-Prompt-Pass.html&#34;&gt;xmonad&lt;/a&gt;
 and &lt;a href=&#34;https://git.zx2c4.com/password-store/tree/contrib/emacs&#34;&gt;emacs&lt;/a&gt;.&lt;/p&gt;
+
 &lt;h4 id=&#34;command-line-tool&#34;&gt;Command Line Tool&lt;/h4&gt;
+
 &lt;p&gt;As a command-line tool, I can use pass anywhere. It doesn&amp;rsquo;t matter how conventional or strange the
 setup may be. I can have it on my desktop, on a headless server, or even inside a container. It
 makes no difference.  Even if I am on a public computer, if I can &lt;code&gt;ssh&lt;/code&gt; into one of my servers, I
 can access my passwords.&lt;/p&gt;
+
 &lt;h4 id=&#34;flexible&#34;&gt;Flexible&lt;/h4&gt;
+
 &lt;p&gt;By default, pass assumes the first line of a store file is the password.  However, the
 multi-line contents of a pass file can be anything. For example, pass could be used securely store
 encrypted notes. This gives the system a ton of flexibility, as the password items don&amp;rsquo;t &lt;em&gt;have&lt;/em&gt; to
 conform to any sort of template.&lt;/p&gt;
-&lt;h2 id=&#34;installing-pass--help-packages&#34;&gt;Installing Pass &amp;amp; Help Packages&lt;/h2&gt;
+
+&lt;h2 id=&#34;installing-pass-help-packages&#34;&gt;Installing Pass &amp;amp; Help Packages&lt;/h2&gt;
+
 &lt;p&gt;On Fedora, pass can be installed using &lt;code&gt;dnf&lt;/code&gt;. For other systems, check out the
 &amp;ldquo;Download&amp;rdquo; section of the &lt;a href=&#34;https://www.passwordstore.org/&#34;&gt;pass website&lt;/a&gt;.&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;sudo dnf install pass
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;configuring-pass&#34;&gt;Configuring Pass&lt;/h2&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;sudo dnf install pass&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h2 id=&#34;configuring-pass&#34;&gt;Configuring Pass&lt;/h2&gt;
+
 &lt;p&gt;After installing pass, there are few steps to configure it. First, we need to create a gpg key if
 one doesn&amp;rsquo;t already exist. Then, we need to initialize a password-store using that key.&lt;/p&gt;
+
 &lt;p&gt;&lt;strong&gt;Note:&lt;/strong&gt; &lt;em&gt;I went a little heavy with the animation images in the remainder of
 the post. Sorry. I hope they are more useful than annoying. Being a visual learner, at the very
 least they are helpful for me when I reference this post in the future. &amp;hellip;&lt;/em&gt;&lt;/p&gt;
+
 &lt;h3 id=&#34;new-gpg-key&#34;&gt;New GPG Key&lt;/h3&gt;
-&lt;!-- raw HTML omitted --&gt;
-&lt;p&gt;To create a gpg key, the &lt;code&gt;gpg2 --gen-key&lt;/code&gt; command is normally used.  However, I opted to use &lt;code&gt;gpg2 --full-gen-key&lt;/code&gt;, which allows for a bit more control during setup.  The command will prompt for
+
+&lt;p&gt;&lt;img alt=&#34;animation running gpg --gen-key&#34; src=&#34;../../img/posts/setting-up-pass/animation-hover.png&#34; onmouseover=&#34;this.src=&#39;../../img/posts/setting-up-pass/generate-gpg-keys.gif&#39;&#34; onmouseout=&#34;this.src=&#39;../../img/posts/setting-up-pass/animation-hover.png&#39;&#34; style=&#34;max-width: 100%;&#34;/&gt;
+&lt;div class=&#34;caption&#34;&gt;Generate a new gpg key with &lt;code&gt;gpg2 --full-gen-key&lt;/code&gt;.&lt;/div&gt;&lt;/p&gt;
+
+&lt;p&gt;To create a gpg key, the &lt;code&gt;gpg2 --gen-key&lt;/code&gt; command is normally used.  However, I opted to use &lt;code&gt;gpg2
+--full-gen-key&lt;/code&gt;, which allows for a bit more control during setup.  The command will prompt for
 several bits of information, and the default selections are generally fine for most of the options
 (Personally, I use a 4096-bit key, because&amp;hellip; why not?). At the end it will ask for a
 name, Password, and optional comment.&lt;/p&gt;
+
 &lt;p&gt;&lt;em&gt;It should be noted that &lt;code&gt;gpg2&lt;/code&gt; most likely needs to be used instead of &lt;code&gt;gpg&lt;/code&gt;
 for pass. However, it may vary depending on distribution and the package
 versions.&lt;/em&gt;&lt;/p&gt;
+
 &lt;h3 id=&#34;pass-init&#34;&gt;Pass Init&lt;/h3&gt;
-&lt;!-- raw HTML omitted --&gt;
+
+&lt;p&gt;&lt;img alt=&#34;Crating new pass store with pass init&#34; src=&#34;../../img/posts/setting-up-pass/animation-hover.png&#34; onmouseover=&#34;this.src=&#39;../../img/posts/setting-up-pass/pass-init.gif&#39;&#34; onmouseout=&#34;this.src=&#39;../../img/posts/setting-up-pass/animation-hover.png&#39;&#34; style=&#34;max-width: 100%;&#34;/&gt;
+&lt;div class=&#34;caption&#34;&gt;Initialize a new pass store with &lt;code&gt;pass init&lt;/code&gt;.&lt;/div&gt;&lt;/p&gt;
+
 &lt;p&gt;After a gpg key has been generated, it can be used with pass.  First, find the key&amp;rsquo;s ID by using
 &lt;code&gt;gpg2 --list-secret-keys&lt;/code&gt;. Then, configure pass with &lt;code&gt;pass init GPG-KEY-ID&lt;/code&gt;. This will create a
 password-store directory, located by default at &lt;code&gt;~/.password-store/&lt;/code&gt;.&lt;/p&gt;
+
 &lt;h3 id=&#34;add-some-items&#34;&gt;Add some items&lt;/h3&gt;
-&lt;!-- raw HTML omitted --&gt;
+
+&lt;p&gt;&lt;img alt=&#34;Adding, editing, and retrieving some passwords with `pass`, `pass insert`, `pass generate`, and `pass edit`&#34; src=&#34;../../img/posts/setting-up-pass/animation-hover.png&#34; onmouseover=&#34;this.src=&#39;../../img/posts/setting-up-pass/pass-add-demo.gif&#39;&#34; onmouseout=&#34;this.src=&#39;../../img/posts/setting-up-pass/animation-hover.png&#39;&#34; style=&#34;max-width: 100%;&#34;/&gt;
+&lt;div class=&#34;caption&#34;&gt;Adding, editing, and retrieving some passwords with &lt;code&gt;pass&lt;/code&gt;, &lt;code&gt;pass insert&lt;/code&gt;, &lt;code&gt;pass generate&lt;/code&gt;, and &lt;code&gt;pass edit&lt;/code&gt;.&lt;/div&gt;&lt;/p&gt;
+
 &lt;p&gt;With pass initialized, lets start adding passwords to it! Here are &lt;em&gt;some&lt;/em&gt; of
 the most common commands to do so:&lt;/p&gt;
+
 &lt;h4 id=&#34;insert&#34;&gt;insert&lt;/h4&gt;
+
 &lt;p&gt;Simply put, &lt;code&gt;pass insert&lt;/code&gt; &amp;hellip; inserts a password. Call it with the desired folder/file
 structure for the password, and pass will then prompt for the password to
 save. That&amp;rsquo;s it.&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;pass insert Shopping/amazon.com/ryan
-&lt;/code&gt;&lt;/pre&gt;&lt;h4 id=&#34;pass-generate&#34;&gt;pass generate&lt;/h4&gt;
+&lt;pre&gt;&lt;code&gt;pass insert Shopping/amazon.com/ryan&lt;/code&gt;&lt;/pre&gt;
+&lt;h4 id=&#34;pass-generate&#34;&gt;pass generate&lt;/h4&gt;
+
 &lt;p&gt;In addition to inserting existing passwords, pass can also &lt;em&gt;generate new&lt;/em&gt; ones
 using &lt;code&gt;pass generate&lt;/code&gt;. Just provide the password path, and optionally the
 length of the password. Pass will then generate a random password, spit it out
 on screen, and insert the entry to the password-store.&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;pass generate Shopping/SomeFakeStore/ryan 35
-&lt;/code&gt;&lt;/pre&gt;&lt;h4 id=&#34;pass-edit&#34;&gt;pass edit&lt;/h4&gt;
+&lt;pre&gt;&lt;code&gt;pass generate Shopping/SomeFakeStore/ryan 35&lt;/code&gt;&lt;/pre&gt;
+&lt;h4 id=&#34;pass-edit&#34;&gt;pass edit&lt;/h4&gt;
+
 &lt;p&gt;Generating passwords is great, but being a forgetful person, I like to keep additional information
 in my pass entries (username, email, website url). This is where &lt;code&gt;pass edit&lt;/code&gt; comes in. When called,
 &lt;code&gt;pass edit&lt;/code&gt; will open up the contents of the entry in the default editor. From there, make the
 changes, and save.&lt;/p&gt;
+
 &lt;p&gt;For example:&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;pass edit Shopping/SomeFakeStore/ryan
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Then, in vim:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;pass edit Shopping/SomeFakeStore/ryan&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Then, in vim:&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&amp;lt;&amp;amp;DdU1x&amp;lt;&amp;amp;~&amp;amp;&lt;span style=&#34;color:#f92672&#34;&gt;{&lt;/span&gt;;w7w&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;kvsWdHAF-\Vi&amp;#34;&lt;/span&gt;I9Q&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt;I
 ---
 Username: ryan
 Password: &amp;lt;&amp;amp;DdU1x&amp;lt;&amp;amp;~&amp;amp;&lt;span style=&#34;color:#f92672&#34;&gt;{&lt;/span&gt;;w7w&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;kvsWdHAF-\Vi&amp;#34;&lt;/span&gt;I9Q&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt;I
 URL: https://www.some-bs-store.com
-Notes: I love this place!
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h4 id=&#34;pass&#34;&gt;pass&lt;/h4&gt;
+Notes: I love this place!&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h4 id=&#34;pass&#34;&gt;pass&lt;/h4&gt;
+
 &lt;p&gt;Lastly, to retrieve stored passwords, call &lt;code&gt;pass&lt;/code&gt; with the
 password entry. Optionally, use the &lt;code&gt;-c&lt;/code&gt; flag to copy the password
 (first line if a multi-line entry) to the clipboard instead of spewing it into
 the terminal.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;pass Shopping/SomeFakeStore/ryan
 &lt;span style=&#34;color:#75715e&#34;&gt;## or ##&lt;/span&gt;
-pass -c Shopping/SomeFakeStore/ryan
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;making-pass-better&#34;&gt;Making Pass Better&lt;/h2&gt;
+pass -c Shopping/SomeFakeStore/ryan&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h2 id=&#34;making-pass-better&#34;&gt;Making Pass Better&lt;/h2&gt;
+
 &lt;p&gt;With pass&amp;rsquo;s flexibility, there are many additional features to help improve it for each user&amp;rsquo;s
 needs.  For me, there are two extensions that make my pass experience &lt;em&gt;much&lt;/em&gt; more enjoyable.&lt;/p&gt;
+
 &lt;h3 id=&#34;pass-git&#34;&gt;Pass Git&lt;/h3&gt;
-&lt;!-- raw HTML omitted --&gt;
+
+&lt;p&gt;&lt;img alt=&#34;Managing and maintaining the password-store with `pass git`&#34; src=&#34;../../img/posts/setting-up-pass/animation-hover.png&#34; onmouseover=&#34;this.src=&#39;../../img/posts/setting-up-pass/pass-git.gif&#39;&#34; onmouseout=&#34;this.src=&#39;../../img/posts/setting-up-pass/animation-hover.png&#39;&#34; style=&#34;max-width: 100%;&#34;/&gt;
+&lt;div class=&#34;caption&#34;&gt;Use git to automatically maintain your password-store&lt;/div&gt;&lt;/p&gt;
+
 &lt;p&gt;Password-Store items are text files, which allows them to be easily version controlled.
 Consequently, pass has built in support for git with the &lt;code&gt;pass git&lt;/code&gt; command. If a password-store
 is linked up to a git repo, normal git commands (&lt;code&gt;add&lt;/code&gt;, &lt;code&gt;mv&lt;/code&gt;, &lt;code&gt;rm&lt;/code&gt;&amp;hellip;) can be used with the store.&lt;/p&gt;
+
 &lt;p&gt;Additionally, when modifying the store&amp;rsquo;s contents, &lt;code&gt;pass git&lt;/code&gt; will automatically create commits
 that reflect the changes. After adding or modifying a password, issue the command &lt;code&gt;pass git push&lt;/code&gt; on the updated
 machine, and then &lt;code&gt;pass git pull&lt;/code&gt; on others to sync the changes.&lt;/p&gt;
+
 &lt;h3 id=&#34;passmeu&#34;&gt;Passmeu&lt;/h3&gt;
-&lt;!-- raw HTML omitted --&gt;
+
+&lt;p&gt;&lt;center&gt;
+&lt;video style=&#34;max-width:100%;&#34; controls&gt;
+  &lt;source src=&#34;../../img/posts/setting-up-pass/passmenu_demo.mp4&#34; type=&#34;video/mp4&#34;&gt;
+  &lt;source src=&#34;movie.ogg&#34; type=&#34;video/ogg&#34;&gt;
+Your browser does not support the video tag.
+&lt;/video&gt;
+&lt;div id=&#34;caption&#34;&gt;&lt;code&gt;passmenu&lt;/code&gt; lets you easily search and select a pass item.&lt;/div&gt;
+&lt;/center&gt;&lt;/p&gt;
+
 &lt;p&gt;While having a CLI password manager is nice when working with headless systems, it can be a bit
 cumbersome for normal day-to-day use. Hence,
 &lt;a href=&#34;https://git.zx2c4.com/password-store/tree/contrib/dmenu/passmenu&#34;&gt;passmenu&lt;/a&gt;.&lt;/p&gt;
+
 &lt;p&gt;Passmenu is a script (now built into the upstream project) that wraps
 &lt;a href=&#34;https://tools.suckless.org/dmenu/&#34;&gt;dmenu&lt;/a&gt; around pass. When &lt;code&gt;passmenu&lt;/code&gt; is run, &lt;code&gt;dmenu&lt;/code&gt; opens up
 with all the password-store items to search/filter from. When an item is
 selected in dmenu, the user is prompted for the gpg password (if it hasn&amp;rsquo;t been unlocked recently),
 after which the password is then temporarily added to the user&amp;rsquo;s clipboard.&lt;/p&gt;
+
 &lt;p&gt;On all my computers, I bind the command &lt;code&gt;passmenu&lt;/code&gt; to the keys &lt;code&gt;SUPER&lt;/code&gt; + &lt;code&gt;SHIFT&lt;/code&gt; + &lt;code&gt;P&lt;/code&gt;.  Whenever I
 need a password, I just hit those three keys, and dmenu pops up so I can search for the password I
 want.  After typing in my master passphrase, I can paste the password wherever I need it.  Passmenu
 makes pass much more reasonable to use.&lt;/p&gt;
+
 &lt;p&gt;&lt;em&gt;See Also: &lt;a href=&#34;https://github.com/carnager/rofi-pass&#34;&gt;rofi-pass&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
+
 &lt;h2 id=&#34;setting-up-your-pass-setup-on-a-new-system&#34;&gt;Setting up your pass setup on a new system&lt;/h2&gt;
+
 &lt;p&gt;Now that I&amp;rsquo;ve done it over a hundred times, setting up a new system is easy. Here&amp;rsquo;s my usual steps:&lt;/p&gt;
+
 &lt;h4 id=&#34;export-gpg-key&#34;&gt;Export GPG Key&lt;/h4&gt;
-&lt;!-- raw HTML omitted --&gt;
+
+&lt;p&gt;&lt;img alt=&#34;Export a gpg key to use with pass on another system&#34; src=&#34;../../img/posts/setting-up-pass/animation-hover.png&#34; onmouseover=&#34;this.src=&#39;../../img/posts/setting-up-pass/export-key.gif&#39;&#34; onmouseout=&#34;this.src=&#39;../../img/posts/setting-up-pass/animation-hover.png&#39;&#34; style=&#34;max-width: 100%;&#34;/&gt;
+&lt;div class=&#34;caption&#34;&gt;Export a gpg key to save or use on another system.&lt;/div&gt;&lt;/p&gt;
+
 &lt;p&gt;First, export the password-store&amp;rsquo;s gpg key.  To do that, use &lt;code&gt;gpg2 --list-secret-keys&lt;/code&gt; to confirm the
 key&amp;rsquo;s ID, then export that key to a file with the following command:&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;gpg2 --export-secret-keys KEY-ID &amp;gt;&amp;gt; key-filename.gpg
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Next, transfer that file to the new machine.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;gpg2 --export-secret-keys KEY-ID &amp;gt;&amp;gt; key-filename.gpg&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Next, transfer that file to the new machine.&lt;/p&gt;
+
 &lt;h4 id=&#34;import-gpg-key&#34;&gt;Import GPG Key&lt;/h4&gt;
-&lt;!-- raw HTML omitted --&gt;
+
+&lt;p&gt;&lt;img alt=&#34;Import a gpg key and trust it to use with pass&#34; src=&#34;../../img/posts/setting-up-pass/animation-hover.png&#34; onmouseover=&#34;this.src=&#39;../../img/posts/setting-up-pass/pass-import-gpg-key.gif&#39;&#34; onmouseout=&#34;this.src=&#39;../../img/posts/setting-up-pass/animation-hover.png&#39;&#34; style=&#34;max-width: 100%;&#34;/&gt;
+&lt;div class=&#34;caption&#34;&gt;Import and trust a gpg key to use it with pass.&lt;/div&gt;&lt;/p&gt;
+
 &lt;p&gt;On the new machine, import the gpg key using the following command (note, you
 will be required to enter the key&amp;rsquo;s passphrase):&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;gpg2 --import key-filename.gpg
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;After the key is imported, its &lt;em&gt;trust level&lt;/em&gt; will have to be set to &lt;em&gt;ultimate&lt;/em&gt;. Use the command
+&lt;pre&gt;&lt;code&gt;gpg2 --import key-filename.gpg&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;After the key is imported, its &lt;em&gt;trust level&lt;/em&gt; will have to be set to &lt;em&gt;ultimate&lt;/em&gt;. Use the command
 &lt;code&gt;gpg2 --edit-key KEY-ID&lt;/code&gt; to enter the edit prompt. From there, type &lt;code&gt;trust&lt;/code&gt; and hit &lt;code&gt;ENTER&lt;/code&gt;. The
 various levels will be shown on screen. Enter and confirm &lt;code&gt;5&lt;/code&gt;, to select &amp;lsquo;Ultimate&amp;rsquo;. Lastly, use
 &lt;code&gt;quit&lt;/code&gt; to leave the gpg key editor.&lt;/p&gt;
+
 &lt;h4 id=&#34;pull-pass-repo&#34;&gt;Pull Pass Repo&lt;/h4&gt;
-&lt;p&gt;With the keys configured, the last step is to pull down the password-store to the new machine. If using git, this can be done with &lt;code&gt;pass git clone&lt;/code&gt;&amp;hellip; but if I&amp;rsquo;m being honest, I usually just do a normal &lt;code&gt;git clone&lt;/code&gt;, and then move
+
+&lt;p&gt;With the keys configured, the last step is to pull down the password-store to the new machine. If using git, this can be done with &lt;code&gt;pass git
+clone&lt;/code&gt;&amp;hellip; but if I&amp;rsquo;m being honest, I usually just do a normal &lt;code&gt;git clone&lt;/code&gt;, and then move
 the folder to &lt;code&gt;~/.password-store/&lt;/code&gt;. If not using git, just copy the store&amp;rsquo;s directory and files to
 the new machine. The important thing is that the store can be found at &lt;code&gt;~/.password-store&lt;/code&gt; (by
 default, this of course can be changed using &lt;code&gt;pass init&lt;/code&gt;).&lt;/p&gt;
+
 &lt;h3 id=&#34;conclusion&#34;&gt;Conclusion&lt;/h3&gt;
+
 &lt;p&gt;That&amp;rsquo;s about it. As I previously stated, I&amp;rsquo;ve been loving pass for years, and I
 don&amp;rsquo;t plan to be switching off of it any time soon. At this point, if there is
 something I want to improve with my password setup&amp;hellip; I&amp;rsquo;m sure the community
@@ -585,7 +754,9 @@ of evil mode and use-package. As I was wrapping up, I learned of yet
 &lt;em&gt;another&lt;/em&gt; emacs package that wil forever change how I maintain my
 emacs
 configuration&amp;hellip; &lt;a href=&#34;https://orgmode.org/worg/org-contrib/babel/intro.html&#34;&gt;org-babel&lt;/a&gt;.&lt;/p&gt;
+
 &lt;h2 id=&#34;org-babel&#34;&gt;Org Babel&lt;/h2&gt;
+
 &lt;p&gt;Org-babel is an emacs package, that lets take an
 &lt;a href=&#34;https://orgmode.org/&#34;&gt;org-mode&lt;/a&gt; file, and evaluates all of the &lt;a href=&#34;https://orgmode.org/org.html#Literal-examples&#34;&gt;code
 blocks&lt;/a&gt; contained
@@ -593,13 +764,17 @@ within it. This means I can write an annotated org file, filled with
 &lt;code&gt;emacs-lisp&lt;/code&gt; code blocks, and export just the emacs-lisp code. After
 testing it out, I realized that the main emacs lisp file I use is&amp;hellip; my
 &lt;code&gt;.emacs&lt;/code&gt; file&amp;hellip;&lt;/p&gt;
+
 &lt;h2 id=&#34;setup&#34;&gt;Setup&lt;/h2&gt;
+
 &lt;p&gt;Installing babel couldn&amp;rsquo;t be simpler. If you are running Emacs version
 24 or higher, and a current version of Org-mode, Babel is already
 available by default. In order to generate an &lt;code&gt;.emacs&lt;/code&gt; config from an
 &lt;code&gt;.org&lt;/code&gt; file, we need to first setup a &lt;code&gt;config.org&lt;/code&gt; file, and then tell
 &lt;code&gt;.emacs&lt;/code&gt; to load it with org-babel.&lt;/p&gt;
-&lt;h3 id=&#34;configorg&#34;&gt;config.org&lt;/h3&gt;
+
+&lt;h3 id=&#34;config-org&#34;&gt;config.org&lt;/h3&gt;
+
 &lt;p&gt;First, start by creating an &lt;code&gt;.org&lt;/code&gt; file to use for all of the
 configuration content. This can be named anything, and exist anywhere,
 but I like to keep mine in the emacs section of my &lt;a href=&#34;https://github.com/himmAllRight/dotfiles&#34;&gt;dotfiles
@@ -609,47 +784,68 @@ a small header section at the top&amp;hellip; because why not?&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-org&#34; data-lang=&#34;org&#34;&gt;&lt;span style=&#34;color:#75715e&#34;&gt;#+TITLE&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;: My Emacs Configuration&lt;/span&gt;
 &lt;span style=&#34;color:#75715e&#34;&gt;#+AUTHOR&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;: Ryan Himmelwright&lt;/span&gt;
 &lt;span style=&#34;color:#75715e&#34;&gt;#+EMAIL&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;: ryan@himmelwright.net&lt;/span&gt;
-&lt;span style=&#34;color:#75715e&#34;&gt;#+OPTIONS&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;: num:nil&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;After that, I broke down my file by creating org headings for the
+&lt;span style=&#34;color:#75715e&#34;&gt;#+OPTIONS&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;: num:nil&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;After that, I broke down my file by creating org headings for the
 different groups of the configuration. For example, I started with the
 headings &lt;code&gt;Repos &amp;amp; Core Packages&lt;/code&gt;, &lt;code&gt;Core Setup&lt;/code&gt;, &lt;code&gt;Evil Mode&lt;/code&gt;, &lt;code&gt;Ivy&lt;/code&gt;,
 &lt;code&gt;Writing&lt;/code&gt;, &lt;code&gt;Development&lt;/code&gt;&amp;hellip; etc.&lt;/p&gt;
-&lt;p&gt;&lt;em&gt;Note: In org-mode, use &amp;ldquo;*&amp;rdquo; to create headings. Each contiguous &amp;ldquo;*&amp;rdquo;
+
+&lt;p&gt;&lt;em&gt;Note: In org-mode, use &amp;ldquo;*&amp;rdquo; to create headings. Each contiguous &amp;ldquo;*&amp;ldquo;
 corresponds to the equivalent HTML heading level. Ex: &lt;code&gt;*&lt;/code&gt; == &lt;code&gt;&amp;lt;h1&amp;gt;&lt;/code&gt;,
 &lt;code&gt;**&lt;/code&gt; == &lt;code&gt;&amp;lt;h2&amp;gt;&lt;/code&gt;, and so on.&lt;/em&gt;&lt;/p&gt;
+
 &lt;p&gt;I started transferring the emacs-lisp code from my previous &lt;code&gt;.emacs&lt;/code&gt;
 file, to under each heading in &lt;code&gt;config.org&lt;/code&gt;. As I transferred text, I
 transformed the comments that described each code snippet into normal
 org text, and wrapped the &lt;code&gt;emacs-lisp&lt;/code&gt; inside an org code block.&lt;/p&gt;
-&lt;p&gt;&lt;!-- raw HTML omitted --&gt;&lt;!-- raw HTML omitted --&gt;&lt;!-- raw HTML omitted --&gt;
-&lt;!-- raw HTML omitted --&gt;&lt;/p&gt;
-&lt;!-- raw HTML omitted --&gt;
+
+&lt;p&gt;&lt;a href=&#34;../../img/posts/org-babel-setup/config-org-example1.png&#34;&gt;&lt;img src=&#34;../../img/posts/org-babel-setup/config-org-example1.png&#34; style=&#34;max-width: 100%; float: left; margin: 0px 15px 0px 0px;&#34; alt=&#34;Example snippet of my org-babel config.org file&#34; /&gt;&lt;/a&gt;
+&lt;br clear=&#34;all&#34;&gt;
+&lt;div class=&#34;caption&#34;&gt;Example snippet of my org-babel config.org file&lt;/div&gt;&lt;/p&gt;
+
 &lt;p&gt;To create a code block, use the &lt;code&gt;#+BEGIN_SRC emacs-lisp&lt;/code&gt; and
 &lt;code&gt;#+END_SRC&lt;/code&gt; org tags to encapsulate the &lt;code&gt;emacs-lisp&lt;/code&gt; code. Continue to
 do this until all of the desired emacs-lisp code is contained inside
 org code blocks.&lt;/p&gt;
+
 &lt;h5 id=&#34;side-note-easy-org-code-blocks&#34;&gt;Side Note: Easy Org Code Blocks&lt;/h5&gt;
-&lt;p&gt;&lt;!-- raw HTML omitted --&gt;&lt;!-- raw HTML omitted --&gt;&lt;!-- raw HTML omitted --&gt; &lt;!-- raw HTML omitted --&gt; &lt;!-- raw HTML omitted --&gt;Code block can be easily created
-with &lt;code&gt;&amp;lt;s&lt;/code&gt; and &lt;code&gt;TAB&lt;/code&gt;.&lt;!-- raw HTML omitted --&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;../../img/posts/org-babel-setup/easy-org-mode-code.gif&#34;&gt;&lt;img
+src=&#34;../../img/posts/org-babel-setup/easy-org-mode-code.gif&#34;
+style=&#34;max-width: 100%; float: left; margin: 0px 15px 0px 0px;&#34;
+alt=&#34;Example snippet of my org-babel config.org file&#34; /&gt;&lt;/a&gt; &lt;br
+clear=&#34;all&#34;&gt; &lt;div class=&#34;caption&#34;&gt;Code block can be easily created
+with &lt;code&gt;&amp;lt;s&lt;/code&gt; and &lt;code&gt;TAB&lt;/code&gt;.&lt;/div&gt;&lt;/p&gt;
+
 &lt;p&gt;In org-mode, you can write &lt;code&gt;&amp;lt;s&lt;/code&gt;, then hit &lt;code&gt;TAB&lt;/code&gt; and it will expand
 into the &lt;code&gt;BEGIN_SRC&lt;/code&gt; and &lt;code&gt;END_SRC&lt;/code&gt; tags. Just don&amp;rsquo;t forget to add
 &lt;code&gt;emacs-lisp&lt;/code&gt; to the &lt;code&gt;BEGIN_SRC&lt;/code&gt; tag!&lt;/p&gt;
+
 &lt;h3 id=&#34;emacs&#34;&gt;.emacs&lt;/h3&gt;
+
 &lt;p&gt;For the contents of &lt;code&gt;.emacs&lt;/code&gt;, call &lt;code&gt;package-initialize&lt;/code&gt; and then have
 &lt;code&gt;org-babel&lt;/code&gt; load the &lt;code&gt;config.org&lt;/code&gt; file.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-emacs-lisp&#34; data-lang=&#34;emacs-lisp&#34;&gt;(package-initialize)
-(org-babel-load-file &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;~/dotfiles/emacs/config.org&amp;#34;&lt;/span&gt;)
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;That&amp;rsquo;s it. Assuming the &lt;code&gt;config.org&lt;/code&gt; is complete, emacs should now
+(org-babel-load-file &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;~/dotfiles/emacs/config.org&amp;#34;&lt;/span&gt;)&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;That&amp;rsquo;s it. Assuming the &lt;code&gt;config.org&lt;/code&gt; is complete, emacs should now
 initialize using the code snippets from &lt;em&gt;it&lt;/em&gt;. While these are the only
 two &lt;em&gt;required&lt;/em&gt; lines, do note that emacs will still write the
 &lt;code&gt;#&#39;custom-set-variables&lt;/code&gt; to the bottom of the &lt;code&gt;.emacs&lt;/code&gt; file. That&amp;rsquo;s
 fine. If anything, it makes it easier to source control the &lt;em&gt;actual&lt;/em&gt;
 configuration file, since emacs isn&amp;rsquo;t constantly adding to it,
 changing the diff.&lt;/p&gt;
+
 &lt;h2 id=&#34;what-i-like&#34;&gt;What I like&lt;/h2&gt;
+
 &lt;h3 id=&#34;organized&#34;&gt;Organized&lt;/h3&gt;
-&lt;p&gt;&lt;!-- raw HTML omitted --&gt;&lt;!-- raw HTML omitted --&gt;&lt;!-- raw HTML omitted --&gt; &lt;!-- raw HTML omitted --&gt; &lt;!-- raw HTML omitted --&gt;Expanding org headers to
-easily find code.&lt;!-- raw HTML omitted --&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;../../img/posts/org-babel-setup/org-expand-example.gif&#34;&gt;&lt;img
+src=&#34;../../img/posts/org-babel-setup/org-expand-example.gif&#34;
+style=&#34;max-width: 100%; float: left; margin: 0px 15px 0px 0px;&#34;
+alt=&#34;Example snippet of expanding org headers to easily find code.&#34;
+/&gt;&lt;/a&gt; &lt;br clear=&#34;all&#34;&gt; &lt;div class=&#34;caption&#34;&gt;Expanding org headers to
+easily find code.&lt;/div&gt;&lt;/p&gt;
+
 &lt;p&gt;Org mode&amp;rsquo;s hierarchical structure inherently organizes the content of
 files. Using it for my emacs configuration is no different. I can use
 org headers to easily break down my file into sections and
@@ -657,7 +853,9 @@ sub-sections, which I can then expand and collapse as needed. For
 example, my &lt;code&gt;config.org&lt;/code&gt; is currently over 500 lines long, but with
 all the headers collapsed, it displays in less than 20. From there I
 can just expand to the section I need.&lt;/p&gt;
+
 &lt;h3 id=&#34;maintainable&#34;&gt;Maintainable&lt;/h3&gt;
+
 &lt;p&gt;Being so organized, the &lt;code&gt;config.org&lt;/code&gt; file is very easy to maintain. If
 I want to edit a setting, I can just search through the headers for
 the section, and then edit the code block and/or text. If I want to
@@ -665,20 +863,30 @@ add a new item, I can just insert a new header, add the code block I
 want, and maybe some explanatory text. Done. Most importantly, the
 structure helps prevent it from turning into an &lt;em&gt;in-production
 &amp;ldquo;scratch code&amp;rdquo;&lt;/em&gt; file&amp;hellip;&lt;/p&gt;
+
 &lt;h3 id=&#34;easy-to-read&#34;&gt;Easy to Read&lt;/h3&gt;
+
 &lt;p&gt;It should go without saying that the organization and maintainability
 of org-mode configurations make them extremely &lt;em&gt;readable&lt;/em&gt;. Not only is
 the source code easier to read, but org files can be
 &lt;a href=&#34;https://orgmode.org/manual/Exporting.html&#34;&gt;exported&lt;/a&gt; to all sorts of
 outputs (HTML, LaTeX, OpenDocument, etc). Combined with a style-sheet,
 these outputs can look quite professional.&lt;/p&gt;
-&lt;p&gt;&lt;!-- raw HTML omitted --&gt;&lt;!-- raw HTML omitted --&gt;&lt;!-- raw HTML omitted --&gt; &lt;!-- raw HTML omitted --&gt; &lt;!-- raw HTML omitted --&gt;Github renders org files as a markdown.&lt;!-- raw HTML omitted --&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;../../img/posts/org-babel-setup/github-config.png&#34;&gt;&lt;img
+src=&#34;../../img/posts/org-babel-setup/github-config.png&#34;
+style=&#34;max-width: 100%; float: left; margin: 0px 15px 0px 0px;&#34;
+alt=&#34;Example of how Github renders org files as a markdown&#34; /&gt;&lt;/a&gt; &lt;br
+clear=&#34;all&#34;&gt; &lt;div class=&#34;caption&#34;&gt;Github renders org files as a markdown.&lt;/div&gt;&lt;/p&gt;
+
 &lt;p&gt;Beyond normal &lt;code&gt;org&lt;/code&gt; exporting, &lt;a href=&#34;http://www.github.com&#34;&gt;Github&lt;/a&gt; does
 something awesome&amp;hellip; they &lt;em&gt;render&lt;/em&gt; &lt;code&gt;org&lt;/code&gt; files as a known markup
 language on their website! This means that if you click an &lt;code&gt;*.org&lt;/code&gt;
 file on Gihub&amp;rsquo;s web interface, it will display a rendered version of
 the content, instead of defaulting to the raw org text.&lt;/p&gt;
+
 &lt;h2 id=&#34;speaking-of-github&#34;&gt;Speaking of Github&amp;hellip;&lt;/h2&gt;
+
 &lt;p&gt;While I have always maintained my emacs configuration in &lt;a href=&#34;https://github.com/himmAllRight/dotfiles&#34;&gt;my dotfiles
 repo&lt;/a&gt;, org-babel has helped
 me step up my game. My current &lt;a href=&#34;../../post/new-dotfiles/&#34;&gt;dotfile
@@ -686,17 +894,25 @@ system&lt;/a&gt; has all of my
 emacs files in a separate &lt;code&gt;emacs&lt;/code&gt; folder. On Github, each directory in
 a repo can contain a &lt;code&gt;README&lt;/code&gt; file (or&amp;hellip;. a symlink to &lt;em&gt;another&lt;/em&gt;
 file&amp;hellip;)  to be displayed below the list of files.&lt;/p&gt;
+
 &lt;h2 id=&#34;my-maintained-config&#34;&gt;My Maintained Config&lt;/h2&gt;
-&lt;p&gt;&lt;!-- raw HTML omitted --&gt;&lt;!-- raw HTML omitted --&gt;&lt;!-- raw HTML omitted --&gt; &lt;!-- raw HTML omitted --&gt; &lt;!-- raw HTML omitted --&gt;Github renders org files as a
-markdown.&lt;!-- raw HTML omitted --&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;../../img/posts/org-babel-setup/github-emacs.png&#34;&gt;&lt;img
+src=&#34;../../img/posts/org-babel-setup/github-emacs.png&#34;
+style=&#34;max-width: 100%; float: left; margin: 0px 15px 0px 0px;&#34;
+alt=&#34;Example of how Github renders org files as a markdown&#34; /&gt;&lt;/a&gt; &lt;br
+clear=&#34;all&#34;&gt; &lt;div class=&#34;caption&#34;&gt;Github renders org files as a
+markdown.&lt;/div&gt;&lt;/p&gt;
+
 &lt;p&gt;In the emacs section of my dotfiles, I have created a symlink,
 &lt;code&gt;README.org&lt;/code&gt;, to my &lt;code&gt;config.org&lt;/code&gt; file:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;sudo ln -s config.org README.org
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Github recognizes this, so my &lt;code&gt;README&lt;/code&gt; file &amp;ldquo;contains&amp;rdquo; whatever the
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;sudo ln -s config.org README.org&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Github recognizes this, so my &lt;code&gt;README&lt;/code&gt; file &amp;ldquo;contains&amp;rdquo; whatever the
 contents of &lt;code&gt;config.org&lt;/code&gt; are. Now, when one visits the &lt;a href=&#34;https://github.com/himmAllRight/dotfiles/tree/master/emacs&#34;&gt;emacs
 section&lt;/a&gt;
 of my dotfiles repo, an organized, annotated, and always up-to-date
 version of my &amp;ldquo;&lt;code&gt;.emacs&lt;/code&gt;&amp;rdquo; file is displayed as the &lt;code&gt;README&lt;/code&gt;.&lt;/p&gt;
+
 &lt;p&gt;The Github support was the cherry on top of a new emacs configuration
 system I am already ecstatic about. I&amp;rsquo;ve been a fan of org-mode for
 years, and org-babel is one more feature to add to the growing list of
@@ -715,10 +931,15 @@ configuration again. However, spacemacs has shown me several packages
 that I want to incorporate into my new emacs setup. Rather than
 resurrect and Frankenstein the changes into my old &lt;code&gt;.emacs&lt;/code&gt;
 file&amp;hellip; I&amp;rsquo;m starting from scratch.&lt;/p&gt;
-&lt;p&gt;&lt;!-- raw HTML omitted --&gt;&lt;!-- raw HTML omitted --&gt;&lt;!-- raw HTML omitted --&gt;&lt;/p&gt;
-&lt;!-- raw HTML omitted --&gt;
+
+&lt;p&gt;&lt;a href=&#34;../../img/posts/emacs-config-evil-usepackage/newemacs1.png&#34;&gt;&lt;img src=&#34;../../img/posts/emacs-config-evil-usepackage/newemacs1.png&#34; style=&#34;max-width: 100%; float: left; margin: 0px 15px 0px 0px;&#34; alt=&#34;New Emacs Window&#34; /&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;div class=&#34;caption&#34;&gt;A window of my New Emacs configuration&lt;/div&gt;
+
 &lt;h2 id=&#34;evil-mode&#34;&gt;Evil Mode&lt;/h2&gt;
+
 &lt;h4 id=&#34;history&#34;&gt;History&lt;/h4&gt;
+
 &lt;p&gt;The one emacs package that spacemacs &lt;em&gt;really&lt;/em&gt; got me addicted to was
 &lt;a href=&#34;https://github.com/emacs-evil/evil&#34;&gt;Evil&lt;/a&gt;, which emulates the main
 features of the &lt;a href=&#34;https://www.vim.org&#34;&gt;vim&lt;/a&gt; text editor. I &lt;em&gt;started&lt;/em&gt;
@@ -728,8 +949,11 @@ the first power editor that I &lt;em&gt;really&lt;/em&gt; got into (I even bough
 to learn it better). I stuck with Vim until I became a professional
 LISP developer, and the switch back to Emacs was impossible to ignore,
 and obvious.&lt;/p&gt;
-&lt;p&gt;&lt;!-- raw HTML omitted --&gt;&lt;!-- raw HTML omitted --&gt;&lt;!-- raw HTML omitted --&gt;&lt;/p&gt;
-&lt;!-- raw HTML omitted --&gt;
+
+&lt;p&gt;&lt;a href=&#34;../../img/posts/emacs-config-evil-usepackage/vim.png&#34;&gt;&lt;img src=&#34;../../img/posts/emacs-config-evil-usepackage/vim.png&#34; style=&#34;max-width: 100%; float: left; margin: 0px 15px 0px 0px;&#34; alt=&#34;A Vim Window&#34; /&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;div class=&#34;caption&#34;&gt;The Vim editor&lt;/div&gt;
+
 &lt;p&gt;Even after switching to back Emacs, I have still enjoyed using command
 line applications like &lt;a href=&#34;https://cmus.github.io&#34;&gt;cmus&lt;/a&gt;,
 &lt;a href=&#34;https://github.com/ranger/ranger&#34;&gt;ranger&lt;/a&gt;, and
@@ -739,11 +963,14 @@ and often incorporate similar keyboard commands (at least the &lt;code&gt;j&lt;/
 prefer to &lt;em&gt;write&lt;/em&gt;, but not necessarily &lt;em&gt;edit&lt;/em&gt; code with emacs-syle
 navigation), I never lost my love for the homerow-centric, and
 efficient vim-style movement commands.&lt;/p&gt;
+
 &lt;h4 id=&#34;best-of-both-worlds&#34;&gt;Best of Both Worlds&lt;/h4&gt;
-&lt;p&gt;For the last two years, &lt;a href=&#34;http://spacemacs.org/&#34;&gt;Spacemacs&lt;/a&gt;&amp;lsquo;s default
+
+&lt;p&gt;For the last two years, &lt;a href=&#34;http://spacemacs.org/&#34;&gt;Spacemacs&lt;/a&gt;&amp;rsquo;s default
 Vim configuration has provided the best of both worlds. It had all of
 the Evil packages pre-configured and optimized, but I could simply hit
 &lt;code&gt;Ctrl-z&lt;/code&gt;, and jump back to Emacs-mode.&lt;/p&gt;
+
 &lt;p&gt;Spacemacs was easy to use and I enjoyed it, but it really started to
 have stability issues on my Windows 10 work computer. I thought that
 going back to a stock emacs configuration may tone down the
@@ -752,7 +979,9 @@ configuration based around &lt;code&gt;Evil&lt;/code&gt;. During setup, I was ha
 surprised to learn that the &lt;code&gt;Ctrl-z&lt;/code&gt; option to switch back to
 Emacs-mode was a default &lt;code&gt;Evil&lt;/code&gt; behavior&amp;hellip; so I still have the best of
 both worlds!&lt;/p&gt;
+
 &lt;h4 id=&#34;starting-config&#34;&gt;Starting Config&lt;/h4&gt;
+
 &lt;p&gt;Here is my starting &lt;code&gt;Evil&lt;/code&gt; setup. I&amp;rsquo;ve nested other &lt;code&gt;use-packages&lt;/code&gt;
 inside of it, so that if &lt;code&gt;evil&lt;/code&gt; is configured, the packages that
 depend on it go ahead and configure themselves too. I&amp;rsquo;m sure this will
@@ -790,9 +1019,11 @@ provide all the core functionality I need.&lt;/p&gt;
   (&lt;span style=&#34;color:#a6e22e&#34;&gt;use-package&lt;/span&gt; powerline-evil
     &lt;span style=&#34;color:#e6db74&#34;&gt;:ensure&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;t&lt;/span&gt;
     &lt;span style=&#34;color:#e6db74&#34;&gt;:config&lt;/span&gt;
-    (powerline-evil-vim-color-theme)))
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;I think it needs more key bindings over time&amp;hellip;&lt;/p&gt;
+    (powerline-evil-vim-color-theme)))&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;I think it needs more key bindings over time&amp;hellip;&lt;/p&gt;
+
 &lt;h2 id=&#34;use-package&#34;&gt;Use Package&lt;/h2&gt;
+
 &lt;p&gt;After my setting up an initial install of the Evil mode parts, I
 discovered the amazing
 &lt;a href=&#34;https://github.com/jwiegley/use-package&#34;&gt;use-package&lt;/a&gt;. I have come
@@ -800,17 +1031,19 @@ across it before reading blog posts, but never actually tried
 it. After realizing how well it worked, I immediately combed through
 my &lt;code&gt;.emacs&lt;/code&gt; file, converting all of my &lt;code&gt;(require &#39;package-name)&lt;/code&gt; calls
 to &lt;code&gt;use-package&lt;/code&gt; forms instead.&lt;/p&gt;
+
 &lt;h4 id=&#34;setup&#34;&gt;Setup&lt;/h4&gt;
+
 &lt;p&gt;After ensuring the &lt;a href=&#34;http://melpa.org&#34;&gt;MELPA&lt;/a&gt; repos are added and
 initialized:&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-lisp&#34; data-lang=&#34;lisp&#34;&gt;&lt;span style=&#34;color:#75715e&#34;&gt;;; Add Melpa packages to Repos&lt;/span&gt;
 (&lt;span style=&#34;color:#a6e22e&#34;&gt;require&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;package&lt;/span&gt;)
 (add-to-list &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;package-archives&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;&amp;#39;&lt;/span&gt;(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;melpa&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;http://melpa.org/packages/&amp;#34;&lt;/span&gt;))
-(package-initialize)
-
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;The &lt;code&gt;use-package&lt;/code&gt; package can be installed next. I wrapped the
+(package-initialize)&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;The &lt;code&gt;use-package&lt;/code&gt; package can be installed next. I wrapped the
 install commands in an &lt;code&gt;unless&lt;/code&gt;, so that when my emacs loads, it
 only installs &lt;code&gt;use-package&lt;/code&gt; if it is not already installed.&lt;/p&gt;
+
 &lt;p&gt;Afterwards, make sure to &lt;code&gt;(require &#39;use-package)&lt;/code&gt;. It only needs to
 happen during compile, so I have mine in an &lt;code&gt;(evail-when compile ...)&lt;/code&gt;.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-lisp&#34; data-lang=&#34;lisp&#34;&gt;(unless (package-installed-p &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;use-package&lt;/span&gt;)
@@ -818,10 +1051,12 @@ happen during compile, so I have mine in an &lt;code&gt;(evail-when compile ...)
   (package-install &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;use-package&lt;/span&gt;))
 
 (eval-when-compile
-  (&lt;span style=&#34;color:#a6e22e&#34;&gt;require&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;use-package&lt;/span&gt;))
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;I keep all of this at the top of my configuration, which works well
+  (&lt;span style=&#34;color:#a6e22e&#34;&gt;require&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;use-package&lt;/span&gt;))&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;I keep all of this at the top of my configuration, which works well
 even when initializing a new computer.&lt;/p&gt;
-&lt;h4 id=&#34;bye-bye-emacs_initel&#34;&gt;Bye Bye emacs_init.el&lt;/h4&gt;
+
+&lt;h4 id=&#34;bye-bye-emacs-init-el&#34;&gt;Bye Bye emacs_init.el&lt;/h4&gt;
+
 &lt;p&gt;When I last had my own custom emacs config, I had to also maintain an
 &lt;code&gt;emacs_init.el&lt;/code&gt; file. This was an emacs-lisp script that used a
 &lt;code&gt;mapcar&lt;/code&gt; to apply &lt;code&gt;#&#39;package-install&lt;/code&gt; across an ever-growing list of
@@ -829,28 +1064,34 @@ emacs packages my configuration required. My goal was to have a
 script, so that when configuring Emacs on a new system, I could just load
 and evaluate the contents of &lt;code&gt;emacs_init.el&lt;/code&gt;, and everything required
 for &lt;code&gt;.emacs&lt;/code&gt; would automatically install.&lt;/p&gt;
+
 &lt;p&gt;The reality was that it never fully worked. There were always a few
 packages that would error, or that I had forgotten to add the last time
 I updated my &lt;code&gt;.emacs&lt;/code&gt; file. With &lt;code&gt;use-package&lt;/code&gt;, this might be an issue
 of the past, as it allows me to combine my emacs init script &lt;em&gt;with&lt;/em&gt;
 my configuration files.&lt;/p&gt;
+
 &lt;h4 id=&#34;key-bindings&#34;&gt;Key Bindings&lt;/h4&gt;
+
 &lt;p&gt;After converting all of my &lt;code&gt;(require &#39;PACKAGE-NAME)&lt;/code&gt; calls and related
 expressions to filled &lt;code&gt;use-package&lt;/code&gt; wrappers, I learned about the &lt;code&gt;:bind&lt;/code&gt;
 parameter. Instead of manually setting key binds with a &lt;code&gt;setq&lt;/code&gt;,
 &lt;code&gt;:bind&lt;/code&gt; takes a list of dotted pairs and binds the function (defined
 in the second spot of the pair), to the key sequence stated in the
 first spot of the pair.&lt;/p&gt;
+
 &lt;p&gt;For example, to setup my preferred &lt;code&gt;ispell&lt;/code&gt; key-bindings, I used the
 following &lt;code&gt;:bind&lt;/code&gt; parameter in my &lt;code&gt;ispell&lt;/code&gt; &lt;code&gt;use-package&lt;/code&gt; call:&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-emacs-lisp&#34; data-lang=&#34;emacs-lisp&#34;&gt;(use-package ispell
   :ensure &lt;span style=&#34;color:#66d9ef&#34;&gt;t&lt;/span&gt;
   :bind
   ((&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;C-c w&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;ispell-word&lt;/span&gt;)
-   (&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;C-c r&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;ispell-region&lt;/span&gt;)))
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;This helps to keep the configuration a bit cleaner and organized. The
+   (&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;C-c r&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;ispell-region&lt;/span&gt;)))&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;This helps to keep the configuration a bit cleaner and organized. The
 syntax is also straight-forward and easy to remember.&lt;/p&gt;
+
 &lt;h2 id=&#34;system-specific-load-files&#34;&gt;System Specific Load Files&lt;/h2&gt;
+
 &lt;p&gt;Finally, I moved all my work-specific emacs configuration (setting up
 Allegro Common Lisp, defining some helper functions&amp;hellip; and anything
 Windows specific) into it&amp;rsquo;s own &lt;code&gt;emacs-work.el&lt;/code&gt; file. With that in it&amp;rsquo;s
@@ -858,15 +1099,15 @@ own separate file, I just needed to &lt;code&gt;load&lt;/code&gt; it from my mai
 configuration. The only issue with that, is I only want it to load on
 my &lt;em&gt;work computer&lt;/em&gt;. So, I wrapped it with a nice little handler:&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-emacs-lisp&#34; data-lang=&#34;emacs-lisp&#34;&gt;(when (&lt;span style=&#34;color:#a6e22e&#34;&gt;string-equal&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;system-name&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;LAFAYETTE&amp;#34;&lt;/span&gt;)
-  (&lt;span style=&#34;color:#a6e22e&#34;&gt;load&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;~/.emacs-work.el&amp;#34;&lt;/span&gt;))
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;This works because I don&amp;rsquo;t name my home computers with the same name
+  (&lt;span style=&#34;color:#a6e22e&#34;&gt;load&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;~/.emacs-work.el&amp;#34;&lt;/span&gt;))&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;This works because I don&amp;rsquo;t name my home computers with the same name
 as my work machine. This little tweak worked so well, that I decided
 to make another file, &lt;code&gt;emacs-linux.el&lt;/code&gt;, that I could dump my Linux
 and/or home specific configuration into. I only load it when on a
 GNU/Linux machine:&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-emacs-lisp&#34; data-lang=&#34;emacs-lisp&#34;&gt;(when (&lt;span style=&#34;color:#a6e22e&#34;&gt;string-equal&lt;/span&gt; system-type &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;gnu/linux&amp;#34;&lt;/span&gt;)
-  (&lt;span style=&#34;color:#a6e22e&#34;&gt;load&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;~/.emacs-linux.el&amp;#34;&lt;/span&gt;))
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;I&amp;rsquo;ve really enjoyed the ability to only load parts of my configuration
+  (&lt;span style=&#34;color:#a6e22e&#34;&gt;load&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;~/.emacs-linux.el&amp;#34;&lt;/span&gt;))&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;I&amp;rsquo;ve really enjoyed the ability to only load parts of my configuration
 when a certain condition is met. Breaking down my configuration into
 use-specific components seems like a good idea (like abstracting messy
 code to smaller functions). Right now, I try to keep my configuration
@@ -874,12 +1115,15 @@ file partitioned into sections, based on use-case (Writing,
 Development, Appearance, etc). However, as I continue to fine-tune my
 emacs setup, I think I might break those sections into actual &lt;em&gt;files&lt;/em&gt;,
 and then &lt;code&gt;load&lt;/code&gt; them from the main config.&lt;/p&gt;
+
 &lt;p&gt;The only issue I can see with that is that it can be confusing with
-overlapping use-cases. However, I already have to deal with that in a
-single configuration (which &lt;em&gt;section&lt;/em&gt; to put it in), and my process
-of converting everything to &lt;code&gt;use-package&lt;/code&gt; has actually started to
-minimize that issue. So it might work&amp;hellip;&lt;/p&gt;
+ overlapping use-cases. However, I already have to deal with that in a
+ single configuration (which &lt;em&gt;section&lt;/em&gt; to put it in), and my process
+ of converting everything to &lt;code&gt;use-package&lt;/code&gt; has actually started to
+ minimize that issue. So it might work&amp;hellip;&lt;/p&gt;
+
 &lt;h2 id=&#34;next-steps&#34;&gt;Next Steps&lt;/h2&gt;
+
 &lt;p&gt;Now that I have an &amp;ldquo;&lt;code&gt;Evil&lt;/code&gt;&amp;rdquo; Emacs setup configured, things should be
 returning to business as usually. As I work, I sure there&amp;rsquo;ll be a
 forgotten package here or there that needs to added. However, with
@@ -894,19 +1138,33 @@ from here on out.&lt;/p&gt;</description>
       
       <guid>http://ryan.himmelwright.net/post/new-dotfiles/</guid>
       <description>&lt;p&gt;I have maintained a &amp;ldquo;dotfiles&amp;rdquo; repository since I made my github account in 2013. However, overtime it became more of a post-apocalyptic wasteland, cluttered with remnants of obsolete configurations and scraps of scripts. It was no longer the pristine, culled, collection that I desired. I also did not have an efficient method of easily linking the files on a new system. I had to manually make symlinks for each dotfile. I knew there were &lt;em&gt;much&lt;/em&gt; better dotfiles setups out there, but I never got around to it. Until now.&lt;/p&gt;
+
 &lt;p&gt;One day, after reading &lt;a href=&#34;http://brandon.invergo.net/news/2012-05-26-using-gnu-stow-to-manage-your-dotfiles.html&#34;&gt;this post&lt;/a&gt;, I finally decided to sit down and clean up my dotfiles directory. I wanted to re-organize it so that I could use &lt;a href=&#34;http://freecode.com/projects/gnustow&#34;&gt;GNU Stow&lt;/a&gt; to initialize my dotfiles.&lt;/p&gt;
+
 &lt;p&gt;After setting it all up, I decided to just start from scratch with a &lt;a href=&#34;https://github.com/himmAllRight/dotfiles&#34;&gt;new repository&lt;/a&gt;.&lt;/p&gt;
+
 &lt;h2 id=&#34;using-stow-and-dotfiles&#34;&gt;Using Stow and dotfiles&lt;/h2&gt;
+
 &lt;p&gt;If you haven&amp;rsquo;t seen it before, I highly suggest reading the post I have linked above. But in the meantime, I can provide a quick summary of how my dotfiles are setup.&lt;/p&gt;
-&lt;!-- raw HTML omitted --&gt;
+
+&lt;p&gt;&lt;center&gt;&lt;img alt=&#34;My Dotfiles Dir&#34; src=&#34;../../img/posts/new-dotfiles/dotfiles.png&#34; style=&#34;max-width: 100%;&#34;/&gt;&lt;/center&gt;&lt;/p&gt;
+
 &lt;p&gt;Each application has an associated sub-directory (ex: &lt;code&gt;dotfiles/emacs&lt;/code&gt;), which contains all of the dotfiles/folders associated with that application. Structurally, I treat the items in each application directory as if they were in my &lt;code&gt;~&lt;/code&gt;. For example, the &lt;code&gt;vim&lt;/code&gt; sub-directory has my &lt;code&gt;.vimrc&lt;/code&gt;, as well as the &lt;code&gt;.vim/colors/&lt;/code&gt; directory. This is so that when I use stow, it will properly link them in &lt;code&gt;~&lt;/code&gt;.&lt;/p&gt;
-&lt;!-- raw HTML omitted --&gt;
+
+&lt;p&gt;&lt;center&gt;&lt;img alt=&#34;Vim dotfiles directory&#34; src=&#34;../../img/posts/new-dotfiles/vim-dots.png&#34; style=&#34;max-width: 100%;&#34;/&gt;&lt;/center&gt;&lt;/p&gt;
+
 &lt;p&gt;When I setup my dotfiles on a new system, or install an application for which I already have dotfiles saved for, setting them up is as easy as typing:&lt;/p&gt;
+
 &lt;p&gt;&lt;code&gt;stow application-dir&lt;/code&gt; (ex: &lt;code&gt;stow vim&lt;/code&gt;).&lt;/p&gt;
+
 &lt;p&gt;GNU Stow then links the files under my home directory. In my vim example, this means symlinks are created for &lt;code&gt;~/.vimrc&lt;/code&gt; and &lt;code&gt;~/.vim/colors/*&lt;/code&gt;, pointing to their respective locations in &lt;code&gt;~/dotfiles/vim/&lt;/code&gt;.&lt;/p&gt;
-&lt;!-- raw HTML omitted --&gt;
+
+&lt;p&gt;&lt;center&gt;&lt;img alt=&#34;Vim dotfiles in Home&#34; src=&#34;../../img/posts/new-dotfiles/vim-home.png&#34; style=&#34;max-width: 100%;&#34;/&gt;&lt;/center&gt;&lt;/p&gt;
+
 &lt;p&gt;I think this setup is brilliant. Initializing an application&amp;rsquo;s directory is so simple, and I can choose to only initialize specific sub-directories.&lt;/p&gt;
+
 &lt;p&gt;In the future, I might make multiple branches of the repository, one for each of my computers, so I can maintain specific configurations. In theory, I could also just make different folders (ex &lt;code&gt;vim-laptop&lt;/code&gt; and &lt;code&gt;vim-server&lt;/code&gt;), but I like the branch idea better because it&amp;rsquo;s a little easier for me to merge changes. We shall see.&lt;/p&gt;
+
 &lt;p&gt;Anyway, that&amp;rsquo;s the new setup. Enjoy :-D&lt;/p&gt;</description>
     </item>
     

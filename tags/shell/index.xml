@@ -25,48 +25,61 @@ around, the &lt;code&gt;ssh&lt;/code&gt; session will occasionally time out.  &l
 and &lt;a href=&#34;../../post/setting-up-tmuxinator/&#34;&gt;tmuxinator&lt;/a&gt; make this less of an issue,
 since I can re-attach my session, but I still wish my remote sessions were a
 bit more seamless. They can be&amp;hellip; using &lt;code&gt;mosh&lt;/code&gt;.&lt;/p&gt;
+
 &lt;h4 id=&#34;mosh&#34;&gt;Mosh&lt;/h4&gt;
-&lt;!-- raw HTML omitted --&gt;
+
+&lt;p&gt;&lt;a href=&#34;../../img/posts/setup-mosh/ponyta-mosh.png&#34;&gt;
+&lt;img alt=&#34;Using mosh to conenct to a server&#34; src=&#34;../../img/posts/setup-mosh/ponyta-mosh.png&#34; style=&#34;max-width: 100%; padding: 5px 15px 10px 10px&#34;/&gt;&lt;/a&gt;
+&lt;div class=&#34;caption&#34;&gt;Using &lt;code&gt;mosh&lt;/code&gt; to connect to one of my servers&lt;/div&gt;&lt;/p&gt;
+
 &lt;p&gt;&lt;a href=&#34;https://mosh.org&#34;&gt;Mosh&lt;/a&gt; is a more robust replacement for interactive ssh
 terminals. It automatically roams and continues to work even as the computer
 switches networks or is put to sleep. It also responds to typing, even on a bad
 connection, which cuts down on lag. Lastly, it&amp;rsquo;s free and open source software,
 licenced under the GPLv3.&lt;/p&gt;
+
 &lt;h4 id=&#34;mosh-install&#34;&gt;Mosh Install&lt;/h4&gt;
+
 &lt;p&gt;Mosh should be in most Linux repos, and is also available on BSD, Mac, Windows,
 and basically everything else.  For more information on how to install it on
 your platform, head over to the &lt;a href=&#34;https://mosh.org/#getting&#34;&gt;getting mosh&lt;/a&gt;
 page.  For me, it was a simple &lt;code&gt;dnf&lt;/code&gt;/&lt;code&gt;yum&lt;/code&gt; install to get it on both my laptop
 and
 server:&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;sudo dnf install mosh
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;*Note: My centos server required me to first enable the epel repos to get
+&lt;pre&gt;&lt;code&gt;sudo dnf install mosh&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;*Note: My centos server required me to first enable the epel repos to get
 access to &lt;code&gt;mosh&lt;/code&gt;. Fedora might also, but I already had it enabled on my
 laptop.&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;sudo yum install -y epel-release
-sudo yum install -y mosh
-&lt;/code&gt;&lt;/pre&gt;&lt;h4 id=&#34;open-firewall-ports&#34;&gt;Open Firewall Ports&lt;/h4&gt;
+sudo yum install -y mosh&lt;/code&gt;&lt;/pre&gt;
+&lt;h4 id=&#34;open-firewall-ports&#34;&gt;Open Firewall Ports&lt;/h4&gt;
+
 &lt;p&gt;After installing &lt;code&gt;mosh&lt;/code&gt;&amp;hellip; it might not immediately work. If so, it is likely
 due to not having the required ports open. Mosh uses UDP ports 60000-61000 for
 it&amp;rsquo;s connections. Enable these ports and optionally restart the firewall,
 before trying mosh again.&lt;/p&gt;
+
 &lt;p&gt;&lt;em&gt;Note: If you want to connect from outside the network, remember to also
 forward these ports on the network.&lt;/em&gt;&lt;/p&gt;
+
 &lt;h4 id=&#34;connect&#34;&gt;Connect&lt;/h4&gt;
+
 &lt;p&gt;We should now be able to connect to the server using mosh. Typical connections
 look very similar to &lt;code&gt;ssh&lt;/code&gt;:&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;mosh ryan@centos-server
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;If a specific mosh UDP port needs to be specified (for port-forwarding, for example)
+&lt;pre&gt;&lt;code&gt;mosh ryan@centos-server&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;If a specific mosh UDP port needs to be specified (for port-forwarding, for example)
 use the &lt;code&gt;-p&lt;/code&gt; flag:&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;mosh -p 1234 ryan@centos-server
-&lt;/code&gt;&lt;/pre&gt;&lt;h4 id=&#34;ssh-options&#34;&gt;SSH Options&lt;/h4&gt;
+&lt;pre&gt;&lt;code&gt;mosh -p 1234 ryan@centos-server&lt;/code&gt;&lt;/pre&gt;
+&lt;h4 id=&#34;ssh-options&#34;&gt;SSH Options&lt;/h4&gt;
+
 &lt;p&gt;Mosh uses ssh for the initial connection. Occasionally, particular ssh options
 might be required in order for mosh to initialize a connection.  For
 example, I typically &lt;code&gt;ssh&lt;/code&gt; home on a particular port, so that my router knows
 which VM to transfer me to.  Options like this can be passed to &lt;code&gt;mosh&lt;/code&gt; using
 the &lt;code&gt;--ssh&lt;/code&gt; flag:&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;mosh --ssh=&amp;quot;ssh -p 1234&amp;quot; ryan@centos-network
-&lt;/code&gt;&lt;/pre&gt;&lt;h4 id=&#34;conclusion&#34;&gt;Conclusion&lt;/h4&gt;
+&lt;pre&gt;&lt;code&gt;mosh --ssh=&amp;#34;ssh -p 1234&amp;#34; ryan@centos-network&lt;/code&gt;&lt;/pre&gt;
+&lt;h4 id=&#34;conclusion&#34;&gt;Conclusion&lt;/h4&gt;
+
 &lt;p&gt;That&amp;rsquo;s really it. There is a bunch of cool &lt;a href=&#34;https://mosh.org/#techinfo&#34;&gt;technical
 stuff&lt;/a&gt; going on under the hood of mosh, but on the
 surface&amp;hellip; it is simply useful. For an even &lt;em&gt;better&lt;/em&gt; experience with mosh, be
@@ -86,28 +99,35 @@ mentioned that while writing it, I had learned about
 looked so good, I may switch to it eventually. Well&amp;hellip; that didn&amp;rsquo;t take long. I&amp;rsquo;ve
 scrapped my tmux shell scripts, and have converted to using tmuxinator. Here&amp;rsquo;s
 how.&lt;/p&gt;
+
 &lt;h2 id=&#34;what-is-tmuxinator&#34;&gt;What is Tmuxinator?&lt;/h2&gt;
+
 &lt;p&gt;&lt;a href=&#34;https://github.com/tmuxinator/tmuxinator&#34;&gt;Tmuxinator&lt;/a&gt; is a command line
 application that makes it easy to create and manage tmux sessions. It allows a
 user to define how to setup a session, including naming windows, splitting
 panes, and what commands initially run in each pane. The configuration is done
 in yaml, so it is very easy to figure out and get started.&lt;/p&gt;
+
 &lt;h2 id=&#34;install&#34;&gt;Install&lt;/h2&gt;
+
 &lt;p&gt;Most distros probably have &lt;code&gt;tmuxinator&lt;/code&gt; in their offical repos. These days, I
 mostly run Fedora on all of my machines and I was able to find it there:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;sudo dnf install termixinator
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;strong&gt;However&lt;/strong&gt;, I found that this version was quite out of date (&lt;code&gt;0.6.11&lt;/code&gt;) even on my new
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;sudo dnf install termixinator&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;&lt;strong&gt;However&lt;/strong&gt;, I found that this version was quite out of date (&lt;code&gt;0.6.11&lt;/code&gt;) even on my new
 Fedora 30 install, so I recommend using the method stated on
 the project&amp;rsquo;s Github page (requires &lt;code&gt;rubygems&lt;/code&gt;) to install a much more current
 version (&lt;code&gt;1.1.0&lt;/code&gt;):&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;gem install tmuxinator
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;create&#34;&gt;Create&lt;/h2&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;gem install tmuxinator&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h2 id=&#34;create&#34;&gt;Create&lt;/h2&gt;
+
 &lt;p&gt;To create a new tmuxinator profile, pass the desired project name to &lt;code&gt;tmuxinator new&lt;/code&gt;:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-sh&#34; data-lang=&#34;sh&#34;&gt;tmuxinator new Website
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;This will open up a new tmuxinator template inside your default editor. The
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-sh&#34; data-lang=&#34;sh&#34;&gt;tmuxinator new Website&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;This will open up a new tmuxinator template inside your default editor. The
 default template contains a bunch of comments that help guide how to configure
 it.&lt;/p&gt;
+
 &lt;h4 id=&#34;header&#34;&gt;Header&lt;/h4&gt;
+
 &lt;p&gt;The first thing to set at the top of the template is the &lt;code&gt;name&lt;/code&gt; field, followed
 by the &lt;code&gt;root&lt;/code&gt; directory. The tmux session name is defined with &lt;code&gt;name&lt;/code&gt;, and
 &lt;code&gt;root&lt;/code&gt; will be the directory which all of the windows/panes open up in by
@@ -117,8 +137,9 @@ directory, &lt;code&gt;~/Documents/himmAllRight-source&lt;/code&gt;:&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# /home/ryan/.config/tmuxinator/Website.yml&lt;/span&gt;
 
 &lt;span style=&#34;color:#66d9ef&#34;&gt;name&lt;/span&gt;: Website
-&lt;span style=&#34;color:#66d9ef&#34;&gt;root&lt;/span&gt;: ~/Documents/himmAllRight-source
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h4 id=&#34;windows&#34;&gt;Windows&lt;/h4&gt;
+&lt;span style=&#34;color:#66d9ef&#34;&gt;root&lt;/span&gt;: ~/Documents/himmAllRight-source&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h4 id=&#34;windows&#34;&gt;Windows&lt;/h4&gt;
+
 &lt;p&gt;Next, I needed to configure my windows. To convert the script from my previous
 post, I wanted a dedicated &amp;lsquo;Main&amp;rsquo; window, one for the server, one for vim, and
 one for an extra shell. Additionally, since that last post I&amp;rsquo;ve added a window
@@ -131,9 +152,11 @@ that&lt;/em&gt; with tmuxinator:&lt;/p&gt;
   - &lt;span style=&#34;color:#66d9ef&#34;&gt;Server&lt;/span&gt;: hugo serve -D -F
   - &lt;span style=&#34;color:#66d9ef&#34;&gt;Write&lt;/span&gt;: nvim
   - &lt;span style=&#34;color:#66d9ef&#34;&gt;Shell&lt;/span&gt;: zsh; clear
-  - &lt;span style=&#34;color:#66d9ef&#34;&gt;Web&lt;/span&gt;: qutebrowser localhost:&lt;span style=&#34;color:#ae81ff&#34;&gt;1313&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Done. Save the file and that&amp;rsquo;s it! See the benefit of using tmuxinator??&lt;/p&gt;
+  - &lt;span style=&#34;color:#66d9ef&#34;&gt;Web&lt;/span&gt;: qutebrowser localhost:&lt;span style=&#34;color:#ae81ff&#34;&gt;1313&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Done. Save the file and that&amp;rsquo;s it! See the benefit of using tmuxinator??&lt;/p&gt;
+
 &lt;h4 id=&#34;pane-splits&#34;&gt;Pane splits&lt;/h4&gt;
+
 &lt;p&gt;While I don&amp;rsquo;t use them in this example configuration, it should be noted that
 setting up pane splits is also quite easy with tmuxinator. For example, if I
 wanted to split the server window into two panes, one running the hugo server
@@ -142,22 +165,33 @@ and one running htop, I could use:&lt;/p&gt;
     &lt;span style=&#34;color:#66d9ef&#34;&gt;layout&lt;/span&gt;: even-vertical
     &lt;span style=&#34;color:#66d9ef&#34;&gt;panes&lt;/span&gt;:
         - hugo
-        - htop
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;The &lt;code&gt;layout&lt;/code&gt; key defines which
+        - htop&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;The &lt;code&gt;layout&lt;/code&gt; key defines which
 &lt;a href=&#34;http://man7.org/linux/man-pages/man1/tmux.1.html#WINDOWS_AND_PANES&#34;&gt;tmux layout&lt;/a&gt; to
 use when splitting the panes, and &lt;code&gt;panes&lt;/code&gt; is a list that defines what to run in
 each pane.&lt;/p&gt;
+
 &lt;h2 id=&#34;launch&#34;&gt;Launch&lt;/h2&gt;
-&lt;!-- raw HTML omitted --&gt;
-&lt;p&gt;To start up the newly defined tmuxinator project, use &lt;code&gt;tmuxinator start&lt;/code&gt;:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-sh&#34; data-lang=&#34;sh&#34;&gt;tmuxinator start Website
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;manage&#34;&gt;Manage&lt;/h2&gt;
+
+&lt;p&gt;&lt;a href=&#39;../../img/posts/setting-up-tmuxinator/start-website-tmuxinator.gif&#39;&gt;
+&lt;img alt=&#34;Launching Website tmux session with tmuxinator&#34; src=&#34;../../img/posts/setting-up-tmuxinator/starting-website-tmuxinator.png&#34; onmouseover=&#34;this.src=&#39;../../img/posts/setting-up-tmuxinator/start-website-tmuxinator.gif&#39;&#34; onmouseout=&#34;this.src=&#39;../../img/posts/setting-up-tmuxinator/starting-website-tmuxinator.png&#39;&#34; style=&#34;max-width: 100%;&#34;/&gt;
+&lt;/a&gt;
+&lt;div class=&#34;caption&#34;&gt;Launching my website tmux session with tmuxinator&lt;/div&gt;&lt;/p&gt;
+
+&lt;p&gt;To start up the newly defined tmuxinator project, use &lt;code&gt;tmuxinator
+start&lt;/code&gt;:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-sh&#34; data-lang=&#34;sh&#34;&gt;tmuxinator start Website&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h2 id=&#34;manage&#34;&gt;Manage&lt;/h2&gt;
+
 &lt;p&gt;All of the tmuxinator profile templates are stored at &lt;code&gt;~/.config/tmuxinator&lt;/code&gt;,
 which means they can easily be copied to a new machine, or even
 saved/maintained in source control.&lt;/p&gt;
+
 &lt;p&gt;&lt;em&gt;Note: I think older versions stored them at &lt;code&gt;~/.tmuxinator/&lt;/code&gt;, so check there
 if they are missing.&lt;/em&gt;&lt;/p&gt;
+
 &lt;h2 id=&#34;conclusion&#34;&gt;Conclusion&lt;/h2&gt;
+
 &lt;p&gt;That&amp;rsquo;s it. While scripting my own method was a good bash exercise and helped me
 learn the details of &lt;code&gt;tmux&lt;/code&gt; a little bit better, I ultimately think that
 &lt;code&gt;tmuxinator&lt;/code&gt; is the way to go. This is especially true when using tmux to work
@@ -177,17 +211,21 @@ command-line system information tool for a few years now. While browsing
 of the submissions did not have distro logos in their neofetch/screenfetch
 ascii art. I knew that neofetch was customizable, but have never dug
 into it myself. So I decided to change that.&lt;/p&gt;
+
 &lt;h3 id=&#34;custom-neofetch-ascii-art&#34;&gt;Custom Neofetch ASCII Art&lt;/h3&gt;
+
 &lt;p&gt;I started my neofetch investigation the same way one should start researching
 &lt;em&gt;any&lt;/em&gt; Linux command-line tool: &lt;code&gt;man neofetch&lt;/code&gt;. Inside the man pages, I was
 greeted with all sorts of customization options. Eventually, I scrolled down to
 the section I wanted, &lt;code&gt;IMAGE BACKEND&lt;/code&gt;.&lt;/p&gt;
+
 &lt;p&gt;There I learned that a custom image could be specified using the &lt;code&gt;--source&lt;/code&gt; flag.
 For example, to set the art to an ascii charmeleon file I &lt;em&gt;just happen&lt;/em&gt; to have
 on my desktop, I tried:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;neofetch --source /home/ryan/Documents/Pokemon-ascii/5.txt
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;AAAAAND&amp;hellip; It didn&amp;rsquo;t work. It was still the Fedora logo. Clearly, I was still
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;neofetch --source /home/ryan/Documents/Pokemon-ascii/5.txt&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;AAAAAND&amp;hellip; It didn&amp;rsquo;t work. It was still the Fedora logo. Clearly, I was still
 missing something.&lt;/p&gt;
+
 &lt;p&gt;After some browsing, I found the &lt;a href=&#34;https://github.com/dylanaraps/neofetch/wiki/Custom-Ascii-art-file-format&#34;&gt;ASCII art
 page&lt;/a&gt;
 on neofetch&amp;rsquo;s Github wiki. Reading it, I noticed that I was missing the &lt;code&gt;${c1}&lt;/code&gt;
@@ -195,29 +233,35 @@ in my pokemon ascii files. So, I made a copy of the file and added &lt;code&gt;S
 the top:&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;➜  welcome-messages git:(master) ✗ head charmeleon
 ${c1}
-                      ,-&#39;`\
-                  _,&amp;quot;&#39;    j
+                      ,-&amp;#39;`\
+                  _,&amp;#34;&amp;#39;    j
            __....+       /               .
-       ,-&#39;&amp;quot;             /               ; `-._.&#39;.
-      /                (              ,&#39;       .&#39;
+       ,-&amp;#39;&amp;#34;             /               ; `-._.&amp;#39;.
+      /                (              ,&amp;#39;       .&amp;#39;
      |            _.    \             \   ---._ `-.
-     ,|    ,   _.&#39;  Y    \             `- ,&#39;   \   `.`.
-     l&#39;    \ ,&#39;._,\ `.    .              /       ,--. l
-  .,-        `._  |  |    |              \       _   l .
-&lt;/code&gt;&lt;/pre&gt;&lt;!-- raw HTML omitted --&gt;
+     ,|    ,   _.&amp;#39;  Y    \             `- ,&amp;#39;   \   `.`.
+     l&amp;#39;    \ ,&amp;#39;._,\ `.    .              /       ,--. l
+  .,-        `._  |  |    |              \       _   l .&lt;/code&gt;&lt;/pre&gt;
+&lt;div class=&#34;caption&#34;&gt;head output of my modified charmeleon ascii file&lt;/div&gt;
+
 &lt;p&gt;AAAAAND&amp;hellip; It worked!&lt;/p&gt;
+
 &lt;h3 id=&#34;adding-a-shell-alias&#34;&gt;Adding a Shell Alias&lt;/h3&gt;
-&lt;p&gt;&lt;!-- raw HTML omitted --&gt;&lt;!-- raw HTML omitted --&gt;&lt;!-- raw HTML omitted --&gt;&lt;/p&gt;
-&lt;!-- raw HTML omitted --&gt;
+
+&lt;p&gt;&lt;a href=&#34;../../img/posts/custom-neofetch-ascii-art/charmeleon-neofetch.png&#34;&gt;&lt;img alt=&#34;Custom Charmeleon ASCII art for my desktop&#39;s neofetch output&#34; src=&#34;../../img/posts/custom-neofetch-ascii-art/charmeleon-neofetch.png&#34; style=&#34;max-width: 100%;&#34;/&gt;&lt;/a&gt;
+&lt;div class=&#34;caption&#34;&gt;Custom Charmeleon ASCII art for my desktop&amp;rsquo;s neofetch output&lt;/div&gt;&lt;/p&gt;
+
 &lt;p&gt;Lastly, I wanted the charmeleon ascii art to be the &lt;em&gt;default&lt;/em&gt; neofetch output on my
 desktop. While I&amp;rsquo;m sure that I could have accomplished this &lt;em&gt;properly&lt;/em&gt; by
 editing the &lt;code&gt;~/.config/neofetch/config.conf&lt;/code&gt; file I learned about, for now&amp;hellip;
 creating an alias seemed easier XD. So I added the following line to my
 &lt;code&gt;~/.zshrc&lt;/code&gt;:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;alias neofetch&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;neofetch --source /home/ryan/Documents/ascii/pokemon/charmeleon&amp;#39;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Now whenever I call plain &lt;code&gt;neofetch&lt;/code&gt; on my desktop, it runs with the charmeleon
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;alias neofetch&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;neofetch --source /home/ryan/Documents/ascii/pokemon/charmeleon&amp;#39;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Now whenever I call plain &lt;code&gt;neofetch&lt;/code&gt; on my desktop, it runs with the charmeleon
 art.&lt;/p&gt;
+
 &lt;h3 id=&#34;conclusion&#34;&gt;Conclusion&lt;/h3&gt;
+
 &lt;p&gt;So that&amp;rsquo;s it. A nice &lt;em&gt;short&lt;/em&gt; post for once! Despite the size, I hope if was
 useful. If you haven&amp;rsquo;t heard of neofetch before, go check it out. If you have,
 I encourage you to go digging through the man pages. I promise you won&amp;rsquo;t regret
@@ -237,25 +281,34 @@ combined with &lt;code&gt;ssh&lt;/code&gt;). I have been utilizing tmux even mor
 started to script the start up/configuration a tmux session for each project.
 The other day, I decided to write a script to spin up a session for working on my
 website&amp;hellip; and thought it would be a great tutorial!&lt;/p&gt;
+
 &lt;h3 id=&#34;tmux&#34;&gt;Tmux&lt;/h3&gt;
-&lt;!-- raw HTML omitted --&gt;
+
+&lt;p&gt;&lt;img alt=&#34;tmux demo animation&#34; src=&#34;../../img/posts/scripting-tmux-workspaces/animation-hover.png&#34; onmouseover=&#34;this.src=&#39;../../img/posts/scripting-tmux-workspaces/tmux-demo.gif&#39;&#34; onmouseout=&#34;this.src=&#39;../../img/posts/scripting-tmux-workspaces/animation-hover.png&#39;&#34; style=&#34;max-width: 100%;&#34;/&gt;
+&lt;div class=&#34;caption&#34;&gt;Small tmux demonstration&lt;/div&gt;&lt;/p&gt;
+
 &lt;p&gt;When working on a project, I like to use tmux to maintain all of the terminal
 windows related to it. This keeps everything together, and even allows me to
 detach the session, switch to another computer, ssh into the previous computer,
 and re-attach my working tmux session. Paired with the fact that I&amp;rsquo;ve started
 using VIM again, it works seamlessly. Scripting the initialization makes
 getting started even smoother.&lt;/p&gt;
+
 &lt;h3 id=&#34;automating-tmux-initialization-for-working-on-my-website&#34;&gt;Automating tmux initialization for working on my website&lt;/h3&gt;
+
 &lt;h4 id=&#34;new-script&#34;&gt;New Script&lt;/h4&gt;
+
 &lt;p&gt;First, lets create a new script. Start by opening a new file, and adding a bash
 &lt;a href=&#34;https://en.wikipedia.org/wiki/Shebang_(Unix)&#34;&gt;shebang&lt;/a&gt; line to the top:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;color:#75715e&#34;&gt;#!/bin/bash
-&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;This line tells the system that the following text will be a
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;color:#75715e&#34;&gt;#!/bin/bash&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;This line tells the system that the following text will be a
 &lt;a href=&#34;https://en.wikipedia.org/wiki/Bash_(Unix_shell)&#34;&gt;bash&lt;/a&gt; script.&lt;/p&gt;
+
 &lt;p&gt;&lt;em&gt;Optional: Save and close the file, then re-open it to take advantage the text
 editor&amp;rsquo;s bash syntax highlighting if it didn&amp;rsquo;t automatically switch it on.&lt;/em&gt;&lt;/p&gt;
+
 &lt;h4 id=&#34;create-a-new-tmux-session-with-var-name&#34;&gt;Create a new tmux session (with var name)&lt;/h4&gt;
+
 &lt;p&gt;Next, lets define a variable to store the tmux session name. This will make it
 easier to change the session name later on. Using the session variable, a new
 tmux-session with our desired name can be created.&lt;/p&gt;
@@ -263,19 +316,22 @@ tmux-session with our desired name can be created.&lt;/p&gt;
 session&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;Website&amp;#34;&lt;/span&gt;
 
 &lt;span style=&#34;color:#75715e&#34;&gt;# Start New Session with our name&lt;/span&gt;
-tmux new-session -d -s $session
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h4 id=&#34;name-initial-default-window-and-switch-to-zsh&#34;&gt;Name initial default Window (and switch to &lt;code&gt;zsh&lt;/code&gt;)&lt;/h4&gt;
+tmux new-session -d -s $session&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h4 id=&#34;name-initial-default-window-and-switch-to-zsh&#34;&gt;Name initial default Window (and switch to &lt;code&gt;zsh&lt;/code&gt;)&lt;/h4&gt;
+
 &lt;p&gt;Let&amp;rsquo;s customize the default window and give it a new name. Lets call this first tmux
 window &lt;code&gt;&amp;quot;Main&amp;quot;&lt;/code&gt;, and have it simply run a &lt;a href=&#34;https://ohmyz.sh/&#34;&gt;zsh&lt;/a&gt; shell. After
 creating a new session, there is only one window, so I know it will be
 identified with the number &lt;code&gt;0&lt;/code&gt;. I can use this with &lt;code&gt;-t&lt;/code&gt; to rename the window.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# Name first Window and start zsh&lt;/span&gt;
 tmux rename-window -t &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;Main&amp;#39;&lt;/span&gt;
-tmux send-keys -t &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;Main&amp;#39;&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;zsh&amp;#39;&lt;/span&gt; C-m &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;clear&amp;#39;&lt;/span&gt; C-m
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;I can then use the &lt;code&gt;send-keys&lt;/code&gt; command with the new window name to start zsh.
+tmux send-keys -t &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;Main&amp;#39;&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;zsh&amp;#39;&lt;/span&gt; C-m &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;clear&amp;#39;&lt;/span&gt; C-m&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;I can then use the &lt;code&gt;send-keys&lt;/code&gt; command with the new window name to start zsh.
 This is the equivalent of typing &lt;code&gt;zsh&lt;/code&gt;, &lt;code&gt;[Enter]&lt;/code&gt;, &lt;code&gt;clear&lt;/code&gt;, &lt;code&gt;[Enter]&lt;/code&gt; into the
 command line.&lt;/p&gt;
+
 &lt;h4 id=&#34;add-a-new-named-window-for-hugo-server&#34;&gt;Add a new (named) window for hugo server&lt;/h4&gt;
+
 &lt;p&gt;With the main tmux window setup, I want to add a few more for
 different tasks. First, I want a window that can run the hugo server
 as I&amp;rsquo;m writing a post. With a session already created, I can name the
@@ -283,57 +339,73 @@ window as I create it, using just the &lt;code&gt;new-window&lt;/code&gt; comamn
 &lt;code&gt;-n&lt;/code&gt; flag.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# Create and setup pane for hugo server&lt;/span&gt;
 tmux new-window -t $session:1 -n &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;Hugo Server&amp;#39;&lt;/span&gt;
-tmux send-keys -t &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;Hugo Server&amp;#39;&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;hugo serve -D -F&amp;#39;&lt;/span&gt; C-m
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Again, I used tmux &lt;code&gt;send-keys&lt;/code&gt;, this time to send the &lt;code&gt;hugo serve -D -F&lt;/code&gt; command to start up a hugo server for local draft editing.&lt;/p&gt;
+tmux send-keys -t &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;Hugo Server&amp;#39;&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;hugo serve -D -F&amp;#39;&lt;/span&gt; C-m&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Again, I used tmux &lt;code&gt;send-keys&lt;/code&gt;, this time to send the &lt;code&gt;hugo serve -D
+-F&lt;/code&gt; command to start up a hugo server for local draft editing.&lt;/p&gt;
+
 &lt;h4 id=&#34;add-a-new-name-pane-for-vim&#34;&gt;Add a new (name) pane for vim&lt;/h4&gt;
+
 &lt;p&gt;Now, I need a place to write website posts&amp;hellip; so lets fire up a new tmux
 window, and open up neovim inside of it.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# setup Writing window&lt;/span&gt;
 tmux new-window -t $SESSION:2 -n &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;Writing&amp;#39;&lt;/span&gt;
-tmux send-keys -t &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;Writing&amp;#39;&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;nvim&amp;#34;&lt;/span&gt; C-m
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h4 id=&#34;another-shell&#34;&gt;Another shell&lt;/h4&gt;
+tmux send-keys -t &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;Writing&amp;#39;&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;nvim&amp;#34;&lt;/span&gt; C-m&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h4 id=&#34;another-shell&#34;&gt;Another shell&lt;/h4&gt;
+
 &lt;p&gt;Lastly, lets create one more shell window, just in case it&amp;rsquo;s needed. Why not?&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# Setup an additional shell&lt;/span&gt;
 tmux new-window -t $SESSION:3 -n &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;Shell&amp;#39;&lt;/span&gt;
-tmux send-keys -t &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;Shell&amp;#39;&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;zsh&amp;#34;&lt;/span&gt; C-m &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;clear&amp;#39;&lt;/span&gt; C-m
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h4 id=&#34;attach-session&#34;&gt;Attach Session&lt;/h4&gt;
+tmux send-keys -t &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;Shell&amp;#39;&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;zsh&amp;#34;&lt;/span&gt; C-m &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;clear&amp;#39;&lt;/span&gt; C-m&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h4 id=&#34;attach-session&#34;&gt;Attach Session&lt;/h4&gt;
+
 &lt;p&gt;With the tmux session all configured and customized, we can tell the script to
 go ahead and attach it, using the &lt;code&gt;attach-session&lt;/code&gt; command with the session
 name variable.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# Attach Session, on the Main window&lt;/span&gt;
-tmux attach-session -t $SESSION:0
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;em&gt;Note: the &lt;code&gt;0&lt;/code&gt; tells tmux to attach the first window (&lt;code&gt;Main&lt;/code&gt;). Using
+tmux attach-session -t $SESSION:0&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;&lt;em&gt;Note: the &lt;code&gt;0&lt;/code&gt; tells tmux to attach the first window (&lt;code&gt;Main&lt;/code&gt;). Using
 another index value will attach a different window. For example, &lt;code&gt;1&lt;/code&gt;
 would open the &lt;code&gt;Hugo Server&lt;/code&gt; window when attaching&lt;/em&gt;&lt;/p&gt;
+
 &lt;h4 id=&#34;bonus-minor-improvement&#34;&gt;Bonus: Minor improvement&lt;/h4&gt;
-&lt;!-- raw HTML omitted --&gt;
+
+&lt;p&gt;&lt;img alt=&#34;tmux demo animation&#34; src=&#34;../../img/posts/scripting-tmux-workspaces/animation-hover.png&#34; onmouseover=&#34;this.src=&#39;../../img/posts/scripting-tmux-workspaces/tmux-duplicate-windows.gif&#39;&#34; onmouseout=&#34;this.src=&#39;../../img/posts/scripting-tmux-workspaces/animation-hover.png&#39;&#34; style=&#34;max-width: 100%;&#34;/&gt;
+&lt;div class=&#34;caption&#34;&gt;The script would create duplicate windows if the tmux
+session already existed.&lt;/div&gt;&lt;/p&gt;
+
 &lt;p&gt;At this point, I was done with the tmux script. It worked well for creating my
 session and attaching it. However, there was &lt;em&gt;one&lt;/em&gt; issue I still had. If I ran
 the script when there was a tmux session with the same name &lt;em&gt;already&lt;/em&gt;, it would
 just double up the windows in that session. If I accidentally did this, I would
 have to go through each window, close out whatever and was running, and then
 close the window.&lt;/p&gt;
+
 &lt;p&gt;To fix this issue, I decided to wrap the initialization commands inside of an
 &lt;code&gt;if&lt;/code&gt; statement, and only run them if the tmux session &lt;em&gt;didn&amp;rsquo;t&lt;/em&gt; already exist.&lt;/p&gt;
+
 &lt;h5 id=&#34;checking-if-the-session-already-exists&#34;&gt;Checking if the Session Already Exists&lt;/h5&gt;
+
 &lt;p&gt;First, I needed a way to &lt;em&gt;check&lt;/em&gt; whether the desired tmux session already existed
 or not. This can be done by &amp;ldquo;grep&amp;rsquo;ing&amp;rdquo; the output of &lt;code&gt;tmux list-sessions&lt;/code&gt; for
 the session name, which we&amp;rsquo;ve already conveniently stored in our &lt;code&gt;$SESSION&lt;/code&gt;
 variable. For Cleanliness, I took the output of that process and saved it in a
 &lt;code&gt;SESSIONEXISTS&lt;/code&gt; variable, defined directly under &lt;code&gt;SESSION&lt;/code&gt; in the script.&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;SESSIONEXISTS&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;$(&lt;/span&gt;tmux list-sessions | grep $SESSION&lt;span style=&#34;color:#66d9ef&#34;&gt;)&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;If the session exists, &lt;code&gt;SESSIONEXISTS&lt;/code&gt; will be a string of the line which &lt;code&gt;grep&lt;/code&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;SESSIONEXISTS&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;$(&lt;/span&gt;tmux list-sessions | grep $SESSION&lt;span style=&#34;color:#66d9ef&#34;&gt;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;If the session exists, &lt;code&gt;SESSIONEXISTS&lt;/code&gt; will be a string of the line which &lt;code&gt;grep&lt;/code&gt;
 matched. Otherwise, it will just be an empty string (&lt;code&gt;&amp;quot;&amp;quot;&lt;/code&gt;).&lt;/p&gt;
+
 &lt;p&gt;Now, I can use the &lt;code&gt;SESSIONEXISTS&lt;/code&gt; variable with an &lt;code&gt;if&lt;/code&gt; condition to wrap the tmux
 setup code so that it only runs if &lt;code&gt;SESSIONEXISTS&lt;/code&gt; is &lt;code&gt;&amp;quot;&amp;quot;&lt;/code&gt;.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;$SESSIONEXISTS&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt;
 &lt;span style=&#34;color:#66d9ef&#34;&gt;then&lt;/span&gt;
 ...
-&lt;span style=&#34;color:#66d9ef&#34;&gt;fi&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;The &lt;code&gt;attach-session&lt;/code&gt; command should be &lt;em&gt;outside&lt;/em&gt; of the &lt;code&gt;if&lt;/code&gt; body,
+&lt;span style=&#34;color:#66d9ef&#34;&gt;fi&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;The &lt;code&gt;attach-session&lt;/code&gt; command should be &lt;em&gt;outside&lt;/em&gt; of the &lt;code&gt;if&lt;/code&gt; body,
 because it will be run in both cases (even if the session doesn&amp;rsquo;t have
 to be created, we still want to attach the one that already exists).&lt;/p&gt;
+
 &lt;h3 id=&#34;conclusion&#34;&gt;Conclusion&lt;/h3&gt;
+
 &lt;p&gt;That is it. Here is the script with everything all put together:&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;color:#75715e&#34;&gt;#!/bin/sh
 &lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;
@@ -365,8 +437,8 @@ SESSIONEXISTS&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span st
 &lt;span style=&#34;color:#66d9ef&#34;&gt;fi&lt;/span&gt;
 
 &lt;span style=&#34;color:#75715e&#34;&gt;# Attach Session, on the Main window&lt;/span&gt;
-tmux attach-session -t $SESSION:0
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;I hope this post has been helpful! Although, I have to admit that this post
+tmux attach-session -t $SESSION:0&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;I hope this post has been helpful! Although, I have to admit that this post
 &lt;em&gt;may&lt;/em&gt; be moot if I decide check out
 &lt;a href=&#34;https://github.com/tmuxinator/tmuxinator&#34;&gt;tmuxinator&lt;/a&gt; (which a co-worker
 recommended) &amp;hellip; oh well. I guess this endeavor was still a good exercise in
@@ -384,15 +456,21 @@ appreciate that all of the &lt;code&gt;.swp&lt;/code&gt;, &lt;code&gt;.retry&lt;
 help me when things go wrong&amp;hellip; sometimes I just want to clean up my
 file system. So&amp;hellip; here is a simple string of commands I often use to declutter
 my files.&lt;/p&gt;
+
 &lt;p&gt;&lt;em&gt;DISCLAIMER:&lt;/em&gt; I know there are &lt;em&gt;MANY&lt;/em&gt; ways to accomplish this.  The method
 described in this post is to share &lt;strong&gt;one&lt;/strong&gt; efficient solution I use, that might
 help someone that currently knows &lt;strong&gt;zero&lt;/strong&gt;.&lt;/p&gt;
+
 &lt;h3 id=&#34;the-commands&#34;&gt;The commands&lt;/h3&gt;
+
 &lt;p&gt;First, lets quickly meet the commands we will be using:&lt;/p&gt;
+
 &lt;h3 id=&#34;find&#34;&gt;Find&lt;/h3&gt;
+
 &lt;p&gt;&lt;code&gt;find&lt;/code&gt; is a classic UNIX command that searches for files in a directory
 hierarchy. By default, it writes out the file path for each file/directory that
 it finds.&lt;/p&gt;
+
 &lt;h4 id=&#34;example&#34;&gt;Example&lt;/h4&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;➜  tree
 .
@@ -416,11 +494,13 @@ it finds.&lt;/p&gt;
 ./dirA
 ./dirA/file5
 ./dirA/file4
-./dirA/file3
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;grep&#34;&gt;Grep&lt;/h3&gt;
+./dirA/file3&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h3 id=&#34;grep&#34;&gt;Grep&lt;/h3&gt;
+
 &lt;p&gt;Another classic. Basically, &lt;code&gt;grep&lt;/code&gt; searches for a pattern in each file
 provided. In addition to files, it can search text passed through a pipe (this
 is important for our use, but more on that later).&lt;/p&gt;
+
 &lt;h4 id=&#34;example-1&#34;&gt;Example&lt;/h4&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;➜  cat file1
 This is a fake file
@@ -435,39 +515,46 @@ I wonder if I will be able to get it...
 
 
 ➜  grep Secret file1
-Secret: 12345
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;command-substitution&#34;&gt;Command Substitution&lt;/h3&gt;
+Secret: 12345&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h3 id=&#34;command-substitution&#34;&gt;Command Substitution&lt;/h3&gt;
+
 &lt;p&gt;Lastly, &lt;em&gt;command substitution&lt;/em&gt; is taking one command, and using it&amp;rsquo;s output as
 &lt;em&gt;part&lt;/em&gt; of &lt;em&gt;another command&lt;/em&gt;. Traditionally, this was done by calling the
 substitution command `inside backticks`, but it &lt;a href=&#34;http://mywiki.wooledge.org/BashFAQ/082&#34;&gt;is now preferred to use
 $(COMMAND) instead of backticks&lt;/a&gt;.&lt;/p&gt;
+
 &lt;h4 id=&#34;example-2&#34;&gt;Example&lt;/h4&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;➜ echo I am at: `pwd`
-I am at: /tmp/demo
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;or (preferred):&lt;/p&gt;
+I am at: /tmp/demo&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;or (preferred):&lt;/p&gt;
 &lt;pre&gt;&lt;code class=&#34;language-test&#34; data-lang=&#34;test&#34;&gt;➜ echo I am at: $(pwd)
-I am at: /tmp/demo
-&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;pipes&#34;&gt;Pipes&lt;/h3&gt;
+I am at: /tmp/demo&lt;/code&gt;&lt;/pre&gt;
+&lt;h3 id=&#34;pipes&#34;&gt;Pipes&lt;/h3&gt;
+
 &lt;p&gt;An &lt;a href=&#34;https://en.wikipedia.org/wiki/Pipeline_(Unix)&#34;&gt;unix pipe&lt;/a&gt; (&lt;code&gt;|&lt;/code&gt;) directs the
 &lt;em&gt;output&lt;/em&gt; of one command, to be used as the &lt;em&gt;input&lt;/em&gt; for another command. Pipes
 can be used to chain together several commands, forming a &lt;em&gt;pipeline&lt;/em&gt;.&lt;/p&gt;
+
 &lt;h4 id=&#34;example-3&#34;&gt;Example&lt;/h4&gt;
+
 &lt;p&gt;The output of &lt;code&gt;ls&lt;/code&gt; can be fed as input to &lt;code&gt;wc&lt;/code&gt; (word count) to create a
 pipeline command that returns the number of files/directories in the current directory.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;➜ ls
 dirA  dirB  file1  file2
 
 ➜ ls | wc -l
-&lt;span style=&#34;color:#ae81ff&#34;&gt;4&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;putting-it-all-together&#34;&gt;Putting It All Together&lt;/h3&gt;
+&lt;span style=&#34;color:#ae81ff&#34;&gt;4&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h3 id=&#34;putting-it-all-together&#34;&gt;Putting It All Together&lt;/h3&gt;
+
 &lt;p&gt;Now that we know all the parts, how does it all fit together? One particular
 shell chain I find convenient is pairing &lt;code&gt;find&lt;/code&gt; and &lt;code&gt;grep&lt;/code&gt; to recursively get
 all the paths of a particular file type, and then use it in a command
 substitution to pass that result on to another command (such as &lt;code&gt;rm&lt;/code&gt;).&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;COMMAND &lt;span style=&#34;color:#66d9ef&#34;&gt;$(&lt;/span&gt;find . | grep SEARCHSTRING&lt;span style=&#34;color:#66d9ef&#34;&gt;)&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;This is the combination I use to clean up my directories. While working on
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;COMMAND &lt;span style=&#34;color:#66d9ef&#34;&gt;$(&lt;/span&gt;find . | grep SEARCHSTRING&lt;span style=&#34;color:#66d9ef&#34;&gt;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;This is the combination I use to clean up my directories. While working on
 writing ansible playbooks, I can generate a few &lt;code&gt;*.retry&lt;/code&gt; files, as well as
 some &lt;code&gt;*.swp&lt;/code&gt; files from editing in vim.&lt;/p&gt;
+
 &lt;h4 id=&#34;example-4&#34;&gt;Example&lt;/h4&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;➜ find . | grep .retry          &lt;span style=&#34;color:#75715e&#34;&gt;## Find *.retry files&lt;/span&gt;
 ./file1.retry
@@ -478,8 +565,9 @@ some &lt;code&gt;*.swp&lt;/code&gt; files from editing in vim.&lt;/p&gt;
 
 ➜ find . | grep .retry          &lt;span style=&#34;color:#75715e&#34;&gt;## Check that they were deleted&lt;/span&gt;
 
-➜
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;summary&#34;&gt;Summary&lt;/h3&gt;
+➜&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h3 id=&#34;summary&#34;&gt;Summary&lt;/h3&gt;
+
 &lt;p&gt;That&amp;rsquo;s it. A small post for a &lt;em&gt;simple&lt;/em&gt; but &lt;strong&gt;powerful&lt;/strong&gt; command line set.  If
 you haven&amp;rsquo;t used this team of commands before, give it a try sometime! Have
 fun!&lt;/p&gt;</description>

@@ -22,67 +22,102 @@ progressed over the last year. So, I decided to try to use Gitlab to manage the
 automated build and deployments of a personal project I&amp;rsquo;ve been working on.
 The first step of the process was to setup a runner my Gitlab instance could
 use for the builds.&lt;/p&gt;
-&lt;h2 id=&#34;setup-a-machinevm&#34;&gt;Setup a Machine/VM&lt;/h2&gt;
-&lt;!-- raw HTML omitted --&gt;
+
+&lt;h2 id=&#34;setup-a-machine-vm&#34;&gt;Setup a Machine/VM&lt;/h2&gt;
+
+&lt;p&gt;&lt;center&gt;
+&lt;a href=&#34;../../img/posts/create-gitlab-runner/fedora-vm-install.png&#34;&gt;
+&lt;img alt=&#34;Installing a new Fedora30 VM in Virt-Manager&#34; src=&#34;../../img/posts/create-gitlab-runner/fedora-vm-install.png&#34; style=&#34;max-width: 100%;&#34;/&gt;&lt;/a&gt;
+&lt;div class=&#34;caption&#34;&gt;Installing a new Fedora 30 VM in Virt-Manager for my runner&lt;/div&gt;
+&lt;/center&gt;&lt;/p&gt;
+
 &lt;p&gt;This will be a BYOG post (bring your own Gitlab). I already
-&amp;ldquo;&lt;em&gt;had one laying around&lt;/em&gt;&amp;quot;, so I won&amp;rsquo;t cover setting that up.&lt;/p&gt;
+&amp;ldquo;&lt;em&gt;had one laying around&lt;/em&gt;&amp;rdquo;, so I won&amp;rsquo;t cover setting that up.&lt;/p&gt;
+
 &lt;p&gt;Your runner needs may differ, but in this post I am installing runner on a
 Fedora 30 VM. I will also be using both &lt;a href=&#34;https://buildah.io/&#34;&gt;buildah&lt;/a&gt; and
 &lt;a href=&#34;https://podman.io/&#34;&gt;podman&lt;/a&gt; for this project.&lt;/p&gt;
-&lt;h4 id=&#34;some-things-to-noteconsider-during-vm-setup&#34;&gt;Some things to note/consider during VM setup:&lt;/h4&gt;
+
+&lt;h4 id=&#34;some-things-to-note-consider-during-vm-setup&#34;&gt;Some things to note/consider during VM setup:&lt;/h4&gt;
+
 &lt;ul&gt;
 &lt;li&gt;Install packages required for pipeline tasks (ex: &lt;code&gt;podman&lt;/code&gt; and &lt;code&gt;buildah&lt;/code&gt;)&lt;/li&gt;
 &lt;li&gt;If &lt;code&gt;sudo&lt;/code&gt; is required, manage the &lt;code&gt;gitlab-runner&lt;/code&gt; user/group using &lt;code&gt;visudo&lt;/code&gt;&lt;/li&gt;
 &lt;li&gt;If using docker runners, &lt;code&gt;docker-machine&lt;/code&gt; needs to be installed&lt;/li&gt;
 &lt;/ul&gt;
+
 &lt;h2 id=&#34;install-runner&#34;&gt;Install runner&lt;/h2&gt;
+
 &lt;p&gt;First, install the &lt;code&gt;gitlab-runner&lt;/code&gt; package. This can be done using the
 instructions found
 &lt;a href=&#34;https://docs.gitlab.com/runner/install/linux-repository.html&#34;&gt;here&lt;/a&gt;.
 &lt;em&gt;However&lt;/em&gt;, I encountered issues installing it on my Fedora VMs, as this install
 method isn&amp;rsquo;t supported for 30 yet.  (Check out &lt;a href=&#34;https://gitlab.com/gitlab-org/gitlab-runner/issues/4401&#34;&gt;this
 issue&lt;/a&gt; for more info).&lt;/p&gt;
-&lt;h4 id=&#34;add-gitlabs-repo&#34;&gt;Add GitLab&amp;rsquo;s Repo&lt;/h4&gt;
-&lt;pre&gt;&lt;code&gt;curl -L https://packages.gitlab.com/install/repositories/runner/gitlab-runner/script.rpm.sh | sudo bash
-&lt;/code&gt;&lt;/pre&gt;&lt;h4 id=&#34;install-gitlab-runner&#34;&gt;Install gitlab runner&lt;/h4&gt;
-&lt;pre&gt;&lt;code&gt;sudo dnf install gitlab-runner
-&lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&#34;alternative-copr-install&#34;&gt;(Alternative) Copr install&lt;/h2&gt;
+
+&lt;h4 id=&#34;add-gitlab-s-repo&#34;&gt;Add GitLab&amp;rsquo;s Repo&lt;/h4&gt;
+&lt;pre&gt;&lt;code&gt;curl -L https://packages.gitlab.com/install/repositories/runner/gitlab-runner/script.rpm.sh | sudo bash&lt;/code&gt;&lt;/pre&gt;
+&lt;h4 id=&#34;install-gitlab-runner&#34;&gt;Install gitlab runner&lt;/h4&gt;
+&lt;pre&gt;&lt;code&gt;sudo dnf install gitlab-runner&lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id=&#34;alternative-copr-install&#34;&gt;(Alternative) Copr install&lt;/h2&gt;
+
 &lt;p&gt;For now, I have been using the copr install posted in the comments
 of that issue (linked above). I recommend checking if the issue is resolved first, as it
 might change from the time of writing this post. To install:&lt;/p&gt;
+
 &lt;p&gt;First enable the copr repo:&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;sudo dnf copr enable snecker/gitlab-runner -y
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Next, install:&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;sudo dnf install gitlab-runner -y
-&lt;/code&gt;&lt;/pre&gt;&lt;h4 id=&#34;register-the-runner&#34;&gt;Register the Runner&lt;/h4&gt;
+&lt;pre&gt;&lt;code&gt;sudo dnf copr enable snecker/gitlab-runner -y&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Next, install:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;sudo dnf install gitlab-runner -y&lt;/code&gt;&lt;/pre&gt;
+&lt;h4 id=&#34;register-the-runner&#34;&gt;Register the Runner&lt;/h4&gt;
+
 &lt;p&gt;Once installed, register the runner. Instructions on how to register a runner
 can be found &lt;a href=&#34;https://docs.gitlab.com/runner/register/index.html&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;sudo gitlab-runner register
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Enter the coordinator URL (ex: &lt;code&gt;https://gitlab.com&lt;/code&gt;)&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;sudo gitlab-runner register&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Enter the coordinator URL (ex: &lt;code&gt;https://gitlab.com&lt;/code&gt;)&lt;/p&gt;
+
 &lt;p&gt;Next, a &lt;em&gt;gitlab-ci&lt;/em&gt; token must be shared with the runner.&lt;/p&gt;
-&lt;!-- raw HTML omitted --&gt;
+
+&lt;p&gt;&lt;a href=&#34;../../img/posts/create-gitlab-runner/gitlab-runner-settings.png&#34;&gt;
+&lt;img alt=&#34;Gitlab Runner Settings&#34; src=&#34;../../img/posts/create-gitlab-runner/gitlab-runner-settings.png&#34; style=&#34;max-width: 100%;&#34;/&gt;&lt;/a&gt;
+&lt;div class=&#34;caption&#34;&gt;Gitlab Runner&lt;strong&gt;s&lt;/strong&gt; Settings Page&lt;/div&gt;&lt;/p&gt;
+
 &lt;p&gt;To obtain a gitlab-ci token, got to &lt;strong&gt;Admin Area&lt;/strong&gt; -&amp;gt; &lt;strong&gt;Overview&lt;/strong&gt; -&amp;gt;
 &lt;strong&gt;Runners&lt;/strong&gt;. On the right, there should be a token to use during setup.&lt;/p&gt;
+
 &lt;p&gt;When the runner registrations asks for the token, use the &amp;ldquo;registration token&amp;rdquo;
 listed in the &amp;ldquo;Set up a shared Runner manually&amp;rdquo; section.&lt;/p&gt;
+
 &lt;p&gt;Next, provide a short description, and add a tag or two (when prompted).&lt;/p&gt;
+
 &lt;p&gt;Lastly, enter the executor (the system on the runner that executes commands). For
 now, I&amp;rsquo;ve been using &lt;code&gt;&amp;quot;shell&amp;quot;&lt;/code&gt; for my needs, as these VMs are fully
 dedicated to be used as the runners for a single project.&lt;/p&gt;
+
 &lt;p&gt;Congrats, the runner should be registered! Now to set it up&amp;hellip;&lt;/p&gt;
-&lt;h2 id=&#34;link-to-cicd-builds&#34;&gt;Link to CI/CD Builds&lt;/h2&gt;
+
+&lt;h2 id=&#34;link-to-ci-cd-builds&#34;&gt;Link to CI/CD Builds&lt;/h2&gt;
+
 &lt;p&gt;It is time to link up the runner to a CI/CD job. This can be done with
 tagging, but I currently just have one pipeline using my runners, so haven&amp;rsquo;t
 used the tags as much. Edit the runner by clicking its  &lt;code&gt;edit&lt;/code&gt; icon.&lt;/p&gt;
-&lt;!-- raw HTML omitted --&gt;
+
+&lt;p&gt;&lt;a href=&#34;../../img/posts/create-gitlab-runner/runner-edit.png&#34;&gt;
+&lt;img alt=&#34;Gitlab Runner Settings&#34; src=&#34;../../img/posts/create-gitlab-runner/runner-edit.png&#34; style=&#34;max-width: 100%;&#34;/&gt;&lt;/a&gt;
+&lt;div class=&#34;caption&#34;&gt;Gitlab Runner Edit Page&lt;/div&gt;&lt;/p&gt;
+
 &lt;p&gt;In the runner edit menu, ensure that the &amp;ldquo;&lt;code&gt;Active&lt;/code&gt;&amp;rdquo; checkbox is checked. I&amp;rsquo;ve
 also checked the &amp;ldquo;&lt;code&gt;Run untagged jobs&lt;/code&gt;&amp;rdquo; box for this runner, which will allow it
 to pick up any job that does &lt;em&gt;not&lt;/em&gt; have a tag. If the runner is to be assigned
-to a &lt;em&gt;specific&lt;/em&gt; project, that can be enabled/assigned below in the &amp;ldquo;&lt;code&gt;Restrict projects for this Runner&lt;/code&gt;&amp;rdquo; section.&lt;/p&gt;
+to a &lt;em&gt;specific&lt;/em&gt; project, that can be enabled/assigned below in the &amp;ldquo;&lt;code&gt;Restrict
+projects for this Runner&lt;/code&gt;&amp;rdquo; section.&lt;/p&gt;
+
 &lt;h2 id=&#34;test-run&#34;&gt;Test Run&lt;/h2&gt;
+
 &lt;p&gt;To test out the runner, start a new build in a project! (Note, if there are
 several runners already setup, 1. why are you reading this, and 2. it might be a good idea
 to pause the others to ensure the new one will run with the test).&lt;/p&gt;
+
 &lt;p&gt;I won&amp;rsquo;t detail how to write a &lt;code&gt;gitlab-ci.yml&lt;/code&gt; now, but for my test I made an empty
 demo repo with the following pipeline:&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;before_script:
@@ -93,16 +128,24 @@ demo repo with the following pipeline:&lt;/p&gt;
 build-base:
   stage: build
   script:
-    - echo &amp;quot;Hello world!&amp;quot;
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;After committing it, a build kicked off with the new runner and finished
+    - echo &amp;#34;Hello world!&amp;#34;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;After committing it, a build kicked off with the new runner and finished
 successfully!&lt;/p&gt;
+
 &lt;p&gt;&lt;em&gt;Notice that the job indeed ran on &lt;code&gt;post-runner&lt;/code&gt;, the runner I setup
 specifically for this post&lt;/em&gt;&lt;/p&gt;
-&lt;!-- raw HTML omitted --&gt;
+
+&lt;p&gt;&lt;a href=&#34;../../img/posts/create-gitlab-runner/pipeline-run.png&#34;&gt;
+&lt;img alt=&#34;Gitlab Runner Settings&#34; src=&#34;../../img/posts/create-gitlab-runner/pipeline-run.png&#34; style=&#34;max-width: 100%;&#34;/&gt;&lt;/a&gt;
+&lt;div class=&#34;caption&#34;&gt;Gitlab Demo Job Run Results&lt;/div&gt;&lt;/p&gt;
+
 &lt;p&gt;If the job is more complicated, more runs might have to be manually started
 after tweaking the runner settings again. Pipelines can be started by going to
-the project&amp;rsquo;s &lt;code&gt;CI/CD-&amp;gt;Pipelines&lt;/code&gt; page via the side menu, and hitting the &lt;code&gt;Run Pipeline&lt;/code&gt; button.&lt;/p&gt;
+the project&amp;rsquo;s &lt;code&gt;CI/CD-&amp;gt;Pipelines&lt;/code&gt; page via the side menu, and hitting the &lt;code&gt;Run
+Pipeline&lt;/code&gt; button.&lt;/p&gt;
+
 &lt;h2 id=&#34;conclusion&#34;&gt;Conclusion&lt;/h2&gt;
+
 &lt;p&gt;That&amp;rsquo;s it. We should now have a connected runner! So far, the runners have been working
 &lt;em&gt;(mostly)&lt;/em&gt; fine. When they &lt;em&gt;do&lt;/em&gt; break, it is usually because I&amp;rsquo;ve let the disk
 fill up or allowed some other system-related negligence to build up
@@ -119,30 +162,42 @@ some other time. Enjoy!&lt;/p&gt;</description>
       <description>&lt;p&gt;Last week, I extended the virtual disk of the VM hosting my
 &lt;a href=&#34;https://jenkins.io&#34;&gt;jenkins&lt;/a&gt; server. Shortly after, I increased the maximum
 disk size of one of the job&amp;rsquo;s docker containers, maxing out the disk. This
-meant that I needed to extend the drive*&amp;hellip; again*. If you ever do something
-twice, it is *best* to have it documented for the potential third time. So,
+meant that I needed to extend the drive&lt;em&gt;&amp;hellip; again&lt;/em&gt;. If you ever do something
+twice, it is &lt;em&gt;best&lt;/em&gt; to have it documented for the potential third time. So,
 here we are.&lt;/p&gt;
+
 &lt;h4 id=&#34;assumptions&#34;&gt;Assumptions&lt;/h4&gt;
+
 &lt;p&gt;Before getting started, I want to point out that this method is specific to the
 environment I currently have for &lt;em&gt;my VMs&lt;/em&gt;. Specifically, I am using kvm/qemu
 and virt-manager, with qcow2 images for the virtual disks. Additionally, the
 specific VM I was extending was installed with LVM and it&amp;rsquo;s main partition was
 formatted with a xfs file system. Just note that some steps &lt;em&gt;may&lt;/em&gt; differ
 elsewhere. This is what worked for &lt;em&gt;me&lt;/em&gt;.&lt;/p&gt;
+
 &lt;h2 id=&#34;clone-vm&#34;&gt;Clone VM&lt;/h2&gt;
-&lt;!-- raw HTML omitted --&gt;
+
+&lt;p&gt;&lt;center&gt;
+&lt;a href=&#34;../../img/posts/extending-vm-hd/clone-vm.png&#34;&gt;&lt;img alt=&#34;Clone VM window in Virt Manager&#34; src= &#34;/img/posts/extending-vm-hd/clone-vm.png&#34; style=&#34;max-width: 100%;&#34;/&gt;&lt;/a&gt;
+&lt;div class=&#34;caption&#34;&gt;Cloning the VM in Virt Manager&lt;/div&gt;
+&lt;/center&gt;&lt;/p&gt;
+
 &lt;p&gt;While not &lt;em&gt;required&lt;/em&gt;, it isn&amp;rsquo;t a &lt;em&gt;bad&lt;/em&gt; idea to first clone the VM (just
 in case anything becomes damaged). If using &lt;code&gt;virt-manager&lt;/code&gt;, cloning a
 VM is as simple as right clicking a &lt;em&gt;powered down&lt;/em&gt; VM, and selecting
-&amp;ldquo;&lt;em&gt;Clone&amp;hellip;&lt;/em&gt;&amp;quot;. A window will pop up with options for cloning the
+&amp;ldquo;&lt;em&gt;Clone&amp;hellip;&lt;/em&gt;&amp;rdquo;. A window will pop up with options for cloning the
 VM. Make the desired name changes and hit &lt;em&gt;Clone&lt;/em&gt;.&lt;/p&gt;
+
 &lt;h2 id=&#34;extend-qcow2-file&#34;&gt;Extend qcow2 file&lt;/h2&gt;
+
 &lt;p&gt;The first step in resizing the virtual drive is to first expand
 the &lt;code&gt;qcow2&lt;/code&gt; image. By default, the images tend to be stored at
 &lt;code&gt;/var/lib/libvirt/images/&lt;/code&gt; and will require &lt;code&gt;root&lt;/code&gt; privileges to
 access. Virt-Manager can be used to double check which image the VM is
-using for its disk. To resize the qcow2 image, use the &lt;code&gt;qemu-img resize&lt;/code&gt; command, providing it the image file path/name and then the size
-to expand it. For example, I used &lt;code&gt;+40G&lt;/code&gt; in my command (&lt;code&gt;qemu-img resize Jenkins.qcow2 +40G&lt;/code&gt;) to extend the image by 40GB.&lt;/p&gt;
+using for its disk. To resize the qcow2 image, use the &lt;code&gt;qemu-img
+resize&lt;/code&gt; command, providing it the image file path/name and then the size
+to expand it. For example, I used &lt;code&gt;+40G&lt;/code&gt; in my command (&lt;code&gt;qemu-img
+resize Jenkins.qcow2 +40G&lt;/code&gt;) to extend the image by 40GB.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;root@ninetales:/var/lib/libvirt/images# qemu-img info Jenkins.qcow2
 image: Jenkins.qcow2
 file format: qcow2
@@ -170,31 +225,48 @@ Format specific information:
     refcount bits: &lt;span style=&#34;color:#ae81ff&#34;&gt;16&lt;/span&gt;
     corrupt: false
 
-root@ninetales:/var/lib/libvirt/images#
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;The command &lt;code&gt;qemu-image info&lt;/code&gt; can be helpful in verifying that the resize
+root@ninetales:/var/lib/libvirt/images#&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;The command &lt;code&gt;qemu-image info&lt;/code&gt; can be helpful in verifying that the resize
 worked, by checking the size of the image.&lt;/p&gt;
+
 &lt;h2 id=&#34;gparted-live-iso&#34;&gt;Gparted Live ISO&lt;/h2&gt;
+
 &lt;p&gt;For the next few steps, it is a good idea to boot the system from a live CD.
 This will run the OS in RAM, allowing the disk to be fully unmounted.  With
 access to the VM&amp;rsquo;s display, an ISO such as the &lt;a href=&#34;https://gparted.org/livecd.php&#34;&gt;gparted live
 CD&lt;/a&gt; can be used to resize the partitions,
 as it contains the amazing graphical tool, &lt;code&gt;gparted&lt;/code&gt; (duh).&lt;/p&gt;
+
 &lt;p&gt;&lt;strong&gt;Note:&lt;/strong&gt; If you boot up the VM and don&amp;rsquo;t see the new unallocated space available in the
 volume&amp;hellip; make sure you didn&amp;rsquo;t accidentally boot the &lt;em&gt;backup VM&lt;/em&gt;&amp;hellip; Not that
 &lt;strong&gt;I made such a mistake&amp;hellip;&lt;/strong&gt; :P&lt;/p&gt;
+
 &lt;h4 id=&#34;lvm-resize&#34;&gt;LVM Resize&lt;/h4&gt;
+
 &lt;p&gt;My VM is installed using LVM volumes, so I had to resize them
 before I could resize the file system. Gparted will do this
 automatically when resizing a partition.&lt;/p&gt;
-&lt;!-- raw HTML omitted --&gt;
+
+&lt;p&gt;&lt;center&gt;
+&lt;a href=&#34;../../img/posts/extending-vm-hd/gparted-live-iso.png&#34;&gt;&lt;img alt=&#34;Booting into the Gparted live ISO&#34; src= &#34;/img/posts/extending-vm-hd/gparted-live-iso.png&#34; style=&#34;max-width: 100%;&#34;/&gt;&lt;/a&gt;
+&lt;div class=&#34;caption&#34;&gt;Booting into the Gparted live ISO&lt;/div&gt;
+&lt;/center&gt;&lt;/p&gt;
+
 &lt;p&gt;To resize the partition, first verify that the correct virtual disk
 is selected in the top right drop-down the window. Next, select the
 partition to expand, and click the &amp;ldquo;&lt;em&gt;Resize/Move&lt;/em&gt;&amp;rdquo; icon at the top.&lt;/p&gt;
-&lt;!-- raw HTML omitted --&gt;
+
+&lt;p&gt;&lt;center&gt;
+&lt;a href=&#34;../../img/posts/extending-vm-hd/gparted-resize.png&#34;&gt;&lt;img alt=&#34;Resizing the partition in Gparted&#34; src= &#34;/img/posts/extending-vm-hd/gparted-resize.png&#34; style=&#34;max-width: 100%;&#34;/&gt;&lt;/a&gt;
+&lt;div class=&#34;caption&#34;&gt;Resizing the partition in Gparted&lt;/div&gt;
+&lt;/center&gt;&lt;/p&gt;
+
 &lt;p&gt;In the resize window, I changed the &lt;code&gt;Free space following (MiB)&lt;/code&gt;
 value to &lt;code&gt;0&lt;/code&gt;, to expand the partition to use &lt;em&gt;all&lt;/em&gt; of the unallocated space.
 Lastly, I hit the &lt;em&gt;Resize&lt;/em&gt; button and let Gparted do it&amp;rsquo;s magic.&lt;/p&gt;
+
 &lt;h4 id=&#34;grow-xfs&#34;&gt;Grow XFS&lt;/h4&gt;
+
 &lt;p&gt;Finally, with the lvm volume expanded, I just had to grow my file system to use
 the new space. I booted up the VM and logged in. This VM uses an xfs file
 system, so I was able to use the &lt;code&gt;xfs_growfs&lt;/code&gt; command to expand the partition:&lt;/p&gt;
@@ -210,12 +282,14 @@ tmpfs                    1.9G  8.0K  1.9G   1% /dev/shm
 tmpfs                    1.9G  8.7M  1.9G   1% /run
 tmpfs                    1.9G     &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;  1.9G   0% /sys/fs/cgroup
 /dev/vda1                497M  231M  267M  47% /boot
-tmpfs                    379M     &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;  379M   0% /run/user/1000
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;em&gt;Note: My VM&amp;rsquo;s disk space was COMPLETELY full. This meant that I couldn&amp;rsquo;t use auto
+tmpfs                    379M     &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;  379M   0% /run/user/1000&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;&lt;em&gt;Note: My VM&amp;rsquo;s disk space was COMPLETELY full. This meant that I couldn&amp;rsquo;t use auto
 tab complete in my shell because it spit out there&amp;rsquo;s no disk space. Typing the
 command out fully by hand, still worked.&lt;/em&gt;&lt;/p&gt;
+
 &lt;p&gt;With the xfs partition resized, I rebooted the VM for good measure, and
 everything was up and running again.&lt;/p&gt;
+
 &lt;p&gt;That&amp;rsquo;s about it. Remember, the steps I took might need to be altered for other
 environments, but this post should still be a good &lt;em&gt;starting&lt;/em&gt; point. I know it
 will help me when I acidently overfill this VM &lt;em&gt;again&lt;/em&gt;&amp;hellip; Enjoy!&lt;/p&gt;</description>
@@ -228,17 +302,33 @@ will help me when I acidently overfill this VM &lt;em&gt;again&lt;/em&gt;&amp;he
       
       <guid>http://ryan.himmelwright.net/post/exporting-proxmox-vms/</guid>
       <description>&lt;p&gt;For a long time I have been thinking about replacing my server&amp;rsquo;s proxmox install with vanilla Debian or CentOS, mostly for learning purposes. I would first setup zfs on the new system and import my existing data pools. Then, I would use either a system like ovrit or just plain kvm/lxc to run my VMs and containers. In order to do this though&amp;hellip; I have to first figure out how export my containers and VMs running in Proxmox. As it turns out&amp;hellip; exporting the VMs wasn&amp;rsquo;t very hard&amp;hellip;&lt;/p&gt;
+
 &lt;h2 id=&#34;exporting-proxmox-vm-disk&#34;&gt;Exporting Proxmox VM Disk&lt;/h2&gt;
-&lt;!-- raw HTML omitted --&gt;
+
+&lt;p&gt;&lt;center&gt;
+&lt;img alt=&#34;Proxmox logo&#34; src=&#34;../../img/posts/exporting-proxmox-vms/proxmox-logo.png&#34; style=&#34;max-width: 100%;&#34;/&gt;
+&lt;/center&gt;&lt;/p&gt;
+
 &lt;p&gt;My Proxmox VMs are setup on an LVM virtual group, with each virtual drive being a lvm volume passed to the VM. So, I wanted to be able to extract these disks to something I could more easily transfer. I ended up converting the lvm volumes to qcow2 images because it was easy and I&amp;rsquo;ve actually experienced okay performance with qcow2 on my workstations. Additionally, qcow2 being a single file, is easy to move around and I can always convert them to something else on the final system. To export one of the VMs, I ran the command:&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;qemu-img convert -O qcow2 /dev/pve/vm-108-disk-1 /Data/freebsd-vm.qcow2
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;That was it. It took a few minutes to finish, but honestly that is all I had to do (I&amp;rsquo;m sure I should of taken a snapshot or something then copy that, but this seemed to work fine). When it completed, I copied the image down to my desktop and decided to test it out with virt-manager.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;qemu-img convert -O qcow2 /dev/pve/vm-108-disk-1 /Data/freebsd-vm.qcow2&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;That was it. It took a few minutes to finish, but honestly that is all I had to do (I&amp;rsquo;m sure I should of taken a snapshot or something then copy that, but this seemed to work fine). When it completed, I copied the image down to my desktop and decided to test it out with virt-manager.&lt;/p&gt;
+
 &lt;h2 id=&#34;importing-the-image-to-virt-manager&#34;&gt;Importing the image to Virt-Manager&lt;/h2&gt;
+
 &lt;p&gt;I opened up virt-manager and selected the button to create a new VM. At the first prompt, instead of selecting my usual &amp;ldquo;Local install media (ISO image or CDROM)&amp;rdquo; option, I choose to &amp;ldquo;Import an existing disk image&amp;rdquo;.&lt;/p&gt;
-&lt;!-- raw HTML omitted --&gt;
+
+&lt;p&gt;&lt;center&gt;
+&lt;img alt=&#34;import image&#34; src=&#34;../../img/posts/exporting-proxmox-vms/import-image.png&#34; style=&#34;max-width: 100%;&#34;/&gt;
+&lt;/center&gt;&lt;/p&gt;
+
 &lt;p&gt;At the second menu, I opened up the browse menu to see my already configured locations. From there, I found where I had saved the converted qcow2 image, and selected it.&lt;/p&gt;
-&lt;!-- raw HTML omitted --&gt;
+
+&lt;p&gt;&lt;center&gt;
+&lt;img alt=&#34;select qcow2 image&#34; src=&#34;../../img/posts/exporting-proxmox-vms/select-qcow2-image.png&#34; style=&#34;max-width: 100%;&#34;/&gt;
+&lt;/center&gt;&lt;/p&gt;
+
 &lt;p&gt;Next, I continued setting up the virtual specs (CPU, RAM, etc.) for the machine just as I would with any other VM setup. When I was done, I started the VM and FreeBSD booted right up. I logged in and compared the installed applications and files with the still running proxmox VM. They were identical.&lt;/p&gt;
+
 &lt;p&gt;That&amp;rsquo;s all I really have for this post. It was extremely simple to export the VMs. I know I&amp;rsquo;m not fully done yet and still have to import the VMs to the final system, but I&amp;rsquo;ll save that for a later post. Right now&amp;hellip; I have quite a few VM images to convert, so I might as well get started.&lt;/p&gt;</description>
     </item>
     

@@ -151,7 +151,9 @@ noisy&hellip; very noisy. Fearing the worst, I <a href="../../post/zfs-backups-t
 backup</a>, and shutdown the server until I had
 time to investigate further&hellip; and likely replace the drive. That
 time came this past week.</p>
+
 <h3 id="verifying-the-drive-failed">Verifying the Drive Failed</h3>
+
 <p>Before throwing money at the problem, I wanted to see if ZFS was detecting any
 issues. When I ran a <code>zpool status</code> on my <code>Data</code> pool, it warned me that one of
 the devices had experienced an error, but that I had not (<em>yet</em>) encountered
@@ -173,22 +175,31 @@ config:
 	    ata-TOSHIBA_DT01ACA300_365XDT3KS  ONLINE       <span style="color:#ae81ff">0</span>     <span style="color:#ae81ff">0</span>     <span style="color:#ae81ff">2</span>
 	    ata-TOSHIBA_DT01ACA300_365XDR5KS  ONLINE       <span style="color:#ae81ff">0</span>     <span style="color:#ae81ff">0</span>     <span style="color:#ae81ff">0</span>
 
-errors: No known data errors
-</code></pre></div><h3 id="ordering-a-new-drive">Ordering a New Drive</h3>
+errors: No known data errors</code></pre></div>
+<h3 id="ordering-a-new-drive">Ordering a New Drive</h3>
+
 <p>When I started shopping for hard drives, I decided to replace my broken 7200 RPM
 one a 5400 RPM one. I&rsquo;d rather have the drives last longer and run quieter,
 than whatever marginal speed difference the faster spinning disks <em>may</em>
 provide. I decided to finally go with a <a href="https://www.amazon.com/dp/B008JJLW4M/ref=twister_B07GXT9HNH?_encoding=UTF8&amp;psc=1">3TB Western Digital RED
 drive</a>
 this time, even tough it&rsquo;s a bit more expensive&hellip; mostly to try out.</p>
+
 <h3 id="replacing-the-drive">Replacing the Drive</h3>
-<!-- raw HTML omitted -->
+
+<p><center>
+<a href="../../img/posts/replace-zfs-mirror-drive/hdd-swap.jpg"><img alt="Swapping the two hard drives" src= "/img/posts/replace-zfs-mirror-drive/hdd-swap.jpg" style="max-width: 100%;"/></a>
+<div class="caption">Swapping the hot-swap caddy from the broken hard drive (left) with my new WD Red drive (right)</div>
+</center></p>
+
 <p><em>Physically</em> swapping the hard drives was a breeze. I could easily tell which
 drive was the defective one&hellip; as it caused the entire server to rumble (ಠ_ಠ) .
 So I slid it out, unscrewed the drive from its caddy, and screwed in the new
 one. Lastly, I slide the caddy back into the server and booted it up. I love
 hot-swap drive bays.</p>
+
 <h4 id="figuring-out-which-disk-to-replace">Figuring Out Which Disk To Replace</h4>
+
 <p>Determining which disk was being replaced <em>in software</em> was a bit more
 difficult. In order to add the new drive to the <code>Data</code> pool, I needed to tell
 ZFS which one had been <em>replaced</em>.  This was made more complicated by the fact
@@ -248,26 +259,25 @@ Data:
     features_for_read:
         com.delphix:hole_birth
         com.delphix:embedded_data
-...
-</code></pre></div><p>At first, I still didn&rsquo;t know which drive was which. However, after looking
+...</code></pre></div>
+<p>At first, I still didn&rsquo;t know which drive was which. However, after looking
 deeper, I noticed that <em>one</em> of the Toshiba drives listed had the line
 <code>not_present: 1</code>, indicating that it was the broken drive I had removed!</p>
+
 <h4 id="replacing-the-drive-1">Replacing the drive</h4>
+
 <p>With the <code>guid</code> of the broken drive known, I was able to start the process of
 replacing it in the pool with the new one. I issued a <code>zpool replace</code> command
 with the following arguments:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">sudo zpool replace Data <span style="color:#ae81ff">4676737554230074290</span> /dev/sdd
-</code></pre></div><ul>
-<li>
-<p><code>Data</code> - the name of the pool</p>
-</li>
-<li>
-<p><code>4676737554230074290</code> - the <code>guid</code> of the previous drive</p>
-</li>
-<li>
-<p><code>/dev/sdd</code> - the path to the new drive</p>
-</li>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">sudo zpool replace Data <span style="color:#ae81ff">4676737554230074290</span> /dev/sdd</code></pre></div>
+<ul>
+<li><p><code>Data</code> - the name of the pool</p></li>
+
+<li><p><code>4676737554230074290</code> - the <code>guid</code> of the previous drive</p></li>
+
+<li><p><code>/dev/sdd</code> - the path to the new drive</p></li>
 </ul>
+
 <p>Afterwards, the resilvering process started (rebuilding the mirror by copying
 data from one drive to the other). I was able to check the status of
 the process using <code>zpool status Data</code>.</p>
@@ -290,13 +300,15 @@ config:
 	      sdd                             ONLINE       <span style="color:#ae81ff">0</span>     <span style="color:#ae81ff">0</span>     <span style="color:#ae81ff">0</span>  <span style="color:#f92672">(</span>resilvering<span style="color:#f92672">)</span>
 	    ata-TOSHIBA_DT01ACA300_365XDR5KS  ONLINE       <span style="color:#ae81ff">0</span>     <span style="color:#ae81ff">0</span>     <span style="color:#ae81ff">0</span>
 
-errors: No known data errors
-</code></pre></div><p>Resilvering can take a <em>long</em> time. Luckily, I only had about ~1 TB of data to
+errors: No known data errors</code></pre></div>
+<p>Resilvering can take a <em>long</em> time. Luckily, I only had about ~1 TB of data to
 rebuild, so I hoped it wouldn&rsquo;t <em>actually</em> take the 123.5 hours that the first
 <code>status</code> predicted! Regardless, during the resilvering process, the only thing
 to do is wait (<em>and hope that the other drive doesn&rsquo;t break in the process!</em>).
 So I did.</p>
+
 <h4 id="resilver-complete">Resilver Complete</h4>
+
 <p>In just over 4 hours, my pool had rebuilt and was back online.</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">λ ninetales ~ → zpool status Data
   pool: Data
@@ -310,9 +322,10 @@ config:
 	    sdd                               ONLINE       <span style="color:#ae81ff">0</span>     <span style="color:#ae81ff">0</span>     <span style="color:#ae81ff">0</span>
 	    ata-TOSHIBA_DT01ACA300_365XDR5KS  ONLINE       <span style="color:#ae81ff">0</span>     <span style="color:#ae81ff">0</span>     <span style="color:#ae81ff">0</span>
 
-errors: No known data errors
-</code></pre></div><p>Looking at this output now, I realize I probably should have added the new
+errors: No known data errors</code></pre></div>
+<p>Looking at this output now, I realize I probably should have added the new
 drive by <code>uuid</code> instead of pathname&hellip;hmmm&hellip;</p>
+
 <p>Oh well. That is a post for another day. At least my broken drive
 has <em>finally</em> been replaced!</p>
 

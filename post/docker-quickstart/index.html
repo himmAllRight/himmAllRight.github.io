@@ -152,85 +152,114 @@ First on the list: <a href="https://docker.io">Docker</a>. These days, Docker ha
 ecosystem surrounding it, and can take years to truly master. This post on the
 other hand, will <em>hopefully</em> help you get up and playing with docker containers in
 just a few minutes. Lets get started.</p>
+
 <h2 id="installing-docker">Installing Docker</h2>
-<p><!-- raw HTML omitted --></p>
+
+<p><img src="../../img/posts/docker-quickstart/docker-logo.png" style="max-width: 100%; width: 400px; float: right; margin: 0px 15px 5px 5px;" alt="Docker Logo" /></p>
+
 <p>Installing docker on <a href="https://getsol.us">Solus</a> was easy enough. I just
 had to install the package, and then enable the service:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">sudo eopkg it docker
 sudo systemctl enable docker
-sudo systemctl start docker
-</code></pre></div><p>On other distributions, it may not be in the package manager, or it might be
+sudo systemctl start docker</code></pre></div>
+<p>On other distributions, it may not be in the package manager, or it might be
 under a different name. To be sure, check out the community edition
 <a href="https://docs.docker.com/install/linux/docker-ce/fedora/#set-up-the-repository">installation
 documentation</a>
 for your specific distro.</p>
+
 <h2 id="adding-user-to-docker-group">Adding User to Docker Group</h2>
+
 <p>By default, user accounts will not have permission to run docker commands
 without root access. So, after first installing docker, it might be tempting to
 just run everything using <code>sudo</code>, but that isn&rsquo;t the best idea. To get around
 this, simply add the user account to the <code>docker</code> group:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">sudo usermod -a -G docker ryan
-</code></pre></div><p>If the docker group is not created for some reason, it can be added:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">sudo groupadd docker
-</code></pre></div><p>Afterwards, that user should be able to run docker commands without requiring
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">sudo usermod -a -G docker ryan</code></pre></div>
+<p>If the docker group is not created for some reason, it can be added:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">sudo groupadd docker</code></pre></div>
+<p>Afterwards, that user should be able to run docker commands without requiring
 <code>sudo</code>. They <em>might</em> have to log out and back in first.</p>
+
 <p><em>Note: These commands may differ based on distro.</em></p>
+
 <h2 id="some-useful-commands">Some Useful Commands</h2>
+
 <p>Before getting too caught up in creating and using containers, lets first go
 over a few useful commands that make navigating docker a bit easier.</p>
+
 <h4 id="docker-ps">docker ps</h4>
-<p><!-- raw HTML omitted --><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
-<!-- raw HTML omitted -->
+
+<p><a href="../../img/posts/docker-quickstart/docker-ps.png"><img src="../../img/posts/docker-quickstart/docker-ps.png" style="max-width: 100%; float: left; margin: 0px 15px 0px 0px;" alt="Docker ps" /></a>
+<div class="caption">Example of the docker ps and docker ps -a commands</div></p>
+
 <p>Similar to how Unix-based systems have the <code>ps</code> command to see running
 processes, docker has <code>docker ps</code> to see created and running containers. To
 view the currently running containers, use the basic <code>docker ps</code> command:</p>
+
 <p>The base command however, doesn&rsquo;t always tell the whole story. A system might
 have containers that <em>exist</em> but are not running. A container may have been
 stopped, <em>or</em> exited if it encountered an error. Containers that are stopped or
 exited <em>will not</em> show up in the default <code>docker ps</code> command. To see <em>all</em> of the
 current containers on the system, run <code>ps</code> with the <code>-a</code> flag.</p>
+
 <h4 id="docker-inspect">docker inspect</h4>
-<p><!-- raw HTML omitted --><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
-<!-- raw HTML omitted -->
+
+<p><a href="../../img/posts/docker-quickstart/docker-inspect.png"><img src="../../img/posts/docker-quickstart/docker-inspect.png" style="max-width: 100%; float: left; margin: 0px 15px 0px 0px;" alt="Docker inspect examples: docker inspect web-test | grep Status and docker inspect web-test | grep IPAddress" /></a>
+<div class="caption">Using the docker inspect command to get the container&rsquo;s status and IP address</div></p>
+
 <p>Another useful command when working with docker containers is <code>docker inspect</code>.
 The <code>inspect</code> command will dump the xml for all the low level information of the
 container/docker object. The output contains basically <em>everything</em> about the
 container: Full ID, time created, state, volumes, network information&hellip;
 everything. It can be useful to pipe the output of <code>inspect</code> to grep, in order
 to get specific information about the container quickly.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">docker inspect container_name | grep IPAddress
-</code></pre></div><p>For example, the above command will grab and return only the lines which contain
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">docker inspect container_name | grep IPAddress</code></pre></div>
+<p>For example, the above command will grab and return only the lines which contain
 &ldquo;IPAddress&rdquo;.</p>
+
 <h4 id="help">help</h4>
-<p><!-- raw HTML omitted --><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
-<!-- raw HTML omitted -->
+
+<p><a href="../../img/posts/docker-quickstart/docker-help.png"><img src="../../img/posts/docker-quickstart/docker-help.png" style="max-width: 100%; float: left; margin: 0px 15px 0px 0px;" alt="Using the docker help command flags. For Example: docker inspect --help" /></a>
+<div class="caption">Using the docker help command flags.</div></p>
+
 <p>Last but not least, don&rsquo;t forget about the <code>help</code> command. To see all the
 available docker commands, run <code>docker help</code>.</p>
+
 <p>Additionally, when using each of those specific commands, (<code>inspect</code> for
 example), a description and possible options can be shown using the <code>--help</code>
 flag (as in <code>docker inspect --help</code>).</p>
+
 <p>Just as man pages can be extremely valuable when working on a Linux system,
 <code>help</code> is just as essential when using docker.</p>
+
 <h2 id="images">Images</h2>
+
 <p>A docker container is created from a base <em>image</em>. Images can be pulled down
 from <a href="https://hub.docker.com/">Dockerhub</a>. To search docker hub from command
 line, use the <code>docker search</code> command. For example, <code>docker search nginx</code> will
 search for images related to nginx.</p>
-<p><!-- raw HTML omitted --><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
-<!-- raw HTML omitted -->
+
+<p><a href="../../img/posts/docker-quickstart/docker-search.png"><img src="../../img/posts/docker-quickstart/docker-search.png" style="max-width: 100%; float: left; margin: 0px 15px 0px 0px;" alt="Docker Search output. Ex: docker search nginx" /></a>
+<div class="caption">The search output for nginx images</div></p>
+
 <p>The search will list all of the public images in order, from most to least
 stars. When a desired image is found, pull it down using the <code>docker pull</code>
 command. For example, <code>docker pull nginx</code> will pull down the <a href="https://hub.docker.com/_/nginx/">nginx
 image</a>.</p>
-<p><!-- raw HTML omitted --><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
-<!-- raw HTML omitted -->
+
+<p><a href="../../img/posts/docker-quickstart/docker-pull.png"><img src="../../img/posts/docker-quickstart/docker-pull.png" style="max-width: 100%; width:100%; float: left; margin: 0px 15px 0px 0px;" alt="Docker Pull output. Ex: docker pull nginx" /></a>
+<div class="caption">Pulling the latest nginx image</div></p>
+
 <p>Docker will then download all the layers for the image. When the download
 completes, the image will be locally available to create docker containers
 from. To see all of the local images, use the <code>docker images</code> command:</p>
+
 <p>To delete an image, use the <code>docker images rm</code> command, or my preferred, lazier
 command, <code>docker rmi</code>:</p>
-<p><!-- raw HTML omitted --><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
-<!-- raw HTML omitted -->
+
+<p><a href="../../img/posts/docker-quickstart/docker-images.png"><img src="../../img/posts/docker-quickstart/docker-images.png" style="max-width: 100%; float: left; margin: 0px 15px 0px 0px;" alt="docker images and docker rmi. Ex: docker images, then docker rmi test-ubuntu" /></a>
+<div class="caption">Viewing downloaded images with the docker images command, then deleting the &ldquo;test-ubuntu&rdquo; image using the docker rmi command</div></p>
+
 <p>Lastly, it should be noted that custom images can be created/tailored using a
 <a href="https://docs.docker.com/engine/reference/builder/#usage">Dockerfile</a>. With a
 Dockerfile is defined, an image can be created from it using the <code>docker build</code>
@@ -243,101 +272,128 @@ MAINTAINER himmallright &lt;ryan.himmelwright@gmail.com<span style="color:#e6db7
 </span><span style="color:#e6db74">
 </span><span style="color:#e6db74">RUN apt-get update</span>
 
-RUN apt-get install -y vim stow git tmux fish htop emacs
-
-</code></pre></div><p>To build the image, run the following command in the same directory as the
+RUN apt-get install -y vim stow git tmux fish htop emacs</code></pre></div>
+<p>To build the image, run the following command in the same directory as the
 Dockerfile (if defining a specific file, the <code>-f</code> flag can be used):</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">docker build -t ubuntu-base:v1 .
-</code></pre></div><p>I like to use the <code>-t</code> flag, so that I can specify a <code>name:tag</code> for the image.
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">docker build -t ubuntu-base:v1 .</code></pre></div>
+<p>I like to use the <code>-t</code> flag, so that I can specify a <code>name:tag</code> for the image.
 This helps to make it easier to find it in the <code>docker images</code> list.</p>
+
 <h2 id="creating-containers">Creating Containers</h2>
+
 <p>Docker containers can be <em>created</em> (but not run) with the <code>docker create</code>
 command. When creating containers, it is useful to use flags to tailor the
 details of the container. For example, the <code>-m</code> flag can be used to create a
 memory limit, <code>--name</code> to name the container, and so on. To create a simple nginx
 container from the image we previously pulled:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">docker create --name web-test nginx:latest
-</code></pre></div><h2 id="starting--running-containers">Starting &amp; Running Containers</h2>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">docker create --name web-test nginx:latest</code></pre></div>
+<h2 id="starting-running-containers">Starting &amp; Running Containers</h2>
+
 <p>To <em>start</em> a container created with <code>docker create</code>, or one that has been previously
 stopped, use the <code>docker start</code> command. For example, to start
 the container created in the previous step:</p>
-<pre><code>docker start web-test
-</code></pre><p>Similarly, a container can be stopped with <code>docker stop</code>, or restarted with
+<pre><code>docker start web-test</code></pre>
+<p>Similarly, a container can be stopped with <code>docker stop</code>, or restarted with
 <code>docker restart</code>.</p>
+
 <p>Instead of using a <code>docker create</code> and <code>docker start</code> combination, <code>docker run</code>
 can be used to both instantiate <em>and</em> start a container. To create and start the
 &ldquo;web-test&rdquo; container from the previous examples:</p>
-<pre><code>docker run --name web-test -d nginx:latest
-</code></pre><h4 id="cleaning-containers">Cleaning containers</h4>
-<p><!-- raw HTML omitted --><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
-<!-- raw HTML omitted -->
+<pre><code>docker run --name web-test -d nginx:latest</code></pre>
+<h4 id="cleaning-containers">Cleaning containers</h4>
+
+<p><a href="../../img/posts/docker-quickstart/docker-rm.png"><img src="../../img/posts/docker-quickstart/docker-rm.png" style="max-width: 100%; float: left; width: 95%;" alt="Docker rm all images. Ex: docker rm `docker ps -aq`" /></a>
+<div class="caption">Removing all the older container images</div></p>
+
 <p>Over time, old containers may build up on the system. To remove an old (but not
 running) container, use <code>docker rm</code> with either the container name, <em>or</em> the id.
 Note, to easily delete <em>all</em> of the containers on the system, <code>docker rm</code> can be
 fed the output of <code>docker ps -aq</code>, where the <code>-aq</code> flag returns a list of all
 the container ids.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">docker rm <span style="color:#e6db74">`</span>docker ps -aq<span style="color:#e6db74">`</span>
-</code></pre></div><p><em>(Note: this doesn&rsquo;t work in my Fish shell, but does in bash)</em></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">docker rm <span style="color:#e6db74">`</span>docker ps -aq<span style="color:#e6db74">`</span></code></pre></div>
+<p><em>(Note: this doesn&rsquo;t work in my Fish shell, but does in bash)</em></p>
+
 <h2 id="attaching-to-containers">Attaching to Containers</h2>
+
 <p>After a container is running, it might occasionally be necessary to attach to
 it and poke around with a shell. There is the obvious way to do this,
-<code>docker attach</code>, and a somewhat work-around way, which I prefer to use: <code>docker exec</code>.</p>
-<p><!-- raw HTML omitted --><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
-<!-- raw HTML omitted -->
+<code>docker attach</code>, and a somewhat work-around way, which I prefer to use: <code>docker
+exec</code>.</p>
+
+<p><a href="../../img/posts/docker-quickstart/docker-attach.png"><img src="../../img/posts/docker-quickstart/docker-attach.png" style="max-width: 100%; float: left;" alt="Docker attach example" /></a>
+<div class="caption">An example using the docker attach command</div></p>
+
 <p>The attach command works as one would expect. It allows a user to &ldquo;Attach local
 standard input, output, and error streams to a running container&rdquo;. This is all
 well an good, except for one issue: when exiting the attached container, the
 <em>container also</em> exits.</p>
-<p><!-- raw HTML omitted --><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
-<!-- raw HTML omitted -->
+
+<p><a href="../../img/posts/docker-quickstart/docker-exec-bash.png"><img src="../../img/posts/docker-quickstart/docker-exec-bash.png" style="max-width: 100%; float: left;" alt="Docker exec bash example" /></a>
+<div class="caption">An example using docker exec with a bash shell, as an alternative to docker attach</div></p>
+
 <p>A way around this annoyance is to utilize the <code>docker exec</code> command, which
 allows a command to be executed inside a container. Executing a shell program
 inside the container, such as <code>bash</code>, mimics the <code>attach</code> command, but with the
 added benefit that when exiting, only the shell exits, and <em>not</em> the entire
 container.</p>
-<h2 id="ports--volumes">Ports &amp; Volumes</h2>
+
+<h2 id="ports-volumes">Ports &amp; Volumes</h2>
+
 <p>As mentioned earlier, docker containers can be built and run using many specific
 commands to tailor the container and how it interfaces with the host system.
 There are two concepts in particular that I want to briefly touch on in this
 <em>quick start</em> post. Those two items, are <code>ports</code> and <code>volumes</code>.</p>
+
 <h4 id="ports">Ports</h4>
-<p><!-- raw HTML omitted --><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
-<!-- raw HTML omitted -->
+
+<p><a href="../../img/posts/docker-quickstart/nginx-firefox-port.png"><img src="../../img/posts/docker-quickstart/nginx-firefox-port.png" style="max-width: 100%; float: center;" alt="Containerized nginx server connected to through localhost" /></a>
+<div class="caption">Container ports can be forwarded to the host&rsquo;s ports.</div></p>
+
 <p>While it is nice to spin up a web server inside a docker container, it isn&rsquo;t
 always very useful to only have it available to the host machine. By using the
 <code>-p</code> flag when running a container, the container&rsquo;s ports can be forwarded to
 ports on the host system.</p>
-<p><!-- raw HTML omitted --><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
-<!-- raw HTML omitted -->
+
+<p><a href="../../img/posts/docker-quickstart/docker-port.png"><img src="../../img/posts/docker-quickstart/docker-port.png" style="max-width: 100%; float: center;" alt="Creating an nginx container, forwarding port 80 to he host's 8081" /></a>
+<div class="caption">Creating an nginx container, forwarding it&rsquo;s port 80 to the host&rsquo;s port 8081</div></p>
+
 <p>Using <code>-p</code> with just a single number, as in <code>-p 8080</code>, will declare that port of
 the container to be exposed. To forward exposed ports to the host, use <em>two</em>
 port numbers, separated with a <code>:</code>. The first number is the host port to bind
 to, and the second is the container port to expose and forward.</p>
-<pre><code>docker run -itd --name webtest -p 8081:80 nginx:latest
-</code></pre><p>The above example, a nginx container is started with port 80 forwarded to port
+<pre><code>docker run -itd --name webtest -p 8081:80 nginx:latest</code></pre>
+<p>The above example, a nginx container is started with port 80 forwarded to port
 8081 on the host. As a result, any computer connecting to port 8081 of the host
 machine will be directed to the nginx web server inside the container.</p>
+
 <h4 id="volumes">Volumes</h4>
-<p><!-- raw HTML omitted --><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
-<!-- raw HTML omitted -->
+
+<p><a href="../../img/posts/docker-quickstart/nginx-firefox-volume.png"><img src="../../img/posts/docker-quickstart/nginx-firefox-volume.png" style="max-width: 100%; float: center;" alt="Nginx container with website pages in a volume from the host." /></a>
+<div class="caption">Containers can attach volumes from the host system for persistent data.</div></p>
+
 <p>Lastly, by design docker containers are mean to be expendable. They are run, and then
 disposed. It should not be assumed that <em>any</em> data inside the container will
 be preserved by default. That is, unless
 <a href="https://docs.docker.com/storage/volumes/">volumes</a> are used.</p>
-<p><!-- raw HTML omitted --><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
-<!-- raw HTML omitted -->
+
+<p><a href="../../img/posts/docker-quickstart/docker-volume.png"><img src="../../img/posts/docker-quickstart/docker-volume.png" style="max-width: 100%; float: center;" alt="Creating an nginx container, forwarding port 80 to he host's 8081" /></a>
+<div class="caption">Creating an nginx container, forwarding it&rsquo;s port 80 to the host&rsquo;s port 8081</div></p>
+
 <p>Docker volumes are the preferred mechanism for preserving data across container
 runs, and are specified using the <code>-v</code> flag. Similar to setting ports, volumes
 can be created by providing either a single path, or two separated by a <code>:</code>.
 When a single path is provided, as in <code>-v /Data</code>, docker will create a volume
 and bind it to that location within the container. Two locations can be provided
 to bind a directory on the host system, to the volume inside to container.</p>
-<pre><code>docker run -d --name testsite -v /home/ryan/testsite/:/usr/share/nginx/html nginx:latest
-</code></pre><p>In the above command, for example, <code>-v /home/ryan/testsite/:/usr/share/nginx/html</code> will use the <code>/home/ryan/testsite/</code>
+<pre><code>docker run -d --name testsite -v /home/ryan/testsite/:/usr/share/nginx/html nginx:latest</code></pre>
+<p>In the above command, for example, <code>-v
+/home/ryan/testsite/:/usr/share/nginx/html</code> will use the <code>/home/ryan/testsite/</code>
 directory of the host system, as a volume located at <code>/usr/share/nginx/html</code>
 inside the container. This means that the container will server the website
 files, which are located (and can be easily edited), on the host system.</p>
+
 <h2 id="in-conclusion">In Conclusion</h2>
+
 <p>So, this has been&hellip; a rather long post. However, when it comes to Docker, this
 <em>really is just the tip of the iceberg</em>. With any luck though, you should now
 know the basic to at <em>least</em> get <em>started</em>. So&hellip; go ahead and have some fun!.</p>

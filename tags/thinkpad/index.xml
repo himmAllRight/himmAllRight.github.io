@@ -23,55 +23,100 @@ laptop when working from home. Normally, it works fine. However, last week I
 reformatted the work laptop with the &lt;a href=&#34;https://spins.fedoraproject.org/kde/&#34;&gt;&lt;em&gt;KDE Plasma&lt;/em&gt; spin&lt;/a&gt; of
 Fedora Workstation 31&amp;hellip; and my TB3 hub stopped playing nicely with it.
 Here&amp;rsquo;s why.&lt;/p&gt;
+
 &lt;h2 id=&#34;the-issue&#34;&gt;The Issue&lt;/h2&gt;
+
 &lt;p&gt;Due to a NVIDIA Quadro M1000M in my lenovo P50 work laptop, I&amp;rsquo;ve been using
 Gnome with Wayland, because that combination seems to have the least amount of
 annoying trade-offs. While doing a system refresh, I figured I would see if
 things are any different with a clean Fedora 31 Plasma install (they weren&amp;rsquo;t,
 but that&amp;rsquo;s beyond this post).&lt;/p&gt;
-&lt;!-- raw HTML omitted --&gt;
+
+&lt;p&gt;&lt;center&gt;
+&lt;a href=&#34;../../img/posts/fedora-kde-tb3/gnome-tb3-settings.png&#34;&gt;
+&lt;img alt=&#34;Gnome Thunderbolt Settings&#34; src=&#34;../../img/posts/fedora-kde-tb3/gnome-tb3-settings.png&#34; style=&#34;max-width: 100%; padding: 5px 15px 10px 10px&#34;/&gt;&lt;/a&gt;
+&lt;div class=&#34;caption&#34;&gt;The Gnome desktop environment now has a thunderbolt pane
+in the settings GUI&lt;/div&gt;
+&lt;/center&gt;&lt;/p&gt;
+
 &lt;p&gt;Booting into the live cd, and later the installed system, I noticed that my
 Thunderbolt 3 hub did &lt;em&gt;not&lt;/em&gt; work while I was in Plasma. That was fine. I
 expected it really, because for security reasons Linux distros tend to disable
 thunderbolt ports by default.  In gnome, there are now settings to authorize
 it (which I guess I had done on my previous install, and forgot about).  In
 Plasma however, I needed to install and configure &lt;code&gt;bolt&lt;/code&gt;.&lt;/p&gt;
+
 &lt;h2 id=&#34;bolt&#34;&gt;Bolt&lt;/h2&gt;
-&lt;!-- raw HTML omitted --&gt;
+
+&lt;p&gt;&lt;center&gt;
+&lt;a href=&#34;../../img/posts/fedora-kde-tb3/bolt-install.png&#34;&gt;
+&lt;img alt=&#34;Installing bolt with dnf&#34; src=&#34;../../img/posts/fedora-kde-tb3/bolt-install.png&#34; style=&#34;max-width: 100%; padding: 5px 15px 10px 10px&#34;/&gt;&lt;/a&gt;
+&lt;div class=&#34;caption&#34;&gt;&lt;code&gt;bolt&lt;/code&gt; is in the Fedora repos and is easily installed with
+&lt;code&gt;dnf&lt;/code&gt;&lt;/div&gt;
+&lt;/center&gt;&lt;/p&gt;
+
 &lt;p&gt;In Fedora, &lt;code&gt;bolt&lt;/code&gt; is in the repos (at least in Fedora 31+), so installing it is
 easy:&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;sudo dnf install bolt
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Once &lt;code&gt;bolt&lt;/code&gt; is installed, it isn&amp;rsquo;t a bad idea to check to make sure it is
+&lt;pre&gt;&lt;code&gt;sudo dnf install bolt&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Once &lt;code&gt;bolt&lt;/code&gt; is installed, it isn&amp;rsquo;t a bad idea to check to make sure it is
 running: &lt;code&gt;sudo systemctl bolt&lt;/code&gt;.&lt;/p&gt;
-&lt;!-- raw HTML omitted --&gt;
+
+&lt;p&gt;&lt;center&gt;
+&lt;a href=&#34;../../img/posts/fedora-kde-tb3/bolt-systemctl-status.png&#34;&gt;
+&lt;img alt=&#34;bolt systemctl status&#34; src=&#34;../../img/posts/fedora-kde-tb3/bolt-systemctl-status.png&#34; style=&#34;max-width: 100%; padding: 5px 15px 10px 10px&#34;/&gt;&lt;/a&gt;
+&lt;div class=&#34;caption&#34;&gt;Checking &lt;code&gt;bolt&lt;/code&gt; is running using &lt;code&gt;systemctl status&lt;/code&gt;&lt;/div&gt;
+&lt;/center&gt;&lt;/p&gt;
+
 &lt;p&gt;If the status shows that it isn&amp;rsquo;t running for some reason, it can be started
 using &lt;code&gt;systemctl start bolt&lt;/code&gt;. Check the status again, and if it it &lt;em&gt;still&lt;/em&gt; is not
 running&amp;hellip; sorry?&lt;/p&gt;
-&lt;!-- raw HTML omitted --&gt;
+
+&lt;p&gt;&lt;center&gt;
+&lt;a href=&#34;../../img/posts/fedora-kde-tb3/boltctl.png&#34;&gt;
+&lt;img alt=&#34;boltctl&#34; src=&#34;../../img/posts/fedora-kde-tb3/boltctl.png&#34; style=&#34;max-width: 100%; padding: 5px 15px 10px 10px&#34;/&gt;&lt;/a&gt;
+&lt;div class=&#34;caption&#34;&gt;&lt;/div&gt;
+&lt;/center&gt;&lt;/p&gt;
+
 &lt;p&gt;With bolt installed, the command &lt;code&gt;boltctl&lt;/code&gt; is available to use. The base command will
 show information about attached thunderbolt devices. To see more &lt;code&gt;boltctl&lt;/code&gt;
 commands, run &lt;code&gt;boltctl --help&lt;/code&gt;.&lt;/p&gt;
+
 &lt;h2 id=&#34;authorizing&#34;&gt;Authorizing&lt;/h2&gt;
-&lt;!-- raw HTML omitted --&gt;
+
+&lt;p&gt;&lt;center&gt;
+&lt;a href=&#34;../../img/posts/fedora-kde-tb3/boltctl-authorize.png&#34;&gt;
+&lt;img alt=&#34;boltctl authorize&#34; src=&#34;../../img/posts/fedora-kde-tb3/boltctl-authorize.png&#34; style=&#34;max-width: 100%; padding: 5px 15px 10px 10px&#34;/&gt;&lt;/a&gt;
+&lt;div class=&#34;caption&#34;&gt;Authorizing the device&lt;/div&gt;
+&lt;/center&gt;&lt;/p&gt;
+
 &lt;p&gt;In order to &lt;em&gt;use&lt;/em&gt; the thunderbolt 3 device, it needs to be authorized. To
 authorize a device, first use a plain &lt;code&gt;boltctl&lt;/code&gt; command to get the &lt;code&gt;uuid&lt;/code&gt; of
 the device. Next, call &lt;code&gt;boltctl authorize&lt;/code&gt; using the &lt;code&gt;uuid&lt;/code&gt; to authorize it:&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;boltctl authorize &amp;lt;UUID HERE&amp;gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;The device should now be authorized. When I authorized mine, some of my devices
+&lt;pre&gt;&lt;code&gt;boltctl authorize &amp;lt;UUID HERE&amp;gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;The device should now be authorized. When I authorized mine, some of my devices
 started showing up automatically, while others needed to be disconnected and
 replugged.&lt;/p&gt;
+
 &lt;h2 id=&#34;enrolling&#34;&gt;Enrolling&lt;/h2&gt;
-&lt;!-- raw HTML omitted --&gt;
+
+&lt;p&gt;&lt;center&gt;
+&lt;a href=&#34;../../img/posts/fedora-kde-tb3/bresetoltctl-enroll.png&#34;&gt;
+&lt;img alt=&#34;boltctl enroll&#34; src=&#34;../../img/posts/fedora-kde-tb3/boltctl-enroll.png&#34; style=&#34;max-width: 100%; padding: 5px 15px 10px 10px&#34;/&gt;&lt;/a&gt;
+&lt;div class=&#34;caption&#34;&gt;Enrolling the device for permanent use&lt;/div&gt;
+&lt;/center&gt;&lt;/p&gt;
+
 &lt;p&gt;Authorizing a device enables it to be used, but doesn&amp;rsquo;t guarantee persistence.
 While this may be desired to grant &lt;em&gt;temporary&lt;/em&gt; authorization to a device, many
 users tend want their device to &lt;em&gt;always&lt;/em&gt; work, without having to manually
 authorize it. In this case, the device should be &lt;em&gt;enrolled&lt;/em&gt; (like &lt;code&gt;systemctl enable&lt;/code&gt;).
 Simply call &lt;code&gt;boltctl enroll&lt;/code&gt;, with the device UUID:&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;boltctl enroll &amp;lt;UUID HERE&amp;gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Once enrolled, the device&amp;rsquo;s UUID will be recorded and added to a database. By
+&lt;pre&gt;&lt;code&gt;boltctl enroll &amp;lt;UUID HERE&amp;gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Once enrolled, the device&amp;rsquo;s UUID will be recorded and added to a database. By
 default, the device will now automatically be authorized whenever it is
 connected.&lt;/p&gt;
+
 &lt;h2 id=&#34;conclusion&#34;&gt;Conclusion&lt;/h2&gt;
+
 &lt;p&gt;That&amp;rsquo;s it. While the solution isn&amp;rsquo;t very difficult, it can be frustrating to
 figure out when it appears that the thunderbolt device simply is not working.
 Regardless, I&amp;rsquo;m glad that I now know about &lt;code&gt;bolt&lt;/code&gt; and how to use it!&lt;/p&gt;</description>
@@ -84,12 +129,15 @@ Regardless, I&amp;rsquo;m glad that I now know about &lt;code&gt;bolt&lt;/code&g
       
       <guid>http://ryan.himmelwright.net/post/my-t470/</guid>
       <description>&lt;p&gt;In my previous post, I discussed how I sold off my System76 Bonobo laptop, and
-planned to replace it with a new computer. Well, I did&amp;hellip; awhile ago. For the
-last few months, I have been using a Lenovo T470 Thinkpad (with dock) as my new
-daily driver. Here are my thoughts.&lt;/p&gt;
+ planned to replace it with a new computer. Well, I did&amp;hellip; awhile ago. For the
+ last few months, I have been using a Lenovo T470 Thinkpad (with dock) as my new
+ daily driver. Here are my thoughts.&lt;/p&gt;
+
 &lt;h2 id=&#34;the-choice&#34;&gt;The Choice&lt;/h2&gt;
-&lt;p&gt;&lt;!-- raw HTML omitted --&gt;&lt;!-- raw HTML omitted --&gt;&lt;!-- raw HTML omitted --&gt;&lt;/p&gt;
-&lt;!-- raw HTML omitted --&gt;
+
+&lt;p&gt;&lt;a href=&#34;../../img/posts/my-t470/coffee-picture.jpg&#34;&gt;&lt;img alt=&#34;T470 Coffee&#34; src=&#34;../../img/posts/my-t470/coffee-picture.jpg&#34; style=&#34;max-width: 100%;&#34;/&gt;&lt;/a&gt;
+&lt;div class=&#34;caption&#34;&gt;My T470 on a Sunday morning&lt;/div&gt;&lt;/p&gt;
+
 &lt;p&gt;The
 &lt;a href=&#34;https://www.notebookcheck.net/Lenovo-ThinkPad-T470-Core-i5-Full-HD-Notebook-Review.198130.0.html&#34;&gt;T470&lt;/a&gt;
 is the 14&amp;rdquo; model of Lenovo&amp;rsquo;s &amp;ldquo;business&amp;rdquo; laptop lineup. The T470 series actually
@@ -106,10 +154,14 @@ because I assumed that the combination of having a lower powered CPU (compared
 to the T70p), but a slightly larger case (compared to the T480s) would make it
 the optimal choice concerning my heat/noise concerns outlined in the previous
 post.&lt;/p&gt;
+
 &lt;h2 id=&#34;the-specs&#34;&gt;The Specs&lt;/h2&gt;
-&lt;p&gt;&lt;!-- raw HTML omitted --&gt;&lt;!-- raw HTML omitted --&gt;&lt;!-- raw HTML omitted --&gt;&lt;/p&gt;
-&lt;!-- raw HTML omitted --&gt;
+
+&lt;p&gt;&lt;a href=&#34;../../img/posts/my-t470/inside.jpg&#34;&gt;&lt;img alt=&#34;Inside T470&#34; src=&#34;../../img/posts/my-t470/inside.jpg&#34; style=&#34;max-width: 100%;&#34;/&gt;&lt;/a&gt;
+&lt;div class=&#34;caption&#34;&gt;The Guts of the T470&lt;/div&gt;&lt;/p&gt;
+
 &lt;p&gt;So, the T470 then&amp;hellip;&lt;/p&gt;
+
 &lt;p&gt;I got my T470 from a vendor on Ebay. It came configured with a 2.5GHz (3.1 GHz
 Turbo) i5-7200u cpu, 8 GBs of DDR4 RAM, a 14&amp;rdquo; 1920x1080 screen, and a 500GB Hard
 Drive with Windows 10 on it. After checking that it booted up fine, I
@@ -119,38 +171,42 @@ installed &lt;a href=&#34;https://getsol.us&#34;&gt;Solus&lt;/a&gt; on it. In So
 Christmas, I got a new 500GB Samsung EVO SSD to upgrade the 250GB one. In total,
 the T470 has less total storage than the Bonobo had, but &lt;em&gt;all&lt;/em&gt; of it is fast SSD
 storage. I am getting better at using my server for network storage anyway, so
-it all works out &lt;!-- raw HTML omitted --&gt;&lt;!-- raw HTML omitted --&gt;.&lt;/p&gt;
-&lt;p&gt;&lt;!-- raw HTML omitted --&gt;&lt;!-- raw HTML omitted --&gt;&lt;!-- raw HTML omitted --&gt;&lt;/p&gt;
-&lt;!-- raw HTML omitted --&gt;
+it all works out &lt;i class=&#34;fa fa-smile-o&#34; aria-hidden=&#34;true&#34;&gt;&lt;/i&gt;.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;../../img/posts/my-t470/solus-install.jpg&#34;&gt;&lt;img alt=&#34;Solus Install&#34; src=&#34;../../img/posts/my-t470/solus-install.jpg&#34; style=&#34;max-width: 100%;&#34;/&gt;&lt;/a&gt;
+&lt;div class=&#34;caption&#34;&gt;Installing Solus the first night&lt;/div&gt;&lt;/p&gt;
+
 &lt;p&gt;While I still plan to upgrade the T470 in the future, here are it&amp;rsquo;s specs at the
 time of writing this post:&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;T470 Thinkpad
 Intel i5-7200u [2.5 Ghz (3.1 Ghz Turbo), 2 Cores, 4 Threads]
 8 GB RAM
 500 GB Samsung EVO SSD
-14&amp;quot; 1920x1080 IPS Display
-Solus
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;The hardware on the T470 is nice, and the technical specs are &lt;em&gt;okay&lt;/em&gt;, but the
+14&amp;#34; 1920x1080 IPS Display
+Solus&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;The hardware on the T470 is nice, and the technical specs are &lt;em&gt;okay&lt;/em&gt;, but the
 real killer feature of switching to a Thinkpad for my main computer is that I
 also purchased the ThinkPad Ultra Dock (40A2). This means that I am able to
 &lt;em&gt;easily&lt;/em&gt; take advantage of my periphery devices whenever I am working at my
 desk.&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;Thinkpad Ultra Dock 40A2
-2 x 23.6&amp;quot; ASUS 1920x1080 Monitors
+2 x 23.6&amp;#34; ASUS 1920x1080 Monitors
 Happy Hacking Keyboard Pro2
 Audioengine A2+ Speakers &amp;amp; Stands
 Bose AE2 Headphones
 Logitech HD Pro Webcam c920 Widescreen
 Blue Yeti Microphone - Backout Edition
-Inateck USB 3.0 to SATA Dual-Bay Hard Drive Docking Station
-&lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&#34;what-i-like&#34;&gt;What I like&lt;/h2&gt;
-&lt;p&gt;&lt;!-- raw HTML omitted --&gt;&lt;!-- raw HTML omitted --&gt;&lt;!-- raw HTML omitted --&gt;&lt;/p&gt;
-&lt;!-- raw HTML omitted --&gt;
+Inateck USB 3.0 to SATA Dual-Bay Hard Drive Docking Station&lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id=&#34;what-i-like&#34;&gt;What I like&lt;/h2&gt;
+
+&lt;p&gt;&lt;a href=&#34;../../img/posts/my-t470/hotel.jpg&#34;&gt;&lt;img alt=&#34;T470 in Hotel&#34; src=&#34;../../img/posts/my-t470/hotel.jpg&#34; style=&#34;max-width: 100%;&#34;/&gt;&lt;/a&gt;
+&lt;div class=&#34;caption&#34;&gt;I&amp;rsquo;ve enjoyed the portability and great keyboard of the T470&lt;/div&gt;&lt;/p&gt;
+
 &lt;p&gt;Now that I&amp;rsquo;ve provided some background information and a summary, I&amp;rsquo;ll quickly
 list what I &lt;em&gt;like&lt;/em&gt; and &lt;em&gt;do not like&lt;/em&gt; about my new T470.&lt;/p&gt;
+
 &lt;ul&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;strong&gt;Cool &amp;amp; Quiet&lt;/strong&gt; - After realizing that I am picky about heat and noise in
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;Cool &amp;amp; Quiet&lt;/strong&gt; - After realizing that I am picky about heat and noise in
 computers, one of my biggest goals when replacing my old computer was to find
 one that ran cooler and quieter. I think I did well here. &lt;em&gt;This thing is
 silent.&lt;/em&gt; Using one of my new favorite command line applications,
@@ -159,10 +215,9 @@ time when I&amp;rsquo;m writing code, browsing the web, or listening to music, t
 in the T470 don&amp;rsquo;t even kick on. When I do push the machine a little by
 running VMs, or being on a video conference, the do kick up, but even then I
 have to put my ear right against the computer to hear anything. At it&amp;rsquo;s
-loudest, the T470 is still a very quiet device.&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;strong&gt;Size &amp;amp; Portability&lt;/strong&gt; - I love the size and portability of this laptop. The
+loudest, the T470 is still a very quiet device.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;Size &amp;amp; Portability&lt;/strong&gt; - I love the size and portability of this laptop. The
 14&amp;rdquo; form factor is large enough that I don&amp;rsquo;t feel cramped when using it as a
 stand-alone device, but still small enough that I can easily throw it in my
 bag and bring it with me. While I wouldn&amp;rsquo;t mind the T470 shedding a &lt;em&gt;little&lt;/em&gt;
@@ -170,10 +225,9 @@ weight (which is mostly from the battery), I find it&amp;rsquo;s thickness perfe
 acceptable for my uses (hear that Apple?). As far as build quality, it is a
 solid machine. When I rest my hands on it to type, they feel fully supported
 and there is &lt;em&gt;zero&lt;/em&gt; flex. When holding the closed laptop, it feels as though
-it could take quite a beating and still be fine. I love that.&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;strong&gt;Keyboard &amp;amp; Track-point/pad&lt;/strong&gt; - It&amp;rsquo;s a Thinkpad keyboard, what else do I have
+it could take quite a beating and still be fine. I love that.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;Keyboard &amp;amp; Track-point/pad&lt;/strong&gt; - It&amp;rsquo;s a Thinkpad keyboard, what else do I have
 to say? The keys are adequately spaced, have travel (though not as much as my
 x230), and feel &lt;em&gt;crisp&lt;/em&gt; when pressed, not mushy. It has a track&lt;em&gt;point&lt;/em&gt; with
 physical buttons, which at this point I don&amp;rsquo;t think I could do without (Crap.
@@ -181,36 +235,34 @@ Unintentional pun. Oh well, I&amp;rsquo;m leaving it.). While I don&amp;rsquo;t 
 track&lt;em&gt;pad&lt;/em&gt; is also quite nice. I find it to be an ideal size, and has
 rubberized texture which prevents my fingers from feeling raw after long use.
 I find it hard these days for others laptops to compete with the Thinkpad&amp;rsquo;s
-keyboard/track-point setup.&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;strong&gt;Dock-able&lt;/strong&gt; - I&amp;rsquo;ve already mentioned this above, but I love that the T470 is
+keyboard/track-point setup.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;Dock-able&lt;/strong&gt; - I&amp;rsquo;ve already mentioned this above, but I love that the T470 is
 dock-able. This is becoming more common with the pervasiveness of USB-C, but
 Thinkpads have been in the dock game for years. It works well, and fits my
-current computing use-case perfectly.&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;strong&gt;Thunderbolt/USB C&lt;/strong&gt; - The big difference between the T470 and the T460
+current computing use-case perfectly.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;Thunderbolt/USB C&lt;/strong&gt; - The big difference between the T470 and the T460
 essentially comes down to the Thunderbolt 3/USB-C port on the T470. I don&amp;rsquo;t
 use it much &lt;em&gt;so far&lt;/em&gt;, but I hope the industry continues the move down the this
-route, and I will be glad to already have the port as they do.&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;strong&gt;Battery(s)&lt;/strong&gt; - The battery configuration and life on this laptop is great.
+route, and I will be glad to already have the port as they do.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;Battery(s)&lt;/strong&gt; - The battery configuration and life on this laptop is great.
 The T470 can get a 3-cell battery that doesn&amp;rsquo;t stick out, or an extended
 battery that comes in 6 and 9 cell variations (Note: the 6 and 9 cell are the
 same size). The T470 also supports an internal 3 cell battery, that can be
 used to keep the laptop powered on while the external battery is swapped. I
 currently have the least optimal configuration: A bulky 6-cell external, with
 no internal battery. Even so, it easily lasts me throughout the day, and I can
-always upgrade it down the road. I love the flexibility.&lt;/p&gt;
-&lt;/li&gt;
+always upgrade it down the road. I love the flexibility.&lt;/p&gt;&lt;/li&gt;
 &lt;/ul&gt;
-&lt;h2 id=&#34;what-i-dont-like&#34;&gt;What I don&amp;rsquo;t like&lt;/h2&gt;
+
+&lt;h2 id=&#34;what-i-don-t-like&#34;&gt;What I don&amp;rsquo;t like&lt;/h2&gt;
+
 &lt;p&gt;While I overall love the T470, there are a few things I&amp;rsquo;m not thrilled about.&lt;/p&gt;
+
 &lt;ul&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;strong&gt;The Screen&lt;/strong&gt; - When I first got my laptop&amp;hellip; I thought the screen was
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;The Screen&lt;/strong&gt; - When I first got my laptop&amp;hellip; I thought the screen was
 defective. I had read in reviews that it wasn&amp;rsquo;t very &lt;em&gt;bright&lt;/em&gt;, but the colors
 were terrible. My screen always looked as if I was using something like
 &lt;a href=&#34;https://justgetflux.com/&#34;&gt;f.lux&lt;/a&gt;. After doing some reading, it turns out that
@@ -220,30 +272,30 @@ panel, made it appear particularly awful to me. I found and configured a &lt;a h
 file&lt;/a&gt; which
 helped, but the biggest fix was time. As terrible as it was at first, I really
 don&amp;rsquo;t mind the screen. Yea, it could be brighter with better colors, but now I
-think it looks nice, and colors on top of black really pop.&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;strong&gt;Track-point&lt;/strong&gt; - I stated in the section above that the track-point was one of
+think it looks nice, and colors on top of black really pop.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;Track-point&lt;/strong&gt; - I stated in the section above that the track-point was one of
 the features I loved about this laptop. That is true&amp;hellip; but, if I &lt;em&gt;had&lt;/em&gt; to get
 picky, the track-point itself is not that great. It&amp;rsquo;s hard to move around with
 and it&amp;rsquo;s sensitivity differs depending on which direction it is traveling. At
 times it can be a real pain. By contrast, my x230 is very stable and precise.
-I wish the T470&amp;rsquo;s track-point was like the one on my x230&amp;rsquo;s.&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;strong&gt;Graphics&lt;/strong&gt; - I can&amp;rsquo;t complain too much here because I knew what I was
+I wish the T470&amp;rsquo;s track-point was like the one on my x230&amp;rsquo;s.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;Graphics&lt;/strong&gt; - I can&amp;rsquo;t complain too much here because I knew what I was
 getting myself into, but&amp;hellip; the graphics performance isn&amp;rsquo;t the best. I know
 &lt;em&gt;not&lt;/em&gt; having dedicated graphics is what allows the T470 to run cool and sip
 power, but I wouldn&amp;rsquo;t mind a &lt;em&gt;little&lt;/em&gt; more umph. I don&amp;rsquo;t expect to do heavy
 gaming on the T470. If I want to game, I am going to build a gaming computer.
 However, I do wish I could play basic games a &lt;em&gt;little&lt;/em&gt; better in the meantime.
 (&lt;em&gt;On the bright side&amp;hellip;with the thunderbolt 3 port&amp;hellip; an eGPU is a
-possibility&amp;hellip;hmmm&amp;hellip;&lt;/em&gt;)&lt;/p&gt;
-&lt;/li&gt;
+possibility&amp;hellip;hmmm&amp;hellip;&lt;/em&gt;)&lt;/p&gt;&lt;/li&gt;
 &lt;/ul&gt;
+
 &lt;h2 id=&#34;future-plans&#34;&gt;Future Plans&lt;/h2&gt;
-&lt;p&gt;&lt;!-- raw HTML omitted --&gt;&lt;!-- raw HTML omitted --&gt;&lt;!-- raw HTML omitted --&gt;&lt;/p&gt;
-&lt;!-- raw HTML omitted --&gt;
+
+&lt;p&gt;&lt;a href=&#34;../../img/posts/my-t470/ram-upgrade.jpg&#34;&gt;&lt;img alt=&#34;T470 Ram Slot&#34; src=&#34;../../img/posts/my-t470/ram-upgrade.jpg&#34; style=&#34;max-width: 100%;&#34;/&gt;&lt;/a&gt;
+&lt;div class=&#34;caption&#34;&gt;The empty RAM slot I hope to add a 16GB stick to&amp;hellip; if prices ever drop again&amp;hellip;&lt;/div&gt;&lt;/p&gt;
+
 &lt;p&gt;Overall, I have been very happy with the T470 as my main computer. I&amp;rsquo;d still
 like to upgrade the RAM at some point, and I &lt;em&gt;have&lt;/em&gt; entertained the idea of
 trying an eGPU setup&amp;hellip; I might &lt;em&gt;eventually&lt;/em&gt; build a new desktop, but even then,
@@ -264,8 +316,11 @@ use, but couldn&amp;rsquo;t run VMs, over-heated, and didn&amp;rsquo;t have grea
 battery life. Now that I am going to libraries and other locations to
 work on personal and open source projects, I really needed a better
 mobile pc setup.&lt;/p&gt;
+
 &lt;h3 id=&#34;other-considerations&#34;&gt;Other Considerations&lt;/h3&gt;
-&lt;!-- raw HTML omitted --&gt;
+
+&lt;p&gt;&lt;img alt=&#34;Asus x201e&#34; src=&#34;../../img/posts/my-new-used-x230/asus_x201e.png&#34; width=55% style=&#34;float: right; margin: 0px 15px 5px 5px;&#34;/&gt;&lt;/p&gt;
+
 &lt;p&gt;I had been keeping an eye open for a new mobile computer for well over a
 year to find out what is out there. I mostly looked sub $300 ubuntu laptops like the Asus 11&amp;rdquo;
 celeron (x201e) I got in college. I don&amp;rsquo;t need much HD
@@ -277,7 +332,9 @@ usually had Celeron processors and little ram. Even worse, they
 were not easily expandable. I also briefly entertained the idea of
 putting Linux on a chrome book, but they had the same issues that all
 the other sub $300 options had.&lt;/p&gt;
+
 &lt;h3 id=&#34;used-thinkpads&#34;&gt;Used Thinkpads&lt;/h3&gt;
+
 &lt;p&gt;When I intensified my search, I started to consider other
 options. There is one alternative that is very popular among Linux users,
 but I always seem to forget about it when looking for a new
@@ -291,14 +348,24 @@ acceptable bit of ram and &amp;ldquo;okay&amp;rdquo; hard drives for under my $3
 point. Better yet, the Thinkpads seemed easy to upgrade .
 So, even if the device had a bad battery, or needed a
 RAM/HD upgrade, &lt;em&gt;I could could do it&lt;/em&gt;.&lt;/p&gt;
+
 &lt;p&gt;I eventually narrowed my search down to the X230 or T430s. That year&amp;rsquo;s
 model seemed like the perfect mix of still being relatively new, while
 also being old enough that many business had started to replace
 them, flooding the market and driving the cost down. They also
 didn&amp;rsquo;t have the terrible track pad that the x240 and T440s had (without buttons). I
 eventually decided on the x230 because the main use of this laptop would be portability.&lt;/p&gt;
-&lt;h3 id=&#34;this-particular-thinkpad-x230-&#34;&gt;This Particular Thinkpad x230 &amp;hellip;&lt;/h3&gt;
-&lt;!-- raw HTML omitted --&gt;
+
+&lt;h3 id=&#34;this-particular-thinkpad-x230&#34;&gt;This Particular Thinkpad x230 &amp;hellip;&lt;/h3&gt;
+
+&lt;p&gt;&lt;img alt=&#34;x230&#34; src=&#34;../../img/posts/my-new-used-x230/kadabra2.jpg&#34; width= 100%&gt;
+I found my used x230 on Amazon, for about $185. The vendor an acceptable
+rating, and the specs were good for the price:
+- Intel i5-3320M
+- 4 GB RAM
+- 12.5&amp;rdquo; 1366x768 HD LED Display
+- 320 GB HHD&lt;/p&gt;
+
 &lt;p&gt;The listing also said that it came with a &amp;ldquo;used 6-cell battery&amp;rdquo;. So I planned
 from the beginning to have it replaced. Sure enough, when the laptop arrived,
 the battery was completely dead. If I unplugged the laptop, it would shutdown.
@@ -309,7 +376,9 @@ around. After installing Korora 24 on the new SSD, I had a
 nice, portable computer that only cost me about $200 (plus some spare
 parts). As advertised, swapping the battery, adding RAM, and replacing
 the HD were &lt;em&gt;super simple&lt;/em&gt; and &lt;em&gt;accessible&lt;/em&gt;.&lt;/p&gt;
+
 &lt;h3 id=&#34;what-i-like-about-it&#34;&gt;What I like about it&lt;/h3&gt;
+
 &lt;ul&gt;
 &lt;li&gt;&lt;strong&gt;Track point&lt;/strong&gt; - I love track points. Using other laptops with
 just track-pads is really frustrating now. I completely understand why
@@ -343,7 +412,9 @@ as I find it to be the perfect size to hold and carry around. It is
 a similar size to a few of my programming books and slides into my
 backpack very easily.&lt;/li&gt;
 &lt;/ul&gt;
-&lt;h3 id=&#34;what-i-dont-like&#34;&gt;What I don&amp;rsquo;t like&lt;/h3&gt;
+
+&lt;h3 id=&#34;what-i-don-t-like&#34;&gt;What I don&amp;rsquo;t like&lt;/h3&gt;
+
 &lt;ul&gt;
 &lt;li&gt;&lt;strong&gt;Has a little bit of flex&lt;/strong&gt; - While the laptop overall feels pretty
 solid, the screen does have a bit of flex when pressed.&lt;/li&gt;
@@ -353,9 +424,15 @@ solid, the screen does have a bit of flex when pressed.&lt;/li&gt;
 sound very good. This isn&amp;rsquo;t a huge deal for me because being my mobile computer, I am using
 headphones 99% of the time. Still, it would be nice if when I occasionally share a video with someone they could actually hear it.&lt;/li&gt;
 &lt;/ul&gt;
+
 &lt;h3 id=&#34;conclusions&#34;&gt;Conclusions&lt;/h3&gt;
-&lt;!-- raw HTML omitted --&gt;
+
+&lt;p&gt;&lt;img alt=&#34;x230&#34; src=&#34;../../img/posts/my-new-used-x230/kadabra.jpg&#34; style=&#34;max-width: 100%;&#34;/&gt;
+I have had my x230 for several months now and still love it. I use it at work daily (to listen to
+music, podcasts, and to have a &lt;em&gt;linux&lt;/em&gt; computer available to me at all times in a Windows office). It is a perfect mix of being portable while still having enough power to accomplish whatever I want to work on. I still prefer to vote with my wallet by purchasing from a vendors like &lt;a href=&#34;http://www.system76.com&#34;&gt;System76&lt;/a&gt; when possible, but buying used business hardware, such as thinkpads, is a very affordable alternative. I have no regrets buying my used x230. It is infinitely better than my other options at that price point.&lt;/p&gt;
+
 &lt;h3 id=&#34;update&#34;&gt;Update&lt;/h3&gt;
+
 &lt;p&gt;&lt;em&gt;I have taken so long to publish this post, I am actually now using Arch Linux on the x230. It also runs great :)&lt;/em&gt;&lt;/p&gt;</description>
     </item>
     

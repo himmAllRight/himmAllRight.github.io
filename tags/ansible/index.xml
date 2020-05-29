@@ -20,67 +20,73 @@
 &lt;a href=&#34;https://www.ansible.com&#34;&gt;Ansible&lt;/a&gt;, in &lt;a href=&#34;../../post/ansible-on-pi-cluster/&#34;&gt;a post about building a raspberry pi
 cluster&lt;/a&gt;. All in all&amp;hellip; it was by no means a
 great introduction to the basics of ansible.&lt;/p&gt;
+
 &lt;p&gt;A month ago, I drafted a progression of examples with notes, to teach a
 co-worker the &lt;em&gt;basics&lt;/em&gt; of writing and using ansible roles and playbooks. After
 reading through them, I realized it wouldn&amp;rsquo;t take much to turn
 them into an &lt;em&gt;actual&lt;/em&gt; Ansible quickstart post. So here we are.&lt;/p&gt;
+
 &lt;p&gt;I am not an Ansible genius, and reading this will not make you one either. However,
 the goal of this post is to provide enough understating to get started with writing
 some ansible playbooks.&lt;/p&gt;
+
 &lt;h2 id=&#34;installing&#34;&gt;Installing&lt;/h2&gt;
+
 &lt;p&gt;Lets start by installing ansible. It should be in most distro&amp;rsquo;s main repos these
 days:&lt;/p&gt;
+
 &lt;p&gt;Fedora Linux:&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;sudo dnf install ansible
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;MacOS:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;sudo dnf install ansible&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;MacOS:&lt;/p&gt;
+
 &lt;p&gt;&amp;hellip; I have no idea. I usually always &lt;code&gt;ssh&lt;/code&gt; to Linux boxes from my macbook.&lt;/p&gt;
+
 &lt;p&gt;I think it can be installed with &lt;code&gt;pip&lt;/code&gt; though, so possibly:&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;pip3 install ansible
-&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;remote-node-requirements&#34;&gt;Remote Node Requirements&lt;/h3&gt;
+&lt;pre&gt;&lt;code&gt;pip3 install ansible&lt;/code&gt;&lt;/pre&gt;
+&lt;h3 id=&#34;remote-node-requirements&#34;&gt;Remote Node Requirements&lt;/h3&gt;
+
 &lt;p&gt;In order for ansible to connect to a remote node, that node usually needs 3
 things:&lt;/p&gt;
+
 &lt;ul&gt;
-&lt;li&gt;
-&lt;ol&gt;
-&lt;li&gt;Python installed&lt;/li&gt;
-&lt;/ol&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;ol start=&#34;2&#34;&gt;
-&lt;li&gt;password-less sudo permissions&lt;/li&gt;
-&lt;/ol&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;ol start=&#34;3&#34;&gt;
-&lt;li&gt;&lt;code&gt;ssh&lt;/code&gt; keys configured (if running against remote hosts. Not needed if
-just running playbooks against &lt;code&gt;localhost&lt;/code&gt;)&lt;/li&gt;
-&lt;/ol&gt;
-&lt;/li&gt;
+&lt;li&gt;1) Python installed&lt;/li&gt;
+&lt;li&gt;2) password-less sudo permissions&lt;/li&gt;
+&lt;li&gt;3) &lt;code&gt;ssh&lt;/code&gt; keys configured (if running against remote hosts. Not needed if
+ just running playbooks against &lt;code&gt;localhost&lt;/code&gt;)&lt;/li&gt;
 &lt;/ul&gt;
+
 &lt;h4 id=&#34;python&#34;&gt;python&lt;/h4&gt;
+
 &lt;p&gt;Python should already be installed on most systems. If not, check your package
 manager, or try searching the documentation on &lt;a href=&#34;https://python.org&#34;&gt;python.org&lt;/a&gt;
 to learn the best install method for your system.&lt;/p&gt;
+
 &lt;h4 id=&#34;passwordless-sudo&#34;&gt;Passwordless &lt;code&gt;sudo&lt;/code&gt;&lt;/h4&gt;
+
 &lt;p&gt;This will allow a user to run &lt;code&gt;sudo&lt;/code&gt; commands, without having to type in a
 password each time. I shouldn&amp;rsquo;t have to say this, but&amp;hellip; &lt;em&gt;please use with care!&lt;/em&gt;&lt;/p&gt;
+
 &lt;p&gt;Granting password-less sudo permissions are most easily accomplished with
 &lt;code&gt;visudo&lt;/code&gt;:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;sudo visudo
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;This will open up the &lt;code&gt;sudo&lt;/code&gt; settings in your &lt;code&gt;$EDITOR&lt;/code&gt;. Once opened, find the
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;sudo visudo&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;This will open up the &lt;code&gt;sudo&lt;/code&gt; settings in your &lt;code&gt;$EDITOR&lt;/code&gt;. Once opened, find the
 following line and uncomment it (it&amp;rsquo;s usually near the bottom of the file).&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;color:#75715e&#34;&gt;## Same thing without a password&lt;/span&gt;
-%wheel        ALL&lt;span style=&#34;color:#f92672&#34;&gt;=(&lt;/span&gt;ALL&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt;       NOPASSWD: ALL
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h4 id=&#34;ssh&#34;&gt;ssh&lt;/h4&gt;
+%wheel        ALL&lt;span style=&#34;color:#f92672&#34;&gt;=(&lt;/span&gt;ALL&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt;       NOPASSWD: ALL&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h4 id=&#34;ssh&#34;&gt;ssh&lt;/h4&gt;
+
 &lt;p&gt;Lastly, exchange ssh-keys with the remote node. This will allow ansible to ssh
 into the node without having to deal with those pesky passwords. The easiest way
 to exchange keys is using the &lt;code&gt;ssh-copy-id&lt;/code&gt; command, as such:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;ssh-copy-id username@hostname
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;ansible-basics&#34;&gt;Ansible Basics&lt;/h2&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;ssh-copy-id username@hostname&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h2 id=&#34;ansible-basics&#34;&gt;Ansible Basics&lt;/h2&gt;
+
 &lt;h4 id=&#34;hosts-file&#34;&gt;Hosts File&lt;/h4&gt;
+
 &lt;p&gt;A host inventory file is a yaml file that defines hosts ansible can connect to.
 The default file is located at &lt;code&gt;/etc/ansible/hosts&lt;/code&gt;. An alternative inventory
 file may be provided using the &lt;code&gt;-i&lt;/code&gt; flag.&lt;/p&gt;
+
 &lt;p&gt;Example file:&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;[VMs]
 &lt;span style=&#34;color:#75715e&#34;&gt;## Server VMs&lt;/span&gt;
@@ -95,14 +101,18 @@ file may be provided using the &lt;code&gt;-i&lt;/code&gt; flag.&lt;/p&gt;
 [cluster]
 &lt;span style=&#34;color:#ae81ff&#34;&gt;192.168.112.205&lt;/span&gt;
 &lt;span style=&#34;color:#ae81ff&#34;&gt;192.168.112.206&lt;/span&gt;
-&lt;span style=&#34;color:#ae81ff&#34;&gt;192.168.112.207&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h4 id=&#34;modules&#34;&gt;Modules&lt;/h4&gt;
+&lt;span style=&#34;color:#ae81ff&#34;&gt;192.168.112.207&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h4 id=&#34;modules&#34;&gt;Modules&lt;/h4&gt;
+
 &lt;p&gt;Modules are premade functionality used in ansible that can be imported into a
 playbook. Simply, they &lt;em&gt;do&lt;/em&gt; what you want &lt;em&gt;done&lt;/em&gt;. Some examples are &lt;code&gt;ping&lt;/code&gt;,
 &lt;code&gt;dnf&lt;/code&gt;, &lt;code&gt;apt&lt;/code&gt;, &lt;code&gt;redhat_subscription&lt;/code&gt;.&lt;/p&gt;
+
 &lt;p&gt;Feel free to search the &lt;a href=&#34;https://docs.ansible.com&#34;&gt;ansible documentation&lt;/a&gt; to
 learn more.&lt;/p&gt;
+
 &lt;h4 id=&#34;ad-hoc-ansible-commands&#34;&gt;Ad-hoc Ansible Commands&lt;/h4&gt;
+
 &lt;p&gt;Simple and straight ansible executions can be called with the &lt;code&gt;ansible&lt;/code&gt; command.
 Ad-hoc commands are usually called with a module, using the &lt;code&gt;-m&lt;/code&gt; flag. For
 example, &lt;code&gt;ping&lt;/code&gt;:&lt;/p&gt;
@@ -111,38 +121,43 @@ example, &lt;code&gt;ping&lt;/code&gt;:&lt;/p&gt;
 localhost | SUCCESS &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&amp;gt; &lt;span style=&#34;color:#f92672&#34;&gt;{&lt;/span&gt;
     &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;changed&amp;#34;&lt;/span&gt;: false,
     &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;ping&amp;#34;&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;pong&amp;#34;&lt;/span&gt;
-&lt;span style=&#34;color:#f92672&#34;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;For a more complicated example, lets use the &lt;code&gt;dnf&lt;/code&gt; module to install &lt;code&gt;htop&lt;/code&gt;:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;ansible -m dnf -a &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;name=htop state=latest&amp;#34;&lt;/span&gt; localhost --become
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;This module requires some parameters to be defined. We are able to supply
+&lt;span style=&#34;color:#f92672&#34;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;For a more complicated example, lets use the &lt;code&gt;dnf&lt;/code&gt; module to install &lt;code&gt;htop&lt;/code&gt;:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;ansible -m dnf -a &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;name=htop state=latest&amp;#34;&lt;/span&gt; localhost --become&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;This module requires some parameters to be defined. We are able to supply
 them using the &lt;code&gt;-a&lt;/code&gt; flag, followed by a string of the key/values pairs.&lt;/p&gt;
+
 &lt;p&gt;Also, because the &lt;code&gt;dnf&lt;/code&gt; module requires root permissions to function, we supply
 the &lt;code&gt;--become&lt;/code&gt; flag, to become &lt;code&gt;root&lt;/code&gt;.&lt;/p&gt;
+
 &lt;p&gt;Note, if I want to run this against another machine (beyond &lt;code&gt;localhost&lt;/code&gt;), it
 has to be defined in whatever inventory file we are using.&lt;/p&gt;
+
 &lt;p&gt;So, if I define an inventory file (&lt;code&gt;./hosts.yaml&lt;/code&gt;) containing my desktop
 computer:&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;[charmelon]
-&lt;span style=&#34;color:#ae81ff&#34;&gt;192.168.1.5&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;I can install &lt;code&gt;htop&lt;/code&gt; on &lt;em&gt;my desktop&lt;/em&gt;, using:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;ansible -i ./hosts -m dnf -a &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;name=htop state=latest&amp;#34;&lt;/span&gt; charmeleon --become
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&amp;hellip; and it works!&lt;/p&gt;
+&lt;span style=&#34;color:#ae81ff&#34;&gt;192.168.1.5&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;I can install &lt;code&gt;htop&lt;/code&gt; on &lt;em&gt;my desktop&lt;/em&gt;, using:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;ansible -i ./hosts -m dnf -a &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;name=htop state=latest&amp;#34;&lt;/span&gt; charmeleon --become&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;&amp;hellip; and it works!&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;192.168.1.5 | CHANGED =&amp;gt; {
-    &amp;quot;ansible_facts&amp;quot;: {
-        &amp;quot;discovered_interpreter_python&amp;quot;: &amp;quot;/usr/bin/python&amp;quot;
+    &amp;#34;ansible_facts&amp;#34;: {
+        &amp;#34;discovered_interpreter_python&amp;#34;: &amp;#34;/usr/bin/python&amp;#34;
     },
-    &amp;quot;changed&amp;quot;: true,
-    &amp;quot;msg&amp;quot;: &amp;quot;&amp;quot;,
-    &amp;quot;rc&amp;quot;: 0,
-    &amp;quot;results&amp;quot;: [
-        &amp;quot;Installed: htop-2.2.0-8.fc32.x86_64&amp;quot;
+    &amp;#34;changed&amp;#34;: true,
+    &amp;#34;msg&amp;#34;: &amp;#34;&amp;#34;,
+    &amp;#34;rc&amp;#34;: 0,
+    &amp;#34;results&amp;#34;: [
+        &amp;#34;Installed: htop-2.2.0-8.fc32.x86_64&amp;#34;
     ]
-}
-&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;playbooks&#34;&gt;Playbooks&lt;/h3&gt;
+}&lt;/code&gt;&lt;/pre&gt;
+&lt;h3 id=&#34;playbooks&#34;&gt;Playbooks&lt;/h3&gt;
+
 &lt;p&gt;As you can imagine, doing everything from the command line isn&amp;rsquo;t always
 helpful, or easily reproducible. That&amp;rsquo;s what playbooks are for. In a nutshell,
 playbooks are ansible scripts. They are a yaml file which ansible runs, instead
 of running a series of ad-hoc commands.&lt;/p&gt;
+
 &lt;p&gt;To demonstrate, lets convert the &lt;code&gt;dnf&lt;/code&gt; command from above, into a simple
 playbook named &lt;code&gt;install-htop.yaml&lt;/code&gt;.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;---
@@ -153,23 +168,27 @@ playbook named &lt;code&gt;install-htop.yaml&lt;/code&gt;.&lt;/p&gt;
     - &lt;span style=&#34;color:#66d9ef&#34;&gt;name&lt;/span&gt;: Install Htop
       &lt;span style=&#34;color:#66d9ef&#34;&gt;dnf&lt;/span&gt;:
         &lt;span style=&#34;color:#66d9ef&#34;&gt;name&lt;/span&gt;: htop
-        &lt;span style=&#34;color:#66d9ef&#34;&gt;state&lt;/span&gt;: latest
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Being a &lt;code&gt;yaml&lt;/code&gt; file, the first line starts with &lt;code&gt;---&lt;/code&gt;. Next, we define some
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;state&lt;/span&gt;: latest&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Being a &lt;code&gt;yaml&lt;/code&gt; file, the first line starts with &lt;code&gt;---&lt;/code&gt;. Next, we define some
 meta information for the entire playbook. For example, this is were we put the
 &lt;code&gt;--become&lt;/code&gt; flag, by turning it into &lt;code&gt;become: true&lt;/code&gt;. This is also where we
 define what hosts the playbook will run against. If I&amp;rsquo;m providing a hosts file,
 I can alternatively use &lt;code&gt;hosts: all&lt;/code&gt; to run against &lt;em&gt;all&lt;/em&gt; hosts defined in the
 inventory file.&lt;/p&gt;
+
 &lt;h4 id=&#34;local-connections&#34;&gt;local connections&lt;/h4&gt;
+
 &lt;p&gt;If the playbook is to run only locally, the connection type can be set to
 &lt;code&gt;local&lt;/code&gt; (by default, it is set to &lt;code&gt;ssh&lt;/code&gt;.)&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;  hosts: 127.0.0.1
-  connection: local
-&lt;/code&gt;&lt;/pre&gt;&lt;h4 id=&#34;tasks&#34;&gt;tasks&lt;/h4&gt;
+  connection: local&lt;/code&gt;&lt;/pre&gt;
+&lt;h4 id=&#34;tasks&#34;&gt;tasks&lt;/h4&gt;
+
 &lt;p&gt;Below the header information, we can define a set of tasks to run. In the
 &lt;code&gt;tasks&lt;/code&gt; section, a block is defined for each task, usually by calling a module
 with parameters. It is best practice to describe each task using &lt;code&gt;name:&lt;/code&gt;. This
 will make it easier to trace the logs.&lt;/p&gt;
+
 &lt;p&gt;For example, lets add the&lt;code&gt;ping&lt;/code&gt; module to the playbook so we have more than one
 task&amp;hellip;.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;---
@@ -184,8 +203,8 @@ task&amp;hellip;.&lt;/p&gt;
     - &lt;span style=&#34;color:#66d9ef&#34;&gt;name&lt;/span&gt;: Install Htop
       &lt;span style=&#34;color:#66d9ef&#34;&gt;dnf&lt;/span&gt;:
         &lt;span style=&#34;color:#66d9ef&#34;&gt;name&lt;/span&gt;: htop
-        &lt;span style=&#34;color:#66d9ef&#34;&gt;state&lt;/span&gt;: latest
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Now the playbook will run both tasks, using &lt;code&gt;name&lt;/code&gt; as the header for the output
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;state&lt;/span&gt;: latest&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Now the playbook will run both tasks, using &lt;code&gt;name&lt;/code&gt; as the header for the output
 of each one:&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;➜  /tmp ansible-playbook install-htop.yaml
 
@@ -201,8 +220,9 @@ TASK &lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;Install Htop&lt;spa
 ok: &lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;192.168.1.5&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt;
 
 PLAY RECAP ****************************************
-192.168.1.5                : ok&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;3&lt;/span&gt;    changed&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;    unreachable&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;    failed&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;    skipped&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;    rescued&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;    ignored&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h5 id=&#34;variables&#34;&gt;Variables&lt;/h5&gt;
+192.168.1.5                : ok&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;3&lt;/span&gt;    changed&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;    unreachable&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;    failed&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;    skipped&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;    rescued&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;    ignored&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h5 id=&#34;variables&#34;&gt;Variables&lt;/h5&gt;
+
 &lt;p&gt;We can define sections other than &lt;code&gt;tasks&lt;/code&gt;.  A useful section to add is &lt;code&gt;vars:&lt;/code&gt;,
 which defines variables for use in the playbook. To illustrate, lets replace
 the hard-coded &lt;code&gt;htop&lt;/code&gt; in the &lt;code&gt;dnf&lt;/code&gt; task, to a variable named &lt;code&gt;package&lt;/code&gt;. We can
@@ -223,8 +243,8 @@ output in the log:&lt;/p&gt;
     - &lt;span style=&#34;color:#66d9ef&#34;&gt;name&lt;/span&gt;: Install {{ package }}
       &lt;span style=&#34;color:#66d9ef&#34;&gt;dnf&lt;/span&gt;:
         &lt;span style=&#34;color:#66d9ef&#34;&gt;name&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;{{ package }}&amp;#34;&lt;/span&gt;
-        &lt;span style=&#34;color:#66d9ef&#34;&gt;state&lt;/span&gt;: latest
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;And the output:&lt;/p&gt;
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;state&lt;/span&gt;: latest&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;And the output:&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;➜  ansible-playbook install-htop.yaml
 
 PLAY &lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;127.0.0.1&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt; ****************************************
@@ -239,8 +259,8 @@ TASK &lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;Install htop&lt;spa
 changed: &lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;127.0.0.1&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt;
 
 PLAY RECAP ****************************************
-127.0.0.1                  : ok&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;3&lt;/span&gt;    changed&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;    unreachable&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;    failed&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;    skipped&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;    rescued&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;    ignored&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;One great feature of variables is that they can be swapped out when calling the
+127.0.0.1                  : ok&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;3&lt;/span&gt;    changed&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;    unreachable&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;    failed&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;    skipped&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;    rescued&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;    ignored&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;One great feature of variables is that they can be swapped out when calling the
 playbook. The &lt;code&gt;-e&lt;/code&gt; flag allows you to provide an alternative value for a
 variable.  For example, lets say we want to install &lt;code&gt;nano&lt;/code&gt; instead of &lt;code&gt;htop&lt;/code&gt;:&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;➜  ansible-playbook install-htop.yaml -e package&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;nano
@@ -257,20 +277,26 @@ TASK &lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;Install nano&lt;spa
 changed: &lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;127.0.0.1&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt;
 
 PLAY RECAP ****************************************
-127.0.0.1                  : ok&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;3&lt;/span&gt;    changed&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;    unreachable&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;    failed&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;    skipped&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;    rescued&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;    ignored&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Note how the task name has changed accordingly in the output. So Fancy!&lt;/p&gt;
+127.0.0.1                  : ok&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;3&lt;/span&gt;    changed&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;    unreachable&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;    failed&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;    skipped&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;    rescued&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;    ignored&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Note how the task name has changed accordingly in the output. So Fancy!&lt;/p&gt;
+
 &lt;h2 id=&#34;creating-some-structure&#34;&gt;Creating some structure&lt;/h2&gt;
+
 &lt;h3 id=&#34;roles&#34;&gt;Roles&lt;/h3&gt;
+
 &lt;p&gt;As nice as scripts are, they don&amp;rsquo;t scale well. To combat impending chaos, we
 break functionality down into &lt;code&gt;roles&lt;/code&gt;. Roles are collections of tasks,
 variables, and other resources that can be mixed and matched in playbooks.&lt;/p&gt;
+
 &lt;p&gt;A role is defined by a directory of it&amp;rsquo;s name, and usually contains a &lt;code&gt;tasks&lt;/code&gt;
 sub-directory, where all of it&amp;rsquo;s tasks are defined. Each sub-directory requires
 a &lt;code&gt;main.yaml&lt;/code&gt; to be the root file for that directory. So, at the vary least, a
 tasks directory will have a file named &lt;code&gt;tasks/main.yaml&lt;/code&gt; which contains the
 role&amp;rsquo;s tasks.&lt;/p&gt;
+
 &lt;p&gt;If there are a BUNCH of tasks defined, they can be broken out into seperate
 files, and included in the &lt;code&gt;main.yaml&lt;/code&gt; task file.&lt;/p&gt;
+
 &lt;p&gt;In addition to &lt;code&gt;tasks&lt;/code&gt;, a role might include a &lt;code&gt;defaults&lt;/code&gt; or &lt;code&gt;vars&lt;/code&gt; sub
 directory. These are again structured with a &lt;code&gt;main.yaml&lt;/code&gt; file that may, or may
 not, import other files, depending on the size and organization of the role.&lt;/p&gt;
@@ -281,35 +307,40 @@ roles
     │   └── main.yaml
     ├── README.md
     └── tasks
-        └── main.yaml
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;It is important to note that these yaml files contain &lt;em&gt;just&lt;/em&gt; their item. For
+        └── main.yaml&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;It is important to note that these yaml files contain &lt;em&gt;just&lt;/em&gt; their item. For
 example, the task files contain just tasks. This is because when a role is
 imported into a playbook, its items are simply inserted accordingly.&lt;/p&gt;
-&lt;h3 id=&#34;ansiblecfg&#34;&gt;ansible.cfg&lt;/h3&gt;
+
+&lt;h3 id=&#34;ansible-cfg&#34;&gt;ansible.cfg&lt;/h3&gt;
+
 &lt;p&gt;Before we start writing some roles, it is important to know that if you are using
 roles, you need to tell &lt;code&gt;ansible&lt;/code&gt; where to find them. The easiest way to do
 this is to define an &lt;code&gt;ansible.cfg&lt;/code&gt; file in the directory you will run
 &lt;code&gt;ansible-playbook&lt;/code&gt; from. For example:&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;[defaults]
-roles_path = roles/
-&lt;/code&gt;&lt;/pre&gt;&lt;h4 id=&#34;our-role&#34;&gt;Our role&lt;/h4&gt;
+roles_path = roles/&lt;/code&gt;&lt;/pre&gt;
+&lt;h4 id=&#34;our-role&#34;&gt;Our role&lt;/h4&gt;
+
 &lt;p&gt;As it stands, our example playbook is a &lt;em&gt;massive 13 lines long&lt;/em&gt;! I can hardly
 open the file without crashing my text editor. So, lets try to break up the
 functionality into roles.&lt;/p&gt;
+
 &lt;p&gt;First, lets make the directories:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;mkdir -p roles/install-htop/&lt;span style=&#34;color:#f92672&#34;&gt;{&lt;/span&gt;tasks,defaults&lt;span style=&#34;color:#f92672&#34;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Next, we can add our variables to a default file,
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;mkdir -p roles/install-htop/&lt;span style=&#34;color:#f92672&#34;&gt;{&lt;/span&gt;tasks,defaults&lt;span style=&#34;color:#f92672&#34;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Next, we can add our variables to a default file,
 &lt;code&gt;roles/install-htop/defaults/main.yaml&lt;/code&gt;:&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;---
-&lt;span style=&#34;color:#66d9ef&#34;&gt;package&lt;/span&gt;: htop
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;With the &lt;code&gt;package&lt;/code&gt; variable set, lets create the tasks. To demonstrate
+&lt;span style=&#34;color:#66d9ef&#34;&gt;package&lt;/span&gt;: htop&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;With the &lt;code&gt;package&lt;/code&gt; variable set, lets create the tasks. To demonstrate
 including other files in the &lt;code&gt;main.yaml&lt;/code&gt;, I&amp;rsquo;m going to be overly-complicated and
 extract our &lt;code&gt;ping&lt;/code&gt; task into its own file, and then include it in the &lt;code&gt;main.yaml&lt;/code&gt;.&lt;/p&gt;
+
 &lt;p&gt;So first, &lt;code&gt;roles/install-htop/tasks/ping.yaml&lt;/code&gt;&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;---
 - &lt;span style=&#34;color:#66d9ef&#34;&gt;name&lt;/span&gt;: Ping host first...
-  &lt;span style=&#34;color:#66d9ef&#34;&gt;ping&lt;/span&gt;:
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;And then, &lt;code&gt;roles/install-htop/tasks/main.yaml&lt;/code&gt;, which will also include our
+  ping:&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;And then, &lt;code&gt;roles/install-htop/tasks/main.yaml&lt;/code&gt;, which will also include our
 &lt;code&gt;dnf&lt;/code&gt; install task&amp;hellip;&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;---
 - &lt;span style=&#34;color:#66d9ef&#34;&gt;include_tasks&lt;/span&gt;: ping.yaml
@@ -317,9 +348,11 @@ extract our &lt;code&gt;ping&lt;/code&gt; task into its own file, and then inclu
 - &lt;span style=&#34;color:#66d9ef&#34;&gt;name&lt;/span&gt;: Install {{ package }}
   &lt;span style=&#34;color:#66d9ef&#34;&gt;dnf&lt;/span&gt;:
     &lt;span style=&#34;color:#66d9ef&#34;&gt;name&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;{{ package }}&amp;#34;&lt;/span&gt;
-    &lt;span style=&#34;color:#66d9ef&#34;&gt;state&lt;/span&gt;: latest
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Congrats, we have an &lt;code&gt;install-htop&lt;/code&gt; role defined!&lt;/p&gt;
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;state&lt;/span&gt;: latest&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Congrats, we have an &lt;code&gt;install-htop&lt;/code&gt; role defined!&lt;/p&gt;
+
 &lt;h3 id=&#34;including-roles-in-playbooks&#34;&gt;Including roles in playbooks&lt;/h3&gt;
+
 &lt;p&gt;Just as we included &lt;code&gt;vars&lt;/code&gt; and &lt;code&gt;tasks&lt;/code&gt; in the playbook, if we already have
 tasks and vars defined in a &lt;em&gt;role&lt;/em&gt;, we can instead include that &lt;em&gt;role&lt;/em&gt;:&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;---
@@ -328,8 +361,8 @@ tasks and vars defined in a &lt;em&gt;role&lt;/em&gt;, we can instead include th
   &lt;span style=&#34;color:#66d9ef&#34;&gt;become&lt;/span&gt;: &lt;span style=&#34;color:#66d9ef&#34;&gt;true&lt;/span&gt;
 
   &lt;span style=&#34;color:#66d9ef&#34;&gt;roles&lt;/span&gt;:
-    - install-htop
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Easy. Let&amp;rsquo;s run it:&lt;/p&gt;
+    - install-htop&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Easy. Let&amp;rsquo;s run it:&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;➜  ansible-playbook install-htop.yaml
 &lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;WARNING&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt;: Ansible is being run in a world writable directory &lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;/tmp&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt;, ignoring it as an ansible.cfg source. For more information see
 https://docs.ansible.com/ansible/devel/reference_appendices/config.html#cfg-in-world-writable-dir
@@ -349,9 +382,11 @@ TASK &lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;install-htop : Inst
 ok: &lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;127.0.0.1&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt;
 
 PLAY RECAP ****************************************
-127.0.0.1                  : ok&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;4&lt;/span&gt;    changed&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;    unreachable&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;    failed&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;    skipped&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;    rescued&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;    ignored&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;and it still works :)&lt;/p&gt;
+127.0.0.1                  : ok&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;4&lt;/span&gt;    changed&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;    unreachable&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;    failed&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;    skipped&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;    rescued&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;    ignored&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;and it still works :)&lt;/p&gt;
+
 &lt;h1 id=&#34;conclusion&#34;&gt;Conclusion&lt;/h1&gt;
+
 &lt;p&gt;While only the tip of the iceburg, I think we have covered enough basics
 to make &lt;em&gt;something&lt;/em&gt; useful. Using this small amount of Ansible
 knowledge, I have been able to create playbooks that configure applications,
@@ -366,10 +401,16 @@ tool and worth any amount of time invested into it. Enjoy!&lt;/p&gt;</descriptio
       <pubDate>Thu, 25 May 2017 00:00:00 +0000</pubDate>
       
       <guid>http://ryan.himmelwright.net/post/updating-pi-cluster-with-ansible/</guid>
-      <description>&lt;p&gt;With Ansible configured on the Pi cluster, it is time to have it do something useful. When working with a clustered system, even the simplest tasks become tedious and time consuming. For example, updating the system. While I could manually update each of the 3 pi nodes, it is not scalable to 10 or 30 nodes, let alone hundreds or thousands. Tools like Ansible, make doing tasks such a supdating clustered systems, trivial again. In this post, I will walk through setting up an Ansible playbook to update my Pi cluster.&lt;/p&gt;
-&lt;!-- raw HTML omitted --&gt;
+      <description>
+
+&lt;p&gt;With Ansible configured on the Pi cluster, it is time to have it do something useful. When working with a clustered system, even the simplest tasks become tedious and time consuming. For example, updating the system. While I could manually update each of the 3 pi nodes, it is not scalable to 10 or 30 nodes, let alone hundreds or thousands. Tools like Ansible, make doing tasks such a supdating clustered systems, trivial again. In this post, I will walk through setting up an Ansible playbook to update my Pi cluster.&lt;/p&gt;
+
+&lt;!-- more --&gt;
+
 &lt;h3 id=&#34;hosts-file&#34;&gt;Hosts File&lt;/h3&gt;
+
 &lt;p&gt;The first task when using Ansible is to setup the &lt;code&gt;hosts&lt;/code&gt; file. No, not the normal &lt;code&gt;/etc/hosts&lt;/code&gt; file, but the &lt;em&gt;other&lt;/em&gt; one &lt;em&gt;just&lt;/em&gt; for Ansible, which can be found at &lt;code&gt;/etc/ansible/hosts&lt;/code&gt;. Configuring the Ansible hosts file is fairly straightforward. Groups of computers are defined using &lt;code&gt;[brackets]&lt;/code&gt;, with computer ip/hostnames of the group are listed below. For example:&lt;/p&gt;
+
 &lt;p&gt;A nice feature of group definitions is that hierical structures can be constructed using the &lt;code&gt;:child&lt;/code&gt; suffix in order to create groups of groups. For example, for my &lt;a href=&#34;../../pages/homelab&#34;&gt;homelab&lt;/a&gt;, I like to make an ansible hosts file that splits out my servers based on their distribution, and then group those by their packaging type. This makes it easier for me to do generic updates, which is what I mostly use ansible for (at this point). So, for example:&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;[ubuntu]
 mrmime
@@ -395,9 +436,8 @@ debian
 
 [rpm:children]
 fedora
-centos
-
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;For use with the cluster, I kept it simple, although I did opt to create rpi/bpi subgroups:&lt;/p&gt;
+centos&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;For use with the cluster, I kept it simple, although I did opt to create rpi/bpi subgroups:&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;[cluster:children]
 rpis
 bpis
@@ -407,42 +447,54 @@ pi0
 pi1
 
 [bpis]
-bpi
-&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;ping-hosts&#34;&gt;Ping Hosts&lt;/h3&gt;
+bpi&lt;/code&gt;&lt;/pre&gt;
+&lt;h3 id=&#34;ping-hosts&#34;&gt;Ping Hosts&lt;/h3&gt;
+
 &lt;p&gt;Once the hosts file is setup, it can be tested using the &lt;code&gt;ping&lt;/code&gt; module. I tested my &lt;code&gt;cluser&lt;/code&gt; group, as well as the &lt;code&gt;rpis&lt;/code&gt; and &lt;code&gt;bpis&lt;/code&gt; subgroups.&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;ansible rpis -m ping
 ansible bpis -m ping
-ansible cluster -m ping
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Assuming the steps of &lt;a href=&#34;../../post/Ansible-On-Pi-Cluster&#34;&gt;the last post&lt;/a&gt; were done correctly, this should work. If not, double check that post and make sure everything looks correct.&lt;/p&gt;
+ansible cluster -m ping&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Assuming the steps of &lt;a href=&#34;../../post/Ansible-On-Pi-Cluster&#34;&gt;the last post&lt;/a&gt; were done correctly, this should work. If not, double check that post and make sure everything looks correct.&lt;/p&gt;
+
 &lt;h3 id=&#34;playbooks&#34;&gt;Playbooks&lt;/h3&gt;
+
 &lt;p&gt;After confirming that the hosts file is properly configured, I started to dig into playbooks. Playbooks are Ansible&amp;rsquo;s scripting system used to configure, deploy, and orcistrate systems. They can describe ways in which systems should be configured (ex: enable ssh), or outline a set of steps for an IT task (ex: running updates, restarting a server). As stated in the &lt;a href=&#34;https://docs.ansible.com/ansible/playbooks.html&#34;&gt;playbook documentation&lt;/a&gt;:&lt;/p&gt;
-&lt;!-- raw HTML omitted --&gt;
-&lt;p&gt;Playbook files are expressed using &lt;a href=&#34;https://docs.ansible.com/ansible/YAMLSyntax.html&#34;&gt;YAML syntax&lt;/a&gt;, which is easy to read, but still powerful. The first step when creating a new playbook, being a YAML file, is to set the header and footer. The header consists of three &lt;code&gt;-&lt;/code&gt;&#39;s at the top of the file, and the footer ends the file with three periods (&lt;code&gt;.&lt;/code&gt;). This indicates the start and end of the document.&lt;/p&gt;
+
+&lt;div id=&#34;post-quote&#34;&gt;
+*&#34;If Ansible modules are the tools in your workshop, playbooks are your instruction manuals, and your inventory of hosts are your raw material.&#34;*
+&lt;/div&gt;
+
+&lt;p&gt;Playbook files are expressed using &lt;a href=&#34;https://docs.ansible.com/ansible/YAMLSyntax.html&#34;&gt;YAML syntax&lt;/a&gt;, which is easy to read, but still powerful. The first step when creating a new playbook, being a YAML file, is to set the header and footer. The header consists of three &lt;code&gt;-&lt;/code&gt;&amp;rsquo;s at the top of the file, and the footer ends the file with three periods (&lt;code&gt;.&lt;/code&gt;). This indicates the start and end of the document.&lt;/p&gt;
+
 &lt;p&gt;When writing a playbook to update the pi cluster, I first needed to declare what systems the playbook is used with. To do that, I used the &lt;code&gt;hosts&lt;/code&gt; key, and provided it with the &lt;code&gt;cluster&lt;/code&gt; group name, which is defined in my &lt;code&gt;/etc/ansible/hosts&lt;/code&gt; file, as the value.&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;---
 - hosts: cluster
 
-...
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;After the hosts are defined, modules can be added to update the nodes. To list the tasks, I used the &lt;code&gt;taks:&lt;/code&gt; key, with the same indentation as the &lt;code&gt;hosts:&lt;/code&gt; keyword. Instead of using a single value, I provided the &lt;code&gt;tasks:&lt;/code&gt; keyword with a list of things to do. The first task I want to do when updating the nodes is to check that they running and connected. This can be accomplised with the &lt;a href=&#34;https://docs.ansible.com/ansible/ping_module.html&#34;&gt;ping module&lt;/a&gt; that I used earlier in the post. The ping module will try to connect to each node, verify that a usable python is installed, and return &lt;code&gt;pong&lt;/code&gt; upon success. To add the module, I added &lt;code&gt;- ping: ~&lt;/code&gt;, indented, to the line below &lt;code&gt;tasks:&lt;/code&gt;:&lt;/p&gt;
+...&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;After the hosts are defined, modules can be added to update the nodes. To list the tasks, I used the &lt;code&gt;taks:&lt;/code&gt; key, with the same indentation as the &lt;code&gt;hosts:&lt;/code&gt; keyword. Instead of using a single value, I provided the &lt;code&gt;tasks:&lt;/code&gt; keyword with a list of things to do. The first task I want to do when updating the nodes is to check that they running and connected. This can be accomplised with the &lt;a href=&#34;https://docs.ansible.com/ansible/ping_module.html&#34;&gt;ping module&lt;/a&gt; that I used earlier in the post. The ping module will try to connect to each node, verify that a usable python is installed, and return &lt;code&gt;pong&lt;/code&gt; upon success. To add the module, I added &lt;code&gt;- ping: ~&lt;/code&gt;, indented, to the line below &lt;code&gt;tasks:&lt;/code&gt;:&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;---
 - hosts: cluster
 
   tasks:
-    - ping: ~
-&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;apt-module&#34;&gt;Apt Module&lt;/h3&gt;
+    - ping: ~&lt;/code&gt;&lt;/pre&gt;
+&lt;h3 id=&#34;apt-module&#34;&gt;Apt Module&lt;/h3&gt;
+
 &lt;p&gt;After defining the ping module, I started to get a bit fancier. Well&amp;hellip; a little bit fancier. Each node in my pi cluster is running some verison of Ubuntu, which uses apt as it&amp;rsquo;s package manager. If I wanted to ssh into each node and update them manually, the steps I would follow would be to 1) run the command &lt;code&gt;sudo apt-get update&lt;/code&gt; to update the repository cache, and 2) run &lt;code&gt;sudo apt-get upgrade&lt;/code&gt; to actually install the updates. To recreate these commands in the playbook, I used the &lt;a href=&#34;https://docs.ansible.com/ansible/apt_module.html&#34;&gt;apt module&lt;/a&gt;. To start with updating the repository cache, I added the following lines to my playbook:&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;- name: Update APT package manager repositories cache
   become: true
   apt:
-    update_cache: yes
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;The &lt;code&gt;name:&lt;/code&gt; defines the name of the task, and is the text printed out to the console when executing this step of the playbook. Setting the &lt;a href=&#34;https://docs.ansible.com/ansible/become.html&#34;&gt;&lt;code&gt;become&lt;/code&gt;&lt;/a&gt; key to &lt;code&gt;true&lt;/code&gt; tells Ansible to run the command with privilege escalation (sudo). Lastly, the remaining two lines run the &lt;code&gt;update_cache:&lt;/code&gt; functionality of the apt module.&lt;/p&gt;
+    update_cache: yes&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;The &lt;code&gt;name:&lt;/code&gt; defines the name of the task, and is the text printed out to the console when executing this step of the playbook. Setting the &lt;a href=&#34;https://docs.ansible.com/ansible/become.html&#34;&gt;&lt;code&gt;become&lt;/code&gt;&lt;/a&gt; key to &lt;code&gt;true&lt;/code&gt; tells Ansible to run the command with privilege escalation (sudo). Lastly, the remaining two lines run the &lt;code&gt;update_cache:&lt;/code&gt; functionality of the apt module.&lt;/p&gt;
+
 &lt;p&gt;With the repositories updated on each node, I can have ansible run the updates by adding the following lines to the playbook (after the cache update ones):&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;- name: Upgrade installed packages
   become: true
   apt:
-    upgrade: dist
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;This set of commands is very similar to the last group. The &lt;code&gt;name:&lt;/code&gt; again provides a description of what the task is doing, and privilege escalation is used again via &lt;code&gt;become: true&lt;/code&gt;. The only difference is that the apt module is using the &lt;code&gt;upgrade: dist&lt;/code&gt; command instead. This will run the updates for any installed packages on the system.&lt;/p&gt;
+    upgrade: dist&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;This set of commands is very similar to the last group. The &lt;code&gt;name:&lt;/code&gt; again provides a description of what the task is doing, and privilege escalation is used again via &lt;code&gt;become: true&lt;/code&gt;. The only difference is that the apt module is using the &lt;code&gt;upgrade: dist&lt;/code&gt; command instead. This will run the updates for any installed packages on the system.&lt;/p&gt;
+
 &lt;h3 id=&#34;update-cluster-playbook&#34;&gt;Update Cluster Playbook&lt;/h3&gt;
+
 &lt;p&gt;I then had a completed playbook to update the pi cluster:&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;---
 - hosts: cluster
@@ -459,11 +511,10 @@ ansible cluster -m ping
       become: true
       apt:
         upgrade: dist
-...
-
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;The last step is to test it out! Playbooks can be executed using the &lt;code&gt;ansible-playbook&lt;/code&gt; command:&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;ansible-playbook update-cluster.yml
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;When running the playbook, ansible will first attempt to gather facts about each node, and then begin to run each of the tasks defined in the playbook. At each step, it will print out the &lt;code&gt;name&lt;/code&gt; of each task, followed by the status/result for each node. When it completes, all the nodes in the cluster should be updated. Now you can update three+ computers with a single command! Enjoy!&lt;/p&gt;
+...&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;The last step is to test it out! Playbooks can be executed using the &lt;code&gt;ansible-playbook&lt;/code&gt; command:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;ansible-playbook update-cluster.yml&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;When running the playbook, ansible will first attempt to gather facts about each node, and then begin to run each of the tasks defined in the playbook. At each step, it will print out the &lt;code&gt;name&lt;/code&gt; of each task, followed by the status/result for each node. When it completes, all the nodes in the cluster should be updated. Now you can update three+ computers with a single command! Enjoy!&lt;/p&gt;
 </description>
     </item>
     
@@ -474,40 +525,59 @@ ansible cluster -m ping
       
       <guid>http://ryan.himmelwright.net/post/ansible-on-pi-cluster/</guid>
       <description>&lt;p&gt;In my &lt;a href=&#34;../../post/Setting-up-the-pi-cluster/&#34;&gt;previous post&lt;/a&gt;, I pieced together my &lt;a href=&#34;../../pages/homelab/#cluster&#34;&gt;pi cluster&lt;/a&gt;, and installed variations of Ubuntu 16.04 Server on each of its nodes. With the cluster built, I quickly needed an easy way to maintain and interact with the system as a whole. This, is where &lt;a href=&#34;https://www.ansible.com/&#34;&gt;Ansible&lt;/a&gt; comes in. In this post, I will walk through the steps I took to setup Ansible on my Cluster.&lt;/p&gt;
+
 &lt;h2 id=&#34;ansible&#34;&gt;Ansible&lt;/h2&gt;
-&lt;!-- raw HTML omitted --&gt;
+
+&lt;p&gt;&lt;img src=&#34;../../img/posts/setting-up-ansible-pi-cluster/ansible-logo.png&#34; style=&#34;max-width: 50%; width: 150px; float: left; margin: 0px 15px 5px 5px;&#34;/&gt;&lt;/p&gt;
+
 &lt;p&gt;Ansible is an open source, configuration management and automation system. It is written in Python, and financially backed by &lt;a href=&#34;http://www.redhat.com&#34;&gt;Red Hat&lt;/a&gt;. It simplifies the management of groups of computers, through the use of modules (standalone units of work. for example, apt, ping, rpm, etc). Ansible is script-able using simple YAML files, known as playbooks, that define a set of orchestration tasks for one or many computers. These scripts can be edited and version controlled, creating a simple &lt;a href=&#34;https://en.wikipedia.org/wiki/Infrastructure_as_Code&#34;&gt;infrastructure as code&lt;/a&gt; setup.&lt;/p&gt;
+
 &lt;h2 id=&#34;setting-up-the-user-account&#34;&gt;Setting up the User Account&lt;/h2&gt;
+
 &lt;p&gt;When Ansible executes commands on the PIs, it will do so from the user-account (ryan) that I setup in the last post. However, many of these commands will require Root privledges. While I previously setup sudo and added the &lt;code&gt;ryan&lt;/code&gt; account to the &lt;code&gt;sudo&lt;/code&gt; group &amp;hellip; it required that I manually enter my password. Ansible did not like this, so I had to update the sudo configuration to allow the &lt;code&gt;ryan&lt;/code&gt; account to run &lt;code&gt;sudo&lt;/code&gt; commands with out a password. To do this, I opened the &lt;code&gt;sudoers&lt;/code&gt; file:&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;sudo visudo
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;and added the following line to the end of the file:&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;ryan  ALL=(ALL:ALL) NOPASSWD: ALL
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;I repeated this on each of the nodes, and afterwards was no longer promted for a password when running &lt;code&gt;sudo&lt;/code&gt; commands. This made Ansible happy.&lt;/p&gt;
-&lt;p&gt;&lt;!-- raw HTML omitted --&gt;&lt;!-- raw HTML omitted --&gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;sudo visudo&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;and added the following line to the end of the file:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;ryan  ALL=(ALL:ALL) NOPASSWD: ALL&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;I repeated this on each of the nodes, and afterwards was no longer promted for a password when running &lt;code&gt;sudo&lt;/code&gt; commands. This made Ansible happy.&lt;/p&gt;
+
+&lt;p&gt;&lt;a name=&#34;ssh&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+
 &lt;h2 id=&#34;setup-ssh-keys&#34;&gt;Setup SSH Keys&lt;/h2&gt;
+
 &lt;p&gt;Well&amp;hellip; &lt;em&gt;almost&lt;/em&gt; happy.&lt;/p&gt;
-&lt;p&gt;Ansible&amp;rsquo;s main method of communication is via ssh, which by default, prompts me for a password when connecting. Ansible &lt;em&gt;really&lt;/em&gt; hates passwords. So, I had to configure ssh to use keys instead. Honestly, this is proabaly a good step to do regardless, now that the &lt;code&gt;ryan&lt;/code&gt; account no longer uses a password when running &lt;code&gt;sudo&lt;/code&gt;. To setup key-based logins, I appended the contents of my &lt;a href=&#34;../../pages/homelab/#alakazam&#34;&gt;main computer&lt;/a&gt;&amp;lsquo;s ssh public key*, to each pi&amp;rsquo;s &lt;code&gt;authorized_keys&lt;/code&gt; file. This can all be done using a magic one-line pipe command (x3, one for each pi):&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;cat ~/.ssh/id_rsa.pub | ssh pi0 &amp;quot;cat &amp;gt;&amp;gt; ~/.ssh/authorized_keys&amp;quot;
-cat ~/.ssh/id_rsa.pub | ssh pi1 &amp;quot;cat &amp;gt;&amp;gt; ~/.ssh/authorized_keys&amp;quot;
-cat ~/.ssh/id_rsa.pub | ssh bpi &amp;quot;cat &amp;gt;&amp;gt; ~/.ssh/authorized_keys&amp;quot;
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;em&gt;*Note: If keys are not already generated, they can be created using the command:&lt;/em&gt;&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;ssh-keygen
-&lt;/code&gt;&lt;/pre&gt;&lt;h4 id=&#34;key-only-login&#34;&gt;Key Only Login&lt;/h4&gt;
+
+&lt;p&gt;Ansible&amp;rsquo;s main method of communication is via ssh, which by default, prompts me for a password when connecting. Ansible &lt;em&gt;really&lt;/em&gt; hates passwords. So, I had to configure ssh to use keys instead. Honestly, this is proabaly a good step to do regardless, now that the &lt;code&gt;ryan&lt;/code&gt; account no longer uses a password when running &lt;code&gt;sudo&lt;/code&gt;. To setup key-based logins, I appended the contents of my &lt;a href=&#34;../../pages/homelab/#alakazam&#34;&gt;main computer&lt;/a&gt;&amp;rsquo;s ssh public key*, to each pi&amp;rsquo;s &lt;code&gt;authorized_keys&lt;/code&gt; file. This can all be done using a magic one-line pipe command (x3, one for each pi):&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;cat ~/.ssh/id_rsa.pub | ssh pi0 &amp;#34;cat &amp;gt;&amp;gt; ~/.ssh/authorized_keys&amp;#34;
+cat ~/.ssh/id_rsa.pub | ssh pi1 &amp;#34;cat &amp;gt;&amp;gt; ~/.ssh/authorized_keys&amp;#34;
+cat ~/.ssh/id_rsa.pub | ssh bpi &amp;#34;cat &amp;gt;&amp;gt; ~/.ssh/authorized_keys&amp;#34;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;em&gt;*Note: If keys are not already generated, they can be created using the command:&lt;/em&gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;ssh-keygen&lt;/code&gt;&lt;/pre&gt;
+&lt;h4 id=&#34;key-only-login&#34;&gt;Key Only Login&lt;/h4&gt;
+
 &lt;p&gt;To help secure access to the PIs (and to get on Ansible&amp;rsquo;s good side), I configured sshd to disable password logins, and only allow connections from clients with approved keys. To disable password authentication, I opened the &lt;code&gt;/etc/ssh/sshd_config&lt;/code&gt; file, found the line containing &lt;code&gt;# PasswordAuthentication yes&lt;/code&gt;, changed the &lt;code&gt;yes&lt;/code&gt; to a &lt;code&gt;no&lt;/code&gt;, and unncommented it by removing the &lt;code&gt;#&lt;/code&gt;.&lt;/p&gt;
+
 &lt;p&gt;While I was in the &lt;code&gt;sshd_config&lt;/code&gt; file, I also set &lt;code&gt;PermitRootLogin&lt;/code&gt; to &lt;code&gt;no&lt;/code&gt;, for good measure.&lt;/p&gt;
+
 &lt;p&gt;Lastly, I reset the &lt;code&gt;sshd&lt;/code&gt; service and repeated the steps for each pi:&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;sudo systemctl restart sshd
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Afterwards, I was unable to login to the PIs from a computer with unauthorized ssh keys.&lt;/p&gt;
-&lt;!-- raw HTML omitted --&gt;
+&lt;pre&gt;&lt;code&gt;sudo systemctl restart sshd&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Afterwards, I was unable to login to the PIs from a computer with unauthorized ssh keys.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;../../img/posts/setting-up-ansible-pi-cluster/terminal-play.png&#34; name=&#34;pic&#34; onmouseover=&#34;this.src=&#39;../../img/posts/setting-up-ansible-pi-cluster/blocked-ssh-attempt.gif&#39;&#34; onmouseout=&#34;this.src=&#39;../../img/posts/setting-up-ansible-pi-cluster/terminal-play.png&#39;&#34; style=&#34;max-width: 100%;&#34;/&gt;&lt;/p&gt;
+
 &lt;p&gt;But, I was still able to loging from the authorized computer.&lt;/p&gt;
-&lt;!-- raw HTML omitted --&gt;
+
+&lt;p&gt;&lt;img src=&#34;../../img/posts/setting-up-ansible-pi-cluster/terminal-play.png&#34; name=&#34;pic&#34; onmouseover=&#34;this.src=&#39;../../img/posts/setting-up-ansible-pi-cluster/accepted-ssh-attempt.gif&#39;&#34; onmouseout=&#34;this.src=&#39;../../img/posts/setting-up-ansible-pi-cluster/terminal-play.png&#39;&#34; style=&#34;max-width: 100%;&#34;/&gt;&lt;/p&gt;
+
 &lt;h2 id=&#34;install-python&#34;&gt;Install Python&lt;/h2&gt;
+
 &lt;p&gt;The last issue Ansible complained about was that it needed python installed on the Pis. Like everything else, the Bananna Pi already had this setup, but I had to install it on the two Raspberry Pis. It was simple enough:&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;sudo apt-get install python
-&lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&#34;install-ansible&#34;&gt;Install Ansible&lt;/h2&gt;
+&lt;pre&gt;&lt;code&gt;sudo apt-get install python&lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id=&#34;install-ansible&#34;&gt;Install Ansible&lt;/h2&gt;
+
 &lt;p&gt;I have a confession. So, you know how I have been fun and cheery by anthropomorphisizing Ansible, saying that it was &lt;em&gt;&amp;ldquo;happy&amp;rdquo;&lt;/em&gt; or &lt;em&gt;&amp;ldquo;frusterated&amp;rdquo;&lt;/em&gt; during the previous steps? That wasn&amp;rsquo;t true. I made it up. Ansible wasn&amp;rsquo;t &lt;em&gt;actually&lt;/em&gt; installed yet. &lt;em&gt;So&amp;hellip; to install Ansible&amp;hellip;&lt;/em&gt;&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;sudo eopkg it ansible
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;I used &lt;code&gt;eopkg&lt;/code&gt; because I am currently running &lt;a href=&#34;https://getsol.us&#34;&gt;Solus&lt;/a&gt;. You might use &lt;code&gt;sudo apt-get install ansible&lt;/code&gt;, &lt;code&gt;sudo dnf install ansible&lt;/code&gt;, or &lt;code&gt;pacaur -S ansible&lt;/code&gt; depending on whatever distro you are using.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;sudo eopkg it ansible&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;I used &lt;code&gt;eopkg&lt;/code&gt; because I am currently running &lt;a href=&#34;https://getsol.us&#34;&gt;Solus&lt;/a&gt;. You might use &lt;code&gt;sudo apt-get install ansible&lt;/code&gt;, &lt;code&gt;sudo dnf install ansible&lt;/code&gt;, or &lt;code&gt;pacaur -S ansible&lt;/code&gt; depending on whatever distro you are using.&lt;/p&gt;
+
 &lt;p&gt;That&amp;rsquo;s all for &lt;em&gt;setting up&lt;/em&gt; Ansible. I&amp;rsquo;ll cut this post off here, but in the next post, I&amp;rsquo;ll walk through the steps on how to get Ansible to be useful.&lt;/p&gt;</description>
     </item>
     

@@ -154,14 +154,20 @@ outside of emacs remains low (other than <a href="https://github.com/himmAllRigh
 files</a>), I started
 to look for a more standard system. The last few months, I&rsquo;ve been using
 <a href="https://joplinapp.org/">Joplin</a>. Here are my thoughts.</p>
-<h2 id="previous-system---org-mode">Previous System - Org-mode</h2>
-<!-- raw HTML omitted -->
+
+<h2 id="previous-system-org-mode">Previous System - Org-mode</h2>
+
+<p><a href="../../img/posts/switched-to-joplin-notes/org-mode-notes.png">
+<img alt="Emacs with a note opened in org-mode." src="../../img/posts/switched-to-joplin-notes/org-mode-notes.png" style="max-width: 100%;"/></a>
+<div class="caption">Emacs with a note opened in org-mode</div></p>
+
 <p>Previously, I had been taking all of my notes using org-mode in emacs. Each
 week, I made a new <code>.org</code> file for my work notes, and another for my personal
 planning/notes. I would then list my <a href="https://orgmode.org/manual/TODO-items.html">todo
 items</a>, usually grouped by day,
 category, or both. I would also
 <a href="https://orgmode.org/manual/Tags.html">tag</a> each item, for better organization.</p>
+
 <p>As I worked on each task, I could quickly add time-stamped notes using the
 built-in <a href="https://orgmode.org/manual/Drawers.html">logbook drawer</a> shortcut. In
 these notes, I would ramble, or paste a code snippet to save for later. As work
@@ -171,7 +177,12 @@ on each item progressed, I could set the <code>TODO</code> status to <code>Worki
 script/package</a> that took the
 <code>todo</code> items in my <code>org</code> file, and dumped them into a SCRUM board at the top of
 the file.</p>
-<!-- raw HTML omitted -->
+
+<p><a href="../../img/posts/switched-to-joplin-notes/org-notes-export-pages.png">
+<img alt="Pictured of org notes exported to HTML" src="../../img/posts/switched-to-joplin-notes/org-notes-export-pages.png" style="max-width: 100%;"/></a>
+<div class="caption">org-notes allowed me to link and export my notes to
+HTML</div></p>
+
 <p>Lastly, org files can be <a href="https://orgmode.org/manual/Exporting.html">exported</a>
 to all sorts of file types (md, html, pdf, latex). By combining the export
 feature with <a href="https://orgmode.org/manual/Internal-links.html">internal
@@ -180,7 +191,9 @@ an organized system for my archived notes. I created an <code>index.org</code> f
 linked to each week&rsquo;s notes. Every week, I would archive the html export of a
 note, and add it to the index list. This meant I could browse my old notes as a
 website.</p>
+
 <h3 id="what-i-liked">What I liked</h3>
+
 <ul>
 <li><code>org-mode</code> is great.</li>
 <li>I could take all of my notes in a simple markdown language (org)</li>
@@ -189,60 +202,97 @@ website.</p>
 <li>Exported to html (or txt, md, pdf, or anything really)</li>
 <li>My previous notes were all exported to an archive website</li>
 </ul>
+
 <h3 id="issues">Issues</h3>
+
 <ul>
 <li>I <em>had</em> to use emacs for any edits</li>
 <li>Not supported on mobile devices</li>
 <li>As I used more <code>.md</code> syntax for other applications, I found myself fumbling between <code>org</code> and <code>md</code> syntax often.</li>
 <li>Syncing issues (mostly Nextcloud issues. Seafile helped, but it still occurred)</li>
 </ul>
+
 <p>All in all, I loved taking notes in org-mode. However, I wanted something that
 could be used on <em>all</em> my devices, and was more easily translatable outside of
 &ldquo;emacsOS&rdquo;.</p>
-<h2 id="the-switch---joplin">The Switch - Joplin</h2>
-<!-- raw HTML omitted -->
+
+<h2 id="the-switch-joplin">The Switch - Joplin</h2>
+
+<p><a href="../../img/posts/switched-to-joplin-notes/joplin-window.png">
+<img alt="Window of the Joplin GUI application" src="../../img/posts/switched-to-joplin-notes/joplin-window.png" style="max-width: 100%;"/></a>
+<div class="caption">Joplin GUI window (in &lsquo;split mode&rsquo;)</div></p>
+
 <h3 id="about-joplin">About Joplin</h3>
+
 <p>Joplin is an open source note-taking and to-do application. It synchronizes and
 organizes markdown notes into notebooks, across many platforms (Android, iOS,
 macOS, Linux, and Windows). It even has both a GUI <em>and</em> terminal client.  So,
 I decided to give it a try.</p>
+
 <h3 id="my-setup">My Setup</h3>
+
 <p>When configuring joplin, a sync system has to be defined (well, <em>should</em>. Notes
 can also be saved locally). There are a few supported options including using
 Nextcloud. I had previously synced my org notes using Nextcloud, but eventually
 moved away from it due to repeated file conflict issues. So I wanted to try
 something different.</p>
-<!-- raw HTML omitted -->
+
+<p><center>
+<a href="../../img/posts/switched-to-joplin-notes/fastmail_logo.png">
+<img alt="Window of the Joplin GUI application" src="../../img/posts/switched-to-joplin-notes/fastmail_logo.png" style="max-width: 70%;"/></a>
+<div class="caption">Joplin GUI window (in &lsquo;split mode&rsquo;)</div>
+</center></p>
+
 <p>While researching Joplin, I learned that I could sync notes to the WebDav
 server on the <a href="https://www.fastmail.com">fastmail</a> account I have for email. I
 wasn&rsquo;t using any of the account&rsquo;s file storage, so I figured I this would be a
 good way to get use out of a service I&rsquo;m already paying for. It works great!</p>
+
 <h3 id="what-i-like">What I like</h3>
+
 <h4 id="syncs-on-all-my-devices">Syncs on <em>all</em> my devices</h4>
+
 <p>What I have enjoyed most about this setup is that my notes sync to all of my
 devices. Most importantly, I can <em>read</em> the notes on every device. With
 previous systems, the files would sync everywhere, but I still couldn&rsquo;t always
 easily read them.</p>
+
 <h4 id="cli-and-gui-versions">CLI and GUI versions</h4>
+
 <p>Similarly, I like that Joplin has both a GUI and CLI client. I
 mostly use the GUI, but enjoy having the CLI as an option because it means I
 can always ssh into a machine and take notes. Additionally, the
 cli client allows me to take/edit notes using my own terminal editors such as
 emacs <em>or</em> vim. This is quite convenient, and I should probably start using
 Joplin this way more often.</p>
+
 <h4 id="markdown-note-exports">Markdown Note Exports</h4>
-<!-- raw HTML omitted -->
+
+<p><center>
+<a href="../../img/posts/switched-to-joplin-notes/export-options.png">
+<img alt="Joplin cli application" src="../../img/posts/switched-to-joplin-notes/export-options.png" style="max-width: 100%;"/></a>
+</center>
+<div class="caption">Export options in Joplin GUI</div></p>
+
 <p>I like that notes are formatted in markdown. This provides some
 consistency when writing, but ensures that my notes are in a format that is
 standardized. Additionally, joplin allows easy exporting of
 the notes to other formats such as <code>json</code> or as <code>pdf</code>s.</p>
+
 <h4 id="easy-enough-to-use">Easy enough to use</h4>
+
 <p>Lastly, Joplin has been easy to use. After setup, I just have to open the app,
 and start typing away (maybe with a sync or two). While my last setup required
 the user to be somewhat of an emacs/org guru&hellip; this doesn&rsquo;t.</p>
-<h3 id="issues-im-still-figuring-outanticipate">Issues I&rsquo;m still figuring out/Anticipate</h3>
-<!-- raw HTML omitted -->
+
+<h3 id="issues-i-m-still-figuring-out-anticipate">Issues I&rsquo;m still figuring out/Anticipate</h3>
+
+<p><a href="../../img/posts/switched-to-joplin-notes/joplin-cli.png">
+<img alt="Joplin cli application" src="../../img/posts/switched-to-joplin-notes/joplin-cli.png" style="max-width: 100%;"/></a>
+<div class="caption">Joplin CLI window </div></p>
+
 <h4 id="setup-is-a-pain">Setup is a pain</h4>
+
 <p>While configuring sync can be a pain, it&rsquo;s not my biggest gripe with the Joplin
 setup process. It&rsquo;s adding a new system. By default, if I configure a new
 device with my sync solution (my laptop or phone for example) and then sync, it
@@ -251,29 +301,37 @@ down to all of my systems. This is extremely frustrating because I have to keep
 deleting them.  This is multiplied by the fact that it happens with <em>each
 client</em> I setup. So if I setup the gui and cli on my laptop, it will happen
 <em>twice</em> (2x each default tags/notes will show up on all my systems).</p>
+
 <p><em>Semi-Solution</em>:</p>
+
 <p>A <em>slight</em> work-around I have been able to use when setting up a new computer
 is to simply copy the config files from an existing system to the new one.
 These folders can be found at <code>~/.config/joplin/</code>, <code>~/.config/Joplin/</code>, and/or
 <code>~/.config/joplin-desktop/</code>. This also means that the new system <em>should</em> have less
 it needs to sync down from the server on the first sync.</p>
+
 <h4 id="long-term-archiving">Long term archiving</h4>
+
 <p>The <strong>big</strong> problem I have&hellip; and think I will continue to have with Joplin, is
 the long-term organization of notes. Part of this is my inability to figure out an
 efficient and organized way to handle my &ldquo;log&rdquo; notes.</p>
+
 <p>This problem partially stems from Joplin&rsquo;s shallow organizational
 structure. There are notebooks, and notes. That&rsquo;s it. Unlike having
 a file structure where I can do something like
 <code>archive/2019/June/Weekly_Plans/</code>, I can&rsquo;t really go that deep with Joplin, so
 I end up just having a single notebook with <em>all</em> my weekly plan notes listed
 in it.</p>
+
 <p>One remaining solution might be to get more aggressive with the tagging
 feature, and see if I can create a more organized system using that. I might be
 able to tag each note with a month/year, and then truncate my log notes each
 month. The only problem with this is that it doesn&rsquo;t seem like I can select
 <em>multiple</em> tags at a time, which would mean <em>all</em> of my notes for a month
 will be shown under the tag. That would be a deal breaker for me :( .</p>
+
 <h2 id="conclusion">Conclusion</h2>
+
 <p>In summary, I think that Joplin <em>is</em> a great open source notes solution.  If
 someone needs a system to keep a bunch of normal notes synced across all their
 devices, this is it. I however, might need to try out something else long-term.

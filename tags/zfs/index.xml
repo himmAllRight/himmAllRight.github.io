@@ -21,7 +21,9 @@ noisy&amp;hellip; very noisy. Fearing the worst, I &lt;a href=&#34;../../post/zf
 backup&lt;/a&gt;, and shutdown the server until I had
 time to investigate further&amp;hellip; and likely replace the drive. That
 time came this past week.&lt;/p&gt;
+
 &lt;h3 id=&#34;verifying-the-drive-failed&#34;&gt;Verifying the Drive Failed&lt;/h3&gt;
+
 &lt;p&gt;Before throwing money at the problem, I wanted to see if ZFS was detecting any
 issues. When I ran a &lt;code&gt;zpool status&lt;/code&gt; on my &lt;code&gt;Data&lt;/code&gt; pool, it warned me that one of
 the devices had experienced an error, but that I had not (&lt;em&gt;yet&lt;/em&gt;) encountered
@@ -43,22 +45,31 @@ config:
 	    ata-TOSHIBA_DT01ACA300_365XDT3KS  ONLINE       &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;     &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;     &lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;
 	    ata-TOSHIBA_DT01ACA300_365XDR5KS  ONLINE       &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;     &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;     &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;
 
-errors: No known data errors
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;ordering-a-new-drive&#34;&gt;Ordering a New Drive&lt;/h3&gt;
+errors: No known data errors&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h3 id=&#34;ordering-a-new-drive&#34;&gt;Ordering a New Drive&lt;/h3&gt;
+
 &lt;p&gt;When I started shopping for hard drives, I decided to replace my broken 7200 RPM
 one a 5400 RPM one. I&amp;rsquo;d rather have the drives last longer and run quieter,
 than whatever marginal speed difference the faster spinning disks &lt;em&gt;may&lt;/em&gt;
 provide. I decided to finally go with a &lt;a href=&#34;https://www.amazon.com/dp/B008JJLW4M/ref=twister_B07GXT9HNH?_encoding=UTF8&amp;amp;psc=1&#34;&gt;3TB Western Digital RED
 drive&lt;/a&gt;
 this time, even tough it&amp;rsquo;s a bit more expensive&amp;hellip; mostly to try out.&lt;/p&gt;
+
 &lt;h3 id=&#34;replacing-the-drive&#34;&gt;Replacing the Drive&lt;/h3&gt;
-&lt;!-- raw HTML omitted --&gt;
+
+&lt;p&gt;&lt;center&gt;
+&lt;a href=&#34;../../img/posts/replace-zfs-mirror-drive/hdd-swap.jpg&#34;&gt;&lt;img alt=&#34;Swapping the two hard drives&#34; src= &#34;/img/posts/replace-zfs-mirror-drive/hdd-swap.jpg&#34; style=&#34;max-width: 100%;&#34;/&gt;&lt;/a&gt;
+&lt;div class=&#34;caption&#34;&gt;Swapping the hot-swap caddy from the broken hard drive (left) with my new WD Red drive (right)&lt;/div&gt;
+&lt;/center&gt;&lt;/p&gt;
+
 &lt;p&gt;&lt;em&gt;Physically&lt;/em&gt; swapping the hard drives was a breeze. I could easily tell which
 drive was the defective one&amp;hellip; as it caused the entire server to rumble (ಠ_ಠ) .
 So I slid it out, unscrewed the drive from its caddy, and screwed in the new
 one. Lastly, I slide the caddy back into the server and booted it up. I love
 hot-swap drive bays.&lt;/p&gt;
+
 &lt;h4 id=&#34;figuring-out-which-disk-to-replace&#34;&gt;Figuring Out Which Disk To Replace&lt;/h4&gt;
+
 &lt;p&gt;Determining which disk was being replaced &lt;em&gt;in software&lt;/em&gt; was a bit more
 difficult. In order to add the new drive to the &lt;code&gt;Data&lt;/code&gt; pool, I needed to tell
 ZFS which one had been &lt;em&gt;replaced&lt;/em&gt;.  This was made more complicated by the fact
@@ -118,26 +129,25 @@ Data:
     features_for_read:
         com.delphix:hole_birth
         com.delphix:embedded_data
-...
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;At first, I still didn&amp;rsquo;t know which drive was which. However, after looking
+...&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;At first, I still didn&amp;rsquo;t know which drive was which. However, after looking
 deeper, I noticed that &lt;em&gt;one&lt;/em&gt; of the Toshiba drives listed had the line
 &lt;code&gt;not_present: 1&lt;/code&gt;, indicating that it was the broken drive I had removed!&lt;/p&gt;
+
 &lt;h4 id=&#34;replacing-the-drive-1&#34;&gt;Replacing the drive&lt;/h4&gt;
+
 &lt;p&gt;With the &lt;code&gt;guid&lt;/code&gt; of the broken drive known, I was able to start the process of
 replacing it in the pool with the new one. I issued a &lt;code&gt;zpool replace&lt;/code&gt; command
 with the following arguments:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;sudo zpool replace Data &lt;span style=&#34;color:#ae81ff&#34;&gt;4676737554230074290&lt;/span&gt; /dev/sdd
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;code&gt;Data&lt;/code&gt; - the name of the pool&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;code&gt;4676737554230074290&lt;/code&gt; - the &lt;code&gt;guid&lt;/code&gt; of the previous drive&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;code&gt;/dev/sdd&lt;/code&gt; - the path to the new drive&lt;/p&gt;
-&lt;/li&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;sudo zpool replace Data &lt;span style=&#34;color:#ae81ff&#34;&gt;4676737554230074290&lt;/span&gt; /dev/sdd&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;&lt;code&gt;Data&lt;/code&gt; - the name of the pool&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;&lt;code&gt;4676737554230074290&lt;/code&gt; - the &lt;code&gt;guid&lt;/code&gt; of the previous drive&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;&lt;code&gt;/dev/sdd&lt;/code&gt; - the path to the new drive&lt;/p&gt;&lt;/li&gt;
 &lt;/ul&gt;
+
 &lt;p&gt;Afterwards, the resilvering process started (rebuilding the mirror by copying
 data from one drive to the other). I was able to check the status of
 the process using &lt;code&gt;zpool status Data&lt;/code&gt;.&lt;/p&gt;
@@ -160,13 +170,15 @@ config:
 	      sdd                             ONLINE       &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;     &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;     &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;  &lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;resilvering&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt;
 	    ata-TOSHIBA_DT01ACA300_365XDR5KS  ONLINE       &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;     &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;     &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;
 
-errors: No known data errors
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Resilvering can take a &lt;em&gt;long&lt;/em&gt; time. Luckily, I only had about ~1 TB of data to
+errors: No known data errors&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Resilvering can take a &lt;em&gt;long&lt;/em&gt; time. Luckily, I only had about ~1 TB of data to
 rebuild, so I hoped it wouldn&amp;rsquo;t &lt;em&gt;actually&lt;/em&gt; take the 123.5 hours that the first
 &lt;code&gt;status&lt;/code&gt; predicted! Regardless, during the resilvering process, the only thing
 to do is wait (&lt;em&gt;and hope that the other drive doesn&amp;rsquo;t break in the process!&lt;/em&gt;).
 So I did.&lt;/p&gt;
+
 &lt;h4 id=&#34;resilver-complete&#34;&gt;Resilver Complete&lt;/h4&gt;
+
 &lt;p&gt;In just over 4 hours, my pool had rebuilt and was back online.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;λ ninetales ~ → zpool status Data
   pool: Data
@@ -180,9 +192,10 @@ config:
 	    sdd                               ONLINE       &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;     &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;     &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;
 	    ata-TOSHIBA_DT01ACA300_365XDR5KS  ONLINE       &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;     &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;     &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;
 
-errors: No known data errors
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Looking at this output now, I realize I probably should have added the new
+errors: No known data errors&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Looking at this output now, I realize I probably should have added the new
 drive by &lt;code&gt;uuid&lt;/code&gt; instead of pathname&amp;hellip;hmmm&amp;hellip;&lt;/p&gt;
+
 &lt;p&gt;Oh well. That is a post for another day. At least my broken drive
 has &lt;em&gt;finally&lt;/em&gt; been replaced!&lt;/p&gt;</description>
     </item>
@@ -194,64 +207,96 @@ has &lt;em&gt;finally&lt;/em&gt; been replaced!&lt;/p&gt;</description>
       
       <guid>http://ryan.himmelwright.net/post/zfs-backups-to-luks-external/</guid>
       <description>&lt;p&gt;I have been using &lt;a href=&#34;https://en.wikipedia.org/wiki/ZFS&#34;&gt;ZFS&lt;/a&gt; data pools to store data on &lt;a href=&#34;../../pages/homelab/#ninetales&#34;&gt;my server&lt;/a&gt; for some time now. As great as that is, I am ashamed to admit that I have not had a &lt;em&gt;true&lt;/em&gt; backup system in place (raid/mirrors are not backup). I have a backup solution that I have attempted in the past, but ran into an issue and let it drift to the side. That changes now. It&amp;rsquo;s time to revisit my solution, and complete it to the end.&lt;/p&gt;
+
 &lt;p&gt;Currently, my server is configured with two main zfs mirrored pools. The first one, &lt;code&gt;Data&lt;/code&gt;, is built on 2 x 3TB hard drives, providing 2.72 TB of usable disk space. It contains all of my wife&amp;rsquo;s and my data, organized into sub-category pools (ex: &lt;code&gt;Data/Music&lt;/code&gt;, &lt;code&gt;Data/Pictures&lt;/code&gt;, &lt;code&gt;Data/ryan&lt;/code&gt;, etc). The second, &lt;code&gt;Backups&lt;/code&gt;, is built on the 2 x 1TB hard drives from my old desktop, creating a 928 GB usable pool . It stores the automatic backups of some of the VMs and LXC containers hosted on the server.&lt;/p&gt;
+
 &lt;p&gt;Before I had my 3TB drives, I bought a 2TB external hard drive to backup the 1TB drives to. While it isn&amp;rsquo;t as large as the total usable space on my server, it is enough to store my data backups to, for the time being.&lt;/p&gt;
+
 &lt;p&gt;My goal is to setup a zfs pool on the external drive, so I can use zfs&amp;rsquo;s send &amp;amp; receive functionality to send bi-weekly-ish incremental snapshots to it. When I am not running backups, I want to store the drive at an off-site location. With the drive being stored elsewhere, I want to ensure that the data is protected, so I will be encrypting the it using &lt;a href=&#34;https://en.wikipedia.org/wiki/Linux_Unified_Key_Setup&#34;&gt;LUKS&lt;/a&gt;, the Linux disk encryption software.&lt;/p&gt;
+
 &lt;h3 id=&#34;setting-up-luks&#34;&gt;Setting up LUKS&lt;/h3&gt;
+
 &lt;p&gt;&lt;a href=&#34;https://gitlab.com/cryptsetup/cryptsetup/blob/master/README.md&#34;&gt;LUKS&lt;/a&gt; (Linux Unified Key Setup) is the standard for Linux disk encryption. I will use it to encrypt the external drive, and then present the LUKS mapper devices to ZFS as a block device. To do this, we need to first install &lt;code&gt;cryptsetup&lt;/code&gt; with &lt;code&gt;sudo apt-get install cryptsetup&lt;/code&gt; (Assuming you are on a Debian-based operating system). Once that is installed, we can use the &lt;code&gt;cryptsetup&lt;/code&gt; command to configure LUKS on the drive.&lt;/p&gt;
+
 &lt;p&gt;The cryptsetup tool has a plethora of settings and options. After researching around, I decided to use options that the author of &lt;a href=&#34;http://www.makethenmakeinstall.com/2014/10/zfs-on-linux-with-luks-encrypted-disks/&#34;&gt;this post&lt;/a&gt; used, because they were doing something very similar to what I am trying. I configured LUKS on my external drive using the following command:&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;cryptsetup luksFormat --cipher aes-xts-plain64 --key-size 512 --iter-time 10000 --use-random -y /dev/sdf
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;code&gt;--cipher aex-xts-plain64&lt;/code&gt;and &lt;code&gt;--key-size 512&lt;/code&gt; refer to the algorithm and key size used to encrypt the data. In general, the larger the key, the harder the encryption is to crack.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;cryptsetup luksFormat --cipher aes-xts-plain64 --key-size 512 --iter-time 10000 --use-random -y /dev/sdf&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;code&gt;--cipher aex-xts-plain64&lt;/code&gt;and &lt;code&gt;--key-size 512&lt;/code&gt; refer to the algorithm and key size used to encrypt the data. In general, the larger the key, the harder the encryption is to crack.&lt;/p&gt;
+
 &lt;p&gt;&lt;code&gt;--iter-time 10000&lt;/code&gt; and &lt;code&gt;--use-random -y&lt;/code&gt; are additional precautions to make it more difficult to crack the encryption. The &lt;code&gt;--iter-time 10000&lt;/code&gt; means it will spend at least 10 seconds processing the passphrase each time the disk is unlocked. This makes it much harder to brute-force the passphrase.&lt;/p&gt;
+
 &lt;p&gt;Once the device is encrypted, we need to unlock it and map it as a device. This is done using the command:&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;sudo cryptsetup luksOpen /dev/sdf sdf-enc
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;code&gt;/dev/sdf&lt;/code&gt; is the external disk, and &lt;code&gt;sdf-enc&lt;/code&gt; is whatever you want to name the unlocked device. This is the name that what will be used when referring to the unlocked device. With the drive is encrypted and unlocked, it&amp;rsquo;s time for some ZFS magic.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;sudo cryptsetup luksOpen /dev/sdf sdf-enc&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;code&gt;/dev/sdf&lt;/code&gt; is the external disk, and &lt;code&gt;sdf-enc&lt;/code&gt; is whatever you want to name the unlocked device. This is the name that what will be used when referring to the unlocked device. With the drive is encrypted and unlocked, it&amp;rsquo;s time for some ZFS magic.&lt;/p&gt;
+
 &lt;h3 id=&#34;creating-a-zfs-pool&#34;&gt;Creating a ZFS Pool&lt;/h3&gt;
+
 &lt;p&gt;I am creating a zpool using just my single external drive, so the setup is very basic. No mirrors, no zvols. A simple zpool is created with the simple command:&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;sudo zpool create externalBackup sdf-enc
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;That&amp;rsquo;s it.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;sudo zpool create externalBackup sdf-enc&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;That&amp;rsquo;s it.&lt;/p&gt;
+
 &lt;h3 id=&#34;taking-base-snapshots&#34;&gt;Taking Base Snapshots&lt;/h3&gt;
-&lt;!-- raw HTML omitted --&gt;
+
+&lt;p&gt;&lt;img alt=&#34;Taking a ZFS snapshot&#34; src=&#34;../../img/posts/ZFS-Backups-To-LUKS-External/snapshot.gif&#34; style=&#34;max-width: 100%;&#34;/&gt;
+&lt;div id=&#34;caption&#34;&gt;Taking a ZFS snapshot&lt;/div&gt;&lt;/p&gt;
+
 &lt;p&gt;With a zpool initialized on the externalDrive, I can now send snapshots to it. To start, I created a base snapshot to send. Starting with the smaller pool, &lt;code&gt;/Backups&lt;/code&gt;:&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;sudo zfs snapshot -r Backups@VM-LXC-BackupBase
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;This command creates a recursive snapshot of my &lt;code&gt;Backups&lt;/code&gt; zpool, named &lt;code&gt;VM-LXC-BackupBase&lt;/code&gt;. Making a base snapshot for my &lt;code&gt;/Data&lt;/code&gt; zpool is nearly the same:&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;sudo zfs snapshot -r Data/DataBackupBase
-&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;sending-the-base-snapshots&#34;&gt;Sending the Base Snapshots&lt;/h3&gt;
+&lt;pre&gt;&lt;code&gt;sudo zfs snapshot -r Backups@VM-LXC-BackupBase&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;This command creates a recursive snapshot of my &lt;code&gt;Backups&lt;/code&gt; zpool, named &lt;code&gt;VM-LXC-BackupBase&lt;/code&gt;. Making a base snapshot for my &lt;code&gt;/Data&lt;/code&gt; zpool is nearly the same:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;sudo zfs snapshot -r Data/DataBackupBase&lt;/code&gt;&lt;/pre&gt;
+&lt;h3 id=&#34;sending-the-base-snapshots&#34;&gt;Sending the Base Snapshots&lt;/h3&gt;
+
 &lt;p&gt;After taking base snapshots of the zpools, I can transfer them to the external drive using the zfs &lt;code&gt;send&lt;/code&gt; and &lt;code&gt;recv&lt;/code&gt; commands. Again, starting with the &lt;code&gt;VM-LXC-BackupBase&lt;/code&gt;:&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;sudo zfs send Backups@VM-LXC-BackupBase | sudo zfs recv externalBackup/VM-LXC-BackupBase
-&lt;/code&gt;&lt;/pre&gt;&lt;!-- raw HTML omitted --&gt;
+&lt;pre&gt;&lt;code&gt;sudo zfs send Backups@VM-LXC-BackupBase | sudo zfs recv externalBackup/VM-LXC-BackupBase&lt;/code&gt;&lt;/pre&gt;
+&lt;div id=&#34;caption&#34;&gt;Looking back, I realized I named this poorly... The external zpool should be `/externalBackup/VM-LXC-Backup`, not `BackupBase`, that name is just for the first *snapshot*. Oh well.&lt;/div&gt;
+
 &lt;p&gt;Now for the slightly harder pool, &lt;code&gt;/Data&lt;/code&gt;, with all of the sub zpools. The first time I attempted this, only the parent &lt;code&gt;Data&lt;/code&gt; snapshot was copied, but none of the children were (&lt;code&gt;Data/Music&lt;/code&gt;, &lt;code&gt;Data/Pictures&lt;/code&gt;, etc). After some digging around the docs and online I realized I was missing the &lt;code&gt;-R&lt;/code&gt; to my &lt;code&gt;zfs send&lt;/code&gt; command.  Also note, that when using the &lt;code&gt;-R&lt;/code&gt; flag, the snapshot name for the destination pool are not specified (because it is copying multiple). It will use the same snapshot names from the source pool.&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;sudo zfs send -R Data@DataBackupBase | sudo zfs recv externalBackup/DataBackup
-&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;incremental-backups&#34;&gt;Incremental Backups&lt;/h3&gt;
+&lt;pre&gt;&lt;code&gt;sudo zfs send -R Data@DataBackupBase | sudo zfs recv externalBackup/DataBackup&lt;/code&gt;&lt;/pre&gt;
+&lt;h3 id=&#34;incremental-backups&#34;&gt;Incremental Backups&lt;/h3&gt;
+
 &lt;p&gt;Taking a snapshot of my data and sending it to an external drive is nice, but I don&amp;rsquo;t want to send all of the data each time I backup. Transferring can take a very long time, especially as my data pools continue to grow. I don&amp;rsquo;t want to sit around all day, listening to hard drives hum as my data transfers.&lt;/p&gt;
-&lt;!-- raw HTML omitted --&gt;
+
+&lt;p&gt;&lt;center&gt;&lt;img alt=&#34;no time&#34; src=&#34;../../img/posts/ZFS-Backups-To-LUKS-External/aint-nobody-got-time-for-that.gif&#34; style=&#34;max-width: 100%;&#34;/&gt;&lt;/center&gt;&lt;/p&gt;
+
 &lt;p&gt;A useful feature of the zfs &lt;code&gt;send&lt;/code&gt; and &lt;code&gt;recv&lt;/code&gt; commands is the ability to send &lt;em&gt;incremental&lt;/em&gt; snapshots. This means when I want to update my backups, I can just send the &lt;em&gt;changes&lt;/em&gt; between the two snapshots. This is similar to &lt;a href=&#34;https://en.wikipedia.org/wiki/Diff_utility&#34;&gt;source code diffs&lt;/a&gt;, but for file systems.&lt;/p&gt;
+
 &lt;p&gt;To send incremental snapshots, the &lt;code&gt;-i&lt;/code&gt; or &lt;code&gt;-I&lt;/code&gt; flag is used. The difference between the two is that the &lt;code&gt;-i&lt;/code&gt; flag will send the difference between the two snapshots listed, whereas &lt;code&gt;-I&lt;/code&gt; will send a series of snapshots between the two listed. For example, if I&amp;rsquo;ve taken several snapshots of my data (&lt;code&gt;A&lt;/code&gt;, &lt;code&gt;B&lt;/code&gt;, &lt;code&gt;C&lt;/code&gt;, and &lt;code&gt;D&lt;/code&gt;), but have neglected to copy them to the external drive since snapshot &lt;code&gt;A&lt;/code&gt;, I can use &lt;code&gt;-I A D&lt;/code&gt; in my &lt;code&gt;zfs send&lt;/code&gt; command, and all four of the snapshots will be sent to the external.&lt;/p&gt;
+
 &lt;p&gt;To send an incremental update to my backup, I first created new snapshot for my pools (this time with a date):&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;sudo zfs snapshot -r Backups@VM-LXC-Backup20170418
-sudo zfs snapshot -r Data@DataBackup20170418
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Next, I sent the incremental changes between the base snapshots, and new ones I just made:&lt;/p&gt;
+sudo zfs snapshot -r Data@DataBackup20170418&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Next, I sent the incremental changes between the base snapshots, and new ones I just made:&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;sudo zfs send -R -i Backups@VM-LXC-BackupBase Backups@VM-LXC-Backup20170418 | sudo zfs recv externalBackup/VM-LXC-BackupBase
-sudo zfs send -R -i Data@DataBackupBase Data@DataBackup20170418 | sudo zfs recv externalBackup/DataBackup
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Notice that I specify &lt;em&gt;two&lt;/em&gt; snapshots in the send command, to define the range of differences to send.&lt;/p&gt;
+sudo zfs send -R -i Data@DataBackupBase Data@DataBackup20170418 | sudo zfs recv externalBackup/DataBackup&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Notice that I specify &lt;em&gt;two&lt;/em&gt; snapshots in the send command, to define the range of differences to send.&lt;/p&gt;
+
 &lt;h4 id=&#34;a-minor-issue&#34;&gt;A Minor Issue&lt;/h4&gt;
+
 &lt;p&gt;The first time I tried sending an incremental backup, I encountered a minor issue. ZFS gave me an error stating that my destination had been changed since last snapshot (meaning the base snapshot on the externalBackup pool). I looked this up online and it seems that sometimes, just looking around the pool can change files. Some people recommended setting the destination pool to read-only, so I did that to my backup pool with:&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;sudo zfs set readonly=on externalBackup
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;I am not sure if this will eliminate this problem in the future, but I guess I will find out.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;sudo zfs set readonly=on externalBackup&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;I am not sure if this will eliminate this problem in the future, but I guess I will find out.&lt;/p&gt;
+
 &lt;p&gt;I still had the error when sending, so I added the &lt;code&gt;-F&lt;/code&gt; flag to the &lt;code&gt;zfs recv&lt;/code&gt; command. I am not sure if this was the &lt;em&gt;best&lt;/em&gt; solution, but it seemed to be okay. I also thought about rolling back to the snapshot, and then copying which is likely a safer method (if you don&amp;rsquo;t mind losing the &amp;ldquo;changes&amp;rdquo; on the destination pool).&lt;/p&gt;
+
 &lt;h3 id=&#34;safely-closing-and-removing-the-external-drive&#34;&gt;Safely Closing and Removing the External Drive&lt;/h3&gt;
-&lt;!-- raw HTML omitted --&gt;
+
+&lt;p&gt;&lt;img alt=&#34;Exporting the zpool&#34; src=&#34;../../img/posts/ZFS-Backups-To-LUKS-External/export-drive.gif&#34; style=&#34;max-width: 100%;&#34;/&gt;
+&lt;div id=&#34;caption&#34;&gt;Exporting the zpool and closing the LUKS device&lt;/div&gt;&lt;/p&gt;
+
 &lt;p&gt;When the incremental backups finishes transferring, the external drive can be removed. The sequence of steps to do this safely are 1) export the zpool 2) close the LUKS device, and 3) unplug the drive. To export the zpool and close the LUKS device I used the commands:&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;sudo zpool export externalBackup
-sudo cryptSetup luksClose sdf-enc
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;After that, I was able to unplug the external drive, and store it in a safe location, until I need to backup data to it again.&lt;/p&gt;
+sudo cryptSetup luksClose sdf-enc&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;After that, I was able to unplug the external drive, and store it in a safe location, until I need to backup data to it again.&lt;/p&gt;
+
 &lt;h3 id=&#34;opening-and-importing-zpool-for-recurring-backups&#34;&gt;Opening and Importing zpool for Recurring Backups&lt;/h3&gt;
+
 &lt;p&gt;Lastly, there are a few steps to take when reconnecting the drive to run a daily/monthly/weekly (whatever) backup. First, the drive must be decrypted and mounted, using the same command as above:&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;sudo cryptSetup luksOpen /dev/sdf sdf-enc
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Next, the zpool on the drive must be imported so that it can be used from the main system. Like exporting the pool, the command is simple:&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;sudo zpool import externalBackup
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;That&amp;rsquo;s it. Now the steps detailing taking snapshots and sending incremental backups can be repeated.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;sudo cryptSetup luksOpen /dev/sdf sdf-enc&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Next, the zpool on the drive must be imported so that it can be used from the main system. Like exporting the pool, the command is simple:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;sudo zpool import externalBackup&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;That&amp;rsquo;s it. Now the steps detailing taking snapshots and sending incremental backups can be repeated.&lt;/p&gt;
+
 &lt;h3 id=&#34;summary&#34;&gt;Summary&lt;/h3&gt;
+
 &lt;p&gt;I am happy with this solution for now. It allows me to leverage ZFS a bit more, and become more familiar with it. The biggest issue I will likely face is space on the external drive. Luckily, ZFS makes it easy to delete old snapshots. In the future, I might also consider using an online backup solution like &lt;a href=&#34;https://www.tarsnap.com/&#34;&gt;Tarsnap&lt;/a&gt;, but I need to find a cost-effective one first. I&amp;rsquo;ll be sure to update as I continue to expand my backup solution.&lt;/p&gt;</description>
     </item>
     

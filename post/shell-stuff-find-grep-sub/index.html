@@ -151,15 +151,21 @@ appreciate that all of the <code>.swp</code>, <code>.retry</code>, and <code>&qu
 help me when things go wrong&hellip; sometimes I just want to clean up my
 file system. So&hellip; here is a simple string of commands I often use to declutter
 my files.</p>
+
 <p><em>DISCLAIMER:</em> I know there are <em>MANY</em> ways to accomplish this.  The method
 described in this post is to share <strong>one</strong> efficient solution I use, that might
 help someone that currently knows <strong>zero</strong>.</p>
+
 <h3 id="the-commands">The commands</h3>
+
 <p>First, lets quickly meet the commands we will be using:</p>
+
 <h3 id="find">Find</h3>
+
 <p><code>find</code> is a classic UNIX command that searches for files in a directory
 hierarchy. By default, it writes out the file path for each file/directory that
 it finds.</p>
+
 <h4 id="example">Example</h4>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">➜  tree
 .
@@ -183,11 +189,13 @@ it finds.</p>
 ./dirA
 ./dirA/file5
 ./dirA/file4
-./dirA/file3
-</code></pre></div><h3 id="grep">Grep</h3>
+./dirA/file3</code></pre></div>
+<h3 id="grep">Grep</h3>
+
 <p>Another classic. Basically, <code>grep</code> searches for a pattern in each file
 provided. In addition to files, it can search text passed through a pipe (this
 is important for our use, but more on that later).</p>
+
 <h4 id="example-1">Example</h4>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">➜  cat file1
 This is a fake file
@@ -202,39 +210,46 @@ I wonder if I will be able to get it...
 
 
 ➜  grep Secret file1
-Secret: 12345
-</code></pre></div><h3 id="command-substitution">Command Substitution</h3>
+Secret: 12345</code></pre></div>
+<h3 id="command-substitution">Command Substitution</h3>
+
 <p>Lastly, <em>command substitution</em> is taking one command, and using it&rsquo;s output as
 <em>part</em> of <em>another command</em>. Traditionally, this was done by calling the
 substitution command `inside backticks`, but it <a href="http://mywiki.wooledge.org/BashFAQ/082">is now preferred to use
 $(COMMAND) instead of backticks</a>.</p>
+
 <h4 id="example-2">Example</h4>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">➜ echo I am at: `pwd`
-I am at: /tmp/demo
-</code></pre></div><p>or (preferred):</p>
+I am at: /tmp/demo</code></pre></div>
+<p>or (preferred):</p>
 <pre><code class="language-test" data-lang="test">➜ echo I am at: $(pwd)
-I am at: /tmp/demo
-</code></pre><h3 id="pipes">Pipes</h3>
+I am at: /tmp/demo</code></pre>
+<h3 id="pipes">Pipes</h3>
+
 <p>An <a href="https://en.wikipedia.org/wiki/Pipeline_(Unix)">unix pipe</a> (<code>|</code>) directs the
 <em>output</em> of one command, to be used as the <em>input</em> for another command. Pipes
 can be used to chain together several commands, forming a <em>pipeline</em>.</p>
+
 <h4 id="example-3">Example</h4>
+
 <p>The output of <code>ls</code> can be fed as input to <code>wc</code> (word count) to create a
 pipeline command that returns the number of files/directories in the current directory.</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">➜ ls
 dirA  dirB  file1  file2
 
 ➜ ls | wc -l
-<span style="color:#ae81ff">4</span>
-</code></pre></div><h3 id="putting-it-all-together">Putting It All Together</h3>
+<span style="color:#ae81ff">4</span></code></pre></div>
+<h3 id="putting-it-all-together">Putting It All Together</h3>
+
 <p>Now that we know all the parts, how does it all fit together? One particular
 shell chain I find convenient is pairing <code>find</code> and <code>grep</code> to recursively get
 all the paths of a particular file type, and then use it in a command
 substitution to pass that result on to another command (such as <code>rm</code>).</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">COMMAND <span style="color:#66d9ef">$(</span>find . | grep SEARCHSTRING<span style="color:#66d9ef">)</span>
-</code></pre></div><p>This is the combination I use to clean up my directories. While working on
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">COMMAND <span style="color:#66d9ef">$(</span>find . | grep SEARCHSTRING<span style="color:#66d9ef">)</span></code></pre></div>
+<p>This is the combination I use to clean up my directories. While working on
 writing ansible playbooks, I can generate a few <code>*.retry</code> files, as well as
 some <code>*.swp</code> files from editing in vim.</p>
+
 <h4 id="example-4">Example</h4>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">➜ find . | grep .retry          <span style="color:#75715e">## Find *.retry files</span>
 ./file1.retry
@@ -245,8 +260,9 @@ some <code>*.swp</code> files from editing in vim.</p>
 
 ➜ find . | grep .retry          <span style="color:#75715e">## Check that they were deleted</span>
 
-➜
-</code></pre></div><h3 id="summary">Summary</h3>
+➜</code></pre></div>
+<h3 id="summary">Summary</h3>
+
 <p>That&rsquo;s it. A small post for a <em>simple</em> but <strong>powerful</strong> command line set.  If
 you haven&rsquo;t used this team of commands before, give it a try sometime! Have
 fun!</p>

@@ -21,23 +21,35 @@ the &lt;a href=&#34;https://tsqa.org&#34;&gt;Triangle Software Quality Associati
 being hosted by my local software testing group, the speakers and
 attendees were from all over the country. While only a single-day conference,
 it was packed full with solid advice and ideas I left with. Here are a few.&lt;/p&gt;
+
 &lt;p&gt;&lt;em&gt;Just to clarify: TSQA occured in February, right before COVID-19 really started spreading
 in the US. I&amp;rsquo;m just very late in this post.&lt;/em&gt;&lt;/p&gt;
+
 &lt;h2 id=&#34;tsqa-2020&#34;&gt;TSQA 2020&lt;/h2&gt;
+
 &lt;h4 id=&#34;getting-there&#34;&gt;Getting There&lt;/h4&gt;
+
 &lt;p&gt;TSQA was held at the &lt;a href=&#34;https://www.durhamconventioncenter.com&#34;&gt;Durham Convention
 Center&lt;/a&gt;, which is located in the middle
 of downtown Durham (NC, USA). Being so close to our office, I managed to help
 convince/remind several of my co-workers to register last minute. On the
 morning of the event, I drove the one mile to the office parking garage, then
 hustled coat-less through the cold morning wind to the conference center.&lt;/p&gt;
+
 &lt;p&gt;As I walked inside, I immediately saw my manager at the entrance handing out
 bandages, and knew I was in the right place (he was a TSQA volunteer).  After
 saying hello and checking in, I made my way to the main ballroom to grab some
 food. After awhile, my co-workers started to trickle in, so we found a table
 near the front and gathered for the opening statements.&lt;/p&gt;
+
 &lt;h4 id=&#34;keynote&#34;&gt;Keynote&lt;/h4&gt;
-&lt;!-- raw HTML omitted --&gt;
+
+&lt;p&gt;&lt;center&gt;
+&lt;a href=&#34;../../img/posts/tsqa-2020/the_jetsons.jpg&#34;&gt;
+&lt;img alt=&#34;The Jetsons&#34; src=&#34;../../img/posts/tsqa-2020/the_jetsons.jpg&#34; style=&#34;max-width: 100%; padding: 5px 15px 10px 10px&#34;/&gt;&lt;/a&gt;
+&lt;div class=&#34;caption&#34;&gt;The Jetsons&lt;/div&gt;
+&lt;/center&gt;&lt;/p&gt;
+
 &lt;p&gt;They keynote, presented by &lt;a href=&#34;http://angiejones.tech&#34;&gt;Angie Jones&lt;/a&gt; was an
 entertaining look at the history and future of technology. She took ideas that
 were shown in &lt;a href=&#34;https://en.wikipedia.org/wiki/The_Jetsons&#34;&gt;The Jetsons&lt;/a&gt;, and
@@ -45,40 +57,59 @@ compared them to how close (or far) we have come to many of them. She then used
 this as an example of how we should be planning to test &lt;em&gt;future&lt;/em&gt; technology,
 because like it or not, it&amp;rsquo;s coming. She concluded by providing some examples
 of what testing in the future could look like.&lt;/p&gt;
+
 &lt;h4 id=&#34;talks&#34;&gt;Talks&lt;/h4&gt;
+
 &lt;p&gt;For the rest of the day, I attended several talks interspaced with a lunch and
 snack break. I mainly focused on attending talks around automation, but also
 went to a few about developing test cases or UI testing tools. Similar to my
 &lt;a href=&#34;../../post/ato2019/&#34;&gt;All Things Open 2019 post&lt;/a&gt;, instead of narrating each talk I
 went to, I picked out few lessons I learned and will share them below.&lt;/p&gt;
+
 &lt;p&gt;After the conference ended, my co-workers and I made our way back to the office
 to share experiences and debate our thoughts over a drink.  It&amp;rsquo;s always great
 to hash out ideas with others after a conference, while they are still fresh.
 Also&amp;hellip; it&amp;rsquo;s fun :) .&lt;/p&gt;
-&lt;h3 id=&#34;lessons-learnedstrengthened&#34;&gt;Lessons Learned/Strengthened&lt;/h3&gt;
+
+&lt;h3 id=&#34;lessons-learned-strengthened&#34;&gt;Lessons Learned/Strengthened&lt;/h3&gt;
+
 &lt;p&gt;Now to summarize a few of the many lessons I picked up while at TSQA 2020. I&amp;rsquo;ve
 heard many of these suggestions before, but the speakers presented them so
 well, I really want to ensure I start implementing the at work.  Lets get
 started.&lt;/p&gt;
+
 &lt;h4 id=&#34;no-failing-tests&#34;&gt;No failing tests&lt;/h4&gt;
+
 &lt;p&gt;It is all too easy to let a backlog of failing tests build up. This may be
 due to the test being out of date, a low priority issue, or worse of
 all&amp;hellip; just a flaky test. Regardless of the reason, failing tests really should
 be mitigated &lt;em&gt;immediately&lt;/em&gt;, for several reasons.&lt;/p&gt;
+
 &lt;p&gt;Leaving failing tests to continuously run causes failure fatigue. This
 normalizes the failing tests and causes a team to ignore &lt;em&gt;other&lt;/em&gt; failing tests in
 the future. Basically, it decreases the competence in the test suite, and thus
 the QE team as a whole.&lt;/p&gt;
-&lt;!-- raw HTML omitted --&gt;
+
+&lt;p&gt;&lt;center&gt;
+&lt;a href=&#34;../../img/posts/tsqa-2020/disable-tests-meme.jpg&#34;&gt;
+&lt;img alt=&#34;Failing tests meme&#34; src=&#34;../../img/posts/tsqa-2020/disable-tests-meme.jpg&#34; style=&#34;max-width: 100%; padding: 5px 15px 10px 10px&#34;/&gt;&lt;/a&gt;
+&lt;div class=&#34;caption&#34;&gt;This is supposed to be a joke, but it&amp;rsquo;s actually
+the point I&amp;rsquo;m sharing. If tests are failing, disable or get rid of them, &lt;em&gt;AFTER&lt;/em&gt; filing an
+issue! &lt;/div&gt;
+&lt;/center&gt;&lt;/p&gt;
+
 &lt;p&gt;So, if a project has continuously failing tests, try to fix them as quick
 as possible. If there currently isn&amp;rsquo;t time to fix it (we&amp;rsquo;ve all been there),
 that&amp;rsquo;s fine, but file an issue to &lt;em&gt;remember&lt;/em&gt; to fix it later. Then disable it.
 It will make a test suite more meaningful, because each failure
 &lt;em&gt;means something important&lt;/em&gt;.&lt;/p&gt;
+
 &lt;p&gt;One last statement here: &lt;strong&gt;No&lt;/strong&gt; flaky tests either. If we can&amp;rsquo;t depend on them,
 they aren&amp;rsquo;t worth having.  Either figure out how to fix them so they are
 consistent, or remove them.&lt;/p&gt;
+
 &lt;h4 id=&#34;write-tests-to-pass-for-known-issues&#34;&gt;Write tests to pass for known issues&lt;/h4&gt;
+
 &lt;p&gt;Now, lets expand that suggestion of disabling failing tests, and write tests
 that &lt;em&gt;pass&lt;/em&gt; when a &lt;em&gt;known&lt;/em&gt; defect happens. While sounding counter-intuitive at
 first, this idea makes more sense if you accept the fact that tests don&amp;rsquo;t
@@ -86,50 +117,59 @@ actually &lt;em&gt;find&lt;/em&gt; defects. Rather, automated tests depict the &
 system, and fail when &lt;em&gt;something has changed&lt;/em&gt;. A passed or failed test simply
 acts as a &lt;em&gt;data point&lt;/em&gt;. When a quality engineer goes and investigates the test
 results, &lt;em&gt;they&lt;/em&gt; determine if there is a defect based on the data.&lt;/p&gt;
+
 &lt;p&gt;For example, lets assume I have a test that asserts that an api call returns a
 &lt;code&gt;200&lt;/code&gt; status. However, due to a known issue, it is currently returning &lt;code&gt;404&lt;/code&gt;s.
 I &lt;em&gt;know&lt;/em&gt; that in its current state, the system returns a &lt;code&gt;404&lt;/code&gt; for that api
 call, so I can change/add a test to assert that it is indeed, returning &lt;code&gt;404&lt;/code&gt;s.
 This technique &lt;em&gt;removes a failing test&lt;/em&gt; (as suggest in the previous section),
 while allowing us to maintain that data point. The test will pass while it
-continues to return &lt;code&gt;404&lt;/code&gt;&#39;s, but will fail and notify us of any related state
+continues to return &lt;code&gt;404&lt;/code&gt;&amp;rsquo;s, but will fail and notify us of any related state
 changes.&lt;/p&gt;
+
 &lt;p&gt;Those changes could be from the developers merging a bug fix&amp;hellip; or a
 &lt;em&gt;new&lt;/em&gt; defect popping up, resulting in the api call now returning &lt;code&gt;500&lt;/code&gt; errors.
 Regardless, we know that something has changed again, and we should investigate. By
 comparison, an always-failing or fully removed test would not have demanded our
 attention so easily.&lt;/p&gt;
+
 &lt;h4 id=&#34;better-documentation&#34;&gt;Better Documentation&lt;/h4&gt;
+
 &lt;p&gt;So&amp;hellip; if we have our tests setup to &lt;em&gt;pass&lt;/em&gt; for known defects, lets make one
 thing clear&amp;hellip; we need to make sure we have &lt;strong&gt;amazing documentation&lt;/strong&gt;. This is
 imperative.&lt;/p&gt;
-&lt;!-- raw HTML omitted --&gt;
+
+&lt;p&gt;&lt;center&gt;
+&lt;a href=&#34;../../img/posts/tsqa-2020/documentation-meme.png&#34;&gt;
+&lt;img alt=&#34;Documentation Meme&#34; src=&#34;../../img/posts/tsqa-2020/documentation-meme.png&#34; style=&#34;max-width: 100%; padding: 5px 15px 10px 10px&#34;/&gt;&lt;/a&gt;
+&lt;/center&gt;&lt;/p&gt;
+
 &lt;p&gt;Any test designed to pass on a known defect should contain a few pieces of
 information in its documentation:&lt;/p&gt;
+
 &lt;ul&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;em&gt;Why the test is there&lt;/em&gt;: If a test is checking for undesired
+&lt;li&gt;&lt;p&gt;&lt;em&gt;Why the test is there&lt;/em&gt;: If a test is checking for undesired
 behavior, it is a good idea to quickly document something along the lines
 of &amp;lsquo;This test is checking for behavior we don&amp;rsquo;t want. It is just here
-until an issue is fixed&amp;rsquo;.&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;em&gt;The issue number&lt;/em&gt;. If a test exists until a known issue is resolved&amp;hellip;
+until an issue is fixed&amp;rsquo;.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;&lt;em&gt;The issue number&lt;/em&gt;. If a test exists until a known issue is resolved&amp;hellip;
 please include the issue/bug number in the documentation. This will make it
 much easier for others (or you!) to find more information, or check if the
-issue is already closed once the test starts failing (due to a fix).&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;em&gt;What we expect from the test&lt;/em&gt;: Try to document why the test is
-currently passing, and what we expect when it starts failing again.&lt;/p&gt;
-&lt;/li&gt;
+issue is already closed once the test starts failing (due to a fix).&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;&lt;em&gt;What we expect from the test&lt;/em&gt;: Try to document why the test is
+currently passing, and what we expect when it starts failing again.&lt;/p&gt;&lt;/li&gt;
 &lt;/ul&gt;
+
 &lt;p&gt;Continuing with our example from above:&lt;/p&gt;
+
 &lt;blockquote&gt;
 &lt;p&gt;&amp;ldquo;This test has been altered until issue #23483 is resolved. Currently, this api
 call returns a 404 status. If the issue is resolved, it should return a 200
 status, at which point this test needs to be updated.&amp;rdquo;&lt;/p&gt;
 &lt;/blockquote&gt;
+
 &lt;p&gt;Lastly, remember to periodically clean up the documentation.  When filing an
 issue, state &lt;em&gt;were&lt;/em&gt; a failing test can be found if it is being updated to match
 the behavior. This way when the issue is closed, it will be easier to go update
@@ -137,7 +177,9 @@ the test. Temporary test states can also be marked with a tag, such as &lt;code&
 to make them easier to search through.  Honestly, whatever works for your team.
 The goal is to create enough context so that someone else is able to know what
 is going on and fix it without having to find you.&lt;/p&gt;
+
 &lt;h2 id=&#34;conclusion&#34;&gt;Conclusion&lt;/h2&gt;
+
 &lt;p&gt;Overall, TSQA 2020 turned out to be a wonderful conference and was a desirable
 size. It was not crazy and over-crowded, but also not so small that it felt
 awkward.  It had a diverse mix of people from all over the country, and the
@@ -158,7 +200,9 @@ I had the tests run on &lt;code&gt;any&lt;/code&gt; node. I &lt;em&gt;wanted&lt;
 run inside a fedora docker container, but ran into issues configuring it.
 With the problem now long fixed, I decided I would write a quick update post about
 switching the pipeline to use container nodes.&lt;/p&gt;
+
 &lt;h3 id=&#34;why-switch&#34;&gt;Why Switch&lt;/h3&gt;
+
 &lt;p&gt;When I first defined the pipeline, I had it use &lt;code&gt;any&lt;/code&gt; node for the agent:&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-groovy&#34; data-lang=&#34;groovy&#34;&gt;pipeline &lt;span style=&#34;color:#f92672&#34;&gt;{&lt;/span&gt;
     agent any
@@ -168,23 +212,32 @@ switching the pipeline to use container nodes.&lt;/p&gt;
         &lt;span style=&#34;color:#75715e&#34;&gt;// This is where the stages will be defined //
 &lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;
     &lt;span style=&#34;color:#f92672&#34;&gt;}&lt;/span&gt;
-&lt;span style=&#34;color:#f92672&#34;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;This just runs the job on any available node, which for me was just the same VM
+&lt;span style=&#34;color:#f92672&#34;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;This just runs the job on any available node, which for me was just the same VM
 server I was running Jenkins on. This was fine, but for testing I want to make
 sure &lt;em&gt;everything&lt;/em&gt; in my automation is configured and up to date. The best
 way to ensure that, is with &lt;em&gt;clean&lt;/em&gt; runs.&lt;/p&gt;
+
 &lt;p&gt;When using docker for the pipeline agent, a new container is created to run the
 pipeline in, and then destroyed when completed. This means all packages and
 dependencies &lt;em&gt;must&lt;/em&gt; be defined correctly, or the run will fail. This is what we
 want.&lt;/p&gt;
-&lt;!-- raw HTML omitted --&gt;
+
+&lt;p&gt;&lt;center&gt;
+&lt;a href=&#34;../../img/posts/docker-quickstart/docker-logo.png&#34;&gt;
+&lt;img alt=&#34;Docker Logo&#34; src=&#34;../../img/posts/docker-quickstart/docker-logo.png&#34; style=&#34;float: right; max-width: 100%; width:400px; padding: 5px 15px 10px 10px&#34;/&gt;&lt;/a&gt;
+&lt;/center&gt;&lt;/p&gt;
+
 &lt;h3 id=&#34;using-docker-nodes&#34;&gt;Using Docker Nodes&lt;/h3&gt;
+
 &lt;p&gt;First, the obvious: make sure &lt;code&gt;docker&lt;/code&gt; is installed on the desired
 Jenkins nodes. I won&amp;rsquo;t cover this as it can be different for
 every user (and I already had &lt;code&gt;docker&lt;/code&gt; installed on my Jenkins host).&lt;/p&gt;
+
 &lt;p&gt;With docker installed, next make sure the Jenkins server has the &lt;a href=&#34;https://plugins.jenkins.io/docker-slaves/&#34;&gt;Docker
 Slaves&lt;/a&gt; (and possibly &lt;a href=&#34;https://plugins.jenkins.io/docker-workflow/&#34;&gt;Docker
 Pipeline&lt;/a&gt;) plug-in(s) installed.&lt;/p&gt;
+
 &lt;p&gt;Lastly, with some docker plug-ins enabled, switch the &lt;code&gt;agent&lt;/code&gt; statement to use a
 container image. I choose to use the &lt;code&gt;fedora:31&lt;/code&gt; image:&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-groovy&#34; data-lang=&#34;groovy&#34;&gt;pipeline &lt;span style=&#34;color:#f92672&#34;&gt;{&lt;/span&gt;
@@ -194,13 +247,15 @@ container image. I choose to use the &lt;code&gt;fedora:31&lt;/code&gt; image:&l
         &lt;span style=&#34;color:#f92672&#34;&gt;}&lt;/span&gt;
     &lt;span style=&#34;color:#f92672&#34;&gt;}&lt;/span&gt;
     &lt;span style=&#34;color:#f92672&#34;&gt;...&lt;/span&gt; &lt;span style=&#34;color:#75715e&#34;&gt;// rest of the pipeline
-&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;fixing-rootsudo-error&#34;&gt;Fixing root/sudo error&lt;/h3&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h3 id=&#34;fixing-root-sudo-error&#34;&gt;Fixing root/sudo error&lt;/h3&gt;
+
 &lt;p&gt;When I first set the pipeline to use the fedora image, it kept failing.
 Specifically, the &lt;code&gt;sudo dnf&lt;/code&gt; steps would fail because the &lt;code&gt;sudo&lt;/code&gt; command didn&amp;rsquo;t
 exist in the container. If I removed &lt;code&gt;sudo&lt;/code&gt; from the command&amp;hellip;  it still
 failed because I didn&amp;rsquo;t have permissions to run &lt;code&gt;dnf&lt;/code&gt; inside the container ಠ_ಠ
 (yes, the user was &lt;code&gt;root&lt;/code&gt;).&lt;/p&gt;
+
 &lt;p&gt;After some research, I learned that it wasn&amp;rsquo;t passing the root permissions to
 the container, and I could &amp;ldquo;solve&amp;rdquo; this issue by providing the &lt;code&gt;-u&lt;/code&gt; flag with
 &lt;code&gt;0:0&lt;/code&gt; as an arg to the docker agent:&lt;/p&gt;
@@ -212,9 +267,11 @@ the container, and I could &amp;ldquo;solve&amp;rdquo; this issue by providing t
         &lt;span style=&#34;color:#f92672&#34;&gt;}&lt;/span&gt;
     &lt;span style=&#34;color:#f92672&#34;&gt;}&lt;/span&gt;
     &lt;span style=&#34;color:#f92672&#34;&gt;...&lt;/span&gt; &lt;span style=&#34;color:#75715e&#34;&gt;// rest of the pipeline
-&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;I don&amp;rsquo;t &lt;em&gt;love&lt;/em&gt; this solution&amp;hellip; but it seems to work.&lt;/p&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;I don&amp;rsquo;t &lt;em&gt;love&lt;/em&gt; this solution&amp;hellip; but it seems to work.&lt;/p&gt;
+
 &lt;h3 id=&#34;conclusion&#34;&gt;Conclusion&lt;/h3&gt;
+
 &lt;p&gt;Like I said, this was just a quick update about switching my
 test nodes to use docker containers. Honestly, I&amp;rsquo;d much rather try to use
 &lt;a href=&#34;http://podman.io&#34;&gt;podman&lt;/a&gt; containers for my test agents, but I&amp;rsquo;m sure that
@@ -236,17 +293,28 @@ content outside the website, I &lt;em&gt;can&lt;/em&gt; choose to remove links i
 broken. So, in this post, we will add tests to ensure that links in our posts
 are working. Well, at least the
 &lt;a href=&#34;https://guides.github.com/pdfs/markdown-cheatsheet-online.pdf&#34;&gt;markdown&lt;/a&gt; ones.&lt;/p&gt;
+
 &lt;h2 id=&#34;what-to-test&#34;&gt;What to Test&lt;/h2&gt;
-&lt;!-- raw HTML omitted --&gt;
+
+&lt;p&gt;&lt;center&gt;
+&lt;a href=&#34;../../img/posts/creating-website-tests-links/google-404-error.png&#34;&gt;
+&lt;img alt=&#34;Google 404 Error Page&#34; src=&#34;../../img/posts/creating-website-tests-links/google-404-error.png&#34; style=&#34;max-width: 100%; padding: 5px 15px 10px 10px&#34;/&gt;&lt;/a&gt;
+&lt;div class=&#34;caption&#34;&gt;Google 404 Error Page&lt;/div&gt;
+&lt;/center&gt;&lt;/p&gt;
+
 &lt;p&gt;For this test set, we will be scanning the content files of all of the posts, and
 grabbing every markdown link defined in them. With the links known, we
 will then make a request to each one to check that it is available. If we
 can connect, the test passes. If not (ex: we get a 404), it fails.&lt;/p&gt;
+
 &lt;h3 id=&#34;adding-utility-functions&#34;&gt;Adding Utility Functions&lt;/h3&gt;
+
 &lt;p&gt;Before we are able to write the test function, we first need to add to the
 utility functions. These will allow us to get the post&amp;rsquo;s file paths, grab their
 content, and extract all the markdown links from that content.&lt;/p&gt;
-&lt;h4 id=&#34;get_file_paths&#34;&gt;get_file_paths&lt;/h4&gt;
+
+&lt;h4 id=&#34;get-file-paths&#34;&gt;get_file_paths&lt;/h4&gt;
+
 &lt;p&gt;First, lets define a new helper function, &lt;code&gt;get_file_paths&lt;/code&gt;:&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;get_file_paths&lt;/span&gt;(src, extension&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;None):
     &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&amp;#34;&amp;#34;Collects the paths of all files of a directory&amp;#34;&amp;#34;&amp;#34;&lt;/span&gt;
@@ -260,12 +328,14 @@ content, and extract all the markdown links from that content.&lt;/p&gt;
         &lt;span style=&#34;color:#75715e&#34;&gt;# Otherwise, add everything&lt;/span&gt;
         &lt;span style=&#34;color:#66d9ef&#34;&gt;else&lt;/span&gt;:
             file_list&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;append(path&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;join(root_path, file))
-    &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; file_list
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;When provided a directory path (&lt;code&gt;src&lt;/code&gt;), this function will return a list of all the
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; file_list&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;When provided a directory path (&lt;code&gt;src&lt;/code&gt;), this function will return a list of all the
 file paths in that directory. Optionally, the &lt;code&gt;extension&lt;/code&gt; parameter can be
 supplied to only return files of that extension type (in our case, &lt;code&gt;md&lt;/code&gt;). This
 will be used to grab the paths of all of the website post source files.&lt;/p&gt;
-&lt;h4 id=&#34;get_file_content&#34;&gt;get_file_content&lt;/h4&gt;
+
+&lt;h4 id=&#34;get-file-content&#34;&gt;get_file_content&lt;/h4&gt;
+
 &lt;p&gt;Now lets define &lt;code&gt;get_file_content&lt;/code&gt;. This function will take the file lists
 generated from &lt;code&gt;get_file_paths&lt;/code&gt;, grab the content from those files,
 and return a dictionary of all the data.&lt;/p&gt;
@@ -276,15 +346,15 @@ and return a dictionary of all the data.&lt;/p&gt;
         f &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; open(file, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;r&amp;#34;&lt;/span&gt;)
         file_content &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; f&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;read()
         content_all_files[path&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;basename(file)] &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; file_content
-    &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; content_all_files
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;The returned dictionary uses the filename as the key, and the content set to the
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; content_all_files&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;The returned dictionary uses the filename as the key, and the content set to the
 value. For example:&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;{
   &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;post1.md&amp;#39;&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;This is the text of post1.&amp;#39;&lt;/span&gt;,
   &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;post2.md&amp;#39;&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;This is the text of post2. Basically the same ol&amp;#39; stuff.&amp;#34;&lt;/span&gt;
-}
+}&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h4 id=&#34;get-md-links&#34;&gt;get_md_links&lt;/h4&gt;
 
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h4 id=&#34;get_md_links&#34;&gt;get_md_links&lt;/h4&gt;
 &lt;p&gt;Lastly, lets define &lt;code&gt;get_md_links&lt;/code&gt;. This function takes the content dictionary
 returned by &lt;code&gt;get_file_content&lt;/code&gt;, and uses some &lt;a href=&#34;https://en.wikipedia.org/wiki/Regular_expression&#34;&gt;regular
 expression&lt;/a&gt; magic to match
@@ -300,17 +370,20 @@ the markdown links:&lt;/p&gt;
             &lt;span style=&#34;color:#75715e&#34;&gt;# Regex can&amp;#39;t properly match urls with parens in them, so skip.&lt;/span&gt;
             &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;(&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;not&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; match&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;group(&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;):
                 all_links&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;append(match&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;group(&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;))
-    &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; all_links
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;First, the function compiles the regular expression defined by the &lt;code&gt;regex&lt;/code&gt;
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; all_links&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;First, the function compiles the regular expression defined by the &lt;code&gt;regex&lt;/code&gt;
 parameter. Next, it loops through all the data in the content dictionary,
 strips the newline characters, and then grabs all the regex matches.&lt;/p&gt;
+
 &lt;p&gt;Unfortunately, the regex expression can&amp;rsquo;t properly match markdown formated urls
 with parenthesis in them, so we have to check if each match has a &lt;code&gt;(&lt;/code&gt; in it. If
 it does, the url is thrown away because we cannot be sure we matched the full
 &lt;code&gt;url&lt;/code&gt;. If there are no parenthesis, the url is added to our saved list. After
 parsing all the values of the content dictionary, a list of the matched urls is
 returned.&lt;/p&gt;
-&lt;h3 id=&#34;adding-to-conftestpy&#34;&gt;Adding to conftest.py&lt;/h3&gt;
+
+&lt;h3 id=&#34;adding-to-conftest-py&#34;&gt;Adding to conftest.py&lt;/h3&gt;
+
 &lt;p&gt;With our new utility functions defined, we can next add a new fixture (and it&amp;rsquo;s
 helper function) to the &lt;code&gt;conftest.py&lt;/code&gt; file. Lets start with the fixture&amp;rsquo;s
 helper function, &lt;code&gt;post_md_link()&lt;/code&gt;:&lt;/p&gt;
@@ -320,21 +393,24 @@ helper function, &lt;code&gt;post_md_link()&lt;/code&gt;:&lt;/p&gt;
     all_post_contents &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; get_file_content(all_post_files)
     all_post_md_links &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; get_md_links(all_post_contents)
     &lt;span style=&#34;color:#75715e&#34;&gt;# Return de-dup list&lt;/span&gt;
-    &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; list(set(all_post_md_links))
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;This function uses the utility functions we just wrote above, to extract
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; list(set(all_post_md_links))&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;This function uses the utility functions we just wrote above, to extract
 all of the markdown links from the post files found at the
 &lt;code&gt;POST_DIR&lt;/code&gt; constant location. It then returns a de-duplicated list of all
 the links.&lt;/p&gt;
+
 &lt;p&gt;Now, we can define the fixture, &lt;code&gt;post_md_link&lt;/code&gt;:&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;@pytest.fixture&lt;/span&gt;(params&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;post_md_links())
 &lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;post_md_link&lt;/span&gt;(request):
     &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&amp;#34;&amp;#34;Returns the md_link object for a md link found in a post.&amp;#34;&amp;#34;&amp;#34;&lt;/span&gt;
-    &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; request&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;param
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Similar to the fixtures in the &lt;a href=&#34;../../post/creating-website-tests-pages/&#34;&gt;pages
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; request&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;param&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Similar to the fixtures in the &lt;a href=&#34;../../post/creating-website-tests-pages/&#34;&gt;pages
 tests&lt;/a&gt;, this one will allow tests to map
 across all the links found in the markdown pages, so a test will run for each
 link.&lt;/p&gt;
+
 &lt;h3 id=&#34;writing-the-markdown-link-test&#34;&gt;Writing the markdown link test&lt;/h3&gt;
+
 &lt;p&gt;Finally, time to write the &lt;em&gt;one and only test function&lt;/em&gt; in this post:&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;test_md_links&lt;/span&gt;(post_md_link):
     &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&amp;#34;&amp;#34;Checks that the markdown links are not broken.&amp;#34;&amp;#34;&amp;#34;&lt;/span&gt;
@@ -344,16 +420,18 @@ link.&lt;/p&gt;
         url &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; BASE_URL &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; post_md_link&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;lower()
     response &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; requests&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;get(url)
     &lt;span style=&#34;color:#66d9ef&#34;&gt;assert&lt;/span&gt; response&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;status_code &lt;span style=&#34;color:#f92672&#34;&gt;!=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;404&lt;/span&gt;, f&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;The link {post_md_link} is not found.&amp;#34;&lt;/span&gt;
-    &lt;span style=&#34;color:#66d9ef&#34;&gt;assert&lt;/span&gt; response&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;status_code &lt;span style=&#34;color:#f92672&#34;&gt;!=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;403&lt;/span&gt;, f&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;The link {post_md_link} is forbidden.&amp;#34;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Because I link to both internal and external pages in my posts, I have to prep
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;assert&lt;/span&gt; response&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;status_code &lt;span style=&#34;color:#f92672&#34;&gt;!=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;403&lt;/span&gt;, f&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;The link {post_md_link} is forbidden.&amp;#34;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Because I link to both internal and external pages in my posts, I have to prep
 my urls a bit. So, I first check if the link starts with &lt;code&gt;http&lt;/code&gt; (which would
 also match ones starting with &lt;code&gt;https&lt;/code&gt;). If it does, we can leave the link as
 is. If it doesn&amp;rsquo;t, we can assume the link is an internal one (ex:
 &lt;code&gt;/post/creating-website-tests-links/&lt;/code&gt;), and we need to prepend it with the
 &lt;code&gt;BASE_URL&lt;/code&gt; constant.&lt;/p&gt;
+
 &lt;p&gt;With a proper url, we can use &lt;code&gt;requests.get()&lt;/code&gt; to attempt to retrieve a
 response code from the page. If we get a response, I then assert that the
 &lt;code&gt;status_code&lt;/code&gt; is &lt;em&gt;not&lt;/em&gt; &lt;code&gt;404&lt;/code&gt; or &lt;code&gt;403&lt;/code&gt;.&lt;/p&gt;
+
 &lt;p&gt;&lt;em&gt;Side Note:&lt;/em&gt; I started by asserting that each link returned a &lt;code&gt;200&lt;/code&gt; status, but
 quickly learned that it was a bad idea, because I was testing mostly external
 links.  I never got all the tests to pass because they would often return
@@ -361,13 +439,17 @@ odd 500-level errors for issues that quite frankly, doesn&amp;rsquo;t matter to 
 example, one site kept return a 500-level error I think because their servers
 were &amp;lsquo;under a slightly higher load&amp;rsquo;&amp;hellip; but when I went to the link, the page
 loaded fine.&lt;/p&gt;
+
 &lt;p&gt;In the end, I decided I wasn&amp;rsquo;t trying to test the issues the websites I linked
 to were having, but instead just wanted to make sure that &lt;em&gt;my links&lt;/em&gt; weren&amp;rsquo;t
-&lt;em&gt;broken&lt;/em&gt;.  So, I now just ensure that I&amp;rsquo;m not getting &lt;code&gt;404&lt;/code&gt; or &lt;code&gt;403&lt;/code&gt;&#39;s, and I&amp;rsquo;m
+&lt;em&gt;broken&lt;/em&gt;.  So, I now just ensure that I&amp;rsquo;m not getting &lt;code&gt;404&lt;/code&gt; or &lt;code&gt;403&lt;/code&gt;&amp;rsquo;s, and I&amp;rsquo;m
 happy with that.&lt;/p&gt;
+
 &lt;h2 id=&#34;limitations&#34;&gt;Limitations&lt;/h2&gt;
+
 &lt;p&gt;While I am very happy with the coverage these tests provide, they do have some
 limitations to keep in mind:&lt;/p&gt;
+
 &lt;ul&gt;
 &lt;li&gt;They cannot match urls with parentheses&lt;/li&gt;
 &lt;li&gt;Currently, they only check that pages do not return &lt;code&gt;403&lt;/code&gt; and &lt;code&gt;404&lt;/code&gt; errors. This means I
@@ -376,21 +458,29 @@ issues. I plan to expand this assert list in the future to cover more
 cases.&lt;/li&gt;
 &lt;li&gt;I&amp;rsquo;m currently only testing markdown links. This doesn&amp;rsquo;t grab any html links I
 have in my posts.
+
 &lt;ul&gt;
 &lt;li&gt;On a similar note, because I link most of my images with html, it also
 isn&amp;rsquo;t testing if my images are broken.&lt;/li&gt;
 &lt;li&gt;I&amp;rsquo;d like to add tests for both of these issues eventually, but
 decided testing the markdown links was the best place to start.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
 &lt;li&gt;Sometimes tests fail because a site is down. No biggie. I just usually wait
 a bit and then run the tests again before deciding to remove the link.&lt;/li&gt;
 &lt;/ul&gt;
+
 &lt;h2 id=&#34;conclusion&#34;&gt;Conclusion&lt;/h2&gt;
-&lt;!-- raw HTML omitted --&gt;
+
+&lt;p&gt;&lt;center&gt;
+&lt;a href=&#34;../../img/posts/creating-website-tests-links/passing-links-tests.png&#34;&gt;
+&lt;img alt=&#34;Passing tests, including new link tests&#34; src=&#34;../../img/posts/creating-website-tests-links/passing-link-tests.png&#34; style=&#34;max-width: 100%; padding: 5px 15px 10px 10px&#34;/&gt;&lt;/a&gt;
+&lt;div class=&#34;caption&#34;&gt;Passing tests, including the new markdown link tests&lt;/div&gt;
+&lt;/center&gt;&lt;/p&gt;
+
 &lt;p&gt;That&amp;rsquo;s it. By adding a few easy helper functions, a new fixture, and a &lt;em&gt;single&lt;/em&gt;
 test function, We&amp;rsquo;ve expanded my test results from 70 to over 420 tests (and
 growing).&lt;/p&gt;
+
 &lt;p&gt;More important than the number of tests, is &lt;em&gt;what&lt;/em&gt; the results tell us. A
 failing test tells me that one of my markdown links &lt;em&gt;might&lt;/em&gt; be broken. These
 tests have &lt;em&gt;already&lt;/em&gt; been beneficial to me, as I ended updating/removing
@@ -411,19 +501,28 @@ before merging a branch into &lt;code&gt;master&lt;/code&gt;. Luckily, I have
 &lt;a href=&#34;https://jenkins.io&#34;&gt;Jenkins&lt;/a&gt; to take care of all the &amp;ldquo;&lt;em&gt;responsible&lt;/em&gt;&amp;rdquo; tasks. In
 this post, we will take the test framework created in the previous post&amp;hellip;  and
 automate it.&lt;/p&gt;
-&lt;h2 id=&#34;what-im-usingplan&#34;&gt;What I&amp;rsquo;m Using/Plan&lt;/h2&gt;
-&lt;!-- raw HTML omitted --&gt;
+
+&lt;h2 id=&#34;what-i-m-using-plan&#34;&gt;What I&amp;rsquo;m Using/Plan&lt;/h2&gt;
+
+&lt;p&gt;&lt;center&gt;
+&lt;a href=&#34;../../img/posts/creating-website-tests-ci/jenkins-logo.png&#34;&gt;
+&lt;img alt=&#34;Jenkins Logo&#34; src=&#34;../../img/posts/creating-website-tests-ci/jenkins-logo.png&#34; style=&#34;float: right; max-width: 100%; padding: 5px 15px 10px 10px&#34;/&gt;&lt;/a&gt;
+&lt;/center&gt;&lt;/p&gt;
+
 &lt;p&gt;I have started using &lt;a href=&#34;https://gitlab.com&#34;&gt;Gitlab&lt;/a&gt; for more of my projects
 recently, but have decided to keep my website source hosted on Github for the time
 being. So, I won&amp;rsquo;t be using Gitlab&amp;rsquo;s CI/CD tools for &lt;em&gt;this&lt;/em&gt;, but I wanted it
 to be known that this automation is &lt;em&gt;very&lt;/em&gt; straight forward and could be easily
 accomplished there as well.&lt;/p&gt;
+
 &lt;p&gt;For this project, because my website is hosted on Github, and I &lt;em&gt;already&lt;/em&gt;
 have &lt;a href=&#34;../../post/extending-vm-hd/&#34;&gt;my own Jenkins server&lt;/a&gt; configured&amp;hellip; I will be
 using a Jenkins pipeline. First, we will create the pipeline file to add
 to the git repo. Then, we will use the pipeline to configure a new
 &lt;em&gt;multi-branch&lt;/em&gt; pipeline in Jenkins.&lt;/p&gt;
+
 &lt;h2 id=&#34;jenkinsfile&#34;&gt;Jenkinsfile&lt;/h2&gt;
+
 &lt;p&gt;Lets start by creating the Jenkinsfile. Create a new file named &lt;code&gt;Jenkinsfile&lt;/code&gt;
 in the project directory. Next, lets create a new pipeline and get ready to add
 stages:&lt;/p&gt;
@@ -435,13 +534,18 @@ stages:&lt;/p&gt;
         &lt;span style=&#34;color:#75715e&#34;&gt;// This is where the stages will be defined //
 &lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;
     &lt;span style=&#34;color:#f92672&#34;&gt;}&lt;/span&gt;
-&lt;span style=&#34;color:#f92672&#34;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;em&gt;(Make sure to add the closing &lt;code&gt;}&lt;/code&gt;&#39;s!)&lt;/em&gt;&lt;/p&gt;
+&lt;span style=&#34;color:#f92672&#34;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;&lt;em&gt;(Make sure to add the closing &lt;code&gt;}&lt;/code&gt;&amp;rsquo;s!)&lt;/em&gt;&lt;/p&gt;
+
 &lt;h3 id=&#34;stages&#34;&gt;Stages&lt;/h3&gt;
+
 &lt;p&gt;Now, lets add the stages. A stage is a named, functional chunk in our pipeline.
 Breaking the pipeline into stages will help keep all the various steps
 organized, as well as make it easier to follow along as the pipeline runs.&lt;/p&gt;
-&lt;p&gt;Each of the following stage definitions will be placed inside the &lt;code&gt;stages { .. }&lt;/code&gt; section we defined above (&lt;em&gt;in the same order as they are listed!&lt;/em&gt;).&lt;/p&gt;
+
+&lt;p&gt;Each of the following stage definitions will be placed inside the &lt;code&gt;stages { ..
+}&lt;/code&gt; section we defined above (&lt;em&gt;in the same order as they are listed!&lt;/em&gt;).&lt;/p&gt;
+
 &lt;h4 id=&#34;setup-deps&#34;&gt;Setup Deps&lt;/h4&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-groovy&#34; data-lang=&#34;groovy&#34;&gt;stage&lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;Setup Deps&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;{&lt;/span&gt;
     steps &lt;span style=&#34;color:#f92672&#34;&gt;{&lt;/span&gt;
@@ -449,36 +553,41 @@ organized, as well as make it easier to follow along as the pipeline runs.&lt;/p
         sh &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;sudo yum install -y epel-release&amp;#39;&lt;/span&gt;
         sh &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;sudo yum install -y hugo python36-pytest&amp;#39;&lt;/span&gt;
     &lt;span style=&#34;color:#f92672&#34;&gt;}&lt;/span&gt;
-&lt;span style=&#34;color:#f92672&#34;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;The first stage is &amp;lsquo;Setup Deps&amp;rsquo;. This stage handles installing any dependencies
+&lt;span style=&#34;color:#f92672&#34;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;The first stage is &amp;lsquo;Setup Deps&amp;rsquo;. This stage handles installing any dependencies
 our Jenkins node will need installed to run the tests. Our tests will require
 &lt;code&gt;hugo&lt;/code&gt;, &lt;code&gt;pytest&lt;/code&gt;, and &lt;code&gt;python3&lt;/code&gt;. It will also require some &lt;code&gt;pip&lt;/code&gt; packages, but
 we will get to that later.&lt;/p&gt;
+
 &lt;p&gt;&lt;em&gt;Note: My current Jenkins node is running CentOS, so my package manager commands
 are specific to that. As always, adjust accordingly.&lt;/em&gt;&lt;/p&gt;
+
 &lt;h4 id=&#34;start-hugo-server&#34;&gt;Start Hugo Server&lt;/h4&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-groovy&#34; data-lang=&#34;groovy&#34;&gt;stage&lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;Start Hugo Server&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;{&lt;/span&gt;
     steps &lt;span style=&#34;color:#f92672&#34;&gt;{&lt;/span&gt;
         sh &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;hugo serve &amp;amp;&amp;#39;&lt;/span&gt;
     &lt;span style=&#34;color:#f92672&#34;&gt;}&lt;/span&gt;
-&lt;span style=&#34;color:#f92672&#34;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;With &lt;code&gt;hugo&lt;/code&gt; installed (and presumably being inside the website&amp;rsquo;s git repo&amp;hellip;),
+&lt;span style=&#34;color:#f92672&#34;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;With &lt;code&gt;hugo&lt;/code&gt; installed (and presumably being inside the website&amp;rsquo;s git repo&amp;hellip;),
 we can start the web server. This is done with &lt;code&gt;hugo serve&lt;/code&gt;. The &lt;code&gt;&amp;amp;&lt;/code&gt; is used to
 have the server run as a background process so that it won&amp;rsquo;t be killed when the
 pipeline to continues on.&lt;/p&gt;
+
 &lt;p&gt;&lt;em&gt;Note: Make sure the tests are set to point to &lt;code&gt;localhost:1313&lt;/code&gt;, as that is
 where &lt;code&gt;hugo&lt;/code&gt; will try to serve the website by default.&lt;/em&gt;&lt;/p&gt;
+
 &lt;h4 id=&#34;setup-python&#34;&gt;Setup Python&lt;/h4&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-groovy&#34; data-lang=&#34;groovy&#34;&gt;stage&lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;Setup Tests&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;{&lt;/span&gt;
     steps &lt;span style=&#34;color:#f92672&#34;&gt;{&lt;/span&gt;
         sh &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;pip3 install pipenv --user&amp;#39;&lt;/span&gt;
         sh &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;python3 -m pipenv install&amp;#39;&lt;/span&gt;
     &lt;span style=&#34;color:#f92672&#34;&gt;}&lt;/span&gt;
-&lt;span style=&#34;color:#f92672&#34;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Next, lets configure &lt;code&gt;python&lt;/code&gt; by setting up an environment and installing the
+&lt;span style=&#34;color:#f92672&#34;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Next, lets configure &lt;code&gt;python&lt;/code&gt; by setting up an environment and installing the
 packages we need in it. First, I use &lt;code&gt;pip3&lt;/code&gt; to install &lt;code&gt;pipenv&lt;/code&gt;. Then, I have
 &lt;code&gt;pipenv&lt;/code&gt; install the tests&amp;rsquo; required python packages, which are defined in the
 repo&amp;rsquo;s &lt;code&gt;Pipfile&lt;/code&gt;.&lt;/p&gt;
+
 &lt;h4 id=&#34;run-tests&#34;&gt;Run Tests&lt;/h4&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-groovy&#34; data-lang=&#34;groovy&#34;&gt;stage&lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;Run Tests&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;{&lt;/span&gt;
     steps &lt;span style=&#34;color:#f92672&#34;&gt;{&lt;/span&gt;
@@ -488,11 +597,13 @@ repo&amp;rsquo;s &lt;code&gt;Pipfile&lt;/code&gt;.&lt;/p&gt;
 &lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;            set -e
 &lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;        &amp;#39;&amp;#39;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;stripIndent&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;()&lt;/span&gt;
     &lt;span style=&#34;color:#f92672&#34;&gt;}&lt;/span&gt;
-&lt;span style=&#34;color:#f92672&#34;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Test time. I again utilize &lt;code&gt;pipenv&lt;/code&gt; here, by having it call the test command
+&lt;span style=&#34;color:#f92672&#34;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Test time. I again utilize &lt;code&gt;pipenv&lt;/code&gt; here, by having it call the test command
 (&lt;code&gt;pytest -v --junit-xml himmallright-source-test-report.xml .&lt;/code&gt;) so that it runs
 in the pipenv virtual environment.&lt;/p&gt;
+
 &lt;p&gt;Two things to note here:&lt;/p&gt;
+
 &lt;ul&gt;
 &lt;li&gt;The &lt;code&gt;--junit-xml&lt;/code&gt; flag defines a xml filename to write the junit test report
 to. This will be used by Jenkins to collect the test results.&lt;/li&gt;
@@ -501,20 +612,25 @@ allows tests to fail but without triggering a &lt;em&gt;pipeline&lt;/em&gt; fail
 Jenkins.  This way even if tests fail, we make it all the way through
 collection so we can see &lt;em&gt;what&lt;/em&gt; tests failed and &lt;em&gt;why&lt;/em&gt;.&lt;/li&gt;
 &lt;/ul&gt;
+
 &lt;h4 id=&#34;collect-test-results&#34;&gt;Collect Test Results&lt;/h4&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-groovy&#34; data-lang=&#34;groovy&#34;&gt;stage&lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;Collect Test Resuts&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;{&lt;/span&gt;
     steps &lt;span style=&#34;color:#f92672&#34;&gt;{&lt;/span&gt;
         archiveArtifacts &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;himmallright-source-test-report.xml&amp;#34;&lt;/span&gt;
         junit &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;himmallright-source-test-report.xml&amp;#34;&lt;/span&gt;
     &lt;span style=&#34;color:#f92672&#34;&gt;}&lt;/span&gt;
-&lt;span style=&#34;color:#f92672&#34;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Next, we archive the junit report xml file as a Jenkins artifact (just in
+&lt;span style=&#34;color:#f92672&#34;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Next, we archive the junit report xml file as a Jenkins artifact (just in
 case). Finally, we have the &lt;a href=&#34;https://plugins.jenkins.io/junit/&#34;&gt;junit&lt;/a&gt; plugin
 collect the report.&lt;/p&gt;
-&lt;h3 id=&#34;save--commit&#34;&gt;Save &amp;amp; Commit&lt;/h3&gt;
+
+&lt;h3 id=&#34;save-commit&#34;&gt;Save &amp;amp; Commit&lt;/h3&gt;
+
 &lt;p&gt;That should be it for the pipeline file! Commit and push it to the git repo,
 and we can start working with it in Jenkins!&lt;/p&gt;
+
 &lt;h2 id=&#34;multibranch-pipelines&#34;&gt;Multibranch Pipelines&lt;/h2&gt;
+
 &lt;p&gt;With the &lt;code&gt;Jenkinsfile&lt;/code&gt; in the repo, we can create the pipeline! Specifically,
 we will be creating a mult-branch pipeline. A &lt;em&gt;multi-branch&lt;/em&gt; job scans a git
 project, and creates a separate pipeline for each branch or PR in the repo.
@@ -522,45 +638,85 @@ This is beneficial for testing, as it will automatically instantiate a test
 pipeline against a newly created PR, so we can verify that the PR passes the
 tests before merging it into the &lt;code&gt;master&lt;/code&gt; branch. Additionally, it lets us make
 sure we aren&amp;rsquo;t breaking anything &lt;em&gt;while&lt;/em&gt; working in a new branch.&lt;/p&gt;
+
 &lt;h4 id=&#34;creating-the-pipeline&#34;&gt;Creating the Pipeline&lt;/h4&gt;
-&lt;!-- raw HTML omitted --&gt;
+
+&lt;p&gt;&lt;center&gt;
+&lt;a href=&#34;../../img/posts/creating-website-tests-ci/new-job.png&#34;&gt;
+&lt;img alt=&#34;Creating a new Jenkins Item&#34; src=&#34;../../img/posts/creating-website-tests-ci/new-job.png&#34; style=&#34;max-width: 100%; padding: 5px 15px 10px 10px&#34;/&gt;&lt;/a&gt;
+&lt;div class=&#34;caption&#34;&gt;Select Multibranch Pipeline from the new item menu in Jenkins.&lt;/div&gt;
+&lt;/center&gt;&lt;/p&gt;
+
 &lt;p&gt;To create a Multi-Branch pipeline, select &lt;em&gt;New Item&lt;/em&gt; in the menu on the left.
 Next, enter a name for the pipeline and select &lt;em&gt;Multibranch Pipeline&lt;/em&gt; at the
 bottom. Click &lt;em&gt;Ok&lt;/em&gt;.&lt;/p&gt;
+
 &lt;h4 id=&#34;configuring-the-pipeline&#34;&gt;Configuring the Pipeline&lt;/h4&gt;
-&lt;!-- raw HTML omitted --&gt;
+
+&lt;p&gt;&lt;center&gt;
+&lt;a href=&#34;../../img/posts/creating-website-tests-ci/multipipeline-config-options.png&#34;&gt;
+&lt;img alt=&#34;Multibranch pipeline config options&#34; src=&#34;../../img/posts/creating-website-tests-ci/multipipeline-config-options.png&#34; style=&#34;max-width: 100%; padding: 5px 15px 10px 10px&#34;/&gt;&lt;/a&gt;
+&lt;div class=&#34;caption&#34;&gt;Configuration options when creating the multibranch
+pipeline.&lt;/div&gt;
+&lt;/center&gt;&lt;/p&gt;
+
 &lt;p&gt;On the pipelines configuration page, start by filling out the &lt;em&gt;Display Name&lt;/em&gt;
 and &lt;em&gt;Description&lt;/em&gt; text boxes. Next, go down to &lt;em&gt;Branch Sources&lt;/em&gt; and click on
 &lt;em&gt;Add source&lt;/em&gt;. My website is currently hosted on Github, so I will select that.
 However, select &lt;em&gt;Git&lt;/em&gt; if your project is hosted on another &lt;code&gt;git&lt;/code&gt; service.&lt;/p&gt;
+
 &lt;p&gt;Add the Repository URL and choose the pipeline Behaviors. The Behaviors define
 how the pipeline will split up branches. For example, it can be selected to
 only discover branches that are also PRs.&lt;/p&gt;
+
 &lt;p&gt;Next, in the &lt;em&gt;Build Configuration&lt;/em&gt; section, be sure that the &lt;em&gt;Script Path&lt;/em&gt;
 defines the path where the &lt;code&gt;Jenkinsfile&lt;/code&gt; is located. If it&amp;rsquo;s in the root
 directory (and named &lt;code&gt;Jenkinsfile&lt;/code&gt;), the default should work.&lt;/p&gt;
+
 &lt;p&gt;Lastly, select an interval to automatically check the repo for changes in the
 &lt;em&gt;Scan Repository Triggers&lt;/em&gt; section. This step is optional, but I highly
 recommend it.&lt;/p&gt;
+
 &lt;p&gt;That&amp;rsquo;s all we &lt;em&gt;need&lt;/em&gt; to setup, but feel free to research more options. I mostly
 have defaults selected for the rest. When complete, hit &lt;em&gt;Save&lt;/em&gt;.&lt;/p&gt;
+
 &lt;h2 id=&#34;running-pipelines&#34;&gt;Running Pipelines&lt;/h2&gt;
-&lt;!-- raw HTML omitted --&gt;
+
+&lt;p&gt;&lt;center&gt;
+&lt;a href=&#34;../../img/posts/creating-website-tests-ci/multibranch-pipeline-overview.png&#34;&gt;
+&lt;img alt=&#34;The multibranch pipeline overview page&#34; src=&#34;../../img/posts/creating-website-tests-ci/multibranch-pipeline-overview.png&#34; style=&#34;max-width: 100%; padding: 5px 15px 10px 10px&#34;/&gt;&lt;/a&gt;
+&lt;div class=&#34;caption&#34;&gt;The multibranch pipeline overview page.&lt;/div&gt;
+&lt;/center&gt;&lt;/p&gt;
+
 &lt;p&gt;Once the multibranch pipeline is created, it should scan the repo to detect any
 branches or pull requests that have defined &lt;code&gt;Jenkinsfile&lt;/code&gt;s. It will create an
 job item in the list for each branch/PR it detects (and kick off runs for
 each).&lt;/p&gt;
+
 &lt;p&gt;To manually start a scan, select &lt;em&gt;Scan Repository Now&lt;/em&gt; in the menu on the left,
 and it will scan all the branches again, looking for changes, and kicking off
 pipeline runs for any branch or pr that has changed.&lt;/p&gt;
-&lt;!-- raw HTML omitted --&gt;
+
+&lt;p&gt;&lt;center&gt;
+&lt;a href=&#34;../../img/posts/creating-website-tests-ci/branch-overview.png&#34;&gt;
+&lt;img alt=&#34;The overview page of a single branch&#34; src=&#34;../../img/posts/creating-website-tests-ci/branch-overview.png&#34; style=&#34;max-width: 100%; padding: 5px 15px 10px 10px&#34;/&gt;&lt;/a&gt;
+&lt;div class=&#34;caption&#34;&gt;The overview page of a single branch.&lt;/div&gt;
+&lt;/center&gt;&lt;/p&gt;
+
 &lt;p&gt;To manually start a specific branch run, click on the branch name to enter the
 branch&amp;rsquo;s job overview page. Then, simply click &lt;em&gt;Build Now&lt;/em&gt; on the left. Once
 the run starts, it runs like a normal jenkins job and can be viewed by clicking
 the job&amp;rsquo;s run number to the bottom left. The job&amp;rsquo;s progress can then be viewed
 on that page, or using &lt;em&gt;Blue Ocean&lt;/em&gt; (Recommended).&lt;/p&gt;
+
 &lt;h2 id=&#34;viewing-results&#34;&gt;Viewing Results&lt;/h2&gt;
-&lt;!-- raw HTML omitted --&gt;
+
+&lt;p&gt;&lt;center&gt;
+&lt;a href=&#34;../../img/posts/creating-website-tests-ci/test-results.png&#34;&gt;
+&lt;img alt=&#34;The overview page of a single branch&#34; src=&#34;../../img/posts/creating-website-tests-ci/test-results.png&#34; style=&#34;max-width: 100%; padding: 5px 15px 10px 10px&#34;/&gt;&lt;/a&gt;
+&lt;div class=&#34;caption&#34;&gt;The overview page of a single branch.&lt;/div&gt;
+&lt;/center&gt;&lt;/p&gt;
+
 &lt;p&gt;Personally, I prefer to always view the test results using the Blue Ocean
 viewer. Once a job completes, select the &lt;em&gt;Tests&lt;/em&gt; tab at the top of the viewer
 to see the collected test results (this is what the junit steps in our pipeline
@@ -570,7 +726,9 @@ tests, they can be clicked, and the row will expand to show the failed test&amp;
 error message and stack trace. For my test set, this makes it easy to see which
 page failed, and even know what status code was &lt;em&gt;actually&lt;/em&gt; returned in the
 response (by looking at the stack trace). Very helpful!&lt;/p&gt;
+
 &lt;h2 id=&#34;conclusion&#34;&gt;Conclusion&lt;/h2&gt;
+
 &lt;p&gt;There we go! Not only do we now have the website tests automated as a pipeline,
 but as a &lt;em&gt;multibranch&lt;/em&gt; pipeline. This should help automatically ensure that
 nothing breaks as I edit and add to the website. It will even run the tests
@@ -591,31 +749,39 @@ separate branches (instead of pushing everything straight to &lt;code&gt;master&
 even that isn&amp;rsquo;t enough to ensure everything works as expected when publishing
 something new. Then, I thought of something obvious&amp;hellip; I could setup some
 simple testing&amp;hellip; for my website.&lt;/p&gt;
+
 &lt;h2 id=&#34;what-to-test&#34;&gt;What to Test&lt;/h2&gt;
+
 &lt;p&gt;After editing a page or drafting a new post, I often wonder &amp;ldquo;how can I be
 &lt;em&gt;sure&lt;/em&gt; everything will still work when I publish this change&amp;rdquo;? I question if
 every post file is &lt;em&gt;actually&lt;/em&gt; being served as a web page. Or worse&amp;hellip; I fear
 that a post that isn&amp;rsquo;t &lt;em&gt;ready&lt;/em&gt; to be published might &lt;em&gt;accidentally&lt;/em&gt; get pushed
 with an unrelated website fix.&lt;/p&gt;
+
 &lt;p&gt;&lt;em&gt;(Yes, this is a completely unreasonable fear given that ALL of my
 website source files, drafts included, are publicly hosted on Github.
 Nonetheless, the fear exists)&lt;/em&gt;&lt;/p&gt;
+
 &lt;p&gt;This will be a multi-post serries, so in this first one we will focus on:&lt;/p&gt;
+
 &lt;ul&gt;
 &lt;li&gt;Configuring the test environment&lt;/li&gt;
 &lt;li&gt;Building up the testing framework&lt;/li&gt;
 &lt;li&gt;Writing some basic tests to ensure:
+
 &lt;ul&gt;
 &lt;li&gt;The pages I &lt;em&gt;want&lt;/em&gt; to be served are&lt;/li&gt;
 &lt;li&gt;Pages and posts that are not ready, are &lt;em&gt;not&lt;/em&gt; being served&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
 &lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
+
 &lt;p&gt;As my website is currently compiled using &lt;a href=&#34;https://gohugo.io&#34;&gt;hugo&lt;/a&gt;, the tests
 will be centered around that framework. However, most of the information can be
 applied to testing websites using other static website generators, are they are
 all quite similar.&lt;/p&gt;
+
 &lt;h2 id=&#34;setting-up-the-env&#34;&gt;Setting up the env&lt;/h2&gt;
+
 &lt;p&gt;I will be using
 &lt;a href=&#34;https://docs.pytest.org/en/latest/contents.html&#34;&gt;pytest&lt;/a&gt; for the testing
 framework, and to make all the
@@ -624,23 +790,30 @@ python dependencies a bit easier to manage, I will also use
 &lt;a href=&#34;https://getfedora.org&#34;&gt;Fedora&lt;/a&gt; computer, VM, or at the very least in a Fedora
 &lt;a href=&#34;https://podman.io&#34;&gt;podman&lt;/a&gt; container. So, some of my instructions use &lt;code&gt;dnf&lt;/code&gt;,
 but feel free to adjust to your package manager accordingly.&lt;/p&gt;
+
 &lt;h4 id=&#34;install-pipenv&#34;&gt;Install &lt;code&gt;pipenv&lt;/code&gt;&lt;/h4&gt;
+
 &lt;p&gt;First, lets install &lt;code&gt;pipenv&lt;/code&gt;, which is easy enough in Fedora:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;sudo dnf install pipenv
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h4 id=&#34;install-needed-packages-inside-pipenv-shell&#34;&gt;Install needed packages inside &lt;code&gt;pipenv shell&lt;/code&gt;&lt;/h4&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;sudo dnf install pipenv&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h4 id=&#34;install-needed-packages-inside-pipenv-shell&#34;&gt;Install needed packages inside &lt;code&gt;pipenv shell&lt;/code&gt;&lt;/h4&gt;
+
 &lt;p&gt;After installing, create a pipenv shell and enter it:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;pipenv shell
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Install &lt;code&gt;pytest&lt;/code&gt; and &lt;code&gt;requests&lt;/code&gt; in the pip environment:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;pip install pytest requests
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;creating-the-test-framework&#34;&gt;Creating the Test Framework&lt;/h2&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;pipenv shell&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Install &lt;code&gt;pytest&lt;/code&gt; and &lt;code&gt;requests&lt;/code&gt; in the pip environment:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;pip install pytest requests&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h2 id=&#34;creating-the-test-framework&#34;&gt;Creating the Test Framework&lt;/h2&gt;
+
 &lt;p&gt;With the environment setup, we can start building up the test framework. We
 will start by defining come constants, then use those when building helper
 functions. Lastly, we will use the helper functions to piece together the
 &lt;code&gt;conftest.py&lt;/code&gt; and &lt;code&gt;test_pages.py&lt;/code&gt; files.&lt;/p&gt;
+
 &lt;h3 id=&#34;defining-constants&#34;&gt;Defining Constants&lt;/h3&gt;
+
 &lt;p&gt;First, lets define some constants we can use throughout the test framework. In
 the future, I might switch these to be set optionally with  CLI arguments, but
 for now&amp;hellip; they&amp;rsquo;re just static constant variables defined in a file.&lt;/p&gt;
+
 &lt;p&gt;So first, create a new file in the &lt;code&gt;tests&lt;/code&gt; directory named &lt;code&gt;constants.py&lt;/code&gt;. In
 that file, lets dump our contants:&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;BASE_URL &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;http://localhost:1313&amp;#34;&lt;/span&gt;
@@ -654,8 +827,9 @@ POST_NAMES &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; [
     &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt;Removed middle of list because it&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;s long&amp;gt;&lt;/span&gt;
     &lt;span style=&#34;color:#f92672&#34;&gt;...&lt;/span&gt;
     &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;ZFS-Backups-To-LUKS-External&amp;#34;&lt;/span&gt;,
-]
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;As you can see, in my &lt;code&gt;constants.py&lt;/code&gt; file I have 4 variables defined:&lt;/p&gt;
+]&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;As you can see, in my &lt;code&gt;constants.py&lt;/code&gt; file I have 4 variables defined:&lt;/p&gt;
+
 &lt;ul&gt;
 &lt;li&gt;&lt;code&gt;BASE_URL&lt;/code&gt;: this is the base url for the website when running &lt;code&gt;hugo serve&lt;/code&gt;.
 For most, it will default to &lt;code&gt;http://localhost:1313&lt;/code&gt;, but I have this as
@@ -669,17 +843,22 @@ page is being served, which is at &lt;code&gt;baseurl/pages/about/&lt;/code&gt;,
 &lt;li&gt;&lt;code&gt;POST_NAMES&lt;/code&gt;: This is a list of the names of the post &lt;em&gt;files&lt;/em&gt; (without the
 &lt;code&gt;.md&lt;/code&gt;)&lt;/li&gt;
 &lt;/ul&gt;
+
 &lt;p&gt;Add in your values for the variables, and remember to save the file.&lt;/p&gt;
+
 &lt;h3 id=&#34;writing-some-helper-utility-functions&#34;&gt;Writing Some Helper Utility Functions&lt;/h3&gt;
+
 &lt;p&gt;With those constants defined, we should be ready to write some helper
 functions. These are normal python functions that will be called from tests or
 even test fixture functions.&lt;/p&gt;
+
 &lt;p&gt;First, lets create &lt;code&gt;utils.py&lt;/code&gt;. The helper functions will need to use
 &lt;code&gt;listdir&lt;/code&gt;, as well as the &lt;code&gt;path&lt;/code&gt; function from the &lt;code&gt;os&lt;/code&gt; module. They will also
 need the regex functions. So, lets make those imports at the top of the file:&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#f92672&#34;&gt;from&lt;/span&gt; os &lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; listdir, path
-&lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; re
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h4 id=&#34;get_file_names&#34;&gt;get_file_names&lt;/h4&gt;
+&lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; re&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h4 id=&#34;get-file-names&#34;&gt;get_file_names&lt;/h4&gt;
+
 &lt;p&gt;Lets define a helper function named &lt;code&gt;get_file_names&lt;/code&gt;:&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;get_file_names&lt;/span&gt;(src, extension&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;None):
     &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&amp;#34;&amp;#34;Collects the names of all files of a directory&amp;#34;&amp;#34;&amp;#34;&lt;/span&gt;
@@ -693,49 +872,56 @@ need the regex functions. So, lets make those imports at the top of the file:&lt
         &lt;span style=&#34;color:#75715e&#34;&gt;# Otherwise, add everything&lt;/span&gt;
         &lt;span style=&#34;color:#66d9ef&#34;&gt;else&lt;/span&gt;:
             file_list&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;append(file)
-    &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; file_list
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;When provided a file path (&lt;code&gt;src&lt;/code&gt;), this function will return a list of all the
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; file_list&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;When provided a file path (&lt;code&gt;src&lt;/code&gt;), this function will return a list of all the
 file names in the directory. Optionally, the &lt;code&gt;extension&lt;/code&gt; parameter can be
 supplied to only return files of that extension type (for exapmple, &lt;code&gt;md&lt;/code&gt;). This
 function will be used to grab the names of all the post source files.&lt;/p&gt;
+
 &lt;p&gt;&amp;hellip; and that&amp;rsquo;s all we need in &lt;code&gt;utils.py&lt;/code&gt;&amp;hellip; for now!&lt;/p&gt;
+
 &lt;h3 id=&#34;conftest&#34;&gt;Conftest&lt;/h3&gt;
+
 &lt;p&gt;Now lets start digging into test-related stuff, by first creating a
 &lt;code&gt;conftest.py&lt;/code&gt; file. This file will mostly hold the fixtures we will use for the
 tests. In our particular setup, they will gather lists of pages to run multiple
 calls of each test against by using &lt;code&gt;@pytest.fixture(params)&lt;/code&gt;.&lt;/p&gt;
+
 &lt;p&gt;But first, lets import a few things at the top of &lt;code&gt;conftest.py&lt;/code&gt;:&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; pytest
 &lt;span style=&#34;color:#f92672&#34;&gt;from&lt;/span&gt; os &lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; path
 
 &lt;span style=&#34;color:#f92672&#34;&gt;from&lt;/span&gt; constants &lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; BASE_URL, SITE_PAGES, POST_DIR, POST_NAMES
-&lt;span style=&#34;color:#f92672&#34;&gt;from&lt;/span&gt; utils &lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; get_file_names
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;The imports include the &lt;code&gt;os.path()&lt;/code&gt; function, some of the constants we
+&lt;span style=&#34;color:#f92672&#34;&gt;from&lt;/span&gt; utils &lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; get_file_names&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;The imports include the &lt;code&gt;os.path()&lt;/code&gt; function, some of the constants we
 defined, and the &lt;code&gt;get_file_names()&lt;/code&gt; helper function. Oh, And of course
 &lt;code&gt;pytest&lt;/code&gt; ;) .&lt;/p&gt;
-&lt;h4 id=&#34;page_url&#34;&gt;page_url&lt;/h4&gt;
+
+&lt;h4 id=&#34;page-url&#34;&gt;page_url&lt;/h4&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;@pytest.fixture&lt;/span&gt;(params&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;SITE_PAGES)
 &lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;page_url&lt;/span&gt;(request):
     &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&amp;#34;&amp;#34;Returns the page urls for testing.&amp;#34;&amp;#34;&amp;#34;&lt;/span&gt;
-    &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; BASE_URL &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; request&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;param
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;The first fixture, &lt;code&gt;page_url&lt;/code&gt;, is very basic. It creates a list of all of the
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; BASE_URL &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; request&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;param&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;The first fixture, &lt;code&gt;page_url&lt;/code&gt;, is very basic. It creates a list of all of the
 website pages (not posts), by combining the &lt;code&gt;BASE_URL&lt;/code&gt; with each of the values
 defined in the &lt;code&gt;SITE_PAGES&lt;/code&gt; constant. This list will later be used to
 paramaterize a single test across all of the page links.&lt;/p&gt;
-&lt;h4 id=&#34;post_url&#34;&gt;post_url&lt;/h4&gt;
+
+&lt;h4 id=&#34;post-url&#34;&gt;post_url&lt;/h4&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;@pytest.fixture&lt;/span&gt;(params&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;POST_NAMES)
 &lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;post_url&lt;/span&gt;(request):
     &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&amp;#34;&amp;#34;Returns the post urls for testing.&amp;#34;&amp;#34;&amp;#34;&lt;/span&gt;
-    &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; BASE_URL &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;/post/&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; request&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;param&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;lower()
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;The next fixture, &lt;code&gt;post_url&lt;/code&gt; is basically the same as &lt;code&gt;page_url&lt;/code&gt;, except it
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; BASE_URL &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;/post/&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; request&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;param&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;lower()&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;The next fixture, &lt;code&gt;post_url&lt;/code&gt; is basically the same as &lt;code&gt;page_url&lt;/code&gt;, except it
 creates a list of all the &lt;em&gt;posts&lt;/em&gt; using the &lt;code&gt;POST_NAMES&lt;/code&gt; constant. Again, this
 will be used to expand a single test into many, one for each post.&lt;/p&gt;
-&lt;h4 id=&#34;non_live_post_url&#34;&gt;non_live_post_url&lt;/h4&gt;
+
+&lt;h4 id=&#34;non-live-post-url&#34;&gt;non_live_post_url&lt;/h4&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;@pytest.fixture&lt;/span&gt;(params&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;non_live_post_urls())
 &lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;non_live_post_url&lt;/span&gt;(request):
     &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&amp;#34;&amp;#34;Returns the url of a non-defined post file&amp;#34;&amp;#34;&amp;#34;&lt;/span&gt;
-    &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; BASE_URL &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;/post/&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; request&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;param&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;lower()
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Lastly, we have &lt;code&gt;non_live_post_url&lt;/code&gt; with its accompanying helper function,
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; BASE_URL &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;/post/&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; request&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;param&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;lower()&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Lastly, we have &lt;code&gt;non_live_post_url&lt;/code&gt; with its accompanying helper function,
 &lt;code&gt;non_live_post_urls&lt;/code&gt;. This pair creates a list of posts that have a markdown
 file in the &lt;code&gt;/post/&lt;/code&gt; directory, but are &lt;em&gt;not&lt;/em&gt; listed in the &lt;code&gt;POST_NAMES&lt;/code&gt;
 constant (so in practice, not really to be published).&lt;/p&gt;
@@ -746,13 +932,15 @@ constant (so in practice, not really to be published).&lt;/p&gt;
     )
     live_post_names &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; list(map(&lt;span style=&#34;color:#66d9ef&#34;&gt;lambda&lt;/span&gt; name: name&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;lower(), POST_NAMES))
     non_live_post_names &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; set(all_post_md_names)&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;difference(set(live_post_names))
-    &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; list(non_live_post_names)
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;First, the &lt;code&gt;non_live_post_urls&lt;/code&gt; helper function returns a list of non-listed
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; list(non_live_post_names)&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;First, the &lt;code&gt;non_live_post_urls&lt;/code&gt; helper function returns a list of non-listed
 post files. That  list is then used in &lt;code&gt;non_live_post_url&lt;/code&gt; as the
 &lt;code&gt;pytest.fixture(params)&lt;/code&gt; object, much like &lt;code&gt;SITE_PAGES&lt;/code&gt; and &lt;code&gt;POST_NAMES&lt;/code&gt; were
 for the previous
 fixtures.&lt;/p&gt;
+
 &lt;h3 id=&#34;finally-some-tests&#34;&gt;Finally&amp;hellip; Some Tests!&lt;/h3&gt;
+
 &lt;p&gt;Phew. Okay. With &lt;em&gt;all of that&lt;/em&gt; defined&amp;hellip; lets create the first test file. When
 &lt;code&gt;pytest&lt;/code&gt; runs, it will try to grab tests recursively from all the files down
 the current directory, starting with &lt;code&gt;test&lt;/code&gt;. This first set of tests will be
@@ -760,8 +948,9 @@ checking whether a web page is being served (or not), so lets name the file
 &lt;code&gt;test_pages.py&lt;/code&gt;. Again, start with the required imports. This time we only need
 &lt;code&gt;pytest&lt;/code&gt; and &lt;code&gt;requests&lt;/code&gt;.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; pytest
-&lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; requests
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h5 id=&#34;testing-pages&#34;&gt;Testing Pages&lt;/h5&gt;
+&lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; requests&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h5 id=&#34;testing-pages&#34;&gt;Testing Pages&lt;/h5&gt;
+
 &lt;p&gt;The first test will check that each page defined in the &lt;code&gt;SITE_PAGES&lt;/code&gt; constant
 is being served. More specifically, we will use the &lt;code&gt;requests&lt;/code&gt; module to ensure
 not only that the page is served, but returns a &lt;a href=&#34;https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/200&#34;&gt;200
@@ -770,25 +959,29 @@ actually requires very little code to accomplish (Gotta love python) :&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;test_page_served&lt;/span&gt;(page_url):
     &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&amp;#34;&amp;#34;Checks that the website pages are available&amp;#34;&amp;#34;&amp;#34;&lt;/span&gt;
     response &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; requests&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;get(page_url)
-    &lt;span style=&#34;color:#66d9ef&#34;&gt;assert&lt;/span&gt; response&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;status_code &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;200&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;We simply define a function, &lt;code&gt;test_page_served()&lt;/code&gt;, and because it is in
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;assert&lt;/span&gt; response&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;status_code &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;200&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;We simply define a function, &lt;code&gt;test_page_served()&lt;/code&gt;, and because it is in
 &lt;code&gt;test_pages.py&lt;/code&gt;, it will be assumed to be a test by &lt;code&gt;pytest&lt;/code&gt;. We provide the
 &lt;code&gt;page_url&lt;/code&gt; fixture we previously defined in &lt;code&gt;conftest.py&lt;/code&gt; as the only
 parameter. This will call the &lt;code&gt;test_page_served&lt;/code&gt; test for each url
 in the list generated by &lt;code&gt;page_url&lt;/code&gt;. Next, we use &lt;code&gt;requests.get()&lt;/code&gt; to make a
 page request. Lastly, we &lt;code&gt;assert&lt;/code&gt; that the &lt;code&gt;status_code&lt;/code&gt; from our response is
 &lt;code&gt;200&lt;/code&gt;. If it is, the test passes, if not, it fails.&lt;/p&gt;
+
 &lt;h5 id=&#34;testing-posts&#34;&gt;Testing Posts&lt;/h5&gt;
+
 &lt;p&gt;Next, lets test that all of the &lt;em&gt;posts&lt;/em&gt; are being served. This test works
 &lt;em&gt;exactly&lt;/em&gt; the same as &lt;em&gt;test_page_served&lt;/em&gt;, except we are using the &lt;code&gt;post_url&lt;/code&gt;
 fixture instead of &lt;code&gt;page_url&lt;/code&gt; to supply the links to test:&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;test_post_served&lt;/span&gt;(post_url):
     &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&amp;#34;&amp;#34;Checks that the desired posts are available&amp;#34;&amp;#34;&amp;#34;&lt;/span&gt;
     response &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; requests&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;get(post_url)
-    &lt;span style=&#34;color:#66d9ef&#34;&gt;assert&lt;/span&gt; response&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;status_code &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;200&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;em&gt;(While I could combine these cases into a single test function, I decided to
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;assert&lt;/span&gt; response&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;status_code &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;200&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;&lt;em&gt;(While I could combine these cases into a single test function, I decided to
 keep them separate for flexibility in the future)&lt;/em&gt;&lt;/p&gt;
+
 &lt;h5 id=&#34;lets-get-fancy-testing-unapproved-posts-are-not-served&#34;&gt;Lets Get Fancy: Testing Unapproved Posts Are &lt;em&gt;NOT&lt;/em&gt; Served&lt;/h5&gt;
+
 &lt;p&gt;For the last test, lets get a little bit more complicated and ensure that post files
 &lt;em&gt;not&lt;/em&gt; listed in the approved list are &lt;em&gt;not&lt;/em&gt; being served. Well&amp;hellip; it
 turns out all the &amp;ldquo;fancy&amp;rdquo; code required for this test case already occured in
@@ -798,23 +991,38 @@ now checking for a &lt;code&gt;404&lt;/code&gt; return status instead of &lt;cod
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;test_non_defined_posts_not_served&lt;/span&gt;(non_live_post_url):
     &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&amp;#34;&amp;#34;Checks that a non-defined post is NOT available&amp;#34;&amp;#34;&amp;#34;&lt;/span&gt;
     response &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; requests&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;get(non_live_post_url)
-    &lt;span style=&#34;color:#66d9ef&#34;&gt;assert&lt;/span&gt; response&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;status_code &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;404&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;That defines all of the tests for this first set! Don&amp;rsquo;t let only having three
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;assert&lt;/span&gt; response&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;status_code &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;404&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;That defines all of the tests for this first set! Don&amp;rsquo;t let only having three
 test functions fool you, they should generate over 70 test results when run!
 (For my website, at the time of writing this post)&lt;/p&gt;
+
 &lt;h3 id=&#34;lets-run-some-tests&#34;&gt;Lets Run Some Tests!&lt;/h3&gt;
+
 &lt;p&gt;Finally, we should be able to run the tests. To do so, first ensure that you
 are in the pipenv by running &lt;code&gt;pipenv shell&lt;/code&gt;, &lt;em&gt;or&lt;/em&gt; you can run the tests from
 outside the pipenv using &lt;code&gt;pipenv run COMMAND&lt;/code&gt;. Next, call:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;pytest -v .
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;The &lt;code&gt;-v&lt;/code&gt; flag runs pytest in &lt;em&gt;&amp;lsquo;verbose&amp;rsquo;&lt;/em&gt; mode, which I like to do as it shows
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;pytest -v .&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;The &lt;code&gt;-v&lt;/code&gt; flag runs pytest in &lt;em&gt;&amp;lsquo;verbose&amp;rsquo;&lt;/em&gt; mode, which I like to do as it shows
 the results for each test run, rather than each &lt;em&gt;file&lt;/em&gt;.&lt;/p&gt;
-&lt;!-- raw HTML omitted --&gt;
+
+&lt;p&gt;&lt;center&gt;
+&lt;video style=&#34;max-width:100%;&#34; controls&gt;
+  &lt;source src=&#34;../../img/posts/creating-website-tests-pages/passing-tests.mp4&#34; type=&#34;video/mp4&#34;&gt;
+&lt;/video&gt;
+&lt;div id=&#34;caption&#34;&gt;Running the pages tests. All 72 passed.&lt;/div&gt;
+&lt;/center&gt;&lt;/p&gt;
+
 &lt;p&gt;So it looks like all the tests are passing! To be sure, Lets do a quick check to
 make sure they work as expected&amp;hellip; I&amp;rsquo;ll mark this post with &lt;code&gt;draft = &amp;quot;False&amp;quot;&lt;/code&gt;,
 but &lt;em&gt;not&lt;/em&gt; add it to the approved lists, and the test for this page &lt;em&gt;should&lt;/em&gt;
 fail&amp;hellip;&lt;/p&gt;
-&lt;!-- raw HTML omitted --&gt;
+
+&lt;p&gt;&lt;center&gt;
+&lt;a href=&#34;../../img/posts/creating-website-tests-pages/failed-test.png&#34;&gt;
+&lt;img alt=&#34;Checking a test fails when we want it to&#34; src=&#34;../../img/posts/creating-website-tests-pages/failed-test.png&#34; style=&#34;max-width: 100%; padding: 5px 15px 10px 10px&#34;/&gt;&lt;/a&gt;
+&lt;div class=&#34;caption&#34;&gt;Checking that a test fails when we want it to.&lt;/div&gt;
+&lt;/center&gt;&lt;/p&gt;
+
 &lt;p&gt;Awesome, it failed! I guess all there is left to do is to finish up this post, so I
 can add it to the approved posts lists and publish it! Stay tuned!&lt;/p&gt;</description>
     </item>
