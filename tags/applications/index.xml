@@ -5,10 +5,226 @@
     <description>Recent content in Applications on λ ryan. himmelwright. net</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 07 Aug 2019 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 28 Jun 2020 00:00:00 +0000</lastBuildDate>
     
         <atom:link href="http://ryan.himmelwright.net/tags/applications/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Trying out Notion</title>
+      <link>http://ryan.himmelwright.net/post/trying-notion/</link>
+      <pubDate>Sun, 28 Jun 2020 00:00:00 +0000</pubDate>
+      
+      <guid>http://ryan.himmelwright.net/post/trying-notion/</guid>
+      <description>&lt;p&gt;Over the past year or two, my notes and planning systems have been a bit of a
+jumble.  It started when I attempted to switch everything to &lt;a href=&#34;../../post/switched-to-joplin-notes/&#34;&gt;joplin
+notes&lt;/a&gt;&amp;hellip; only to eventually switch &lt;a href=&#34;../../post/back-on-org-mode-for-work/&#34;&gt;back to
+org-mode (for my work notes)&lt;/a&gt; a few months
+later. Around that same time, I also started using &lt;a href=&#34;https://trello.com&#34;&gt;trello&lt;/a&gt;
+to organize my personal and home life task boards. This system has worked well, but
+feels very disjointed. My notes, goals, and tasks are spread all over the place.
+This might all be about to change. I&amp;rsquo;ve started using
+&lt;a href=&#34;https://notion.so&#34;&gt;Notion&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h2 id=&#34;quick-history&#34;&gt;Quick History&lt;/h2&gt;
+
+&lt;p&gt;Before diving into my experience with Notion, lets first describe in more
+detail the system I&amp;rsquo;m coming from.&lt;/p&gt;
+
+&lt;h3 id=&#34;previous-system&#34;&gt;Previous System&lt;/h3&gt;
+
+&lt;p&gt;&lt;a href=&#34;../../img/posts/trying-notion/trello_weekly_board.png&#34;&gt;
+&lt;img alt=&#34;Trello Weekly Board&#34; src=&#34;../../img/posts/trying-notion/trello_weekly_board.png&#34; style=&#34;max-width: 100%;&#34;/&gt;&lt;/a&gt;
+&lt;div class=&#34;caption&#34;&gt;My Trello Weekly Task Board&lt;/div&gt;&lt;/p&gt;
+
+&lt;p&gt;Most recently, my personal and professional notes, and task planning systems
+have consisted of three applications: Trello, Emacs (org-mode), and Joplin.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Trello&lt;/strong&gt;: I had several boards for planning my weekly, monthly, and
+multi-month personal tasks (including household ones). I also maintained a few
+boards to keep track of goals and projects ideas (ex: future website posts, books to
+read, training courses to take, etc).&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Emacs org-mode&lt;/strong&gt;: For my professional work life, I completed all the same tasks I
+listed under the trello section, using emacs instead.  I would write down my
+tasks, and log quick notes and thoughts under each one while I was working on
+it. Logging helps me think through problems, and serves as a reference
+later. While I &lt;em&gt;could&lt;/em&gt; log notes into Trello cards, it wasn&amp;rsquo;t nearly as easy to
+quickly open up and record a stream of consciousness, as it is was in org mode.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Joplin&lt;/strong&gt;: I previously attempted to make Joplin my universal planning system,
+but it failed. It was a bit messy for a universal system, and lacked a
+board style layout for  my goals and task planning (what Trello or even my &lt;a href=&#34;https://github.com/himmAllRight/ry-org-scrum&#34;&gt;ry-org-scrum&lt;/a&gt;
+package provide). That said, it was a great cross-platform notes application&amp;hellip;
+so I continued to use it for that. Any personal or work &lt;em&gt;note&lt;/em&gt; that wasn&amp;rsquo;t
+directly related to a single task card was stored in Joplin.&lt;/p&gt;
+
+&lt;h3 id=&#34;issues-with-the-system&#34;&gt;Issues with the system&lt;/h3&gt;
+
+&lt;p&gt;&lt;a href=&#34;../../img/posts/back-on-org-mode-for-work/scrum-board.png&#34;&gt;
+&lt;img alt=&#34;Emacs org mode&#34; src=&#34;../../img/posts/back-on-org-mode-for-work/scrum-board.png&#34; style=&#34;max-width: 100%;&#34;/&gt;&lt;/a&gt;
+&lt;div class=&#34;caption&#34;&gt;My Emacs org-mode task/notes, using the task-board
+package I wrote.&lt;/div&gt;&lt;/p&gt;
+
+&lt;p&gt;While this system &lt;em&gt;worked&lt;/em&gt;, it does some issues.&lt;/p&gt;
+
+&lt;h4 id=&#34;couldn-t-share-items-across-applications&#34;&gt;Couldn&amp;rsquo;t share items across applications&lt;/h4&gt;
+
+&lt;p&gt;The biggest issue I had with this framework was that it was made from several
+&lt;em&gt;disconnected&lt;/em&gt; systems. This meant that my notes and information were spread
+all over the place, and not linkable. I tried to keep notes and task logs
+separate, but while working on projects I often wanted to create longer,
+stand-alone, reference &lt;em&gt;notes&lt;/em&gt; related to a task. With this setup, I couldn&amp;rsquo;t
+easily have the two items reference each other.&lt;/p&gt;
+
+&lt;h4 id=&#34;had-to-configure-each-application-on-every-device&#34;&gt;Had to configure each application&amp;hellip; on every device&lt;/h4&gt;
+
+&lt;p&gt;I have &lt;a href=&#34;http://ryan.himmelwright.net/post/org-babel-setup/&#34;&gt;automated my emacs
+setup&lt;/a&gt;, but both joplin and
+emacs still required me to manually configure their sync solutions.
+Additionally, while Trello&amp;rsquo;s minimal setup of &amp;lsquo;just login&amp;rsquo; seems simple enough,
+even this can quickly become tedious when doing it for multiple applications at a
+time&amp;hellip; on several devices&amp;hellip; some of them phones.&lt;/p&gt;
+
+&lt;h4 id=&#34;not-accessible-beyond-my-computers&#34;&gt;Not accessible beyond my computers&lt;/h4&gt;
+
+&lt;p&gt;Lastly, my main issue was that apart from Trello, these systems weren&amp;rsquo;t really
+accessable from devices beside my own. In fact Emacs wasn&amp;rsquo;t even available on
+my mobile devices. While good from a security standpoint, I don&amp;rsquo;t like having
+all my notes and information only available when I sit down at a desktop. If
+I&amp;rsquo;m working on a family member&amp;rsquo;s machine, or in a fresh VM (without a shared
+clipboard), I want to be able to access my notes from a private browser tab. I
+also like to move cards across my task board from my phone as I complete them
+throughout the day.&lt;/p&gt;
+
+&lt;h3 id=&#34;desires&#34;&gt;Desires&lt;/h3&gt;
+
+&lt;p&gt;With these issues defined, what is it that I actually want to see in my note
+taking and task organization system?&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;../../img/posts/back-on-org-mode-for-work/joplin-gui.png&#34;&gt;
+&lt;img alt=&#34;Joplin GUI&#34; src=&#34;../../img/posts/back-on-org-mode-for-work/joplin-gui.png&#34; style=&#34;max-width: 100%;&#34;/&gt;&lt;/a&gt;
+&lt;div class=&#34;caption&#34;&gt;Joplin Notes&lt;/div&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Consolidated into one system&lt;/strong&gt;: I don&amp;rsquo;t want to setup multiple apps
+and logins on all my systems.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Cross platform&lt;/strong&gt;: Despite only wanting a single system, I want it supported
+on all my devices, including mobile.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Task board support&lt;/strong&gt;: I really enjoy moving and displaying  my task items
+in a board view.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Normal notes too&lt;/strong&gt;: In addition to task cards, I also want support for
+traditional, stand-alone notes. Ideally tasks &lt;em&gt;can&lt;/em&gt; be linked to
+notes, but the notes don&amp;rsquo;t &lt;em&gt;have&lt;/em&gt; to be task-bound.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Easy to jump in, add a log note, and get out&lt;/strong&gt;: I love this in org-mode. I need
+the ability to quickly jump into a task, hit a keyboard shortcut to auto-insert
+a time-stamp, and write a log note.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;notion&#34;&gt;Notion&lt;/h2&gt;
+
+&lt;p&gt;&lt;a href=&#34;../../img/posts/trying-notion/notion_window.png&#34;&gt;
+&lt;img alt=&#34;Notion in iOS&#34; src=&#34;../../img/posts/trying-notion/notion_window.png&#34; style=&#34;max-width: 100%;&#34;/&gt;&lt;/a&gt;
+&lt;div class=&#34;caption&#34;&gt;Notion window in macOS, displaying my page for this post. The UI looks the same on the web and in my &amp;lsquo;Nativfier&amp;rsquo; app in Linux.&lt;/div&gt;&lt;/p&gt;
+
+&lt;p&gt;Notion might be my solution. The &lt;a href=&#34;https://notion.so&#34;&gt;Notion website&lt;/a&gt; states
+that it is an &amp;ldquo;&lt;em&gt;All-in-one workspace.  Write, plan, collaborate, and get
+organized — all in one tool&lt;/em&gt;&amp;rdquo;. Having used it as my lone system over the
+past several weeks, I think agree.&lt;/p&gt;
+
+&lt;h3 id=&#34;what-i-like-so-far&#34;&gt;What I like so far&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;FLEXIBLE&lt;/strong&gt;: This cannot be emphasized enough. Notion is &lt;em&gt;extremely&lt;/em&gt;
+flexible, providing the &lt;em&gt;tools&lt;/em&gt; to setup your own system, rather than being
+a defined system itself. Want just a pile of markdown-ish notes? Fine. Want
+to create endless clusters  of relational databases? Go ahead. This endless
+flexibility makes Notion what I would consider to be the Emacs org-mode for
+&lt;del&gt;normal&lt;/del&gt; &lt;em&gt;reasonable&lt;/em&gt; people.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;Easy logging using &lt;code&gt;@now&lt;/code&gt;&lt;/strong&gt;:
+&lt;a href=&#34;../../img/posts/trying-notion/now_timestamp.png&#34;&gt;
+&lt;img alt=&#34;logging using @now&#34; src=&#34;../../img/posts/trying-notion/now_timestamp.png&#34; style=&#34;max-width: 100%;&#34;/&gt;&lt;/a&gt;
+&lt;div class=&#34;caption&#34;&gt;Easy logging using &lt;code&gt;@now&lt;/code&gt;&lt;/div&gt;
+Notion has the &amp;lsquo;easy logging&amp;rsquo; feature I
+wanted. I just have to type &lt;code&gt;@now&lt;/code&gt;, hit enter, and it auto auto-inserts a
+dynamic date and time (the &amp;lsquo;today&amp;rsquo; changes to &amp;lsquo;yesterday&amp;rsquo;, and eventually
+the date as time passes).&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;Databases&lt;/strong&gt;: Databases are a compelling tool that are the backbone of a
+powerful notion setup. They allow collections of data to be linked, sorted,
+and filtered. Databases themselves have several notable features worth
+mentioning:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Multiple view methods for the same data&lt;/strong&gt;: Database items can be displayed in
+different &lt;em&gt;views&lt;/em&gt;. These include tables, boards, galleries,
+calendar, and lists.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Views can be filtered and sorted using property rules&lt;/strong&gt;:
+Properties can be also marked as hidden, and any custom
+changes to the data view can be saved. This makes it easy to flip
+through different views to get a better picture of the information.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Linkable&lt;/strong&gt;: A database can be embedded in a page as a &amp;lsquo;linked database&amp;rsquo;.
+This is a database that points to an already existing
+one, and any changes to it also occur in the original DB. However,
+the linked databases have their own saved and default views.&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;Templates&lt;/strong&gt;: Templates are another convenient feature. A specific page
+layout can be defined as a template, which new pages can then be created
+from. For example, I have weekly templates that
+contain all the tasks and linked databases for that week automatically
+configured. So when setting up a new week, I can simply create a new page
+from the template and fill in some information. Done.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;Accessible from all my devices&lt;/strong&gt;:
+&lt;a href=&#34;../../img/posts/trying-notion/ios_notion.png&#34;&gt;
+&lt;img alt=&#34;Notion in iOS&#34; src=&#34;../../img/posts/trying-notion/ios_notion.png&#34; style=&#34;max-width: 100%;&#34;/&gt;&lt;/a&gt;
+&lt;div class=&#34;caption&#34;&gt;Notion views in iOS. Navigation, my &amp;lsquo;Areas&amp;rsquo; card view,
+a daily log page&amp;rsquo; properties, and a task &amp;lsquo;board&amp;rsquo; view.&lt;/div&gt;&lt;/p&gt;
+
+&lt;p&gt;Notion has desktop applications for macOS and Windows, as well as
+mobile apps for iOS and Andriod. Additionally, it functions well as a webapp, which
+made it easy for me to create a
+&lt;a href=&#34;https://github.com/jiahaog/nativefier&#34;&gt;nativefier&lt;/a&gt; build of it to run on my Linux
+systems.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;Free, and affordable for pro&lt;/strong&gt;: When I started using notion, the free tier
+was limited to 1000 blocks, but since then they have made the personal tier
+free &lt;em&gt;without&lt;/em&gt; a use limit! There is still a Pro version with fancy features
+(like revision history), but even that is offered at a reasonable price.&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&#34;downsides-concerns&#34;&gt;Downsides/Concerns&lt;/h3&gt;
+
+&lt;p&gt;&lt;a href=&#34;../../img/posts/trying-notion/notion-export.png&#34;&gt;
+&lt;img alt=&#34;Notion in iOS&#34; src=&#34;../../img/posts/trying-notion/notion-export.png&#34; style=&#34;max-width: 100%;&#34;/&gt;&lt;/a&gt;
+&lt;div class=&#34;caption&#34;&gt;Notion makes it easy to export an entire workspace.&lt;/div&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;All my eggs in one basket&lt;/strong&gt;: My biggest concern with Notion, is that I am
+throwing everything into a single service which I now rely on. That is a &lt;em&gt;huge risk&lt;/em&gt;. Fortunately,
+Notion does make it extremely easy to &lt;a href=&#34;https://www.notion.so/Workspace-settings-security-b0a64a148cad461cb6e9df74f7372ecf#23a9194abf324cb7a222ede243fdcb5b&#34;&gt;export&lt;/a&gt; a workspace, which eases
+my fears a bit. I need to test this out, and maybe make it a habit to
+periodically do it as a backup.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;A bit of a steep learning curve&lt;/strong&gt;: All the flexibility
+and power means it can take a bit of trial and error to setup a system that
+works for you. While overwhelming at first, I don&amp;rsquo;t find it to be not that
+big of an problem. I &lt;em&gt;am&lt;/em&gt; coming from using mostly emacs after all :P&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Lacks a cheaper &amp;lsquo;Family&amp;rsquo; Plan&lt;/strong&gt;: I&amp;rsquo;m ecstatic that they made the personal plan
+free, but I would still love to see a &amp;lsquo;Family&amp;rsquo; plan that would allow my
+wife and I to have shared collaborative pages. I know this is what the
+teams version provides, but we don&amp;rsquo;t need all the other advanced features,
+and the price ends up being a bit steep for what we would want.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;conclusion&#34;&gt;Conclusion&lt;/h2&gt;
+
+&lt;p&gt;In summary, I&amp;rsquo;ve found Notion to be amazing. I&amp;rsquo;ve had to redo my setup twice
+already as I&amp;rsquo;ve started to better understand more powerful features, but every
+time it has been worth it. Notion appears to be fitting my needs perfectly, and
+it keeps getting better every day as I continue to tweak and perfect it.&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>Back On org-mode For Work</title>

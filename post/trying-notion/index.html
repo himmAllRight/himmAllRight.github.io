@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Trying out Notion -- λ ryan. himmelwright. net</title>
+
+    
+
+    
+    <link href="http://ryan.himmelwright.net/css/bootstrap.min.css" rel="stylesheet">
+
+    
+    <link href="http://ryan.himmelwright.net/css/clean-blog.min.css" rel="stylesheet">
+
+    
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href='//fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+
+    
+    
+    
+
+
+
+    
+    <script type="text/javascript">
+        var _paq = _paq || [];
+         
+        _paq.push(["setDocumentTitle", document.domain + "/" + document.title]);
+        _paq.push(["setCookieDomain", "*.ryan.himmelwright.net"]);
+        _paq.push(["setDomains", ["*.ryan.himmelwright.net"]]);
+        _paq.push(['trackPageView']);
+        _paq.push(['enableLinkTracking']);
+        (function() {
+        var u="//cloud.himmelwright.net/piwik/";
+        _paq.push(['setTrackerUrl', u+'piwik.php']);
+        _paq.push(['setSiteId', '1']);
+        var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+        g.type='text/javascript'; g.async=true; g.defer=true; g.src=u+'piwik.js'; s.parentNode.insertBefore(g,s);
+        })();
+        </script>
+        <noscript><p><img src="//cloud.himmelwright.net/piwik/piwik.php?idsite=1&rec=1" style="border:0;" alt="" /></p></noscript>
+        
+
+
+
+</head>
+
+<body>
+
+    
+    <nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+        <div class="container-fluid">
+            
+            <div class="navbar-header page-scroll">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="http://ryan.himmelwright.net">λ ryan. himmelwright. net</a>
+            </div>
+
+                       
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    
+                    <li>
+                        <a href="../../">home</a>
+                    </li>
+                    
+                    <li>
+                        <a href="../../pages/about/">About</a>
+                    </li>
+                    
+                    <li>
+                        <a href="../../pages/homelab/">Homelab</a>
+                    </li>
+                    
+                    <li>
+                        <a href="../../tags">tags</a>
+                    </li>
+                    
+                    <li>
+                        <a href="../../post/">Archives</a>
+                    </li>
+                    
+                    <li>
+                        <a href="../../post/index.xml">RSS</a>
+                    </li>
+                    
+                  </ul>
+            </div>
+           
+
+        </div>
+        
+    </nav>
+
+
+
+
+<header class="intro-header" style="background-image: url('http://ryan.himmelwright.net/img/posts/trying-notion/journals.jpeg')">
+    
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <h1>Trying out Notion</h1>
+                    <h2 class="subheading"></h2>
+                    <span class="meta">
+                        
+Posted by <a href="#">Ryan Himmelwright</a> on Sun, Jun 28, 2020
+
+
+
+
+
+
+
+<br />
+Tags <a href="../../tags/notes">notes</a>, <a href="../../tags/organization">organization</a>, <a href="../../tags/applications">applications</a>
+
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    </header>
+
+    
+    <article>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                    
+                    <p>Over the past year or two, my notes and planning systems have been a bit of a
+jumble.  It started when I attempted to switch everything to <a href="../../post/switched-to-joplin-notes/">joplin
+notes</a>&hellip; only to eventually switch <a href="../../post/back-on-org-mode-for-work/">back to
+org-mode (for my work notes)</a> a few months
+later. Around that same time, I also started using <a href="https://trello.com">trello</a>
+to organize my personal and home life task boards. This system has worked well, but
+feels very disjointed. My notes, goals, and tasks are spread all over the place.
+This might all be about to change. I&rsquo;ve started using
+<a href="https://notion.so">Notion</a>.</p>
+
+<h2 id="quick-history">Quick History</h2>
+
+<p>Before diving into my experience with Notion, lets first describe in more
+detail the system I&rsquo;m coming from.</p>
+
+<h3 id="previous-system">Previous System</h3>
+
+<p><a href="../../img/posts/trying-notion/trello_weekly_board.png">
+<img alt="Trello Weekly Board" src="../../img/posts/trying-notion/trello_weekly_board.png" style="max-width: 100%;"/></a>
+<div class="caption">My Trello Weekly Task Board</div></p>
+
+<p>Most recently, my personal and professional notes, and task planning systems
+have consisted of three applications: Trello, Emacs (org-mode), and Joplin.</p>
+
+<p><strong>Trello</strong>: I had several boards for planning my weekly, monthly, and
+multi-month personal tasks (including household ones). I also maintained a few
+boards to keep track of goals and projects ideas (ex: future website posts, books to
+read, training courses to take, etc).</p>
+
+<p><strong>Emacs org-mode</strong>: For my professional work life, I completed all the same tasks I
+listed under the trello section, using emacs instead.  I would write down my
+tasks, and log quick notes and thoughts under each one while I was working on
+it. Logging helps me think through problems, and serves as a reference
+later. While I <em>could</em> log notes into Trello cards, it wasn&rsquo;t nearly as easy to
+quickly open up and record a stream of consciousness, as it is was in org mode.</p>
+
+<p><strong>Joplin</strong>: I previously attempted to make Joplin my universal planning system,
+but it failed. It was a bit messy for a universal system, and lacked a
+board style layout for  my goals and task planning (what Trello or even my <a href="https://github.com/himmAllRight/ry-org-scrum">ry-org-scrum</a>
+package provide). That said, it was a great cross-platform notes application&hellip;
+so I continued to use it for that. Any personal or work <em>note</em> that wasn&rsquo;t
+directly related to a single task card was stored in Joplin.</p>
+
+<h3 id="issues-with-the-system">Issues with the system</h3>
+
+<p><a href="../../img/posts/back-on-org-mode-for-work/scrum-board.png">
+<img alt="Emacs org mode" src="../../img/posts/back-on-org-mode-for-work/scrum-board.png" style="max-width: 100%;"/></a>
+<div class="caption">My Emacs org-mode task/notes, using the task-board
+package I wrote.</div></p>
+
+<p>While this system <em>worked</em>, it does some issues.</p>
+
+<h4 id="couldn-t-share-items-across-applications">Couldn&rsquo;t share items across applications</h4>
+
+<p>The biggest issue I had with this framework was that it was made from several
+<em>disconnected</em> systems. This meant that my notes and information were spread
+all over the place, and not linkable. I tried to keep notes and task logs
+separate, but while working on projects I often wanted to create longer,
+stand-alone, reference <em>notes</em> related to a task. With this setup, I couldn&rsquo;t
+easily have the two items reference each other.</p>
+
+<h4 id="had-to-configure-each-application-on-every-device">Had to configure each application&hellip; on every device</h4>
+
+<p>I have <a href="http://ryan.himmelwright.net/post/org-babel-setup/">automated my emacs
+setup</a>, but both joplin and
+emacs still required me to manually configure their sync solutions.
+Additionally, while Trello&rsquo;s minimal setup of &lsquo;just login&rsquo; seems simple enough,
+even this can quickly become tedious when doing it for multiple applications at a
+time&hellip; on several devices&hellip; some of them phones.</p>
+
+<h4 id="not-accessible-beyond-my-computers">Not accessible beyond my computers</h4>
+
+<p>Lastly, my main issue was that apart from Trello, these systems weren&rsquo;t really
+accessable from devices beside my own. In fact Emacs wasn&rsquo;t even available on
+my mobile devices. While good from a security standpoint, I don&rsquo;t like having
+all my notes and information only available when I sit down at a desktop. If
+I&rsquo;m working on a family member&rsquo;s machine, or in a fresh VM (without a shared
+clipboard), I want to be able to access my notes from a private browser tab. I
+also like to move cards across my task board from my phone as I complete them
+throughout the day.</p>
+
+<h3 id="desires">Desires</h3>
+
+<p>With these issues defined, what is it that I actually want to see in my note
+taking and task organization system?</p>
+
+<p><a href="../../img/posts/back-on-org-mode-for-work/joplin-gui.png">
+<img alt="Joplin GUI" src="../../img/posts/back-on-org-mode-for-work/joplin-gui.png" style="max-width: 100%;"/></a>
+<div class="caption">Joplin Notes</div></p>
+
+<ul>
+<li><strong>Consolidated into one system</strong>: I don&rsquo;t want to setup multiple apps
+and logins on all my systems.</li>
+<li><strong>Cross platform</strong>: Despite only wanting a single system, I want it supported
+on all my devices, including mobile.</li>
+<li><strong>Task board support</strong>: I really enjoy moving and displaying  my task items
+in a board view.</li>
+<li><strong>Normal notes too</strong>: In addition to task cards, I also want support for
+traditional, stand-alone notes. Ideally tasks <em>can</em> be linked to
+notes, but the notes don&rsquo;t <em>have</em> to be task-bound.</li>
+<li><strong>Easy to jump in, add a log note, and get out</strong>: I love this in org-mode. I need
+the ability to quickly jump into a task, hit a keyboard shortcut to auto-insert
+a time-stamp, and write a log note.</li>
+</ul>
+
+<h2 id="notion">Notion</h2>
+
+<p><a href="../../img/posts/trying-notion/notion_window.png">
+<img alt="Notion in iOS" src="../../img/posts/trying-notion/notion_window.png" style="max-width: 100%;"/></a>
+<div class="caption">Notion window in macOS, displaying my page for this post. The UI looks the same on the web and in my &lsquo;Nativfier&rsquo; app in Linux.</div></p>
+
+<p>Notion might be my solution. The <a href="https://notion.so">Notion website</a> states
+that it is an &ldquo;<em>All-in-one workspace.  Write, plan, collaborate, and get
+organized — all in one tool</em>&rdquo;. Having used it as my lone system over the
+past several weeks, I think agree.</p>
+
+<h3 id="what-i-like-so-far">What I like so far</h3>
+
+<ul>
+<li><p><strong>FLEXIBLE</strong>: This cannot be emphasized enough. Notion is <em>extremely</em>
+flexible, providing the <em>tools</em> to setup your own system, rather than being
+a defined system itself. Want just a pile of markdown-ish notes? Fine. Want
+to create endless clusters  of relational databases? Go ahead. This endless
+flexibility makes Notion what I would consider to be the Emacs org-mode for
+<del>normal</del> <em>reasonable</em> people.</p></li>
+
+<li><p><strong>Easy logging using <code>@now</code></strong>:
+<a href="../../img/posts/trying-notion/now_timestamp.png">
+<img alt="logging using @now" src="../../img/posts/trying-notion/now_timestamp.png" style="max-width: 100%;"/></a>
+<div class="caption">Easy logging using <code>@now</code></div>
+Notion has the &lsquo;easy logging&rsquo; feature I
+wanted. I just have to type <code>@now</code>, hit enter, and it auto auto-inserts a
+dynamic date and time (the &lsquo;today&rsquo; changes to &lsquo;yesterday&rsquo;, and eventually
+the date as time passes).</p></li>
+
+<li><p><strong>Databases</strong>: Databases are a compelling tool that are the backbone of a
+powerful notion setup. They allow collections of data to be linked, sorted,
+and filtered. Databases themselves have several notable features worth
+mentioning:</p>
+
+<ul>
+<li><strong>Multiple view methods for the same data</strong>: Database items can be displayed in
+different <em>views</em>. These include tables, boards, galleries,
+calendar, and lists.</li>
+<li><strong>Views can be filtered and sorted using property rules</strong>:
+Properties can be also marked as hidden, and any custom
+changes to the data view can be saved. This makes it easy to flip
+through different views to get a better picture of the information.</li>
+<li><strong>Linkable</strong>: A database can be embedded in a page as a &lsquo;linked database&rsquo;.
+This is a database that points to an already existing
+one, and any changes to it also occur in the original DB. However,
+the linked databases have their own saved and default views.</li>
+</ul></li>
+
+<li><p><strong>Templates</strong>: Templates are another convenient feature. A specific page
+layout can be defined as a template, which new pages can then be created
+from. For example, I have weekly templates that
+contain all the tasks and linked databases for that week automatically
+configured. So when setting up a new week, I can simply create a new page
+from the template and fill in some information. Done.</p></li>
+
+<li><p><strong>Accessible from all my devices</strong>:
+<a href="../../img/posts/trying-notion/ios_notion.png">
+<img alt="Notion in iOS" src="../../img/posts/trying-notion/ios_notion.png" style="max-width: 100%;"/></a>
+<div class="caption">Notion views in iOS. Navigation, my &lsquo;Areas&rsquo; card view,
+a daily log page&rsquo; properties, and a task &lsquo;board&rsquo; view.</div></p>
+
+<p>Notion has desktop applications for macOS and Windows, as well as
+mobile apps for iOS and Andriod. Additionally, it functions well as a webapp, which
+made it easy for me to create a
+<a href="https://github.com/jiahaog/nativefier">nativefier</a> build of it to run on my Linux
+systems.</p></li>
+
+<li><p><strong>Free, and affordable for pro</strong>: When I started using notion, the free tier
+was limited to 1000 blocks, but since then they have made the personal tier
+free <em>without</em> a use limit! There is still a Pro version with fancy features
+(like revision history), but even that is offered at a reasonable price.</p></li>
+</ul>
+
+<h3 id="downsides-concerns">Downsides/Concerns</h3>
+
+<p><a href="../../img/posts/trying-notion/notion-export.png">
+<img alt="Notion in iOS" src="../../img/posts/trying-notion/notion-export.png" style="max-width: 100%;"/></a>
+<div class="caption">Notion makes it easy to export an entire workspace.</div></p>
+
+<ul>
+<li><strong>All my eggs in one basket</strong>: My biggest concern with Notion, is that I am
+throwing everything into a single service which I now rely on. That is a <em>huge risk</em>. Fortunately,
+Notion does make it extremely easy to <a href="https://www.notion.so/Workspace-settings-security-b0a64a148cad461cb6e9df74f7372ecf#23a9194abf324cb7a222ede243fdcb5b">export</a> a workspace, which eases
+my fears a bit. I need to test this out, and maybe make it a habit to
+periodically do it as a backup.</li>
+<li><strong>A bit of a steep learning curve</strong>: All the flexibility
+and power means it can take a bit of trial and error to setup a system that
+works for you. While overwhelming at first, I don&rsquo;t find it to be not that
+big of an problem. I <em>am</em> coming from using mostly emacs after all :P</li>
+<li><strong>Lacks a cheaper &lsquo;Family&rsquo; Plan</strong>: I&rsquo;m ecstatic that they made the personal plan
+free, but I would still love to see a &lsquo;Family&rsquo; plan that would allow my
+wife and I to have shared collaborative pages. I know this is what the
+teams version provides, but we don&rsquo;t need all the other advanced features,
+and the price ends up being a bit steep for what we would want.</li>
+</ul>
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p>In summary, I&rsquo;ve found Notion to be amazing. I&rsquo;ve had to redo my setup twice
+already as I&rsquo;ve started to better understand more powerful features, but every
+time it has been worth it. Notion appears to be fitting my needs perfectly, and
+it keeps getting better every day as I continue to tweak and perfect it.</p>
+
+                    
+                    
+                    
+                         <div style="float: right; text-decoration: underline; text-align: right;">Prev Post:</div>
+                    
+                    <br>
+                    
+                    
+                        <a href="http://ryan.himmelwright.net/post/switching-hugo-md-handler/" style="text-align: right; float: right; max-width: 40%">Switching Hugo&#39;s Markdown Handler</a>
+                    
+
+			
+			<div class="comment-section">
+			  
+   <div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "himmallright" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+			</div>
+                </div>
+            </div>
+        </div>
+    </article>
+
+        <hr>
+    
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                  <ul class="list-inline text-center">
+                    
+                      <li>
+                        <a href="mailto:ryan@himmelwright.net">
+                          <span class="fa-stack fa-lg">
+                            <i class="fa fa-circle fa-stack-2x"></i>
+                            <i class="fa fa-envelope-o fa-stack-1x fa-inverse"></i>
+                          </span>
+                        </a>
+                      </li>
+                    
+                    
+                    <li>
+                      <a href="https://github.com/himmAllRight">
+                        <span class="fa-stack fa-lg">
+                          <i class="fa fa-circle fa-stack-2x"></i>
+                          <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                        </span>
+                      </a>
+                    </li>
+                    
+                    <li>
+                      <a href="https://www.linkedin.com/in/ryan-himmelwright-b3891774/">
+                        <span class="fa-stack fa-lg">
+                          <i class="fa fa-circle fa-stack-2x"></i>
+                          <i class="fa fa-linkedin fa-stack-1x fa-inverse"></i>
+                        </span>
+                      </a>
+                    </li>
+                    
+                  </ul>
+<p class="copyright text-muted">
+
+<a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img
+  alt="Creative Commons License" style="border-width:0"
+  src="https://i.creativecommons.org/l/by/4.0/88x31.png" /></a><br />This work
+by <a xmlns:cc="http://creativecommons.org/ns#" href="http://ryan.himmelwright.net" property="cc:attributionName" rel="cc:attributionURL">Ryan Himmelwright</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
+</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    
+    <script src="http://ryan.himmelwright.net/js/jquery.min.js"></script>
+
+    
+    <script src="http://ryan.himmelwright.net/js/bootstrap.min.js"></script>
+
+    
+    <script src="http://ryan.himmelwright.net/js/clean-blog.js"></script>
+
+    
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-123-45', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+
+
+</body>
+
+</html>
+
