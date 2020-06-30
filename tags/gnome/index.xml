@@ -1,0 +1,109 @@
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Gnome on λ ryan. himmelwright. net</title>
+    <link>http://ryan.himmelwright.net/tags/gnome/</link>
+    <description>Recent content in Gnome on λ ryan. himmelwright. net</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Tue, 30 Jun 2020 00:00:00 +0000</lastBuildDate>
+    
+        <atom:link href="http://ryan.himmelwright.net/tags/gnome/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>My Three Required Gnome Extensions</title>
+      <link>http://ryan.himmelwright.net/post/three-required-gnome-extensions/</link>
+      <pubDate>Tue, 30 Jun 2020 00:00:00 +0000</pubDate>
+      
+      <guid>http://ryan.himmelwright.net/post/three-required-gnome-extensions/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;https://www.gnome.org&#34;&gt;Gnome&lt;/a&gt; is the default desktop environment for many
+Linux distributions, including my distro of choice,
+&lt;a href=&#34;https://getfedora.org&#34;&gt;Fedora&lt;/a&gt;. When Gnome 3 was first released, I had to
+install a bunch of &lt;a href=&#34;https://extensions.gnome.org&#34;&gt;extensions&lt;/a&gt; to get a
+functional experience. These days, between becoming more familar with the Gnome
+workflow, and the Gnome team ironing out the rougher edges of the DE, I don&amp;rsquo;t
+need nearly as many extensions to get going. However, there are still three
+which I do not think I could live without.&lt;/p&gt;
+
+&lt;h2 id=&#34;gnome-extensions&#34;&gt;Gnome Extensions&lt;/h2&gt;
+
+&lt;p&gt;&lt;center&gt;
+&lt;a href=&#34;../../img/posts/three-required-gnome-extensions/gnome-extensions.png&#34;&gt;
+&lt;img alt=&#34;Gnome Extensions Website&#34; src=&#34;../../img/posts/three-required-gnome-extensions/gnome-extensions.png&#34; style=&#34;max-width: 100%;&#34;/&gt;&lt;/a&gt;
+&lt;div class=&#34;caption&#34;&gt;The Gnome Extensions website&lt;/div&gt;
+&lt;/center&gt;&lt;/p&gt;
+
+&lt;p&gt;Gnome extensions are installable enhancements to the Gnome desktop environment.
+They are obtained by going to the &lt;a href=&#34;https://extensions.gnome.org&#34;&gt;gnome extensions
+website&lt;/a&gt; with a supported browser, installing the
+plugin, and switching the tab of desired extensions to &amp;ldquo;On&amp;rdquo;. Extensions can
+be further configured using the
+&lt;a href=&#34;https://wiki.gnome.org/action/show/Apps/Tweaks?action=show&amp;amp;redirect=Apps%2FGnomeTweakTool&#34;&gt;Tweaks&lt;/a&gt;
+desktop application.&lt;/p&gt;
+
+&lt;h2 id=&#34;my-must-have-3&#34;&gt;My Must-Have 3&lt;/h2&gt;
+
+&lt;h3 id=&#34;caffeine&#34;&gt;Caffeine&lt;/h3&gt;
+
+&lt;p&gt;My first required extension is Caffeine, which adds a little coffee cup icon to
+the status bar. When the cup is empty, the system behaves as normal. However,
+when clicked, the cup &amp;lsquo;fills up&amp;rsquo; and caffeine will prevent the system from
+suspending the display.&lt;/p&gt;
+
+&lt;p&gt;This is useful when giving presentations to stop the screen from dimming off
+during longer slides, or during Q&amp;amp;A time. I also use this if I have a secondary
+computer displaying information, to prevent it from repeatedly logging me out. I
+can temporarily pause my sleep settings, without having to actually go
+in and change them.&lt;/p&gt;
+
+&lt;h3 id=&#34;top-icons-plus&#34;&gt;Top Icons Plus&lt;/h3&gt;
+
+&lt;p&gt;&lt;center&gt;
+&lt;a href=&#34;../../img/posts/three-required-gnome-extensions/top-bars.png&#34;&gt;
+&lt;img alt=&#34;Gnome top bars with and without extensions enabled&#34; src=&#34;../../img/posts/three-required-gnome-extensions/top-bars.png&#34; style=&#34;max-width: 100%;&#34;/&gt;&lt;/a&gt;
+&lt;div class=&#34;caption&#34;&gt;The right side of my top bar, without extensions (top),
+and with the &lt;em&gt;caffeine&lt;/em&gt; and &lt;em&gt;top icons plus&lt;/em&gt; extensions enabled (bottom)&lt;/div&gt;
+&lt;/center&gt;&lt;/p&gt;
+
+&lt;p&gt;Many applications still expect an icon to be visible, in a task bar, where the
+application can to store settings in. However, Gnome will often hide these
+icons, making them less accessible. Top icons plus moves these icons back to
+the top status bar, like many people expect.&lt;/p&gt;
+
+&lt;p&gt;I use this extension so that I can more easily see and control applications on
+my system which &lt;em&gt;assume&lt;/em&gt; the icons to be visible. Top Icons plus also allows me
+to choose where on the bar I want them located (left, center, right). I
+usually just set them to the &amp;lsquo;right&amp;rsquo; side of the screen, with all the other
+junk.&lt;/p&gt;
+
+&lt;h3 id=&#34;sound-input-output-device-chooser&#34;&gt;Sound Input &amp;amp; Output Device Chooser&lt;/h3&gt;
+
+&lt;p&gt;&lt;a href=&#34;../../img/posts/three-required-gnome-extensions/drop-downs.png&#34;&gt;
+&lt;img alt=&#34;Dropdown Menu, with and without sound device chooser&#34; src=&#34;../../img/posts/three-required-gnome-extensions/drop-downs.png&#34; style=&#34;max-width: 100%;&#34;/&gt;&lt;/a&gt;
+&lt;div class=&#34;caption&#34;&gt;Top bar dropdown menu, with (right) and without (left) the
+&lt;em&gt;Sound Input &amp;amp; Output Device Chooser&lt;/em&gt; extension enabled&lt;/div&gt;
+&lt;/center&gt;&lt;/p&gt;
+
+&lt;p&gt;Lastly, the &lt;em&gt;Sound Input &amp;amp; Output Device Chooser&lt;/em&gt; plugin adds a drop-down menu
+to the top bar where audio input and output devices can be easily switched.
+Otherwise, I usually need to do this from the &lt;em&gt;sound&lt;/em&gt; section of the system
+settings.&lt;/p&gt;
+
+&lt;p&gt;As someone that switches between speakers and headphones all day, has 100%
+remote meetings, and usually more than one microphone device connected to their
+computer, this is probably my most &lt;em&gt;required&lt;/em&gt; plug-in. It makes my life
+easier, and allows me to react quicker in a meeting if I notice that an
+incorrect audio device is selected.&lt;/p&gt;
+
+&lt;h2 id=&#34;conclusion&#34;&gt;Conclusion&lt;/h2&gt;
+
+&lt;p&gt;While I still use other extensions, these are the big three. I think default gnome
+has gotten surprisingly usable, but I would probably struggle to use it if
+these extensions were no longer available to me.  So, to the Gnome team&amp;hellip;
+please consider adding the functionality of these items as defaults in Gnome.
+If not, I understand. However, if that is the case&amp;hellip; Gnome community, please
+don&amp;rsquo;t let these extensions become deprecated! Thanks :)&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

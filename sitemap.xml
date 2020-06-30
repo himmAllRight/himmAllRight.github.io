@@ -3,6 +3,51 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>http://ryan.himmelwright.net/tags/c/</loc>
+    <lastmod>2020-06-30T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://ryan.himmelwright.net/tags/customization/</loc>
+    <lastmod>2020-06-30T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://ryan.himmelwright.net/tags/fedora/</loc>
+    <lastmod>2020-06-30T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://ryan.himmelwright.net/tags/gnome/</loc>
+    <lastmod>2020-06-30T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://ryan.himmelwright.net/tags/linux/</loc>
+    <lastmod>2020-06-30T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://ryan.himmelwright.net/post/three-required-gnome-extensions/</loc>
+    <lastmod>2020-06-30T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://ryan.himmelwright.net/post/</loc>
+    <lastmod>2020-06-30T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://ryan.himmelwright.net/tags/</loc>
+    <lastmod>2020-06-30T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://ryan.himmelwright.net/</loc>
+    <lastmod>2020-06-30T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>http://ryan.himmelwright.net/tags/applications/</loc>
     <lastmod>2020-06-28T00:00:00+00:00</lastmod>
   </url>
@@ -18,22 +63,7 @@
   </url>
   
   <url>
-    <loc>http://ryan.himmelwright.net/post/</loc>
-    <lastmod>2020-06-28T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://ryan.himmelwright.net/tags/</loc>
-    <lastmod>2020-06-28T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
     <loc>http://ryan.himmelwright.net/post/trying-notion/</loc>
-    <lastmod>2020-06-28T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://ryan.himmelwright.net/</loc>
     <lastmod>2020-06-28T00:00:00+00:00</lastmod>
   </url>
   
@@ -69,11 +99,6 @@
   
   <url>
     <loc>http://ryan.himmelwright.net/tags/homelab/</loc>
-    <lastmod>2020-05-28T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://ryan.himmelwright.net/tags/linux/</loc>
     <lastmod>2020-05-28T00:00:00+00:00</lastmod>
   </url>
   
@@ -168,11 +193,6 @@
   </url>
   
   <url>
-    <loc>http://ryan.himmelwright.net/tags/fedora/</loc>
-    <lastmod>2020-01-25T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
     <loc>http://ryan.himmelwright.net/tags/kde/</loc>
     <lastmod>2020-01-25T00:00:00+00:00</lastmod>
   </url>
@@ -253,11 +273,6 @@
   </url>
   
   <url>
-    <loc>http://ryan.himmelwright.net/tags/c/</loc>
-    <lastmod>2019-11-09T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
     <loc>http://ryan.himmelwright.net/tags/community/</loc>
     <lastmod>2019-11-09T00:00:00+00:00</lastmod>
   </url>
@@ -330,11 +345,6 @@
   <url>
     <loc>http://ryan.himmelwright.net/tags/filesystems/</loc>
     <lastmod>2019-06-05T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://ryan.himmelwright.net/tags/customization/</loc>
-    <lastmod>2019-05-23T00:00:00+00:00</lastmod>
   </url>
   
   <url>
