@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Auto-starting Applications with Systemd Services -- λ ryan. himmelwright. net</title>
+
+    
+
+    
+    <link href="http://ryan.himmelwright.net/css/bootstrap.min.css" rel="stylesheet">
+
+    
+    <link href="http://ryan.himmelwright.net/css/clean-blog.min.css" rel="stylesheet">
+
+    
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href='//fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+
+    
+    
+    
+
+
+
+    
+    <script type="text/javascript">
+        var _paq = _paq || [];
+         
+        _paq.push(["setDocumentTitle", document.domain + "/" + document.title]);
+        _paq.push(["setCookieDomain", "*.ryan.himmelwright.net"]);
+        _paq.push(["setDomains", ["*.ryan.himmelwright.net"]]);
+        _paq.push(['trackPageView']);
+        _paq.push(['enableLinkTracking']);
+        (function() {
+        var u="//cloud.himmelwright.net/piwik/";
+        _paq.push(['setTrackerUrl', u+'piwik.php']);
+        _paq.push(['setSiteId', '1']);
+        var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+        g.type='text/javascript'; g.async=true; g.defer=true; g.src=u+'piwik.js'; s.parentNode.insertBefore(g,s);
+        })();
+        </script>
+        <noscript><p><img src="//cloud.himmelwright.net/piwik/piwik.php?idsite=1&rec=1" style="border:0;" alt="" /></p></noscript>
+        
+
+
+
+</head>
+
+<body>
+
+    
+    <nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+        <div class="container-fluid">
+            
+            <div class="navbar-header page-scroll">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="http://ryan.himmelwright.net">λ ryan. himmelwright. net</a>
+            </div>
+
+                       
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    
+                    <li>
+                        <a href="../../">home</a>
+                    </li>
+                    
+                    <li>
+                        <a href="../../pages/about/">About</a>
+                    </li>
+                    
+                    <li>
+                        <a href="../../pages/homelab/">Homelab</a>
+                    </li>
+                    
+                    <li>
+                        <a href="../../tags">tags</a>
+                    </li>
+                    
+                    <li>
+                        <a href="../../post/">Archives</a>
+                    </li>
+                    
+                    <li>
+                        <a href="../../post/index.xml">RSS</a>
+                    </li>
+                    
+                  </ul>
+            </div>
+           
+
+        </div>
+        
+    </nav>
+
+
+
+
+<header class="intro-header" style="background-image: url('http://ryan.himmelwright.net/img/posts/autostart-application-systemd-service/unc-quad-trees.jpeg')">
+    
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <h1>Auto-starting Applications with Systemd Services</h1>
+                    <h2 class="subheading"></h2>
+                    <span class="meta">
+                        
+Posted by <a href="#">Ryan Himmelwright</a> on Tue, Jul 14, 2020
+
+
+
+
+
+
+
+<br />
+Tags <a href="../../tags/linux">linux</a>, <a href="../../tags/systemd">systemd</a>, <a href="../../tags/customization">customization</a>
+
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <span class="header-caption">UNC-Chapel Hill Campus, Chapel Hill, NC</span>
+    
+    </header>
+
+    
+    <article>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                    
+                    <p>Recently, I&rsquo;ve been hosting a <a href="http://foundryvtt.com">Foundry VTT</a> server (a
+nodejs app) in a virtual machine on my home network. I would start the
+application inside a
+<a href="http://ryan.himmelwright.net/post/setting-up-tmuxinator/"><code>tmux</code></a> session, by
+executing a CLI command which worked&hellip; fine.  However, if the VM restarted or
+the applications crashed, I had to ssh in and manually run the command again. So,
+to better automate this tedious task, I created a unit file to
+define the foundry server as a systemd service. Here&rsquo;s how.</p>
+
+<h3 id="unit-files">Unit Files</h3>
+
+<p>With so many distributions utilizing
+<a href="https://en.wikipedia.org/wiki/Systemd">systemd</a>, unit files have become a new
+standard for auto-starting, or re-starting, applications in Linux. Simply put,
+unit files are used to define resources to be managed by systemd. This includes
+<em>services</em>. So to run FoundryVTT <em>as</em> a service, we need to create a new systemd
+<code>.service</code> unit file.</p>
+
+<h3 id="creating-the-service-file">Creating the service file</h3>
+
+<p>To create a unit file, I opened <code>/lib/systemd/system/foundryvtt.service</code> in
+<code>vim</code> and filled it with the following contents:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ini" data-lang="ini"><span style="color:#66d9ef">[Unit]</span>
+<span style="color:#a6e22e">Description</span><span style="color:#f92672">=</span><span style="color:#e6db74">A service to run the Foundry VTT node app</span>
+<span style="color:#a6e22e">Documentation</span><span style="color:#f92672">=</span><span style="color:#e6db74">https://foundryvtt.com</span>
+<span style="color:#a6e22e">After</span><span style="color:#f92672">=</span><span style="color:#e6db74">network.target</span>
+
+<span style="color:#66d9ef">[Service]</span>
+<span style="color:#a6e22e">Environment</span><span style="color:#f92672">=</span><span style="color:#e6db74">NODE_PORT=30000</span>
+<span style="color:#a6e22e">Type</span><span style="color:#f92672">=</span><span style="color:#e6db74">simple</span>
+<span style="color:#a6e22e">User</span><span style="color:#f92672">=</span><span style="color:#e6db74">ryan</span>
+<span style="color:#a6e22e">ExecStart</span><span style="color:#f92672">=</span><span style="color:#e6db74">/usr/bin/node /home/user/foundryvtt/resources/app/main.js --dataPath=/home/user/foundrydata</span>
+<span style="color:#a6e22e">Restart</span><span style="color:#f92672">=</span><span style="color:#e6db74">on-failure</span>
+
+<span style="color:#66d9ef">[Install]</span>
+<span style="color:#a6e22e">WantedBy</span><span style="color:#f92672">=</span><span style="color:#e6db74">multi-user.target</span></code></pre></div>
+<p>This file tells systemd all the information it needs to run the service. The
+contents of the <code>[Unit]</code> section define some basic information about the unit
+file. The variables which define our <em>service</em>, are appropriately listed in the
+<code>[Service]</code> section and include:</p>
+
+<ul>
+<li><code>Environment=NODE_PORT=30000</code> sets an environment variable</li>
+<li><code>Type=simple</code> states that our service is executing a single command, and is
+&ldquo;started&rdquo; when that command runs.</li>
+<li><code>User=ryan</code> tells the service to run under the <code>ryan</code> user</li>
+<li><code>ExecStart</code> defines which command to run when the service is started
+(this is the command I had to manually type in <code>tmux</code>)</li>
+<li><code>Restart=on-failure</code> tells the service to automatically restart on any
+failures.</li>
+</ul>
+
+<p>Save and exit the file.</p>
+
+<h3 id="start-and-enable-the-service">Start and Enable the Service</h3>
+
+<p>With the unit file created, the new service can be started:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">sudo systemctl start foundryvtt</code></pre></div>
+<p>In addition to starting the service, I also <em>enabled</em> it so that it will
+automatically launch whenever the system reboots:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">sudo systemctl enable foundryvtt</code></pre></div>
+<h3 id="stopping-restarting-and-status">Stopping, Restarting, and Status</h3>
+
+<p>To check that the service is running, use the command <code>systemctl status foundryvtt</code>:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">sudo systemctl status foundryvtt
+<span style="color:#f92672">[</span>ryan@magmar dotfiles<span style="color:#f92672">]</span>$ sudo systemctl status foundryvtt
+● foundryvtt.service - A service to run the Foundry VTT node app
+     Loaded: loaded <span style="color:#f92672">(</span>/usr/lib/systemd/system/foundryvtt.service; disabled; vendor preset: disabled<span style="color:#f92672">)</span>
+     Active: active <span style="color:#f92672">(</span>running<span style="color:#f92672">)</span> since Sun 2020-07-12 16:34:29 EDT; 2s ago
+       Docs: https://foundryvtt.com
+   Main PID: <span style="color:#ae81ff">1070</span> <span style="color:#f92672">(</span>node<span style="color:#f92672">)</span>
+      Tasks: <span style="color:#ae81ff">11</span> <span style="color:#f92672">(</span>limit: 2327<span style="color:#f92672">)</span>
+     Memory: 93.8M
+        CPU: 1.227s
+     CGroup: /system.slice/foundryvtt.service
+             └─1070 /usr/bin/node /home/ryan/foundryvtt/resources/app/main.js --dataPath<span style="color:#f92672">=</span>/home/ryan/foundrydata
+
+... *A Bunch of Logs I removed*...</code></pre></div>
+<p>The output contains <code>Active: active (running)</code>, which means the service is
+running. We can also restart or stop the service using the <code>systemctl restart
+foundryvtt</code> and <code>systemctl stop foundryvtt</code> commands, respectively.</p>
+
+<p>For example, I can stop the service and then check the status to verify it is
+killed (<em>Note the <code>Active: inactive (dead)</code> in the status output</em>).</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#f92672">[</span>ryan@magmar<span style="color:#f92672">]</span>$ sudo systemctl stop foundryvtt
+<span style="color:#f92672">[</span>ryan@magmar<span style="color:#f92672">]</span>$ sudo systemctl status foundryvtt
+● foundryvtt.service - A service to run the Foundry VTT node app
+     Loaded: loaded <span style="color:#f92672">(</span>/usr/lib/systemd/system/foundryvtt.service; disabled; vendor preset: disabled<span style="color:#f92672">)</span>
+     Active: inactive <span style="color:#f92672">(</span>dead<span style="color:#f92672">)</span>
+       Docs: https://foundryvtt.com</code></pre></div>
+<h3 id="conclusion">Conclusion</h3>
+
+<p>That&rsquo;s about it. Systemd unit files might seem complicated at first, but
+after writing, one they aren&rsquo;t that bad. Additionally, it turns out that using
+automation to <em>create</em> them isn&rsquo;t too difficult either&hellip; but I&rsquo;ll show that in
+another post. Until then, enjoy!</p>
+
+                    
+                    
+                    
+                         <div style="float: right; text-decoration: underline; text-align: right;">Prev Post:</div>
+                    
+                    <br>
+                    
+                    
+                        <a href="http://ryan.himmelwright.net/post/three-required-gnome-extensions/" style="text-align: right; float: right; max-width: 40%">My Three Required Gnome Extensions</a>
+                    
+
+			
+			<div class="comment-section">
+			  
+   <div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "himmallright" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+			</div>
+                </div>
+            </div>
+        </div>
+    </article>
+
+        <hr>
+    
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                  <ul class="list-inline text-center">
+                    
+                      <li>
+                        <a href="mailto:ryan@himmelwright.net">
+                          <span class="fa-stack fa-lg">
+                            <i class="fa fa-circle fa-stack-2x"></i>
+                            <i class="fa fa-envelope-o fa-stack-1x fa-inverse"></i>
+                          </span>
+                        </a>
+                      </li>
+                    
+                    
+                    <li>
+                      <a href="https://github.com/himmAllRight">
+                        <span class="fa-stack fa-lg">
+                          <i class="fa fa-circle fa-stack-2x"></i>
+                          <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                        </span>
+                      </a>
+                    </li>
+                    
+                    <li>
+                      <a href="https://www.linkedin.com/in/ryan-himmelwright-b3891774/">
+                        <span class="fa-stack fa-lg">
+                          <i class="fa fa-circle fa-stack-2x"></i>
+                          <i class="fa fa-linkedin fa-stack-1x fa-inverse"></i>
+                        </span>
+                      </a>
+                    </li>
+                    
+                  </ul>
+<p class="copyright text-muted">
+
+<a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img
+  alt="Creative Commons License" style="border-width:0"
+  src="https://i.creativecommons.org/l/by/4.0/88x31.png" /></a><br />This work
+by <a xmlns:cc="http://creativecommons.org/ns#" href="http://ryan.himmelwright.net" property="cc:attributionName" rel="cc:attributionURL">Ryan Himmelwright</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
+</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    
+    <script src="http://ryan.himmelwright.net/js/jquery.min.js"></script>
+
+    
+    <script src="http://ryan.himmelwright.net/js/bootstrap.min.js"></script>
+
+    
+    <script src="http://ryan.himmelwright.net/js/clean-blog.js"></script>
+
+    
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-123-45', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+
+
+</body>
+
+</html>
+

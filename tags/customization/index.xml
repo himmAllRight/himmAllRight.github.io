@@ -5,10 +5,114 @@
     <description>Recent content in Customization on λ ryan. himmelwright. net</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 30 Jun 2020 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 14 Jul 2020 00:00:00 +0000</lastBuildDate>
     
         <atom:link href="http://ryan.himmelwright.net/tags/customization/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Auto-starting Applications with Systemd Services</title>
+      <link>http://ryan.himmelwright.net/post/autostarting-application-systemd-service/</link>
+      <pubDate>Tue, 14 Jul 2020 00:00:00 +0000</pubDate>
+      
+      <guid>http://ryan.himmelwright.net/post/autostarting-application-systemd-service/</guid>
+      <description>&lt;p&gt;Recently, I&amp;rsquo;ve been hosting a &lt;a href=&#34;http://foundryvtt.com&#34;&gt;Foundry VTT&lt;/a&gt; server (a
+nodejs app) in a virtual machine on my home network. I would start the
+application inside a
+&lt;a href=&#34;http://ryan.himmelwright.net/post/setting-up-tmuxinator/&#34;&gt;&lt;code&gt;tmux&lt;/code&gt;&lt;/a&gt; session, by
+executing a CLI command which worked&amp;hellip; fine.  However, if the VM restarted or
+the applications crashed, I had to ssh in and manually run the command again. So,
+to better automate this tedious task, I created a unit file to
+define the foundry server as a systemd service. Here&amp;rsquo;s how.&lt;/p&gt;
+
+&lt;h3 id=&#34;unit-files&#34;&gt;Unit Files&lt;/h3&gt;
+
+&lt;p&gt;With so many distributions utilizing
+&lt;a href=&#34;https://en.wikipedia.org/wiki/Systemd&#34;&gt;systemd&lt;/a&gt;, unit files have become a new
+standard for auto-starting, or re-starting, applications in Linux. Simply put,
+unit files are used to define resources to be managed by systemd. This includes
+&lt;em&gt;services&lt;/em&gt;. So to run FoundryVTT &lt;em&gt;as&lt;/em&gt; a service, we need to create a new systemd
+&lt;code&gt;.service&lt;/code&gt; unit file.&lt;/p&gt;
+
+&lt;h3 id=&#34;creating-the-service-file&#34;&gt;Creating the service file&lt;/h3&gt;
+
+&lt;p&gt;To create a unit file, I opened &lt;code&gt;/lib/systemd/system/foundryvtt.service&lt;/code&gt; in
+&lt;code&gt;vim&lt;/code&gt; and filled it with the following contents:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-ini&#34; data-lang=&#34;ini&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;[Unit]&lt;/span&gt;
+&lt;span style=&#34;color:#a6e22e&#34;&gt;Description&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;A service to run the Foundry VTT node app&lt;/span&gt;
+&lt;span style=&#34;color:#a6e22e&#34;&gt;Documentation&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;https://foundryvtt.com&lt;/span&gt;
+&lt;span style=&#34;color:#a6e22e&#34;&gt;After&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;network.target&lt;/span&gt;
+
+&lt;span style=&#34;color:#66d9ef&#34;&gt;[Service]&lt;/span&gt;
+&lt;span style=&#34;color:#a6e22e&#34;&gt;Environment&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;NODE_PORT=30000&lt;/span&gt;
+&lt;span style=&#34;color:#a6e22e&#34;&gt;Type&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;simple&lt;/span&gt;
+&lt;span style=&#34;color:#a6e22e&#34;&gt;User&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;ryan&lt;/span&gt;
+&lt;span style=&#34;color:#a6e22e&#34;&gt;ExecStart&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;/usr/bin/node /home/user/foundryvtt/resources/app/main.js --dataPath=/home/user/foundrydata&lt;/span&gt;
+&lt;span style=&#34;color:#a6e22e&#34;&gt;Restart&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;on-failure&lt;/span&gt;
+
+&lt;span style=&#34;color:#66d9ef&#34;&gt;[Install]&lt;/span&gt;
+&lt;span style=&#34;color:#a6e22e&#34;&gt;WantedBy&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;multi-user.target&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;This file tells systemd all the information it needs to run the service. The
+contents of the &lt;code&gt;[Unit]&lt;/code&gt; section define some basic information about the unit
+file. The variables which define our &lt;em&gt;service&lt;/em&gt;, are appropriately listed in the
+&lt;code&gt;[Service]&lt;/code&gt; section and include:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;Environment=NODE_PORT=30000&lt;/code&gt; sets an environment variable&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;Type=simple&lt;/code&gt; states that our service is executing a single command, and is
+&amp;ldquo;started&amp;rdquo; when that command runs.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;User=ryan&lt;/code&gt; tells the service to run under the &lt;code&gt;ryan&lt;/code&gt; user&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;ExecStart&lt;/code&gt; defines which command to run when the service is started
+(this is the command I had to manually type in &lt;code&gt;tmux&lt;/code&gt;)&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;Restart=on-failure&lt;/code&gt; tells the service to automatically restart on any
+failures.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Save and exit the file.&lt;/p&gt;
+
+&lt;h3 id=&#34;start-and-enable-the-service&#34;&gt;Start and Enable the Service&lt;/h3&gt;
+
+&lt;p&gt;With the unit file created, the new service can be started:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;sudo systemctl start foundryvtt&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;In addition to starting the service, I also &lt;em&gt;enabled&lt;/em&gt; it so that it will
+automatically launch whenever the system reboots:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;sudo systemctl enable foundryvtt&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h3 id=&#34;stopping-restarting-and-status&#34;&gt;Stopping, Restarting, and Status&lt;/h3&gt;
+
+&lt;p&gt;To check that the service is running, use the command &lt;code&gt;systemctl status foundryvtt&lt;/code&gt;:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;sudo systemctl status foundryvtt
+&lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;ryan@magmar dotfiles&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt;$ sudo systemctl status foundryvtt
+● foundryvtt.service - A service to run the Foundry VTT node app
+     Loaded: loaded &lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;/usr/lib/systemd/system/foundryvtt.service; disabled; vendor preset: disabled&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt;
+     Active: active &lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;running&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt; since Sun 2020-07-12 16:34:29 EDT; 2s ago
+       Docs: https://foundryvtt.com
+   Main PID: &lt;span style=&#34;color:#ae81ff&#34;&gt;1070&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;node&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt;
+      Tasks: &lt;span style=&#34;color:#ae81ff&#34;&gt;11&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;limit: 2327&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt;
+     Memory: 93.8M
+        CPU: 1.227s
+     CGroup: /system.slice/foundryvtt.service
+             └─1070 /usr/bin/node /home/ryan/foundryvtt/resources/app/main.js --dataPath&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;/home/ryan/foundrydata
+
+... *A Bunch of Logs I removed*...&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;The output contains &lt;code&gt;Active: active (running)&lt;/code&gt;, which means the service is
+running. We can also restart or stop the service using the &lt;code&gt;systemctl restart
+foundryvtt&lt;/code&gt; and &lt;code&gt;systemctl stop foundryvtt&lt;/code&gt; commands, respectively.&lt;/p&gt;
+
+&lt;p&gt;For example, I can stop the service and then check the status to verify it is
+killed (&lt;em&gt;Note the &lt;code&gt;Active: inactive (dead)&lt;/code&gt; in the status output&lt;/em&gt;).&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;ryan@magmar&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt;$ sudo systemctl stop foundryvtt
+&lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;ryan@magmar&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt;$ sudo systemctl status foundryvtt
+● foundryvtt.service - A service to run the Foundry VTT node app
+     Loaded: loaded &lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;/usr/lib/systemd/system/foundryvtt.service; disabled; vendor preset: disabled&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt;
+     Active: inactive &lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;dead&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt;
+       Docs: https://foundryvtt.com&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h3 id=&#34;conclusion&#34;&gt;Conclusion&lt;/h3&gt;
+
+&lt;p&gt;That&amp;rsquo;s about it. Systemd unit files might seem complicated at first, but
+after writing, one they aren&amp;rsquo;t that bad. Additionally, it turns out that using
+automation to &lt;em&gt;create&lt;/em&gt; them isn&amp;rsquo;t too difficult either&amp;hellip; but I&amp;rsquo;ll show that in
+another post. Until then, enjoy!&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>My Three Required Gnome Extensions</title>
