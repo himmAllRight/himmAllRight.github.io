@@ -5,7 +5,7 @@
     <description>Recent content in Pages on λ ryan. himmelwright. net</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 11 Apr 2020 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 15 Jul 2020 00:00:00 +0000</lastBuildDate>
     
         <atom:link href="http://ryan.himmelwright.net/pages/index.xml" rel="self" type="application/rss+xml" />
     
@@ -13,7 +13,7 @@
     <item>
       <title>Homelab</title>
       <link>http://ryan.himmelwright.net/pages/homelab/</link>
-      <pubDate>Sat, 11 Apr 2020 00:00:00 +0000</pubDate>
+      <pubDate>Wed, 15 Jul 2020 00:00:00 +0000</pubDate>
       
       <guid>http://ryan.himmelwright.net/pages/homelab/</guid>
       <description>
@@ -40,10 +40,10 @@ MSI B450 Tomahawk Motherboard
 32 GB (2x16GB) DDR4-3200 Mhz RAM
 Sapphire Radeon Pulse RX 580 8GB GPU
 500 GB Samsung 970 EVO NVME SSD
-250 GB Samsung 850 EVO SATA SSD
+500 GB Samsung 850 EVO SATA SSD
 Fractal Design Meshify C Dark TG ATX Mid Tower Case
 EVGA SuperNOVA G4 650w 80+ Gold, fully modular PSU
-Fedora 32
+Fedora 32 (KDE Plasma)
 *Connected to Periphery devices&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;&lt;a name=&#34;kadabra&#34;&gt;&lt;/a&gt;&lt;/p&gt;
 
@@ -51,9 +51,9 @@ Fedora 32
 &lt;pre&gt;&lt;code&gt;T470 Thinkpad
 Intel i5-7200u [2.5 GHz (3.1 GHz Turbo), 2 Cores, 4 Threads]
 16 GB RAM
-500 GB Samsung EVO SSD
+250 GB Samsung EVO SSD
 14&amp;#34; 1920x1080 IPS Display
-Fedora 32
+Fedora Silverblue 32
 *Can Connect to Periphery devices via Thunderbolt 3 Dongle&lt;/code&gt;&lt;/pre&gt;
 &lt;h3 id=&#34;interface-devices&#34;&gt;Interface Devices&lt;/h3&gt;
 
