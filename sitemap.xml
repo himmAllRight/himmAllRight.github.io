@@ -3,6 +3,51 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>http://ryan.himmelwright.net/tags/ansible/</loc>
+    <lastmod>2020-07-29T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://ryan.himmelwright.net/tags/c/</loc>
+    <lastmod>2020-07-29T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://ryan.himmelwright.net/post/foundryvtt-service-ansible-role/</loc>
+    <lastmod>2020-07-29T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://ryan.himmelwright.net/tags/customization/</loc>
+    <lastmod>2020-07-29T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://ryan.himmelwright.net/tags/linux/</loc>
+    <lastmod>2020-07-29T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://ryan.himmelwright.net/post/</loc>
+    <lastmod>2020-07-29T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://ryan.himmelwright.net/tags/systemd/</loc>
+    <lastmod>2020-07-29T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://ryan.himmelwright.net/tags/</loc>
+    <lastmod>2020-07-29T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://ryan.himmelwright.net/</loc>
+    <lastmod>2020-07-29T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>http://ryan.himmelwright.net/pages/homelab/</loc>
     <lastmod>2020-07-15T00:00:00+00:00</lastmod>
   </url>
@@ -13,42 +58,7 @@
   </url>
   
   <url>
-    <loc>http://ryan.himmelwright.net/</loc>
-    <lastmod>2020-07-15T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
     <loc>http://ryan.himmelwright.net/post/autostarting-application-systemd-service/</loc>
-    <lastmod>2020-07-14T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://ryan.himmelwright.net/tags/c/</loc>
-    <lastmod>2020-07-14T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://ryan.himmelwright.net/tags/customization/</loc>
-    <lastmod>2020-07-14T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://ryan.himmelwright.net/tags/linux/</loc>
-    <lastmod>2020-07-14T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://ryan.himmelwright.net/post/</loc>
-    <lastmod>2020-07-14T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://ryan.himmelwright.net/tags/systemd/</loc>
-    <lastmod>2020-07-14T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://ryan.himmelwright.net/tags/</loc>
     <lastmod>2020-07-14T00:00:00+00:00</lastmod>
   </url>
   
@@ -125,11 +135,6 @@
   <url>
     <loc>http://ryan.himmelwright.net/post/rx580-upgrade/</loc>
     <lastmod>2020-05-28T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://ryan.himmelwright.net/tags/ansible/</loc>
-    <lastmod>2020-04-30T00:00:00+00:00</lastmod>
   </url>
   
   <url>

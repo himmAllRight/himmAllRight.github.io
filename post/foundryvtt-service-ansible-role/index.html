@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Creating Systemd Unit Files using Ansible -- λ ryan. himmelwright. net</title>
+
+    
+
+    
+    <link href="http://ryan.himmelwright.net/css/bootstrap.min.css" rel="stylesheet">
+
+    
+    <link href="http://ryan.himmelwright.net/css/clean-blog.min.css" rel="stylesheet">
+
+    
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href='//fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+
+    
+    
+    
+
+
+
+    
+    <script type="text/javascript">
+        var _paq = _paq || [];
+         
+        _paq.push(["setDocumentTitle", document.domain + "/" + document.title]);
+        _paq.push(["setCookieDomain", "*.ryan.himmelwright.net"]);
+        _paq.push(["setDomains", ["*.ryan.himmelwright.net"]]);
+        _paq.push(['trackPageView']);
+        _paq.push(['enableLinkTracking']);
+        (function() {
+        var u="//cloud.himmelwright.net/piwik/";
+        _paq.push(['setTrackerUrl', u+'piwik.php']);
+        _paq.push(['setSiteId', '1']);
+        var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+        g.type='text/javascript'; g.async=true; g.defer=true; g.src=u+'piwik.js'; s.parentNode.insertBefore(g,s);
+        })();
+        </script>
+        <noscript><p><img src="//cloud.himmelwright.net/piwik/piwik.php?idsite=1&rec=1" style="border:0;" alt="" /></p></noscript>
+        
+
+
+
+</head>
+
+<body>
+
+    
+    <nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+        <div class="container-fluid">
+            
+            <div class="navbar-header page-scroll">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="http://ryan.himmelwright.net">λ ryan. himmelwright. net</a>
+            </div>
+
+                       
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    
+                    <li>
+                        <a href="../../">home</a>
+                    </li>
+                    
+                    <li>
+                        <a href="../../pages/about/">About</a>
+                    </li>
+                    
+                    <li>
+                        <a href="../../pages/homelab/">Homelab</a>
+                    </li>
+                    
+                    <li>
+                        <a href="../../tags">tags</a>
+                    </li>
+                    
+                    <li>
+                        <a href="../../post/">Archives</a>
+                    </li>
+                    
+                    <li>
+                        <a href="../../post/index.xml">RSS</a>
+                    </li>
+                    
+                  </ul>
+            </div>
+           
+
+        </div>
+        
+    </nav>
+
+
+
+
+<header class="intro-header" style="background-image: url('http://ryan.himmelwright.net/img/posts/foundryvtt-service-ansible-role/unc-campus.jpeg')">
+    
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <h1>Creating Systemd Unit Files using Ansible</h1>
+                    <h2 class="subheading"></h2>
+                    <span class="meta">
+                        
+Posted by <a href="#">Ryan Himmelwright</a> on Wed, Jul 29, 2020
+
+
+
+
+
+
+
+<br />
+Tags <a href="../../tags/linux">linux</a>, <a href="../../tags/systemd">systemd</a>, <a href="../../tags/customization">customization</a>, <a href="../../tags/ansible">ansible</a>
+
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <span class="header-caption">UNC-Chapel Hill Campus, Chapel Hill, NC</span>
+    
+    </header>
+
+    
+    <article>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                    
+                    <p>In my <a href="../../post/autostarting-application-systemd-service/">previous post</a>, I
+created a systemd unit file to define an application as a service, and
+configured it to auto-start on my server. I&rsquo;ve been making a big push to define
+the provisioning of all my homelab machines/VMs using automation. So the last
+step in setting up my FoundryVTT server, is to <em>automate</em> the process.
+Fortunately, creating a systemd unit file is quite easy to do using
+<a href="https://www.ansible.com">ansible</a>.</p>
+
+<h2 id="creating-the-ansible-role">Creating the Ansible Role</h2>
+
+<p>Let&rsquo;s start by creating a role (if you don&rsquo;t know what an ansible role
+is, checkout <a href="../../post/ansible-quickstart/">this guide</a> I wrote not too long ago).
+First, create some directories:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">cd roles
+mkdir -p foundryvtt/<span style="color:#f92672">{</span>defaults,tasks,templates<span style="color:#f92672">}</span></code></pre></div>
+<p>One difference from roles I&rsquo;ve created previously, is that this one contains a
+<code>templates</code> directory. That is because <em>this</em> role will use a <code>j2</code> template to
+define the systemd unit file, but more on that later.</p>
+
+<h2 id="defining-variables">Defining Variables</h2>
+
+<p>Lets create some files, starting with one to define the default variables.
+Open <code>roles/foundryvtt/defaults/main.yaml</code> and add the following:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml">---
+<span style="color:#66d9ef">user</span>: <span style="color:#e6db74">&#34;{{ ansible_user_id }}&#34;</span>
+<span style="color:#66d9ef">service_description</span>: <span style="color:#e6db74">&#34;A service to run the Foundry VTT node app&#34;</span>
+<span style="color:#66d9ef">foundryvtt_dir</span>: <span style="color:#e6db74">&#34;/home/{{ user }}/foundryvtt/&#34;</span>
+<span style="color:#66d9ef">foundrydata_dir</span>: <span style="color:#e6db74">&#34;/home/{{ user }}/foundrydata&#34;</span></code></pre></div>
+<p>This defines a few default veriables that will be used in the service file
+template, as well as in the tasks file. The variables can optionally be
+over-ridden when running a playbook, but they will default to these values if
+not specified.</p>
+
+<h2 id="making-a-template">Making a Template</h2>
+
+<p>Now that the varibles are defined, we can create the unit file template. So,
+open a new file (<code>roles/foundryvtt/templates/foundryvtt.service.j2</code> in my
+case), and insert the unit file from the previous post.</p>
+
+<p>Next, walk through the file and substitute any values for the variables defined
+in the previous section:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-INI" data-lang="INI"><span style="color:#66d9ef">[Unit]</span>
+<span style="color:#a6e22e">Description</span><span style="color:#f92672">=</span><span style="color:#e6db74">{{ service_description }}</span>
+<span style="color:#a6e22e">Documentation</span><span style="color:#f92672">=</span><span style="color:#e6db74">https://foundryvtt.com</span>
+<span style="color:#a6e22e">After</span><span style="color:#f92672">=</span><span style="color:#e6db74">network.target</span>
+
+<span style="color:#66d9ef">[Service]</span>
+<span style="color:#a6e22e">Environment</span><span style="color:#f92672">=</span><span style="color:#e6db74">NODE_PORT=30000</span>
+<span style="color:#a6e22e">Type</span><span style="color:#f92672">=</span><span style="color:#e6db74">simple</span>
+<span style="color:#a6e22e">User</span><span style="color:#f92672">=</span><span style="color:#e6db74">{{ user }}</span>
+<span style="color:#a6e22e">ExecStart</span><span style="color:#f92672">=</span><span style="color:#e6db74">/usr/bin/node {{ foundry_dir }}/resources/app/main.js --dataPath={{ foundrydata_dir }}</span>
+<span style="color:#a6e22e">Restart</span><span style="color:#f92672">=</span><span style="color:#e6db74">on-failure</span>
+
+<span style="color:#66d9ef">[Install]</span>
+<span style="color:#a6e22e">WantedBy</span><span style="color:#f92672">=</span><span style="color:#e6db74">multi-user.target</span></code></pre></div>
+<p>Great! This template is now ready to be used in our role.</p>
+
+<h2 id="ansible-tasks">Ansible Tasks</h2>
+
+<p>Last but not least, time to write some Ansible tasks. Open a new file
+(<code>roles/foundryvtt/tasks/main.yaml</code>), and lets start by adding any additional
+tasks <em>this particular role</em> needs, outside of the service file. For my example,
+this includes creating the defined data directories, unzipping the application source
+package, and opening required ports in the firewall:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#75715e">## Note, you likely don&#39;t need these tasks. They are just for my particular</span>
+<span style="color:#75715e">## example...</span>
+- <span style="color:#66d9ef">name</span>: Create foundryvtt dir at {{ foundryvtt_dir }}
+  <span style="color:#66d9ef">become_user</span>: <span style="color:#e6db74">&#34;{{ user }}&#34;</span>
+  <span style="color:#66d9ef">file</span>:
+    <span style="color:#66d9ef">path</span>: <span style="color:#e6db74">&#34;{{ foundryvtt_dir }}&#34;</span>
+    <span style="color:#66d9ef">state</span>: directory
+
+- <span style="color:#66d9ef">name</span>: Create foundrydata dir at {{ foundrydata_dir }}
+  <span style="color:#66d9ef">become_user</span>: <span style="color:#e6db74">&#34;{{ user }}&#34;</span>
+  <span style="color:#66d9ef">file</span>:
+    <span style="color:#66d9ef">path</span>: <span style="color:#e6db74">&#34;{{ foundrydata_dir }}&#34;</span>
+    <span style="color:#66d9ef">state</span>: directory
+
+- <span style="color:#66d9ef">name</span>: Send Foundry Package
+  <span style="color:#66d9ef">when</span>: foundryvtt_send_src is defined and foundryvtt_send_src is not none
+  <span style="color:#66d9ef">copy</span>:
+    <span style="color:#66d9ef">src</span>: <span style="color:#e6db74">&#34;{{ foundryvtt_send_src }}&#34;</span>
+    <span style="color:#66d9ef">dest</span>: <span style="color:#e6db74">&#34;{{ foundryvtt_package_src }}&#34;</span>
+
+- <span style="color:#66d9ef">name</span>: Extract package
+  <span style="color:#66d9ef">unarchive</span>:
+    <span style="color:#66d9ef">src</span>: <span style="color:#e6db74">&#34;{{ foundryvtt_package_src }}&#34;</span>
+    <span style="color:#66d9ef">dest</span>: <span style="color:#e6db74">&#34;{{ foundryvtt_dir }}&#34;</span>
+    <span style="color:#66d9ef">remote_src</span>: yes
+
+- <span style="color:#66d9ef">name</span>: Start firewalld
+  <span style="color:#66d9ef">systemd</span>:
+    <span style="color:#66d9ef">name</span>: firewalld
+    <span style="color:#66d9ef">state</span>: started
+
+- <span style="color:#66d9ef">name</span>: Open FoundryVTT Ports (firewalld)
+  <span style="color:#66d9ef">firewalld</span>:
+    <span style="color:#66d9ef">port</span>: <span style="color:#ae81ff">30000</span>/tcp
+    <span style="color:#66d9ef">permanent</span>: yes
+    <span style="color:#66d9ef">state</span>: enabled
+
+- <span style="color:#66d9ef">name</span>: reload service firewalld, in all cases
+  <span style="color:#66d9ef">systemd</span>:
+    <span style="color:#66d9ef">name</span>: firewalld
+    <span style="color:#66d9ef">state</span>: reloaded</code></pre></div>
+<p>With all that defined, lets finally define a task to create our unit file using
+the template:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml">- <span style="color:#66d9ef">name</span>: Create foundryvtt systemd service file
+  <span style="color:#66d9ef">template</span>:
+    <span style="color:#66d9ef">src</span>: templates/foundryvtt.service.j2
+    <span style="color:#66d9ef">dest</span>: /lib/systemd/system/foundryvtt.service</code></pre></div>
+<p>The <code>src</code> is set to the relative location (to the role) of the template we
+defined earlier, and the <code>dest</code> is set to where we would like the generated
+file to be copied to. This template is a unit file for a systemd service, so
+I&rsquo;m going to copy it to <code>/lib/systemd/system/foundryvtt.service</code>.</p>
+
+<p>Last but not least, lets start the newly created service:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml">- <span style="color:#66d9ef">name</span>: Start foundryvtt service
+  <span style="color:#66d9ef">systemd</span>:
+    <span style="color:#66d9ef">name</span>: foundryvtt
+    <span style="color:#66d9ef">state</span>: started</code></pre></div>
+<p>&hellip; and&hellip; our role is finished!</p>
+
+<h2 id="playbook">Playbook</h2>
+
+<p>To run the role, it is easiest to have it run in a playbook. I try to define
+the provisioning of all my systems in their own playbooks, including my foundry
+server, so I use this role there. Just remember to call it in a <code>roles:</code>
+section of the playbook, like so:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml">  <span style="color:#66d9ef">roles</span>:
+    - foundryvtt</code></pre></div>
+<h2 id="conclusion">Conclusion</h2>
+
+<p>That&rsquo;s it. We&rsquo;ve easily automated setting up the systemd unit file from the
+previous post using ansible. This makes defining and reproducing unit roles
+very simple. In addition, knowing how to use templates in ansible is <em>very</em>
+powerful, and I will definitely be utilizing them much more moving forward.
+Enjoy!</p>
+
+                    
+                    
+                    
+                         <div style="float: right; text-decoration: underline; text-align: right;">Prev Post:</div>
+                    
+                    <br>
+                    
+                    
+                        <a href="http://ryan.himmelwright.net/post/autostarting-application-systemd-service/" style="text-align: right; float: right; max-width: 40%">Auto-starting Applications with Systemd Services</a>
+                    
+
+			
+			<div class="comment-section">
+			  
+   <div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "himmallright" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+			</div>
+                </div>
+            </div>
+        </div>
+    </article>
+
+        <hr>
+    
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                  <ul class="list-inline text-center">
+                    
+                      <li>
+                        <a href="mailto:ryan@himmelwright.net">
+                          <span class="fa-stack fa-lg">
+                            <i class="fa fa-circle fa-stack-2x"></i>
+                            <i class="fa fa-envelope-o fa-stack-1x fa-inverse"></i>
+                          </span>
+                        </a>
+                      </li>
+                    
+                    
+                    <li>
+                      <a href="https://github.com/himmAllRight">
+                        <span class="fa-stack fa-lg">
+                          <i class="fa fa-circle fa-stack-2x"></i>
+                          <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                        </span>
+                      </a>
+                    </li>
+                    
+                    <li>
+                      <a href="https://www.linkedin.com/in/ryan-himmelwright-b3891774/">
+                        <span class="fa-stack fa-lg">
+                          <i class="fa fa-circle fa-stack-2x"></i>
+                          <i class="fa fa-linkedin fa-stack-1x fa-inverse"></i>
+                        </span>
+                      </a>
+                    </li>
+                    
+                  </ul>
+<p class="copyright text-muted">
+
+<a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img
+  alt="Creative Commons License" style="border-width:0"
+  src="https://i.creativecommons.org/l/by/4.0/88x31.png" /></a><br />This work
+by <a xmlns:cc="http://creativecommons.org/ns#" href="http://ryan.himmelwright.net" property="cc:attributionName" rel="cc:attributionURL">Ryan Himmelwright</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
+</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    
+    <script src="http://ryan.himmelwright.net/js/jquery.min.js"></script>
+
+    
+    <script src="http://ryan.himmelwright.net/js/bootstrap.min.js"></script>
+
+    
+    <script src="http://ryan.himmelwright.net/js/clean-blog.js"></script>
+
+    
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-123-45', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+
+
+</body>
+
+</html>
+

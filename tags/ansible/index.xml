@@ -5,10 +5,156 @@
     <description>Recent content in Ansible on λ ryan. himmelwright. net</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 30 Apr 2020 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 29 Jul 2020 00:00:00 +0000</lastBuildDate>
     
         <atom:link href="http://ryan.himmelwright.net/tags/ansible/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Creating Systemd Unit Files using Ansible</title>
+      <link>http://ryan.himmelwright.net/post/foundryvtt-service-ansible-role/</link>
+      <pubDate>Wed, 29 Jul 2020 00:00:00 +0000</pubDate>
+      
+      <guid>http://ryan.himmelwright.net/post/foundryvtt-service-ansible-role/</guid>
+      <description>&lt;p&gt;In my &lt;a href=&#34;../../post/autostarting-application-systemd-service/&#34;&gt;previous post&lt;/a&gt;, I
+created a systemd unit file to define an application as a service, and
+configured it to auto-start on my server. I&amp;rsquo;ve been making a big push to define
+the provisioning of all my homelab machines/VMs using automation. So the last
+step in setting up my FoundryVTT server, is to &lt;em&gt;automate&lt;/em&gt; the process.
+Fortunately, creating a systemd unit file is quite easy to do using
+&lt;a href=&#34;https://www.ansible.com&#34;&gt;ansible&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h2 id=&#34;creating-the-ansible-role&#34;&gt;Creating the Ansible Role&lt;/h2&gt;
+
+&lt;p&gt;Let&amp;rsquo;s start by creating a role (if you don&amp;rsquo;t know what an ansible role
+is, checkout &lt;a href=&#34;../../post/ansible-quickstart/&#34;&gt;this guide&lt;/a&gt; I wrote not too long ago).
+First, create some directories:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;cd roles
+mkdir -p foundryvtt/&lt;span style=&#34;color:#f92672&#34;&gt;{&lt;/span&gt;defaults,tasks,templates&lt;span style=&#34;color:#f92672&#34;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;One difference from roles I&amp;rsquo;ve created previously, is that this one contains a
+&lt;code&gt;templates&lt;/code&gt; directory. That is because &lt;em&gt;this&lt;/em&gt; role will use a &lt;code&gt;j2&lt;/code&gt; template to
+define the systemd unit file, but more on that later.&lt;/p&gt;
+
+&lt;h2 id=&#34;defining-variables&#34;&gt;Defining Variables&lt;/h2&gt;
+
+&lt;p&gt;Lets create some files, starting with one to define the default variables.
+Open &lt;code&gt;roles/foundryvtt/defaults/main.yaml&lt;/code&gt; and add the following:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;---
+&lt;span style=&#34;color:#66d9ef&#34;&gt;user&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;{{ ansible_user_id }}&amp;#34;&lt;/span&gt;
+&lt;span style=&#34;color:#66d9ef&#34;&gt;service_description&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;A service to run the Foundry VTT node app&amp;#34;&lt;/span&gt;
+&lt;span style=&#34;color:#66d9ef&#34;&gt;foundryvtt_dir&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;/home/{{ user }}/foundryvtt/&amp;#34;&lt;/span&gt;
+&lt;span style=&#34;color:#66d9ef&#34;&gt;foundrydata_dir&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;/home/{{ user }}/foundrydata&amp;#34;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;This defines a few default veriables that will be used in the service file
+template, as well as in the tasks file. The variables can optionally be
+over-ridden when running a playbook, but they will default to these values if
+not specified.&lt;/p&gt;
+
+&lt;h2 id=&#34;making-a-template&#34;&gt;Making a Template&lt;/h2&gt;
+
+&lt;p&gt;Now that the varibles are defined, we can create the unit file template. So,
+open a new file (&lt;code&gt;roles/foundryvtt/templates/foundryvtt.service.j2&lt;/code&gt; in my
+case), and insert the unit file from the previous post.&lt;/p&gt;
+
+&lt;p&gt;Next, walk through the file and substitute any values for the variables defined
+in the previous section:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-INI&#34; data-lang=&#34;INI&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;[Unit]&lt;/span&gt;
+&lt;span style=&#34;color:#a6e22e&#34;&gt;Description&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;{{ service_description }}&lt;/span&gt;
+&lt;span style=&#34;color:#a6e22e&#34;&gt;Documentation&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;https://foundryvtt.com&lt;/span&gt;
+&lt;span style=&#34;color:#a6e22e&#34;&gt;After&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;network.target&lt;/span&gt;
+
+&lt;span style=&#34;color:#66d9ef&#34;&gt;[Service]&lt;/span&gt;
+&lt;span style=&#34;color:#a6e22e&#34;&gt;Environment&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;NODE_PORT=30000&lt;/span&gt;
+&lt;span style=&#34;color:#a6e22e&#34;&gt;Type&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;simple&lt;/span&gt;
+&lt;span style=&#34;color:#a6e22e&#34;&gt;User&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;{{ user }}&lt;/span&gt;
+&lt;span style=&#34;color:#a6e22e&#34;&gt;ExecStart&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;/usr/bin/node {{ foundry_dir }}/resources/app/main.js --dataPath={{ foundrydata_dir }}&lt;/span&gt;
+&lt;span style=&#34;color:#a6e22e&#34;&gt;Restart&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;on-failure&lt;/span&gt;
+
+&lt;span style=&#34;color:#66d9ef&#34;&gt;[Install]&lt;/span&gt;
+&lt;span style=&#34;color:#a6e22e&#34;&gt;WantedBy&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;multi-user.target&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Great! This template is now ready to be used in our role.&lt;/p&gt;
+
+&lt;h2 id=&#34;ansible-tasks&#34;&gt;Ansible Tasks&lt;/h2&gt;
+
+&lt;p&gt;Last but not least, time to write some Ansible tasks. Open a new file
+(&lt;code&gt;roles/foundryvtt/tasks/main.yaml&lt;/code&gt;), and lets start by adding any additional
+tasks &lt;em&gt;this particular role&lt;/em&gt; needs, outside of the service file. For my example,
+this includes creating the defined data directories, unzipping the application source
+package, and opening required ports in the firewall:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;&lt;span style=&#34;color:#75715e&#34;&gt;## Note, you likely don&amp;#39;t need these tasks. They are just for my particular&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;## example...&lt;/span&gt;
+- &lt;span style=&#34;color:#66d9ef&#34;&gt;name&lt;/span&gt;: Create foundryvtt dir at {{ foundryvtt_dir }}
+  &lt;span style=&#34;color:#66d9ef&#34;&gt;become_user&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;{{ user }}&amp;#34;&lt;/span&gt;
+  &lt;span style=&#34;color:#66d9ef&#34;&gt;file&lt;/span&gt;:
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;path&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;{{ foundryvtt_dir }}&amp;#34;&lt;/span&gt;
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;state&lt;/span&gt;: directory
+
+- &lt;span style=&#34;color:#66d9ef&#34;&gt;name&lt;/span&gt;: Create foundrydata dir at {{ foundrydata_dir }}
+  &lt;span style=&#34;color:#66d9ef&#34;&gt;become_user&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;{{ user }}&amp;#34;&lt;/span&gt;
+  &lt;span style=&#34;color:#66d9ef&#34;&gt;file&lt;/span&gt;:
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;path&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;{{ foundrydata_dir }}&amp;#34;&lt;/span&gt;
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;state&lt;/span&gt;: directory
+
+- &lt;span style=&#34;color:#66d9ef&#34;&gt;name&lt;/span&gt;: Send Foundry Package
+  &lt;span style=&#34;color:#66d9ef&#34;&gt;when&lt;/span&gt;: foundryvtt_send_src is defined and foundryvtt_send_src is not none
+  &lt;span style=&#34;color:#66d9ef&#34;&gt;copy&lt;/span&gt;:
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;src&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;{{ foundryvtt_send_src }}&amp;#34;&lt;/span&gt;
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;dest&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;{{ foundryvtt_package_src }}&amp;#34;&lt;/span&gt;
+
+- &lt;span style=&#34;color:#66d9ef&#34;&gt;name&lt;/span&gt;: Extract package
+  &lt;span style=&#34;color:#66d9ef&#34;&gt;unarchive&lt;/span&gt;:
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;src&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;{{ foundryvtt_package_src }}&amp;#34;&lt;/span&gt;
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;dest&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;{{ foundryvtt_dir }}&amp;#34;&lt;/span&gt;
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;remote_src&lt;/span&gt;: yes
+
+- &lt;span style=&#34;color:#66d9ef&#34;&gt;name&lt;/span&gt;: Start firewalld
+  &lt;span style=&#34;color:#66d9ef&#34;&gt;systemd&lt;/span&gt;:
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;name&lt;/span&gt;: firewalld
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;state&lt;/span&gt;: started
+
+- &lt;span style=&#34;color:#66d9ef&#34;&gt;name&lt;/span&gt;: Open FoundryVTT Ports (firewalld)
+  &lt;span style=&#34;color:#66d9ef&#34;&gt;firewalld&lt;/span&gt;:
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;port&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;30000&lt;/span&gt;/tcp
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;permanent&lt;/span&gt;: yes
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;state&lt;/span&gt;: enabled
+
+- &lt;span style=&#34;color:#66d9ef&#34;&gt;name&lt;/span&gt;: reload service firewalld, in all cases
+  &lt;span style=&#34;color:#66d9ef&#34;&gt;systemd&lt;/span&gt;:
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;name&lt;/span&gt;: firewalld
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;state&lt;/span&gt;: reloaded&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;With all that defined, lets finally define a task to create our unit file using
+the template:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;- &lt;span style=&#34;color:#66d9ef&#34;&gt;name&lt;/span&gt;: Create foundryvtt systemd service file
+  &lt;span style=&#34;color:#66d9ef&#34;&gt;template&lt;/span&gt;:
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;src&lt;/span&gt;: templates/foundryvtt.service.j2
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;dest&lt;/span&gt;: /lib/systemd/system/foundryvtt.service&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;The &lt;code&gt;src&lt;/code&gt; is set to the relative location (to the role) of the template we
+defined earlier, and the &lt;code&gt;dest&lt;/code&gt; is set to where we would like the generated
+file to be copied to. This template is a unit file for a systemd service, so
+I&amp;rsquo;m going to copy it to &lt;code&gt;/lib/systemd/system/foundryvtt.service&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;Last but not least, lets start the newly created service:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;- &lt;span style=&#34;color:#66d9ef&#34;&gt;name&lt;/span&gt;: Start foundryvtt service
+  &lt;span style=&#34;color:#66d9ef&#34;&gt;systemd&lt;/span&gt;:
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;name&lt;/span&gt;: foundryvtt
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;state&lt;/span&gt;: started&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;&amp;hellip; and&amp;hellip; our role is finished!&lt;/p&gt;
+
+&lt;h2 id=&#34;playbook&#34;&gt;Playbook&lt;/h2&gt;
+
+&lt;p&gt;To run the role, it is easiest to have it run in a playbook. I try to define
+the provisioning of all my systems in their own playbooks, including my foundry
+server, so I use this role there. Just remember to call it in a &lt;code&gt;roles:&lt;/code&gt;
+section of the playbook, like so:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;  &lt;span style=&#34;color:#66d9ef&#34;&gt;roles&lt;/span&gt;:
+    - foundryvtt&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h2 id=&#34;conclusion&#34;&gt;Conclusion&lt;/h2&gt;
+
+&lt;p&gt;That&amp;rsquo;s it. We&amp;rsquo;ve easily automated setting up the systemd unit file from the
+previous post using ansible. This makes defining and reproducing unit roles
+very simple. In addition, knowing how to use templates in ansible is &lt;em&gt;very&lt;/em&gt;
+powerful, and I will definitely be utilizing them much more moving forward.
+Enjoy!&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>Ansible Quickstart</title>
