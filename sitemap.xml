@@ -3,6 +3,26 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>http://ryan.himmelwright.net/pages/about/</loc>
+    <lastmod>2020-07-30T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://ryan.himmelwright.net/pages/homelab/</loc>
+    <lastmod>2020-07-30T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://ryan.himmelwright.net/pages/</loc>
+    <lastmod>2020-07-30T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://ryan.himmelwright.net/</loc>
+    <lastmod>2020-07-30T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>http://ryan.himmelwright.net/tags/ansible/</loc>
     <lastmod>2020-07-29T00:00:00+00:00</lastmod>
   </url>
@@ -40,21 +60,6 @@
   <url>
     <loc>http://ryan.himmelwright.net/tags/</loc>
     <lastmod>2020-07-29T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://ryan.himmelwright.net/</loc>
-    <lastmod>2020-07-29T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://ryan.himmelwright.net/pages/homelab/</loc>
-    <lastmod>2020-07-15T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://ryan.himmelwright.net/pages/</loc>
-    <lastmod>2020-07-15T00:00:00+00:00</lastmod>
   </url>
   
   <url>
@@ -275,11 +280,6 @@
   <url>
     <loc>http://ryan.himmelwright.net/tags/ssh/</loc>
     <lastmod>2019-12-04T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://ryan.himmelwright.net/pages/about/</loc>
-    <lastmod>2019-11-22T06:47:00-04:00</lastmod>
   </url>
   
   <url>
