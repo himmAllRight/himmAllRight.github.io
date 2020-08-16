@@ -5,10 +5,74 @@
     <description>Recent content in website on λ ryan. himmelwright. net</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 31 May 2020 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 16 Aug 2020 00:00:00 +0000</lastBuildDate>
     
         <atom:link href="http://ryan.himmelwright.net/tags/website/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Running my Website Tests in Parallel with Pytest-Parallel</title>
+      <link>http://ryan.himmelwright.net/post/pytest-parallel-website-tests/</link>
+      <pubDate>Sun, 16 Aug 2020 00:00:00 +0000</pubDate>
+      
+      <guid>http://ryan.himmelwright.net/post/pytest-parallel-website-tests/</guid>
+      <description>&lt;p&gt;Not too long ago, I added some basic testing for my website. Now when I push
+changes to my website&amp;rsquo;s source repo, &lt;a href=&#34;../../post/creating-website-tests-ci&#34;&gt;automated
+tests&lt;/a&gt; run to verify that the site&amp;rsquo;s &lt;a href=&#34;../../post/creating-website-tests-pages/&#34;&gt;pages
+are being served&lt;/a&gt;, and that the (markdown)
+&lt;a href=&#34;../../post/creating-website-tests-links&#34;&gt;links are not broken&lt;/a&gt;. It works well
+enough through the 450 or so generated tests. However, one recent afternoon I
+realized&amp;hellip; I should parallelize them.&lt;/p&gt;
+
+&lt;h2 id=&#34;why-parallelize&#34;&gt;Why Parallelize?&lt;/h2&gt;
+
+&lt;p&gt;Not all tests can be parallelized, but if they &lt;em&gt;can&lt;/em&gt; handle concurrent runs, it
+might be worth trying to figure it out.  All of my current website tests do a
+single thing: check if a page can be reached, or not. Furthermore, each check
+does not interfere with the others. Checking if one link is available does not
+change the state of a second one. Ultimately, this means that I could in
+theory, run all of the tests at the same time.&lt;/p&gt;
+
+&lt;h2 id=&#34;adding-pytest-parallel&#34;&gt;Adding pytest-parallel&lt;/h2&gt;
+
+&lt;p&gt;It turns out getting my website tests to run in parallel wasn&amp;rsquo;t actually that
+hard. I just added a new pip package. I found a few, but the most
+promising one seemed to be &lt;code&gt;pytest-parallel&lt;/code&gt;, which simply adds the option to
+start pytest runs using parallel workers. To test it out, I installed the package
+using the following pip command:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;pip install pytest&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;parallel &lt;span style=&#34;color:#f92672&#34;&gt;--&lt;/span&gt;user&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Once I verified that it &lt;em&gt;worked&lt;/em&gt;, I updated the &lt;code&gt;Pipfile&lt;/code&gt; in the website test
+repo to include the &lt;code&gt;pytest-parallel&lt;/code&gt; package:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;[packages]
+pytest &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;*&amp;#34;&lt;/span&gt;
+requests &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;*&amp;#34;&lt;/span&gt;
+pytest&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;parallel &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;*&amp;#34;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;That&amp;rsquo;s it! To run the tests in parallel, just add the &lt;code&gt;--workers&lt;/code&gt; flag with a
+number to the &lt;code&gt;pytest&lt;/code&gt; call. For example:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;pytest --workers &lt;span style=&#34;color:#ae81ff&#34;&gt;12&lt;/span&gt; -vv .&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;This will run my normal test run (&lt;code&gt;pytest -vv .&lt;/code&gt;), across 12 parallel workers.&lt;/p&gt;
+
+&lt;h2 id=&#34;improvements&#34;&gt;Improvements&lt;/h2&gt;
+
+&lt;p&gt;So, did this actually improve anything? Yep, quite a bit ☺.
+&lt;center&gt;
+&lt;a href=&#34;../../img/posts/pytest-parallel-website-tests/pipeline-time-decrease.png&#34;&gt;
+&lt;img alt=&#34;Time decrease in Jenkins test pipline&#34; src=&#34;../../img/posts/pytest-parallel-website-tests/pipeline-time-decrease.png&#34; style=&#34;max-width: 100%;&#34;/&gt;&lt;/a&gt;
+&lt;div class=&#34;caption&#34;&gt;Time decreases in Jenkins Test Pipeline&lt;/div&gt;
+&lt;/center&gt;&lt;/p&gt;
+
+&lt;p&gt;Using 12 workers, my test pipeline in Jenkins went from taking around 4.5-5
+minutes, all the way down to under 1.5 on average, and sometimes only a minute!
+These times include some other steps, but the tests themselves went from
+taking a few minutes to under 30 seconds! All 450+ of them!&lt;/p&gt;
+
+&lt;h2 id=&#34;conclusion&#34;&gt;Conclusion&lt;/h2&gt;
+
+&lt;p&gt;That&amp;rsquo;s all I have. One day I thought I should parallelize my website tests, and
+it turned out to be quite easy to do. Considering the results, I&amp;rsquo;m glad I did.
+Again, while it is not always possible to run tests concurrently, if it is for
+yours&amp;hellip; try it out!&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>Switching Hugo&#39;s Markdown Handler</title>
