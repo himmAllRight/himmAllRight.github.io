@@ -5,15 +5,65 @@
     <description>Recent content in Pages on λ ryan. himmelwright. net</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 21 Aug 2020 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 30 Jul 2020 00:00:00 +0000</lastBuildDate>
     
         <atom:link href="http://ryan.himmelwright.net/pages/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
+      <title>About</title>
+      <link>http://ryan.himmelwright.net/pages/about/</link>
+      <pubDate>Thu, 30 Jul 2020 00:00:00 +0000</pubDate>
+      
+      <guid>http://ryan.himmelwright.net/pages/about/</guid>
+      <description>
+
+&lt;p&gt;&lt;img src=&#34;../../img/about/east_campus.jpeg&#34; style=&#34;width: 45%; float: left; margin: 10px 10px 10px 10px;&#34;/&gt;&lt;/p&gt;
+
+&lt;p&gt;I am a Quality Engineer at &lt;a href=&#34;https://redhat.com&#34;&gt;Red Hat&lt;/a&gt;,
+living and working in &lt;a href=&#34;https://durhamnc.gov/&#34;&gt;Durham, NC&lt;/a&gt;. Previously,
+I worked at &lt;a href=&#34;http://2is-inc.com/&#34;&gt;2Is-Inc&lt;/a&gt; as a Back-end Software Developer,
+creating applications and build systems (mostly in &lt;a href=&#34;https://franz.com/products/allegro-common-lisp/&#34;&gt;Allegro Common
+Lisp&lt;/a&gt;). Before that, I
+was a student at &lt;a href=&#34;https://www.lafayette.edu/&#34;&gt;Lafayette College&lt;/a&gt;,
+where I majored in Neuroscience and minored in Computer Science.&lt;/p&gt;
+
+&lt;p&gt;Outside of work, I am still an enthusiastic Linux user that loves
+learning about computers, programming languages (especially functional ones),
+and open source technologies. I am particularly interested in containers,
+immutable infrastructure,  and automation.&lt;/p&gt;
+
+&lt;p&gt;I am a self-taught learner and continue to study computer science and IT topics
+by working on &lt;a href=&#34;https://gitlab.com/himmAllRight/&#34;&gt;personal&lt;/a&gt;
+&lt;a href=&#34;https://github.com/himmAllRight?tab=repositories&#34;&gt;projects&lt;/a&gt;, taking courses,
+and maintaining my &lt;a href=&#34;../pages/homelab/&#34;&gt;homelab&lt;/a&gt;. This website exists to help
+document the projects I work on, and what I&amp;rsquo;ve learned.&lt;/p&gt;
+
+&lt;p&gt;Beyond technology, I love &lt;a href=&#34;https://bandcamp.com/himmallright&#34;&gt;music&lt;/a&gt;,
+&lt;a href=&#34;../post/&#34;&gt;writing&lt;/a&gt;, the outdoors, and swimming (I
+competitively swam from the age of 8, through college). I am married to
+Rebecca, a third year &lt;a href=&#34;https://anesthesia.mc.duke.edu/&#34;&gt;Anaesthesia&lt;/a&gt; resident
+at Duke. We have been together for over 13 years and were married on September
+17th, 2016 (the day before our 10th anniversary).&lt;/p&gt;
+
+&lt;p&gt;Feel free to contact me using any of the methods below.&lt;/p&gt;
+
+&lt;h3 id=&#34;contact&#34;&gt;Contact&lt;/h3&gt;
+
+&lt;p&gt;In addition to the contact icons at the bottom of the website, I can
+be reached via these additional methods:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Email: &lt;a href=&#34;mailto:ryan@himmelwright.net&#34;&gt;ryan@himmelwright.net&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Telegram: &lt;code&gt;@himmAllRight&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+    <item>
       <title>Homelab</title>
       <link>http://ryan.himmelwright.net/pages/homelab/</link>
-      <pubDate>Fri, 21 Aug 2020 00:00:00 +0000</pubDate>
+      <pubDate>Thu, 30 Jul 2020 00:00:00 +0000</pubDate>
       
       <guid>http://ryan.himmelwright.net/pages/homelab/</guid>
       <description>
@@ -101,36 +151,27 @@ Logitech HD Pro Webcam c920 Widescreen&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;Even though this is my wife&amp;rsquo;s gear&amp;hellip; I&amp;rsquo;m in charge of managing it all. So I
 decided to add it here.&lt;/p&gt;
 
-&lt;h4 id=&#34;vileplume-macbook&#34;&gt;Vileplume (Macbook)&lt;/h4&gt;
-&lt;pre&gt;&lt;code&gt;Macbook Pro 13&amp;#34; (2020)
-1.4GHz quad‑core 8th‑gen Intel Core i5, Turbo Boost up to 3.9GHz
-8 GB 2133MHz DDR3 RAM
-256 GB PCIe Flash HD
-Intel Iris Plug Graphics 645
-13.3” 2560x1600 IPS LED Display (1440x900 scaled)
-3.1 Lbs and ~0.6” thick
-Apple Magic Keyboard
-Mac OS Catalina&lt;/code&gt;&lt;/pre&gt;
-&lt;h4 id=&#34;gloom-tablet&#34;&gt;Gloom (Tablet)&lt;/h4&gt;
-&lt;pre&gt;&lt;code&gt;iPad (6th Gen)
-* Can be used as a secondary display for Vileplume&lt;/code&gt;&lt;/pre&gt;
-&lt;h4 id=&#34;oddish-phone&#34;&gt;Oddish (Phone)&lt;/h4&gt;
-&lt;pre&gt;&lt;code&gt;iPhone 8 Plus&lt;/code&gt;&lt;/pre&gt;
-&lt;h4 id=&#34;weepinbell-desktop-laptop&#34;&gt;- Weepinbell (Desktop Laptop)&lt;/h4&gt;
+&lt;h4 id=&#34;weepinbell&#34;&gt;- Weepinbell&lt;/h4&gt;
 &lt;pre&gt;&lt;code&gt;Thinkpad T450s
 Intel i5-5300u [2.3 GHz (2.90 GHz Turbo), 2 Cores, 4 Threads]
 12 GB RAM
 256 GB SSD
 14&amp;#34; 1600x900 LED Display
 6-Cell Battery
-CloudReady (a chromiumos spin)
-* Ususally docked to be used as a desktop&lt;/code&gt;&lt;/pre&gt;
+CloudReady (a chromiumos spin)&lt;/code&gt;&lt;/pre&gt;
+&lt;h4 id=&#34;bellsprout&#34;&gt;- Bellsprout&lt;/h4&gt;
+&lt;pre&gt;&lt;code&gt;Macbook Air (2014)
+Intel i5 (1.4 GHz (2.7 GHz Turbo), 3M Cache, 2 Cores, 2 Threads) ?
+4 GB RAM
+128 GB PCIe Flash HD
+13.3” 1440x900 LED Display
+2.96 Lbs and ~0.7” thick
+Mac OS Catalina&lt;/code&gt;&lt;/pre&gt;
 &lt;h4 id=&#34;periphery&#34;&gt;- Periphery&lt;/h4&gt;
 &lt;pre&gt;&lt;code&gt;Thinkpad Ultra Dock 40A2 (to connect to periphery devices below)
 LG 32QK500W, 32&amp;#34; 2560x1440 IPS Monitor
 Apple Air Pod Pros
-Bose AE2 Headphones
-Apple Watch 5&lt;/code&gt;&lt;/pre&gt;
+Bose AE2 Headphones&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;&lt;a name=&#34;servers&#34;&gt;&lt;/a&gt;&lt;/p&gt;
 
 &lt;h2 id=&#34;servers-networking&#34;&gt;Servers &amp;amp; Networking&lt;/h2&gt;
@@ -162,56 +203,6 @@ Nintendo Switch&lt;/code&gt;&lt;/pre&gt;
 1 GB RAM
 20 GB SSD
 Ubuntu 16.04 OS&lt;/code&gt;&lt;/pre&gt;</description>
-    </item>
-    
-    <item>
-      <title>About</title>
-      <link>http://ryan.himmelwright.net/pages/about/</link>
-      <pubDate>Thu, 30 Jul 2020 00:00:00 +0000</pubDate>
-      
-      <guid>http://ryan.himmelwright.net/pages/about/</guid>
-      <description>
-
-&lt;p&gt;&lt;img src=&#34;../../img/about/east_campus.jpeg&#34; style=&#34;width: 45%; float: left; margin: 10px 10px 10px 10px;&#34;/&gt;&lt;/p&gt;
-
-&lt;p&gt;I am a Quality Engineer at &lt;a href=&#34;https://redhat.com&#34;&gt;Red Hat&lt;/a&gt;,
-living and working in &lt;a href=&#34;https://durhamnc.gov/&#34;&gt;Durham, NC&lt;/a&gt;. Previously,
-I worked at &lt;a href=&#34;http://2is-inc.com/&#34;&gt;2Is-Inc&lt;/a&gt; as a Back-end Software Developer,
-creating applications and build systems (mostly in &lt;a href=&#34;https://franz.com/products/allegro-common-lisp/&#34;&gt;Allegro Common
-Lisp&lt;/a&gt;). Before that, I
-was a student at &lt;a href=&#34;https://www.lafayette.edu/&#34;&gt;Lafayette College&lt;/a&gt;,
-where I majored in Neuroscience and minored in Computer Science.&lt;/p&gt;
-
-&lt;p&gt;Outside of work, I am still an enthusiastic Linux user that loves
-learning about computers, programming languages (especially functional ones),
-and open source technologies. I am particularly interested in containers,
-immutable infrastructure,  and automation.&lt;/p&gt;
-
-&lt;p&gt;I am a self-taught learner and continue to study computer science and IT topics
-by working on &lt;a href=&#34;https://gitlab.com/himmAllRight/&#34;&gt;personal&lt;/a&gt;
-&lt;a href=&#34;https://github.com/himmAllRight?tab=repositories&#34;&gt;projects&lt;/a&gt;, taking courses,
-and maintaining my &lt;a href=&#34;../pages/homelab/&#34;&gt;homelab&lt;/a&gt;. This website exists to help
-document the projects I work on, and what I&amp;rsquo;ve learned.&lt;/p&gt;
-
-&lt;p&gt;Beyond technology, I love &lt;a href=&#34;https://bandcamp.com/himmallright&#34;&gt;music&lt;/a&gt;,
-&lt;a href=&#34;../post/&#34;&gt;writing&lt;/a&gt;, the outdoors, and swimming (I
-competitively swam from the age of 8, through college). I am married to
-Rebecca, a third year &lt;a href=&#34;https://anesthesia.mc.duke.edu/&#34;&gt;Anaesthesia&lt;/a&gt; resident
-at Duke. We have been together for over 13 years and were married on September
-17th, 2016 (the day before our 10th anniversary).&lt;/p&gt;
-
-&lt;p&gt;Feel free to contact me using any of the methods below.&lt;/p&gt;
-
-&lt;h3 id=&#34;contact&#34;&gt;Contact&lt;/h3&gt;
-
-&lt;p&gt;In addition to the contact icons at the bottom of the website, I can
-be reached via these additional methods:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Email: &lt;a href=&#34;mailto:ryan@himmelwright.net&#34;&gt;ryan@himmelwright.net&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;Telegram: &lt;code&gt;@himmAllRight&lt;/code&gt;&lt;/li&gt;
-&lt;/ul&gt;
-</description>
     </item>
     
   </channel>
