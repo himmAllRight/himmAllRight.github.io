@@ -5,10 +5,55 @@
     <description>Recent content in Tags on λ ryan. himmelwright. net</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 16 Aug 2020 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 23 Aug 2020 00:00:00 +0000</lastBuildDate>
     
         <atom:link href="http://ryan.himmelwright.net/tags/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>C</title>
+      <link>http://ryan.himmelwright.net/tags/c/</link>
+      <pubDate>Sun, 23 Aug 2020 00:00:00 +0000</pubDate>
+      
+      <guid>http://ryan.himmelwright.net/tags/c/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Containers</title>
+      <link>http://ryan.himmelwright.net/tags/containers/</link>
+      <pubDate>Sun, 23 Aug 2020 00:00:00 +0000</pubDate>
+      
+      <guid>http://ryan.himmelwright.net/tags/containers/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Fedora</title>
+      <link>http://ryan.himmelwright.net/tags/fedora/</link>
+      <pubDate>Sun, 23 Aug 2020 00:00:00 +0000</pubDate>
+      
+      <guid>http://ryan.himmelwright.net/tags/fedora/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>linux</title>
+      <link>http://ryan.himmelwright.net/tags/linux/</link>
+      <pubDate>Sun, 23 Aug 2020 00:00:00 +0000</pubDate>
+      
+      <guid>http://ryan.himmelwright.net/tags/linux/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Network</title>
+      <link>http://ryan.himmelwright.net/tags/network/</link>
+      <pubDate>Sun, 23 Aug 2020 00:00:00 +0000</pubDate>
+      
+      <guid>http://ryan.himmelwright.net/tags/network/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>hugo</title>
@@ -65,15 +110,6 @@
     </item>
     
     <item>
-      <title>C</title>
-      <link>http://ryan.himmelwright.net/tags/c/</link>
-      <pubDate>Wed, 29 Jul 2020 00:00:00 +0000</pubDate>
-      
-      <guid>http://ryan.himmelwright.net/tags/c/</guid>
-      <description></description>
-    </item>
-    
-    <item>
       <title>Customization</title>
       <link>http://ryan.himmelwright.net/tags/customization/</link>
       <pubDate>Wed, 29 Jul 2020 00:00:00 +0000</pubDate>
@@ -83,29 +119,11 @@
     </item>
     
     <item>
-      <title>linux</title>
-      <link>http://ryan.himmelwright.net/tags/linux/</link>
-      <pubDate>Wed, 29 Jul 2020 00:00:00 +0000</pubDate>
-      
-      <guid>http://ryan.himmelwright.net/tags/linux/</guid>
-      <description></description>
-    </item>
-    
-    <item>
       <title>systemd</title>
       <link>http://ryan.himmelwright.net/tags/systemd/</link>
       <pubDate>Wed, 29 Jul 2020 00:00:00 +0000</pubDate>
       
       <guid>http://ryan.himmelwright.net/tags/systemd/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Fedora</title>
-      <link>http://ryan.himmelwright.net/tags/fedora/</link>
-      <pubDate>Tue, 30 Jun 2020 00:00:00 +0000</pubDate>
-      
-      <guid>http://ryan.himmelwright.net/tags/fedora/</guid>
       <description></description>
     </item>
     
@@ -398,15 +416,6 @@
     </item>
     
     <item>
-      <title>Network</title>
-      <link>http://ryan.himmelwright.net/tags/network/</link>
-      <pubDate>Wed, 12 Dec 2018 00:00:00 +0000</pubDate>
-      
-      <guid>http://ryan.himmelwright.net/tags/network/</guid>
-      <description></description>
-    </item>
-    
-    <item>
       <title>Ryzen</title>
       <link>http://ryan.himmelwright.net/tags/ryzen/</link>
       <pubDate>Mon, 26 Nov 2018 00:00:00 +0000</pubDate>
@@ -457,15 +466,6 @@
       <pubDate>Tue, 24 Apr 2018 00:00:00 +0000</pubDate>
       
       <guid>http://ryan.himmelwright.net/tags/sql/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Containers</title>
-      <link>http://ryan.himmelwright.net/tags/containers/</link>
-      <pubDate>Sun, 25 Feb 2018 00:00:00 +0000</pubDate>
-      
-      <guid>http://ryan.himmelwright.net/tags/containers/</guid>
       <description></description>
     </item>
     

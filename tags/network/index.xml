@@ -5,10 +5,113 @@
     <description>Recent content in Network on λ ryan. himmelwright. net</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 12 Dec 2018 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 23 Aug 2020 00:00:00 +0000</lastBuildDate>
     
         <atom:link href="http://ryan.himmelwright.net/tags/network/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>PIA Client Interfering with Podman Containers</title>
+      <link>http://ryan.himmelwright.net/post/pia-client-podman-issues/</link>
+      <pubDate>Sun, 23 Aug 2020 00:00:00 +0000</pubDate>
+      
+      <guid>http://ryan.himmelwright.net/post/pia-client-podman-issues/</guid>
+      <description>&lt;p&gt;Earlier this month, I woke up and tried to start working on my &lt;a href=&#34;../../post/pytest-parallel-website-tests/&#34;&gt;previous
+post&lt;/a&gt;, but quickly hit a snag.
+I was unable to start the
+&lt;a href=&#34;https://docs.fedoraproject.org/en-US/fedora-silverblue/toolbox/&#34;&gt;toolbox&lt;/a&gt;
+container I use while working on my website. In fact, &lt;em&gt;none&lt;/em&gt; of my podman
+containers would start.&lt;/p&gt;
+
+&lt;h2 id=&#34;was-podman-broken&#34;&gt;Was Podman Broken?&lt;/h2&gt;
+
+&lt;p&gt;Specifically, when I tried to start a container I encountered this error
+message:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-sh&#34; data-lang=&#34;sh&#34;&gt;podman start website
+Error: unable to start container &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;f8ab31d42b9d04d051b23c65604e19748a9496f17bd3baab8e6f947eee8f3692&amp;#34;&lt;/span&gt;: creating cgroup directory &lt;span style=&#34;color:#e6db74&#34;&gt;`&lt;/span&gt;/sys/fs/cgroup/net_cls/user.slice/user-1000.slice/user@1000.service/user.slice/libpod-f8ab31d42b9d04d051b23c65604e19748a9496f17bd3baab8e6f947eee8f3692.scope/container&lt;span style=&#34;color:#e6db74&#34;&gt;`&lt;/span&gt;: No such file or directory: OCI runtime command not found error&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;So, I attempted to use  podman on a different computer. It worked fine. I
+compared version numbers and noticed that the second computer had a newer
+version of podman installed. I figured that I had hit a bug that must now be fixed,
+so I waited for the update to reach my desktop (it wasn&amp;rsquo;t available on that
+machine yet for some reason).&lt;/p&gt;
+
+&lt;p&gt;A day later when I ran my updates, the new version of &lt;code&gt;podman&lt;/code&gt; was installed, which
+I thought would surely fix my problem. It didn&amp;rsquo;t. (ಠ_ಠ)&lt;/p&gt;
+
+&lt;h2 id=&#34;the-issue&#34;&gt;The Issue&lt;/h2&gt;
+
+&lt;p&gt;I started to scour the internet again to look for answers. Eventually, I
+found &lt;a href=&#34;https://www.reddit.com/r/Fedora/comments/hqbo34/podman_cgroup_issues_on_f32/&#34;&gt;this reddit
+post&lt;/a&gt;.
+While reading it, the poster&amp;rsquo;s experience sounded &lt;em&gt;very&lt;/em&gt; similar to my own.
+After reading some of the comments that connected the &lt;a href=&#34;https://www.privateinternetaccess.com&#34;&gt;private internet
+access&lt;/a&gt; client to the original poster&amp;rsquo;s
+issues, I suddenly remembered&amp;hellip; I had installed the &lt;a href=&#34;https://www.privateinternetaccess.com/pages/download&#34;&gt;PIA
+client&lt;/a&gt; on my machine
+earlier that week!&lt;/p&gt;
+
+&lt;p&gt;Sure enough, when I checked the ownership of my &lt;code&gt;net_cls&lt;/code&gt; files (as suggested
+in the thread), it looked like &lt;code&gt;piavpn&lt;/code&gt; was claiming group ownership of the
+files:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;➜  ~ ll /sys/fs/cgroup/net_cls
+total &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;
+-rw-r--r--. &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt; root piavpn &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt; Aug  &lt;span style=&#34;color:#ae81ff&#34;&gt;4&lt;/span&gt; 21:21 cgroup.clone_children
+-rw-r--r--. &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt; root piavpn &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt; Aug  &lt;span style=&#34;color:#ae81ff&#34;&gt;4&lt;/span&gt; 21:21 cgroup.procs
+-r--r--r--. &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt; root piavpn &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt; Aug  &lt;span style=&#34;color:#ae81ff&#34;&gt;4&lt;/span&gt; 21:21 cgroup.sane_behavior
+drwxr-xr-x. &lt;span style=&#34;color:#ae81ff&#34;&gt;6&lt;/span&gt; root root   &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt; Aug  &lt;span style=&#34;color:#ae81ff&#34;&gt;4&lt;/span&gt; 21:21 machine.slice
+-rw-r--r--. &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt; root piavpn &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt; Aug  &lt;span style=&#34;color:#ae81ff&#34;&gt;4&lt;/span&gt; 21:21 net_cls.classid
+-rw-r--r--. &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt; root piavpn &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt; Aug  &lt;span style=&#34;color:#ae81ff&#34;&gt;4&lt;/span&gt; 21:21 notify_on_release
+-rw-r--r--. &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt; root piavpn &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt; Aug  &lt;span style=&#34;color:#ae81ff&#34;&gt;4&lt;/span&gt; 21:21 release_agent
+-rw-r--r--. &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt; root piavpn &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt; Aug  &lt;span style=&#34;color:#ae81ff&#34;&gt;4&lt;/span&gt; 21:21 tasks&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Some commenters in the thread stated that the conflict went away after they
+removed the PIA client.&lt;/p&gt;
+
+&lt;h2 id=&#34;removing-the-pia-client&#34;&gt;Removing the PIA Client&lt;/h2&gt;
+
+&lt;p&gt;As a result, I decided to un-install my PIA client. It wasn&amp;rsquo;t a major loss for
+me, as I hadn&amp;rsquo;t used it in months. I only installed it to double check if it
+was a service I wanted, or if I should cancel my subscription before it
+auto-renewed later that month.&lt;/p&gt;
+
+&lt;p&gt;At first, I couldn&amp;rsquo;t find an &lt;em&gt;un&lt;/em&gt;-install option, but eventually found it deep
+in the settings. After removing the client, the &lt;code&gt;piavpn&lt;/code&gt; group went away&amp;hellip; sort
+of. It still had a &lt;code&gt;1004&lt;/code&gt; gid, which I&amp;rsquo;m guessing &lt;em&gt;was&lt;/em&gt; the previous &lt;code&gt;piavpn&lt;/code&gt;
+group.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;➜  ~ ll /sys/fs/cgroup/net_cls
+total &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;
+-rw-r--r--. &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt; root &lt;span style=&#34;color:#ae81ff&#34;&gt;1004&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt; Aug  &lt;span style=&#34;color:#ae81ff&#34;&gt;4&lt;/span&gt; 21:21 cgroup.clone_children
+-rw-r--r--. &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt; root &lt;span style=&#34;color:#ae81ff&#34;&gt;1004&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt; Aug  &lt;span style=&#34;color:#ae81ff&#34;&gt;4&lt;/span&gt; 21:21 cgroup.procs
+-r--r--r--. &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt; root &lt;span style=&#34;color:#ae81ff&#34;&gt;1004&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt; Aug  &lt;span style=&#34;color:#ae81ff&#34;&gt;4&lt;/span&gt; 21:21 cgroup.sane_behavior
+drwxr-xr-x. &lt;span style=&#34;color:#ae81ff&#34;&gt;6&lt;/span&gt; root root &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt; Aug  &lt;span style=&#34;color:#ae81ff&#34;&gt;4&lt;/span&gt; 21:21 machine.slice
+-rw-r--r--. &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt; root &lt;span style=&#34;color:#ae81ff&#34;&gt;1004&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt; Aug  &lt;span style=&#34;color:#ae81ff&#34;&gt;4&lt;/span&gt; 21:21 net_cls.classid
+-rw-r--r--. &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt; root &lt;span style=&#34;color:#ae81ff&#34;&gt;1004&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt; Aug  &lt;span style=&#34;color:#ae81ff&#34;&gt;4&lt;/span&gt; 21:21 notify_on_release
+-rw-r--r--. &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt; root &lt;span style=&#34;color:#ae81ff&#34;&gt;1004&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt; Aug  &lt;span style=&#34;color:#ae81ff&#34;&gt;4&lt;/span&gt; 21:21 release_agent
+-rw-r--r--. &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt; root &lt;span style=&#34;color:#ae81ff&#34;&gt;1004&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt; Aug  &lt;span style=&#34;color:#ae81ff&#34;&gt;4&lt;/span&gt; 21:21 tasks&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Whatever the case&amp;hellip; podman still didn&amp;rsquo;t work.&lt;/p&gt;
+
+&lt;h2 id=&#34;don-t-forget-to-reboot&#34;&gt;&amp;hellip; Don&amp;rsquo;t forget to Reboot!&lt;/h2&gt;
+
+&lt;p&gt;I was furious. After calming down, I reasoned it probably still wasn&amp;rsquo;t working
+due to cruft from the client lingering on my system (like the &lt;code&gt;1004&lt;/code&gt; group for
+example), so I rebooted my desktop&amp;hellip; and it worked!&lt;/p&gt;
+
+&lt;h2 id=&#34;conclusion&#34;&gt;Conclusion&lt;/h2&gt;
+
+&lt;p&gt;In conclusion&amp;hellip; why did I write this post? This complication was a huge pain
+to troubleshoot.  It was only by chance that I stumbled on that reddit post,
+and would have had an even &lt;em&gt;harder&lt;/em&gt; time without it. I assume having at least
+&lt;em&gt;one&lt;/em&gt; more page on the internet stating that podman and the PIA client don&amp;rsquo;t
+play nice, might help others find the solution quicker. Hence, this post.&lt;/p&gt;
+
+&lt;p&gt;&lt;center&gt;
+&lt;img src=&#34;https://media.giphy.com/media/3rgXBBaVvhPXk3NSnK/giphy.gif&#34; alt=&#34;Frustation meme&#34; /&gt;
+&lt;/center&gt;&lt;/p&gt;
+
+&lt;p&gt;Before I end, it is worth nothing that some users reported that configuring the PIA openvpn
+profiles and using &lt;em&gt;them&lt;/em&gt; to connect to the VPN works without issue. It is just
+the &lt;em&gt;client&lt;/em&gt; that breaks containers. So if you want to still use PIA (I let
+mine expire. I don&amp;rsquo;t use it enough), give it a try!&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>Configuring Pass, the Standard Unix Password Manager</title>

@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>PIA Client Interfering with Podman Containers -- λ ryan. himmelwright. net</title>
+
+    
+
+    
+    <link href="http://ryan.himmelwright.net/css/bootstrap.min.css" rel="stylesheet">
+
+    
+    <link href="http://ryan.himmelwright.net/css/clean-blog.min.css" rel="stylesheet">
+
+    
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href='//fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+
+    
+    
+    
+
+
+
+    
+    <script type="text/javascript">
+        var _paq = _paq || [];
+         
+        _paq.push(["setDocumentTitle", document.domain + "/" + document.title]);
+        _paq.push(["setCookieDomain", "*.ryan.himmelwright.net"]);
+        _paq.push(["setDomains", ["*.ryan.himmelwright.net"]]);
+        _paq.push(['trackPageView']);
+        _paq.push(['enableLinkTracking']);
+        (function() {
+        var u="//cloud.himmelwright.net/piwik/";
+        _paq.push(['setTrackerUrl', u+'piwik.php']);
+        _paq.push(['setSiteId', '1']);
+        var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+        g.type='text/javascript'; g.async=true; g.defer=true; g.src=u+'piwik.js'; s.parentNode.insertBefore(g,s);
+        })();
+        </script>
+        <noscript><p><img src="//cloud.himmelwright.net/piwik/piwik.php?idsite=1&rec=1" style="border:0;" alt="" /></p></noscript>
+        
+
+
+
+</head>
+
+<body>
+
+    
+    <nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+        <div class="container-fluid">
+            
+            <div class="navbar-header page-scroll">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="http://ryan.himmelwright.net">λ ryan. himmelwright. net</a>
+            </div>
+
+                       
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    
+                    <li>
+                        <a href="../../">home</a>
+                    </li>
+                    
+                    <li>
+                        <a href="../../pages/about/">About</a>
+                    </li>
+                    
+                    <li>
+                        <a href="../../pages/homelab/">Homelab</a>
+                    </li>
+                    
+                    <li>
+                        <a href="../../tags">tags</a>
+                    </li>
+                    
+                    <li>
+                        <a href="../../post/">Archives</a>
+                    </li>
+                    
+                    <li>
+                        <a href="../../post/index.xml">RSS</a>
+                    </li>
+                    
+                  </ul>
+            </div>
+           
+
+        </div>
+        
+    </nav>
+
+
+
+
+<header class="intro-header" style="background-image: url('http://ryan.himmelwright.net/img/posts/pia-client-podman-issues/grass_jamesville_mirror.jpeg')">
+    
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <h1>PIA Client Interfering with Podman Containers</h1>
+                    <h2 class="subheading"></h2>
+                    <span class="meta">
+                        
+Posted by <a href="#">Ryan Himmelwright</a> on Sun, Aug 23, 2020
+
+
+
+
+
+
+
+<br />
+Tags <a href="../../tags/linux">linux</a>, <a href="../../tags/network">network</a>, <a href="../../tags/containers">containers</a>, <a href="../../tags/fedora">fedora</a>
+
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <span class="header-caption">U.S. Route 64, Jamesville, NC</span>
+    
+    </header>
+
+    
+    <article>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                    
+                    <p>Earlier this month, I woke up and tried to start working on my <a href="../../post/pytest-parallel-website-tests/">previous
+post</a>, but quickly hit a snag.
+I was unable to start the
+<a href="https://docs.fedoraproject.org/en-US/fedora-silverblue/toolbox/">toolbox</a>
+container I use while working on my website. In fact, <em>none</em> of my podman
+containers would start.</p>
+
+<h2 id="was-podman-broken">Was Podman Broken?</h2>
+
+<p>Specifically, when I tried to start a container I encountered this error
+message:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">podman start website
+Error: unable to start container <span style="color:#e6db74">&#34;f8ab31d42b9d04d051b23c65604e19748a9496f17bd3baab8e6f947eee8f3692&#34;</span>: creating cgroup directory <span style="color:#e6db74">`</span>/sys/fs/cgroup/net_cls/user.slice/user-1000.slice/user@1000.service/user.slice/libpod-f8ab31d42b9d04d051b23c65604e19748a9496f17bd3baab8e6f947eee8f3692.scope/container<span style="color:#e6db74">`</span>: No such file or directory: OCI runtime command not found error</code></pre></div>
+<p>So, I attempted to use  podman on a different computer. It worked fine. I
+compared version numbers and noticed that the second computer had a newer
+version of podman installed. I figured that I had hit a bug that must now be fixed,
+so I waited for the update to reach my desktop (it wasn&rsquo;t available on that
+machine yet for some reason).</p>
+
+<p>A day later when I ran my updates, the new version of <code>podman</code> was installed, which
+I thought would surely fix my problem. It didn&rsquo;t. (ಠ_ಠ)</p>
+
+<h2 id="the-issue">The Issue</h2>
+
+<p>I started to scour the internet again to look for answers. Eventually, I
+found <a href="https://www.reddit.com/r/Fedora/comments/hqbo34/podman_cgroup_issues_on_f32/">this reddit
+post</a>.
+While reading it, the poster&rsquo;s experience sounded <em>very</em> similar to my own.
+After reading some of the comments that connected the <a href="https://www.privateinternetaccess.com">private internet
+access</a> client to the original poster&rsquo;s
+issues, I suddenly remembered&hellip; I had installed the <a href="https://www.privateinternetaccess.com/pages/download">PIA
+client</a> on my machine
+earlier that week!</p>
+
+<p>Sure enough, when I checked the ownership of my <code>net_cls</code> files (as suggested
+in the thread), it looked like <code>piavpn</code> was claiming group ownership of the
+files:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">➜  ~ ll /sys/fs/cgroup/net_cls
+total <span style="color:#ae81ff">0</span>
+-rw-r--r--. <span style="color:#ae81ff">1</span> root piavpn <span style="color:#ae81ff">0</span> Aug  <span style="color:#ae81ff">4</span> 21:21 cgroup.clone_children
+-rw-r--r--. <span style="color:#ae81ff">1</span> root piavpn <span style="color:#ae81ff">0</span> Aug  <span style="color:#ae81ff">4</span> 21:21 cgroup.procs
+-r--r--r--. <span style="color:#ae81ff">1</span> root piavpn <span style="color:#ae81ff">0</span> Aug  <span style="color:#ae81ff">4</span> 21:21 cgroup.sane_behavior
+drwxr-xr-x. <span style="color:#ae81ff">6</span> root root   <span style="color:#ae81ff">0</span> Aug  <span style="color:#ae81ff">4</span> 21:21 machine.slice
+-rw-r--r--. <span style="color:#ae81ff">1</span> root piavpn <span style="color:#ae81ff">0</span> Aug  <span style="color:#ae81ff">4</span> 21:21 net_cls.classid
+-rw-r--r--. <span style="color:#ae81ff">1</span> root piavpn <span style="color:#ae81ff">0</span> Aug  <span style="color:#ae81ff">4</span> 21:21 notify_on_release
+-rw-r--r--. <span style="color:#ae81ff">1</span> root piavpn <span style="color:#ae81ff">0</span> Aug  <span style="color:#ae81ff">4</span> 21:21 release_agent
+-rw-r--r--. <span style="color:#ae81ff">1</span> root piavpn <span style="color:#ae81ff">0</span> Aug  <span style="color:#ae81ff">4</span> 21:21 tasks</code></pre></div>
+<p>Some commenters in the thread stated that the conflict went away after they
+removed the PIA client.</p>
+
+<h2 id="removing-the-pia-client">Removing the PIA Client</h2>
+
+<p>As a result, I decided to un-install my PIA client. It wasn&rsquo;t a major loss for
+me, as I hadn&rsquo;t used it in months. I only installed it to double check if it
+was a service I wanted, or if I should cancel my subscription before it
+auto-renewed later that month.</p>
+
+<p>At first, I couldn&rsquo;t find an <em>un</em>-install option, but eventually found it deep
+in the settings. After removing the client, the <code>piavpn</code> group went away&hellip; sort
+of. It still had a <code>1004</code> gid, which I&rsquo;m guessing <em>was</em> the previous <code>piavpn</code>
+group.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">➜  ~ ll /sys/fs/cgroup/net_cls
+total <span style="color:#ae81ff">0</span>
+-rw-r--r--. <span style="color:#ae81ff">1</span> root <span style="color:#ae81ff">1004</span> <span style="color:#ae81ff">0</span> Aug  <span style="color:#ae81ff">4</span> 21:21 cgroup.clone_children
+-rw-r--r--. <span style="color:#ae81ff">1</span> root <span style="color:#ae81ff">1004</span> <span style="color:#ae81ff">0</span> Aug  <span style="color:#ae81ff">4</span> 21:21 cgroup.procs
+-r--r--r--. <span style="color:#ae81ff">1</span> root <span style="color:#ae81ff">1004</span> <span style="color:#ae81ff">0</span> Aug  <span style="color:#ae81ff">4</span> 21:21 cgroup.sane_behavior
+drwxr-xr-x. <span style="color:#ae81ff">6</span> root root <span style="color:#ae81ff">0</span> Aug  <span style="color:#ae81ff">4</span> 21:21 machine.slice
+-rw-r--r--. <span style="color:#ae81ff">1</span> root <span style="color:#ae81ff">1004</span> <span style="color:#ae81ff">0</span> Aug  <span style="color:#ae81ff">4</span> 21:21 net_cls.classid
+-rw-r--r--. <span style="color:#ae81ff">1</span> root <span style="color:#ae81ff">1004</span> <span style="color:#ae81ff">0</span> Aug  <span style="color:#ae81ff">4</span> 21:21 notify_on_release
+-rw-r--r--. <span style="color:#ae81ff">1</span> root <span style="color:#ae81ff">1004</span> <span style="color:#ae81ff">0</span> Aug  <span style="color:#ae81ff">4</span> 21:21 release_agent
+-rw-r--r--. <span style="color:#ae81ff">1</span> root <span style="color:#ae81ff">1004</span> <span style="color:#ae81ff">0</span> Aug  <span style="color:#ae81ff">4</span> 21:21 tasks</code></pre></div>
+<p>Whatever the case&hellip; podman still didn&rsquo;t work.</p>
+
+<h2 id="don-t-forget-to-reboot">&hellip; Don&rsquo;t forget to Reboot!</h2>
+
+<p>I was furious. After calming down, I reasoned it probably still wasn&rsquo;t working
+due to cruft from the client lingering on my system (like the <code>1004</code> group for
+example), so I rebooted my desktop&hellip; and it worked!</p>
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p>In conclusion&hellip; why did I write this post? This complication was a huge pain
+to troubleshoot.  It was only by chance that I stumbled on that reddit post,
+and would have had an even <em>harder</em> time without it. I assume having at least
+<em>one</em> more page on the internet stating that podman and the PIA client don&rsquo;t
+play nice, might help others find the solution quicker. Hence, this post.</p>
+
+<p><center>
+<img src="https://media.giphy.com/media/3rgXBBaVvhPXk3NSnK/giphy.gif" alt="Frustation meme" />
+</center></p>
+
+<p>Before I end, it is worth nothing that some users reported that configuring the PIA openvpn
+profiles and using <em>them</em> to connect to the VPN works without issue. It is just
+the <em>client</em> that breaks containers. So if you want to still use PIA (I let
+mine expire. I don&rsquo;t use it enough), give it a try!</p>
+
+                    
+                    
+                    
+                         <div style="float: right; text-decoration: underline; text-align: right;">Prev Post:</div>
+                    
+                    <br>
+                    
+                    
+                        <a href="http://ryan.himmelwright.net/post/pytest-parallel-website-tests/" style="text-align: right; float: right; max-width: 40%">Running my Website Tests in Parallel with Pytest-Parallel</a>
+                    
+
+			
+			<div class="comment-section">
+			  
+   <div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "himmallright" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+			</div>
+                </div>
+            </div>
+        </div>
+    </article>
+
+        <hr>
+    
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                  <ul class="list-inline text-center">
+                    
+                      <li>
+                        <a href="mailto:ryan@himmelwright.net">
+                          <span class="fa-stack fa-lg">
+                            <i class="fa fa-circle fa-stack-2x"></i>
+                            <i class="fa fa-envelope-o fa-stack-1x fa-inverse"></i>
+                          </span>
+                        </a>
+                      </li>
+                    
+                    
+                    <li>
+                      <a href="https://github.com/himmAllRight">
+                        <span class="fa-stack fa-lg">
+                          <i class="fa fa-circle fa-stack-2x"></i>
+                          <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                        </span>
+                      </a>
+                    </li>
+                    
+                    <li>
+                      <a href="https://www.linkedin.com/in/ryan-himmelwright-b3891774/">
+                        <span class="fa-stack fa-lg">
+                          <i class="fa fa-circle fa-stack-2x"></i>
+                          <i class="fa fa-linkedin fa-stack-1x fa-inverse"></i>
+                        </span>
+                      </a>
+                    </li>
+                    
+                  </ul>
+<p class="copyright text-muted">
+
+<a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img
+  alt="Creative Commons License" style="border-width:0"
+  src="https://i.creativecommons.org/l/by/4.0/88x31.png" /></a><br />This work
+by <a xmlns:cc="http://creativecommons.org/ns#" href="http://ryan.himmelwright.net" property="cc:attributionName" rel="cc:attributionURL">Ryan Himmelwright</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
+</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    
+    <script src="http://ryan.himmelwright.net/js/jquery.min.js"></script>
+
+    
+    <script src="http://ryan.himmelwright.net/js/bootstrap.min.js"></script>
+
+    
+    <script src="http://ryan.himmelwright.net/js/clean-blog.js"></script>
+
+    
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-123-45', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+
+
+</body>
+
+</html>
+
