@@ -5,7 +5,7 @@
     <description>Recent content in Pages on λ ryan. himmelwright. net</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 21 Aug 2020 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 10 Sep 2020 00:00:00 +0000</lastBuildDate>
     
         <atom:link href="http://ryan.himmelwright.net/pages/index.xml" rel="self" type="application/rss+xml" />
     
@@ -13,7 +13,7 @@
     <item>
       <title>Homelab</title>
       <link>http://ryan.himmelwright.net/pages/homelab/</link>
-      <pubDate>Fri, 21 Aug 2020 00:00:00 +0000</pubDate>
+      <pubDate>Thu, 10 Sep 2020 00:00:00 +0000</pubDate>
       
       <guid>http://ryan.himmelwright.net/pages/homelab/</guid>
       <description>
@@ -88,6 +88,7 @@ macOS Catalina
 
 &lt;h3 id=&#34;periphery-devices&#34;&gt;Periphery Devices&lt;/h3&gt;
 &lt;pre&gt;&lt;code&gt;Dell 27&amp;#34; 2560x1440 IPS Monitor (Dell u2717d)
+Ergodox EZ Glow w/ Cherry MX Brown Switches
 Happy Hacking Keyboard Pro2
 Audioengine A2+ Speakers &amp;amp; Stands
 Audio Technica M50x Headphones

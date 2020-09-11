@@ -5,10 +5,266 @@
     <description>Recent content in Homelab on λ ryan. himmelwright. net</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 28 May 2020 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 10 Sep 2020 00:00:00 +0000</lastBuildDate>
     
         <atom:link href="http://ryan.himmelwright.net/tags/homelab/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Running VMs with VirtIO 3D Acceleration</title>
+      <link>http://ryan.himmelwright.net/post/virtio-3d-vms/</link>
+      <pubDate>Thu, 10 Sep 2020 00:00:00 +0000</pubDate>
+      
+      <guid>http://ryan.himmelwright.net/post/virtio-3d-vms/</guid>
+      <description>&lt;p&gt;While on vacation the other week, the only laptop I brought along was &lt;a href=&#34;http://ryan.himmelwright.net/post/new-2019-16inch-mbp/&#34;&gt;my
+macbook pro&lt;/a&gt;. That
+being said, I still wanted the ability to jump into Linux while I was away.  I
+needed to virtualize. I&amp;rsquo;ve used VirtualBox in the past, and while it&amp;rsquo;s &lt;em&gt;fine&lt;/em&gt;
+for running headless installs, I find that it is not a great experience on
+macOS when trying to run a full desktop environment. So I downloaded the free
+trial of &lt;a href=&#34;https://www.parallels.com/blogs/just-released-parallels-desktop-for-mac/&#34;&gt;parallels desktop
+15&lt;/a&gt;,
+and honestly&amp;hellip; it was great. Afterwards, I was motivated to improve the
+experience of VMs running on my (Linux) desktop.&lt;/p&gt;
+
+&lt;p&gt;&lt;center&gt;
+&lt;a href=&#34;img/posts/virtio-3d-vms/parallels.png&#34;&gt;
+&lt;img alt=&#34;Parallels Desktop on MacOS&#34; src=&#34;../../img/posts/virtio-3d-vms/parallels.png&#34; style=&#34;max-width: 100%;&#34;/&gt;&lt;/a&gt;
+&lt;div class=&#34;caption&#34;&gt;Parallels desktop on MacOS&lt;/div&gt;
+&lt;/center&gt;&lt;/p&gt;
+
+&lt;p&gt;Parallels handled graphics on both my Windows and Linux guests wonderfully. I
+would full-screen the VM and it felt like I was running that OS directly on my
+macbook (for the most part). I was sad when the trial was over, but decided not
+to buy the subscription. My main reason being&amp;hellip; my VM computer is &lt;em&gt;not&lt;/em&gt; my
+macbook, it&amp;rsquo;s my Linux desktop.&lt;/p&gt;
+
+&lt;p&gt;I love libvirt and virt-manager, but using parallels showed me that I really
+needed to figure out how to improve the graphics situation of my VMs to catch
+up. I wanted to be able to work in guest VMs, without a lagging
+UI or &lt;em&gt;feeling&lt;/em&gt; like I was &lt;em&gt;in&lt;/em&gt; a VM.&lt;/p&gt;
+
+&lt;h3 id=&#34;vfio-gpu-passthrough&#34;&gt;VFIO - GPU Passthrough&lt;/h3&gt;
+
+&lt;p&gt;Prior to my trip, I had been experimenting &lt;em&gt;once again&lt;/em&gt; with VFIO&amp;hellip; and
+actually got it working* for the first time. If you don&amp;rsquo;t know what this means,
+basically in Linux it is possible to pass a full device, like a GPU, through to
+a VM to be used directly. The technology was made more widely known a few years
+ago from the &amp;ldquo;X Gamers, 1 CPU&amp;rdquo; serries of videos Linux Tech Tips made.&lt;/p&gt;
+
+&lt;p&gt;&lt;center&gt;
+&lt;iframe width=&#34;560&#34; height=&#34;315&#34; src=&#34;https://www.youtube.com/embed/LuJYMCbIbPk&#34; frameborder=&#34;0&#34; allow=&#34;accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture&#34; allowfullscreen&gt;&lt;/iframe&gt;
+&lt;div class=&#34;caption&#34;&gt;The first video of the serries, 2 Gaming PCs 1 Tower&lt;/div&gt;
+&lt;/center&gt;&lt;/p&gt;
+
+&lt;p&gt;I was able to temporarily run both Proxmox and Unraid on my desktop, and pass
+my gpu directly to Fedora VMs.  While it was a neat experiment, I realized it
+can also be quite a pain.&lt;/p&gt;
+
+&lt;p&gt;I currently only have one GPU in my desktop, so to pass it to the VM I had to
+disable it on the host. Not having a GPU for the host system meant that I had
+to start the VMs from another device, which honestly isn&amp;rsquo;t &lt;em&gt;that&lt;/em&gt; bad. The much
+worse issue however, was that the gpu would often get stuck while being passed
+around, so I had to reboot my host whenever the VM restarted&amp;hellip; which defeated
+the point of using a VM instead of multi-booting.&lt;/p&gt;
+
+&lt;p&gt;&lt;center&gt;
+&lt;iframe width=&#34;560&#34; height=&#34;315&#34; src=&#34;https://www.youtube.com/embed/6T_-HMkgxt0&#34; frameborder=&#34;0&#34; allow=&#34;accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture&#34; allowfullscreen&gt;&lt;/iframe&gt;
+&lt;div class=&#34;caption&#34;&gt;Gaming on Linux continues to get better over time&lt;/div&gt;
+&lt;/center&gt;&lt;/p&gt;
+
+&lt;p&gt;So to &lt;em&gt;properly&lt;/em&gt; utilize VFIO and have a more stable setup, I would want a
+second GPU. In truth though, I realized this setup wasn&amp;rsquo;t what I was looking
+for. KVM gpu passthrough is a great option if you run Linux as your main
+computer, but want to be able to boot into a Windows VM to play games. But GPU
+passthrough is slowly becoming overkill even for &lt;em&gt;that&lt;/em&gt;, as gaming support on
+Linux keeps getting better.&lt;/p&gt;
+
+&lt;p&gt;Aside from having an occasional Windows VM to play around with, I mostly want
+to run Linux VMs on a Linux host. I needed to figure out how to let my VMs
+utilize the &lt;em&gt;power&lt;/em&gt; of my GPU, without the complications of GPU passthrough&amp;hellip;&lt;/p&gt;
+
+&lt;h3 id=&#34;virgil&#34;&gt;Virgil&lt;/h3&gt;
+
+&lt;p&gt;Introducing, &lt;a href=&#34;https://virgil3d.github.io&#34;&gt;virgil&lt;/a&gt;. According to the
+project&amp;rsquo;s website:&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;Virgil is a research project to investigate the possibility of creating a virtual 3D GPU for use inside qemu virtual machines, that allows the guest operating system to use the capabilities of the host GPU to accelerate 3D rendering. The plan is to have a guest GPU that is fully independent of the host GPU.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;So, Virgil essentially allows libvirt to create &lt;em&gt;virtual 3D GPUs&lt;/em&gt;, that work
+with the host GPU for 3D acceleratuon.  This means, that I &lt;em&gt;should&lt;/em&gt; be able to
+get high performing VMs, including the graphics, on my Linux desktop.&lt;/p&gt;
+
+&lt;h2 id=&#34;setup&#34;&gt;Setup&lt;/h2&gt;
+
+&lt;p&gt;Enabling virgil for a VM using virt-manager actually ended up be much easier
+that I had anticipated. Here is how to do it:&lt;/p&gt;
+
+&lt;h3 id=&#34;create-a-vm&#34;&gt;Create a VM&lt;/h3&gt;
+
+&lt;p&gt;&lt;center&gt;
+&lt;a href=&#34;img/posts/virtio-3d-vms/new_fedora_vm.png&#34;&gt;
+&lt;img alt=&#34;Newly Created Fedora VM&#34; src=&#34;../../img/posts/virtio-3d-vms/new_fedora_vm.png&#34; style=&#34;max-width: 100%;&#34;/&gt;&lt;/a&gt;
+&lt;div class=&#34;caption&#34;&gt;Newly created Fedora VM&lt;/div&gt;
+&lt;/center&gt;&lt;/p&gt;
+
+&lt;p&gt;First, create and install a new virtual machine using &lt;code&gt;virt-manager&lt;/code&gt;. I
+recommend going through your normal install process and then boot into the
+installed system once, just to ensure that everything works as expected. If
+things look good, shutdown the VM and open up the settings window.&lt;/p&gt;
+
+&lt;h3 id=&#34;enable-virtio-and-3d-acceleration&#34;&gt;Enable VirtIO and 3D Acceleration&lt;/h3&gt;
+
+&lt;h4 id=&#34;spice-settings&#34;&gt;Spice Settings&lt;/h4&gt;
+
+&lt;p&gt;In the settings menu, open up the &lt;em&gt;Display Spice&lt;/em&gt; section.&lt;/p&gt;
+
+&lt;p&gt;&lt;center&gt; &lt;a href=&#34;img/posts/virtio-3d-vms/display_spice_config_post.png&#34;&gt;
+&lt;img alt=&#34;Virt-manager&#39;s Spice settings for a VM&#34; src=&#34;../../img/posts/virtio-3d-vms/display_spice_config_post.png&#34; style=&#34;max-width: 100%;&#34;/&gt;&lt;/a&gt;
+&lt;div class=&#34;caption&#34;&gt;In the VM&amp;rsquo;s &amp;lsquo;Display Spice&amp;rsquo; config, select &amp;lsquo;None&amp;rsquo; for
+Listen type, and check the box for OpenGL&lt;/div&gt;
+&lt;/center&gt;&lt;/p&gt;
+
+&lt;p&gt;Select &lt;code&gt;Spice server&lt;/code&gt; for &lt;code&gt;Type:&lt;/code&gt;, and &lt;code&gt;None&lt;/code&gt; for &lt;code&gt;Listen type:&lt;/code&gt; (virgil only
+works on local VMs right now). Lastly, make sure that the &lt;code&gt;OpenGL&lt;/code&gt; checkbox
+&lt;em&gt;is&lt;/em&gt; checked. Hit &lt;code&gt;Apply&lt;/code&gt;.&lt;/p&gt;
+
+&lt;h4 id=&#34;virtio-settings&#34;&gt;Virtio Settings&lt;/h4&gt;
+
+&lt;p&gt;Next, select the &lt;em&gt;Video Virtio&lt;/em&gt; section.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;img/posts/virtio-3d-vms/video_config_post.png&#34;&gt;
+&lt;img alt=&#34;Virt-manager&#39;s Video settings for a VM&#34; src=&#34;../../img/posts/virtio-3d-vms/video_config_post.png&#34; style=&#34;max-width: 100%;&#34;/&gt;&lt;/a&gt;
+&lt;div class=&#34;caption&#34;&gt;In the VM&amp;rsquo;s video settings, switch to Virtio and select 3D
+acceleration&lt;/div&gt;
+&lt;/center&gt;&lt;/p&gt;
+
+&lt;p&gt;Switch to &lt;code&gt;Virtio&lt;/code&gt; for &lt;code&gt;Model:&lt;/code&gt;, and make sure to check the &lt;code&gt;3D acceleration&lt;/code&gt;
+checkbox. That&amp;rsquo;s it! Hit apply, start up the VM, and verify that it is working.&lt;/p&gt;
+
+&lt;h2 id=&#34;testing-and-comparisons&#34;&gt;Testing and Comparisons&lt;/h2&gt;
+
+&lt;h3 id=&#34;youtube-video-playback&#34;&gt;Youtube Video Playback&lt;/h3&gt;
+
+&lt;p&gt;While configuring this for the first time, there were a few benchmarks I used
+to tell if and how well it was working. The first one, was simply opening up
+Firefox and trying to play a fullscreen Youtube Video (at 1440p).&lt;/p&gt;
+
+&lt;p&gt;Now to be fair, the video playback was still &lt;em&gt;okay&lt;/em&gt; before I made this change.
+This wasn&amp;rsquo;t a good measure, but rather an initial test.&lt;/p&gt;
+
+&lt;h3 id=&#34;unigine-heaven-benchmark&#34;&gt;Unigine Heaven Benchmark&lt;/h3&gt;
+
+&lt;p&gt;My next step was to give the VM a &lt;em&gt;real&lt;/em&gt; GPU test, so I downloaded the &lt;a href=&#34;https://benchmark.unigine.com/heaven&#34;&gt;Unigine
+Heaven Benchmark&lt;/a&gt;. First I got my
+baseline by running the benchmark directly on my host system. &lt;em&gt;It should be
+noted that I did have other applications running during all of these benchmarks&lt;/em&gt;.&lt;/p&gt;
+
+&lt;p&gt;&lt;center&gt;
+&lt;a href=&#34;img/posts/virtio-3d-vms/unigine_heaven_score_host_export.png&#34;&gt;
+&lt;img alt=&#34;Unigine Heaven Benchmark - Host&#34; src=&#34;../../img/posts/virtio-3d-vms/unigine_heaven_score_host_export.png&#34; style=&#34;max-width: 100%;&#34;/&gt;&lt;/a&gt;
+&lt;div class=&#34;caption&#34;&gt;Unigine Heaven Benchmark running directly on the host (my
+desktop)&lt;/div&gt;
+&lt;/center&gt;&lt;/p&gt;
+
+&lt;p&gt;So not bad, and roughly what I expected. Next, I tried running it in the VM&amp;hellip;&lt;/p&gt;
+
+&lt;p&gt;&lt;center&gt;
+&lt;a href=&#34;img/posts/virtio-3d-vms/unigine_heaven_score_vm_export.png&#34;&gt;
+&lt;img alt=&#34;Unigine Heaven Benchmark - VM&#34; src=&#34;../../img/posts/virtio-3d-vms/unigine_heaven_score_vm.png&#34; style=&#34;max-width: 100%;&#34;/&gt;&lt;/a&gt;
+&lt;div class=&#34;caption&#34;&gt;Unigine Heaven Benchmark running inside the VM with
+&lt;em&gt;shared&lt;/em&gt; graphics&lt;/div&gt;
+&lt;/center&gt;&lt;/p&gt;
+
+&lt;p&gt;While not as good as on the host, it is a &lt;em&gt;very&lt;/em&gt; respectable result. Especially
+after remembering that the VM had less cores and RAM assigned to it compared to
+the host.&lt;/p&gt;
+
+&lt;p&gt;Additionally, my default VM &lt;em&gt;wouldn&amp;rsquo;t even run&lt;/em&gt; the benchmark. I was
+able to open it, but the load screen ran frame-by-frame. Turning on the
+3D acceleration settings definitely made a difference.&lt;/p&gt;
+
+&lt;h3 id=&#34;portal-2&#34;&gt;Portal 2&lt;/h3&gt;
+
+&lt;p&gt;With the Unigine Heaven benchmark working in my VM, I decided to attempt the
+next test&amp;hellip; playing a video game. Now, I have &lt;em&gt;zero&lt;/em&gt; intentions of running games in
+my VMs, but this is the most common use case for having a GPU-passthrough
+setup, so I wanted to see how this system compared.&lt;/p&gt;
+
+&lt;p&gt;I decided to try running a classic game: Portal 2. It&amp;rsquo;s not a very resource
+intensive game, but one that certainly does &lt;em&gt;not&lt;/em&gt; normally run well in my VMs.
+I installed the game, started a level&amp;hellip;  and was immediately forced to stare
+at the ground.&lt;/p&gt;
+
+&lt;p&gt;Staring at my character&amp;rsquo;s feet, I was reminded that I was playing in a VM, and
+that the game didn&amp;rsquo;t actually have my proper mouse capture. It only had the
+input clicks from my host to the VM spice window, which wasn&amp;rsquo;t enough to
+actually play the game.&lt;/p&gt;
+
+&lt;p&gt;&lt;center&gt;
+&lt;a href=&#34;img/posts/virtio-3d-vms/portal2_window.png&#34;&gt;
+&lt;img alt=&#34;Playing Portal 2 in a Fedora VM&#34; src=&#34;../../img/posts/virtio-3d-vms/portal2_window.png&#34; style=&#34;max-width: 100%;&#34;/&gt;&lt;/a&gt;
+&lt;div class=&#34;caption&#34;&gt;Playing Portal2 at 2560x1440 resolution, inside my Fedora
+VM.(I had it full screen but windowed it to show it was indeed in the VM)&lt;/div&gt;
+&lt;/center&gt;&lt;/p&gt;
+
+&lt;p&gt;Anyway, after one VM shutdown and usb mouse pasthrough later&amp;hellip; I was playing
+Portal 2! It was a little glitchy for the first few seconds, but afterwards ran
+well.  I think the initial lag was likely due to the system heavily hitting the
+&lt;em&gt;virtualized&lt;/em&gt; disk while loading the level. Regardless, I was thrilled.&lt;/p&gt;
+
+&lt;h2 id=&#34;drawbacks-limitations&#34;&gt;Drawbacks/Limitations&lt;/h2&gt;
+
+&lt;p&gt;While I&amp;rsquo;m very happy with the performance of my virtio VM, there are a few
+drawbacks or limitations to keep in mind:&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Need to pass through hardware devices&lt;/strong&gt;: &amp;hellip; like a mouse when gaming XD. This
+could also be a webcam, microphone, flash drive, or even a full ssd if you need
+better IO in the VM.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Linux Guests Only:&lt;/strong&gt; While researching, I saw &lt;a href=&#34;https://www.youtube.com/watch?v=aBgYNDLXuyg&#34;&gt;conference talks about getting
+virgl working on Windows&lt;/a&gt; , but I
+&lt;em&gt;think&lt;/em&gt; it currently only works with Linux guests.&lt;/p&gt;
+
+&lt;p&gt;&lt;center&gt;
+&lt;a href=&#34;img/posts/virtio-3d-vms/other_working_distros.png&#34;&gt;
+&lt;img alt=&#34;Both Manjaro and Pop_OS! worked fine&#34; src=&#34;../../img/posts/virtio-3d-vms/other_working_distros.png&#34; style=&#34;max-width: 100%;&#34;/&gt;&lt;/a&gt;
+&lt;div class=&#34;caption&#34;&gt;Both my Manjaro and Pop_OS! VMs worked just fine with
+virgl&lt;/div&gt;
+&lt;/center&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Even on Linux, some Distros might freak out a bit&lt;/strong&gt;: I had weird issues
+when trying it on some of my RHEL 8 VMs. The mouse pointer wouldn&amp;rsquo;t show
+and the screen would glitch and flicker when running high graphics tasks. I&amp;rsquo;m
+Not sure why it&amp;rsquo;s happening, but I&amp;rsquo;m guessing it might be related to older
+software packages/kernel. I have tried it with Pop_OS! and Manjaro VMs and they
+seem to work just fine.&lt;/p&gt;
+
+&lt;p&gt;&lt;center&gt;
+&lt;a href=&#34;img/posts/virtio-3d-vms/glitch_t470_fedora.png&#34;&gt;
+&lt;img alt=&#34;My Fedora VMs didn&#39;t work on my T470 Thinkpad&#34; src=&#34;../../img/posts/virtio-3d-vms/glitchy_t470_fedora.png&#34; style=&#34;max-width: 100%;&#34;/&gt;&lt;/a&gt;
+&lt;div class=&#34;caption&#34;&gt;My Fedora VMs on my T470 Thinkpad (intel graphics only)
+didn&amp;rsquo;t seem to like virgl&lt;/div&gt;
+&lt;/center&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Not entirely sure about hardware support&lt;/strong&gt;: So far my working VMs have all
+been on my desktop, which has an AMD RX580 GPU. I tried using a Fedora guest
+on my T470 Thinkpad which has integrated Intel graphics, but the screen was
+all crazy at login. I don&amp;rsquo;t know what hardware is supported and
+what isn&amp;rsquo;t. It is possible that different hardware might just need different
+settings selected, but I have not played around enough yet to know for sure.&lt;/p&gt;
+
+&lt;h2 id=&#34;conclusion&#34;&gt;Conclusion&lt;/h2&gt;
+
+&lt;p&gt;Overall, I love this setup. It allows me to utilie my desktop to it&amp;rsquo;s full
+potential, by running VMs I can jump into and forget that I am in a
+virtalized system. This works well when testing fedora packages, or maintaining
+a &lt;a href=&#34;https://fedoraproject.org/wiki/Releases/Rawhide&#34;&gt;Rawhide&lt;/a&gt; machine. Virgl is
+an awesome projects and I hope it continues to progress over time. If you
+haven&amp;rsquo;t tried it yet, give it a shot!&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>Rx-580 Upgrade</title>
@@ -1990,7 +2246,7 @@ it appeared to have &lt;a href=&#34;https://www.fractal-design.com/home/product/
 thermals&lt;/a&gt;,
 which I liked. This was my easiest part to pick.&lt;/p&gt;
 
-&lt;h4 id=&#34;psu-evga-supernova-g4-650w-80-gold-fully-modular-atx-psu-https-www-evga-com-products-product-aspx-pn-120-g1-0650-xr&#34;&gt;PSU: EVGA - &lt;a href=&#34;https://www.evga.com/products/product.aspx?pn=120-g1-0650-xr&#34;&gt;SuperNOVA G4 650W 80+ Gold, fully modular ATX PSU&lt;/a&gt;&lt;/h4&gt;
+&lt;h4 id=&#34;psu-evga-supernova-g4-650w-80-gold-fully-modular-atx-psu-https-web-archive-org-web-20181102223931-https-www-evga-com-products-product-aspx-pn-120-g1-0650-xr&#34;&gt;PSU: EVGA - &lt;a href=&#34;https://web.archive.org/web/20181102223931/https://www.evga.com/Products/Product.aspx?pn=120-G1-0650-XR&#34;&gt;SuperNOVA G4 650W 80+ Gold, fully modular ATX PSU&lt;/a&gt;&lt;/h4&gt;
 
 &lt;p&gt;&lt;a href=&#34;../../img/posts/chameleon-desktop-design/psu.png&#34;&gt;&lt;img alt=&#34;The KDE Plasma 5 extend display GUI&#34; src=&#34;../../img/posts/charmeleon-desktop-design/psu.png&#34; style=&#34;max-width: 35%; float: right; margin-bottom: 10px;&#34;/&gt;&lt;/a&gt;&lt;/p&gt;
 
