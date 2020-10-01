@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Setup Optfine with Minecraft Flatpak Install -- λ ryan. himmelwright. net</title>
+
+    
+
+    
+    <link href="http://ryan.himmelwright.net/css/bootstrap.min.css" rel="stylesheet">
+
+    
+    <link href="http://ryan.himmelwright.net/css/clean-blog.min.css" rel="stylesheet">
+
+    
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href='//fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+
+    
+    
+    
+
+
+
+    
+    <script type="text/javascript">
+        var _paq = _paq || [];
+         
+        _paq.push(["setDocumentTitle", document.domain + "/" + document.title]);
+        _paq.push(["setCookieDomain", "*.ryan.himmelwright.net"]);
+        _paq.push(["setDomains", ["*.ryan.himmelwright.net"]]);
+        _paq.push(['trackPageView']);
+        _paq.push(['enableLinkTracking']);
+        (function() {
+        var u="//cloud.himmelwright.net/piwik/";
+        _paq.push(['setTrackerUrl', u+'piwik.php']);
+        _paq.push(['setSiteId', '1']);
+        var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+        g.type='text/javascript'; g.async=true; g.defer=true; g.src=u+'piwik.js'; s.parentNode.insertBefore(g,s);
+        })();
+        </script>
+        <noscript><p><img src="//cloud.himmelwright.net/piwik/piwik.php?idsite=1&rec=1" style="border:0;" alt="" /></p></noscript>
+        
+
+
+
+</head>
+
+<body>
+
+    
+    <nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+        <div class="container-fluid">
+            
+            <div class="navbar-header page-scroll">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="http://ryan.himmelwright.net">λ ryan. himmelwright. net</a>
+            </div>
+
+                       
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    
+                    <li>
+                        <a href="../../">home</a>
+                    </li>
+                    
+                    <li>
+                        <a href="../../pages/about/">About</a>
+                    </li>
+                    
+                    <li>
+                        <a href="../../pages/homelab/">Homelab</a>
+                    </li>
+                    
+                    <li>
+                        <a href="../../tags">tags</a>
+                    </li>
+                    
+                    <li>
+                        <a href="../../post/">Archives</a>
+                    </li>
+                    
+                    <li>
+                        <a href="../../post/index.xml">RSS</a>
+                    </li>
+                    
+                  </ul>
+            </div>
+           
+
+        </div>
+        
+    </nav>
+
+
+
+
+<header class="intro-header" style="background-image: url('http://ryan.himmelwright.net/img/posts/setup-optifine-minecraft-flatpak/obx-pier-post.jpeg')">
+    
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <h1>Setup Optfine with Minecraft Flatpak Install</h1>
+                    <h2 class="subheading"></h2>
+                    <span class="meta">
+                        
+Posted by <a href="#">Ryan Himmelwright</a> on Wed, Sep 30, 2020
+
+
+
+
+
+
+
+<br />
+Tags <a href="../../tags/linux">linux</a>, <a href="../../tags/flatpak">flatpak</a>, <a href="../../tags/fedora">fedora</a>
+
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <span class="header-caption">Kitty Hawk, NC</span>
+    
+    </header>
+
+    
+    <article>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                    
+                    <p>Over the past few months, I started to play Minecraft (Java) on my desktop
+again.  After <a href="../../post/rx580-upgrade">upgrading my graphics card</a>, I wanted to
+install some shaders. However, unlike when I was in college, I now install and
+play minecraft using <a href="http://flatpak.org">flatpak</a>. While flatpak makes
+installing minecraft convenient, it also complicates enabling mods like
+Optifine. So&hellip;  here&rsquo;s how it&rsquo;s done :) .</p>
+
+<p><em>Note: Before we start, I have only done this on Fedora Linux. It is possible
+that paths and locations may differ on other distros</em>.</p>
+
+<h3 id="install-the-minecraft-flatpak">Install the Minecraft Flatpak</h3>
+
+<p><center>
+<a href="../../img/posts/setup-optifine-minecraft-flatpak/flathub_page.png">
+<img alt="The Minecraft Flathub Page" src="../../img/posts/setup-optifine-minecraft-flatpak/flathub_page.png" style="max-width: 100%;"/></a>
+<div class="caption">The Minecraft Flathub page</div>
+</center></p>
+
+<p>First, lets install the minecraft flatpak. Ensure that <a href="https://flatpak.org/setup/Fedora/">flathub is
+enabled</a>, then run the following command
+to install Minecraft:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">flatpak install com.mojang.Minecraft</code></pre></div>
+<p>When it finishes, open up the launcher and login to verify that everything is
+working.</p>
+
+<p><em>(Logging into the official launcher at least once is required to install
+Optifine in the later steps).</em></p>
+
+<h3 id="optifine">Optifine</h3>
+
+<p><a href="https://optifine.net/home">Optifine</a> is a Minecraft optimiziation mod which
+supports installing shader and texture packs. Simply put, this makes minecraft
+look better. Additionally, some shaders can optimize the game to <em>perform</em>
+better too. I use a shader that renders some textures more realistically
+from the default, but nothing too fancy.</p>
+
+<h4 id="download">Download</h4>
+
+<p><center>
+<a href="../../img/posts/setup-optifine-minecraft-flatpak/optifine_download.png">
+<img alt="Optifine Download Page" src="../../img/posts/setup-optifine-minecraft-flatpak/optifine_download.png" style="max-width: 100%;"/></a>
+<div class="caption">Optifine Download page</div>
+</center></p>
+
+<p>To obtain optifine, go to the <a href="https://optifine.net/downloads">downloads page</a>
+and download the version which corresponds to the minecraft version you are
+using. If you are running a version which is more recent, you might have to try
+a <em>Preview version</em> of optifine. In my experience, the previews have worked
+without issue.</p>
+
+<h3 id="install-optifine">Install Optifine</h3>
+
+<h4 id="finding-the-minecraft-folder">Finding the minecraft folder</h4>
+
+<p>Before we install Optifine, there is one piece of information we need to know:
+the <code>.minecraft</code> folder location. This is where running a flatpak verion
+diverges from a normal minecraft install, as the folder will not be at
+<code>~/.minecraft/</code>.</p>
+
+<p>This is because flatpak applications are sandboxed from the system. While good
+for security, it means that the <em>&lsquo;home directory&rsquo;</em> observed inside the application
+is different from the user&rsquo;s (like a <code>chroot</code>).</p>
+
+<p><center>
+<a href="../../img/posts/setup-optifine-minecraft-flatpak/flatpak_minecraft_folder.png">
+<img alt="The flatpak minecraft folder" src="../../img/posts/setup-optifine-minecraft-flatpak/flatpak_minecraft_folder.png" style="max-width: 100%;"/></a>
+<div class="caption">The flatpak minecraft folder</div>
+</center></p>
+
+<p>On my computer, the flatpak applications are located at <code>/home/ryan/.var/app/</code>,
+making my &lsquo;<code>/home/ryan/.minecraft/</code>&rsquo; folder <em>actually</em> at
+<code>/home/ryan/.var/app/com.mojang.Minecraft/data/minecraft/</code>. Find and remember
+this location. <em>(Hint: it should be similar to mine)</em></p>
+
+<h4 id="install-optifine-1">Install Optifine</h4>
+
+<p>Back to Optifine&hellip;</p>
+
+<p>To run the optifine installer, open a terminal, navigate to the downloaded
+<code>jar</code> file, and execute it using java:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e">## If java is not installed:</span>
+sudo dnf install java-openjdk-latest
+<span style="color:#75715e">## Then:</span>
+cd ~/Downloads
+java -jar preview_OptiFine_1.16.3_HD_U_G3_pre1.jar</code></pre></div>
+<p>This will open the installer.</p>
+
+<p><center>
+<a href="../../img/posts/setup-optifine-minecraft-flatpak/optifine_install.png">
+<img alt="The optifine installer" src="../../img/posts/setup-optifine-minecraft-flatpak/optifine_install.png" style="max-width: 100%;"/></a>
+<div class="caption">The Optifine installer window</div>
+</center></p>
+
+<p>Switch the <em>Folder</em> to the <code>minecraft</code> one we found previously, and click
+<em>Install</em>. Note: If the official minecraft launcher was not already logged
+into, this step will <em>not</em> work as it will fail to find minecraft (the launcher
+downloads content on the first login).</p>
+
+<h3 id="configure-the-optifine-launcher">Configure The Optifine Launcher</h3>
+
+<p><center>
+<a href="../../img/posts/setup-optifine-minecraft-flatpak/select_optifine.png">
+<img alt="The minecraft launcher, selecting optifine" src="../../img/posts/setup-optifine-minecraft-flatpak/select_optifine.png" style="max-width: 100%;"/></a>
+<div class="caption">Select Optifine in the Minecraft Launcher</div>
+</center></p>
+
+<p>With Optifine installed, we need to select it in the minecraft launcher. If
+Optifine was correctly installed, it should now be an option at the
+bottom left of the window (Next to settings).</p>
+
+<h4 id="add-your-own-installation">Add your own installation</h4>
+
+<p><center>
+<a href="../../img/posts/setup-optifine-minecraft-flatpak/diy_launcher.png">
+<img alt="Creating a new minecraft launcher install" src="../../img/posts/setup-optifine-minecraft-flatpak/diy_launcher.png" style="max-width: 100%;"/></a>
+<div class="caption">Creating a Minecraft launcher for Optifine</div>
+</center></p>
+
+<p>If for some reason optifine <em>is not</em> an option, a custom launcher can be
+added. To create one, click <em>Installations</em> at the top of the
+launcher, and hit the <em>New</em> button. From that window, give the install a name
+and select your latest Optifine version from the drop-down menu. If optifine
+isn&rsquo;t an option, it likely wasn&rsquo;t installed correctly or in the right location.</p>
+
+<p>Lastly, remember to <em>once again</em> switch the <em>Game Directory</em> to the location of
+the flatpak minecraft folder we&rsquo;ve been using. Hit <em>Create</em> and switch to the
+new profile.</p>
+
+<h3 id="shaders">Shaders</h3>
+
+<p>The main motivation behind adding Optifine is the ability to use shaders. With
+Optifine all configured, lets finish what we came here for.</p>
+
+<h4 id="download-1">Download</h4>
+
+<p>First, find a shader. I have been using the
+<a href="https://bitslablab.com/bslshaders/">BSL</a> shader pack and love it. It keeps a
+more &lsquo;classic&rsquo; minecraft style, without changing too much. However, it improves
+key visuals like the lighting, water, and  swaying plants.</p>
+
+<p>When you find a shader you want, just download the package and move it to the
+<em>shaders</em> folder in our flatpak minecraft folder.
+<a href="https://bitslablab.com/bslshaders/#download">Here</a> is where I downloaded the
+one I use.</p>
+
+<p><em>FYI, not every shader I tried worked.</em></p>
+
+<h3 id="enable-in-game">Enable in game</h3>
+
+<p><center>
+<a href="../../img/posts/optifine-minecraft-flatpak/minecraft_video_settings.png">
+<img alt="Minecraft Video Settings" src="../../img/posts/setup-optifine-minecraft-flatpak/minecraft_video_settings.png" style="max-width: 100%;"/></a>
+<div class="caption">Minecraft Video Settings, with Shaders setting</div>
+</center></p>
+
+<p>With the shader package in place, we should be able to enable it in the game.
+Fire up minecraft (using the optifine install), and select <em>Options</em>, then <em>Video
+Settings</em>. From there, you should now see a newly available <em>Shaders</em> option.
+Click it to open up the shaders menu.</p>
+
+<p><center>
+<a href="../../img/posts/optifine-minecraft-flatpak/minecraft_shader_settings.png">
+<img alt="Minecraft Shader Settings" src="../../img/posts/setup-optifine-minecraft-flatpak/minecraft_shader_settings.png" style="max-width: 100%;"/></a>
+<div class="caption">Minecraft Shader Settings</div>
+</center></p>
+
+<p>If the shader package was moved to the correct location, it <em>should</em> show up
+here. If so, click the desired shader (the laucher might restart when
+a new shader is selected). If not, open the <em>Shaders Folder</em>
+to double check the location.</p>
+
+<p>After picking the shader, hit <em>Done</em> and check it out!</p>
+
+<h3 id="conlusion">Conlusion</h3>
+
+<p><center>
+<a href="../../img/posts/optifine-minecraft-flatpak/minecraft_with_shaders.png">
+<img alt="Minecraft with Shaders" src="../../img/posts/setup-optifine-minecraft-flatpak/minecraft_with_shaders.png" style="max-width: 100%;"/></a>
+<div class="caption">Minecraft using the BLS Shaders</div>
+</center></p>
+
+<p>Much better! Shaders can make minecraft feel like a whole new game, and are a
+blast to play with. While they might seem difficult to setup with a flatpak
+install, it really isn&rsquo;t bad <em>if</em> you know (and remember XD) <em>where</em> the
+minecraft folder is located.  Enjoy!</p>
+
+<p><em>PS: For those that read <a href="../../post/virtio-3d-vms/">my previous post</a>: yes, I
+did use a virgil VM to get clean install screenshots for this post&hellip; including
+the gameplay one!</em></p>
+
+                    
+                    
+                    
+                         <div style="float: right; text-decoration: underline; text-align: right;">Prev Post:</div>
+                    
+                    <br>
+                    
+                    
+                        <a href="http://ryan.himmelwright.net/post/virtio-3d-vms/" style="text-align: right; float: right; max-width: 40%">Running VMs with VirtIO 3D Acceleration</a>
+                    
+
+			
+			<div class="comment-section">
+			  
+   <div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "himmallright" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+			</div>
+                </div>
+            </div>
+        </div>
+    </article>
+
+        <hr>
+    
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                  <ul class="list-inline text-center">
+                    
+                      <li>
+                        <a href="mailto:ryan@himmelwright.net">
+                          <span class="fa-stack fa-lg">
+                            <i class="fa fa-circle fa-stack-2x"></i>
+                            <i class="fa fa-envelope-o fa-stack-1x fa-inverse"></i>
+                          </span>
+                        </a>
+                      </li>
+                    
+                    
+                    <li>
+                      <a href="https://github.com/himmAllRight">
+                        <span class="fa-stack fa-lg">
+                          <i class="fa fa-circle fa-stack-2x"></i>
+                          <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                        </span>
+                      </a>
+                    </li>
+                    
+                    <li>
+                      <a href="https://www.linkedin.com/in/ryan-himmelwright-b3891774/">
+                        <span class="fa-stack fa-lg">
+                          <i class="fa fa-circle fa-stack-2x"></i>
+                          <i class="fa fa-linkedin fa-stack-1x fa-inverse"></i>
+                        </span>
+                      </a>
+                    </li>
+                    
+                  </ul>
+<p class="copyright text-muted">
+
+<a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img
+  alt="Creative Commons License" style="border-width:0"
+  src="https://i.creativecommons.org/l/by/4.0/88x31.png" /></a><br />This work
+by <a xmlns:cc="http://creativecommons.org/ns#" href="http://ryan.himmelwright.net" property="cc:attributionName" rel="cc:attributionURL">Ryan Himmelwright</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
+</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    
+    <script src="http://ryan.himmelwright.net/js/jquery.min.js"></script>
+
+    
+    <script src="http://ryan.himmelwright.net/js/bootstrap.min.js"></script>
+
+    
+    <script src="http://ryan.himmelwright.net/js/clean-blog.js"></script>
+
+    
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-123-45', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+
+
+</body>
+
+</html>
+
