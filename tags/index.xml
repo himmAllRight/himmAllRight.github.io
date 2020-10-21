@@ -5,10 +5,46 @@
     <description>Recent content in Tags on λ ryan. himmelwright. net</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 30 Sep 2020 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 20 Oct 2020 00:00:00 +0000</lastBuildDate>
     
         <atom:link href="http://ryan.himmelwright.net/tags/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>ergodox</title>
+      <link>http://ryan.himmelwright.net/tags/ergodox/</link>
+      <pubDate>Tue, 20 Oct 2020 00:00:00 +0000</pubDate>
+      
+      <guid>http://ryan.himmelwright.net/tags/ergodox/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Hardware</title>
+      <link>http://ryan.himmelwright.net/tags/hardware/</link>
+      <pubDate>Tue, 20 Oct 2020 00:00:00 +0000</pubDate>
+      
+      <guid>http://ryan.himmelwright.net/tags/hardware/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>hhkb</title>
+      <link>http://ryan.himmelwright.net/tags/hhkb/</link>
+      <pubDate>Tue, 20 Oct 2020 00:00:00 +0000</pubDate>
+      
+      <guid>http://ryan.himmelwright.net/tags/hhkb/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>keyboards</title>
+      <link>http://ryan.himmelwright.net/tags/keyboards/</link>
+      <pubDate>Tue, 20 Oct 2020 00:00:00 +0000</pubDate>
+      
+      <guid>http://ryan.himmelwright.net/tags/keyboards/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>Fedora</title>
@@ -205,15 +241,6 @@
       <pubDate>Thu, 28 May 2020 00:00:00 +0000</pubDate>
       
       <guid>http://ryan.himmelwright.net/tags/gpu/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Hardware</title>
-      <link>http://ryan.himmelwright.net/tags/hardware/</link>
-      <pubDate>Thu, 28 May 2020 00:00:00 +0000</pubDate>
-      
-      <guid>http://ryan.himmelwright.net/tags/hardware/</guid>
       <description></description>
     </item>
     
@@ -484,24 +511,6 @@
       <pubDate>Sun, 25 Feb 2018 00:00:00 +0000</pubDate>
       
       <guid>http://ryan.himmelwright.net/tags/solus/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>HHKB</title>
-      <link>http://ryan.himmelwright.net/tags/hhkb/</link>
-      <pubDate>Thu, 28 Dec 2017 00:00:00 +0000</pubDate>
-      
-      <guid>http://ryan.himmelwright.net/tags/hhkb/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Keyboards</title>
-      <link>http://ryan.himmelwright.net/tags/keyboards/</link>
-      <pubDate>Thu, 28 Dec 2017 00:00:00 +0000</pubDate>
-      
-      <guid>http://ryan.himmelwright.net/tags/keyboards/</guid>
       <description></description>
     </item>
     

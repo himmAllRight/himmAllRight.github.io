@@ -1,14 +1,193 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Keyboards on λ ryan. himmelwright. net</title>
+    <title>keyboards on λ ryan. himmelwright. net</title>
     <link>http://ryan.himmelwright.net/tags/keyboards/</link>
-    <description>Recent content in Keyboards on λ ryan. himmelwright. net</description>
+    <description>Recent content in keyboards on λ ryan. himmelwright. net</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 28 Dec 2017 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 20 Oct 2020 00:00:00 +0000</lastBuildDate>
     
         <atom:link href="http://ryan.himmelwright.net/tags/keyboards/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Decided to get an Ergodox</title>
+      <link>http://ryan.himmelwright.net/post/decided-to-get-an-ergodox/</link>
+      <pubDate>Tue, 20 Oct 2020 00:00:00 +0000</pubDate>
+      
+      <guid>http://ryan.himmelwright.net/post/decided-to-get-an-ergodox/</guid>
+      <description>&lt;p&gt;For the past month, I have been learning to type&amp;hellip; on my new keyboard!  I
+decided to purchase an &lt;a href=&#34;https://ergodox-ez.com&#34;&gt;ergodox-ex&lt;/a&gt; and have been using
+it ever since. I still &lt;em&gt;love&lt;/em&gt; &lt;a href=&#34;../../post/new-hhkb-pro2/&#34;&gt;my HHKB&lt;/a&gt;, so why did I get
+a new keyboard? And why&amp;hellip; the ergodox?&lt;/p&gt;
+
+&lt;h2 id=&#34;previous-keyboard&#34;&gt;Previous Keyboard&lt;/h2&gt;
+
+&lt;p&gt;&lt;a href=&#34;../../img/posts/new-hhkb-pro2/got-hhkb.jpg&#34;&gt;&lt;img alt=&#34;Getting the HHKB
+Keyboard&#34; src=&#34;../../img/posts/new-hhkb-pro2/got-hhkb.jpg&#34; style=&#34;max-width:
+100%;&#34;/&gt;&lt;/a&gt;
+&lt;div class=&#34;caption&#34;&gt;My Happy Hacking Pro Keyboard&lt;/div&gt;&lt;/p&gt;
+
+&lt;p&gt;For a few years, I have been gladly using a
+&lt;a href=&#34;https://www.hhkeyboard.com/uk/products/pro2/&#34;&gt;Happy Hacking Pro
+2&lt;/a&gt; keyboard.  Before that, I was
+on a &lt;a href=&#34;https://deskthority.net/wiki/HHKB_Lite&#34;&gt;Happy Hacking Lite&lt;/a&gt;, which I
+started using while in college. I love the layout of HHK and still think it&amp;rsquo;s
+an amazing keyboard. The years I spent on HKBs are why I think &lt;em&gt;every&lt;/em&gt; keyboard
+should have &lt;code&gt;ctrl&lt;/code&gt; instead of a &lt;code&gt;caps&lt;/code&gt; key, or at least switch to two.&lt;/p&gt;
+
+&lt;h2 id=&#34;rationale-for-a-new-one&#34;&gt;Rationale for a new one&lt;/h2&gt;
+
+&lt;p&gt;While I love my HHKB and have no &lt;em&gt;real&lt;/em&gt; complaints, there were a few things that
+pushed me to start looking at new boards again.&lt;/p&gt;
+
+&lt;h3 id=&#34;i-was-getting-the-itch-to-build-one&#34;&gt;I was getting the itch to &lt;em&gt;build&lt;/em&gt; one&lt;/h3&gt;
+
+&lt;p&gt;My initial motivation was the slow, growing itch to build a mechanical
+keyboard.  It is an itch that I&amp;rsquo;ve felt before. I purchased my HHKB Pro as a
+&lt;em&gt;backup&lt;/em&gt; plan when the order for a
+&lt;a href=&#34;https://olkb.com/collections/planck&#34;&gt;planck&lt;/a&gt; keyboard kit via  mass.com was
+unfortunately cancelled. My &lt;em&gt;original&lt;/em&gt; intention was to learn how to solder (I
+even brought a soldering iron), and build the keyboard from scratch. Ultimately buying the
+HHKB, I never got to scratch that itch. While I &lt;em&gt;technically&lt;/em&gt; still haven&amp;rsquo;t&amp;hellip;
+this is what had me looking at keyboards and browsing
+&lt;a href=&#34;https://www.reddit.com/r/MechanicalKeyboards/&#34;&gt;/r/MechanicalKeyboards&lt;/a&gt; again in the
+first place&amp;hellip;&lt;/p&gt;
+
+&lt;h3 id=&#34;wanted-a-program-able-board&#34;&gt;Wanted a program-able board&lt;/h3&gt;
+
+&lt;p&gt;&lt;center&gt;
+&lt;iframe width=&#34;720&#34; height=&#34;405&#34; src=&#34;https://www.youtube.com/embed/5aJ9U5t9oD4?start=557&#34; frameborder=&#34;0&#34; allow=&#34;accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture&#34; allowfullscreen&gt;&lt;/iframe&gt;
+&lt;div class=&#34;caption&#34;&gt;The keyboard firmware can be customized on some System76 laptops, as demonstrated during this review.&lt;/div&gt;
+&lt;/center&gt;&lt;/p&gt;
+
+&lt;p&gt;More important than &lt;em&gt;physically&lt;/em&gt; building a keyboard, I wanted to be able to
+&lt;em&gt;programatically&lt;/em&gt; build it. That is to say, play with custom firmware. This is
+something that my HHKB doesn&amp;rsquo;t have, but the plank did. The
+&lt;a href=&#34;https://mechanicalkeyboards.com/shop/index.php?l=product_list&amp;amp;c=165&#34;&gt;pok3r&lt;/a&gt;,
+which I&amp;rsquo;ve considered in the past, also has programmable layers. Even some of
+&lt;a href=&#34;https://system76.com/laptops&#34;&gt;System76&amp;rsquo;s laptops&lt;/a&gt; now allow the ability to
+remap their keyboards using open firmware (which is awesome!). The
+&lt;em&gt;biggest&lt;/em&gt; thing I wanted from a new keyboard was the ability to customize and
+program the layers and layouts.&lt;/p&gt;
+
+&lt;h3 id=&#34;after-starting-to-learn-proper-touch-typing-i-wanted-to-try-an-ortholinear-layout&#34;&gt;After starting to learn proper touch typing, I wanted to try an ortholinear layout&lt;/h3&gt;
+
+&lt;p&gt;Working in mostly the same space for much of this year, I&amp;rsquo;ve noticed that my
+wrists and arms have really started to tighten up. So, I put my foot down
+and decided it was time once again to try and force myself to &lt;em&gt;proper&lt;/em&gt;
+touch type&amp;hellip; using all of my fingers. Normally, I slide my hands across the board
+and have just a few fingers do the bulk of the work.  This not only creates
+unnecessary movement, but also over-strains parts of my hands, building up tension
+in my wrists.&lt;/p&gt;
+
+&lt;p&gt;&lt;center&gt;
+&lt;a href=&#34;../../img/posts/decided_to_get_an_ergodox/touch_type_diagram.jpg&#34;&gt;
+&lt;img alt=&#34;The Minecraft Flathub Page&#34; src=&#34;../../img/posts/decided_to_get_an_ergodox/touch_type_diagram.jpg&#34; style=&#34;max-width: 100%;&#34;/&gt;&lt;/a&gt;
+&lt;div class=&#34;caption&#34;&gt;&amp;lsquo;Proper&amp;rsquo; finger key map for touch typing on a standard
+layout&lt;/div&gt;
+&lt;/center&gt;&lt;/p&gt;
+
+&lt;p&gt;As I started typing with proper finger use, I noticed my hands &lt;em&gt;really&lt;/em&gt; have a
+hard time hitting some keys. Particularly the bottom row, especially with my
+left hand, gave me trouble. My other fingers commonly blocked the path that the
+&amp;ldquo;correct&amp;rdquo; finger needed to reach a key. It became obvious why I naturally
+adapted to sliding across the board over the years. I wondered if an
+ortholinear layout would better allow me to touch type properly, using all of
+my fingers. My hope was that the straight grid would let my fingers
+slide directly up and down to the other rows, without crossing over and
+impeding my other fingers.&lt;/p&gt;
+
+&lt;h3 id=&#34;my-shoulder-pain-increased&#34;&gt;My shoulder pain increased&lt;/h3&gt;
+
+&lt;p&gt;The last straw, promoting my keyboard urgency to something I &lt;em&gt;needed&lt;/em&gt; to order
+&lt;em&gt;now&lt;/em&gt;, was that my shoulder was beginning to hurt&amp;hellip; all the time. During my
+search, I noticed split keyboards and thought they might
+help to alleviate some of my pain. The ability to type with my arms
+positioned at any width would at least allow me to vary my shoulder angle as
+it got sore. So, I switched from looking at DIY kits, to pre-built split
+keyboards that I could have shipped and under my fingers much quicker than I
+could order and build one.&lt;/p&gt;
+
+&lt;h2 id=&#34;keyboard-considerations&#34;&gt;Keyboard Considerations&lt;/h2&gt;
+
+&lt;p&gt;With requirements decided, I started searching for my keyboard. Both of the
+keyboards that I considered are made and sold from the same company,
+&lt;a href=&#34;https://zsa.io&#34;&gt;ZSA&lt;/a&gt;. From what I read online, they were usually highly
+recommended, with people rating both ZSA&amp;rsquo;s products and customer service very
+well. Personally, I enjoyed reading about their focus on
+&lt;a href=&#34;https://ergodox-ez.com/pages/sustainability&#34;&gt;sustainability&lt;/a&gt; and creating open
+source products.&lt;/p&gt;
+
+&lt;h3 id=&#34;moonlander&#34;&gt;Moonlander&lt;/h3&gt;
+
+&lt;p&gt;&lt;center&gt;
+&lt;a href=&#34;../../img/posts/decided_to_get_an_ergodox/moonlander.png&#34;&gt;
+&lt;img alt=&#34;The Minecraft Flathub Page&#34; src=&#34;../../img/posts/decided_to_get_an_ergodox/moonlander.png&#34; style=&#34;max-width: 100%;&#34;/&gt;&lt;/a&gt;
+&lt;div class=&#34;caption&#34;&gt;The Moonlander&lt;/div&gt;
+&lt;/center&gt;&lt;/p&gt;
+
+&lt;p&gt;The first keyboard that caught my eye was the new
+&lt;a href=&#34;https://www.zsa.io/moonlander/&#34;&gt;Moonlander&lt;/a&gt;. When I first saw it, it had
+&lt;em&gt;just&lt;/em&gt; been released. I admired it&amp;rsquo;s floating keys and slim profile.
+Apparently, it was designed to be at least somewhat portable, as it comes with
+a carrying case. The board seemed to be a fresh new take on the ergodox, with a
+clever folding design and some newer features like usb-c.&lt;/p&gt;
+
+&lt;p&gt;&lt;center&gt;
+&lt;iframe width=&#34;720&#34; height=&#34;405&#34; src=&#34;https://www.youtube.com/embed/mWu-_ACpSgY&#34; frameborder=&#34;0&#34; allow=&#34;accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture&#34; allowfullscreen&gt;&lt;/iframe&gt;
+&lt;/center&gt;&lt;/p&gt;
+
+&lt;p&gt;I had to dig deep to learn anything about the moonlander as there were only a
+handful of people that had them at the time. As I dug, I passively learned
+more and more about the ergodox&amp;hellip;&lt;/p&gt;
+
+&lt;h3 id=&#34;ergodox-ez&#34;&gt;Ergodox-EZ&lt;/h3&gt;
+
+&lt;p&gt;&lt;center&gt;
+&lt;a href=&#34;../../img/posts/decided_to_get_an_ergodox/ergodox_configurator.png&#34;&gt;
+&lt;img alt=&#34;The Minecraft Flathub Page&#34; src=&#34;../../img/posts/decided_to_get_an_ergodox/ergodox_configurator.png&#34; style=&#34;max-width: 100%;&#34;/&gt;&lt;/a&gt;
+&lt;div class=&#34;caption&#34;&gt;The Ergodox-EZ Configurator&lt;/div&gt;
+&lt;/center&gt;&lt;/p&gt;
+
+&lt;p&gt;In addition to the moonlander, ZSA also builds and sells the
+&lt;a href=&#34;https://ergodox-ez.com&#34;&gt;ergodox-ez&lt;/a&gt; (and the &lt;a href=&#34;https://ergodox-ez.com/pages/planck&#34;&gt;planck
+ez&lt;/a&gt;, but I wanted a split board). The
+ergodox-ez is a pre-built version of the well-known (to keyboard nerds&amp;hellip;),
+&lt;a href=&#34;https://github.com/Ergodox-io&#34;&gt;open-source&lt;/a&gt;, ortholinear, split keyboard, the
+&lt;a href=&#34;https://deskthority.net/wiki/ErgoDox&#34;&gt;ergodox&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;I loved the Moonlander&amp;rsquo;s features and design, but I ultimately
+decided to go with the ergodox-ez for a couple of reasons:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;The Moonlander is brand-new and there wasn&amp;rsquo;t much feedback for it
+yet, &lt;a href=&#34;https://www.youtube.com/watch?v=LALQsqZP1nA&#34;&gt;whereas&lt;/a&gt; &lt;a href=&#34;https://www.youtube.com/watch?v=1GPHiJMS7eo&#34;&gt;there&lt;/a&gt; &lt;a href=&#34;https://www.nytimes.com/wirecutter/reviews/comfortable-ergo-keyboard/&#34;&gt;is&lt;/a&gt; &lt;a href=&#34;https://thenextweb.com/insider/2016/03/03/why-this-300-ergonomic-keyboard-might-actually-be-worth-the-money/&#34;&gt;plenty&lt;/a&gt; &lt;a href=&#34;https://www.rtings.com/keyboard/reviews/ergodox/ez&#34;&gt;of&lt;/a&gt; &lt;a href=&#34;https://www.mmorpg.com/hardware-reviews/ergodox-ez-this-is-what-powerful-looks-like-2000107228&#34;&gt;information&lt;/a&gt; &lt;a href=&#34;https://matteeyah.com/ergodox-ez-keyboard&#34;&gt;about&lt;/a&gt; the ergodox-ez.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;On a similar note, because the ergodox has been a popular design for years
+now, 3rd-party parts like specialized keycaps sets
+can easily be found on &lt;a href=&#34;https://www.mass.com/&#34;&gt;mass.com&lt;/a&gt; and &lt;a href=&#34;http://www.mechsupply.co.uk&#34;&gt;other
+websites&lt;/a&gt;. This makes the ergodox a bit easier
+to customize than the moonlander, at least currently.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;The ergodox is great starting board for testing out the
+orthlinear+split design. If there were parts of it I really hated over the
+next few years, I could always switch to a moonlander or another split board that better fits my needs,
+based on what I learn from the ergodox.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;However, if I instead &lt;em&gt;love&lt;/em&gt; the ergodox design and want &lt;em&gt;another&lt;/em&gt; in a few
+years for some reason, I still have the option to &lt;em&gt;build&lt;/em&gt; one.. and &lt;em&gt;finally&lt;/em&gt;
+scratch that itch XD.&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;It&amp;rsquo;s a win-win situation.&lt;/p&gt;
+
+&lt;h3 id=&#34;conclusion&#34;&gt;Conclusion&lt;/h3&gt;
+
+&lt;p&gt;I ordered the Ergodox-ez and have had it for a over a month now. If you are
+wondering what configuration I selected, and what I think about it so far&amp;hellip;
+stay tuned for my next post ;) .&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>New Happy Hacking Keyboard Pro 2</title>
