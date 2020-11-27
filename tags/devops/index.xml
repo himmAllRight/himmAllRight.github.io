@@ -88,17 +88,17 @@ The default file is located at &lt;code&gt;/etc/ansible/hosts&lt;/code&gt;. An a
 file may be provided using the &lt;code&gt;-i&lt;/code&gt; flag.&lt;/p&gt;
 
 &lt;p&gt;Example file:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;[VMs]
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;[&lt;span style=&#34;color:#ae81ff&#34;&gt;VMs]&lt;/span&gt;
 &lt;span style=&#34;color:#75715e&#34;&gt;## Server VMs&lt;/span&gt;
 &lt;span style=&#34;color:#ae81ff&#34;&gt;192.168.10.50&lt;/span&gt;
 &lt;span style=&#34;color:#ae81ff&#34;&gt;192.168.10.71&lt;/span&gt;
 &lt;span style=&#34;color:#ae81ff&#34;&gt;192.168.10.118&lt;/span&gt;
 
-[Hosts]
+[&lt;span style=&#34;color:#ae81ff&#34;&gt;Hosts]&lt;/span&gt;
 &lt;span style=&#34;color:#75715e&#34;&gt;## Hosts&lt;/span&gt;
 &lt;span style=&#34;color:#ae81ff&#34;&gt;192.168.10.12&lt;/span&gt;
 
-[cluster]
+[&lt;span style=&#34;color:#ae81ff&#34;&gt;cluster]&lt;/span&gt;
 &lt;span style=&#34;color:#ae81ff&#34;&gt;192.168.112.205&lt;/span&gt;
 &lt;span style=&#34;color:#ae81ff&#34;&gt;192.168.112.206&lt;/span&gt;
 &lt;span style=&#34;color:#ae81ff&#34;&gt;192.168.112.207&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
@@ -135,7 +135,7 @@ has to be defined in whatever inventory file we are using.&lt;/p&gt;
 
 &lt;p&gt;So, if I define an inventory file (&lt;code&gt;./hosts.yaml&lt;/code&gt;) containing my desktop
 computer:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;[charmelon]
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;[&lt;span style=&#34;color:#ae81ff&#34;&gt;charmelon]&lt;/span&gt;
 &lt;span style=&#34;color:#ae81ff&#34;&gt;192.168.1.5&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;I can install &lt;code&gt;htop&lt;/code&gt; on &lt;em&gt;my desktop&lt;/em&gt;, using:&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;ansible -i ./hosts -m dnf -a &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;name=htop state=latest&amp;#34;&lt;/span&gt; charmeleon --become&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
@@ -161,14 +161,14 @@ of running a series of ad-hoc commands.&lt;/p&gt;
 &lt;p&gt;To demonstrate, lets convert the &lt;code&gt;dnf&lt;/code&gt; command from above, into a simple
 playbook named &lt;code&gt;install-htop.yaml&lt;/code&gt;.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;---
-- &lt;span style=&#34;color:#66d9ef&#34;&gt;hosts&lt;/span&gt;: charmeleon
-  &lt;span style=&#34;color:#66d9ef&#34;&gt;become&lt;/span&gt;: &lt;span style=&#34;color:#66d9ef&#34;&gt;true&lt;/span&gt;
+- &lt;span style=&#34;color:#f92672&#34;&gt;hosts&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;charmeleon&lt;/span&gt;
+  &lt;span style=&#34;color:#f92672&#34;&gt;become&lt;/span&gt;: &lt;span style=&#34;color:#66d9ef&#34;&gt;true&lt;/span&gt;
 
-  &lt;span style=&#34;color:#66d9ef&#34;&gt;tasks&lt;/span&gt;:
-    - &lt;span style=&#34;color:#66d9ef&#34;&gt;name&lt;/span&gt;: Install Htop
-      &lt;span style=&#34;color:#66d9ef&#34;&gt;dnf&lt;/span&gt;:
-        &lt;span style=&#34;color:#66d9ef&#34;&gt;name&lt;/span&gt;: htop
-        &lt;span style=&#34;color:#66d9ef&#34;&gt;state&lt;/span&gt;: latest&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+  &lt;span style=&#34;color:#f92672&#34;&gt;tasks&lt;/span&gt;:
+    - &lt;span style=&#34;color:#f92672&#34;&gt;name&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;Install Htop&lt;/span&gt;
+      &lt;span style=&#34;color:#f92672&#34;&gt;dnf&lt;/span&gt;:
+        &lt;span style=&#34;color:#f92672&#34;&gt;name&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;htop&lt;/span&gt;
+        &lt;span style=&#34;color:#f92672&#34;&gt;state&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;latest&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;Being a &lt;code&gt;yaml&lt;/code&gt; file, the first line starts with &lt;code&gt;---&lt;/code&gt;. Next, we define some
 meta information for the entire playbook. For example, this is were we put the
 &lt;code&gt;--become&lt;/code&gt; flag, by turning it into &lt;code&gt;become: true&lt;/code&gt;. This is also where we
@@ -192,18 +192,18 @@ will make it easier to trace the logs.&lt;/p&gt;
 &lt;p&gt;For example, lets add the&lt;code&gt;ping&lt;/code&gt; module to the playbook so we have more than one
 task&amp;hellip;.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;---
-- &lt;span style=&#34;color:#66d9ef&#34;&gt;hosts&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;127.0.0.1&lt;/span&gt;
-  &lt;span style=&#34;color:#66d9ef&#34;&gt;connection&lt;/span&gt;: local
-  &lt;span style=&#34;color:#66d9ef&#34;&gt;become&lt;/span&gt;: &lt;span style=&#34;color:#66d9ef&#34;&gt;true&lt;/span&gt;
+- &lt;span style=&#34;color:#f92672&#34;&gt;hosts&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;127.0.0.1&lt;/span&gt;
+  &lt;span style=&#34;color:#f92672&#34;&gt;connection&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;local&lt;/span&gt;
+  &lt;span style=&#34;color:#f92672&#34;&gt;become&lt;/span&gt;: &lt;span style=&#34;color:#66d9ef&#34;&gt;true&lt;/span&gt;
 
-  &lt;span style=&#34;color:#66d9ef&#34;&gt;tasks&lt;/span&gt;:
-	- &lt;span style=&#34;color:#66d9ef&#34;&gt;name&lt;/span&gt;: Ping host first...
-	  &lt;span style=&#34;color:#66d9ef&#34;&gt;ping&lt;/span&gt;:
+  &lt;span style=&#34;color:#f92672&#34;&gt;tasks&lt;/span&gt;:
+	- &lt;span style=&#34;color:#f92672&#34;&gt;name&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;Ping host first...&lt;/span&gt;
+	  &lt;span style=&#34;color:#f92672&#34;&gt;ping&lt;/span&gt;:
 
-    - &lt;span style=&#34;color:#66d9ef&#34;&gt;name&lt;/span&gt;: Install Htop
-      &lt;span style=&#34;color:#66d9ef&#34;&gt;dnf&lt;/span&gt;:
-        &lt;span style=&#34;color:#66d9ef&#34;&gt;name&lt;/span&gt;: htop
-        &lt;span style=&#34;color:#66d9ef&#34;&gt;state&lt;/span&gt;: latest&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+    - &lt;span style=&#34;color:#f92672&#34;&gt;name&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;Install Htop&lt;/span&gt;
+      &lt;span style=&#34;color:#f92672&#34;&gt;dnf&lt;/span&gt;:
+        &lt;span style=&#34;color:#f92672&#34;&gt;name&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;htop&lt;/span&gt;
+        &lt;span style=&#34;color:#f92672&#34;&gt;state&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;latest&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;Now the playbook will run both tasks, using &lt;code&gt;name&lt;/code&gt; as the header for the output
 of each one:&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;➜  /tmp ansible-playbook install-htop.yaml
@@ -229,21 +229,21 @@ the hard-coded &lt;code&gt;htop&lt;/code&gt; in the &lt;code&gt;dnf&lt;/code&gt;
 even use the &lt;code&gt;package&lt;/code&gt; variable in the &lt;code&gt;name&lt;/code&gt; string, to dynamically change the
 output in the log:&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;---
-- &lt;span style=&#34;color:#66d9ef&#34;&gt;hosts&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;127.0.0.1&lt;/span&gt;
-  &lt;span style=&#34;color:#66d9ef&#34;&gt;connection&lt;/span&gt;: local
-  &lt;span style=&#34;color:#66d9ef&#34;&gt;become&lt;/span&gt;: &lt;span style=&#34;color:#66d9ef&#34;&gt;true&lt;/span&gt;
+- &lt;span style=&#34;color:#f92672&#34;&gt;hosts&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;127.0.0.1&lt;/span&gt;
+  &lt;span style=&#34;color:#f92672&#34;&gt;connection&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;local&lt;/span&gt;
+  &lt;span style=&#34;color:#f92672&#34;&gt;become&lt;/span&gt;: &lt;span style=&#34;color:#66d9ef&#34;&gt;true&lt;/span&gt;
 
-  &lt;span style=&#34;color:#66d9ef&#34;&gt;vars&lt;/span&gt;:
-    &lt;span style=&#34;color:#66d9ef&#34;&gt;package&lt;/span&gt;: htop
+  &lt;span style=&#34;color:#f92672&#34;&gt;vars&lt;/span&gt;:
+    &lt;span style=&#34;color:#f92672&#34;&gt;package&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;htop&lt;/span&gt;
 
-  &lt;span style=&#34;color:#66d9ef&#34;&gt;tasks&lt;/span&gt;:
-    - &lt;span style=&#34;color:#66d9ef&#34;&gt;name&lt;/span&gt;: Ping host first...
-      &lt;span style=&#34;color:#66d9ef&#34;&gt;ping&lt;/span&gt;:
+  &lt;span style=&#34;color:#f92672&#34;&gt;tasks&lt;/span&gt;:
+    - &lt;span style=&#34;color:#f92672&#34;&gt;name&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;Ping host first...&lt;/span&gt;
+      &lt;span style=&#34;color:#f92672&#34;&gt;ping&lt;/span&gt;:
 
-    - &lt;span style=&#34;color:#66d9ef&#34;&gt;name&lt;/span&gt;: Install {{ package }}
-      &lt;span style=&#34;color:#66d9ef&#34;&gt;dnf&lt;/span&gt;:
-        &lt;span style=&#34;color:#66d9ef&#34;&gt;name&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;{{ package }}&amp;#34;&lt;/span&gt;
-        &lt;span style=&#34;color:#66d9ef&#34;&gt;state&lt;/span&gt;: latest&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+    - &lt;span style=&#34;color:#f92672&#34;&gt;name&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;Install {{ package }}&lt;/span&gt;
+      &lt;span style=&#34;color:#f92672&#34;&gt;dnf&lt;/span&gt;:
+        &lt;span style=&#34;color:#f92672&#34;&gt;name&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;{{ package }}&amp;#34;&lt;/span&gt;
+        &lt;span style=&#34;color:#f92672&#34;&gt;state&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;latest&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;And the output:&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;➜  ansible-playbook install-htop.yaml
 
@@ -331,24 +331,24 @@ functionality into roles.&lt;/p&gt;
 &lt;p&gt;Next, we can add our variables to a default file,
 &lt;code&gt;roles/install-htop/defaults/main.yaml&lt;/code&gt;:&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;---
-&lt;span style=&#34;color:#66d9ef&#34;&gt;package&lt;/span&gt;: htop&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;span style=&#34;color:#f92672&#34;&gt;package&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;htop&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;With the &lt;code&gt;package&lt;/code&gt; variable set, lets create the tasks. To demonstrate
 including other files in the &lt;code&gt;main.yaml&lt;/code&gt;, I&amp;rsquo;m going to be overly-complicated and
 extract our &lt;code&gt;ping&lt;/code&gt; task into its own file, and then include it in the &lt;code&gt;main.yaml&lt;/code&gt;.&lt;/p&gt;
 
 &lt;p&gt;So first, &lt;code&gt;roles/install-htop/tasks/ping.yaml&lt;/code&gt;&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;---
-- &lt;span style=&#34;color:#66d9ef&#34;&gt;name&lt;/span&gt;: Ping host first...
-  ping:&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+- &lt;span style=&#34;color:#f92672&#34;&gt;name&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;Ping host first...&lt;/span&gt;
+  &lt;span style=&#34;color:#ae81ff&#34;&gt;ping:&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;And then, &lt;code&gt;roles/install-htop/tasks/main.yaml&lt;/code&gt;, which will also include our
 &lt;code&gt;dnf&lt;/code&gt; install task&amp;hellip;&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;---
-- &lt;span style=&#34;color:#66d9ef&#34;&gt;include_tasks&lt;/span&gt;: ping.yaml
+- &lt;span style=&#34;color:#f92672&#34;&gt;include_tasks&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;ping.yaml&lt;/span&gt;
 
-- &lt;span style=&#34;color:#66d9ef&#34;&gt;name&lt;/span&gt;: Install {{ package }}
-  &lt;span style=&#34;color:#66d9ef&#34;&gt;dnf&lt;/span&gt;:
-    &lt;span style=&#34;color:#66d9ef&#34;&gt;name&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;{{ package }}&amp;#34;&lt;/span&gt;
-    &lt;span style=&#34;color:#66d9ef&#34;&gt;state&lt;/span&gt;: latest&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+- &lt;span style=&#34;color:#f92672&#34;&gt;name&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;Install {{ package }}&lt;/span&gt;
+  &lt;span style=&#34;color:#f92672&#34;&gt;dnf&lt;/span&gt;:
+    &lt;span style=&#34;color:#f92672&#34;&gt;name&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;{{ package }}&amp;#34;&lt;/span&gt;
+    &lt;span style=&#34;color:#f92672&#34;&gt;state&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;latest&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;Congrats, we have an &lt;code&gt;install-htop&lt;/code&gt; role defined!&lt;/p&gt;
 
 &lt;h3 id=&#34;including-roles-in-playbooks&#34;&gt;Including roles in playbooks&lt;/h3&gt;
@@ -356,12 +356,12 @@ extract our &lt;code&gt;ping&lt;/code&gt; task into its own file, and then inclu
 &lt;p&gt;Just as we included &lt;code&gt;vars&lt;/code&gt; and &lt;code&gt;tasks&lt;/code&gt; in the playbook, if we already have
 tasks and vars defined in a &lt;em&gt;role&lt;/em&gt;, we can instead include that &lt;em&gt;role&lt;/em&gt;:&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;---
-- &lt;span style=&#34;color:#66d9ef&#34;&gt;hosts&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;127.0.0.1&lt;/span&gt;
-  &lt;span style=&#34;color:#66d9ef&#34;&gt;connection&lt;/span&gt;: local
-  &lt;span style=&#34;color:#66d9ef&#34;&gt;become&lt;/span&gt;: &lt;span style=&#34;color:#66d9ef&#34;&gt;true&lt;/span&gt;
+- &lt;span style=&#34;color:#f92672&#34;&gt;hosts&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;127.0.0.1&lt;/span&gt;
+  &lt;span style=&#34;color:#f92672&#34;&gt;connection&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;local&lt;/span&gt;
+  &lt;span style=&#34;color:#f92672&#34;&gt;become&lt;/span&gt;: &lt;span style=&#34;color:#66d9ef&#34;&gt;true&lt;/span&gt;
 
-  &lt;span style=&#34;color:#66d9ef&#34;&gt;roles&lt;/span&gt;:
-    - install-htop&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+  &lt;span style=&#34;color:#f92672&#34;&gt;roles&lt;/span&gt;:
+    - &lt;span style=&#34;color:#ae81ff&#34;&gt;install-htop&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;Easy. Let&amp;rsquo;s run it:&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;➜  ansible-playbook install-htop.yaml
 &lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;WARNING&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt;: Ansible is being run in a world writable directory &lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;/tmp&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt;, ignoring it as an ansible.cfg source. For more information see
@@ -887,12 +887,12 @@ command. For example, the following Dockerfile would use an
 &lt;a href=&#34;https://hub.docker.com/_/ubuntu/&#34;&gt;ubuntu&lt;/a&gt; image for the base, but also update &amp;amp;
 install several packages in the image:&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# This is a custom ubuntu image with SSH already installed&lt;/span&gt;
-FROM ubuntu:latest
-MAINTAINER himmallright &amp;lt;ryan.himmelwright@gmail.com&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;gt;
-&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;
-&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;RUN apt-get update&lt;/span&gt;
+&lt;span style=&#34;color:#ae81ff&#34;&gt;FROM ubuntu:latest&lt;/span&gt;
+&lt;span style=&#34;color:#ae81ff&#34;&gt;MAINTAINER himmallright &amp;lt;ryan.himmelwright@gmail.com&amp;gt;&lt;/span&gt;
 
-RUN apt-get install -y vim stow git tmux fish htop emacs&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;span style=&#34;color:#ae81ff&#34;&gt;RUN apt-get update&lt;/span&gt;
+
+&lt;span style=&#34;color:#ae81ff&#34;&gt;RUN apt-get install -y vim stow git tmux fish htop emacs&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;To build the image, run the following command in the same directory as the
 Dockerfile (if defining a specific file, the &lt;code&gt;-f&lt;/code&gt; flag can be used):&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;docker build -t ubuntu-base:v1 .&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;

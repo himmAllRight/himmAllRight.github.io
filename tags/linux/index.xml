@@ -160,11 +160,11 @@ post&lt;/a&gt; I wrote earlier this year.&lt;/p&gt;
 &lt;h3 id=&#34;vars&#34;&gt;Vars&lt;/h3&gt;
 
 &lt;p&gt;First, lets define default values for the variables we will use in tasks and template files:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;user&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;{{ ansible_user_id }}&amp;#34;&lt;/span&gt;  &lt;span style=&#34;color:#75715e&#34;&gt;# User to run as&lt;/span&gt;
-&lt;span style=&#34;color:#66d9ef&#34;&gt;nativefier_build_dir&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;/tmp/&amp;#34;&lt;/span&gt;  &lt;span style=&#34;color:#75715e&#34;&gt;# Location to build apps at&lt;/span&gt;
-&lt;span style=&#34;color:#66d9ef&#34;&gt;nativefier_dir&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;/home/{{ user }}/Builds/&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#75715e&#34;&gt;# Location to move completed builds&lt;/span&gt;
-&lt;span style=&#34;color:#66d9ef&#34;&gt;icons_dir&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;/home/{{ user }}/.local/share/icons/&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#75715e&#34;&gt;# App Icon location&lt;/span&gt;
-&lt;span style=&#34;color:#66d9ef&#34;&gt;applications_dir&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;/home/{{ user }}/.local/share/applications/&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#75715e&#34;&gt;# desktop entry location&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;&lt;span style=&#34;color:#f92672&#34;&gt;user&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;{{ ansible_user_id }}&amp;#34;&lt;/span&gt;  &lt;span style=&#34;color:#75715e&#34;&gt;# User to run as&lt;/span&gt;
+&lt;span style=&#34;color:#f92672&#34;&gt;nativefier_build_dir&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;/tmp/&amp;#34;&lt;/span&gt;  &lt;span style=&#34;color:#75715e&#34;&gt;# Location to build apps at&lt;/span&gt;
+&lt;span style=&#34;color:#f92672&#34;&gt;nativefier_dir&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;/home/{{ user }}/Builds/&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#75715e&#34;&gt;# Location to move completed builds&lt;/span&gt;
+&lt;span style=&#34;color:#f92672&#34;&gt;icons_dir&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;/home/{{ user }}/.local/share/icons/&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#75715e&#34;&gt;# App Icon location&lt;/span&gt;
+&lt;span style=&#34;color:#f92672&#34;&gt;applications_dir&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;/home/{{ user }}/.local/share/applications/&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#75715e&#34;&gt;# desktop entry location&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;We will define one more variable which won&amp;rsquo;t have a default, &lt;code&gt;nativefier_apps&lt;/code&gt;. However, I&amp;rsquo;ll
 talk about that later when we use the role in a playbook.&lt;/p&gt;
 
@@ -205,32 +205,32 @@ tasks sub-directory.&lt;/p&gt;
 &lt;p&gt;The first few tasks will check and ensure that the directories we intend to use
 exist. This is generally a good practice to prevent playbooks from breaking due
 to missing folders:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;- &lt;span style=&#34;color:#66d9ef&#34;&gt;name&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;Ensure Icon dir exists&amp;#34;&lt;/span&gt;
-  &lt;span style=&#34;color:#66d9ef&#34;&gt;file&lt;/span&gt;:
-    &lt;span style=&#34;color:#66d9ef&#34;&gt;path&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;{{ icons_dir }}&amp;#34;&lt;/span&gt;
-    &lt;span style=&#34;color:#66d9ef&#34;&gt;state&lt;/span&gt;: directory
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;- &lt;span style=&#34;color:#f92672&#34;&gt;name&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;Ensure Icon dir exists&amp;#34;&lt;/span&gt;
+  &lt;span style=&#34;color:#f92672&#34;&gt;file&lt;/span&gt;:
+    &lt;span style=&#34;color:#f92672&#34;&gt;path&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;{{ icons_dir }}&amp;#34;&lt;/span&gt;
+    &lt;span style=&#34;color:#f92672&#34;&gt;state&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;directory&lt;/span&gt;
 
-- &lt;span style=&#34;color:#66d9ef&#34;&gt;name&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;Ensure applications dir exists&amp;#34;&lt;/span&gt;
-  &lt;span style=&#34;color:#66d9ef&#34;&gt;file&lt;/span&gt;:
-    &lt;span style=&#34;color:#66d9ef&#34;&gt;path&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;{{ applications_dir }}&amp;#34;&lt;/span&gt;
-    &lt;span style=&#34;color:#66d9ef&#34;&gt;state&lt;/span&gt;: directory
+- &lt;span style=&#34;color:#f92672&#34;&gt;name&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;Ensure applications dir exists&amp;#34;&lt;/span&gt;
+  &lt;span style=&#34;color:#f92672&#34;&gt;file&lt;/span&gt;:
+    &lt;span style=&#34;color:#f92672&#34;&gt;path&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;{{ applications_dir }}&amp;#34;&lt;/span&gt;
+    &lt;span style=&#34;color:#f92672&#34;&gt;state&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;directory&lt;/span&gt;
 
-- &lt;span style=&#34;color:#66d9ef&#34;&gt;name&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;Ensure {{ nativefier_build_dir }} exists&amp;#34;&lt;/span&gt;
-  &lt;span style=&#34;color:#66d9ef&#34;&gt;file&lt;/span&gt;:
-    &lt;span style=&#34;color:#66d9ef&#34;&gt;path&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;{{ nativefier_build_dir }}&amp;#34;&lt;/span&gt;
-    &lt;span style=&#34;color:#66d9ef&#34;&gt;state&lt;/span&gt;: directory
+- &lt;span style=&#34;color:#f92672&#34;&gt;name&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;Ensure {{ nativefier_build_dir }} exists&amp;#34;&lt;/span&gt;
+  &lt;span style=&#34;color:#f92672&#34;&gt;file&lt;/span&gt;:
+    &lt;span style=&#34;color:#f92672&#34;&gt;path&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;{{ nativefier_build_dir }}&amp;#34;&lt;/span&gt;
+    &lt;span style=&#34;color:#f92672&#34;&gt;state&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;directory&lt;/span&gt;
 
-- &lt;span style=&#34;color:#66d9ef&#34;&gt;name&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;Ensure {{ nativefier_dir }} exists&amp;#34;&lt;/span&gt;
-  &lt;span style=&#34;color:#66d9ef&#34;&gt;file&lt;/span&gt;:
-    &lt;span style=&#34;color:#66d9ef&#34;&gt;path&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;{{ nativefier_dir }}&amp;#34;&lt;/span&gt;
-    &lt;span style=&#34;color:#66d9ef&#34;&gt;state&lt;/span&gt;: directory&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+- &lt;span style=&#34;color:#f92672&#34;&gt;name&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;Ensure {{ nativefier_dir }} exists&amp;#34;&lt;/span&gt;
+  &lt;span style=&#34;color:#f92672&#34;&gt;file&lt;/span&gt;:
+    &lt;span style=&#34;color:#f92672&#34;&gt;path&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;{{ nativefier_dir }}&amp;#34;&lt;/span&gt;
+    &lt;span style=&#34;color:#f92672&#34;&gt;state&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;directory&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;h4 id=&#34;managing-icon-files&#34;&gt;Managing Icon Files&lt;/h4&gt;
 
 &lt;p&gt;Next, add a small task that will copy the icons we included with the role,
 to the user&amp;rsquo;s local icon folder:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;- &lt;span style=&#34;color:#66d9ef&#34;&gt;name&lt;/span&gt;: Move icons to local folder
-  &lt;span style=&#34;color:#66d9ef&#34;&gt;copy&lt;/span&gt;: src=&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;{{ item.icon }}&amp;#34;&lt;/span&gt; dest=&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;{{ icons_dir }}/{{ item.icon }}&amp;#34;&lt;/span&gt;
-  &lt;span style=&#34;color:#66d9ef&#34;&gt;loop&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;{{ nativefier_apps }}&amp;#34;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;- &lt;span style=&#34;color:#f92672&#34;&gt;name&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;Move icons to local folder&lt;/span&gt;
+  &lt;span style=&#34;color:#f92672&#34;&gt;copy&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;src=&amp;#34;{{ item.icon }}&amp;#34; dest=&amp;#34;{{ icons_dir }}/{{ item.icon }}&amp;#34;&lt;/span&gt;
+  &lt;span style=&#34;color:#f92672&#34;&gt;loop&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;{{ nativefier_apps }}&amp;#34;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;This will ensure that all the icons are already in place when we build both the
 nativefier app and the &lt;code&gt;.deskop&lt;/code&gt; files.&lt;/p&gt;
 
@@ -238,36 +238,36 @@ nativefier app and the &lt;code&gt;.deskop&lt;/code&gt; files.&lt;/p&gt;
 
 &lt;p&gt;We can now define a few tasks that will pull and run the nativefier container
 using podman. &lt;em&gt;(Note: This could be done with docker&amp;hellip; but I prefer podman XD)&lt;/em&gt;:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;- &lt;span style=&#34;color:#66d9ef&#34;&gt;name&lt;/span&gt;: Pull down nativefier container image
-  &lt;span style=&#34;color:#66d9ef&#34;&gt;shell&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;podman pull jiahaog/nativefier&amp;#34;&lt;/span&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;- &lt;span style=&#34;color:#f92672&#34;&gt;name&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;Pull down nativefier container image&lt;/span&gt;
+  &lt;span style=&#34;color:#f92672&#34;&gt;shell&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;podman pull jiahaog/nativefier&amp;#34;&lt;/span&gt;
 
-- &lt;span style=&#34;color:#66d9ef&#34;&gt;name&lt;/span&gt;: Build Nativefier app via podman
-  &lt;span style=&#34;color:#66d9ef&#34;&gt;shell&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;podman run --rm --security-opt label=disable -v {{ icons_dir }}:/src -v {{ nativefier_build_dir }}:/target jiahaog/nativefier --icon /src/{{ item.icon }} --name {{ item.name}} -p linux -a x64 {{ item.url }} /target&amp;#34;&lt;/span&gt;
-  &lt;span style=&#34;color:#66d9ef&#34;&gt;loop&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;{{ nativefier_apps }}&amp;#34;&lt;/span&gt;
+- &lt;span style=&#34;color:#f92672&#34;&gt;name&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;Build Nativefier app via podman&lt;/span&gt;
+  &lt;span style=&#34;color:#f92672&#34;&gt;shell&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;podman run --rm --security-opt label=disable -v {{ icons_dir }}:/src -v {{ nativefier_build_dir }}:/target jiahaog/nativefier --icon /src/{{ item.icon }} --name {{ item.name}} -p linux -a x64 {{ item.url }} /target&amp;#34;&lt;/span&gt;
+  &lt;span style=&#34;color:#f92672&#34;&gt;loop&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;{{ nativefier_apps }}&amp;#34;&lt;/span&gt;
 
-- &lt;span style=&#34;color:#66d9ef&#34;&gt;name&lt;/span&gt;: Clean out nativefier dir
-  &lt;span style=&#34;color:#66d9ef&#34;&gt;become&lt;/span&gt;: &lt;span style=&#34;color:#66d9ef&#34;&gt;true&lt;/span&gt;
-  &lt;span style=&#34;color:#66d9ef&#34;&gt;file&lt;/span&gt;:
-    &lt;span style=&#34;color:#66d9ef&#34;&gt;path&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;{{ nativefier_dir }}/{{ item.name }}-linux-x64&amp;#34;&lt;/span&gt;
-    &lt;span style=&#34;color:#66d9ef&#34;&gt;state&lt;/span&gt;: absent
-  &lt;span style=&#34;color:#66d9ef&#34;&gt;loop&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;{{ nativefier_apps }}&amp;#34;&lt;/span&gt;
+- &lt;span style=&#34;color:#f92672&#34;&gt;name&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;Clean out nativefier dir&lt;/span&gt;
+  &lt;span style=&#34;color:#f92672&#34;&gt;become&lt;/span&gt;: &lt;span style=&#34;color:#66d9ef&#34;&gt;true&lt;/span&gt;
+  &lt;span style=&#34;color:#f92672&#34;&gt;file&lt;/span&gt;:
+    &lt;span style=&#34;color:#f92672&#34;&gt;path&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;{{ nativefier_dir }}/{{ item.name }}-linux-x64&amp;#34;&lt;/span&gt;
+    &lt;span style=&#34;color:#f92672&#34;&gt;state&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;absent&lt;/span&gt;
+  &lt;span style=&#34;color:#f92672&#34;&gt;loop&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;{{ nativefier_apps }}&amp;#34;&lt;/span&gt;
 
   &lt;span style=&#34;color:#75715e&#34;&gt;# I don&amp;#39;t love this, but copy was too slow&lt;/span&gt;
-- &lt;span style=&#34;color:#66d9ef&#34;&gt;name&lt;/span&gt;: Move Builds to Nativefier Location
-  &lt;span style=&#34;color:#66d9ef&#34;&gt;become&lt;/span&gt;: True
-  &lt;span style=&#34;color:#66d9ef&#34;&gt;shell&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;mv {{ nativefier_build_dir }}/{{ item.name }}-linux-x64 {{ nativefier_dir }}/{{ item.name }}-linux-x64&amp;#34;&lt;/span&gt;
-  &lt;span style=&#34;color:#66d9ef&#34;&gt;loop&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;{{ nativefier_apps }}&amp;#34;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+- &lt;span style=&#34;color:#f92672&#34;&gt;name&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;Move Builds to Nativefier Location&lt;/span&gt;
+  &lt;span style=&#34;color:#f92672&#34;&gt;become&lt;/span&gt;: &lt;span style=&#34;color:#66d9ef&#34;&gt;True&lt;/span&gt;
+  &lt;span style=&#34;color:#f92672&#34;&gt;shell&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;mv {{ nativefier_build_dir }}/{{ item.name }}-linux-x64 {{ nativefier_dir }}/{{ item.name }}-linux-x64&amp;#34;&lt;/span&gt;
+  &lt;span style=&#34;color:#f92672&#34;&gt;loop&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;{{ nativefier_apps }}&amp;#34;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;These tasks also move the built app to the final location.&lt;/p&gt;
 
 &lt;h4 id=&#34;manaing-application-files&#34;&gt;Manaing Application Files&lt;/h4&gt;
 
 &lt;p&gt;Lastly, with icons in place and the application builds complete, we can create the application
 entry files by adding this final task:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;- &lt;span style=&#34;color:#66d9ef&#34;&gt;name&lt;/span&gt;: Generate Application Desktop Files
-  &lt;span style=&#34;color:#66d9ef&#34;&gt;template&lt;/span&gt;:
-    &lt;span style=&#34;color:#66d9ef&#34;&gt;src&lt;/span&gt;: templates/nativefier.desktop.j2
-    &lt;span style=&#34;color:#66d9ef&#34;&gt;dest&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;{{ applications_dir }}/{{ item.name }}.desktop&amp;#34;&lt;/span&gt;
-  &lt;span style=&#34;color:#66d9ef&#34;&gt;loop&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;{{ nativefier_apps }}&amp;#34;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;- &lt;span style=&#34;color:#f92672&#34;&gt;name&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;Generate Application Desktop Files&lt;/span&gt;
+  &lt;span style=&#34;color:#f92672&#34;&gt;template&lt;/span&gt;:
+    &lt;span style=&#34;color:#f92672&#34;&gt;src&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;templates/nativefier.desktop.j2&lt;/span&gt;
+    &lt;span style=&#34;color:#f92672&#34;&gt;dest&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;{{ applications_dir }}/{{ item.name }}.desktop&amp;#34;&lt;/span&gt;
+  &lt;span style=&#34;color:#f92672&#34;&gt;loop&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;{{ nativefier_apps }}&amp;#34;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;And there we go, that&amp;rsquo;s it! Well&amp;hellip; sort of.&lt;/p&gt;
 
 &lt;h2 id=&#34;selinux-woes&#34;&gt;Selinux woes&lt;/h2&gt;
@@ -301,13 +301,13 @@ of &amp;ldquo;&lt;em&gt;just disable selinux&lt;/em&gt;&amp;rdquo;.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;drwxr-xr-x. &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;100999&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;100999&lt;/span&gt;  &lt;span style=&#34;color:#ae81ff&#34;&gt;560&lt;/span&gt; Oct &lt;span style=&#34;color:#ae81ff&#34;&gt;25&lt;/span&gt; 20:40 jellyfin-linux-x64&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;Lastly, I wanted to add one more cleanup task. My builds had the ugly uid/gid
 pair of &lt;code&gt;100999 100999&lt;/code&gt;, so I a task to change ownership to the &lt;code&gt;user&lt;/code&gt;:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;- &lt;span style=&#34;color:#66d9ef&#34;&gt;name&lt;/span&gt;: Change Permissons of Nativefier Dirs
-  &lt;span style=&#34;color:#66d9ef&#34;&gt;become&lt;/span&gt;: True
-  &lt;span style=&#34;color:#66d9ef&#34;&gt;file&lt;/span&gt;:
-    &lt;span style=&#34;color:#66d9ef&#34;&gt;path&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;{{ nativefier_dir }}/{{ item.name }}-linux-x64&amp;#34;&lt;/span&gt;
-    &lt;span style=&#34;color:#66d9ef&#34;&gt;owner&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;{{ user }}&amp;#34;&lt;/span&gt;
-    &lt;span style=&#34;color:#66d9ef&#34;&gt;group&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;{{ user }}&amp;#34;&lt;/span&gt;
-  &lt;span style=&#34;color:#66d9ef&#34;&gt;loop&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;{{ nativefier_apps }}&amp;#34;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;- &lt;span style=&#34;color:#f92672&#34;&gt;name&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;Change Permissons of Nativefier Dirs&lt;/span&gt;
+  &lt;span style=&#34;color:#f92672&#34;&gt;become&lt;/span&gt;: &lt;span style=&#34;color:#66d9ef&#34;&gt;True&lt;/span&gt;
+  &lt;span style=&#34;color:#f92672&#34;&gt;file&lt;/span&gt;:
+    &lt;span style=&#34;color:#f92672&#34;&gt;path&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;{{ nativefier_dir }}/{{ item.name }}-linux-x64&amp;#34;&lt;/span&gt;
+    &lt;span style=&#34;color:#f92672&#34;&gt;owner&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;{{ user }}&amp;#34;&lt;/span&gt;
+    &lt;span style=&#34;color:#f92672&#34;&gt;group&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;{{ user }}&amp;#34;&lt;/span&gt;
+  &lt;span style=&#34;color:#f92672&#34;&gt;loop&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;{{ nativefier_apps }}&amp;#34;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;After that change:&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;drwxr-xr-x. &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt; ryan ryan  &lt;span style=&#34;color:#ae81ff&#34;&gt;560&lt;/span&gt; Oct &lt;span style=&#34;color:#ae81ff&#34;&gt;25&lt;/span&gt; 20:40 jellyfin-linux-x64&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;Much better!&lt;/p&gt;
@@ -333,16 +333,16 @@ defined:&lt;/p&gt;
 
 &lt;p&gt;So, to build my &lt;code&gt;pocket&lt;/code&gt;, &lt;code&gt;fastmail&lt;/code&gt;, and &lt;code&gt;homeassistant&lt;/code&gt; apps, I added the
 following to my playbook:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;nativefier_apps&lt;/span&gt;:
-  - &lt;span style=&#34;color:#66d9ef&#34;&gt;name&lt;/span&gt;: pocket
-    &lt;span style=&#34;color:#66d9ef&#34;&gt;icon&lt;/span&gt;: pocket.png
-    &lt;span style=&#34;color:#66d9ef&#34;&gt;url&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;https://app.getpocket.com&amp;#34;&lt;/span&gt;
-  - &lt;span style=&#34;color:#66d9ef&#34;&gt;name&lt;/span&gt;: fastmail
-    &lt;span style=&#34;color:#66d9ef&#34;&gt;icon&lt;/span&gt;: fastmail.png
-    &lt;span style=&#34;color:#66d9ef&#34;&gt;url&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;https://www.fastmail.com&amp;#34;&lt;/span&gt;
-  - &lt;span style=&#34;color:#66d9ef&#34;&gt;name&lt;/span&gt;: homeassistant
-    &lt;span style=&#34;color:#66d9ef&#34;&gt;icon&lt;/span&gt;: homeassistant.png
-    &lt;span style=&#34;color:#66d9ef&#34;&gt;url&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;http://homeassistant.local:8123&amp;#34;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;&lt;span style=&#34;color:#f92672&#34;&gt;nativefier_apps&lt;/span&gt;:
+  - &lt;span style=&#34;color:#f92672&#34;&gt;name&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;pocket&lt;/span&gt;
+    &lt;span style=&#34;color:#f92672&#34;&gt;icon&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;pocket.png&lt;/span&gt;
+    &lt;span style=&#34;color:#f92672&#34;&gt;url&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;https://app.getpocket.com&amp;#34;&lt;/span&gt;
+  - &lt;span style=&#34;color:#f92672&#34;&gt;name&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;fastmail&lt;/span&gt;
+    &lt;span style=&#34;color:#f92672&#34;&gt;icon&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;fastmail.png&lt;/span&gt;
+    &lt;span style=&#34;color:#f92672&#34;&gt;url&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;https://www.fastmail.com&amp;#34;&lt;/span&gt;
+  - &lt;span style=&#34;color:#f92672&#34;&gt;name&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;homeassistant&lt;/span&gt;
+    &lt;span style=&#34;color:#f92672&#34;&gt;icon&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;homeassistant.png&lt;/span&gt;
+    &lt;span style=&#34;color:#f92672&#34;&gt;url&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;http://homeassistant.local:8123&amp;#34;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;That should be it! Afterwards, my playbooks could build and configure all
 my nativefier applications automatically!&lt;/p&gt;
 
@@ -945,10 +945,10 @@ define the systemd unit file, but more on that later.&lt;/p&gt;
 &lt;p&gt;Lets create some files, starting with one to define the default variables.
 Open &lt;code&gt;roles/foundryvtt/defaults/main.yaml&lt;/code&gt; and add the following:&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;---
-&lt;span style=&#34;color:#66d9ef&#34;&gt;user&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;{{ ansible_user_id }}&amp;#34;&lt;/span&gt;
-&lt;span style=&#34;color:#66d9ef&#34;&gt;service_description&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;A service to run the Foundry VTT node app&amp;#34;&lt;/span&gt;
-&lt;span style=&#34;color:#66d9ef&#34;&gt;foundryvtt_dir&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;/home/{{ user }}/foundryvtt/&amp;#34;&lt;/span&gt;
-&lt;span style=&#34;color:#66d9ef&#34;&gt;foundrydata_dir&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;/home/{{ user }}/foundrydata&amp;#34;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;span style=&#34;color:#f92672&#34;&gt;user&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;{{ ansible_user_id }}&amp;#34;&lt;/span&gt;
+&lt;span style=&#34;color:#f92672&#34;&gt;service_description&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;A service to run the Foundry VTT node app&amp;#34;&lt;/span&gt;
+&lt;span style=&#34;color:#f92672&#34;&gt;foundryvtt_dir&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;/home/{{ user }}/foundryvtt/&amp;#34;&lt;/span&gt;
+&lt;span style=&#34;color:#f92672&#34;&gt;foundrydata_dir&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;/home/{{ user }}/foundrydata&amp;#34;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;This defines a few default veriables that will be used in the service file
 template, as well as in the tasks file. The variables can optionally be
 over-ridden when running a playbook, but they will default to these values if
@@ -987,61 +987,61 @@ this includes creating the defined data directories, unzipping the application s
 package, and opening required ports in the firewall:&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;&lt;span style=&#34;color:#75715e&#34;&gt;## Note, you likely don&amp;#39;t need these tasks. They are just for my particular&lt;/span&gt;
 &lt;span style=&#34;color:#75715e&#34;&gt;## example...&lt;/span&gt;
-- &lt;span style=&#34;color:#66d9ef&#34;&gt;name&lt;/span&gt;: Create foundryvtt dir at {{ foundryvtt_dir }}
-  &lt;span style=&#34;color:#66d9ef&#34;&gt;become_user&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;{{ user }}&amp;#34;&lt;/span&gt;
-  &lt;span style=&#34;color:#66d9ef&#34;&gt;file&lt;/span&gt;:
-    &lt;span style=&#34;color:#66d9ef&#34;&gt;path&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;{{ foundryvtt_dir }}&amp;#34;&lt;/span&gt;
-    &lt;span style=&#34;color:#66d9ef&#34;&gt;state&lt;/span&gt;: directory
+- &lt;span style=&#34;color:#f92672&#34;&gt;name&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;Create foundryvtt dir at {{ foundryvtt_dir }}&lt;/span&gt;
+  &lt;span style=&#34;color:#f92672&#34;&gt;become_user&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;{{ user }}&amp;#34;&lt;/span&gt;
+  &lt;span style=&#34;color:#f92672&#34;&gt;file&lt;/span&gt;:
+    &lt;span style=&#34;color:#f92672&#34;&gt;path&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;{{ foundryvtt_dir }}&amp;#34;&lt;/span&gt;
+    &lt;span style=&#34;color:#f92672&#34;&gt;state&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;directory&lt;/span&gt;
 
-- &lt;span style=&#34;color:#66d9ef&#34;&gt;name&lt;/span&gt;: Create foundrydata dir at {{ foundrydata_dir }}
-  &lt;span style=&#34;color:#66d9ef&#34;&gt;become_user&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;{{ user }}&amp;#34;&lt;/span&gt;
-  &lt;span style=&#34;color:#66d9ef&#34;&gt;file&lt;/span&gt;:
-    &lt;span style=&#34;color:#66d9ef&#34;&gt;path&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;{{ foundrydata_dir }}&amp;#34;&lt;/span&gt;
-    &lt;span style=&#34;color:#66d9ef&#34;&gt;state&lt;/span&gt;: directory
+- &lt;span style=&#34;color:#f92672&#34;&gt;name&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;Create foundrydata dir at {{ foundrydata_dir }}&lt;/span&gt;
+  &lt;span style=&#34;color:#f92672&#34;&gt;become_user&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;{{ user }}&amp;#34;&lt;/span&gt;
+  &lt;span style=&#34;color:#f92672&#34;&gt;file&lt;/span&gt;:
+    &lt;span style=&#34;color:#f92672&#34;&gt;path&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;{{ foundrydata_dir }}&amp;#34;&lt;/span&gt;
+    &lt;span style=&#34;color:#f92672&#34;&gt;state&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;directory&lt;/span&gt;
 
-- &lt;span style=&#34;color:#66d9ef&#34;&gt;name&lt;/span&gt;: Send Foundry Package
-  &lt;span style=&#34;color:#66d9ef&#34;&gt;when&lt;/span&gt;: foundryvtt_send_src is defined and foundryvtt_send_src is not none
-  &lt;span style=&#34;color:#66d9ef&#34;&gt;copy&lt;/span&gt;:
-    &lt;span style=&#34;color:#66d9ef&#34;&gt;src&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;{{ foundryvtt_send_src }}&amp;#34;&lt;/span&gt;
-    &lt;span style=&#34;color:#66d9ef&#34;&gt;dest&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;{{ foundryvtt_package_src }}&amp;#34;&lt;/span&gt;
+- &lt;span style=&#34;color:#f92672&#34;&gt;name&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;Send Foundry Package&lt;/span&gt;
+  &lt;span style=&#34;color:#f92672&#34;&gt;when&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;foundryvtt_send_src is defined and foundryvtt_send_src is not none&lt;/span&gt;
+  &lt;span style=&#34;color:#f92672&#34;&gt;copy&lt;/span&gt;:
+    &lt;span style=&#34;color:#f92672&#34;&gt;src&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;{{ foundryvtt_send_src }}&amp;#34;&lt;/span&gt;
+    &lt;span style=&#34;color:#f92672&#34;&gt;dest&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;{{ foundryvtt_package_src }}&amp;#34;&lt;/span&gt;
 
-- &lt;span style=&#34;color:#66d9ef&#34;&gt;name&lt;/span&gt;: Extract package
-  &lt;span style=&#34;color:#66d9ef&#34;&gt;unarchive&lt;/span&gt;:
-    &lt;span style=&#34;color:#66d9ef&#34;&gt;src&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;{{ foundryvtt_package_src }}&amp;#34;&lt;/span&gt;
-    &lt;span style=&#34;color:#66d9ef&#34;&gt;dest&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;{{ foundryvtt_dir }}&amp;#34;&lt;/span&gt;
-    &lt;span style=&#34;color:#66d9ef&#34;&gt;remote_src&lt;/span&gt;: yes
+- &lt;span style=&#34;color:#f92672&#34;&gt;name&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;Extract package&lt;/span&gt;
+  &lt;span style=&#34;color:#f92672&#34;&gt;unarchive&lt;/span&gt;:
+    &lt;span style=&#34;color:#f92672&#34;&gt;src&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;{{ foundryvtt_package_src }}&amp;#34;&lt;/span&gt;
+    &lt;span style=&#34;color:#f92672&#34;&gt;dest&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;{{ foundryvtt_dir }}&amp;#34;&lt;/span&gt;
+    &lt;span style=&#34;color:#f92672&#34;&gt;remote_src&lt;/span&gt;: &lt;span style=&#34;color:#66d9ef&#34;&gt;yes&lt;/span&gt;
 
-- &lt;span style=&#34;color:#66d9ef&#34;&gt;name&lt;/span&gt;: Start firewalld
-  &lt;span style=&#34;color:#66d9ef&#34;&gt;systemd&lt;/span&gt;:
-    &lt;span style=&#34;color:#66d9ef&#34;&gt;name&lt;/span&gt;: firewalld
-    &lt;span style=&#34;color:#66d9ef&#34;&gt;state&lt;/span&gt;: started
+- &lt;span style=&#34;color:#f92672&#34;&gt;name&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;Start firewalld&lt;/span&gt;
+  &lt;span style=&#34;color:#f92672&#34;&gt;systemd&lt;/span&gt;:
+    &lt;span style=&#34;color:#f92672&#34;&gt;name&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;firewalld&lt;/span&gt;
+    &lt;span style=&#34;color:#f92672&#34;&gt;state&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;started&lt;/span&gt;
 
-- &lt;span style=&#34;color:#66d9ef&#34;&gt;name&lt;/span&gt;: Open FoundryVTT Ports (firewalld)
-  &lt;span style=&#34;color:#66d9ef&#34;&gt;firewalld&lt;/span&gt;:
-    &lt;span style=&#34;color:#66d9ef&#34;&gt;port&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;30000&lt;/span&gt;/tcp
-    &lt;span style=&#34;color:#66d9ef&#34;&gt;permanent&lt;/span&gt;: yes
-    &lt;span style=&#34;color:#66d9ef&#34;&gt;state&lt;/span&gt;: enabled
+- &lt;span style=&#34;color:#f92672&#34;&gt;name&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;Open FoundryVTT Ports (firewalld)&lt;/span&gt;
+  &lt;span style=&#34;color:#f92672&#34;&gt;firewalld&lt;/span&gt;:
+    &lt;span style=&#34;color:#f92672&#34;&gt;port&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;30000&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;/tcp&lt;/span&gt;
+    &lt;span style=&#34;color:#f92672&#34;&gt;permanent&lt;/span&gt;: &lt;span style=&#34;color:#66d9ef&#34;&gt;yes&lt;/span&gt;
+    &lt;span style=&#34;color:#f92672&#34;&gt;state&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;enabled&lt;/span&gt;
 
-- &lt;span style=&#34;color:#66d9ef&#34;&gt;name&lt;/span&gt;: reload service firewalld, in all cases
-  &lt;span style=&#34;color:#66d9ef&#34;&gt;systemd&lt;/span&gt;:
-    &lt;span style=&#34;color:#66d9ef&#34;&gt;name&lt;/span&gt;: firewalld
-    &lt;span style=&#34;color:#66d9ef&#34;&gt;state&lt;/span&gt;: reloaded&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+- &lt;span style=&#34;color:#f92672&#34;&gt;name&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;reload service firewalld, in all cases&lt;/span&gt;
+  &lt;span style=&#34;color:#f92672&#34;&gt;systemd&lt;/span&gt;:
+    &lt;span style=&#34;color:#f92672&#34;&gt;name&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;firewalld&lt;/span&gt;
+    &lt;span style=&#34;color:#f92672&#34;&gt;state&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;reloaded&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;With all that defined, lets finally define a task to create our unit file using
 the template:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;- &lt;span style=&#34;color:#66d9ef&#34;&gt;name&lt;/span&gt;: Create foundryvtt systemd service file
-  &lt;span style=&#34;color:#66d9ef&#34;&gt;template&lt;/span&gt;:
-    &lt;span style=&#34;color:#66d9ef&#34;&gt;src&lt;/span&gt;: templates/foundryvtt.service.j2
-    &lt;span style=&#34;color:#66d9ef&#34;&gt;dest&lt;/span&gt;: /lib/systemd/system/foundryvtt.service&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;- &lt;span style=&#34;color:#f92672&#34;&gt;name&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;Create foundryvtt systemd service file&lt;/span&gt;
+  &lt;span style=&#34;color:#f92672&#34;&gt;template&lt;/span&gt;:
+    &lt;span style=&#34;color:#f92672&#34;&gt;src&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;templates/foundryvtt.service.j2&lt;/span&gt;
+    &lt;span style=&#34;color:#f92672&#34;&gt;dest&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;/lib/systemd/system/foundryvtt.service&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;The &lt;code&gt;src&lt;/code&gt; is set to the relative location (to the role) of the template we
 defined earlier, and the &lt;code&gt;dest&lt;/code&gt; is set to where we would like the generated
 file to be copied to. This template is a unit file for a systemd service, so
 I&amp;rsquo;m going to copy it to &lt;code&gt;/lib/systemd/system/foundryvtt.service&lt;/code&gt;.&lt;/p&gt;
 
 &lt;p&gt;Last but not least, lets start the newly created service:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;- &lt;span style=&#34;color:#66d9ef&#34;&gt;name&lt;/span&gt;: Start foundryvtt service
-  &lt;span style=&#34;color:#66d9ef&#34;&gt;systemd&lt;/span&gt;:
-    &lt;span style=&#34;color:#66d9ef&#34;&gt;name&lt;/span&gt;: foundryvtt
-    &lt;span style=&#34;color:#66d9ef&#34;&gt;state&lt;/span&gt;: started&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;- &lt;span style=&#34;color:#f92672&#34;&gt;name&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;Start foundryvtt service&lt;/span&gt;
+  &lt;span style=&#34;color:#f92672&#34;&gt;systemd&lt;/span&gt;:
+    &lt;span style=&#34;color:#f92672&#34;&gt;name&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;foundryvtt&lt;/span&gt;
+    &lt;span style=&#34;color:#f92672&#34;&gt;state&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;started&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;&amp;hellip; and&amp;hellip; our role is finished!&lt;/p&gt;
 
 &lt;h2 id=&#34;playbook&#34;&gt;Playbook&lt;/h2&gt;
@@ -1050,8 +1050,8 @@ I&amp;rsquo;m going to copy it to &lt;code&gt;/lib/systemd/system/foundryvtt.ser
 the provisioning of all my systems in their own playbooks, including my foundry
 server, so I use this role there. Just remember to call it in a &lt;code&gt;roles:&lt;/code&gt;
 section of the playbook, like so:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;  &lt;span style=&#34;color:#66d9ef&#34;&gt;roles&lt;/span&gt;:
-    - foundryvtt&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;  &lt;span style=&#34;color:#f92672&#34;&gt;roles&lt;/span&gt;:
+    - &lt;span style=&#34;color:#ae81ff&#34;&gt;foundryvtt&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;h2 id=&#34;conclusion&#34;&gt;Conclusion&lt;/h2&gt;
 
 &lt;p&gt;That&amp;rsquo;s it. We&amp;rsquo;ve easily automated setting up the systemd unit file from the
@@ -1489,17 +1489,17 @@ The default file is located at &lt;code&gt;/etc/ansible/hosts&lt;/code&gt;. An a
 file may be provided using the &lt;code&gt;-i&lt;/code&gt; flag.&lt;/p&gt;
 
 &lt;p&gt;Example file:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;[VMs]
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;[&lt;span style=&#34;color:#ae81ff&#34;&gt;VMs]&lt;/span&gt;
 &lt;span style=&#34;color:#75715e&#34;&gt;## Server VMs&lt;/span&gt;
 &lt;span style=&#34;color:#ae81ff&#34;&gt;192.168.10.50&lt;/span&gt;
 &lt;span style=&#34;color:#ae81ff&#34;&gt;192.168.10.71&lt;/span&gt;
 &lt;span style=&#34;color:#ae81ff&#34;&gt;192.168.10.118&lt;/span&gt;
 
-[Hosts]
+[&lt;span style=&#34;color:#ae81ff&#34;&gt;Hosts]&lt;/span&gt;
 &lt;span style=&#34;color:#75715e&#34;&gt;## Hosts&lt;/span&gt;
 &lt;span style=&#34;color:#ae81ff&#34;&gt;192.168.10.12&lt;/span&gt;
 
-[cluster]
+[&lt;span style=&#34;color:#ae81ff&#34;&gt;cluster]&lt;/span&gt;
 &lt;span style=&#34;color:#ae81ff&#34;&gt;192.168.112.205&lt;/span&gt;
 &lt;span style=&#34;color:#ae81ff&#34;&gt;192.168.112.206&lt;/span&gt;
 &lt;span style=&#34;color:#ae81ff&#34;&gt;192.168.112.207&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
@@ -1536,7 +1536,7 @@ has to be defined in whatever inventory file we are using.&lt;/p&gt;
 
 &lt;p&gt;So, if I define an inventory file (&lt;code&gt;./hosts.yaml&lt;/code&gt;) containing my desktop
 computer:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;[charmelon]
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;[&lt;span style=&#34;color:#ae81ff&#34;&gt;charmelon]&lt;/span&gt;
 &lt;span style=&#34;color:#ae81ff&#34;&gt;192.168.1.5&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;I can install &lt;code&gt;htop&lt;/code&gt; on &lt;em&gt;my desktop&lt;/em&gt;, using:&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;ansible -i ./hosts -m dnf -a &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;name=htop state=latest&amp;#34;&lt;/span&gt; charmeleon --become&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
@@ -1562,14 +1562,14 @@ of running a series of ad-hoc commands.&lt;/p&gt;
 &lt;p&gt;To demonstrate, lets convert the &lt;code&gt;dnf&lt;/code&gt; command from above, into a simple
 playbook named &lt;code&gt;install-htop.yaml&lt;/code&gt;.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;---
-- &lt;span style=&#34;color:#66d9ef&#34;&gt;hosts&lt;/span&gt;: charmeleon
-  &lt;span style=&#34;color:#66d9ef&#34;&gt;become&lt;/span&gt;: &lt;span style=&#34;color:#66d9ef&#34;&gt;true&lt;/span&gt;
+- &lt;span style=&#34;color:#f92672&#34;&gt;hosts&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;charmeleon&lt;/span&gt;
+  &lt;span style=&#34;color:#f92672&#34;&gt;become&lt;/span&gt;: &lt;span style=&#34;color:#66d9ef&#34;&gt;true&lt;/span&gt;
 
-  &lt;span style=&#34;color:#66d9ef&#34;&gt;tasks&lt;/span&gt;:
-    - &lt;span style=&#34;color:#66d9ef&#34;&gt;name&lt;/span&gt;: Install Htop
-      &lt;span style=&#34;color:#66d9ef&#34;&gt;dnf&lt;/span&gt;:
-        &lt;span style=&#34;color:#66d9ef&#34;&gt;name&lt;/span&gt;: htop
-        &lt;span style=&#34;color:#66d9ef&#34;&gt;state&lt;/span&gt;: latest&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+  &lt;span style=&#34;color:#f92672&#34;&gt;tasks&lt;/span&gt;:
+    - &lt;span style=&#34;color:#f92672&#34;&gt;name&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;Install Htop&lt;/span&gt;
+      &lt;span style=&#34;color:#f92672&#34;&gt;dnf&lt;/span&gt;:
+        &lt;span style=&#34;color:#f92672&#34;&gt;name&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;htop&lt;/span&gt;
+        &lt;span style=&#34;color:#f92672&#34;&gt;state&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;latest&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;Being a &lt;code&gt;yaml&lt;/code&gt; file, the first line starts with &lt;code&gt;---&lt;/code&gt;. Next, we define some
 meta information for the entire playbook. For example, this is were we put the
 &lt;code&gt;--become&lt;/code&gt; flag, by turning it into &lt;code&gt;become: true&lt;/code&gt;. This is also where we
@@ -1593,18 +1593,18 @@ will make it easier to trace the logs.&lt;/p&gt;
 &lt;p&gt;For example, lets add the&lt;code&gt;ping&lt;/code&gt; module to the playbook so we have more than one
 task&amp;hellip;.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;---
-- &lt;span style=&#34;color:#66d9ef&#34;&gt;hosts&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;127.0.0.1&lt;/span&gt;
-  &lt;span style=&#34;color:#66d9ef&#34;&gt;connection&lt;/span&gt;: local
-  &lt;span style=&#34;color:#66d9ef&#34;&gt;become&lt;/span&gt;: &lt;span style=&#34;color:#66d9ef&#34;&gt;true&lt;/span&gt;
+- &lt;span style=&#34;color:#f92672&#34;&gt;hosts&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;127.0.0.1&lt;/span&gt;
+  &lt;span style=&#34;color:#f92672&#34;&gt;connection&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;local&lt;/span&gt;
+  &lt;span style=&#34;color:#f92672&#34;&gt;become&lt;/span&gt;: &lt;span style=&#34;color:#66d9ef&#34;&gt;true&lt;/span&gt;
 
-  &lt;span style=&#34;color:#66d9ef&#34;&gt;tasks&lt;/span&gt;:
-	- &lt;span style=&#34;color:#66d9ef&#34;&gt;name&lt;/span&gt;: Ping host first...
-	  &lt;span style=&#34;color:#66d9ef&#34;&gt;ping&lt;/span&gt;:
+  &lt;span style=&#34;color:#f92672&#34;&gt;tasks&lt;/span&gt;:
+	- &lt;span style=&#34;color:#f92672&#34;&gt;name&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;Ping host first...&lt;/span&gt;
+	  &lt;span style=&#34;color:#f92672&#34;&gt;ping&lt;/span&gt;:
 
-    - &lt;span style=&#34;color:#66d9ef&#34;&gt;name&lt;/span&gt;: Install Htop
-      &lt;span style=&#34;color:#66d9ef&#34;&gt;dnf&lt;/span&gt;:
-        &lt;span style=&#34;color:#66d9ef&#34;&gt;name&lt;/span&gt;: htop
-        &lt;span style=&#34;color:#66d9ef&#34;&gt;state&lt;/span&gt;: latest&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+    - &lt;span style=&#34;color:#f92672&#34;&gt;name&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;Install Htop&lt;/span&gt;
+      &lt;span style=&#34;color:#f92672&#34;&gt;dnf&lt;/span&gt;:
+        &lt;span style=&#34;color:#f92672&#34;&gt;name&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;htop&lt;/span&gt;
+        &lt;span style=&#34;color:#f92672&#34;&gt;state&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;latest&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;Now the playbook will run both tasks, using &lt;code&gt;name&lt;/code&gt; as the header for the output
 of each one:&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;➜  /tmp ansible-playbook install-htop.yaml
@@ -1630,21 +1630,21 @@ the hard-coded &lt;code&gt;htop&lt;/code&gt; in the &lt;code&gt;dnf&lt;/code&gt;
 even use the &lt;code&gt;package&lt;/code&gt; variable in the &lt;code&gt;name&lt;/code&gt; string, to dynamically change the
 output in the log:&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;---
-- &lt;span style=&#34;color:#66d9ef&#34;&gt;hosts&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;127.0.0.1&lt;/span&gt;
-  &lt;span style=&#34;color:#66d9ef&#34;&gt;connection&lt;/span&gt;: local
-  &lt;span style=&#34;color:#66d9ef&#34;&gt;become&lt;/span&gt;: &lt;span style=&#34;color:#66d9ef&#34;&gt;true&lt;/span&gt;
+- &lt;span style=&#34;color:#f92672&#34;&gt;hosts&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;127.0.0.1&lt;/span&gt;
+  &lt;span style=&#34;color:#f92672&#34;&gt;connection&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;local&lt;/span&gt;
+  &lt;span style=&#34;color:#f92672&#34;&gt;become&lt;/span&gt;: &lt;span style=&#34;color:#66d9ef&#34;&gt;true&lt;/span&gt;
 
-  &lt;span style=&#34;color:#66d9ef&#34;&gt;vars&lt;/span&gt;:
-    &lt;span style=&#34;color:#66d9ef&#34;&gt;package&lt;/span&gt;: htop
+  &lt;span style=&#34;color:#f92672&#34;&gt;vars&lt;/span&gt;:
+    &lt;span style=&#34;color:#f92672&#34;&gt;package&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;htop&lt;/span&gt;
 
-  &lt;span style=&#34;color:#66d9ef&#34;&gt;tasks&lt;/span&gt;:
-    - &lt;span style=&#34;color:#66d9ef&#34;&gt;name&lt;/span&gt;: Ping host first...
-      &lt;span style=&#34;color:#66d9ef&#34;&gt;ping&lt;/span&gt;:
+  &lt;span style=&#34;color:#f92672&#34;&gt;tasks&lt;/span&gt;:
+    - &lt;span style=&#34;color:#f92672&#34;&gt;name&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;Ping host first...&lt;/span&gt;
+      &lt;span style=&#34;color:#f92672&#34;&gt;ping&lt;/span&gt;:
 
-    - &lt;span style=&#34;color:#66d9ef&#34;&gt;name&lt;/span&gt;: Install {{ package }}
-      &lt;span style=&#34;color:#66d9ef&#34;&gt;dnf&lt;/span&gt;:
-        &lt;span style=&#34;color:#66d9ef&#34;&gt;name&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;{{ package }}&amp;#34;&lt;/span&gt;
-        &lt;span style=&#34;color:#66d9ef&#34;&gt;state&lt;/span&gt;: latest&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+    - &lt;span style=&#34;color:#f92672&#34;&gt;name&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;Install {{ package }}&lt;/span&gt;
+      &lt;span style=&#34;color:#f92672&#34;&gt;dnf&lt;/span&gt;:
+        &lt;span style=&#34;color:#f92672&#34;&gt;name&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;{{ package }}&amp;#34;&lt;/span&gt;
+        &lt;span style=&#34;color:#f92672&#34;&gt;state&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;latest&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;And the output:&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;➜  ansible-playbook install-htop.yaml
 
@@ -1732,24 +1732,24 @@ functionality into roles.&lt;/p&gt;
 &lt;p&gt;Next, we can add our variables to a default file,
 &lt;code&gt;roles/install-htop/defaults/main.yaml&lt;/code&gt;:&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;---
-&lt;span style=&#34;color:#66d9ef&#34;&gt;package&lt;/span&gt;: htop&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;span style=&#34;color:#f92672&#34;&gt;package&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;htop&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;With the &lt;code&gt;package&lt;/code&gt; variable set, lets create the tasks. To demonstrate
 including other files in the &lt;code&gt;main.yaml&lt;/code&gt;, I&amp;rsquo;m going to be overly-complicated and
 extract our &lt;code&gt;ping&lt;/code&gt; task into its own file, and then include it in the &lt;code&gt;main.yaml&lt;/code&gt;.&lt;/p&gt;
 
 &lt;p&gt;So first, &lt;code&gt;roles/install-htop/tasks/ping.yaml&lt;/code&gt;&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;---
-- &lt;span style=&#34;color:#66d9ef&#34;&gt;name&lt;/span&gt;: Ping host first...
-  ping:&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+- &lt;span style=&#34;color:#f92672&#34;&gt;name&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;Ping host first...&lt;/span&gt;
+  &lt;span style=&#34;color:#ae81ff&#34;&gt;ping:&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;And then, &lt;code&gt;roles/install-htop/tasks/main.yaml&lt;/code&gt;, which will also include our
 &lt;code&gt;dnf&lt;/code&gt; install task&amp;hellip;&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;---
-- &lt;span style=&#34;color:#66d9ef&#34;&gt;include_tasks&lt;/span&gt;: ping.yaml
+- &lt;span style=&#34;color:#f92672&#34;&gt;include_tasks&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;ping.yaml&lt;/span&gt;
 
-- &lt;span style=&#34;color:#66d9ef&#34;&gt;name&lt;/span&gt;: Install {{ package }}
-  &lt;span style=&#34;color:#66d9ef&#34;&gt;dnf&lt;/span&gt;:
-    &lt;span style=&#34;color:#66d9ef&#34;&gt;name&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;{{ package }}&amp;#34;&lt;/span&gt;
-    &lt;span style=&#34;color:#66d9ef&#34;&gt;state&lt;/span&gt;: latest&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+- &lt;span style=&#34;color:#f92672&#34;&gt;name&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;Install {{ package }}&lt;/span&gt;
+  &lt;span style=&#34;color:#f92672&#34;&gt;dnf&lt;/span&gt;:
+    &lt;span style=&#34;color:#f92672&#34;&gt;name&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;{{ package }}&amp;#34;&lt;/span&gt;
+    &lt;span style=&#34;color:#f92672&#34;&gt;state&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;latest&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;Congrats, we have an &lt;code&gt;install-htop&lt;/code&gt; role defined!&lt;/p&gt;
 
 &lt;h3 id=&#34;including-roles-in-playbooks&#34;&gt;Including roles in playbooks&lt;/h3&gt;
@@ -1757,12 +1757,12 @@ extract our &lt;code&gt;ping&lt;/code&gt; task into its own file, and then inclu
 &lt;p&gt;Just as we included &lt;code&gt;vars&lt;/code&gt; and &lt;code&gt;tasks&lt;/code&gt; in the playbook, if we already have
 tasks and vars defined in a &lt;em&gt;role&lt;/em&gt;, we can instead include that &lt;em&gt;role&lt;/em&gt;:&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;---
-- &lt;span style=&#34;color:#66d9ef&#34;&gt;hosts&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;127.0.0.1&lt;/span&gt;
-  &lt;span style=&#34;color:#66d9ef&#34;&gt;connection&lt;/span&gt;: local
-  &lt;span style=&#34;color:#66d9ef&#34;&gt;become&lt;/span&gt;: &lt;span style=&#34;color:#66d9ef&#34;&gt;true&lt;/span&gt;
+- &lt;span style=&#34;color:#f92672&#34;&gt;hosts&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;127.0.0.1&lt;/span&gt;
+  &lt;span style=&#34;color:#f92672&#34;&gt;connection&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;local&lt;/span&gt;
+  &lt;span style=&#34;color:#f92672&#34;&gt;become&lt;/span&gt;: &lt;span style=&#34;color:#66d9ef&#34;&gt;true&lt;/span&gt;
 
-  &lt;span style=&#34;color:#66d9ef&#34;&gt;roles&lt;/span&gt;:
-    - install-htop&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+  &lt;span style=&#34;color:#f92672&#34;&gt;roles&lt;/span&gt;:
+    - &lt;span style=&#34;color:#ae81ff&#34;&gt;install-htop&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;Easy. Let&amp;rsquo;s run it:&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;➜  ansible-playbook install-htop.yaml
 &lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;WARNING&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt;: Ansible is being run in a world writable directory &lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;/tmp&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt;, ignoring it as an ansible.cfg source. For more information see
@@ -3025,8 +3025,8 @@ default. For example, when converting my website script, I set &lt;code&gt;name&
 directory, &lt;code&gt;~/Documents/himmAllRight-source&lt;/code&gt;:&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# /home/ryan/.config/tmuxinator/Website.yml&lt;/span&gt;
 
-&lt;span style=&#34;color:#66d9ef&#34;&gt;name&lt;/span&gt;: Website
-&lt;span style=&#34;color:#66d9ef&#34;&gt;root&lt;/span&gt;: ~/Documents/himmAllRight-source&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;span style=&#34;color:#f92672&#34;&gt;name&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;Website&lt;/span&gt;
+&lt;span style=&#34;color:#f92672&#34;&gt;root&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;~/Documents/himmAllRight-source&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;h4 id=&#34;windows&#34;&gt;Windows&lt;/h4&gt;
 
 &lt;p&gt;Next, I needed to configure my windows. To convert the script from my previous
@@ -3034,14 +3034,14 @@ post, I wanted a dedicated &amp;lsquo;Main&amp;rsquo; window, one for the server
 one for an extra shell. Additionally, since that last post I&amp;rsquo;ve added a window
 that launches my hugo-served website in a web browser. To recreate &lt;em&gt;all of
 that&lt;/em&gt; with tmuxinator:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;windows&lt;/span&gt;:
-  - &lt;span style=&#34;color:#66d9ef&#34;&gt;Main&lt;/span&gt;:
-      - zsh
-      - clear
-  - &lt;span style=&#34;color:#66d9ef&#34;&gt;Server&lt;/span&gt;: hugo serve -D -F
-  - &lt;span style=&#34;color:#66d9ef&#34;&gt;Write&lt;/span&gt;: nvim
-  - &lt;span style=&#34;color:#66d9ef&#34;&gt;Shell&lt;/span&gt;: zsh; clear
-  - &lt;span style=&#34;color:#66d9ef&#34;&gt;Web&lt;/span&gt;: qutebrowser localhost:&lt;span style=&#34;color:#ae81ff&#34;&gt;1313&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;&lt;span style=&#34;color:#f92672&#34;&gt;windows&lt;/span&gt;:
+  - &lt;span style=&#34;color:#f92672&#34;&gt;Main&lt;/span&gt;:
+      - &lt;span style=&#34;color:#ae81ff&#34;&gt;zsh&lt;/span&gt;
+      - &lt;span style=&#34;color:#ae81ff&#34;&gt;clear&lt;/span&gt;
+  - &lt;span style=&#34;color:#f92672&#34;&gt;Server&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;hugo serve -D -F&lt;/span&gt;
+  - &lt;span style=&#34;color:#f92672&#34;&gt;Write&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;nvim&lt;/span&gt;
+  - &lt;span style=&#34;color:#f92672&#34;&gt;Shell&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;zsh; clear&lt;/span&gt;
+  - &lt;span style=&#34;color:#f92672&#34;&gt;Web&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;qutebrowser localhost:1313&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;Done. Save the file and that&amp;rsquo;s it! See the benefit of using tmuxinator??&lt;/p&gt;
 
 &lt;h4 id=&#34;pane-splits&#34;&gt;Pane splits&lt;/h4&gt;
@@ -3050,11 +3050,11 @@ that&lt;/em&gt; with tmuxinator:&lt;/p&gt;
 setting up pane splits is also quite easy with tmuxinator. For example, if I
 wanted to split the server window into two panes, one running the hugo server
 and one running htop, I could use:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;- &lt;span style=&#34;color:#66d9ef&#34;&gt;Server&lt;/span&gt;:
-    &lt;span style=&#34;color:#66d9ef&#34;&gt;layout&lt;/span&gt;: even-vertical
-    &lt;span style=&#34;color:#66d9ef&#34;&gt;panes&lt;/span&gt;:
-        - hugo
-        - htop&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;- &lt;span style=&#34;color:#f92672&#34;&gt;Server&lt;/span&gt;:
+    &lt;span style=&#34;color:#f92672&#34;&gt;layout&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;even-vertical&lt;/span&gt;
+    &lt;span style=&#34;color:#f92672&#34;&gt;panes&lt;/span&gt;:
+        - &lt;span style=&#34;color:#ae81ff&#34;&gt;hugo&lt;/span&gt;
+        - &lt;span style=&#34;color:#ae81ff&#34;&gt;htop&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;The &lt;code&gt;layout&lt;/code&gt; key defines which
 &lt;a href=&#34;http://man7.org/linux/man-pages/man1/tmux.1.html#WINDOWS_AND_PANES&#34;&gt;tmux layout&lt;/a&gt; to
 use when splitting the panes, and &lt;code&gt;panes&lt;/code&gt; is a list that defines what to run in
@@ -4420,7 +4420,7 @@ properly use with &lt;a href=&#34;../../post/new-lgud4379b/&#34;&gt;my UHD monit
 display port). When I switched to the 2600, I was able to go back to the
 TOMAHAWK, and funnel the cost savings towards getting my GPU.&lt;/p&gt;
 
-&lt;h4 id=&#34;gpu-sapphire-1024-4gb-pulse-radeon-rx-560-http-www-sapphiretech-com-productdetial-asp-pid-3ecead87-2972-477a-a3be-480194d9fd6e-lang-eng&#34;&gt;GPU: &lt;a href=&#34;http://www.sapphiretech.com/productdetial.asp?pid=3ECEAD87-2972-477A-A3BE-480194D9FD6E&amp;amp;lang=eng&#34;&gt;Sapphire 1024 4GB PULSE Radeon RX 560&lt;/a&gt;&lt;/h4&gt;
+&lt;h4 id=&#34;gpu-sapphire-1024-4gb-pulse-radeon-rx-560-https-www-techpowerup-com-gpu-specs-sapphire-pulse-rx-560-oc-4-gb-b4627&#34;&gt;GPU: &lt;a href=&#34;https://www.techpowerup.com/gpu-specs/sapphire-pulse-rx-560-oc-4-gb.b4627&#34;&gt;Sapphire 1024 4GB PULSE Radeon RX 560&lt;/a&gt;&lt;/h4&gt;
 
 &lt;p&gt;&lt;a href=&#34;../../img/posts/chameleon-desktop-design/rx560.png&#34;&gt;&lt;img alt=&#34;The KDE Plasma 5 extend display GUI&#34; src=&#34;../../img/posts/charmeleon-desktop-design/rx560.png&#34; style=&#34;max-width: 35%; float: left;&#34;/&gt;&lt;/a&gt;&lt;/p&gt;
 
@@ -6515,12 +6515,12 @@ command. For example, the following Dockerfile would use an
 &lt;a href=&#34;https://hub.docker.com/_/ubuntu/&#34;&gt;ubuntu&lt;/a&gt; image for the base, but also update &amp;amp;
 install several packages in the image:&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# This is a custom ubuntu image with SSH already installed&lt;/span&gt;
-FROM ubuntu:latest
-MAINTAINER himmallright &amp;lt;ryan.himmelwright@gmail.com&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;gt;
-&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;
-&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;RUN apt-get update&lt;/span&gt;
+&lt;span style=&#34;color:#ae81ff&#34;&gt;FROM ubuntu:latest&lt;/span&gt;
+&lt;span style=&#34;color:#ae81ff&#34;&gt;MAINTAINER himmallright &amp;lt;ryan.himmelwright@gmail.com&amp;gt;&lt;/span&gt;
 
-RUN apt-get install -y vim stow git tmux fish htop emacs&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;span style=&#34;color:#ae81ff&#34;&gt;RUN apt-get update&lt;/span&gt;
+
+&lt;span style=&#34;color:#ae81ff&#34;&gt;RUN apt-get install -y vim stow git tmux fish htop emacs&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;To build the image, run the following command in the same directory as the
 Dockerfile (if defining a specific file, the &lt;code&gt;-f&lt;/code&gt; flag can be used):&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;docker build -t ubuntu-base:v1 .&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;

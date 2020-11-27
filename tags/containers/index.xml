@@ -160,11 +160,11 @@ post&lt;/a&gt; I wrote earlier this year.&lt;/p&gt;
 &lt;h3 id=&#34;vars&#34;&gt;Vars&lt;/h3&gt;
 
 &lt;p&gt;First, lets define default values for the variables we will use in tasks and template files:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;user&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;{{ ansible_user_id }}&amp;#34;&lt;/span&gt;  &lt;span style=&#34;color:#75715e&#34;&gt;# User to run as&lt;/span&gt;
-&lt;span style=&#34;color:#66d9ef&#34;&gt;nativefier_build_dir&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;/tmp/&amp;#34;&lt;/span&gt;  &lt;span style=&#34;color:#75715e&#34;&gt;# Location to build apps at&lt;/span&gt;
-&lt;span style=&#34;color:#66d9ef&#34;&gt;nativefier_dir&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;/home/{{ user }}/Builds/&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#75715e&#34;&gt;# Location to move completed builds&lt;/span&gt;
-&lt;span style=&#34;color:#66d9ef&#34;&gt;icons_dir&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;/home/{{ user }}/.local/share/icons/&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#75715e&#34;&gt;# App Icon location&lt;/span&gt;
-&lt;span style=&#34;color:#66d9ef&#34;&gt;applications_dir&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;/home/{{ user }}/.local/share/applications/&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#75715e&#34;&gt;# desktop entry location&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;&lt;span style=&#34;color:#f92672&#34;&gt;user&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;{{ ansible_user_id }}&amp;#34;&lt;/span&gt;  &lt;span style=&#34;color:#75715e&#34;&gt;# User to run as&lt;/span&gt;
+&lt;span style=&#34;color:#f92672&#34;&gt;nativefier_build_dir&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;/tmp/&amp;#34;&lt;/span&gt;  &lt;span style=&#34;color:#75715e&#34;&gt;# Location to build apps at&lt;/span&gt;
+&lt;span style=&#34;color:#f92672&#34;&gt;nativefier_dir&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;/home/{{ user }}/Builds/&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#75715e&#34;&gt;# Location to move completed builds&lt;/span&gt;
+&lt;span style=&#34;color:#f92672&#34;&gt;icons_dir&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;/home/{{ user }}/.local/share/icons/&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#75715e&#34;&gt;# App Icon location&lt;/span&gt;
+&lt;span style=&#34;color:#f92672&#34;&gt;applications_dir&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;/home/{{ user }}/.local/share/applications/&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#75715e&#34;&gt;# desktop entry location&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;We will define one more variable which won&amp;rsquo;t have a default, &lt;code&gt;nativefier_apps&lt;/code&gt;. However, I&amp;rsquo;ll
 talk about that later when we use the role in a playbook.&lt;/p&gt;
 
@@ -205,32 +205,32 @@ tasks sub-directory.&lt;/p&gt;
 &lt;p&gt;The first few tasks will check and ensure that the directories we intend to use
 exist. This is generally a good practice to prevent playbooks from breaking due
 to missing folders:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;- &lt;span style=&#34;color:#66d9ef&#34;&gt;name&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;Ensure Icon dir exists&amp;#34;&lt;/span&gt;
-  &lt;span style=&#34;color:#66d9ef&#34;&gt;file&lt;/span&gt;:
-    &lt;span style=&#34;color:#66d9ef&#34;&gt;path&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;{{ icons_dir }}&amp;#34;&lt;/span&gt;
-    &lt;span style=&#34;color:#66d9ef&#34;&gt;state&lt;/span&gt;: directory
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;- &lt;span style=&#34;color:#f92672&#34;&gt;name&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;Ensure Icon dir exists&amp;#34;&lt;/span&gt;
+  &lt;span style=&#34;color:#f92672&#34;&gt;file&lt;/span&gt;:
+    &lt;span style=&#34;color:#f92672&#34;&gt;path&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;{{ icons_dir }}&amp;#34;&lt;/span&gt;
+    &lt;span style=&#34;color:#f92672&#34;&gt;state&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;directory&lt;/span&gt;
 
-- &lt;span style=&#34;color:#66d9ef&#34;&gt;name&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;Ensure applications dir exists&amp;#34;&lt;/span&gt;
-  &lt;span style=&#34;color:#66d9ef&#34;&gt;file&lt;/span&gt;:
-    &lt;span style=&#34;color:#66d9ef&#34;&gt;path&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;{{ applications_dir }}&amp;#34;&lt;/span&gt;
-    &lt;span style=&#34;color:#66d9ef&#34;&gt;state&lt;/span&gt;: directory
+- &lt;span style=&#34;color:#f92672&#34;&gt;name&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;Ensure applications dir exists&amp;#34;&lt;/span&gt;
+  &lt;span style=&#34;color:#f92672&#34;&gt;file&lt;/span&gt;:
+    &lt;span style=&#34;color:#f92672&#34;&gt;path&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;{{ applications_dir }}&amp;#34;&lt;/span&gt;
+    &lt;span style=&#34;color:#f92672&#34;&gt;state&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;directory&lt;/span&gt;
 
-- &lt;span style=&#34;color:#66d9ef&#34;&gt;name&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;Ensure {{ nativefier_build_dir }} exists&amp;#34;&lt;/span&gt;
-  &lt;span style=&#34;color:#66d9ef&#34;&gt;file&lt;/span&gt;:
-    &lt;span style=&#34;color:#66d9ef&#34;&gt;path&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;{{ nativefier_build_dir }}&amp;#34;&lt;/span&gt;
-    &lt;span style=&#34;color:#66d9ef&#34;&gt;state&lt;/span&gt;: directory
+- &lt;span style=&#34;color:#f92672&#34;&gt;name&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;Ensure {{ nativefier_build_dir }} exists&amp;#34;&lt;/span&gt;
+  &lt;span style=&#34;color:#f92672&#34;&gt;file&lt;/span&gt;:
+    &lt;span style=&#34;color:#f92672&#34;&gt;path&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;{{ nativefier_build_dir }}&amp;#34;&lt;/span&gt;
+    &lt;span style=&#34;color:#f92672&#34;&gt;state&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;directory&lt;/span&gt;
 
-- &lt;span style=&#34;color:#66d9ef&#34;&gt;name&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;Ensure {{ nativefier_dir }} exists&amp;#34;&lt;/span&gt;
-  &lt;span style=&#34;color:#66d9ef&#34;&gt;file&lt;/span&gt;:
-    &lt;span style=&#34;color:#66d9ef&#34;&gt;path&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;{{ nativefier_dir }}&amp;#34;&lt;/span&gt;
-    &lt;span style=&#34;color:#66d9ef&#34;&gt;state&lt;/span&gt;: directory&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+- &lt;span style=&#34;color:#f92672&#34;&gt;name&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;Ensure {{ nativefier_dir }} exists&amp;#34;&lt;/span&gt;
+  &lt;span style=&#34;color:#f92672&#34;&gt;file&lt;/span&gt;:
+    &lt;span style=&#34;color:#f92672&#34;&gt;path&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;{{ nativefier_dir }}&amp;#34;&lt;/span&gt;
+    &lt;span style=&#34;color:#f92672&#34;&gt;state&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;directory&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;h4 id=&#34;managing-icon-files&#34;&gt;Managing Icon Files&lt;/h4&gt;
 
 &lt;p&gt;Next, add a small task that will copy the icons we included with the role,
 to the user&amp;rsquo;s local icon folder:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;- &lt;span style=&#34;color:#66d9ef&#34;&gt;name&lt;/span&gt;: Move icons to local folder
-  &lt;span style=&#34;color:#66d9ef&#34;&gt;copy&lt;/span&gt;: src=&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;{{ item.icon }}&amp;#34;&lt;/span&gt; dest=&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;{{ icons_dir }}/{{ item.icon }}&amp;#34;&lt;/span&gt;
-  &lt;span style=&#34;color:#66d9ef&#34;&gt;loop&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;{{ nativefier_apps }}&amp;#34;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;- &lt;span style=&#34;color:#f92672&#34;&gt;name&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;Move icons to local folder&lt;/span&gt;
+  &lt;span style=&#34;color:#f92672&#34;&gt;copy&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;src=&amp;#34;{{ item.icon }}&amp;#34; dest=&amp;#34;{{ icons_dir }}/{{ item.icon }}&amp;#34;&lt;/span&gt;
+  &lt;span style=&#34;color:#f92672&#34;&gt;loop&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;{{ nativefier_apps }}&amp;#34;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;This will ensure that all the icons are already in place when we build both the
 nativefier app and the &lt;code&gt;.deskop&lt;/code&gt; files.&lt;/p&gt;
 
@@ -238,36 +238,36 @@ nativefier app and the &lt;code&gt;.deskop&lt;/code&gt; files.&lt;/p&gt;
 
 &lt;p&gt;We can now define a few tasks that will pull and run the nativefier container
 using podman. &lt;em&gt;(Note: This could be done with docker&amp;hellip; but I prefer podman XD)&lt;/em&gt;:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;- &lt;span style=&#34;color:#66d9ef&#34;&gt;name&lt;/span&gt;: Pull down nativefier container image
-  &lt;span style=&#34;color:#66d9ef&#34;&gt;shell&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;podman pull jiahaog/nativefier&amp;#34;&lt;/span&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;- &lt;span style=&#34;color:#f92672&#34;&gt;name&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;Pull down nativefier container image&lt;/span&gt;
+  &lt;span style=&#34;color:#f92672&#34;&gt;shell&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;podman pull jiahaog/nativefier&amp;#34;&lt;/span&gt;
 
-- &lt;span style=&#34;color:#66d9ef&#34;&gt;name&lt;/span&gt;: Build Nativefier app via podman
-  &lt;span style=&#34;color:#66d9ef&#34;&gt;shell&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;podman run --rm --security-opt label=disable -v {{ icons_dir }}:/src -v {{ nativefier_build_dir }}:/target jiahaog/nativefier --icon /src/{{ item.icon }} --name {{ item.name}} -p linux -a x64 {{ item.url }} /target&amp;#34;&lt;/span&gt;
-  &lt;span style=&#34;color:#66d9ef&#34;&gt;loop&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;{{ nativefier_apps }}&amp;#34;&lt;/span&gt;
+- &lt;span style=&#34;color:#f92672&#34;&gt;name&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;Build Nativefier app via podman&lt;/span&gt;
+  &lt;span style=&#34;color:#f92672&#34;&gt;shell&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;podman run --rm --security-opt label=disable -v {{ icons_dir }}:/src -v {{ nativefier_build_dir }}:/target jiahaog/nativefier --icon /src/{{ item.icon }} --name {{ item.name}} -p linux -a x64 {{ item.url }} /target&amp;#34;&lt;/span&gt;
+  &lt;span style=&#34;color:#f92672&#34;&gt;loop&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;{{ nativefier_apps }}&amp;#34;&lt;/span&gt;
 
-- &lt;span style=&#34;color:#66d9ef&#34;&gt;name&lt;/span&gt;: Clean out nativefier dir
-  &lt;span style=&#34;color:#66d9ef&#34;&gt;become&lt;/span&gt;: &lt;span style=&#34;color:#66d9ef&#34;&gt;true&lt;/span&gt;
-  &lt;span style=&#34;color:#66d9ef&#34;&gt;file&lt;/span&gt;:
-    &lt;span style=&#34;color:#66d9ef&#34;&gt;path&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;{{ nativefier_dir }}/{{ item.name }}-linux-x64&amp;#34;&lt;/span&gt;
-    &lt;span style=&#34;color:#66d9ef&#34;&gt;state&lt;/span&gt;: absent
-  &lt;span style=&#34;color:#66d9ef&#34;&gt;loop&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;{{ nativefier_apps }}&amp;#34;&lt;/span&gt;
+- &lt;span style=&#34;color:#f92672&#34;&gt;name&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;Clean out nativefier dir&lt;/span&gt;
+  &lt;span style=&#34;color:#f92672&#34;&gt;become&lt;/span&gt;: &lt;span style=&#34;color:#66d9ef&#34;&gt;true&lt;/span&gt;
+  &lt;span style=&#34;color:#f92672&#34;&gt;file&lt;/span&gt;:
+    &lt;span style=&#34;color:#f92672&#34;&gt;path&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;{{ nativefier_dir }}/{{ item.name }}-linux-x64&amp;#34;&lt;/span&gt;
+    &lt;span style=&#34;color:#f92672&#34;&gt;state&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;absent&lt;/span&gt;
+  &lt;span style=&#34;color:#f92672&#34;&gt;loop&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;{{ nativefier_apps }}&amp;#34;&lt;/span&gt;
 
   &lt;span style=&#34;color:#75715e&#34;&gt;# I don&amp;#39;t love this, but copy was too slow&lt;/span&gt;
-- &lt;span style=&#34;color:#66d9ef&#34;&gt;name&lt;/span&gt;: Move Builds to Nativefier Location
-  &lt;span style=&#34;color:#66d9ef&#34;&gt;become&lt;/span&gt;: True
-  &lt;span style=&#34;color:#66d9ef&#34;&gt;shell&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;mv {{ nativefier_build_dir }}/{{ item.name }}-linux-x64 {{ nativefier_dir }}/{{ item.name }}-linux-x64&amp;#34;&lt;/span&gt;
-  &lt;span style=&#34;color:#66d9ef&#34;&gt;loop&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;{{ nativefier_apps }}&amp;#34;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+- &lt;span style=&#34;color:#f92672&#34;&gt;name&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;Move Builds to Nativefier Location&lt;/span&gt;
+  &lt;span style=&#34;color:#f92672&#34;&gt;become&lt;/span&gt;: &lt;span style=&#34;color:#66d9ef&#34;&gt;True&lt;/span&gt;
+  &lt;span style=&#34;color:#f92672&#34;&gt;shell&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;mv {{ nativefier_build_dir }}/{{ item.name }}-linux-x64 {{ nativefier_dir }}/{{ item.name }}-linux-x64&amp;#34;&lt;/span&gt;
+  &lt;span style=&#34;color:#f92672&#34;&gt;loop&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;{{ nativefier_apps }}&amp;#34;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;These tasks also move the built app to the final location.&lt;/p&gt;
 
 &lt;h4 id=&#34;manaing-application-files&#34;&gt;Manaing Application Files&lt;/h4&gt;
 
 &lt;p&gt;Lastly, with icons in place and the application builds complete, we can create the application
 entry files by adding this final task:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;- &lt;span style=&#34;color:#66d9ef&#34;&gt;name&lt;/span&gt;: Generate Application Desktop Files
-  &lt;span style=&#34;color:#66d9ef&#34;&gt;template&lt;/span&gt;:
-    &lt;span style=&#34;color:#66d9ef&#34;&gt;src&lt;/span&gt;: templates/nativefier.desktop.j2
-    &lt;span style=&#34;color:#66d9ef&#34;&gt;dest&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;{{ applications_dir }}/{{ item.name }}.desktop&amp;#34;&lt;/span&gt;
-  &lt;span style=&#34;color:#66d9ef&#34;&gt;loop&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;{{ nativefier_apps }}&amp;#34;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;- &lt;span style=&#34;color:#f92672&#34;&gt;name&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;Generate Application Desktop Files&lt;/span&gt;
+  &lt;span style=&#34;color:#f92672&#34;&gt;template&lt;/span&gt;:
+    &lt;span style=&#34;color:#f92672&#34;&gt;src&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;templates/nativefier.desktop.j2&lt;/span&gt;
+    &lt;span style=&#34;color:#f92672&#34;&gt;dest&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;{{ applications_dir }}/{{ item.name }}.desktop&amp;#34;&lt;/span&gt;
+  &lt;span style=&#34;color:#f92672&#34;&gt;loop&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;{{ nativefier_apps }}&amp;#34;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;And there we go, that&amp;rsquo;s it! Well&amp;hellip; sort of.&lt;/p&gt;
 
 &lt;h2 id=&#34;selinux-woes&#34;&gt;Selinux woes&lt;/h2&gt;
@@ -301,13 +301,13 @@ of &amp;ldquo;&lt;em&gt;just disable selinux&lt;/em&gt;&amp;rdquo;.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;drwxr-xr-x. &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;100999&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;100999&lt;/span&gt;  &lt;span style=&#34;color:#ae81ff&#34;&gt;560&lt;/span&gt; Oct &lt;span style=&#34;color:#ae81ff&#34;&gt;25&lt;/span&gt; 20:40 jellyfin-linux-x64&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;Lastly, I wanted to add one more cleanup task. My builds had the ugly uid/gid
 pair of &lt;code&gt;100999 100999&lt;/code&gt;, so I a task to change ownership to the &lt;code&gt;user&lt;/code&gt;:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;- &lt;span style=&#34;color:#66d9ef&#34;&gt;name&lt;/span&gt;: Change Permissons of Nativefier Dirs
-  &lt;span style=&#34;color:#66d9ef&#34;&gt;become&lt;/span&gt;: True
-  &lt;span style=&#34;color:#66d9ef&#34;&gt;file&lt;/span&gt;:
-    &lt;span style=&#34;color:#66d9ef&#34;&gt;path&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;{{ nativefier_dir }}/{{ item.name }}-linux-x64&amp;#34;&lt;/span&gt;
-    &lt;span style=&#34;color:#66d9ef&#34;&gt;owner&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;{{ user }}&amp;#34;&lt;/span&gt;
-    &lt;span style=&#34;color:#66d9ef&#34;&gt;group&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;{{ user }}&amp;#34;&lt;/span&gt;
-  &lt;span style=&#34;color:#66d9ef&#34;&gt;loop&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;{{ nativefier_apps }}&amp;#34;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;- &lt;span style=&#34;color:#f92672&#34;&gt;name&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;Change Permissons of Nativefier Dirs&lt;/span&gt;
+  &lt;span style=&#34;color:#f92672&#34;&gt;become&lt;/span&gt;: &lt;span style=&#34;color:#66d9ef&#34;&gt;True&lt;/span&gt;
+  &lt;span style=&#34;color:#f92672&#34;&gt;file&lt;/span&gt;:
+    &lt;span style=&#34;color:#f92672&#34;&gt;path&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;{{ nativefier_dir }}/{{ item.name }}-linux-x64&amp;#34;&lt;/span&gt;
+    &lt;span style=&#34;color:#f92672&#34;&gt;owner&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;{{ user }}&amp;#34;&lt;/span&gt;
+    &lt;span style=&#34;color:#f92672&#34;&gt;group&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;{{ user }}&amp;#34;&lt;/span&gt;
+  &lt;span style=&#34;color:#f92672&#34;&gt;loop&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;{{ nativefier_apps }}&amp;#34;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;After that change:&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;drwxr-xr-x. &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt; ryan ryan  &lt;span style=&#34;color:#ae81ff&#34;&gt;560&lt;/span&gt; Oct &lt;span style=&#34;color:#ae81ff&#34;&gt;25&lt;/span&gt; 20:40 jellyfin-linux-x64&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;Much better!&lt;/p&gt;
@@ -333,16 +333,16 @@ defined:&lt;/p&gt;
 
 &lt;p&gt;So, to build my &lt;code&gt;pocket&lt;/code&gt;, &lt;code&gt;fastmail&lt;/code&gt;, and &lt;code&gt;homeassistant&lt;/code&gt; apps, I added the
 following to my playbook:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;nativefier_apps&lt;/span&gt;:
-  - &lt;span style=&#34;color:#66d9ef&#34;&gt;name&lt;/span&gt;: pocket
-    &lt;span style=&#34;color:#66d9ef&#34;&gt;icon&lt;/span&gt;: pocket.png
-    &lt;span style=&#34;color:#66d9ef&#34;&gt;url&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;https://app.getpocket.com&amp;#34;&lt;/span&gt;
-  - &lt;span style=&#34;color:#66d9ef&#34;&gt;name&lt;/span&gt;: fastmail
-    &lt;span style=&#34;color:#66d9ef&#34;&gt;icon&lt;/span&gt;: fastmail.png
-    &lt;span style=&#34;color:#66d9ef&#34;&gt;url&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;https://www.fastmail.com&amp;#34;&lt;/span&gt;
-  - &lt;span style=&#34;color:#66d9ef&#34;&gt;name&lt;/span&gt;: homeassistant
-    &lt;span style=&#34;color:#66d9ef&#34;&gt;icon&lt;/span&gt;: homeassistant.png
-    &lt;span style=&#34;color:#66d9ef&#34;&gt;url&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;http://homeassistant.local:8123&amp;#34;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;&lt;span style=&#34;color:#f92672&#34;&gt;nativefier_apps&lt;/span&gt;:
+  - &lt;span style=&#34;color:#f92672&#34;&gt;name&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;pocket&lt;/span&gt;
+    &lt;span style=&#34;color:#f92672&#34;&gt;icon&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;pocket.png&lt;/span&gt;
+    &lt;span style=&#34;color:#f92672&#34;&gt;url&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;https://app.getpocket.com&amp;#34;&lt;/span&gt;
+  - &lt;span style=&#34;color:#f92672&#34;&gt;name&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;fastmail&lt;/span&gt;
+    &lt;span style=&#34;color:#f92672&#34;&gt;icon&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;fastmail.png&lt;/span&gt;
+    &lt;span style=&#34;color:#f92672&#34;&gt;url&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;https://www.fastmail.com&amp;#34;&lt;/span&gt;
+  - &lt;span style=&#34;color:#f92672&#34;&gt;name&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;homeassistant&lt;/span&gt;
+    &lt;span style=&#34;color:#f92672&#34;&gt;icon&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;homeassistant.png&lt;/span&gt;
+    &lt;span style=&#34;color:#f92672&#34;&gt;url&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;http://homeassistant.local:8123&amp;#34;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;That should be it! Afterwards, my playbooks could build and configure all
 my nativefier applications automatically!&lt;/p&gt;
 
@@ -589,12 +589,12 @@ command. For example, the following Dockerfile would use an
 &lt;a href=&#34;https://hub.docker.com/_/ubuntu/&#34;&gt;ubuntu&lt;/a&gt; image for the base, but also update &amp;amp;
 install several packages in the image:&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# This is a custom ubuntu image with SSH already installed&lt;/span&gt;
-FROM ubuntu:latest
-MAINTAINER himmallright &amp;lt;ryan.himmelwright@gmail.com&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;gt;
-&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;
-&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;RUN apt-get update&lt;/span&gt;
+&lt;span style=&#34;color:#ae81ff&#34;&gt;FROM ubuntu:latest&lt;/span&gt;
+&lt;span style=&#34;color:#ae81ff&#34;&gt;MAINTAINER himmallright &amp;lt;ryan.himmelwright@gmail.com&amp;gt;&lt;/span&gt;
 
-RUN apt-get install -y vim stow git tmux fish htop emacs&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;span style=&#34;color:#ae81ff&#34;&gt;RUN apt-get update&lt;/span&gt;
+
+&lt;span style=&#34;color:#ae81ff&#34;&gt;RUN apt-get install -y vim stow git tmux fish htop emacs&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;To build the image, run the following command in the same directory as the
 Dockerfile (if defining a specific file, the &lt;code&gt;-f&lt;/code&gt; flag can be used):&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;docker build -t ubuntu-base:v1 .&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;

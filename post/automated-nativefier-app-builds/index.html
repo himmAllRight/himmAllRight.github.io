@@ -290,11 +290,11 @@ post</a> I wrote earlier this year.</p>
 <h3 id="vars">Vars</h3>
 
 <p>First, lets define default values for the variables we will use in tasks and template files:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#66d9ef">user</span>: <span style="color:#e6db74">&#34;{{ ansible_user_id }}&#34;</span>  <span style="color:#75715e"># User to run as</span>
-<span style="color:#66d9ef">nativefier_build_dir</span>: <span style="color:#e6db74">&#34;/tmp/&#34;</span>  <span style="color:#75715e"># Location to build apps at</span>
-<span style="color:#66d9ef">nativefier_dir</span>: <span style="color:#e6db74">&#34;/home/{{ user }}/Builds/&#34;</span> <span style="color:#75715e"># Location to move completed builds</span>
-<span style="color:#66d9ef">icons_dir</span>: <span style="color:#e6db74">&#34;/home/{{ user }}/.local/share/icons/&#34;</span> <span style="color:#75715e"># App Icon location</span>
-<span style="color:#66d9ef">applications_dir</span>: <span style="color:#e6db74">&#34;/home/{{ user }}/.local/share/applications/&#34;</span> <span style="color:#75715e"># desktop entry location</span></code></pre></div>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#f92672">user</span>: <span style="color:#e6db74">&#34;{{ ansible_user_id }}&#34;</span>  <span style="color:#75715e"># User to run as</span>
+<span style="color:#f92672">nativefier_build_dir</span>: <span style="color:#e6db74">&#34;/tmp/&#34;</span>  <span style="color:#75715e"># Location to build apps at</span>
+<span style="color:#f92672">nativefier_dir</span>: <span style="color:#e6db74">&#34;/home/{{ user }}/Builds/&#34;</span> <span style="color:#75715e"># Location to move completed builds</span>
+<span style="color:#f92672">icons_dir</span>: <span style="color:#e6db74">&#34;/home/{{ user }}/.local/share/icons/&#34;</span> <span style="color:#75715e"># App Icon location</span>
+<span style="color:#f92672">applications_dir</span>: <span style="color:#e6db74">&#34;/home/{{ user }}/.local/share/applications/&#34;</span> <span style="color:#75715e"># desktop entry location</span></code></pre></div>
 <p>We will define one more variable which won&rsquo;t have a default, <code>nativefier_apps</code>. However, I&rsquo;ll
 talk about that later when we use the role in a playbook.</p>
 
@@ -335,32 +335,32 @@ tasks sub-directory.</p>
 <p>The first few tasks will check and ensure that the directories we intend to use
 exist. This is generally a good practice to prevent playbooks from breaking due
 to missing folders:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml">- <span style="color:#66d9ef">name</span>: <span style="color:#e6db74">&#34;Ensure Icon dir exists&#34;</span>
-  <span style="color:#66d9ef">file</span>:
-    <span style="color:#66d9ef">path</span>: <span style="color:#e6db74">&#34;{{ icons_dir }}&#34;</span>
-    <span style="color:#66d9ef">state</span>: directory
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml">- <span style="color:#f92672">name</span>: <span style="color:#e6db74">&#34;Ensure Icon dir exists&#34;</span>
+  <span style="color:#f92672">file</span>:
+    <span style="color:#f92672">path</span>: <span style="color:#e6db74">&#34;{{ icons_dir }}&#34;</span>
+    <span style="color:#f92672">state</span>: <span style="color:#ae81ff">directory</span>
 
-- <span style="color:#66d9ef">name</span>: <span style="color:#e6db74">&#34;Ensure applications dir exists&#34;</span>
-  <span style="color:#66d9ef">file</span>:
-    <span style="color:#66d9ef">path</span>: <span style="color:#e6db74">&#34;{{ applications_dir }}&#34;</span>
-    <span style="color:#66d9ef">state</span>: directory
+- <span style="color:#f92672">name</span>: <span style="color:#e6db74">&#34;Ensure applications dir exists&#34;</span>
+  <span style="color:#f92672">file</span>:
+    <span style="color:#f92672">path</span>: <span style="color:#e6db74">&#34;{{ applications_dir }}&#34;</span>
+    <span style="color:#f92672">state</span>: <span style="color:#ae81ff">directory</span>
 
-- <span style="color:#66d9ef">name</span>: <span style="color:#e6db74">&#34;Ensure {{ nativefier_build_dir }} exists&#34;</span>
-  <span style="color:#66d9ef">file</span>:
-    <span style="color:#66d9ef">path</span>: <span style="color:#e6db74">&#34;{{ nativefier_build_dir }}&#34;</span>
-    <span style="color:#66d9ef">state</span>: directory
+- <span style="color:#f92672">name</span>: <span style="color:#e6db74">&#34;Ensure {{ nativefier_build_dir }} exists&#34;</span>
+  <span style="color:#f92672">file</span>:
+    <span style="color:#f92672">path</span>: <span style="color:#e6db74">&#34;{{ nativefier_build_dir }}&#34;</span>
+    <span style="color:#f92672">state</span>: <span style="color:#ae81ff">directory</span>
 
-- <span style="color:#66d9ef">name</span>: <span style="color:#e6db74">&#34;Ensure {{ nativefier_dir }} exists&#34;</span>
-  <span style="color:#66d9ef">file</span>:
-    <span style="color:#66d9ef">path</span>: <span style="color:#e6db74">&#34;{{ nativefier_dir }}&#34;</span>
-    <span style="color:#66d9ef">state</span>: directory</code></pre></div>
+- <span style="color:#f92672">name</span>: <span style="color:#e6db74">&#34;Ensure {{ nativefier_dir }} exists&#34;</span>
+  <span style="color:#f92672">file</span>:
+    <span style="color:#f92672">path</span>: <span style="color:#e6db74">&#34;{{ nativefier_dir }}&#34;</span>
+    <span style="color:#f92672">state</span>: <span style="color:#ae81ff">directory</span></code></pre></div>
 <h4 id="managing-icon-files">Managing Icon Files</h4>
 
 <p>Next, add a small task that will copy the icons we included with the role,
 to the user&rsquo;s local icon folder:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml">- <span style="color:#66d9ef">name</span>: Move icons to local folder
-  <span style="color:#66d9ef">copy</span>: src=<span style="color:#e6db74">&#34;{{ item.icon }}&#34;</span> dest=<span style="color:#e6db74">&#34;{{ icons_dir }}/{{ item.icon }}&#34;</span>
-  <span style="color:#66d9ef">loop</span>: <span style="color:#e6db74">&#34;{{ nativefier_apps }}&#34;</span></code></pre></div>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml">- <span style="color:#f92672">name</span>: <span style="color:#ae81ff">Move icons to local folder</span>
+  <span style="color:#f92672">copy</span>: <span style="color:#ae81ff">src=&#34;{{ item.icon }}&#34; dest=&#34;{{ icons_dir }}/{{ item.icon }}&#34;</span>
+  <span style="color:#f92672">loop</span>: <span style="color:#e6db74">&#34;{{ nativefier_apps }}&#34;</span></code></pre></div>
 <p>This will ensure that all the icons are already in place when we build both the
 nativefier app and the <code>.deskop</code> files.</p>
 
@@ -368,36 +368,36 @@ nativefier app and the <code>.deskop</code> files.</p>
 
 <p>We can now define a few tasks that will pull and run the nativefier container
 using podman. <em>(Note: This could be done with docker&hellip; but I prefer podman XD)</em>:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml">- <span style="color:#66d9ef">name</span>: Pull down nativefier container image
-  <span style="color:#66d9ef">shell</span>: <span style="color:#e6db74">&#34;podman pull jiahaog/nativefier&#34;</span>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml">- <span style="color:#f92672">name</span>: <span style="color:#ae81ff">Pull down nativefier container image</span>
+  <span style="color:#f92672">shell</span>: <span style="color:#e6db74">&#34;podman pull jiahaog/nativefier&#34;</span>
 
-- <span style="color:#66d9ef">name</span>: Build Nativefier app via podman
-  <span style="color:#66d9ef">shell</span>: <span style="color:#e6db74">&#34;podman run --rm --security-opt label=disable -v {{ icons_dir }}:/src -v {{ nativefier_build_dir }}:/target jiahaog/nativefier --icon /src/{{ item.icon }} --name {{ item.name}} -p linux -a x64 {{ item.url }} /target&#34;</span>
-  <span style="color:#66d9ef">loop</span>: <span style="color:#e6db74">&#34;{{ nativefier_apps }}&#34;</span>
+- <span style="color:#f92672">name</span>: <span style="color:#ae81ff">Build Nativefier app via podman</span>
+  <span style="color:#f92672">shell</span>: <span style="color:#e6db74">&#34;podman run --rm --security-opt label=disable -v {{ icons_dir }}:/src -v {{ nativefier_build_dir }}:/target jiahaog/nativefier --icon /src/{{ item.icon }} --name {{ item.name}} -p linux -a x64 {{ item.url }} /target&#34;</span>
+  <span style="color:#f92672">loop</span>: <span style="color:#e6db74">&#34;{{ nativefier_apps }}&#34;</span>
 
-- <span style="color:#66d9ef">name</span>: Clean out nativefier dir
-  <span style="color:#66d9ef">become</span>: <span style="color:#66d9ef">true</span>
-  <span style="color:#66d9ef">file</span>:
-    <span style="color:#66d9ef">path</span>: <span style="color:#e6db74">&#34;{{ nativefier_dir }}/{{ item.name }}-linux-x64&#34;</span>
-    <span style="color:#66d9ef">state</span>: absent
-  <span style="color:#66d9ef">loop</span>: <span style="color:#e6db74">&#34;{{ nativefier_apps }}&#34;</span>
+- <span style="color:#f92672">name</span>: <span style="color:#ae81ff">Clean out nativefier dir</span>
+  <span style="color:#f92672">become</span>: <span style="color:#66d9ef">true</span>
+  <span style="color:#f92672">file</span>:
+    <span style="color:#f92672">path</span>: <span style="color:#e6db74">&#34;{{ nativefier_dir }}/{{ item.name }}-linux-x64&#34;</span>
+    <span style="color:#f92672">state</span>: <span style="color:#ae81ff">absent</span>
+  <span style="color:#f92672">loop</span>: <span style="color:#e6db74">&#34;{{ nativefier_apps }}&#34;</span>
 
   <span style="color:#75715e"># I don&#39;t love this, but copy was too slow</span>
-- <span style="color:#66d9ef">name</span>: Move Builds to Nativefier Location
-  <span style="color:#66d9ef">become</span>: True
-  <span style="color:#66d9ef">shell</span>: <span style="color:#e6db74">&#34;mv {{ nativefier_build_dir }}/{{ item.name }}-linux-x64 {{ nativefier_dir }}/{{ item.name }}-linux-x64&#34;</span>
-  <span style="color:#66d9ef">loop</span>: <span style="color:#e6db74">&#34;{{ nativefier_apps }}&#34;</span></code></pre></div>
+- <span style="color:#f92672">name</span>: <span style="color:#ae81ff">Move Builds to Nativefier Location</span>
+  <span style="color:#f92672">become</span>: <span style="color:#66d9ef">True</span>
+  <span style="color:#f92672">shell</span>: <span style="color:#e6db74">&#34;mv {{ nativefier_build_dir }}/{{ item.name }}-linux-x64 {{ nativefier_dir }}/{{ item.name }}-linux-x64&#34;</span>
+  <span style="color:#f92672">loop</span>: <span style="color:#e6db74">&#34;{{ nativefier_apps }}&#34;</span></code></pre></div>
 <p>These tasks also move the built app to the final location.</p>
 
 <h4 id="manaing-application-files">Manaing Application Files</h4>
 
 <p>Lastly, with icons in place and the application builds complete, we can create the application
 entry files by adding this final task:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml">- <span style="color:#66d9ef">name</span>: Generate Application Desktop Files
-  <span style="color:#66d9ef">template</span>:
-    <span style="color:#66d9ef">src</span>: templates/nativefier.desktop.j2
-    <span style="color:#66d9ef">dest</span>: <span style="color:#e6db74">&#34;{{ applications_dir }}/{{ item.name }}.desktop&#34;</span>
-  <span style="color:#66d9ef">loop</span>: <span style="color:#e6db74">&#34;{{ nativefier_apps }}&#34;</span></code></pre></div>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml">- <span style="color:#f92672">name</span>: <span style="color:#ae81ff">Generate Application Desktop Files</span>
+  <span style="color:#f92672">template</span>:
+    <span style="color:#f92672">src</span>: <span style="color:#ae81ff">templates/nativefier.desktop.j2</span>
+    <span style="color:#f92672">dest</span>: <span style="color:#e6db74">&#34;{{ applications_dir }}/{{ item.name }}.desktop&#34;</span>
+  <span style="color:#f92672">loop</span>: <span style="color:#e6db74">&#34;{{ nativefier_apps }}&#34;</span></code></pre></div>
 <p>And there we go, that&rsquo;s it! Well&hellip; sort of.</p>
 
 <h2 id="selinux-woes">Selinux woes</h2>
@@ -431,13 +431,13 @@ of &ldquo;<em>just disable selinux</em>&rdquo;.</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">drwxr-xr-x. <span style="color:#ae81ff">1</span> <span style="color:#ae81ff">100999</span> <span style="color:#ae81ff">100999</span>  <span style="color:#ae81ff">560</span> Oct <span style="color:#ae81ff">25</span> 20:40 jellyfin-linux-x64</code></pre></div>
 <p>Lastly, I wanted to add one more cleanup task. My builds had the ugly uid/gid
 pair of <code>100999 100999</code>, so I a task to change ownership to the <code>user</code>:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml">- <span style="color:#66d9ef">name</span>: Change Permissons of Nativefier Dirs
-  <span style="color:#66d9ef">become</span>: True
-  <span style="color:#66d9ef">file</span>:
-    <span style="color:#66d9ef">path</span>: <span style="color:#e6db74">&#34;{{ nativefier_dir }}/{{ item.name }}-linux-x64&#34;</span>
-    <span style="color:#66d9ef">owner</span>: <span style="color:#e6db74">&#34;{{ user }}&#34;</span>
-    <span style="color:#66d9ef">group</span>: <span style="color:#e6db74">&#34;{{ user }}&#34;</span>
-  <span style="color:#66d9ef">loop</span>: <span style="color:#e6db74">&#34;{{ nativefier_apps }}&#34;</span></code></pre></div>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml">- <span style="color:#f92672">name</span>: <span style="color:#ae81ff">Change Permissons of Nativefier Dirs</span>
+  <span style="color:#f92672">become</span>: <span style="color:#66d9ef">True</span>
+  <span style="color:#f92672">file</span>:
+    <span style="color:#f92672">path</span>: <span style="color:#e6db74">&#34;{{ nativefier_dir }}/{{ item.name }}-linux-x64&#34;</span>
+    <span style="color:#f92672">owner</span>: <span style="color:#e6db74">&#34;{{ user }}&#34;</span>
+    <span style="color:#f92672">group</span>: <span style="color:#e6db74">&#34;{{ user }}&#34;</span>
+  <span style="color:#f92672">loop</span>: <span style="color:#e6db74">&#34;{{ nativefier_apps }}&#34;</span></code></pre></div>
 <p>After that change:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">drwxr-xr-x. <span style="color:#ae81ff">1</span> ryan ryan  <span style="color:#ae81ff">560</span> Oct <span style="color:#ae81ff">25</span> 20:40 jellyfin-linux-x64</code></pre></div>
 <p>Much better!</p>
@@ -463,16 +463,16 @@ defined:</p>
 
 <p>So, to build my <code>pocket</code>, <code>fastmail</code>, and <code>homeassistant</code> apps, I added the
 following to my playbook:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#66d9ef">nativefier_apps</span>:
-  - <span style="color:#66d9ef">name</span>: pocket
-    <span style="color:#66d9ef">icon</span>: pocket.png
-    <span style="color:#66d9ef">url</span>: <span style="color:#e6db74">&#34;https://app.getpocket.com&#34;</span>
-  - <span style="color:#66d9ef">name</span>: fastmail
-    <span style="color:#66d9ef">icon</span>: fastmail.png
-    <span style="color:#66d9ef">url</span>: <span style="color:#e6db74">&#34;https://www.fastmail.com&#34;</span>
-  - <span style="color:#66d9ef">name</span>: homeassistant
-    <span style="color:#66d9ef">icon</span>: homeassistant.png
-    <span style="color:#66d9ef">url</span>: <span style="color:#e6db74">&#34;http://homeassistant.local:8123&#34;</span></code></pre></div>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#f92672">nativefier_apps</span>:
+  - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">pocket</span>
+    <span style="color:#f92672">icon</span>: <span style="color:#ae81ff">pocket.png</span>
+    <span style="color:#f92672">url</span>: <span style="color:#e6db74">&#34;https://app.getpocket.com&#34;</span>
+  - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">fastmail</span>
+    <span style="color:#f92672">icon</span>: <span style="color:#ae81ff">fastmail.png</span>
+    <span style="color:#f92672">url</span>: <span style="color:#e6db74">&#34;https://www.fastmail.com&#34;</span>
+  - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">homeassistant</span>
+    <span style="color:#f92672">icon</span>: <span style="color:#ae81ff">homeassistant.png</span>
+    <span style="color:#f92672">url</span>: <span style="color:#e6db74">&#34;http://homeassistant.local:8123&#34;</span></code></pre></div>
 <p>That should be it! Afterwards, my playbooks could build and configure all
 my nativefier applications automatically!</p>
 
@@ -490,10 +490,14 @@ has somehow managed to make it shine even more. Enjoy!</p>
 
                     
                     
+                        <div style="float: left; text-decoration: underline; text-align: right;">Next Post:</div>
+                    
                     
                          <div style="float: right; text-decoration: underline; text-align: right;">Prev Post:</div>
                     
                     <br>
+                    
+                        <a href="http://ryan.himmelwright.net/post/ergodox-ez-initial-review/" style="text-align: left; float: left; max-width: 40%;">My new Ergox-EZ Keyboard -- Initial Thoughts</a>
                     
                     
                         <a href="http://ryan.himmelwright.net/post/decided-to-get-an-ergodox/" style="text-align: right; float: right; max-width: 40%">Decided to get an Ergodox</a>

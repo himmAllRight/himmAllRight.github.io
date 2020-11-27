@@ -170,10 +170,10 @@ define the systemd unit file, but more on that later.</p>
 <p>Lets create some files, starting with one to define the default variables.
 Open <code>roles/foundryvtt/defaults/main.yaml</code> and add the following:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml">---
-<span style="color:#66d9ef">user</span>: <span style="color:#e6db74">&#34;{{ ansible_user_id }}&#34;</span>
-<span style="color:#66d9ef">service_description</span>: <span style="color:#e6db74">&#34;A service to run the Foundry VTT node app&#34;</span>
-<span style="color:#66d9ef">foundryvtt_dir</span>: <span style="color:#e6db74">&#34;/home/{{ user }}/foundryvtt/&#34;</span>
-<span style="color:#66d9ef">foundrydata_dir</span>: <span style="color:#e6db74">&#34;/home/{{ user }}/foundrydata&#34;</span></code></pre></div>
+<span style="color:#f92672">user</span>: <span style="color:#e6db74">&#34;{{ ansible_user_id }}&#34;</span>
+<span style="color:#f92672">service_description</span>: <span style="color:#e6db74">&#34;A service to run the Foundry VTT node app&#34;</span>
+<span style="color:#f92672">foundryvtt_dir</span>: <span style="color:#e6db74">&#34;/home/{{ user }}/foundryvtt/&#34;</span>
+<span style="color:#f92672">foundrydata_dir</span>: <span style="color:#e6db74">&#34;/home/{{ user }}/foundrydata&#34;</span></code></pre></div>
 <p>This defines a few default veriables that will be used in the service file
 template, as well as in the tasks file. The variables can optionally be
 over-ridden when running a playbook, but they will default to these values if
@@ -212,61 +212,61 @@ this includes creating the defined data directories, unzipping the application s
 package, and opening required ports in the firewall:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#75715e">## Note, you likely don&#39;t need these tasks. They are just for my particular</span>
 <span style="color:#75715e">## example...</span>
-- <span style="color:#66d9ef">name</span>: Create foundryvtt dir at {{ foundryvtt_dir }}
-  <span style="color:#66d9ef">become_user</span>: <span style="color:#e6db74">&#34;{{ user }}&#34;</span>
-  <span style="color:#66d9ef">file</span>:
-    <span style="color:#66d9ef">path</span>: <span style="color:#e6db74">&#34;{{ foundryvtt_dir }}&#34;</span>
-    <span style="color:#66d9ef">state</span>: directory
+- <span style="color:#f92672">name</span>: <span style="color:#ae81ff">Create foundryvtt dir at {{ foundryvtt_dir }}</span>
+  <span style="color:#f92672">become_user</span>: <span style="color:#e6db74">&#34;{{ user }}&#34;</span>
+  <span style="color:#f92672">file</span>:
+    <span style="color:#f92672">path</span>: <span style="color:#e6db74">&#34;{{ foundryvtt_dir }}&#34;</span>
+    <span style="color:#f92672">state</span>: <span style="color:#ae81ff">directory</span>
 
-- <span style="color:#66d9ef">name</span>: Create foundrydata dir at {{ foundrydata_dir }}
-  <span style="color:#66d9ef">become_user</span>: <span style="color:#e6db74">&#34;{{ user }}&#34;</span>
-  <span style="color:#66d9ef">file</span>:
-    <span style="color:#66d9ef">path</span>: <span style="color:#e6db74">&#34;{{ foundrydata_dir }}&#34;</span>
-    <span style="color:#66d9ef">state</span>: directory
+- <span style="color:#f92672">name</span>: <span style="color:#ae81ff">Create foundrydata dir at {{ foundrydata_dir }}</span>
+  <span style="color:#f92672">become_user</span>: <span style="color:#e6db74">&#34;{{ user }}&#34;</span>
+  <span style="color:#f92672">file</span>:
+    <span style="color:#f92672">path</span>: <span style="color:#e6db74">&#34;{{ foundrydata_dir }}&#34;</span>
+    <span style="color:#f92672">state</span>: <span style="color:#ae81ff">directory</span>
 
-- <span style="color:#66d9ef">name</span>: Send Foundry Package
-  <span style="color:#66d9ef">when</span>: foundryvtt_send_src is defined and foundryvtt_send_src is not none
-  <span style="color:#66d9ef">copy</span>:
-    <span style="color:#66d9ef">src</span>: <span style="color:#e6db74">&#34;{{ foundryvtt_send_src }}&#34;</span>
-    <span style="color:#66d9ef">dest</span>: <span style="color:#e6db74">&#34;{{ foundryvtt_package_src }}&#34;</span>
+- <span style="color:#f92672">name</span>: <span style="color:#ae81ff">Send Foundry Package</span>
+  <span style="color:#f92672">when</span>: <span style="color:#ae81ff">foundryvtt_send_src is defined and foundryvtt_send_src is not none</span>
+  <span style="color:#f92672">copy</span>:
+    <span style="color:#f92672">src</span>: <span style="color:#e6db74">&#34;{{ foundryvtt_send_src }}&#34;</span>
+    <span style="color:#f92672">dest</span>: <span style="color:#e6db74">&#34;{{ foundryvtt_package_src }}&#34;</span>
 
-- <span style="color:#66d9ef">name</span>: Extract package
-  <span style="color:#66d9ef">unarchive</span>:
-    <span style="color:#66d9ef">src</span>: <span style="color:#e6db74">&#34;{{ foundryvtt_package_src }}&#34;</span>
-    <span style="color:#66d9ef">dest</span>: <span style="color:#e6db74">&#34;{{ foundryvtt_dir }}&#34;</span>
-    <span style="color:#66d9ef">remote_src</span>: yes
+- <span style="color:#f92672">name</span>: <span style="color:#ae81ff">Extract package</span>
+  <span style="color:#f92672">unarchive</span>:
+    <span style="color:#f92672">src</span>: <span style="color:#e6db74">&#34;{{ foundryvtt_package_src }}&#34;</span>
+    <span style="color:#f92672">dest</span>: <span style="color:#e6db74">&#34;{{ foundryvtt_dir }}&#34;</span>
+    <span style="color:#f92672">remote_src</span>: <span style="color:#66d9ef">yes</span>
 
-- <span style="color:#66d9ef">name</span>: Start firewalld
-  <span style="color:#66d9ef">systemd</span>:
-    <span style="color:#66d9ef">name</span>: firewalld
-    <span style="color:#66d9ef">state</span>: started
+- <span style="color:#f92672">name</span>: <span style="color:#ae81ff">Start firewalld</span>
+  <span style="color:#f92672">systemd</span>:
+    <span style="color:#f92672">name</span>: <span style="color:#ae81ff">firewalld</span>
+    <span style="color:#f92672">state</span>: <span style="color:#ae81ff">started</span>
 
-- <span style="color:#66d9ef">name</span>: Open FoundryVTT Ports (firewalld)
-  <span style="color:#66d9ef">firewalld</span>:
-    <span style="color:#66d9ef">port</span>: <span style="color:#ae81ff">30000</span>/tcp
-    <span style="color:#66d9ef">permanent</span>: yes
-    <span style="color:#66d9ef">state</span>: enabled
+- <span style="color:#f92672">name</span>: <span style="color:#ae81ff">Open FoundryVTT Ports (firewalld)</span>
+  <span style="color:#f92672">firewalld</span>:
+    <span style="color:#f92672">port</span>: <span style="color:#ae81ff">30000</span><span style="color:#ae81ff">/tcp</span>
+    <span style="color:#f92672">permanent</span>: <span style="color:#66d9ef">yes</span>
+    <span style="color:#f92672">state</span>: <span style="color:#ae81ff">enabled</span>
 
-- <span style="color:#66d9ef">name</span>: reload service firewalld, in all cases
-  <span style="color:#66d9ef">systemd</span>:
-    <span style="color:#66d9ef">name</span>: firewalld
-    <span style="color:#66d9ef">state</span>: reloaded</code></pre></div>
+- <span style="color:#f92672">name</span>: <span style="color:#ae81ff">reload service firewalld, in all cases</span>
+  <span style="color:#f92672">systemd</span>:
+    <span style="color:#f92672">name</span>: <span style="color:#ae81ff">firewalld</span>
+    <span style="color:#f92672">state</span>: <span style="color:#ae81ff">reloaded</span></code></pre></div>
 <p>With all that defined, lets finally define a task to create our unit file using
 the template:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml">- <span style="color:#66d9ef">name</span>: Create foundryvtt systemd service file
-  <span style="color:#66d9ef">template</span>:
-    <span style="color:#66d9ef">src</span>: templates/foundryvtt.service.j2
-    <span style="color:#66d9ef">dest</span>: /lib/systemd/system/foundryvtt.service</code></pre></div>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml">- <span style="color:#f92672">name</span>: <span style="color:#ae81ff">Create foundryvtt systemd service file</span>
+  <span style="color:#f92672">template</span>:
+    <span style="color:#f92672">src</span>: <span style="color:#ae81ff">templates/foundryvtt.service.j2</span>
+    <span style="color:#f92672">dest</span>: <span style="color:#ae81ff">/lib/systemd/system/foundryvtt.service</span></code></pre></div>
 <p>The <code>src</code> is set to the relative location (to the role) of the template we
 defined earlier, and the <code>dest</code> is set to where we would like the generated
 file to be copied to. This template is a unit file for a systemd service, so
 I&rsquo;m going to copy it to <code>/lib/systemd/system/foundryvtt.service</code>.</p>
 
 <p>Last but not least, lets start the newly created service:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml">- <span style="color:#66d9ef">name</span>: Start foundryvtt service
-  <span style="color:#66d9ef">systemd</span>:
-    <span style="color:#66d9ef">name</span>: foundryvtt
-    <span style="color:#66d9ef">state</span>: started</code></pre></div>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml">- <span style="color:#f92672">name</span>: <span style="color:#ae81ff">Start foundryvtt service</span>
+  <span style="color:#f92672">systemd</span>:
+    <span style="color:#f92672">name</span>: <span style="color:#ae81ff">foundryvtt</span>
+    <span style="color:#f92672">state</span>: <span style="color:#ae81ff">started</span></code></pre></div>
 <p>&hellip; and&hellip; our role is finished!</p>
 
 <h2 id="playbook">Playbook</h2>
@@ -275,8 +275,8 @@ I&rsquo;m going to copy it to <code>/lib/systemd/system/foundryvtt.service</code
 the provisioning of all my systems in their own playbooks, including my foundry
 server, so I use this role there. Just remember to call it in a <code>roles:</code>
 section of the playbook, like so:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml">  <span style="color:#66d9ef">roles</span>:
-    - foundryvtt</code></pre></div>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml">  <span style="color:#f92672">roles</span>:
+    - <span style="color:#ae81ff">foundryvtt</span></code></pre></div>
 <h2 id="conclusion">Conclusion</h2>
 
 <p>That&rsquo;s it. We&rsquo;ve easily automated setting up the systemd unit file from the

@@ -190,8 +190,8 @@ default. For example, when converting my website script, I set <code>name</code>
 directory, <code>~/Documents/himmAllRight-source</code>:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#75715e"># /home/ryan/.config/tmuxinator/Website.yml</span>
 
-<span style="color:#66d9ef">name</span>: Website
-<span style="color:#66d9ef">root</span>: ~/Documents/himmAllRight-source</code></pre></div>
+<span style="color:#f92672">name</span>: <span style="color:#ae81ff">Website</span>
+<span style="color:#f92672">root</span>: <span style="color:#ae81ff">~/Documents/himmAllRight-source</span></code></pre></div>
 <h4 id="windows">Windows</h4>
 
 <p>Next, I needed to configure my windows. To convert the script from my previous
@@ -199,14 +199,14 @@ post, I wanted a dedicated &lsquo;Main&rsquo; window, one for the server, one fo
 one for an extra shell. Additionally, since that last post I&rsquo;ve added a window
 that launches my hugo-served website in a web browser. To recreate <em>all of
 that</em> with tmuxinator:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#66d9ef">windows</span>:
-  - <span style="color:#66d9ef">Main</span>:
-      - zsh
-      - clear
-  - <span style="color:#66d9ef">Server</span>: hugo serve -D -F
-  - <span style="color:#66d9ef">Write</span>: nvim
-  - <span style="color:#66d9ef">Shell</span>: zsh; clear
-  - <span style="color:#66d9ef">Web</span>: qutebrowser localhost:<span style="color:#ae81ff">1313</span></code></pre></div>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#f92672">windows</span>:
+  - <span style="color:#f92672">Main</span>:
+      - <span style="color:#ae81ff">zsh</span>
+      - <span style="color:#ae81ff">clear</span>
+  - <span style="color:#f92672">Server</span>: <span style="color:#ae81ff">hugo serve -D -F</span>
+  - <span style="color:#f92672">Write</span>: <span style="color:#ae81ff">nvim</span>
+  - <span style="color:#f92672">Shell</span>: <span style="color:#ae81ff">zsh; clear</span>
+  - <span style="color:#f92672">Web</span>: <span style="color:#ae81ff">qutebrowser localhost:1313</span></code></pre></div>
 <p>Done. Save the file and that&rsquo;s it! See the benefit of using tmuxinator??</p>
 
 <h4 id="pane-splits">Pane splits</h4>
@@ -215,11 +215,11 @@ that</em> with tmuxinator:</p>
 setting up pane splits is also quite easy with tmuxinator. For example, if I
 wanted to split the server window into two panes, one running the hugo server
 and one running htop, I could use:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml">- <span style="color:#66d9ef">Server</span>:
-    <span style="color:#66d9ef">layout</span>: even-vertical
-    <span style="color:#66d9ef">panes</span>:
-        - hugo
-        - htop</code></pre></div>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml">- <span style="color:#f92672">Server</span>:
+    <span style="color:#f92672">layout</span>: <span style="color:#ae81ff">even-vertical</span>
+    <span style="color:#f92672">panes</span>:
+        - <span style="color:#ae81ff">hugo</span>
+        - <span style="color:#ae81ff">htop</span></code></pre></div>
 <p>The <code>layout</code> key defines which
 <a href="http://man7.org/linux/man-pages/man1/tmux.1.html#WINDOWS_AND_PANES">tmux layout</a> to
 use when splitting the panes, and <code>panes</code> is a list that defines what to run in

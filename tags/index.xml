@@ -5,10 +5,46 @@
     <description>Recent content in Tags on λ ryan. himmelwright. net</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 31 Oct 2020 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 27 Nov 2020 00:00:00 +0000</lastBuildDate>
     
         <atom:link href="http://ryan.himmelwright.net/tags/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>ergodox</title>
+      <link>http://ryan.himmelwright.net/tags/ergodox/</link>
+      <pubDate>Fri, 27 Nov 2020 00:00:00 +0000</pubDate>
+      
+      <guid>http://ryan.himmelwright.net/tags/ergodox/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Hardware</title>
+      <link>http://ryan.himmelwright.net/tags/hardware/</link>
+      <pubDate>Fri, 27 Nov 2020 00:00:00 +0000</pubDate>
+      
+      <guid>http://ryan.himmelwright.net/tags/hardware/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>hhkb</title>
+      <link>http://ryan.himmelwright.net/tags/hhkb/</link>
+      <pubDate>Fri, 27 Nov 2020 00:00:00 +0000</pubDate>
+      
+      <guid>http://ryan.himmelwright.net/tags/hhkb/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>keyboards</title>
+      <link>http://ryan.himmelwright.net/tags/keyboards/</link>
+      <pubDate>Fri, 27 Nov 2020 00:00:00 +0000</pubDate>
+      
+      <guid>http://ryan.himmelwright.net/tags/keyboards/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>Ansible</title>
@@ -16,15 +52,6 @@
       <pubDate>Sat, 31 Oct 2020 00:00:00 +0000</pubDate>
       
       <guid>http://ryan.himmelwright.net/tags/ansible/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>C</title>
-      <link>http://ryan.himmelwright.net/tags/c/</link>
-      <pubDate>Sat, 31 Oct 2020 00:00:00 +0000</pubDate>
-      
-      <guid>http://ryan.himmelwright.net/tags/c/</guid>
       <description></description>
     </item>
     
@@ -52,42 +79,6 @@
       <pubDate>Sat, 31 Oct 2020 00:00:00 +0000</pubDate>
       
       <guid>http://ryan.himmelwright.net/tags/linux/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>ergodox</title>
-      <link>http://ryan.himmelwright.net/tags/ergodox/</link>
-      <pubDate>Tue, 20 Oct 2020 00:00:00 +0000</pubDate>
-      
-      <guid>http://ryan.himmelwright.net/tags/ergodox/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Hardware</title>
-      <link>http://ryan.himmelwright.net/tags/hardware/</link>
-      <pubDate>Tue, 20 Oct 2020 00:00:00 +0000</pubDate>
-      
-      <guid>http://ryan.himmelwright.net/tags/hardware/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>hhkb</title>
-      <link>http://ryan.himmelwright.net/tags/hhkb/</link>
-      <pubDate>Tue, 20 Oct 2020 00:00:00 +0000</pubDate>
-      
-      <guid>http://ryan.himmelwright.net/tags/hhkb/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>keyboards</title>
-      <link>http://ryan.himmelwright.net/tags/keyboards/</link>
-      <pubDate>Tue, 20 Oct 2020 00:00:00 +0000</pubDate>
-      
-      <guid>http://ryan.himmelwright.net/tags/keyboards/</guid>
       <description></description>
     </item>
     
@@ -637,6 +628,15 @@
       <pubDate>Wed, 06 Jan 2016 00:00:00 +0000</pubDate>
       
       <guid>http://ryan.himmelwright.net/tags/wedding/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>C</title>
+      <link>http://ryan.himmelwright.net/tags/c/</link>
+      <pubDate>Thu, 24 Dec 2015 00:00:00 +0000</pubDate>
+      
+      <guid>http://ryan.himmelwright.net/tags/c/</guid>
       <description></description>
     </item>
     

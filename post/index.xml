@@ -5,10 +5,275 @@
     <description>Recent content in Posts on λ ryan. himmelwright. net</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 31 Oct 2020 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 27 Nov 2020 00:00:00 +0000</lastBuildDate>
     
         <atom:link href="http://ryan.himmelwright.net/post/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>My new Ergox-EZ Keyboard -- Initial Thoughts</title>
+      <link>http://ryan.himmelwright.net/post/ergodox-ez-initial-review/</link>
+      <pubDate>Fri, 27 Nov 2020 00:00:00 +0000</pubDate>
+      
+      <guid>http://ryan.himmelwright.net/post/ergodox-ez-initial-review/</guid>
+      <description>&lt;p&gt;Several weeks ago, I wrote about how I &lt;a href=&#34;../post/decided-to-get-an-ergodox/&#34;&gt;decided to purchase an
+ergodox-ez&lt;/a&gt; split keyboard. In that
+post, I omitted any details about what configuration I ordered,
+as well my impressions about the board. Now that I have been an
+ergodox owner for&amp;hellip; wow, over two months&amp;hellip; I guess this post is
+due. Here are my &amp;lsquo;&lt;em&gt;initial&lt;/em&gt;&amp;rsquo; thoughts of the ergodox-ez&amp;hellip;&lt;/p&gt;
+
+&lt;h2 id=&#34;ordering-and-shipping&#34;&gt;Ordering and shipping&lt;/h2&gt;
+
+&lt;p&gt;&lt;a href=&#34;../../img/posts/ergodox-ez-initial-review/both_boxes.jpeg&#34;&gt;&lt;img alt=&#34;The Boxes my ergdox came in&#34; src=&#34;../../img/posts/ergodox-ez-initial-review/both_boxes.jpeg&#34; style=&#34;max-width:
+100%;&#34;/&gt;&lt;/a&gt;
+&lt;div class=&#34;caption&#34;&gt;The boxes the ergodox-ez shipped in&lt;/div&gt;&lt;/p&gt;
+
+&lt;p&gt;So, what ergodox did I order? After a few hours toggling the
+configuration tool and endless internal debating, I eventually settled on an
+ergodox-ez &lt;em&gt;glow&lt;/em&gt; (backlit keys), with a black body, and black printed, LED
+compatible, key caps.  With a narrowed selection of switch options (to maintain
+backlit key compatibility), I landed on Cherry MX Browns as my best choice. I
+wanted a noticeable tactile bump, but didn&amp;rsquo;t want &amp;ldquo;click-y&amp;rdquo; keys. I prefer a
+lower &amp;ldquo;&lt;em&gt;Clack&lt;/em&gt;&amp;rdquo;, while typing and find the higher pitch of MX Blues annoying.
+I decided that I might as well go all in with this keyboard, so I ordered the
+tenting poles and black wrist rests as well.&lt;/p&gt;
+
+&lt;p&gt;With everything decided, I placed my order and prepared myself to wait
+in anticipated glee for&amp;hellip; an average of 3 weeks shipping time ಠ_ಠ. &lt;em&gt;Luckily&lt;/em&gt;,
+I was fortunate and about a week later, I had a large, flat box show up at my
+door!&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;../../img/posts/ergodox-ez-initial-review/ergodox_box_plastic.jpeg&#34;&gt;&lt;img alt=&#34;Opened the ergodox box&#34; src=&#34;../../img/posts/ergodox-ez-initial-review/ergodox_box_plastic.jpeg&#34; style=&#34;max-width: 100%;&#34;/&gt;&lt;/a&gt;
+&lt;div class=&#34;caption&#34;&gt;Opening the main box&lt;/div&gt;&lt;/p&gt;
+
+&lt;p&gt;Everything was very well packaged. The keyboard came in one box, and the wrist
+rests had their own. The two boxes had the same width, so they could be shipped
+as one unit. Lifting the lid on the larger box, I was greeted by the keyboard
+looking back at me through a plastic panel, with it&amp;rsquo;s accessories (cables, key
+switch pulled, screws) neatly pinned around it.&lt;/p&gt;
+
+&lt;h2 id=&#34;setup&#34;&gt;Setup&lt;/h2&gt;
+
+&lt;p&gt;The initial &lt;em&gt;physical&lt;/em&gt; setup was quite simple. I took everything out of the
+box, connected the two haves of the board together with the included TRRS
+cable, and then used the mini usb cable (also included) to connect right half
+of the board to my laptop&amp;rsquo;s usb port. I positioned the wrist-rests and tweaked
+the tenting poles to some arbitrary position, acting as if I knew what I was
+doing.  That was it. After that point, I was able to type&amp;hellip; &lt;em&gt;stuff&lt;/em&gt;&amp;hellip; into my
+computer.&lt;/p&gt;
+
+&lt;h3 id=&#34;initial-layout-changes&#34;&gt;Initial Layout Changes&lt;/h3&gt;
+
+&lt;p&gt;&lt;a href=&#34;../../img/posts/ergodox-ez-initial-review/ergodox_defalut_layout.png&#34;&gt;&lt;img alt=&#34;The ergodox default layout&#34; src=&#34;../../img/posts/ergodox-ez-initial-review/ergodox_default_layout.png&#34; style=&#34;max-width: 100%;&#34;/&gt;&lt;/a&gt;
+&lt;div class=&#34;caption&#34;&gt;The default ergodox layout&lt;/div&gt;&lt;/p&gt;
+
+&lt;p&gt;I say &lt;em&gt;stuff&lt;/em&gt;, because I wasn&amp;rsquo;t able to just pick up the board
+and feel 100% comfortable like one might with a &amp;ldquo;normal&amp;rdquo;
+keyboard. There was definitely a learning curve (more on that later).  However,
+the main problem was that I didn&amp;rsquo;t even know the &lt;em&gt;default layout&lt;/em&gt;. The
+back-lit QWERTY keys were labeled, but all of the modifier keys on the sides
+and in the thumb clusters were not. So, I navigated online to the &lt;a href=&#34;https://ergodox-ez.com/pages/oryx&#34;&gt;oryx
+configurator&lt;/a&gt; with two goals in mind:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;To learn the standard layout that the board shipped with, and&lt;/li&gt;
+&lt;li&gt;To alter some of the defaults with changes I &lt;em&gt;knew&lt;/em&gt; I would want (caps lock as a ctrl, for example)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;After a few minutes of scanning and tweaking, I had my first layout to flash.
+I downloaded the file&amp;hellip; and ran into my only &lt;em&gt;true&lt;/em&gt; issue I&amp;rsquo;ve experienced with the
+ergodox&amp;hellip;&lt;/p&gt;
+
+&lt;h3 id=&#34;issues-with-wally&#34;&gt;Issues with Wally&lt;/h3&gt;
+
+&lt;p&gt;&lt;a href=&#34;../../img/posts/ergodox-ez-initial-review/ergodox_macbook.jpeg&#34;&gt;&lt;img alt=&#34;Using the ergodox with my Macbook Pro&#34; src=&#34;../../img/posts/ergodox-ez-initial-review/ergodox_macbook.jpeg&#34; style=&#34;max-width:
+100%;&#34;/&gt;&lt;/a&gt;
+&lt;div class=&#34;caption&#34;&gt;Using the ergodox-ez with my MacBook Pro&lt;/div&gt;&lt;/p&gt;
+
+&lt;p&gt;While I was able to flash the firmware using my macbook, for some reason my
+Fedora laptops and desktop had issues at first. I would open up
+&lt;a href=&#34;https://ergodox-ez.com/pages/wally&#34;&gt;wally&lt;/a&gt; (ZSA&amp;rsquo;s firmware flashing tool), load the
+firmware file, and press the tiny &amp;lsquo;reset&amp;rsquo; button on my keyboard with a
+paper-clip&amp;hellip; and it would freeze. The back lights stopped their colorful
+dancing and key presses rendered no response. The only way
+to get the board to respond again was to unplug and replug it back in.&lt;/p&gt;
+
+&lt;p&gt;I had heard that ZSA had good customer support, so I emailed them about my problem.
+They responded right away and helped to debug what might be happening.  It
+appeared to be some sort of permissions issue, although to this day I&amp;rsquo;m not
+100% sure what it actually was. Eventually, it started working. Since then I
+have updated most of my computers to Fedora 33, and I use a newer version of
+Wally. I haven&amp;rsquo;t had trouble since, even on fresh OS installs. It just works.&lt;/p&gt;
+
+&lt;p&gt;Oh well, problem resolved I guess? My main takeaways from the experience were
+that 1) wally definitely requires &lt;code&gt;sudo&lt;/code&gt; root permissions, and 2) that ZSA&amp;rsquo;s customer
+support is wonderful.  Oh, and &lt;a href=&#34;https://github.com/zsa/wally&#34;&gt;open source
+firmware&lt;/a&gt; is the best, but I already knew that.&lt;/p&gt;
+
+&lt;p&gt;(Note: ZSA has since updated the Linux README instructions to contain the udev
+instructions they gave me)&lt;/p&gt;
+
+&lt;h2 id=&#34;getting-used-to-and-learning-the-board&#34;&gt;Getting used to and learning the board&lt;/h2&gt;
+
+&lt;p&gt;As previously stated, I knew I would have to put some effort into learning how
+to type on the ergodox. When I got it, I did a fair bit of
+&lt;a href=&#34;https://www.keybr.com&#34;&gt;typing&lt;/a&gt; &lt;a href=&#34;https://play.typeracer.com/&#34;&gt;practice&lt;/a&gt; and
+used it for work everyday. Within a few days, I was at a passable typing speed,
+and after a few more, and I reached a &lt;em&gt;decent&lt;/em&gt; speed. I am not sure if I am any
+&lt;em&gt;faster&lt;/em&gt; than on my old keyboard, but I can type fast for much longer (I
+could only burst speed-type on the HHKB before starting to cramp up, mostly due to
+poor form).&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;../../img/posts/ergodox-ez-initial-review/oryx_trainer.png&#34;&gt;&lt;img alt=&#34;Oryx Training Tool&#34; src=&#34;../../img/posts/ergodox-ez-initial-review/oryx_trainer.png&#34; style=&#34;max-width: 100%;&#34;/&gt;&lt;/a&gt;
+&lt;div class=&#34;caption&#34;&gt;The Oryx Training Tool&lt;/div&gt;&lt;/p&gt;
+
+&lt;p&gt;I haven&amp;rsquo;t done any typing practice the last few weeks and I&amp;rsquo;ve started to
+notice &lt;em&gt;some&lt;/em&gt; of my bad habits creeping back in. I want to start up
+again and might try to use the trainer that is included in the Oryx tool. It is
+able to connect to the keyboard to show your layout, and provides several types
+of content to type through (code, books, symbols). I might use it to
+help determine an optimized coding layer places my most used symbols in easy to
+reach places.&lt;/p&gt;
+
+&lt;h2 id=&#34;what-i-like&#34;&gt;What I like&lt;/h2&gt;
+
+&lt;h3 id=&#34;customizability&#34;&gt;Customizability&lt;/h3&gt;
+
+&lt;p&gt;This board is fully customizable on both the hardware &lt;em&gt;and&lt;/em&gt; software side.&lt;/p&gt;
+
+&lt;h4 id=&#34;firmware&#34;&gt;Firmware&lt;/h4&gt;
+
+&lt;p&gt;&lt;a href=&#34;../../img/posts/ergodox-ez-initial-review/ergodox_layout.png&#34;&gt;&lt;img alt=&#34;Ergodox layout&#34; src=&#34;../../img/posts/ergodox-ez-initial-review/ergodox_layout.png&#34; style=&#34;max-width: 100%;&#34;/&gt;&lt;/a&gt;
+&lt;div class=&#34;caption&#34;&gt;One of my custom layer layouts&lt;/div&gt;&lt;/p&gt;
+
+&lt;p&gt;Being able to tweak the layout of multiple layers means there are an endless
+amount of ways I can tailor my keyboard to fit my needs. My tweaking has
+slowed down a bit, but I love that I can make quick changes to my layout if I
+decide there is a better way to do something. For example, today I realized I wanted to add
+a key on one of my alternate layers, so I popped open oryx and wally, and had
+the change finished in about a minute.&lt;/p&gt;
+
+&lt;p&gt;Having an open firmware keyboard is reminiscent of when I &lt;a href=&#34;http://ryan.himmelwright.net/post/back-on-arch/&#34;&gt;used vanilla arch
+linux&lt;/a&gt;. I would go weeks
+assuming I had everything required for a typical desktop environment, when all
+of sudden, I would try to open a pdf and realize I never installed a pdf
+reader&amp;hellip; or a &lt;em&gt;file browser&lt;/em&gt;. Last week while working, I noticed that
+my ergodox layout didn&amp;rsquo;t have a &amp;lsquo;delete&amp;rsquo; key. So I quickly added one. Done.&lt;/p&gt;
+
+&lt;p&gt;(Note: Be aware that I haven&amp;rsquo;t even touched on the advanced layout options,
+like macros and long vs short key presses)&lt;/p&gt;
+
+&lt;h4 id=&#34;hardware&#34;&gt;Hardware&lt;/h4&gt;
+
+&lt;p&gt;&lt;a href=&#34;../../img/posts/ergodox-ez-initial-review/key_switches.jpeg&#34;&gt;&lt;img alt=&#34;Key switches&#34; src=&#34;../../img/posts/ergodox-ez-initial-review/key_switches.jpeg&#34; style=&#34;max-width:
+100%;&#34;/&gt;&lt;/a&gt;
+&lt;div class=&#34;caption&#34;&gt;Testing swapping out a switch with one from my switch
+tester&lt;/div&gt;&lt;/p&gt;
+
+&lt;p&gt;In addition to the firmware, It&amp;rsquo;s nice to know that there is quite a bit I can
+    &lt;em&gt;physically&lt;/em&gt; change about my keyboard. Specifically, the key caps can be
+    changed and the switches themselves are hot-swappable.&lt;/p&gt;
+
+&lt;p&gt;I&amp;rsquo;ve already looked around for some of the parts I could swap out on my board
+in a few years if I want to mix things up. For example, I am interesting in
+swapping to mx clear switches someday. The problem with clears is the lights
+would not (ironically) shine through anymore. I guess that wouldn&amp;rsquo;t be too big
+of an issue though, because many of the alternative key caps I like are opaque
+ツ.&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;Anyway&lt;/em&gt;&amp;hellip; Despite talking about all the hardware upgrades I &lt;em&gt;could&lt;/em&gt; make, I
+actually do enjoy it&amp;rsquo;s current configuration. But I do love that I have the
+option to change it over time.&lt;/p&gt;
+
+&lt;h3 id=&#34;ortholinear&#34;&gt;Ortholinear&lt;/h3&gt;
+
+&lt;p&gt;While it was more difficult to get used to than I expected, I have found using
+an orthlinear layout to be considerably easier to type on. My fingers no longer
+fight and trip over each other like Black-Friday shoppers trying to grab the
+last hot-ticket item. The &lt;em&gt;worst&lt;/em&gt; thing about using an ortholinear layout is
+that I now want it to become a standard option when buying laptops: ISO or ANSI,
+Ortho or Staggard? Unfortunately I don&amp;rsquo;t see that happening anytime soon&amp;hellip;&lt;/p&gt;
+
+&lt;h3 id=&#34;split-design&#34;&gt;Split Design&lt;/h3&gt;
+
+&lt;p&gt;&lt;a href=&#34;../../img/posts/ergodox-ez-initial-review/laptop_stand.jpeg&#34;&gt;&lt;img alt=&#34;Ergodox around a laptop stand&#34; src=&#34;../../img/posts/ergodox-ez-initial-review/laptop_stand.jpeg&#34; style=&#34;max-width:
+100%;&#34;/&gt;&lt;/a&gt;
+&lt;div class=&#34;caption&#34;&gt;A split design keyboard pairs nicely with a laptop stand.&lt;/div&gt;&lt;/p&gt;
+
+&lt;p&gt;Like the ortholinear layout, a fully split keyboard is a considerable
+ergonomic boost.  I can lay my arms on the desk in whichever way is most
+comfortable&amp;hellip; and then position the keyboard to match &lt;em&gt;them&lt;/em&gt;.&lt;/p&gt;
+
+&lt;p&gt;As a bonus, the split design pairs nicely with laptop stands, allowing me to
+slide the stand closer. This makes it easier to view smaller screens at a
+proper height.&lt;/p&gt;
+
+&lt;h3 id=&#34;thumb-cluster-keys&#34;&gt;Thumb cluster keys&lt;/h3&gt;
+
+&lt;p&gt;&lt;a href=&#34;../../img/posts/ergodox-ez-initial-review/ergodox_wood.jpeg&#34;&gt;&lt;img alt=&#34;ergodox on wood desk&#34; src=&#34;../../img/posts/ergodox-ez-initial-review/ergodox_wood.jpeg&#34; style=&#34;max-width:
+100%;&#34;/&gt;&lt;/a&gt;
+&lt;div class=&#34;caption&#34;&gt;The thumb cluster of keys has allowed me to better utilize my thumbs, which has been a nice change&lt;/div&gt;&lt;/p&gt;
+
+&lt;p&gt;Another feature I immediately miss on other keyboards, is thumb keys. It is a
+relief to provide my thumbs control over more keys than just the spacebar. The
+thumb clusters enable me to offload responsibility for backspace, tab, enter,
+delete, and a few other keys from my weakest fingers (pinkies), to my strongest
+(thumbs). This makes a huge difference while typing, but is probably the
+biggest difficulty I have when switching to a laptop keyboard from my ergodox.
+I keep finding myself smashing the spacebar when trying to backspace or enter.&lt;/p&gt;
+
+&lt;h2 id=&#34;what-i-don-t-love&#34;&gt;What I don&amp;rsquo;t love&lt;/h2&gt;
+
+&lt;p&gt;Honestly, there is not much that I don&amp;rsquo;t &lt;em&gt;like&lt;/em&gt; about the ergodox-ez. That
+being said, if forced to be picky, here is a thing or two that I don&amp;rsquo;t &lt;em&gt;love&lt;/em&gt;
+about it&amp;hellip;&lt;/p&gt;
+
+&lt;h3 id=&#34;learning-curve&#34;&gt;Learning curve&lt;/h3&gt;
+
+&lt;p&gt;&lt;center&gt;
+&lt;a href=&#34;../../img/posts/ergodox-ez-initial-review/typing_test.png&#34;&gt;&lt;img alt=&#34;typing test results&#34; src=&#34;../../img/posts/ergodox-ez-initial-review/typing_test.png&#34; style=&#34;max-width: 100%;&#34;/&gt;&lt;/a&gt;
+&lt;div class=&#34;caption&#34;&gt;Results from one of my typing practices&lt;/div&gt;
+&lt;/center&gt;&lt;/p&gt;
+
+&lt;p&gt;The biggest con to getting a keyboard like the ergodox is the learning curve.
+It isn&amp;rsquo;t something that you will be able to pick up and immediately start
+using.  It will require time and deliberate daily practice to really start to
+feel comfortable. If you know this when purchasing, it isn&amp;rsquo;t that big of a
+problem, but can be extremely frustrating at first.&lt;/p&gt;
+
+&lt;h3 id=&#34;cost&#34;&gt;Cost&lt;/h3&gt;
+
+&lt;p&gt;It is expensive. Especially for a unique board that you might end up hating.
+With that said, if the ergodox works for you, the cost isn&amp;rsquo;t as bad as it might
+initially appear.  The ergodox-ez is a solid board, with the
+ability to customize both it&amp;rsquo;s hardware and firmware over a span of many years.
+On top of that, when compared to &lt;a href=&#34;https://kinesis-ergo.com/products/#advantage2&#34;&gt;other &amp;lsquo;ergonomic&amp;rsquo; split
+keyboards&lt;/a&gt;, the ergodox is
+priced rather fairly.&lt;/p&gt;
+
+&lt;h3 id=&#34;it-s-difficult-to-switch-back-to-my-hhkb&#34;&gt;It&amp;rsquo;s difficult to switch back to my HHKB&amp;hellip;&lt;/h3&gt;
+
+&lt;p&gt;Switching to keyboards on my laptops is mostly fine, but for whatever
+reason &amp;hellip; I can&amp;rsquo;t type on my HHKB. It feels so squished, and I can&amp;rsquo;t seem to
+naturally position my fingers on the correct keys anymore. I&amp;rsquo;m sure if I
+dedicate a few hours to using the HHKB this might go away, but I haven&amp;rsquo;t done
+that yet.&lt;/p&gt;
+
+&lt;h2 id=&#34;conclusion&#34;&gt;Conclusion&lt;/h2&gt;
+
+&lt;p&gt;&lt;a href=&#34;../../img/posts/ergodox-ez-initial-review/ergodox_office.jpeg&#34;&gt;&lt;img alt=&#34;The ergodox in my home office&#34; src=&#34;../../img/posts/ergodox-ez-initial-review/ergodox_office.jpeg&#34; style=&#34;max-width:
+100%;&#34;/&gt;&lt;/a&gt;
+&lt;div class=&#34;caption&#34;&gt;The ergodox-ez in my home office&lt;/div&gt;&lt;/p&gt;
+
+&lt;p&gt;Overall, I love this keyboard and am very satisfied with my choice. Now that I am used
+to it, it feels normal to type on and I don&amp;rsquo;t have to think about it.
+The Split design and ortholinear layout make it the most natural feeling
+and comfortable board I have used. As a bonus, any layout issues can be stomped
+out with a 2 minute config change and flash, ensuring that I should &lt;em&gt;continue&lt;/em&gt;
+to love this board even as my preferences change. As long as you are aware of
+what you are getting into, I highly recommend the ergodox-ez.&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>Automated Nativefier App builds</title>
@@ -160,11 +425,11 @@ post&lt;/a&gt; I wrote earlier this year.&lt;/p&gt;
 &lt;h3 id=&#34;vars&#34;&gt;Vars&lt;/h3&gt;
 
 &lt;p&gt;First, lets define default values for the variables we will use in tasks and template files:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;user&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;{{ ansible_user_id }}&amp;#34;&lt;/span&gt;  &lt;span style=&#34;color:#75715e&#34;&gt;# User to run as&lt;/span&gt;
-&lt;span style=&#34;color:#66d9ef&#34;&gt;nativefier_build_dir&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;/tmp/&amp;#34;&lt;/span&gt;  &lt;span style=&#34;color:#75715e&#34;&gt;# Location to build apps at&lt;/span&gt;
-&lt;span style=&#34;color:#66d9ef&#34;&gt;nativefier_dir&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;/home/{{ user }}/Builds/&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#75715e&#34;&gt;# Location to move completed builds&lt;/span&gt;
-&lt;span style=&#34;color:#66d9ef&#34;&gt;icons_dir&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;/home/{{ user }}/.local/share/icons/&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#75715e&#34;&gt;# App Icon location&lt;/span&gt;
-&lt;span style=&#34;color:#66d9ef&#34;&gt;applications_dir&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;/home/{{ user }}/.local/share/applications/&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#75715e&#34;&gt;# desktop entry location&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;&lt;span style=&#34;color:#f92672&#34;&gt;user&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;{{ ansible_user_id }}&amp;#34;&lt;/span&gt;  &lt;span style=&#34;color:#75715e&#34;&gt;# User to run as&lt;/span&gt;
+&lt;span style=&#34;color:#f92672&#34;&gt;nativefier_build_dir&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;/tmp/&amp;#34;&lt;/span&gt;  &lt;span style=&#34;color:#75715e&#34;&gt;# Location to build apps at&lt;/span&gt;
+&lt;span style=&#34;color:#f92672&#34;&gt;nativefier_dir&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;/home/{{ user }}/Builds/&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#75715e&#34;&gt;# Location to move completed builds&lt;/span&gt;
+&lt;span style=&#34;color:#f92672&#34;&gt;icons_dir&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;/home/{{ user }}/.local/share/icons/&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#75715e&#34;&gt;# App Icon location&lt;/span&gt;
+&lt;span style=&#34;color:#f92672&#34;&gt;applications_dir&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;/home/{{ user }}/.local/share/applications/&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#75715e&#34;&gt;# desktop entry location&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;We will define one more variable which won&amp;rsquo;t have a default, &lt;code&gt;nativefier_apps&lt;/code&gt;. However, I&amp;rsquo;ll
 talk about that later when we use the role in a playbook.&lt;/p&gt;
 
@@ -205,32 +470,32 @@ tasks sub-directory.&lt;/p&gt;
 &lt;p&gt;The first few tasks will check and ensure that the directories we intend to use
 exist. This is generally a good practice to prevent playbooks from breaking due
 to missing folders:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;- &lt;span style=&#34;color:#66d9ef&#34;&gt;name&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;Ensure Icon dir exists&amp;#34;&lt;/span&gt;
-  &lt;span style=&#34;color:#66d9ef&#34;&gt;file&lt;/span&gt;:
-    &lt;span style=&#34;color:#66d9ef&#34;&gt;path&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;{{ icons_dir }}&amp;#34;&lt;/span&gt;
-    &lt;span style=&#34;color:#66d9ef&#34;&gt;state&lt;/span&gt;: directory
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;- &lt;span style=&#34;color:#f92672&#34;&gt;name&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;Ensure Icon dir exists&amp;#34;&lt;/span&gt;
+  &lt;span style=&#34;color:#f92672&#34;&gt;file&lt;/span&gt;:
+    &lt;span style=&#34;color:#f92672&#34;&gt;path&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;{{ icons_dir }}&amp;#34;&lt;/span&gt;
+    &lt;span style=&#34;color:#f92672&#34;&gt;state&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;directory&lt;/span&gt;
 
-- &lt;span style=&#34;color:#66d9ef&#34;&gt;name&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;Ensure applications dir exists&amp;#34;&lt;/span&gt;
-  &lt;span style=&#34;color:#66d9ef&#34;&gt;file&lt;/span&gt;:
-    &lt;span style=&#34;color:#66d9ef&#34;&gt;path&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;{{ applications_dir }}&amp;#34;&lt;/span&gt;
-    &lt;span style=&#34;color:#66d9ef&#34;&gt;state&lt;/span&gt;: directory
+- &lt;span style=&#34;color:#f92672&#34;&gt;name&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;Ensure applications dir exists&amp;#34;&lt;/span&gt;
+  &lt;span style=&#34;color:#f92672&#34;&gt;file&lt;/span&gt;:
+    &lt;span style=&#34;color:#f92672&#34;&gt;path&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;{{ applications_dir }}&amp;#34;&lt;/span&gt;
+    &lt;span style=&#34;color:#f92672&#34;&gt;state&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;directory&lt;/span&gt;
 
-- &lt;span style=&#34;color:#66d9ef&#34;&gt;name&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;Ensure {{ nativefier_build_dir }} exists&amp;#34;&lt;/span&gt;
-  &lt;span style=&#34;color:#66d9ef&#34;&gt;file&lt;/span&gt;:
-    &lt;span style=&#34;color:#66d9ef&#34;&gt;path&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;{{ nativefier_build_dir }}&amp;#34;&lt;/span&gt;
-    &lt;span style=&#34;color:#66d9ef&#34;&gt;state&lt;/span&gt;: directory
+- &lt;span style=&#34;color:#f92672&#34;&gt;name&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;Ensure {{ nativefier_build_dir }} exists&amp;#34;&lt;/span&gt;
+  &lt;span style=&#34;color:#f92672&#34;&gt;file&lt;/span&gt;:
+    &lt;span style=&#34;color:#f92672&#34;&gt;path&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;{{ nativefier_build_dir }}&amp;#34;&lt;/span&gt;
+    &lt;span style=&#34;color:#f92672&#34;&gt;state&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;directory&lt;/span&gt;
 
-- &lt;span style=&#34;color:#66d9ef&#34;&gt;name&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;Ensure {{ nativefier_dir }} exists&amp;#34;&lt;/span&gt;
-  &lt;span style=&#34;color:#66d9ef&#34;&gt;file&lt;/span&gt;:
-    &lt;span style=&#34;color:#66d9ef&#34;&gt;path&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;{{ nativefier_dir }}&amp;#34;&lt;/span&gt;
-    &lt;span style=&#34;color:#66d9ef&#34;&gt;state&lt;/span&gt;: directory&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+- &lt;span style=&#34;color:#f92672&#34;&gt;name&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;Ensure {{ nativefier_dir }} exists&amp;#34;&lt;/span&gt;
+  &lt;span style=&#34;color:#f92672&#34;&gt;file&lt;/span&gt;:
+    &lt;span style=&#34;color:#f92672&#34;&gt;path&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;{{ nativefier_dir }}&amp;#34;&lt;/span&gt;
+    &lt;span style=&#34;color:#f92672&#34;&gt;state&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;directory&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;h4 id=&#34;managing-icon-files&#34;&gt;Managing Icon Files&lt;/h4&gt;
 
 &lt;p&gt;Next, add a small task that will copy the icons we included with the role,
 to the user&amp;rsquo;s local icon folder:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;- &lt;span style=&#34;color:#66d9ef&#34;&gt;name&lt;/span&gt;: Move icons to local folder
-  &lt;span style=&#34;color:#66d9ef&#34;&gt;copy&lt;/span&gt;: src=&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;{{ item.icon }}&amp;#34;&lt;/span&gt; dest=&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;{{ icons_dir }}/{{ item.icon }}&amp;#34;&lt;/span&gt;
-  &lt;span style=&#34;color:#66d9ef&#34;&gt;loop&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;{{ nativefier_apps }}&amp;#34;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;- &lt;span style=&#34;color:#f92672&#34;&gt;name&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;Move icons to local folder&lt;/span&gt;
+  &lt;span style=&#34;color:#f92672&#34;&gt;copy&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;src=&amp;#34;{{ item.icon }}&amp;#34; dest=&amp;#34;{{ icons_dir }}/{{ item.icon }}&amp;#34;&lt;/span&gt;
+  &lt;span style=&#34;color:#f92672&#34;&gt;loop&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;{{ nativefier_apps }}&amp;#34;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;This will ensure that all the icons are already in place when we build both the
 nativefier app and the &lt;code&gt;.deskop&lt;/code&gt; files.&lt;/p&gt;
 
@@ -238,36 +503,36 @@ nativefier app and the &lt;code&gt;.deskop&lt;/code&gt; files.&lt;/p&gt;
 
 &lt;p&gt;We can now define a few tasks that will pull and run the nativefier container
 using podman. &lt;em&gt;(Note: This could be done with docker&amp;hellip; but I prefer podman XD)&lt;/em&gt;:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;- &lt;span style=&#34;color:#66d9ef&#34;&gt;name&lt;/span&gt;: Pull down nativefier container image
-  &lt;span style=&#34;color:#66d9ef&#34;&gt;shell&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;podman pull jiahaog/nativefier&amp;#34;&lt;/span&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;- &lt;span style=&#34;color:#f92672&#34;&gt;name&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;Pull down nativefier container image&lt;/span&gt;
+  &lt;span style=&#34;color:#f92672&#34;&gt;shell&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;podman pull jiahaog/nativefier&amp;#34;&lt;/span&gt;
 
-- &lt;span style=&#34;color:#66d9ef&#34;&gt;name&lt;/span&gt;: Build Nativefier app via podman
-  &lt;span style=&#34;color:#66d9ef&#34;&gt;shell&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;podman run --rm --security-opt label=disable -v {{ icons_dir }}:/src -v {{ nativefier_build_dir }}:/target jiahaog/nativefier --icon /src/{{ item.icon }} --name {{ item.name}} -p linux -a x64 {{ item.url }} /target&amp;#34;&lt;/span&gt;
-  &lt;span style=&#34;color:#66d9ef&#34;&gt;loop&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;{{ nativefier_apps }}&amp;#34;&lt;/span&gt;
+- &lt;span style=&#34;color:#f92672&#34;&gt;name&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;Build Nativefier app via podman&lt;/span&gt;
+  &lt;span style=&#34;color:#f92672&#34;&gt;shell&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;podman run --rm --security-opt label=disable -v {{ icons_dir }}:/src -v {{ nativefier_build_dir }}:/target jiahaog/nativefier --icon /src/{{ item.icon }} --name {{ item.name}} -p linux -a x64 {{ item.url }} /target&amp;#34;&lt;/span&gt;
+  &lt;span style=&#34;color:#f92672&#34;&gt;loop&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;{{ nativefier_apps }}&amp;#34;&lt;/span&gt;
 
-- &lt;span style=&#34;color:#66d9ef&#34;&gt;name&lt;/span&gt;: Clean out nativefier dir
-  &lt;span style=&#34;color:#66d9ef&#34;&gt;become&lt;/span&gt;: &lt;span style=&#34;color:#66d9ef&#34;&gt;true&lt;/span&gt;
-  &lt;span style=&#34;color:#66d9ef&#34;&gt;file&lt;/span&gt;:
-    &lt;span style=&#34;color:#66d9ef&#34;&gt;path&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;{{ nativefier_dir }}/{{ item.name }}-linux-x64&amp;#34;&lt;/span&gt;
-    &lt;span style=&#34;color:#66d9ef&#34;&gt;state&lt;/span&gt;: absent
-  &lt;span style=&#34;color:#66d9ef&#34;&gt;loop&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;{{ nativefier_apps }}&amp;#34;&lt;/span&gt;
+- &lt;span style=&#34;color:#f92672&#34;&gt;name&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;Clean out nativefier dir&lt;/span&gt;
+  &lt;span style=&#34;color:#f92672&#34;&gt;become&lt;/span&gt;: &lt;span style=&#34;color:#66d9ef&#34;&gt;true&lt;/span&gt;
+  &lt;span style=&#34;color:#f92672&#34;&gt;file&lt;/span&gt;:
+    &lt;span style=&#34;color:#f92672&#34;&gt;path&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;{{ nativefier_dir }}/{{ item.name }}-linux-x64&amp;#34;&lt;/span&gt;
+    &lt;span style=&#34;color:#f92672&#34;&gt;state&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;absent&lt;/span&gt;
+  &lt;span style=&#34;color:#f92672&#34;&gt;loop&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;{{ nativefier_apps }}&amp;#34;&lt;/span&gt;
 
   &lt;span style=&#34;color:#75715e&#34;&gt;# I don&amp;#39;t love this, but copy was too slow&lt;/span&gt;
-- &lt;span style=&#34;color:#66d9ef&#34;&gt;name&lt;/span&gt;: Move Builds to Nativefier Location
-  &lt;span style=&#34;color:#66d9ef&#34;&gt;become&lt;/span&gt;: True
-  &lt;span style=&#34;color:#66d9ef&#34;&gt;shell&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;mv {{ nativefier_build_dir }}/{{ item.name }}-linux-x64 {{ nativefier_dir }}/{{ item.name }}-linux-x64&amp;#34;&lt;/span&gt;
-  &lt;span style=&#34;color:#66d9ef&#34;&gt;loop&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;{{ nativefier_apps }}&amp;#34;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+- &lt;span style=&#34;color:#f92672&#34;&gt;name&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;Move Builds to Nativefier Location&lt;/span&gt;
+  &lt;span style=&#34;color:#f92672&#34;&gt;become&lt;/span&gt;: &lt;span style=&#34;color:#66d9ef&#34;&gt;True&lt;/span&gt;
+  &lt;span style=&#34;color:#f92672&#34;&gt;shell&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;mv {{ nativefier_build_dir }}/{{ item.name }}-linux-x64 {{ nativefier_dir }}/{{ item.name }}-linux-x64&amp;#34;&lt;/span&gt;
+  &lt;span style=&#34;color:#f92672&#34;&gt;loop&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;{{ nativefier_apps }}&amp;#34;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;These tasks also move the built app to the final location.&lt;/p&gt;
 
 &lt;h4 id=&#34;manaing-application-files&#34;&gt;Manaing Application Files&lt;/h4&gt;
 
 &lt;p&gt;Lastly, with icons in place and the application builds complete, we can create the application
 entry files by adding this final task:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;- &lt;span style=&#34;color:#66d9ef&#34;&gt;name&lt;/span&gt;: Generate Application Desktop Files
-  &lt;span style=&#34;color:#66d9ef&#34;&gt;template&lt;/span&gt;:
-    &lt;span style=&#34;color:#66d9ef&#34;&gt;src&lt;/span&gt;: templates/nativefier.desktop.j2
-    &lt;span style=&#34;color:#66d9ef&#34;&gt;dest&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;{{ applications_dir }}/{{ item.name }}.desktop&amp;#34;&lt;/span&gt;
-  &lt;span style=&#34;color:#66d9ef&#34;&gt;loop&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;{{ nativefier_apps }}&amp;#34;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;- &lt;span style=&#34;color:#f92672&#34;&gt;name&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;Generate Application Desktop Files&lt;/span&gt;
+  &lt;span style=&#34;color:#f92672&#34;&gt;template&lt;/span&gt;:
+    &lt;span style=&#34;color:#f92672&#34;&gt;src&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;templates/nativefier.desktop.j2&lt;/span&gt;
+    &lt;span style=&#34;color:#f92672&#34;&gt;dest&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;{{ applications_dir }}/{{ item.name }}.desktop&amp;#34;&lt;/span&gt;
+  &lt;span style=&#34;color:#f92672&#34;&gt;loop&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;{{ nativefier_apps }}&amp;#34;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;And there we go, that&amp;rsquo;s it! Well&amp;hellip; sort of.&lt;/p&gt;
 
 &lt;h2 id=&#34;selinux-woes&#34;&gt;Selinux woes&lt;/h2&gt;
@@ -301,13 +566,13 @@ of &amp;ldquo;&lt;em&gt;just disable selinux&lt;/em&gt;&amp;rdquo;.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;drwxr-xr-x. &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;100999&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;100999&lt;/span&gt;  &lt;span style=&#34;color:#ae81ff&#34;&gt;560&lt;/span&gt; Oct &lt;span style=&#34;color:#ae81ff&#34;&gt;25&lt;/span&gt; 20:40 jellyfin-linux-x64&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;Lastly, I wanted to add one more cleanup task. My builds had the ugly uid/gid
 pair of &lt;code&gt;100999 100999&lt;/code&gt;, so I a task to change ownership to the &lt;code&gt;user&lt;/code&gt;:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;- &lt;span style=&#34;color:#66d9ef&#34;&gt;name&lt;/span&gt;: Change Permissons of Nativefier Dirs
-  &lt;span style=&#34;color:#66d9ef&#34;&gt;become&lt;/span&gt;: True
-  &lt;span style=&#34;color:#66d9ef&#34;&gt;file&lt;/span&gt;:
-    &lt;span style=&#34;color:#66d9ef&#34;&gt;path&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;{{ nativefier_dir }}/{{ item.name }}-linux-x64&amp;#34;&lt;/span&gt;
-    &lt;span style=&#34;color:#66d9ef&#34;&gt;owner&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;{{ user }}&amp;#34;&lt;/span&gt;
-    &lt;span style=&#34;color:#66d9ef&#34;&gt;group&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;{{ user }}&amp;#34;&lt;/span&gt;
-  &lt;span style=&#34;color:#66d9ef&#34;&gt;loop&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;{{ nativefier_apps }}&amp;#34;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;- &lt;span style=&#34;color:#f92672&#34;&gt;name&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;Change Permissons of Nativefier Dirs&lt;/span&gt;
+  &lt;span style=&#34;color:#f92672&#34;&gt;become&lt;/span&gt;: &lt;span style=&#34;color:#66d9ef&#34;&gt;True&lt;/span&gt;
+  &lt;span style=&#34;color:#f92672&#34;&gt;file&lt;/span&gt;:
+    &lt;span style=&#34;color:#f92672&#34;&gt;path&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;{{ nativefier_dir }}/{{ item.name }}-linux-x64&amp;#34;&lt;/span&gt;
+    &lt;span style=&#34;color:#f92672&#34;&gt;owner&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;{{ user }}&amp;#34;&lt;/span&gt;
+    &lt;span style=&#34;color:#f92672&#34;&gt;group&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;{{ user }}&amp;#34;&lt;/span&gt;
+  &lt;span style=&#34;color:#f92672&#34;&gt;loop&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;{{ nativefier_apps }}&amp;#34;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;After that change:&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;drwxr-xr-x. &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt; ryan ryan  &lt;span style=&#34;color:#ae81ff&#34;&gt;560&lt;/span&gt; Oct &lt;span style=&#34;color:#ae81ff&#34;&gt;25&lt;/span&gt; 20:40 jellyfin-linux-x64&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;Much better!&lt;/p&gt;
@@ -333,16 +598,16 @@ defined:&lt;/p&gt;
 
 &lt;p&gt;So, to build my &lt;code&gt;pocket&lt;/code&gt;, &lt;code&gt;fastmail&lt;/code&gt;, and &lt;code&gt;homeassistant&lt;/code&gt; apps, I added the
 following to my playbook:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;nativefier_apps&lt;/span&gt;:
-  - &lt;span style=&#34;color:#66d9ef&#34;&gt;name&lt;/span&gt;: pocket
-    &lt;span style=&#34;color:#66d9ef&#34;&gt;icon&lt;/span&gt;: pocket.png
-    &lt;span style=&#34;color:#66d9ef&#34;&gt;url&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;https://app.getpocket.com&amp;#34;&lt;/span&gt;
-  - &lt;span style=&#34;color:#66d9ef&#34;&gt;name&lt;/span&gt;: fastmail
-    &lt;span style=&#34;color:#66d9ef&#34;&gt;icon&lt;/span&gt;: fastmail.png
-    &lt;span style=&#34;color:#66d9ef&#34;&gt;url&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;https://www.fastmail.com&amp;#34;&lt;/span&gt;
-  - &lt;span style=&#34;color:#66d9ef&#34;&gt;name&lt;/span&gt;: homeassistant
-    &lt;span style=&#34;color:#66d9ef&#34;&gt;icon&lt;/span&gt;: homeassistant.png
-    &lt;span style=&#34;color:#66d9ef&#34;&gt;url&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;http://homeassistant.local:8123&amp;#34;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;&lt;span style=&#34;color:#f92672&#34;&gt;nativefier_apps&lt;/span&gt;:
+  - &lt;span style=&#34;color:#f92672&#34;&gt;name&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;pocket&lt;/span&gt;
+    &lt;span style=&#34;color:#f92672&#34;&gt;icon&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;pocket.png&lt;/span&gt;
+    &lt;span style=&#34;color:#f92672&#34;&gt;url&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;https://app.getpocket.com&amp;#34;&lt;/span&gt;
+  - &lt;span style=&#34;color:#f92672&#34;&gt;name&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;fastmail&lt;/span&gt;
+    &lt;span style=&#34;color:#f92672&#34;&gt;icon&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;fastmail.png&lt;/span&gt;
+    &lt;span style=&#34;color:#f92672&#34;&gt;url&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;https://www.fastmail.com&amp;#34;&lt;/span&gt;
+  - &lt;span style=&#34;color:#f92672&#34;&gt;name&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;homeassistant&lt;/span&gt;
+    &lt;span style=&#34;color:#f92672&#34;&gt;icon&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;homeassistant.png&lt;/span&gt;
+    &lt;span style=&#34;color:#f92672&#34;&gt;url&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;http://homeassistant.local:8123&amp;#34;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;That should be it! Afterwards, my playbooks could build and configure all
 my nativefier applications automatically!&lt;/p&gt;
 
@@ -1188,10 +1453,10 @@ define the systemd unit file, but more on that later.&lt;/p&gt;
 &lt;p&gt;Lets create some files, starting with one to define the default variables.
 Open &lt;code&gt;roles/foundryvtt/defaults/main.yaml&lt;/code&gt; and add the following:&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;---
-&lt;span style=&#34;color:#66d9ef&#34;&gt;user&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;{{ ansible_user_id }}&amp;#34;&lt;/span&gt;
-&lt;span style=&#34;color:#66d9ef&#34;&gt;service_description&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;A service to run the Foundry VTT node app&amp;#34;&lt;/span&gt;
-&lt;span style=&#34;color:#66d9ef&#34;&gt;foundryvtt_dir&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;/home/{{ user }}/foundryvtt/&amp;#34;&lt;/span&gt;
-&lt;span style=&#34;color:#66d9ef&#34;&gt;foundrydata_dir&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;/home/{{ user }}/foundrydata&amp;#34;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;span style=&#34;color:#f92672&#34;&gt;user&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;{{ ansible_user_id }}&amp;#34;&lt;/span&gt;
+&lt;span style=&#34;color:#f92672&#34;&gt;service_description&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;A service to run the Foundry VTT node app&amp;#34;&lt;/span&gt;
+&lt;span style=&#34;color:#f92672&#34;&gt;foundryvtt_dir&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;/home/{{ user }}/foundryvtt/&amp;#34;&lt;/span&gt;
+&lt;span style=&#34;color:#f92672&#34;&gt;foundrydata_dir&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;/home/{{ user }}/foundrydata&amp;#34;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;This defines a few default veriables that will be used in the service file
 template, as well as in the tasks file. The variables can optionally be
 over-ridden when running a playbook, but they will default to these values if
@@ -1230,61 +1495,61 @@ this includes creating the defined data directories, unzipping the application s
 package, and opening required ports in the firewall:&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;&lt;span style=&#34;color:#75715e&#34;&gt;## Note, you likely don&amp;#39;t need these tasks. They are just for my particular&lt;/span&gt;
 &lt;span style=&#34;color:#75715e&#34;&gt;## example...&lt;/span&gt;
-- &lt;span style=&#34;color:#66d9ef&#34;&gt;name&lt;/span&gt;: Create foundryvtt dir at {{ foundryvtt_dir }}
-  &lt;span style=&#34;color:#66d9ef&#34;&gt;become_user&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;{{ user }}&amp;#34;&lt;/span&gt;
-  &lt;span style=&#34;color:#66d9ef&#34;&gt;file&lt;/span&gt;:
-    &lt;span style=&#34;color:#66d9ef&#34;&gt;path&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;{{ foundryvtt_dir }}&amp;#34;&lt;/span&gt;
-    &lt;span style=&#34;color:#66d9ef&#34;&gt;state&lt;/span&gt;: directory
+- &lt;span style=&#34;color:#f92672&#34;&gt;name&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;Create foundryvtt dir at {{ foundryvtt_dir }}&lt;/span&gt;
+  &lt;span style=&#34;color:#f92672&#34;&gt;become_user&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;{{ user }}&amp;#34;&lt;/span&gt;
+  &lt;span style=&#34;color:#f92672&#34;&gt;file&lt;/span&gt;:
+    &lt;span style=&#34;color:#f92672&#34;&gt;path&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;{{ foundryvtt_dir }}&amp;#34;&lt;/span&gt;
+    &lt;span style=&#34;color:#f92672&#34;&gt;state&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;directory&lt;/span&gt;
 
-- &lt;span style=&#34;color:#66d9ef&#34;&gt;name&lt;/span&gt;: Create foundrydata dir at {{ foundrydata_dir }}
-  &lt;span style=&#34;color:#66d9ef&#34;&gt;become_user&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;{{ user }}&amp;#34;&lt;/span&gt;
-  &lt;span style=&#34;color:#66d9ef&#34;&gt;file&lt;/span&gt;:
-    &lt;span style=&#34;color:#66d9ef&#34;&gt;path&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;{{ foundrydata_dir }}&amp;#34;&lt;/span&gt;
-    &lt;span style=&#34;color:#66d9ef&#34;&gt;state&lt;/span&gt;: directory
+- &lt;span style=&#34;color:#f92672&#34;&gt;name&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;Create foundrydata dir at {{ foundrydata_dir }}&lt;/span&gt;
+  &lt;span style=&#34;color:#f92672&#34;&gt;become_user&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;{{ user }}&amp;#34;&lt;/span&gt;
+  &lt;span style=&#34;color:#f92672&#34;&gt;file&lt;/span&gt;:
+    &lt;span style=&#34;color:#f92672&#34;&gt;path&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;{{ foundrydata_dir }}&amp;#34;&lt;/span&gt;
+    &lt;span style=&#34;color:#f92672&#34;&gt;state&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;directory&lt;/span&gt;
 
-- &lt;span style=&#34;color:#66d9ef&#34;&gt;name&lt;/span&gt;: Send Foundry Package
-  &lt;span style=&#34;color:#66d9ef&#34;&gt;when&lt;/span&gt;: foundryvtt_send_src is defined and foundryvtt_send_src is not none
-  &lt;span style=&#34;color:#66d9ef&#34;&gt;copy&lt;/span&gt;:
-    &lt;span style=&#34;color:#66d9ef&#34;&gt;src&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;{{ foundryvtt_send_src }}&amp;#34;&lt;/span&gt;
-    &lt;span style=&#34;color:#66d9ef&#34;&gt;dest&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;{{ foundryvtt_package_src }}&amp;#34;&lt;/span&gt;
+- &lt;span style=&#34;color:#f92672&#34;&gt;name&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;Send Foundry Package&lt;/span&gt;
+  &lt;span style=&#34;color:#f92672&#34;&gt;when&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;foundryvtt_send_src is defined and foundryvtt_send_src is not none&lt;/span&gt;
+  &lt;span style=&#34;color:#f92672&#34;&gt;copy&lt;/span&gt;:
+    &lt;span style=&#34;color:#f92672&#34;&gt;src&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;{{ foundryvtt_send_src }}&amp;#34;&lt;/span&gt;
+    &lt;span style=&#34;color:#f92672&#34;&gt;dest&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;{{ foundryvtt_package_src }}&amp;#34;&lt;/span&gt;
 
-- &lt;span style=&#34;color:#66d9ef&#34;&gt;name&lt;/span&gt;: Extract package
-  &lt;span style=&#34;color:#66d9ef&#34;&gt;unarchive&lt;/span&gt;:
-    &lt;span style=&#34;color:#66d9ef&#34;&gt;src&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;{{ foundryvtt_package_src }}&amp;#34;&lt;/span&gt;
-    &lt;span style=&#34;color:#66d9ef&#34;&gt;dest&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;{{ foundryvtt_dir }}&amp;#34;&lt;/span&gt;
-    &lt;span style=&#34;color:#66d9ef&#34;&gt;remote_src&lt;/span&gt;: yes
+- &lt;span style=&#34;color:#f92672&#34;&gt;name&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;Extract package&lt;/span&gt;
+  &lt;span style=&#34;color:#f92672&#34;&gt;unarchive&lt;/span&gt;:
+    &lt;span style=&#34;color:#f92672&#34;&gt;src&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;{{ foundryvtt_package_src }}&amp;#34;&lt;/span&gt;
+    &lt;span style=&#34;color:#f92672&#34;&gt;dest&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;{{ foundryvtt_dir }}&amp;#34;&lt;/span&gt;
+    &lt;span style=&#34;color:#f92672&#34;&gt;remote_src&lt;/span&gt;: &lt;span style=&#34;color:#66d9ef&#34;&gt;yes&lt;/span&gt;
 
-- &lt;span style=&#34;color:#66d9ef&#34;&gt;name&lt;/span&gt;: Start firewalld
-  &lt;span style=&#34;color:#66d9ef&#34;&gt;systemd&lt;/span&gt;:
-    &lt;span style=&#34;color:#66d9ef&#34;&gt;name&lt;/span&gt;: firewalld
-    &lt;span style=&#34;color:#66d9ef&#34;&gt;state&lt;/span&gt;: started
+- &lt;span style=&#34;color:#f92672&#34;&gt;name&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;Start firewalld&lt;/span&gt;
+  &lt;span style=&#34;color:#f92672&#34;&gt;systemd&lt;/span&gt;:
+    &lt;span style=&#34;color:#f92672&#34;&gt;name&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;firewalld&lt;/span&gt;
+    &lt;span style=&#34;color:#f92672&#34;&gt;state&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;started&lt;/span&gt;
 
-- &lt;span style=&#34;color:#66d9ef&#34;&gt;name&lt;/span&gt;: Open FoundryVTT Ports (firewalld)
-  &lt;span style=&#34;color:#66d9ef&#34;&gt;firewalld&lt;/span&gt;:
-    &lt;span style=&#34;color:#66d9ef&#34;&gt;port&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;30000&lt;/span&gt;/tcp
-    &lt;span style=&#34;color:#66d9ef&#34;&gt;permanent&lt;/span&gt;: yes
-    &lt;span style=&#34;color:#66d9ef&#34;&gt;state&lt;/span&gt;: enabled
+- &lt;span style=&#34;color:#f92672&#34;&gt;name&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;Open FoundryVTT Ports (firewalld)&lt;/span&gt;
+  &lt;span style=&#34;color:#f92672&#34;&gt;firewalld&lt;/span&gt;:
+    &lt;span style=&#34;color:#f92672&#34;&gt;port&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;30000&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;/tcp&lt;/span&gt;
+    &lt;span style=&#34;color:#f92672&#34;&gt;permanent&lt;/span&gt;: &lt;span style=&#34;color:#66d9ef&#34;&gt;yes&lt;/span&gt;
+    &lt;span style=&#34;color:#f92672&#34;&gt;state&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;enabled&lt;/span&gt;
 
-- &lt;span style=&#34;color:#66d9ef&#34;&gt;name&lt;/span&gt;: reload service firewalld, in all cases
-  &lt;span style=&#34;color:#66d9ef&#34;&gt;systemd&lt;/span&gt;:
-    &lt;span style=&#34;color:#66d9ef&#34;&gt;name&lt;/span&gt;: firewalld
-    &lt;span style=&#34;color:#66d9ef&#34;&gt;state&lt;/span&gt;: reloaded&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+- &lt;span style=&#34;color:#f92672&#34;&gt;name&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;reload service firewalld, in all cases&lt;/span&gt;
+  &lt;span style=&#34;color:#f92672&#34;&gt;systemd&lt;/span&gt;:
+    &lt;span style=&#34;color:#f92672&#34;&gt;name&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;firewalld&lt;/span&gt;
+    &lt;span style=&#34;color:#f92672&#34;&gt;state&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;reloaded&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;With all that defined, lets finally define a task to create our unit file using
 the template:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;- &lt;span style=&#34;color:#66d9ef&#34;&gt;name&lt;/span&gt;: Create foundryvtt systemd service file
-  &lt;span style=&#34;color:#66d9ef&#34;&gt;template&lt;/span&gt;:
-    &lt;span style=&#34;color:#66d9ef&#34;&gt;src&lt;/span&gt;: templates/foundryvtt.service.j2
-    &lt;span style=&#34;color:#66d9ef&#34;&gt;dest&lt;/span&gt;: /lib/systemd/system/foundryvtt.service&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;- &lt;span style=&#34;color:#f92672&#34;&gt;name&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;Create foundryvtt systemd service file&lt;/span&gt;
+  &lt;span style=&#34;color:#f92672&#34;&gt;template&lt;/span&gt;:
+    &lt;span style=&#34;color:#f92672&#34;&gt;src&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;templates/foundryvtt.service.j2&lt;/span&gt;
+    &lt;span style=&#34;color:#f92672&#34;&gt;dest&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;/lib/systemd/system/foundryvtt.service&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;The &lt;code&gt;src&lt;/code&gt; is set to the relative location (to the role) of the template we
 defined earlier, and the &lt;code&gt;dest&lt;/code&gt; is set to where we would like the generated
 file to be copied to. This template is a unit file for a systemd service, so
 I&amp;rsquo;m going to copy it to &lt;code&gt;/lib/systemd/system/foundryvtt.service&lt;/code&gt;.&lt;/p&gt;
 
 &lt;p&gt;Last but not least, lets start the newly created service:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;- &lt;span style=&#34;color:#66d9ef&#34;&gt;name&lt;/span&gt;: Start foundryvtt service
-  &lt;span style=&#34;color:#66d9ef&#34;&gt;systemd&lt;/span&gt;:
-    &lt;span style=&#34;color:#66d9ef&#34;&gt;name&lt;/span&gt;: foundryvtt
-    &lt;span style=&#34;color:#66d9ef&#34;&gt;state&lt;/span&gt;: started&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;- &lt;span style=&#34;color:#f92672&#34;&gt;name&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;Start foundryvtt service&lt;/span&gt;
+  &lt;span style=&#34;color:#f92672&#34;&gt;systemd&lt;/span&gt;:
+    &lt;span style=&#34;color:#f92672&#34;&gt;name&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;foundryvtt&lt;/span&gt;
+    &lt;span style=&#34;color:#f92672&#34;&gt;state&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;started&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;&amp;hellip; and&amp;hellip; our role is finished!&lt;/p&gt;
 
 &lt;h2 id=&#34;playbook&#34;&gt;Playbook&lt;/h2&gt;
@@ -1293,8 +1558,8 @@ I&amp;rsquo;m going to copy it to &lt;code&gt;/lib/systemd/system/foundryvtt.ser
 the provisioning of all my systems in their own playbooks, including my foundry
 server, so I use this role there. Just remember to call it in a &lt;code&gt;roles:&lt;/code&gt;
 section of the playbook, like so:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;  &lt;span style=&#34;color:#66d9ef&#34;&gt;roles&lt;/span&gt;:
-    - foundryvtt&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;  &lt;span style=&#34;color:#f92672&#34;&gt;roles&lt;/span&gt;:
+    - &lt;span style=&#34;color:#ae81ff&#34;&gt;foundryvtt&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;h2 id=&#34;conclusion&#34;&gt;Conclusion&lt;/h2&gt;
 
 &lt;p&gt;That&amp;rsquo;s it. We&amp;rsquo;ve easily automated setting up the systemd unit file from the
@@ -2009,17 +2274,17 @@ The default file is located at &lt;code&gt;/etc/ansible/hosts&lt;/code&gt;. An a
 file may be provided using the &lt;code&gt;-i&lt;/code&gt; flag.&lt;/p&gt;
 
 &lt;p&gt;Example file:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;[VMs]
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;[&lt;span style=&#34;color:#ae81ff&#34;&gt;VMs]&lt;/span&gt;
 &lt;span style=&#34;color:#75715e&#34;&gt;## Server VMs&lt;/span&gt;
 &lt;span style=&#34;color:#ae81ff&#34;&gt;192.168.10.50&lt;/span&gt;
 &lt;span style=&#34;color:#ae81ff&#34;&gt;192.168.10.71&lt;/span&gt;
 &lt;span style=&#34;color:#ae81ff&#34;&gt;192.168.10.118&lt;/span&gt;
 
-[Hosts]
+[&lt;span style=&#34;color:#ae81ff&#34;&gt;Hosts]&lt;/span&gt;
 &lt;span style=&#34;color:#75715e&#34;&gt;## Hosts&lt;/span&gt;
 &lt;span style=&#34;color:#ae81ff&#34;&gt;192.168.10.12&lt;/span&gt;
 
-[cluster]
+[&lt;span style=&#34;color:#ae81ff&#34;&gt;cluster]&lt;/span&gt;
 &lt;span style=&#34;color:#ae81ff&#34;&gt;192.168.112.205&lt;/span&gt;
 &lt;span style=&#34;color:#ae81ff&#34;&gt;192.168.112.206&lt;/span&gt;
 &lt;span style=&#34;color:#ae81ff&#34;&gt;192.168.112.207&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
@@ -2056,7 +2321,7 @@ has to be defined in whatever inventory file we are using.&lt;/p&gt;
 
 &lt;p&gt;So, if I define an inventory file (&lt;code&gt;./hosts.yaml&lt;/code&gt;) containing my desktop
 computer:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;[charmelon]
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;[&lt;span style=&#34;color:#ae81ff&#34;&gt;charmelon]&lt;/span&gt;
 &lt;span style=&#34;color:#ae81ff&#34;&gt;192.168.1.5&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;I can install &lt;code&gt;htop&lt;/code&gt; on &lt;em&gt;my desktop&lt;/em&gt;, using:&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;ansible -i ./hosts -m dnf -a &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;name=htop state=latest&amp;#34;&lt;/span&gt; charmeleon --become&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
@@ -2082,14 +2347,14 @@ of running a series of ad-hoc commands.&lt;/p&gt;
 &lt;p&gt;To demonstrate, lets convert the &lt;code&gt;dnf&lt;/code&gt; command from above, into a simple
 playbook named &lt;code&gt;install-htop.yaml&lt;/code&gt;.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;---
-- &lt;span style=&#34;color:#66d9ef&#34;&gt;hosts&lt;/span&gt;: charmeleon
-  &lt;span style=&#34;color:#66d9ef&#34;&gt;become&lt;/span&gt;: &lt;span style=&#34;color:#66d9ef&#34;&gt;true&lt;/span&gt;
+- &lt;span style=&#34;color:#f92672&#34;&gt;hosts&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;charmeleon&lt;/span&gt;
+  &lt;span style=&#34;color:#f92672&#34;&gt;become&lt;/span&gt;: &lt;span style=&#34;color:#66d9ef&#34;&gt;true&lt;/span&gt;
 
-  &lt;span style=&#34;color:#66d9ef&#34;&gt;tasks&lt;/span&gt;:
-    - &lt;span style=&#34;color:#66d9ef&#34;&gt;name&lt;/span&gt;: Install Htop
-      &lt;span style=&#34;color:#66d9ef&#34;&gt;dnf&lt;/span&gt;:
-        &lt;span style=&#34;color:#66d9ef&#34;&gt;name&lt;/span&gt;: htop
-        &lt;span style=&#34;color:#66d9ef&#34;&gt;state&lt;/span&gt;: latest&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+  &lt;span style=&#34;color:#f92672&#34;&gt;tasks&lt;/span&gt;:
+    - &lt;span style=&#34;color:#f92672&#34;&gt;name&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;Install Htop&lt;/span&gt;
+      &lt;span style=&#34;color:#f92672&#34;&gt;dnf&lt;/span&gt;:
+        &lt;span style=&#34;color:#f92672&#34;&gt;name&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;htop&lt;/span&gt;
+        &lt;span style=&#34;color:#f92672&#34;&gt;state&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;latest&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;Being a &lt;code&gt;yaml&lt;/code&gt; file, the first line starts with &lt;code&gt;---&lt;/code&gt;. Next, we define some
 meta information for the entire playbook. For example, this is were we put the
 &lt;code&gt;--become&lt;/code&gt; flag, by turning it into &lt;code&gt;become: true&lt;/code&gt;. This is also where we
@@ -2113,18 +2378,18 @@ will make it easier to trace the logs.&lt;/p&gt;
 &lt;p&gt;For example, lets add the&lt;code&gt;ping&lt;/code&gt; module to the playbook so we have more than one
 task&amp;hellip;.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;---
-- &lt;span style=&#34;color:#66d9ef&#34;&gt;hosts&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;127.0.0.1&lt;/span&gt;
-  &lt;span style=&#34;color:#66d9ef&#34;&gt;connection&lt;/span&gt;: local
-  &lt;span style=&#34;color:#66d9ef&#34;&gt;become&lt;/span&gt;: &lt;span style=&#34;color:#66d9ef&#34;&gt;true&lt;/span&gt;
+- &lt;span style=&#34;color:#f92672&#34;&gt;hosts&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;127.0.0.1&lt;/span&gt;
+  &lt;span style=&#34;color:#f92672&#34;&gt;connection&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;local&lt;/span&gt;
+  &lt;span style=&#34;color:#f92672&#34;&gt;become&lt;/span&gt;: &lt;span style=&#34;color:#66d9ef&#34;&gt;true&lt;/span&gt;
 
-  &lt;span style=&#34;color:#66d9ef&#34;&gt;tasks&lt;/span&gt;:
-	- &lt;span style=&#34;color:#66d9ef&#34;&gt;name&lt;/span&gt;: Ping host first...
-	  &lt;span style=&#34;color:#66d9ef&#34;&gt;ping&lt;/span&gt;:
+  &lt;span style=&#34;color:#f92672&#34;&gt;tasks&lt;/span&gt;:
+	- &lt;span style=&#34;color:#f92672&#34;&gt;name&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;Ping host first...&lt;/span&gt;
+	  &lt;span style=&#34;color:#f92672&#34;&gt;ping&lt;/span&gt;:
 
-    - &lt;span style=&#34;color:#66d9ef&#34;&gt;name&lt;/span&gt;: Install Htop
-      &lt;span style=&#34;color:#66d9ef&#34;&gt;dnf&lt;/span&gt;:
-        &lt;span style=&#34;color:#66d9ef&#34;&gt;name&lt;/span&gt;: htop
-        &lt;span style=&#34;color:#66d9ef&#34;&gt;state&lt;/span&gt;: latest&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+    - &lt;span style=&#34;color:#f92672&#34;&gt;name&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;Install Htop&lt;/span&gt;
+      &lt;span style=&#34;color:#f92672&#34;&gt;dnf&lt;/span&gt;:
+        &lt;span style=&#34;color:#f92672&#34;&gt;name&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;htop&lt;/span&gt;
+        &lt;span style=&#34;color:#f92672&#34;&gt;state&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;latest&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;Now the playbook will run both tasks, using &lt;code&gt;name&lt;/code&gt; as the header for the output
 of each one:&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;➜  /tmp ansible-playbook install-htop.yaml
@@ -2150,21 +2415,21 @@ the hard-coded &lt;code&gt;htop&lt;/code&gt; in the &lt;code&gt;dnf&lt;/code&gt;
 even use the &lt;code&gt;package&lt;/code&gt; variable in the &lt;code&gt;name&lt;/code&gt; string, to dynamically change the
 output in the log:&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;---
-- &lt;span style=&#34;color:#66d9ef&#34;&gt;hosts&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;127.0.0.1&lt;/span&gt;
-  &lt;span style=&#34;color:#66d9ef&#34;&gt;connection&lt;/span&gt;: local
-  &lt;span style=&#34;color:#66d9ef&#34;&gt;become&lt;/span&gt;: &lt;span style=&#34;color:#66d9ef&#34;&gt;true&lt;/span&gt;
+- &lt;span style=&#34;color:#f92672&#34;&gt;hosts&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;127.0.0.1&lt;/span&gt;
+  &lt;span style=&#34;color:#f92672&#34;&gt;connection&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;local&lt;/span&gt;
+  &lt;span style=&#34;color:#f92672&#34;&gt;become&lt;/span&gt;: &lt;span style=&#34;color:#66d9ef&#34;&gt;true&lt;/span&gt;
 
-  &lt;span style=&#34;color:#66d9ef&#34;&gt;vars&lt;/span&gt;:
-    &lt;span style=&#34;color:#66d9ef&#34;&gt;package&lt;/span&gt;: htop
+  &lt;span style=&#34;color:#f92672&#34;&gt;vars&lt;/span&gt;:
+    &lt;span style=&#34;color:#f92672&#34;&gt;package&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;htop&lt;/span&gt;
 
-  &lt;span style=&#34;color:#66d9ef&#34;&gt;tasks&lt;/span&gt;:
-    - &lt;span style=&#34;color:#66d9ef&#34;&gt;name&lt;/span&gt;: Ping host first...
-      &lt;span style=&#34;color:#66d9ef&#34;&gt;ping&lt;/span&gt;:
+  &lt;span style=&#34;color:#f92672&#34;&gt;tasks&lt;/span&gt;:
+    - &lt;span style=&#34;color:#f92672&#34;&gt;name&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;Ping host first...&lt;/span&gt;
+      &lt;span style=&#34;color:#f92672&#34;&gt;ping&lt;/span&gt;:
 
-    - &lt;span style=&#34;color:#66d9ef&#34;&gt;name&lt;/span&gt;: Install {{ package }}
-      &lt;span style=&#34;color:#66d9ef&#34;&gt;dnf&lt;/span&gt;:
-        &lt;span style=&#34;color:#66d9ef&#34;&gt;name&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;{{ package }}&amp;#34;&lt;/span&gt;
-        &lt;span style=&#34;color:#66d9ef&#34;&gt;state&lt;/span&gt;: latest&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+    - &lt;span style=&#34;color:#f92672&#34;&gt;name&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;Install {{ package }}&lt;/span&gt;
+      &lt;span style=&#34;color:#f92672&#34;&gt;dnf&lt;/span&gt;:
+        &lt;span style=&#34;color:#f92672&#34;&gt;name&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;{{ package }}&amp;#34;&lt;/span&gt;
+        &lt;span style=&#34;color:#f92672&#34;&gt;state&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;latest&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;And the output:&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;➜  ansible-playbook install-htop.yaml
 
@@ -2252,24 +2517,24 @@ functionality into roles.&lt;/p&gt;
 &lt;p&gt;Next, we can add our variables to a default file,
 &lt;code&gt;roles/install-htop/defaults/main.yaml&lt;/code&gt;:&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;---
-&lt;span style=&#34;color:#66d9ef&#34;&gt;package&lt;/span&gt;: htop&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;span style=&#34;color:#f92672&#34;&gt;package&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;htop&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;With the &lt;code&gt;package&lt;/code&gt; variable set, lets create the tasks. To demonstrate
 including other files in the &lt;code&gt;main.yaml&lt;/code&gt;, I&amp;rsquo;m going to be overly-complicated and
 extract our &lt;code&gt;ping&lt;/code&gt; task into its own file, and then include it in the &lt;code&gt;main.yaml&lt;/code&gt;.&lt;/p&gt;
 
 &lt;p&gt;So first, &lt;code&gt;roles/install-htop/tasks/ping.yaml&lt;/code&gt;&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;---
-- &lt;span style=&#34;color:#66d9ef&#34;&gt;name&lt;/span&gt;: Ping host first...
-  ping:&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+- &lt;span style=&#34;color:#f92672&#34;&gt;name&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;Ping host first...&lt;/span&gt;
+  &lt;span style=&#34;color:#ae81ff&#34;&gt;ping:&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;And then, &lt;code&gt;roles/install-htop/tasks/main.yaml&lt;/code&gt;, which will also include our
 &lt;code&gt;dnf&lt;/code&gt; install task&amp;hellip;&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;---
-- &lt;span style=&#34;color:#66d9ef&#34;&gt;include_tasks&lt;/span&gt;: ping.yaml
+- &lt;span style=&#34;color:#f92672&#34;&gt;include_tasks&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;ping.yaml&lt;/span&gt;
 
-- &lt;span style=&#34;color:#66d9ef&#34;&gt;name&lt;/span&gt;: Install {{ package }}
-  &lt;span style=&#34;color:#66d9ef&#34;&gt;dnf&lt;/span&gt;:
-    &lt;span style=&#34;color:#66d9ef&#34;&gt;name&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;{{ package }}&amp;#34;&lt;/span&gt;
-    &lt;span style=&#34;color:#66d9ef&#34;&gt;state&lt;/span&gt;: latest&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+- &lt;span style=&#34;color:#f92672&#34;&gt;name&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;Install {{ package }}&lt;/span&gt;
+  &lt;span style=&#34;color:#f92672&#34;&gt;dnf&lt;/span&gt;:
+    &lt;span style=&#34;color:#f92672&#34;&gt;name&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;{{ package }}&amp;#34;&lt;/span&gt;
+    &lt;span style=&#34;color:#f92672&#34;&gt;state&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;latest&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;Congrats, we have an &lt;code&gt;install-htop&lt;/code&gt; role defined!&lt;/p&gt;
 
 &lt;h3 id=&#34;including-roles-in-playbooks&#34;&gt;Including roles in playbooks&lt;/h3&gt;
@@ -2277,12 +2542,12 @@ extract our &lt;code&gt;ping&lt;/code&gt; task into its own file, and then inclu
 &lt;p&gt;Just as we included &lt;code&gt;vars&lt;/code&gt; and &lt;code&gt;tasks&lt;/code&gt; in the playbook, if we already have
 tasks and vars defined in a &lt;em&gt;role&lt;/em&gt;, we can instead include that &lt;em&gt;role&lt;/em&gt;:&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;---
-- &lt;span style=&#34;color:#66d9ef&#34;&gt;hosts&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;127.0.0.1&lt;/span&gt;
-  &lt;span style=&#34;color:#66d9ef&#34;&gt;connection&lt;/span&gt;: local
-  &lt;span style=&#34;color:#66d9ef&#34;&gt;become&lt;/span&gt;: &lt;span style=&#34;color:#66d9ef&#34;&gt;true&lt;/span&gt;
+- &lt;span style=&#34;color:#f92672&#34;&gt;hosts&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;127.0.0.1&lt;/span&gt;
+  &lt;span style=&#34;color:#f92672&#34;&gt;connection&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;local&lt;/span&gt;
+  &lt;span style=&#34;color:#f92672&#34;&gt;become&lt;/span&gt;: &lt;span style=&#34;color:#66d9ef&#34;&gt;true&lt;/span&gt;
 
-  &lt;span style=&#34;color:#66d9ef&#34;&gt;roles&lt;/span&gt;:
-    - install-htop&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+  &lt;span style=&#34;color:#f92672&#34;&gt;roles&lt;/span&gt;:
+    - &lt;span style=&#34;color:#ae81ff&#34;&gt;install-htop&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;Easy. Let&amp;rsquo;s run it:&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;➜  ansible-playbook install-htop.yaml
 &lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;WARNING&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt;: Ansible is being run in a world writable directory &lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;/tmp&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt;, ignoring it as an ansible.cfg source. For more information see
@@ -3870,7 +4135,8 @@ some of the basic functions worked.&lt;/p&gt;
 variables at the top of the page:&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-go&#34; data-lang=&#34;go&#34;&gt;{{ &lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;$&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;mainSections&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;:=&lt;/span&gt; .&lt;span style=&#34;color:#a6e22e&#34;&gt;Site&lt;/span&gt;.&lt;span style=&#34;color:#a6e22e&#34;&gt;Params&lt;/span&gt;.&lt;span style=&#34;color:#a6e22e&#34;&gt;mainSections&lt;/span&gt; | &lt;span style=&#34;color:#66d9ef&#34;&gt;default&lt;/span&gt; (&lt;span style=&#34;color:#a6e22e&#34;&gt;slice&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;post&amp;#34;&lt;/span&gt;) }}
 {{ &lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;$&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;section&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;:=&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;where&lt;/span&gt; .&lt;span style=&#34;color:#a6e22e&#34;&gt;Site&lt;/span&gt;.&lt;span style=&#34;color:#a6e22e&#34;&gt;RegularPages&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;Section&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;in&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;$&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;mainSections&lt;/span&gt; }}
-{{ &lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;$&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;section_count&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;:=&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;len&lt;/span&gt; &lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;$&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;section&lt;/span&gt; }}&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+{{ &lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;$&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;section_count&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;:=&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;len&lt;/span&gt; &lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;$&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;section&lt;/span&gt; }}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;I then referred to the variables further down where I render the recent
 post summaries:&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-html&#34; data-lang=&#34;html&#34;&gt;&amp;lt;&lt;span style=&#34;color:#f92672&#34;&gt;div&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;class&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;container&amp;#34;&lt;/span&gt;&amp;gt;
@@ -5367,8 +5633,8 @@ default. For example, when converting my website script, I set &lt;code&gt;name&
 directory, &lt;code&gt;~/Documents/himmAllRight-source&lt;/code&gt;:&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# /home/ryan/.config/tmuxinator/Website.yml&lt;/span&gt;
 
-&lt;span style=&#34;color:#66d9ef&#34;&gt;name&lt;/span&gt;: Website
-&lt;span style=&#34;color:#66d9ef&#34;&gt;root&lt;/span&gt;: ~/Documents/himmAllRight-source&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;span style=&#34;color:#f92672&#34;&gt;name&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;Website&lt;/span&gt;
+&lt;span style=&#34;color:#f92672&#34;&gt;root&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;~/Documents/himmAllRight-source&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;h4 id=&#34;windows&#34;&gt;Windows&lt;/h4&gt;
 
 &lt;p&gt;Next, I needed to configure my windows. To convert the script from my previous
@@ -5376,14 +5642,14 @@ post, I wanted a dedicated &amp;lsquo;Main&amp;rsquo; window, one for the server
 one for an extra shell. Additionally, since that last post I&amp;rsquo;ve added a window
 that launches my hugo-served website in a web browser. To recreate &lt;em&gt;all of
 that&lt;/em&gt; with tmuxinator:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;windows&lt;/span&gt;:
-  - &lt;span style=&#34;color:#66d9ef&#34;&gt;Main&lt;/span&gt;:
-      - zsh
-      - clear
-  - &lt;span style=&#34;color:#66d9ef&#34;&gt;Server&lt;/span&gt;: hugo serve -D -F
-  - &lt;span style=&#34;color:#66d9ef&#34;&gt;Write&lt;/span&gt;: nvim
-  - &lt;span style=&#34;color:#66d9ef&#34;&gt;Shell&lt;/span&gt;: zsh; clear
-  - &lt;span style=&#34;color:#66d9ef&#34;&gt;Web&lt;/span&gt;: qutebrowser localhost:&lt;span style=&#34;color:#ae81ff&#34;&gt;1313&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;&lt;span style=&#34;color:#f92672&#34;&gt;windows&lt;/span&gt;:
+  - &lt;span style=&#34;color:#f92672&#34;&gt;Main&lt;/span&gt;:
+      - &lt;span style=&#34;color:#ae81ff&#34;&gt;zsh&lt;/span&gt;
+      - &lt;span style=&#34;color:#ae81ff&#34;&gt;clear&lt;/span&gt;
+  - &lt;span style=&#34;color:#f92672&#34;&gt;Server&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;hugo serve -D -F&lt;/span&gt;
+  - &lt;span style=&#34;color:#f92672&#34;&gt;Write&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;nvim&lt;/span&gt;
+  - &lt;span style=&#34;color:#f92672&#34;&gt;Shell&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;zsh; clear&lt;/span&gt;
+  - &lt;span style=&#34;color:#f92672&#34;&gt;Web&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;qutebrowser localhost:1313&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;Done. Save the file and that&amp;rsquo;s it! See the benefit of using tmuxinator??&lt;/p&gt;
 
 &lt;h4 id=&#34;pane-splits&#34;&gt;Pane splits&lt;/h4&gt;
@@ -5392,11 +5658,11 @@ that&lt;/em&gt; with tmuxinator:&lt;/p&gt;
 setting up pane splits is also quite easy with tmuxinator. For example, if I
 wanted to split the server window into two panes, one running the hugo server
 and one running htop, I could use:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;- &lt;span style=&#34;color:#66d9ef&#34;&gt;Server&lt;/span&gt;:
-    &lt;span style=&#34;color:#66d9ef&#34;&gt;layout&lt;/span&gt;: even-vertical
-    &lt;span style=&#34;color:#66d9ef&#34;&gt;panes&lt;/span&gt;:
-        - hugo
-        - htop&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;- &lt;span style=&#34;color:#f92672&#34;&gt;Server&lt;/span&gt;:
+    &lt;span style=&#34;color:#f92672&#34;&gt;layout&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;even-vertical&lt;/span&gt;
+    &lt;span style=&#34;color:#f92672&#34;&gt;panes&lt;/span&gt;:
+        - &lt;span style=&#34;color:#ae81ff&#34;&gt;hugo&lt;/span&gt;
+        - &lt;span style=&#34;color:#ae81ff&#34;&gt;htop&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;The &lt;code&gt;layout&lt;/code&gt; key defines which
 &lt;a href=&#34;http://man7.org/linux/man-pages/man1/tmux.1.html#WINDOWS_AND_PANES&#34;&gt;tmux layout&lt;/a&gt; to
 use when splitting the panes, and &lt;code&gt;panes&lt;/code&gt; is a list that defines what to run in
@@ -6100,7 +6366,7 @@ That being said, I did start to notice myself watching Youtube, Hulu, and
 Netflix, more often from my phone. This usually occurred when the TV was in use,
 or I simply wanted to watch from a different location (ex: my bed). Having a
 small screen and tinny speakers, watching video on a phone is terrible.
-This is especially true on my &lt;a href=&#34;https://blackberrymobile.com/us/product/blackberry-keyone/&#34;&gt;Blackberry
+This is especially true on my &lt;a href=&#34;https://www.gsmarena.com/blackberry_keyone-8508.php&#34;&gt;Blackberry
 KEYone&amp;rsquo;s&lt;/a&gt; &lt;em&gt;even
 smaller&lt;/em&gt; screen (Which I choose because it is a great &lt;em&gt;communication device&lt;/em&gt;, with a long
 battery life. Regardless, even on a large, bezel-less phone screen, watching video
@@ -7088,7 +7354,7 @@ properly use with &lt;a href=&#34;../post/new-lgud4379b/&#34;&gt;my UHD monitor&
 display port). When I switched to the 2600, I was able to go back to the
 TOMAHAWK, and funnel the cost savings towards getting my GPU.&lt;/p&gt;
 
-&lt;h4 id=&#34;gpu-sapphire-1024-4gb-pulse-radeon-rx-560-http-www-sapphiretech-com-productdetial-asp-pid-3ecead87-2972-477a-a3be-480194d9fd6e-lang-eng&#34;&gt;GPU: &lt;a href=&#34;http://www.sapphiretech.com/productdetial.asp?pid=3ECEAD87-2972-477A-A3BE-480194D9FD6E&amp;amp;lang=eng&#34;&gt;Sapphire 1024 4GB PULSE Radeon RX 560&lt;/a&gt;&lt;/h4&gt;
+&lt;h4 id=&#34;gpu-sapphire-1024-4gb-pulse-radeon-rx-560-https-www-techpowerup-com-gpu-specs-sapphire-pulse-rx-560-oc-4-gb-b4627&#34;&gt;GPU: &lt;a href=&#34;https://www.techpowerup.com/gpu-specs/sapphire-pulse-rx-560-oc-4-gb.b4627&#34;&gt;Sapphire 1024 4GB PULSE Radeon RX 560&lt;/a&gt;&lt;/h4&gt;
 
 &lt;p&gt;&lt;a href=&#34;../../img/posts/chameleon-desktop-design/rx560.png&#34;&gt;&lt;img alt=&#34;The KDE Plasma 5 extend display GUI&#34; src=&#34;../../img/posts/charmeleon-desktop-design/rx560.png&#34; style=&#34;max-width: 35%; float: left;&#34;/&gt;&lt;/a&gt;&lt;/p&gt;
 
@@ -9405,12 +9671,12 @@ command. For example, the following Dockerfile would use an
 &lt;a href=&#34;https://hub.docker.com/_/ubuntu/&#34;&gt;ubuntu&lt;/a&gt; image for the base, but also update &amp;amp;
 install several packages in the image:&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# This is a custom ubuntu image with SSH already installed&lt;/span&gt;
-FROM ubuntu:latest
-MAINTAINER himmallright &amp;lt;ryan.himmelwright@gmail.com&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;gt;
-&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;
-&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;RUN apt-get update&lt;/span&gt;
+&lt;span style=&#34;color:#ae81ff&#34;&gt;FROM ubuntu:latest&lt;/span&gt;
+&lt;span style=&#34;color:#ae81ff&#34;&gt;MAINTAINER himmallright &amp;lt;ryan.himmelwright@gmail.com&amp;gt;&lt;/span&gt;
 
-RUN apt-get install -y vim stow git tmux fish htop emacs&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;span style=&#34;color:#ae81ff&#34;&gt;RUN apt-get update&lt;/span&gt;
+
+&lt;span style=&#34;color:#ae81ff&#34;&gt;RUN apt-get install -y vim stow git tmux fish htop emacs&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;To build the image, run the following command in the same directory as the
 Dockerfile (if defining a specific file, the &lt;code&gt;-f&lt;/code&gt; flag can be used):&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;docker build -t ubuntu-base:v1 .&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
@@ -10013,22 +10279,22 @@ a nice dock setup that I have grown to appreciate and love.&lt;/p&gt;</descripti
 
 &lt;p&gt;With the templates made, I  constructed a new &lt;code&gt;/content/pages/&lt;/code&gt; category, and added  &lt;code&gt;about.md&lt;/code&gt; and &lt;code&gt;homelab.md&lt;/code&gt; files to it. In both files, I defined the &lt;code&gt;type&lt;/code&gt; and &lt;code&gt;layout&lt;/code&gt; parameters, so that the new layouts would be used. Lastly, I used the &lt;code&gt;menu&lt;/code&gt; parameter to declare that each page would be part of the main menu.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;---
-&lt;span style=&#34;color:#66d9ef&#34;&gt;title&lt;/span&gt;: About
-&lt;span style=&#34;color:#66d9ef&#34;&gt;date&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;2017-08-28T09:51:18&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;-04&lt;/span&gt;:&lt;span style=&#34;color:#ae81ff&#34;&gt;00&lt;/span&gt;
-&lt;span style=&#34;color:#66d9ef&#34;&gt;type&lt;/span&gt;: about
-&lt;span style=&#34;color:#66d9ef&#34;&gt;menu &lt;/span&gt;:
-  &lt;span style=&#34;color:#66d9ef&#34;&gt;main&lt;/span&gt;:
-    &lt;span style=&#34;color:#66d9ef&#34;&gt;weight&lt;/span&gt;: -&lt;span style=&#34;color:#ae81ff&#34;&gt;150&lt;/span&gt;
-&lt;span style=&#34;color:#66d9ef&#34;&gt;layout&lt;/span&gt;: about-page
-&lt;span style=&#34;color:#66d9ef&#34;&gt;image&lt;/span&gt;: img/header-images/park-books.jpg
+&lt;span style=&#34;color:#f92672&#34;&gt;title&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;About&lt;/span&gt;
+&lt;span style=&#34;color:#f92672&#34;&gt;date&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;2017-08-28T09:51:18&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;-04&lt;/span&gt;:&lt;span style=&#34;color:#ae81ff&#34;&gt;00&lt;/span&gt;
+&lt;span style=&#34;color:#f92672&#34;&gt;type&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;about&lt;/span&gt;
+&lt;span style=&#34;color:#f92672&#34;&gt;menu &lt;/span&gt;:
+  &lt;span style=&#34;color:#f92672&#34;&gt;main&lt;/span&gt;:
+    &lt;span style=&#34;color:#f92672&#34;&gt;weight&lt;/span&gt;: -&lt;span style=&#34;color:#ae81ff&#34;&gt;150&lt;/span&gt;
+&lt;span style=&#34;color:#f92672&#34;&gt;layout&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;about-page&lt;/span&gt;
+&lt;span style=&#34;color:#f92672&#34;&gt;image&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;img/header-images/park-books.jpg&lt;/span&gt;
 ---&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;h3 id=&#34;setting-up-an-rss-feed&#34;&gt;Setting up an RSS Feed&lt;/h3&gt;
 
 &lt;p&gt;It turns out that &lt;a href=&#34;https://gohugo.io/templates/rss/&#34;&gt;Hugo ships with its own RSS 2.0 template&lt;/a&gt; by default. When I first saw this, I thought that I may still have to dash off a layout or markdown page for the feed, but even that was unnecessary. Each &amp;ldquo;content&amp;rdquo; section (&lt;em&gt;ex: post or pages&lt;/em&gt;) has an RSS automatically generated at &lt;code&gt;/section-name/index.rss&lt;/code&gt;. I don&amp;rsquo;t need a feed for my static pages, so I just found the &lt;a href=&#34;../post/index.xml&#34;&gt;feed for my posts&lt;/a&gt;. To make it easily accessible, I added a menu link.  Without a defined markdown file for the rss feed page, I needed another way to add to the navigation menu. I accomplished this by adding the following code to the bottom of my &lt;code&gt;config.toml&lt;/code&gt; file:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;[[menu.main]]
-  name = &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;RSS&amp;#34;&lt;/span&gt;
-  url = &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;/post/index.xml&amp;#34;&lt;/span&gt;
-  weight = &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;[[&lt;span style=&#34;color:#ae81ff&#34;&gt;menu.main]]&lt;/span&gt;
+  &lt;span style=&#34;color:#ae81ff&#34;&gt;name = &amp;#34;RSS&amp;#34;&lt;/span&gt;
+  &lt;span style=&#34;color:#ae81ff&#34;&gt;url = &amp;#34;/post/index.xml&amp;#34;&lt;/span&gt;
+  &lt;span style=&#34;color:#ae81ff&#34;&gt;weight = 0&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;This is how both the &lt;code&gt;Home&lt;/code&gt; and &lt;code&gt;Archives&lt;/code&gt; links were already been added to the navigation bar by default in the theme. I just added another item for the RSS link, and adjusted the weight to have it to show up at the end of the menu. That was it.&lt;/p&gt;
 
 &lt;h3 id=&#34;check-how-the-posts-display&#34;&gt;Check how the posts display&lt;/h3&gt;
@@ -10359,7 +10625,8 @@ Go is expressive, concise, clean, and efficient. Its concurrency mechanisms make
 &lt;span style=&#34;color:#66d9ef&#34;&gt;func&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;getOS&lt;/span&gt;() {
 	&lt;span style=&#34;color:#a6e22e&#34;&gt;os&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;:=&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;runtime&lt;/span&gt;.&lt;span style=&#34;color:#a6e22e&#34;&gt;GOOS&lt;/span&gt;
 	&lt;span style=&#34;color:#a6e22e&#34;&gt;fmt&lt;/span&gt;.&lt;span style=&#34;color:#a6e22e&#34;&gt;Printf&lt;/span&gt;(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;OS: %v\n&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#a6e22e&#34;&gt;os&lt;/span&gt;) &lt;span style=&#34;color:#75715e&#34;&gt;// impure
-&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;}&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description>
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description>
     </item>
     
     <item>

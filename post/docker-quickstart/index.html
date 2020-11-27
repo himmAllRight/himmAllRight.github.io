@@ -267,12 +267,12 @@ command. For example, the following Dockerfile would use an
 <a href="https://hub.docker.com/_/ubuntu/">ubuntu</a> image for the base, but also update &amp;
 install several packages in the image:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#75715e"># This is a custom ubuntu image with SSH already installed</span>
-FROM ubuntu:latest
-MAINTAINER himmallright &lt;ryan.himmelwright@gmail.com<span style="color:#e6db74">&gt;
-</span><span style="color:#e6db74">
-</span><span style="color:#e6db74">RUN apt-get update</span>
+<span style="color:#ae81ff">FROM ubuntu:latest</span>
+<span style="color:#ae81ff">MAINTAINER himmallright &lt;ryan.himmelwright@gmail.com&gt;</span>
 
-RUN apt-get install -y vim stow git tmux fish htop emacs</code></pre></div>
+<span style="color:#ae81ff">RUN apt-get update</span>
+
+<span style="color:#ae81ff">RUN apt-get install -y vim stow git tmux fish htop emacs</span></code></pre></div>
 <p>To build the image, run the following command in the same directory as the
 Dockerfile (if defining a specific file, the <code>-f</code> flag can be used):</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">docker build -t ubuntu-base:v1 .</code></pre></div>

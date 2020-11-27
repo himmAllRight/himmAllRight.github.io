@@ -2211,7 +2211,7 @@ properly use with &lt;a href=&#34;../../post/new-lgud4379b/&#34;&gt;my UHD monit
 display port). When I switched to the 2600, I was able to go back to the
 TOMAHAWK, and funnel the cost savings towards getting my GPU.&lt;/p&gt;
 
-&lt;h4 id=&#34;gpu-sapphire-1024-4gb-pulse-radeon-rx-560-http-www-sapphiretech-com-productdetial-asp-pid-3ecead87-2972-477a-a3be-480194d9fd6e-lang-eng&#34;&gt;GPU: &lt;a href=&#34;http://www.sapphiretech.com/productdetial.asp?pid=3ECEAD87-2972-477A-A3BE-480194D9FD6E&amp;amp;lang=eng&#34;&gt;Sapphire 1024 4GB PULSE Radeon RX 560&lt;/a&gt;&lt;/h4&gt;
+&lt;h4 id=&#34;gpu-sapphire-1024-4gb-pulse-radeon-rx-560-https-www-techpowerup-com-gpu-specs-sapphire-pulse-rx-560-oc-4-gb-b4627&#34;&gt;GPU: &lt;a href=&#34;https://www.techpowerup.com/gpu-specs/sapphire-pulse-rx-560-oc-4-gb.b4627&#34;&gt;Sapphire 1024 4GB PULSE Radeon RX 560&lt;/a&gt;&lt;/h4&gt;
 
 &lt;p&gt;&lt;a href=&#34;../../img/posts/chameleon-desktop-design/rx560.png&#34;&gt;&lt;img alt=&#34;The KDE Plasma 5 extend display GUI&#34; src=&#34;../../img/posts/charmeleon-desktop-design/rx560.png&#34; style=&#34;max-width: 35%; float: left;&#34;/&gt;&lt;/a&gt;&lt;/p&gt;
 
@@ -3179,12 +3179,12 @@ command. For example, the following Dockerfile would use an
 &lt;a href=&#34;https://hub.docker.com/_/ubuntu/&#34;&gt;ubuntu&lt;/a&gt; image for the base, but also update &amp;amp;
 install several packages in the image:&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# This is a custom ubuntu image with SSH already installed&lt;/span&gt;
-FROM ubuntu:latest
-MAINTAINER himmallright &amp;lt;ryan.himmelwright@gmail.com&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;gt;
-&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;
-&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;RUN apt-get update&lt;/span&gt;
+&lt;span style=&#34;color:#ae81ff&#34;&gt;FROM ubuntu:latest&lt;/span&gt;
+&lt;span style=&#34;color:#ae81ff&#34;&gt;MAINTAINER himmallright &amp;lt;ryan.himmelwright@gmail.com&amp;gt;&lt;/span&gt;
 
-RUN apt-get install -y vim stow git tmux fish htop emacs&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;span style=&#34;color:#ae81ff&#34;&gt;RUN apt-get update&lt;/span&gt;
+
+&lt;span style=&#34;color:#ae81ff&#34;&gt;RUN apt-get install -y vim stow git tmux fish htop emacs&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;To build the image, run the following command in the same directory as the
 Dockerfile (if defining a specific file, the &lt;code&gt;-f&lt;/code&gt; flag can be used):&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;docker build -t ubuntu-base:v1 .&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;

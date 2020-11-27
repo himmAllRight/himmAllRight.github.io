@@ -218,17 +218,17 @@ The default file is located at <code>/etc/ansible/hosts</code>. An alternative i
 file may be provided using the <code>-i</code> flag.</p>
 
 <p>Example file:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml">[VMs]
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml">[<span style="color:#ae81ff">VMs]</span>
 <span style="color:#75715e">## Server VMs</span>
 <span style="color:#ae81ff">192.168.10.50</span>
 <span style="color:#ae81ff">192.168.10.71</span>
 <span style="color:#ae81ff">192.168.10.118</span>
 
-[Hosts]
+[<span style="color:#ae81ff">Hosts]</span>
 <span style="color:#75715e">## Hosts</span>
 <span style="color:#ae81ff">192.168.10.12</span>
 
-[cluster]
+[<span style="color:#ae81ff">cluster]</span>
 <span style="color:#ae81ff">192.168.112.205</span>
 <span style="color:#ae81ff">192.168.112.206</span>
 <span style="color:#ae81ff">192.168.112.207</span></code></pre></div>
@@ -265,7 +265,7 @@ has to be defined in whatever inventory file we are using.</p>
 
 <p>So, if I define an inventory file (<code>./hosts.yaml</code>) containing my desktop
 computer:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml">[charmelon]
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml">[<span style="color:#ae81ff">charmelon]</span>
 <span style="color:#ae81ff">192.168.1.5</span></code></pre></div>
 <p>I can install <code>htop</code> on <em>my desktop</em>, using:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">ansible -i ./hosts -m dnf -a <span style="color:#e6db74">&#34;name=htop state=latest&#34;</span> charmeleon --become</code></pre></div>
@@ -291,14 +291,14 @@ of running a series of ad-hoc commands.</p>
 <p>To demonstrate, lets convert the <code>dnf</code> command from above, into a simple
 playbook named <code>install-htop.yaml</code>.</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml">---
-- <span style="color:#66d9ef">hosts</span>: charmeleon
-  <span style="color:#66d9ef">become</span>: <span style="color:#66d9ef">true</span>
+- <span style="color:#f92672">hosts</span>: <span style="color:#ae81ff">charmeleon</span>
+  <span style="color:#f92672">become</span>: <span style="color:#66d9ef">true</span>
 
-  <span style="color:#66d9ef">tasks</span>:
-    - <span style="color:#66d9ef">name</span>: Install Htop
-      <span style="color:#66d9ef">dnf</span>:
-        <span style="color:#66d9ef">name</span>: htop
-        <span style="color:#66d9ef">state</span>: latest</code></pre></div>
+  <span style="color:#f92672">tasks</span>:
+    - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">Install Htop</span>
+      <span style="color:#f92672">dnf</span>:
+        <span style="color:#f92672">name</span>: <span style="color:#ae81ff">htop</span>
+        <span style="color:#f92672">state</span>: <span style="color:#ae81ff">latest</span></code></pre></div>
 <p>Being a <code>yaml</code> file, the first line starts with <code>---</code>. Next, we define some
 meta information for the entire playbook. For example, this is were we put the
 <code>--become</code> flag, by turning it into <code>become: true</code>. This is also where we
@@ -322,18 +322,18 @@ will make it easier to trace the logs.</p>
 <p>For example, lets add the<code>ping</code> module to the playbook so we have more than one
 task&hellip;.</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml">---
-- <span style="color:#66d9ef">hosts</span>: <span style="color:#ae81ff">127.0.0.1</span>
-  <span style="color:#66d9ef">connection</span>: local
-  <span style="color:#66d9ef">become</span>: <span style="color:#66d9ef">true</span>
+- <span style="color:#f92672">hosts</span>: <span style="color:#ae81ff">127.0.0.1</span>
+  <span style="color:#f92672">connection</span>: <span style="color:#ae81ff">local</span>
+  <span style="color:#f92672">become</span>: <span style="color:#66d9ef">true</span>
 
-  <span style="color:#66d9ef">tasks</span>:
-	- <span style="color:#66d9ef">name</span>: Ping host first...
-	  <span style="color:#66d9ef">ping</span>:
+  <span style="color:#f92672">tasks</span>:
+	- <span style="color:#f92672">name</span>: <span style="color:#ae81ff">Ping host first...</span>
+	  <span style="color:#f92672">ping</span>:
 
-    - <span style="color:#66d9ef">name</span>: Install Htop
-      <span style="color:#66d9ef">dnf</span>:
-        <span style="color:#66d9ef">name</span>: htop
-        <span style="color:#66d9ef">state</span>: latest</code></pre></div>
+    - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">Install Htop</span>
+      <span style="color:#f92672">dnf</span>:
+        <span style="color:#f92672">name</span>: <span style="color:#ae81ff">htop</span>
+        <span style="color:#f92672">state</span>: <span style="color:#ae81ff">latest</span></code></pre></div>
 <p>Now the playbook will run both tasks, using <code>name</code> as the header for the output
 of each one:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">➜  /tmp ansible-playbook install-htop.yaml
@@ -359,21 +359,21 @@ the hard-coded <code>htop</code> in the <code>dnf</code> task, to a variable nam
 even use the <code>package</code> variable in the <code>name</code> string, to dynamically change the
 output in the log:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml">---
-- <span style="color:#66d9ef">hosts</span>: <span style="color:#ae81ff">127.0.0.1</span>
-  <span style="color:#66d9ef">connection</span>: local
-  <span style="color:#66d9ef">become</span>: <span style="color:#66d9ef">true</span>
+- <span style="color:#f92672">hosts</span>: <span style="color:#ae81ff">127.0.0.1</span>
+  <span style="color:#f92672">connection</span>: <span style="color:#ae81ff">local</span>
+  <span style="color:#f92672">become</span>: <span style="color:#66d9ef">true</span>
 
-  <span style="color:#66d9ef">vars</span>:
-    <span style="color:#66d9ef">package</span>: htop
+  <span style="color:#f92672">vars</span>:
+    <span style="color:#f92672">package</span>: <span style="color:#ae81ff">htop</span>
 
-  <span style="color:#66d9ef">tasks</span>:
-    - <span style="color:#66d9ef">name</span>: Ping host first...
-      <span style="color:#66d9ef">ping</span>:
+  <span style="color:#f92672">tasks</span>:
+    - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">Ping host first...</span>
+      <span style="color:#f92672">ping</span>:
 
-    - <span style="color:#66d9ef">name</span>: Install {{ package }}
-      <span style="color:#66d9ef">dnf</span>:
-        <span style="color:#66d9ef">name</span>: <span style="color:#e6db74">&#34;{{ package }}&#34;</span>
-        <span style="color:#66d9ef">state</span>: latest</code></pre></div>
+    - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">Install {{ package }}</span>
+      <span style="color:#f92672">dnf</span>:
+        <span style="color:#f92672">name</span>: <span style="color:#e6db74">&#34;{{ package }}&#34;</span>
+        <span style="color:#f92672">state</span>: <span style="color:#ae81ff">latest</span></code></pre></div>
 <p>And the output:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">➜  ansible-playbook install-htop.yaml
 
@@ -461,24 +461,24 @@ functionality into roles.</p>
 <p>Next, we can add our variables to a default file,
 <code>roles/install-htop/defaults/main.yaml</code>:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml">---
-<span style="color:#66d9ef">package</span>: htop</code></pre></div>
+<span style="color:#f92672">package</span>: <span style="color:#ae81ff">htop</span></code></pre></div>
 <p>With the <code>package</code> variable set, lets create the tasks. To demonstrate
 including other files in the <code>main.yaml</code>, I&rsquo;m going to be overly-complicated and
 extract our <code>ping</code> task into its own file, and then include it in the <code>main.yaml</code>.</p>
 
 <p>So first, <code>roles/install-htop/tasks/ping.yaml</code></p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml">---
-- <span style="color:#66d9ef">name</span>: Ping host first...
-  ping:</code></pre></div>
+- <span style="color:#f92672">name</span>: <span style="color:#ae81ff">Ping host first...</span>
+  <span style="color:#ae81ff">ping:</span></code></pre></div>
 <p>And then, <code>roles/install-htop/tasks/main.yaml</code>, which will also include our
 <code>dnf</code> install task&hellip;</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml">---
-- <span style="color:#66d9ef">include_tasks</span>: ping.yaml
+- <span style="color:#f92672">include_tasks</span>: <span style="color:#ae81ff">ping.yaml</span>
 
-- <span style="color:#66d9ef">name</span>: Install {{ package }}
-  <span style="color:#66d9ef">dnf</span>:
-    <span style="color:#66d9ef">name</span>: <span style="color:#e6db74">&#34;{{ package }}&#34;</span>
-    <span style="color:#66d9ef">state</span>: latest</code></pre></div>
+- <span style="color:#f92672">name</span>: <span style="color:#ae81ff">Install {{ package }}</span>
+  <span style="color:#f92672">dnf</span>:
+    <span style="color:#f92672">name</span>: <span style="color:#e6db74">&#34;{{ package }}&#34;</span>
+    <span style="color:#f92672">state</span>: <span style="color:#ae81ff">latest</span></code></pre></div>
 <p>Congrats, we have an <code>install-htop</code> role defined!</p>
 
 <h3 id="including-roles-in-playbooks">Including roles in playbooks</h3>
@@ -486,12 +486,12 @@ extract our <code>ping</code> task into its own file, and then include it in the
 <p>Just as we included <code>vars</code> and <code>tasks</code> in the playbook, if we already have
 tasks and vars defined in a <em>role</em>, we can instead include that <em>role</em>:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml">---
-- <span style="color:#66d9ef">hosts</span>: <span style="color:#ae81ff">127.0.0.1</span>
-  <span style="color:#66d9ef">connection</span>: local
-  <span style="color:#66d9ef">become</span>: <span style="color:#66d9ef">true</span>
+- <span style="color:#f92672">hosts</span>: <span style="color:#ae81ff">127.0.0.1</span>
+  <span style="color:#f92672">connection</span>: <span style="color:#ae81ff">local</span>
+  <span style="color:#f92672">become</span>: <span style="color:#66d9ef">true</span>
 
-  <span style="color:#66d9ef">roles</span>:
-    - install-htop</code></pre></div>
+  <span style="color:#f92672">roles</span>:
+    - <span style="color:#ae81ff">install-htop</span></code></pre></div>
 <p>Easy. Let&rsquo;s run it:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">➜  ansible-playbook install-htop.yaml
 <span style="color:#f92672">[</span>WARNING<span style="color:#f92672">]</span>: Ansible is being run in a world writable directory <span style="color:#f92672">(</span>/tmp<span style="color:#f92672">)</span>, ignoring it as an ansible.cfg source. For more information see
