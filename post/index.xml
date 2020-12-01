@@ -5,10 +5,77 @@
     <description>Recent content in Posts on λ ryan. himmelwright. net</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 27 Nov 2020 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 30 Nov 2020 00:00:00 +0000</lastBuildDate>
     
         <atom:link href="http://ryan.himmelwright.net/post/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Opening Ports with firewall-cmd</title>
+      <link>http://ryan.himmelwright.net/post/firewall-cmd-open-ports/</link>
+      <pubDate>Mon, 30 Nov 2020 00:00:00 +0000</pubDate>
+      
+      <guid>http://ryan.himmelwright.net/post/firewall-cmd-open-ports/</guid>
+      <description>&lt;p&gt;I use a handful containerized services on my workstation.
+&lt;a href=&#34;https://jellyfin.org/&#34;&gt;Jellyfin&lt;/a&gt; and &lt;a href=&#34;https://github.com/itzg/docker-minecraft-server&#34;&gt;minecraft
+servers&lt;/a&gt; are two examples.  Many of these
+self-hosted applications require ports to be opened in order to work. However,
+I often forget this. While I am getting better about remembering to &lt;em&gt;open&lt;/em&gt; the ports&amp;hellip;
+sometimes I forget &lt;em&gt;how&lt;/em&gt;. Not anymore.&lt;/p&gt;
+
+&lt;h3 id=&#34;the-problem&#34;&gt;The Problem&lt;/h3&gt;
+
+&lt;p&gt;&lt;a href=&#34;../../img/posts/firewall-cmd-open-ports/unable_to_connect.png&#34;&gt;&lt;img alt=&#34;Firefox unable to connect to a page&#34; src=&#34;../../img/posts/firewall-cmd-open-ports/unable_to_connect.png&#34; style=&#34;max-width:
+100%;&#34;/&gt;&lt;/a&gt;
+&lt;div class=&#34;caption&#34;&gt;Firefox unable to connect to my hugo page&lt;/div&gt;&lt;/p&gt;
+
+&lt;p&gt;To reiterate: The problem is simple. The services need a port opened, but my firewall is
+blocking it. The solution is just as simple: &lt;del&gt;disable the firewall&lt;/del&gt; open the port.&lt;/p&gt;
+
+&lt;h3 id=&#34;determine-zones&#34;&gt;Determine Zones&lt;/h3&gt;
+
+&lt;p&gt;Before opening ports, lets first determine what &lt;a href=&#34;https://www.linuxjournal.com/content/understanding-firewalld-multi-zone-configurations&#34;&gt;firewalld
+zone&lt;/a&gt;
+to apply the change to. The following command will show all active
+zones, and which devices are in each one:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;sudo firewall-cmd --get-active-zones&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Additionally, I use the next command to help figure out what zone is
+my default.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;sudo firewall-cmd --list-all&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;It is usually &lt;code&gt;public&lt;/code&gt;. The &lt;code&gt;--list-all&lt;/code&gt; command will also show which ports are already opened
+in the &lt;code&gt;ports&lt;/code&gt; section, so use it to verify that they aren&amp;rsquo;t already opened.&lt;/p&gt;
+
+&lt;h3 id=&#34;opening-the-port&#34;&gt;Opening the Port&lt;/h3&gt;
+
+&lt;p&gt;&lt;a href=&#34;../../img/posts/firewall-cmd-open-ports/hugo_connected.png&#34;&gt;&lt;img alt=&#34;Firefox connected to a page&#34; src=&#34;../../img/posts/firewall-cmd-open-ports/hugo_connected.png&#34; style=&#34;max-width:
+100%;&#34;/&gt;&lt;/a&gt;
+&lt;div class=&#34;caption&#34;&gt;Connected to Hugo after opening the port&lt;/div&gt;&lt;/p&gt;
+
+&lt;p&gt;Lets open that port. Change the port value in the following command to whatever
+you need. I used &lt;code&gt;1313&lt;/code&gt; here to open a port for &lt;code&gt;hugo&lt;/code&gt;. Remember to also set
+the zone to whatever was found in the previous step:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;sudo firewall-cmd --zone&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;public --add-port&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;1313/tcp&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;To verify:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;firewall-cmd –-list-ports&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Afterwards, try connecting to the service again. If it still does not work, it is
+possible that additional or different ports may need to be opened.&lt;/p&gt;
+
+&lt;h3 id=&#34;make-it-persistant&#34;&gt;Make it Persistant&lt;/h3&gt;
+
+&lt;p&gt;If everything &lt;em&gt;does&lt;/em&gt; work, the change can be made persistent by running the same command
+again, but this time using the &lt;code&gt;--permanent&lt;/code&gt; flag:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;sudo firewall-cmd --zone&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;public --permanent --add-port&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;1313/tcp&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h3 id=&#34;reload&#34;&gt;Reload&lt;/h3&gt;
+
+&lt;p&gt;When running the command with the &lt;code&gt;--permanent&lt;/code&gt; flag from the start, the changes
+might not take affect until firewalld is reloaded. This command should apply the
+changes:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;sudo firewall-cmd --reload&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h3 id=&#34;conclusion&#34;&gt;Conclusion&lt;/h3&gt;
+
+&lt;p&gt;That&amp;rsquo;s it. It&amp;rsquo;s a short post, but it&amp;rsquo;s one I will use. I am trying not rage
+&lt;code&gt;sudo systemctl stop firewalld&lt;/code&gt; anymore. This should help with that.&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>My new Ergox-EZ Keyboard -- Initial Thoughts</title>
@@ -51,12 +118,12 @@ door!&lt;/p&gt;
 rests had their own. The two boxes had the same width, so they could be shipped
 as one unit. Lifting the lid on the larger box, I was greeted by the keyboard
 looking back at me through a plastic panel, with it&amp;rsquo;s accessories (cables, key
-switch pulled, screws) neatly pinned around it.&lt;/p&gt;
+switch puller, screws) neatly pinned around it.&lt;/p&gt;
 
 &lt;h2 id=&#34;setup&#34;&gt;Setup&lt;/h2&gt;
 
 &lt;p&gt;The initial &lt;em&gt;physical&lt;/em&gt; setup was quite simple. I took everything out of the
-box, connected the two haves of the board together with the included TRRS
+box, connected the two halves of the board together with the included TRRS
 cable, and then used the mini usb cable (also included) to connect right half
 of the board to my laptop&amp;rsquo;s usb port. I positioned the wrist-rests and tweaked
 the tenting poles to some arbitrary position, acting as if I knew what I was
