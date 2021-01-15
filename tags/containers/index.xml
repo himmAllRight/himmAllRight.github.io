@@ -5,10 +5,116 @@
     <description>Recent content in containers on λ ryan. himmelwright. net</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 31 Oct 2020 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 15 Jan 2021 00:00:00 +0000</lastBuildDate>
     
         <atom:link href="http://ryan.himmelwright.net/tags/containers/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Create Podman Systemd Services</title>
+      <link>http://ryan.himmelwright.net/post/create-podman-systemd-services/</link>
+      <pubDate>Fri, 15 Jan 2021 00:00:00 +0000</pubDate>
+      
+      <guid>http://ryan.himmelwright.net/post/create-podman-systemd-services/</guid>
+      <description>&lt;p&gt;On my Linux workstation, I have started to host a
+&lt;a href=&#34;https://jellyfin.org/&#34;&gt;jellyfin&lt;/a&gt; server using podman. I have also started to
+shutdown my computer when I go to bed, as all of our important services (ex:
+home automation) are hosted on my home server. With that said, there is one
+remaining problem with this configuration. When I boot up my computer the
+next morning, my containers do not automatically start&amp;hellip; and I &lt;em&gt;always&lt;/em&gt;
+forget to start them up myself. Let&amp;rsquo;s fix that, using systemd.&lt;/p&gt;
+
+&lt;h2 id=&#34;create-the-container&#34;&gt;Create the container&lt;/h2&gt;
+
+&lt;p&gt;In order to define a systemd service for a container, the container needs to
+already be created and running. The &lt;code&gt;podman run&lt;/code&gt; command is used to start
+a new container. For example, to run my jellyfin server, I used the
+following command:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;podman run --name jellyfin -d -v /home/ryan/Network/jellyfin/config:/config -v /home/ryan/Network/jellyfin/cache:/cache -v /home/ryan/Music:/media/music:ro -v /home/ryan/Videos:/media/videos:ro --net&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;host --privileged jellyfin/jellyfin:latest&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;It should be noted, that because we will want the container to persist, even
+if it is stopped, the &lt;code&gt;--rm&lt;/code&gt; flag should &lt;em&gt;not&lt;/em&gt; be used here. I normally add
+this flag to keeps things clean, but had to remove it for the service file.&lt;/p&gt;
+
+&lt;h2 id=&#34;root-vs-user-containers&#34;&gt;Root vs User containers?&lt;/h2&gt;
+
+&lt;p&gt;Before getting started, I just want to mention user vs. root containers. In my
+first attempt to start podman containers with systemd, I hit some errors
+and then I realized&amp;hellip; &lt;em&gt;systemd&lt;/em&gt; was running as &lt;em&gt;root&lt;/em&gt; but the container ran
+under my username. For example, running &lt;code&gt;sudo podman ps -a&lt;/code&gt; didn&amp;rsquo;t list my
+container, but &lt;code&gt;podman ps -a&lt;/code&gt; did.&lt;/p&gt;
+
+&lt;p&gt;Once solution could be to switch over and run the container as root using
+sudo, but that didn&amp;rsquo;t feel right. A benefit of podman is that it is able to
+run rootless, and to not take advantage of that feature would be a shame. So,
+I started running the systemd steps as the user, but providing the &lt;code&gt;--user&lt;/code&gt;
+flag and it resolved my issues.&lt;/p&gt;
+
+&lt;h2 id=&#34;creating-the-service-file&#34;&gt;Creating the Service File&lt;/h2&gt;
+
+&lt;p&gt;At first, I started creating the systemd service files manually, just as I
+have done &lt;a href=&#34;../../post/autostarting-application-systemd-service/&#34;&gt;in previous
+posts&lt;/a&gt;. Although, after
+reading an example in &lt;a href=&#34;https://www.redhat.com/sysadmin/podman-shareable-systemd-services&#34;&gt;this
+article&lt;/a&gt;,
+I was reminded that there&amp;rsquo;s actually a &lt;code&gt;podman generate systemd&lt;/code&gt; command.
+This command will assemble and output a unit file for a container. I ran
+it, and saved the generated service file to my user local systemd location.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;podman generate systemd jellyfin &amp;gt; ~/.config/systemd/user/jellyfin.service&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Simple! This file could be altered if needed, but after quickly skimming it I
+thought it looked good.&lt;/p&gt;
+
+&lt;h2 id=&#34;starting-enabling-the-service&#34;&gt;Starting &amp;amp; Enabling the Service&lt;/h2&gt;
+
+&lt;p&gt;Before starting the service, it is a good idea to have systemd reload the
+user unit files:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;systemctl --user daemon-reload&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Afterwards, I started the service, and checked the status to confirm that the
+service started up without issue.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;systemctl --user start jellyfin.service
+systemctl --user status jellyfin.service&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Lastly, I &lt;code&gt;enabled&lt;/code&gt; the service, again with the &lt;code&gt;--user&lt;/code&gt; flag so that it
+would automatically start on boot:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;systemctl --user enable jellyfin.service&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h2 id=&#34;testing-it-out&#34;&gt;Testing it out&lt;/h2&gt;
+
+&lt;p&gt;&lt;a href=&#34;../../img/posts/create-podman-systemd-services/jellyfin_container.png&#34;&gt;&lt;img alt=&#34;Auto started Jellyfin serving running in a podman container&#34; src=&#34;../../img/posts/create-podman-systemd-services/jellyfin_container.png&#34; style=&#34;max-width: 100%;&#34;/&gt;&lt;/a&gt;
+&lt;div class=&#34;caption&#34;&gt;Jellyfin service running in a podman container auto-started at boot&lt;/div&gt;&lt;/p&gt;
+
+&lt;p&gt;With the service setup and enabled, I rebooted my computer to test it out.
+After booting up, I used &lt;code&gt;podman ps&lt;/code&gt; to prove that the container was started:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;podman ps -a&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;With the container &lt;em&gt;running&lt;/em&gt;&amp;hellip; I next opened up my web browser to verify that
+jellyfin was actually &lt;em&gt;working&lt;/em&gt;&amp;hellip; and it was!&lt;/p&gt;
+
+&lt;h2 id=&#34;caveats&#34;&gt;Caveats&lt;/h2&gt;
+
+&lt;p&gt;While this solution works for the most part, I did hit two small annoyances:&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;Running as a user service, the service won&amp;rsquo;t start until the
+user has logged in. This makes sense, and can be resolved by quickly ssh&amp;rsquo;ing
+into the machine. However, it should be known and worked around if using
+something like WOL startup, as sending the magic packet won&amp;rsquo;t be enough to
+get the service containers up and running.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;If something breaks with the container and it has to be reset, the service
+file should also be regenerated and replaced. The file references container
+&lt;code&gt;uuid&lt;/code&gt;s, and if that changes, the file needs to reflect that. It&amp;rsquo;s not a big
+problem. Containers break and that&amp;rsquo;s okay (remember, they&amp;rsquo;re designed to be
+ephemeral). Just remember to remove and regenerate the service file when it
+happens.&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&#34;conclusion&#34;&gt;Conclusion&lt;/h2&gt;
+
+&lt;p&gt;When I set out to write this post, I though there would be a bit more to it,
+requiring me to create the service file manually. However, I quickly stumbled
+on the &lt;code&gt;podman generate systemd&lt;/code&gt; command and I am glad I did. It is one more
+feature to add to the ever-growing list of reasons while I love podman and
+the other &lt;a href=&#34;https://docs.fedoraproject.org/en-US/fedora-silverblue/_attachments/container-commandos.pdf&#34;&gt;container
+commandos&lt;/a&gt;.
+Enjoy!&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>Automated Nativefier App builds</title>

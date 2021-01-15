@@ -166,7 +166,7 @@ make install&lt;/code&gt;&lt;/pre&gt;
 &lt;img src=&#34;../../img/posts/LFS-Final-Preparation-Steps/sources-md5-play.png&#34; name=&#34;pic&#34; onmouseover=&#34;this.src=&#39;../../img/posts/LFS-Final-Preparation-Steps/sources-md5.gif&#39;&#34; onmouseout=&#34;this.src=&#39;../../img/posts/LFS-Final-Preparation-Steps/sources-md5-play.png&#39;&#34; style=&#34;max-width: 100%;&#34;/&gt;
 &lt;/center&gt;&lt;/p&gt;
 
-&lt;p&gt;Ever since LFS-7.0, a &lt;a href=&#34;http://www.linuxfromscratch.org/lfs/view/stable-systemd/md5sums&#34;&gt;md5sums file&lt;/a&gt; is provided, which can be downloaded and used to verify the integrity of downloaded packages. Download this file, again with &lt;em&gt;wget&lt;/em&gt;:&lt;/p&gt;
+&lt;p&gt;Ever since LFS-7.0, a md5sums file is provided, which can be downloaded and used to verify the integrity of downloaded packages. Download this file, again with &lt;em&gt;wget&lt;/em&gt;:&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;wget http://www.linuxfromscratch.org/lfs/view/stable-systemd/md5sums&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;Then, compare the hashes in the list to the &lt;a href=&#34;https://en.wikipedia.org/wiki/Md5sum&#34;&gt;md5sum&lt;/a&gt; for each of the source packages. This is done with the commands:&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;pushd $LFS/sources

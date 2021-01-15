@@ -422,7 +422,7 @@ compromise.&lt;/p&gt;
 &lt;h4 id=&#34;gaming&#34;&gt;Gaming&lt;/h4&gt;
 
 &lt;p&gt;Lastly, a half-reason is gaming. I&amp;rsquo;m not a huge gamer so I didn&amp;rsquo;t opt for a
-crazy graphics card when I &lt;a href=&#34;http://localhost:1313/post/charmeleon-desktop-design/&#34;&gt;designed and built my
+crazy graphics card when I &lt;a href=&#34;../../post/charmeleon-desktop-design/&#34;&gt;designed and built my
 desktop&lt;/a&gt;. When I &lt;em&gt;do&lt;/em&gt;
 game, I usually play in windowed-mode (which
 is usually a better experience anyway&amp;hellip; again for field of view reasons).
@@ -456,7 +456,7 @@ out do not show up in the display settings. This makes sense, as &lt;em&gt;most&
 won&amp;rsquo;t be selecting &lt;code&gt;21:9&lt;/code&gt; resolutions on a &lt;code&gt;16:9&lt;/code&gt; panel. I needed to add
 new options using &lt;code&gt;xrandr&lt;/code&gt;.&lt;/p&gt;
 
-&lt;p&gt;After spending sometime in a terminal with &lt;code&gt;xrandr&lt;/code&gt;, (and with some help from &lt;a href=&#34;http://www.arunviswanathan.com/node/53&#34;&gt;this post&lt;/a&gt;), I was able to create new &lt;code&gt;xrandr&lt;/code&gt; modes, and set my monitor to use them.&lt;/p&gt;
+&lt;p&gt;After spending sometime in a terminal with &lt;code&gt;xrandr&lt;/code&gt;, I was able to create new &lt;code&gt;xrandr&lt;/code&gt; modes, and set my monitor to use them.&lt;/p&gt;
 
 &lt;h4 id=&#34;creating-a-new-xrandr-mode&#34;&gt;Creating a new xrandr mode&lt;/h4&gt;
 

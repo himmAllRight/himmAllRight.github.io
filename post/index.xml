@@ -5,15 +5,121 @@
     <description>Recent content in Posts on λ ryan. himmelwright. net</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 31 Dec 2020 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 15 Jan 2021 00:00:00 +0000</lastBuildDate>
     
         <atom:link href="http://ryan.himmelwright.net/post/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
+      <title>Create Podman Systemd Services</title>
+      <link>http://ryan.himmelwright.net/post/create-podman-systemd-services/</link>
+      <pubDate>Fri, 15 Jan 2021 00:00:00 +0000</pubDate>
+      
+      <guid>http://ryan.himmelwright.net/post/create-podman-systemd-services/</guid>
+      <description>&lt;p&gt;On my Linux workstation, I have started to host a
+&lt;a href=&#34;https://jellyfin.org/&#34;&gt;jellyfin&lt;/a&gt; server using podman. I have also started to
+shutdown my computer when I go to bed, as all of our important services (ex:
+home automation) are hosted on my home server. With that said, there is one
+remaining problem with this configuration. When I boot up my computer the
+next morning, my containers do not automatically start&amp;hellip; and I &lt;em&gt;always&lt;/em&gt;
+forget to start them up myself. Let&amp;rsquo;s fix that, using systemd.&lt;/p&gt;
+
+&lt;h2 id=&#34;create-the-container&#34;&gt;Create the container&lt;/h2&gt;
+
+&lt;p&gt;In order to define a systemd service for a container, the container needs to
+already be created and running. The &lt;code&gt;podman run&lt;/code&gt; command is used to start
+a new container. For example, to run my jellyfin server, I used the
+following command:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;podman run --name jellyfin -d -v /home/ryan/Network/jellyfin/config:/config -v /home/ryan/Network/jellyfin/cache:/cache -v /home/ryan/Music:/media/music:ro -v /home/ryan/Videos:/media/videos:ro --net&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;host --privileged jellyfin/jellyfin:latest&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;It should be noted, that because we will want the container to persist, even
+if it is stopped, the &lt;code&gt;--rm&lt;/code&gt; flag should &lt;em&gt;not&lt;/em&gt; be used here. I normally add
+this flag to keeps things clean, but had to remove it for the service file.&lt;/p&gt;
+
+&lt;h2 id=&#34;root-vs-user-containers&#34;&gt;Root vs User containers?&lt;/h2&gt;
+
+&lt;p&gt;Before getting started, I just want to mention user vs. root containers. In my
+first attempt to start podman containers with systemd, I hit some errors
+and then I realized&amp;hellip; &lt;em&gt;systemd&lt;/em&gt; was running as &lt;em&gt;root&lt;/em&gt; but the container ran
+under my username. For example, running &lt;code&gt;sudo podman ps -a&lt;/code&gt; didn&amp;rsquo;t list my
+container, but &lt;code&gt;podman ps -a&lt;/code&gt; did.&lt;/p&gt;
+
+&lt;p&gt;Once solution could be to switch over and run the container as root using
+sudo, but that didn&amp;rsquo;t feel right. A benefit of podman is that it is able to
+run rootless, and to not take advantage of that feature would be a shame. So,
+I started running the systemd steps as the user, but providing the &lt;code&gt;--user&lt;/code&gt;
+flag and it resolved my issues.&lt;/p&gt;
+
+&lt;h2 id=&#34;creating-the-service-file&#34;&gt;Creating the Service File&lt;/h2&gt;
+
+&lt;p&gt;At first, I started creating the systemd service files manually, just as I
+have done &lt;a href=&#34;../post/autostarting-application-systemd-service/&#34;&gt;in previous
+posts&lt;/a&gt;. Although, after
+reading an example in &lt;a href=&#34;https://www.redhat.com/sysadmin/podman-shareable-systemd-services&#34;&gt;this
+article&lt;/a&gt;,
+I was reminded that there&amp;rsquo;s actually a &lt;code&gt;podman generate systemd&lt;/code&gt; command.
+This command will assemble and output a unit file for a container. I ran
+it, and saved the generated service file to my user local systemd location.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;podman generate systemd jellyfin &amp;gt; ~/.config/systemd/user/jellyfin.service&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Simple! This file could be altered if needed, but after quickly skimming it I
+thought it looked good.&lt;/p&gt;
+
+&lt;h2 id=&#34;starting-enabling-the-service&#34;&gt;Starting &amp;amp; Enabling the Service&lt;/h2&gt;
+
+&lt;p&gt;Before starting the service, it is a good idea to have systemd reload the
+user unit files:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;systemctl --user daemon-reload&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Afterwards, I started the service, and checked the status to confirm that the
+service started up without issue.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;systemctl --user start jellyfin.service
+systemctl --user status jellyfin.service&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Lastly, I &lt;code&gt;enabled&lt;/code&gt; the service, again with the &lt;code&gt;--user&lt;/code&gt; flag so that it
+would automatically start on boot:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;systemctl --user enable jellyfin.service&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h2 id=&#34;testing-it-out&#34;&gt;Testing it out&lt;/h2&gt;
+
+&lt;p&gt;&lt;a href=&#34;../../img/posts/create-podman-systemd-services/jellyfin_container.png&#34;&gt;&lt;img alt=&#34;Auto started Jellyfin serving running in a podman container&#34; src=&#34;../../img/posts/create-podman-systemd-services/jellyfin_container.png&#34; style=&#34;max-width: 100%;&#34;/&gt;&lt;/a&gt;
+&lt;div class=&#34;caption&#34;&gt;Jellyfin service running in a podman container auto-started at boot&lt;/div&gt;&lt;/p&gt;
+
+&lt;p&gt;With the service setup and enabled, I rebooted my computer to test it out.
+After booting up, I used &lt;code&gt;podman ps&lt;/code&gt; to prove that the container was started:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;podman ps -a&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;With the container &lt;em&gt;running&lt;/em&gt;&amp;hellip; I next opened up my web browser to verify that
+jellyfin was actually &lt;em&gt;working&lt;/em&gt;&amp;hellip; and it was!&lt;/p&gt;
+
+&lt;h2 id=&#34;caveats&#34;&gt;Caveats&lt;/h2&gt;
+
+&lt;p&gt;While this solution works for the most part, I did hit two small annoyances:&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;Running as a user service, the service won&amp;rsquo;t start until the
+user has logged in. This makes sense, and can be resolved by quickly ssh&amp;rsquo;ing
+into the machine. However, it should be known and worked around if using
+something like WOL startup, as sending the magic packet won&amp;rsquo;t be enough to
+get the service containers up and running.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;If something breaks with the container and it has to be reset, the service
+file should also be regenerated and replaced. The file references container
+&lt;code&gt;uuid&lt;/code&gt;s, and if that changes, the file needs to reflect that. It&amp;rsquo;s not a big
+problem. Containers break and that&amp;rsquo;s okay (remember, they&amp;rsquo;re designed to be
+ephemeral). Just remember to remove and regenerate the service file when it
+happens.&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&#34;conclusion&#34;&gt;Conclusion&lt;/h2&gt;
+
+&lt;p&gt;When I set out to write this post, I though there would be a bit more to it,
+requiring me to create the service file manually. However, I quickly stumbled
+on the &lt;code&gt;podman generate systemd&lt;/code&gt; command and I am glad I did. It is one more
+feature to add to the ever-growing list of reasons while I love podman and
+the other &lt;a href=&#34;https://docs.fedoraproject.org/en-US/fedora-silverblue/_attachments/container-commandos.pdf&#34;&gt;container
+commandos&lt;/a&gt;.
+Enjoy!&lt;/p&gt;</description>
+    </item>
+    
+    <item>
       <title>Selecting Charmeleon&#39;s Upgrades</title>
       <link>http://ryan.himmelwright.net/post/selecting-charmeleons-upgrades/</link>
-      <pubDate>Thu, 31 Dec 2020 00:00:00 +0000</pubDate>
+      <pubDate>Mon, 28 Dec 2020 00:00:00 +0000</pubDate>
       
       <guid>http://ryan.himmelwright.net/post/selecting-charmeleons-upgrades/</guid>
       <description>&lt;p&gt;After months of planning and price tracking, I have finished upgrading
@@ -43,7 +149,7 @@ things became a bit more&amp;hellip; complicated&amp;hellip;&lt;/p&gt;
 100%;&#34;/&gt;&lt;/a&gt;
 &lt;div class=&#34;caption&#34;&gt;RAM upgrade: 2x32 GB of 3200Mhz DDR4, CL 16&lt;/div&gt;&lt;/p&gt;
 
-&lt;p&gt;An easy upgrade I prepared for during the initial build was RAM. My
+&lt;p&gt;An easy upgrade I prepared for during the inital build was RAM. My
 motherboard had 4 slots with a max capacity of 64GB. So, I made sure to
 populate it with 2x16gb sticks instead of 4x8gb ones, so the capacity could
 be effortlessly doubled when RAM became cheaper. But, the release of Ryzen
@@ -62,7 +168,7 @@ timings. There wasn&amp;rsquo;t a 2x32gb pair that matched the model of my origi
 RAM, and but this one had all the same timings while still being cheaper than
 other alternatives. A total of 96GB of RAM is definitely overkill for most
 uses (arguably, even my own). However, I tend to run large, automated VM
-deployments and use my &lt;code&gt;/tmp/&lt;/code&gt; dir as a large scratch folder, so the
+deployments and often use my &lt;code&gt;/tmp/&lt;/code&gt; dir as a large working folder, so the
 extra overhead is nice to have.&lt;/p&gt;
 
 &lt;p&gt;&lt;strong&gt;TLDR:&lt;/strong&gt; I always planned to expand my RAM. Ryzen 3000 allowed an even higher
@@ -75,23 +181,22 @@ and now have 96GB of RAM.&lt;/p&gt;
 100%;&#34;/&gt;&lt;/a&gt;
 &lt;div class=&#34;caption&#34;&gt;CPU upgrade: Ryzen 9 3900x, 12 core/24 thread cpu&lt;/div&gt;&lt;/p&gt;
 
-&lt;p&gt;The &lt;em&gt;original&lt;/em&gt; plan when I built charmeleon was to get the 2600, and later
-upgrade to a 8 core 2700x or a 3000 cpu that was rumored to have even more
-cores. I made sure my motherboard had good VRMs for the cost, so it could
-support a future upgrade with more cores.&lt;/p&gt;
+&lt;p&gt;My &lt;em&gt;origonal&lt;/em&gt; plan when I built charmeleon was to get the 2600, and later
+upgrade to a 8 core 2700x or a 3000 cpu that was rumored to potentially have
+even more cores. I made sure my motherboard had good VRMs for the cost, so it
+could support a future upgrade with more cores.&lt;/p&gt;
 
-&lt;p&gt;Months after 3000 cpus launched, I was set on getting a 3900x.
+&lt;p&gt;Months later the 3000 cpus launched, and I was set on getting a 3900x.
 However, I didn&amp;rsquo;t &lt;em&gt;need&lt;/em&gt; a new cpu yet and I knew AMD was going to be releasing
 the &amp;ldquo;4000&amp;rdquo; cpus in the Fall. I figured I would wait until they were
 released, and then buy a new one, or a discounted 3000 serries one.&lt;/p&gt;
 
-&lt;p&gt;When the 5000 series cpus were released (AMD skipped 4000 on the desktop), I
-thought the 5900x would be perfect. Unfortunately, like ever other tech
-release of 2020, it was nearly impossible to buy one. I didn&amp;rsquo;t feel like
-waiting even longer, and I don&amp;rsquo;t actually &lt;em&gt;need&lt;/em&gt; the increased performance.
-The new gains are particularly observed in gaming&amp;hellip; but I&amp;rsquo;m rocking a
-rx580 and am clearly gpu bottlenecked anyway 😆. I can &lt;em&gt;manage&lt;/em&gt; just fine
-with slower single core speeds&amp;hellip;&lt;/p&gt;
+&lt;p&gt;When the 5000 series cpus were released, I thought the 5900x would be
+perfect. Unfortunately, like ever other tech release of 2020, it was nearly
+impossible to buy one. I didn&amp;rsquo;t feel like waiting even longer, and I don&amp;rsquo;t
+actually &lt;em&gt;need&lt;/em&gt; the increased performance. The new gains are particularly
+observed in gamming&amp;hellip; but I&amp;rsquo;m rocking an rx580 and am clearly gpu bottlenecked
+anyway 😆. I can &lt;em&gt;manage&lt;/em&gt; just fine with slower single core speeds&amp;hellip;&lt;/p&gt;
 
 &lt;p&gt;With the 5900x not available anytime soon, I became tempted by some
 crazier options&amp;hellip; like the 3950x. The 3950x is an amazing cpu, and honestly
@@ -123,10 +228,10 @@ to upgrade my cpu soon, I figured I would wait and order both at the same time s
 I wouldn&amp;rsquo;t have to go through the hassel of repasting the CPU twice.&lt;/p&gt;
 
 &lt;p&gt;I switched what specific model I wanted once or twice, after being confused
-about compatibility. I didn&amp;rsquo;t want the massive NH-D15, but &lt;em&gt;did&lt;/em&gt; want a
-cooler that used a 140mm fans instead of 120mm ones. I much prefer the lower
-sounding &amp;ldquo;woosh&amp;rdquo; of larger fans. After I confirmed it would fit in the
-Meshify C with my RAM, I selected the NH-U14s.&lt;/p&gt;
+about compatibility. I didn&amp;rsquo;t want the massive NH-D15, but did want a cooler
+that used a 140mm fans instead of 120mm ones, because I much prefer their
+lower sounding &amp;ldquo;woosh&amp;rdquo;. After I confirmed it should fit in the Meshify C and
+with my RAM, I selected the NH-U14s.&lt;/p&gt;
 
 &lt;p&gt;&lt;strong&gt;TLDR:&lt;/strong&gt; I wanted a new CPU Cooler with a 140mm fan. I love Noctua.&lt;/p&gt;
 
@@ -136,38 +241,37 @@ Meshify C with my RAM, I selected the NH-U14s.&lt;/p&gt;
 &lt;div class=&#34;caption&#34;&gt;Motherboard upgrade: x570 Aorus Elite Wifi&lt;/div&gt;&lt;/p&gt;
 
 &lt;p&gt;Unlike the CPU and RAM, I never intended to get a new motherboard when
-building Charmeleon. When I was thinking about getting a 5900x, I knew my
-B450 thomahawk wouldn&amp;rsquo;t get the required bios upgrade until January&amp;hellip; and
-even then, only maybe. I also knew the upgrade might not be reversible which
-I didn&amp;rsquo;t like, so I started to look at B550 and x570 boards.&lt;/p&gt;
+building Charmeleon. When I was looking at getting a 5000s cpu, I knew my
+B450 thomahawk wouldn&amp;rsquo;t get the required bios upgrade until January&amp;hellip; maybe.
+I also knew the upgrade might not be reversable which I didn&amp;rsquo;t like, so I
+started to look at B550 and x570 boards.&lt;/p&gt;
 
-&lt;p&gt;While researching, I realized x570 fit my needs a bit better when compared to
-my b450, and even newer b550 boards (which I think &lt;em&gt;most&lt;/em&gt; people should probably
-get). The x570 paired well with the other upgrades I was making. Particular
-features I liked compared to the b450 tomahawk were:&lt;/p&gt;
+&lt;p&gt;I realized x570 fit my needs a bit better when compared to my b450, and even
+the new b550 (which I think &lt;em&gt;most&lt;/em&gt; people should probably get). The x570
+paired well with the other upgrades I was making. Particular features I liked
+compared to the b450 tomahawk were:&lt;/p&gt;
 
 &lt;ul&gt;
 &lt;li&gt;Gen4 PCIe support&lt;/li&gt;
 &lt;li&gt;Better iommu groupings for VFIO passthrough&lt;/li&gt;
-&lt;li&gt;Often had a second m.2 (or more)&lt;/li&gt;
+&lt;li&gt;Often had a second m.2&lt;/li&gt;
 &lt;li&gt;More &lt;em&gt;usable&lt;/em&gt; sata ports (2 of mine were disabled because they shared lanes with my m.2),&lt;/li&gt;
 &lt;li&gt;wifi (mostly for bluetooth)&lt;/li&gt;
 &lt;li&gt;In general, more pcie lanes&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;I looked at motherboards for months while waiting for Ryzen 5000 to be
-officially announced. After some time, I concluded that I wanted a x570
-Gigabyte Aorus board, but wasn&amp;rsquo;t sure which one. The Aorus Master was one of
-&lt;em&gt;the defacto recommend&lt;/em&gt; boards for VFIO builds, but it was very expensive.
-Much of what made it so good however seemed to still be present in the
-cheaper Aorus models. In particular, the Aorus boards had great iommu
-groupings and support,
-&lt;em&gt;and&lt;/em&gt; a bios feature which allowed either x16 slot to be selected as the
+&lt;p&gt;I looked at mother boards for months while waiting for Ryzen 5000 to
+officially be announced. I decided that I wanted a x570 Gigabyte Aorus board, but
+wasn&amp;rsquo;t sure which one. The Aorus Master seemed to be one of &lt;em&gt;the defacto
+recommend&lt;/em&gt; boards for VFIO builds, but it was very expensive. Much of what made
+it so good however for iommu seemed to still be present in the cheaper Aorus models. In
+particular, the Aorus boards had great iommu groupings and support,
+&lt;em&gt;and&lt;/em&gt; a bios feature that allows you select which x16 slot to use for the
 primary gpu. This makes it easier to boot into a secondary gpu, saving the
 beefier one to pass through to VMs.&lt;/p&gt;
 
-&lt;p&gt;I went back and forth for weeks trying to decide between the elite wifi, pro, ultra&amp;hellip;
-and sometimes even the master. When I started making
+&lt;p&gt;I went back and forth trying to decide between the elite wifi, pro, ultra&amp;hellip;
+and sometimes even the master, for weeks. When I started making
 purchases, the elite wifi went on sale and I decided to grab it. It had
 everything I needed, and most of the upgraded features on the other boards I
 either wouldn&amp;rsquo;t use or were just small nice to haves.&lt;/p&gt;
@@ -189,7 +293,7 @@ smaller gpu that I could use for host machine&amp;rsquo;s graphics. I read that 
 small it was (although that could translate more fan moise). In comparison,
 the 550 seemed to be slightly more powerful, was amd, and well rated. In
 fact, I had read several gpu passthrough guides using the rx550 and passing
-through a rx580 (my current gpu). So, I purchased the 550.&lt;/p&gt;
+through a rx580 (my current gpu). I purchased the 550.&lt;/p&gt;
 
 &lt;p&gt;&lt;strong&gt;TLDR:&lt;/strong&gt; I wanted an easier time with VFIO GPU passthrough. Having a second
 card for the host or a second VM makes this easier. The rx550 is a common card
@@ -200,7 +304,7 @@ for this use.&lt;/p&gt;
 &lt;p&gt;&lt;a href=&#34;../../img/posts/selecting-charmeleon-upgrades/post_upgrades.jpeg&#34;&gt;&lt;img alt=&#34;Inside charmeleon after upgrades&#34; src=&#34;../../img/posts/selecting-charmeleon-upgrades/post_upgrades.jpeg&#34; style=&#34;max-width: 100%;&#34;/&gt;&lt;/a&gt;
 &lt;div class=&#34;caption&#34;&gt;Charmeleon Internals after upgrades&lt;/div&gt;&lt;/p&gt;
 
-&lt;p&gt;Overall, I am extremely happy with my selections. It is surreal how powerful of a
+&lt;p&gt;Overall, I am extremely happy with my selections. It&amp;rsquo;s surreal how powerful of a
 machine can be built with a modest budget these days. With the upgrades,
 Charmelon&amp;rsquo;s specs now stand at:&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;Ryzen 9 3900x [3.8 GHz (4.6GHz Boost), 12 Cores, 24 Threads)
@@ -220,10 +324,11 @@ Fedora 33 (KDE Plasma)&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;Not only have these changes drastically improved the performance of my
 workstation, but they have allowed me to run virtual machines at the next
 level. When passing hardware directly to my VMs, I cannot tell that the
-computer I&amp;rsquo;m sitting at is virtualized. This lets me treat my workstation as several computers in one, and I love it.&lt;/p&gt;
+computer I&amp;rsquo;m sitting at is virtualized. I have been living inside Vms, and I
+love it.&lt;/p&gt;
 
-&lt;p&gt;That&amp;rsquo;s it for now! I still want to get a second nvme drive, but other than that
-I think upgrades to Charmeleon will slow down for a bit&amp;hellip;&lt;/p&gt;</description>
+&lt;p&gt;That&amp;rsquo;s it! I still want to get a second nvme sdd, but other than that I think
+upgrades to Charmeleon will slow down for a bit&amp;hellip;&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -6102,7 +6207,7 @@ compromise.&lt;/p&gt;
 &lt;h4 id=&#34;gaming&#34;&gt;Gaming&lt;/h4&gt;
 
 &lt;p&gt;Lastly, a half-reason is gaming. I&amp;rsquo;m not a huge gamer so I didn&amp;rsquo;t opt for a
-crazy graphics card when I &lt;a href=&#34;http://localhost:1313/post/charmeleon-desktop-design/&#34;&gt;designed and built my
+crazy graphics card when I &lt;a href=&#34;../post/charmeleon-desktop-design/&#34;&gt;designed and built my
 desktop&lt;/a&gt;. When I &lt;em&gt;do&lt;/em&gt;
 game, I usually play in windowed-mode (which
 is usually a better experience anyway&amp;hellip; again for field of view reasons).
@@ -6136,7 +6241,7 @@ out do not show up in the display settings. This makes sense, as &lt;em&gt;most&
 won&amp;rsquo;t be selecting &lt;code&gt;21:9&lt;/code&gt; resolutions on a &lt;code&gt;16:9&lt;/code&gt; panel. I needed to add
 new options using &lt;code&gt;xrandr&lt;/code&gt;.&lt;/p&gt;
 
-&lt;p&gt;After spending sometime in a terminal with &lt;code&gt;xrandr&lt;/code&gt;, (and with some help from &lt;a href=&#34;http://www.arunviswanathan.com/node/53&#34;&gt;this post&lt;/a&gt;), I was able to create new &lt;code&gt;xrandr&lt;/code&gt; modes, and set my monitor to use them.&lt;/p&gt;
+&lt;p&gt;After spending sometime in a terminal with &lt;code&gt;xrandr&lt;/code&gt;, I was able to create new &lt;code&gt;xrandr&lt;/code&gt; modes, and set my monitor to use them.&lt;/p&gt;
 
 &lt;h4 id=&#34;creating-a-new-xrandr-mode&#34;&gt;Creating a new xrandr mode&lt;/h4&gt;
 
@@ -11614,7 +11719,7 @@ cat ~/.ssh/id_rsa.pub | ssh bpi &amp;#34;cat &amp;gt;&amp;gt; ~/.ssh/authorized_
 
 &lt;p&gt;After mucking around with Rapsbian and Hypriot one Sunday, I decided to just go with a plain Ubuntu image for the Raspberry Pis. I don&amp;rsquo;t have anything against these specific OSes, but I am mostly setting up this cluster to simulate what I would do on a &amp;ldquo;real&amp;rdquo; system. For me, that often means using a straight OS like Ubuntu.&lt;/p&gt;
 
-&lt;p&gt;Luckily, Canonical makes special &lt;a href=&#34;https://wiki.ubuntu.com/ARM/RaspberryPi&#34;&gt;Ubuntu ARM images&lt;/a&gt;, specifically for the Raspberry Pi. I download the 16.04 server version for both the raspberry pi 2 and &lt;a href=&#34;http://www.finnie.org/software/raspberrypi/ubuntu-rpi3/ubuntu-16.04-preinstalled-server-armhf+raspi3.img.xz&#34;&gt;raspberry pi 3&lt;/a&gt;. The process to write these images to the microSD card differs slightly from ones I&amp;rsquo;ve used in the past. It still uses &lt;code&gt;dd&lt;/code&gt;, but the image is first piped through &lt;code&gt;xzcat&lt;/code&gt;, as such:&lt;/p&gt;
+&lt;p&gt;Luckily, Canonical makes special &lt;a href=&#34;https://wiki.ubuntu.com/ARM/RaspberryPi&#34;&gt;Ubuntu ARM images&lt;/a&gt;, specifically for the Raspberry Pi. I download the 16.04 server version for both the raspberry pi 2 and raspberry pi 3. The process to write these images to the microSD card differs slightly from ones I&amp;rsquo;ve used in the past. It still uses &lt;code&gt;dd&lt;/code&gt;, but the image is first piped through &lt;code&gt;xzcat&lt;/code&gt;, as such:&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;xzcat ubuntu-16.04.2-preinstalled-server-armhf+raspi2.img.xz | sudo dd bs=4M of=/dev/mmcblk0
 xzcat ubuntu-16.04-preinstalled-server-armhf+raspi3.img.xz   | sudo dd bs=4M of=/dev/mmcblk0&lt;/code&gt;&lt;/pre&gt;
 &lt;h3 id=&#34;armbian&#34;&gt;Armbian&lt;/h3&gt;
@@ -12036,7 +12141,7 @@ make install&lt;/code&gt;&lt;/pre&gt;
 &lt;img src=&#34;../../img/posts/LFS-Final-Preparation-Steps/sources-md5-play.png&#34; name=&#34;pic&#34; onmouseover=&#34;this.src=&#39;../../img/posts/LFS-Final-Preparation-Steps/sources-md5.gif&#39;&#34; onmouseout=&#34;this.src=&#39;../../img/posts/LFS-Final-Preparation-Steps/sources-md5-play.png&#39;&#34; style=&#34;max-width: 100%;&#34;/&gt;
 &lt;/center&gt;&lt;/p&gt;
 
-&lt;p&gt;Ever since LFS-7.0, a &lt;a href=&#34;http://www.linuxfromscratch.org/lfs/view/stable-systemd/md5sums&#34;&gt;md5sums file&lt;/a&gt; is provided, which can be downloaded and used to verify the integrity of downloaded packages. Download this file, again with &lt;em&gt;wget&lt;/em&gt;:&lt;/p&gt;
+&lt;p&gt;Ever since LFS-7.0, a md5sums file is provided, which can be downloaded and used to verify the integrity of downloaded packages. Download this file, again with &lt;em&gt;wget&lt;/em&gt;:&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;wget http://www.linuxfromscratch.org/lfs/view/stable-systemd/md5sums&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;Then, compare the hashes in the list to the &lt;a href=&#34;https://en.wikipedia.org/wiki/Md5sum&#34;&gt;md5sum&lt;/a&gt; for each of the source packages. This is done with the commands:&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;pushd $LFS/sources

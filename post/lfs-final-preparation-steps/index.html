@@ -176,7 +176,7 @@ Tags <a href="../../tags/linux">linux</a>, <a href="../../tags/lfs">lfs</a>
 <img src="../../img/posts/LFS-Final-Preparation-Steps/sources-md5-play.png" name="pic" onmouseover="this.src='../../img/posts/LFS-Final-Preparation-Steps/sources-md5.gif'" onmouseout="this.src='../../img/posts/LFS-Final-Preparation-Steps/sources-md5-play.png'" style="max-width: 100%;"/>
 </center></p>
 
-<p>Ever since LFS-7.0, a <a href="http://www.linuxfromscratch.org/lfs/view/stable-systemd/md5sums">md5sums file</a> is provided, which can be downloaded and used to verify the integrity of downloaded packages. Download this file, again with <em>wget</em>:</p>
+<p>Ever since LFS-7.0, a md5sums file is provided, which can be downloaded and used to verify the integrity of downloaded packages. Download this file, again with <em>wget</em>:</p>
 <pre><code>wget http://www.linuxfromscratch.org/lfs/view/stable-systemd/md5sums</code></pre>
 <p>Then, compare the hashes in the list to the <a href="https://en.wikipedia.org/wiki/Md5sum">md5sum</a> for each of the source packages. This is done with the commands:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">pushd $LFS/sources

@@ -156,7 +156,7 @@ Tags <a href="../../tags/homelab">homelab</a>, <a href="../../tags/linux">linux<
 
 <p>After mucking around with Rapsbian and Hypriot one Sunday, I decided to just go with a plain Ubuntu image for the Raspberry Pis. I don&rsquo;t have anything against these specific OSes, but I am mostly setting up this cluster to simulate what I would do on a &ldquo;real&rdquo; system. For me, that often means using a straight OS like Ubuntu.</p>
 
-<p>Luckily, Canonical makes special <a href="https://wiki.ubuntu.com/ARM/RaspberryPi">Ubuntu ARM images</a>, specifically for the Raspberry Pi. I download the 16.04 server version for both the raspberry pi 2 and <a href="http://www.finnie.org/software/raspberrypi/ubuntu-rpi3/ubuntu-16.04-preinstalled-server-armhf+raspi3.img.xz">raspberry pi 3</a>. The process to write these images to the microSD card differs slightly from ones I&rsquo;ve used in the past. It still uses <code>dd</code>, but the image is first piped through <code>xzcat</code>, as such:</p>
+<p>Luckily, Canonical makes special <a href="https://wiki.ubuntu.com/ARM/RaspberryPi">Ubuntu ARM images</a>, specifically for the Raspberry Pi. I download the 16.04 server version for both the raspberry pi 2 and raspberry pi 3. The process to write these images to the microSD card differs slightly from ones I&rsquo;ve used in the past. It still uses <code>dd</code>, but the image is first piped through <code>xzcat</code>, as such:</p>
 <pre><code>xzcat ubuntu-16.04.2-preinstalled-server-armhf+raspi2.img.xz | sudo dd bs=4M of=/dev/mmcblk0
 xzcat ubuntu-16.04-preinstalled-server-armhf+raspi3.img.xz   | sudo dd bs=4M of=/dev/mmcblk0</code></pre>
 <h3 id="armbian">Armbian</h3>
