@@ -5,10 +5,81 @@
     <description>Recent content in containers on λ ryan. himmelwright. net</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 15 Jan 2021 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 31 Jan 2021 00:00:00 +0000</lastBuildDate>
     
         <atom:link href="http://ryan.himmelwright.net/tags/containers/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Automatically Create and Run a Podman Container Using Systemd</title>
+      <link>http://ryan.himmelwright.net/post/auto-podman-run-systemd/</link>
+      <pubDate>Sun, 31 Jan 2021 00:00:00 +0000</pubDate>
+      
+      <guid>http://ryan.himmelwright.net/post/auto-podman-run-systemd/</guid>
+      <description>&lt;p&gt;No, this is not the &lt;em&gt;same&lt;/em&gt; as &lt;a href=&#34;../../post/create-podman-systemd-services/&#34;&gt;my last
+post&lt;/a&gt;, but is a continuation of it.
+While the basic &lt;code&gt;podman generate systemd&lt;/code&gt; generated file works for many
+cases&amp;hellip; it wasn&amp;rsquo;t a good long-term solution for my jellyfin container. So, I
+made a small tweak.&lt;/p&gt;
+
+&lt;h2 id=&#34;the-issue&#34;&gt;The Issue&lt;/h2&gt;
+
+&lt;p&gt;My issue was that the container initially worked, but would occasionally
+break when it grew old. By itself, it isn&amp;rsquo;t a problem. Containers are
+designed to be ephemeral, and arguably &lt;em&gt;should&lt;/em&gt; be blown away before being
+instantiated again. The difficulty is that creating a new container
+results in having to edit the container uuids in the service file, otherwise
+the service breaks&amp;hellip; which seems to sometimes then break the &lt;em&gt;new&lt;/em&gt; container.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;../../img/posts/auto-podman-run-systemd/jellyfin-failed-webpage.png&#34;&gt;&lt;img alt=&#34;Failed Jellyfin Webpage&#34; src=&#34;../../img/posts/auto-podman-run-systemd/jellyfin-failed-webpage.png&#34; style=&#34;max-width: 100%;&#34;/&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;This requires me to then &lt;em&gt;disable&lt;/em&gt; the service, blow-away and make the new
+container, update the service file, and &lt;em&gt;finally&lt;/em&gt; start the service&amp;hellip; again.&lt;/p&gt;
+
+&lt;h2 id=&#34;a-different-approach&#34;&gt;A Different Approach&lt;/h2&gt;
+
+&lt;p&gt;I started to think about how I could better the process. I knew that a
+&lt;em&gt;newly&lt;/em&gt; created container seemed to work each time, as I previously used the
+&lt;code&gt;--rm&lt;/code&gt; flag when starting it manually. From there, I wondered if I could
+write &lt;em&gt;my own&lt;/em&gt; systemd service file using the &lt;code&gt;podman run&lt;/code&gt; command instead.
+This would both create and kick off a &lt;em&gt;new&lt;/em&gt; container after boot, instead of
+re-starting a persistent one.&lt;/p&gt;
+
+&lt;h2 id=&#34;testing-it-out&#34;&gt;Testing it out&lt;/h2&gt;
+
+&lt;p&gt;To test out my plan, I decided to edit the file created by the &lt;code&gt;podman
+generate system&lt;/code&gt; command in the last post and go from there. I opened
+the service file (&lt;code&gt;~/.config/systemd/user/jellyfin.service&lt;/code&gt;) in my editor and
+changed the following line under the &lt;code&gt;[Service]&lt;/code&gt; section:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-ini&#34; data-lang=&#34;ini&#34;&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;ExecStart&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;/usr/bin/podman start 2ba0f86b0fc53cb2fe43abb20215680982800c1bf53421e1a3a90855fa79f030&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;I swapped &lt;code&gt;ExecStart&lt;/code&gt; to use my manual &lt;code&gt;podman run&lt;/code&gt; command, with a &lt;code&gt;--rm&lt;/code&gt; flag:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-ini&#34; data-lang=&#34;ini&#34;&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;ExecStart&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;/usr/bin/podman run --name jellyfin --rm -d -v /home/ryan/Network/jellyfin/config:/config -v /home/ryan/Network/jellyfin/cache:/cache -v /home/ryan/Music:/media/music:ro -v /home/ryan/Videos:/media/videos:ro --net=host --privileged jellyfin/jellyfin:latest&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;I also edited the &lt;code&gt;ExecStop&lt;/code&gt; and &lt;code&gt;ExecStopPost&lt;/code&gt; values:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-ini&#34; data-lang=&#34;ini&#34;&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;ExecStop&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;/usr/bin/podman stop -t 10 2ba0f86b0fc53cb2fe43abb20215680982800c1bf53421e1a3a90855fa79f030&lt;/span&gt;
+&lt;span style=&#34;color:#a6e22e&#34;&gt;ExecStopPost&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;/usr/bin/podman stop -t 10 2ba0f86b0fc53cb2fe43abb20215680982800c1bf53421e1a3a90855fa79f030&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;I switched them to use the container name (&lt;code&gt;jellyfin&lt;/code&gt;) instead of uuids:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-ini&#34; data-lang=&#34;ini&#34;&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;ExecStop&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;/usr/bin/podman stop -t 10 jellyfin&lt;/span&gt;
+&lt;span style=&#34;color:#a6e22e&#34;&gt;ExecStopPost&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;/usr/bin/podman stop -t jellyfin&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;After saving the changes, I removed my old jellyfin container, reloaded the
+unit files (using &lt;code&gt;systemctl --user daemon-reload&lt;/code&gt;, as described in the
+previous post), and restarted the machine to determine what elements would
+need tweaking when writing &lt;em&gt;my&lt;/em&gt; service file.&lt;/p&gt;
+
+&lt;h2 id=&#34;another-shortened-post&#34;&gt;Another Shortened Post&amp;hellip;&lt;/h2&gt;
+
+&lt;p&gt;However, I never made my own service file, or even edited the generated one
+again. It appeared to work fine after making those few tweaks. For the
+second time in a row, I have a much simpler post than originally intended
+due to the tooling around &lt;code&gt;podman&lt;/code&gt;. I&amp;rsquo;m okay with that.&lt;/p&gt;
+
+&lt;h2 id=&#34;conclusion&#34;&gt;Conclusion&lt;/h2&gt;
+
+&lt;p&gt;While the solution still isn&amp;rsquo;t 100% &lt;em&gt;perfect&lt;/em&gt; (containers sometimes don&amp;rsquo;t
+destroy themselves, and I still have to login for the service to autostart)
+it has overall been working great for me. I no longer have to worry about
+uuids. When I encounter an issue, I stop the container, it kills
+itself, and then the service starts up a fresh one. Much better.&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>Create Podman Systemd Services</title>

@@ -73,13 +73,13 @@ ansible cluster -m ping&lt;/code&gt;&lt;/pre&gt;
 
 &lt;h3 id=&#34;playbooks&#34;&gt;Playbooks&lt;/h3&gt;
 
-&lt;p&gt;After confirming that the hosts file is properly configured, I started to dig into playbooks. Playbooks are Ansible&amp;rsquo;s scripting system used to configure, deploy, and orcistrate systems. They can describe ways in which systems should be configured (ex: enable ssh), or outline a set of steps for an IT task (ex: running updates, restarting a server). As stated in the &lt;a href=&#34;https://docs.ansible.com/ansible/playbooks.html&#34;&gt;playbook documentation&lt;/a&gt;:&lt;/p&gt;
+&lt;p&gt;After confirming that the hosts file is properly configured, I started to dig into playbooks. Playbooks are Ansible&amp;rsquo;s scripting system used to configure, deploy, and orcistrate systems. They can describe ways in which systems should be configured (ex: enable ssh), or outline a set of steps for an IT task (ex: running updates, restarting a server). As stated in the &lt;a href=&#34;https://docs.ansible.com/ansible/latest/user_guide/playbooks.html&#34;&gt;playbook documentation&lt;/a&gt;:&lt;/p&gt;
 
 &lt;div id=&#34;post-quote&#34;&gt;
 *&#34;If Ansible modules are the tools in your workshop, playbooks are your instruction manuals, and your inventory of hosts are your raw material.&#34;*
 &lt;/div&gt;
 
-&lt;p&gt;Playbook files are expressed using &lt;a href=&#34;https://docs.ansible.com/ansible/YAMLSyntax.html&#34;&gt;YAML syntax&lt;/a&gt;, which is easy to read, but still powerful. The first step when creating a new playbook, being a YAML file, is to set the header and footer. The header consists of three &lt;code&gt;-&lt;/code&gt;&amp;rsquo;s at the top of the file, and the footer ends the file with three periods (&lt;code&gt;.&lt;/code&gt;). This indicates the start and end of the document.&lt;/p&gt;
+&lt;p&gt;Playbook files are expressed using &lt;a href=&#34;https://docs.ansible.com/ansible/latest/reference_appendices/YAMLSyntax.html&#34;&gt;YAML syntax&lt;/a&gt;, which is easy to read, but still powerful. The first step when creating a new playbook, being a YAML file, is to set the header and footer. The header consists of three &lt;code&gt;-&lt;/code&gt;&amp;rsquo;s at the top of the file, and the footer ends the file with three periods (&lt;code&gt;.&lt;/code&gt;). This indicates the start and end of the document.&lt;/p&gt;
 
 &lt;p&gt;When writing a playbook to update the pi cluster, I first needed to declare what systems the playbook is used with. To do that, I used the &lt;code&gt;hosts&lt;/code&gt; key, and provided it with the &lt;code&gt;cluster&lt;/code&gt; group name, which is defined in my &lt;code&gt;/etc/ansible/hosts&lt;/code&gt; file, as the value.&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;---
@@ -99,7 +99,7 @@ ansible cluster -m ping&lt;/code&gt;&lt;/pre&gt;
   become: true
   apt:
     update_cache: yes&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;The &lt;code&gt;name:&lt;/code&gt; defines the name of the task, and is the text printed out to the console when executing this step of the playbook. Setting the &lt;a href=&#34;https://docs.ansible.com/ansible/become.html&#34;&gt;&lt;code&gt;become&lt;/code&gt;&lt;/a&gt; key to &lt;code&gt;true&lt;/code&gt; tells Ansible to run the command with privilege escalation (sudo). Lastly, the remaining two lines run the &lt;code&gt;update_cache:&lt;/code&gt; functionality of the apt module.&lt;/p&gt;
+&lt;p&gt;The &lt;code&gt;name:&lt;/code&gt; defines the name of the task, and is the text printed out to the console when executing this step of the playbook. Setting the &lt;code&gt;become&lt;/code&gt; key to &lt;code&gt;true&lt;/code&gt; tells Ansible to run the command with privilege escalation (sudo). Lastly, the remaining two lines run the &lt;code&gt;update_cache:&lt;/code&gt; functionality of the apt module.&lt;/p&gt;
 
 &lt;p&gt;With the repositories updated on each node, I can have ansible run the updates by adding the following lines to the playbook (after the cache update ones):&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;- name: Upgrade installed packages
