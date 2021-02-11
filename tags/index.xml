@@ -5,10 +5,55 @@
     <description>Recent content in Tags on λ ryan. himmelwright. net</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 31 Jan 2021 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 11 Feb 2021 00:00:00 +0000</lastBuildDate>
     
         <atom:link href="http://ryan.himmelwright.net/tags/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Apple</title>
+      <link>http://ryan.himmelwright.net/tags/apple/</link>
+      <pubDate>Thu, 11 Feb 2021 00:00:00 +0000</pubDate>
+      
+      <guid>http://ryan.himmelwright.net/tags/apple/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Hardware</title>
+      <link>http://ryan.himmelwright.net/tags/hardware/</link>
+      <pubDate>Thu, 11 Feb 2021 00:00:00 +0000</pubDate>
+      
+      <guid>http://ryan.himmelwright.net/tags/hardware/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Laptop</title>
+      <link>http://ryan.himmelwright.net/tags/laptop/</link>
+      <pubDate>Thu, 11 Feb 2021 00:00:00 +0000</pubDate>
+      
+      <guid>http://ryan.himmelwright.net/tags/laptop/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>macbook</title>
+      <link>http://ryan.himmelwright.net/tags/macbook/</link>
+      <pubDate>Thu, 11 Feb 2021 00:00:00 +0000</pubDate>
+      
+      <guid>http://ryan.himmelwright.net/tags/macbook/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>macOS</title>
+      <link>http://ryan.himmelwright.net/tags/macos/</link>
+      <pubDate>Thu, 11 Feb 2021 00:00:00 +0000</pubDate>
+      
+      <guid>http://ryan.himmelwright.net/tags/macos/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>containers</title>
@@ -43,15 +88,6 @@
       <pubDate>Sun, 31 Jan 2021 00:00:00 +0000</pubDate>
       
       <guid>http://ryan.himmelwright.net/tags/systemd/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Hardware</title>
-      <link>http://ryan.himmelwright.net/tags/hardware/</link>
-      <pubDate>Mon, 28 Dec 2020 00:00:00 +0000</pubDate>
-      
-      <guid>http://ryan.himmelwright.net/tags/hardware/</guid>
       <description></description>
     </item>
     
@@ -308,15 +344,6 @@
     </item>
     
     <item>
-      <title>Laptop</title>
-      <link>http://ryan.himmelwright.net/tags/laptop/</link>
-      <pubDate>Sat, 25 Jan 2020 00:00:00 +0000</pubDate>
-      
-      <guid>http://ryan.himmelwright.net/tags/laptop/</guid>
-      <description></description>
-    </item>
-    
-    <item>
       <title>tb3</title>
       <link>http://ryan.himmelwright.net/tags/tb3/</link>
       <pubDate>Sat, 25 Jan 2020 00:00:00 +0000</pubDate>
@@ -331,33 +358,6 @@
       <pubDate>Sat, 25 Jan 2020 00:00:00 +0000</pubDate>
       
       <guid>http://ryan.himmelwright.net/tags/thinkpad/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Apple</title>
-      <link>http://ryan.himmelwright.net/tags/apple/</link>
-      <pubDate>Sun, 12 Jan 2020 00:00:00 +0000</pubDate>
-      
-      <guid>http://ryan.himmelwright.net/tags/apple/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>macbook</title>
-      <link>http://ryan.himmelwright.net/tags/macbook/</link>
-      <pubDate>Sun, 12 Jan 2020 00:00:00 +0000</pubDate>
-      
-      <guid>http://ryan.himmelwright.net/tags/macbook/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>macOS</title>
-      <link>http://ryan.himmelwright.net/tags/macos/</link>
-      <pubDate>Sun, 12 Jan 2020 00:00:00 +0000</pubDate>
-      
-      <guid>http://ryan.himmelwright.net/tags/macos/</guid>
       <description></description>
     </item>
     

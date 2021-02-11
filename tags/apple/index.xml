@@ -5,10 +5,220 @@
     <description>Recent content in Apple on λ ryan. himmelwright. net</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 12 Jan 2020 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 11 Feb 2021 00:00:00 +0000</lastBuildDate>
     
         <atom:link href="http://ryan.himmelwright.net/tags/apple/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Traded my 2019 16&#34; MacBook Pro for a M1 MacBook Air</title>
+      <link>http://ryan.himmelwright.net/post/trading-mbp16-for-m1air/</link>
+      <pubDate>Thu, 11 Feb 2021 00:00:00 +0000</pubDate>
+      
+      <guid>http://ryan.himmelwright.net/post/trading-mbp16-for-m1air/</guid>
+      <description>&lt;p&gt;Over a year has passed since I purchased a &lt;a href=&#34;../../post/new-2019-16inch-mbp/&#34;&gt;base model 2019 16&amp;rdquo; MacBook
+Pro&lt;/a&gt;. My first Mac. With it&amp;rsquo;s large &amp;ldquo;retina&amp;rdquo;
+display, resurrected magic keyboard, and truly &lt;em&gt;amazing&lt;/em&gt; speakers, it might
+be the most pleasurable laptop I have ever owned. However, I decided to trade
+it in&amp;hellip; for a new MacBook &lt;em&gt;air&lt;/em&gt;. Here&amp;rsquo;s why.&lt;/p&gt;
+
+&lt;h2 id=&#34;background&#34;&gt;Background&lt;/h2&gt;
+
+&lt;p&gt;&lt;a href=&#34;../../img/posts/trading-mbp16-for-m1air/mac_challenge.jpeg&#34;&gt;&lt;img alt=&#34;Installing macOS Cataline on old air&#34; src=&#34;../../img/posts/trading-mbp16-for-m1air/mac_challenge.jpeg&#34; style=&#34;max-width: 100%;&#34;/&gt;&lt;/a&gt;
+&lt;div class=&#34;caption&#34;&gt;Installing macOS Catalina on my wife&amp;rsquo;s old MacBook Air for my Mac challenge&lt;/div&gt;&lt;/p&gt;
+
+&lt;p&gt;In the Fall of 2019, I decided to do a &lt;a href=&#34;../../post/macos-challenge/&#34;&gt;30 day macOS&lt;/a&gt;
+challenge. During the challenge, I learned that while I think Linux is still
+my go-to and &lt;em&gt;indispensable&lt;/em&gt; OS, I did enjoy having a mac available for doing
+more &lt;a href=&#34;https://www.youtube.com/watch?v=oKiAnxjM8Nc&#34;&gt;&amp;ldquo;normal life computing&amp;rdquo;&lt;/a&gt;.
+Web browsing, writing emails, managing calendars, personal finance, planning
+home projects with my wife, ssh&amp;rsquo;ing into servers to code&amp;hellip; that type of
+stuff.&lt;/p&gt;
+
+&lt;p&gt;After the challenge, I decided to acquire a mac for myself. I choose the 16&amp;rdquo;
+MBP &lt;em&gt;mostly&lt;/em&gt; because it was the only MacBook at the time with the new magic
+keyboard. That was a hard requirement I had. I wouldn&amp;rsquo;t even consider buying
+a butterfly MacBook. Keyboard aside, as my &lt;em&gt;only&lt;/em&gt; Mac, I did want it
+to be powerful enough to be my &amp;lsquo;workstation&amp;rsquo; mac/laptop. And it was.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;../../img/posts/trading-mbp16-for-m1air/mbp_cooling.png&#34;&gt;&lt;img alt=&#34;the mbp had better cooling&#34; src=&#34;../../img/posts/trading-mbp16-for-m1air/mbp_cooling.png&#34; style=&#34;max-width: 100%;&#34;/&gt;&lt;/a&gt;
+&lt;div class=&#34;caption&#34;&gt;While the 16&amp;rdquo; MacBook Pro did improve cooling compared to it&amp;rsquo;s predecessor, it was still too warm for my tastes&lt;/div&gt;&lt;/p&gt;
+
+&lt;p&gt;After a few months of use, a problem emerged regarding that power&amp;hellip; I didn&amp;rsquo;t utilize it. As I discovered
+&lt;a href=&#34;../../post/sold-my-bonobo/&#34;&gt;the last time I had a more &amp;ldquo;workstation laptop&amp;rdquo;&lt;/a&gt;, I
+don&amp;rsquo;t like when my computers overheat and spin up their fans. The 16&amp;rdquo; macbook
+was relatively thin for its specs (did you see the size of
+my previous workstaion laptop!?!?). However, that sleek design came at a
+cost. While the re-designed cooling on the 16&amp;rdquo; was considered quite good for
+a MacBook&amp;hellip; it didn&amp;rsquo;t meet my standards.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;../../img/posts/trading-mbp16-for-m1air/mbp_photoimport_turboboost.png&#34;&gt;&lt;img alt=&#34;Importing photos, turbo boost made temps 100c&#34; src=&#34;../../img/posts/trading-mbp16-for-m1air/mbp_photoimport_turboboost.png&#34; style=&#34;max-width: 100%;&#34;/&gt;&lt;/a&gt;
+&lt;div class=&#34;caption&#34;&gt;While using the CPU (importing photos), the temps stayed at 80C with turbo boost disabled. After enabling it, the temps shot up to 100C!&lt;/div&gt;&lt;/p&gt;
+
+&lt;p&gt;I eventually purchased and installed &lt;a href=&#34;http://tbswitcher.rugarciap.com&#34;&gt;turbo boost
+switcher&lt;/a&gt;, to &lt;em&gt;disable turbo boost on my
+cpu&lt;/em&gt; This runs the cpu at it&amp;rsquo;s base clock, without boosting it up for more
+&amp;lsquo;bursty&amp;rsquo; performance. This didn&amp;rsquo;t seem to hinder my small day-to-day usage,
+and in my mind, was more than worth the trade to keep the computer a little
+bit cooler, and prevent the fans from spinning up all the time. It was just a
+shame to pay so much money for such powerful computer&amp;hellip; and then
+purposefully hinder it.&lt;/p&gt;
+
+&lt;h2 id=&#34;the-m1-macs-are-released&#34;&gt;The M1 Macs are Released&lt;/h2&gt;
+
+&lt;p&gt;&lt;a href=&#34;../../img/posts/trading-mbp16-for-m1air/m1_released.png&#34;&gt;&lt;img alt=&#34;Apple&#39;s M1 Announcement&#34; src=&#34;../../img/posts/trading-mbp16-for-m1air/m1_released.png&#34; style=&#34;max-width: 100%;&#34;/&gt;&lt;/a&gt;
+&lt;div class=&#34;caption&#34;&gt;Apple announced it&amp;rsquo;s first Apple Silicon CPU, the M1&lt;/div&gt;&lt;/p&gt;
+
+&lt;p&gt;Then, in November, Apple announced the new M1 Macs, the first
+computers in the company&amp;rsquo;s planned 2 transition to switch from Intel CPUs to
+Apple&amp;rsquo;s own &amp;ldquo;Apple Silicon&amp;rdquo; arm processors. And they were a hit.&lt;/p&gt;
+
+&lt;p&gt;While I was skeptical about the smoothness of a cpu architecture switch, early
+reviewers indicated that Apple handled it extremely well. This had me
+tempted to immediately swap my MBP in for one of the newer ones. But, I decided to
+hold out for a bit, reasoning that my 16&amp;rdquo; computer was still an &lt;em&gt;amazing&lt;/em&gt;
+laptop that was more than capable of what I needed it for.&lt;/p&gt;
+
+&lt;p&gt;Still, the seed of questioning &lt;em&gt;how&lt;/em&gt; I use a mac had been planted.&lt;/p&gt;
+
+&lt;h2 id=&#34;how-i-use-a-mac&#34;&gt;How I use a Mac&lt;/h2&gt;
+
+&lt;p&gt;I started to map out my Mac use-cases in two broad categories: &lt;em&gt;What&lt;/em&gt; I
+use my mac for, and &lt;em&gt;where&lt;/em&gt; I use it. After some brainstorming, I had the
+following lists:&lt;/p&gt;
+
+&lt;h4 id=&#34;what-i-use-a-mac-for&#34;&gt;&lt;em&gt;What&lt;/em&gt; I use a Mac For&lt;/h4&gt;
+
+&lt;p&gt;I most commonly use my Mac for:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Utilizing Apple apps and services (Messages, FaceTime, Notes, Reminders,
+Photos, GarageBand, Music, iCloud, Etc)&lt;/li&gt;
+&lt;li&gt;Web Browsing&lt;/li&gt;
+&lt;li&gt;Online Courses/Proctored Exams&lt;/li&gt;
+&lt;li&gt;SSH and/or VS Code (I do coding, writing, and all those other tasks on my workstation, and remote in when on my MacBook)&lt;/li&gt;
+&lt;li&gt;Personal Planning/organizing, emails&lt;/li&gt;
+&lt;li&gt;Listen to podcasts or music&lt;/li&gt;
+&lt;li&gt;Watching videos or livestreams&lt;/li&gt;
+&lt;li&gt;Chatting with Friends and Family&lt;/li&gt;
+&lt;li&gt;&lt;em&gt;Maybe&lt;/em&gt; a light game if I&amp;rsquo;m on the go or not at my desk (possibly streamed from my gaming VM)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4 id=&#34;where-i-use-a-macbook&#34;&gt;&lt;em&gt;Where&lt;/em&gt; I use a MacBook&lt;/h4&gt;
+
+&lt;p&gt;&lt;a href=&#34;../../img/posts/trading-mbp16-for-m1air/macbook_stand.jpeg&#34;&gt;&lt;img alt=&#34;Macbook on a stand&#34; src=&#34;../../img/posts/trading-mbp16-for-m1air/macbook_stand.jpeg&#34; style=&#34;max-width: 100%;&#34;/&gt;&lt;/a&gt;
+&lt;div class=&#34;caption&#34;&gt;As my main laptop, my MacBook occasionally has to serve as my portable workstation&lt;/div&gt;&lt;/p&gt;
+
+&lt;p&gt;Being both my &lt;em&gt;only&lt;/em&gt; Mac, as well as my main portable computer, there is
+actually quite a range of &lt;em&gt;where&lt;/em&gt; and &lt;em&gt;how&lt;/em&gt; I setup my MacBook. Some examples
+include:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Portable: I use it as my portable machine, in a few types of locations:
+
+&lt;ul&gt;
+&lt;li&gt;Sitting on the couch&lt;/li&gt;
+&lt;li&gt;At a Table, by itself&lt;/li&gt;
+&lt;li&gt;At a table on a stand w/ Keyboard, and possibly other external displays&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;As my single portable workstation if I travel or visit family&lt;/li&gt;
+&lt;li&gt;As my Mac &amp;lsquo;desktop&amp;rsquo;, connected to all the devices at my desk via a thunderbolt hub.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&#34;best-tool-for-the-job&#34;&gt;Best Tool for the Job&lt;/h3&gt;
+
+&lt;p&gt;&lt;a href=&#34;../../img/posts/trading-mbp16-for-m1air/desktop_benchmarking.jpeg&#34;&gt;&lt;img alt=&#34;Using my macbook while running benchmarks on my desktop&#34; src=&#34;../../img/posts/trading-mbp16-for-m1air/desktop_benchmarking.jpeg&#34; style=&#34;max-width: 100%;&#34;/&gt;&lt;/a&gt;
+&lt;div class=&#34;caption&#34;&gt;Using my MBP while running benchmarks on my desktop
+after &lt;u&gt;&lt;a href=&#34;../../post/selecting-charmeleons-upgrades/&#34;&gt;some upgrades&lt;/a&gt;&lt;/u&gt;. Dispite
+its pwer, my Mac is a &lt;em&gt;secondary&lt;/em&gt; computer.&lt;/div&gt;&lt;/p&gt;
+
+&lt;p&gt;A disparity stood out to me while makings these lists. I
+generally try to use appropriate hardware for my need (at least within
+reason). Looking over what I wrote, it felt weird to have a $2000+ laptop for
+what I use it for. I did &lt;em&gt;not&lt;/em&gt; need that much for my &lt;em&gt;secondary computer&lt;/em&gt;,
+even if I loved the speakers and screen.&lt;/p&gt;
+
+&lt;p&gt;If this was my &lt;em&gt;main&lt;/em&gt; computer, it would be fine. But it isn&amp;rsquo;t. I have a
+&lt;a href=&#34;../../post/selecting-charmeleons-upgrades/&#34;&gt;powerful linux workstation&lt;/a&gt; for my
+heavy lifting and complicated, virtual workloads. Hell, macOS isn&amp;rsquo;t even my
+main OS. I do all my power-user computing on Linux&amp;hellip; even if it&amp;rsquo;s &lt;em&gt;from&lt;/em&gt; my
+mac (as previously stated, I &lt;code&gt;ssh&lt;/code&gt; into my desktop for nearly everything&amp;hellip;
+including writing these posts). The MBP &lt;em&gt;met&lt;/em&gt; the role I needed it for, but
+it didn&amp;rsquo;t necessarily
+&lt;em&gt;fit&lt;/em&gt; that role.&lt;/p&gt;
+
+&lt;h3 id=&#34;16-mbp-vs-air&#34;&gt;16&amp;rdquo; MBP vs. Air&lt;/h3&gt;
+
+&lt;p&gt;&lt;a href=&#34;../../img/posts/trading-mbp16-for-m1air/both_macs_closed.jpeg&#34;&gt;&lt;img alt=&#34;Both Macs, closed on table&#34; src=&#34;../../img/posts/trading-mbp16-for-m1air/both_macs_closed.jpeg&#34; style=&#34;max-width: 100%;&#34;/&gt;&lt;/a&gt;
+&lt;div class=&#34;caption&#34;&gt;The 2019 16&amp;rdquo; MacBook Pro and the 2020 M1 Macbook Air&lt;/div&gt;&lt;/p&gt;
+
+&lt;p&gt;After hammering out my MacBook use cases, I theorized how a M1 MacBook Air
+might compare to my 16&amp;rdquo; MBP in meeting those needs. I came up with the following
+conclusions:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;While I do occasionally use some of the mac&amp;rsquo;s heavier software (garageband,
+imovie, Photos, and others), the performance of the M1 is more than enough
+for what I would need it to do, and even &lt;em&gt;beats&lt;/em&gt; my Intel MBP on some tasks.&lt;/li&gt;
+&lt;li&gt;It wouldn&amp;rsquo;t benefit me to wait for more powerful Apple Silicon Macs,
+as my needs are already passed for what I need this device to do. Even
+if an Apple Silicon 16&amp;rdquo; MBP &lt;em&gt;was&lt;/em&gt; available, tempting as it might be, I&amp;rsquo;ve
+already established it isn&amp;rsquo;t a good fit for this device.&lt;/li&gt;
+&lt;li&gt;While I would miss the screen space and speakers, the air would be &lt;em&gt;much&lt;/em&gt;
+more portable. Not only would this be great when traveling, but it would also
+be appreciated when picking it up with one hand to take into another room.&lt;/li&gt;
+&lt;li&gt;The dedicated GPU in the MBP doesn&amp;rsquo;t really benefit me, as I do all my
+gaming in a Windows VM on my workstation. In fact, it may actually &lt;em&gt;hurt&lt;/em&gt; my
+experience by generating excess heat and kicking up the fans.&lt;/li&gt;
+&lt;li&gt;And on that note&amp;hellip; the air doesn&amp;rsquo;t even &lt;em&gt;have&lt;/em&gt; a fan to spin up, and
+doesn&amp;rsquo;t appear to get too warm either. Unlike the M1 MBP, it &lt;em&gt;will&lt;/em&gt; throttle
+to cool the CPU during sustained workloads, but we&amp;rsquo;ve already established
+that I am &lt;em&gt;currently&lt;/em&gt; doing that on my 16&amp;rdquo; anyway ☺︎.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Overall, I concluded that the Air should be able to do most of the tasks my
+16&amp;rdquo; MBP does, at around the same level of perfomrance, if not better. In the
+case of portability and noise, the air would be &lt;strong&gt;much&lt;/strong&gt; better suited than
+my Pro. Additionally, most of the workloads the MBP &lt;em&gt;is&lt;/em&gt; better at,
+aren&amp;rsquo;t as important for my needs.&lt;/p&gt;
+
+&lt;h2 id=&#34;decided-to-go-for-it&#34;&gt;Decided to Go for it&lt;/h2&gt;
+
+&lt;p&gt;&lt;a href=&#34;../../img/posts/trading-mbp16-for-m1air/trade-in-value.png&#34;&gt;&lt;img alt=&#34;Current trade-in-value&#34; src=&#34;../../img/posts/trading-mbp16-for-m1air/trade-in-value.png&#34; style=&#34;max-width: 100%;&#34;/&gt;&lt;/a&gt;
+&lt;div class=&#34;caption&#34;&gt;I knew my trade-in value would only get worse, and I didn&amp;rsquo;t need to wait for the new 16&amp;rdquo; Pro to come out&lt;/div&gt;&lt;/p&gt;
+
+&lt;p&gt;Eventually, I decided to make the trade-in. My main reasons were:&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;The current trade-in price would cover the cost of the &amp;ldquo;higher end&amp;rdquo; M1
+Macbook Air, and I would only have to pay tax and for any other updgrades I
+wanted to make.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;I knew I would slowly get less and less for my MBP. I figured once a new
+16&amp;rdquo; MBP was released, the value for mine would likely plummet.&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;So, I ordered the higher tier Air ( with 8gpu cores + 512GB of storage),
+and bumped up the RAM to 16GB. If I was going to be be &amp;ldquo;downgrading&amp;rdquo;
+from a MBP to an Air, I wanted to at least keep the same amount of RAM and
+storage that I had before. It took almost a month to arrive, but now it&amp;rsquo;s
+here, and I&amp;rsquo;m packing up the MBP to send back.&lt;/p&gt;
+
+&lt;p&gt;I need this secondary computer to function as my portable laptop, and only
+(physical) Mac. I think the m1 air will fill both of these roles extremely
+well. If I needed a laptop to be my &lt;em&gt;main&lt;/em&gt; machine&amp;hellip; I would have probably
+kept the MBP and upgrade after a newer Apple Silicon version is released.&lt;/p&gt;
+
+&lt;h2 id=&#34;conclusion&#34;&gt;Conclusion&lt;/h2&gt;
+
+&lt;p&gt;&lt;a href=&#34;../../img/posts/trading-mbp16-for-m1air/mbp16.jpeg&#34;&gt;&lt;img alt=&#34;My mbp.&#34; src=&#34;../../img/posts/trading-mbp16-for-m1air/mbp16.jpeg&#34; style=&#34;max-width: 100%;&#34;/&gt;&lt;/a&gt;
+&lt;div class=&#34;caption&#34;&gt;My old 16&amp;rdquo; MacBook Pro&lt;/div&gt;&lt;/p&gt;
+
+&lt;p&gt;The 2019 16&amp;rdquo; MacBook Pro was, and still is, an amazing machine. I &lt;em&gt;will&lt;/em&gt; miss
+it. Ultimately though, a combination of the M1 Macs being &lt;em&gt;very&lt;/em&gt; good, and
+the fact that a smaller, thin and light laptop fit my use case best,
+finalized my decision to switch.&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>My New 16-inch Macbook Pro: Initial Thoughts</title>

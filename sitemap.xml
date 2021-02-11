@@ -3,6 +3,51 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>http://ryan.himmelwright.net/tags/apple/</loc>
+    <lastmod>2021-02-11T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://ryan.himmelwright.net/tags/hardware/</loc>
+    <lastmod>2021-02-11T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://ryan.himmelwright.net/tags/laptop/</loc>
+    <lastmod>2021-02-11T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://ryan.himmelwright.net/tags/macbook/</loc>
+    <lastmod>2021-02-11T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://ryan.himmelwright.net/tags/macos/</loc>
+    <lastmod>2021-02-11T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://ryan.himmelwright.net/post/</loc>
+    <lastmod>2021-02-11T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://ryan.himmelwright.net/tags/</loc>
+    <lastmod>2021-02-11T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://ryan.himmelwright.net/post/trading-mbp16-for-m1air/</loc>
+    <lastmod>2021-02-11T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://ryan.himmelwright.net/</loc>
+    <lastmod>2021-02-11T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>http://ryan.himmelwright.net/post/auto-podman-run-systemd/</loc>
     <lastmod>2021-01-31T00:00:00+00:00</lastmod>
   </url>
@@ -23,33 +68,13 @@
   </url>
   
   <url>
-    <loc>http://ryan.himmelwright.net/post/</loc>
-    <lastmod>2021-01-31T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
     <loc>http://ryan.himmelwright.net/tags/systemd/</loc>
-    <lastmod>2021-01-31T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://ryan.himmelwright.net/tags/</loc>
-    <lastmod>2021-01-31T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://ryan.himmelwright.net/</loc>
     <lastmod>2021-01-31T00:00:00+00:00</lastmod>
   </url>
   
   <url>
     <loc>http://ryan.himmelwright.net/post/create-podman-systemd-services/</loc>
     <lastmod>2021-01-15T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://ryan.himmelwright.net/tags/hardware/</loc>
-    <lastmod>2020-12-28T00:00:00+00:00</lastmod>
   </url>
   
   <url>
@@ -318,11 +343,6 @@
   </url>
   
   <url>
-    <loc>http://ryan.himmelwright.net/tags/laptop/</loc>
-    <lastmod>2020-01-25T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
     <loc>http://ryan.himmelwright.net/tags/tb3/</loc>
     <lastmod>2020-01-25T00:00:00+00:00</lastmod>
   </url>
@@ -330,21 +350,6 @@
   <url>
     <loc>http://ryan.himmelwright.net/tags/thinkpad/</loc>
     <lastmod>2020-01-25T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://ryan.himmelwright.net/tags/apple/</loc>
-    <lastmod>2020-01-12T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://ryan.himmelwright.net/tags/macbook/</loc>
-    <lastmod>2020-01-12T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://ryan.himmelwright.net/tags/macos/</loc>
-    <lastmod>2020-01-12T00:00:00+00:00</lastmod>
   </url>
   
   <url>
