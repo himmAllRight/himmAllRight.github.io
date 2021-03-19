@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Jenkins Parallel Stashing -- λ ryan. himmelwright. net</title>
+
+    
+
+    
+    <link href="http://ryan.himmelwright.net/css/bootstrap.min.css" rel="stylesheet">
+
+    
+    <link href="http://ryan.himmelwright.net/css/clean-blog.min.css" rel="stylesheet">
+
+    
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href='//fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+
+    
+    
+    
+
+
+
+    
+    <script type="text/javascript">
+        var _paq = _paq || [];
+         
+        _paq.push(["setDocumentTitle", document.domain + "/" + document.title]);
+        _paq.push(["setCookieDomain", "*.ryan.himmelwright.net"]);
+        _paq.push(["setDomains", ["*.ryan.himmelwright.net"]]);
+        _paq.push(['trackPageView']);
+        _paq.push(['enableLinkTracking']);
+        (function() {
+        var u="//cloud.himmelwright.net/piwik/";
+        _paq.push(['setTrackerUrl', u+'piwik.php']);
+        _paq.push(['setSiteId', '1']);
+        var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+        g.type='text/javascript'; g.async=true; g.defer=true; g.src=u+'piwik.js'; s.parentNode.insertBefore(g,s);
+        })();
+        </script>
+        <noscript><p><img src="//cloud.himmelwright.net/piwik/piwik.php?idsite=1&rec=1" style="border:0;" alt="" /></p></noscript>
+        
+
+
+
+</head>
+
+<body>
+
+    
+    <nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+        <div class="container-fluid">
+            
+            <div class="navbar-header page-scroll">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="http://ryan.himmelwright.net">λ ryan. himmelwright. net</a>
+            </div>
+
+                       
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    
+                    <li>
+                        <a href="../../">home</a>
+                    </li>
+                    
+                    <li>
+                        <a href="../../pages/about/">About</a>
+                    </li>
+                    
+                    <li>
+                        <a href="../../pages/homelab/">Homelab</a>
+                    </li>
+                    
+                    <li>
+                        <a href="../../tags">tags</a>
+                    </li>
+                    
+                    <li>
+                        <a href="../../post/">Archives</a>
+                    </li>
+                    
+                    <li>
+                        <a href="../../post/index.xml">RSS</a>
+                    </li>
+                    
+                  </ul>
+            </div>
+           
+
+        </div>
+        
+    </nav>
+
+
+
+
+<header class="intro-header" style="background-image: url('http://ryan.himmelwright.net/img/posts/jenkins-parallel-stashing/pennsburg_sky.jpeg')">
+    
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <h1>Jenkins Parallel Stashing</h1>
+                    <h2 class="subheading"></h2>
+                    <span class="meta">
+                        
+Posted by <a href="#">Ryan Himmelwright</a> on Fri, Mar 19, 2021
+
+
+
+
+
+
+
+<br />
+Tags <a href="../../tags/jenkins">jenkins</a>, <a href="../../tags/devops">devops</a>, <a href="../../tags/containers">containers</a>
+
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <span class="header-caption">Pennsburg, PA</span>
+    
+    </header>
+
+    
+    <article>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                    
+                    <p>I recently hit a snag while developing a Jenkins pipeline at work. I was
+having difficulty preserving files across the entire pipeline run. In the
+end, my solution was to use the stash feature. However, I found little
+support for my <em>specific</em> type of issue online, so I figured I might as well
+write a short post about my experience.</p>
+
+<h2 id="background">Background</h2>
+
+<p>The pipeline runs an integration test suite I am working on. It contains
+mostly sequential stages, but there are a few that run in parallel.
+Specifically, there are provisioning and tear-down stages, one for each
+of the components we want to use during the testing.</p>
+
+<p><a href="../../img/posts/jenkins-parallel-stashing/pipeline.png"><img alt="Pipeline stages" src="../../img/posts/jenkins-parallel-stashing/pipeline.png" style="max-width: 100%;"/></a>
+<div class="caption">Pipeline stages</div></p>
+
+<p>The Jenkins instance is hosted on
+<a href="https://www.openshift.com">Openshift</a>, and uses containers for the job
+nodes. The pipeline uses several containers across the different stages,
+which means that the local filesystem does not persist throughout the entire
+pipeline. This was a problem, because we wanted to maintain metadata files
+from each of the provisioning stages, to use in dynamic tests, as well
+as during each tear down stage.</p>
+
+<p>The issue is further complicated by the parallel provisioning stages. Each
+provisioner runs in its own container, all at the same time. On top of that,
+the number of provisioner/tear-down stages is dynamic. The pipeline might run
+using data provisioners for components <code>A</code>, <code>C</code>, and <code>D</code>, in one run, and
+<code>A</code>, <code>B</code>, <code>C</code>, <code>G</code>, and <code>H</code> for during next. It all depends on what
+integration tests we want to perform. This meant that my solution also had to be dynamic and flexible.</p>
+
+<h2 id="my-plan">My Plan</h2>
+
+<p>I looked briefly into changing the containers&rsquo; volume configuration, but my
+proof of concept pipeline hit a silent failure right away (the pipeline would
+endlessly hang, with no error). I decided to revisit that approach <em>if</em>
+my next plan (implementing stash and un-stash) didn&rsquo;t work.</p>
+
+<p>To simplify <em>what</em> to stash, and to have it work with the dynamically
+changing parallel stages, I decided to try a <em>single</em> stash location. I made
+a <code>metadata</code> directory that the stages could all write to, and stashed it. My
+thought was that I could then un-stash it at the start of the first stage in
+each subsequent node, and re-stash the contents at the end of a node.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-groovy" data-lang="groovy">sh <span style="color:#e6db74">&#34;mkdir metadata&#34;</span>
+sh <span style="color:#e6db74">&#34;touch metadata/metadata_init&#34;</span> <span style="color:#75715e">// Stash won&#39;t work with empty dirs
+</span><span style="color:#75715e"></span>stash includes: <span style="color:#e6db74">&#39;metadata/&#39;</span><span style="color:#f92672">,</span> name: <span style="color:#e6db74">&#39;metadata&#39;</span><span style="color:#f92672">,</span> allowEmpty: <span style="color:#66d9ef">true</span></code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-groovy" data-lang="groovy">unstash <span style="color:#e6db74">&#39;metadata&#39;</span></code></pre></div>
+<p>I added the calls to my pipeline, having everything write to a
+<code>metadata</code> stash. It was a good idea, but there was a problem&hellip;</p>
+
+<h2 id="my-problem"><em>My</em> Problem</h2>
+
+<p>Because the stash is executed individually in parallel, only the files from
+the <em>latest</em> parallel stage were being saved and stored.</p>
+
+<h2 id="the-solution">The Solution</h2>
+
+<p>As many issues in software, both the problem <em>and</em> the fix were rather
+simple. All I really did was change my stash call to used
+<em>as documented</em>. Still, I had trouble finding <em>anything</em> online talking about
+<em>using</em> stash the way I needed to, so I thought I&rsquo;d share.</p>
+
+<p>My solution was to continue to use the single directory method, but
+<em>dynamically change the name of the stash</em> during that initial parallel
+stage. It turns out, that the data was overwritten because each stash call had the same <em>stash name</em>, not because it was stashing the same directory.</p>
+
+<p>I only need to parallel stash during the initial parallel stage, as the
+second one was at the end of the pipleline where the metadata would no longer
+be appended. So my plan was to dynamically stash each provisioner metadata,
+and then merge all the stashes into a single <em>metadata</em> stash to be used
+throughout the rest of the pipeline.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-groovy" data-lang="groovy"><span style="color:#75715e">// Stash each builder&#39;s metadata if success
+</span><span style="color:#75715e"></span>stash includes: <span style="color:#e6db74">&#39;metadata/&#39;</span><span style="color:#f92672">,</span> name: <span style="color:#e6db74">&#39;metadata-${testLabel}&#39;</span><span style="color:#f92672">,</span> allowEmpty: <span style="color:#66d9ef">true</span></code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-groovy" data-lang="groovy"><span style="color:#75715e">// Un-stash all successful builder metadata into single dir
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">for</span><span style="color:#f92672">(</span>label <span style="color:#66d9ef">in</span> testLabel<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+    unstash <span style="color:#e6db74">&#34;metadata-${label}&#34;</span>
+<span style="color:#f92672">}</span></code></pre></div>
+<p>Before making things complicated by unmerging to a different location from
+where I wanted <code>metadata</code> to be, I first decided to see what happens if I
+simply <code>unstash</code>ed everything directly to the <code>metadata</code> dir. Luckily,
+everything merged just fine with no overwrites. I even didn&rsquo;t have to write
+a merging function! Problem solved.</p>
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p>So that&rsquo;s it. Often, the solution to a seemingly complicated problem is a
+simple one. This can be made more difficult if all of the online discussion
+seems tangential, but not exactly what you need. In those moments, it is
+probably best to pull aside a buddy to bounce ideas off of. Even if they
+don&rsquo;t know how to immediately solve your problem, they can highlight problem
+areas that you might be able to find a solution in.</p>
+
+<p>That is exactly how this solution surfaced. My friend
+<a href="https://elyezer.com">Elyezer</a> pointed out that the stashes were likely being
+over-written <em>because</em> they had the same stash name. Even though I <em>knew</em>
+that, having him re-emphasize it helped me zone in and work out the idea
+of dynamically making different stashes and merging them for the rest of the
+pipeline.</p>
+
+<p>Teamwork. It makes a difference.</p>
+
+<p>(P.S. Thanks Elyezer!)</p>
+
+                    
+                    
+                    
+                         <div style="float: right; text-decoration: underline; text-align: right;">Prev Post:</div>
+                    
+                    <br>
+                    
+                    
+                        <a href="http://ryan.himmelwright.net/post/m1-air-initial-thoughts/" style="text-align: right; float: right; max-width: 40%">2020 M1 Macbook Air Initial Thoughts</a>
+                    
+
+			
+			<div class="comment-section">
+			  
+   <div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "himmallright" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+			</div>
+                </div>
+            </div>
+        </div>
+    </article>
+
+        <hr>
+    
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                  <ul class="list-inline text-center">
+                    
+                      <li>
+                        <a href="mailto:ryan@himmelwright.net">
+                          <span class="fa-stack fa-lg">
+                            <i class="fa fa-circle fa-stack-2x"></i>
+                            <i class="fa fa-envelope-o fa-stack-1x fa-inverse"></i>
+                          </span>
+                        </a>
+                      </li>
+                    
+                    
+                    <li>
+                      <a href="https://github.com/himmAllRight">
+                        <span class="fa-stack fa-lg">
+                          <i class="fa fa-circle fa-stack-2x"></i>
+                          <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                        </span>
+                      </a>
+                    </li>
+                    
+                    <li>
+                      <a href="https://www.linkedin.com/in/ryan-himmelwright-b3891774/">
+                        <span class="fa-stack fa-lg">
+                          <i class="fa fa-circle fa-stack-2x"></i>
+                          <i class="fa fa-linkedin fa-stack-1x fa-inverse"></i>
+                        </span>
+                      </a>
+                    </li>
+                    
+                  </ul>
+<p class="copyright text-muted">
+
+<a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img
+  alt="Creative Commons License" style="border-width:0"
+  src="https://i.creativecommons.org/l/by/4.0/88x31.png" /></a><br />This work
+by <a xmlns:cc="http://creativecommons.org/ns#" href="http://ryan.himmelwright.net" property="cc:attributionName" rel="cc:attributionURL">Ryan Himmelwright</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
+</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    
+    <script src="http://ryan.himmelwright.net/js/jquery.min.js"></script>
+
+    
+    <script src="http://ryan.himmelwright.net/js/bootstrap.min.js"></script>
+
+    
+    <script src="http://ryan.himmelwright.net/js/clean-blog.js"></script>
+
+    
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-123-45', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+
+
+</body>
+
+</html>
+

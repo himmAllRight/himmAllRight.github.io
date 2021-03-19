@@ -5,10 +5,118 @@
     <description>Recent content in containers on λ ryan. himmelwright. net</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 31 Jan 2021 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 19 Mar 2021 00:00:00 +0000</lastBuildDate>
     
         <atom:link href="http://ryan.himmelwright.net/tags/containers/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Jenkins Parallel Stashing</title>
+      <link>http://ryan.himmelwright.net/post/jenkins-parallel-stashing/</link>
+      <pubDate>Fri, 19 Mar 2021 00:00:00 +0000</pubDate>
+      
+      <guid>http://ryan.himmelwright.net/post/jenkins-parallel-stashing/</guid>
+      <description>&lt;p&gt;I recently hit a snag while developing a Jenkins pipeline at work. I was
+having difficulty preserving files across the entire pipeline run. In the
+end, my solution was to use the stash feature. However, I found little
+support for my &lt;em&gt;specific&lt;/em&gt; type of issue online, so I figured I might as well
+write a short post about my experience.&lt;/p&gt;
+
+&lt;h2 id=&#34;background&#34;&gt;Background&lt;/h2&gt;
+
+&lt;p&gt;The pipeline runs an integration test suite I am working on. It contains
+mostly sequential stages, but there are a few that run in parallel.
+Specifically, there are provisioning and tear-down stages, one for each
+of the components we want to use during the testing.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;../../img/posts/jenkins-parallel-stashing/pipeline.png&#34;&gt;&lt;img alt=&#34;Pipeline stages&#34; src=&#34;../../img/posts/jenkins-parallel-stashing/pipeline.png&#34; style=&#34;max-width: 100%;&#34;/&gt;&lt;/a&gt;
+&lt;div class=&#34;caption&#34;&gt;Pipeline stages&lt;/div&gt;&lt;/p&gt;
+
+&lt;p&gt;The Jenkins instance is hosted on
+&lt;a href=&#34;https://www.openshift.com&#34;&gt;Openshift&lt;/a&gt;, and uses containers for the job
+nodes. The pipeline uses several containers across the different stages,
+which means that the local filesystem does not persist throughout the entire
+pipeline. This was a problem, because we wanted to maintain metadata files
+from each of the provisioning stages, to use in dynamic tests, as well
+as during each tear down stage.&lt;/p&gt;
+
+&lt;p&gt;The issue is further complicated by the parallel provisioning stages. Each
+provisioner runs in its own container, all at the same time. On top of that,
+the number of provisioner/tear-down stages is dynamic. The pipeline might run
+using data provisioners for components &lt;code&gt;A&lt;/code&gt;, &lt;code&gt;C&lt;/code&gt;, and &lt;code&gt;D&lt;/code&gt;, in one run, and
+&lt;code&gt;A&lt;/code&gt;, &lt;code&gt;B&lt;/code&gt;, &lt;code&gt;C&lt;/code&gt;, &lt;code&gt;G&lt;/code&gt;, and &lt;code&gt;H&lt;/code&gt; for during next. It all depends on what
+integration tests we want to perform. This meant that my solution also had to be dynamic and flexible.&lt;/p&gt;
+
+&lt;h2 id=&#34;my-plan&#34;&gt;My Plan&lt;/h2&gt;
+
+&lt;p&gt;I looked briefly into changing the containers&amp;rsquo; volume configuration, but my
+proof of concept pipeline hit a silent failure right away (the pipeline would
+endlessly hang, with no error). I decided to revisit that approach &lt;em&gt;if&lt;/em&gt;
+my next plan (implementing stash and un-stash) didn&amp;rsquo;t work.&lt;/p&gt;
+
+&lt;p&gt;To simplify &lt;em&gt;what&lt;/em&gt; to stash, and to have it work with the dynamically
+changing parallel stages, I decided to try a &lt;em&gt;single&lt;/em&gt; stash location. I made
+a &lt;code&gt;metadata&lt;/code&gt; directory that the stages could all write to, and stashed it. My
+thought was that I could then un-stash it at the start of the first stage in
+each subsequent node, and re-stash the contents at the end of a node.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-groovy&#34; data-lang=&#34;groovy&#34;&gt;sh &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;mkdir metadata&amp;#34;&lt;/span&gt;
+sh &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;touch metadata/metadata_init&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#75715e&#34;&gt;// Stash won&amp;#39;t work with empty dirs
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;stash includes: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;metadata/&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;,&lt;/span&gt; name: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;metadata&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;,&lt;/span&gt; allowEmpty: &lt;span style=&#34;color:#66d9ef&#34;&gt;true&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-groovy&#34; data-lang=&#34;groovy&#34;&gt;unstash &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;metadata&amp;#39;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;I added the calls to my pipeline, having everything write to a
+&lt;code&gt;metadata&lt;/code&gt; stash. It was a good idea, but there was a problem&amp;hellip;&lt;/p&gt;
+
+&lt;h2 id=&#34;my-problem&#34;&gt;&lt;em&gt;My&lt;/em&gt; Problem&lt;/h2&gt;
+
+&lt;p&gt;Because the stash is executed individually in parallel, only the files from
+the &lt;em&gt;latest&lt;/em&gt; parallel stage were being saved and stored.&lt;/p&gt;
+
+&lt;h2 id=&#34;the-solution&#34;&gt;The Solution&lt;/h2&gt;
+
+&lt;p&gt;As many issues in software, both the problem &lt;em&gt;and&lt;/em&gt; the fix were rather
+simple. All I really did was change my stash call to used
+&lt;em&gt;as documented&lt;/em&gt;. Still, I had trouble finding &lt;em&gt;anything&lt;/em&gt; online talking about
+&lt;em&gt;using&lt;/em&gt; stash the way I needed to, so I thought I&amp;rsquo;d share.&lt;/p&gt;
+
+&lt;p&gt;My solution was to continue to use the single directory method, but
+&lt;em&gt;dynamically change the name of the stash&lt;/em&gt; during that initial parallel
+stage. It turns out, that the data was overwritten because each stash call had the same &lt;em&gt;stash name&lt;/em&gt;, not because it was stashing the same directory.&lt;/p&gt;
+
+&lt;p&gt;I only need to parallel stash during the initial parallel stage, as the
+second one was at the end of the pipleline where the metadata would no longer
+be appended. So my plan was to dynamically stash each provisioner metadata,
+and then merge all the stashes into a single &lt;em&gt;metadata&lt;/em&gt; stash to be used
+throughout the rest of the pipeline.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-groovy&#34; data-lang=&#34;groovy&#34;&gt;&lt;span style=&#34;color:#75715e&#34;&gt;// Stash each builder&amp;#39;s metadata if success
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;stash includes: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;metadata/&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;,&lt;/span&gt; name: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;metadata-${testLabel}&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;,&lt;/span&gt; allowEmpty: &lt;span style=&#34;color:#66d9ef&#34;&gt;true&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-groovy&#34; data-lang=&#34;groovy&#34;&gt;&lt;span style=&#34;color:#75715e&#34;&gt;// Un-stash all successful builder metadata into single dir
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;label &lt;span style=&#34;color:#66d9ef&#34;&gt;in&lt;/span&gt; testLabel&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;{&lt;/span&gt;
+    unstash &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;metadata-${label}&amp;#34;&lt;/span&gt;
+&lt;span style=&#34;color:#f92672&#34;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Before making things complicated by unmerging to a different location from
+where I wanted &lt;code&gt;metadata&lt;/code&gt; to be, I first decided to see what happens if I
+simply &lt;code&gt;unstash&lt;/code&gt;ed everything directly to the &lt;code&gt;metadata&lt;/code&gt; dir. Luckily,
+everything merged just fine with no overwrites. I even didn&amp;rsquo;t have to write
+a merging function! Problem solved.&lt;/p&gt;
+
+&lt;h2 id=&#34;conclusion&#34;&gt;Conclusion&lt;/h2&gt;
+
+&lt;p&gt;So that&amp;rsquo;s it. Often, the solution to a seemingly complicated problem is a
+simple one. This can be made more difficult if all of the online discussion
+seems tangential, but not exactly what you need. In those moments, it is
+probably best to pull aside a buddy to bounce ideas off of. Even if they
+don&amp;rsquo;t know how to immediately solve your problem, they can highlight problem
+areas that you might be able to find a solution in.&lt;/p&gt;
+
+&lt;p&gt;That is exactly how this solution surfaced. My friend
+&lt;a href=&#34;https://elyezer.com&#34;&gt;Elyezer&lt;/a&gt; pointed out that the stashes were likely being
+over-written &lt;em&gt;because&lt;/em&gt; they had the same stash name. Even though I &lt;em&gt;knew&lt;/em&gt;
+that, having him re-emphasize it helped me zone in and work out the idea
+of dynamically making different stashes and merging them for the rest of the
+pipeline.&lt;/p&gt;
+
+&lt;p&gt;Teamwork. It makes a difference.&lt;/p&gt;
+
+&lt;p&gt;(P.S. Thanks Elyezer!)&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>Automatically Create and Run a Podman Container Using Systemd</title>
