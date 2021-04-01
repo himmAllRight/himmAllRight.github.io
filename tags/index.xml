@@ -5,10 +5,46 @@
     <description>Recent content in Tags on λ ryan. himmelwright. net</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 19 Mar 2021 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 31 Mar 2021 00:00:00 +0000</lastBuildDate>
     
         <atom:link href="http://ryan.himmelwright.net/tags/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Applications</title>
+      <link>http://ryan.himmelwright.net/tags/applications/</link>
+      <pubDate>Wed, 31 Mar 2021 00:00:00 +0000</pubDate>
+      
+      <guid>http://ryan.himmelwright.net/tags/applications/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>linux</title>
+      <link>http://ryan.himmelwright.net/tags/linux/</link>
+      <pubDate>Wed, 31 Mar 2021 00:00:00 +0000</pubDate>
+      
+      <guid>http://ryan.himmelwright.net/tags/linux/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>macos</title>
+      <link>http://ryan.himmelwright.net/tags/macos/</link>
+      <pubDate>Wed, 31 Mar 2021 00:00:00 +0000</pubDate>
+      
+      <guid>http://ryan.himmelwright.net/tags/macos/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>SSH</title>
+      <link>http://ryan.himmelwright.net/tags/ssh/</link>
+      <pubDate>Wed, 31 Mar 2021 00:00:00 +0000</pubDate>
+      
+      <guid>http://ryan.himmelwright.net/tags/ssh/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>containers</title>
@@ -70,24 +106,6 @@
       <pubDate>Tue, 02 Mar 2021 00:00:00 +0000</pubDate>
       
       <guid>http://ryan.himmelwright.net/tags/macbook/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>macos</title>
-      <link>http://ryan.himmelwright.net/tags/macos/</link>
-      <pubDate>Tue, 02 Mar 2021 00:00:00 +0000</pubDate>
-      
-      <guid>http://ryan.himmelwright.net/tags/macos/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>linux</title>
-      <link>http://ryan.himmelwright.net/tags/linux/</link>
-      <pubDate>Sun, 31 Jan 2021 00:00:00 +0000</pubDate>
-      
-      <guid>http://ryan.himmelwright.net/tags/linux/</guid>
       <description></description>
     </item>
     
@@ -263,15 +281,6 @@
     </item>
     
     <item>
-      <title>Applications</title>
-      <link>http://ryan.himmelwright.net/tags/applications/</link>
-      <pubDate>Sun, 28 Jun 2020 00:00:00 +0000</pubDate>
-      
-      <guid>http://ryan.himmelwright.net/tags/applications/</guid>
-      <description></description>
-    </item>
-    
-    <item>
       <title>Notes</title>
       <link>http://ryan.himmelwright.net/tags/notes/</link>
       <pubDate>Sun, 28 Jun 2020 00:00:00 +0000</pubDate>
@@ -376,15 +385,6 @@
       <pubDate>Wed, 04 Dec 2019 00:00:00 +0000</pubDate>
       
       <guid>http://ryan.himmelwright.net/tags/shell/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>SSH</title>
-      <link>http://ryan.himmelwright.net/tags/ssh/</link>
-      <pubDate>Wed, 04 Dec 2019 00:00:00 +0000</pubDate>
-      
-      <guid>http://ryan.himmelwright.net/tags/ssh/</guid>
       <description></description>
     </item>
     

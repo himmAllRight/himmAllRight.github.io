@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Using Remote VSCode -- λ ryan. himmelwright. net</title>
+
+    
+
+    
+    <link href="http://ryan.himmelwright.net/css/bootstrap.min.css" rel="stylesheet">
+
+    
+    <link href="http://ryan.himmelwright.net/css/clean-blog.min.css" rel="stylesheet">
+
+    
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href='//fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+
+    
+    
+    
+
+
+
+    
+    <script type="text/javascript">
+        var _paq = _paq || [];
+         
+        _paq.push(["setDocumentTitle", document.domain + "/" + document.title]);
+        _paq.push(["setCookieDomain", "*.ryan.himmelwright.net"]);
+        _paq.push(["setDomains", ["*.ryan.himmelwright.net"]]);
+        _paq.push(['trackPageView']);
+        _paq.push(['enableLinkTracking']);
+        (function() {
+        var u="//cloud.himmelwright.net/piwik/";
+        _paq.push(['setTrackerUrl', u+'piwik.php']);
+        _paq.push(['setSiteId', '1']);
+        var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+        g.type='text/javascript'; g.async=true; g.defer=true; g.src=u+'piwik.js'; s.parentNode.insertBefore(g,s);
+        })();
+        </script>
+        <noscript><p><img src="//cloud.himmelwright.net/piwik/piwik.php?idsite=1&rec=1" style="border:0;" alt="" /></p></noscript>
+        
+
+
+
+</head>
+
+<body>
+
+    
+    <nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+        <div class="container-fluid">
+            
+            <div class="navbar-header page-scroll">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="http://ryan.himmelwright.net">λ ryan. himmelwright. net</a>
+            </div>
+
+                       
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    
+                    <li>
+                        <a href="../../">home</a>
+                    </li>
+                    
+                    <li>
+                        <a href="../../pages/about/">About</a>
+                    </li>
+                    
+                    <li>
+                        <a href="../../pages/homelab/">Homelab</a>
+                    </li>
+                    
+                    <li>
+                        <a href="../../tags">tags</a>
+                    </li>
+                    
+                    <li>
+                        <a href="../../post/">Archives</a>
+                    </li>
+                    
+                    <li>
+                        <a href="../../post/index.xml">RSS</a>
+                    </li>
+                    
+                  </ul>
+            </div>
+           
+
+        </div>
+        
+    </nav>
+
+
+
+
+<header class="intro-header" style="background-image: url('http://ryan.himmelwright.net/img/posts/remote-vscode/duke_campus_header.jpeg')">
+    
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <h1>Using Remote VSCode</h1>
+                    <h2 class="subheading"></h2>
+                    <span class="meta">
+                        
+Posted by <a href="#">Ryan Himmelwright</a> on Wed, Mar 31, 2021
+
+
+
+
+
+
+
+<br />
+Tags <a href="../../tags/linux">linux</a>, <a href="../../tags/macos">macos</a>, <a href="../../tags/applications">applications</a>, <a href="../../tags/ssh">ssh</a>
+
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <span class="header-caption">Duke University, Durham NC</span>
+    
+    </header>
+
+    
+    <article>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                    
+                    <p>I mostly work on <a href="../../post/selecting-charmeleons-upgrades/">my desktop</a>, but
+usually <em>from</em> another computer, like my
+<a href="../../post/m1-air-initial-thoughts/">laptop</a>. Historically, the most common
+method I use for this has been combining <code>neovim</code> and <code>tmux</code> (with
+<a href="https://github.com/tmux-python/tmuxp">tmuxp</a>, for ease). However, more often
+than not, I now find myself using <a href="https://code.visualstudio.com">VS Code</a>
+with it&rsquo;s <a href="https://code.visualstudio.com/docs/remote/remote-overview">remote development
+plugin</a>. Here&rsquo;s
+how.</p>
+
+<h2 id="install-the-remote-development-plugin">Install the Remote Development Plugin</h2>
+
+<p>To get started, first make sure that VS code is installed on your machine.
+This can be found on the project&rsquo;s <a href="https://code.visualstudio.com">website</a>,
+or even as a <a href="https://flathub.org/apps/details/com.visualstudio.code">flathub
+flatpak</a></p>
+
+<p><center>
+<video style="max-width:100%;" controls>
+  <source src="../../img/posts/remote-vscode/install_remote_vscode.mp4" type="video/mp4">
+  <source src="movie.ogg" type="video/ogg">
+Your browser does not support the video tag.
+</video>
+<div id="caption">Installing the Remote Development Plugin</id>
+</center></p>
+
+<p>Next, to instal the plugin, click the Extensions tab in the side bar (The
+icon with four squares). From there, search for the extension by using
+something like &lsquo;remote development&rsquo; as the search term. The <code>Remote
+Development</code> extension should appear in the list. Select it, and click <code>Install</code>.</p>
+
+<p>This extension is actually a package that bundles three extensions: <code>Remote -
+SSH</code>, <code>Remote - WSL</code>, and <code>Remote - Containers</code>. Alternatively, you can just install the one you need.</p>
+
+<h2 id="connect-to-the-server">Connect to the Server</h2>
+
+<p><center>
+<video style="max-width:100%;" controls>
+  <source src="../../img/posts/remote-vscode/remote_vscode_config.mp4" type="video/mp4">
+  <source src="movie.ogg" type="video/ogg">
+Your browser does not support the video tag.
+</video>
+<div id="caption">Connecting to a remote machine in vs code</id>
+</center></p>
+
+<p>With the remote plugin installed, we can now connect to a remote machine. I
+mostly do this using <code>ssh</code>. Make sure you first have ssh keys copied to the
+device you want to link to. Then, open the command pallet (<code>CMD/CTRL-Shift-P</code>), and search for the <code>Remote-SSH: Connect to Host...</code> command, and run it.</p>
+
+<p>This will prompt you for an ssh host to connect to. Just enter a <code>host</code> like
+you would when using <code>ssh</code>. For example, <code>ryan@example.com</code>. If it&rsquo;s the
+first time adding a host, the plugin will ask where it can save a config file
+for the hosts. I usually just select one of the defaults it offers me.</p>
+
+<p><center>
+<a href="../../img/posts/remote-vscode/remote_window_status.png"><img alt="Remote Window connected status" src="../../img/posts/remote-vscode/remote_window_status.png" style="max-width: 100%;"/></a>
+<div class="caption">The connected status is displayed in the lower left of the window (top window: remote, bottom: local)</div>
+</center></p>
+
+<p>When connecting to a remote machine, VS code will usually pop open a new
+window. To verify, the ip address of the machine that the window is connected
+to can be found in lower left corner.</p>
+
+<h2 id="working-on-projects-remotely">Working on Projects, Remotely</h2>
+
+<p><center>
+<a href="../../img/posts/remote-vscode/open_remote_dir.png"><img alt="Opening a remote dir" src="../../img/posts/remote-vscode/open_remote_dir.png" style="max-width: 100%;"/></a>
+<div class="caption">Opening a directory in the remote window</div>
+</center></p>
+
+<p>When working in a remote VS Code window, everything is passed on from the
+remote machine, as if you were sitting down at that computer. When opening a
+new file or folder, you browse the contents of the <em>remote filesystem</em>, not
+the local one.</p>
+
+<p>Even the built in terminal runs on the remote machine. I still work in
+<code>tmux</code>, so I have my vscode terminal attach whatever <code>tmux</code> session I need.
+This provides me with the flexibility to switch to a new machine and pickup
+where I left off. Using this setup, I get a full graphical IDE window, while
+still reaping the benefits of <code>vim</code> + <code>tmux</code>.</p>
+
+<p><center>
+<a href="../../img/posts/remote-vscode/working_remote_window.png"><img alt="Working on a post in vs code with vim and tmux opened in the shell" src="../../img/posts/remote-vscode/working_remote_window.png" style="max-width: 100%;"/></a>
+<div class="caption">Working on this post, with <code>vim</code> opened in <code>tmux</code> in the built-in terminal</div>
+</center></p>
+
+<p>And yes&hellip; you <em>can</em> run <code>vim</code>, <em>inside</em> <code>tmux</code>, <em>in</em> the built-in VScode
+terminal, <em>in</em> a VScode remote window. This is something I actually do quite
+often XD.</p>
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p>I am almost always working <em>from</em> a different machine than the one which my
+files and work are on. This setup has been idea for how I work. It is easy to
+use, yet very powerful.</p>
+
+<p>Sitting in front a gruvbox-themed VSCode window, connected to my desktop, and
+typing using vim keybindings (via a vim plugin) has become my new default, no
+matter what computer (or VM) I am physically working from. I love it.</p>
+
+                    
+                    
+                    
+                         <div style="float: right; text-decoration: underline; text-align: right;">Prev Post:</div>
+                    
+                    <br>
+                    
+                    
+                        <a href="http://ryan.himmelwright.net/post/jenkins-parallel-stashing/" style="text-align: right; float: right; max-width: 40%">Jenkins Parallel Stashing</a>
+                    
+
+			
+			<div class="comment-section">
+			  
+   <div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "himmallright" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+			</div>
+                </div>
+            </div>
+        </div>
+    </article>
+
+        <hr>
+    
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                  <ul class="list-inline text-center">
+                    
+                      <li>
+                        <a href="mailto:ryan@himmelwright.net">
+                          <span class="fa-stack fa-lg">
+                            <i class="fa fa-circle fa-stack-2x"></i>
+                            <i class="fa fa-envelope-o fa-stack-1x fa-inverse"></i>
+                          </span>
+                        </a>
+                      </li>
+                    
+                    
+                    <li>
+                      <a href="https://github.com/himmAllRight">
+                        <span class="fa-stack fa-lg">
+                          <i class="fa fa-circle fa-stack-2x"></i>
+                          <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                        </span>
+                      </a>
+                    </li>
+                    
+                    <li>
+                      <a href="https://www.linkedin.com/in/ryan-himmelwright-b3891774/">
+                        <span class="fa-stack fa-lg">
+                          <i class="fa fa-circle fa-stack-2x"></i>
+                          <i class="fa fa-linkedin fa-stack-1x fa-inverse"></i>
+                        </span>
+                      </a>
+                    </li>
+                    
+                  </ul>
+<p class="copyright text-muted">
+
+<a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img
+  alt="Creative Commons License" style="border-width:0"
+  src="https://i.creativecommons.org/l/by/4.0/88x31.png" /></a><br />This work
+by <a xmlns:cc="http://creativecommons.org/ns#" href="http://ryan.himmelwright.net" property="cc:attributionName" rel="cc:attributionURL">Ryan Himmelwright</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
+</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    
+    <script src="http://ryan.himmelwright.net/js/jquery.min.js"></script>
+
+    
+    <script src="http://ryan.himmelwright.net/js/bootstrap.min.js"></script>
+
+    
+    <script src="http://ryan.himmelwright.net/js/clean-blog.js"></script>
+
+    
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-123-45', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+
+
+</body>
+
+</html>
+

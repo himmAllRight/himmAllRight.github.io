@@ -5,10 +5,117 @@
     <description>Recent content in Applications on λ ryan. himmelwright. net</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 28 Jun 2020 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 31 Mar 2021 00:00:00 +0000</lastBuildDate>
     
         <atom:link href="http://ryan.himmelwright.net/tags/applications/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Using Remote VSCode</title>
+      <link>http://ryan.himmelwright.net/post/vscode-remote/</link>
+      <pubDate>Wed, 31 Mar 2021 00:00:00 +0000</pubDate>
+      
+      <guid>http://ryan.himmelwright.net/post/vscode-remote/</guid>
+      <description>&lt;p&gt;I mostly work on &lt;a href=&#34;../../post/selecting-charmeleons-upgrades/&#34;&gt;my desktop&lt;/a&gt;, but
+usually &lt;em&gt;from&lt;/em&gt; another computer, like my
+&lt;a href=&#34;../../post/m1-air-initial-thoughts/&#34;&gt;laptop&lt;/a&gt;. Historically, the most common
+method I use for this has been combining &lt;code&gt;neovim&lt;/code&gt; and &lt;code&gt;tmux&lt;/code&gt; (with
+&lt;a href=&#34;https://github.com/tmux-python/tmuxp&#34;&gt;tmuxp&lt;/a&gt;, for ease). However, more often
+than not, I now find myself using &lt;a href=&#34;https://code.visualstudio.com&#34;&gt;VS Code&lt;/a&gt;
+with it&amp;rsquo;s &lt;a href=&#34;https://code.visualstudio.com/docs/remote/remote-overview&#34;&gt;remote development
+plugin&lt;/a&gt;. Here&amp;rsquo;s
+how.&lt;/p&gt;
+
+&lt;h2 id=&#34;install-the-remote-development-plugin&#34;&gt;Install the Remote Development Plugin&lt;/h2&gt;
+
+&lt;p&gt;To get started, first make sure that VS code is installed on your machine.
+This can be found on the project&amp;rsquo;s &lt;a href=&#34;https://code.visualstudio.com&#34;&gt;website&lt;/a&gt;,
+or even as a &lt;a href=&#34;https://flathub.org/apps/details/com.visualstudio.code&#34;&gt;flathub
+flatpak&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;center&gt;
+&lt;video style=&#34;max-width:100%;&#34; controls&gt;
+  &lt;source src=&#34;../../img/posts/remote-vscode/install_remote_vscode.mp4&#34; type=&#34;video/mp4&#34;&gt;
+  &lt;source src=&#34;movie.ogg&#34; type=&#34;video/ogg&#34;&gt;
+Your browser does not support the video tag.
+&lt;/video&gt;
+&lt;div id=&#34;caption&#34;&gt;Installing the Remote Development Plugin&lt;/id&gt;
+&lt;/center&gt;&lt;/p&gt;
+
+&lt;p&gt;Next, to instal the plugin, click the Extensions tab in the side bar (The
+icon with four squares). From there, search for the extension by using
+something like &amp;lsquo;remote development&amp;rsquo; as the search term. The &lt;code&gt;Remote
+Development&lt;/code&gt; extension should appear in the list. Select it, and click &lt;code&gt;Install&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;This extension is actually a package that bundles three extensions: &lt;code&gt;Remote -
+SSH&lt;/code&gt;, &lt;code&gt;Remote - WSL&lt;/code&gt;, and &lt;code&gt;Remote - Containers&lt;/code&gt;. Alternatively, you can just install the one you need.&lt;/p&gt;
+
+&lt;h2 id=&#34;connect-to-the-server&#34;&gt;Connect to the Server&lt;/h2&gt;
+
+&lt;p&gt;&lt;center&gt;
+&lt;video style=&#34;max-width:100%;&#34; controls&gt;
+  &lt;source src=&#34;../../img/posts/remote-vscode/remote_vscode_config.mp4&#34; type=&#34;video/mp4&#34;&gt;
+  &lt;source src=&#34;movie.ogg&#34; type=&#34;video/ogg&#34;&gt;
+Your browser does not support the video tag.
+&lt;/video&gt;
+&lt;div id=&#34;caption&#34;&gt;Connecting to a remote machine in vs code&lt;/id&gt;
+&lt;/center&gt;&lt;/p&gt;
+
+&lt;p&gt;With the remote plugin installed, we can now connect to a remote machine. I
+mostly do this using &lt;code&gt;ssh&lt;/code&gt;. Make sure you first have ssh keys copied to the
+device you want to link to. Then, open the command pallet (&lt;code&gt;CMD/CTRL-Shift-P&lt;/code&gt;), and search for the &lt;code&gt;Remote-SSH: Connect to Host...&lt;/code&gt; command, and run it.&lt;/p&gt;
+
+&lt;p&gt;This will prompt you for an ssh host to connect to. Just enter a &lt;code&gt;host&lt;/code&gt; like
+you would when using &lt;code&gt;ssh&lt;/code&gt;. For example, &lt;code&gt;ryan@example.com&lt;/code&gt;. If it&amp;rsquo;s the
+first time adding a host, the plugin will ask where it can save a config file
+for the hosts. I usually just select one of the defaults it offers me.&lt;/p&gt;
+
+&lt;p&gt;&lt;center&gt;
+&lt;a href=&#34;../../img/posts/remote-vscode/remote_window_status.png&#34;&gt;&lt;img alt=&#34;Remote Window connected status&#34; src=&#34;../../img/posts/remote-vscode/remote_window_status.png&#34; style=&#34;max-width: 100%;&#34;/&gt;&lt;/a&gt;
+&lt;div class=&#34;caption&#34;&gt;The connected status is displayed in the lower left of the window (top window: remote, bottom: local)&lt;/div&gt;
+&lt;/center&gt;&lt;/p&gt;
+
+&lt;p&gt;When connecting to a remote machine, VS code will usually pop open a new
+window. To verify, the ip address of the machine that the window is connected
+to can be found in lower left corner.&lt;/p&gt;
+
+&lt;h2 id=&#34;working-on-projects-remotely&#34;&gt;Working on Projects, Remotely&lt;/h2&gt;
+
+&lt;p&gt;&lt;center&gt;
+&lt;a href=&#34;../../img/posts/remote-vscode/open_remote_dir.png&#34;&gt;&lt;img alt=&#34;Opening a remote dir&#34; src=&#34;../../img/posts/remote-vscode/open_remote_dir.png&#34; style=&#34;max-width: 100%;&#34;/&gt;&lt;/a&gt;
+&lt;div class=&#34;caption&#34;&gt;Opening a directory in the remote window&lt;/div&gt;
+&lt;/center&gt;&lt;/p&gt;
+
+&lt;p&gt;When working in a remote VS Code window, everything is passed on from the
+remote machine, as if you were sitting down at that computer. When opening a
+new file or folder, you browse the contents of the &lt;em&gt;remote filesystem&lt;/em&gt;, not
+the local one.&lt;/p&gt;
+
+&lt;p&gt;Even the built in terminal runs on the remote machine. I still work in
+&lt;code&gt;tmux&lt;/code&gt;, so I have my vscode terminal attach whatever &lt;code&gt;tmux&lt;/code&gt; session I need.
+This provides me with the flexibility to switch to a new machine and pickup
+where I left off. Using this setup, I get a full graphical IDE window, while
+still reaping the benefits of &lt;code&gt;vim&lt;/code&gt; + &lt;code&gt;tmux&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;&lt;center&gt;
+&lt;a href=&#34;../../img/posts/remote-vscode/working_remote_window.png&#34;&gt;&lt;img alt=&#34;Working on a post in vs code with vim and tmux opened in the shell&#34; src=&#34;../../img/posts/remote-vscode/working_remote_window.png&#34; style=&#34;max-width: 100%;&#34;/&gt;&lt;/a&gt;
+&lt;div class=&#34;caption&#34;&gt;Working on this post, with &lt;code&gt;vim&lt;/code&gt; opened in &lt;code&gt;tmux&lt;/code&gt; in the built-in terminal&lt;/div&gt;
+&lt;/center&gt;&lt;/p&gt;
+
+&lt;p&gt;And yes&amp;hellip; you &lt;em&gt;can&lt;/em&gt; run &lt;code&gt;vim&lt;/code&gt;, &lt;em&gt;inside&lt;/em&gt; &lt;code&gt;tmux&lt;/code&gt;, &lt;em&gt;in&lt;/em&gt; the built-in VScode
+terminal, &lt;em&gt;in&lt;/em&gt; a VScode remote window. This is something I actually do quite
+often XD.&lt;/p&gt;
+
+&lt;h2 id=&#34;conclusion&#34;&gt;Conclusion&lt;/h2&gt;
+
+&lt;p&gt;I am almost always working &lt;em&gt;from&lt;/em&gt; a different machine than the one which my
+files and work are on. This setup has been idea for how I work. It is easy to
+use, yet very powerful.&lt;/p&gt;
+
+&lt;p&gt;Sitting in front a gruvbox-themed VSCode window, connected to my desktop, and
+typing using vim keybindings (via a vim plugin) has become my new default, no
+matter what computer (or VM) I am physically working from. I love it.&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>Trying out Notion</title>
