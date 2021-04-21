@@ -5,10 +5,127 @@
     <description>Recent content in Posts on λ ryan. himmelwright. net</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 31 Mar 2021 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 21 Apr 2021 00:00:00 +0000</lastBuildDate>
     
         <atom:link href="http://ryan.himmelwright.net/post/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Setting up NFS</title>
+      <link>http://ryan.himmelwright.net/post/setup-nfs/</link>
+      <pubDate>Wed, 21 Apr 2021 00:00:00 +0000</pubDate>
+      
+      <guid>http://ryan.himmelwright.net/post/setup-nfs/</guid>
+      <description>&lt;p&gt;Thanks to VFIO passthrough, I find myself sitting in front for a virtualized
+Linux system on a daily basis. While this setup is unbelievable, it does come
+with a few complications. One such hurdle is sharing files located on the
+host system with the VMs. After trying a few methods, I determined that nfs
+was the simplest to get up and running. Here&amp;rsquo;s how.&lt;/p&gt;
+
+&lt;h2 id=&#34;the-problem&#34;&gt;The Problem&lt;/h2&gt;
+
+&lt;p&gt;&lt;center&gt;
+&lt;a href=&#34;../../img/posts/setup-nfs/no_music.png&#34;&gt;&lt;img alt=&#34;Not Music in the VM&#34; src=&#34;../../img/posts/setup-nfs/no_music.png&#34; style=&#34;max-width: 100%;&#34;/&gt;&lt;/a&gt;
+&lt;div class=&#34;caption&#34;&gt;There&amp;rsquo;s no music files in the VM and the player errors looking for the missing files.&lt;/div&gt;
+&lt;/center&gt;&lt;/p&gt;
+
+&lt;p&gt;My desktop is my main workstation. It is the hub that holds all of the data I
+use, including documents, music, and videos. When I am working in a VM, I
+often want access to that data. I like listening to my music
+while working in VMs 😉.&lt;/p&gt;
+
+&lt;p&gt;It would be inefficient, both in time and disk space, to copy all the files I
+desired to each VM that I use. Setting up a network filesystem is an can get
+around this. After some trial and error, I eventually concluded that for &lt;em&gt;my
+use&lt;/em&gt; (linux guests on a linux host), NFS worked. If you want to share with
+Windows guests, something like samba might work better.&lt;/p&gt;
+
+&lt;h2 id=&#34;server-setup&#34;&gt;Server Setup&lt;/h2&gt;
+
+&lt;p&gt;First, we want to setup the sever. Be sure to run the following steps on the
+&lt;em&gt;host&lt;/em&gt; machine.&lt;/p&gt;
+
+&lt;h3 id=&#34;install-dependencies&#34;&gt;Install Dependencies&lt;/h3&gt;
+
+&lt;p&gt;Being on a Fedora host, I installed the dependencies using the following
+&lt;code&gt;dnf&lt;/code&gt; command:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;sudo dnf -y install nfs-utils &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h3 id=&#34;configure-the-domain-name&#34;&gt;Configure The Domain Name&lt;/h3&gt;
+
+&lt;p&gt;Next, open up the file &lt;code&gt;/etc/idmapd.conf&lt;/code&gt; and make sure that the &lt;code&gt;Domain =
+...&lt;/code&gt; line (usually line 5) is un-commented, and set to your machine&amp;rsquo;s
+hostname. If not, edit it to configure the &lt;code&gt;idmapd&lt;/code&gt; domain name:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-ini&#34; data-lang=&#34;ini&#34;&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;Domain&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;charmeleon&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h3 id=&#34;define-the-exports-file&#34;&gt;Define the Exports File&lt;/h3&gt;
+
+&lt;p&gt;After everything is installed, we need to create the &lt;em&gt;exports&lt;/em&gt; file. This
+file will define all of the nfs shares we want to make available. Create and
+open the file &lt;code&gt;/etc/exports&lt;/code&gt;, and add something similar for each directory
+you want to share:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;/home/ryan/Seafile      10.0.7.0/24(rw,all_squash,insecure)
+/home/ryan/Music        10.0.7.0/24(rw)
+/Data/Videos            10.0.7.0/24(rw)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;I like to share my Music and Video folders, along with my Seafile library (so
+I don&amp;rsquo;t have to configure it on each VM).&lt;/p&gt;
+
+&lt;p&gt;Each line breaks down as follows:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;The directory location to share (ex: &lt;code&gt;/home/ryan/Music&lt;/code&gt;)&lt;/li&gt;
+&lt;li&gt;The range of addresses that are allowed to access the share (I use
+&lt;code&gt;10.0.7.0/24&lt;/code&gt;, which allows devices on my home network)&lt;/li&gt;
+&lt;li&gt;The properties for each share. I use &lt;code&gt;(rw)&lt;/code&gt; to allow read and write
+permissions.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;That should be it. Feel free to dig deeper into all the nfs share settings if
+you need them, especially if you want to be a bit more secure in your setup!&lt;/p&gt;
+
+&lt;h3 id=&#34;firewall-other-permissions&#34;&gt;Firewall/other permissions&lt;/h3&gt;
+
+&lt;p&gt;After creating the exports file, we need to allow the service through the
+firewall. To do so, permanently allow the nfs service:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;sudo firewall-cmd --add-service&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;nfs --permanent&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Don&amp;rsquo;t forget to reload the firewall!&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;sudo firewall-cmd --reload&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h3 id=&#34;start-the-service&#34;&gt;Start the service&lt;/h3&gt;
+
+&lt;p&gt;Last but not least, make sure the &lt;code&gt;rpcbind&lt;/code&gt; and &lt;code&gt;nfs-sever&lt;/code&gt; services are
+started and enabled to autostart after a reboot.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;sudo systemctl enable --now rpcbind nfs-server&lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id=&#34;vm-client-setup&#34;&gt;VM Client Setup&lt;/h2&gt;
+
+&lt;p&gt;With the server setup, we should be able to mount the shares in the VMs
+now. First, ensure the &lt;code&gt;nfs-utils&lt;/code&gt; package is installed there too.&lt;/p&gt;
+
+&lt;h3 id=&#34;mount&#34;&gt;Mount&lt;/h3&gt;
+
+&lt;p&gt;Now, use the &lt;code&gt;mount&lt;/code&gt; command with &lt;code&gt;nfs&lt;/code&gt; for the &lt;code&gt;-t&lt;/code&gt; flag to mount the
+shares:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;sudo mount -t nfs 10.0.7.82:/home/ryan/Music /home/ryan/Network/Music&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;If you experience weird issues when mount the shares, a &lt;code&gt;reboot&lt;/code&gt; &lt;em&gt;may&lt;/em&gt; help.
+I occasionally hit permission issues that seem to be resolved after a
+restart.&lt;/p&gt;
+
+&lt;h4 id=&#34;fstab&#34;&gt;fstab&lt;/h4&gt;
+
+&lt;p&gt;It is possible to add the share to your &lt;code&gt;/etc/fstab&lt;/code&gt; file, so that it
+auto-mounts during boot. However, I don&amp;rsquo;t usually do this. I like to
+make the conscious decision to mount data from the host machine,
+as I don&amp;rsquo;t always need it available in the VMs.&lt;/p&gt;
+
+&lt;h2 id=&#34;conclusion&#34;&gt;Conclusion&lt;/h2&gt;
+
+&lt;p&gt;&lt;center&gt;
+&lt;a href=&#34;../../img/posts/setup-nfs/vm_music.png&#34;&gt;&lt;img alt=&#34;Listening to mounted Music in the VM&#34; src=&#34;../../img/posts/setup-nfs/vm_music.png&#34; style=&#34;max-width: 100%;&#34;/&gt;&lt;/a&gt;
+&lt;div class=&#34;caption&#34;&gt;Listening to music in a VM, mounted from a nfs share on the host&lt;/div&gt;
+&lt;/center&gt;&lt;/p&gt;
+
+&lt;p&gt;That&amp;rsquo;s about it. This was just the basics of setting up a nfs share, and I&amp;rsquo;m
+sure I do &lt;em&gt;something&lt;/em&gt; wrong, but so far&amp;hellip; it has worked great for my simple
+use case of sharing data between the host and guests on the same computer.
+Enjoy!&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>Using Remote VSCode</title>

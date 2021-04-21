@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Setting up NFS -- λ ryan. himmelwright. net</title>
+
+    
+
+    
+    <link href="http://ryan.himmelwright.net/css/bootstrap.min.css" rel="stylesheet">
+
+    
+    <link href="http://ryan.himmelwright.net/css/clean-blog.min.css" rel="stylesheet">
+
+    
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href='//fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+
+    
+    
+    
+
+
+
+    
+    <script type="text/javascript">
+        var _paq = _paq || [];
+         
+        _paq.push(["setDocumentTitle", document.domain + "/" + document.title]);
+        _paq.push(["setCookieDomain", "*.ryan.himmelwright.net"]);
+        _paq.push(["setDomains", ["*.ryan.himmelwright.net"]]);
+        _paq.push(['trackPageView']);
+        _paq.push(['enableLinkTracking']);
+        (function() {
+        var u="//cloud.himmelwright.net/piwik/";
+        _paq.push(['setTrackerUrl', u+'piwik.php']);
+        _paq.push(['setSiteId', '1']);
+        var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+        g.type='text/javascript'; g.async=true; g.defer=true; g.src=u+'piwik.js'; s.parentNode.insertBefore(g,s);
+        })();
+        </script>
+        <noscript><p><img src="//cloud.himmelwright.net/piwik/piwik.php?idsite=1&rec=1" style="border:0;" alt="" /></p></noscript>
+        
+
+
+
+</head>
+
+<body>
+
+    
+    <nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+        <div class="container-fluid">
+            
+            <div class="navbar-header page-scroll">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="http://ryan.himmelwright.net">λ ryan. himmelwright. net</a>
+            </div>
+
+                       
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    
+                    <li>
+                        <a href="../../">home</a>
+                    </li>
+                    
+                    <li>
+                        <a href="../../pages/about/">About</a>
+                    </li>
+                    
+                    <li>
+                        <a href="../../pages/homelab/">Homelab</a>
+                    </li>
+                    
+                    <li>
+                        <a href="../../tags">tags</a>
+                    </li>
+                    
+                    <li>
+                        <a href="../../post/">Archives</a>
+                    </li>
+                    
+                    <li>
+                        <a href="../../post/index.xml">RSS</a>
+                    </li>
+                    
+                  </ul>
+            </div>
+           
+
+        </div>
+        
+    </nav>
+
+
+
+
+<header class="intro-header" style="background-image: url('http://ryan.himmelwright.net/img/posts/setup-nfs/pocosin_lakes_wildlife_header.jpeg')">
+    
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <h1>Setting up NFS</h1>
+                    <h2 class="subheading"></h2>
+                    <span class="meta">
+                        
+Posted by <a href="#">Ryan Himmelwright</a> on Wed, Apr 21, 2021
+
+
+
+
+
+
+
+<br />
+Tags <a href="../../tags/linux">linux</a>, <a href="../../tags/filesystem">filesystem</a>, <a href="../../tags/homelab">homelab</a>
+
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <span class="header-caption">Pocosin Lakes Wildlife Refuge, NC</span>
+    
+    </header>
+
+    
+    <article>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                    
+                    <p>Thanks to VFIO passthrough, I find myself sitting in front for a virtualized
+Linux system on a daily basis. While this setup is unbelievable, it does come
+with a few complications. One such hurdle is sharing files located on the
+host system with the VMs. After trying a few methods, I determined that nfs
+was the simplest to get up and running. Here&rsquo;s how.</p>
+
+<h2 id="the-problem">The Problem</h2>
+
+<p><center>
+<a href="../../img/posts/setup-nfs/no_music.png"><img alt="Not Music in the VM" src="../../img/posts/setup-nfs/no_music.png" style="max-width: 100%;"/></a>
+<div class="caption">There&rsquo;s no music files in the VM and the player errors looking for the missing files.</div>
+</center></p>
+
+<p>My desktop is my main workstation. It is the hub that holds all of the data I
+use, including documents, music, and videos. When I am working in a VM, I
+often want access to that data. I like listening to my music
+while working in VMs 😉.</p>
+
+<p>It would be inefficient, both in time and disk space, to copy all the files I
+desired to each VM that I use. Setting up a network filesystem is an can get
+around this. After some trial and error, I eventually concluded that for <em>my
+use</em> (linux guests on a linux host), NFS worked. If you want to share with
+Windows guests, something like samba might work better.</p>
+
+<h2 id="server-setup">Server Setup</h2>
+
+<p>First, we want to setup the sever. Be sure to run the following steps on the
+<em>host</em> machine.</p>
+
+<h3 id="install-dependencies">Install Dependencies</h3>
+
+<p>Being on a Fedora host, I installed the dependencies using the following
+<code>dnf</code> command:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">sudo dnf -y install nfs-utils </code></pre></div>
+<h3 id="configure-the-domain-name">Configure The Domain Name</h3>
+
+<p>Next, open up the file <code>/etc/idmapd.conf</code> and make sure that the <code>Domain =
+...</code> line (usually line 5) is un-commented, and set to your machine&rsquo;s
+hostname. If not, edit it to configure the <code>idmapd</code> domain name:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ini" data-lang="ini"><span style="color:#a6e22e">Domain</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">charmeleon</span></code></pre></div>
+<h3 id="define-the-exports-file">Define the Exports File</h3>
+
+<p>After everything is installed, we need to create the <em>exports</em> file. This
+file will define all of the nfs shares we want to make available. Create and
+open the file <code>/etc/exports</code>, and add something similar for each directory
+you want to share:</p>
+<pre><code>/home/ryan/Seafile      10.0.7.0/24(rw,all_squash,insecure)
+/home/ryan/Music        10.0.7.0/24(rw)
+/Data/Videos            10.0.7.0/24(rw)</code></pre>
+<p>I like to share my Music and Video folders, along with my Seafile library (so
+I don&rsquo;t have to configure it on each VM).</p>
+
+<p>Each line breaks down as follows:</p>
+
+<ul>
+<li>The directory location to share (ex: <code>/home/ryan/Music</code>)</li>
+<li>The range of addresses that are allowed to access the share (I use
+<code>10.0.7.0/24</code>, which allows devices on my home network)</li>
+<li>The properties for each share. I use <code>(rw)</code> to allow read and write
+permissions.</li>
+</ul>
+
+<p>That should be it. Feel free to dig deeper into all the nfs share settings if
+you need them, especially if you want to be a bit more secure in your setup!</p>
+
+<h3 id="firewall-other-permissions">Firewall/other permissions</h3>
+
+<p>After creating the exports file, we need to allow the service through the
+firewall. To do so, permanently allow the nfs service:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">sudo firewall-cmd --add-service<span style="color:#f92672">=</span>nfs --permanent</code></pre></div>
+<p>Don&rsquo;t forget to reload the firewall!</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">sudo firewall-cmd --reload</code></pre></div>
+<h3 id="start-the-service">Start the service</h3>
+
+<p>Last but not least, make sure the <code>rpcbind</code> and <code>nfs-sever</code> services are
+started and enabled to autostart after a reboot.</p>
+<pre><code>sudo systemctl enable --now rpcbind nfs-server</code></pre>
+<h2 id="vm-client-setup">VM Client Setup</h2>
+
+<p>With the server setup, we should be able to mount the shares in the VMs
+now. First, ensure the <code>nfs-utils</code> package is installed there too.</p>
+
+<h3 id="mount">Mount</h3>
+
+<p>Now, use the <code>mount</code> command with <code>nfs</code> for the <code>-t</code> flag to mount the
+shares:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">sudo mount -t nfs 10.0.7.82:/home/ryan/Music /home/ryan/Network/Music</code></pre></div>
+<p>If you experience weird issues when mount the shares, a <code>reboot</code> <em>may</em> help.
+I occasionally hit permission issues that seem to be resolved after a
+restart.</p>
+
+<h4 id="fstab">fstab</h4>
+
+<p>It is possible to add the share to your <code>/etc/fstab</code> file, so that it
+auto-mounts during boot. However, I don&rsquo;t usually do this. I like to
+make the conscious decision to mount data from the host machine,
+as I don&rsquo;t always need it available in the VMs.</p>
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p><center>
+<a href="../../img/posts/setup-nfs/vm_music.png"><img alt="Listening to mounted Music in the VM" src="../../img/posts/setup-nfs/vm_music.png" style="max-width: 100%;"/></a>
+<div class="caption">Listening to music in a VM, mounted from a nfs share on the host</div>
+</center></p>
+
+<p>That&rsquo;s about it. This was just the basics of setting up a nfs share, and I&rsquo;m
+sure I do <em>something</em> wrong, but so far&hellip; it has worked great for my simple
+use case of sharing data between the host and guests on the same computer.
+Enjoy!</p>
+
+                    
+                    
+                    
+                         <div style="float: right; text-decoration: underline; text-align: right;">Prev Post:</div>
+                    
+                    <br>
+                    
+                    
+                        <a href="http://ryan.himmelwright.net/post/vscode-remote/" style="text-align: right; float: right; max-width: 40%">Using Remote VSCode</a>
+                    
+
+			
+			<div class="comment-section">
+			  
+   <div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "himmallright" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+			</div>
+                </div>
+            </div>
+        </div>
+    </article>
+
+        <hr>
+    
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                  <ul class="list-inline text-center">
+                    
+                      <li>
+                        <a href="mailto:ryan@himmelwright.net">
+                          <span class="fa-stack fa-lg">
+                            <i class="fa fa-circle fa-stack-2x"></i>
+                            <i class="fa fa-envelope-o fa-stack-1x fa-inverse"></i>
+                          </span>
+                        </a>
+                      </li>
+                    
+                    
+                    <li>
+                      <a href="https://github.com/himmAllRight">
+                        <span class="fa-stack fa-lg">
+                          <i class="fa fa-circle fa-stack-2x"></i>
+                          <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                        </span>
+                      </a>
+                    </li>
+                    
+                    <li>
+                      <a href="https://www.linkedin.com/in/ryan-himmelwright-b3891774/">
+                        <span class="fa-stack fa-lg">
+                          <i class="fa fa-circle fa-stack-2x"></i>
+                          <i class="fa fa-linkedin fa-stack-1x fa-inverse"></i>
+                        </span>
+                      </a>
+                    </li>
+                    
+                  </ul>
+<p class="copyright text-muted">
+
+<a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img
+  alt="Creative Commons License" style="border-width:0"
+  src="https://i.creativecommons.org/l/by/4.0/88x31.png" /></a><br />This work
+by <a xmlns:cc="http://creativecommons.org/ns#" href="http://ryan.himmelwright.net" property="cc:attributionName" rel="cc:attributionURL">Ryan Himmelwright</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
+</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    
+    <script src="http://ryan.himmelwright.net/js/jquery.min.js"></script>
+
+    
+    <script src="http://ryan.himmelwright.net/js/bootstrap.min.js"></script>
+
+    
+    <script src="http://ryan.himmelwright.net/js/clean-blog.js"></script>
+
+    
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-123-45', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+
+
+</body>
+
+</html>
+
