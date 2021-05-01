@@ -9,11 +9,8 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>filesystem -- λ ryan. himmelwright. net</title>
+    <title>Using kid3 Audio Tag Editor -- λ ryan. himmelwright. net</title>
 
-    
-    <link href="http://ryan.himmelwright.net/tags/filesystem/index.xml" rel="alternate" type="application/rss+xml" title="λ ryan. himmelwright. net" />
-    <link href="http://ryan.himmelwright.net/tags/filesystem/index.xml" rel="feed" type="application/rss+xml" title="λ ryan. himmelwright. net" />
     
 
     
@@ -110,56 +107,154 @@
     </nav>
 
 
-  
 
-  
-  <header class="intro-header" style="background-image: url('/img/default-header.jpg')">
-     <div class="container">
-       <div class="row">
-         <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-           <div class="site-heading">
-             <h1>filesystem</h1>
-             <hr class="small">
-             <span class="subheading"></span>
-           </div>
-         </div>
-       </div>
-     </div>
+
+<header class="intro-header" style="background-image: url('http://ryan.himmelwright.net/img/posts/using-kid3/dunes_trail_header.jpeg')">
+    
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <h1>Using kid3 Audio Tag Editor</h1>
+                    <h2 class="subheading"></h2>
+                    <span class="meta">
+                        
+Posted by <a href="#">Ryan Himmelwright</a> on Fri, Apr 30, 2021
+
+
+
+
+
+
+
+<br />
+Tags <a href="../../tags/application">application</a>, <a href="../../tags/filesystem">filesystem</a>, <a href="../../tags/open-source">open source</a>, <a href="../../tags/audio">audio</a>
+
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <span class="header-caption">Jockey&#39;s Ridge Stage Park, Nags Head, NC</span>
+    
     </header>
 
     
-    <div class="container">
-      <div class="row">
-        <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-          
-                             <div class="post-preview">
-                  <p class="post-meta"><a href="http://ryan.himmelwright.net/post/using-kid3/">Using kid3 Audio Tag Editor</a> on Fri, Apr 30, 2021
-                    <br />
-                    In 
+    <article>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                    
+                    <p>A few months ago, I set out to finally clean up and organize my music library.
+My goal was to get rid of all the random files, and ensure that every item was
+properly tagged so that it would accurately self-organize in the music players I
+use. This would not have been possible without the open source tool,
+<a href="https://kid3.kde.org">kid3</a>.</p>
 
-                    Tags <a href="../../tags/application">application</a>, <a href="../../tags/filesystem">filesystem</a>, <a href="../../tags/open-source">open source</a>, <a href="../../tags/audio">audio</a>
-                  </p>
-               </div>
+<h2 id="the-problem">The Problem</h2>
 
-          
-                             <div class="post-preview">
-                  <p class="post-meta"><a href="http://ryan.himmelwright.net/post/setup-nfs/">Setting up NFS</a> on Wed, Apr 21, 2021
-                    <br />
-                    In 
+<p>In order to clean up my music library, I needed a method to edit the metadata
+tags of the files. Music applications use these tags to grab information about a
+song. For example, a song&rsquo;s title, artist, album name, and release year are all
+contained in the a music file&rsquo;s tags.  Using this information, the music
+player is able to organize and sort the music by artist, album, year, genre, or
+by any other bit of data it knows.</p>
 
-                    Tags <a href="../../tags/linux">linux</a>, <a href="../../tags/filesystem">filesystem</a>, <a href="../../tags/homelab">homelab</a>
-                  </p>
-               </div>
+<p>In the past, I used a tool called <code>easytag</code> to edit the metadata of my files.
+However, after not being able to initially find it (I had the wrong name 😆), I
+started to look for a new tool. I needed something easy to use, as I did not
+want to waste a bunch of time learning a complicated new tool. After very
+little searching, I found <a href="https://kid3.kde.org">kid3</a>.</p>
 
-          
-          
+<h2 id="kid3">Kid3</h2>
+
+<p><center>
+<a href="../../img/posts/using-kid3/kid3.png"><img alt="kid3 window" src="../../img/posts/using-kid3/kid3.png" style="max-width: 100%;"/></a>
+<div class="caption">kid3 window</div>
+</center></p>
+
+<p>As a <a href="https://spins.fedoraproject.org/kde/">Fedora Plasma</a> user, I was happy to
+learn that kid3 appears to be maintained directly by the KDE team.  To use kid3,
+just drag and drop the files into it, add/edit any of the tag info, and save.
+New tags can also be added if they aren&rsquo;t listed.</p>
+
+<p>I started using kid3 on my Linux desktop&hellip; but one night I decided to work in
+the other room on my macBook. I sadly assumed I would have to find a different
+tool to use on macOS. However, while searching a new tool, I learned that kid3
+has a macOS build! In fact, in addition to Linux, the KDE team has official kid3
+builds for macOS, Windows, and Android! I love a good cross-platform tool.</p>
+
+<h2 id="efficiently-editing-album-tags">Efficiently Editing Album Tags</h2>
+
+<p><center>
+<a href="../../img/posts/using-kid3/multi-edit.png"><img alt="Editing multiple files in kid3" src="../../img/posts/using-kid3/multi-edit.png" style="max-width: 100%;"/></a>
+<div class="caption">Editing multiple files in kid3</div>
+</center></p>
+
+<p>After using kid3 it for a bit, I fell into a workflow that made the tedious task
+of grouping multiple files into single albums easier to manage. Specifically, I
+learned that I could select multiple files, and edit a field to apply to all of
+the selected items at one time.  Using this technique, I was able to write the
+artist, album, and year only once, instead of 10+ times for each album. This
+made it <em>much more</em> efficient than methods I had previously used while editing
+metadata.</p>
+
+<h3 id="conclusion">Conclusion</h3>
+
+<p><center>
+<a href="../../img/posts/using-kid3/tagged_music.png"><img alt="A custom album tagged in kid3" src="../../img/posts/using-kid3/tagged_music.png" style="max-width: 100%;"/></a>
+<div class="caption">A &lsquo;home-made&rsquo; file tagged in kid3, now properly sorted in my music player</div>
+</center></p>
+
+<p>That&rsquo;s all I have. This was a short post, but I think it was worth it. I love
+when I find a great open source, cross platform tool that does <em>exactly</em> what I
+need. Kid3 is a gem application. If you need to edit some audio
+tags, check it out. It certainly made my life much easier 🙂.</p>
+
+                    
+                    
+                    
+                         <div style="float: right; text-decoration: underline; text-align: right;">Prev Post:</div>
+                    
+                    <br>
+                    
+                    
+                        <a href="http://ryan.himmelwright.net/post/setup-nfs/" style="text-align: right; float: right; max-width: 40%">Setting up NFS</a>
+                    
+
+			
+			<div class="comment-section">
+			  
+   <div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "himmallright" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
 
 
+			</div>
+                </div>
+            </div>
         </div>
-      </div>
-    </div>
+    </article>
 
-    <hr>
+        <hr>
     
     <footer>
         <div class="container">

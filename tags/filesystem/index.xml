@@ -5,10 +5,83 @@
     <description>Recent content in filesystem on λ ryan. himmelwright. net</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 21 Apr 2021 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 30 Apr 2021 00:00:00 +0000</lastBuildDate>
     
         <atom:link href="http://ryan.himmelwright.net/tags/filesystem/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Using kid3 Audio Tag Editor</title>
+      <link>http://ryan.himmelwright.net/post/using-kid3/</link>
+      <pubDate>Fri, 30 Apr 2021 00:00:00 +0000</pubDate>
+      
+      <guid>http://ryan.himmelwright.net/post/using-kid3/</guid>
+      <description>&lt;p&gt;A few months ago, I set out to finally clean up and organize my music library.
+My goal was to get rid of all the random files, and ensure that every item was
+properly tagged so that it would accurately self-organize in the music players I
+use. This would not have been possible without the open source tool,
+&lt;a href=&#34;https://kid3.kde.org&#34;&gt;kid3&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h2 id=&#34;the-problem&#34;&gt;The Problem&lt;/h2&gt;
+
+&lt;p&gt;In order to clean up my music library, I needed a method to edit the metadata
+tags of the files. Music applications use these tags to grab information about a
+song. For example, a song&amp;rsquo;s title, artist, album name, and release year are all
+contained in the a music file&amp;rsquo;s tags.  Using this information, the music
+player is able to organize and sort the music by artist, album, year, genre, or
+by any other bit of data it knows.&lt;/p&gt;
+
+&lt;p&gt;In the past, I used a tool called &lt;code&gt;easytag&lt;/code&gt; to edit the metadata of my files.
+However, after not being able to initially find it (I had the wrong name 😆), I
+started to look for a new tool. I needed something easy to use, as I did not
+want to waste a bunch of time learning a complicated new tool. After very
+little searching, I found &lt;a href=&#34;https://kid3.kde.org&#34;&gt;kid3&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h2 id=&#34;kid3&#34;&gt;Kid3&lt;/h2&gt;
+
+&lt;p&gt;&lt;center&gt;
+&lt;a href=&#34;../../img/posts/using-kid3/kid3.png&#34;&gt;&lt;img alt=&#34;kid3 window&#34; src=&#34;../../img/posts/using-kid3/kid3.png&#34; style=&#34;max-width: 100%;&#34;/&gt;&lt;/a&gt;
+&lt;div class=&#34;caption&#34;&gt;kid3 window&lt;/div&gt;
+&lt;/center&gt;&lt;/p&gt;
+
+&lt;p&gt;As a &lt;a href=&#34;https://spins.fedoraproject.org/kde/&#34;&gt;Fedora Plasma&lt;/a&gt; user, I was happy to
+learn that kid3 appears to be maintained directly by the KDE team.  To use kid3,
+just drag and drop the files into it, add/edit any of the tag info, and save.
+New tags can also be added if they aren&amp;rsquo;t listed.&lt;/p&gt;
+
+&lt;p&gt;I started using kid3 on my Linux desktop&amp;hellip; but one night I decided to work in
+the other room on my macBook. I sadly assumed I would have to find a different
+tool to use on macOS. However, while searching a new tool, I learned that kid3
+has a macOS build! In fact, in addition to Linux, the KDE team has official kid3
+builds for macOS, Windows, and Android! I love a good cross-platform tool.&lt;/p&gt;
+
+&lt;h2 id=&#34;efficiently-editing-album-tags&#34;&gt;Efficiently Editing Album Tags&lt;/h2&gt;
+
+&lt;p&gt;&lt;center&gt;
+&lt;a href=&#34;../../img/posts/using-kid3/multi-edit.png&#34;&gt;&lt;img alt=&#34;Editing multiple files in kid3&#34; src=&#34;../../img/posts/using-kid3/multi-edit.png&#34; style=&#34;max-width: 100%;&#34;/&gt;&lt;/a&gt;
+&lt;div class=&#34;caption&#34;&gt;Editing multiple files in kid3&lt;/div&gt;
+&lt;/center&gt;&lt;/p&gt;
+
+&lt;p&gt;After using kid3 it for a bit, I fell into a workflow that made the tedious task
+of grouping multiple files into single albums easier to manage. Specifically, I
+learned that I could select multiple files, and edit a field to apply to all of
+the selected items at one time.  Using this technique, I was able to write the
+artist, album, and year only once, instead of 10+ times for each album. This
+made it &lt;em&gt;much more&lt;/em&gt; efficient than methods I had previously used while editing
+metadata.&lt;/p&gt;
+
+&lt;h3 id=&#34;conclusion&#34;&gt;Conclusion&lt;/h3&gt;
+
+&lt;p&gt;&lt;center&gt;
+&lt;a href=&#34;../../img/posts/using-kid3/tagged_music.png&#34;&gt;&lt;img alt=&#34;A custom album tagged in kid3&#34; src=&#34;../../img/posts/using-kid3/tagged_music.png&#34; style=&#34;max-width: 100%;&#34;/&gt;&lt;/a&gt;
+&lt;div class=&#34;caption&#34;&gt;A &amp;lsquo;home-made&amp;rsquo; file tagged in kid3, now properly sorted in my music player&lt;/div&gt;
+&lt;/center&gt;&lt;/p&gt;
+
+&lt;p&gt;That&amp;rsquo;s all I have. This was a short post, but I think it was worth it. I love
+when I find a great open source, cross platform tool that does &lt;em&gt;exactly&lt;/em&gt; what I
+need. Kid3 is a gem application. If you need to edit some audio
+tags, check it out. It certainly made my life much easier 🙂.&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>Setting up NFS</title>
