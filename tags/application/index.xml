@@ -5,10 +5,203 @@
     <description>Recent content in Application on λ ryan. himmelwright. net</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 30 Apr 2021 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 20 May 2021 00:00:00 +0000</lastBuildDate>
     
         <atom:link href="http://ryan.himmelwright.net/tags/application/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Leaving Notion</title>
+      <link>http://ryan.himmelwright.net/post/leaving-notion/</link>
+      <pubDate>Thu, 20 May 2021 00:00:00 +0000</pubDate>
+      
+      <guid>http://ryan.himmelwright.net/post/leaving-notion/</guid>
+      <description>&lt;p&gt;After using &lt;a href=&#34;https://notion.so&#34;&gt;Notion&lt;/a&gt; for my notes and daily planning over
+the &lt;a href=&#34;../../post/trying-notion/&#34;&gt;last year&lt;/a&gt;, there are a few issues with it that have
+worn on me.  Over time, my uneasiness with the application has built up to the
+point where I have decided to switch away Notion completely. Here&amp;rsquo;s why.&lt;/p&gt;
+
+&lt;h2 id=&#34;background&#34;&gt;Background&lt;/h2&gt;
+
+&lt;p&gt;&lt;center&gt;
+&lt;a href=&#34;../../img/posts/leaving-notion/dahsboard.png&#34;&gt;&lt;img alt=&#34;my notion dashboard&#34; src=&#34;../../img/posts/leaving-notion/dashboard.png&#34; style=&#34;max-width: 100%;&#34;/&gt;&lt;/a&gt;
+&lt;div class=&#34;caption&#34;&gt;My Notion Dashboard Page&lt;/div&gt;
+&lt;/center&gt;&lt;/p&gt;
+
+&lt;p&gt;Before getting into it, I want to first state that for the most part, I have
+&lt;em&gt;loved&lt;/em&gt; using Notion. It took a few iterations of figuring out how I wanted
+everything organized, but after my most recent system overhaul, I have it
+arranged perfectly.&lt;/p&gt;
+
+&lt;p&gt;I have everything stored in a handful of databases: Areas, Projects, Tasks, and
+Notes.  The items in each of these DBs are all linked. For
+example, &lt;em&gt;tasks&lt;/em&gt; and &lt;em&gt;notes&lt;/em&gt; are usually attached to a
+&lt;em&gt;project&lt;/em&gt;, which is all associated with a particular &lt;em&gt;area&lt;/em&gt; (&lt;code&gt;Home&lt;/code&gt;, &lt;code&gt;Learning&lt;/code&gt;,
+*&lt;code&gt;Social&lt;/code&gt;, and so on).&lt;/p&gt;
+
+&lt;p&gt;In the most recent iteration, I moved away from linking tasks to a daily journal
+object. Instead, I assigned &lt;em&gt;everything&lt;/em&gt; a date, and created dashboard pages
+with date filters to see the &lt;em&gt;Weekly&lt;/em&gt; and &lt;em&gt;Daily&lt;/em&gt; boards of my tasks.  All in
+all, it was a remarkably efficient system&amp;hellip; most of the time&amp;hellip;&lt;/p&gt;
+
+&lt;h2 id=&#34;what-i-liked-about-notion&#34;&gt;What I liked about Notion&lt;/h2&gt;
+
+&lt;p&gt;&lt;center&gt;
+&lt;a href=&#34;../../img/posts/leaving-notion/project_tasks.png&#34;&gt;&lt;img alt=&#34;My tasks of a goal&#34; src=&#34;../../img/posts/leaving-notion/project_tasks.png&#34; style=&#34;max-width: 100%;&#34;/&gt;&lt;/a&gt;
+&lt;div class=&#34;caption&#34;&gt;My linked tasks in a goal project&lt;/div&gt;
+&lt;/center&gt;&lt;/p&gt;
+
+&lt;p&gt;I&amp;rsquo;ll run through these quickly, as many of the statements echo my &lt;a href=&#34;../../post/trying-notion/&#34;&gt;original
+notion post&lt;/a&gt;&amp;hellip;&lt;/p&gt;
+
+&lt;h3 id=&#34;easy-to-setup-and-use&#34;&gt;Easy to Setup and Use&lt;/h3&gt;
+
+&lt;p&gt;I can have Notion easily configured on &lt;em&gt;all&lt;/em&gt; my devices. All I have to do for
+setup, is install the app and log in. I even have the option to access it in a
+web browser, if I cannot install it as an app on a device.&lt;/p&gt;
+
+&lt;h3 id=&#34;flexibility&#34;&gt;Flexibility&lt;/h3&gt;
+
+&lt;p&gt;As described in the &lt;em&gt;Background&lt;/em&gt; section above, the flexibility of Notion
+allowed me to tailor it to whatever I needed. Notion wasn&amp;rsquo;t a
+&lt;em&gt;system&lt;/em&gt; itself, as much as it was a &lt;em&gt;tool&lt;/em&gt; that let me build my own system.
+It felt like a modern evolution of emacs org-mode for &amp;lsquo;normal&amp;rsquo; people, which is
+a good thing.&lt;/p&gt;
+
+&lt;h3 id=&#34;templates&#34;&gt;Templates&lt;/h3&gt;
+
+&lt;p&gt;With such a malleable system, it helps when the more intricate components can be
+automated and simplified. Luckily, Notion has a template system, which is what
+really allowed my to custom system to be &lt;em&gt;usable&lt;/em&gt;. My frequent tasks were all
+templated to save time when entering them into the system. Without templates,
+Notion would have been a giant pain to maintain.&lt;/p&gt;
+
+&lt;h3 id=&#34;everything-can-be-linked&#34;&gt;Everything can be linked&lt;/h3&gt;
+
+&lt;p&gt;I enjoyed being able to link everything together. Seeing all the associated
+tasks and notes of a project in a dashboard was game changing for how I think
+about organizing information in a system. As an example, I would plan out
+monthly goals and link each task to it. That way, at the end of a month I was
+able to go back and see &lt;em&gt;exactly&lt;/em&gt; if and when I had completed each task for that
+goal.&lt;/p&gt;
+
+&lt;h2 id=&#34;what-i-didn-t-like-about-notion&#34;&gt;What I didn&amp;rsquo;t like about Notion&lt;/h2&gt;
+
+&lt;p&gt;&lt;center&gt;
+&lt;a href=&#34;../../img/posts/leaving-notion/exporting_data.png&#34;&gt;&lt;img alt=&#34;Exporting Notion Data&#34; src=&#34;../../img/posts/leaving-notion/exporting_data.png&#34; style=&#34;max-width: 100%;&#34;/&gt;&lt;/a&gt;
+&lt;div class=&#34;caption&#34;&gt;Exporting Notion Data&lt;/div&gt;
+&lt;/center&gt;&lt;/p&gt;
+
+&lt;h3 id=&#34;requires-notion-servers-being-available&#34;&gt;Requires Notion Servers Being Available&lt;/h3&gt;
+
+&lt;p&gt;Notion is completely hosted online and does not have a true solution for
+&lt;a href=&#34;https://www.notion.so/How-can-I-use-Notion-offline-de55148f97c84de3b6e71aa058906be4&#34;&gt;working
+offline&lt;/a&gt;.
+While this can be &lt;em&gt;convienient&lt;/em&gt; because I don&amp;rsquo;t have to worry about syncing data, it
+does mean that if the Notion service goes down&amp;hellip; I can&amp;rsquo;t access &lt;em&gt;anything&lt;/em&gt;.&lt;/p&gt;
+
+&lt;p&gt;I used Notion for my tasks, notes, and everything else. When it went down, I
+couldn&amp;rsquo;t do &lt;em&gt;basic&lt;/em&gt; actions like check my TODO list, or jot down a quick note
+in my system. I had to record everything somewhere else, and then go back later to
+transfer it into Notion &lt;em&gt;after&lt;/em&gt; the service was available. While &lt;em&gt;Notion&lt;/em&gt;
+didn&amp;rsquo;t go down often, I still faced this problem whenever my internet went
+out, or I was traveling and didn&amp;rsquo;t have a connection. Combined, this happened
+often enough to be annoyed by it.&lt;/p&gt;
+
+&lt;h3 id=&#34;access-to-the-data&#34;&gt;Access to the data&lt;/h3&gt;
+
+&lt;p&gt;On a similar note, all of the data and content resides on Notion servers, and in
+a non-standard format. As a result, any important data-related responsibility
+fall&amp;rsquo;s entirely on their shoulders, and I have to accept whatever level of
+security they choose.&lt;/p&gt;
+
+&lt;p&gt;While data security is very important, my biggest concern is that the
+database data is in a weird format. The page content is in markdown-ish,
+but the only way to view everything organized properly in the databases (without
+hassle, as far as I know), is within Notion.  There are no raw files I can
+easily open or convert. They have an exporting system, but every time I tried to
+use it, it froze. So even while in theory you &lt;em&gt;can&lt;/em&gt; export everything to &lt;code&gt;md&lt;/code&gt;
+and &lt;code&gt;csv&lt;/code&gt; files&amp;hellip;  I couldn&amp;rsquo;t. (&lt;em&gt;Update on this below&lt;/em&gt;)&lt;/p&gt;
+
+&lt;p&gt;In particular, I am most worried about data formatting. If Notion ever disbands
+as a company, or is acquired by a company that slowly shifts direction (or
+honestly, if Notion themselves shift the product over time)&amp;hellip; I&amp;rsquo;m stuck. If I
+want to move to a different system, I can&amp;rsquo;t easily reformat/import the data into
+a new system. This alone has been a nagging hesitancy in the back of my head,
+the entire time I&amp;rsquo;ve used Notion.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Update&lt;/strong&gt;:&lt;/p&gt;
+
+&lt;p&gt;&lt;center&gt;
+&lt;a href=&#34;../../img/posts/leaving-notion/export_in_obsidian.png&#34;&gt;&lt;img alt=&#34;Exported data in Obsidian&#34; src=&#34;../../img/posts/leaving-notion/export_in_obsidian.png&#34; style=&#34;max-width: 100%;&#34;/&gt;&lt;/a&gt;
+&lt;div class=&#34;caption&#34;&gt;Exported Notion Data in Obsidian Notes&lt;/div&gt;
+&lt;/center&gt;&lt;/p&gt;
+
+&lt;p&gt;So while taking screenshots, I tried again to export the data. This time, it
+made it all the way through the process successfully. I was then able to take
+the output and run it through the &lt;a href=&#34;https://github.com/connertennery/Notion-to-Obsidian-Converter&#34;&gt;Notion-to-Obsidian-Converter
+script&lt;/a&gt; (spoiler
+for what I&amp;rsquo;m using now 😆), and import it into an Obsidian vault. While this is
+nice to have as an archive, by default it isn&amp;rsquo;t useful in how it&amp;rsquo;s formatted and
+would be a lot of work to truly convert all the data. This is mostly due to how
+I&amp;rsquo;ve organized by Notion notes, but still&amp;hellip; it is a mess and I don&amp;rsquo;t even know
+where to begin in understanding it.&lt;/p&gt;
+
+&lt;h3 id=&#34;buggy-issues-particularly-with-templates&#34;&gt;Buggy Issues. Particularly With Templates&lt;/h3&gt;
+
+&lt;p&gt;&lt;center&gt;
+&lt;a href=&#34;../../img/posts/leaving-notion/templates.png&#34;&gt;&lt;img alt=&#34;My Notion templates&#34; src=&#34;../../img/posts/leaving-notion/templates.png&#34; style=&#34;max-width: 100%;&#34;/&gt;&lt;/a&gt;
+&lt;div class=&#34;caption&#34;&gt;My Notion templates when creating a new task&lt;/div&gt;
+&lt;/center&gt;&lt;/p&gt;
+
+&lt;p&gt;Lastly, what ultimately pushed me to the edge and confirmed my decision to
+switch away from Notion, was the annoying bugs and glitches I kept experiencing.
+Unfortunately, some of my favorite features of Notion, were also my biggest
+obstacles.&lt;/p&gt;
+
+&lt;p&gt;There were many times when templates just did not work.  I would create a new
+ item and apply a template&amp;hellip; but the content would
+ &lt;em&gt;not&lt;/em&gt; load. This was an issue I experienced very frequently. Considering how
+ much I relied on templates, I would have to either wait till a later time when
+ it would work again, or manually setup everything. Neither of these choices
+ were productive.&lt;/p&gt;
+
+&lt;p&gt;The last straw, finally inciting action to switch, happened at the end of a week
+not too long ago. I noticed mid-week that all of the database links for my
+week&amp;rsquo;s items (linking tasks to their projects, or even the link for what &lt;em&gt;area&lt;/em&gt;
+a task belonged to)&amp;hellip; were missing. Nothing was connected.&lt;/p&gt;
+
+&lt;p&gt;Normally, this is set automatically with the templates, so I chalked it up to
+ template issues, &lt;em&gt;again&lt;/em&gt;, and manually connected everything. That Friday, I
+ had off from work, so I sat down to plan out my vacation day. I quickly noticed
+ that the items weren&amp;rsquo;t linked&amp;hellip; &lt;em&gt;again&lt;/em&gt;. That was enough. I spent the rest of
+ my vacation day researching alternatives for Notion. (and trying to export my
+ data&amp;hellip; but I already stated how that (originally) went 😖).&lt;/p&gt;
+
+&lt;h2 id=&#34;conclusion&#34;&gt;Conclusion&lt;/h2&gt;
+
+&lt;p&gt;&lt;center&gt;
+&lt;a href=&#34;../../img/posts/leaving-notion/task_board.png&#34;&gt;&lt;img alt=&#34;Notion task board&#34; src=&#34;../../img/posts/leaving-notion/task_board.png&#34; style=&#34;max-width: 100%;&#34;/&gt;&lt;/a&gt;
+&lt;div class=&#34;caption&#34;&gt;My Notion Task Board&lt;/div&gt;
+&lt;/center&gt;&lt;/p&gt;
+
+&lt;p&gt;I think Notion is a great product, but with several trade-offs.  I recognize
+that many of the items I feel strongly about, won&amp;rsquo;t be concerns for others.
+In fact, I was able to overlook many of them &lt;em&gt;because&lt;/em&gt; of how great a tool it
+was.&lt;/p&gt;
+
+&lt;p&gt;Over the past year however, my concerns about access to the data have really
+been nagging in the back of my mind. Every day that passed, I felt the guilt of
+having an ever-growing collection of notes that was equally growing in how
+painful it would be to loose/convert if I switched away from Notion. On top of
+that, every time I experienced issues with my templates, I wanted to replace
+Notion. So now I finally have.&lt;/p&gt;
+
+&lt;p&gt;It&amp;rsquo;s been a great year using a great tool. Notion is an excellent tool if you
+can manage not always having access to it, and if you are okay with the chance
+it might all go away someday. But for my planning and notes system, I just can&amp;rsquo;t
+afford to use something that doesn&amp;rsquo;t give me ownership of the raw files it uses.&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>Using kid3 Audio Tag Editor</title>
