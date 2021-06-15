@@ -3,6 +3,21 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>http://ryan.himmelwright.net/pages/homelab/</loc>
+    <lastmod>2021-06-15T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://ryan.himmelwright.net/pages/</loc>
+    <lastmod>2021-06-15T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://ryan.himmelwright.net/</loc>
+    <lastmod>2021-06-15T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>http://ryan.himmelwright.net/post/upgrading-ipad-pro-2021/</loc>
     <lastmod>2021-05-28T00:00:00+00:00</lastmod>
   </url>
@@ -34,11 +49,6 @@
   
   <url>
     <loc>http://ryan.himmelwright.net/tags/</loc>
-    <lastmod>2021-05-28T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://ryan.himmelwright.net/</loc>
     <lastmod>2021-05-28T00:00:00+00:00</lastmod>
   </url>
   
@@ -150,16 +160,6 @@
   <url>
     <loc>http://ryan.himmelwright.net/tags/macbook/</loc>
     <lastmod>2021-03-02T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://ryan.himmelwright.net/pages/homelab/</loc>
-    <lastmod>2021-02-17T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://ryan.himmelwright.net/pages/</loc>
-    <lastmod>2021-02-17T00:00:00+00:00</lastmod>
   </url>
   
   <url>
