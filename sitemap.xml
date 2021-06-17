@@ -3,17 +3,57 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>http://ryan.himmelwright.net/post/disable-seafile-notifications-gnome40/</loc>
+    <lastmod>2021-06-17T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://ryan.himmelwright.net/tags/fedora/</loc>
+    <lastmod>2021-06-17T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://ryan.himmelwright.net/tags/gnome/</loc>
+    <lastmod>2021-06-17T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://ryan.himmelwright.net/tags/linux/</loc>
+    <lastmod>2021-06-17T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://ryan.himmelwright.net/tags/obsidian/</loc>
+    <lastmod>2021-06-17T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://ryan.himmelwright.net/post/</loc>
+    <lastmod>2021-06-17T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://ryan.himmelwright.net/tags/seafile/</loc>
+    <lastmod>2021-06-17T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://ryan.himmelwright.net/tags/</loc>
+    <lastmod>2021-06-17T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://ryan.himmelwright.net/</loc>
+    <lastmod>2021-06-17T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>http://ryan.himmelwright.net/pages/homelab/</loc>
     <lastmod>2021-06-15T00:00:00+00:00</lastmod>
   </url>
   
   <url>
     <loc>http://ryan.himmelwright.net/pages/</loc>
-    <lastmod>2021-06-15T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://ryan.himmelwright.net/</loc>
     <lastmod>2021-06-15T00:00:00+00:00</lastmod>
   </url>
   
@@ -39,16 +79,6 @@
   
   <url>
     <loc>http://ryan.himmelwright.net/tags/ipados/</loc>
-    <lastmod>2021-05-28T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://ryan.himmelwright.net/post/</loc>
-    <lastmod>2021-05-28T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://ryan.himmelwright.net/tags/</loc>
     <lastmod>2021-05-28T00:00:00+00:00</lastmod>
   </url>
   
@@ -94,11 +124,6 @@
   
   <url>
     <loc>http://ryan.himmelwright.net/tags/homelab/</loc>
-    <lastmod>2021-04-21T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://ryan.himmelwright.net/tags/linux/</loc>
     <lastmod>2021-04-21T00:00:00+00:00</lastmod>
   </url>
   
@@ -200,11 +225,6 @@
   <url>
     <loc>http://ryan.himmelwright.net/tags/vfio/</loc>
     <lastmod>2020-12-28T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://ryan.himmelwright.net/tags/fedora/</loc>
-    <lastmod>2020-11-30T00:00:00+00:00</lastmod>
   </url>
   
   <url>
@@ -320,11 +340,6 @@
   <url>
     <loc>http://ryan.himmelwright.net/post/autostarting-application-systemd-service/</loc>
     <lastmod>2020-07-14T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://ryan.himmelwright.net/tags/gnome/</loc>
-    <lastmod>2020-06-30T00:00:00+00:00</lastmod>
   </url>
   
   <url>

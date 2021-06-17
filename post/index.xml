@@ -5,10 +5,102 @@
     <description>Recent content in Posts on λ ryan. himmelwright. net</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 28 May 2021 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 17 Jun 2021 00:00:00 +0000</lastBuildDate>
     
         <atom:link href="http://ryan.himmelwright.net/post/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Disable Seafile Notifications on Gnome 40</title>
+      <link>http://ryan.himmelwright.net/post/disable-seafile-notifications-gnome40/</link>
+      <pubDate>Thu, 17 Jun 2021 00:00:00 +0000</pubDate>
+      
+      <guid>http://ryan.himmelwright.net/post/disable-seafile-notifications-gnome40/</guid>
+      <description>&lt;p&gt;Quick post here. Basically, I keep figuring out and then forgetting how to
+disable Seafile notifications on Gnome, because it doesn&amp;rsquo;t allow tray icons.
+This time, I&amp;rsquo;m recording the process.&lt;/p&gt;
+
+&lt;h2 id=&#34;background&#34;&gt;Background&lt;/h2&gt;
+
+&lt;p&gt;First, why do I need to disable &lt;em&gt;Seafile&lt;/em&gt; notifications specifically?  Because I
+sync my &lt;a href=&#34;https://obsidian.md&#34;&gt;obsidian&lt;/a&gt; vaults using
+&lt;a href=&#34;../post/trying-out-seafile/&#34;&gt;Seafile&lt;/a&gt;. While this sync method
+works wonderfully, it unfortunately has the side effect of whenever I type
+in obsidian, seafile&amp;hellip; uh&amp;hellip; &lt;em&gt;politely notifies me&lt;/em&gt;&amp;hellip; that it has synced my
+changing notes. Which is incredibly annoying, to say the least.&lt;/p&gt;
+
+&lt;p&gt;However, I don&amp;rsquo;t want to solve the problem by simply disabling &lt;em&gt;all&lt;/em&gt; system
+notifications. Luckily, seafile has a setting to do this&amp;hellip; if you can get to
+it.&lt;/p&gt;
+
+&lt;h3 id=&#34;install-tray-icons-reloaded-extension&#34;&gt;Install Tray Icons: Reloaded extension&lt;/h3&gt;
+
+&lt;p&gt;&lt;center&gt;
+&lt;a href=&#34;../../img/posts/disable-seafile-notifications-gnome40/install-extension.png&#34;&gt;&lt;img alt=&#34;Installing the gnome extension&#34; src=&#34;../../img/posts/disable-seafile-notifications-gnome40/install-extension.png&#34; style=&#34;max-width: 100%;&#34;/&gt;&lt;/a&gt;
+&lt;div class=&#34;caption&#34;&gt;Installing &amp;lsquo;Tray Icons: Reloaded&amp;rsquo; from the Gnome extensions website&lt;/div&gt;
+&lt;/center&gt;&lt;/p&gt;
+
+&lt;p&gt;The first step is to install an extension that allows application tray icons.
+One such extension that seems to &amp;ldquo;work&amp;rdquo; currently (with a catch, more on that
+below), is &lt;a href=&#34;https://extensions.gnome.org/extension/2890/tray-icons-reloaded/&#34;&gt;Tray Icons:
+Reloaded&lt;/a&gt;. So,
+to install it, open up the page in
+&lt;a href=&#34;https://www.mozilla.org/en-US/firefox/new/?redirect_source=firefox-com&#34;&gt;Firefox&lt;/a&gt;,
+and click the slider tab on the top right, to switch it from &lt;code&gt;OFF&lt;/code&gt; to &lt;code&gt;ON&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;Note: If this is the first extension being installed, Firefox may ask you to
+install a plugin. This is normal. Just hit accept and it will do it for you.&lt;/em&gt;&lt;/p&gt;
+
+&lt;h3 id=&#34;optionally-install-gnome-extensions-app&#34;&gt;(Optionally) Install Gnome Extensions app&lt;/h3&gt;
+
+&lt;p&gt;&lt;center&gt;
+&lt;a href=&#34;../../img/posts/disable-seafile-notifications-gnome40/install-gnome-extensions.png&#34;&gt;&lt;img alt=&#34;Installing gnome-extensions app&#34; src=&#34;../../img/posts/disable-seafile-notifications-gnome40/install-gnome-extensions.png&#34; style=&#34;max-width: 100%;&#34;/&gt;&lt;/a&gt;
+&lt;div class=&#34;caption&#34;&gt;Installing the Gnome extensions app&lt;/div&gt;
+&lt;/center&gt;&lt;/p&gt;
+
+&lt;p&gt;Next, while optional, it is ideal to have the &lt;em&gt;Gnome Extensions&lt;/em&gt; app
+installed. So, open up Software Center, and install it from there.
+Alternatively, install it as a flatpak from the command line:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;sudo flatpak install org.gnome.Extensions&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;This app allows you to configure and enable gnome extensions. With Gnome
+Extensions opened, make sure &lt;code&gt;Tray Icons: Reloaded&lt;/code&gt; is turned on. &lt;em&gt;Note, icons
+likely won&amp;rsquo;t show up yet, even with the extension enabled&lt;/em&gt;.&lt;/p&gt;
+
+&lt;h3 id=&#34;switch-to-an-xorg-session&#34;&gt;Switch to an Xorg Session&lt;/h3&gt;
+
+&lt;p&gt;&lt;center&gt;
+&lt;a href=&#34;../../img/posts/disable-seafile-notifications-gnome40/switch-to-xorg.png&#34;&gt;&lt;img alt=&#34;Switching to Xorg Session&#34; src=&#34;../../img/posts/disable-seafile-notifications-gnome40/switch-to-xorg.png&#34; style=&#34;max-width: 100%;&#34;/&gt;&lt;/a&gt;
+&lt;div class=&#34;caption&#34;&gt;Switching to Xorg Session&lt;/div&gt;
+&lt;/center&gt;&lt;/p&gt;
+
+&lt;p&gt;This is the step I always forget (and hence why I&amp;rsquo;m writing this post). While
+&lt;code&gt;Top Icons: Reloaded&lt;/code&gt; &amp;ldquo;works&amp;rdquo; in Gnome 40&amp;hellip; it only does in Xorg sessions. So,
+log out, switch the session to &lt;code&gt;GNOME on Xorg&lt;/code&gt; (gear icon at the bottom right of
+the login screen), and log back in. Once logged in, the top icons extension should now work, &lt;em&gt;hopefully&lt;/em&gt; displaying the Seafile icon (assuming
+&lt;code&gt;seafile-client&lt;/code&gt; is running).&lt;/p&gt;
+
+&lt;h3 id=&#34;edit-the-seafile-settings&#34;&gt;Edit the Seafile Settings&lt;/h3&gt;
+
+&lt;p&gt;&lt;center&gt;
+&lt;a href=&#34;../../img/posts/disable-seafile-notifications-gnome40/seafile-icon-select-settings.png&#34;&gt;&lt;img alt=&#34;Accessing seafile settings from toolbar icon&#34; src=&#34;../../img/posts/disable-seafile-notifications-gnome40/seafile-icon-select-settings.png&#34; style=&#34;max-width: 100%;&#34;/&gt;&lt;/a&gt;
+&lt;div class=&#34;caption&#34;&gt;Accessing seafile settings from toolbar icon.&lt;/div&gt;
+&lt;/center&gt;&lt;/p&gt;
+
+&lt;p&gt;To open up the Seafile settings, right click on the icon and select &lt;code&gt;Settings&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;&lt;center&gt;
+&lt;a href=&#34;../../img/posts/disable-seafile-notifications-gnome40/seafile-settings.png&#34;&gt;&lt;img alt=&#34;Changing notification setting&#34; src=&#34;../../img/posts/disable-seafile-notifications-gnome40/seafile-settings.png&#34; style=&#34;max-width: 100%;&#34;/&gt;&lt;/a&gt;
+&lt;div class=&#34;caption&#34;&gt;Changing notification setting&lt;/div&gt;
+&lt;/center&gt;&lt;/p&gt;
+
+&lt;p&gt;From there, notifications can be &lt;strong&gt;disabled&lt;/strong&gt; by &lt;strong&gt;unchecking&lt;/strong&gt; the &lt;code&gt;Notify when libraries are synchronized&lt;/code&gt; checkbox. Hit &lt;code&gt;OK&lt;/code&gt;, and that&amp;rsquo;s it. Feel free to log out and back into a &lt;code&gt;Wayland&lt;/code&gt; session 🙂.&lt;/p&gt;
+
+&lt;h2 id=&#34;conclusion&#34;&gt;Conclusion&lt;/h2&gt;
+
+&lt;p&gt;Short post, but I forgot how to do this simple process twice now, so I wrote it.
+Hopefully this helps that &lt;em&gt;one&lt;/em&gt; other person also experiencing this issue, or at
+least a few more that are confused for similar reasons. Enjoy!&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title> Upgrading My iPad Pro</title>

@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Disable Seafile Notifications on Gnome 40 -- λ ryan. himmelwright. net</title>
+
+    
+
+    
+    <link href="http://ryan.himmelwright.net/css/bootstrap.min.css" rel="stylesheet">
+
+    
+    <link href="http://ryan.himmelwright.net/css/clean-blog.min.css" rel="stylesheet">
+
+    
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href='//fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+
+    
+    
+    
+
+
+
+    
+    <script type="text/javascript">
+        var _paq = _paq || [];
+         
+        _paq.push(["setDocumentTitle", document.domain + "/" + document.title]);
+        _paq.push(["setCookieDomain", "*.ryan.himmelwright.net"]);
+        _paq.push(["setDomains", ["*.ryan.himmelwright.net"]]);
+        _paq.push(['trackPageView']);
+        _paq.push(['enableLinkTracking']);
+        (function() {
+        var u="//cloud.himmelwright.net/piwik/";
+        _paq.push(['setTrackerUrl', u+'piwik.php']);
+        _paq.push(['setSiteId', '1']);
+        var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+        g.type='text/javascript'; g.async=true; g.defer=true; g.src=u+'piwik.js'; s.parentNode.insertBefore(g,s);
+        })();
+        </script>
+        <noscript><p><img src="//cloud.himmelwright.net/piwik/piwik.php?idsite=1&rec=1" style="border:0;" alt="" /></p></noscript>
+        
+
+
+
+</head>
+
+<body>
+
+    
+    <nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+        <div class="container-fluid">
+            
+            <div class="navbar-header page-scroll">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="http://ryan.himmelwright.net">λ ryan. himmelwright. net</a>
+            </div>
+
+                       
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    
+                    <li>
+                        <a href="../../">home</a>
+                    </li>
+                    
+                    <li>
+                        <a href="../../pages/about/">About</a>
+                    </li>
+                    
+                    <li>
+                        <a href="../../pages/homelab/">Homelab</a>
+                    </li>
+                    
+                    <li>
+                        <a href="../../tags">tags</a>
+                    </li>
+                    
+                    <li>
+                        <a href="../../post/">Archives</a>
+                    </li>
+                    
+                    <li>
+                        <a href="../../post/index.xml">RSS</a>
+                    </li>
+                    
+                  </ul>
+            </div>
+           
+
+        </div>
+        
+    </nav>
+
+
+
+
+<header class="intro-header" style="background-image: url('http://ryan.himmelwright.net/img/posts/disable-seafile-notifications-gnome40/the-dunes-sound-header.jpeg')">
+    
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <h1>Disable Seafile Notifications on Gnome 40</h1>
+                    <h2 class="subheading"></h2>
+                    <span class="meta">
+                        
+Posted by <a href="#">Ryan Himmelwright</a> on Thu, Jun 17, 2021
+
+
+
+
+
+
+
+<br />
+Tags <a href="../../tags/linux">linux</a>, <a href="../../tags/seafile">seafile</a>, <a href="../../tags/gnome">gnome</a>, <a href="../../tags/fedora">fedora</a>, <a href="../../tags/obsidian">obsidian</a>
+
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <span class="header-caption">Jockey&#39;s Ridge Stage Park, Nags Head, NC</span>
+    
+    </header>
+
+    
+    <article>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                    
+                    <p>Quick post here. Basically, I keep figuring out and then forgetting how to
+disable Seafile notifications on Gnome, because it doesn&rsquo;t allow tray icons.
+This time, I&rsquo;m recording the process.</p>
+
+<h2 id="background">Background</h2>
+
+<p>First, why do I need to disable <em>Seafile</em> notifications specifically?  Because I
+sync my <a href="https://obsidian.md">obsidian</a> vaults using
+<a href="../../post/trying-out-seafile/">Seafile</a>. While this sync method
+works wonderfully, it unfortunately has the side effect of whenever I type
+in obsidian, seafile&hellip; uh&hellip; <em>politely notifies me</em>&hellip; that it has synced my
+changing notes. Which is incredibly annoying, to say the least.</p>
+
+<p>However, I don&rsquo;t want to solve the problem by simply disabling <em>all</em> system
+notifications. Luckily, seafile has a setting to do this&hellip; if you can get to
+it.</p>
+
+<h3 id="install-tray-icons-reloaded-extension">Install Tray Icons: Reloaded extension</h3>
+
+<p><center>
+<a href="../../img/posts/disable-seafile-notifications-gnome40/install-extension.png"><img alt="Installing the gnome extension" src="../../img/posts/disable-seafile-notifications-gnome40/install-extension.png" style="max-width: 100%;"/></a>
+<div class="caption">Installing &lsquo;Tray Icons: Reloaded&rsquo; from the Gnome extensions website</div>
+</center></p>
+
+<p>The first step is to install an extension that allows application tray icons.
+One such extension that seems to &ldquo;work&rdquo; currently (with a catch, more on that
+below), is <a href="https://extensions.gnome.org/extension/2890/tray-icons-reloaded/">Tray Icons:
+Reloaded</a>. So,
+to install it, open up the page in
+<a href="https://www.mozilla.org/en-US/firefox/new/?redirect_source=firefox-com">Firefox</a>,
+and click the slider tab on the top right, to switch it from <code>OFF</code> to <code>ON</code>.</p>
+
+<p><em>Note: If this is the first extension being installed, Firefox may ask you to
+install a plugin. This is normal. Just hit accept and it will do it for you.</em></p>
+
+<h3 id="optionally-install-gnome-extensions-app">(Optionally) Install Gnome Extensions app</h3>
+
+<p><center>
+<a href="../../img/posts/disable-seafile-notifications-gnome40/install-gnome-extensions.png"><img alt="Installing gnome-extensions app" src="../../img/posts/disable-seafile-notifications-gnome40/install-gnome-extensions.png" style="max-width: 100%;"/></a>
+<div class="caption">Installing the Gnome extensions app</div>
+</center></p>
+
+<p>Next, while optional, it is ideal to have the <em>Gnome Extensions</em> app
+installed. So, open up Software Center, and install it from there.
+Alternatively, install it as a flatpak from the command line:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">sudo flatpak install org.gnome.Extensions</code></pre></div>
+<p>This app allows you to configure and enable gnome extensions. With Gnome
+Extensions opened, make sure <code>Tray Icons: Reloaded</code> is turned on. <em>Note, icons
+likely won&rsquo;t show up yet, even with the extension enabled</em>.</p>
+
+<h3 id="switch-to-an-xorg-session">Switch to an Xorg Session</h3>
+
+<p><center>
+<a href="../../img/posts/disable-seafile-notifications-gnome40/switch-to-xorg.png"><img alt="Switching to Xorg Session" src="../../img/posts/disable-seafile-notifications-gnome40/switch-to-xorg.png" style="max-width: 100%;"/></a>
+<div class="caption">Switching to Xorg Session</div>
+</center></p>
+
+<p>This is the step I always forget (and hence why I&rsquo;m writing this post). While
+<code>Top Icons: Reloaded</code> &ldquo;works&rdquo; in Gnome 40&hellip; it only does in Xorg sessions. So,
+log out, switch the session to <code>GNOME on Xorg</code> (gear icon at the bottom right of
+the login screen), and log back in. Once logged in, the top icons extension should now work, <em>hopefully</em> displaying the Seafile icon (assuming
+<code>seafile-client</code> is running).</p>
+
+<h3 id="edit-the-seafile-settings">Edit the Seafile Settings</h3>
+
+<p><center>
+<a href="../../img/posts/disable-seafile-notifications-gnome40/seafile-icon-select-settings.png"><img alt="Accessing seafile settings from toolbar icon" src="../../img/posts/disable-seafile-notifications-gnome40/seafile-icon-select-settings.png" style="max-width: 100%;"/></a>
+<div class="caption">Accessing seafile settings from toolbar icon.</div>
+</center></p>
+
+<p>To open up the Seafile settings, right click on the icon and select <code>Settings</code>.</p>
+
+<p><center>
+<a href="../../img/posts/disable-seafile-notifications-gnome40/seafile-settings.png"><img alt="Changing notification setting" src="../../img/posts/disable-seafile-notifications-gnome40/seafile-settings.png" style="max-width: 100%;"/></a>
+<div class="caption">Changing notification setting</div>
+</center></p>
+
+<p>From there, notifications can be <strong>disabled</strong> by <strong>unchecking</strong> the <code>Notify when libraries are synchronized</code> checkbox. Hit <code>OK</code>, and that&rsquo;s it. Feel free to log out and back into a <code>Wayland</code> session 🙂.</p>
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p>Short post, but I forgot how to do this simple process twice now, so I wrote it.
+Hopefully this helps that <em>one</em> other person also experiencing this issue, or at
+least a few more that are confused for similar reasons. Enjoy!</p>
+
+                    
+                    
+                    
+                         <div style="float: right; text-decoration: underline; text-align: right;">Prev Post:</div>
+                    
+                    <br>
+                    
+                    
+                        <a href="http://ryan.himmelwright.net/post/upgrading-ipad-pro-2021/" style="text-align: right; float: right; max-width: 40%"> Upgrading My iPad Pro</a>
+                    
+
+			
+			<div class="comment-section">
+			  
+   <div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "himmallright" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+			</div>
+                </div>
+            </div>
+        </div>
+    </article>
+
+        <hr>
+    
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                  <ul class="list-inline text-center">
+                    
+                      <li>
+                        <a href="mailto:ryan@himmelwright.net">
+                          <span class="fa-stack fa-lg">
+                            <i class="fa fa-circle fa-stack-2x"></i>
+                            <i class="fa fa-envelope-o fa-stack-1x fa-inverse"></i>
+                          </span>
+                        </a>
+                      </li>
+                    
+                    
+                    <li>
+                      <a href="https://github.com/himmAllRight">
+                        <span class="fa-stack fa-lg">
+                          <i class="fa fa-circle fa-stack-2x"></i>
+                          <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                        </span>
+                      </a>
+                    </li>
+                    
+                    <li>
+                      <a href="https://www.linkedin.com/in/ryan-himmelwright-b3891774/">
+                        <span class="fa-stack fa-lg">
+                          <i class="fa fa-circle fa-stack-2x"></i>
+                          <i class="fa fa-linkedin fa-stack-1x fa-inverse"></i>
+                        </span>
+                      </a>
+                    </li>
+                    
+                  </ul>
+<p class="copyright text-muted">
+
+<a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img
+  alt="Creative Commons License" style="border-width:0"
+  src="https://i.creativecommons.org/l/by/4.0/88x31.png" /></a><br />This work
+by <a xmlns:cc="http://creativecommons.org/ns#" href="http://ryan.himmelwright.net" property="cc:attributionName" rel="cc:attributionURL">Ryan Himmelwright</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
+</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    
+    <script src="http://ryan.himmelwright.net/js/jquery.min.js"></script>
+
+    
+    <script src="http://ryan.himmelwright.net/js/bootstrap.min.js"></script>
+
+    
+    <script src="http://ryan.himmelwright.net/js/clean-blog.js"></script>
+
+    
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-123-45', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+
+
+</body>
+
+</html>
+
