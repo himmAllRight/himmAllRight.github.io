@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Multi-hop ssh Connections -- λ ryan. himmelwright. net</title>
+
+    
+
+    
+    <link href="http://ryan.himmelwright.net/css/bootstrap.min.css" rel="stylesheet">
+
+    
+    <link href="http://ryan.himmelwright.net/css/clean-blog.min.css" rel="stylesheet">
+
+    
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href='//fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+
+    
+    
+    
+
+
+
+    
+    <script type="text/javascript">
+        var _paq = _paq || [];
+         
+        _paq.push(["setDocumentTitle", document.domain + "/" + document.title]);
+        _paq.push(["setCookieDomain", "*.ryan.himmelwright.net"]);
+        _paq.push(["setDomains", ["*.ryan.himmelwright.net"]]);
+        _paq.push(['trackPageView']);
+        _paq.push(['enableLinkTracking']);
+        (function() {
+        var u="//cloud.himmelwright.net/piwik/";
+        _paq.push(['setTrackerUrl', u+'piwik.php']);
+        _paq.push(['setSiteId', '1']);
+        var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+        g.type='text/javascript'; g.async=true; g.defer=true; g.src=u+'piwik.js'; s.parentNode.insertBefore(g,s);
+        })();
+        </script>
+        <noscript><p><img src="//cloud.himmelwright.net/piwik/piwik.php?idsite=1&rec=1" style="border:0;" alt="" /></p></noscript>
+        
+
+
+
+</head>
+
+<body>
+
+    
+    <nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+        <div class="container-fluid">
+            
+            <div class="navbar-header page-scroll">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="http://ryan.himmelwright.net">λ ryan. himmelwright. net</a>
+            </div>
+
+                       
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    
+                    <li>
+                        <a href="../../">home</a>
+                    </li>
+                    
+                    <li>
+                        <a href="../../pages/about/">About</a>
+                    </li>
+                    
+                    <li>
+                        <a href="../../pages/homelab/">Homelab</a>
+                    </li>
+                    
+                    <li>
+                        <a href="../../tags">tags</a>
+                    </li>
+                    
+                    <li>
+                        <a href="../../post/">Archives</a>
+                    </li>
+                    
+                    <li>
+                        <a href="../../post/index.xml">RSS</a>
+                    </li>
+                    
+                  </ul>
+            </div>
+           
+
+        </div>
+        
+    </nav>
+
+
+
+
+<header class="intro-header" style="background-image: url('http://ryan.himmelwright.net/img/posts/multi-hop-ssh-connections/duke_alumni_center_header.jpeg')">
+    
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <h1>Multi-hop ssh Connections</h1>
+                    <h2 class="subheading"></h2>
+                    <span class="meta">
+                        
+Posted by <a href="#">Ryan Himmelwright</a> on Sun, Jun 27, 2021
+
+
+
+
+
+
+
+<br />
+Tags <a href="../../tags/linux">linux</a>, <a href="../../tags/ssh">ssh</a>, <a href="../../tags/network">network</a>, <a href="../../tags/shell">shell</a>
+
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <span class="header-caption">Karsh Alumni Center (Duke University), Durham NC</span>
+    
+    </header>
+
+    
+    <article>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                    
+                    <p>Last weekend, I wanted to ensure that I could work on a personal project using
+my typical setup, while I was away for a few hours. This consists of running VS
+Code on my <a href="../../post/m1-air-initial-thoughts/">macbook air</a>, but <a href="../../post/vscode-remote/">remotely
+connected</a> to my <a href="../../post/selecting-charmeleons-upgrades/">Linux
+desktop</a>. All of the coding actually
+happens on the Linux computer, even though I am running VS code on my macbook.
+However, when outside of my home network, connecting to the desktop requires
+multiple <code>ssh</code> hops. Fortunately, configuring <code>ssh</code> to handle a multi-hop setup
+is actually quite easy <em>and</em>&hellip;.  it works with the VSCode remote plugin.
+Here&rsquo;s how.</p>
+
+<h3 id="problem">Problem</h3>
+
+<p>To restate the problem: If I am outside of my home network, I need to make
+multiple <code>ssh</code> &lsquo;<em>hops</em>&rsquo; in order to get to my desktop (charmeleon).</p>
+<pre><code>Laptop -&gt; Ponyta (SSH Entry Node) -&gt; Charmeleon (Desktop)</code></pre>
+<p>Normally, this requires me to first <code>ssh</code> into my home network (<code>ponyta</code>), and
+then from <em>there</em>, <code>ssh</code> <em>again</em> to whichever device I want to connect to (In
+this example, <code>Charmeleon</code>). Out of pure laziness, I want to run these steps as
+a single command. Additionally, for tasks that are automated, or outside of a
+shell, connecting to my desktop truly <em>needs</em> to be a single step in order to
+work.</p>
+
+<h2 id="solution">Solution</h2>
+
+<p>An simple solution is to create a new host item in the ssh config file. In this
+file, we can utilize the <code>ProxyCommand</code> option to setup a multi-hop scenario.
+So, I added the following my <code>~/.ssh/config</code> (make sure to swap out your <code>PORT</code>
+and <code>HOSTNAME</code> values accordingly):</p>
+<pre><code>Host remote-charmeleon
+	Hostname CHAMELEON-IP
+	User ryan
+	ProxyCommand ssh -p PORT ryan@PUBLIC_FACING_PONYTA_HOSTNAME -W %h:%p</code></pre>
+<p>Now, I only need to run <code>ssh remote-charmeleon</code> to kick off the the full <code>Laptop
+-&gt; (Ponyta) -&gt; Charmeleon</code> sequence. Easy.</p>
+
+<h2 id="setting-it-up-in-vscode">Setting it up in VSCode</h2>
+
+<p><center>
+<a href="../../img/posts/multi-hop-ssh-connections/vscode-multi-hop-connect.png"><img alt="Connecting via a multi-hop ssh connection in vscode" src="../../img/posts/multi-hop-ssh-connections/vscode-multi-hop-connect.png" style="max-width: 100%;"/></a>
+<div class="caption">Connecting to a multi-hop system via ssh in VS Code</div>
+</center></p>
+
+<p>Now, how can this be used in a VS Code session?</p>
+
+<p>All I had to do was add the config sequence to the ssh config file that <em>VSCode</em>
+uses, which I usually have set to be different from my default one.</p>
+
+<p>To do this, call the <code>Remote-SSH: Open SSH Configuration File</code> in VS Code to
+open the proper config file. Next, add the same code from above to the config.
+From then on, you can select that host item when running <code>Remote-SSH: Connect to
+Host...</code> in VS Code.</p>
+
+<p>For example, I can now select <code>remote-charmeleon</code> when VSCode prompts for the
+host to connect to.</p>
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p>That&rsquo;s all. It&rsquo;s a simple solution that I very much appreciate. I always forget
+how powerful <code>ssh</code> is, especially when you start setting up custom configs. It&rsquo;s
+worth taking a look at! As always, <code>man ssh</code> is a great place to start 😉.</p>
+
+                    
+                    
+                    
+                         <div style="float: left; text-decoration: underline; text-align: right;">Prev Post:</div>
+                    
+                    <br>
+                    
+                    
+                        <a href="http://ryan.himmelwright.net/post/disable-seafile-notifications-gnome40/" style="text-align: left; float: left; max-width: 40%">Disable Seafile Notifications on Gnome 40</a>
+                    
+
+			
+			<div class="comment-section">
+			  
+   <div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "himmallright" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+			</div>
+                </div>
+            </div>
+        </div>
+    </article>
+
+        <hr>
+    
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                  <ul class="list-inline text-center">
+                    
+                      <li>
+                        <a href="mailto:ryan@himmelwright.net">
+                          <span class="fa-stack fa-lg">
+                            <i class="fa fa-circle fa-stack-2x"></i>
+                            <i class="fa fa-envelope-o fa-stack-1x fa-inverse"></i>
+                          </span>
+                        </a>
+                      </li>
+                    
+                    
+                    <li>
+                      <a href="https://github.com/himmAllRight">
+                        <span class="fa-stack fa-lg">
+                          <i class="fa fa-circle fa-stack-2x"></i>
+                          <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                        </span>
+                      </a>
+                    </li>
+                    
+                    <li>
+                      <a href="https://www.linkedin.com/in/ryan-himmelwright-b3891774/">
+                        <span class="fa-stack fa-lg">
+                          <i class="fa fa-circle fa-stack-2x"></i>
+                          <i class="fa fa-linkedin fa-stack-1x fa-inverse"></i>
+                        </span>
+                      </a>
+                    </li>
+                    
+                  </ul>
+<p class="copyright text-muted">
+
+<a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img
+  alt="Creative Commons License" style="border-width:0"
+  src="https://i.creativecommons.org/l/by/4.0/88x31.png" /></a><br />This work
+by <a xmlns:cc="http://creativecommons.org/ns#" href="http://ryan.himmelwright.net" property="cc:attributionName" rel="cc:attributionURL">Ryan Himmelwright</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
+</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    
+    <script src="http://ryan.himmelwright.net/js/jquery.min.js"></script>
+
+    
+    <script src="http://ryan.himmelwright.net/js/bootstrap.min.js"></script>
+
+    
+    <script src="http://ryan.himmelwright.net/js/clean-blog.js"></script>
+
+    
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-123-45', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+
+
+</body>
+
+</html>
+

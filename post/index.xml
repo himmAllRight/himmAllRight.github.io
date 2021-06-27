@@ -5,10 +5,79 @@
     <description>Recent content in Posts on λ ryan. himmelwright. net</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 17 Jun 2021 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 27 Jun 2021 00:00:00 +0000</lastBuildDate>
     
         <atom:link href="http://ryan.himmelwright.net/post/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Multi-hop ssh Connections</title>
+      <link>http://ryan.himmelwright.net/post/multi-hop-ssh-connect/</link>
+      <pubDate>Sun, 27 Jun 2021 00:00:00 +0000</pubDate>
+      
+      <guid>http://ryan.himmelwright.net/post/multi-hop-ssh-connect/</guid>
+      <description>&lt;p&gt;Last weekend, I wanted to ensure that I could work on a personal project using
+my typical setup, while I was away for a few hours. This consists of running VS
+Code on my &lt;a href=&#34;../post/m1-air-initial-thoughts/&#34;&gt;macbook air&lt;/a&gt;, but &lt;a href=&#34;../post/vscode-remote/&#34;&gt;remotely
+connected&lt;/a&gt; to my &lt;a href=&#34;../post/selecting-charmeleons-upgrades/&#34;&gt;Linux
+desktop&lt;/a&gt;. All of the coding actually
+happens on the Linux computer, even though I am running VS code on my macbook.
+However, when outside of my home network, connecting to the desktop requires
+multiple &lt;code&gt;ssh&lt;/code&gt; hops. Fortunately, configuring &lt;code&gt;ssh&lt;/code&gt; to handle a multi-hop setup
+is actually quite easy &lt;em&gt;and&lt;/em&gt;&amp;hellip;.  it works with the VSCode remote plugin.
+Here&amp;rsquo;s how.&lt;/p&gt;
+
+&lt;h3 id=&#34;problem&#34;&gt;Problem&lt;/h3&gt;
+
+&lt;p&gt;To restate the problem: If I am outside of my home network, I need to make
+multiple &lt;code&gt;ssh&lt;/code&gt; &amp;lsquo;&lt;em&gt;hops&lt;/em&gt;&amp;rsquo; in order to get to my desktop (charmeleon).&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;Laptop -&amp;gt; Ponyta (SSH Entry Node) -&amp;gt; Charmeleon (Desktop)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Normally, this requires me to first &lt;code&gt;ssh&lt;/code&gt; into my home network (&lt;code&gt;ponyta&lt;/code&gt;), and
+then from &lt;em&gt;there&lt;/em&gt;, &lt;code&gt;ssh&lt;/code&gt; &lt;em&gt;again&lt;/em&gt; to whichever device I want to connect to (In
+this example, &lt;code&gt;Charmeleon&lt;/code&gt;). Out of pure laziness, I want to run these steps as
+a single command. Additionally, for tasks that are automated, or outside of a
+shell, connecting to my desktop truly &lt;em&gt;needs&lt;/em&gt; to be a single step in order to
+work.&lt;/p&gt;
+
+&lt;h2 id=&#34;solution&#34;&gt;Solution&lt;/h2&gt;
+
+&lt;p&gt;An simple solution is to create a new host item in the ssh config file. In this
+file, we can utilize the &lt;code&gt;ProxyCommand&lt;/code&gt; option to setup a multi-hop scenario.
+So, I added the following my &lt;code&gt;~/.ssh/config&lt;/code&gt; (make sure to swap out your &lt;code&gt;PORT&lt;/code&gt;
+and &lt;code&gt;HOSTNAME&lt;/code&gt; values accordingly):&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;Host remote-charmeleon
+	Hostname CHAMELEON-IP
+	User ryan
+	ProxyCommand ssh -p PORT ryan@PUBLIC_FACING_PONYTA_HOSTNAME -W %h:%p&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Now, I only need to run &lt;code&gt;ssh remote-charmeleon&lt;/code&gt; to kick off the the full &lt;code&gt;Laptop
+-&amp;gt; (Ponyta) -&amp;gt; Charmeleon&lt;/code&gt; sequence. Easy.&lt;/p&gt;
+
+&lt;h2 id=&#34;setting-it-up-in-vscode&#34;&gt;Setting it up in VSCode&lt;/h2&gt;
+
+&lt;p&gt;&lt;center&gt;
+&lt;a href=&#34;../../img/posts/multi-hop-ssh-connections/vscode-multi-hop-connect.png&#34;&gt;&lt;img alt=&#34;Connecting via a multi-hop ssh connection in vscode&#34; src=&#34;../../img/posts/multi-hop-ssh-connections/vscode-multi-hop-connect.png&#34; style=&#34;max-width: 100%;&#34;/&gt;&lt;/a&gt;
+&lt;div class=&#34;caption&#34;&gt;Connecting to a multi-hop system via ssh in VS Code&lt;/div&gt;
+&lt;/center&gt;&lt;/p&gt;
+
+&lt;p&gt;Now, how can this be used in a VS Code session?&lt;/p&gt;
+
+&lt;p&gt;All I had to do was add the config sequence to the ssh config file that &lt;em&gt;VSCode&lt;/em&gt;
+uses, which I usually have set to be different from my default one.&lt;/p&gt;
+
+&lt;p&gt;To do this, call the &lt;code&gt;Remote-SSH: Open SSH Configuration File&lt;/code&gt; in VS Code to
+open the proper config file. Next, add the same code from above to the config.
+From then on, you can select that host item when running &lt;code&gt;Remote-SSH: Connect to
+Host...&lt;/code&gt; in VS Code.&lt;/p&gt;
+
+&lt;p&gt;For example, I can now select &lt;code&gt;remote-charmeleon&lt;/code&gt; when VSCode prompts for the
+host to connect to.&lt;/p&gt;
+
+&lt;h2 id=&#34;conclusion&#34;&gt;Conclusion&lt;/h2&gt;
+
+&lt;p&gt;That&amp;rsquo;s all. It&amp;rsquo;s a simple solution that I very much appreciate. I always forget
+how powerful &lt;code&gt;ssh&lt;/code&gt; is, especially when you start setting up custom configs. It&amp;rsquo;s
+worth taking a look at! As always, &lt;code&gt;man ssh&lt;/code&gt; is a great place to start 😉.&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>Disable Seafile Notifications on Gnome 40</title>
@@ -6290,7 +6359,7 @@ maximize my windows, and usually just wanted a normal-sized one in the center.&l
 of the quick window-snapping key bindings I&amp;rsquo;ve become accustomed to were
 useless.  I was forced to switch over to my mouse more than I would like to.
 While &lt;a href=&#34;https://www.youtube.com/watch?v=DuIK-NuN3aY&#34;&gt;some might point to using window management
-software&lt;/a&gt;, or a &lt;a href=&#34;https://jonblack.me/large-display-paradox-resolved/&#34;&gt;tiling window
+software&lt;/a&gt;, or a &lt;a href=&#34;https://web.archive.org/web/20180320052505/http://www.jonblack.me/large-display-paradox-resolved/&#34;&gt;tiling window
 manager&lt;/a&gt;, I don&amp;rsquo;t think
 this would solve &lt;em&gt;my&lt;/em&gt; issues. You &lt;em&gt;might&lt;/em&gt; be able to get away with using a
 window manager like &lt;a href=&#34;https://github.com/Airblader/i3&#34;&gt;i3-gaps&lt;/a&gt; (or
@@ -7188,7 +7257,7 @@ Just like in the talk I described above.
 
 &lt;p&gt;I am fully aware that I &amp;ldquo;did SELF wrong&amp;rdquo; by only going for
 a single day and mostly watching talks. I didn&amp;rsquo;t spend too much
-time in the &amp;ldquo;&lt;a href=&#34;https://blogs.vmware.com/opensource/2018/05/15/hallway-track-open-source-conferences/&#34;&gt;hallway
+time in the &amp;ldquo;&lt;a href=&#34;https://web.archive.org/web/20201129232611/https://blogs.vmware.com/opensource/2018/05/15/hallway-track-open-source-conferences/&#34;&gt;hallway
 track&lt;/a&gt;&amp;rdquo;,
 and missed out on the late-night antics and philosophical discussions I heard
 about. Regardless, I still learned a bunch and had a great time. Now that I&amp;rsquo;ve scoped out
